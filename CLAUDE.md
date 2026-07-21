@@ -141,9 +141,9 @@ Shared visibility — how "everyone edits" works on a static site: Carlos merges
 
 ## Design system (established — reuse, never reinvent)
 
-Tokens: `--hx-navy #0E2A47` · `--hx-blue #1E5A8E` · `--hx-accent #2E86AB` · `--hx-band #F4F8FB` · `--hx-light #E8F1F7` · ink `#17293A` · muted `#5B7086` · lines `#D8E4EE / #E3ECF4`.
+**GRAYSCALE ONLY (Carlos, 2026-07-21): black, white, and grays — no hue anywhere. It is a wireframe.** Never introduce a color; meaning comes from copy, shade, and border style (solid / dashed / dotted). Token names are historical but resolve to grays: `--hx-navy #1A1A1A` · `--hx-blue #3D3D3D` · `--hx-accent #6E6E6E` · `--hx-band #F7F7F7` · `--hx-light #EFEFEF` · ink `#1A1A1A` · muted `#737373` · lines `#DBDBDB / #E9E9E9`.
 
-Status colors (the ONLY color system on the calendar; appointment type is text): Scheduled `#7A8CA3` · Confirmed `#2E86AB` · Arrived `#E8A13C` · In Room/Chair `#1E5A8E` · Done `#2F8F5B` · No-Show `#C0564B` · Cancelled `#9AA5B1`.
+Status is a light→dark grayscale ramp — the further along the visit, the darker (still the ONLY differentiation system on the calendar; appointment type is text): Scheduled `#C9C9C9` · Confirmed `#9A9A9A` · Arrived `#6E6E6E` · In Room/Chair `#3D3D3D` · Done `#1A1A1A` on white · No-Show dashed `#4A4A4A` · Cancelled `#B3B3B3` + strikethrough. Network badges read by border: INN solid · OON dashed · self-pay dotted.
 
 Type and copy: Inter everywhere; Fraunces only on the login hero and hub headline. Sentence case. Buttons say exactly what they do ("Book appointment", never "Submit") and keep their name through a flow. Errors say what happened and how to fix it. 8px spacing rhythm. App shell: navy sidebar 216px, band background, white cards, 12px radius.
 

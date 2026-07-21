@@ -115,6 +115,9 @@ lacks. If it feels general, it belongs in `assets/hcos.css` instead.
 
 ## Copy and design rules (from CLAUDE.md — enforced at review)
 
+- **GRAYSCALE ONLY: black, white, grays. Never write a color value in a page** — no colored
+  hex/rgb/hsl, no named colors. Use the shared classes and CSS variables; if you need a shade,
+  it is already a token. Meaning comes from copy, shade, and border style, not hue.
 - Sentence case everywhere. Inter for UI; Fraunces ONLY on the login hero and hub headline.
 - Buttons say exactly what they do: "Book appointment", "Sign and lock", "Start infusion" —
   never "Submit", "OK", "Go". A button keeps its name through a flow.
