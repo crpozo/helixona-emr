@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostics &amp; lab · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .c-result-row td:first-child { font-weight: 600; }
+  .c-flash { outline: 2px solid var(--hx-accent); outline-offset: 2px; border-radius: 12px; }
+  .c-shortcut-stack { display: flex; flex-direction: column; gap: 8px; }
+  .c-shortcut-stack .btn { justify-content: flex-start; text-align: left; }
+</style>
+</head>
+<body data-page="labs" data-page-title="Diagnostics &amp; lab" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="c-01-orders" data-title="Orders &amp; results">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/labs</span></div>
+      <div class="frame-body">
+
+        <div class="page-title">Diagnostics &amp; lab</div>
+        <div class="page-sub">Tuesday, July 21 · orders, results, and the feed that brings them home</div>
+
+        <div class="grid-4" style="margin:14px 0 16px">
+          <div class="card stat-card">
+            <div class="stat-num">14</div>
+            <div class="stat-lbl">Open orders</div>
+            <div class="stat-sub">3 draws scheduled today</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">5</div>
+            <div class="stat-lbl">Results to review</div>
+            <div class="stat-sub">Oldest arrived yesterday 4:10 PM</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Abnormal flags</div>
+            <div class="stat-sub">Both routed to Dr. Drannikov</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num" style="font-size:17px;padding-top:4px">eCW FHIR R4</div>
+            <div class="stat-lbl">Results feed</div>
+            <div class="stat-sub"><span class="pill pill-ok">Sandbox connected</span></div>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+
+          <!-- MAIN column -->
+          <div>
+            <div class="card" style="padding:0;overflow:hidden">
+              <div class="filters" style="border-bottom:1px solid var(--line-soft)">
+                <span class="filter-chip active">All</span>
+                <span class="filter-chip">Needs review · 5</span>
+                <span class="filter-chip">Draws today · 3</span>
+                <span class="filter-chip">In transit</span>
+                <span class="filter-chip">Filed</span>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Patient</th>
+                      <th>Order</th>
+                      <th>Ordered by</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="patients.html">Grace Lindqvist</a></td>
+                      <td>Thyroid panel</td>
+                      <td>Dr. Drannikov</td>
+                      <td><span class="pill pill-warn">Resulted · TSH high</span></td>
+                      <td style="text-align:right"><button class="btn btn-accent btn-sm" id="c-review-grace">Review result</button></td>
+                    </tr>
+                    <tr>
+                      <td><a href="patients.html">Sofia Ramos</a></td>
+                      <td>Lab draw · 15m</td>
+                      <td>Brooke</td>
+                      <td><span class="pill pill-navy">Draw today · 11:15 AM</span></td>
+                      <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Requisition sent to the front-desk printer.', 'ok')">Print requisition</button></td>
+                    </tr>
+                    <tr>
+                      <td><a href="patients.html">Daniel Okafor</a></td>
+                      <td>CMP · pre-infusion</td>
+                      <td>Dr. Drannikov</td>
+                      <td><span class="pill pill-ok">Resulted · all in range</span></td>
+                      <td style="text-align:right"><button class="btn btn-ghost btn-sm" data-open-drawer="#c-result-daniel">Review result</button></td>
+                    </tr>
+                    <tr>
+                      <td><a href="patients.html">Nadia Boulos</a></td>
+                      <td>Micronutrient panel</td>
+                      <td>Brooke</td>
+                      <td><span class="pill pill-muted">In transit · reference lab</span></td>
+                      <td style="text-align:right"><button class="btn btn-ghost btn-sm" data-open-drawer="#c-order-nadia">View order</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card" id="c-result-grace" style="margin-top:16px">
+              <div class="card-title">Result detail — <a href="patients.html">Grace Lindqvist</a> · Thyroid panel</div>
+              <div style="font-size:11.5px;color:var(--muted);margin:-6px 0 10px">Resulted today 9:52 AM via eCW FHIR R4 feed · ordered by Dr. Drannikov · drawn by Bea (Medic)</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>Test</th><th>Value</th><th>Reference range</th><th>Flag</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr class="c-result-row">
+                      <td>TSH</td><td>6.8 mIU/L</td><td>0.40 – 4.50</td>
+                      <td><span class="pill pill-warn">High</span></td>
+                    </tr>
+                    <tr>
+                      <td>Free T4</td><td>1.1 ng/dL</td><td>0.8 – 1.8</td>
+                      <td><span class="pill pill-muted">In range</span></td>
+                    </tr>
+                    <tr>
+                      <td>Free T3</td><td>3.0 pg/mL</td><td>2.3 – 4.2</td>
+                      <td><span class="pill pill-muted">In range</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="callout callout-warn" style="margin-top:12px">Trend: TSH 4.2 (Apr) → 5.5 (Jun) → 6.8 (Jul) — rising across three draws. Flag routed to Dr. Drannikov for review before Grace's Thursday follow-up.</div>
+              <div class="callout" style="margin-top:8px">Filing writes this result to Grace's chart and to the <a href="readiness.html#/i-01-readiness">Readiness engine</a> in the same step — labs are one of its six input streams, no re-keying.</div>
+              <div style="display:flex;gap:8px;margin-top:12px">
+                <button class="btn btn-primary" onclick="HCOS.toast('Result filed to Grace’s chart — Readiness inputs updated.', 'ok')">File to chart</button>
+                <button class="btn btn-ghost" onclick="HCOS.toast('Prior thyroid panels opened — Apr and Jun draws shown beside today’s.', 'ok')">Compare with prior results</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIDE column -->
+          <div>
+            <div class="card">
+              <div class="card-title">eCW results feed</div>
+              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">FHIR R4 · sandbox connected · certification lead time 2–4 weeks</div>
+              <ul class="check-list">
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Sandbox endpoint</span>
+                  <span class="check-meta">Active</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Credentialing</span>
+                  <span class="check-meta">Submitted</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon pending"></span>
+                  <span class="check-label">Production feed</span>
+                  <span class="check-meta">Pending · 2–4 weeks</span>
+                </li>
+              </ul>
+              <div class="callout callout-ok" style="margin-top:12px">Until the production feed certifies, results on this screen arrive from the sandbox endpoint.</div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Ordering shortcuts</div>
+              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">One click drafts the order; it dispatches when the provider signs.</div>
+              <div class="c-shortcut-stack">
+                <button class="btn btn-ghost" onclick="HCOS.toast('Thyroid panel drafted — dispatches when Dr. Drannikov signs.', 'ok')">Order thyroid panel</button>
+                <button class="btn btn-ghost" onclick="HCOS.toast('CMP drafted — dispatches when the provider signs.', 'ok')">Order CMP</button>
+                <button class="btn btn-ghost" onclick="HCOS.toast('Micronutrient panel drafted — dispatches when the provider signs.', 'ok')">Order micronutrient panel</button>
+                <button class="btn btn-ghost" onclick="HCOS.toast('Pre-infusion set drafted — dispatches when the provider signs.', 'ok')">Order pre-infusion set</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Result drawer (C-01) — Daniel Okafor · CMP -->
+<div class="drawer-overlay" data-close-drawer="#c-result-daniel"></div>
+<div class="drawer" id="c-result-daniel">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Result detail — Daniel Okafor · CMP</div>
+      <div class="modal-sub">Resulted today 8:14 AM via eCW FHIR R4 feed · pre-infusion · ordered by Dr. Drannikov · drawn by Nate (Medic)</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#c-result-daniel">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th>Test</th><th>Value</th><th>Reference range</th><th>Flag</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Creatinine</td><td>0.9 mg/dL</td><td>0.7 – 1.3</td><td><span class="pill pill-muted">In range</span></td></tr>
+          <tr><td>eGFR</td><td>92</td><td>&gt; 60</td><td><span class="pill pill-muted">In range</span></td></tr>
+          <tr><td>Glucose</td><td>88 mg/dL</td><td>70 – 99</td><td><span class="pill pill-muted">In range</span></td></tr>
+          <tr><td>ALT</td><td>24 U/L</td><td>7 – 56</td><td><span class="pill pill-muted">In range</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-ok" style="margin-top:12px">All values in range — Daniel is cleared for today's IV vitamin C 25 g infusion.</div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-primary" onclick="HCOS.toast('Result filed to Daniel’s chart — infusion bay notified.', 'ok')">File to chart</button>
+      <a class="btn btn-ghost" href="patients.html">Open Daniel's profile</a>
+    </div>
+  </div>
+</div>
+
+<!-- Order drawer (C-01) — Nadia Boulos · micronutrient panel in transit -->
+<div class="drawer-overlay" data-close-drawer="#c-order-nadia"></div>
+<div class="drawer" id="c-order-nadia">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Order — Nadia Boulos · Micronutrient panel</div>
+      <div class="modal-sub">Ordered by Brooke · in transit at the reference lab</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#c-order-nadia">×</button>
+  </div>
+  <div class="drawer-body">
+    <ul class="check-list">
+      <li class="check-item">
+        <span class="check-icon done">✓</span>
+        <span class="check-label">Ordered</span>
+        <span class="check-meta">Mon 1:30 PM · Brooke</span>
+      </li>
+      <li class="check-item">
+        <span class="check-icon done">✓</span>
+        <span class="check-label">Specimen drawn</span>
+        <span class="check-meta">Mon 2:05 PM · Juan (Medic)</span>
+      </li>
+      <li class="check-item">
+        <span class="check-icon done">✓</span>
+        <span class="check-label">Received by reference lab</span>
+        <span class="check-meta">Mon 3:40 PM</span>
+      </li>
+      <li class="check-item">
+        <span class="check-icon pending"></span>
+        <span class="check-label">Resulted</span>
+        <span class="check-meta">Expected Thursday</span>
+      </li>
+    </ul>
+    <div class="callout" style="margin-top:12px">When the result lands it files to Nadia's chart and the <a href="readiness.html#/i-01-readiness">Readiness engine</a> in one step — her readiness state is Physician review, so Dr. Drannikov is watching this panel.</div>
+    <a class="btn btn-ghost" style="margin-top:12px" href="patients.html">Open Nadia's profile</a>
+  </div>
+</div>
+
+<script src="assets/hcos.js"></script>
+<script>
+  // "Review result" on Grace's row scrolls to and briefly highlights her result detail card.
+  (function () {
+    var btn = document.getElementById('c-review-grace');
+    var card = document.getElementById('c-result-grace');
+    if (!btn || !card) return;
+    btn.addEventListener('click', function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('c-flash');
+      setTimeout(function () { card.classList.remove('c-flash'); }, 1400);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -108,7 +108,7 @@
   function buildSidebar() {
     var sb = el('aside', 'sidebar');
     var brand = el('div', 'brand',
-      '<a href="index.html"><div class="brand-title">Helixona · HCOS</div>' +
+      '<a href="schedule.html"><div class="brand-title">Helixona · HCOS</div>' +
       '<div class="brand-sub">Wireframe — the whole team shapes it</div></a>');
     sb.appendChild(brand);
     MODULES.forEach(function (m) {
@@ -120,7 +120,8 @@
       sb.appendChild(a);
     });
     var foot = el('div', 'sidebar-foot',
-      '<a href="login.html">Sign-in screens</a> · <a href="index.html#feedback">How feedback works</a>' +
+      '<a href="hub.html">Module map</a> · <a href="hub.html#feedback">How feedback works</a> · ' +
+      '<a href="login.html">Sign out</a>' +
       '<br>HCOS wireframe v0.1 · Helixona, Inc.');
     sb.appendChild(foot);
     return sb;

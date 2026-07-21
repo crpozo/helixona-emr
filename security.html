@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security &amp; compliance · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .g-perm-tbl th, .g-perm-tbl td { text-align: center; }
+  .g-perm-tbl th:first-child, .g-perm-tbl td:first-child { text-align: left; }
+  .g-role { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
+  .g-role-people { display: block; font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 1px; white-space: nowrap; }
+  .g-yes { color: var(--ok); font-weight: 700; }
+  .g-no { color: var(--line); font-weight: 600; }
+  .g-audit-bar { display: flex; gap: 10px; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--line-soft); flex-wrap: wrap; }
+  .g-audit-bar .search-input { flex: 1; min-width: 200px; }
+  .g-when { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .g-who { white-space: nowrap; }
+  .g-who .g-who-role { display: block; font-size: 10.5px; color: var(--muted); }
+</style>
+</head>
+<body data-page="security" data-page-title="Security &amp; compliance" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="g-01-audit" data-title="Roles, permissions &amp; audit trail">
+    <div class="screen-descriptor">
+      <div class="descriptor-eyebrow">G-01 · Roles, permissions &amp; audit trail</div>
+      <div class="descriptor-title">Who can do what — and the line every action leaves behind</div>
+      <div class="descriptor-body">Shibani administers roles from one matrix; every chart view, signature, and settings change writes an append-only audit line the moment it happens. When an auditor asks who saw a chart, this table answers — not anyone's memory.</div>
+      <div class="descriptor-meta">
+        <span class="meta-item"><strong>Primary users</strong> Shibani (Admin) · Karina (Operations Manager) · Tom Bakman (Leadership)</span>
+        <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">access questions answered from memory, not a log</span></span>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/security</span></div>
+      <div class="frame-body">
+
+        <div class="page-title">Security &amp; compliance</div>
+        <div class="page-sub">Tuesday, July 21 · roles, permissions, and the trail that proves them</div>
+
+        <div class="grid-sidebar">
+
+          <!-- MAIN column -->
+          <div>
+
+            <div class="card" style="padding:0;overflow:hidden">
+              <div class="card-title" style="padding:14px 14px 0;margin-bottom:10px">Roles &amp; permissions</div>
+              <div style="font-size:11.5px;color:var(--muted);padding:0 14px;margin:-4px 0 10px">One matrix for the whole clinic. Sign &amp; lock belongs to providers only — that is what makes a signature mean something. Changes to this matrix write their own audit line.</div>
+              <div class="tbl-wrap">
+                <table class="tbl g-perm-tbl">
+                  <thead>
+                    <tr>
+                      <th>Role</th>
+                      <th>Chart read</th>
+                      <th>Chart write</th>
+                      <th>Sign &amp; lock</th>
+                      <th>Schedule</th>
+                      <th>Billing</th>
+                      <th>Settings</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="g-role">Provider<span class="g-role-people">Dr. Drannikov · Dr. Bakman</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Physician Associate<span class="g-role-people">Brooke</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">New Patient Advisor<span class="g-role-people">Marie</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Front Desk<span class="g-role-people">Yazmin · Haylee</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Medical Assistant<span class="g-role-people">Charlene (Virtual) · Wesley</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Medic<span class="g-role-people">Bea · Juan · Nate</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Nurse<span class="g-role-people">Nick</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">PCC<span class="g-role-people">Bee</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Billing<span class="g-role-people">Vignesh · Kamalesh</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Operations Manager<span class="g-role-people">Karina</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-role">Admin<span class="g-role-people">Shibani</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line-soft)">
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Role editing opens here — every change writes its own audit line.', 'ok')">Edit a role</button>
+                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('User accounts are managed in Settings → Users — Shibani only.', 'ok')">Manage users</button>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
+              <div class="card-title" style="padding:14px 14px 0;margin-bottom:10px">Audit trail</div>
+              <div style="font-size:11.5px;color:var(--muted);padding:0 14px;margin:-4px 0 10px">Append-only — no line is ever edited or deleted. Filter by person, patient, or action; export the range an auditor asks for.</div>
+              <div class="g-audit-bar">
+                <input class="search-input" type="text" placeholder="Search by person, patient, or action…">
+                <span class="filter-chip active">Today</span>
+                <span class="filter-chip">Sign &amp; lock</span>
+                <span class="filter-chip">Chart access</span>
+                <span class="filter-chip">Billing</span>
+                <span class="filter-chip">Admin changes</span>
+                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Audit log exported as CSV — Jul 1 to Jul 21, 1,482 lines.', 'ok')">Export audit log</button>
+              </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>When</th>
+                      <th>Who</th>
+                      <th>Action</th>
+                      <th>Patient / screen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 11:38 AM</span></td>
+                      <td><span class="g-who">Yazmin<span class="g-who-role">Front Desk</span></span></td>
+                      <td>Chart viewed</td>
+                      <td>Maya Reyes · Patients / profile</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 11:32 AM</span></td>
+                      <td><span class="g-who">Dr. Drannikov<span class="g-who-role">Provider</span></span></td>
+                      <td>Note signed &amp; locked — dispatched to billing, labs, infusion</td>
+                      <td>Daniel Okafor · Clinical / sign &amp; lock</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 11:15 AM</span></td>
+                      <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
+                      <td>Questionnaire filed to chart</td>
+                      <td>Nadia Boulos · Clinical / questionnaire</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 10:58 AM</span></td>
+                      <td><span class="g-who">Kamalesh<span class="g-who-role">Billing</span></span></td>
+                      <td>Claim packet sent — Blue Shield portal upload</td>
+                      <td>Priya Natarajan · Billing / packet</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 10:41 AM</span></td>
+                      <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
+                      <td>Caregiver access granted — appointments + plan, 90 days</td>
+                      <td>Walter Hsu · Caregiver portal</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 10:12 AM</span></td>
+                      <td><span class="g-who">Bea<span class="g-who-role">Medic</span></span></td>
+                      <td>Infusion record updated — stop time entered</td>
+                      <td>Maya Reyes · Clinical / infusion</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 9:47 AM</span></td>
+                      <td><span class="g-who">Marie<span class="g-who-role">New Patient Advisor</span></span></td>
+                      <td>Chart viewed</td>
+                      <td>Tom Alvarez · Intake / triage</td>
+                    </tr>
+                    <tr>
+                      <td><span class="g-when">Jul 21 · 8:02 AM</span></td>
+                      <td><span class="g-who">Haylee<span class="g-who-role">Front Desk</span></span></td>
+                      <td>Signed in — new device, two-step verified</td>
+                      <td>— · Sign in</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SIDE column -->
+          <div>
+
+            <div class="card">
+              <div class="card-title">Sessions &amp; sign-in</div>
+              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Secure without sign-in fatigue — the audit trail starts at the front door.</div>
+              <dl class="kv">
+                <dt>Two-step code</dt><dd>New devices only</dd>
+                <dt>Known devices</dt><dd>One-screen sign-in</dd>
+                <dt>Session length</dt><dd>Through the clinic day</dd>
+                <dt>Shared devices</dt><dd>Auto sign-out after 15 min idle</dd>
+              </dl>
+              <a class="btn btn-ghost btn-sm" href="login.html" style="margin-top:12px">See the sign-in flow</a>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Break the glass</div>
+              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">In an emergency, any clinician can open a chart outside their permissions — with a written reason.</div>
+              <div class="callout callout-warn">Emergency access opens the chart immediately, requires a reason, and pages Shibani. The reason and everything viewed land in the audit trail.</div>
+              <button class="btn btn-danger btn-sm" style="margin-top:12px" data-open-modal="#g-modal-glass">Request emergency chart access</button>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Retention</div>
+              <div style="font-size:12.5px;color:var(--ink);line-height:1.55">Audit lines are append-only — never edited, never deleted — and kept for 7 years, alongside the charts they describe. Deactivating a user keeps their history; nothing an auditor needs ever disappears.</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Break-the-glass modal (outside .screens) -->
+<div class="modal-overlay" id="g-modal-glass">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Break the glass — emergency chart access</div>
+        <div class="modal-sub">Opens the chart now · pages Shibani · writes the audit line</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="field-label">Patient</label>
+        <select class="field-select">
+          <option>Walter Hsu</option>
+          <option>Maya Reyes</option>
+          <option>Daniel Okafor</option>
+          <option>Priya Natarajan</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Reason for emergency access (required)</label>
+        <textarea class="field-textarea" placeholder="e.g. Patient in chair reporting chest tightness — need allergy list and current medications now."></textarea>
+        <div class="field-help">Your name, this reason, and every screen you open are written to the audit trail.</div>
+      </div>
+      <div class="callout callout-warn">Shibani is paged the moment you continue and reviews every break-the-glass event the same day.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal>Cancel</button>
+      <button class="btn btn-danger" data-close-modal onclick="HCOS.toast('Chart opened — Shibani paged, audit line written.', 'warn')">Open chart and page Shibani</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>

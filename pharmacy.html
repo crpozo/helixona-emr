@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharmacy &amp; medication · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .h-patient-strip { display: flex; align-items: center; gap: 14px; }
+  .h-patient-name { font-size: 15px; font-weight: 600; color: var(--hx-navy); }
+  .h-patient-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .h-strip-actions { margin-left: auto; display: flex; gap: 8px; }
+  .h-refill-item { border: 1px solid var(--line-soft); border-radius: 8px; padding: 12px; }
+  .h-refill-item + .h-refill-item { margin-top: 10px; }
+  .h-refill-name { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); }
+  .h-refill-meta { font-size: 11.5px; color: var(--muted); margin: 3px 0 10px; }
+</style>
+</head>
+<body data-page="pharmacy" data-page-title="Pharmacy &amp; medication" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="h-01-meds" data-title="Medications &amp; supplements">
+    <div class="screen-descriptor">
+      <div class="descriptor-eyebrow">H-01 · Medications &amp; supplements</div>
+      <div class="descriptor-title">One list — prescriptions and supplements, side by side</div>
+      <div class="descriptor-body">Dr. Drannikov and Brooke prescribe from here, and the supplement protocol lives right next to the prescriptions — first-class, tagged to the program it serves, and covered by the same interaction checks. In a functional medicine clinic the supplement stack IS treatment, so it is never a free-text afterthought.</div>
+      <div class="descriptor-meta">
+        <span class="meta-item"><strong>Primary users</strong> Dr. Drannikov (Provider) · Brooke (Physician Associate)</span>
+        <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">supplements buried in free-text notes, outside interaction checks</span></span>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/pharmacy/maya-reyes</span></div>
+      <div class="frame-body">
+
+        <div class="page-title">Pharmacy &amp; medication</div>
+        <div class="page-sub">Tuesday, July 21 · prescriptions, the supplement protocol, and the refill queue</div>
+
+        <div class="card h-patient-strip" style="margin-bottom:16px">
+          <span class="avatar lg">MR</span>
+          <div>
+            <div class="h-patient-name">Maya Reyes</div>
+            <div class="h-patient-sub">52 · UnitedHealthcare PPO <span class="net-badge net-oon">OON</span> · NAD+ series · Detox program · Readiness: Standard</div>
+          </div>
+          <div class="h-strip-actions">
+            <a class="btn btn-ghost btn-sm" href="patients.html#pt-02-profile">Open full chart</a>
+            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('New prescription drafted — it dispatches when the provider signs.', 'ok')">Write new prescription</button>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+
+          <!-- MAIN column -->
+          <div>
+            <div class="card" style="padding:0;overflow:hidden">
+              <div class="card-title" style="padding:14px 16px 0">Active medications</div>
+              <div style="font-size:11.5px;color:var(--muted);padding:2px 16px 10px">Prescriptions only — the supplement protocol lives below, with equal standing.</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Medication</th>
+                      <th>Directions</th>
+                      <th>Prescriber</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Metformin 500 mg tablet</strong></td>
+                      <td>One tablet twice daily, with meals</td>
+                      <td>Dr. Drannikov</td>
+                      <td><span class="pill pill-ok">Active · 2 refills left</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Low-dose naltrexone 4.5 mg capsule</strong> <span style="font-size:11px;color:var(--muted)">(compounded)</span></td>
+                      <td>One capsule nightly, at bedtime</td>
+                      <td>Brooke</td>
+                      <td><span class="pill pill-warn">Refill requested · 0 left</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="callout callout-warn" style="margin-top:16px"><strong>Interaction check — Berberine + metformin.</strong> Both lower blood glucose; the combined effect can overshoot. Monitor glucose while the detox stack runs. Flagged for Dr. Drannikov — the supplement row below carries the same flag, because supplements sit inside the check, not outside it.</div>
+
+            <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
+              <div class="card-title" style="padding:14px 16px 0">Supplement protocol — NAD+ support stack</div>
+              <div style="font-size:11.5px;color:var(--muted);padding:2px 16px 10px">Each row is tagged to the protocol it serves, so adjusting a program adjusts its supplements together.</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Supplement</th>
+                      <th>Dose</th>
+                      <th>Timing</th>
+                      <th>Protocol</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Berberine</strong> <span class="pill pill-warn" style="margin-left:6px">Interaction flag</span></td>
+                      <td>500 mg</td>
+                      <td>With lunch and dinner</td>
+                      <td><span class="pill pill-muted">Detox program · glucose support</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Liposomal glutathione</strong></td>
+                      <td>500 mg</td>
+                      <td>Morning, empty stomach</td>
+                      <td><span class="pill pill-muted">Detox program</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Magnesium glycinate</strong></td>
+                      <td>400 mg</td>
+                      <td>Evening, with food</td>
+                      <td><span class="pill pill-muted">NAD+ series support</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Omega-3 (EPA/DHA)</strong></td>
+                      <td>2 g</td>
+                      <td>With breakfast</td>
+                      <td><span class="pill pill-muted">Foundation</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="padding:12px 16px;border-top:1px solid var(--line-soft);display:flex;gap:8px">
+                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Protocol opened for adjustment — changes apply to every supplement tagged to it.', 'ok')">Adjust protocol</button>
+                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Supplement list sent to Maya’s patient journey view (Module J).', 'ok')">Share with patient</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIDE column -->
+          <div>
+            <div class="card">
+              <div class="card-title">E-prescribing status</div>
+              <div style="font-size:12px;color:var(--ink);line-height:1.5;margin-bottom:10px">EPCS / DEA certification has a long lead time — in progress. These screens work now; controlled-substance e-prescribing switches on when certification lands.</div>
+              <ul class="check-list">
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Identity proofing</span>
+                  <span class="check-meta">Complete</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon pending"></span>
+                  <span class="check-label">Pharmacy network</span>
+                  <span class="check-meta">Pending</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon pending"></span>
+                  <span class="check-label">EPCS certification</span>
+                  <span class="check-meta">Pending</span>
+                </li>
+              </ul>
+              <div class="callout callout-ok" style="margin-top:12px">Non-controlled prescriptions and the whole supplement workflow run today — nothing here waits for the DEA.</div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Refill queue</div>
+              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Requests from patients, answered without a phone-tag loop.</div>
+              <div class="h-refill-item">
+                <div class="h-refill-name">Maya Reyes — Low-dose naltrexone 4.5 mg</div>
+                <div class="h-refill-meta">Requested Sunday · 0 refills left · last visit June 30 · prescriber Brooke</div>
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Refill approved — queued for the compounding pharmacy when Brooke signs.', 'ok')">Approve refill</button>
+              </div>
+              <div class="h-refill-item">
+                <div class="h-refill-name">Grace Lindqvist — Levothyroxine 50 mcg</div>
+                <div class="h-refill-meta">Requested Monday · TSH high on July 21 panel · Dr. Drannikov wants a visit before renewing</div>
+                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Booking request sent to Grace — a follow-up before renewal, with the reason explained.', 'ok')">Ask the patient to book</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>

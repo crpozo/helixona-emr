@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient communication · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .e-msg-shell {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #fff;
+    min-height: 520px;
+  }
+  .e-threads { border-right: 1px solid var(--line-soft); display: flex; flex-direction: column; }
+  .e-threads-head { padding: 10px 12px 8px; border-bottom: 1px solid var(--line-soft); }
+  .e-thread {
+    display: flex; gap: 9px; align-items: flex-start;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    cursor: pointer;
+  }
+  .e-thread:hover { background: #FAFBFD; }
+  .e-thread.selected { background: var(--hx-light); border-left: 3px solid var(--hx-accent); padding-left: 9px; }
+  .e-thread-main { flex: 1; min-width: 0; }
+  .e-thread-top { display: flex; align-items: baseline; gap: 6px; }
+  .e-thread-name { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); flex: 1; }
+  .e-thread-time { font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+  .e-thread-snip {
+    font-size: 11.5px; color: var(--muted); margin-top: 2px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .e-thread.unread .e-thread-snip { color: var(--ink); font-weight: 500; }
+  .e-unread {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--hx-accent);
+    margin-top: 5px; flex-shrink: 0;
+  }
+  .e-read { width: 8px; height: 8px; margin-top: 5px; flex-shrink: 0; }
+  .e-chat { display: flex; flex-direction: column; min-width: 0; }
+  .e-chat-head {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line-soft);
+    background: #FAFBFD;
+  }
+  .e-chat-who { flex: 1; min-width: 180px; }
+  .e-chat-name { font-size: 14px; font-weight: 600; color: var(--hx-navy); }
+  .e-chat-ctx { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .e-chat-body { flex: 1; padding: 18px 18px 8px; background: var(--hx-band); }
+  .e-bubble-meta { font-size: 10.5px; color: var(--muted); margin: 0 4px 12px; }
+  .e-bubble-meta.out { text-align: right; }
+  .e-chat-compose { padding: 12px 16px 14px; border-top: 1px solid var(--line-soft); }
+  .e-macros { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .e-compose-row { display: flex; gap: 8px; align-items: flex-end; }
+  .e-compose-row .field { flex: 1; margin: 0; }
+  .e-compose-note { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .e-rem-row { padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+  .e-rem-row:last-child { border-bottom: none; }
+  .e-rem-top { display: flex; align-items: center; gap: 8px; }
+  .e-rem-type { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); flex: 1; }
+  .e-rem-sched { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  @media (max-width: 900px) { .e-msg-shell { grid-template-columns: 1fr; } .e-threads { display: none; } }
+</style>
+</head>
+<body data-page="communication" data-page-title="Patient communication" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="e-01-inbox" data-title="Reminders &amp; messaging">
+    <div class="screen-descriptor">
+      <div class="descriptor-eyebrow">E-01 · Reminders &amp; messaging</div>
+      <div class="descriptor-title">Every text next to the chart it belongs to</div>
+      <div class="descriptor-body">One inbox for patient texting and automatic reminders. The open thread shows the patient's coverage and next appointment right in the header, replies teach until it makes sense (pillar 4), and every message files to the chart on its own.</div>
+      <div class="descriptor-meta">
+        <span class="meta-item"><strong>Primary users</strong> Yazmin · Haylee (Front Desk) · Bee (PCC) · Marie (New Patient Advisor)</span>
+        <span class="meta-item"><strong>Replaces today</strong> <span class="fixes-ecw">texting lives in OhMD, disconnected from the chart — context gets lost between apps</span></span>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/messages</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Patient communication</h2>
+        <p class="page-sub">Tuesday, July 21 · texts send from (949) 257-2644 and file to the patient's chart automatically</p>
+
+        <div class="grid-sidebar">
+
+          <!-- MAIN: two-pane messaging -->
+          <div class="e-msg-shell">
+
+            <!-- Thread list -->
+            <div class="e-threads">
+              <div class="e-threads-head">
+                <input class="search-input" type="text" placeholder="Search messages" style="width:100%">
+              </div>
+              <div class="e-thread selected unread">
+                <span class="e-unread"></span>
+                <div class="e-thread-main">
+                  <div class="e-thread-top"><span class="e-thread-name">Maya Reyes</span><span class="e-thread-time">11:26 AM</span></div>
+                  <div class="e-thread-snip">What should I eat before the NAD+?</div>
+                </div>
+              </div>
+              <div class="e-thread">
+                <span class="e-read"></span>
+                <div class="e-thread-main">
+                  <div class="e-thread-top"><span class="e-thread-name">Tom Alvarez</span><span class="e-thread-time">10:52 AM</span></div>
+                  <div class="e-thread-snip">C — see you Thursday</div>
+                  <div style="margin-top:4px"><span class="pill pill-st st-confirmed">Confirmed</span> <span style="font-size:10px;color:var(--muted)">reply flipped the calendar</span></div>
+                </div>
+              </div>
+              <div class="e-thread unread">
+                <span class="e-unread"></span>
+                <div class="e-thread-main">
+                  <div class="e-thread-top"><span class="e-thread-name">Priya Natarajan</span><span class="e-thread-time">9:15 AM</span></div>
+                  <div class="e-thread-snip">Can I move Friday's Myers' to next week?</div>
+                </div>
+              </div>
+              <div class="e-thread unread">
+                <span class="e-unread"></span>
+                <div class="e-thread-main">
+                  <div class="e-thread-top"><span class="e-thread-name">Elena Petrova</span><span class="e-thread-time">8:41 AM</span></div>
+                  <div class="e-thread-snip">Will the telehealth link come by text?</div>
+                </div>
+              </div>
+              <div class="e-thread">
+                <span class="e-read"></span>
+                <div class="e-thread-main">
+                  <div class="e-thread-top"><span class="e-thread-name">Grace Lindqvist</span><span class="e-thread-time">Yesterday</span></div>
+                  <div class="e-thread-snip">Thanks — got the lab instructions.</div>
+                </div>
+              </div>
+              <div class="e-thread">
+                <span class="e-read"></span>
+                <div class="e-thread-main">
+                  <div class="e-thread-top"><span class="e-thread-name">Walter Hsu</span><span class="e-thread-time">Monday</span></div>
+                  <div class="e-thread-snip">Daughter here — where do we park for the NAD+?</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Open thread -->
+            <div class="e-chat">
+              <div class="e-chat-head">
+                <span class="avatar">MR</span>
+                <div class="e-chat-who">
+                  <div class="e-chat-name">Maya Reyes <span class="net-badge net-oon">OON</span></div>
+                  <div class="e-chat-ctx">52 · UnitedHealthcare PPO · next: NAD+ infusion · Wed Jul 22 · 9:00 AM · Chair 2 <span class="pill pill-st st-confirmed">Confirmed</span></div>
+                </div>
+                <button class="btn btn-sm" onclick="HCOS.toast('Chart opens beside the thread — no app switching.', 'ok')">Open chart</button>
+              </div>
+              <div class="e-chat-body">
+                <div class="sms-bubble">Hi! Quick question — what should I eat before the NAD+ tomorrow? And is coffee ok?</div>
+                <div class="e-bubble-meta">Maya · 11:26 AM</div>
+                <div class="sms-bubble out">Great question, Maya — here's the simple version. Eat a light meal about an hour before; a little protein helps keep nausea away. Drink water today and tomorrow morning — a hydrated vein makes the IV much easier to place. Save the coffee for after; caffeine during NAD+ can feel jittery. The drip runs about 3 hours, so bring headphones or a book. You're safe to drive home afterward.</div>
+                <div class="e-bubble-meta out">Bee (PCC) · 11:31 AM · filed to chart</div>
+                <div class="sms-bubble">Perfect, thank you! See you at 9.</div>
+                <div class="e-bubble-meta">Maya · 11:38 AM</div>
+              </div>
+              <div class="e-chat-compose">
+                <div class="e-macros">
+                  <span style="font-size:10.5px;color:var(--muted);align-self:center">Quick replies:</span>
+                  <button class="filter-chip" data-e-macro="Here's how to get ready for your infusion: eat a light meal an hour before, drink plenty of water, and save coffee for after. The visit runs about 3 hours — bring headphones or a book.">Infusion prep</button>
+                  <button class="filter-chip" data-e-macro="We're at 114 Pacifica, Suite 130, Irvine. Free parking right in front of the building — come straight up to Suite 130 and we'll be expecting you.">Directions &amp; parking</button>
+                  <button class="filter-chip" data-e-macro="No problem — you can pick a new time yourself with this link, and the calendar updates the moment you choose: hcos.helixona.com/r/maya">Reschedule link</button>
+                </div>
+                <div class="e-compose-row">
+                  <div class="field">
+                    <textarea class="field-textarea" id="e-compose" rows="2" placeholder="Type a text to Maya…" style="min-height:52px"></textarea>
+                  </div>
+                  <button class="btn btn-primary" onclick="HCOS.toast('Text sent to Maya — filed to her chart.', 'ok')">Send text</button>
+                </div>
+                <div class="e-compose-note">Quick replies insert the macro so you can personalize it before sending — the button stays "Send text" either way.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SIDE: reminder schedule + today's reality -->
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Automatic reminders by appointment type</div>
+              <div class="e-rem-row">
+                <div class="e-rem-top"><span class="e-rem-type">New patient consult · 90m</span><span class="pill">3 touches</span></div>
+                <div class="e-rem-sched">7d email · 2d SMS · 2h SMS</div>
+              </div>
+              <div class="e-rem-row">
+                <div class="e-rem-top"><span class="e-rem-type">Infusion</span><span class="pill pill-warn">prep note</span></div>
+                <div class="e-rem-sched">24h prep SMS with fasting note — worded per infusion type</div>
+              </div>
+              <div class="e-rem-row">
+                <div class="e-rem-top"><span class="e-rem-type">Telehealth · 30m</span><span class="pill pill-navy">join link</span></div>
+                <div class="e-rem-sched">15m SMS with the visit link — nothing to install</div>
+              </div>
+              <div class="callout callout-ok" style="margin-top:12px">A patient's "C" reply flips the appointment to <span class="pill pill-st st-confirmed">Confirmed</span> on the calendar — no phone call, no re-keying.</div>
+              <button class="btn btn-sm btn-ghost" style="margin-top:10px" onclick="HCOS.toast('Reminder rules live in Settings — one place, per appointment type.', 'ok')">Edit reminder rules</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Where this lives today</div>
+              <div class="callout">OhMD handles texting today; voice stays on separate VoIP — HCOS brings messaging next to the chart so context never gets lost.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+<script>
+  // Quick-reply macros: insert into the composer for personalizing before send.
+  document.querySelectorAll('[data-e-macro]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var box = document.getElementById('e-compose');
+      if (box) { box.value = chip.getAttribute('data-e-macro'); box.focus(); }
+      HCOS.toast('Macro inserted — personalize it, then send.', 'ok');
+    });
+  });
+</script>
+</body>
+</html>

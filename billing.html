@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Billing / RCM · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  /* Billing-only bits the shared vocabulary lacks (prefix d-) */
+  .d-route { font-size: 11.5px; line-height: 1.45; max-width: 330px; }
+  .d-route strong { color: var(--hx-navy); font-weight: 600; }
+  .d-route-sub { display: block; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  .d-num { font-family: ui-monospace, monospace; font-size: 12px; white-space: nowrap; }
+  .d-num-sub { display: block; font-size: 10px; color: var(--muted); font-family: ui-monospace, monospace; margin-top: 2px; white-space: nowrap; }
+  .d-claim-id { font-family: ui-monospace, monospace; font-size: 11px; color: var(--hx-blue); }
+  .tbl tr.d-recoup td, .tbl tr.d-recoup:hover td { background: var(--hx-light); }
+  .d-plan-row { display: flex; gap: 10px; margin: 0 0 16px; flex-wrap: wrap; }
+  .d-plan { flex: 1; min-width: 240px; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 12px; color: var(--muted); }
+  .d-plan.active { border: 2px solid var(--hx-accent); background: var(--hx-band); padding: 11px 13px; color: var(--ink); }
+  .d-plan-name { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); margin-bottom: 3px; }
+  .d-fair-row { display: flex; align-items: center; gap: 8px; font-size: 11px; margin-bottom: 8px; }
+  .d-fair-lbl { width: 92px; color: var(--muted); flex-shrink: 0; }
+  .d-fair-bar { flex: 1; height: 10px; background: var(--hx-light); border-radius: 5px; position: relative; overflow: hidden; }
+  .d-fair-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--hx-accent); border-radius: 5px; }
+  .d-fair-row.d-billed .d-fair-fill { background: var(--hx-navy); }
+  .d-fair-amt { width: 52px; text-align: right; font-family: ui-monospace, monospace; font-size: 11px; flex-shrink: 0; }
+  .d-draft { border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 12.5px; line-height: 1.6; background: var(--hx-band); }
+  .d-draft p { margin: 0 0 10px; }
+</style>
+</head>
+<body data-page="billing" data-page-title="Billing / RCM" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="d-01-worklist" data-title="Claim worklist">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/billing</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Claim worklist</div>
+            <div class="page-sub" style="margin:0">Tuesday, July 21 · sorted by next action</div>
+          </div>
+          <button class="btn" data-open-drawer="#d-rulebook">View payer rulebook</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:16px">
+          <div class="card stat-card">
+            <div class="stat-num">62</div>
+            <div class="stat-lbl">In flight</div>
+          </div>
+          <div class="card stat-card" style="border-left-color:var(--warn)">
+            <div class="stat-num">9</div>
+            <div class="stat-lbl">Waiting on payer claim #</div>
+          </div>
+          <div class="card stat-card" style="border-left-color:var(--hx-navy)">
+            <div class="stat-num">7</div>
+            <div class="stat-lbl">Appeals open</div>
+          </div>
+          <div class="card stat-card" style="border-left-color:var(--ok)">
+            <div class="stat-num">100%</div>
+            <div class="stat-lbl">Recoupments appealed</div>
+            <div class="stat-sub">3 of 3 this quarter — none written off</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <span class="filter-chip active">All payers</span>
+          <span class="filter-chip">Anthem Blue Cross</span>
+          <span class="filter-chip">UnitedHealthcare</span>
+          <span class="filter-chip">Blue Shield of CA</span>
+          <span class="filter-chip">Cigna</span>
+          <span class="filter-chip">Waiting on claim # · 9</span>
+          <span class="filter-chip">Appeals · 7</span>
+          <input class="search-input" type="text" placeholder="Search claim, patient, or payer claim #">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Claim</th>
+                <th>Patient</th>
+                <th>Payer</th>
+                <th>Amount</th>
+                <th>State</th>
+                <th>Routing — the payer rule, on the row</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-claim="CLM-1042" data-patient="Daniel Okafor" data-payer="Anthem Blue Cross · INN" data-amount="$276.50 · J3490 · 50 units × $5.53" data-state="Paid" data-route="EDI 275 rides with the claim · Waystar — 837 + 275 together via clearinghouse, no claim # needed first" data-chart="patients.html">
+                <td><span class="d-claim-id">CLM-1042</span></td>
+                <td><a href="patients.html">Daniel Okafor</a></td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><span class="d-num">$276.50</span><span class="d-num-sub">J3490 · 50 units × $5.53</span></td>
+                <td><span class="pill pill-ok">Paid</span></td>
+                <td><div class="d-route"><strong>EDI 275 rides with the claim · Waystar</strong><span class="d-route-sub">837 + 275 together via clearinghouse — no claim # needed first</span></div></td>
+              </tr>
+              <tr class="row-click" data-claim="CLM-1046" data-patient="Maya Reyes" data-payer="UnitedHealthcare · OON" data-amount="$1,150.00 · NAD+ infusion" data-state="In flight" data-route="EDI 275 rides with the claim — 837 + 275 together via clearinghouse, no claim # needed first" data-chart="patients.html#/pt-02-profile">
+                <td><span class="d-claim-id">CLM-1046</span></td>
+                <td><a href="patients.html#/pt-02-profile">Maya Reyes</a></td>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td><span class="d-num">$1,150.00</span><span class="d-num-sub">NAD+ infusion</span></td>
+                <td><span class="pill">In flight</span></td>
+                <td><div class="d-route"><strong>EDI 275 rides with the claim</strong><span class="d-route-sub">837 + 275 together via clearinghouse — no claim # needed first</span></div></td>
+              </tr>
+              <tr class="row-click" data-claim="CLM-1038" data-patient="Priya Natarajan" data-payer="Blue Shield of CA · OON" data-amount="$485.00 · Myers' cocktail · 96365" data-state="Appeal — reduced via NovoLogix" data-route="Claim # arrived today → SympliSend portal / secure fax. Packet unlocked this morning." data-chart="patients.html" data-packet>
+                <td><span class="d-claim-id">CLM-1038</span></td>
+                <td><a href="patients.html">Priya Natarajan</a></td>
+                <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
+                <td><span class="d-num">$485.00</span><span class="d-num-sub">Myers' cocktail · 96365</span></td>
+                <td><span class="pill pill-navy">Appeal</span><span class="d-num-sub" style="font-family:var(--font-ui)">Reduced via NovoLogix</span></td>
+                <td><div class="d-route"><strong>Claim # arrived today → SympliSend portal / secure fax</strong><span class="d-route-sub">Packet unlocked this morning — <a href="#d-02-packet" data-activate="d-02-packet">build and send the packet</a></span></div></td>
+              </tr>
+              <tr class="row-click" data-claim="CLM-1051" data-patient="Tom Alvarez" data-payer="Cigna · OON" data-amount="$325.00 · Glutathione push" data-state="Waiting on claim # · day 9" data-route="Cigna sends the claim # first; the packet cannot route without it. Then portal upload / secure fax." data-chart="patients.html">
+                <td><span class="d-claim-id">CLM-1051</span></td>
+                <td><a href="patients.html">Tom Alvarez</a></td>
+                <td>Cigna <span class="net-badge net-oon">OON</span></td>
+                <td><span class="d-num">$325.00</span><span class="d-num-sub">Glutathione push</span></td>
+                <td><span class="pill pill-warn">Waiting on claim #</span></td>
+                <td><div class="d-route"><strong>Waiting on payer claim # → then portal upload / secure fax</strong><span class="d-route-sub">Day 9 — Cigna sends the claim # first; the packet cannot route without it</span></div></td>
+              </tr>
+              <tr class="row-click" data-claim="CLM-1049" data-patient="Walter Hsu" data-payer="Cigna · OON · self-funded / ERISA" data-amount="$1,150.00 · NAD+ infusion" data-state="Appeal — reduced via MultiPlan" data-route="Claim # received → portal upload / secure fax. ERISA plan — federal rules govern the appeal window, not CA DMHC." data-chart="patients.html">
+                <td><span class="d-claim-id">CLM-1049</span></td>
+                <td><a href="patients.html">Walter Hsu</a></td>
+                <td>Cigna <span class="net-badge net-oon">OON</span> <span class="pill pill-muted">Self-funded / ERISA</span></td>
+                <td><span class="d-num">$1,150.00</span><span class="d-num-sub">NAD+ infusion</span></td>
+                <td><span class="pill pill-navy">Appeal</span><span class="d-num-sub" style="font-family:var(--font-ui)">Reduced via MultiPlan</span></td>
+                <td><div class="d-route"><strong>Claim # received → portal upload / secure fax</strong><span class="d-route-sub">ERISA plan — federal rules govern the appeal window, not CA DMHC</span></div></td>
+              </tr>
+              <tr class="row-click" data-claim="CLM-1053" data-patient="Sofia Ramos" data-payer="Blue Shield of CA · OON" data-amount="$95.00 · Lab draw" data-state="Waiting on claim # · day 4" data-route="HCOS watches for the claim # and unlocks the packet automatically. Then SympliSend portal / secure fax." data-chart="patients.html">
+                <td><span class="d-claim-id">CLM-1053</span></td>
+                <td><a href="patients.html">Sofia Ramos</a></td>
+                <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
+                <td><span class="d-num">$95.00</span><span class="d-num-sub">Lab draw</span></td>
+                <td><span class="pill pill-warn">Waiting on claim #</span></td>
+                <td><div class="d-route"><strong>Waiting on payer claim # → then SympliSend portal / secure fax</strong><span class="d-route-sub">Day 4 — HCOS watches for the claim # and unlocks the packet automatically</span></div></td>
+              </tr>
+              <tr class="row-click" data-claim="CLM-1040" data-patient="Marcus Webb" data-payer="Anthem Blue Cross · INN" data-amount="$650.00 · New patient consult" data-state="In flight" data-route="EDI 275 rides with the claim · Waystar — 837 + 275 together via clearinghouse, no claim # needed first" data-chart="patients.html">
+                <td><span class="d-claim-id">CLM-1040</span></td>
+                <td><a href="patients.html">Marcus Webb</a></td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><span class="d-num">$650.00</span><span class="d-num-sub">New patient consult</span></td>
+                <td><span class="pill">In flight</span></td>
+                <td><div class="d-route"><strong>EDI 275 rides with the claim · Waystar</strong><span class="d-route-sub">837 + 275 together via clearinghouse — no claim # needed first</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px">The routing column is the payer rulebook, printed on every row. When a payer changes its rule, Shibani updates it once in Settings — every claim re-routes itself.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="d-02-packet" data-title="Documentation packet">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/billing/packet/clm-1038</span></div>
+      <div class="frame-body">
+        <div class="page-title">Documentation packet</div>
+        <div class="page-sub"><a href="patients.html">Priya Natarajan</a> · Blue Shield of CA PPO · out-of-network · Myers' cocktail · <span class="d-claim-id">CLM-1038</span> · payer claim # BSC-88214-07</div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="d-plan-row">
+              <div class="d-plan active">
+                <div class="d-plan-name">Fully insured / commercial — CA DMHC rules apply</div>
+                Classified from the plan's EOC on file. State appeal timelines and disclosure rules govern this packet.
+              </div>
+              <div class="d-plan">
+                <div class="d-plan-name">Self-funded / ERISA</div>
+                Not this plan. If the SPD showed self-funding, federal ERISA rules would govern instead — the packet re-classifies and the deadlines change.
+              </div>
+            </div>
+            <div class="callout" style="margin-top:0">Every packet classifies the plan first — governance changes the rules. Priya's EOC (84 pages) was requested before the visit, as with every PPO OON patient.</div>
+
+            <div class="callout callout-ok">Claim # arrived this morning → packet unlocked. Send via SympliSend.
+              <div style="margin-top:10px"><button class="btn btn-primary" onclick="HCOS.toast('Packet sent via SympliSend — the delivery receipt will attach to CLM-1038.', 'ok')">Send packet</button></div>
+            </div>
+
+            <div class="seg-divider">Packet contents — assembled automatically from the chart</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Claim identifier page / CMS-1500 detail</span>
+                <span class="check-meta">Payer claim # BSC-88214-07 · arrived 8:52 AM</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Verification of benefits</span>
+                <span class="check-meta">Verified Jul 2 · OON 60% after $1,500 deductible</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">W-9</span>
+                <span class="check-meta">Helixona, Inc. · current year on file</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Clinical notes</span>
+                <span class="check-meta">Signed and locked by Dr. Drannikov · Jul 14</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Infusion record</span>
+                <span class="check-meta">Myers' cocktail · start/stop, route, dosage, supplies</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">FAIR Health benchmark summary</span>
+                <span class="check-meta">CPT 96365 · geozip 926 · see benchmark card</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon active">7</span>
+                <span class="check-label">Helixona cover sheet — pricing-methodology disclosure request</span>
+                <span class="check-meta">Generated for Blue Shield · review before sending</span>
+              </li>
+            </ul>
+
+            <div class="callout callout-warn">Blue Shield reduces via NovoLogix. Cigna reduces via MultiPlan. UHC uses third-party pricing. The cover sheet demands the payer disclose the database, the geographic mapping, the percentile, and the edits used — reductions without a stated methodology don't stand.</div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">FAIR Health benchmark · CPT 96365</div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Geozip 926 (Irvine) · IV infusion, initial hour</div>
+              <div class="d-fair-row d-billed">
+                <span class="d-fair-lbl">Billed</span>
+                <div class="d-fair-bar"><div class="d-fair-fill" style="width:58%"></div></div>
+                <span class="d-fair-amt">$485</span>
+              </div>
+              <div class="d-fair-row">
+                <span class="d-fair-lbl">75th percentile</span>
+                <div class="d-fair-bar"><div class="d-fair-fill" style="width:73%"></div></div>
+                <span class="d-fair-amt">$612</span>
+              </div>
+              <div class="d-fair-row">
+                <span class="d-fair-lbl">85th percentile</span>
+                <div class="d-fair-bar"><div class="d-fair-fill" style="width:85%"></div></div>
+                <span class="d-fair-amt">$718</span>
+              </div>
+              <div class="d-fair-row">
+                <span class="d-fair-lbl">95th percentile</span>
+                <div class="d-fair-bar"><div class="d-fair-fill" style="width:100%"></div></div>
+                <span class="d-fair-amt">$842</span>
+              </div>
+              <div class="callout callout-ok" style="margin-bottom:0">Billed $485.00 sits below the 75th percentile — the NovoLogix reduction has no benchmark support. This summary goes in the packet.</div>
+            </div>
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Claim summary</div>
+              <dl class="kv">
+                <dt>Claim</dt><dd><span class="d-claim-id">CLM-1038</span></dd>
+                <dt>Payer claim #</dt><dd>BSC-88214-07 · arrived today</dd>
+                <dt>Date of service</dt><dd>Jul 14</dd>
+                <dt>Billed</dt><dd>$485.00</dd>
+                <dt>Paid</dt><dd>$118.72</dd>
+                <dt>Reduction</dt><dd>−$366.28 · via NovoLogix</dd>
+                <dt>State</dt><dd><span class="pill pill-navy">Appeal</span></dd>
+                <dt>Respond by</dt><dd>Sep 12 · 53 days left</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="d-03-era" data-title="EOB / ERA &amp; appeals">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/billing/era</span></div>
+      <div class="frame-body">
+        <div class="page-title">EOB / ERA reconciliation</div>
+        <div class="page-sub">Remits posted this week · Jul 15–21</div>
+
+        <div class="callout callout-warn">Every recoupment is appealed. There is no passive write-off in HCOS — the appeal drafts itself. <span style="color:var(--muted)">· Standing policy, Tom Bakman</span></div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Claim</th>
+                    <th>Patient · payer</th>
+                    <th>Billed</th>
+                    <th>Payment</th>
+                    <th>Adjustment</th>
+                    <th>Patient resp.</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="d-claim-id">CLM-1042</span></td>
+                    <td><a href="patients.html">Daniel Okafor</a><span class="d-num-sub" style="font-family:var(--font-ui)">Anthem Blue Cross · INN</span></td>
+                    <td><span class="d-num">$276.50</span></td>
+                    <td><span class="d-num">$221.20</span></td>
+                    <td><span class="d-num">$0.00</span></td>
+                    <td><span class="d-num">$55.30</span></td>
+                    <td><span class="pill pill-ok">Posted</span></td>
+                  </tr>
+                  <tr class="d-recoup">
+                    <td><span class="d-claim-id">CLM-1029</span></td>
+                    <td><a href="patients.html#/pt-02-profile">Maya Reyes</a><span class="d-num-sub" style="font-family:var(--font-ui)">UnitedHealthcare · OON</span></td>
+                    <td><span class="d-num">$1,150.00</span></td>
+                    <td><span class="d-num">−$412.00</span></td>
+                    <td><span class="pill pill-err">Recoupment $412</span><span class="d-num-sub" style="font-family:var(--font-ui)">Third-party pricing review</span></td>
+                    <td><span class="d-num">$0.00</span></td>
+                    <td><button class="btn btn-sm btn-primary" data-open-modal="#d-appeal-modal">Appeal drafted — review and send</button></td>
+                  </tr>
+                  <tr>
+                    <td><span class="d-claim-id">CLM-1038</span></td>
+                    <td><a href="patients.html">Priya Natarajan</a><span class="d-num-sub" style="font-family:var(--font-ui)">Blue Shield of CA · OON</span></td>
+                    <td><span class="d-num">$485.00</span></td>
+                    <td><span class="d-num">$118.72</span></td>
+                    <td><span class="d-num">−$366.28</span><span class="d-num-sub" style="font-family:var(--font-ui)">Reduced via NovoLogix</span></td>
+                    <td><span class="d-num">$0.00</span></td>
+                    <td><a href="#d-02-packet" data-activate="d-02-packet" class="btn btn-sm" style="text-decoration:none;display:inline-block">Open appeal packet</a></td>
+                  </tr>
+                  <tr>
+                    <td><span class="d-claim-id">CLM-1049</span></td>
+                    <td><a href="patients.html">Walter Hsu</a><span class="d-num-sub" style="font-family:var(--font-ui)">Cigna · OON · self-funded / ERISA</span></td>
+                    <td><span class="d-num">$1,150.00</span></td>
+                    <td><span class="d-num">$402.50</span></td>
+                    <td><span class="d-num">−$747.50</span><span class="d-num-sub" style="font-family:var(--font-ui)">Reduced via MultiPlan</span></td>
+                    <td><span class="d-num">$0.00</span></td>
+                    <td><span class="pill pill-navy">Appeal drafting</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="d-claim-id">CLM-1040</span></td>
+                    <td><a href="patients.html">Marcus Webb</a><span class="d-num-sub" style="font-family:var(--font-ui)">Anthem Blue Cross · INN</span></td>
+                    <td><span class="d-num">$650.00</span></td>
+                    <td><span class="d-num">$520.00</span></td>
+                    <td><span class="d-num">$0.00</span></td>
+                    <td><span class="d-num">$130.00</span></td>
+                    <td><span class="pill pill-ok">Posted</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px">The recoupment row has no write-off action — by design. The only path forward is the drafted appeal.</div>
+
+            <div class="seg-divider">Appeals worklist — 7 open · sorted by deadline</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Appeal</th>
+                    <th>Payer</th>
+                    <th>Reason</th>
+                    <th>Respond by</th>
+                    <th>State</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a href="patients.html">Elena Petrova</a> <span class="d-claim-id">CLM-1002</span></td>
+                    <td>UnitedHealthcare</td>
+                    <td>Underpaid vs FAIR Health 75th</td>
+                    <td>Jul 28 <span class="pill pill-warn">7 days left</span></td>
+                    <td><button class="btn btn-sm" onclick="HCOS.toast('Appeal sent to UnitedHealthcare — CLM-1002 tracked with its Jul 28 deadline.', 'ok')">Send appeal</button></td>
+                  </tr>
+                  <tr>
+                    <td><a href="patients.html#/pt-02-profile">Maya Reyes</a> <span class="d-claim-id">CLM-1029</span></td>
+                    <td>UnitedHealthcare</td>
+                    <td>Recoupment $412 · third-party pricing review</td>
+                    <td>Aug 20 <span class="pill pill-muted">30 days left</span></td>
+                    <td><button class="btn btn-sm btn-primary" data-open-modal="#d-appeal-modal">Appeal drafted — review and send</button></td>
+                  </tr>
+                  <tr>
+                    <td><a href="patients.html">Priya Natarajan</a> <span class="d-claim-id">CLM-1038</span></td>
+                    <td>Blue Shield of CA</td>
+                    <td>Reduced via NovoLogix · −$366.28</td>
+                    <td>Sep 12 <span class="pill pill-muted">53 days left</span></td>
+                    <td><a href="#d-02-packet" data-activate="d-02-packet">Packet ready — claim # arrived today</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="patients.html">Walter Hsu</a> <span class="d-claim-id">CLM-1049</span></td>
+                    <td>Cigna · ERISA</td>
+                    <td>Reduced via MultiPlan · −$747.50</td>
+                    <td>Jan 10 <span class="pill pill-muted">ERISA 180-day window</span></td>
+                    <td><span class="pill pill-navy">Appeal drafting</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Anthem J3490 methodology</div>
+              <dl class="kv" style="grid-template-columns:110px 1fr">
+                <dt>1 unit</dt><dd>500 mg ascorbic acid</dd>
+                <dt>Rate</dt><dd>$5.53 per unit</dd>
+                <dt>25 g infusion</dt><dd>50 units = $276.50</dd>
+                <dt>Effective</dt><dd>May 2025</dd>
+              </dl>
+              <div class="callout callout-ok" style="margin-bottom:0">Applied automatically to every IV vitamin C claim line — the math never lives in someone's head.</div>
+            </div>
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Recoupments this quarter</div>
+              <dl class="kv" style="grid-template-columns:110px 1fr">
+                <dt>Received</dt><dd>3</dd>
+                <dt>Appealed</dt><dd>3 · 100%</dd>
+                <dt>Recovered</dt><dd>$1,271.40</dd>
+                <dt>Written off</dt><dd>$0.00 — none, ever</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Payer rulebook drawer (D-01) -->
+<div class="drawer-overlay" data-close-drawer="#d-rulebook"></div>
+<div class="drawer" id="d-rulebook">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Payer rulebook</div>
+      <div class="modal-sub">The same rules the routing column prints on every row</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#d-rulebook">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Payer</th>
+            <th>Network</th>
+            <th>Docs method</th>
+            <th>Claim # first?</th>
+            <th>Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Anthem Blue Cross</td>
+            <td><span class="net-badge net-inn">INN</span></td>
+            <td>EDI 275 with the claim</td>
+            <td>No</td>
+            <td>837 + 275 via clearinghouse (Waystar)</td>
+          </tr>
+          <tr>
+            <td>UnitedHealthcare</td>
+            <td><span class="net-badge net-oon">OON</span></td>
+            <td>EDI 275 with the claim</td>
+            <td>No</td>
+            <td>837 + 275 via clearinghouse</td>
+          </tr>
+          <tr>
+            <td>Blue Shield of CA</td>
+            <td><span class="net-badge net-oon">OON</span></td>
+            <td>Portal / fax packet</td>
+            <td>Yes</td>
+            <td>Claim # → SympliSend portal or secure fax</td>
+          </tr>
+          <tr>
+            <td>Cigna</td>
+            <td><span class="net-badge net-oon">OON</span></td>
+            <td>Portal / fax packet</td>
+            <td>Yes</td>
+            <td>Claim # → portal upload or secure fax</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:14px">Every packet classifies the plan first: self-funded / ERISA vs fully insured / commercial — governance changes the rules.</div>
+    <div class="callout">Patients with PPO OON benefits are asked for their plan's governing document (SPD / EOC, typically 50–150 pages) before the visit.</div>
+    <div class="callout callout-ok">These rules live in Settings, not in anyone's memory. Change a payer's rule once and every claim re-routes itself.</div>
+  </div>
+</div>
+
+<!-- Claim detail drawer (D-01 worklist rows) -->
+<div class="drawer-overlay" data-close-drawer="#d-claim-drawer"></div>
+<div class="drawer" id="d-claim-drawer">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Claim <span class="d-claim-id" id="d-claim-claim">CLM-0000</span></div>
+      <div class="modal-sub" id="d-claim-patient">Patient</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#d-claim-drawer">×</button>
+  </div>
+  <div class="drawer-body">
+    <dl class="kv">
+      <dt>Payer</dt><dd id="d-claim-payer"></dd>
+      <dt>Amount</dt><dd><span class="d-num" id="d-claim-amount"></span></dd>
+      <dt>State</dt><dd id="d-claim-state"></dd>
+      <dt>Routing</dt><dd id="d-claim-route"></dd>
+    </dl>
+    <div class="callout" style="margin-top:14px">The routing rule comes from the payer rulebook in Settings — it travels with the claim, so nothing waits on the person who happened to know it.</div>
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" id="d-claim-packet" data-close-drawer="#d-claim-drawer">Open documentation packet</button>
+      <a class="btn" id="d-claim-chart" href="patients.html" style="text-decoration:none">Open patient chart</a>
+    </div>
+  </div>
+</div>
+
+<!-- Drafted appeal modal (D-03) -->
+<div class="modal-overlay" id="d-appeal-modal">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Appeal — UnitedHealthcare recoupment $412.00</div>
+        <div class="modal-sub">Maya Reyes · CLM-1029 · drafted automatically from the ERA the moment the recoupment posted</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="d-draft">
+        <p><strong>To:</strong> UnitedHealthcare provider appeals · <strong>Re:</strong> recoupment of $412.00 on claim CLM-1029, NAD+ infusion, date of service Jun 30.</p>
+        <p>Helixona, Inc. (group NPI 1407646755) disputes this recoupment. The remit cites a third-party pricing review but discloses no methodology. We request, in writing: the pricing database used, its geographic mapping, the percentile applied, and every edit applied to the claim.</p>
+        <p>The billed amount sits below the FAIR Health 75th percentile for geozip 926. Absent a disclosed methodology that supports the reduction, we request the recouped amount be reinstated in full.</p>
+      </div>
+      <div class="seg-divider">Attached automatically</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.7">CMS-1500 detail · verification of benefits · clinical notes (signed and locked) · infusion record · FAIR Health benchmark summary · Helixona cover sheet</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal>Keep draft for later</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Appeal sent to UnitedHealthcare — tracked in the appeals worklist with its deadline.', 'ok')">Send appeal</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js"></script>
+<script>
+/* D-01: worklist rows open the claim detail drawer, filled from the row's data attributes */
+(function () {
+  var drawer = document.getElementById('d-claim-drawer');
+  var overlay = document.querySelector('.drawer-overlay[data-close-drawer="#d-claim-drawer"]');
+  var packetBtn = document.getElementById('d-claim-packet');
+  var chartLink = document.getElementById('d-claim-chart');
+  var fields = ['claim', 'patient', 'payer', 'amount', 'state', 'route'];
+  var rows = document.querySelectorAll('#d-01-worklist tr.row-click');
+  Array.prototype.forEach.call(rows, function (row) {
+    row.addEventListener('click', function (ev) {
+      if (ev.target.closest('a, button')) return; /* links inside the row keep their own action */
+      fields.forEach(function (f) {
+        var slot = document.getElementById('d-claim-' + f);
+        if (slot) slot.textContent = row.getAttribute('data-' + f) || '—';
+      });
+      chartLink.setAttribute('href', row.getAttribute('data-chart') || 'patients.html');
+      packetBtn.style.display = row.hasAttribute('data-packet') ? '' : 'none';
+      drawer.classList.add('open');
+      if (overlay) overlay.classList.add('open');
+    });
+  });
+  /* the packet button also jumps to the packet screen (drawer closes via data-close-drawer) */
+  packetBtn.addEventListener('click', function () { window.HCOS.activate('d-02-packet'); });
+})();
+</script>
+</body>
+</html>

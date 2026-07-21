@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake &amp; onboarding · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  /* Funnel chain */
+  .a-chain { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
+  .a-chain-step {
+    flex: 1; min-width: 148px;
+    background: #fff; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .a-chain-step.a-warn { border: 1px dashed var(--warn); background: var(--hx-band); }
+  .a-chain-step { cursor: pointer; }
+  .a-chain-step:hover { border-color: var(--hx-navy); }
+  .a-chain-num { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .a-chain-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); margin: 2px 0 4px; }
+  .a-chain-sub { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .a-chain-arrow { align-self: center; color: var(--muted); font-size: 15px; flex-shrink: 0; }
+  .a-stack { display: grid; gap: 16px; align-content: start; }
+  /* Kiosk extras */
+  .a-kiosk-lbl { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.6px; margin: 12px 0 8px; }
+  .a-kiosk-input {
+    width: 100%; max-width: 300px;
+    padding: 13px 16px; font-size: 17px; text-align: center;
+    border: 2px solid rgba(255,255,255,0.3); border-radius: 8px;
+    background: rgba(255,255,255,0.08); color: #fff;
+    font-family: inherit;
+  }
+  .a-kiosk-sm { min-height: 0; padding: 36px 28px; }
+  .a-kiosk-sm .kiosk-title { font-size: 24px; margin-bottom: 10px; }
+  .a-kiosk-sm .kiosk-sub { font-size: 13px; margin-bottom: 0; }
+  .a-pin-filled { border-color: var(--hx-accent); background: rgba(255,255,255,0.08); }
+  /* Form builder extras */
+  .a-pal-h, .a-insp-h { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin: 4px 0 8px; }
+  .a-pi-ic {
+    width: 30px; flex-shrink: 0; text-align: center;
+    font-size: 9.5px; font-weight: 600; color: var(--hx-blue);
+    background: var(--hx-light); border-radius: 4px; padding: 3px 0;
+  }
+  .a-fb-formname { font-size: 15px; font-weight: 600; color: var(--hx-navy); display: flex; align-items: center; gap: 8px; }
+  .a-fb-formsub { font-size: 11.5px; color: var(--muted); margin: 3px 0 14px; }
+  .a-q-type { font-size: 9.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .a-q-text { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 2px; }
+  .a-q-opts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 7px; }
+  .a-q-opt { font-size: 11px; color: var(--muted); border: 1px solid var(--line-soft); border-radius: 12px; padding: 2px 10px; }
+  .a-scale { display: flex; gap: 4px; margin-top: 7px; }
+  .a-scale span {
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+    font-size: 10.5px; color: var(--muted); border: 1px solid var(--line-soft); border-radius: 4px;
+  }
+  .a-drop {
+    border: 1px dashed var(--line); border-radius: var(--radius-sm);
+    padding: 12px; text-align: center; font-size: 11px; color: var(--muted);
+  }
+  .a-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); margin: 10px 0 14px; }
+  .a-toggle-track { width: 34px; height: 18px; border-radius: 10px; background: var(--hx-accent); position: relative; flex-shrink: 0; }
+  .a-toggle-track::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+</style>
+</head>
+<body data-page="intake" data-page-title="Intake &amp; onboarding" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-01-funnel" data-title="Public funnel">
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-title">The five steps</div>
+      <div class="a-chain">
+        <div class="a-chain-step" onclick="HCOS.toast('Public landing opens at helixona.com — the door into the funnel.', 'ok')">
+          <div class="a-chain-num">Step 1</div>
+          <div class="a-chain-name">Public landing</div>
+          <div class="a-chain-sub">helixona.com — the method, the pillars, one clear door in</div>
+        </div>
+        <div class="a-chain-arrow">→</div>
+        <div class="a-chain-step" data-activate="a-04-builder">
+          <div class="a-chain-num">Step 2</div>
+          <div class="a-chain-name">Initial inquiry form</div>
+          <div class="a-chain-sub">6 short questions, built in the form builder (A-04) · consent captured here</div>
+        </div>
+        <div class="a-chain-arrow">→</div>
+        <div class="a-chain-step" onclick="aShow('a-art-email')">
+          <div class="a-chain-num">Step 3</div>
+          <div class="a-chain-name">Check your email / text</div>
+          <div class="a-chain-sub">The same link goes both ways — whichever they open first wins</div>
+        </div>
+        <div class="a-chain-arrow">→</div>
+        <div class="a-chain-step" onclick="aShow('a-art-sms')">
+          <div class="a-chain-num">Step 4</div>
+          <div class="a-chain-name">Magic link</div>
+          <div class="a-chain-sub">Email + SMS · 7-day expiry · pause and resume anywhere, on any device</div>
+        </div>
+        <div class="a-chain-arrow">→</div>
+        <div class="a-chain-step a-warn" onclick="aShow('a-art-expired')">
+          <div class="a-chain-num">Exception</div>
+          <div class="a-chain-name">Link expired</div>
+          <div class="a-chain-sub">Recovery state — answers stay saved, a fresh link is one tap away</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" id="a-art-email">
+        <div class="card-title">The email — "Your Helixona link"</div>
+        <div class="msg-preview">
+          <div class="msg-header">
+            <div class="msg-header-row"><span class="msg-header-lbl">From</span><span>Helixona Care &lt;care@helixona.com&gt;</span></div>
+            <div class="msg-header-row"><span class="msg-header-lbl">To</span><span>r.delgado@example.com</span></div>
+            <div class="msg-header-row"><span class="msg-header-lbl">Subject</span><span><strong>Your Helixona link</strong></span></div>
+          </div>
+          <div class="msg-body">
+            Hi Rosa,<br><br>
+            Thanks for telling us a little about what brings you in. Your intake picks up exactly where you left off — any device, whenever you're ready.<br>
+            <a class="msg-cta" href="#" onclick="HCOS.toast('The intake resumes exactly where Rosa left off — question 3 of 6.', 'ok'); return false;">Continue your intake</a><br>
+            Questions? Just reply — Marie, our new patient advisor, answers personally.
+          </div>
+          <div class="msg-foot">This link works for 7 days, and you can pause and resume anywhere. If it expires, request a fresh one — your answers stay saved.</div>
+        </div>
+      </div>
+
+      <div class="a-stack">
+        <div class="card" id="a-art-sms">
+          <div class="card-title">The same link, by text</div>
+          <div class="sms-bubble">Helixona: your intake link is ready. Pick up where you left off — hcos.helixona.com/i/r8k2d. It works for 7 days; pause and resume anytime.</div>
+          <div class="sms-bubble out">Perfect, thank you!</div>
+          <div class="field-help">Sent only when SMS consent was given on the inquiry form. Reply STOP always opts out.</div>
+        </div>
+        <div class="card" id="a-art-expired">
+          <div class="card-title">Link expired — a recovery, not a dead end</div>
+          <div class="callout callout-warn" style="margin-bottom:12px">This link expired after 7 days. Tap below and we'll text you a fresh one — your answers are saved.</div>
+          <button class="btn btn-primary" onclick="HCOS.toast('New link texted to (•••) •••-0412 — it works for 7 days.', 'ok')">Send me a new link</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-02-triage" data-title="Triage console">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/triage</span></div>
+      <div class="frame-body">
+        <div class="grid-4" style="margin-bottom:16px">
+          <div class="card stat-card">
+            <div class="stat-num">6</div>
+            <div class="stat-lbl">New inquiries today</div>
+            <div class="stat-sub">3 website · 2 referral · 1 Instagram</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">11</div>
+            <div class="stat-lbl">Waiting on patient</div>
+            <div class="stat-sub">Magic link out, answers pending</div>
+          </div>
+          <div class="card stat-card" style="border-left-color:var(--warn)">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Stalled &gt; 48 h</div>
+            <div class="stat-sub">Oldest 4 d — nudge these first</div>
+          </div>
+          <div class="card stat-card" style="border-left-color:var(--ok)">
+            <div class="stat-num">9</div>
+            <div class="stat-lbl">Booked this week</div>
+            <div class="stat-sub">Consults on the schedule (L)</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <span class="filter-chip active">All open · 20</span>
+          <span class="filter-chip">New</span>
+          <span class="filter-chip">Waiting on patient</span>
+          <span class="filter-chip">Stalled &gt; 48 h</span>
+          <input class="search-input" placeholder="Search inquiries">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Inquiry</th><th>Source</th><th>Stage</th><th>Waiting</th><th>Consent</th><th>Next action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>R. Delgado</strong></td>
+                <td>Website</td>
+                <td><span class="pill">New</span></td>
+                <td>2 h</td>
+                <td><span class="pill pill-ok">✓ SMS ok</span></td>
+                <td><button class="btn btn-sm btn-accent" onclick="HCOS.toast('Magic link sent to R. Delgado by email and text — works for 7 days.', 'ok')">Send magic link</button></td>
+              </tr>
+              <tr>
+                <td><strong>K. Patel</strong></td>
+                <td>Referral</td>
+                <td><span class="pill pill-navy">Answers in</span></td>
+                <td>5 h</td>
+                <td><span class="pill pill-ok">✓ SMS ok</span></td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Booking opens on the schedule — new patient consult, 90 minutes.', 'ok')">Book consult</button></td>
+              </tr>
+              <tr>
+                <td><strong>J. Morrison</strong></td>
+                <td>Instagram</td>
+                <td><span class="pill pill-muted">Reached out</span></td>
+                <td><span class="pill pill-warn">3 d</span></td>
+                <td><span class="pill pill-muted">✗ no marketing</span></td>
+                <td><button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Friendly nudge texted to J. Morrison — logged on the inquiry.', 'ok')">Nudge</button></td>
+              </tr>
+              <tr>
+                <td><strong>L. Nguyen</strong></td>
+                <td>Website</td>
+                <td><span class="pill pill-ok">Ready to book</span></td>
+                <td>1 h</td>
+                <td><span class="pill pill-ok">✓ SMS ok</span></td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Booking opens on the schedule — new patient consult, 90 minutes.', 'ok')">Book consult</button></td>
+              </tr>
+              <tr>
+                <td><strong>S. Whitfield</strong></td>
+                <td>Referral</td>
+                <td><span class="pill">New</span></td>
+                <td>26 h</td>
+                <td><span class="pill pill-ok">✓ SMS ok</span></td>
+                <td><button class="btn btn-sm btn-accent" onclick="HCOS.toast('Magic link sent to S. Whitfield by email and text — works for 7 days.', 'ok')">Send magic link</button></td>
+              </tr>
+              <tr>
+                <td><strong>M. Okoye</strong></td>
+                <td>Website</td>
+                <td><span class="pill pill-muted">Reached out</span></td>
+                <td><span class="pill pill-warn">4 d</span></td>
+                <td><span class="pill pill-ok">✓ SMS ok</span></td>
+                <td><button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Friendly nudge texted to M. Okoye — logged on the inquiry.', 'ok')">Nudge</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="field-help" style="margin-top:10px">Inquiries are prospects, not patients yet — a chart is created only when the first consult is booked.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-03-kiosk" data-title="Kiosk check-in">
+    <div class="grid-2">
+      <div>
+        <div class="kiosk-frame">
+          <div class="kiosk-title">Welcome to Helixona</div>
+          <div class="kiosk-sub">Check in for your visit — enter your last name and the 4-digit code from your reminder text.</div>
+          <div class="a-kiosk-lbl">Last name</div>
+          <input class="a-kiosk-input" value="Alvarez">
+          <div class="a-kiosk-lbl">4-digit code</div>
+          <div class="kiosk-pin" id="a-kiosk-pin">
+            <div class="kiosk-pin-cell a-pin-filled">7</div>
+            <div class="kiosk-pin-cell a-pin-filled">2</div>
+            <div class="kiosk-pin-cell"></div>
+            <div class="kiosk-pin-cell"></div>
+          </div>
+          <button class="kiosk-btn" onclick="aKioskCheckIn()">Check me in</button>
+        </div>
+        <div class="field-help" style="margin-top:10px">A successful check-in flips the visit to Arrived on the schedule (Module L) — no front-desk retyping.</div>
+      </div>
+
+      <div class="a-stack">
+        <div class="card">
+          <div class="card-title">If check-in fails</div>
+          <div class="kiosk-frame a-kiosk-sm" id="a-kiosk-fail">
+            <div class="kiosk-title">We couldn't check you in</div>
+            <div class="kiosk-sub">The front desk has been pinged — please have a seat and someone will greet you in a moment. Your appointment is safe.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Front desk alert</div>
+          <div class="callout callout-warn" style="margin-bottom:12px"><strong>Kiosk check-in failed for T. Alvarez · 2:58 PM</strong> — greet him and check him in from the schedule.</div>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('T. Alvarez marked Arrived — kiosk alert cleared.', 'ok')">Mark him arrived</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-04-builder" data-title="Form builder">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/settings/forms/initial-inquiry</span></div>
+      <div class="frame-body tight">
+        <div class="fb-shell">
+
+          <div class="fb-palette">
+            <div class="a-pal-h">Field types — drag in</div>
+            <div class="fb-palette-item"><span class="a-pi-ic">Aa</span>Short answer</div>
+            <div class="fb-palette-item"><span class="a-pi-ic">◈</span>Multiple choice</div>
+            <div class="fb-palette-item"><span class="a-pi-ic">1–10</span>Scale 1–10</div>
+            <div class="fb-palette-item"><span class="a-pi-ic">Y/N</span>Yes/No</div>
+            <div class="fb-palette-item"><span class="a-pi-ic">↑</span>File upload</div>
+            <div class="fb-palette-item"><span class="a-pi-ic">▤</span>Section</div>
+          </div>
+
+          <div class="fb-canvas">
+            <div class="a-fb-formname">Initial inquiry form <span class="pill pill-ok">Live</span></div>
+            <div class="a-fb-formsub">Step 2 of the public funnel (A-01) · 6 questions · about 3 minutes</div>
+            <div class="fb-question">
+              <div class="a-q-type">Short answer · required</div>
+              <div class="a-q-text">What brings you to Helixona?</div>
+            </div>
+            <div class="fb-question">
+              <div class="a-q-type">Multiple choice · required</div>
+              <div class="a-q-text">What are you most interested in?</div>
+              <div class="a-q-opts"><span class="a-q-opt">IV therapy</span><span class="a-q-opt">Functional medicine</span><span class="a-q-opt">Detox program</span></div>
+            </div>
+            <div class="fb-question selected">
+              <div class="a-q-type">Scale 1–10 · required · logic</div>
+              <div class="a-q-text">How would you rate your energy most days?</div>
+              <div class="a-scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+            </div>
+            <div class="fb-question">
+              <div class="a-q-type">Yes/No</div>
+              <div class="a-q-text">Do you currently have health insurance?</div>
+              <div class="a-q-opts"><span class="a-q-opt">Yes</span><span class="a-q-opt">No</span></div>
+            </div>
+            <div class="a-drop">Drop a field type here to add a question</div>
+          </div>
+
+          <div class="fb-inspector">
+            <div class="a-insp-h">Question settings</div>
+            <div class="field">
+              <label class="field-label">Label</label>
+              <input class="field-input" value="How would you rate your energy most days?">
+            </div>
+            <div class="field">
+              <label class="field-label">Type</label>
+              <select class="field-select"><option>Scale 1–10</option><option>Short answer</option><option>Multiple choice</option><option>Yes/No</option></select>
+            </div>
+            <div class="a-toggle"><span class="a-toggle-track"></span>Required</div>
+            <div class="seg-divider"></div>
+            <div class="a-insp-h">Logic</div>
+            <div class="field">
+              <label class="field-label">Show if</label>
+              <select class="field-select"><option>"What are you most interested in?" = Detox program</option><option>Always show</option></select>
+            </div>
+            <div class="field-help" style="margin-bottom:14px">People only see questions that apply to them — forms stay short.</div>
+            <button class="btn btn-primary btn-sm" style="width:100%" onclick="HCOS.toast('Question saved — the live form updated instantly.', 'ok')">Save question</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient journey · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .j-layout { display: flex; gap: 28px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+  .j-side { width: 360px; max-width: 100%; display: flex; flex-direction: column; gap: 16px; }
+  .j-greet-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .j-greet { font-size: 19px; font-weight: 600; color: var(--hx-navy); }
+  .j-greet-date { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .j-pcard { border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; margin-bottom: 12px; background: #fff; }
+  .j-pcard-title { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+  .j-toggle { cursor: pointer; border-radius: 8px; }
+  .j-toggle:hover { background: var(--hx-band); }
+  .j-check-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .j-next-row { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; align-items: baseline; }
+  .j-next-row:last-child { border-bottom: none; }
+  .j-next-when { width: 84px; flex-shrink: 0; color: var(--muted); font-size: 11px; }
+  .j-next-what { font-weight: 500; color: var(--ink); }
+  .j-next-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .j-teach-h { font-size: 14.5px; font-weight: 600; color: var(--hx-navy); margin-bottom: 6px; }
+  .j-teach-body { font-size: 12.5px; line-height: 1.6; color: var(--ink); margin-bottom: 10px; }
+  .j-strip { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 2px; }
+  .j-strip-lbl { font-size: 11px; font-weight: 600; color: var(--hx-navy); }
+  .j-strip-meta { font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+  .j-meter { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin-top: 5px; }
+  .j-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  .j-src { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+  .j-src:last-of-type { border-bottom: none; }
+  .j-src-info { flex: 1; min-width: 0; }
+  .j-src-name { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); }
+  .j-src-what { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .j-lib-row { padding: 8px 0; border-bottom: 1px solid var(--line-soft); }
+  .j-lib-row:last-of-type { border-bottom: none; }
+  .j-lib-title { font-size: 12.5px; font-weight: 500; color: var(--ink); }
+  .j-lib-meta { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+  .j-lib-meta .j-meter { flex: 1; max-width: 150px; margin-top: 0; }
+  .j-lib-pct { font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+</style>
+</head>
+<body data-page="journey" data-page-title="Patient journey &amp; education" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-01-today" data-title="The patient's today view">
+    <div class="j-layout">
+
+      <!-- Maya's phone -->
+      <div class="phone-frame">
+        <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+        <div class="phone-body">
+
+          <div class="j-greet-row">
+            <span class="avatar">MR</span>
+            <div>
+              <div class="j-greet">Good morning, Maya</div>
+              <div class="j-greet-date">Tuesday, July 21 · infusion day</div>
+            </div>
+          </div>
+
+          <div class="j-pcard">
+            <div class="j-pcard-title">Today</div>
+            <ul class="check-list">
+              <li class="check-item j-toggle">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Morning supplement stack
+                  <div class="j-check-sub">Done at 8:05 AM</div>
+                </span>
+              </li>
+              <li class="check-item j-toggle">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Drink 2 L of water before your infusion
+                  <div class="j-check-sub">Hydrated veins make the IV start easier</div>
+                </span>
+              </li>
+              <li class="check-item j-toggle">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Leave for Helixona at 12:15 PM
+                  <div class="j-check-sub">NAD+ infusion 1:00 PM · Chair 1 · with Nick</div>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="j-pcard">
+            <div class="j-pcard-title">What's next</div>
+            <div class="j-next-row">
+              <div class="j-next-when">Thu Jul 23</div>
+              <div>
+                <div class="j-next-what">NAD+ session 5 of 8</div>
+                <div class="j-next-sub">1:00 PM · we'll text a reminder the evening before</div>
+              </div>
+            </div>
+            <div class="j-next-row">
+              <div class="j-next-when">In 2 weeks</div>
+              <div>
+                <div class="j-next-what">Labs re-check</div>
+                <div class="j-next-sub">Quick draw, 15 minutes · shows how the series is working</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="j-pcard">
+            <div class="j-pcard-title">Understand your care</div>
+            <div class="j-teach-h">Why NAD+ takes 3 hours</div>
+            <div class="j-teach-body">NAD+ dripped too fast can make you feel flushed, queasy, or tight in the chest, so we run it slowly on purpose. Three unhurried hours is what lets your cells actually absorb and use it.</div>
+            <button class="btn btn-sm" onclick="HCOS.toast('Opening the 2-minute read — Why NAD+ takes 3 hours.', 'ok')">Read the 2-minute version</button>
+          </div>
+
+          <div class="j-strip">
+            <div style="flex:1">
+              <div class="j-strip-lbl">NAD+ series</div>
+              <div class="j-meter"><div class="j-meter-fill" style="width:50%"></div></div>
+              <div class="j-strip-meta">Session 4 of 8</div>
+            </div>
+            <span class="pill pill-ok">Readiness · Standard</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Team view beside the phone -->
+      <div class="j-side">
+
+        <div class="card">
+          <div class="card-title">Composed automatically</div>
+          <div class="field-help" style="margin-bottom:6px">Maya's today view assembled itself at 6:00 AM from three sources — nobody hand-writes it.</div>
+          <div class="j-src">
+            <div class="j-src-info">
+              <div class="j-src-name">Scheduling</div>
+              <div class="j-src-what">Today 1:00 PM · NAD+ infusion · Chair 1 · Nick</div>
+            </div>
+            <a class="btn btn-sm" href="schedule.html">Open schedule</a>
+          </div>
+          <div class="j-src">
+            <div class="j-src-info">
+              <div class="j-src-name">Protocol</div>
+              <div class="j-src-what">NAD+ series, session 4 of 8 · detox program</div>
+            </div>
+            <a class="btn btn-sm" href="clinical.html">Open protocol</a>
+          </div>
+          <div class="j-src">
+            <div class="j-src-info">
+              <div class="j-src-name">Readiness</div>
+              <div class="j-src-what">Standard pacing · water prep added to today</div>
+            </div>
+            <a class="btn btn-sm" href="readiness.html">Open readiness</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Education library</div>
+          <div class="j-lib-row">
+            <div class="j-lib-title">Why NAD+ takes 3 hours</div>
+            <div class="j-lib-meta">
+              <div class="j-meter"><div class="j-meter-fill" style="width:82%"></div></div>
+              <span class="j-lib-pct">82% read</span>
+            </div>
+          </div>
+          <div class="j-lib-row">
+            <div class="j-lib-title">Water before an infusion — how much and why</div>
+            <div class="j-lib-meta">
+              <div class="j-meter"><div class="j-meter-fill" style="width:74%"></div></div>
+              <span class="j-lib-pct">74% read</span>
+            </div>
+          </div>
+          <div class="j-lib-row">
+            <div class="j-lib-title">Your detox program, week by week</div>
+            <div class="j-lib-meta">
+              <div class="j-meter"><div class="j-meter-fill" style="width:61%"></div></div>
+              <span class="j-lib-pct">61% read</span>
+            </div>
+          </div>
+          <button class="btn btn-sm" style="margin-top:10px" onclick="HCOS.toast('Opening the education library.', 'ok')">Open library</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+<script>
+  // Demo only: checklist items in the phone toggle between done and pending on click.
+  document.addEventListener('click', function (ev) {
+    var item = ev.target.closest ? ev.target.closest('.j-toggle') : null;
+    if (!item) return;
+    var icon = item.querySelector('.check-icon');
+    if (!icon) return;
+    var wasDone = icon.classList.contains('done');
+    icon.classList.remove('done', 'pending');
+    icon.classList.add(wasDone ? 'pending' : 'done');
+    icon.textContent = wasDone ? '' : '✓';
+  });
+</script>
+</body>
+</html>

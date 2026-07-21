@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patients · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .pt-prow { display: flex; align-items: center; gap: 10px; }
+  .pt-pname { font-weight: 600; color: var(--hx-navy); }
+  .pt-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .pt-header-info { flex: 1; min-width: 220px; }
+  .pt-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .pt-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .pt-payer { font-size: 15px; font-weight: 600; color: var(--hx-navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .pt-meter { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin-top: 6px; }
+  .pt-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  .pt-create-card { max-width: 480px; margin: 0 auto; }
+  .pt-team-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+  .pt-team-role { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body data-page="patients" data-page-title="Patients" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pt-01-list" data-title="Patient list">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Patients</h2>
+        <p class="page-sub">Tuesday, July 21 · coverage and readiness at a glance</p>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card">
+            <div class="stat-num">412</div>
+            <div class="stat-lbl">Active patients</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">168</div>
+            <div class="stat-lbl">OON PPO</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">57</div>
+            <div class="stat-lbl">SPD documents on file</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">34</div>
+            <div class="stat-lbl">Infusion series active</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <button class="filter-chip active">All active</button>
+          <button class="filter-chip">OON</button>
+          <button class="filter-chip">In-network</button>
+          <button class="filter-chip">Self-pay</button>
+          <input class="search-input" type="search" placeholder="Search by name, phone, or DOB">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>Coverage</th>
+                <th>Plan governance</th>
+                <th>Next appointment</th>
+                <th>Readiness</th>
+                <th>Flags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">MR</span><span class="pt-pname">Maya Reyes</span></div></td>
+                <td>UnitedHealthcare PPO <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-navy">ERISA</span></td>
+                <td>Today · 1:00 PM · NAD+ infusion</td>
+                <td><span class="pill pill-ok">Standard</span></td>
+                <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">DO</span><span class="pt-pname">Daniel Okafor</span></div></td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><span class="pill pill-muted">Commercial</span></td>
+                <td>Thu Jul 23 · 9:30 AM · IV vitamin C 25 g</td>
+                <td><span class="pill pill-ok">Standard</span></td>
+                <td><span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">PN</span><span class="pt-pname">Priya Natarajan</span></div></td>
+                <td>Blue Shield of CA PPO <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-muted">Commercial</span></td>
+                <td>Mon Jul 27 · 11:00 AM · Myers' cocktail</td>
+                <td><span class="pill pill-navy">Gentle</span></td>
+                <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">Tom Alvarez</span></div></td>
+                <td>Cigna PPO <span class="net-badge net-oon">OON</span></td>
+                <td><span style="color:var(--muted)">—</span></td>
+                <td>Wed Jul 22 · 2:00 PM · Glutathione push</td>
+                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">GL</span><span class="pt-pname">Grace Lindqvist</span></div></td>
+                <td>Self-pay <span class="net-badge net-self">SELF</span></td>
+                <td><span style="color:var(--muted)">—</span></td>
+                <td>Fri Jul 24 · 10:00 AM · Follow-up</td>
+                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">MW</span><span class="pt-pname">Marcus Webb</span></div></td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><span class="pill pill-muted">Commercial</span></td>
+                <td>Today · 3:30 PM · New patient consult</td>
+                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">EP</span><span class="pt-pname">Elena Petrova</span></div></td>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-muted">Commercial</span></td>
+                <td>Today · 2:00 PM · Telehealth follow-up</td>
+                <td><span class="pill pill-warn">Pause</span></td>
+                <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">SR</span><span class="pt-pname">Sofia Ramos</span></div></td>
+                <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-muted">Commercial</span></td>
+                <td>Today · 11:15 AM · Lab draw</td>
+                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">WH</span><span class="pt-pname">Walter Hsu</span></div></td>
+                <td>Cigna <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-navy">ERISA</span></td>
+                <td>Thu Jul 23 · 1:00 PM · NAD+ infusion</td>
+                <td><span class="pill pill-ok">Standard</span></td>
+                <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+              <tr class="row-click" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">NB</span><span class="pt-pname">Nadia Boulos</span></div></td>
+                <td>Anthem <span class="net-badge net-inn">INN</span></td>
+                <td><span class="pill pill-muted">Commercial</span></td>
+                <td>Tue Jul 28 · 9:00 AM · Follow-up</td>
+                <td><span class="pill pill-err">Physician review</span></td>
+                <td><span class="pill pill-warn">Questionnaire pending</span> <span class="pill pill-muted">Consent ✓</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pt-02-profile" data-title="Patient profile — Maya Reyes">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients/maya-reyes</span></div>
+      <div class="frame-body">
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="pt-header-row">
+            <span class="avatar lg">MR</span>
+            <div class="pt-header-info">
+              <div class="pt-name">Maya Reyes</div>
+              <div class="pt-demo">52 · she/her · DOB Mar 14, 1974 · (949) 555-0132 · maya.reyes@example.com</div>
+            </div>
+            <a class="btn btn-primary" href="schedule.html">Book appointment</a>
+            <a class="btn" href="clinical.html">Open chart</a>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Insurance snapshot</div>
+              <div class="pt-payer">UnitedHealthcare PPO <span class="net-badge net-oon">OON</span></div>
+              <div style="margin:10px 0 4px">
+                <span class="pill pill-navy">Self-funded / ERISA</span>
+              </div>
+              <div class="field-help">Governance changes the appeal rules — self-funded plans follow ERISA timelines, not state insurance law (Module D).</div>
+              <div class="callout callout-ok" style="margin-top:12px">SPD received Jul 2 · 118 pages · summary ready</div>
+              <div class="seg-divider">OON benefits</div>
+              <dl class="kv">
+                <dt>Deductible</dt>
+                <dd>
+                  $1,850 met of $3,000
+                  <div class="pt-meter" style="max-width:220px"><div class="pt-meter-fill" style="width:62%"></div></div>
+                </dd>
+                <dt>Coinsurance</dt>
+                <dd>40% after deductible</dd>
+                <dt>Docs method</dt>
+                <dd>EDI 275 with the claim · via clearinghouse</dd>
+                <dt>Claim # first?</dt>
+                <dd>No — packet travels with the 837</dd>
+              </dl>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Upcoming appointments</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>When</th><th>Appointment</th><th>Where</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Today · 1:00 PM</td>
+                      <td>NAD+ infusion · session 4 of 8 · ~3h</td>
+                      <td>Chair 2</td>
+                      <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
+                    </tr>
+                    <tr>
+                      <td>Fri Jul 24 · 1:00 PM</td>
+                      <td>NAD+ infusion · session 5 of 8 · ~3h</td>
+                      <td>Chair 2</td>
+                      <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                    </tr>
+                    <tr>
+                      <td>Tue Jul 28 · 1:00 PM</td>
+                      <td>NAD+ infusion · session 6 of 8 · ~3h</td>
+                      <td>Chair 2</td>
+                      <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Active protocol</div>
+              <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">NAD+ series — detox program</div>
+              <div class="field-help" style="margin-top:4px">Session 4 of 8 · next infusion today 1:00 PM</div>
+              <div class="pt-meter" style="max-width:260px;margin-top:8px"><div class="pt-meter-fill" style="width:50%"></div></div>
+              <div style="margin-top:12px">
+                Readiness (Module I): <span class="pill pill-ok">Standard</span>
+                <span class="field-help" style="display:inline;margin-left:6px">cleared for standard pacing · reviewed Jul 20</span>
+              </div>
+            </div>
+
+            <div class="callout" style="margin-top:16px">Questionnaire answers file into this chart automatically — nothing is re-keyed by hand. See <a href="clinical.html">Clinical documentation</a> for where they land.</div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Consent flags</div>
+              <ul class="check-list">
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Treatment consent</span>
+                  <span class="check-meta">Jun 12</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Financial policy</span>
+                  <span class="check-meta">Jun 12</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Communication · SMS + email</span>
+                  <span class="check-meta">Jun 12</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Care team</div>
+              <div class="pt-team-row">
+                <span class="avatar">DD</span>
+                <div>
+                  <div style="font-size:13px;font-weight:500">Dr. Drannikov</div>
+                  <div class="pt-team-role">Provider</div>
+                </div>
+              </div>
+              <div class="pt-team-row">
+                <span class="avatar">NK</span>
+                <div>
+                  <div style="font-size:13px;font-weight:500">Nick</div>
+                  <div class="pt-team-role">Nurse (RN) · infusion suite</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Recent notes</div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-time">Jul 14</div>
+                  <div class="timeline-body">Infusion record — NAD+ session 3 of 8 · signed</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">Jul 7</div>
+                  <div class="timeline-body">Follow-up SOAP note · signed by Dr. Drannikov</div>
+                </div>
+                <div class="timeline-item muted">
+                  <div class="timeline-time">Jul 2</div>
+                  <div class="timeline-body">SPD received · 118 pages · summarized for Module D</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card stat-card">
+              <div class="stat-num">$240.00</div>
+              <div class="stat-lbl">Current balance</div>
+              <div class="stat-sub">Last payment $120.00 · Jul 7 · coinsurance after EOB</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pt-03-create" data-title="Quick create">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients/new</span></div>
+      <div class="frame-body">
+        <div class="card pt-create-card">
+          <h2 class="page-title">New patient</h2>
+          <p class="page-sub">From the 1:30 PM open slot · Tuesday, July 21</p>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">First name</label>
+              <input class="field-input" type="text" placeholder="First name">
+            </div>
+            <div class="field">
+              <label class="field-label">Last name</label>
+              <input class="field-input" type="text" placeholder="Last name">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Mobile phone</label>
+            <input class="field-input" type="tel" placeholder="(949) 555-0100">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">Email</label>
+              <input class="field-input" type="email" placeholder="name@example.com">
+            </div>
+            <div class="field">
+              <label class="field-label">Date of birth</label>
+              <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+            </div>
+          </div>
+          <div class="field" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
+            <input type="checkbox" id="pt-consent-text" checked style="margin:0">
+            <label for="pt-consent-text">Okay to text this number — appointment reminders and scheduling only</label>
+          </div>
+          <button class="btn btn-primary btn-lg" style="width:100%" onclick="HCOS.toast('Patient created — pick the slot on the calendar to book.', 'ok')">Create patient and book</button>
+          <div class="field-help" style="margin-top:8px">Everything else can wait — intake fills the rest.</div>
+          <div class="callout" style="margin-top:14px">After create, intake (Module A) texts the magic link — history, insurance, and consents arrive before the visit.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+</script>
+</body>
+</html>

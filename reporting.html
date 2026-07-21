@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporting &amp; admin · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .f-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .f-legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin: 2px 0 14px; }
+  .f-legend-item { display: flex; align-items: center; gap: 6px; }
+  .f-swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .f-payer-row { margin-bottom: 14px; }
+  .f-payer-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 12.5px; margin-bottom: 5px; }
+  .f-payer-name { font-weight: 600; color: var(--hx-navy); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .f-payer-amt { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+  .f-bar { display: flex; height: 18px; border-radius: 5px; overflow: hidden; background: #EEF1F5; }
+  .f-seg { display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 600; color: #fff; white-space: nowrap; }
+  .f-fineprint { font-size: 11px; color: var(--muted); line-height: 1.55; border-top: 1px solid var(--line-soft); margin-top: 14px; padding-top: 10px; }
+  .f-pipe { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; margin: 4px 0 14px; }
+  .f-stage { flex: 1; min-width: 92px; background: #FAFBFD; border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 8px; text-align: center; }
+  .f-stage-num { font-size: 20px; font-weight: 600; color: var(--hx-navy); line-height: 1.2; }
+  .f-stage-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
+  .f-stage.won { background: var(--st-done-bg); border-color: transparent; }
+  .f-stage.won .f-stage-num { color: var(--ok); }
+  .f-pipe-arrow { align-self: center; color: var(--line); font-size: 14px; }
+  .f-chair-grid { display: grid; grid-template-columns: 64px repeat(5, 1fr); gap: 8px 6px; align-items: end; }
+  .f-day-head { text-align: center; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+  .f-day-head.today { color: var(--hx-blue); }
+  .f-chair-lbl { font-size: 12px; font-weight: 600; color: var(--hx-navy); align-self: center; }
+  .f-track { height: 52px; background: #EEF1F5; border-radius: 5px; position: relative; overflow: hidden; }
+  .f-fill { position: absolute; left: 0; right: 0; bottom: 0; background: var(--hx-accent); }
+  .f-fill.today { background: var(--hx-blue); }
+  .f-meter-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .f-meter-lbl { flex: 1.4; font-size: 12.5px; color: var(--ink); }
+  .f-meter { flex: 1.6; height: 8px; background: #EEF1F5; border-radius: 4px; overflow: hidden; }
+  .f-meter-fill { height: 100%; background: var(--ok); border-radius: 4px; }
+  .f-meter-val { width: 42px; text-align: right; font-weight: 600; font-size: 12.5px; color: var(--hx-navy); }
+</style>
+</head>
+<body data-page="reporting" data-page-title="Reporting &amp; admin" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="f-01-dash" data-title="Leadership dashboard">
+    <div class="screen-descriptor">
+      <div class="descriptor-eyebrow">F-01 · Leadership dashboard</div>
+      <div class="descriptor-title">The clinic's health on one screen</div>
+      <div class="descriptor-body">Money, appeals, chairs, and documentation — the four numbers Tom checks on a Tuesday morning, each wired to the module that produces it. Every card says in small print where its number comes from, so a drifting number is also a link to the fix.</div>
+      <div class="descriptor-meta">
+        <span class="meta-item"><strong>Primary users</strong> Tom Bakman (Leadership / RCM oversight) · Shibani (Admin) · Karina (Operations Manager)</span>
+        <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">zero payer automation — outcomes hand-tallied from EOBs into a spreadsheet</span></span>
+      </div>
+    </div>
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reporting</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Reporting &amp; admin</h2>
+        <p class="page-sub">Tuesday, July 21 · figures as of 11:40 AM</p>
+
+        <div class="f-toolbar">
+          <div class="filters" style="margin:0">
+            <button class="filter-chip active">Month to date</button>
+            <button class="filter-chip">Last month</button>
+            <button class="filter-chip">Quarter to date</button>
+            <button class="filter-chip">Year to date</button>
+          </div>
+          <span style="flex:1"></span>
+          <button class="btn btn-primary" onclick="HCOS.toast('Board packet queued — it lands in your email in about a minute.', 'ok')">Email me the board packet</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:16px">
+          <div class="card stat-card">
+            <div class="stat-num">$184k</div>
+            <div class="stat-lbl">Collections MTD</div>
+            <div class="stat-sub">Posted from ERA / EOB reconciliation — Module D</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">100% <span class="pill pill-ok">Standing policy</span></div>
+            <div class="stat-lbl">Recoupments appealed</div>
+            <div class="stat-sub">Every recoupment appealed, none written off — Tom's rule, wired into Module D</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">94%</div>
+            <div class="stat-lbl">Same-day sign-and-lock</div>
+            <div class="stat-sub">Module B sign-and-lock — notes end at the clinic, not the weekend</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">81%</div>
+            <div class="stat-lbl">Chair utilization</div>
+            <div class="stat-sub">Chairs 1–4, 8:00 AM–6:00 PM — Module L infusion suite view</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+
+          <!-- Claim outcomes by payer -->
+          <div class="card">
+            <div class="card-title">Claim outcomes by payer · July MTD</div>
+            <div class="f-legend">
+              <span class="f-legend-item"><span class="f-swatch" style="background:var(--ok)"></span>Paid as billed</span>
+              <span class="f-legend-item"><span class="f-swatch" style="background:var(--warn)"></span>Reduced</span>
+              <span class="f-legend-item"><span class="f-swatch" style="background:var(--hx-accent)"></span>In appeal</span>
+            </div>
+            <div class="f-payer-row">
+              <div class="f-payer-head">
+                <span class="f-payer-name">Anthem Blue Cross <span class="net-badge net-inn">INN</span></span>
+                <span class="f-payer-amt">$68.4k billed</span>
+              </div>
+              <div class="f-bar">
+                <div class="f-seg" style="width:82%;background:var(--ok)" title="Paid as billed · 82%">82%</div>
+                <div class="f-seg" style="width:8%;background:var(--warn)" title="Reduced · 8%"></div>
+                <div class="f-seg" style="width:10%;background:var(--hx-accent)" title="In appeal · 10%"></div>
+              </div>
+            </div>
+            <div class="f-payer-row">
+              <div class="f-payer-head">
+                <span class="f-payer-name">UnitedHealthcare <span class="net-badge net-oon">OON</span></span>
+                <span class="f-payer-amt">$55.0k billed</span>
+              </div>
+              <div class="f-bar">
+                <div class="f-seg" style="width:55%;background:var(--ok)" title="Paid as billed · 55%">55%</div>
+                <div class="f-seg" style="width:27%;background:var(--warn)" title="Reduced · 27% (third-party pricing)">27%</div>
+                <div class="f-seg" style="width:18%;background:var(--hx-accent)" title="In appeal · 18%">18%</div>
+              </div>
+            </div>
+            <div class="f-payer-row">
+              <div class="f-payer-head">
+                <span class="f-payer-name">Blue Shield of CA <span class="net-badge net-oon">OON</span></span>
+                <span class="f-payer-amt">$47.9k billed</span>
+              </div>
+              <div class="f-bar">
+                <div class="f-seg" style="width:49%;background:var(--ok)" title="Paid as billed · 49%">49%</div>
+                <div class="f-seg" style="width:30%;background:var(--warn)" title="Reduced · 30% (NovoLogix repricing)">30%</div>
+                <div class="f-seg" style="width:21%;background:var(--hx-accent)" title="In appeal · 21%">21%</div>
+              </div>
+            </div>
+            <div class="f-payer-row" style="margin-bottom:0">
+              <div class="f-payer-head">
+                <span class="f-payer-name">Cigna <span class="net-badge net-oon">OON</span></span>
+                <span class="f-payer-amt">$38.7k billed</span>
+              </div>
+              <div class="f-bar">
+                <div class="f-seg" style="width:52%;background:var(--ok)" title="Paid as billed · 52%">52%</div>
+                <div class="f-seg" style="width:28%;background:var(--warn)" title="Reduced · 28% (MultiPlan repricing)">28%</div>
+                <div class="f-seg" style="width:20%;background:var(--hx-accent)" title="In appeal · 20%">20%</div>
+              </div>
+            </div>
+            <div class="f-fineprint">Every reduced dollar routes into the Module D worklist with the payer's documentation path attached — EDI 275 for Anthem and UHC, claim-number-first portal or fax for Blue Shield and Cigna. Nothing waits for someone to notice an EOB.</div>
+          </div>
+
+          <!-- Appeals pipeline -->
+          <div class="card">
+            <div class="card-title">Appeals pipeline</div>
+            <div class="f-pipe">
+              <div class="f-stage">
+                <div class="f-stage-num">6</div>
+                <div class="f-stage-lbl">Drafted</div>
+              </div>
+              <span class="f-pipe-arrow">→</span>
+              <div class="f-stage">
+                <div class="f-stage-num">9</div>
+                <div class="f-stage-lbl">Sent</div>
+              </div>
+              <span class="f-pipe-arrow">→</span>
+              <div class="f-stage">
+                <div class="f-stage-num">5</div>
+                <div class="f-stage-lbl">Payer review</div>
+              </div>
+              <span class="f-pipe-arrow">→</span>
+              <div class="f-stage won">
+                <div class="f-stage-num">14</div>
+                <div class="f-stage-lbl">Won YTD</div>
+              </div>
+            </div>
+            <div class="callout callout-ok">$23,400 recovered year to date · 0 recoupments written off without an appeal.</div>
+            <div style="font-size:12px;color:var(--ink);margin-top:12px">
+              Newest in payer review: Priya Natarajan · Blue Shield of CA · Myers' cocktail claim reduced via NovoLogix — packet demands the pricing methodology.
+            </div>
+            <div class="f-fineprint">Appeals draft themselves from the signed encounter and infusion record — Module B sign-and-lock dispatches the documentation packet, Module D tracks it here. Tom sees policy honored, not promised.</div>
+          </div>
+
+          <!-- Infusion suite utilization -->
+          <div class="card">
+            <div class="card-title">Infusion suite utilization · week of July 20</div>
+            <div class="f-chair-grid">
+              <span></span>
+              <div class="f-day-head">Mon 20</div>
+              <div class="f-day-head today">Tue 21</div>
+              <div class="f-day-head">Wed 22</div>
+              <div class="f-day-head">Thu 23</div>
+              <div class="f-day-head">Fri 24</div>
+
+              <div class="f-chair-lbl">Chair 1</div>
+              <div class="f-track" title="Chair 1 · Mon Jul 20 · 85% booked"><div class="f-fill" style="height:85%"></div></div>
+              <div class="f-track" title="Chair 1 · Tue Jul 21 (today) · 95% booked"><div class="f-fill today" style="height:95%"></div></div>
+              <div class="f-track" title="Chair 1 · Wed Jul 22 · 75% booked"><div class="f-fill" style="height:75%"></div></div>
+              <div class="f-track" title="Chair 1 · Thu Jul 23 · 70% booked"><div class="f-fill" style="height:70%"></div></div>
+              <div class="f-track" title="Chair 1 · Fri Jul 24 · 60% booked"><div class="f-fill" style="height:60%"></div></div>
+
+              <div class="f-chair-lbl">Chair 2</div>
+              <div class="f-track" title="Chair 2 · Mon Jul 20 · 80% booked"><div class="f-fill" style="height:80%"></div></div>
+              <div class="f-track" title="Chair 2 · Tue Jul 21 (today) · 90% booked"><div class="f-fill today" style="height:90%"></div></div>
+              <div class="f-track" title="Chair 2 · Wed Jul 22 · 85% booked"><div class="f-fill" style="height:85%"></div></div>
+              <div class="f-track" title="Chair 2 · Thu Jul 23 · 65% booked"><div class="f-fill" style="height:65%"></div></div>
+              <div class="f-track" title="Chair 2 · Fri Jul 24 · 55% booked"><div class="f-fill" style="height:55%"></div></div>
+
+              <div class="f-chair-lbl">Chair 3</div>
+              <div class="f-track" title="Chair 3 · Mon Jul 20 · 65% booked"><div class="f-fill" style="height:65%"></div></div>
+              <div class="f-track" title="Chair 3 · Tue Jul 21 (today) · 85% booked"><div class="f-fill today" style="height:85%"></div></div>
+              <div class="f-track" title="Chair 3 · Wed Jul 22 · 70% booked"><div class="f-fill" style="height:70%"></div></div>
+              <div class="f-track" title="Chair 3 · Thu Jul 23 · 60% booked"><div class="f-fill" style="height:60%"></div></div>
+              <div class="f-track" title="Chair 3 · Fri Jul 24 · 50% booked"><div class="f-fill" style="height:50%"></div></div>
+
+              <div class="f-chair-lbl">Chair 4</div>
+              <div class="f-track" title="Chair 4 · Mon Jul 20 · 90% booked"><div class="f-fill" style="height:90%"></div></div>
+              <div class="f-track" title="Chair 4 · Tue Jul 21 (today) · 100% booked"><div class="f-fill today" style="height:100%"></div></div>
+              <div class="f-track" title="Chair 4 · Wed Jul 22 · 80% booked"><div class="f-fill" style="height:80%"></div></div>
+              <div class="f-track" title="Chair 4 · Thu Jul 23 · 75% booked"><div class="f-fill" style="height:75%"></div></div>
+              <div class="f-track" title="Chair 4 · Fri Jul 24 · 45% booked"><div class="f-fill" style="height:45%"></div></div>
+            </div>
+            <div class="f-legend" style="margin:12px 0 0">
+              <span class="f-legend-item"><span class="f-swatch" style="background:var(--hx-accent)"></span>Booked chair hours</span>
+              <span class="f-legend-item"><span class="f-swatch" style="background:var(--hx-blue)"></span>Today (Tuesday)</span>
+              <span class="f-legend-item">Mon–Tue actual · Wed–Fri booked ahead</span>
+            </div>
+            <div class="f-fineprint">Booked chair hours ÷ available hours, 8:00 AM–6:00 PM. Gaps show up in Module L's chair columns before the day starts, so Yazmin and Haylee fill Friday afternoons instead of discovering them.</div>
+          </div>
+
+          <!-- Documentation health -->
+          <div class="card">
+            <div class="card-title">Documentation health · July MTD</div>
+            <div class="f-meter-row">
+              <span class="f-meter-lbl">Encounters signed same day</span>
+              <div class="f-meter"><div class="f-meter-fill" style="width:94%"></div></div>
+              <span class="f-meter-val">94%</span>
+            </div>
+            <div class="f-meter-row">
+              <span class="f-meter-lbl">Scribe drafts used at signing</span>
+              <div class="f-meter"><div class="f-meter-fill" style="width:88%"></div></div>
+              <span class="f-meter-val">88%</span>
+            </div>
+            <div class="f-meter-row">
+              <span class="f-meter-lbl">Questionnaire answers auto-filed</span>
+              <div class="f-meter"><div class="f-meter-fill" style="width:97%"></div></div>
+              <span class="f-meter-val">97%</span>
+            </div>
+            <div style="font-size:12px;margin-top:4px"><span class="pill pill-warn">2 open past 24 h</span> <span style="color:var(--muted)">Both nudged to Dr. Drannikov this morning — signing dispatches billing, labs, and pharmacy at once.</span></div>
+            <div class="f-fineprint">Signed same day = Module B sign-and-lock (B-12). Scribe drafts = the HCOS AI scribe replacing eCW's unreliable one. Auto-filed = the one survey engine shared by Modules A, B, and I — Charlene stops re-keying answers by hand.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>

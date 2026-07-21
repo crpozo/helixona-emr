@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical documentation · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  /* Page-local pieces the shared vocabulary lacks — all prefixed .b- */
+  .b-macro-bar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 14px;
+    background: var(--hx-band); border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+  }
+  .b-macro {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 11px;
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: ui-monospace, monospace; font-size: 11.5px;
+    color: var(--hx-navy); cursor: pointer;
+  }
+  .b-macro:hover { border-color: var(--hx-accent); }
+  .b-scribe-live { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .b-scribe-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--err); animation: bPulse 1.4s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes bPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .b-transcript {
+    background: var(--hx-band); border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px; margin: 12px 0;
+    font-size: 12px; line-height: 1.65; color: var(--ink);
+  }
+  .b-transcript .spk { font-weight: 600; color: var(--hx-blue); }
+  .b-startstop {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    padding: 16px 20px; margin-bottom: 16px;
+    background: var(--hx-light); border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .b-elapsed { font-family: ui-monospace, monospace; font-size: 30px; font-weight: 600; color: var(--hx-navy); line-height: 1.1; }
+  .b-elapsed-lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 600; }
+  .b-vitals { display: flex; gap: 12px; flex-wrap: wrap; font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--ink); margin-top: 3px; }
+  .b-q { border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+  .b-q-t { font-size: 12px; font-weight: 600; color: var(--hx-navy); margin-bottom: 6px; }
+  .b-q-a { font-size: 12.5px; background: var(--hx-light); border-radius: 6px; padding: 7px 10px; color: var(--ink); }
+  .b-chart-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    padding: 11px 0; border-bottom: 1px solid var(--line-soft);
+  }
+  .b-chart-row:last-child { border-bottom: none; }
+  .b-chart-lbl { font-size: 11px; color: var(--muted); }
+  .b-chart-val { font-size: 12.5px; font-weight: 500; color: var(--ink); margin-top: 1px; }
+  .b-phone-mini .phone-body { min-height: 0; padding: 16px 14px; }
+</style>
+</head>
+<body data-page="clinical" data-page-title="Clinical documentation" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================
+       B-01 · SOAP editor + AI scribe
+       ============================================================ -->
+  <section class="screen" id="b-01-soap" data-title="SOAP editor + AI scribe">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/soap</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">GL</span>
+            <div>
+              <div class="app-logo"><a href="patients.html">Grace Lindqvist</a> <span class="net-badge net-self" style="margin-left:6px">Self-pay</span></div>
+              <div class="app-logo-sub">Follow-up · Tuesday, July 21 · 11:00 AM · Dr. Drannikov</div>
+            </div>
+          </div>
+          <div class="app-user">
+            <span class="pill pill-st st-inroom">In room</span>
+            <button class="btn btn-sm" data-activate="b-04-sign">Go to sign and lock</button>
+          </div>
+        </div>
+
+        <div class="b-macro-bar">
+          <span class="card-title" style="margin:0">Macros</span>
+          <span class="b-macro" onclick="HCOS.toast('.detox-followup expanded into Plan — edit it like any text.', 'ok')">.detox-followup <span class="pill pill-ok">shared · Dr. Drannikov → Brooke</span></span>
+          <span class="b-macro" onclick="HCOS.toast('.thyroid-panel expanded into Plan — edit it like any text.', 'ok')">.thyroid-panel <span class="pill pill-ok">shared · Dr. Drannikov → Brooke</span></span>
+          <span style="font-size:11px;color:var(--muted)">Type a dot-phrase in any section — sharing takes one click, not a support ticket.</span>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-title">Subjective <span class="pill pill-warn" style="margin-left:8px;text-transform:none;letter-spacing:0">Drafted by scribe — review</span></div>
+              <p style="font-size:13px;line-height:1.6;margin:0">Grace reports steadier energy through mid-afternoon since starting the liver-support protocol; brain fog now 2 of 10, down from 6 in June. Sleep is 7 hours and unbroken most nights. She still notes cold intolerance and dry skin in the mornings, and asks whether her thyroid panel results are back.</p>
+            </div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-title">Objective</div>
+              <p style="font-size:13px;line-height:1.6;margin:0">BP 118/74 · HR 66 · Temp 98.1 °F · Weight 141 lb (−3 lb since June 23). Thyroid non-tender, no palpable nodules. Skin dry at extensor surfaces. Thyroid panel (TSH, free T3, free T4, TPO antibodies) drawn July 14 — results pending in Diagnostics.</p>
+            </div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-title">Assessment <span class="pill pill-warn" style="margin-left:8px;text-transform:none;letter-spacing:0">Drafted by scribe — review</span></div>
+              <p style="font-size:13px;line-height:1.6;margin:0">Fatigue improving on the current functional protocol. The symptom pattern — cold intolerance, dry skin, weight trend — keeps subclinical hypothyroidism on the differential pending the July 14 panel. Detox readiness remains Standard; no flare signs today.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Plan</div>
+              <p style="font-size:13px;line-height:1.6;margin:0">Continue liver-support supplements at current dosing. Review the thyroid panel when it lands; flag TPO above 35 for physician review. Continue morning hydration and the castor-oil pack routine 3 times a week. Recheck in 4 weeks — book the follow-up before she leaves.</p>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-title">HCOS scribe</div>
+              <div class="b-scribe-live"><span class="b-scribe-dot"></span>Listening · 22 min</div>
+              <div class="b-transcript">
+                <span class="spk">Grace:</span> …the fog is mostly gone by nine now, which is new for me…<br>
+                <span class="spk">Dr. Drannikov:</span> And the cold hands in the morning — better, worse, the same?<br>
+                <span class="spk">Grace:</span> The same, honestly. That and the dry skin.
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Last exchange summarized and inserted into Subjective.', 'ok')">Insert into note</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Scribe paused — nothing is captured until you resume.', 'warn')">Pause scribe</button>
+              </div>
+              <div class="callout callout-ok" style="margin:0">Draft ready 40 seconds after the visit — every visit. No retries, no lost audio, no typing it yourself at 9 PM.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-02 · Questionnaire → chart
+       ============================================================ -->
+  <section class="screen" id="b-02-questionnaire" data-title="Questionnaire → chart">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/questionnaires</span></div>
+      <div class="frame-body">
+
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="card stat-card">
+            <div class="stat-num">12</div>
+            <div class="stat-lbl">Answers filed this visit</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">0</div>
+            <div class="stat-lbl">Re-keyed by hand</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num" style="font-size:16px;line-height:1.4;padding-top:5px">Charlene reviews instead of retypes</div>
+            <div class="stat-lbl">Her checkmark is the only human step</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="seg-divider">What Nadia sees — her phone</div>
+            <div class="phone-frame b-phone-mini">
+              <div class="phone-bar"><span>9:41</span><span>Helixona</span><span>●●●</span></div>
+              <div class="phone-body">
+                <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy);margin-bottom:2px">Detox follow-up questionnaire</div>
+                <div style="font-size:11px;color:var(--muted);margin-bottom:14px">From the one HCOS survey engine — the same engine behind intake forms and readiness surveys.</div>
+                <div class="b-q">
+                  <div class="b-q-t">How would you rate your energy this week?</div>
+                  <div class="b-q-a">6 of 10 — better after mid-morning</div>
+                </div>
+                <div class="b-q">
+                  <div class="b-q-t">Any new symptoms since your last visit?</div>
+                  <div class="b-q-a">Mild headaches, 2 evenings</div>
+                </div>
+                <div class="b-q">
+                  <div class="b-q-t">How many days did you complete your home routine?</div>
+                  <div class="b-q-a">5 of 7 days</div>
+                </div>
+                <div class="callout callout-ok" style="margin:12px 0 0;font-size:11.5px">Sent — your care team already has these in your chart.</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="seg-divider">What Charlene sees — the chart, already filed</div>
+            <div class="card">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <span class="avatar">NB</span>
+                <div>
+                  <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">Nadia Boulos <span class="net-badge net-inn" style="margin-left:6px">INN</span></div>
+                  <div style="font-size:11px;color:var(--muted)">Anthem · readiness Physician Review · encounter prep for Thursday</div>
+                </div>
+              </div>
+              <div class="b-chart-row">
+                <div>
+                  <div class="b-chart-lbl">Energy score (interval)</div>
+                  <div class="b-chart-val">6 / 10 — better after mid-morning</div>
+                </div>
+                <span class="pill pill-ok">Filed automatically</span>
+              </div>
+              <div class="b-chart-row">
+                <div>
+                  <div class="b-chart-lbl">Interval symptoms</div>
+                  <div class="b-chart-val">Mild evening headaches × 2</div>
+                </div>
+                <span class="pill pill-ok">Filed automatically</span>
+              </div>
+              <div class="b-chart-row">
+                <div>
+                  <div class="b-chart-lbl">Home routine adherence</div>
+                  <div class="b-chart-val">5 of 7 days</div>
+                </div>
+                <span class="pill pill-ok">Filed automatically</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('All 12 answers marked reviewed — Dr. Drannikov sees them flagged in the encounter.', 'ok')">Mark all reviewed</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Evening headaches flagged for Dr. Drannikov before Thursday.', 'ok')">Flag for provider</button>
+              </div>
+              <div class="callout" style="margin:14px 0 0">Each question in the survey engine maps to a chart field when it is built — so the answer files itself, every time, for every patient.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-03 · Infusion record
+       ============================================================ -->
+  <section class="screen" id="b-03-infusion" data-title="Infusion record">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/infusion</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">MR</span>
+            <div>
+              <div class="app-logo"><a href="patients.html#/pt-02-profile">Maya Reyes</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">NAD+ infusion · Chair 2 · ordered by Dr. Drannikov · Tuesday, July 21</div>
+            </div>
+          </div>
+          <div class="app-user">
+            <span class="pill pill-st st-inchair">In chair</span>
+            <span>Recording: Bea (Medic)</span>
+          </div>
+        </div>
+
+        <div class="b-startstop">
+          <div>
+            <div class="b-elapsed-lbl">Started 9:04 AM · elapsed</div>
+            <div class="b-elapsed">2:36</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted);max-width:320px">NAD+ runs ~3 h at target rate. Stopping records the end time, locks the timeline, and opens the completion checklist.</div>
+          <button class="btn btn-danger btn-lg" onclick="HCOS.toast('Infusion stopped at 11:40 AM — flush and completion checklist is now active.', 'ok')">Stop infusion</button>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-title">Protocol · NAD+ 500 mg</div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Route</label>
+                  <input class="field-input" value="IV — left forearm · 22 g catheter">
+                </div>
+                <div class="field">
+                  <label class="field-label">Rate</label>
+                  <input class="field-input" value="180 mL/hr — titrated up from 100 at 10:00">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Dosage</label>
+                  <input class="field-input" value="NAD+ 500 mg in 500 mL 0.9% sodium chloride">
+                </div>
+                <div class="field">
+                  <label class="field-label">Tolerance notes</label>
+                  <input class="field-input" value="Mild flushing at 9:55 — rate held, resolved">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Supplies used — lots recorded at the chair</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>Item</th><th>Lot</th><th>Expires</th><th>Qty</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>NAD+ 500 mg vial</td><td>N24-8871</td><td>02/2027</td><td>1</td></tr>
+                    <tr><td>0.9% sodium chloride 500 mL</td><td>S51-0342</td><td>11/2026</td><td>1</td></tr>
+                    <tr><td>IV start kit · 22 g catheter</td><td>K19-5510</td><td>08/2027</td><td>1</td></tr>
+                    <tr><td>Extension set + saline flush 10 mL</td><td>F73-2209</td><td>05/2027</td><td>2</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="field-help" style="margin-top:8px">Lots feed the OON documentation packet in Billing (D) — no end-of-day transcription.</div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:12px">
+              <div class="card-title">Vitals checkpoints</div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-time">9:04 AM · baseline</div>
+                  <div class="timeline-body">Comfortable, consented, line patent.
+                    <div class="b-vitals"><span>BP 122/78</span><span>HR 72</span><span>SpO₂ 99%</span></div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">10:00 AM</div>
+                  <div class="timeline-body">Mild flushing — rate held at 100, resolved.
+                    <div class="b-vitals"><span>BP 118/76</span><span>HR 70</span><span>SpO₂ 99%</span></div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">11:00 AM</div>
+                  <div class="timeline-body">Comfortable — rate back to 180.
+                    <div class="b-vitals"><span>BP 120/74</span><span>HR 68</span><span>SpO₂ 98%</span></div>
+                  </div>
+                </div>
+                <div class="timeline-item muted">
+                  <div class="timeline-time">12:00 PM · due next</div>
+                  <div class="timeline-body">Hourly check.</div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-sm" style="width:100%" onclick="HCOS.toast('Vitals checkpoint added at 11:40 AM.', 'ok')">Record vitals now</button>
+            </div>
+            <div class="card">
+              <div class="card-title">Flush + completion</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Baseline vitals recorded</div><div class="check-meta">9:04 AM</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Hourly vitals × 2</div><div class="check-meta">10:00 · 11:00</div></li>
+                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Saline flush at completion</div><div class="check-meta">After stop</div></li>
+                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Site check + catheter removal</div><div class="check-meta">After stop</div></li>
+                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Post-infusion vitals</div><div class="check-meta">After stop</div></li>
+                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Chair 2 status → Done</div><div class="check-meta">Auto on completion</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-04 · Sign and lock (B-12)
+       ============================================================ -->
+  <section class="screen" id="b-04-sign" data-title="Sign and lock (B-12)">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/sign</span></div>
+      <div class="frame-body">
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:14px">
+              <div class="card-title">Encounter summary</div>
+              <dl class="kv">
+                <dt>Patient</dt><dd>Grace Lindqvist · 44 · Self-pay</dd>
+                <dt>Visit</dt><dd>Follow-up · 30 m · Tuesday, July 21 · 11:00 AM</dd>
+                <dt>Provider</dt><dd>Dr. Drannikov</dd>
+                <dt>Note</dt><dd>4 sections complete · scribe drafts reviewed</dd>
+                <dt>Orders</dt><dd>Thyroid panel recheck · glutathione push (next visit)</dd>
+                <dt>Charges</dt><dd>99214 · liver-support supplement refill</dd>
+              </dl>
+            </div>
+
+            <div class="seg-divider">Signing dispatches everything at once</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Lab order — thyroid panel recheck</div><div class="check-meta">Diagnostics (C)</div></li>
+              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Infusion order — glutathione push, next visit</div><div class="check-meta">Infusion bay</div></li>
+              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Superbill — 99214 + today's charges</div><div class="check-meta">Billing (D)</div></li>
+              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Supplement plan — liver-support refill</div><div class="check-meta">Pharmacy (H)</div></li>
+              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Follow-up booking — 4 weeks, 30 m</div><div class="check-meta">Scheduling (L)</div></li>
+            </ul>
+            <button class="btn btn-primary btn-lg" style="width:100%;margin-top:6px" data-open-modal="#b-modal-sign">Sign and lock</button>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">After signing — what the five destinations see</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Lab order in Diagnostics</div><div class="check-meta">4:52 PM</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Infusion order in the bay queue</div><div class="check-meta">4:52 PM</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Superbill in the Billing worklist</div><div class="check-meta">4:52 PM</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Supplement plan in Pharmacy</div><div class="check-meta">4:52 PM</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Follow-up on the calendar</div><div class="check-meta">4:52 PM</div></li>
+              </ul>
+              <div class="callout callout-ok" style="margin:12px 0 0">Nothing follows Dr. Drannikov home. That is the point.</div>
+              <a class="btn btn-sm" href="billing.html#/d-01-worklist" style="margin-top:12px">Open the billing worklist</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Sign-and-lock confirm modal — outside .screens -->
+<div class="modal-overlay" id="b-modal-sign">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Sign and lock this encounter</div>
+        <div class="modal-sub">Grace Lindqvist · Follow-up · Tuesday, July 21 · Dr. Drannikov</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;margin:0 0 12px">Signing locks the note and sends five dispatches at once:</p>
+      <ul class="check-list">
+        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Lab order</div><div class="check-meta">Diagnostics (C)</div></li>
+        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Infusion order</div><div class="check-meta">Infusion bay</div></li>
+        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Superbill</div><div class="check-meta">Billing (D)</div></li>
+        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Supplement plan</div><div class="check-meta">Pharmacy (H)</div></li>
+        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Follow-up booking</div><div class="check-meta">Scheduling (L)</div></li>
+      </ul>
+      <div class="callout" style="margin:12px 0 0">After signing, changes go in as an addendum — the original note stays locked for the audit trail.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Keep editing</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Encounter signed and locked — five dispatches sent at once.', 'ok')">Sign and lock</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>

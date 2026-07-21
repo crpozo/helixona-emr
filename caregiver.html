@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caregiver portal · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+</head>
+<body data-page="caregiver" data-page-title="Caregiver portal" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="k-01-access" data-title="Caregiver access">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/caregivers</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Caregiver access</h2>
+        <p class="page-sub">Tuesday, July 21 · scoped, patient-approved, always logged</p>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Give someone access to Walter's care</div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Caregiver name</label>
+                  <input class="field-input" type="text" value="Amy Hsu">
+                </div>
+                <div class="field">
+                  <label class="field-label">Relationship</label>
+                  <input class="field-input" type="text" value="Daughter">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label">What Amy can see</label>
+                <div class="filters" id="k-scope" style="margin-bottom:4px">
+                  <button class="filter-chip active" data-scope="appointments">Appointments</button>
+                  <button class="filter-chip" data-scope="supplements">Supplements</button>
+                  <button class="filter-chip active" data-scope="plan">Care plan</button>
+                  <button class="filter-chip" data-scope="everything">Everything</button>
+                </div>
+                <div class="field-help">Everything adds labs and visit summaries. Clinical notes are never shared — with any scope.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">How long</label>
+                <div class="filters" id="k-duration" style="margin-bottom:4px">
+                  <button class="filter-chip" data-duration="temp">Temporary until date</button>
+                  <button class="filter-chip active" data-duration="perm">Permanent</button>
+                </div>
+              </div>
+              <div class="field" id="k-until" style="display:none;max-width:220px">
+                <label class="field-label">Access ends on</label>
+                <input class="field-input" type="text" value="08/15/2026">
+                <div class="field-help">Access closes at midnight on this date — no one has to remember to revoke it.</div>
+              </div>
+              <div class="callout" style="margin-bottom:14px">Walter approves by text before access opens — nothing is shared until he replies yes.</div>
+              <button class="btn btn-primary btn-lg" onclick="HCOS.toast('Invitation sent — Walter gets the approval text.', 'ok')">Send the invitation</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Active grants</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Caregiver</th>
+                      <th>Patient</th>
+                      <th>Scope</th>
+                      <th>Duration</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div style="display:flex;align-items:center;gap:10px">
+                          <span class="avatar">AH</span>
+                          <div>
+                            <div style="font-weight:600;color:var(--hx-navy)">Amy Hsu</div>
+                            <div style="font-size:11px;color:var(--muted)">Daughter</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td><a href="patients.html">Walter Hsu</a></td>
+                      <td>Appointments + Care plan</td>
+                      <td>Permanent</td>
+                      <td style="white-space:nowrap;text-align:right">
+                        <button class="btn btn-sm" onclick="HCOS.toast('Scope change sent — Walter approves it by text first.', 'ok')">Change scope</button>
+                        <button class="btn btn-danger btn-sm" onclick="HCOS.toast('Access revoked.', 'ok')">Revoke access</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div style="display:flex;align-items:center;gap:10px">
+                          <span class="avatar">RA</span>
+                          <div>
+                            <div style="font-weight:600;color:var(--hx-navy)">Rosa Alvarez</div>
+                            <div style="font-size:11px;color:var(--muted)">Spouse</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td><a href="patients.html">Tom Alvarez</a></td>
+                      <td>Appointments</td>
+                      <td><span class="pill pill-warn">Temporary</span> <span style="font-size:11px;color:var(--muted)">expires Aug 15</span></td>
+                      <td style="white-space:nowrap;text-align:right">
+                        <button class="btn btn-sm" onclick="HCOS.toast('Scope change sent — Tom approves it by text first.', 'ok')">Change scope</button>
+                        <button class="btn btn-danger btn-sm" onclick="HCOS.toast('Access revoked.', 'ok')">Revoke access</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="field-help" style="margin-top:8px">Revoking closes access immediately — the patient and the caregiver are both notified.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">What Amy sees</div>
+              <div class="field-help" style="margin-bottom:10px">The preview follows the scope you pick — toggle a chip and it updates.</div>
+              <ul class="check-list">
+                <li class="check-item" id="k-see-appointments" data-meta="Next: Thu Jul 23 · 1:00 PM · NAD+ infusion · ~3h · Chair 3">
+                  <span class="check-icon done">✓</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="check-label" style="font-weight:500">Appointments</div>
+                    <div class="check-meta k-see-meta">Next: Thu Jul 23 · 1:00 PM · NAD+ infusion · ~3h · Chair 3</div>
+                  </div>
+                </li>
+                <li class="check-item" id="k-see-supplements" data-meta="Daily schedule — what to take, when, and why">
+                  <span class="check-icon blocked">–</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="check-label" style="font-weight:500">Supplements</div>
+                    <div class="check-meta k-see-meta">Not in this scope</div>
+                  </div>
+                </li>
+                <li class="check-item" id="k-see-plan" data-meta="NAD+ series · session 4 of 8 · hydrate well before Thursday">
+                  <span class="check-icon done">✓</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="check-label" style="font-weight:500">Care plan</div>
+                    <div class="check-meta k-see-meta">NAD+ series · session 4 of 8 · hydrate well before Thursday</div>
+                  </div>
+                </li>
+                <li class="check-item" id="k-see-labs" data-meta="Recent labs and the summary after each visit">
+                  <span class="check-icon blocked">–</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="check-label" style="font-weight:500">Labs and visit summaries</div>
+                    <div class="check-meta k-see-meta">Not in this scope</div>
+                  </div>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon blocked">–</span>
+                  <div style="flex:1;min-width:0">
+                    <div class="check-label" style="font-weight:500">Clinical notes</div>
+                    <div class="check-meta">Never shared with caregivers — with any scope</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Every caregiver view is logged</div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-time">Sun Jul 19 · 8:12 PM</div>
+                  <div class="timeline-body">Amy viewed Walter's appointments</div>
+                </div>
+                <div class="timeline-item muted">
+                  <div class="timeline-time">Sat Jul 18 · 9:40 AM</div>
+                  <div class="timeline-body">Amy viewed the care plan</div>
+                </div>
+              </div>
+              <div class="field-help" style="margin-bottom:10px">Walter can read this log too, and can pause access any time.</div>
+              <a class="btn" href="security.html#/g-01-audit">Open the audit trail</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+<script>
+  // Demo only: scope chips multi-toggle ("Everything" is exclusive), duration chips
+  // single-select, and the "What Amy sees" preview follows the scope.
+  (function () {
+    var scopeBar = document.getElementById('k-scope');
+    var durBar = document.getElementById('k-duration');
+    var until = document.getElementById('k-until');
+
+    function scopeOn(name) {
+      var chip = scopeBar.querySelector('[data-scope="' + name + '"]');
+      return !!chip && chip.classList.contains('active');
+    }
+
+    function syncPreview() {
+      var all = scopeOn('everything');
+      var rows = {
+        appointments: all || scopeOn('appointments'),
+        supplements: all || scopeOn('supplements'),
+        plan: all || scopeOn('plan'),
+        labs: all
+      };
+      for (var key in rows) {
+        var li = document.getElementById('k-see-' + key);
+        if (!li) continue;
+        var icon = li.querySelector('.check-icon');
+        var meta = li.querySelector('.k-see-meta');
+        if (rows[key]) {
+          icon.className = 'check-icon done';
+          icon.textContent = '✓';
+          meta.textContent = li.getAttribute('data-meta');
+        } else {
+          icon.className = 'check-icon blocked';
+          icon.textContent = '–';
+          meta.textContent = 'Not in this scope';
+        }
+      }
+    }
+
+    scopeBar.addEventListener('click', function (ev) {
+      var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+      if (!chip) return;
+      var chips = scopeBar.querySelectorAll('.filter-chip');
+      var i;
+      if (chip.getAttribute('data-scope') === 'everything') {
+        var turnOn = !chip.classList.contains('active');
+        for (i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+        if (turnOn) chip.classList.add('active');
+      } else {
+        var everything = scopeBar.querySelector('[data-scope="everything"]');
+        if (everything) everything.classList.remove('active');
+        chip.classList.toggle('active');
+      }
+      syncPreview();
+    });
+
+    durBar.addEventListener('click', function (ev) {
+      var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+      if (!chip) return;
+      var chips = durBar.querySelectorAll('.filter-chip');
+      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+      chip.classList.add('active');
+      until.style.display = chip.getAttribute('data-duration') === 'temp' ? '' : 'none';
+    });
+  })();
+</script>
+</body>
+</html>

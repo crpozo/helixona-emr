@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hub · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .hub-cta-row { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+  .hub-btn-light {
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.45);
+  }
+  .hub-btn-light:hover { background: rgba(255,255,255,0.1); }
+  .hub-step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--hx-accent); color: #fff;
+    font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+  }
+  .hub-step-title { font-size: 14px; font-weight: 600; color: var(--hx-navy); margin-bottom: 6px; }
+  .hub-step-body { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+  .hub-foot-line + .hub-foot-line { margin-top: 6px; }
+  .hub-principle { font-style: italic; color: var(--ink); }
+</style>
+</head>
+<body data-page="hub" data-page-title="Hub" data-shell="none" data-screen="hub">
+
+  <!-- ============================================================ Hero -->
+  <header class="hub-hero">
+    <div class="hub-hero-inner">
+      <h1 class="hub-headline">HCOS — the EMR we shape together</h1>
+      <div class="hub-sub">
+        This is a browsable wireframe of the whole system that will replace eClinicalWorks at Helixona.
+        Walk through every module, tap around, and leave a note on any screen — an idea, a problem,
+        a question, or a simple &ldquo;this works.&rdquo; Nothing here is final. That is the point.
+      </div>
+      <div class="hub-cta-row">
+        <a class="btn btn-accent btn-lg" href="login.html">Enter the wireframe — start at sign in</a>
+        <a class="btn hub-btn-light" href="schedule.html">Jump straight to the calendar</a>
+        <a class="btn hub-btn-light" href="#feedback">See how feedback works</a>
+      </div>
+      <div class="hub-pillars">
+        <div class="hub-pillar"><span class="num">1</span><b>Body knows how to heal</b></div>
+        <div class="hub-pillar"><span class="num">2</span><b>Healing happens together</b></div>
+        <div class="hub-pillar"><span class="num">3</span><b>Listen deeply</b></div>
+        <div class="hub-pillar"><span class="num">4</span><b>Teach until it makes sense</b></div>
+        <div class="hub-pillar"><span class="num">5</span><b>Timing matters</b></div>
+        <div class="hub-pillar"><span class="num">6</span><b>Love is clinical</b></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================ Modules -->
+  <section class="hub-section">
+    <div class="hub-section-title">The 12 modules</div>
+    <div class="module-map">
+
+      <a class="module-card" href="intake.html">
+        <span class="module-status wireframed">Wireframed</span>
+        <div class="module-letter">A</div>
+        <div class="module-name">Intake &amp; onboarding</div>
+        <div class="module-desc">The public funnel — inquiry form to magic link — plus Marie's triage console, kiosk check-in, and the form builder.</div>
+      </a>
+
+      <a class="module-card" href="clinical.html">
+        <span class="module-status wireframed">Wireframed</span>
+        <div class="module-letter">B</div>
+        <div class="module-name">Clinical documentation</div>
+        <div class="module-desc">SOAP notes with a reliable AI scribe, questionnaires that flow into the chart, infusion records, and sign-and-lock.</div>
+      </a>
+
+      <a class="module-card" href="labs.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">C</div>
+        <div class="module-name">Diagnostics &amp; lab</div>
+        <div class="module-desc">Lab orders and results, with the FHIR feed that carries patient history over from eCW.</div>
+      </a>
+
+      <a class="module-card" href="billing.html">
+        <span class="module-status wireframed">Wireframed</span>
+        <div class="module-letter">D</div>
+        <div class="module-name">Billing / RCM</div>
+        <div class="module-desc">The claim worklist with each payer's routing built in, not memorized — and every recoupment appealed.</div>
+      </a>
+
+      <a class="module-card" href="communication.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">E</div>
+        <div class="module-name">Patient communication</div>
+        <div class="module-desc">Reminders and messaging tied to the chart, instead of living in a separate app.</div>
+      </a>
+
+      <a class="module-card" href="reporting.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">F</div>
+        <div class="module-name">Reporting &amp; admin</div>
+        <div class="module-desc">Operational and clinical reporting, so leadership sees the whole picture without exports.</div>
+      </a>
+
+      <a class="module-card" href="security.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">G</div>
+        <div class="module-name">Security &amp; compliance</div>
+        <div class="module-desc">Roles, permissions, and an audit trail behind every action that touches a record.</div>
+      </a>
+
+      <a class="module-card" href="pharmacy.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">H</div>
+        <div class="module-name">Pharmacy &amp; medication</div>
+        <div class="module-desc">Medications and supplements managed together, with e-prescribing to follow.</div>
+      </a>
+
+      <a class="module-card" href="readiness.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">I</div>
+        <div class="module-name">Readiness engine</div>
+        <div class="module-desc">Detox readiness from surveys, symptoms, labs, and physician rules — Gentle through Physician Review.</div>
+      </a>
+
+      <a class="module-card" href="journey.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">J</div>
+        <div class="module-name">Patient journey &amp; education</div>
+        <div class="module-desc">The patient's today view — what to do today, what comes next, taught until it makes sense.</div>
+      </a>
+
+      <a class="module-card" href="caregiver.html">
+        <span class="module-status inprogress">In progress</span>
+        <div class="module-letter">K</div>
+        <div class="module-name">Caregiver portal</div>
+        <div class="module-desc">Scoped access for family and caregivers — appointments, supplements, plan, or everything.</div>
+      </a>
+
+      <a class="module-card featured" href="schedule.html">
+        <span class="module-status wireframed">Wireframed</span>
+        <div class="module-letter">L</div>
+        <div class="module-name">Scheduling</div>
+        <div class="module-desc">The calendar — the centerpiece. Dr. Drannikov and Chairs 1–4 on one live screen, the whole clinic day without scrolling.</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ Daily pages -->
+  <section class="hub-section">
+    <div class="hub-section-title">Where the day runs</div>
+    <div class="module-map">
+
+      <a class="module-card" href="patients.html">
+        <span class="module-status wireframed">Wireframed</span>
+        <div class="module-letter">·</div>
+        <div class="module-name">Patients</div>
+        <div class="module-desc">The patient list and profile, with the insurance snapshot — in-network or out-of-network — right up front.</div>
+      </a>
+
+      <a class="module-card" href="login.html">
+        <span class="module-status wireframed">Wireframed</span>
+        <div class="module-letter">·</div>
+        <div class="module-name">Sign in</div>
+        <div class="module-desc">Staff sign-in and its four states: sign in, two-step code, forgot password, and account paused.</div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ Feedback -->
+  <section class="hub-section" id="feedback">
+    <div class="hub-section-title">How feedback works</div>
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="hub-step-num">1</div>
+        <div class="hub-step-title">Leave a note on any screen</div>
+        <div class="hub-step-body">Tap the floating <b>Feedback</b> button in the corner of any screen. Pick your name, write the note, and it saves instantly in your browser — no account, nothing to install.</div>
+      </div>
+
+      <div class="card">
+        <div class="hub-step-num">2</div>
+        <div class="hub-step-title">Send it to Carlos</div>
+        <div class="hub-step-body"><b>Send to Carlos</b> opens an email that is already filled in — just press send. Or <b>Export my notes</b> downloads a file you can attach anywhere.</div>
+      </div>
+
+      <div class="card">
+        <div class="hub-step-num">3</div>
+        <div class="hub-step-title">See it appear for everyone</div>
+        <div class="hub-step-body">Carlos merges the notes into the shared file (<b>feedback/notes.json</b>), and they show up for the whole team — as badges and a notes drawer on the exact screen you commented on. Comfortable with GitHub? You can propose changes to that file directly.</div>
+      </div>
+
+    </div>
+    <div class="callout callout-ok" style="margin-top:14px">
+      Every note shapes what gets built — an idea, a problem, a question, or an approval all count the same.
+      The screens you see here change because of what you write.
+    </div>
+  </section>
+
+  <!-- ============================================================ Foot -->
+  <footer class="hub-foot">
+    <div class="hub-foot-line">Helixona, Inc. · 114 Pacifica, Suite 130, Irvine, CA 92618 · (949) 257-2644 · Group NPI 1407646755</div>
+    <div class="hub-foot-line hub-principle">&ldquo;Every screen must reduce burden, improve understanding, or help make the next safest decision.&rdquo;</div>
+    <div class="hub-foot-line">All patient data in this wireframe is synthetic — no PHI anywhere.</div>
+  </footer>
+
+  <script src="assets/hcos.js"></script>
+</body>
+</html>

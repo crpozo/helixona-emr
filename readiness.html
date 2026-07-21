@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Readiness engine · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .i-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .i-lane { flex: 1 1 240px; min-width: 220px; }
+  .i-lane-label { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+  .i-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .i-chip {
+    font-size: 12px; padding: 4px 10px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--hx-band); color: var(--ink); white-space: nowrap;
+  }
+  .i-arrow { font-size: 20px; color: var(--muted); padding: 0 10px; }
+  .i-engine {
+    border: 2px solid var(--hx-navy); border-radius: var(--radius);
+    padding: 14px 20px; text-align: center; flex: 0 0 auto;
+  }
+  .i-engine-name { font-weight: 600; color: var(--hx-navy); font-size: 14px; }
+  .i-engine-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .i-pname { font-weight: 600; color: var(--hx-navy); text-decoration: none; }
+  .i-pname:hover { text-decoration: underline; }
+  .i-why { font-size: 12.5px; color: var(--muted); }
+  .i-fired { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+  .i-fired-src { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 3px; }
+  .i-fired-body { font-size: 13px; }
+  .i-rule { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 13px; }
+  .i-rule:last-of-type { border-bottom: 0; }
+  .i-rule-num { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
+</style>
+</head>
+<body data-page="readiness" data-page-title="Readiness engine" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="i-01-readiness" data-title="Detox readiness — Module 001">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/readiness</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Detox readiness — Module 001</h2>
+        <p class="page-sub">Tuesday, July 21 · evaluated daily at 7:00 AM · physician rules outrank the engine</p>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="i-flow">
+            <div class="i-lane">
+              <div class="i-lane-label">Inputs</div>
+              <div class="i-chips">
+                <span class="i-chip">Surveys</span>
+                <span class="i-chip">Symptoms</span>
+                <span class="i-chip">Labs</span>
+                <span class="i-chip">Physician rules</span>
+                <span class="i-chip">Home activities</span>
+                <span class="i-chip">Treatment history</span>
+              </div>
+            </div>
+            <div class="i-arrow">→</div>
+            <div class="i-engine">
+              <div class="i-engine-name">Readiness engine</div>
+              <div class="i-engine-sub">Weighs every input · shows its work</div>
+            </div>
+            <div class="i-arrow">→</div>
+            <div class="i-lane">
+              <div class="i-lane-label">Outputs</div>
+              <div class="i-chips">
+                <span class="pill pill-navy">Gentle</span>
+                <span class="pill pill-ok">Standard</span>
+                <span class="pill pill-navy">Advanced</span>
+                <span class="pill pill-warn">Pause</span>
+                <span class="pill pill-warn">Flare recovery</span>
+                <span class="pill pill-err">Physician review</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card">
+              <div class="card-title">Patients on the detox program</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Patient</th>
+                      <th>Program</th>
+                      <th>Current state</th>
+                      <th>Why</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a class="i-pname" href="patients.html#/pt-02-profile">Maya Reyes</a></td>
+                      <td>NAD+ series · session 4 of 8</td>
+                      <td><span class="pill pill-ok">Standard</span></td>
+                      <td class="i-why">Symptom scores stable · labs current</td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="i-pname" href="patients.html">Nadia Boulos</a></td>
+                      <td>Detox program · week 3</td>
+                      <td><span class="pill pill-err">Physician review</span></td>
+                      <td class="i-why">New symptom cluster in this week's survey — Dr. Drannikov decides, not the engine</td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="i-pname" href="patients.html">Walter Hsu</a></td>
+                      <td>NAD+ series · session 1 of 6</td>
+                      <td><span class="pill pill-navy">Gentle</span></td>
+                      <td class="i-why">Age + first series</td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="i-pname" href="patients.html">Priya Natarajan</a></td>
+                      <td>Myers' cocktail series</td>
+                      <td><span class="pill pill-warn">Flare recovery</span></td>
+                      <td class="i-why">Flare reported Sunday · escalation auto-paused</td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                    </tr>
+                    <tr>
+                      <td><a class="i-pname" href="patients.html">Grace Lindqvist</a></td>
+                      <td>Detox prep · thyroid panel first</td>
+                      <td><span class="pill pill-warn">Pause</span></td>
+                      <td class="i-why">Thyroid results pending</td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="field-help" style="margin-top:8px">Open the why on any row — Nadia's evaluation is the built example.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">One survey engine</div>
+              <p style="font-size:13px">Readiness surveys, intake forms, and clinical questionnaires come from the same builder — one engine, not three. Answers file into the chart and feed this screen automatically.</p>
+              <a class="btn" href="intake.html#/a-04-builder">Open the form builder</a>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Physician rules</div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 1</div>
+                <div>If a weekly survey shows a new symptom cluster, route to physician review — the engine never escalates on its own.</div>
+              </div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 2</div>
+                <div>If a flare is reported, switch to flare recovery and pause escalation until Dr. Drannikov clears it.</div>
+              </div>
+              <div class="field-help" style="margin:8px 0 12px">A fired rule always outranks the engine's own recommendation.</div>
+              <button class="btn" onclick="HCOS.toast('Only providers edit rules.', 'warn')">Edit rules</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- The why drawer (I-01) — the engine shows its work -->
+<div class="drawer-overlay" data-close-drawer="#i-why-drawer"></div>
+<div class="drawer" id="i-why-drawer">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Why physician review — Nadia Boulos</div>
+      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#i-why-drawer">×</button>
+  </div>
+  <div class="drawer-body">
+    <div style="margin-bottom:14px">
+      Current state: <span class="pill pill-err">Physician review</span>
+      <span class="field-help" style="display:inline;margin-left:6px">was Standard until Monday's survey</span>
+    </div>
+
+    <div class="seg-divider">Inputs that fired</div>
+
+    <div class="i-fired">
+      <div class="i-fired-src">Survey · weekly detox check-in · answered Mon Jul 20</div>
+      <div class="i-fired-body">"Headaches most days, new nausea, sleep worse than last week" — three symptoms that were absent in weeks 1 and 2.</div>
+    </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Lab · comprehensive metabolic panel · resulted Jul 15</div>
+      <div class="i-fired-body">ALT above her baseline trend — still in range, moving the wrong way.</div>
+    </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Physician rule · rule 1</div>
+      <div class="i-fired-body">New symptom cluster in a weekly survey routes to physician review. Dr. Drannikov decides, not the engine.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">Home activities and treatment history were current — nothing else fired.</div>
+
+    <button class="btn btn-primary" onclick="HCOS.toast('Sent to Dr. Drannikov for review.', 'ok')">Send to Dr. Drannikov</button>
+    <a class="btn" href="patients.html">Open Nadia's profile</a>
+  </div>
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>
