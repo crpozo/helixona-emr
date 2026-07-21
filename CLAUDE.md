@@ -116,9 +116,12 @@ Unreliable AI scribe · macros that cannot be shared · questionnaire answers th
 ## Site architecture
 
 ```
-index.html            hub: pillars line, 12-module map with status chips
-                      (wireframed / in progress / planned), feedback explainer
-login.html            staff sign-in + 4 auth states   (ref: design file screens 00, 00b)
+index.html            REDIRECT to login.html — the root opens the sign-in like the
+                      real app (Carlos, 2026-07-21). Never put the hub back here.
+hub.html              hub: pillars line, 12-module map with status chips
+                      (wireframed / in progress / planned), feedback explainer;
+                      linked from the sidebar foot ("Module map")
+login.html            staff sign-in + 4 auth states — chrome-free, card only
 schedule.html         day calendar with chairs + week (ref: design file screens 01–04)
 patients.html         list + profile with insurance snapshot (INN / OON)
 clinical.html         encounter SOAP + infusion record + sign-and-lock concept

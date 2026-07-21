@@ -153,7 +153,7 @@
                 <td>Anthem <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Tue Jul 28 · 9:00 AM · Follow-up</td>
-                <td><span class="pill pill-err">Physician review</span></td>
+                <td><span class="pill pill-err">Physician Review</span></td>
                 <td><span class="pill pill-warn">Questionnaire pending</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
             </tbody>
@@ -177,7 +177,7 @@
               <div class="pt-name">Maya Reyes</div>
               <div class="pt-demo">52 · she/her · DOB Mar 14, 1974 · (949) 555-0132 · maya.reyes@example.com</div>
             </div>
-            <a class="btn btn-primary" href="schedule.html">Book appointment</a>
+            <a class="btn btn-primary" href="schedule.html#/l-03-book">Book appointment</a>
             <a class="btn" href="clinical.html">Open chart</a>
           </div>
         </div>
@@ -190,7 +190,7 @@
               <div style="margin:10px 0 4px">
                 <span class="pill pill-navy">Self-funded / ERISA</span>
               </div>
-              <div class="field-help">Governance changes the appeal rules — self-funded plans follow ERISA timelines, not state insurance law (Module D).</div>
+              <div class="field-help">Governance changes the appeal rules — self-funded plans follow ERISA timelines, not state insurance law.</div>
               <div class="callout callout-ok" style="margin-top:12px">SPD received Jul 2 · 118 pages · summary ready</div>
               <div class="seg-divider">OON benefits</div>
               <dl class="kv">
@@ -245,12 +245,11 @@
               <div class="field-help" style="margin-top:4px">Session 4 of 8 · next infusion today 1:00 PM</div>
               <div class="pt-meter" style="max-width:260px;margin-top:8px"><div class="pt-meter-fill" style="width:50%"></div></div>
               <div style="margin-top:12px">
-                Readiness (Module I): <span class="pill pill-ok">Standard</span>
+                Readiness: <span class="pill pill-ok">Standard</span>
                 <span class="field-help" style="display:inline;margin-left:6px">cleared for standard pacing · reviewed Jul 20</span>
               </div>
             </div>
 
-            <div class="callout" style="margin-top:16px">Questionnaire answers file into this chart automatically — nothing is re-keyed by hand. See <a href="clinical.html">Clinical documentation</a> for where they land.</div>
           </div>
 
           <div>
@@ -306,7 +305,7 @@
                 </div>
                 <div class="timeline-item muted">
                   <div class="timeline-time">Jul 2</div>
-                  <div class="timeline-body">SPD received · 118 pages · summarized for Module D</div>
+                  <div class="timeline-body">SPD received · 118 pages · summary ready for billing</div>
                 </div>
               </div>
             </div>
@@ -360,9 +359,9 @@
             <input type="checkbox" id="pt-consent-text" checked style="margin:0">
             <label for="pt-consent-text">Okay to text this number — appointment reminders and scheduling only</label>
           </div>
-          <button class="btn btn-primary btn-lg" style="width:100%" onclick="HCOS.toast('Patient created — pick the slot on the calendar to book.', 'ok')">Create patient and book</button>
+          <button class="btn btn-primary btn-lg" style="width:100%" onclick="HCOS.toast('Patient created — pick the slot on the calendar to book.', 'ok'); setTimeout(function(){ window.location.href = 'schedule.html#/l-01-day'; }, 900)">Create patient and book</button>
           <div class="field-help" style="margin-top:8px">Everything else can wait — intake fills the rest.</div>
-          <div class="callout" style="margin-top:14px">After create, intake (Module A) texts the magic link — history, insurance, and consents arrive before the visit.</div>
+          <div class="callout" style="margin-top:14px">After create, intake texts the magic link — history, insurance, and consents arrive before the visit.</div>
         </div>
       </div>
     </div>

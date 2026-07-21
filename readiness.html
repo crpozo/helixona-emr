@@ -103,40 +103,39 @@
                       <td>NAD+ series · session 4 of 8</td>
                       <td><span class="pill pill-ok">Standard</span></td>
                       <td class="i-why">Symptom scores stable · labs current</td>
-                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-maya">Open the why</button></td>
                     </tr>
                     <tr>
                       <td><a class="i-pname" href="patients.html">Nadia Boulos</a></td>
                       <td>Detox program · week 3</td>
                       <td><span class="pill pill-err">Physician review</span></td>
                       <td class="i-why">New symptom cluster in this week's survey — Dr. Drannikov decides, not the engine</td>
-                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-nadia">Open the why</button></td>
                     </tr>
                     <tr>
                       <td><a class="i-pname" href="patients.html">Walter Hsu</a></td>
                       <td>NAD+ series · session 1 of 6</td>
                       <td><span class="pill pill-navy">Gentle</span></td>
                       <td class="i-why">Age + first series</td>
-                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-walter">Open the why</button></td>
                     </tr>
                     <tr>
                       <td><a class="i-pname" href="patients.html">Priya Natarajan</a></td>
                       <td>Myers' cocktail series</td>
                       <td><span class="pill pill-warn">Flare recovery</span></td>
                       <td class="i-why">Flare reported Sunday · escalation auto-paused</td>
-                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-priya">Open the why</button></td>
                     </tr>
                     <tr>
                       <td><a class="i-pname" href="patients.html">Grace Lindqvist</a></td>
                       <td>Detox prep · thyroid panel first</td>
                       <td><span class="pill pill-warn">Pause</span></td>
                       <td class="i-why">Thyroid results pending</td>
-                      <td><button class="btn btn-sm" data-open-drawer="#i-why-drawer">Open the why</button></td>
+                      <td><button class="btn btn-sm" data-open-drawer="#i-why-grace">Open the why</button></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="field-help" style="margin-top:8px">Open the why on any row — Nadia's evaluation is the built example.</div>
             </div>
           </div>
 
@@ -158,7 +157,7 @@
                 <div>If a flare is reported, switch to flare recovery and pause escalation until Dr. Drannikov clears it.</div>
               </div>
               <div class="field-help" style="margin:8px 0 12px">A fired rule always outranks the engine's own recommendation.</div>
-              <button class="btn" onclick="HCOS.toast('Only providers edit rules.', 'warn')">Edit rules</button>
+              <button class="btn" onclick="HCOS.toast('Only providers edit rules — ask Dr. Drannikov or Dr. Bakman to change one.', 'warn')">Edit rules</button>
             </div>
           </div>
         </div>
@@ -169,15 +168,46 @@
 
 </div>
 
-<!-- The why drawer (I-01) — the engine shows its work -->
-<div class="drawer-overlay" data-close-drawer="#i-why-drawer"></div>
-<div class="drawer" id="i-why-drawer">
+<!-- The why drawers (I-01) — the engine shows its work, one per patient -->
+<div class="drawer-overlay" data-close-drawer="#i-why-maya"></div>
+<div class="drawer" id="i-why-maya">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Why standard — Maya Reyes</div>
+      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#i-why-maya">×</button>
+  </div>
+  <div class="drawer-body">
+    <div style="margin-bottom:14px">
+      Current state: <span class="pill pill-ok">Standard</span>
+    </div>
+
+    <div class="seg-divider">What the engine weighed</div>
+
+    <div class="i-fired">
+      <div class="i-fired-src">Survey · weekly detox check-in · answered Mon Jul 20</div>
+      <div class="i-fired-body">Symptom scores level with weeks 1–3 — nothing new reported.</div>
+    </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Lab · comprehensive metabolic panel · resulted Jul 10</div>
+      <div class="i-fired-body">All values tracking her baseline.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">No rules fired — the engine's own recommendation stands.</div>
+
+    <a class="btn btn-primary" href="patients.html#/pt-02-profile">Open Maya's profile</a>
+  </div>
+</div>
+
+<div class="drawer-overlay" data-close-drawer="#i-why-nadia"></div>
+<div class="drawer" id="i-why-nadia">
   <div class="drawer-head">
     <div>
       <div class="modal-title">Why physician review — Nadia Boulos</div>
       <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
     </div>
-    <button class="modal-close" data-close-drawer="#i-why-drawer">×</button>
+    <button class="modal-close" data-close-drawer="#i-why-nadia">×</button>
   </div>
   <div class="drawer-body">
     <div style="margin-bottom:14px">
@@ -203,7 +233,99 @@
     <div class="field-help" style="margin-bottom:16px">Home activities and treatment history were current — nothing else fired.</div>
 
     <button class="btn btn-primary" onclick="HCOS.toast('Sent to Dr. Drannikov for review.', 'ok')">Send to Dr. Drannikov</button>
-    <a class="btn" href="patients.html">Open Nadia's profile</a>
+    <a class="btn" href="patients.html">Open the patient list</a>
+  </div>
+</div>
+
+<div class="drawer-overlay" data-close-drawer="#i-why-walter"></div>
+<div class="drawer" id="i-why-walter">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Why gentle — Walter Hsu</div>
+      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#i-why-walter">×</button>
+  </div>
+  <div class="drawer-body">
+    <div style="margin-bottom:14px">
+      Current state: <span class="pill pill-navy">Gentle</span>
+    </div>
+
+    <div class="seg-divider">What the engine weighed</div>
+
+    <div class="i-fired">
+      <div class="i-fired-src">Treatment history · reviewed Jul 21</div>
+      <div class="i-fired-body">First NAD+ series, session 1 of 6 — no prior infusion response to draw on.</div>
+    </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Profile · age 68</div>
+      <div class="i-fired-body">Age plus a first series sets the starting pace to gentle.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">No rules fired — gentle is the engine's starting point for a first series.</div>
+
+    <a class="btn" href="patients.html">Open the patient list</a>
+  </div>
+</div>
+
+<div class="drawer-overlay" data-close-drawer="#i-why-priya"></div>
+<div class="drawer" id="i-why-priya">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Why flare recovery — Priya Natarajan</div>
+      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#i-why-priya">×</button>
+  </div>
+  <div class="drawer-body">
+    <div style="margin-bottom:14px">
+      Current state: <span class="pill pill-warn">Flare recovery</span>
+      <span class="field-help" style="display:inline;margin-left:6px">was Standard until Sunday's report</span>
+    </div>
+
+    <div class="seg-divider">Inputs that fired</div>
+
+    <div class="i-fired">
+      <div class="i-fired-src">Symptoms · flare report · Sun Jul 19</div>
+      <div class="i-fired-body">Fatigue flare reported after Saturday's Myers' cocktail session.</div>
+    </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Physician rule · rule 2</div>
+      <div class="i-fired-body">A reported flare switches the program to flare recovery and pauses escalation until Dr. Drannikov clears it.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">Surveys and labs were current — nothing else fired.</div>
+
+    <button class="btn btn-primary" onclick="HCOS.toast('Sent to Dr. Drannikov for review.', 'ok')">Send to Dr. Drannikov</button>
+    <a class="btn" href="patients.html">Open the patient list</a>
+  </div>
+</div>
+
+<div class="drawer-overlay" data-close-drawer="#i-why-grace"></div>
+<div class="drawer" id="i-why-grace">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Why pause — Grace Lindqvist</div>
+      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#i-why-grace">×</button>
+  </div>
+  <div class="drawer-body">
+    <div style="margin-bottom:14px">
+      Current state: <span class="pill pill-warn">Pause</span>
+    </div>
+
+    <div class="seg-divider">Inputs that fired</div>
+
+    <div class="i-fired">
+      <div class="i-fired-src">Lab · thyroid panel · ordered Jul 14, results pending</div>
+      <div class="i-fired-body">Detox prep needs the thyroid result before a start date — the engine holds at pause until it files.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">Surveys and home activities were current — nothing else fired.</div>
+
+    <a class="btn btn-primary" href="labs.html">Open lab orders</a>
+    <a class="btn" href="patients.html">Open the patient list</a>
   </div>
 </div>
 
