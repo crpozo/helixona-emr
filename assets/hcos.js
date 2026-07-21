@@ -19,9 +19,7 @@
 (function () {
   'use strict';
 
-  var FEEDBACK_EMAIL = 'crpozo95@gmail.com';
   var LS_NOTES = 'hcos.notes.v1';
-  var LS_NAME = 'hcos.name';
 
   /* The 12-module map — single source for sidebar, statuses, and hub links */
   var MODULES = [
@@ -40,31 +38,6 @@
     { num: 'K', name: 'Caregiver portal', href: 'caregiver.html', page: 'caregiver', status: 'inprogress' },
     { num: 'F', name: 'Reporting & admin', href: 'reporting.html', page: 'reporting', status: 'inprogress' },
     { num: 'G', name: 'Security & compliance', href: 'security.html', page: 'security', status: 'inprogress' }
-  ];
-
-  /* The team — feedback dropdown (real users; see CLAUDE.md roster) */
-  var TEAM = [
-    'Tom Bakman — Leadership / RCM oversight',
-    'Dr. Drannikov — Provider',
-    'Dr. Bakman — Provider',
-    'Brooke — Physician Associate',
-    'Marie — New Patient Advisor',
-    'Bee — PCC',
-    'Yazmin — Front Desk',
-    'Haylee — Front Desk',
-    'Charlene — Medical Assistant (Virtual)',
-    'Wesley — Medical Assistant',
-    'Bea — Medic',
-    'Juan — Medic',
-    'Nate — Medic',
-    'Nick — Nurse',
-    'Kyle — Technician',
-    'Karina — Operations Manager',
-    'Shibani — Admin',
-    'Vignesh — Billing (AnnexMed)',
-    'Kamalesh — Billing (AnnexMed)',
-    'Carlos — Technical lead',
-    'Other'
   ];
 
   var body = document.body;
@@ -243,11 +216,8 @@
     body.appendChild(fbkBtn);
 
     fbkPanel = el('div', 'fbk-panel');
-    var typeChips = TEAMLESS_TYPES.map(function (t) {
+    var typeChips = NOTE_TYPES.map(function (t) {
       return '<button type="button" class="fbk-type' + (t === 'Idea' ? ' active' : '') + '" data-type="' + t + '">' + t + '</button>';
-    }).join('');
-    var nameOpts = '<option value="">Who are you?</option>' + TEAM.map(function (t) {
-      return '<option>' + esc(t) + '</option>';
     }).join('');
     fbkPanel.innerHTML =
       '<div class="fbk-panel-head">' +
@@ -255,8 +225,6 @@
       '  <div class="fbk-panel-sub">Ideas, problems, questions — everything shapes the build.</div>' +
       '</div>' +
       '<div class="fbk-panel-body">' +
-      '  <div class="field"><label class="field-label">Name</label>' +
-      '    <select class="field-select" id="fbk-name">' + nameOpts + '</select></div>' +
       '  <div class="field"><label class="field-label">Screen</label>' +
       '    <input class="field-input" id="fbk-screen" disabled></div>' +
       '  <div class="field"><label class="field-label">Type</label>' +
@@ -265,7 +233,6 @@
       '    <textarea class="field-textarea" id="fbk-text" placeholder="What would make this screen better?"></textarea></div>' +
       '  <div class="fbk-actions">' +
       '    <button class="btn btn-primary" id="fbk-save">Save note</button>' +
-      '    <button class="btn" id="fbk-send">Send to Carlos</button>' +
       '  </div>' +
       '</div>' +
       '<div class="fbk-panel-foot">' +
@@ -273,12 +240,6 @@
       '  <button id="fbk-view">View notes on this screen</button>' +
       '</div>';
     body.appendChild(fbkPanel);
-
-    var nameSel = fbkPanel.querySelector('#fbk-name');
-    try { var saved = localStorage.getItem(LS_NAME); if (saved) nameSel.value = saved; } catch (e) {}
-    nameSel.addEventListener('change', function () {
-      try { localStorage.setItem(LS_NAME, nameSel.value); } catch (e) {}
-    });
 
     Array.prototype.forEach.call(fbkPanel.querySelectorAll('.fbk-type'), function (b) {
       b.addEventListener('click', function () {
@@ -289,8 +250,7 @@
       });
     });
 
-    fbkPanel.querySelector('#fbk-save').addEventListener('click', function () { saveNote(false); });
-    fbkPanel.querySelector('#fbk-send').addEventListener('click', function () { saveNote(true); });
+    fbkPanel.querySelector('#fbk-save').addEventListener('click', saveNote);
     fbkPanel.querySelector('#fbk-export').addEventListener('click', exportNotes);
     fbkPanel.querySelector('#fbk-view').addEventListener('click', function () {
       fbkPanel.classList.remove('open');
@@ -310,18 +270,15 @@
     body.appendChild(fbkDrawer);
   }
 
-  var TEAMLESS_TYPES = ['Idea', 'Problem', 'Question', 'Approved'];
+  var NOTE_TYPES = ['Idea', 'Problem', 'Question', 'Approved'];
 
-  function saveNote(sendMail) {
-    var name = fbkPanel.querySelector('#fbk-name').value;
+  function saveNote() {
     var text = fbkPanel.querySelector('#fbk-text').value.trim();
-    if (!name) { HCOS.toast('Pick your name first — the dropdown at the top of the panel.', 'warn'); return; }
     if (!text) { HCOS.toast('Write the note first — even one line helps.', 'warn'); return; }
     var note = {
       id: 'n-' + Date.now(),
       page: PAGE,
       screen: widgetScreenId(),
-      name: name.split('—')[0].trim(),
       type: fbkType,
       text: text,
       date: new Date().toISOString().slice(0, 10),
@@ -332,17 +289,7 @@
     saveMyNotes(list);
     fbkPanel.querySelector('#fbk-text').value = '';
     refreshFeedbackUI();
-    if (sendMail) {
-      var subject = '[HCOS Wireframe] ' + widgetScreenLabel() + ' — ' + note.name;
-      var mailBody = note.type + ': ' + note.text + '\n\n—\nScreen: ' + widgetScreenLabel() +
-        '\nDate: ' + note.date + '\nSent from the HCOS wireframe feedback widget.';
-      window.location.href = 'mailto:' + FEEDBACK_EMAIL +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(mailBody);
-      HCOS.toast('Saved here and opened an email to Carlos — press send there.', 'ok');
-    } else {
-      HCOS.toast('Saved in this browser. Use “Send to Carlos” so it reaches the shared board.', 'ok');
-    }
+    HCOS.toast('Saved on this screen.', 'ok');
   }
 
   function exportNotes() {
@@ -355,14 +302,14 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    HCOS.toast('Downloaded hcos-notes.json — attach it in an email or PR.', 'ok');
+    HCOS.toast('Downloaded hcos-notes.json — share the file to publish your notes.', 'ok');
   }
 
   function noteHTML(n, mine) {
     var typeCls = (n.type || 'idea').toLowerCase();
     return '<div class="fbk-note' + (mine ? ' mine' : '') + '">' +
       '<div class="fbk-note-head">' +
-      '  <span class="fbk-note-name">' + esc(n.name || '?') + '</span>' +
+      (n.name ? '<span class="fbk-note-name">' + esc(n.name) + '</span>' : '') +
       '  <span class="fbk-type-pill ' + esc(typeCls) + '">' + esc(n.type || 'Idea') + '</span>' +
       (n.status === 'done' ? '<span class="fbk-status-done">✓ done</span>' : '') +
       '  <span class="fbk-note-date">' + esc(n.date || '') + (mine ? ' · yours, only in this browser' : '') + '</span>' +
@@ -397,12 +344,12 @@
         data.pub.forEach(function (n) { html += noteHTML(n, false); });
       }
       if (data.mine.length) {
-        html += '<div class="seg-divider">Yours — send them to Carlos to publish</div>';
+        html += '<div class="seg-divider">Yours — saved in this browser</div>';
         data.mine.forEach(function (n) { html += noteHTML(n, true); });
       }
     }
     html += '<p style="font-size:11px;color:var(--muted);margin-top:16px">Published notes live in ' +
-      '<code>feedback/notes.json</code>. Emailed and exported notes get merged there by Carlos, ' +
+      '<code>feedback/notes.json</code>. Exported notes get merged there, ' +
       'so the whole team sees them on these screens.</p></div>';
     fbkDrawer.innerHTML = html;
     fbkDrawer.querySelector('#hcos-drawer-close').addEventListener('click', closeNotesDrawer);
@@ -551,7 +498,6 @@
     toast: toast,
     activate: activate,
     modules: MODULES,
-    team: TEAM,
     openNotes: function () { openNotesDrawer(); }
   };
 

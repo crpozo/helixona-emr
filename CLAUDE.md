@@ -136,11 +136,10 @@ Each module page uses screen-nav chips like the design file, 2–5 screens maxim
 
 ## Feedback widget (on every screen — never omit)
 
-Floating **Feedback** button → panel with: Name (the team dropdown above), Screen (auto-filled from page + screen id), Type (Idea / Problem / Question / Approved), Note. On save:
+Floating **Feedback** button → panel with: Screen (auto-filled from page + screen id), Type (Idea / Problem / Question / Approved), Note. No name field, no email step (removed by Carlos, 2026-07-21). On save:
 
-1. Persists to localStorage and renders as the author's own pin on that screen — instant, private to their browser, no account needed.
-2. **Send to Carlos** opens a prefilled mailto — subject `[HCOS Wireframe] <page>/<screen> — <name>`.
-3. **Export my notes** downloads a notes.json the person can attach anywhere.
+1. Persists to localStorage and renders as the author's own pin on that screen — instant, private to their browser, no account needed. Own notes can be deleted from the drawer.
+2. **Export my notes** downloads a notes.json the person can share any way they like (chat, email, PR).
 
 Shared visibility — how "everyone edits" works on a static site: Carlos merges received feedback into `feedback/notes.json` (fields `id, page, screen, name, type, text, date, status(open|done)`); `hcos.js` fetches it and renders count badges plus a notes drawer on each screen, visible to all. GitHub-savvy collaborators may PR that file directly. This two-layer loop IS the collaboration mechanism — protect it in every change. `fetch()` fails on `file://`, so wrap it with a graceful fallback (empty published notes, no console error).
 
