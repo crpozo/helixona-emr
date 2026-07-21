@@ -17,11 +17,11 @@
   .f-payer-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 12.5px; margin-bottom: 5px; }
   .f-payer-name { font-weight: 600; color: var(--hx-navy); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
   .f-payer-amt { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
-  .f-bar { display: flex; height: 18px; border-radius: 5px; overflow: hidden; background: #EEF1F5; }
+  .f-bar { display: flex; height: 18px; border-radius: 5px; overflow: hidden; background: var(--hx-light); }
   .f-seg { display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 600; color: #fff; white-space: nowrap; }
   .f-fineprint { font-size: 11px; color: var(--muted); line-height: 1.55; border-top: 1px solid var(--line-soft); margin-top: 14px; padding-top: 10px; }
   .f-pipe { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; margin: 4px 0 14px; }
-  .f-stage { flex: 1; min-width: 92px; background: #FAFBFD; border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 8px; text-align: center; }
+  .f-stage { flex: 1; min-width: 92px; background: var(--hx-band); border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 8px; text-align: center; }
   .f-stage-num { font-size: 20px; font-weight: 600; color: var(--hx-navy); line-height: 1.2; }
   .f-stage-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px; }
   .f-stage.won { background: var(--st-done-bg); border-color: transparent; }
@@ -31,12 +31,12 @@
   .f-day-head { text-align: center; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
   .f-day-head.today { color: var(--hx-blue); }
   .f-chair-lbl { font-size: 12px; font-weight: 600; color: var(--hx-navy); align-self: center; }
-  .f-track { height: 52px; background: #EEF1F5; border-radius: 5px; position: relative; overflow: hidden; }
+  .f-track { height: 52px; background: var(--hx-light); border-radius: 5px; position: relative; overflow: hidden; }
   .f-fill { position: absolute; left: 0; right: 0; bottom: 0; background: var(--hx-accent); }
   .f-fill.today { background: var(--hx-blue); }
   .f-meter-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
   .f-meter-lbl { flex: 1.4; font-size: 12.5px; color: var(--ink); }
-  .f-meter { flex: 1.6; height: 8px; background: #EEF1F5; border-radius: 4px; overflow: hidden; }
+  .f-meter { flex: 1.6; height: 8px; background: var(--hx-light); border-radius: 4px; overflow: hidden; }
   .f-meter-fill { height: 100%; background: var(--ok); border-radius: 4px; }
   .f-meter-val { width: 42px; text-align: right; font-weight: 600; font-size: 12.5px; color: var(--hx-navy); }
 </style>
@@ -47,15 +47,6 @@
 
   <!-- ============================================================ -->
   <section class="screen" id="f-01-dash" data-title="Leadership dashboard">
-    <div class="screen-descriptor">
-      <div class="descriptor-eyebrow">F-01 · Leadership dashboard</div>
-      <div class="descriptor-title">The clinic's health on one screen</div>
-      <div class="descriptor-body">Money, appeals, chairs, and documentation — the four numbers Tom checks on a Tuesday morning, each wired to the module that produces it. Every card says in small print where its number comes from, so a drifting number is also a link to the fix.</div>
-      <div class="descriptor-meta">
-        <span class="meta-item"><strong>Primary users</strong> Tom Bakman (Leadership / RCM oversight) · Shibani (Admin) · Karina (Operations Manager)</span>
-        <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">zero payer automation — outcomes hand-tallied from EOBs into a spreadsheet</span></span>
-      </div>
-    </div>
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/reporting</span></div>
@@ -75,26 +66,26 @@
         </div>
 
         <div class="grid-4" style="margin-bottom:16px">
-          <div class="card stat-card">
+          <a class="card stat-card" href="billing.html#/d-03-era" style="text-decoration:none">
             <div class="stat-num">$184k</div>
             <div class="stat-lbl">Collections MTD</div>
             <div class="stat-sub">Posted from ERA / EOB reconciliation — Module D</div>
-          </div>
-          <div class="card stat-card">
+          </a>
+          <a class="card stat-card" href="billing.html#/d-03-era" style="text-decoration:none">
             <div class="stat-num">100% <span class="pill pill-ok">Standing policy</span></div>
             <div class="stat-lbl">Recoupments appealed</div>
             <div class="stat-sub">Every recoupment appealed, none written off — Tom's rule, wired into Module D</div>
-          </div>
-          <div class="card stat-card">
+          </a>
+          <a class="card stat-card" href="clinical.html#/b-04-sign" style="text-decoration:none">
             <div class="stat-num">94%</div>
             <div class="stat-lbl">Same-day sign-and-lock</div>
             <div class="stat-sub">Module B sign-and-lock — notes end at the clinic, not the weekend</div>
-          </div>
-          <div class="card stat-card">
+          </a>
+          <a class="card stat-card" href="schedule.html#/l-01-day" style="text-decoration:none">
             <div class="stat-num">81%</div>
             <div class="stat-lbl">Chair utilization</div>
             <div class="stat-sub">Chairs 1–4, 8:00 AM–6:00 PM — Module L infusion suite view</div>
-          </div>
+          </a>
         </div>
 
         <div class="grid-2">

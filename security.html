@@ -28,16 +28,6 @@
 
   <!-- ============================================================ -->
   <section class="screen" id="g-01-audit" data-title="Roles, permissions &amp; audit trail">
-    <div class="screen-descriptor">
-      <div class="descriptor-eyebrow">G-01 · Roles, permissions &amp; audit trail</div>
-      <div class="descriptor-title">Who can do what — and the line every action leaves behind</div>
-      <div class="descriptor-body">Shibani administers roles from one matrix; every chart view, signature, and settings change writes an append-only audit line the moment it happens. When an auditor asks who saw a chart, this table answers — not anyone's memory.</div>
-      <div class="descriptor-meta">
-        <span class="meta-item"><strong>Primary users</strong> Shibani (Admin) · Karina (Operations Manager) · Tom Bakman (Leadership)</span>
-        <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">access questions answered from memory, not a log</span></span>
-      </div>
-    </div>
-
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/security</span></div>
@@ -125,12 +115,12 @@
               <div class="card-title" style="padding:14px 14px 0;margin-bottom:10px">Audit trail</div>
               <div style="font-size:11.5px;color:var(--muted);padding:0 14px;margin:-4px 0 10px">Append-only — no line is ever edited or deleted. Filter by person, patient, or action; export the range an auditor asks for.</div>
               <div class="g-audit-bar">
-                <input class="search-input" type="text" placeholder="Search by person, patient, or action…">
-                <span class="filter-chip active">Today</span>
-                <span class="filter-chip">Sign &amp; lock</span>
-                <span class="filter-chip">Chart access</span>
-                <span class="filter-chip">Billing</span>
-                <span class="filter-chip">Admin changes</span>
+                <input class="search-input" id="g-audit-search" type="text" placeholder="Search by person, patient, or action…">
+                <span class="filter-chip active" data-filter="all">Today</span>
+                <span class="filter-chip" data-filter="sign">Sign &amp; lock</span>
+                <span class="filter-chip" data-filter="chart">Chart access</span>
+                <span class="filter-chip" data-filter="billing">Billing</span>
+                <span class="filter-chip" data-filter="admin">Admin changes</span>
                 <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Audit log exported as CSV — Jul 1 to Jul 21, 1,482 lines.', 'ok')">Export audit log</button>
               </div>
               <div class="tbl-wrap">
@@ -143,54 +133,57 @@
                       <th>Patient / screen</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
+                  <tbody id="g-audit-rows">
+                    <tr data-cat="chart">
                       <td><span class="g-when">Jul 21 · 11:38 AM</span></td>
                       <td><span class="g-who">Yazmin<span class="g-who-role">Front Desk</span></span></td>
                       <td>Chart viewed</td>
                       <td>Maya Reyes · Patients / profile</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="sign">
                       <td><span class="g-when">Jul 21 · 11:32 AM</span></td>
                       <td><span class="g-who">Dr. Drannikov<span class="g-who-role">Provider</span></span></td>
                       <td>Note signed &amp; locked — dispatched to billing, labs, infusion</td>
                       <td>Daniel Okafor · Clinical / sign &amp; lock</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="chart">
                       <td><span class="g-when">Jul 21 · 11:15 AM</span></td>
                       <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
                       <td>Questionnaire filed to chart</td>
                       <td>Nadia Boulos · Clinical / questionnaire</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="billing">
                       <td><span class="g-when">Jul 21 · 10:58 AM</span></td>
                       <td><span class="g-who">Kamalesh<span class="g-who-role">Billing</span></span></td>
                       <td>Claim packet sent — Blue Shield portal upload</td>
                       <td>Priya Natarajan · Billing / packet</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="admin">
                       <td><span class="g-when">Jul 21 · 10:41 AM</span></td>
                       <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
                       <td>Caregiver access granted — appointments + plan, 90 days</td>
                       <td>Walter Hsu · Caregiver portal</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="chart">
                       <td><span class="g-when">Jul 21 · 10:12 AM</span></td>
                       <td><span class="g-who">Bea<span class="g-who-role">Medic</span></span></td>
                       <td>Infusion record updated — stop time entered</td>
                       <td>Maya Reyes · Clinical / infusion</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="chart">
                       <td><span class="g-when">Jul 21 · 9:47 AM</span></td>
                       <td><span class="g-who">Marie<span class="g-who-role">New Patient Advisor</span></span></td>
                       <td>Chart viewed</td>
                       <td>Tom Alvarez · Intake / triage</td>
                     </tr>
-                    <tr>
+                    <tr data-cat="admin">
                       <td><span class="g-when">Jul 21 · 8:02 AM</span></td>
                       <td><span class="g-who">Haylee<span class="g-who-role">Front Desk</span></span></td>
                       <td>Signed in — new device, two-step verified</td>
                       <td>— · Sign in</td>
+                    </tr>
+                    <tr id="g-audit-empty" style="display:none">
+                      <td colspan="4" style="color:var(--muted);font-size:12px;padding:16px 14px">No audit lines match — clear the search or switch back to Today.</td>
                     </tr>
                   </tbody>
                 </table>
@@ -271,5 +264,38 @@
 </div>
 
 <script src="assets/hcos.js"></script>
+<script>
+(function () {
+  var search = document.getElementById('g-audit-search');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.g-audit-bar .filter-chip'));
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#g-audit-rows tr[data-cat]'));
+  var empty = document.getElementById('g-audit-empty');
+  var cat = 'all';
+
+  function apply() {
+    var q = search ? search.value.trim().toLowerCase() : '';
+    var shown = 0;
+    rows.forEach(function (r) {
+      var catOk = cat === 'all' || r.getAttribute('data-cat') === cat;
+      var textOk = !q || r.textContent.toLowerCase().indexOf(q) !== -1;
+      var show = catOk && textOk;
+      r.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    if (empty) empty.style.display = shown ? 'none' : '';
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      chips.forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      cat = chip.getAttribute('data-filter') || 'all';
+      apply();
+    });
+  });
+
+  if (search) search.addEventListener('input', apply);
+})();
+</script>
 </body>
 </html>

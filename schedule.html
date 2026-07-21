@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheduling · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
+  .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
+  .l-chip-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .l-cal-foot { padding: 12px 16px 16px; }
+  .l-appt-header { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .l-appt-header-info { flex: 1; min-width: 220px; }
+  .l-appt-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .l-appt-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body data-page="schedule" data-page-title="Scheduling" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-01-day" data-title="Day view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule</span></div>
+      <div class="frame-body tight">
+        <div class="cal">
+
+          <div class="cal-toolbar">
+            <div class="cal-nav">
+              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">‹</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Already on today — Tuesday, July 21')">Today</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">›</button>
+              <span class="cal-date" style="margin-left:8px">Tuesday, July 21</span>
+            </div>
+            <div class="cal-views">
+              <button class="active">Day</button>
+              <button data-activate="l-02-week">Week</button>
+            </div>
+            <div class="l-chip-row">
+              <button class="filter-chip active">Dr. Drannikov</button>
+              <button class="filter-chip" onclick="HCOS.toast('Provider filters are representative — the wireframe shows Dr. Drannikov')">Dr. Bakman</button>
+              <button class="filter-chip" onclick="HCOS.toast('Provider filters are representative — the wireframe shows Dr. Drannikov')">Brooke</button>
+            </div>
+            <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
+          </div>
+
+          <div class="daycal-head">
+            <div class="daycal-band-spacer"></div>
+            <div class="daycal-band">Infusion suite</div>
+            <div class="daycal-col-head hours-head"></div>
+            <div class="daycal-col-head">Dr. Drannikov<span class="sub">Provider</span></div>
+            <div class="daycal-col-head">Chair 1<span class="sub">Nick · Nurse</span></div>
+            <div class="daycal-col-head">Chair 2<span class="sub">Bea · Medic</span></div>
+            <div class="daycal-col-head">Chair 3<span class="sub">Juan · Medic</span></div>
+            <div class="daycal-col-head">Chair 4<span class="sub">Nate · Medic</span></div>
+          </div>
+
+          <div class="daycal-grid">
+            <div class="daycal-hours">
+              <div class="daycal-hour">8 AM</div>
+              <div class="daycal-hour">9 AM</div>
+              <div class="daycal-hour">10 AM</div>
+              <div class="daycal-hour">11 AM</div>
+              <div class="daycal-hour">12 PM</div>
+              <div class="daycal-hour">1 PM</div>
+              <div class="daycal-hour">2 PM</div>
+              <div class="daycal-hour">3 PM</div>
+              <div class="daycal-hour">4 PM</div>
+              <div class="daycal-hour">5 PM</div>
+            </div>
+
+            <!-- Dr. Drannikov -->
+            <div class="daycal-col">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done" style="top:44px;height:128px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">8:30 – 10:00</div>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <div class="cal-appt-type">New patient consult · 90m</div>
+              </div>
+              <div class="cal-appt st-inroom" style="top:220px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Grace Lindqvist</div>
+                <div class="cal-appt-type">Follow-up · 30m</div>
+              </div>
+              <div class="cal-appt st-arrived" style="top:308px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <div class="cal-appt-type">Telehealth · 30m</div>
+              </div>
+              <div class="cal-appt st-confirmed" style="top:484px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">1:30 PM</div>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-type">Follow-up · 30m</div>
+              </div>
+              <div class="cal-appt st-cancelled" style="top:528px;height:40px;right:50%" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Grace Lindqvist</div>
+                <div class="cal-appt-type">Follow-up · 30m</div>
+              </div>
+              <div class="daycal-empty-hint l-hint-visible" style="top:528px;height:40px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
+              <div class="cal-appt st-scheduled" style="top:616px;height:128px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">3:00 – 4:30 PM</div>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <div class="cal-appt-type">New patient consult · 90m</div>
+              </div>
+            </div>
+
+            <!-- Chair 1 -->
+            <div class="daycal-col">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-inchair" style="top:88px;height:260px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">9:00 – 12:00</div>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <div class="cal-appt-type">NAD+ infusion · ~3 h</div>
+              </div>
+              <div class="cal-appt st-confirmed" style="top:440px;height:260px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">1:00 – 4:00 PM</div>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-type">NAD+ infusion · ~3 h</div>
+              </div>
+            </div>
+
+            <!-- Chair 2 -->
+            <div class="daycal-col">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-inchair" style="top:176px;height:216px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">10:00 – 12:30</div>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <div class="cal-appt-type">IV vitamin C 25 g · 2.5 h</div>
+              </div>
+            </div>
+
+            <!-- Chair 3 -->
+            <div class="daycal-col">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-arrived" style="top:308px;height:84px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">11:30 – 12:30</div>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <div class="cal-appt-type">Myers' cocktail · 1 h</div>
+              </div>
+              <div class="cal-appt st-scheduled" style="top:660px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">3:30 PM</div>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <div class="cal-appt-type">Glutathione push · 30m</div>
+              </div>
+            </div>
+
+            <!-- Chair 4 -->
+            <div class="daycal-col">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-arrived" style="top:286px;height:18px;padding:1px 8px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-name" style="font-size:10px">Sofia Ramos · 11:15 lab draw · 15m</div>
+              </div>
+              <div class="cal-appt st-confirmed" style="top:528px;height:84px;right:38%" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">2:00 – 3:00 PM</div>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-type">Myers' cocktail · 1 h</div>
+              </div>
+              <div class="cal-appt st-scheduled conflict" style="top:528px;height:40px;left:34%;z-index:2" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <div class="cal-appt-type">Glutathione push · 30m</div>
+              </div>
+            </div>
+
+            <div class="cal-now" style="top:323px"><span class="cal-now-label">11:40 AM</span></div>
+          </div>
+
+          <div class="cal-legend">
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-scheduled)"></span>Scheduled</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-confirmed)"></span>Confirmed</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-arrived)"></span>Arrived</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-inroom)"></span>In room / In chair</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-done)"></span>Done</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-noshow-bg);border-style:dashed;border-color:var(--st-noshow)"></span>No-show</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-cancelled)"></span>Cancelled</span>
+          </div>
+        </div>
+
+        <div class="l-cal-foot">
+          <div class="callout callout-warn" style="margin:0">Chair 4 is double-booked at 2:00 PM — HCOS warns, it never blocks. Clinics overbook on purpose.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-02-week" data-title="Week view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/week</span></div>
+      <div class="frame-body tight">
+        <div class="cal">
+
+          <div class="cal-toolbar">
+            <div class="cal-nav">
+              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows the week of July 20')">‹</button>
+              <button class="btn btn-sm" data-activate="l-01-day">Today</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows the week of July 20')">›</button>
+              <span class="cal-date" style="margin-left:8px">Mon Jul 20 – Fri Jul 24</span>
+            </div>
+            <div class="cal-views">
+              <button data-activate="l-01-day">Day</button>
+              <button class="active">Week</button>
+            </div>
+            <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
+          </div>
+
+          <div class="weekcal-head">
+            <div></div>
+            <div class="weekcal-day"><div class="weekcal-day-name">Mon</div><div class="weekcal-day-num">20</div><div class="weekcal-day-count">5 appts</div></div>
+            <div class="weekcal-day today"><div class="weekcal-day-name">Tue</div><div class="weekcal-day-num">21</div><div class="weekcal-day-count">14 appts</div></div>
+            <div class="weekcal-day"><div class="weekcal-day-name">Wed</div><div class="weekcal-day-num">22</div><div class="weekcal-day-count">4 appts</div></div>
+            <div class="weekcal-day"><div class="weekcal-day-name">Thu</div><div class="weekcal-day-num">23</div><div class="weekcal-day-count">5 appts</div></div>
+            <div class="weekcal-day"><div class="weekcal-day-name">Fri</div><div class="weekcal-day-num">24</div><div class="weekcal-day-count">4 appts</div></div>
+          </div>
+
+          <div class="weekcal-grid">
+            <div>
+              <div class="weekcal-hour">8 AM</div>
+              <div class="weekcal-hour">9 AM</div>
+              <div class="weekcal-hour">10 AM</div>
+              <div class="weekcal-hour">11 AM</div>
+              <div class="weekcal-hour">12 PM</div>
+              <div class="weekcal-hour">1 PM</div>
+              <div class="weekcal-hour">2 PM</div>
+              <div class="weekcal-hour">3 PM</div>
+              <div class="weekcal-hour">4 PM</div>
+              <div class="weekcal-hour">5 PM</div>
+            </div>
+
+            <!-- Mon Jul 20 -->
+            <div class="weekcal-col">
+              <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
+              <div class="week-appt st-done" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt st-done" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div class="week-appt st-noshow" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div class="week-appt st-done" style="top:56px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div class="week-appt st-done" style="top:280px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+            </div>
+
+            <!-- Tue Jul 21 · today, mirrors the day view -->
+            <div class="weekcal-col today">
+              <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
+              <div class="week-appt st-done" style="top:28px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Marcus Webb</span>Consult</div>
+              <div class="week-appt st-inroom" style="top:140px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt st-arrived" style="top:196px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div class="week-appt st-confirmed" style="top:308px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div class="week-appt st-cancelled" style="top:336px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt st-scheduled" style="top:392px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Tom Alvarez</span>Consult</div>
+              <div class="week-appt st-inchair" style="top:56px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div class="week-appt st-inchair" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C</div>
+              <div class="week-appt st-arrived" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div class="week-appt st-arrived" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
+              <div class="week-appt st-confirmed" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div class="week-appt st-confirmed" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Myers'</div>
+              <div class="week-appt st-scheduled conflict" style="top:336px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div class="week-appt st-scheduled" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+            </div>
+
+            <!-- Wed Jul 22 -->
+            <div class="weekcal-col">
+              <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
+              <div class="week-appt st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt st-confirmed" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div class="week-appt st-scheduled" style="top:112px;height:53px;left:50%" data-activate="l-01-day"><span class="n">Priya Natarajan</span>Myers'</div>
+              <div class="week-appt st-scheduled" style="top:336px;height:25px;left:50%" data-activate="l-01-day"><span class="n">Tom Alvarez</span></div>
+            </div>
+
+            <!-- Thu Jul 23 -->
+            <div class="weekcal-col">
+              <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
+              <div class="week-appt st-scheduled" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div class="week-appt st-scheduled" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div class="week-appt st-confirmed" style="top:84px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div class="week-appt st-scheduled" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
+              <div class="week-appt st-confirmed" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+            </div>
+
+            <!-- Fri Jul 24 -->
+            <div class="weekcal-col">
+              <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
+              <div class="week-appt st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div class="week-appt st-confirmed" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt st-scheduled" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div class="week-appt st-scheduled" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+            </div>
+          </div>
+
+          <div class="cal-legend">
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-scheduled)"></span>Scheduled</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-confirmed)"></span>Confirmed</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-arrived)"></span>Arrived</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-inroom)"></span>In room / In chair</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-done)"></span>Done</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-noshow-bg);border-style:dashed;border-color:var(--st-noshow)"></span>No-show</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-cancelled)"></span>Cancelled</span>
+          </div>
+        </div>
+
+        <div class="l-cal-foot">
+          <div class="field-help" style="margin:0">Select any appointment to open its day.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-03-book" data-title="Book appointment">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/book</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Book appointment</h2>
+        <p class="page-sub">Tuesday, July 21 · from the day view</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Patient</div>
+            <div style="display:flex;gap:10px;align-items:flex-end">
+              <div class="field" style="flex:1;margin-bottom:0">
+                <label class="field-label">Find a patient</label>
+                <input class="search-input" style="width:100%;box-sizing:border-box" type="search" value="Priya Natarajan" placeholder="Search by name, phone, or DOB">
+              </div>
+              <button class="btn" id="l-newpt-toggle" onclick="lToggleNewPt()">New patient</button>
+            </div>
+            <div class="field-help" style="margin-top:6px">Priya Natarajan · 38 · Blue Shield of CA PPO · OON</div>
+
+            <div id="l-quick-create" style="display:none;border-top:1px solid var(--line-soft);margin-top:14px;padding-top:14px">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">First name</label>
+                  <input class="field-input" type="text" placeholder="First name">
+                </div>
+                <div class="field">
+                  <label class="field-label">Last name</label>
+                  <input class="field-input" type="text" placeholder="Last name">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Mobile phone</label>
+                  <input class="field-input" type="tel" placeholder="(949) 555-0100">
+                </div>
+                <div class="field">
+                  <label class="field-label">Email</label>
+                  <input class="field-input" type="email" placeholder="name@example.com">
+                </div>
+              </div>
+              <div class="field-help">Four fields and the patient exists — intake (Module A) collects everything else before the visit.</div>
+            </div>
+
+            <div class="seg-divider">Appointment</div>
+            <div class="field">
+              <label class="field-label">Appointment type</label>
+              <select class="field-select">
+                <option>New patient consult · 90 min</option>
+                <option>Follow-up · 30 min</option>
+                <option>NAD+ infusion · 3 h</option>
+                <option>IV vitamin C 25 g · 2.5 h</option>
+                <option selected>Myers' cocktail · 1 h</option>
+                <option>Glutathione push · 30 min</option>
+                <option>Lab draw · 15 min</option>
+                <option>Telehealth · 30 min</option>
+              </select>
+              <div class="field-help">The duration holds the chair automatically — Myers' cocktail blocks 1 h.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Time and place</div>
+            <div class="field">
+              <label class="field-label">Provider or chair</label>
+              <select class="field-select">
+                <option>Dr. Drannikov · Provider</option>
+                <option>Dr. Bakman · Provider</option>
+                <option>Brooke · Physician associate</option>
+                <option>Chair 1 · Nick (Nurse)</option>
+                <option selected>Chair 2 · Bea (Medic)</option>
+                <option>Chair 3 · Juan (Medic)</option>
+                <option>Chair 4 · Nate (Medic)</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label">Date</label>
+                <input class="field-input" type="text" value="Tue, Jul 21">
+              </div>
+              <div class="field">
+                <label class="field-label">Start time</label>
+                <select class="field-select">
+                  <option>10:00 AM</option>
+                  <option selected>10:30 AM</option>
+                  <option>11:00 AM</option>
+                  <option>11:30 AM</option>
+                  <option>2:00 PM</option>
+                  <option>2:30 PM</option>
+                </select>
+              </div>
+            </div>
+            <div class="callout callout-warn">Chair 2 already has Daniel Okafor 10:00–12:30. You can book anyway — conflicts warn, never block.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;align-items:center">
+          <button class="btn btn-primary btn-lg" data-activate="l-01-day" onclick="HCOS.toast('Appointment booked — it is on the day view.', 'ok')">Book appointment</button>
+          <button class="btn btn-ghost" data-activate="l-01-day">Back to day view</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-04-appt" data-title="Appointment detail">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/appt/2847</span></div>
+      <div class="frame-body">
+
+        <div class="l-appt-header">
+          <span class="avatar lg">WH</span>
+          <div class="l-appt-header-info">
+            <div class="l-appt-name">Walter Hsu</div>
+            <div class="l-appt-demo">NAD+ infusion · today 1:00 – 4:00 PM · Chair 1 · Nick (Nurse)</div>
+          </div>
+          <span class="pill pill-st st-confirmed">Confirmed</span>
+          <button class="btn" data-activate="l-01-day">Back to day view</button>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">Status</div>
+          <div class="status-flow">
+            <span class="status-step past">Scheduled</span>
+            <span class="status-arrow">›</span>
+            <span class="status-step current">Confirmed</span>
+            <span class="status-arrow">›</span>
+            <span class="status-step" onclick="HCOS.toast('Walter Hsu marked arrived — the chair team sees it instantly.', 'ok')">Arrived</span>
+            <span class="status-arrow">›</span>
+            <span class="status-step" onclick="HCOS.toast('Walter Hsu is in the chair — the infusion record opens for Nick.', 'ok')">In chair</span>
+            <span class="status-arrow">›</span>
+            <span class="status-step" onclick="HCOS.toast('Marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Marked no-show — the 1:00 PM chair hold is released.', 'warn')">Mark no-show</button>
+            <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Appointment cancelled — Walter Hsu gets a courtesy text.', 'warn')">Cancel appointment</button>
+            <button class="btn btn-sm" data-activate="l-01-day" onclick="HCOS.toast('Pick the new time on the day view — the old slot frees when you do.')">Reschedule</button>
+          </div>
+          <div class="field-help" style="margin-top:8px">One status vocabulary everywhere — the calendar, the chair board, and billing all read this same field.</div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Status history</div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-time">Jul 10 · 2:12 PM</div>
+                  <div class="timeline-body">Scheduled by Yazmin (front desk) · session 5 of 8 in the NAD+ series</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">Jul 20 · 9:00 AM</div>
+                  <div class="timeline-body">Reminder sent · SMS to (•••) •••-0184</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-time">Jul 20 · 9:31 AM</div>
+                  <div class="timeline-body">Confirmed · Walter replied C by text</div>
+                </div>
+                <div class="timeline-item muted">
+                  <div class="timeline-time">Today · 12:45 PM</div>
+                  <div class="timeline-body">Expected arrival — front desk marks Arrived at check-in</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Infusion protocol</div>
+              <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">NAD+ 500 mg · ~3 h drip</div>
+              <dl class="kv" style="margin-top:10px">
+                <dt>Series</dt>
+                <dd>Session 5 of 8</dd>
+                <dt>Chair</dt>
+                <dd>Chair 1 · Nick (Nurse)</dd>
+                <dt>Pre-checks</dt>
+                <dd>Vitals + hydration on arrival · rate titrated to comfort</dd>
+                <dt>Last session</dt>
+                <dd>Jul 14 · completed in 2 h 55 m · no reactions</dd>
+              </dl>
+              <div style="margin-top:12px">
+                <a class="btn btn-primary" href="clinical.html#/b-03-infusion">Open infusion record</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Patient snapshot</div>
+              <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">Walter Hsu · 68</div>
+              <div style="margin:8px 0 4px">Cigna PPO <span class="net-badge net-oon">OON</span></div>
+              <div style="margin:6px 0 10px"><span class="pill pill-navy">Self-funded / ERISA</span></div>
+              <div class="field-help">Caregiver access granted · appointments and plan · permanent (Module K)</div>
+              <div style="margin-top:12px">
+                <a class="btn" href="patients.html">Open profile</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Readiness (Module I)</div>
+              <a class="pill pill-ok" href="readiness.html" style="text-decoration:none">Standard</a>
+              <div class="field-help" style="margin-top:8px">Cleared for standard pacing · reviewed Jul 20 · select the chip to see how the score was made.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Shared appointment drawer — opens from any day-view block; shows Maya Reyes -->
+<div class="drawer-overlay" data-close-drawer="#l-appt-drawer"></div>
+<aside class="drawer" id="l-appt-drawer">
+  <div class="drawer-head">
+    <div>
+      <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">Maya Reyes</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:2px">NAD+ infusion · 9:00 – 12:00 · Chair 1 · Nick (Nurse)</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#l-appt-drawer">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="status-flow">
+      <span class="status-step past">Scheduled</span>
+      <span class="status-arrow">›</span>
+      <span class="status-step past">Confirmed</span>
+      <span class="status-arrow">›</span>
+      <span class="status-step past">Arrived</span>
+      <span class="status-arrow">›</span>
+      <span class="status-step current">In chair</span>
+      <span class="status-arrow">›</span>
+      <span class="status-step" onclick="HCOS.toast('Maya Reyes marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
+    </div>
+
+    <div class="seg-divider">Appointment</div>
+    <dl class="kv">
+      <dt>Patient</dt>
+      <dd>Maya Reyes · 52</dd>
+      <dt>Coverage</dt>
+      <dd>UnitedHealthcare PPO · OON · ERISA</dd>
+      <dt>When</dt>
+      <dd>Today · 9:00 AM – 12:00 PM</dd>
+      <dt>Where</dt>
+      <dd>Chair 1 · Nick (Nurse)</dd>
+      <dt>Arrived</dt>
+      <dd>8:52 AM · in chair since 9:05 AM</dd>
+      <dt>Readiness</dt>
+      <dd>Standard · reviewed Jul 20</dd>
+    </dl>
+
+    <div class="seg-divider">Protocol</div>
+    <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">NAD+ 500 mg · ~3 h drip</div>
+    <div class="field-help" style="margin-top:4px">Session 4 of 8 · rate titrated to comfort · vitals at start and hourly</div>
+
+    <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="HCOS.toast('Maya Reyes marked done — Chair 1 frees up on the day view.', 'ok')">Mark done</button>
+      <a class="btn" href="clinical.html">Open chart</a>
+      <a class="btn" href="clinical.html#/b-03-infusion">Infusion record</a>
+    </div>
+    <div class="field-help" style="margin-top:12px">Wireframe note: every block opens this drawer — the built product opens its own patient.</div>
+  </div>
+</aside>
+
+<script src="assets/hcos.js"></script>
+<script>
+  // Demo only: reveal the quick-create mini-form on "New patient".
+  function lToggleNewPt() {
+    var panel = document.getElementById('l-quick-create');
+    var btn = document.getElementById('l-newpt-toggle');
+    var open = panel.style.display !== 'none';
+    panel.style.display = open ? 'none' : 'block';
+    btn.textContent = open ? 'New patient' : 'Use existing patient';
+  }
+</script>
+</body>
+</html>

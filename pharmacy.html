@@ -25,16 +25,6 @@
 
   <!-- ============================================================ -->
   <section class="screen" id="h-01-meds" data-title="Medications &amp; supplements">
-    <div class="screen-descriptor">
-      <div class="descriptor-eyebrow">H-01 · Medications &amp; supplements</div>
-      <div class="descriptor-title">One list — prescriptions and supplements, side by side</div>
-      <div class="descriptor-body">Dr. Drannikov and Brooke prescribe from here, and the supplement protocol lives right next to the prescriptions — first-class, tagged to the program it serves, and covered by the same interaction checks. In a functional medicine clinic the supplement stack IS treatment, so it is never a free-text afterthought.</div>
-      <div class="descriptor-meta">
-        <span class="meta-item"><strong>Primary users</strong> Dr. Drannikov (Provider) · Brooke (Physician Associate)</span>
-        <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">supplements buried in free-text notes, outside interaction checks</span></span>
-      </div>
-    </div>
-
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/pharmacy/maya-reyes</span></div>
@@ -46,11 +36,11 @@
         <div class="card h-patient-strip" style="margin-bottom:16px">
           <span class="avatar lg">MR</span>
           <div>
-            <div class="h-patient-name">Maya Reyes</div>
+            <div class="h-patient-name"><a href="patients.html#/pt-02-profile" style="color:inherit;text-decoration:none">Maya Reyes</a></div>
             <div class="h-patient-sub">52 · UnitedHealthcare PPO <span class="net-badge net-oon">OON</span> · NAD+ series · Detox program · Readiness: Standard</div>
           </div>
           <div class="h-strip-actions">
-            <a class="btn btn-ghost btn-sm" href="patients.html#pt-02-profile">Open full chart</a>
+            <a class="btn btn-ghost btn-sm" href="patients.html#/pt-02-profile">Open full chart</a>
             <button class="btn btn-primary btn-sm" onclick="HCOS.toast('New prescription drafted — it dispatches when the provider signs.', 'ok')">Write new prescription</button>
           </div>
         </div>
@@ -176,7 +166,10 @@
               <div class="h-refill-item">
                 <div class="h-refill-name">Grace Lindqvist — Levothyroxine 50 mcg</div>
                 <div class="h-refill-meta">Requested Monday · TSH high on July 21 panel · Dr. Drannikov wants a visit before renewing</div>
-                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Booking request sent to Grace — a follow-up before renewal, with the reason explained.', 'ok')">Ask the patient to book</button>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Booking request sent to Grace — a follow-up before renewal, with the reason explained.', 'ok')">Ask the patient to book</button>
+                  <a class="btn btn-ghost btn-sm" href="schedule.html#/l-03-book">Book the visit now</a>
+                </div>
               </div>
             </div>
           </div>
