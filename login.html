@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css">
+<style>
+  .login-col { max-width: 460px; margin: 0 auto; padding: 24px 16px 70px; }
+  .login-col .auth-card { margin: 0 auto; }
+  .code-cells { display: flex; gap: 8px; margin: 6px 0 4px; }
+  .code-cell {
+    width: 48px; height: 54px;
+    border: 1px solid var(--line); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 600; color: var(--hx-navy);
+  }
+  .code-cell.filled { border-color: var(--hx-accent); background: var(--hx-light); }
+</style>
+</head>
+<body data-page="login" data-page-title="Sign in" data-shell="bare">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="auth-01-signin" data-title="Sign in">
+    <div class="login-col">
+      <div class="screen-descriptor">
+        <div class="descriptor-eyebrow">AUTH-01 · Sign in</div>
+        <div class="descriptor-title">Staff sign-in — the front door</div>
+        <div class="descriptor-body">Email and password, one screen, no clutter. Two-step verification follows on new devices. Sessions stay alive through a clinic day so nobody signs in six times between patients.</div>
+        <div class="descriptor-meta">
+          <span class="meta-item"><strong>Primary users</strong> All staff</span>
+          <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">multi-prompt logins mid-clinic</span></span>
+        </div>
+      </div>
+      <div class="auth-card">
+        <h1 class="auth-hero">Helixona</h1>
+        <div class="auth-sub">HCOS · staff sign-in</div>
+        <div class="field">
+          <label class="field-label">Work email</label>
+          <input class="field-input" type="email" placeholder="you@helixona.com">
+        </div>
+        <div class="field">
+          <label class="field-label">Password</label>
+          <input class="field-input" type="password" placeholder="••••••••••">
+        </div>
+        <div class="field" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
+          <input type="checkbox" id="remember" checked style="margin:0">
+          <label for="remember">Keep me signed in on this clinic device</label>
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%" data-activate="auth-02-code">Sign in</button>
+        <div class="auth-foot">
+          <a href="#auth-03-forgot" data-activate="auth-03-forgot">Forgot your password?</a><br>
+          Trouble signing in? Ask Shibani (admin) — accounts are created in Settings, never shared.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="auth-02-code" data-title="Two-step code">
+    <div class="login-col">
+      <div class="screen-descriptor">
+        <div class="descriptor-eyebrow">AUTH-02 · Two-step code</div>
+        <div class="descriptor-title">Verify it's you — new device only</div>
+        <div class="descriptor-body">A 6-digit code goes to the staff member's phone the first time a new device is used. Known clinic devices skip this step, so the daily flow stays one screen.</div>
+        <div class="descriptor-meta">
+          <span class="meta-item"><strong>Primary users</strong> All staff</span>
+          <span class="meta-item"><strong>Why it exists</strong> PHI access · Module G audit trail starts here</span>
+        </div>
+      </div>
+      <div class="auth-card">
+        <h1 class="auth-hero">Enter your code</h1>
+        <div class="auth-sub">We texted a 6-digit code to (•••) •••-2644</div>
+        <div class="code-cells">
+          <div class="code-cell filled">4</div>
+          <div class="code-cell filled">8</div>
+          <div class="code-cell filled">2</div>
+          <div class="code-cell"></div>
+          <div class="code-cell"></div>
+          <div class="code-cell"></div>
+        </div>
+        <div class="field-help" style="margin-bottom:14px">The code expires in 10 minutes.</div>
+        <button class="btn btn-primary btn-lg" style="width:100%">Verify code</button>
+        <div class="auth-foot">
+          Didn't get it? <a href="#" onclick="HCOS.toast('New code sent to your phone.', 'ok'); return false;">Send a new code</a> ·
+          <a href="#auth-01-signin" data-activate="auth-01-signin">Use a different account</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="auth-03-forgot" data-title="Forgot password">
+    <div class="login-col">
+      <div class="screen-descriptor">
+        <div class="descriptor-eyebrow">AUTH-03 · Forgot password</div>
+        <div class="descriptor-title">Reset without a help ticket</div>
+        <div class="descriptor-body">Staff reset their own password by email link. No IT queue, no shared passwords, and the audit trail records the reset.</div>
+        <div class="descriptor-meta">
+          <span class="meta-item"><strong>Primary users</strong> All staff</span>
+        </div>
+      </div>
+      <div class="auth-card">
+        <h1 class="auth-hero">Reset your password</h1>
+        <div class="auth-sub">We'll email you a link that works for 30 minutes.</div>
+        <div class="field">
+          <label class="field-label">Work email</label>
+          <input class="field-input" type="email" value="marie@helixona.com">
+        </div>
+        <button class="btn btn-primary btn-lg" style="width:100%" onclick="HCOS.toast('Reset link sent — check your inbox.', 'ok')">Email me a reset link</button>
+        <div class="callout-ok callout" style="margin-top:16px">Link sent to marie@helixona.com. It works once and expires in 30 minutes — check spam if it isn't there in a minute.</div>
+        <div class="auth-foot"><a href="#auth-01-signin" data-activate="auth-01-signin">Back to sign in</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="auth-04-locked" data-title="Account locked">
+    <div class="login-col">
+      <div class="screen-descriptor">
+        <div class="descriptor-eyebrow">AUTH-04 · Account locked</div>
+        <div class="descriptor-title">Errors that say what happened and how to fix it</div>
+        <div class="descriptor-body">After five wrong passwords the account pauses. The message names the problem, the wait, and the human who can help — no dead ends, no jargon.</div>
+        <div class="descriptor-meta">
+          <span class="meta-item"><strong>Primary users</strong> All staff</span>
+          <span class="meta-item"><strong>Design rule</strong> errors explain themselves</span>
+        </div>
+      </div>
+      <div class="auth-card">
+        <h1 class="auth-hero">Account paused</h1>
+        <div class="auth-sub">Too many password attempts</div>
+        <div class="callout callout-err">This account paused for 15 minutes after 5 incorrect passwords. That protects patient records if someone else is guessing.</div>
+        <div class="callout">You can wait 15 minutes and try again, reset your password now with the button below, or ask Shibani to unpause the account from Settings → Users.</div>
+        <button class="btn btn-primary btn-lg" style="width:100%" data-activate="auth-03-forgot">Reset my password now</button>
+        <div class="auth-foot"><a href="#auth-01-signin" data-activate="auth-01-signin">Back to sign in</a></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js"></script>
+</body>
+</html>
