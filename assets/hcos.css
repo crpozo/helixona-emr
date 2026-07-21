@@ -1130,6 +1130,17 @@ button { font-family: inherit; }
 .fbk-type-pill.question { border: 1px dashed var(--muted); color: var(--ink); }
 .fbk-type-pill.approved { background: var(--ink); border: 1px solid var(--ink); color: #fff; }
 .fbk-status-done { font-size: 9.5px; color: var(--ink); font-weight: 600; }
+.fbk-note-del {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 10.5px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+.fbk-note-del:hover { color: var(--ink); }
 
 .fbk-pin {
   position: fixed;

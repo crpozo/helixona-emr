@@ -375,9 +375,17 @@
       '  <span class="fbk-type-pill ' + esc(typeCls) + '">' + esc(n.type || 'Idea') + '</span>' +
       (n.status === 'done' ? '<span class="fbk-status-done">✓ done</span>' : '') +
       '  <span class="fbk-note-date">' + esc(n.date || '') + (mine ? ' · yours, only in this browser' : '') + '</span>' +
+      (mine ? '<button class="fbk-note-del" data-del-note="' + esc(n.id) + '">Delete</button>' : '') +
       '</div>' +
       '<div class="fbk-note-text">' + esc(n.text || '') + '</div>' +
       '</div>';
+  }
+
+  function deleteNote(id) {
+    saveMyNotes(myNotes().filter(function (n) { return n.id !== id; }));
+    refreshFeedbackUI();
+    openNotesDrawer(); /* re-render the list in place */
+    HCOS.toast('Note deleted.', 'ok');
   }
 
   function openNotesDrawer() {
@@ -407,6 +415,9 @@
       'so the whole team sees them on these screens.</p></div>';
     fbkDrawer.innerHTML = html;
     fbkDrawer.querySelector('#hcos-drawer-close').addEventListener('click', closeNotesDrawer);
+    Array.prototype.forEach.call(fbkDrawer.querySelectorAll('[data-del-note]'), function (b) {
+      b.addEventListener('click', function () { deleteNote(b.getAttribute('data-del-note')); });
+    });
     fbkDrawer.classList.add('open');
     fbkOverlay.classList.add('open');
   }
