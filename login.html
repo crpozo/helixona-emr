@@ -9,8 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/hcos.css">
 <style>
-  .login-col { max-width: 460px; margin: 0 auto; padding: 48px 16px 70px; }
-  .login-col .auth-card { margin: 0 auto; }
+  .login-col {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  .login-col .auth-card { width: 100%; max-width: 420px; }
   .code-cells { display: flex; gap: 8px; margin: 6px 0 4px; }
   .code-cell {
     width: 48px; height: 54px;
