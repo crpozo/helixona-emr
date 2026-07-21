@@ -224,8 +224,12 @@ button { font-family: inherit; }
 .screen.active { display: block; }
 
 /* ==========================================================================
-   SCREEN DESCRIPTOR — the context block above every screen
+   SCREEN DESCRIPTOR — RETIRED (Carlos: no explanations on screens; the
+   wireframe behaves like the real app). Kept only as a kill-switch while
+   legacy markup is stripped.
    ========================================================================== */
+
+.screen-descriptor { display: none !important; }
 
 .screen-descriptor {
   background: var(--hx-light);

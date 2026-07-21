@@ -59,24 +59,27 @@ whole site (they are feedback anchors — a note pins to `page/screen-id` foreve
 
 2–5 screens per page. High level means representative, never exhaustive.
 
-## Every screen starts with a descriptor
+## No explanations on screens — it flows like the real app
 
-```html
-<div class="screen-descriptor">
-  <div class="descriptor-eyebrow">L-01 · Day view</div>
-  <div class="descriptor-title">The clinic day at a glance</div>
-  <div class="descriptor-body">One or two sentences: what this screen is and the decision it helps make.</div>
-  <div class="descriptor-meta">
-    <span class="meta-item"><strong>Primary users</strong> Yazmin · Haylee (Front Desk)</span>
-    <span class="meta-item"><strong>Replaces in eCW</strong> <span class="fixes-ecw">separate per-provider views</span></span>
-  </div>
-</div>
-```
+**The descriptor block is RETIRED (Carlos, 2026-07-21).** Screens contain ONLY product UI —
+no context cards, no "primary users", no "replaces in eCW" commentary. The CSS hides any
+legacy `.screen-descriptor`; strip the markup on sight. Context for reviewers lives in the
+hub's feedback explainer and in the notes drawer, never on the screen.
 
-When a screen visibly fixes one of the "why eCW loses" items, say so in the descriptor —
-that is the argument for the whole project.
+**The wireframe is a clickable prototype, tested like the real app.** Every primary action
+must DO something:
 
-Below the descriptor, the actual mock lives inside a `.frame` (browser-style container):
+- Buttons that move the flow navigate: `data-activate="screen-id"` within a page, a real
+  `href` across pages (login → `schedule.html`; "Open chart" → `clinical.html`;
+  "Book appointment" → `schedule.html#/l-03-book`). Cross-page links may target a specific
+  screen with `page.html#/screen-id`.
+- List rows and calendar blocks open their detail (drawer or modal).
+- Actions with side effects confirm via `HCOS.toast(...)` ("Appointment booked — it is on
+  the day view.").
+- Never a dead primary button. Secondary/tertiary controls may be inert, but anything a
+  user would tap to get through the flow must respond.
+
+The actual mock lives inside a `.frame` (browser-style container):
 
 ```html
 <div class="frame">

@@ -17,6 +17,8 @@ We are NOT building the application yet. The current deliverable is a **high-lev
 - Priority order: 1 Hub · 2 Login · 3 Schedule/Calendar (the centerpiece — a real calendar showing appointments) · 4 Patients · 5 Clinical Documentation + Infusion · 6 Billing/RCM · then remaining modules as one high-level screen each.
 - Every screen carries the feedback widget (spec below).
 - High level means high level: 2–5 representative screens per module, never exhaustive flows. Depth comes later, driven by team feedback.
+- **It behaves like a clickable prototype (Carlos, 2026-07-21): the team tests it as if using the real app.** Sign in flows into the calendar; buttons navigate; rows open their detail; flows connect pages (calendar ↔ chart ↔ billing). Never a dead primary button.
+- **No explanatory blocks on screens** (descriptor cards retired 2026-07-21) — screens show product UI only; reviewer context lives in the hub explainer and the notes drawer.
 
 ## The clinic
 
