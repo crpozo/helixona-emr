@@ -180,19 +180,9 @@
       shell.appendChild(main);
       body.insertBefore(shell, screensWrap);
       inner.appendChild(screensWrap);
-    } else if (SHELL === 'bare') {
-      var bar = el('div', 'topbar');
-      bar.innerHTML = '<div><a href="index.html" style="text-decoration:none">' +
-        '<span class="top-title">Helixona · HCOS</span></a>' +
-        '<div class="top-screen"></div></div>';
-      chipsNav = el('nav', 'screen-chips');
-      var right = el('div', 'top-right');
-      right.appendChild(el('span', 'wf-tag', 'Wireframe — give feedback'));
-      bar.appendChild(right);
-      body.insertBefore(bar, screensWrap);
-      body.insertBefore(chipsNav, screensWrap);
-      topScreenEl = bar.querySelector('.top-screen');
     }
+    /* SHELL === 'bare': chrome-free page (login) — no topbar, no chips.
+       Screens navigate through their own in-card links; the widget still loads. */
   }
 
   /* ---------- screens + chips ---------- */
