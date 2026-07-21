@@ -153,6 +153,8 @@ Type and copy: Inter everywhere; Fraunces only on the login hero and hub headlin
 
 New module screens may use simplified placeholder blocks for depth we don't have yet — but always inside the real shell, with real labels drawn from this file.
 
+**The shell is the real product's chrome (Carlos, 2026-07-21): a real EMR menu, not wireframe scaffolding.** Sidebar groups: Clinic (Schedule · Patients · Documentation · Orders & results · Medications · Messages · Billing), Programs (Intake · Readiness · Patient journey · Caregiver access), Practice (Reports · Security & audit) — no module letters, no status dots, no "wireframe" labels. Sidebar foot = signed-in user card (Dr. Drannikov · Provider · Sign out). Topbar = page title + global search. Wireframe meta lives only in the floating feedback widget and hub.html.
+
 ## Data rules
 
 **No PHI, ever.** Patients, appointments, notes, and claims in the wireframe are always synthetic. Clinic identity (name, address, phone, NPI) and staff first names are fine — they are the real users. Do not put the clinic TIN, payer account numbers, or any real patient detail anywhere in this repo.

@@ -21,23 +21,24 @@
 
   var LS_NOTES = 'hcos.notes.v1';
 
-  /* The 12-module map — single source for sidebar, statuses, and hub links */
+  /* The EMR navigation — the real product menu, grouped the way the clinic works */
   var MODULES = [
-    { group: 'Daily work' },
-    { num: 'L', name: 'Scheduling', href: 'schedule.html', page: 'schedule', status: 'wireframed' },
-    { num: '·', name: 'Patients', href: 'patients.html', page: 'patients', status: 'wireframed' },
-    { num: 'B', name: 'Clinical documentation', href: 'clinical.html', page: 'clinical', status: 'wireframed' },
-    { num: 'D', name: 'Billing / RCM', href: 'billing.html', page: 'billing', status: 'wireframed' },
-    { num: 'A', name: 'Intake & onboarding', href: 'intake.html', page: 'intake', status: 'wireframed' },
-    { group: 'Modules' },
-    { num: 'C', name: 'Diagnostics & lab', href: 'labs.html', page: 'labs', status: 'inprogress' },
-    { num: 'E', name: 'Patient communication', href: 'communication.html', page: 'communication', status: 'inprogress' },
-    { num: 'H', name: 'Pharmacy & medication', href: 'pharmacy.html', page: 'pharmacy', status: 'inprogress' },
-    { num: 'I', name: 'Readiness engine', href: 'readiness.html', page: 'readiness', status: 'inprogress' },
-    { num: 'J', name: 'Patient journey', href: 'journey.html', page: 'journey', status: 'inprogress' },
-    { num: 'K', name: 'Caregiver portal', href: 'caregiver.html', page: 'caregiver', status: 'inprogress' },
-    { num: 'F', name: 'Reporting & admin', href: 'reporting.html', page: 'reporting', status: 'inprogress' },
-    { num: 'G', name: 'Security & compliance', href: 'security.html', page: 'security', status: 'inprogress' }
+    { group: 'Clinic' },
+    { name: 'Schedule', href: 'schedule.html', page: 'schedule' },
+    { name: 'Patients', href: 'patients.html', page: 'patients' },
+    { name: 'Documentation', href: 'clinical.html', page: 'clinical' },
+    { name: 'Orders & results', href: 'labs.html', page: 'labs' },
+    { name: 'Medications', href: 'pharmacy.html', page: 'pharmacy' },
+    { name: 'Messages', href: 'communication.html', page: 'communication' },
+    { name: 'Billing', href: 'billing.html', page: 'billing' },
+    { group: 'Programs' },
+    { name: 'Intake', href: 'intake.html', page: 'intake' },
+    { name: 'Readiness', href: 'readiness.html', page: 'readiness' },
+    { name: 'Patient journey', href: 'journey.html', page: 'journey' },
+    { name: 'Caregiver access', href: 'caregiver.html', page: 'caregiver' },
+    { group: 'Practice' },
+    { name: 'Reports', href: 'reporting.html', page: 'reporting' },
+    { name: 'Security & audit', href: 'security.html', page: 'security' }
   ];
 
   var body = document.body;
@@ -81,21 +82,20 @@
   function buildSidebar() {
     var sb = el('aside', 'sidebar');
     var brand = el('div', 'brand',
-      '<a href="schedule.html"><div class="brand-title">Helixona · HCOS</div>' +
-      '<div class="brand-sub">Wireframe — the whole team shapes it</div></a>');
+      '<a href="schedule.html"><div class="brand-title">Helixona</div>' +
+      '<div class="brand-sub">Functional medicine &amp; infusion</div></a>');
     sb.appendChild(brand);
     MODULES.forEach(function (m) {
       if (m.group) { sb.appendChild(el('div', 'nav-group', esc(m.group))); return; }
       var a = el('a', 'nav-item' + (m.page === PAGE ? ' active' : ''));
       a.href = m.href;
-      a.innerHTML = '<span class="nav-num">' + esc(m.num) + '</span><span>' + esc(m.name) + '</span>' +
-        '<span class="nav-status ' + m.status + '" title="' + m.status + '"></span>';
+      a.innerHTML = '<span>' + esc(m.name) + '</span>';
       sb.appendChild(a);
     });
-    var foot = el('div', 'sidebar-foot',
-      '<a href="hub.html">Module map</a> · <a href="hub.html#feedback">How feedback works</a> · ' +
-      '<a href="login.html">Sign out</a>' +
-      '<br>HCOS wireframe v0.1 · Helixona, Inc.');
+    var foot = el('div', 'sidebar-user',
+      '<span class="avatar">DD</span>' +
+      '<span class="sidebar-user-meta"><b>Dr. Drannikov</b><span>Provider</span></span>' +
+      '<a href="login.html" class="sidebar-signout">Sign out</a>');
     sb.appendChild(foot);
     return sb;
   }
@@ -119,11 +119,12 @@
     left.appendChild(t);
     tb.appendChild(left);
     var right = el('div', 'top-right');
-    var notesBtn = el('button', 'btn btn-sm', 'Notes on this screen');
-    notesBtn.id = 'hcos-notes-btn';
-    notesBtn.addEventListener('click', function () { openNotesDrawer(); });
-    right.appendChild(notesBtn);
-    right.appendChild(el('span', 'wf-tag', 'Wireframe — give feedback'));
+    var search = el('input', 'search-input top-search');
+    search.placeholder = 'Search patients, claims, notes…';
+    search.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter') { HCOS.toast('Search arrives with the real build.', 'ok'); search.value = ''; }
+    });
+    right.appendChild(search);
     tb.appendChild(right);
     topScreenEl = t.querySelector('.top-screen');
     return tb;
@@ -190,7 +191,7 @@
     }
     currentScreen = target;
     if (topScreenEl) {
-      topScreenEl.innerHTML = esc(target.title) + ' · <code>' + esc(PAGE + '/' + target.id) + '</code>';
+      topScreenEl.textContent = target.title;
     }
     /* '#/' prefix: never a real element id, so the browser never anchor-scrolls to it */
     try { history.replaceState(null, '', '#/' + id); } catch (e) { /* file:// quirks */ }
