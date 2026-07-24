@@ -3,342 +3,318 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clinical documentation · HCOS Wireframe</title>
+<title>Documentation · HCOS Wireframe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=3">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
 <style>
-  /* Page-local pieces the shared vocabulary lacks — all prefixed .b- */
-  .b-macro-bar {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    padding: 10px 14px;
-    background: var(--hx-band); border: 1px solid var(--line-soft);
-    border-radius: var(--radius-sm);
-    margin-bottom: 16px;
-  }
-  .b-macro {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 5px 11px;
-    background: #fff; border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    font-family: ui-monospace, monospace; font-size: 11.5px;
-    color: var(--hx-navy); cursor: pointer;
-  }
-  .b-macro:hover { border-color: var(--hx-accent); }
-  .b-scribe-live { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--hx-navy); }
-  .b-scribe-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--err); animation: bPulse 1.4s ease-in-out infinite; flex-shrink: 0; }
-  @keyframes bPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .b-transcript {
-    background: var(--hx-band); border: 1px solid var(--line-soft);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px; margin: 12px 0;
-    font-size: 12px; line-height: 1.65; color: var(--ink);
-  }
-  .b-transcript .spk { font-weight: 600; color: var(--hx-blue); }
-  .b-startstop {
-    display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-    padding: 16px 20px; margin-bottom: 16px;
-    background: var(--hx-light); border: 1px solid var(--line);
-    border-radius: var(--radius);
-  }
-  .b-elapsed { font-family: ui-monospace, monospace; font-size: 30px; font-weight: 600; color: var(--hx-navy); line-height: 1.1; }
-  .b-elapsed-lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 600; }
-  .b-vitals { display: flex; gap: 12px; flex-wrap: wrap; font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--ink); margin-top: 3px; }
-  .b-q { border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
-  .b-q-t { font-size: 12px; font-weight: 600; color: var(--hx-navy); margin-bottom: 6px; }
-  .b-q-a { font-size: 12.5px; background: var(--hx-light); border-radius: 6px; padding: 7px 10px; color: var(--ink); }
-  .b-chart-row {
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    padding: 11px 0; border-bottom: 1px solid var(--line-soft);
-  }
-  .b-chart-row:last-child { border-bottom: none; }
-  .b-chart-lbl { font-size: 11px; color: var(--muted); }
-  .b-chart-val { font-size: 12.5px; font-weight: 500; color: var(--ink); margin-top: 1px; }
-  .b-phone-mini .phone-body { min-height: 0; padding: 16px 14px; }
+  .b-prow { display: flex; align-items: center; gap: 10px; }
+  .b-pname { font-weight: 600; color: var(--hx-navy); }
+  .b-psub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .b-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .b-header-info { flex: 1; min-width: 240px; }
+  .b-enc-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .b-enc-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .b-encbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--hx-band); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; font-size: 12.5px; }
+  .b-encbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .b-vitals { display: flex; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+  .b-vital { flex: 1 1 90px; padding: 10px 12px; border-right: 1px solid var(--line); }
+  .b-vital:last-child { border-right: none; }
+  .b-vital-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .b-vital-val { font-size: 15px; font-weight: 600; color: var(--hx-navy); margin-top: 2px; }
+  .b-code { font-family: ui-monospace, monospace; font-size: 11px; background: var(--hx-light); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; color: var(--ink); white-space: nowrap; }
+  .b-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .b-tab { font-size: 12px; font-weight: 600; padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--muted); cursor: pointer; }
+  .b-tab.active { background: var(--hx-navy); color: #fff; border-color: var(--hx-navy); }
+  .b-macros { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .b-macros-lbl { font-size: 11px; color: var(--muted); font-weight: 600; margin-right: 2px; }
+  .b-ros-h { font-size: 12px; font-weight: 600; color: var(--hx-navy); margin: 12px 0 4px; }
+  .b-ros-h.first { margin-top: 0; }
+  .b-ros-t { font-size: 11.5px; color: var(--ink); }
+  .b-scribe-wave { border: 1px dashed var(--line); border-radius: 8px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .b-sig { border: 1px dashed var(--line); border-radius: 10px; padding: 20px; text-align: center; }
+  .b-sig.signed { border-style: solid; }
+  .b-sig-name { font-size: 20px; font-style: italic; color: var(--hx-navy); }
+  .b-sig-hint { font-size: 12px; color: var(--muted); }
+  .b-sig-meta { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: ui-monospace, monospace; }
 </style>
 </head>
-<body data-page="clinical" data-page-title="Clinical documentation" data-shell="app">
+<body data-page="clinical" data-page-title="Documentation" data-shell="app">
 
 <div class="screens">
 
-  <!-- ============================================================
-       B-01 · SOAP editor + AI scribe
-       ============================================================ -->
-  <section class="screen" id="b-01-soap" data-title="SOAP editor + AI scribe">
+  <!-- ============================================================ -->
+  <section class="screen" id="b-01-worklist" data-title="Worklist">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/clinical/soap</span></div>
+        <span class="frame-url">hcos.helixona.com/clinical</span></div>
       <div class="frame-body">
+        <h2 class="page-title">Today's encounters</h2>
+        <p class="page-sub">Tuesday, July 21 · Dr. Drannikov · every patient on today's schedule with documentation status</p>
 
-        <div class="app-header">
-          <div style="display:flex;align-items:center;gap:12px">
-            <span class="avatar lg">GL</span>
-            <div>
-              <div class="app-logo"><a href="patients.html">Grace Lindqvist</a> <span class="net-badge net-self" style="margin-left:6px">Self-pay</span></div>
-              <div class="app-logo-sub">Follow-up · Tuesday, July 21 · 11:00 AM · Dr. Drannikov</div>
-            </div>
-          </div>
-          <div class="app-user">
-            <span class="pill pill-st st-inroom">In room</span>
-            <button class="btn btn-sm" data-activate="b-04-sign">Go to sign and lock</button>
-          </div>
-        </div>
-
-        <div class="b-macro-bar">
-          <span class="card-title" style="margin:0">Macros</span>
-          <span class="b-macro" onclick="HCOS.toast('.detox-followup expanded into Plan — edit it like any text.', 'ok')">.detox-followup <span class="pill pill-ok">shared · Dr. Drannikov → Brooke</span></span>
-          <span class="b-macro" onclick="HCOS.toast('.thyroid-panel expanded into Plan — edit it like any text.', 'ok')">.thyroid-panel <span class="pill pill-ok">shared · Dr. Drannikov → Brooke</span></span>
-          <span style="font-size:11px;color:var(--muted)">Type a dot-phrase in any section — sharing takes one click, not a support ticket.</span>
-        </div>
-
-        <div class="grid-sidebar">
-          <div>
-            <div class="card" style="margin-bottom:12px">
-              <div class="card-title">Subjective <span class="pill pill-warn" style="margin-left:8px;text-transform:none;letter-spacing:0">Drafted by scribe — review</span></div>
-              <p style="font-size:13px;line-height:1.6;margin:0">Grace reports steadier energy through mid-afternoon since starting the liver-support protocol; brain fog now 2 of 10, down from 6 in June. Sleep is 7 hours and unbroken most nights. She still notes cold intolerance and dry skin in the mornings, and asks whether her thyroid panel results are back.</p>
-            </div>
-            <div class="card" style="margin-bottom:12px">
-              <div class="card-title">Objective</div>
-              <p style="font-size:13px;line-height:1.6;margin:0">BP 118/74 · HR 66 · Temp 98.1 °F · Weight 141 lb (−3 lb since June 23). Thyroid non-tender, no palpable nodules. Skin dry at extensor surfaces. Thyroid panel (TSH, free T3, free T4, TPO antibodies) drawn July 14 — results pending in Diagnostics.</p>
-            </div>
-            <div class="card" style="margin-bottom:12px">
-              <div class="card-title">Assessment <span class="pill pill-warn" style="margin-left:8px;text-transform:none;letter-spacing:0">Drafted by scribe — review</span></div>
-              <p style="font-size:13px;line-height:1.6;margin:0">Fatigue improving on the current functional protocol. The symptom pattern — cold intolerance, dry skin, weight trend — keeps subclinical hypothyroidism on the differential pending the July 14 panel. Detox readiness remains Standard; no flare signs today.</p>
-            </div>
-            <div class="card">
-              <div class="card-title">Plan</div>
-              <p style="font-size:13px;line-height:1.6;margin:0">Continue liver-support supplements at current dosing. Review the thyroid panel when it lands; flag TPO above 35 for physician review. Continue morning hydration and the castor-oil pack routine 3 times a week. Recheck in 4 weeks — book the follow-up before she leaves.</p>
-            </div>
-          </div>
-          <div>
-            <div class="card">
-              <div class="card-title">HCOS scribe</div>
-              <div class="b-scribe-live"><span class="b-scribe-dot"></span>Listening · 22 min</div>
-              <div class="b-transcript">
-                <span class="spk">Grace:</span> …the fog is mostly gone by nine now, which is new for me…<br>
-                <span class="spk">Dr. Drannikov:</span> And the cold hands in the morning — better, worse, the same?<br>
-                <span class="spk">Grace:</span> The same, honestly. That and the dry skin.
-              </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Last exchange summarized and inserted into Subjective.', 'ok')">Insert into note</button>
-                <button class="btn btn-sm" onclick="HCOS.toast('Scribe paused — nothing is captured until you resume.', 'warn')">Pause scribe</button>
-              </div>
-              <div class="callout callout-ok" style="margin:0">Draft ready 40 seconds after the visit — every visit. No retries, no lost audio, no typing it yourself at 9 PM.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       B-02 · Questionnaire → chart
-       ============================================================ -->
-  <section class="screen" id="b-02-questionnaire" data-title="Questionnaire → chart">
-    <div class="frame">
-      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/clinical/questionnaires</span></div>
-      <div class="frame-body">
-
-        <div class="grid-3" style="margin-bottom:18px">
+        <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
             <div class="stat-num">12</div>
-            <div class="stat-lbl">Answers filed this visit</div>
+            <div class="stat-lbl">On today's schedule</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">0</div>
-            <div class="stat-lbl">Re-keyed by hand</div>
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">In progress</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num" style="font-size:16px;line-height:1.4;padding-top:5px">Charlene reviews instead of retypes</div>
-            <div class="stat-lbl">Her checkmark is the only human step</div>
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Pending signature</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">5</div>
+            <div class="stat-lbl">Signed today</div>
           </div>
         </div>
 
-        <div class="grid-2">
-          <div>
-            <div class="seg-divider">What Nadia sees — her phone</div>
-            <div class="phone-frame b-phone-mini">
-              <div class="phone-bar"><span>9:41</span><span>Helixona</span><span>●●●</span></div>
-              <div class="phone-body">
-                <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy);margin-bottom:2px">Detox follow-up questionnaire</div>
-                <div style="font-size:11px;color:var(--muted);margin-bottom:14px">From the one HCOS survey engine — the same engine behind intake forms and readiness surveys.</div>
-                <div class="b-q">
-                  <div class="b-q-t">How would you rate your energy this week?</div>
-                  <div class="b-q-a">6 of 10 — better after mid-morning</div>
-                </div>
-                <div class="b-q">
-                  <div class="b-q-t">Any new symptoms since your last visit?</div>
-                  <div class="b-q-a">Mild headaches, 2 evenings</div>
-                </div>
-                <div class="b-q">
-                  <div class="b-q-t">How many days did you complete your home routine?</div>
-                  <div class="b-q-a">5 of 7 days</div>
-                </div>
-                <div class="callout callout-ok" style="margin:12px 0 0;font-size:11.5px">Sent — your care team already has these in your chart.</div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="seg-divider">What Charlene sees — the chart, already filed</div>
-            <div class="card">
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-                <span class="avatar">NB</span>
-                <div>
-                  <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">Nadia Boulos <span class="net-badge net-inn" style="margin-left:6px">INN</span></div>
-                  <div style="font-size:11px;color:var(--muted)">Anthem · readiness Physician Review · encounter prep for Thursday</div>
-                </div>
-              </div>
-              <div class="b-chart-row">
-                <div>
-                  <div class="b-chart-lbl">Energy score (interval)</div>
-                  <div class="b-chart-val">6 / 10 — better after mid-morning</div>
-                </div>
-                <span class="pill pill-ok">Filed automatically</span>
-              </div>
-              <div class="b-chart-row">
-                <div>
-                  <div class="b-chart-lbl">Interval symptoms</div>
-                  <div class="b-chart-val">Mild evening headaches × 2</div>
-                </div>
-                <span class="pill pill-ok">Filed automatically</span>
-              </div>
-              <div class="b-chart-row">
-                <div>
-                  <div class="b-chart-lbl">Home routine adherence</div>
-                  <div class="b-chart-val">5 of 7 days</div>
-                </div>
-                <span class="pill pill-ok">Filed automatically</span>
-              </div>
-              <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('All 12 answers marked reviewed — Dr. Drannikov sees them flagged in the encounter.', 'ok')">Mark all reviewed</button>
-                <button class="btn btn-sm" onclick="HCOS.toast('Evening headaches flagged for Dr. Drannikov before Thursday.', 'ok')">Flag for provider</button>
-              </div>
-              <div class="callout" style="margin:14px 0 0">Each question in the survey engine maps to a chart field when it is built — so the answer files itself, every time, for every patient.</div>
-            </div>
-          </div>
+        <div class="filters">
+          <input class="search-input" type="search" placeholder="Search by patient, MRN, or chief complaint">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip">Not started</button>
+          <button class="filter-chip">In progress</button>
+          <button class="filter-chip">Pending signature</button>
+          <button class="filter-chip">Signed</button>
+          <button class="btn btn-primary btn-sm" data-activate="b-03-soap" style="margin-left:auto">New note</button>
         </div>
 
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Visit type</th>
+                <th>Chief complaint</th>
+                <th>Visit</th>
+                <th>Documentation</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>9:00 AM</td>
+                <td><div class="b-prow"><span class="avatar">MR</span><div><div class="b-pname">Maya Reyes</div><div class="b-psub">MRN 1042 · 52 · she/her</div></div></div></td>
+                <td>Follow-up</td>
+                <td>NAD+ series check</td>
+                <td><span class="pill pill-st st-done">Done</span></td>
+                <td><span class="pill pill-ok">Signed · 9:41 AM</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-02-snapshot">Open</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>9:30 AM</td>
+                <td><div class="b-prow"><span class="avatar">DO</span><div><div class="b-pname">Daniel Okafor</div><div class="b-psub">MRN 0918 · 47 · he/him</div></div></div></td>
+                <td>Follow-up</td>
+                <td>IV vitamin C series</td>
+                <td><span class="pill pill-st st-done">Done</span></td>
+                <td><span class="pill pill-warn">Pending signature</span></td>
+                <td><button class="btn btn-primary btn-sm" data-activate="b-11-sign-lock">Sign</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>11:15 AM</td>
+                <td><div class="b-prow"><span class="avatar">GL</span><div><div class="b-pname">Grace Lindqvist</div><div class="b-psub">MRN 2071 · 44 · she/her</div></div></div></td>
+                <td>Follow-up</td>
+                <td>Fatigue and thyroid review</td>
+                <td><span class="pill pill-st st-inroom">In room</span></td>
+                <td><span class="pill pill-navy">In progress · 22 min</span></td>
+                <td><button class="btn btn-primary btn-sm" data-activate="b-02-snapshot">Continue</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>11:15 AM</td>
+                <td><div class="b-prow"><span class="avatar">SR</span><div><div class="b-pname">Sofia Ramos</div><div class="b-psub">MRN 1188 · 29 · she/her</div></div></div></td>
+                <td>Lab draw</td>
+                <td>Fasting labs</td>
+                <td><span class="pill pill-st st-arrived">Arrived</span></td>
+                <td><span class="pill pill-muted">Not started</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-02-snapshot">Open</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>2:00 PM</td>
+                <td><div class="b-prow"><span class="avatar">EP</span><div><div class="b-pname">Elena Petrova</div><div class="b-psub">MRN 1330 · 33 · she/her</div></div></div></td>
+                <td>Telehealth follow-up</td>
+                <td>Medication check</td>
+                <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
+                <td><span class="pill pill-muted">Not started</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-02-snapshot">Open</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>3:30 PM</td>
+                <td><div class="b-prow"><span class="avatar">MW</span><div><div class="b-pname">Marcus Webb</div><div class="b-psub">MRN 1389 · 55 · he/him</div></div></div></td>
+                <td>New patient consult</td>
+                <td>Functional medicine intake</td>
+                <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                <td><span class="pill pill-muted">Awaiting pre-chart</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-02-snapshot">Open</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-02-snapshot">
+                <td>4:00 PM</td>
+                <td><div class="b-prow"><span class="avatar">NB</span><div><div class="b-pname">Nadia Boulos</div><div class="b-psub">MRN 0876 · 41 · she/her</div></div></div></td>
+                <td>Follow-up</td>
+                <td>Readiness review</td>
+                <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                <td><span class="pill pill-warn">Questionnaire pending</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-02-snapshot">Open</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px">Two notes still need a signature — the kind that used to follow Dr. Drannikov into the weekend. Sign and lock finishes each one, and everything downstream, in a single step.</div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       B-03 · Infusion record
-       ============================================================ -->
-  <section class="screen" id="b-03-infusion" data-title="Infusion record">
+  <!-- ============================================================ -->
+  <section class="screen" id="b-02-snapshot" data-title="Patient snapshot">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/clinical/infusion</span></div>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/snapshot</span></div>
       <div class="frame-body">
 
-        <div class="app-header">
-          <div style="display:flex;align-items:center;gap:12px">
-            <span class="avatar lg">MR</span>
-            <div>
-              <div class="app-logo"><a href="patients.html#/pt-02-profile">Maya Reyes</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
-              <div class="app-logo-sub">NAD+ infusion · Chair 2 · ordered by Dr. Drannikov · Tuesday, July 21</div>
-            </div>
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Grace Lindqvist · 44 · she/her</div>
+            <div class="b-enc-sub">MRN 2071 · Self-pay <span class="net-badge net-self">SELF</span> · encounter ENC-2026-07211 · follow-up · 30 min · today 11:15 AM</div>
           </div>
-          <div class="app-user">
-            <span class="pill pill-st st-inchair">In chair</span>
-            <span>Recording: Bea (Medic)</span>
+          <a class="btn" href="clinical-chart.html">Open full chart</a>
+          <button class="btn btn-primary" data-activate="b-03-soap">Open SOAP note</button>
+        </div>
+
+        <div class="b-encbar">
+          <div><span class="pill pill-navy">In progress</span> Started 11:15 AM · auto-saved 22 seconds ago</div>
+          <div class="b-encbar-actions">
+            <a class="btn btn-sm" href="clinical-remote.html">Pre-chart by Charlene</a>
+            <button class="btn btn-sm btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
           </div>
         </div>
 
-        <div class="b-startstop">
-          <div>
-            <div class="b-elapsed-lbl">Started 9:04 AM · elapsed</div>
-            <div class="b-elapsed">2:36</div>
-          </div>
-          <div style="font-size:12px;color:var(--muted);max-width:320px">NAD+ runs ~3 h at target rate. Stopping records the end time, locks the timeline, and opens the completion checklist.</div>
-          <button class="btn btn-danger btn-lg" onclick="HCOS.toast('Infusion stopped at 11:40 AM — flush and completion checklist is now active.', 'ok')">Stop infusion</button>
+        <div class="b-vitals">
+          <div class="b-vital"><div class="b-vital-lbl">BP</div><div class="b-vital-val">118 / 76</div></div>
+          <div class="b-vital"><div class="b-vital-lbl">HR</div><div class="b-vital-val">72</div></div>
+          <div class="b-vital"><div class="b-vital-lbl">Temp</div><div class="b-vital-val">98.4°F</div></div>
+          <div class="b-vital"><div class="b-vital-lbl">SpO₂</div><div class="b-vital-val">98%</div></div>
+          <div class="b-vital"><div class="b-vital-lbl">Weight</div><div class="b-vital-val">148 lb</div></div>
+          <div class="b-vital"><div class="b-vital-lbl">BMI</div><div class="b-vital-val">24.0</div></div>
+          <div class="b-vital"><div class="b-vital-lbl">Fatigue</div><div class="b-vital-val">5 / 10</div></div>
         </div>
 
         <div class="grid-sidebar">
           <div>
-            <div class="card" style="margin-bottom:12px">
-              <div class="card-title">Protocol · NAD+ 500 mg</div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field-label">Route</label>
-                  <input class="field-input" value="IV — left forearm · 22 g catheter">
-                </div>
-                <div class="field">
-                  <label class="field-label">Rate</label>
-                  <input class="field-input" value="180 mL/hr — titrated up from 100 at 10:00">
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field-label">Dosage</label>
-                  <input class="field-input" value="NAD+ 500 mg in 500 mL 0.9% sodium chloride">
-                </div>
-                <div class="field">
-                  <label class="field-label">Tolerance notes</label>
-                  <input class="field-input" value="Mild flushing at 9:55 — rate held, resolved">
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-title">Supplies used — lots recorded at the chair</div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Active problems</div>
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Item</th><th>Lot</th><th>Expires</th><th>Qty</th></tr>
+                    <tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>Status</th><th></th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>NAD+ 500 mg vial</td><td>N24-8871</td><td>02/2027</td><td>1</td></tr>
-                    <tr><td>0.9% sodium chloride 500 mL</td><td>S51-0342</td><td>11/2026</td><td>1</td></tr>
-                    <tr><td>IV start kit · 22 g catheter</td><td>K19-5510</td><td>08/2027</td><td>1</td></tr>
-                    <tr><td>Extension set + saline flush 10 mL</td><td>F73-2209</td><td>05/2027</td><td>2</td></tr>
+                    <tr>
+                      <td>Hashimoto's thyroiditis</td>
+                      <td><span class="b-code">E06.3</span></td>
+                      <td>2019</td>
+                      <td><span class="pill pill-warn">Active</span></td>
+                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                    </tr>
+                    <tr>
+                      <td>Generalized fatigue · worse after exertion</td>
+                      <td><span class="b-code">R53.83</span></td>
+                      <td>Chronic</td>
+                      <td><span class="pill pill-warn">Active</span></td>
+                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                    </tr>
+                    <tr>
+                      <td>Cognitive complaints · morning brain fog</td>
+                      <td><span class="b-code">R41.840</span></td>
+                      <td>2024</td>
+                      <td><span class="pill pill-warn">Active</span></td>
+                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                    </tr>
+                    <tr>
+                      <td>Vitamin D deficiency</td>
+                      <td><span class="b-code">E55.9</span></td>
+                      <td>2025</td>
+                      <td><span class="pill pill-warn">Active</span></td>
+                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="field-help" style="margin-top:8px">Lots feed the OON documentation packet in Billing (D) — no end-of-day transcription.</div>
+            </div>
+
+            <div class="callout"><strong>Reason for today's visit, in her words:</strong> "I want to see if the higher thyroid dose is working — the exhaustion is a little better but the morning fog and word-finding are still there, and I'd like a plan I can actually stick to."</div>
+
+            <div class="grid-2" style="margin-top:16px">
+              <div class="card">
+                <div class="card-title">Medications (3)</div>
+                <div style="font-size:12.5px;line-height:1.9">
+                  <div>Levothyroxine 75 mcg PO daily</div>
+                  <div>Magnesium glycinate 400 mg PRN</div>
+                  <div>Vitamin D3 5,000 IU daily</div>
+                </div>
+                <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html">Reconcile in chart</a>
+              </div>
+              <div class="card">
+                <div class="card-title">Allergies (1)</div>
+                <div style="font-size:12.5px;line-height:1.9">
+                  <div>Sulfa drugs — rash, hives</div>
+                </div>
+                <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html">Review in chart</a>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Recent labs · last 90 days</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>Test</th><th>Result</th><th>Flag</th><th>Drawn</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>TSH</td><td><strong>3.8</strong> mIU/L</td><td><span class="pill pill-ok">Normal</span></td><td>Jul 14</td></tr>
+                    <tr><td>Vitamin D, 25-OH</td><td><strong>18</strong> ng/mL</td><td><span class="pill pill-err">Low</span></td><td>Jul 14</td></tr>
+                    <tr><td>Ferritin</td><td><strong>22</strong> ng/mL</td><td><span class="pill pill-warn">Low-normal</span></td><td>Jul 14</td></tr>
+                    <tr><td>hs-CRP</td><td><strong>4.6</strong> mg/L</td><td><span class="pill pill-warn">Elevated</span></td><td>Jul 14</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <a class="btn btn-ghost btn-sm" style="margin-top:8px" href="labs.html">Open orders and results</a>
             </div>
           </div>
+
           <div>
-            <div class="card" style="margin-bottom:12px">
-              <div class="card-title">Vitals checkpoints</div>
-              <div class="timeline">
-                <div class="timeline-item">
-                  <div class="timeline-time">9:04 AM · baseline</div>
-                  <div class="timeline-body">Comfortable, consented, line patent.
-                    <div class="b-vitals"><span>BP 122/78</span><span>HR 72</span><span>SpO₂ 99%</span></div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-time">10:00 AM</div>
-                  <div class="timeline-body">Mild flushing — rate held at 100, resolved.
-                    <div class="b-vitals"><span>BP 118/76</span><span>HR 70</span><span>SpO₂ 99%</span></div>
-                  </div>
-                </div>
-                <div class="timeline-item">
-                  <div class="timeline-time">11:00 AM</div>
-                  <div class="timeline-body">Comfortable — rate back to 180.
-                    <div class="b-vitals"><span>BP 120/74</span><span>HR 68</span><span>SpO₂ 98%</span></div>
-                  </div>
-                </div>
-                <div class="timeline-item muted">
-                  <div class="timeline-time">12:00 PM · due next</div>
-                  <div class="timeline-body">Hourly check.</div>
-                </div>
-              </div>
-              <button class="btn btn-primary btn-sm" style="width:100%" onclick="HCOS.toast('Vitals checkpoint added at 11:40 AM.', 'ok')">Record vitals now</button>
-            </div>
-            <div class="card">
-              <div class="card-title">Flush + completion</div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Encounter checklist</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Baseline vitals recorded</div><div class="check-meta">9:04 AM</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Hourly vitals × 2</div><div class="check-meta">10:00 · 11:00</div></li>
-                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Saline flush at completion</div><div class="check-meta">After stop</div></li>
-                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Site check + catheter removal</div><div class="check-meta">After stop</div></li>
-                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Post-infusion vitals</div><div class="check-meta">After stop</div></li>
-                <li class="check-item"><span class="check-icon pending">✓</span><div class="check-label">Chair 2 status → Done</div><div class="check-meta">Auto on completion</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Intake reviewed</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Vitals captured</span></li>
+                <li class="check-item"><span class="check-icon active">3</span><span class="check-label">HPI documented</span><span class="check-meta">In progress</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Physical exam</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Assessment and plan</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Orders placed</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Signature</span></li>
               </ul>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Quick jump</div>
+              <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-activate="b-03-soap">SOAP note</button>
+              <a class="btn btn-sm" style="width:100%;margin-bottom:6px" href="clinical-chart.html">Functional medicine timeline</a>
+              <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-activate="b-09-orders">Orders</button>
+              <button class="btn btn-sm" style="width:100%" data-activate="b-11-sign-lock">Sign and lock</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Care team</div>
+              <div style="font-size:12.5px;line-height:1.9">
+                <div>Dr. Drannikov · Provider</div>
+                <div>Charlene · Medical assistant (virtual)</div>
+                <div>Bee · PCC</div>
+              </div>
             </div>
           </div>
         </div>
@@ -347,52 +323,443 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       B-04 · Sign and lock (B-12)
-       ============================================================ -->
-  <section class="screen" id="b-04-sign" data-title="Sign and lock (B-12)">
+  <!-- ============================================================ -->
+  <section class="screen" id="b-03-soap" data-title="SOAP note">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/clinical/sign</span></div>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/note</span></div>
       <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Grace Lindqvist · 44 · she/her</div>
+            <div class="b-enc-sub">MRN 2071 · encounter ENC-2026-07211 · SOAP note</div>
+          </div>
+          <button class="btn btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
+        </div>
+
+        <div class="b-encbar">
+          <div><span class="pill pill-warn">Draft</span> Auto-saved 6 seconds ago · template: <strong>Functional medicine — follow-up</strong></div>
+          <div class="b-encbar-actions">
+            <a class="btn btn-sm" href="clinical-templates.html">Change template</a>
+            <button class="btn btn-sm" onclick="HCOS.toast('Patient preview opened — this is the note Grace will see in her portal after sign.')">Preview as patient</button>
+          </div>
+        </div>
+
+        <div class="b-tabs">
+          <span class="b-tab active">S · Subjective</span>
+          <span class="b-tab active">O · Objective</span>
+          <span class="b-tab" data-activate="b-08-assessment">A · Assessment →</span>
+          <span class="b-tab" data-activate="b-09-orders">P · Plan and orders →</span>
+        </div>
 
         <div class="grid-sidebar">
           <div>
-            <div class="card" style="margin-bottom:14px">
-              <div class="card-title">Encounter summary</div>
-              <dl class="kv">
-                <dt>Patient</dt><dd>Grace Lindqvist · 44 · Self-pay</dd>
-                <dt>Visit</dt><dd>Follow-up · 30 m · Tuesday, July 21 · 11:00 AM</dd>
-                <dt>Provider</dt><dd>Dr. Drannikov</dd>
-                <dt>Note</dt><dd>4 sections complete · scribe drafts reviewed</dd>
-                <dt>Orders</dt><dd>Thyroid panel recheck · glutathione push (next visit)</dd>
-                <dt>Charges</dt><dd>99214 · liver-support supplement refill</dd>
-              </dl>
+            <div class="seg-divider" style="margin-top:0">Chief complaint</div>
+            <input class="field-input" value="Fatigue follow-up and thyroid lab review">
+
+            <div class="seg-divider">History of present illness</div>
+            <textarea class="field-textarea" rows="7">44 y/o woman returns for follow-up of persistent fatigue and Hashimoto's thyroiditis, six weeks after levothyroxine was increased from 50 to 75 mcg. Reports fatigue improved from 7/10 to 5/10 but still worse after physical or cognitive exertion, with post-exertional malaise lasting into the next day. Morning brain fog and word-finding difficulty persist. Sleep remains unrefreshing despite 8+ hours. Repeat thyroid panel and vitamin D were drawn last week and are reviewed today: TSH 3.8, vitamin D 18 ng/mL (low), ferritin low-normal, hs-CRP mildly elevated. Patient is motivated to add IV nutrient support and a structured supplement plan.</textarea>
+
+            <div class="b-macros">
+              <span class="b-macros-lbl">Shared macros</span>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.fatigue</a>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.thyroidopt</a>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.pemquery</a>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.sleepqual</a>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.cognitive</a>
+              <a class="btn btn-ghost btn-sm" href="clinical-templates.html#/b-23-dot-phrases">Open dot-phrase library</a>
             </div>
 
-            <div class="seg-divider">Signing dispatches everything at once</div>
-            <ul class="check-list">
-              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Lab order — thyroid panel recheck</div><div class="check-meta">Diagnostics (C)</div></li>
-              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Infusion order — glutathione push, next visit</div><div class="check-meta">Infusion bay</div></li>
-              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Superbill — 99214 + today's charges</div><div class="check-meta">Billing (D)</div></li>
-              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Supplement plan — liver-support refill</div><div class="check-meta">Pharmacy (H)</div></li>
-              <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Follow-up booking — 4 weeks, 30 m</div><div class="check-meta">Scheduling (L)</div></li>
-            </ul>
-            <button class="btn btn-primary btn-lg" style="width:100%;margin-top:6px" data-open-modal="#b-modal-sign">Sign and lock</button>
+            <div class="seg-divider">Review of systems</div>
+            <div class="grid-2">
+              <div>
+                <div class="b-ros-h first">Constitutional</div>
+                <div class="b-ros-t">Fatigue (+), unrefreshed sleep (+), no fever, no weight loss</div>
+                <div class="b-ros-h">Neurological</div>
+                <div class="b-ros-t">Cognitive dysfunction (+), headache 2×/week, no syncope</div>
+                <div class="b-ros-h">Endocrine</div>
+                <div class="b-ros-t">Cold intolerance (+), hair thinning (+)</div>
+              </div>
+              <div>
+                <div class="b-ros-h first">Gastrointestinal</div>
+                <div class="b-ros-t">Bloating after meals, constipation &gt; loose stools</div>
+                <div class="b-ros-h">Cardiovascular</div>
+                <div class="b-ros-t">No chest pain, occasional lightheadedness on standing</div>
+                <div class="b-ros-h">Psychiatric</div>
+                <div class="b-ros-t">Mild anxiety, PHQ-9 = 6 (mild), stable</div>
+              </div>
+            </div>
+
+            <div class="callout callout-ok" style="margin-top:12px"><strong>From the intake questionnaire:</strong> 14 of 32 review-of-systems fields auto-populated from Grace's answers. Any field is editable; the original answers stay in the audit trail. No one re-keyed a thing.</div>
           </div>
 
           <div>
-            <div class="card">
-              <div class="card-title">After signing — what the five destinations see</div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">AI scribe</div>
+              <div class="b-scribe-wave">Microphone ready · ambient</div>
+              <button class="btn btn-primary btn-sm" style="width:100%;margin-bottom:8px" onclick="HCOS.toast('Ambient scribe recording — it drafts the note; you review every line before sign.', 'ok')">Start ambient recording</button>
+              <div class="field-help">Captures the consult and drafts the SOAP note. You review before sign — this is the scribe that no longer fails mid-visit.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Template sections</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Lab order in Diagnostics</div><div class="check-meta">4:52 PM</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Infusion order in the bay queue</div><div class="check-meta">4:52 PM</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Superbill in the Billing worklist</div><div class="check-meta">4:52 PM</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Supplement plan in Pharmacy</div><div class="check-meta">4:52 PM</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Follow-up on the calendar</div><div class="check-meta">4:52 PM</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Chief complaint</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">HPI</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Review of systems</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Past medical history</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Social history</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Lifestyle · sleep, diet, stress</span></li>
               </ul>
-              <div class="callout callout-ok" style="margin:12px 0 0">Nothing follows Dr. Drannikov home. That is the point.</div>
-              <a class="btn btn-sm" href="billing.html#/d-01-worklist" style="margin-top:12px">Open the billing worklist</a>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Word count</div>
+              <div class="stat-num" style="font-size:22px">612</div>
+              <div class="field-help">Subjective section</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-08-assessment" data-title="Assessment">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/assessment</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Assessment and diagnoses</div>
+            <div class="b-enc-sub">Grace Lindqvist · MRN 2071 · encounter ENC-2026-07211</div>
+          </div>
+          <button class="btn" data-activate="b-03-soap">Back to note</button>
+          <button class="btn btn-primary" data-activate="b-09-orders">Continue to orders</button>
+        </div>
+
+        <p class="page-sub" style="margin-top:0">Clinical reasoning plus the structured ICD-10 codes that drive both the problem list and the superbill.</p>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Clinical assessment · narrative</div>
+            <textarea class="field-textarea" rows="9">44 y/o woman with Hashimoto's thyroiditis on levothyroxine, now partially optimized at 75 mcg (TSH 3.8, trending toward target). Persistent fatigue with post-exertional malaise, cognitive complaints, and mild orthostatic symptoms. New confirmation of vitamin D deficiency (18 ng/mL) and low-grade inflammation (hs-CRP 4.6), with low-normal ferritin limiting energy and thyroid hormone conversion.
+
+Functional medicine framing: chronic mediators (autoimmune thyroid disease, marginal iron and vitamin D status) sustaining fatigue and cognitive symptoms. Reasonable candidate for IV nutrient therapy as an adjunct to a structured oral supplement and lifestyle plan. Self-pay — plan built around cost-transparent options she can sustain.</textarea>
+
+            <div class="b-macros">
+              <span class="b-macros-lbl">Shared macros</span>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.thyroidopt</a>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.fatigueplan</a>
+              <a class="pill pill-muted" href="clinical-templates.html#/b-23-dot-phrases">.vitdrepletion</a>
+            </div>
+
+            <div class="seg-divider">Diagnoses on this encounter</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead><tr><th>#</th><th>Diagnosis</th><th>ICD-10</th><th>Type</th><th></th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1</strong></td>
+                    <td>Other malaise and fatigue</td>
+                    <td><span class="b-code">R53.83</span></td>
+                    <td><span class="pill">Primary</span></td>
+                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Hashimoto's thyroiditis</td>
+                    <td><span class="b-code">E06.3</span></td>
+                    <td><span class="pill pill-muted">Secondary</span></td>
+                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Vitamin D deficiency</td>
+                    <td><span class="b-code">E55.9</span></td>
+                    <td><span class="pill pill-muted">Secondary</span></td>
+                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Cognitive communication deficit</td>
+                    <td><span class="b-code">R41.840</span></td>
+                    <td><span class="pill pill-muted">Secondary</span></td>
+                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="display:flex;gap:8px;margin-top:12px">
+              <input class="search-input" type="search" placeholder="Search ICD-10 code or diagnosis name" style="flex:1">
+              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Diagnosis added to this encounter — it flows to the problem list and the superbill on sign.', 'ok')">Add diagnosis</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Smart suggestions</div>
+              <div class="field-help" style="margin-bottom:8px">Based on the note content</div>
+              <div style="font-size:12.5px;line-height:2.1">
+                <div><span class="b-code">E83.39</span> Disorder of mineral metabolism</div>
+                <div><span class="b-code">F41.1</span> Generalized anxiety</div>
+                <div><span class="b-code">E61.1</span> Iron deficiency</div>
+                <div><span class="b-code">G47.00</span> Insomnia, unspecified</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Coding tips</div>
+              <div class="field-help">Pair each symptom code with its condition code so the problem list and the self-pay superbill both read clean. Grace is self-pay — no payer packet — but complete coding still drives her care plan and any claim she submits herself.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-09-orders" data-title="Orders">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/orders</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Orders</div>
+            <div class="b-enc-sub">Grace Lindqvist · MRN 2071 · encounter ENC-2026-07211</div>
+          </div>
+          <button class="btn" data-activate="b-08-assessment">Back to assessment</button>
+          <button class="btn btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
+        </div>
+
+        <p class="page-sub" style="margin-top:0">Every order for this encounter in one place — labs, IV protocols, prescriptions, supplements, referrals. Each is dispatched on sign and lock.</p>
+
+        <div class="filters">
+          <button class="filter-chip active">All (8)</button>
+          <button class="filter-chip">Labs (5)</button>
+          <button class="filter-chip">IV (2)</button>
+          <button class="filter-chip">Rx (1)</button>
+          <button class="filter-chip">Supplements (1)</button>
+          <button class="filter-chip">Referrals (0)</button>
+          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Order added to this encounter — it dispatches on sign and lock.', 'ok')">Add order</button>
+        </div>
+
+        <div class="seg-divider" style="margin-top:0">Lab orders <a class="btn btn-ghost btn-sm" style="margin-left:8px" href="labs.html">Open orders and results</a></div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Order</th><th>Details</th><th>Priority</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Comprehensive metabolic panel + CBC with differential</strong></td>
+                <td>Vibrant Labs · fasting · Dx R53.83</td>
+                <td><span class="pill pill-muted">Routine</span></td>
+              </tr>
+              <tr>
+                <td><strong>Thyroid panel — TSH, fT4, fT3, rT3, TPO, Tg Ab</strong></td>
+                <td>Vibrant Labs · Dx E06.3 · optimal-target reporting requested</td>
+                <td><span class="pill pill-muted">Routine</span></td>
+              </tr>
+              <tr>
+                <td><strong>Vitamin D, 25-OH — recheck</strong></td>
+                <td>Vibrant Labs · Dx E55.9 · recheck in 12 weeks</td>
+                <td><span class="pill pill-muted">Routine</span></td>
+              </tr>
+              <tr>
+                <td><strong>Ferritin + iron panel</strong></td>
+                <td>Vibrant Labs · Dx R53.83 · low-normal on last draw</td>
+                <td><span class="pill pill-muted">Routine</span></td>
+              </tr>
+              <tr>
+                <td><strong>Organic acids test (OAT)</strong></td>
+                <td>Mosaic Diagnostics · urine · 24-hour collection · $339</td>
+                <td><span class="pill pill-warn">Self-pay</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">IV protocols</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Protocol</th><th>Details</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>IV Myers' cocktail · series of 6 over 6 weeks</strong></td>
+                <td>B-complex, B12, calcium, magnesium, vitamin C 5 g · saline 100 mL · ~1 h</td>
+                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Edit protocol</a></td>
+              </tr>
+              <tr>
+                <td><strong>Glutathione push 2,000 mg · single trial dose</strong></td>
+                <td>Saline 30 mL · IV push · ~30 min · assess response before adding to the series</td>
+                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Edit protocol</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Prescriptions</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Prescription</th><th>Details</th><th>Type</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Levothyroxine 75 mcg PO daily</strong> · continue</td>
+                <td>90-day supply · 3 refills · recheck TSH in 8 weeks · transmits to the patient's pharmacy</td>
+                <td><span class="pill pill-muted">Refill</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Supplements · Fullscript</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Supplement</th><th>Details</th><th>Route</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Vitamin D3 5,000 IU + K2 100 mcg daily</strong></td>
+                <td>Pure Encapsulations · 90-day supply · recheck vitamin D in 12 weeks</td>
+                <td><span class="pill pill-muted">Fullscript</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Referrals</div>
+        <div class="empty-state">No referrals on this encounter.</div>
+
+        <div class="callout callout-ok" style="margin-top:14px">On sign and lock: labs route to the reference lab, IV orders queue to the infusion bay board, the prescription transmits to the patient's pharmacy, supplements push to Fullscript, and charges generate for billing. Sign once — everything moves. <a href="clinical.html#/b-11-sign-lock">Review sign and lock →</a></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-11-sign-lock" data-title="Sign and lock">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/sign</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Sign and lock encounter</div>
+            <div class="b-enc-sub">ENC-2026-07211 · Grace Lindqvist · follow-up · today, July 21, 2026</div>
+          </div>
+          <button class="btn btn-ghost" data-activate="b-03-soap">Back to note</button>
+        </div>
+
+        <p class="page-sub" style="margin-top:0">Final review before locking the encounter. Once signed, the note becomes part of the legal record — amendments require an addendum.</p>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card">
+              <div class="card-title">Completion summary</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <tbody>
+                    <tr><td>Chief complaint</td><td>Complete</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>HPI</td><td>Complete · 612 words</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Review of systems</td><td>14 systems documented</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Physical exam</td><td>Complete · follow-up template</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Assessment</td><td>Narrative + 4 ICD-10 diagnoses</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Plan</td><td>Complete</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Orders</td><td>8 queued · 5 labs · 2 IV · 1 Rx · 1 supplement</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Meds reconciled</td><td>1 change confirmed</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Allergies reviewed</td><td>Sulfa confirmed</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="seg-divider">Provider attestation</div>
+            <div class="callout">By signing this encounter I attest that I personally evaluated this patient today, July 21, 2026, that the documentation above accurately reflects the services provided, and that the diagnoses are supported by the documentation. — Dr. Drannikov, MD · NPI 1407646755</div>
+
+            <div class="seg-divider">Signature</div>
+            <div id="b-sign-before">
+              <div class="b-sig">
+                <div class="b-sig-hint">Signing applies your credentials and locks the encounter.</div>
+              </div>
+            </div>
+            <div id="b-sign-after" style="display:none">
+              <div class="b-sig signed">
+                <div class="b-sig-name">Andriy Drannikov, MD</div>
+                <div class="b-sig-meta">Signed Jul 21, 2026 · 11:52 AM PDT · token a8f2-3392-bc41</div>
+              </div>
+            </div>
+
+            <!-- Dispatch: before signing -->
+            <div id="b-dispatch-before">
+              <div class="seg-divider">On sign and lock, this encounter dispatches at once</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Lab orders transmit to the reference lab</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">IV protocols queue to the infusion bay board</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Prescription transmits to the patient's pharmacy</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Charges generate for billing</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Follow-up visits open in scheduling</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Patient portal notified · Open Notes compliant</span></li>
+              </ul>
+              <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+                <button class="btn btn-ghost" data-activate="b-03-soap">Back to note</button>
+                <button class="btn btn-lg btn-accent" data-open-modal="#b-sign-modal" style="margin-left:auto">Sign and lock encounter</button>
+              </div>
+            </div>
+
+            <!-- Dispatch: after signing -->
+            <div id="b-dispatch-after" style="display:none">
+              <div class="seg-divider">Dispatched · Jul 21, 2026 · 11:52 AM</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">5 lab orders transmitted to the reference lab</span><span class="check-meta"><a href="labs.html">Orders and results →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">2 IV protocols queued to the infusion bay board</span><span class="check-meta"><a href="clinical-infusion.html">Bay board →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Prescription transmitted to the patient's pharmacy</span><span class="check-meta"><a href="pharmacy.html">Pharmacy →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Charges generated for billing</span><span class="check-meta"><a href="billing.html">Billing →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Follow-up infusion series opened in scheduling</span><span class="check-meta"><a href="schedule.html">Schedule →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Patient portal notified · Open Notes compliant</span></li>
+              </ul>
+              <div class="callout callout-ok" style="margin-top:14px">Encounter locked. Everything downstream moved with one signature — the documentation ends here at the clinic, not in the weekend.</div>
+              <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+                <button class="btn btn-primary" data-activate="b-01-worklist">Back to worklist</button>
+                <a class="btn" href="clinical-chart.html">Add an addendum</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Compliance checks</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Time-based billing supported · 30 min documented</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">MDM level · moderate</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Suggested CPT · 99214</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Diagnosis codes match documentation</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">No conflicting allergies</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Provider NPI valid</span></li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Open Notes release</div>
+              <div class="field-help" style="margin-bottom:8px">The patient sees this note in the portal automatically under the 21st Century Cures Act. To delay release (rare), check below.</div>
+              <label style="display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)">
+                <input type="checkbox"> Hold from patient portal · requires a reason
+              </label>
+            </div>
+
+            <div class="card">
+              <div class="card-title">If something is wrong</div>
+              <div class="field-help">Once signed, edits require a formal addendum and the original note is preserved.</div>
+              <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html">View amendment flow</a>
             </div>
           </div>
         </div>
@@ -403,34 +770,56 @@
 
 </div>
 
-<!-- Sign-and-lock confirm modal — outside .screens -->
-<div class="modal-overlay" id="b-modal-sign">
+<!-- Sign and lock confirm modal (page-local, outside .screens) -->
+<div class="modal-overlay" id="b-sign-modal">
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div class="modal-title">Sign and lock this encounter</div>
-        <div class="modal-sub">Grace Lindqvist · Follow-up · Tuesday, July 21 · Dr. Drannikov</div>
+        <div class="modal-title">Sign and lock this encounter?</div>
+        <div class="modal-sub">Grace Lindqvist · follow-up · once locked, changes require an addendum</div>
       </div>
       <button class="modal-close" data-close-modal>×</button>
     </div>
     <div class="modal-body">
-      <p style="font-size:13px;margin:0 0 12px">Signing locks the note and sends five dispatches at once:</p>
+      <div style="font-size:13px;margin-bottom:10px">Signing dispatches the whole encounter at once:</div>
       <ul class="check-list">
-        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Lab order</div><div class="check-meta">Diagnostics (C)</div></li>
-        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Infusion order</div><div class="check-meta">Infusion bay</div></li>
-        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Superbill</div><div class="check-meta">Billing (D)</div></li>
-        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Supplement plan</div><div class="check-meta">Pharmacy (H)</div></li>
-        <li class="check-item"><span class="check-icon active">→</span><div class="check-label">Follow-up booking</div><div class="check-meta">Scheduling (L)</div></li>
+        <li class="check-item"><span class="check-icon active">1</span><span class="check-label">5 lab orders → reference lab</span></li>
+        <li class="check-item"><span class="check-icon active">2</span><span class="check-label">2 IV protocols → infusion bay board</span></li>
+        <li class="check-item"><span class="check-icon active">3</span><span class="check-label">1 prescription → patient's pharmacy</span></li>
+        <li class="check-item"><span class="check-icon active">4</span><span class="check-label">Charges → billing</span></li>
+        <li class="check-item"><span class="check-icon active">5</span><span class="check-label">Follow-up series → scheduling</span></li>
       </ul>
-      <div class="callout" style="margin:12px 0 0">After signing, changes go in as an addendum — the original note stays locked for the audit trail.</div>
     </div>
     <div class="modal-foot">
-      <button class="btn" data-close-modal>Keep editing</button>
-      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Encounter signed and locked — five dispatches sent at once.', 'ok')">Sign and lock</button>
+      <button class="btn btn-ghost" data-close-modal>Keep editing</button>
+      <button class="btn btn-accent" data-close-modal onclick="bSignLock()">Sign and lock</button>
     </div>
   </div>
 </div>
 
-<script src="assets/hcos.js?v=3"></script>
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+
+  // Demo only: sign and lock swaps the encounter into its dispatched after-state.
+  function bSignLock() {
+    var before = document.getElementById('b-sign-before');
+    var after = document.getElementById('b-sign-after');
+    var dbefore = document.getElementById('b-dispatch-before');
+    var dafter = document.getElementById('b-dispatch-after');
+    if (before) before.style.display = 'none';
+    if (after) after.style.display = 'block';
+    if (dbefore) dbefore.style.display = 'none';
+    if (dafter) dafter.style.display = 'block';
+    if (window.HCOS && HCOS.toast) HCOS.toast('Encounter signed and locked — labs, infusion bay, pharmacy, billing, and scheduling all dispatched.', 'ok');
+  }
+</script>
 </body>
 </html>

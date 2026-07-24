@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Pre-visit · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .a-prow { display: flex; align-items: center; gap: 10px; }
+  .a-pname { font-weight: 600; color: var(--hx-navy); }
+  .a-dim { color: var(--muted); }
+  .a-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .a-header-info { flex: 1; min-width: 220px; }
+  .a-lead-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .a-lead-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .a-flag-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; color: var(--ink); }
+  .a-flag-kicker.review { color: var(--muted); }
+  .a-quote { font-size: 13px; line-height: 1.6; }
+  .a-list { font-size: 12.5px; line-height: 1.8; }
+  .check-label .check-meta { display: block; margin-top: 2px; }
+</style>
+</head>
+<body data-page="intake-previsit" data-page-title="Intake · Pre-visit" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-39-previsit-queue" data-title="Pre-visit queue">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/pre-visit</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Pre-visit queue</h2>
+        <p class="page-sub">Wednesday, July 22 · Charlene and Wesley pre-populate each chart before the provider enters the room</p>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Reviewed</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Review now</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Not started</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">With clinical flags</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <input class="search-input" type="search" placeholder="Search tomorrow's patients by name or visit type">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip">Reviewed</button>
+          <button class="filter-chip">Review now</button>
+          <button class="filter-chip">Not started</button>
+          <button class="filter-chip">With clinical flags</button>
+        </div>
+
+        <div class="field-help" style="margin:0 0 8px">7 patients scheduled for Wednesday · answers arrive from intake — nothing is re-keyed</div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Visit type</th>
+                <th>Chart review</th>
+                <th>Flags</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>8:00 AM</td>
+                <td><div class="a-prow"><span class="avatar">MW</span><span class="a-pname">Marcus Webb</span></div></td>
+                <td>New patient consult · 90m</td>
+                <td><span class="pill pill-warn">Review now</span></td>
+                <td><span class="a-dim">—</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>9:00 AM</td>
+                <td><div class="a-prow"><span class="avatar">GL</span><span class="a-pname">Grace Lindqvist</span></div></td>
+                <td>Follow-up · 30m</td>
+                <td><span class="pill pill-ok">Reviewed</span></td>
+                <td><span class="a-dim">—</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>10:00 AM</td>
+                <td><div class="a-prow"><span class="avatar">DO</span><span class="a-pname">Daniel Okafor</span></div></td>
+                <td>IV vitamin C 25 g · ~2.5h</td>
+                <td><span class="pill pill-ok">Reviewed</span></td>
+                <td><span class="a-dim">—</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>10:30 AM</td>
+                <td><div class="a-prow"><span class="avatar">NB</span><span class="a-pname">Nadia Boulos</span></div></td>
+                <td>Follow-up · 30m</td>
+                <td><span class="pill pill-muted">Not started</span></td>
+                <td><button class="btn btn-sm" data-activate="a-41-flag-provider">1 flag</button></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>11:30 AM</td>
+                <td><div class="a-prow"><span class="avatar">PN</span><span class="a-pname">Priya Natarajan</span></div></td>
+                <td>Myers' cocktail + glutathione push · ~1h</td>
+                <td><span class="pill pill-ok">Reviewed</span></td>
+                <td><button class="btn btn-sm" data-activate="a-41-flag-provider">2 flags</button></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>1:00 PM</td>
+                <td><div class="a-prow"><span class="avatar">MR</span><span class="a-pname">Maya Reyes</span></div></td>
+                <td>NAD+ infusion · ~3h</td>
+                <td><span class="pill pill-warn">Review now</span></td>
+                <td><span class="a-dim">—</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-40-previsit-chart">
+                <td>2:00 PM</td>
+                <td><div class="a-prow"><span class="avatar">TA</span><span class="a-pname">Tom Alvarez</span></div></td>
+                <td>New patient · glutathione push · 30m</td>
+                <td><span class="pill pill-muted">Not started</span></td>
+                <td><span class="a-dim">—</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-40-previsit-chart">Open chart</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px">Every answer here flowed straight from the patient's intake questionnaires — Charlene no longer re-types anything into the chart by hand.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-40-previsit-chart" data-title="Pre-visit chart">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/pre-visit/marcus-webb</span></div>
+      <div class="frame-body">
+
+        <div class="a-header-row">
+          <span class="avatar lg">MW</span>
+          <div class="a-header-info">
+            <div class="a-lead-name">Marcus Webb · 55M</div>
+            <div class="a-lead-demo">New patient · Wed Jul 22 · 8:00 AM with Dr. Drannikov · Anthem Blue Cross <span class="net-badge net-inn">INN</span></div>
+          </div>
+          <button class="btn btn-sm" data-activate="a-41-flag-provider">Flag for provider</button>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Intake answers pushed to the progress note — nothing was re-keyed.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html'; }, 900)">Push to progress note</button>
+        </div>
+
+        <div class="callout callout-ok">Everything below was filed by Marcus at intake — reviewed here, not re-entered. Confirm it reads right, then push it into the progress note for Dr. Drannikov.</div>
+
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <div class="seg-divider" style="margin-top:0">Reason for visit — from intake</div>
+              <div class="a-quote">"Chronic fatigue and brain fog for about 18 months. Standard labs came back normal. Wants a functional approach."</div>
+              <div class="field-help" style="margin-top:8px">Severity now: <strong>7 of 10</strong></div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="seg-divider" style="margin-top:0">Current conditions reported</div>
+              <div class="a-list">
+                Chronic fatigue<br>
+                Brain fog<br>
+                Sleep disturbance <span class="a-dim">(newly added at intake)</span>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="seg-divider" style="margin-top:0">Medications — from intake</div>
+              <div class="a-list">Levothyroxine 50 mcg · 1× daily <span class="a-dim">(since 2021)</span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="seg-divider" style="margin-top:0">Allergies</div>
+              <div class="a-quote"><span class="pill pill-err">Severe</span> <strong>Penicillin</strong> — rash, swelling</div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="seg-divider" style="margin-top:0">Eligibility and coverage</div>
+              <div class="a-list">
+                <span class="pill pill-ok">Active</span> Anthem Blue Cross PPO <span class="net-badge net-inn">INN</span>
+                <div style="margin-top:6px">Deductible $1,200 met of $2,500 · out-of-pocket $3,400 met of $7,500</div>
+              </div>
+              <a class="btn btn-ghost btn-sm" style="margin-top:10px" href="patients.html">Open full patient record</a>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="seg-divider" style="margin-top:0">What I'd like Dr. Drannikov to see first</div>
+              <textarea class="field-textarea" rows="4">Patient suspects a functional cause. Worth a thyroid panel, cortisol curve, and heavy-metals screen. Consider B12 / folate methylation labs given the brain-fog pattern.</textarea>
+              <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="HCOS.toast('Note saved — it opens with the chart for Dr. Drannikov.', 'ok')">Save note for provider</button>
+                <button class="btn btn-ghost btn-sm" data-activate="a-41-flag-provider">Flag items for provider</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-41-flag-provider" data-title="Flag for provider">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/pre-visit/priya-natarajan/flag</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Flag items for Dr. Drannikov</h2>
+        <p class="page-sub">Priya Natarajan · 38F · Wed Jul 22 · 11:30 AM · Myers' cocktail + glutathione push — what should the provider see before the room?</p>
+
+        <div class="grid-2">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Available signals</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon active">!</span>
+                <span class="check-label"><strong>Drug interaction flagged</strong><span class="check-meta">Existing methylprednisolone + planned glutathione push</span></span>
+                <button class="btn btn-sm" data-flag-btn>Flag</button>
+              </li>
+              <li class="check-item">
+                <span class="check-icon active">!</span>
+                <span class="check-label"><strong>Abnormal lab — recent</strong><span class="check-meta">CRP 8.4 mg/L · 5 days ago · trending up from 3.1</span></span>
+                <button class="btn btn-sm" data-flag-btn>Flag</button>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Allergy: sulfa drugs <span class="a-dim">(moderate)</span></span>
+                <button class="btn btn-sm" data-flag-btn>Flag</button>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Pregnancy status not documented <span class="a-dim">(not asked at intake)</span></span>
+                <button class="btn btn-sm" data-flag-btn>Flag</button>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">New symptom since last visit: heart palpitations</span>
+                <button class="btn btn-sm" data-flag-btn>Flag</button>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="seg-divider" style="margin-top:0">Currently flagged (2)</div>
+
+            <div class="callout callout-err" style="margin-top:0">
+              <div class="a-flag-kicker">Urgent — review before orders</div>
+              <div style="font-weight:600;margin:6px 0 4px">Drug interaction</div>
+              <div style="font-size:12px;color:var(--muted)">Methylprednisolone + glutathione push — confirm the order plan</div>
+            </div>
+
+            <div class="callout callout-warn" style="margin-top:10px">
+              <div class="a-flag-kicker review">Review</div>
+              <div style="font-weight:600;margin:6px 0 4px">Recent abnormal CRP</div>
+              <div style="font-size:12px;color:var(--muted)">8.4 mg/L · 5 days ago · trending up from 3.1</div>
+            </div>
+
+            <div class="callout" style="margin-top:14px">Flagged items sit at the top of Dr. Drannikov's chart, marked urgent or review, and trigger a notification the moment she opens the encounter.</div>
+
+            <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="HCOS.toast('Flags sent — they are at the top of the provider worklist.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html'; }, 900)">Send flags to provider</button>
+              <button class="btn btn-ghost" data-activate="a-39-previsit-queue">Back to queue</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle active state; Flag buttons confirm they were added.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (chip && chip.parentElement) {
+      var chips = chip.parentElement.querySelectorAll('.filter-chip');
+      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+      chip.classList.add('active');
+    }
+    var fb = ev.target.closest ? ev.target.closest('[data-flag-btn]') : null;
+    if (fb && fb.textContent !== 'Flagged') {
+      fb.textContent = 'Flagged';
+      fb.classList.add('btn-navy');
+      if (window.HCOS) HCOS.toast('Added to the flags for Dr. Drannikov.', 'ok');
+    }
+  });
+</script>
+</body>
+</html>

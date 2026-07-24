@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation · Remote MA · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .b-encbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:10px 14px; background:var(--hx-band); border:1px solid var(--line); border-radius:10px; margin-bottom:16px; }
+  .b-encbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
+  .b-dot { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .b-dotphrase { font-family:ui-monospace, monospace; font-size:11px; }
+  .b-workup { font-size:12.5px; line-height:1.95; color:var(--ink); }
+  .b-workup span { color:var(--muted); margin-right:6px; }
+  .b-timesaved { font-size:22px; font-weight:600; color:var(--ink); margin:6px 0; }
+  .b-tasktitle { font-weight:600; color:var(--hx-navy); }
+  .b-taskmeta { font-size:11px; color:var(--muted); margin-top:2px; line-height:1.5; }
+  .b-mrn { font-size:11px; color:var(--muted); }
+</style>
+</head>
+<body data-page="clinical-remote" data-page-title="Documentation · Remote MA" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-18-precharting-queue" data-title="Pre-charting queue">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/precharting/queue</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Pre-charting queue</h2>
+        <p class="page-sub">Tuesday, July 21 · today's and tomorrow's charts scrubbed before the provider walks in — no more "did you look at the intake?"</p>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card">
+            <div class="stat-num">7</div>
+            <div class="stat-lbl">Pending pre-chart</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">12</div>
+            <div class="stat-lbl">Pre-charted today</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Awaiting intake</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">1</div>
+            <div class="stat-lbl">Flagged for provider</div>
+          </div>
+        </div>
+
+        <div class="callout">Questionnaire answers already flow into every chart automatically — the MA reviews and scrubs, never re-keys. <a href="clinical-questionnaires.html">See where answers come from</a>.</div>
+
+        <div class="filters" style="margin-top:14px">
+          <input class="search-input" type="search" placeholder="Search by patient name or reason">
+          <button class="filter-chip active">Pending (7)</button>
+          <button class="filter-chip">Today only</button>
+          <button class="filter-chip">Tomorrow only</button>
+          <button class="filter-chip">Flagged (1)</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Appointment</th>
+                <th>Patient</th>
+                <th>Visit type</th>
+                <th>Intake</th>
+                <th>Pre-chart status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td><strong>Today · 1:30 PM</strong></td>
+                <td>Marcus Webb <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill">New patient consult</span></td>
+                <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-warn">Not started</span></td>
+                <td><button class="btn btn-primary btn-sm" data-activate="b-19-precharting">Start pre-chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td>Today · 2:00 PM</td>
+                <td>Daniel Okafor <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill pill-muted">Follow-up</span></td>
+                <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-warn">Awaiting MA</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start</button></td>
+              </tr>
+              <tr>
+                <td>Today · 3:00 PM</td>
+                <td>Tom Alvarez <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill">New patient consult</span></td>
+                <td><span class="pill pill-warn">80% · SPD / EOC missing</span></td>
+                <td><span class="pill pill-muted">Waiting on intake</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Reminder sent — Tom Alvarez gets the link to finish intake and upload his SPD / EOC.', 'ok')">Send reminder</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td>Tmrw · 9:00 AM</td>
+                <td>Grace Lindqvist <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill pill-muted">Follow-up</span></td>
+                <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-muted">Scheduled for tomorrow</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td>Tmrw · 10:30 AM</td>
+                <td>Priya Natarajan <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill pill-muted">Follow-up</span></td>
+                <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-err">Flagged for provider review</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">View flag</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td>Tmrw · 2:00 PM</td>
+                <td>Elena Petrova <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill pill-muted">Telehealth follow-up</span></td>
+                <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-muted">Pending</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-19-precharting" data-title="Pre-charting">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/precharting/marcus-webb</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Pre-charting — Marcus Webb</h2>
+        <p class="page-sub">New patient consult · Today · 1:30 PM · Dr. Drannikov · functional medicine intake</p>
+
+        <div class="b-encbar">
+          <div><span class="pill pill-warn">Pre-charting</span> Auto-saved 4 seconds ago · provider opens the encounter at 1:30 PM</div>
+          <div class="b-encbar-actions">
+            <button class="btn btn-sm" onclick="HCOS.toast('Flagged for Dr. Drannikov — the B12 workup note is pinned to the encounter.', 'warn')">Flag for provider</button>
+            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Released to Dr. Drannikov — your summary is waiting in his SOAP note. Nothing is signed.', 'ok'); setTimeout(function(){ window.location.href='clinical.html'; }, 1000)">Finish and release to provider</button>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Intake summary — filed from the patient questionnaire</div>
+            <div class="callout"><strong>Patient reports:</strong> "I've been vegetarian for 20 years, mostly active, but for the last 18 months I've felt increasingly fatigued. My PCP ran basic labs that came back 'normal' but I'm still exhausted. I want to find the root cause, not just take another supplement."</div>
+            <div class="field-help" style="margin-top:6px">These answers came straight from the questionnaire — nothing was re-typed. <a href="clinical-questionnaires.html">Open the full questionnaire</a>.</div>
+
+            <div class="seg-divider">HPI draft — assembled from the questionnaire, MA reviews</div>
+            <textarea class="field-textarea" rows="7">55 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
+            <div class="b-dot">
+              <span class="pill pill-muted b-dotphrase">.veganhx</span>
+              <span class="pill pill-muted b-dotphrase">.macrocytosis</span>
+              <span class="pill pill-muted b-dotphrase">.fatigueworkup</span>
+            </div>
+            <div class="field-help" style="margin-top:6px">Dot-phrases pull in shared macros — the same library the provider uses. <a href="clinical-templates.html">Manage dot-phrases</a>.</div>
+
+            <div class="seg-divider">Suggested workup for provider review</div>
+            <div class="b-workup">
+              <div><span>▸</span>Vitamin B12 — active B12 / holoTC if available</div>
+              <div><span>▸</span>Methylmalonic acid (MMA)</div>
+              <div><span>▸</span>Homocysteine</div>
+              <div><span>▸</span>MTHFR polymorphism (C677T, A1298C)</div>
+              <div><span>▸</span>Ferritin with % saturation, TIBC</div>
+              <div><span>▸</span>TSH + fT4 + fT3 + TPO / Tg antibodies</div>
+              <div><span>▸</span>DEXA scan referral — long-term vegetarian</div>
+            </div>
+            <div class="field-help" style="margin-top:6px">Suggestions only — nothing is ordered until the provider signs. <a href="labs.html">Labs and orders</a>.</div>
+
+            <div class="seg-divider">Outside records uploaded</div>
+            <div class="card" style="margin-bottom:0">
+              <div style="font-size:12.5px"><strong>CBC · Nov 12, 2025 — outside lab</strong></div>
+              <div class="field-help" style="margin-top:2px">PDF · 2 pages · uploaded by patient · macrocytosis flagged · MA reviewed</div>
+              <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="HCOS.toast('Opening the outside CBC — 2 pages.')">View PDF</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Outside CBC pushed to Marcus Webb\'s chart — the provider sees it in results.', 'ok')">Push to chart</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Flags for provider</div>
+              <div class="b-workup">
+                <div><span>▸</span>Mild macrocytosis (MCV 102) on outside CBC</div>
+                <div><span>▸</span>Vegetarian 20+ years · B12 status not assessed</div>
+                <div><span>▸</span>Family history of pernicious anemia (mother)</div>
+                <div><span>▸</span>Suggest B12 workup as priority</div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Provider time saved</div>
+              <div class="b-timesaved">~12 min</div>
+              <div class="field-help" style="margin:0">Estimated review time this pre-chart saves Dr. Drannikov. Tracked across the team.</div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Hand-off</div>
+              <div style="font-size:12.5px;color:var(--muted);line-height:1.6">When you finish, your summary lands inside the encounter's SOAP note, ready for the provider to edit and confirm. Nothing is auto-signed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-20-postvisit" data-title="Post-visit tasks">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/postvisit/tasks</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Post-visit tasks</h2>
+        <p class="page-sub">Tasks generated the moment the provider signs land here to close out — replacing the sticky notes and the "did anyone send those results?" thread</p>
+
+        <div class="filters">
+          <button class="filter-chip active">All open (14)</button>
+          <button class="filter-chip">Lab results to route (4)</button>
+          <button class="filter-chip">Patient messages (3)</button>
+          <button class="filter-chip">Referrals to send (2)</button>
+          <button class="filter-chip">Refills (3)</button>
+          <button class="filter-chip">Documents to upload (2)</button>
+        </div>
+
+        <div class="seg-divider" style="margin-top:0">Today's worklist</div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Patient</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-tasktitle">Route abnormal lab to provider</div>
+                  <div class="b-taskmeta">CMP shows K+ 5.4 · flagged · provider review before any patient message · from Vibrant Labs</div>
+                </td>
+                <td>Nadia Boulos <span class="net-badge net-inn">INN</span></td>
+                <td>Lab result</td>
+                <td><span class="pill pill-err">Urgent</span></td>
+                <td><a class="btn btn-primary btn-sm" href="labs.html">Open</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-tasktitle">Message patient with normal results</div>
+                  <div class="b-taskmeta">Lyme PCR negative + immune panel normal · template "Routine — reassuring" · provider approved</div>
+                </td>
+                <td>Daniel Okafor <span class="net-badge net-inn">INN</span></td>
+                <td>Patient message</td>
+                <td><span class="pill pill-warn">Today</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Results message sent to Daniel Okafor — Routine – reassuring template.', 'ok')">Send</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-tasktitle">Fax referral to cardiology</div>
+                  <div class="b-taskmeta">POTS workup · Dr. Kapoor, UCI · cover letter pre-filled · outbound fax</div>
+                </td>
+                <td>Maya Reyes <span class="net-badge net-oon">OON</span></td>
+                <td>Referral</td>
+                <td><span class="pill pill-warn">Today</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Referral faxed to Dr. Kapoor at UCI — a copy is filed in Maya Reyes\'s chart.', 'ok')">Send fax</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-tasktitle">Refill — levothyroxine 75 mcg</div>
+                  <div class="b-taskmeta">Signed by provider · transmit to CVS Irvine #4421 · standard</div>
+                </td>
+                <td>Grace Lindqvist <span class="net-badge net-self">SELF</span></td>
+                <td>Refill</td>
+                <td><span class="pill pill-muted">Today</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Levothyroxine 75 mcg transmitted to CVS Irvine #4421 via Surescripts.', 'ok')">Transmit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-tasktitle">Upload outside MRI report</div>
+                  <div class="b-taskmeta">Patient delivered a disc · OCR and attach to the chart</div>
+                </td>
+                <td>Tom Alvarez <span class="net-badge net-oon">OON</span></td>
+                <td>Document</td>
+                <td><span class="pill pill-muted">This week</span></td>
+                <td><a class="btn btn-sm" href="intake-documents.html">Upload</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-tasktitle">Schedule follow-up</div>
+                  <div class="b-taskmeta">Myers' cocktail session 4 · per provider plan · ideally next week</div>
+                </td>
+                <td>Priya Natarajan <span class="net-badge net-oon">OON</span></td>
+                <td>Scheduling</td>
+                <td><span class="pill pill-muted">This week</span></td>
+                <td><a class="btn btn-sm" href="schedule.html">Schedule</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px">Every task is auto-generated from the provider's signed note. Recurring tasks — weekly Myers' follow-ups, monthly thyroid rechecks — are templated in <a href="reporting.html">Reports and admin</a>.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+</script>
+</body>
+</html>

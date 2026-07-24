@@ -172,6 +172,26 @@ button { font-family: inherit; }
   white-space: nowrap;
 }
 
+/* Second-level module tabs (Intake, Documentation) — real-app section nav */
+.subnav {
+  display: flex;
+  gap: 2px;
+  padding: 0 28px;
+  background: #fff;
+  border-bottom: 1px solid var(--line-soft);
+  overflow-x: auto;
+}
+.subnav-tab {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+.subnav-tab:hover { color: var(--ink); }
+.subnav-tab.active { color: var(--ink); font-weight: 600; border-bottom-color: var(--ink); }
+
 /* Screen chips — the per-page screen navigation */
 .screen-chips {
   display: flex;

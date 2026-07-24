@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Documents · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .ad-eyebrow { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .ad-h { font-size: 18px; font-weight: 600; color: var(--hx-navy); margin: 4px 0 14px; }
+  .ad-sub { font-size: 12.5px; color: var(--muted); line-height: 1.6; margin: -8px 0 14px; }
+  .ad-card-mock {
+    background: var(--hx-blue); color: #fff;
+    border-radius: 8px; padding: 12px 14px;
+    font-size: 10px; margin-bottom: 8px;
+  }
+  .ad-mock-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .ad-mock-lbl { opacity: 0.65; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .ad-mock-big { font-size: 13px; font-weight: 600; }
+  .ad-captured { font-size: 11px; font-weight: 600; color: var(--ink); margin-bottom: 14px; }
+  .ad-upload {
+    border: 1.5px dashed var(--line); border-radius: 8px;
+    padding: 18px 14px; text-align: center;
+    font-size: 12px; color: var(--muted); cursor: pointer;
+  }
+  .ad-upload:hover { border-color: var(--ink); color: var(--ink); }
+  .ad-upload-ic {
+    width: 30px; margin: 0 auto 6px;
+    font-size: 13px; font-weight: 600; color: var(--hx-blue);
+    background: var(--hx-light); border-radius: 4px; padding: 3px 0;
+  }
+  .ad-upload-note { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .ad-steps { font-size: 12px; color: var(--muted); line-height: 1.8; }
+  .ad-center { text-align: center; }
+  .ad-done-circle {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--ink); color: #fff; font-size: 26px;
+    margin: 0 auto 14px; display: flex; align-items: center; justify-content: center;
+  }
+  .ad-pause-circle {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: var(--hx-light);
+    margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .ad-pbar { width: 5px; height: 18px; background: var(--ink); border-radius: 2px; }
+  .ad-appt-card {
+    background: var(--hx-band); border: 1px solid var(--line-soft);
+    border-radius: 8px; padding: 14px; margin-bottom: 4px;
+  }
+  .ad-map {
+    height: 100px; background: var(--hx-light); border-radius: 6px;
+    margin: 10px 0 4px; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--muted);
+  }
+  .ad-chip-pair { display: flex; gap: 6px; }
+  .ad-chip-pair .filter-chip { flex: 1; text-align: center; justify-content: center; }
+  .ad-list { font-size: 12.5px; line-height: 1.7; }
+</style>
+</head>
+<body data-page="intake-documents" data-page-title="Intake · Documents" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-23-id-ocr" data-title="ID upload">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:04</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ad-eyebrow">Step 5 of 8</div>
+        <div class="ad-h">Upload your ID</div>
+
+        <div class="seg-divider" style="margin-top:0">Front of ID</div>
+        <div class="ad-card-mock">
+          <div class="ad-mock-row"><span>California</span><span>Driver license</span></div>
+          <div class="ad-mock-big" style="margin:16px 0 6px">ALVAREZ, TOM</div>
+          <div>DL D8742219 · EXP 02/09/2028</div>
+        </div>
+        <div class="ad-captured">✓ Captured — reads clearly</div>
+
+        <div class="seg-divider">Back of ID</div>
+        <div class="ad-upload" onclick="HCOS.toast('Back of ID captured.', 'ok')">
+          <div class="ad-upload-ic">↑</div>
+          Tap to capture the back of your ID
+        </div>
+
+        <div class="seg-divider">Confirm what we read</div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Name</label>
+            <input class="field-input" type="text" value="Tom Alvarez">
+          </div>
+          <div class="field">
+            <label class="field-label">Date of birth</label>
+            <input class="field-input" type="text" value="02/09/1965">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">License number</label>
+            <input class="field-input" type="text" value="D8742219">
+          </div>
+          <div class="field">
+            <label class="field-label">Expires</label>
+            <input class="field-input" type="text" value="02/09/2028">
+          </div>
+        </div>
+        <div class="field-help">Read from the photo — fix anything that looks wrong.</div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:14px" data-activate="a-24-insurance-ocr">Confirm and continue</button>
+        <button class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px" data-activate="a-28-save-resume">Save and finish later</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-24-insurance-ocr" data-title="Insurance card">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:07</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ad-eyebrow">Step 6 of 8</div>
+        <div class="ad-h">Insurance card</div>
+
+        <div class="seg-divider" style="margin-top:0">Front of card</div>
+        <div class="ad-card-mock">
+          <div class="ad-mock-row"><span class="ad-mock-big">Cigna</span><span>PPO</span></div>
+          <div class="ad-mock-lbl" style="margin-top:14px">Member</div>
+          <div class="ad-mock-big" style="margin-bottom:8px">TOM ALVAREZ</div>
+          <div class="ad-mock-row">
+            <span><span class="ad-mock-lbl">ID</span><br><strong>U8834-2210-7</strong></span>
+            <span><span class="ad-mock-lbl">Group</span><br><strong>77103-B</strong></span>
+          </div>
+        </div>
+        <div class="ad-captured">✓ Captured · 99% confidence</div>
+
+        <div class="seg-divider">Back of card</div>
+        <div class="ad-captured" style="margin-bottom:10px">✓ Captured</div>
+
+        <div class="seg-divider">Confirm what we read</div>
+        <div class="field">
+          <label class="field-label">Payer</label>
+          <input class="field-input" type="text" value="Cigna PPO">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Member ID</label>
+            <input class="field-input" type="text" value="U8834-2210-7">
+          </div>
+          <div class="field">
+            <label class="field-label">Group number</label>
+            <input class="field-input" type="text" value="77103-B">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">RxBIN</label>
+            <input class="field-input" type="text" value="555321">
+          </div>
+          <div class="field">
+            <label class="field-label">PCN</label>
+            <input class="field-input" type="text" value="H4">
+          </div>
+        </div>
+        <div class="field-help">Filled in from your card — fix anything that looks off.</div>
+
+        <div class="callout callout-ok" style="margin-top:12px;font-size:11.5px">
+          We checked your benefits — coverage is <strong>active</strong>, out-of-network <span class="net-badge net-oon">OON</span> with our clinic. You will see a cost estimate before any service.
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:10px" data-activate="a-25-spd-upload">Confirm and continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-25-spd-upload" data-title="Plan document">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:10</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ad-eyebrow">Step 7 of 8 · out-of-network plans</div>
+        <div class="ad-h">Your plan document</div>
+
+        <div class="ad-sub" style="margin-top:0">
+          Helixona is out-of-network with your Cigna PPO. Your plan's governing document — the <strong>Summary Plan Description (SPD)</strong> or <strong>Evidence of Coverage (EOC)</strong> — tells us exactly how your plan handles claims, so we can stand up for your benefits before your visit. It is usually 50–150 pages, and you can download it from your member portal.
+        </div>
+
+        <div class="seg-divider">How to find it</div>
+        <div class="ad-steps">
+          1. Sign in to your insurance member portal<br>
+          2. Look for "Plan documents" or "Benefit booklet"<br>
+          3. Download the PDF<br>
+          4. Upload it here
+        </div>
+
+        <div class="ad-upload" style="margin:16px 0" onclick="HCOS.toast('Plan document received — billing reads it before your visit.', 'ok')">
+          <div class="ad-upload-ic">↑</div>
+          Tap to upload your SPD or EOC
+          <div class="ad-upload-note">PDF · up to 30 MB</div>
+        </div>
+
+        <button class="btn" style="width:100%;margin-bottom:8px" onclick="HCOS.toast('Instructions texted — where to find the document in the Cigna member portal.', 'ok')">Can't find it — text me instructions</button>
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:6px" data-activate="a-26-pharmacy-prefs">Continue</button>
+        <button class="btn btn-ghost" style="width:100%;font-size:12px" data-activate="a-26-pharmacy-prefs">Skip for now</button>
+        <div class="field-help" style="margin-top:6px">Skipping is fine — your link lets you add it later, and we will remind you before your visit.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-26-pharmacy-prefs" data-title="Pharmacy">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:13</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ad-eyebrow">Step 8 of 8</div>
+        <div class="ad-h">Preferred pharmacy</div>
+        <div class="ad-sub">Where would you like new prescriptions sent?</div>
+
+        <div class="seg-divider" style="margin-top:0">Pharmacy on file</div>
+        <div class="card" style="padding:12px 14px;margin-bottom:8px;font-size:12.5px">
+          <strong>CVS Pharmacy #4421</strong>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:2px">5421 Walnut Ave, Irvine, CA 92604</div>
+          <div style="font-size:11.5px;color:var(--muted)">(949) 555-2103</div>
+        </div>
+        <button class="btn btn-sm" style="margin-bottom:14px" onclick="HCOS.toast('Pharmacy search opens — pick any pharmacy by name, city, or zip.')">Change pharmacy</button>
+
+        <div class="seg-divider">Electronic prescribing</div>
+        <div class="callout" style="margin-bottom:8px;font-size:11.5px">
+          E-prescribing through Surescripts lets your provider send prescriptions straight to your pharmacy — no paper, no phone calls, faster pickup.
+        </div>
+        <div class="ad-chip-pair" style="margin-bottom:14px">
+          <button class="filter-chip active">Yes, link my pharmacy</button>
+          <button class="filter-chip">No thanks</button>
+        </div>
+
+        <div class="seg-divider">Mail-order pharmacy (optional)</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">
+          If your plan has a mail-order option for maintenance medications, add it here.
+        </div>
+        <div class="field">
+          <input class="field-input" type="text" placeholder="Mail-order pharmacy name (optional)">
+        </div>
+        <div class="field-help">Supplements are separate — they come later with your care plan, not through your pharmacy.</div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:10px" data-activate="a-27-previsit-confirm" onclick="HCOS.toast('Pharmacy saved — new prescriptions go to CVS Pharmacy #4421.', 'ok')">Save pharmacy and continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-27-previsit-confirm" data-title="You're all set">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:15</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ad-center" style="padding:18px 0 20px">
+          <div class="ad-done-circle">✓</div>
+          <div style="font-size:20px;font-weight:600;color:var(--hx-navy)">You're all set, Tom</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">See you today at 3:00 PM</div>
+        </div>
+
+        <div class="ad-appt-card">
+          <div class="ad-eyebrow">Your appointment</div>
+          <div style="font-size:16px;font-weight:600;color:var(--hx-navy);margin:6px 0">Today, Tue Jul 21 · 3:00 PM</div>
+          <div style="font-size:12.5px">New patient consult · 90 min<br>Dr. Drannikov</div>
+        </div>
+
+        <div class="seg-divider">Where</div>
+        <div style="font-size:12.5px">Helixona, Inc.<br>114 Pacifica, Suite 130<br>Irvine, CA 92618</div>
+        <div class="ad-map">Map — 114 Pacifica, Suite 130</div>
+
+        <div class="seg-divider">What to bring</div>
+        <div class="ad-list">
+          • A photo ID — yours is on file ✓<br>
+          • Any labs from the last 12 months<br>
+          • A list of supplements you take today
+        </div>
+
+        <div class="seg-divider">What happens next</div>
+        <div class="ad-list">
+          • Arrive 10 minutes early — the front desk already has everything you sent<br>
+          • Your consult with Dr. Drannikov is 90 minutes — bring your questions<br>
+          • You leave with a plan, and your today view walks you through it
+        </div>
+
+        <div class="callout callout-warn" style="margin-top:14px;font-size:11.5px">
+          Still needed: your plan document (SPD or EOC). You can upload it any time from this link.
+          <div style="margin-top:8px"><button class="btn btn-sm" data-activate="a-25-spd-upload">Upload plan document</button></div>
+        </div>
+
+        <button class="btn" style="width:100%;margin-top:14px" onclick="HCOS.toast('Added to your calendar — Tuesday, July 21 · 3:00 PM.', 'ok')">Add to calendar</button>
+        <a class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px;box-sizing:border-box;text-align:center" href="schedule.html#/l-01-day">Need a different time? Reschedule</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-28-save-resume" data-title="Save and resume">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>9:12</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ad-center" style="padding:26px 0 20px">
+          <div class="ad-pause-circle"><span class="ad-pbar"></span><span class="ad-pbar"></span></div>
+          <div style="font-size:18px;font-weight:600;color:var(--hx-navy)">Saved for later</div>
+          <div style="font-size:12.5px;color:var(--muted);margin:8px auto 0;max-width:280px">
+            Everything you've entered is saved. The link we texted returns you to this exact step — any device, any time before your visit.
+          </div>
+        </div>
+
+        <div class="sms-bubble" style="margin-bottom:14px">Helixona: your intake is saved at step 5 of 8. Pick up where you left off — hcos.helixona.com/i/t4x9m. The same link works on any device.</div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="seg-divider" style="margin-top:0">Your progress</div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Demographics</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Medical history</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Reason for visit</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Consents</span><span class="check-meta">HIPAA + treatment</span></li>
+            <li class="check-item"><span class="check-icon active">›</span><span class="check-label">ID upload</span><span class="check-meta">you are here</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Insurance card</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan document</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Pharmacy</span></li>
+          </ul>
+        </div>
+
+        <div class="callout callout-ok" style="font-size:11.5px">
+          No rush — we'll text a gentle reminder tomorrow at 9 AM if you haven't finished. Your answers stay saved until your appointment.
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:14px" data-activate="a-23-id-ocr">Continue where I left off</button>
+        <button class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px" onclick="HCOS.toast('Closed — the link in your text brings you right back here.')">Close</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a chip pair.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+</script>
+</body>
+</html>

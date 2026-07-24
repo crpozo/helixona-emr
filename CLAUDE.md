@@ -124,15 +124,35 @@ hub.html              hub: pillars line, 12-module map with status chips
 login.html            staff sign-in + 4 auth states — chrome-free, card only
 schedule.html         day calendar with chairs + week (ref: design file screens 01–04)
 patients.html         list + profile with insurance snapshot (INN / OON)
-clinical.html         encounter SOAP + infusion record + sign-and-lock concept
 billing.html          claim worklist + payer routing (EDI 275 vs claim-number-first)
-[remaining modules]   one high-level screen each, added in later passes
+
+Modules A and B carry the FULL deep pass (76 screens ported 2026-07-21 from the old
+helixona-ehr wireframes), organized as sub-pages with second-level tabs (SUBNAV in
+hcos.js):
+intake.html            Triage — Marie's console, module home    a-06…a-12
+intake-funnel.html     Public funnel                            a-01…a-05
+intake-onboarding.html Onboarding wizard, 10 steps              a-13…a-22
+intake-documents.html  Uploads/OCR, SPD, confirmation           a-23…a-28
+intake-frontdesk.html  Front desk day                           a-29…a-32
+intake-kiosk.html      Kiosk flow                               a-33…a-38
+intake-previsit.html   MA pre-visit sweep                       a-39…a-41
+intake-admin.html      Audit, templates, notifications, builder a-42…a-46
+clinical.html          Provider spine (worklist→sign & lock)    b-01,02,03,08,09,11
+clinical-chart.html    Timeline, problems, med rec, IV order    b-04…07,10,12
+clinical-questionnaires.html  Survey-engine clinical arm        b-28…b-30
+clinical-infusion.html Bay board, five rights, flowsheet        b-13…b-17
+clinical-remote.html   Remote MA pre/post-charting              b-18…b-20
+clinical-templates.html Shared templates + dot-phrases          b-21…b-23
+clinical-governance.html Co-sign, audit, quality, states        b-24…b-27
+
+[remaining modules]   one high-level screen each, deepened in later passes
 assets/hcos.css       tokens + components — single source of truth
 assets/hcos.js        screen switching + the feedback widget
 feedback/notes.json   published team notes, rendered as badges and a drawer per screen
 ```
 
-Each module page uses screen-nav chips like the design file, 2–5 screens maximum.
+Each page uses screen-nav chips; deep modules stay usable by splitting into sub-pages of
+3–10 screens under their module tabs (the 2–5 rule applies to NEW high-level modules only).
 
 ## Feedback widget (on every screen — never omit)
 

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation · Questionnaires · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .bq-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .bq-header-info { flex: 1; min-width: 220px; }
+  .bq-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .bq-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .bq-inst-name { font-size: 14.5px; font-weight: 600; color: var(--hx-navy); }
+  .bq-inst-desc { font-size: 12.5px; color: var(--ink); line-height: 1.5; margin: 6px 0 10px; }
+  .bq-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+  .bq-meta strong { color: var(--hx-navy); font-weight: 600; }
+  .bq-inst-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bq-suggested { border-left: 3px solid var(--hx-navy); }
+  /* Progress bar */
+  .bq-progress { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; }
+  .bq-progress-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  /* Phone questionnaire */
+  .bq-phone-head { padding-bottom: 10px; border-bottom: 1px solid var(--line-soft); margin-bottom: 12px; }
+  .bq-phone-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+  .bq-phone-title { font-size: 15px; font-weight: 600; color: var(--hx-navy); margin-top: 2px; }
+  .bq-phone-prog-lbl { font-size: 11px; color: var(--muted); margin: 8px 0 4px; }
+  .bq-sec-head { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 600; margin: 16px 0 8px; display: flex; justify-content: space-between; gap: 8px; }
+  .bq-q { padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
+  .bq-q.dim { opacity: 0.5; }
+  .bq-qtext { font-size: 12.5px; line-height: 1.45; margin-bottom: 8px; }
+  .bq-qnum { font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-right: 7px; }
+  .bq-choices { display: flex; gap: 6px; flex-wrap: wrap; }
+  .bq-choice { padding: 6px 14px; font-size: 12px; border: 1px solid var(--line); border-radius: 16px; background: #fff; color: var(--ink); cursor: pointer; }
+  .bq-choice:hover { border-color: var(--hx-navy); }
+  .bq-choice.picked { background: var(--hx-navy); color: #fff; border-color: var(--hx-navy); font-weight: 600; }
+  .bq-choice.picked-warn { background: #fff; border: 1px dashed var(--ink); color: var(--ink); font-weight: 600; }
+  .bq-phone-input { width: 100%; padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: 12.5px; font-family: inherit; background: #fff; color: var(--ink); }
+  .bq-phone-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); font-size: 11px; color: var(--muted); }
+  .bq-tally { font-size: 24px; font-weight: 600; color: var(--hx-navy); margin: 4px 0; }
+  /* Score bars (results) */
+  .bq-score-row { display: grid; grid-template-columns: 210px 1fr 96px; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .bq-score-lbl { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .bq-meter { height: 8px; background: var(--hx-light); border-radius: 4px; overflow: hidden; }
+  .bq-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 4px; }
+  .bq-score-val { text-align: right; font-family: ui-monospace, monospace; font-size: 12px; color: var(--hx-navy); font-weight: 600; }
+  .bq-delta { color: var(--muted); font-weight: 500; margin-left: 6px; }
+  .bq-trend-row { display: grid; grid-template-columns: 120px 1fr 54px; gap: 12px; align-items: center; padding: 8px 0; font-size: 12.5px; }
+  @media (max-width: 640px) {
+    .bq-score-row { grid-template-columns: 1fr; gap: 5px; }
+    .bq-score-val { text-align: left; }
+  }
+</style>
+</head>
+<body data-page="clinical-questionnaires" data-page-title="Documentation · Questionnaires" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-28-quest-library" data-title="Library">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/questionnaires</span></div>
+      <div class="frame-body">
+
+        <div class="bq-header-row">
+          <span class="avatar lg">NB</span>
+          <div class="bq-header-info">
+            <div class="bq-name">Nadia Boulos <span class="net-badge net-inn">INN</span></div>
+            <div class="bq-demo">41 · she/her · Anthem Blue Cross · pre-visit for follow-up Tue Jul 28 · readiness under Physician Review</div>
+          </div>
+          <a class="btn btn-sm" href="clinical.html">Open chart</a>
+          <a class="btn btn-primary btn-sm" href="clinical.html#/b-02-snapshot">See answers in chart</a>
+        </div>
+
+        <h2 class="page-title">Questionnaires</h2>
+        <p class="page-sub">Pick an instrument to administer now, or send it to the patient portal so the provider walks in with results in hand. Answers flow into the chart automatically — nothing is re-keyed.</p>
+
+        <div class="callout">Questionnaires, intake forms, and readiness surveys run on one survey engine — build or edit any instrument once and it is available everywhere. <a href="intake-admin.html#/a-46-form-builder">Open the form builder</a>.</div>
+
+        <div class="grid-4" style="margin:14px 0">
+          <div class="card stat-card">
+            <div class="stat-num">9</div>
+            <div class="stat-lbl">Instruments available</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Sent, awaiting completion</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Ready to score</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">27</div>
+            <div class="stat-lbl">Filed to chart this month</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <input class="search-input" type="search" placeholder="Search instruments by name or topic">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip">Suggested</button>
+          <button class="filter-chip">Patient self-report</button>
+          <button class="filter-chip">Provider-led</button>
+          <button class="filter-chip">Intake packets</button>
+        </div>
+
+        <div class="callout callout-ok">
+          <strong>Suggested for this visit</strong> — based on chief complaint (fatigue with environmental exposure history):
+          <span class="pill pill-warn">Mold History</span>
+          <span class="pill pill-warn">Metabolic Assessment</span>
+          <span class="pill pill-warn">SF-36 Quality of Life</span>
+          <button class="btn btn-sm" style="margin-left:8px" onclick="HCOS.toast('Bundle sent — Nadia Boulos gets one portal link for all 3 questionnaires.', 'ok')">Send all 3 to portal</button>
+        </div>
+
+        <div class="seg-divider">Suggested for this visit</div>
+        <div class="grid-2">
+          <div class="card bq-suggested">
+            <div class="bq-inst-name">Mold History Questionnaire</div>
+            <div class="bq-inst-desc">Environmental exposure assessment — residence history, water intrusion, visible mold, dampness. Supports decisions about VCS testing, urinary mycotoxins, and detox pacing. Not diagnostic on its own.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> 28 questions</span>
+              <span><strong>Time</strong> ~10 min</span>
+              <span><strong>Mode</strong> Provider-led or portal</span>
+              <span><strong>Last</strong> Never</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" data-activate="b-29-quest-administer">Administer now</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Mold History sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
+            </div>
+          </div>
+
+          <div class="card bq-suggested">
+            <div class="bq-inst-name">Metabolic Assessment · MSQ-style</div>
+            <div class="bq-inst-desc">Functional-medicine symptom-burden survey across gut, blood sugar, adrenal, thyroid, liver, hormones, energy, and mood. Section subscores and a total that trends over time as a measure of treatment response.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> ~110 items</span>
+              <span><strong>Time</strong> ~20 min</span>
+              <span><strong>Mode</strong> Patient self-report</span>
+              <span><strong>Last</strong> Completed Jun 9</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" data-activate="b-30-quest-results">View results</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Metabolic Assessment sent — a fresh administration will trend against Jun 9.', 'ok')">Send to portal</button>
+            </div>
+          </div>
+
+          <div class="card bq-suggested">
+            <div class="bq-inst-name">SF-36 · Quality of Life</div>
+            <div class="bq-inst-desc">Validated 36-item instrument across 8 domains — physical function, role limits, pain, social, emotional, vitality, mental health, general health. A baseline and serial measure of how the patient is actually doing.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> 36 items</span>
+              <span><strong>Time</strong> ~7 min</span>
+              <span><strong>Mode</strong> Patient self-report</span>
+              <span><strong>Last</strong> Never</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('SF-36 sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
+              <button class="btn btn-sm" data-activate="b-29-quest-administer">Administer now</button>
+            </div>
+          </div>
+
+          <div class="card bq-suggested">
+            <div class="bq-inst-name">Lyme Symptom Severity</div>
+            <div class="bq-inst-desc">30-item 0–4 severity rating across constitutional, musculoskeletal, neurologic, autonomic, and cognitive clusters. A score profile that aligns suggests a tickborne workup.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> 30 items</span>
+              <span><strong>Time</strong> ~6 min</span>
+              <span><strong>Mode</strong> Patient self-report</span>
+              <span><strong>Last</strong> Never</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Lyme Symptom Severity sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
+              <button class="btn btn-sm" data-activate="b-29-quest-administer">Administer now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="seg-divider">All instruments</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="bq-inst-name">Brain Region Localization</div>
+            <div class="bq-inst-desc">Autonomic and epileptiform symptom checklist used by neurologically-focused care. Helps localize regions and guide further workup during the encounter.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> 22 items</span>
+              <span><strong>Time</strong> ~5 min</span>
+              <span><strong>Mode</strong> Provider-led</span>
+              <span><strong>Last</strong> Never</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" data-activate="b-29-quest-administer">Administer now</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="bq-inst-name">New Patient Packet</div>
+            <div class="bq-inst-desc">Full intake — demographics, medical story, past medical &amp; surgical history, meds, supplements, allergies, social/family history, lifestyle, ACEs, chronological timeline. 7 pages.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> ~120 fields</span>
+              <span><strong>Time</strong> ~25 min</span>
+              <span><strong>Mode</strong> Patient · portal</span>
+              <span><strong>Last</strong> Completed at intake</span>
+            </div>
+            <div class="bq-inst-actions">
+              <a class="btn btn-primary btn-sm" href="clinical.html#/b-02-snapshot">View responses</a>
+              <button class="btn btn-sm" onclick="HCOS.toast('Update request sent — Nadia can confirm or change intake answers from the portal.', 'ok')">Request update</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="bq-inst-name">L2/L3 New Patient Packet</div>
+            <div class="bq-inst-desc">Extended intake for tier-2/tier-3 services (EBOO, Erchonia laser, advanced IV protocols). Adds support team, implanted devices, anticoagulant allergies, and G6PD status.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> ~95 fields</span>
+              <span><strong>Time</strong> ~20 min</span>
+              <span><strong>Mode</strong> Patient · portal</span>
+              <span><strong>Last</strong> Not started</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('L2/L3 New Patient Packet sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="bq-inst-name">L2/L3 Follow-up Packet</div>
+            <div class="bq-inst-desc">Follow-up version of the L2/L3 intake. Prefills prior answers and asks the patient to confirm or update. Sent before every L2/L3 follow-up encounter.</div>
+            <div class="bq-meta">
+              <span><strong>Length</strong> ~60 fields</span>
+              <span><strong>Time</strong> ~12 min</span>
+              <span><strong>Mode</strong> Patient · portal</span>
+              <span><strong>Last</strong> Not yet applicable</span>
+            </div>
+            <div class="bq-inst-actions">
+              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('L2/L3 Follow-up sent — it prefills prior answers for Nadia to confirm.', 'ok')">Send to portal</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-ok" style="margin-top:16px">
+          <strong>How it fits the visit:</strong> patient self-report instruments go to the portal before the visit so the provider walks in with results in hand; provider-led instruments are administered conversationally in the room. Every score attaches to the chart, lands in the SOAP note's Subjective section, and trends on the results screen — no answer is re-keyed by hand.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-29-quest-administer" data-title="Administer">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/questionnaires/mold-history</span></div>
+      <div class="frame-body">
+
+        <h2 class="page-title">Mold History Questionnaire</h2>
+        <p class="page-sub">Nadia Boulos · Anthem Blue Cross INN · started in the room with Dr. Drannikov, patient finishing on their phone</p>
+
+        <div class="filters" style="justify-content:space-between">
+          <div>
+            <span class="pill pill-warn">In progress</span>
+            <span class="field-help" style="display:inline;margin-left:8px">Auto-saved 8 s ago · 16 of 28 answered · ~4 min to complete</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="HCOS.toast('Remaining questions sent — Nadia can finish the rest from her portal.', 'ok')">Send remaining to portal</button>
+            <button class="btn btn-sm" data-activate="b-28-quest-library" onclick="HCOS.toast('Saved — pick this instrument back up any time from the library.')">Save and continue later</button>
+            <button class="btn btn-primary btn-sm" data-activate="b-30-quest-results" onclick="HCOS.toast('Scoring — the flag profile is on the results screen.', 'ok')">Score answers</button>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="phone-frame">
+              <div class="phone-bar"><span>11:40</span><span>Helixona portal</span></div>
+              <div class="phone-body">
+                <div class="bq-phone-head">
+                  <div class="bq-phone-kicker">Helixona · pre-visit</div>
+                  <div class="bq-phone-title">Mold History Questionnaire</div>
+                </div>
+                <div class="bq-phone-prog-lbl">16 of 28 answered · about 4 minutes left</div>
+                <div class="bq-progress"><div class="bq-progress-fill" style="width:57%"></div></div>
+
+                <div class="bq-sec-head"><span>Section 1 · Residence overview</span><span>5 of 5</span></div>
+
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">01</span>What year was your home built?</div>
+                  <input class="bq-phone-input" value="1982" style="max-width:160px">
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">02</span>Does your home smell musty?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">03</span>Is mold visible anywhere inside your home?</div>
+                  <div class="bq-choices"><span class="bq-choice">Yes</span><span class="bq-choice picked">No</span></div>
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">04</span>Does your home have a crawlspace or basement?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">05</span>If yes, is the crawlspace or basement damp or musty?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span><span class="bq-choice">Not sure</span></div>
+                </div>
+
+                <div class="bq-sec-head"><span>Section 2 · Water intrusion &amp; drainage</span><span>6 of 8</span></div>
+
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">06</span>Is there standing water inside or around your home?</div>
+                  <div class="bq-choices"><span class="bq-choice">Yes</span><span class="bq-choice picked">No</span></div>
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">07</span>Does the ground slope toward or away from the building?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Toward</span><span class="bq-choice">Away</span></div>
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">08</span>Do your gutters overflow during heavy rain?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span><span class="bq-choice">Not sure</span></div>
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">11</span>Are water stains present on any ceilings, floors, or walls?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                </div>
+
+                <div class="bq-sec-head"><span>Section 3 · Interior &amp; ventilation</span><span>5 of 8</span></div>
+
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">12</span>Roughly what share of your living space is carpeted?</div>
+                  <input class="bq-phone-input" value="40%" style="max-width:120px">
+                </div>
+                <div class="bq-q">
+                  <div class="bq-qtext"><span class="bq-qnum">16</span>Are others in your household frequently sick?</div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                </div>
+                <div class="bq-q dim">
+                  <div class="bq-qtext"><span class="bq-qnum">17</span>Have you ever lived somewhere with confirmed or suspected mold or water damage?</div>
+                  <div class="bq-choices"><span class="bq-choice">Yes</span><span class="bq-choice">No</span></div>
+                </div>
+
+                <div class="bq-phone-foot">
+                  <span>10 more questions across 2 sections remain</span>
+                  <button class="btn btn-sm">Continue</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">About this questionnaire</div>
+              <div style="font-size:12.5px;line-height:1.6">Builds a picture of likely mold and water-damage exposure across the patient's current and prior environments. Not diagnostic on its own — it supports clinical reasoning and decisions about VCS testing, urinary mycotoxins, and detox pacing.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Early flags from answers</div>
+              <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+                <span class="pill pill-warn">Musty smell</span>
+                <span class="pill pill-warn">Damp basement</span>
+                <span class="pill pill-warn">Gutters overflow</span>
+                <span class="pill pill-warn">Water stains</span>
+                <span class="pill pill-warn">Ground slopes toward home</span>
+                <span class="pill pill-warn">Household members frequently sick</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Running tally</div>
+              <div class="bq-tally">6 / 16 flags</div>
+              <div class="field-help">Trending toward moderate-likelihood exposure. Complete the full instrument to confirm before scoring.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-30-quest-results" data-title="Results & scoring">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/questionnaires/results</span></div>
+      <div class="frame-body">
+
+        <div class="bq-header-row">
+          <span class="avatar lg">NB</span>
+          <div class="bq-header-info">
+            <div class="bq-name">Nadia Boulos <span class="net-badge net-inn">INN</span></div>
+            <div class="bq-demo">Results and scoring · scores feed the chart and the readiness Physician Review</div>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Filed to chart — scores are in Nadia Boulos’s Subjective section and trending on the chart.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-02-snapshot'; }, 900)">File all results to chart</button>
+        </div>
+
+        <div class="callout callout-ok">Answers flow straight into the chart — no one re-keys them. Charlene pre-charts from these scores before the visit. <a href="clinical-remote.html#/b-19-precharting">See how answers pre-chart the note</a>.</div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Metabolic Assessment · MSQ-style symptom burden</div>
+              <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px">
+                <div class="stat-num" style="font-size:34px">118</div>
+                <div>
+                  <span class="pill pill-warn">Elevated burden</span>
+                  <div class="field-help" style="margin-top:4px">Down 26 from 144 on Jun 9 · improving · supports the detox program and a Physician Review</div>
+                </div>
+              </div>
+              <div class="field-help" style="margin-bottom:12px">Optimal &lt; 10 · mild 10–49 · moderate 50–99 · high 100+. Section subscores below; the darker the bar, the more of that section's items were endorsed.</div>
+
+              <div class="seg-divider" style="margin-top:0">Section subscores</div>
+
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Energy and mitochondria <span class="pill pill-warn">High</span></div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:69%"></div></div>
+                <div class="bq-score-val">22 / 32 <span class="bq-delta">▼6</span></div>
+              </div>
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Adrenal and stress <span class="pill pill-warn">High</span></div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:63%"></div></div>
+                <div class="bq-score-val">20 / 32 <span class="bq-delta">▼4</span></div>
+              </div>
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Gut and GI</div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:50%"></div></div>
+                <div class="bq-score-val">16 / 32 <span class="bq-delta">▼3</span></div>
+              </div>
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Mind and mood</div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:47%"></div></div>
+                <div class="bq-score-val">15 / 32 <span class="bq-delta">▼3</span></div>
+              </div>
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Liver and biliary</div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:54%"></div></div>
+                <div class="bq-score-val">13 / 24 <span class="bq-delta">▼4</span></div>
+              </div>
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Hormone balance</div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:50%"></div></div>
+                <div class="bq-score-val">12 / 24 <span class="bq-delta">▼3</span></div>
+              </div>
+              <div class="bq-score-row">
+                <div class="bq-score-lbl">Blood sugar handling</div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:46%"></div></div>
+                <div class="bq-score-val">11 / 24 <span class="bq-delta">▼2</span></div>
+              </div>
+              <div class="bq-score-row" style="border-bottom:none">
+                <div class="bq-score-lbl">Thyroid</div>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:45%"></div></div>
+                <div class="bq-score-val">9 / 20 <span class="bq-delta">▼1</span></div>
+              </div>
+
+              <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Filed to chart — Metabolic Assessment score is in the Subjective section.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-02-snapshot'; }, 900)">File to chart</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Re-administration sent — the next result will trend against today.', 'ok')">Send fresh administration</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Mold History Questionnaire · just submitted</div>
+              <div style="font-size:12.5px;line-height:1.6;margin-bottom:8px">Flag-based instrument — no MSQ total. <strong>6 of 16 flags positive</strong> · <span class="pill pill-warn">Moderate likelihood</span> of environmental mold exposure.</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+                <span class="pill pill-warn">Musty smell</span>
+                <span class="pill pill-warn">Damp basement</span>
+                <span class="pill pill-warn">Gutters overflow</span>
+                <span class="pill pill-warn">Water stains</span>
+                <span class="pill pill-warn">Slopes toward home</span>
+                <span class="pill pill-warn">Household often sick</span>
+              </div>
+              <div class="field-help">Recommend VCS testing and urinary mycotoxins before advancing detox pacing.</div>
+              <div style="margin-top:12px">
+                <button class="btn btn-sm" data-activate="b-29-quest-administer">Back to the questionnaire</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Trend vs last administration</div>
+              <div class="bq-trend-row">
+                <span>Jun 9</span>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:80%"></div></div>
+                <span class="bq-score-val">144</span>
+              </div>
+              <div class="bq-trend-row">
+                <span><strong>Today</strong> Jul 21</span>
+                <div class="bq-meter"><div class="bq-meter-fill" style="width:66%"></div></div>
+                <span class="bq-score-val">118</span>
+              </div>
+              <div class="field-help" style="margin-top:8px">Symptom burden is falling as the detox program progresses — Energy and Adrenal remain the two highest sections.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Administration history</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>Date</th><th>Total</th><th>By</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Jul 21</td><td>118</td><td>Portal · self-report</td></tr>
+                    <tr><td>Jun 9</td><td>144</td><td>Portal · self-report</td></tr>
+                    <tr><td>Apr 28</td><td>161</td><td>In room · Charlene</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Where these scores go</div>
+              <ul class="check-list">
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">SOAP · Subjective section</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Chart trend graph</span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon active">→</span>
+                  <span class="check-label">Readiness engine</span>
+                  <span class="check-meta">Physician Review</span>
+                </li>
+              </ul>
+              <a class="btn btn-sm" style="margin-top:4px" href="readiness.html">Open readiness review</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+
+  // Demo only: tapping a choice on the phone selects it within its question.
+  document.addEventListener('click', function (ev) {
+    var choice = ev.target.closest ? ev.target.closest('.bq-choice') : null;
+    if (!choice || !choice.parentElement) return;
+    var group = choice.parentElement.querySelectorAll('.bq-choice');
+    for (var i = 0; i < group.length; i++) {
+      group[i].classList.remove('picked');
+      group[i].classList.remove('picked-warn');
+    }
+    choice.classList.add('picked');
+  });
+</script>
+</body>
+</html>

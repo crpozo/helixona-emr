@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation · Governance · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .gov-prow { display: flex; align-items: center; gap: 10px; }
+  .gov-pname { font-weight: 600; color: var(--hx-navy); }
+  .gov-mrn { font-size: 11px; color: var(--muted); }
+  .gov-metric { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .gov-metric:last-child { border-bottom: none; }
+  .gov-metric b { color: var(--hx-navy); }
+  .gov-metric-lbl { flex: 1; color: var(--ink); }
+  .gov-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--ink); }
+  .gov-state { padding: 30px 20px; text-align: center; color: var(--muted); }
+  .gov-state-glyph { font-size: 30px; margin-bottom: 10px; display: inline-block; color: var(--hx-accent); }
+  .gov-state-glyph.spin { animation: govspin 1.1s linear infinite; }
+  @keyframes govspin { to { transform: rotate(360deg); } }
+  .gov-state-title { font-size: 13px; color: var(--ink); font-weight: 500; }
+  .gov-state-sub { font-size: 11.5px; margin-top: 4px; }
+  .gov-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .gov-header-info { flex: 1; min-width: 220px; }
+  .gov-enc-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .gov-enc-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body data-page="clinical-governance" data-page-title="Documentation · Governance" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-24-cosign" data-title="Co-sign queue">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/cosign</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Co-signature queue</h2>
+        <p class="page-sub">Tuesday, July 21 · notes and orders drafted by the care team that need Dr. Drannikov's co-signature — no more "did anyone co-sign that?"</p>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Overdue · over 48h</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">5</div>
+            <div class="stat-lbl">Due today</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Due this week</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">21</div>
+            <div class="stat-lbl">Co-signed this month</div>
+          </div>
+        </div>
+
+        <div class="callout callout-warn">Clinic policy: care-team notes are co-signed within 48 hours. Two infusion notes are past that — they lead the queue.</div>
+
+        <div class="filters">
+          <button class="filter-chip active">All pending (10)</button>
+          <button class="filter-chip">Infusion notes</button>
+          <button class="filter-chip">Pre-charts</button>
+          <button class="filter-chip">Refill requests</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Patient</th>
+                <th>What needs co-sign</th>
+                <th>Author</th>
+                <th>Submitted</th>
+                <th>Due</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-open-modal="#b-cosign-modal">
+                <td><div class="gov-prow"><span class="avatar">PN</span><div><div class="gov-pname">Priya Natarajan</div><div class="gov-mrn">MRN 0992</div></div></div></td>
+                <td>Infusion session note · Myers' cocktail</td>
+                <td>Brooke · PA</td>
+                <td>Sat Jul 19</td>
+                <td><span class="pill pill-err">Overdue · 60h</span></td>
+                <td><button class="btn btn-sm btn-primary" data-open-modal="#b-cosign-modal">Review and co-sign</button></td>
+              </tr>
+              <tr class="row-click" data-open-modal="#b-cosign-modal">
+                <td><div class="gov-prow"><span class="avatar">WH</span><div><div class="gov-pname">Walter Hsu</div><div class="gov-mrn">MRN 0731</div></div></div></td>
+                <td>Adverse event · resolved · NAD+ infusion</td>
+                <td>Brooke · PA</td>
+                <td>Sat Jul 19</td>
+                <td><span class="pill pill-err">Overdue · 50h</span></td>
+                <td><button class="btn btn-sm btn-primary" data-open-modal="#b-cosign-modal">Review and co-sign</button></td>
+              </tr>
+              <tr class="row-click" data-open-modal="#b-cosign-modal">
+                <td><div class="gov-prow"><span class="avatar">MR</span><div><div class="gov-pname">Maya Reyes</div><div class="gov-mrn">MRN 0556</div></div></div></td>
+                <td>Infusion session note · NAD+ · flagged event</td>
+                <td>Brooke · PA</td>
+                <td>Today · 12:14 PM</td>
+                <td><span class="pill pill-warn">Due today</span></td>
+                <td><button class="btn btn-sm" data-open-modal="#b-cosign-modal">Review</button></td>
+              </tr>
+              <tr class="row-click" data-open-modal="#b-cosign-modal">
+                <td><div class="gov-prow"><span class="avatar">DO</span><div><div class="gov-pname">Daniel Okafor</div><div class="gov-mrn">MRN 1834</div></div></div></td>
+                <td>Refill request · magnesium glycinate</td>
+                <td>Charlene · MA</td>
+                <td>Today · 9:42 AM</td>
+                <td><span class="pill pill-warn">Due today</span></td>
+                <td><button class="btn btn-sm" data-open-modal="#b-cosign-modal">Review</button></td>
+              </tr>
+              <tr class="row-click" data-open-modal="#b-cosign-modal">
+                <td><div class="gov-prow"><span class="avatar">NB</span><div><div class="gov-pname">Nadia Boulos</div><div class="gov-mrn">MRN 2287</div></div></div></td>
+                <td>Pre-chart · flagged for physician review</td>
+                <td>Charlene · MA</td>
+                <td>Today · 10:18 AM</td>
+                <td><span class="pill pill-warn">Due today</span></td>
+                <td><button class="btn btn-sm" data-open-modal="#b-cosign-modal">Review</button></td>
+              </tr>
+              <tr class="row-click" data-open-modal="#b-cosign-modal">
+                <td><div class="gov-prow"><span class="avatar">SR</span><div><div class="gov-pname">Sofia Ramos</div><div class="gov-mrn">MRN 1119</div></div></div></td>
+                <td>Infusion session note · Myers' cocktail</td>
+                <td>Brooke · PA</td>
+                <td>Today · 11:05 AM</td>
+                <td><span class="pill pill-muted">Tomorrow</span></td>
+                <td><button class="btn btn-sm" data-open-modal="#b-cosign-modal">Review</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="field-help" style="margin-top:10px">Co-signing dispatches the note the same way sign-and-lock does — it lands in billing and the chart at once. Overdue items also surface on the documentation states screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-25-audit-log" data-title="Encounter audit log">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/audit/ENC-2026-04158</span></div>
+      <div class="frame-body">
+
+        <div class="gov-header-row">
+          <span class="avatar lg">MR</span>
+          <div class="gov-header-info">
+            <div class="gov-enc-name">Encounter audit log — Maya Reyes</div>
+            <div class="gov-enc-sub">ENC-2026-04158 · follow-up · signed Jul 7 · complete history</div>
+          </div>
+          <button class="btn btn-sm" onclick="HCOS.toast('Audit log exported — the CSV is downloading.', 'ok')">Export CSV</button>
+          <a class="btn btn-sm" href="security.html#/g-01-audit">Open in Security and audit</a>
+        </div>
+
+        <p class="page-sub">Every read, edit, sign, and release on this encounter. Required for HIPAA, payer audits, and the 21st Century Cures Act information-blocking rules.</p>
+
+        <div class="filters">
+          <input class="search-input" type="search" placeholder="Search by action or user">
+          <button class="filter-chip active">All (42)</button>
+          <button class="filter-chip">Edits</button>
+          <button class="filter-chip">Reads</button>
+          <button class="filter-chip">System actions</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Field / section</th><th>Before → after</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Jul 7 · 11:48:34 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">SIGN_LOCK</code></td><td>encounter</td><td>draft → locked</td></tr>
+              <tr><td>Jul 7 · 11:48:31 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">EDIT</code></td><td>note.plan</td><td>Added "L-lysine 1 g BID"</td></tr>
+              <tr><td>Jul 7 · 11:46:12 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">ORDER_ADD</code></td><td>orders.iv</td><td>Added IV NAD+ × 4 sessions</td></tr>
+              <tr><td>Jul 7 · 11:44:08 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">EDIT</code></td><td>note.assessment</td><td>Edited 387 → 503 chars</td></tr>
+              <tr><td>Jul 7 · 11:30:47 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">DOT_EXPAND</code></td><td>note.hpi</td><td>".pemquery" expanded from a shared template</td></tr>
+              <tr><td>Jul 7 · 11:22:01 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">ENCOUNTER_OPEN</code></td><td>—</td><td>Opened from the provider worklist</td></tr>
+              <tr><td>Jul 7 · 11:21:54 AM</td><td>System</td><td><code class="gov-code">SCRIBE_DRAFT</code></td><td>note</td><td>AI scribe draft ready before the note was opened</td></tr>
+              <tr><td>Jul 7 · 11:21:50 AM</td><td>System</td><td><code class="gov-code">VITALS_PUSH</code></td><td>vitals</td><td>Auto-populated from check-in</td></tr>
+              <tr><td>Jul 7 · 11:20:33 AM</td><td>Yazmin · Front Desk</td><td><code class="gov-code">CHECK_IN</code></td><td>encounter.state</td><td>Scheduled → Arrived</td></tr>
+              <tr><td>Jul 7 · 10:43:18 AM</td><td>Charlene · MA</td><td><code class="gov-code">PRECHART_RELEASE</code></td><td>—</td><td>Pre-chart released to the provider</td></tr>
+              <tr><td>Jul 7 · 10:31:12 AM</td><td>Charlene · MA</td><td><code class="gov-code">EDIT</code></td><td>prechart.scratchpad</td><td>848 chars saved</td></tr>
+              <tr><td>Jul 6 · 4:22:09 PM</td><td>System</td><td><code class="gov-code">QUESTIONNAIRE_SYNC</code></td><td>chart</td><td>Questionnaire answers flowed into the chart</td></tr>
+              <tr><td>Jul 9 · 8:12:04 AM</td><td>Shibani · Admin</td><td><code class="gov-code">READ</code></td><td>encounter</td><td>Viewed while assembling the billing packet</td></tr>
+              <tr><td>Jul 10 · 7:40:11 AM</td><td>Patient portal</td><td><code class="gov-code">PORTAL_READ</code></td><td>note</td><td>Patient viewed the released note</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px">Audit entries are immutable. Reads — including the patient's own portal reads — and system actions (auto-saves, scribe drafts, eligibility checks) all appear here alongside user edits.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-26-doc-quality" data-title="Documentation quality">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/quality</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Documentation quality</h2>
+        <p class="page-sub">July 2026 · practice-wide health of clinical documentation — spot bottlenecks and drift without reading individual notes. Documentation that ends at the clinic, not in the weekend.</p>
+
+        <div class="grid-4" style="margin-bottom:16px">
+          <div class="card stat-card">
+            <div class="stat-num">81%</div>
+            <div class="stat-lbl">Notes closed same day</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">88%</div>
+            <div class="stat-lbl">Started from a scribe draft</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">11 min</div>
+            <div class="stat-lbl">Median note time</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Unsigned over 48h</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Time to sign · this month</div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Signed same day</span><b>81%</b><span class="pill pill-ok">▲ 4%</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Signed within 24h</span><b>94%</b><span class="pill pill-ok">▲ 2%</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Signed within 72h</span><b>99%</b><span class="pill pill-muted">—</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Average unsigned at day's end</span><b>2.1</b><span class="pill pill-ok">▼ 1.8</span></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Scribe draft usage</div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Notes started from a scribe draft</span><b>88%</b><span class="pill pill-ok">▲ 9%</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Draft ready before the note was opened</span><b>96%</b><span class="pill pill-muted">—</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Drafts accepted with only light edits</span><b>74%</b><span class="pill pill-ok">▲ 6%</span></div>
+            <div class="callout callout-ok" style="margin:10px 0 0">The scribe drafts the note during the visit, so the provider reviews instead of writing from scratch — the fix for eCW's unreliable scribe.</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Note quality flags</div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Notes copied from a prior visit</span><b>4</b><span class="pill pill-warn">Review</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Missing assessment text</span><b>0</b><span class="pill pill-ok">Good</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Missing plan text</span><b>1</b><span class="pill pill-warn">Review</span></div>
+            <div class="gov-metric"><span class="gov-metric-lbl">Diagnoses without supporting text</span><b>2</b><span class="pill pill-warn">Review</span></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">By provider</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead><tr><th>Provider</th><th>Notes</th><th>Median time</th><th>Same-day</th></tr></thead>
+                <tbody>
+                  <tr><td>Dr. Drannikov</td><td>142</td><td>11 min</td><td><span class="pill pill-ok">88%</span></td></tr>
+                  <tr><td>Dr. Bakman</td><td>63</td><td>14 min</td><td><span class="pill pill-ok">79%</span></td></tr>
+                  <tr><td>Brooke · PA</td><td>48</td><td>9 min</td><td><span class="pill pill-muted">Co-signed</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">By visit type</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead><tr><th>Visit type</th><th>Count</th><th>Median note time</th></tr></thead>
+                <tbody>
+                  <tr><td>New patient consult</td><td>24</td><td>22 min</td></tr>
+                  <tr><td>Follow-up</td><td>62</td><td>9 min</td></tr>
+                  <tr><td>Infusion session</td><td>56</td><td>4 min</td></tr>
+                  <tr><td>Telehealth</td><td>14</td><td>7 min</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Where to act</div>
+            <div style="font-size:12.5px;line-height:1.6">Three notes are unsigned past 48 hours and two infusion notes await co-signature. Clearing them protects the same-day rate.</div>
+            <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+              <button class="btn btn-sm btn-primary" data-activate="b-24-cosign">Open co-sign queue</button>
+              <a class="btn btn-sm" href="clinical.html#/b-11-sign-lock">Open a chart to sign</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-27-system-states" data-title="Documentation states">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documentation/states</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Documentation states</h2>
+        <p class="page-sub">What the clinician sees when things go sideways — the scribe drops, the network wobbles, a note can't be signed. Every state says what happened and how to move forward.</p>
+
+        <div class="grid-2">
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Loading · opening an encounter</div>
+            <div class="gov-state">
+              <div class="gov-state-glyph spin">⟳</div>
+              <div class="gov-state-title">Loading encounter ENC-2026-04158…</div>
+              <div class="gov-state-sub">The chart, vitals, and scribe draft are coming up together.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Empty · provider worklist</div>
+            <div class="gov-state">
+              <div class="gov-state-glyph">✓</div>
+              <div class="gov-state-title">Nothing left to sign today</div>
+              <div class="gov-state-sub" style="margin-bottom:12px">Every encounter is documented and locked. Enjoy the breathing room — or open a past encounter from the calendar.</div>
+              <a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day view</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Degraded · AI scribe dropped</div>
+            <div class="callout callout-warn" style="margin:0">
+              <strong>The AI scribe lost its audio connection.</strong> Your dictation is still recording on this device — the draft will catch up when the scribe reconnects, or you can type the note directly. Nothing said so far is lost.
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="HCOS.toast('Reconnecting the scribe — the draft will resume in a moment.', 'ok')">Reconnect scribe</button>
+                <a class="btn btn-sm" href="clinical.html#/b-03-soap">Type the note instead</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Offline · network dropped</div>
+            <div class="callout callout-warn" style="margin:0">
+              <strong>You're working offline.</strong> Edits are saved on this device and will sync the moment the connection returns. Sign-and-lock is paused until then — it will finish on its own, nothing needs re-typing.
+              <div style="margin-top:8px"><button class="btn btn-sm" onclick="HCOS.toast('Checking the connection — sync resumes automatically once you are back online.')">Check connection</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Error · lab order not sent</div>
+            <div class="callout callout-err" style="margin:0">
+              <strong>Lab order not transmitted.</strong> The lab interface returned a 503. The order is held in the queue and retries every 5 minutes for one hour — the patient's draw is unaffected.
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="HCOS.toast('Retrying the lab order now — you will see it clear the queue if it goes through.', 'ok')">Retry now</button>
+                <a class="btn btn-sm" href="labs.html#/c-01-orders">Reroute in orders and results</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Blocked · allergy conflict</div>
+            <div class="callout callout-err" style="margin:0">
+              <strong>Can't sign and lock.</strong> The order for Bactrim conflicts with a documented sulfa allergy. Remove the order, switch to an alternative, or document an override with a reason before signing.
+              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-07-allergies">Review allergies</a></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Warning · required section empty</div>
+            <div class="callout callout-warn" style="margin:0">
+              <strong>The assessment section is empty.</strong> It's required before sign-and-lock. Add the assessment, then sign.
+              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical.html#/b-08-assessment">Jump to assessment</a></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Locked · encounter signed</div>
+            <div class="callout" style="margin:0">
+              <strong>This encounter is locked.</strong> It was signed Jul 7 · 11:48 AM by Dr. Drannikov. To add or correct anything, create an addendum — the original stays intact.
+              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-12-amendment">Create an addendum</a></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Overdue · co-signature waiting</div>
+            <div class="callout callout-err" style="margin:0">
+              <strong>Two co-signatures are overdue.</strong> RN infusion notes from Sat Jul 19 still need your co-signature — clinic policy is within 48 hours.
+              <div style="margin-top:8px"><button class="btn btn-sm" data-activate="b-24-cosign">Open co-sign queue</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Released · patient portal note</div>
+            <div class="callout callout-ok" style="margin:0">
+              This encounter note is now visible in the patient's portal under the 21st Century Cures Act. Last viewed by the patient: not yet.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===================== page-local modal ===================== -->
+<div class="modal-overlay" id="b-cosign-modal">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Review and co-sign — Priya Natarajan</div>
+        <div class="modal-sub">Infusion session note · Myers' cocktail · drafted by Brooke · PA · submitted Sat Jul 19</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="callout callout-warn" style="margin-top:0"><strong>Overdue · 60h.</strong> Clinic policy is co-signature within 48 hours. Co-signing dispatches the note to billing and the chart at once.</div>
+
+      <div class="seg-divider" style="margin-top:14px">Note preview</div>
+      <dl class="kv" style="margin-bottom:12px">
+        <dt>Protocol</dt>
+        <dd>Myers' cocktail · 1 h · Chair 3</dd>
+        <dt>Started / stopped</dt>
+        <dd>10:05 AM → 11:08 AM · Nick, RN present</dd>
+        <dt>Route</dt>
+        <dd>IV push, right antecubital · 22g</dd>
+        <dt>Tolerance</dt>
+        <dd>Well tolerated · no adverse event · vitals stable throughout</dd>
+        <dt>Supplies</dt>
+        <dd>Recorded against the session · five rights confirmed</dd>
+      </dl>
+
+      <div class="seg-divider">Author's assessment</div>
+      <p style="font-size:12.5px;line-height:1.6">Session 3 of a fatigue-workup Myers' series. Patient reports steady improvement in energy since session 1. No infusion-site reaction. Continue series as planned; recheck ferritin before session 5.</p>
+
+      <div class="callout" style="margin-bottom:0">Co-signing confirms you reviewed the note and orders. To send it back for changes, return it to Brooke with a comment instead.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal onclick="HCOS.toast('Returned to Brooke — she will see your comment on the draft.')">Return to author</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Note co-signed — it is locked and dispatched to billing and the chart.', 'ok')">Co-sign note</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+</script>
+</body>
+</html>

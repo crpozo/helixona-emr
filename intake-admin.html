@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Admin &amp; builder · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .a-time { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .a-tmpl-card { cursor: pointer; margin-bottom: 6px; padding: 10px 12px; }
+  .a-tmpl-card:hover { border-color: var(--hx-navy); }
+  .a-tmpl-card.selected { border-left: 3px solid var(--ink); }
+  .a-tmpl-name { font-weight: 600; font-size: 13px; color: var(--hx-navy); }
+  .a-tmpl-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .a-split { display: grid; grid-template-columns: 240px 1fr; gap: 18px; }
+  .a-spinner {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 3px solid var(--line); border-top-color: var(--ink);
+    margin: 0 auto 14px; animation: a-spin 0.9s linear infinite;
+  }
+  @keyframes a-spin { to { transform: rotate(360deg); } }
+  .a-big-check {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin: 0 auto 12px;
+  }
+  .a-mono { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--muted); }
+  @media (max-width: 720px) { .a-split { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="intake-admin" data-page-title="Intake · Admin &amp; builder" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-42-audit-log" data-title="Audit log">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/admin/audit</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Audit log</h2>
+        <p class="page-sub">Every action on every record — who, what, when. Immutable and append-only.</p>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card"><div class="stat-num">1,284</div><div class="stat-lbl">Events today</div></div>
+          <div class="card stat-card"><div class="stat-num">37</div><div class="stat-lbl">PHI accesses</div></div>
+          <div class="card stat-card"><div class="stat-num">19</div><div class="stat-lbl">Active users</div></div>
+          <div class="card stat-card"><div class="stat-num">0</div><div class="stat-lbl">Blocked attempts</div></div>
+        </div>
+
+        <div class="filters">
+          <input class="search-input" type="search" placeholder="Filter by user, patient, action, or source">
+          <button class="filter-chip active">All actions</button>
+          <button class="filter-chip">PHI access</button>
+          <button class="filter-chip">Edits</button>
+          <button class="filter-chip">Consents</button>
+          <button class="filter-chip">Eligibility</button>
+          <button class="filter-chip">Packets</button>
+          <button class="filter-chip">Logins</button>
+          <button class="btn btn-sm" style="margin-left:auto" onclick="HCOS.toast('Audit export queued — the CSV downloads when it is ready.', 'ok')">Export CSV</button>
+        </div>
+
+        <div class="field-help" style="margin:0 0 8px">Showing 9 of 1,284 events · Tuesday, July 21</div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Source</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">11:38 AM</td>
+                <td>Shibani · Admin</td>
+                <td>Opened audit log</td>
+                <td>Front office · 10.0.1.14</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">11:21 AM</td>
+                <td>Marie · New Patient Advisor</td>
+                <td>Viewed chart — Maya Reyes <span class="pill pill-muted">PHI</span></td>
+                <td>Front office · 10.0.1.9</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">10:41 AM</td>
+                <td>Charlene (Virtual) · MA</td>
+                <td>Edited medical history — Nadia Boulos <span class="pill pill-warn">Edit</span></td>
+                <td>Remote · VPN 73.12.x</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">9:41 AM</td>
+                <td>Marie · New Patient Advisor</td>
+                <td>Ran eligibility 270/271 — Daniel Okafor · Anthem</td>
+                <td>Front office · 10.0.1.9</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">9:14 AM</td>
+                <td>Maya Reyes · Patient</td>
+                <td>Signed HIPAA consent</td>
+                <td>Patient portal · magic link</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">8:20 AM</td>
+                <td>Yazmin · Front Desk</td>
+                <td>Marked Arrived — Priya Natarajan</td>
+                <td>Front desk · 10.0.1.6</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">8:02 AM</td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Signed and locked encounter — Grace Lindqvist</td>
+                <td>Exam room 2 · 10.0.1.21</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">7:58 AM</td>
+                <td>Karina · Operations Manager</td>
+                <td>Sent onboarding packet — Tom Alvarez</td>
+                <td>Billing · 10.0.1.31</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+                <td class="a-time">7:45 AM</td>
+                <td>Shibani · Admin</td>
+                <td>Signed in</td>
+                <td>Front office · 10.0.1.14</td>
+                <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px">The audit trail cannot be edited or deleted by anyone — including admins. Entries are append-only and retained for seven years.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-43-template-editor" data-title="Template editor">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/admin/templates</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Onboarding templates</h2>
+        <p class="page-sub">Define what each kind of patient receives — reused across every lead.</p>
+
+        <div class="a-split">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Templates</div>
+            <div class="card a-tmpl-card selected" data-tmpl="New patient · PPO INN" onclick="aPickTmpl(this)">
+              <div class="a-tmpl-name">New patient · PPO INN</div>
+              <div class="a-tmpl-meta">8 items · 12 min average</div>
+            </div>
+            <div class="card a-tmpl-card" data-tmpl="New patient · PPO OON" onclick="aPickTmpl(this)">
+              <div class="a-tmpl-name">New patient · PPO OON</div>
+              <div class="a-tmpl-meta">9 items · 15 min average · adds SPD / EOC request</div>
+            </div>
+            <div class="card a-tmpl-card" data-tmpl="Returning patient" onclick="aPickTmpl(this)">
+              <div class="a-tmpl-name">Returning patient</div>
+              <div class="a-tmpl-meta">4 items · 4 min average</div>
+            </div>
+            <div class="card a-tmpl-card" data-tmpl="IV infusion only" onclick="aPickTmpl(this)">
+              <div class="a-tmpl-name">IV infusion only</div>
+              <div class="a-tmpl-meta">6 items · 8 min average</div>
+            </div>
+            <div class="card a-tmpl-card" data-tmpl="Self-pay walk-in" onclick="aPickTmpl(this)">
+              <div class="a-tmpl-name">Self-pay walk-in</div>
+              <div class="a-tmpl-meta">5 items · 6 min average</div>
+            </div>
+            <button class="btn btn-sm" style="margin-top:12px;width:100%" onclick="HCOS.toast('New template started — name it and add the first item.', 'ok')">New template</button>
+          </div>
+
+          <div>
+            <div class="seg-divider" style="margin-top:0">Editing: <span id="a-tmpl-title">New patient · PPO INN</span></div>
+
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>Step</th><th>Item</th><th>Required</th><th>Channel</th><th></th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td><td>Demographics and emergency contact</td>
+                    <td><span class="pill pill-muted">Required</span></td><td>Portal</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened — edit label, help text, and channel.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td><td>Medical history questionnaire</td>
+                    <td><span class="pill pill-muted">Required</span></td><td>Portal</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened — this questionnaire is built in the form builder.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td><td>Reason for visit</td>
+                    <td><span class="pill pill-muted">Required</span></td><td>Portal</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>4</td><td>HIPAA, treatment, and financial consents</td>
+                    <td><span class="pill pill-muted">Required</span></td><td>Portal / Kiosk</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>5</td><td>ID upload — driver license or passport</td>
+                    <td><span class="pill pill-muted">Required</span></td><td>Portal / Kiosk</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>6</td><td>Insurance card upload</td>
+                    <td><span class="pill pill-muted">Required</span></td><td>Portal / Kiosk</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>7</td><td>Pharmacy and supplement preferences</td>
+                    <td>Optional</td><td>Portal</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened.')">Edit</button></td>
+                  </tr>
+                  <tr>
+                    <td>8</td><td>Photo / video consent</td>
+                    <td>Optional</td><td>Portal</td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Item settings opened.')">Edit</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout" style="margin-top:12px">Questionnaire items are authored once in the form builder and reused here — the answers land in the chart automatically, nothing is re-keyed.</div>
+
+            <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="HCOS.toast('Template saved — new leads matching this type get it automatically.', 'ok')">Save template</button>
+              <a class="btn" href="intake-funnel.html">Preview as patient</a>
+              <button class="btn btn-ghost" data-activate="a-46-form-builder">Open form builder</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-44-notifications" data-title="Notifications">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/admin/notifications</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Notifications</h2>
+        <p class="page-sub">Which events trigger which messages, on which channels — every message is templated and audited.</p>
+
+        <div class="filters">
+          <span class="field-help" style="margin:0">7 rules active</span>
+          <button class="btn btn-sm" style="margin-left:auto" data-activate="a-43-template-editor">Manage message templates</button>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('New rule started — pick a trigger, audience, and channel.', 'ok')">New rule</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Trigger</th><th>Audience</th><th>Channel</th><th>Template</th><th>Active</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Onboarding packet sent</td>
+                <td>Patient</td>
+                <td><span class="pill pill-muted">SMS</span></td>
+                <td class="a-mono">onboard.welcome.v3</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened — edit trigger, audience, channel, and template.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Reminder · 24 h after send, still incomplete</td>
+                <td>Patient</td>
+                <td><span class="pill pill-muted">SMS</span></td>
+                <td class="a-mono">onboard.reminder.24h.v2</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Appointment confirmation</td>
+                <td>Patient</td>
+                <td><span class="pill pill-muted">SMS + Email</span></td>
+                <td class="a-mono">appt.confirm.v4</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Eligibility check failed</td>
+                <td>Marie</td>
+                <td><span class="pill pill-muted">In-app</span></td>
+                <td class="a-mono">elig.fail.alert.v1</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Patient checked in</td>
+                <td>Charlene, Dr. Drannikov</td>
+                <td><span class="pill pill-muted">In-app + desktop</span></td>
+                <td class="a-mono">checkin.notify.v2</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Kiosk offline alert</td>
+                <td>Yazmin, Shibani</td>
+                <td><span class="pill pill-muted">SMS + In-app</span></td>
+                <td class="a-mono">kiosk.offline.v1</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Pre-visit chart ready for provider</td>
+                <td>Dr. Drannikov</td>
+                <td><span class="pill pill-muted">In-app</span></td>
+                <td class="a-mono">previsit.ready.v1</td>
+                <td><span class="pill pill-ok">On</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top:14px">The kiosk offline alert is the fix for today's silent failure — when a kiosk drops offline, Yazmin and Shibani are paged instead of finding out from a stranded patient.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-45-system-states" data-title="System states">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/admin/states</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">System states</h2>
+        <p class="page-sub">The reusable patterns intake uses everywhere — fail loudly, never silently.</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Empty state</div>
+            <div class="empty-state" style="padding:28px 10px">
+              <div style="font-size:14px;color:var(--ink);font-weight:600">No leads yet today</div>
+              <div style="font-size:12px;margin-top:4px">New web inquiries and phone calls appear here.</div>
+              <a class="btn btn-primary btn-sm" style="margin-top:14px" href="intake.html">Create lead manually</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Loading state</div>
+            <div style="padding:28px 10px;text-align:center">
+              <div class="a-spinner"></div>
+              <div style="font-size:13px;color:var(--ink)">Running eligibility check…</div>
+              <div class="field-help" style="margin-top:4px">Usually takes 3–8 seconds</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Error state</div>
+            <div class="callout callout-err" style="margin-top:0"><strong>Eligibility check failed.</strong> The payer did not respond after three attempts. Retry now, or call the payer to verify by phone.</div>
+            <div class="a-mono" style="margin:10px 0">270 timeout · ANTHEM · request_id 8f2k</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-sm" onclick="HCOS.toast('Retrying eligibility check — the 271 response lands in seconds.', 'ok')">Retry check</button>
+              <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Payer line dialed — (855) 555-0142 on the front-desk phone.')">Call payer</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Success state</div>
+            <div style="text-align:center;padding:28px 10px">
+              <div class="a-big-check">✓</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Packet sent to Tom Alvarez</div>
+              <div class="field-help" style="margin-top:4px">Text delivered · 11:42 AM</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Inline validation</div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Member ID</label>
+              <input class="field-input invalid" value="XJK4-882">
+              <div class="field-error">Member IDs for Anthem are 11–13 characters. This one has 8 — check the card and re-enter.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Permission denied</div>
+            <div class="callout"><strong>You do not have access to this.</strong> Only Office Manager and above can edit notification templates. Ask Shibani to grant access, or open a read-only view.</div>
+            <button class="btn btn-sm" style="margin-top:10px" onclick="HCOS.toast('Access request sent to Shibani — you will be notified when it is granted.', 'ok')">Request access</button>
+          </div>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top:14px">Every failure gets a state — no blank screen, no spinner that never ends, no silent kiosk. If something breaks, the screen says what happened and what to do next.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-46-form-builder" data-title="Form builder">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/admin/builder</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Form builder</h2>
+        <p class="page-sub">Drag questions in, drop them where you want, set the rules — no Typeform, no re-keying.</p>
+
+        <div class="filters">
+          <span class="field-help" style="margin:0">Editing: Initial inquiry form · public funnel</span>
+          <a class="btn btn-sm" style="margin-left:auto" href="intake-funnel.html">Preview as patient</a>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Form published — the initial inquiry form is live on the public funnel.', 'ok')">Publish form</button>
+        </div>
+
+        <div class="fb-shell">
+          <div class="fb-palette">
+            <div class="seg-divider" style="margin:0 0 6px">Add a question</div>
+            <div class="fb-palette-item" onclick="HCOS.toast('Short answer added to the form — set its label in the inspector.')">Short answer</div>
+            <div class="fb-palette-item" onclick="HCOS.toast('Multiple choice added — add options in the inspector.')">Multiple choice</div>
+            <div class="fb-palette-item" onclick="HCOS.toast('Scale 1–10 added.')">Scale 1–10</div>
+            <div class="fb-palette-item" onclick="HCOS.toast('Yes / No added.')">Yes / No</div>
+            <div class="fb-palette-item" onclick="HCOS.toast('File upload added.')">File upload</div>
+            <div class="fb-palette-item" onclick="HCOS.toast('Section break added.')">Section</div>
+          </div>
+
+          <div class="fb-canvas">
+            <div class="seg-divider" style="margin-top:0">Initial inquiry form</div>
+            <div class="fb-question selected" onclick="aPickQ(this)" data-q="Full name">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Full name <span class="pill pill-muted">Required</span></div>
+              <div class="field-help" style="margin-top:2px">Short answer</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Phone">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Phone <span class="pill pill-muted">Required</span></div>
+              <div class="field-help" style="margin-top:2px">Short answer · used to recognize returning leads</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Email">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Email <span class="pill pill-warn">Optional</span></div>
+              <div class="field-help" style="margin-top:2px">Short answer</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="What brings you to Helixona?">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">What brings you to Helixona? <span class="pill pill-muted">Required</span></div>
+              <div class="field-help" style="margin-top:2px">Short answer · becomes the reason for visit</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Which services interest you?">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Which services interest you? <span class="pill pill-muted">Required</span></div>
+              <div class="field-help" style="margin-top:2px">Multiple choice · NAD+, IV vitamin C, Myers' cocktail, glutathione, detox program</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Do you have insurance you'd like us to check?">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Do you have insurance you'd like us to check? <span class="pill pill-warn">Optional</span></div>
+              <div class="field-help" style="margin-top:2px">Yes / No · a Yes reveals the payer and member ID fields</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="How did you hear about us?">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">How did you hear about us? <span class="pill pill-warn">Optional</span></div>
+              <div class="field-help" style="margin-top:2px">Multiple choice</div>
+            </div>
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Okay to text and email you?">
+              <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Okay to text and email you? <span class="pill pill-muted">Required</span></div>
+              <div class="field-help" style="margin-top:2px">Yes / No · contact consent</div>
+            </div>
+          </div>
+
+          <div class="fb-inspector">
+            <div class="seg-divider" style="margin-top:0">Question settings</div>
+            <div class="field">
+              <label class="field-label">Label</label>
+              <input class="field-input" value="Full name" id="a-insp-label">
+            </div>
+            <div class="field">
+              <label class="field-label">Type</label>
+              <select class="field-select">
+                <option selected>Short answer</option>
+                <option>Multiple choice</option>
+                <option>Scale 1–10</option>
+                <option>Yes / No</option>
+                <option>File upload</option>
+                <option>Section</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Help text</label>
+              <input class="field-input" placeholder="Shown under the question">
+            </div>
+            <ul class="check-list" style="margin:10px 0">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Required</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Show only if a condition is met</span>
+                <span class="check-meta">Logic</span>
+              </li>
+            </ul>
+            <div class="field-help">Logic lets a Yes on the insurance question reveal the payer and member ID fields.</div>
+            <button class="btn btn-primary btn-sm" style="margin-top:12px;width:100%" onclick="HCOS.toast('Question saved.', 'ok')">Save question</button>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:14px">One survey engine powers all of it — the intake forms built here, the
+          <a href="clinical-questionnaires.html">clinical questionnaires</a> whose answers flow into the chart, and the
+          <a href="readiness.html">readiness surveys</a>. Build a question once; reuse it anywhere.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- page-local drawer: audit entry detail -->
+<div class="drawer-overlay" data-close-drawer="#a-audit-drawer"></div>
+<div class="drawer" id="a-audit-drawer">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Audit entry</div>
+      <div class="modal-sub">Append-only — this record cannot be changed</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#a-audit-drawer">×</button>
+  </div>
+  <div class="drawer-body">
+    <dl class="kv">
+      <dt>Timestamp</dt><dd>Tuesday, July 21 · 10:41 AM PT</dd>
+      <dt>User</dt><dd>Charlene (Virtual) · Medical Assistant</dd>
+      <dt>Action</dt><dd>Edited medical history</dd>
+      <dt>Record</dt><dd>Nadia Boulos · MRN 10-4471</dd>
+      <dt>Source</dt><dd>Remote · VPN 73.12.x · session 8f2k-a19</dd>
+    </dl>
+
+    <div class="seg-divider">What changed</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead>
+        <tbody>
+          <tr><td>Current medications</td><td>Levothyroxine 50 mcg</td><td>Levothyroxine 75 mcg</td></tr>
+          <tr><td>Allergies</td><td>None recorded</td><td>Sulfa — hives</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout" style="margin-top:14px">These answers came from the patient questionnaire and flowed into the chart automatically — the edit is a correction, not a re-key.</div>
+
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+      <a class="btn" href="clinical-chart.html">Open the chart</a>
+      <button class="btn btn-ghost" data-close-drawer="#a-audit-drawer">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+
+  // Demo only: template list selection feeds the editing header.
+  function aPickTmpl(card) {
+    var cards = document.querySelectorAll('.a-tmpl-card');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+    card.classList.add('selected');
+    var title = document.getElementById('a-tmpl-title');
+    if (title) title.textContent = card.getAttribute('data-tmpl');
+  }
+
+  // Demo only: form-builder question selection feeds the inspector label.
+  function aPickQ(q) {
+    var qs = document.querySelectorAll('.fb-question');
+    for (var i = 0; i < qs.length; i++) qs[i].classList.remove('selected');
+    q.classList.add('selected');
+    var label = document.getElementById('a-insp-label');
+    if (label) label.value = q.getAttribute('data-q');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Kiosk · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .ik-brand { font-size: 13px; letter-spacing: 3px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+  .ik-status { margin-top: 44px; font-size: 12px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 7px; }
+  .ik-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); display: inline-block; }
+  .ik-label { font-size: 11px; letter-spacing: 1.5px; color: rgba(255,255,255,0.55); }
+  .ik-keypad { display: grid; grid-template-columns: repeat(3, 64px); gap: 10px; margin-top: 16px; }
+  .ik-key {
+    height: 52px; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.22); border-radius: 8px;
+    color: #fff; font-size: 18px; cursor: pointer;
+  }
+  .ik-key-blank { background: transparent; border: none; cursor: default; }
+  .ik-qr { width: 150px; height: 150px; background: #fff; border-radius: 8px; padding: 12px; margin: 0 auto 12px; cursor: pointer; }
+  .ik-qr-inner { width: 100%; height: 100%; background: repeating-linear-gradient(45deg, #1A1A1A 0, #1A1A1A 4px, #fff 4px, #fff 8px); }
+  .ik-vline { width: 1px; align-self: stretch; background: rgba(255,255,255,0.14); }
+  .ik-panel { background: rgba(255,255,255,0.06); border-radius: 10px; }
+  .ik-item { display: flex; align-items: center; gap: 16px; padding: 18px; margin-bottom: 14px; text-align: left; }
+  .ik-item-num {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .ik-item-name { font-size: 16px; font-weight: 500; }
+  .ik-item-meta { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .ik-item-state { font-size: 13px; color: rgba(255,255,255,0.55); margin-left: auto; }
+  .ik-consent {
+    background: #fff; color: var(--ink);
+    padding: 20px 22px; border-radius: 10px;
+    max-height: 220px; overflow-y: auto;
+    font-size: 13px; line-height: 1.7; margin-bottom: 18px; text-align: left;
+  }
+  .ik-sigpad { background: #fff; height: 90px; border-radius: 6px; position: relative; cursor: pointer; }
+  .ik-sig-name { position: absolute; bottom: 6px; left: 14px; font-family: 'Brush Script MT', 'Snell Roundhand', cursive; color: #1A1A1A; font-size: 28px; }
+  .ik-sig-hint { position: absolute; bottom: 8px; right: 14px; font-size: 11px; color: #9A9A9A; }
+  .ik-ghost-btn {
+    padding: 10px 18px; background: rgba(255,255,255,0.1); color: #fff;
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 6px;
+    font-size: 13px; cursor: pointer;
+  }
+  .ik-badge-circle {
+    width: 90px; height: 90px; background: #fff; color: var(--hx-navy);
+    border-radius: 50%; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 46px; font-weight: 600;
+  }
+  .ik-errbox {
+    background: rgba(0,0,0,0.35); border-radius: 10px;
+    padding: 16px 22px; margin-top: 24px;
+    font-size: 12px; line-height: 1.8; color: rgba(255,255,255,0.7);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; text-align: left;
+  }
+  .ik-frame-err { border: 2px dashed rgba(255,255,255,0.35); }
+  .ik-fine { margin-top: 22px; font-size: 13px; color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body data-page="intake-kiosk" data-page-title="Intake · Kiosk" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-33-kiosk-welcome" data-title="Welcome">
+    <div class="kiosk-frame">
+      <div class="ik-brand">HELIXONA</div>
+      <div class="kiosk-title">Welcome</div>
+      <div class="kiosk-sub">Touch the screen to begin check-in. It takes about two minutes when your onboarding is complete.</div>
+      <button class="kiosk-btn" data-activate="a-34-kiosk-id">Tap to check in</button>
+      <div class="ik-status"><span class="ik-dot"></span> Connected · last sync 12 seconds ago</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-34-kiosk-id" data-title="Find your appointment">
+    <div class="kiosk-frame">
+      <div class="kiosk-title" style="font-size:28px">Find your appointment</div>
+      <div class="kiosk-sub">Enter your date of birth, or scan the QR code from your text message.</div>
+
+      <div style="display:flex; gap:48px; align-items:center; text-align:left">
+        <div>
+          <div class="ik-label">Date of birth</div>
+          <div class="kiosk-pin">
+            <div class="kiosk-pin-cell ik-cell">0</div>
+            <div class="kiosk-pin-cell ik-cell">2</div>
+            <div style="align-self:center; color:rgba(255,255,255,0.5)">/</div>
+            <div class="kiosk-pin-cell ik-cell">0</div>
+            <div class="kiosk-pin-cell ik-cell">9</div>
+            <div style="align-self:center; color:rgba(255,255,255,0.5)">/</div>
+            <div class="kiosk-pin-cell ik-cell">1</div>
+            <div class="kiosk-pin-cell ik-cell">9</div>
+            <div class="kiosk-pin-cell ik-cell"></div>
+            <div class="kiosk-pin-cell ik-cell"></div>
+          </div>
+          <div class="ik-keypad">
+            <button class="ik-key" data-key="1">1</button><button class="ik-key" data-key="2">2</button><button class="ik-key" data-key="3">3</button>
+            <button class="ik-key" data-key="4">4</button><button class="ik-key" data-key="5">5</button><button class="ik-key" data-key="6">6</button>
+            <button class="ik-key" data-key="7">7</button><button class="ik-key" data-key="8">8</button><button class="ik-key" data-key="9">9</button>
+            <div class="ik-key ik-key-blank"></div>
+            <button class="ik-key" data-key="0">0</button>
+            <button class="ik-key" data-key="back">⌫</button>
+          </div>
+        </div>
+        <div class="ik-vline"></div>
+        <div style="text-align:center">
+          <div class="ik-qr" data-activate="a-35-kiosk-pending" title="Scan QR code">
+            <div class="ik-qr-inner"></div>
+          </div>
+          <div style="font-size:13px; color:rgba(255,255,255,0.7)">Or scan your QR code</div>
+        </div>
+      </div>
+
+      <button class="kiosk-btn" style="margin-top:32px" data-activate="a-35-kiosk-pending">Find my appointment</button>
+      <div class="ik-fine">Can't find your appointment? The front desk can check you in.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-35-kiosk-pending" data-title="Pending items">
+    <div class="kiosk-frame" style="justify-content:flex-start; padding-top:56px; text-align:left; align-items:stretch">
+      <div style="width:100%; max-width:640px; margin:0 auto">
+        <div class="ik-label" style="margin-bottom:8px">Hi, Marcus</div>
+        <div class="kiosk-title" style="font-size:28px; margin-bottom:10px">A couple of things before we begin</div>
+        <div style="font-size:14px; color:rgba(255,255,255,0.6); margin-bottom:30px">Your appointment is at 3:30 PM with Dr. Drannikov. Two consents still need your signature.</div>
+
+        <div class="ik-panel ik-item">
+          <div class="ik-item-num">1</div>
+          <div style="flex:1">
+            <div class="ik-item-name">Treatment consent</div>
+            <div class="ik-item-meta">2 min · sign on screen</div>
+          </div>
+          <div class="ik-item-state">Pending</div>
+        </div>
+
+        <div class="ik-panel ik-item">
+          <div class="ik-item-num">2</div>
+          <div style="flex:1">
+            <div class="ik-item-name">Financial responsibility</div>
+            <div class="ik-item-meta">1 min · sign on screen</div>
+          </div>
+          <div class="ik-item-state">Pending</div>
+        </div>
+
+        <button class="kiosk-btn" style="width:100%; margin-top:18px" data-activate="a-36-kiosk-resign">Start with treatment consent</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-36-kiosk-resign" data-title="Consent signature">
+    <div class="kiosk-frame" style="justify-content:flex-start; padding-top:50px; text-align:left; align-items:stretch">
+      <div style="width:100%; max-width:720px; margin:0 auto">
+        <div class="ik-label" id="ik-consent-step" style="margin-bottom:8px">Consent 1 of 2 · treatment</div>
+        <div class="kiosk-title" id="ik-consent-title" style="font-size:24px; margin-bottom:14px">Treatment consent</div>
+
+        <div class="ik-consent" id="ik-consent-text">I voluntarily consent to evaluation and treatment by the providers of Helixona, Inc. I understand the nature of functional medicine evaluation, including laboratory testing, intravenous therapy, and supplement recommendations. I understand the risks, benefits, and alternatives have been explained to me, and that no specific outcome has been promised or guaranteed. I understand I may refuse any treatment at any time. I have had the opportunity to ask questions about my care, and my questions have been answered to my satisfaction…</div>
+
+        <div class="ik-panel" style="padding:20px">
+          <div class="ik-label" style="margin-bottom:10px">Sign below</div>
+          <div class="ik-sigpad" id="ik-sigpad">
+            <div class="ik-sig-name" id="ik-sig-name">Marcus Webb</div>
+            <div class="ik-sig-hint" id="ik-sig-hint">Tap Clear to redo</div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:12px">
+            <button class="ik-ghost-btn" id="ik-clear-btn">Clear</button>
+            <button class="kiosk-btn" id="ik-sign-btn" style="padding:10px 22px; font-size:13px; margin-left:auto">Sign and continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-37-kiosk-complete" data-title="Checked in">
+    <div class="kiosk-frame">
+      <div class="ik-badge-circle">✓</div>
+      <div class="kiosk-title">You're checked in</div>
+      <div class="kiosk-sub">Please have a seat. <strong style="color:#fff">Wesley</strong> will call your name when it's time.</div>
+
+      <div class="ik-panel" style="padding:18px 24px; min-width:340px; text-align:left">
+        <div class="ik-label">Your appointment</div>
+        <div style="font-size:18px; font-weight:500; margin:6px 0">3:30 PM · New patient consult</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7)">Dr. Drannikov · 90 minutes</div>
+      </div>
+
+      <div class="ik-fine">Restroom is down the hall on the right · Water is by the front desk</div>
+      <button class="kiosk-btn" style="margin-top:28px" data-activate="a-33-kiosk-welcome">Done</button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-38-kiosk-error" data-title="Kiosk error">
+    <div class="kiosk-frame ik-frame-err">
+      <div class="ik-badge-circle">!</div>
+      <div class="kiosk-title">We need a quick hand from the front desk</div>
+      <div class="kiosk-sub">The kiosk can't reach Helixona's system right now. <strong style="color:#fff">Please see Yazmin at the front desk</strong> — she has been notified and is ready to help.</div>
+
+      <div class="ik-errbox">
+        Error: KIOSK_OFFLINE_SYNC<br>
+        Time: 11:38:12 AM · Device: KIOSK-01<br>
+        Alert sent to: Yazmin, Shibani
+      </div>
+
+      <div class="ik-fine">Your spot is not lost — the front desk can check you in right away.</div>
+      <div style="display:flex; gap:10px; margin-top:24px">
+        <button class="ik-ghost-btn" data-activate="a-33-kiosk-welcome">Back to start</button>
+        <button class="kiosk-btn" style="padding:12px 26px; font-size:14px" onclick="HCOS.toast('Still can\'t reach the system — Yazmin can check you in at the front desk.', 'warn')">Try again</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: date-of-birth keypad fills the pin cells.
+  (function () {
+    var cells = document.querySelectorAll('#a-34-kiosk-id .ik-cell');
+    document.addEventListener('click', function (ev) {
+      var key = ev.target.closest ? ev.target.closest('.ik-key') : null;
+      if (!key) return;
+      var k = key.getAttribute('data-key');
+      if (!k) return;
+      var i;
+      if (k === 'back') {
+        for (i = cells.length - 1; i >= 0; i--) {
+          if (cells[i].textContent !== '') { cells[i].textContent = ''; return; }
+        }
+      } else {
+        for (i = 0; i < cells.length; i++) {
+          if (cells[i].textContent === '') { cells[i].textContent = k; return; }
+        }
+      }
+    });
+  })();
+
+  // Demo only: two-consent signature flow on one screen.
+  (function () {
+    var step = 1;
+    var signed = true;
+    var stepLbl = document.getElementById('ik-consent-step');
+    var titleEl = document.getElementById('ik-consent-title');
+    var textEl = document.getElementById('ik-consent-text');
+    var sigName = document.getElementById('ik-sig-name');
+    var sigHint = document.getElementById('ik-sig-hint');
+    var pad = document.getElementById('ik-sigpad');
+    if (!stepLbl || !titleEl || !textEl || !sigName || !sigHint || !pad) return;
+    var treatmentText = textEl.textContent;
+    var financialText = 'I understand that I am financially responsible for services provided by Helixona, Inc., including any portion my insurance plan does not cover. I authorize Helixona to submit claims and supporting clinical documentation to my insurance carrier on my behalf and to receive payment information related to my care. For out-of-network plans, I understand an estimate of my responsibility is shared before treatment, and that I will receive a statement after my plan processes each claim…';
+    function setSigned(v) {
+      signed = v;
+      sigName.style.display = v ? '' : 'none';
+      sigHint.textContent = v ? 'Tap Clear to redo' : 'Tap here to sign';
+    }
+    pad.addEventListener('click', function () { if (!signed) setSigned(true); });
+    document.getElementById('ik-clear-btn').addEventListener('click', function () { setSigned(false); });
+    document.getElementById('ik-sign-btn').addEventListener('click', function () {
+      if (!signed) { HCOS.toast('Add your signature first — tap the signature box.', 'warn'); return; }
+      if (step === 1) {
+        step = 2;
+        stepLbl.textContent = 'Consent 2 of 2 · financial responsibility';
+        titleEl.textContent = 'Financial responsibility';
+        textEl.textContent = financialText;
+        setSigned(false);
+        HCOS.toast('Treatment consent signed.', 'ok');
+      } else {
+        step = 1;
+        stepLbl.textContent = 'Consent 1 of 2 · treatment';
+        titleEl.textContent = 'Treatment consent';
+        textEl.textContent = treatmentText;
+        setSigned(true);
+        HCOS.toast('Both consents signed — the schedule now shows Arrived.', 'ok');
+        HCOS.activate('a-37-kiosk-complete');
+      }
+    });
+  })();
+</script>
+</body>
+</html>

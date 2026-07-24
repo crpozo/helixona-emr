@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Public funnel · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .a-public-nav { display: flex; align-items: center; gap: 18px; padding: 14px 24px; border-bottom: 1px solid var(--line-soft); background: #fff; }
+  .a-public-logo { font-size: 15px; font-weight: 700; color: var(--hx-navy); letter-spacing: 0.3px; }
+  .a-public-links { display: flex; gap: 16px; font-size: 12.5px; color: var(--muted); margin-left: auto; }
+  .a-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
+  .a-cta-sub { font-size: 11.5px; color: var(--muted); margin-top: 10px; }
+  .a-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 28px 24px; }
+  .a-feature-ico { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--ink); background: #fff; margin-bottom: 10px; }
+  .a-feature-title { font-size: 13px; font-weight: 600; color: var(--hx-navy); margin-bottom: 4px; }
+  .a-feature-body { font-size: 12px; color: var(--muted); line-height: 1.55; }
+  .a-public-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 24px; border-top: 1px solid var(--line-soft); font-size: 11px; color: var(--muted); }
+  .a-progress { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin-bottom: 20px; }
+  .a-progress-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  .a-step { margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
+  .a-step:last-of-type { border-bottom: none; }
+  .a-q { font-size: 13px; font-weight: 600; color: var(--hx-navy); line-height: 1.5; display: flex; gap: 8px; }
+  .a-qnum { width: 20px; height: 20px; border-radius: 50%; background: var(--hx-navy); color: #fff; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .a-qhelp { font-size: 11.5px; color: var(--muted); margin: 4px 0 8px 28px; line-height: 1.5; }
+  .a-choice { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; margin: 6px 0 0 28px; font-size: 12.5px; cursor: pointer; background: #fff; }
+  .a-choice:hover { border-color: var(--hx-navy); }
+  .a-choice.selected { border: 1.5px solid var(--ink); background: var(--hx-band); font-weight: 600; }
+  .a-letter { width: 20px; height: 20px; border: 1px solid var(--line); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; color: var(--muted); flex-shrink: 0; background: #fff; }
+  .a-choice.selected .a-letter { background: var(--hx-navy); border-color: var(--hx-navy); color: #fff; }
+  .a-conditional { margin: 12px 0 0 28px; padding: 12px 14px; background: var(--hx-band); border-left: 3px solid var(--hx-accent); border-radius: 4px; }
+  .a-conditional .a-choice { margin-left: 0; }
+  .a-conditional-title { font-size: 12px; font-weight: 600; color: var(--hx-navy); margin-bottom: 4px; }
+  .a-upload { border: 2px dashed var(--line); border-radius: 8px; padding: 24px 20px; text-align: center; margin: 12px 0 0 28px; cursor: pointer; }
+  .a-upload:hover { border-color: var(--ink); }
+  .a-upload-title { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .a-upload-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .a-upload-file { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--hx-band); border: 1px solid var(--line); border-radius: 6px; margin: 10px 0 0 28px; font-size: 12.5px; }
+  .a-file-ico { width: 32px; height: 32px; border-radius: 6px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; flex-shrink: 0; }
+  .a-status-ico { width: 64px; height: 64px; border-radius: 50%; background: var(--hx-light); color: var(--ink); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+  .a-status-title { font-size: 18px; font-weight: 600; color: var(--hx-navy); margin-bottom: 8px; }
+  .a-status-body { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+  .a-contact-box { background: var(--hx-band); border: 1px solid var(--line-soft); border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; text-align: left; }
+  .a-contact-lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
+  .a-contact-val { font-size: 13.5px; color: var(--hx-navy); font-weight: 500; margin-top: 2px; }
+  .a-fineprint { font-size: 10.5px; color: var(--muted); text-align: center; margin-top: 10px; line-height: 1.5; }
+  .a-req { color: var(--ink); font-weight: 700; }
+  .a-msg-link { color: var(--ink); text-decoration: underline; cursor: pointer; }
+  @media (max-width: 900px) { .a-features { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="intake-funnel" data-page-title="Intake · Public funnel" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-01-landing" data-title="Public landing">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">helixona.com/become-a-patient</span></div>
+      <div class="frame-body tight">
+
+        <div class="a-public-nav">
+          <div class="a-public-logo">Helixona</div>
+          <div class="a-public-links"><span>About</span><span>Services</span><span>Approach</span><span>Contact</span></div>
+          <button class="btn btn-primary btn-sm" data-activate="a-02-inquiry">Become a patient</button>
+        </div>
+
+        <div class="public-hero" style="border-radius:0">
+          <div class="a-eyebrow">Now accepting new patients</div>
+          <h1 class="public-h1">Functional medicine that <strong>finds the root cause</strong>.</h1>
+          <p class="public-lede">Helixona is a functional medicine clinic in Irvine, California specializing in chronic fatigue, post-COVID syndrome, autoimmune conditions, and IV nutrient therapy. Most PPO plans accepted as out-of-network.</p>
+          <button class="btn btn-primary btn-lg" data-activate="a-02-inquiry">Start your intake</button>
+          <div class="a-cta-sub">Takes about 5 minutes · no account needed</div>
+        </div>
+
+        <div class="a-features">
+          <div>
+            <div class="a-feature-ico">⚕</div>
+            <div class="a-feature-title">Comprehensive root-cause workup</div>
+            <div class="a-feature-body">We don't manage symptoms — we trace them. Functional labs, a structured timeline, and a systems-based assessment for chronic and complex conditions.</div>
+          </div>
+          <div>
+            <div class="a-feature-ico">∞</div>
+            <div class="a-feature-title">In-clinic IV nutrient therapy</div>
+            <div class="a-feature-body">Four infusion chairs onsite. NAD+, Myers' cocktail, glutathione, high-dose vitamin C, and custom protocols administered under provider supervision.</div>
+          </div>
+          <div>
+            <div class="a-feature-ico">$</div>
+            <div class="a-feature-title">Out-of-network with most PPOs</div>
+            <div class="a-feature-body">We submit out-of-network claims to Anthem, Blue Shield, UnitedHealthcare, and Cigna on your behalf. Cash and Medicare options also available.</div>
+          </div>
+        </div>
+
+        <div class="a-public-foot">
+          <div>114 Pacifica, Suite 130, Irvine CA 92618 · (949) 257-2644</div>
+          <div>© Helixona, Inc.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-02-inquiry" data-title="Inquiry form">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:40</span><span>helixona.com</span><span>•••</span></div>
+      <div class="phone-body">
+
+        <div style="text-align:center;padding:4px 0 14px">
+          <div style="font-size:16px;font-weight:600;color:var(--hx-navy)">Welcome to Helixona</div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">Become a patient · about 5 min</div>
+        </div>
+
+        <div class="a-progress"><div class="a-progress-fill" style="width:70%"></div></div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">1</span><span>I give my consent to receive text messages, emails, and phone calls from Helixona. I understand this consent can be revoked at any time. <span class="a-req">*</span></span></div>
+          <div class="a-qhelp">At Helixona, we stay in close communication with our patients to support their healing journey.</div>
+          <label class="a-choice selected"><span class="a-letter">A</span>Yes</label>
+          <label class="a-choice"><span class="a-letter">B</span>No</label>
+        </div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">2</span><span>Contact information <span class="a-req">*</span></span></div>
+          <div class="a-qhelp">Please provide your full contact information.</div>
+          <div class="field">
+            <label class="field-label">Your full name *</label>
+            <input class="field-input" type="text" placeholder="First Last">
+          </div>
+          <div class="field">
+            <label class="field-label">Date of birth *</label>
+            <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+          </div>
+          <div class="field">
+            <label class="field-label">Best contact phone number</label>
+            <input class="field-input" type="tel" placeholder="(949) 555-0100">
+          </div>
+          <div class="field">
+            <label class="field-label">Email address</label>
+            <input class="field-input" type="email" placeholder="name@example.com">
+          </div>
+        </div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">3</span><span>Home address</span></div>
+          <div class="a-qhelp">Used for claim submission and clinic correspondence.</div>
+          <div class="field">
+            <label class="field-label">Address</label>
+            <input class="field-input" type="text" placeholder="Street address">
+          </div>
+          <div class="field">
+            <label class="field-label">Address line 2</label>
+            <input class="field-input" type="text" placeholder="Apt / suite (optional)">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label">City</label>
+              <input class="field-input" type="text">
+            </div>
+            <div class="field">
+              <label class="field-label">State</label>
+              <input class="field-input" type="text" placeholder="CA" style="text-transform:uppercase">
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Zip code</label>
+            <input class="field-input" type="text" placeholder="92618">
+          </div>
+        </div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">4</span><span>What brings you in?</span></div>
+          <div class="a-qhelp">A sentence or two is fine. We'll go deeper later.</div>
+          <textarea class="field-textarea" rows="3" placeholder="e.g. Chronic fatigue since COVID, looking for a real workup"></textarea>
+        </div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">5</span><span>How did you hear about us?</span></div>
+          <div class="a-qhelp">Helps us know what's working — and follow up on referrals.</div>
+          <label class="a-choice selected"><span class="a-letter">A</span>Social media</label>
+          <label class="a-choice"><span class="a-letter">B</span>Online search</label>
+          <label class="a-choice"><span class="a-letter">C</span>Doctor referral</label>
+          <label class="a-choice"><span class="a-letter">D</span>Friend or family referral</label>
+          <label class="a-choice"><span class="a-letter">E</span>Helixona website (direct)</label>
+          <label class="a-choice"><span class="a-letter">F</span>Podcast, article, or interview</label>
+          <label class="a-choice"><span class="a-letter">G</span>Other</label>
+
+          <div class="a-conditional">
+            <div class="a-conditional-title">Which platform?</div>
+            <label class="a-choice selected"><span class="a-letter">a</span>Instagram</label>
+            <label class="a-choice"><span class="a-letter">b</span>Facebook</label>
+            <label class="a-choice"><span class="a-letter">c</span>TikTok</label>
+            <label class="a-choice"><span class="a-letter">d</span>YouTube</label>
+            <label class="a-choice"><span class="a-letter">e</span>X / Twitter</label>
+            <label class="a-choice"><span class="a-letter">f</span>LinkedIn</label>
+            <label class="a-choice"><span class="a-letter">g</span>Reddit</label>
+            <label class="a-choice"><span class="a-letter">h</span>Other platform</label>
+            <div class="field" style="margin:10px 0 0">
+              <label class="field-label">Whose account or post (optional)</label>
+              <input class="field-input" type="text" placeholder="@account or post link if you remember">
+            </div>
+          </div>
+        </div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">6</span><span>What type of health insurance do you currently have? <span class="a-req">*</span></span></div>
+          <label class="a-choice"><span class="a-letter">A</span>PPO insurance</label>
+          <label class="a-choice"><span class="a-letter">B</span>HMO insurance</label>
+          <label class="a-choice selected"><span class="a-letter">C</span>Medicare with PPO</label>
+          <label class="a-choice"><span class="a-letter">D</span>Medicare with HMO</label>
+          <label class="a-choice"><span class="a-letter">E</span>Medicare with Medicaid (Medi-Medi)</label>
+          <label class="a-choice"><span class="a-letter">F</span>Medi-Cal / Medicaid</label>
+          <label class="a-choice"><span class="a-letter">G</span>Uninsured (cash only)</label>
+          <label class="a-choice"><span class="a-letter">H</span>Other type of coverage</label>
+        </div>
+
+        <div class="a-step">
+          <div class="a-q"><span class="a-qnum">7</span><span>Upload a copy of your insurance card</span></div>
+          <div class="a-qhelp">Front of card. We use this to verify your benefits before your visit. You can also share it later from your portal.</div>
+          <div class="a-upload" onclick="HCOS.toast('File upload arrives with the real build.', 'ok')">
+            <div class="a-upload-title">Choose file or drag here</div>
+            <div class="a-upload-sub">JPG, PNG, or PDF · 10 MB max</div>
+          </div>
+          <div class="a-upload-file">
+            <div class="a-file-ico">✓</div>
+            <div style="flex:1">
+              <div style="font-weight:600;color:var(--hx-navy)">medicare-card-front.jpg</div>
+              <div style="font-size:11px;color:var(--muted)">1.8 MB · uploaded · card details read automatically after you submit</div>
+            </div>
+            <button class="btn btn-sm">Replace</button>
+          </div>
+          <div class="a-qhelp" style="margin-top:10px">Skip this if you don't have your card handy — our team will ask for it before scheduling.</div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:4px" data-activate="a-03-check-email" onclick="HCOS.toast('Inquiry received — your secure link is on its way by email and text.', 'ok')">Get my secure link</button>
+        <div class="a-fineprint">By submitting, you agree that Helixona may contact you at the email and phone provided. We never share your information.</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-03-check-email" data-title="Check your email">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:40</span><span>helixona.com</span><span>•••</span></div>
+      <div class="phone-body" style="text-align:center;padding:40px 24px">
+
+        <div class="a-status-ico">✓</div>
+        <div class="a-status-title">Check your email and text</div>
+        <div class="a-status-body">We sent your secure intake link to:</div>
+
+        <div class="a-contact-box">
+          <div class="a-contact-lbl">Email</div>
+          <div class="a-contact-val">rosa.delgado@example.com</div>
+        </div>
+        <div class="a-contact-box" style="margin-bottom:22px">
+          <div class="a-contact-lbl">Text message</div>
+          <div class="a-contact-val">+1 (949) 555-0184</div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:10px" data-activate="a-04-magic-link">Open the email</button>
+        <button class="btn" style="width:100%;margin-bottom:10px" onclick="HCOS.toast('Link re-sent by email and text.', 'ok')">Resend link</button>
+        <button class="btn btn-ghost" style="width:100%;font-size:12px" data-activate="a-02-inquiry">Use a different email or phone</button>
+
+        <div class="callout" style="margin-top:24px;text-align:left"><strong>Your link expires in 7 days.</strong> If you don't see the email, check your spam folder. You can pause and resume your intake any time using the same link.</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-04-magic-link" data-title="Magic link">
+    <div class="grid-2" style="gap:24px;align-items:start">
+
+      <div>
+        <div class="seg-divider" style="margin-top:0">Email</div>
+        <div class="msg-preview">
+          <div class="msg-header">
+            <div class="msg-header-row"><div class="msg-header-lbl">From</div><div><strong>Helixona</strong> &lt;hello@helixona.com&gt;</div></div>
+            <div class="msg-header-row"><div class="msg-header-lbl">To</div><div>rosa.delgado@example.com</div></div>
+            <div class="msg-header-row"><div class="msg-header-lbl">Subject</div><div><strong>Your Helixona intake link is ready</strong></div></div>
+          </div>
+          <div class="msg-body">
+            <div style="font-size:22px;font-weight:600;color:var(--hx-navy);margin-bottom:14px">Helixona</div>
+            <p style="margin:0 0 12px">Hi Rosa,</p>
+            <p style="margin:0 0 12px">Thank you for reaching out to Helixona. We received your inquiry and want to learn a bit more about your health so we can prepare for your visit.</p>
+            <p style="margin:0 0 4px">Tap below to continue your intake — it takes about 10 minutes, and you can pause and pick up where you left off.</p>
+            <a class="msg-cta" href="intake-onboarding.html">Continue my intake</a>
+            <p style="margin:0 0 12px;font-size:11.5px;color:var(--muted)">Or paste this link in your browser:<br><span style="font-family:ui-monospace, monospace;word-break:break-all">https://helixona.app/i/a8f2-3392-bc41</span></p>
+            <p style="margin:20px 0 4px">Looking forward to working with you,</p>
+            <p style="margin:0"><strong>The Helixona team</strong></p>
+          </div>
+          <div class="msg-foot">This link <a class="a-msg-link" data-activate="a-05-link-expired">expires in 7 days</a>. If you didn't request it, you can safely ignore this email.<br>Helixona, Inc. · 114 Pacifica, Suite 130, Irvine CA 92618</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="seg-divider" style="margin-top:0">Text message</div>
+        <div class="phone-frame" style="width:320px">
+          <div class="phone-bar"><span>11:41</span><span>Messages</span><span>•••</span></div>
+          <div class="phone-body" style="background:var(--hx-band);padding:18px 14px;min-height:0">
+            <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px">Today 11:41 AM</div>
+            <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:6px">Helixona</div>
+            <div class="sms-bubble">Helixona: Thanks for reaching out! Continue your intake here (expires in 7 days, pause &amp; resume anytime):<br><br><a class="a-msg-link" href="intake-onboarding.html">https://helixona.app/i/a8f2-3392-bc41</a><br><br>Reply STOP to opt out. Reply HELP for help.</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <div class="card-title">About this link</div>
+          <ul class="check-list">
+            <li class="check-item">
+              <span class="check-icon done">✓</span>
+              <span class="check-label">Single-use signed link</span>
+              <span class="check-meta">expires Tue Jul 28</span>
+            </li>
+            <li class="check-item">
+              <span class="check-icon done">✓</span>
+              <span class="check-label">Same link in email and text — pause and resume anytime</span>
+            </li>
+            <li class="check-item">
+              <span class="check-icon done">✓</span>
+              <span class="check-label">No health information in the link — everything is gated behind it</span>
+            </li>
+            <li class="check-item">
+              <span class="check-icon done">✓</span>
+              <span class="check-label">STOP and HELP honored on text automatically</span>
+            </li>
+            <li class="check-item">
+              <span class="check-icon done">✓</span>
+              <span class="check-label">Every use of the link is logged</span>
+              <span class="check-meta"><a href="security.html" style="color:var(--muted)">audit trail</a></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-05-link-expired" data-title="Link expired">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:40</span><span>helixona.app</span><span>•••</span></div>
+      <div class="phone-body" style="text-align:center;padding:40px 24px">
+
+        <div class="a-status-ico">◷</div>
+        <div class="a-status-title">Your link has expired</div>
+        <div class="a-status-body">For your security, intake links expire after 7 days. <strong style="color:var(--hx-navy)">All the answers you saved so far are safe.</strong></div>
+
+        <div class="a-contact-box" style="margin-bottom:20px">
+          <div class="a-contact-lbl">We have on file</div>
+          <div class="a-contact-val">rosa.delgado@example.com</div>
+          <div class="a-contact-val">+1 (949) 555-0184</div>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:10px" onclick="HCOS.toast('New link sent — check your email and text. It is good for 7 days.', 'ok'); setTimeout(function(){ HCOS.activate('a-03-check-email'); }, 900)">Send me a new link</button>
+        <button class="btn btn-ghost" style="width:100%;font-size:12px" data-activate="a-02-inquiry">My email or phone has changed</button>
+
+        <div class="callout" style="margin-top:22px;text-align:left;font-size:12px">Prefer to talk? Call us at <strong>(949) 257-2644</strong>, Mon–Fri, 8 AM – 6 PM Pacific.</div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: tapping a choice selects it within its own group.
+  document.addEventListener('click', function (ev) {
+    var choice = ev.target.closest ? ev.target.closest('.a-choice') : null;
+    if (!choice || !choice.parentElement) return;
+    var kids = choice.parentElement.children;
+    for (var i = 0; i < kids.length; i++) {
+      if (kids[i].classList && kids[i].classList.contains('a-choice')) kids[i].classList.remove('selected');
+    }
+    choice.classList.add('selected');
+  });
+</script>
+</body>
+</html>

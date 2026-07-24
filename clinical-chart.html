@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation · Chart · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  /* Page-local pieces the shared vocabulary lacks — all prefixed .b- */
+  .b-status-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    padding: 12px 16px; margin-bottom: 16px;
+    background: var(--hx-band); border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 12.5px; color: var(--ink);
+  }
+  .b-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 4px; }
+  .b-sys {
+    background: #fff; border: 1px solid var(--line-soft);
+    border-left: 3px solid var(--line); border-radius: var(--radius-sm);
+    padding: 8px 10px;
+  }
+  .b-sys.sev { border-left-color: var(--ink); }
+  .b-sys.sub { border-left-style: dashed; border-left-color: var(--muted); }
+  .b-sys-name { font-size: 11.5px; font-weight: 600; color: var(--hx-navy); }
+  .b-sys-status { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .b-clin-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .b-clin-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+  .b-proto {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); padding: 11px 13px; cursor: pointer; margin-bottom: 8px;
+  }
+  .b-proto:hover { border-color: var(--hx-navy); }
+  .b-proto.selected { border-color: var(--ink); border-left: 3px solid var(--ink); }
+  .b-proto-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .b-proto-dose { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  .b-sigpad {
+    border: 1.5px dashed var(--line); border-radius: var(--radius-sm);
+    padding: 22px; text-align: center; font-size: 12px; color: var(--muted);
+    cursor: pointer; background: var(--hx-band);
+  }
+  .b-sigpad:hover { border-color: var(--hx-navy); color: var(--ink); }
+  .b-workup { font-size: 12.5px; line-height: 2; color: var(--ink); margin: 6px 0 0; }
+</style>
+</head>
+<body data-page="clinical-chart" data-page-title="Documentation · Chart" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================
+       B-04 · Functional medicine timeline
+       ============================================================ -->
+  <section class="screen" id="b-04-timeline" data-title="Timeline">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/chart/timeline</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">PN</span>
+            <div>
+              <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">38 · Blue Shield of CA PPO · MRN 30418 · functional medicine timeline — antecedents, triggers, mediators</div>
+            </div>
+          </div>
+          <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
+        </div>
+
+        <h2 class="page-title">Functional medicine timeline</h2>
+        <p class="page-sub">The patient's story over time — the antecedents, triggers, and mediators that shape the plan.</p>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Life events and symptom onset</div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-time">Born · 1988</div>
+                <div class="timeline-body"><span class="pill pill-muted">Antecedent</span> Birth and early childhood — vaginal delivery, breastfed 9 months, no early antibiotics. Family history: maternal Hashimoto's, paternal celiac.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">2012 · age 24</div>
+                <div class="timeline-body"><span class="pill pill-muted">Antecedent</span> Mononucleosis — confirmed EBV mono with 4 weeks of fatigue. Recovered at the time but reports never feeling "100%" since.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">2016 – 2021</div>
+                <div class="timeline-body"><span class="pill pill-warn">Mediator</span> High-stress career period — tech industry, 60+ hour weeks, frequent travel, irregular sleep. Gradual onset of perimenstrual mood symptoms.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">2021</div>
+                <div class="timeline-body"><span class="pill pill-warn">Mediator</span> Hashimoto's diagnosis — subclinical hypothyroidism identified; started levothyroxine 50 mcg. Antibody titers not re-checked since.</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-time">Aug 2024</div>
+                <div class="timeline-body"><span class="pill pill-err">Trigger</span> COVID-19 infection (acute) — moderate severity, 10-day acute phase, not hospitalized, no antivirals. Symptoms never fully resolved.</div>
+              </div>
+              <div class="timeline-item muted">
+                <div class="timeline-time">Sep 2024 → present</div>
+                <div class="timeline-body"><span class="pill pill-navy">Current</span> Persistent fatigue, post-exertional malaise, brain fog, orthostatic intolerance, GI bloating, anxiety. Self-rated overall function: 4 of 10.</div>
+              </div>
+            </div>
+
+            <div class="seg-divider">Systems and matrix</div>
+            <div class="b-matrix">
+              <div class="b-sys sev"><div class="b-sys-name">Energy / mitochondria</div><div class="b-sys-status">Severely impaired</div></div>
+              <div class="b-sys sub"><div class="b-sys-name">Hormones</div><div class="b-sys-status">Hashimoto's · suboptimal</div></div>
+              <div class="b-sys sub"><div class="b-sys-name">GI / microbiome</div><div class="b-sys-status">Dysbiosis symptoms</div></div>
+              <div class="b-sys sev"><div class="b-sys-name">Immune / inflammation</div><div class="b-sys-status">CRP elevated</div></div>
+              <div class="b-sys sub"><div class="b-sys-name">Detox / biotransformation</div><div class="b-sys-status">Symptoms present</div></div>
+              <div class="b-sys"><div class="b-sys-name">Cardiovascular</div><div class="b-sys-status">POTS suspected</div></div>
+              <div class="b-sys sub"><div class="b-sys-name">Structural</div><div class="b-sys-status">Hypermobility (+3)</div></div>
+              <div class="b-sys"><div class="b-sys-name">Mental / emotional</div><div class="b-sys-status">Anxiety present</div></div>
+            </div>
+            <div class="field-help" style="margin-top:8px">Solid left edge — severe. Dashed — suboptimal, watch. Plain — stable or pending workup.</div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Working hypothesis</div>
+              <p style="font-size:12.5px;line-height:1.6;margin:0">Post-acute sequelae of COVID-19 (PASC) overlaid on chronic Hashimoto's and a suspected POTS phenotype. EBV reactivation possible. Mitochondrial dysfunction likely contributory.</p>
+              <button class="btn btn-sm" style="margin-top:12px" data-activate="b-05-problem-list">Open the problem list</button>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Suggested workup</div>
+              <ul class="b-workup">
+                <li>Comprehensive metabolic panel</li>
+                <li>Thyroid panel + TPO / Tg antibodies</li>
+                <li>EBV reactivation panel</li>
+                <li>Organic acids test (OAT)</li>
+                <li>Active B12 + MTHFR</li>
+                <li>Tilt-table or active stand test</li>
+              </ul>
+              <a class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" href="labs.html#/c-01-orders">Send to lab orders</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-05 · Problem list
+       ============================================================ -->
+  <section class="screen" id="b-05-problem-list" data-title="Problem list">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/chart/problems</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">PN</span>
+            <div>
+              <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">Problem list · source of truth for assessments and claim diagnoses</div>
+            </div>
+          </div>
+          <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
+        </div>
+
+        <h2 class="page-title">Problem list</h2>
+        <p class="page-sub">Every active problem flows into the assessment of each note and onto the diagnosis lines of each claim.</p>
+
+        <div class="filters">
+          <button class="filter-chip active">Active (6)</button>
+          <button class="filter-chip">Resolved (2)</button>
+          <button class="filter-chip">All</button>
+          <input class="search-input" type="search" placeholder="Search ICD-10 or problem name">
+          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Problem added to the active list — it now flows into the assessment and the claim.', 'ok')">Add problem</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Problem</th><th>ICD-10</th><th>Status</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Post-acute sequelae of COVID-19</div>
+                  <div class="b-clin-meta">Onset 2024-08 · linked: fatigue, brain fog, orthostatic intolerance · working diagnosis</div>
+                </td>
+                <td><span class="pill pill-muted">U09.9</span></td>
+                <td><span class="pill pill-warn">Chronic · Active</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Brain fog and cognitive complaints</div>
+                  <div class="b-clin-meta">Onset 2024-09 · worse mornings · linked to PASC</div>
+                </td>
+                <td><span class="pill pill-muted">R41.840</span></td>
+                <td><span class="pill pill-warn">Active</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Generalized fatigue</div>
+                  <div class="b-clin-meta">Chronic · worse after exertion · post-exertional malaise characteristics</div>
+                </td>
+                <td><span class="pill pill-muted">R53.83</span></td>
+                <td><span class="pill pill-warn">Chronic · Active</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Hashimoto's thyroiditis</div>
+                  <div class="b-clin-meta">Diagnosed 2021 · on levothyroxine · TSH 3.8 (suboptimal for functional target)</div>
+                </td>
+                <td><span class="pill pill-muted">E06.3</span></td>
+                <td><span class="pill pill-warn">Chronic · Active</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Vitamin D deficiency</div>
+                  <div class="b-clin-meta">Confirmed lab 2026-04-08 · 18 ng/mL · target &gt; 50</div>
+                </td>
+                <td><span class="pill pill-muted">E55.9</span></td>
+                <td><span class="pill pill-err">New</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Postural orthostatic tachycardia syndrome (suspected)</div>
+                  <div class="b-clin-meta">Based on history of orthostatic HR increase · workup pending</div>
+                </td>
+                <td><span class="pill pill-muted">G90.A</span></td>
+                <td><span class="pill pill-muted">Suspected</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Resolved</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Acute COVID-19 infection</div>
+                  <div class="b-clin-meta">Aug 2024 · resolved · now flagged as the PASC trigger</div>
+                </td>
+                <td><span class="pill pill-muted">U07.1</span></td>
+                <td><span class="pill pill-muted">Resolved</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Infectious mononucleosis</div>
+                  <div class="b-clin-meta">2012 · resolved · historical, may be relevant to the current presentation</div>
+                </td>
+                <td><span class="pill pill-muted">B27.9</span></td>
+                <td><span class="pill pill-muted">Resolved</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:18px">
+          Each active problem flows into the assessment of every note and onto the diagnosis lines of every claim. Resolved problems are kept for context but excluded from billing.
+          <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+            <a class="btn btn-sm" href="clinical.html#/b-03-soap">Open the SOAP note</a>
+            <a class="btn btn-sm" href="billing.html#/d-01-worklist">See the claim worklist</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-06 · Medication reconciliation
+       ============================================================ -->
+  <section class="screen" id="b-06-med-rec" data-title="Med reconciliation">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/chart/medications</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">PN</span>
+            <div>
+              <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">Medication reconciliation · intake vs. chart vs. pharmacy on file</div>
+            </div>
+          </div>
+          <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
+        </div>
+
+        <h2 class="page-title">Medication reconciliation</h2>
+        <p class="page-sub">Required every encounter — 30 seconds when nothing has changed.</p>
+
+        <div class="b-status-bar">
+          <div>Last reconciled Apr 8, 2026 by Charlene (MA) · <span class="pill pill-warn">2 differences detected</span></div>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reconciliation confirmed — the chart, intake, and pharmacy now match.', 'ok')">Confirm reconciliation</button>
+        </div>
+
+        <div class="seg-divider" style="margin-top:0">Active medications (3)</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Medication</th><th>Source</th><th>Decision</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Levothyroxine 50 mcg PO daily</div>
+                  <div class="b-clin-meta">Dr. Drannikov · started 2021 · for Hashimoto's · CVS Irvine #4421</div>
+                </td>
+                <td><span class="pill pill-muted">Rx on file</span></td>
+                <td><span class="pill pill-ok">Continue</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this medication — changes save to the chart and route to pharmacy.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Sertraline 50 mg PO daily</div>
+                  <div class="b-clin-meta">Prescribed by an outside PCP · patient reports no benefit · consider taper after acute workup</div>
+                </td>
+                <td><span class="pill pill-muted">External</span></td>
+                <td><span class="pill pill-warn">Continue · review</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this medication — changes save to the chart and route to pharmacy.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Magnesium glycinate 400 mg PO PRN</div>
+                  <div class="b-clin-meta">Self-administered OTC · for sleep · reports modest benefit</div>
+                </td>
+                <td><span class="pill pill-muted">OTC</span></td>
+                <td><span class="pill pill-ok">Continue</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this medication — changes save to the chart and route to pharmacy.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Differences flagged</div>
+        <div class="callout callout-warn">
+          <strong>Patient reports taking, not in chart:</strong> Vitamin D3 5,000 IU daily — started about a month ago, self-purchased. Matches the new vitamin D deficiency problem.
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="HCOS.toast('Vitamin D3 5,000 IU added to the active medication list.', 'ok')">Add to chart</button>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Left off the chart — the difference is cleared from this reconciliation.')">Ignore</button>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <strong>In the chart, patient reports stopped:</strong> Cetirizine 10 mg daily — was for seasonal allergies, stopped Mar 2026.
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="HCOS.toast('Cetirizine marked discontinued — moved to the historical list.', 'ok')">Mark discontinued</button>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Cetirizine kept active — no change to the chart.')">Keep active</button>
+          </div>
+        </div>
+
+        <div class="seg-divider">Discontinued / historical</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Cetirizine 10 mg daily</div>
+                  <div class="b-clin-meta">Discontinued by patient · Mar 2026</div>
+                </td>
+                <td><span class="pill pill-muted">Inactive</span></td>
+                <td></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Cetirizine restored to the active list.', 'ok')">Restore</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          The pharmacy column reads from what the pharmacy has on file — reconciliation clears the differences before any new order is written.
+          <div style="margin-top:10px"><a class="btn btn-sm" href="pharmacy.html">Open medications and pharmacy</a></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-07 · Allergies and intolerances
+       ============================================================ -->
+  <section class="screen" id="b-07-allergies" data-title="Allergies">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/chart/allergies</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">PN</span>
+            <div>
+              <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">Allergies and intolerances · checked against every order</div>
+            </div>
+          </div>
+          <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
+        </div>
+
+        <h2 class="page-title">Allergies and intolerances</h2>
+        <p class="page-sub">Hard-block allergies stop inappropriate orders. Soft intolerances surface as warnings but do not block.</p>
+
+        <div class="b-status-bar">
+          <div>Last reviewed Apr 8, 2026 by Charlene (MA) · reconfirmed by patient at check-in today</div>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Allergies confirmed — no changes. Review recorded for today.', 'ok')">Confirm — no changes</button>
+        </div>
+
+        <div class="seg-divider" style="margin-top:0">Allergies — hard block</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>Substance</th><th>Reaction</th><th>Type</th><th>Enforcement</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Sulfa drugs (sulfonamides)</div>
+                  <div class="b-clin-meta">Verified by patient · onset childhood</div>
+                </td>
+                <td>Rash, hives · moderate</td>
+                <td><span class="pill pill-err">Allergy</span></td>
+                <td><span class="pill pill-warn">Hard block</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this allergy — changes recheck every open order.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Sensitivities — soft warn</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Gluten (self-reported sensitivity)</div>
+                  <div class="b-clin-meta">Not biopsy-confirmed celiac · self-elimination 2022</div>
+                </td>
+                <td>GI upset, brain fog</td>
+                <td><span class="pill pill-warn">Sensitivity</span></td>
+                <td><span class="pill pill-muted">Soft warn</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this sensitivity — changes recheck every open order.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Dairy (self-reported)</div>
+                  <div class="b-clin-meta">Tolerates aged cheese in small amounts</div>
+                </td>
+                <td>Bloating</td>
+                <td><span class="pill pill-warn">Sensitivity</span></td>
+                <td><span class="pill pill-muted">Soft warn</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this sensitivity — changes recheck every open order.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">No known allergies</div>
+        <div style="font-size:12.5px;color:var(--ink);display:flex;gap:16px;flex-wrap:wrap">
+          <span>Environmental <span class="pill pill-muted">None reported</span></span>
+          <span>Food (severe) <span class="pill pill-muted">None reported</span></span>
+          <span>Latex <span class="pill pill-muted">None reported</span></span>
+        </div>
+
+        <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="HCOS.toast('Allergy or sensitivity added — it is now checked against every order.', 'ok')">Add allergy or sensitivity</button>
+
+        <div class="callout" style="margin-top:18px">
+          Everything here is checked against every IV protocol, prescription, and supplement order. The sulfa flag blocks any sulfa-containing prescription from being signed.
+          <div style="margin-top:10px"><button class="btn btn-sm" data-activate="b-10-iv-order">See the IV order safety check</button></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-10 · IV infusion order
+       ============================================================ -->
+  <section class="screen" id="b-10-iv-order" data-title="IV infusion order">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/chart/orders/iv</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">PN</span>
+            <div>
+              <div class="app-logo">IV infusion order — <a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">Series of 6 · encounter ENC-2026-0418 · ordered by Dr. Drannikov</div>
+            </div>
+          </div>
+          <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
+        </div>
+
+        <div class="b-status-bar">
+          <div>Active template: <strong>Myers' cocktail · standard</strong> · <span class="pill pill-ok">Sulfa allergy checked — no conflict</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="HCOS.toast('Template history — every edit is versioned with who changed what.')">View template history</button>
+            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('IV order saved — it is queued for the infusion bay and travels with the note at sign.', 'ok')">Save order</button>
+          </div>
+        </div>
+
+        <div class="seg-divider" style="margin-top:0">Protocol template — pick one, the dose math follows</div>
+        <div class="grid-3">
+          <div class="b-proto selected" onclick="bPickProtocol(this,'Myers cocktail')">
+            <div class="b-proto-name">Myers' cocktail</div>
+            <div class="b-proto-dose">5 g vitamin C + B-complex + B12 + calcium + magnesium in 100 mL saline · 117 mL total · 30 min at 234 mL/hr · ~1 h chair</div>
+          </div>
+          <div class="b-proto" onclick="bPickProtocol(this,'NAD+ 500 mg')">
+            <div class="b-proto-name">NAD+ 500 mg</div>
+            <div class="b-proto-dose">500 mg NAD+ in 500 mL saline · start 100 mL/hr, titrate to 180 · ~3 h to limit flushing</div>
+          </div>
+          <div class="b-proto" onclick="bPickProtocol(this,'IV vitamin C 25 g')">
+            <div class="b-proto-name">IV vitamin C 25 g</div>
+            <div class="b-proto-dose">25 g ascorbic acid (500 mg/mL × 50 mL) in 250 mL saline · 50 billing units · ~2.5 h · G6PD checked before high-dose C</div>
+          </div>
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Components · Myers' cocktail</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>Component</th><th>Concentration</th><th>Volume</th><th>Route</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>B-complex 100</td><td>Standard</td><td>1 mL</td><td>IV push or admix</td></tr>
+                  <tr><td>Vitamin B12 (methylcobalamin)</td><td>1,000 mcg/mL</td><td>1 mL</td><td>IV admix</td></tr>
+                  <tr><td>Calcium gluconate</td><td>100 mg/mL</td><td>1 mL</td><td>IV admix</td></tr>
+                  <tr><td>Magnesium sulfate</td><td>500 mg/mL</td><td>4 mL</td><td>IV admix</td></tr>
+                  <tr><td>Ascorbic acid (vitamin C)</td><td>500 mg/mL</td><td>10 mL (5 g)</td><td>IV admix</td></tr>
+                  <tr><td>0.9% sodium chloride (diluent)</td><td>—</td><td>100 mL</td><td>IV bag</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="seg-divider">Administration</div>
+            <div class="field-row">
+              <div class="field"><label class="field-label">Total volume</label><input class="field-input" value="117 mL" disabled></div>
+              <div class="field"><label class="field-label">Infusion duration</label><input class="field-input" value="30 minutes"></div>
+            </div>
+            <div class="field-row">
+              <div class="field"><label class="field-label">Rate</label><input class="field-input" value="234 mL/hr" disabled></div>
+              <div class="field">
+                <label class="field-label">IV access</label>
+                <select class="field-select">
+                  <option selected>Peripheral 22 g preferred</option>
+                  <option>Peripheral 20 g</option>
+                  <option>Port (if in place)</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label">Pre-medication and special instructions</label>
+              <textarea class="field-textarea" rows="3">First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.</textarea>
+            </div>
+
+            <div class="seg-divider">Frequency</div>
+            <div class="field-row">
+              <div class="field"><label class="field-label">Total infusions</label><input class="field-input" value="6"></div>
+              <div class="field">
+                <label class="field-label">Cadence</label>
+                <select class="field-select">
+                  <option selected>Weekly × 6</option>
+                  <option>Twice weekly × 6</option>
+                  <option>Every other week × 6</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Safety checks</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Sulfa allergy · no conflict</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">No G6PD contraindication</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Renal function — last eGFR 92</div></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><div class="check-label">Hashimoto's · monitor</div></li>
+              </ul>
+              <a class="btn btn-sm" style="margin-top:8px" data-activate="b-07-allergies">Open the allergy list</a>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Cost and coverage</div>
+              <dl class="kv">
+                <dt>Self-pay per infusion</dt><dd>$185</dd>
+                <dt>Series of 6</dt><dd>$1,050 with package discount</dd>
+                <dt>Insurance</dt><dd>Blue Shield of CA <span class="net-badge net-oon">OON</span> · superbill provided</dd>
+              </dl>
+              <div class="field-help" style="margin-top:8px">Out-of-network Blue Shield PPO — Priya pays at time of service; the superbill lists each CPT/HCPCS code and diagnosis so she can claim her plan's out-of-network allowable.</div>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Patient-facing summary</div>
+              <p style="font-size:12px;color:var(--muted);line-height:1.6;margin:0">"You'll receive 6 infusions of vitamins and minerals over 6 weeks. Each takes about 30 minutes. We monitor your vitals before, during, and after."</p>
+              <button class="btn btn-sm" style="width:100%;margin-top:10px" onclick="HCOS.toast('Summary sent — it is on the patient portal and in the next reminder.', 'ok')">Send to patient portal</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="HCOS.toast('IV order saved — it is queued for the infusion bay and travels with the note at sign.', 'ok')">Save order</button>
+          <a class="btn" href="clinical.html#/b-11-sign-lock">Send to sign and lock</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       B-12 · Amendment / addendum
+       ============================================================ -->
+  <section class="screen" id="b-12-amendment" data-title="Amendment">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/chart/addendum</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="avatar lg">PN</span>
+            <div>
+              <div class="app-logo">Addendum — <a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
+              <div class="app-logo-sub">Encounter ENC-2026-0418 · signed May 22, 2026 · 11:48 AM by Dr. Drannikov</div>
+            </div>
+          </div>
+          <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
+        </div>
+
+        <h2 class="page-title">Amendment / addendum</h2>
+        <p class="page-sub">A signed encounter cannot be edited. To add or correct information, add a dated addendum that becomes part of the legal record.</p>
+
+        <div class="b-status-bar">
+          <div><span class="pill pill-navy">Locked</span> Original note ENC-2026-0418 · signed May 22, 2026 · 11:48 AM · every view and change is logged</div>
+          <a class="btn btn-sm" href="security.html#/g-01-audit">Open the audit trail</a>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Why an addendum, not an edit:</strong> the original note is the legal record at the moment of sign. Amending keeps the original verbatim and appends new content with a fresh timestamp, signature, and reason — meeting HIPAA, payer audit, and 21 CFR Part 11 standards.
+        </div>
+
+        <div class="seg-divider">Original encounter (read-only)</div>
+        <div class="card" style="background:var(--hx-band)">
+          <div style="font-size:12.5px;line-height:1.7"><strong>Plan (excerpt):</strong> Start IV Myers' cocktail series of 6. NAD+ trial after Myers. Recheck TSH in 8 weeks on increased levothyroxine 75 mcg.</div>
+        </div>
+
+        <div class="field" style="margin-top:16px">
+          <label class="field-label">Reason for addendum</label>
+          <select class="field-select">
+            <option selected>Lab result came back after the encounter</option>
+            <option>Patient communication clarified a symptom</option>
+            <option>Correction to medication dose / wrong drug entered</option>
+            <option>Documentation completeness</option>
+            <option>Other (free text)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Addendum text</label>
+          <textarea class="field-textarea" rows="6">EBV reactivation panel result received 2026-05-29 (7 days post-encounter): EBV early antigen IgG elevated at 1:160 with VCA-IgG positive — pattern consistent with EBV reactivation. This supports the working hypothesis discussed at the encounter. Plan amended to add: low-dose naltrexone 1.5 mg nightly × 30 days with reassessment, and L-lysine 1 g twice daily. Will call the patient today and document the call separately.</textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Signature</label>
+          <div class="b-sigpad" onclick="HCOS.toast('Signed with your stored signature — press Sign addendum to lock it.')">Click to sign with your stored signature</div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;justify-content:flex-end">
+          <button class="btn btn-ghost" onclick="HCOS.toast('Draft saved — finish and sign it any time from the chart.')">Save draft</button>
+          <button class="btn btn-accent" data-open-modal="#b-modal-addendum">Sign addendum</button>
+        </div>
+
+        <div class="callout" style="margin-top:18px">
+          <strong>What changes after sign:</strong> the encounter shows "1 addendum" with a timestamp, the patient portal shows it on the next load, and — because charges were already submitted — billing is notified for a corrected claim. Priya's claim is in appeals, so the addendum attaches to the appeal packet.
+          <div style="margin-top:10px"><a class="btn btn-sm" href="billing.html#/d-01-worklist">Open the claim worklist</a></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Sign-addendum confirm modal — outside .screens -->
+<div class="modal-overlay" id="b-modal-addendum">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Sign this addendum</div>
+        <div class="modal-sub">Priya Natarajan · encounter ENC-2026-0418 · Dr. Drannikov</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;margin:0 0 12px">Signing appends the addendum with a fresh timestamp and signature. The original note stays locked and verbatim.</p>
+      <div class="callout" style="margin:0">The audit trail records the addendum, and billing is notified for a corrected claim.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Keep editing</button>
+      <button class="btn btn-accent" data-close-modal onclick="HCOS.toast('Addendum signed — appended to ENC-2026-0418 and sent to the audit trail and billing.', 'ok')">Sign addendum</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+
+  // Demo only: pick an IV protocol template — highlights the card and confirms the switch.
+  function bPickProtocol(card, name) {
+    var cards = document.querySelectorAll('.b-proto');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+    card.classList.add('selected');
+    HCOS.toast('Loaded the ' + name + ' template — review the components and dose math, then save the order.', 'ok');
+  }
+</script>
+</body>
+</html>

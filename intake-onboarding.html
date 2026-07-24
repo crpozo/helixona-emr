@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Onboarding · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .ob-brand { text-align: center; padding: 26px 0 18px; }
+  .ob-brand-name { font-size: 22px; font-weight: 600; color: var(--hx-navy); }
+  .ob-brand-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .ob-step { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .ob-h { font-size: 18px; font-weight: 600; color: var(--hx-navy); margin: 4px 0 6px; }
+  .ob-sub { font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-bottom: 14px; }
+  .ob-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .ob-scale { display: flex; gap: 4px; margin-top: 8px; }
+  .ob-scale .filter-chip { flex: 1; text-align: center; padding-left: 0; padding-right: 0; }
+  .ob-scale-ends { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); margin-top: 4px; }
+  .ob-progress { background: var(--hx-light); border-radius: 8px; padding: 10px 14px; margin-bottom: 18px; font-size: 12px; color: var(--hx-navy); }
+  .ob-meter { height: 6px; background: #fff; border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .ob-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  .ob-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; font-size: 12.5px; }
+  .ob-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+  .ob-card.ob-hard { border-left: 3px solid var(--ink); }
+  .ob-card.ob-soft { border-left: 3px dashed var(--muted); }
+  .ob-card-note { margin-top: 6px; font-size: 10.5px; color: var(--muted); }
+  .ob-med-sub { font-size: 11px; color: var(--muted); }
+  .ob-consent-doc { background: var(--hx-band); border: 1px solid var(--line-soft); border-radius: 6px; padding: 12px; font-size: 11.5px; line-height: 1.6; color: var(--ink); max-height: 140px; overflow-y: auto; margin-bottom: 10px; }
+  .ob-foot { text-align: center; font-size: 11px; color: var(--muted); margin-top: 18px; }
+  .ob-full { width: 100%; }
+  .ob-item-link { cursor: pointer; }
+  .ob-item-link:hover .check-label { text-decoration: underline; }
+</style>
+</head>
+<body data-page="intake-onboarding" data-page-title="Intake · Onboarding" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-13-welcome-verify" data-title="Welcome &amp; verify">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:38</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-brand">
+          <div class="ob-brand-name">Helixona</div>
+          <div class="ob-brand-sub">Functional medicine clinic</div>
+        </div>
+
+        <div class="ob-h">Welcome, Sarah</div>
+        <div class="ob-sub">Let's get you ready for your visit on <strong>Fri, Jul 24 at 2:00 PM</strong>. About 12 minutes — you can save and come back anytime.</div>
+
+        <div class="seg-divider" style="margin-top:0">Verify it's you</div>
+        <div class="field">
+          <label class="field-label">Date of birth</label>
+          <input class="field-input" type="text" placeholder="MM / DD / YYYY">
+        </div>
+        <div class="field">
+          <label class="field-label">Last 4 of your phone number</label>
+          <input class="field-input" type="text" placeholder="0184">
+        </div>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-14-checklist" style="margin-top:18px">Verify and continue</button>
+
+        <div class="ob-foot">Secure link · expires Fri, Jul 24 at 2:00 PM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-14-checklist" data-title="Checklist">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:39</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Your onboarding</div>
+        <div class="ob-h" style="margin-bottom:18px">Let's get you ready, Sarah</div>
+
+        <div class="ob-progress">
+          <strong>1 of 12 complete</strong> · about 12 minutes remaining
+          <div class="ob-meter"><div class="ob-meter-fill" style="width:8%"></div></div>
+        </div>
+
+        <ul class="check-list">
+          <li class="check-item ob-item-link" data-activate="a-13-welcome-verify">
+            <div class="check-icon done">✓</div>
+            <div class="check-label">Verify it's you<div class="check-meta">Done · 11:39 AM</div></div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-15-demographics">
+            <div class="check-icon active">→</div>
+            <div class="check-label"><strong>About you</strong><div class="check-meta">Up next · about 2 min</div></div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-16-conditions">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Conditions</div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-17-symptoms">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Symptoms</div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-18-allergies">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Allergies and sensitivities</div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-19-medications">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Medications</div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-20-supplements">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Supplements</div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-21-reason">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Reason for visit</div>
+          </li>
+          <li class="check-item ob-item-link" data-activate="a-22-consents">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Consents<div class="check-meta">5 documents</div></div>
+          </li>
+          <li class="check-item ob-item-link" onclick="window.location.href='intake-documents.html'">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Upload ID</div>
+          </li>
+          <li class="check-item ob-item-link" onclick="window.location.href='intake-documents.html'">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Upload insurance card</div>
+          </li>
+          <li class="check-item ob-item-link" onclick="window.location.href='intake-documents.html'">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Plan document (SPD / EOC)</div>
+          </li>
+        </ul>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-15-demographics" style="margin-top:8px">Continue</button>
+        <button class="btn btn-ghost ob-full" style="margin-top:6px;font-size:12px" onclick="HCOS.toast('Progress saved — your link picks up right here for 7 days.', 'ok')">Save and finish later</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-15-demographics" data-title="About you">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:40</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 2 of 12 — about you</div>
+        <div class="ob-h">About you</div>
+        <div class="ob-sub">We've pre-filled what you shared in the inquiry. Confirm or update anything that's not right.</div>
+
+        <div class="callout callout-ok" style="margin-bottom:14px">Pulled in from your inquiry: name, DOB, phone, email, and address. Edit anything below if needed.</div>
+
+        <div class="seg-divider" style="margin-top:0">Name and identity</div>
+        <div class="field">
+          <label class="field-label">Legal first name</label>
+          <input class="field-input" type="text" value="Sarah">
+        </div>
+        <div class="field">
+          <label class="field-label">Legal last name</label>
+          <input class="field-input" type="text" value="Anderson">
+        </div>
+        <div class="field">
+          <label class="field-label">Preferred name (optional)</label>
+          <input class="field-input" type="text" placeholder="What we should call you">
+        </div>
+        <div class="field">
+          <label class="field-label">Pronouns (optional)</label>
+          <select class="field-select">
+            <option>Prefer not to say</option>
+            <option>She / her</option>
+            <option>He / him</option>
+            <option>They / them</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Date of birth</label>
+          <input class="field-input" type="text" value="03 / 14 / 1988">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Sex at birth</label>
+            <select class="field-select">
+              <option>Select</option>
+              <option selected>Female</option>
+              <option>Male</option>
+              <option>Intersex</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Gender identity</label>
+            <input class="field-input" type="text" placeholder="Same as above, or different">
+          </div>
+        </div>
+
+        <div class="seg-divider">Contact</div>
+        <div class="field">
+          <label class="field-label">Best phone number <span class="pill pill-ok">From inquiry ✓</span></label>
+          <input class="field-input" type="tel" value="(949) 555-0184">
+        </div>
+        <button class="btn btn-sm" style="margin-bottom:14px">+ Add a second phone</button>
+        <div class="field">
+          <label class="field-label">Email <span class="pill pill-ok">From inquiry ✓</span></label>
+          <input class="field-input" type="email" value="sarah@example.com">
+        </div>
+
+        <div class="seg-divider">Home address</div>
+        <div class="callout callout-ok" style="margin-bottom:10px">Already collected on the inquiry — 2148 Alton Pkwy, Irvine, CA 92606.</div>
+        <button class="btn btn-sm" style="margin-bottom:14px">Edit address</button>
+
+        <div class="seg-divider">Emergency contact</div>
+        <div class="field">
+          <label class="field-label">Full name</label>
+          <input class="field-input" type="text" placeholder="First Last">
+        </div>
+        <div class="field">
+          <label class="field-label">Relationship</label>
+          <select class="field-select">
+            <option>Select</option>
+            <option>Spouse / partner</option>
+            <option>Parent</option>
+            <option>Sibling</option>
+            <option>Child</option>
+            <option>Friend</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Best phone number</label>
+          <input class="field-input" type="tel" placeholder="(___) ___-____">
+          <div class="field-help">Just one number is fine — we only call this person if we can't reach you in an emergency.</div>
+        </div>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-16-conditions" style="margin-top:12px">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-16-conditions" data-title="Conditions">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:42</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 3 of 12 — conditions</div>
+        <div class="ob-h">Conditions you've been diagnosed with</div>
+        <div class="ob-sub">Include conditions even if they're no longer active. We use this to understand your health picture, not to judge it.</div>
+
+        <div class="seg-divider" style="margin-top:0">Common conditions — tap any that apply</div>
+        <div class="ob-chips" style="margin-bottom:14px">
+          <button class="filter-chip active">Long COVID / PASC</button>
+          <button class="filter-chip active">Hashimoto's thyroiditis</button>
+          <button class="filter-chip">Autoimmune disorder</button>
+          <button class="filter-chip">Lyme disease</button>
+          <button class="filter-chip">Mold-related illness</button>
+          <button class="filter-chip">POTS</button>
+          <button class="filter-chip">MCAS</button>
+          <button class="filter-chip">Hypermobility</button>
+          <button class="filter-chip">Heavy metals</button>
+          <button class="filter-chip">Diabetes</button>
+          <button class="filter-chip">Heart disease</button>
+          <button class="filter-chip">High cholesterol</button>
+          <button class="filter-chip">Cancer</button>
+          <button class="filter-chip">GI disorder</button>
+          <button class="filter-chip">Kidney disease</button>
+          <button class="filter-chip">Liver disease</button>
+          <button class="filter-chip">Lung disease</button>
+          <button class="filter-chip">Bleeding disorder</button>
+          <button class="filter-chip">Anemia</button>
+          <button class="filter-chip">Eating disorder</button>
+          <button class="filter-chip">Mental health</button>
+          <button class="filter-chip">Substance use</button>
+          <button class="filter-chip">Alcohol use</button>
+          <button class="filter-chip">+ Other</button>
+        </div>
+
+        <div class="seg-divider">Your selected conditions — add detail</div>
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <strong>Long COVID / PASC</strong>
+            <button class="btn btn-sm" onclick="this.closest('.ob-card').remove(); HCOS.toast('Condition removed.', 'ok')">Remove</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Onset</label>
+              <input class="field-input" type="text" value="Aug 2024">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Status</label>
+              <select class="field-select">
+                <option selected>Active</option>
+                <option>Chronic</option>
+                <option>Improving</option>
+                <option>Resolved</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Notes (optional)</label>
+            <input class="field-input" type="text" placeholder="Working dx; multiple specialists tried">
+          </div>
+        </div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <strong>Hashimoto's thyroiditis</strong>
+            <button class="btn btn-sm" onclick="this.closest('.ob-card').remove(); HCOS.toast('Condition removed.', 'ok')">Remove</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Diagnosed</label>
+              <input class="field-input" type="text" value="2020">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Status</label>
+              <select class="field-select">
+                <option selected>Active on treatment</option>
+                <option>Active</option>
+                <option>Chronic</option>
+                <option>Resolved</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Notes (optional)</label>
+            <input class="field-input" type="text" placeholder="On levothyroxine 50 mcg">
+          </div>
+        </div>
+
+        <button class="btn btn-sm" style="margin-bottom:18px" onclick="HCOS.toast('Tap a chip above — it becomes a detail card here.', 'ok')">+ Add another condition</button>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-17-symptoms">Continue to symptoms</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-17-symptoms" data-title="Symptoms">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:44</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 4 of 12 — symptoms</div>
+        <div class="ob-h">What symptoms are you experiencing?</div>
+        <div class="ob-sub">Different from diagnoses — these are what you actually feel day to day. Tap any that apply.</div>
+
+        <div class="seg-divider" style="margin-top:0">Constitutional</div>
+        <div class="ob-chips">
+          <button class="filter-chip active">Fatigue</button>
+          <button class="filter-chip active">Post-exertional malaise</button>
+          <button class="filter-chip">Unrefreshed sleep</button>
+          <button class="filter-chip">Night sweats</button>
+          <button class="filter-chip">Fever</button>
+          <button class="filter-chip">Weight change</button>
+        </div>
+
+        <div class="seg-divider">Neurological and cognitive</div>
+        <div class="ob-chips">
+          <button class="filter-chip active">Brain fog</button>
+          <button class="filter-chip active">Word-finding</button>
+          <button class="filter-chip active">Memory issues</button>
+          <button class="filter-chip">Headaches</button>
+          <button class="filter-chip">Tingling / numbness</button>
+          <button class="filter-chip">Light sensitivity</button>
+          <button class="filter-chip">Tremor</button>
+        </div>
+
+        <div class="seg-divider">Autonomic and cardiovascular</div>
+        <div class="ob-chips">
+          <button class="filter-chip active">Lightheaded on standing</button>
+          <button class="filter-chip">Palpitations</button>
+          <button class="filter-chip">Chest pain</button>
+          <button class="filter-chip">Shortness of breath</button>
+          <button class="filter-chip">Cold hands / feet</button>
+        </div>
+
+        <div class="seg-divider">GI</div>
+        <div class="ob-chips">
+          <button class="filter-chip active">Bloating</button>
+          <button class="filter-chip">Constipation</button>
+          <button class="filter-chip">Diarrhea</button>
+          <button class="filter-chip">Nausea</button>
+          <button class="filter-chip">Reflux</button>
+          <button class="filter-chip">Abdominal pain</button>
+        </div>
+
+        <div class="seg-divider">Musculoskeletal</div>
+        <div class="ob-chips">
+          <button class="filter-chip">Joint pain</button>
+          <button class="filter-chip">Muscle aches</button>
+          <button class="filter-chip">Muscle weakness</button>
+          <button class="filter-chip">Stiffness</button>
+        </div>
+
+        <div class="seg-divider">Mood and sleep</div>
+        <div class="ob-chips" style="margin-bottom:16px">
+          <button class="filter-chip active">Anxiety</button>
+          <button class="filter-chip">Depression</button>
+          <button class="filter-chip">Trouble falling asleep</button>
+          <button class="filter-chip">Trouble staying asleep</button>
+          <button class="filter-chip">+ Other symptom</button>
+        </div>
+
+        <div class="seg-divider">Severity and impact</div>
+        <div class="ob-card" style="margin-bottom:10px">
+          <strong>How would you rate your overall symptom severity today?</strong>
+          <div class="ob-scale" data-chip-single>
+            <button class="filter-chip">1</button>
+            <button class="filter-chip">2</button>
+            <button class="filter-chip">3</button>
+            <button class="filter-chip">4</button>
+            <button class="filter-chip">5</button>
+            <button class="filter-chip active">6</button>
+            <button class="filter-chip">7</button>
+            <button class="filter-chip">8</button>
+            <button class="filter-chip">9</button>
+            <button class="filter-chip">10</button>
+          </div>
+          <div class="ob-scale-ends"><span>None</span><span>Severe</span></div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Anything else worth noting</label>
+          <textarea class="field-textarea" rows="3" placeholder="Describe it in your own words"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-18-allergies" style="margin-top:12px">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-18-allergies" data-title="Allergies">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:46</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 5 of 12 — allergies</div>
+        <div class="ob-h">Allergies and sensitivities</div>
+        <div class="ob-sub">Drug, food, environmental, latex, contrast — anything that has caused a reaction. Be specific about what happened.</div>
+
+        <div class="seg-divider" style="margin-top:0">Your allergies</div>
+
+        <div class="ob-card ob-hard">
+          <div class="ob-card-head">
+            <strong>Sulfa drugs</strong>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Type</label>
+              <select class="field-select">
+                <option selected>Drug</option>
+                <option>Food</option>
+                <option>Environmental</option>
+                <option>Latex</option>
+                <option>Contrast</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Severity</label>
+              <select class="field-select">
+                <option>Mild</option>
+                <option selected>Moderate</option>
+                <option>Severe</option>
+                <option>Life-threatening</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Reaction</label>
+            <input class="field-input" type="text" value="Rash, hives">
+          </div>
+          <div class="ob-card-note">Hard block — any sulfa-containing prescription is stopped at signing.</div>
+        </div>
+
+        <div class="ob-card ob-soft">
+          <div class="ob-card-head">
+            <strong>Gluten</strong>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Type</label>
+              <select class="field-select">
+                <option>Drug</option>
+                <option selected>Food sensitivity</option>
+                <option>Environmental</option>
+                <option>Latex</option>
+                <option>Contrast</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Severity</label>
+              <select class="field-select">
+                <option selected>Mild-moderate</option>
+                <option>Moderate</option>
+                <option>Severe</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Reaction</label>
+            <input class="field-input" type="text" value="GI bloating, brain fog within 1–2 hours">
+          </div>
+          <div class="ob-card-note">Soft warning during ordering — not biopsy-confirmed celiac.</div>
+        </div>
+
+        <button class="btn btn-sm" style="margin-bottom:18px" onclick="HCOS.toast('New allergy card added below — describe the reaction.', 'ok')">+ Add allergy or sensitivity</button>
+
+        <div class="seg-divider">No known reactions to</div>
+        <div class="ob-chips" style="margin-bottom:14px">
+          <button class="filter-chip">Penicillin</button>
+          <button class="filter-chip">Aspirin / NSAIDs</button>
+          <button class="filter-chip">Iodine / shellfish</button>
+          <button class="filter-chip">Bee stings</button>
+          <button class="filter-chip">Latex</button>
+          <button class="filter-chip">CT contrast</button>
+          <button class="filter-chip">Heparin / anticoagulants</button>
+        </div>
+
+        <div class="callout callout-warn" style="margin-bottom:14px">
+          Have you ever had a reaction to <strong>heparin, Lovenox, or another anticoagulant</strong>?
+          <div class="ob-chips" data-chip-single style="margin:6px 0 0">
+            <button class="filter-chip">Yes</button>
+            <button class="filter-chip active">No</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-19-medications">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-19-medications" data-title="Medications">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:48</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 6 of 12 — medications</div>
+        <div class="ob-h">Prescription medications</div>
+        <div class="ob-sub">Everything you're currently taking that requires a prescription. Add as many as you need.</div>
+
+        <div class="seg-divider" style="margin-top:0">Your medications — 3 added</div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Levothyroxine</strong> · 50 mcg<br>
+              <span class="ob-med-sub">Once daily · morning · empty stomach</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Synthroid">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Hashimoto's">
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Prescribed by</label>
+            <input class="field-input" type="text" value="Dr. Lee · PCP">
+          </div>
+        </div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Sertraline</strong> · 50 mg<br>
+              <span class="ob-med-sub">Once daily · evening · with food</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Zoloft (generic)">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Anxiety">
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Prescribed by</label>
+            <input class="field-input" type="text" value="Dr. Lee · PCP">
+          </div>
+        </div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Estradiol</strong> · 0.5 mg<br>
+              <span class="ob-med-sub">Patch · twice weekly</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Vivelle-Dot">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Perimenopause">
+            </div>
+          </div>
+          <div class="field" style="margin:8px 0 0">
+            <label class="field-label">Prescribed by</label>
+            <input class="field-input" type="text" value="Dr. Marsh · Gyn">
+          </div>
+        </div>
+
+        <button class="btn btn-sm" style="margin-bottom:18px" onclick="HCOS.toast('New medication card added below — name, dose, and who prescribed it.', 'ok')">+ Add another medication</button>
+
+        <div class="seg-divider">Quick add</div>
+        <div class="ob-med-sub" style="margin-bottom:8px">Or import from your pharmacy via SureScripts — CVS Irvine #4421 is on file.</div>
+        <button class="btn ob-full" style="margin-bottom:14px" onclick="HCOS.toast('Import requested — your pharmacy list will appear here for review.', 'ok')">Import from CVS Irvine #4421</button>
+
+        <div class="callout callout-warn" style="margin-bottom:14px">Don't include over-the-counter medications or supplements here — those have their own step next.</div>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-20-supplements">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-20-supplements" data-title="Supplements">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:50</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 7 of 12 — supplements</div>
+        <div class="ob-h">Supplements you're taking</div>
+        <div class="ob-sub">Vitamins, minerals, herbs, probiotics, peptides — anything over the counter or from a practitioner.</div>
+
+        <div class="seg-divider" style="margin-top:0">Your supplements — 4 added</div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Vitamin D3</strong> · 5,000 IU<br>
+              <span class="ob-med-sub">Daily · morning · with fat</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Pure Encapsulations">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Bone, mood">
+            </div>
+          </div>
+          <div class="field-row" style="gap:8px;margin-top:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Recommended by</label>
+              <input class="field-input" type="text" value="Self-purchased">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Source</label>
+              <select class="field-select">
+                <option>Amazon</option>
+                <option selected>Fullscript</option>
+                <option>Health food store</option>
+                <option>Practitioner office</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Magnesium glycinate</strong> · 400 mg<br>
+              <span class="ob-med-sub">Daily · evening · 30 min before bed</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Thorne">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Sleep, anxiety">
+            </div>
+          </div>
+          <div class="field-row" style="gap:8px;margin-top:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Recommended by</label>
+              <input class="field-input" type="text" value="Friend">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Source</label>
+              <select class="field-select">
+                <option selected>Amazon</option>
+                <option>Fullscript</option>
+                <option>Health food store</option>
+                <option>Practitioner office</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Methylated B-complex</strong> · 1 cap<br>
+              <span class="ob-med-sub">Daily · morning · with food</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Seeking Health">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Energy, MTHFR">
+            </div>
+          </div>
+        </div>
+
+        <div class="ob-card">
+          <div class="ob-card-head">
+            <div>
+              <strong>Curcumin phytosome</strong> · 500 mg<br>
+              <span class="ob-med-sub">2x daily · with meals</span>
+            </div>
+            <button class="btn btn-sm">Edit</button>
+          </div>
+          <div class="field-row" style="gap:8px">
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Brand</label>
+              <input class="field-input" type="text" value="Thorne Meriva">
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Taken for</label>
+              <input class="field-input" type="text" value="Inflammation">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-sm" style="margin-bottom:14px" onclick="HCOS.toast('New supplement card added below — brand and source matter clinically.', 'ok')">+ Add another supplement</button>
+
+        <div class="seg-divider">Quick add</div>
+        <button class="btn ob-full" style="margin-bottom:10px" onclick="HCOS.toast('Import requested — your Fullscript protocol will appear here for review.', 'ok')">Import from Fullscript account</button>
+        <button class="btn ob-full" style="margin-bottom:18px" onclick="HCOS.toast('Snap each bottle label — names are read into this list for your review.', 'ok')">Snap photos of your bottles</button>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-21-reason">Continue</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-21-reason" data-title="Reason for visit">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:52</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 8 of 12 — reason for visit</div>
+        <div class="ob-h" style="margin-bottom:14px">What brings you in?</div>
+
+        <div class="field">
+          <label class="field-label">Main concern (in your own words)</label>
+          <textarea class="field-textarea" rows="4">I've had chronic fatigue and brain fog for about 18 months. Standard labs come back normal. I want a functional approach.</textarea>
+        </div>
+
+        <div class="seg-divider">When did it start?</div>
+        <div class="field">
+          <select class="field-select">
+            <option>Within the last month</option>
+            <option>1–6 months ago</option>
+            <option>6–12 months ago</option>
+            <option selected>About 18 months ago</option>
+            <option>More than 2 years ago</option>
+          </select>
+        </div>
+
+        <div class="seg-divider">Severity right now</div>
+        <div class="ob-scale" data-chip-single style="margin:6px 0 14px">
+          <button class="filter-chip">1</button>
+          <button class="filter-chip">2</button>
+          <button class="filter-chip">3</button>
+          <button class="filter-chip">4</button>
+          <button class="filter-chip">5</button>
+          <button class="filter-chip">6</button>
+          <button class="filter-chip active">7</button>
+          <button class="filter-chip">8</button>
+          <button class="filter-chip">9</button>
+          <button class="filter-chip">10</button>
+        </div>
+
+        <div class="seg-divider">What you've already tried</div>
+        <div class="field">
+          <textarea class="field-textarea" rows="3" placeholder="Other doctors, supplements, lifestyle changes…"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-22-consents" style="margin-top:12px">Continue</button>
+
+        <div class="callout callout-ok" style="margin-top:14px">Your answers land in your chart before Dr. Drannikov sees you — no re-typing, and more time in the visit.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-22-consents" data-title="Consents">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:54</span><span>● ● ●</span></div>
+      <div class="phone-body">
+        <div class="ob-step">Step 9 of 12 — consents</div>
+        <div class="ob-h" style="margin-bottom:14px">Sign and agree</div>
+
+        <ul class="check-list">
+          <li class="check-item">
+            <div class="check-icon done">✓</div>
+            <div class="check-label"><strong>HIPAA privacy notice</strong><div class="check-meta">Signed today, 11:41 AM</div></div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon active">→</div>
+            <div class="check-label"><strong>Treatment consent</strong><div class="check-meta">Reading now — sign below</div></div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon pending"></div>
+            <div class="check-label"><strong>Financial responsibility</strong><div class="check-meta">Tap to read and sign</div></div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon pending"></div>
+            <div class="check-label"><strong>Telehealth consent</strong><div class="check-meta">Tap to read and sign</div></div>
+          </li>
+          <li class="check-item">
+            <div class="check-icon pending"></div>
+            <div class="check-label">Photo / video (optional)</div>
+          </li>
+        </ul>
+
+        <div class="seg-divider">Now signing: treatment consent</div>
+        <div class="ob-consent-doc">
+          I voluntarily consent to evaluation and treatment by the providers of Helixona, Inc. I understand the nature of functional medicine evaluation, including laboratory testing, intravenous therapy, and supplement recommendations. I understand I may refuse any treatment at any time. I have had the opportunity to ask questions about my care…
+        </div>
+
+        <div class="field">
+          <label class="field-label">Type your full legal name to sign</label>
+          <input class="field-input" type="text" placeholder="Sarah Anderson">
+        </div>
+
+        <a class="btn btn-primary btn-lg ob-full" href="intake-documents.html" style="text-align:center" onclick="HCOS.toast('Treatment consent signed.', 'ok')">Sign and continue</a>
+        <div class="field-help" style="margin-top:8px;text-align:center">Next: upload your ID, insurance card, and plan document.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: chips toggle on tap. Inside a [data-chip-single] group (severity
+  // scales, yes/no) exactly one chip stays active; everywhere else chips multi-select.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip) return;
+    var single = chip.closest('[data-chip-single]');
+    if (single) {
+      var chips = single.querySelectorAll('.filter-chip');
+      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+      chip.classList.add('active');
+    } else {
+      chip.classList.toggle('active');
+    }
+  });
+</script>
+</body>
+</html>

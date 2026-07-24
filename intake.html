@@ -3,346 +3,710 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intake &amp; onboarding · HCOS Wireframe</title>
+<title>Intake · HCOS Wireframe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=3">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
 <style>
-  /* Funnel chain */
-  .a-chain { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
-  .a-chain-step {
-    flex: 1; min-width: 148px;
-    background: #fff; border: 1px solid var(--line); border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .a-chain-step.a-warn { border: 1px dashed var(--warn); background: var(--hx-band); }
-  .a-chain-step { cursor: pointer; }
-  .a-chain-step:hover { border-color: var(--hx-navy); }
-  .a-chain-num { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .a-chain-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); margin: 2px 0 4px; }
-  .a-chain-sub { font-size: 11px; color: var(--muted); line-height: 1.5; }
-  .a-chain-arrow { align-self: center; color: var(--muted); font-size: 15px; flex-shrink: 0; }
-  .a-stack { display: grid; gap: 16px; align-content: start; }
-  /* Kiosk extras */
-  .a-kiosk-lbl { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.6px; margin: 12px 0 8px; }
-  .a-kiosk-input {
-    width: 100%; max-width: 300px;
-    padding: 13px 16px; font-size: 17px; text-align: center;
-    border: 2px solid rgba(255,255,255,0.3); border-radius: 8px;
-    background: rgba(255,255,255,0.08); color: #fff;
-    font-family: inherit;
-  }
-  .a-kiosk-sm { min-height: 0; padding: 36px 28px; }
-  .a-kiosk-sm .kiosk-title { font-size: 24px; margin-bottom: 10px; }
-  .a-kiosk-sm .kiosk-sub { font-size: 13px; margin-bottom: 0; }
-  .a-pin-filled { border-color: var(--hx-accent); background: rgba(255,255,255,0.08); }
-  /* Form builder extras */
-  .a-pal-h, .a-insp-h { font-size: 10.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin: 4px 0 8px; }
-  .a-pi-ic {
-    width: 30px; flex-shrink: 0; text-align: center;
-    font-size: 9.5px; font-weight: 600; color: var(--hx-blue);
-    background: var(--hx-light); border-radius: 4px; padding: 3px 0;
-  }
-  .a-fb-formname { font-size: 15px; font-weight: 600; color: var(--hx-navy); display: flex; align-items: center; gap: 8px; }
-  .a-fb-formsub { font-size: 11.5px; color: var(--muted); margin: 3px 0 14px; }
-  .a-q-type { font-size: 9.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .a-q-text { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 2px; }
-  .a-q-opts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 7px; }
-  .a-q-opt { font-size: 11px; color: var(--muted); border: 1px solid var(--line-soft); border-radius: 12px; padding: 2px 10px; }
-  .a-scale { display: flex; gap: 4px; margin-top: 7px; }
-  .a-scale span {
-    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
-    font-size: 10.5px; color: var(--muted); border: 1px solid var(--line-soft); border-radius: 4px;
-  }
-  .a-drop {
-    border: 1px dashed var(--line); border-radius: var(--radius-sm);
-    padding: 12px; text-align: center; font-size: 11px; color: var(--muted);
-  }
-  .a-toggle { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); margin: 10px 0 14px; }
-  .a-toggle-track { width: 34px; height: 18px; border-radius: 10px; background: var(--hx-accent); position: relative; flex-shrink: 0; }
-  .a-toggle-track::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+  .a-prow { display: flex; align-items: center; gap: 10px; }
+  .a-pname { font-weight: 600; color: var(--hx-navy); }
+  .a-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .a-header-info { flex: 1; min-width: 220px; }
+  .a-lead-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .a-lead-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .a-visit-card { cursor: pointer; margin-bottom: 8px; }
+  .a-visit-card:hover { border-color: var(--hx-navy); }
+  .a-visit-card.selected { border-color: var(--ink); border-left: 3px solid var(--ink); }
+  .a-visit-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .a-visit-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .a-dash { color: var(--line); }
+  .a-hist { font-size: 12px; color: var(--muted); line-height: 1.9; font-family: ui-monospace, monospace; }
 </style>
 </head>
-<body data-page="intake" data-page-title="Intake &amp; onboarding" data-shell="app">
+<body data-page="intake" data-page-title="Intake" data-shell="app">
 
 <div class="screens">
 
   <!-- ============================================================ -->
-  <section class="screen" id="a-01-funnel" data-title="Public funnel">
-    <div class="card" style="margin-bottom:16px">
-      <div class="card-title">The five steps</div>
-      <div class="a-chain">
-        <div class="a-chain-step" onclick="HCOS.toast('Public landing opens at helixona.com — the door into the funnel.', 'ok')">
-          <div class="a-chain-num">Step 1</div>
-          <div class="a-chain-name">Public landing</div>
-          <div class="a-chain-sub">helixona.com — the method, the pillars, one clear door in</div>
-        </div>
-        <div class="a-chain-arrow">→</div>
-        <div class="a-chain-step" data-activate="a-04-builder">
-          <div class="a-chain-num">Step 2</div>
-          <div class="a-chain-name">Initial inquiry form</div>
-          <div class="a-chain-sub">6 short questions, built in the form builder (A-04) · consent captured here</div>
-        </div>
-        <div class="a-chain-arrow">→</div>
-        <div class="a-chain-step" onclick="aShow('a-art-email')">
-          <div class="a-chain-num">Step 3</div>
-          <div class="a-chain-name">Check your email / text</div>
-          <div class="a-chain-sub">The same link goes both ways — whichever they open first wins</div>
-        </div>
-        <div class="a-chain-arrow">→</div>
-        <div class="a-chain-step" onclick="aShow('a-art-sms')">
-          <div class="a-chain-num">Step 4</div>
-          <div class="a-chain-name">Magic link</div>
-          <div class="a-chain-sub">Email + SMS · 7-day expiry · pause and resume anywhere, on any device</div>
-        </div>
-        <div class="a-chain-arrow">→</div>
-        <div class="a-chain-step a-warn" onclick="aShow('a-art-expired')">
-          <div class="a-chain-num">Exception</div>
-          <div class="a-chain-name">Link expired</div>
-          <div class="a-chain-sub">Recovery state — answers stay saved, a fresh link is one tap away</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid-2">
-      <div class="card" id="a-art-email">
-        <div class="card-title">The email — "Your Helixona link"</div>
-        <div class="msg-preview">
-          <div class="msg-header">
-            <div class="msg-header-row"><span class="msg-header-lbl">From</span><span>Helixona Care &lt;care@helixona.com&gt;</span></div>
-            <div class="msg-header-row"><span class="msg-header-lbl">To</span><span>r.delgado@example.com</span></div>
-            <div class="msg-header-row"><span class="msg-header-lbl">Subject</span><span><strong>Your Helixona link</strong></span></div>
-          </div>
-          <div class="msg-body">
-            Hi Rosa,<br><br>
-            Thanks for telling us a little about what brings you in. Your intake picks up exactly where you left off — any device, whenever you're ready.<br>
-            <a class="msg-cta" href="#" onclick="HCOS.toast('The intake resumes exactly where Rosa left off — question 3 of 6.', 'ok'); return false;">Continue your intake</a><br>
-            Questions? Just reply — Marie, our new patient advisor, answers personally.
-          </div>
-          <div class="msg-foot">This link works for 7 days, and you can pause and resume anywhere. If it expires, request a fresh one — your answers stay saved.</div>
-        </div>
-      </div>
-
-      <div class="a-stack">
-        <div class="card" id="a-art-sms">
-          <div class="card-title">The same link, by text</div>
-          <div class="sms-bubble">Helixona: your intake link is ready. Pick up where you left off — hcos.helixona.com/i/r8k2d. It works for 7 days; pause and resume anytime.</div>
-          <div class="sms-bubble out">Perfect, thank you!</div>
-          <div class="field-help">Sent only when SMS consent was given on the inquiry form. Reply STOP always opts out.</div>
-        </div>
-        <div class="card" id="a-art-expired">
-          <div class="card-title">Link expired — a recovery, not a dead end</div>
-          <div class="callout callout-warn" style="margin-bottom:12px">This link expired after 7 days. Tap below and we'll text you a fresh one — your answers are saved.</div>
-          <button class="btn btn-primary" onclick="HCOS.toast('New link texted to (•••) •••-0412 — it works for 7 days.', 'ok')">Send me a new link</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="screen" id="a-02-triage" data-title="Triage console">
+  <section class="screen" id="a-06-triage-dashboard" data-title="Triage dashboard">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/intake/triage</span></div>
+        <span class="frame-url">hcos.helixona.com/intake</span></div>
       <div class="frame-body">
-        <div class="grid-4" style="margin-bottom:16px">
+        <h2 class="page-title">Triage dashboard</h2>
+        <p class="page-sub">Tuesday, July 21 · every new patient lead in one queue</p>
+
+        <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
             <div class="stat-num">6</div>
-            <div class="stat-lbl">New inquiries today</div>
-            <div class="stat-sub">3 website · 2 referral · 1 Instagram</div>
+            <div class="stat-lbl">New leads</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">11</div>
-            <div class="stat-lbl">Waiting on patient</div>
-            <div class="stat-sub">Magic link out, answers pending</div>
-          </div>
-          <div class="card stat-card" style="border-left-color:var(--warn)">
-            <div class="stat-num">3</div>
-            <div class="stat-lbl">Stalled &gt; 48 h</div>
-            <div class="stat-sub">Oldest 4 d — nudge these first</div>
-          </div>
-          <div class="card stat-card" style="border-left-color:var(--ok)">
             <div class="stat-num">9</div>
-            <div class="stat-lbl">Booked this week</div>
-            <div class="stat-sub">Consults on the schedule (L)</div>
+            <div class="stat-lbl">In progress</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">4</div>
+            <div class="stat-lbl">Scheduled</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Eligibility issues</div>
           </div>
         </div>
 
         <div class="filters">
-          <span class="filter-chip active">All open · 20</span>
-          <span class="filter-chip">New</span>
-          <span class="filter-chip">Waiting on patient</span>
-          <span class="filter-chip">Stalled &gt; 48 h</span>
-          <input class="search-input" placeholder="Search inquiries">
+          <input class="search-input" type="search" placeholder="Search by name, phone, member ID, or reason">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip">New</button>
+          <button class="filter-chip">In progress</button>
+          <button class="filter-chip">Scheduled</button>
+          <button class="filter-chip">Dropped</button>
+          <button class="btn btn-primary btn-sm" data-activate="a-07-new-lead" style="margin-left:auto">New lead</button>
         </div>
+
+        <div class="field-help" style="margin:0 0 8px">21 leads this month · showing 7</div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
               <tr>
-                <th>Inquiry</th><th>Source</th><th>Stage</th><th>Waiting</th><th>Consent</th><th>Next action</th>
+                <th>Lead</th>
+                <th>Source</th>
+                <th>Reason</th>
+                <th>Payer</th>
+                <th>Status</th>
+                <th>Last activity</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>R. Delgado</strong></td>
-                <td>Website</td>
-                <td><span class="pill">New</span></td>
-                <td>2 h</td>
-                <td><span class="pill pill-ok">✓ SMS ok</span></td>
-                <td><button class="btn btn-sm btn-accent" onclick="HCOS.toast('Magic link sent to R. Delgado by email and text — works for 7 days.', 'ok')">Send magic link</button></td>
+              <tr class="row-click" data-activate="a-08-lead-detail">
+                <td><div class="a-prow"><span class="avatar">SA</span><span class="a-pname">Sarah Anderson</span></div></td>
+                <td>Web form</td>
+                <td>Chronic fatigue, brain fog</td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><span class="pill pill-ok">In progress</span></td>
+                <td>Today · 9:14 AM · signed HIPAA consent</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-08-lead-detail">Open</button></td>
               </tr>
-              <tr>
-                <td><strong>K. Patel</strong></td>
-                <td>Referral</td>
-                <td><span class="pill pill-navy">Answers in</span></td>
-                <td>5 h</td>
-                <td><span class="pill pill-ok">✓ SMS ok</span></td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Booking opens on the schedule — new patient consult, 90 minutes.', 'ok')">Book consult</button></td>
+              <tr class="row-click" data-activate="a-08-lead-detail">
+                <td><div class="a-prow"><span class="avatar">RD</span><span class="a-pname">R. Delgado</span></div></td>
+                <td>Phone call</td>
+                <td>NAD+ program inquiry</td>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-warn">New</span></td>
+                <td>Today · 10:55 AM · lead created</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-08-lead-detail">Open</button></td>
               </tr>
-              <tr>
-                <td><strong>J. Morrison</strong></td>
-                <td>Instagram</td>
-                <td><span class="pill pill-muted">Reached out</span></td>
-                <td><span class="pill pill-warn">3 d</span></td>
-                <td><span class="pill pill-muted">✗ no marketing</span></td>
-                <td><button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Friendly nudge texted to J. Morrison — logged on the inquiry.', 'ok')">Nudge</button></td>
+              <tr class="row-click" data-activate="a-08-lead-detail">
+                <td><div class="a-prow"><span class="avatar">TN</span><span class="a-pname">T. Nguyen</span></div></td>
+                <td>Phone call</td>
+                <td>Myers' cocktail pricing</td>
+                <td>Cigna <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                <td>Today · 8:20 AM · consult booked Thu Jul 23</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-08-lead-detail">Open</button></td>
               </tr>
-              <tr>
-                <td><strong>L. Nguyen</strong></td>
-                <td>Website</td>
-                <td><span class="pill pill-ok">Ready to book</span></td>
-                <td>1 h</td>
-                <td><span class="pill pill-ok">✓ SMS ok</span></td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Booking opens on the schedule — new patient consult, 90 minutes.', 'ok')">Book consult</button></td>
+              <tr class="row-click" data-activate="a-08-lead-detail">
+                <td><div class="a-prow"><span class="avatar">JP</span><span class="a-pname">J. Park</span></div></td>
+                <td>Web form</td>
+                <td>IV vitamin C — oncology support</td>
+                <td>Blue Shield of CA <span class="net-badge net-oon">OON</span> <span class="pill pill-warn">Check failed</span></td>
+                <td><span class="pill pill-ok">In progress</span></td>
+                <td>Yesterday · 3:40 PM · eligibility check failed</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-08-lead-detail">Open</button></td>
               </tr>
-              <tr>
-                <td><strong>S. Whitfield</strong></td>
-                <td>Referral</td>
-                <td><span class="pill">New</span></td>
-                <td>26 h</td>
-                <td><span class="pill pill-ok">✓ SMS ok</span></td>
-                <td><button class="btn btn-sm btn-accent" onclick="HCOS.toast('Magic link sent to S. Whitfield by email and text — works for 7 days.', 'ok')">Send magic link</button></td>
+              <tr class="row-click" data-activate="a-08-lead-detail">
+                <td><div class="a-prow"><span class="avatar">MW</span><span class="a-pname">M. Whitfield</span></div></td>
+                <td>Physician referral</td>
+                <td>Gut health workup</td>
+                <td>Self-pay <span class="net-badge net-self">SELF</span></td>
+                <td><span class="pill pill-warn">New</span></td>
+                <td>Yesterday · 11:02 AM · referral received</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-08-lead-detail">Open</button></td>
               </tr>
-              <tr>
-                <td><strong>M. Okoye</strong></td>
-                <td>Website</td>
-                <td><span class="pill pill-muted">Reached out</span></td>
-                <td><span class="pill pill-warn">4 d</span></td>
-                <td><span class="pill pill-ok">✓ SMS ok</span></td>
-                <td><button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Friendly nudge texted to M. Okoye — logged on the inquiry.', 'ok')">Nudge</button></td>
+              <tr class="row-click" data-activate="a-08-lead-detail">
+                <td><div class="a-prow"><span class="avatar">DO</span><span class="a-pname">D. Osei</span></div></td>
+                <td>Web form</td>
+                <td>Detox program — second opinion</td>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-ok">In progress</span></td>
+                <td>Fri Jul 17 · packet 60% complete</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-08-lead-detail">Open</button></td>
+              </tr>
+              <tr class="row-click" data-activate="a-12-drop-noshow">
+                <td><div class="a-prow"><span class="avatar">RO</span><span class="a-pname">Rachel Okonkwo</span></div></td>
+                <td>Web form</td>
+                <td>Detox program</td>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td><span class="pill pill-muted">Dropped</span></td>
+                <td>Jul 15 · no response after 3 follow-ups</td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="a-12-drop-noshow">Open</button></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="field-help" style="margin-top:10px">Inquiries are prospects, not patients yet — a chart is created only when the first consult is booked.</div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="a-03-kiosk" data-title="Kiosk check-in">
-    <div class="grid-2">
-      <div>
-        <div class="kiosk-frame">
-          <div class="kiosk-title">Welcome to Helixona</div>
-          <div class="kiosk-sub">Check in for your visit — enter your last name and the 4-digit code from your reminder text.</div>
-          <div class="a-kiosk-lbl">Last name</div>
-          <input class="a-kiosk-input" value="Alvarez">
-          <div class="a-kiosk-lbl">4-digit code</div>
-          <div class="kiosk-pin" id="a-kiosk-pin">
-            <div class="kiosk-pin-cell a-pin-filled">7</div>
-            <div class="kiosk-pin-cell a-pin-filled">2</div>
-            <div class="kiosk-pin-cell"></div>
-            <div class="kiosk-pin-cell"></div>
-          </div>
-          <button class="kiosk-btn" onclick="aKioskCheckIn()">Check me in</button>
-        </div>
-        <div class="field-help" style="margin-top:10px">A successful check-in flips the visit to Arrived on the schedule (Module L) — no front-desk retyping.</div>
-      </div>
-
-      <div class="a-stack">
-        <div class="card">
-          <div class="card-title">If check-in fails</div>
-          <div class="kiosk-frame a-kiosk-sm" id="a-kiosk-fail">
-            <div class="kiosk-title">We couldn't check you in</div>
-            <div class="kiosk-sub">The front desk has been pinged — please have a seat and someone will greet you in a moment. Your appointment is safe.</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Front desk alert</div>
-          <div class="callout callout-warn" style="margin-bottom:12px"><strong>Kiosk check-in failed for T. Alvarez · 2:58 PM</strong> — greet him and check him in from the schedule.</div>
-          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('T. Alvarez marked Arrived — kiosk alert cleared.', 'ok')">Mark him arrived</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <section class="screen" id="a-04-builder" data-title="Form builder">
+  <section class="screen" id="a-07-new-lead" data-title="New lead">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/settings/forms/initial-inquiry</span></div>
-      <div class="frame-body tight">
-        <div class="fb-shell">
+        <span class="frame-url">hcos.helixona.com/intake/leads/new</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">New lead</h2>
+        <p class="page-sub">Capture an inquiry in under a minute — only name and phone are required</p>
 
-          <div class="fb-palette">
-            <div class="a-pal-h">Field types — drag in</div>
-            <div class="fb-palette-item" onclick="aAddField('Short answer')"><span class="a-pi-ic">Aa</span>Short answer</div>
-            <div class="fb-palette-item" onclick="aAddField('Multiple choice')"><span class="a-pi-ic">◈</span>Multiple choice</div>
-            <div class="fb-palette-item" onclick="aAddField('Scale 1–10')"><span class="a-pi-ic">1–10</span>Scale 1–10</div>
-            <div class="fb-palette-item" onclick="aAddField('Yes/No')"><span class="a-pi-ic">Y/N</span>Yes/No</div>
-            <div class="fb-palette-item" onclick="aAddField('File upload')"><span class="a-pi-ic">↑</span>File upload</div>
-            <div class="fb-palette-item" onclick="aAddField('Section')"><span class="a-pi-ic">▤</span>Section</div>
-          </div>
-
-          <div class="fb-canvas">
-            <div class="a-fb-formname">Initial inquiry form <span class="pill pill-ok">Live</span></div>
-            <div class="a-fb-formsub">Step 2 of the public funnel (A-01) · 6 questions · about 3 minutes</div>
-            <div class="fb-question">
-              <div class="a-q-type">Short answer · required</div>
-              <div class="a-q-text">What brings you to Helixona?</div>
-            </div>
-            <div class="fb-question">
-              <div class="a-q-type">Multiple choice · required</div>
-              <div class="a-q-text">What are you most interested in?</div>
-              <div class="a-q-opts"><span class="a-q-opt">IV therapy</span><span class="a-q-opt">Functional medicine</span><span class="a-q-opt">Detox program</span></div>
-            </div>
-            <div class="fb-question selected">
-              <div class="a-q-type">Scale 1–10 · required · logic</div>
-              <div class="a-q-text">How would you rate your energy most days?</div>
-              <div class="a-scale"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
-            </div>
-            <div class="fb-question">
-              <div class="a-q-type">Yes/No</div>
-              <div class="a-q-text">Do you currently have health insurance?</div>
-              <div class="a-q-opts"><span class="a-q-opt">Yes</span><span class="a-q-opt">No</span></div>
-            </div>
-            <div class="a-drop" onclick="HCOS.toast('Pick a field type on the left to add a question here.', 'ok')">Drop a field type here to add a question</div>
-          </div>
-
-          <div class="fb-inspector">
-            <div class="a-insp-h">Question settings</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Contact</div>
             <div class="field">
-              <label class="field-label">Label</label>
-              <input class="field-input" id="a-insp-label" value="How would you rate your energy most days?">
+              <label class="field-label">Full name</label>
+              <input class="field-input" type="text" placeholder="First Last">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label">Phone</label>
+                <input class="field-input" type="tel" placeholder="(949) 555-0100">
+              </div>
+              <div class="field">
+                <label class="field-label">Email — optional</label>
+                <input class="field-input" type="email" placeholder="name@example.com">
+              </div>
             </div>
             <div class="field">
-              <label class="field-label">Type</label>
-              <select class="field-select"><option>Scale 1–10</option><option>Short answer</option><option>Multiple choice</option><option>Yes/No</option></select>
+              <label class="field-label">Preferred contact method</label>
+              <select class="field-select">
+                <option selected>Text message</option>
+                <option>Phone call</option>
+                <option>Email</option>
+              </select>
             </div>
-            <div class="a-toggle"><span class="a-toggle-track"></span>Required</div>
-            <div class="seg-divider"></div>
-            <div class="a-insp-h">Logic</div>
-            <div class="field">
-              <label class="field-label">Show if</label>
-              <select class="field-select"><option>"What are you most interested in?" = Detox program</option><option>Always show</option></select>
-            </div>
-            <div class="field-help" style="margin-bottom:14px">People only see questions that apply to them — forms stay short.</div>
-            <button class="btn btn-primary btn-sm" style="width:100%" onclick="HCOS.toast('Question saved — the live form updated instantly.', 'ok')">Save question</button>
           </div>
 
+          <div class="card">
+            <div class="card-title">Inquiry</div>
+            <div class="field">
+              <label class="field-label">Source</label>
+              <select class="field-select">
+                <option>Web form</option>
+                <option selected>Phone call</option>
+                <option>Physician referral</option>
+                <option>Walk-in</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Reason for visit</label>
+              <textarea class="field-textarea" rows="3" placeholder="Caller mentioned chronic fatigue, brain fog…"></textarea>
+            </div>
+            <div class="field">
+              <label class="field-label">Clinical urgency</label>
+              <select class="field-select">
+                <option selected>Routine</option>
+                <option>Expedite if possible</option>
+                <option>Urgent — same week</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">The lead record is created the moment you save — everything else can be finished later from the lead detail.</div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+          <button class="btn btn-primary" data-activate="a-06-triage-dashboard" onclick="HCOS.toast('Lead saved — it is on the triage dashboard.', 'ok')">Save lead</button>
+          <button class="btn" data-activate="a-10-packet" onclick="HCOS.toast('Lead saved — now pick what the packet includes.', 'ok')">Save and send onboarding packet</button>
+          <button class="btn btn-ghost" data-activate="a-06-triage-dashboard">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-08-lead-detail" data-title="Lead detail">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/leads/sarah-anderson</span></div>
+      <div class="frame-body">
+
+        <div class="a-header-row">
+          <span class="avatar lg">SA</span>
+          <div class="a-header-info">
+            <div class="a-lead-name">Sarah Anderson</div>
+            <div class="a-lead-demo">(949) 555-0119 · sarah.a@example.com · Web form · lead created Sun Jul 19</div>
+          </div>
+          <button class="btn btn-sm" data-activate="a-10-packet">Send packet</button>
+          <button class="btn btn-sm" data-activate="a-11-eligibility">Run eligibility</button>
+          <button class="btn btn-primary btn-sm" data-activate="a-09-booking">Book appointment</button>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Onboarding status</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Demographics</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Medical history</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon active">2</span>
+                <span class="check-label">Consents</span>
+                <span class="check-meta">2 of 4 signed</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">ID upload</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon blocked">!</span>
+                <span class="check-label">Insurance card</span>
+                <span class="check-meta">Not started</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">SPD / EOC document</span>
+                <span class="check-meta">Not requested — INN</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Eligibility · 270/271</div>
+            <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">Anthem Blue Cross PPO <span class="net-badge net-inn">INN</span></div>
+            <div class="field-help" style="margin-top:4px">Member ID XJK4-882-104</div>
+            <div style="margin:10px 0"><span class="pill pill-ok">Active</span> <span class="field-help" style="display:inline;margin-left:6px">verified today 9:41 AM</span></div>
+            <dl class="kv" style="margin-top:10px">
+              <dt>Deductible</dt>
+              <dd>$1,200 met of $2,500</dd>
+              <dt>Out-of-pocket</dt>
+              <dd>$3,400 met of $7,500</dd>
+            </dl>
+            <button class="btn btn-sm" style="margin-top:12px" data-activate="a-11-eligibility">Open eligibility console</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Next action</div>
+            <div style="font-size:12.5px">Sarah still needs to upload her insurance card. A reminder went out at 10:40 AM.</div>
+            <button class="btn btn-sm" style="margin-top:12px" onclick="HCOS.toast('Reminder sent — text with the upload link is on its way to Sarah.', 'ok')">Resend reminder</button>
+            <div class="callout callout-warn" style="margin-top:12px;margin-bottom:0">Booking does not wait on this — the card can arrive any time before the visit.</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Activity timeline</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-time">Today · 9:14 AM</div>
+              <div class="timeline-body">Signed HIPAA consent</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">Today · 9:02 AM</div>
+              <div class="timeline-body">Completed medical history questionnaire · 14 min · answers flow straight into the chart</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">Mon Jul 20 · 4:22 PM</div>
+              <div class="timeline-body">Onboarding packet sent · text with the magic link</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">Mon Jul 20 · 4:20 PM</div>
+              <div class="timeline-body">Marie called Sarah · 6 min · "Confirmed interest, will start onboarding tonight"</div>
+            </div>
+            <div class="timeline-item muted">
+              <div class="timeline-time">Sun Jul 19 · 11:08 AM</div>
+              <div class="timeline-body">Lead created from the web form</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-09-booking" data-title="Book appointment">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/leads/sarah-anderson/book</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Book appointment — Sarah Anderson</h2>
+        <p class="page-sub">Pick the visit type, pick a slot, confirm — done</p>
+
+        <div class="grid-3">
+          <div>
+            <div class="seg-divider" style="margin-top:0">Visit type</div>
+            <div class="card a-visit-card selected" data-visit="New patient consult · 90 min · Dr. Drannikov" onclick="aPickVisit(this)">
+              <div class="a-visit-name">New patient consult</div>
+              <div class="a-visit-sub">90 min · Dr. Drannikov</div>
+            </div>
+            <div class="card a-visit-card" data-visit="Follow-up · 30 min" onclick="aPickVisit(this)">
+              <div class="a-visit-name">Follow-up</div>
+              <div class="a-visit-sub">30 min</div>
+            </div>
+            <div class="card a-visit-card" data-visit="Infusion · duration by protocol" onclick="aPickVisit(this)">
+              <div class="a-visit-name">Infusion</div>
+              <div class="a-visit-sub">Duration by protocol · Myers' 1 h · NAD+ ~3 h · chair + medic</div>
+            </div>
+            <div class="card a-visit-card" data-visit="Telehealth · 30 min" onclick="aPickVisit(this)">
+              <div class="a-visit-name">Telehealth</div>
+              <div class="a-visit-sub">30 min</div>
+            </div>
+          </div>
+
+          <div style="grid-column:span 2">
+            <div class="seg-divider" style="margin-top:0">Open slots · this week and next Monday</div>
+            <div class="tbl-wrap">
+              <table class="tbl" id="a-slot-grid">
+                <thead>
+                  <tr><th>Tue 7/21</th><th>Wed 7/22</th><th>Thu 7/23</th><th>Fri 7/24</th><th>Mon 7/27</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="a-dash">—</span></td>
+                    <td><button class="btn btn-sm" data-slot="Wed Jul 22 · 9:00 AM" onclick="aPickSlot(this)">9:00</button></td>
+                    <td><button class="btn btn-sm" data-slot="Thu Jul 23 · 9:00 AM" onclick="aPickSlot(this)">9:00</button></td>
+                    <td><span class="a-dash">—</span></td>
+                    <td><button class="btn btn-sm" data-slot="Mon Jul 27 · 9:00 AM" onclick="aPickSlot(this)">9:00</button></td>
+                  </tr>
+                  <tr>
+                    <td><span class="a-dash">—</span></td>
+                    <td><span class="a-dash">—</span></td>
+                    <td><button class="btn btn-primary btn-sm" data-slot="Thu Jul 23 · 10:30 AM" onclick="aPickSlot(this)">10:30</button></td>
+                    <td><button class="btn btn-sm" data-slot="Fri Jul 24 · 10:30 AM" onclick="aPickSlot(this)">10:30</button></td>
+                    <td><button class="btn btn-sm" data-slot="Mon Jul 27 · 11:00 AM" onclick="aPickSlot(this)">11:00</button></td>
+                  </tr>
+                  <tr>
+                    <td><button class="btn btn-sm" data-slot="Tue Jul 21 · 2:00 PM" onclick="aPickSlot(this)">2:00</button></td>
+                    <td><button class="btn btn-sm" data-slot="Wed Jul 22 · 2:30 PM" onclick="aPickSlot(this)">2:30</button></td>
+                    <td><span class="a-dash">—</span></td>
+                    <td><button class="btn btn-sm" data-slot="Fri Jul 24 · 2:00 PM" onclick="aPickSlot(this)">2:00</button></td>
+                    <td><span class="a-dash">—</span></td>
+                  </tr>
+                  <tr>
+                    <td><span class="a-dash">—</span></td>
+                    <td><button class="btn btn-sm" data-slot="Wed Jul 22 · 4:00 PM" onclick="aPickSlot(this)">4:00</button></td>
+                    <td><button class="btn btn-sm" data-slot="Thu Jul 23 · 4:30 PM" onclick="aPickSlot(this)">4:30</button></td>
+                    <td><span class="a-dash">—</span></td>
+                    <td><button class="btn btn-sm" data-slot="Mon Jul 27 · 3:30 PM" onclick="aPickSlot(this)">3:30</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="field-help" style="margin-top:6px">Slots are Dr. Drannikov's open 90-minute windows. Conflicts warn, never block.</div>
+
+            <div class="callout callout-ok" id="a-book-selected" style="margin-top:14px"><strong>Selected:</strong> Thu Jul 23 · 10:30 AM · New patient consult · 90 min · Dr. Drannikov</div>
+
+            <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="HCOS.toast('Appointment booked — Sarah Anderson is on the day view.', 'ok'); setTimeout(function(){ window.location.href = 'schedule.html#/l-01-day'; }, 900)">Confirm booking</button>
+              <button class="btn" data-activate="a-08-lead-detail" onclick="HCOS.toast('Appointment booked — confirmation text sent to (949) 555-0119.', 'ok')">Confirm and text the details</button>
+              <button class="btn btn-ghost" data-activate="a-08-lead-detail">Back to lead</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-10-packet" data-title="Send packet">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/leads/sarah-anderson/packet</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Send onboarding packet — Sarah Anderson</h2>
+        <p class="page-sub">Pick what to send, pick the channel, preview, send — one link covers everything</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">What to include</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Demographics and contact info</span>
+                <span class="pill pill-muted">Required</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Medical history questionnaire</span>
+                <span class="pill pill-muted">Required</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Consents — HIPAA, treatment, financial</span>
+                <span class="pill pill-muted">Required</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">ID upload — driver license or passport</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Insurance card upload</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">SPD / EOC plan document request</span>
+                <span class="pill pill-warn">OON PPO only</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Pharmacy and supplement preferences</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label">Photo / video consent</span>
+              </li>
+            </ul>
+            <div class="field-help" style="margin-top:8px">Questionnaire answers land in the chart automatically — nothing is re-keyed.</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Delivery</div>
+            <div class="field">
+              <label class="field-label">Channel</label>
+              <div class="filters" style="margin-bottom:0;padding:0;border:none;background:transparent">
+                <button class="filter-chip active">Text</button>
+                <button class="filter-chip">Email</button>
+                <button class="filter-chip">Both</button>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label">Recipient</label>
+              <input class="field-input" type="tel" value="(949) 555-0119">
+            </div>
+            <div class="field">
+              <label class="field-label">Message preview</label>
+              <textarea class="field-textarea" rows="5">Hi Sarah — welcome to Helixona. Tap this link to complete your intake before your visit: helx.io/p/a8f2k9 — about 12 minutes. Save and resume anytime. Reply STOP to opt out.</textarea>
+              <div class="field-help">The magic link works for 7 days and resumes wherever Sarah left off.</div>
+            </div>
+
+            <div class="seg-divider">Reminders</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Auto-reminder 24 h after send if incomplete</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Reminder 48 h before the appointment</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Reminder the morning of the appointment</span>
+              </li>
+            </ul>
+
+            <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+              <button class="btn btn-primary" data-activate="a-08-lead-detail" onclick="HCOS.toast('Packet sent — text with the magic link is on its way to Sarah Anderson.', 'ok')">Send packet</button>
+              <button class="btn" data-activate="a-08-lead-detail" onclick="HCOS.toast('Draft saved — send it from the lead detail when ready.')">Save as draft</button>
+              <a class="btn btn-ghost" href="intake-funnel.html">Preview the patient link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-11-eligibility" data-title="Eligibility">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/leads/sarah-anderson/eligibility</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Eligibility console</h2>
+        <p class="page-sub">Live 270/271 check against the payer — results in seconds</p>
+
+        <div class="grid-2">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Patient and coverage</div>
+              <div class="field">
+                <label class="field-label">Patient</label>
+                <input class="field-input" type="text" value="Sarah Anderson" disabled>
+              </div>
+              <div class="field">
+                <label class="field-label">Payer</label>
+                <select class="field-select">
+                  <option selected>Anthem Blue Cross · PPO</option>
+                  <option>Blue Shield of California</option>
+                  <option>UnitedHealthcare</option>
+                  <option>Cigna</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Member ID</label>
+                  <input class="field-input" type="text" value="XJK4-882-104">
+                </div>
+                <div class="field">
+                  <label class="field-label">Group number</label>
+                  <input class="field-input" type="text" value="00417GG">
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="HCOS.toast('Eligibility check sent — the 271 response lands in seconds.', 'ok')">Run eligibility check</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">What each payer needs downstream</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>Payer</th><th>Network</th><th>Docs path</th><th>Claim # first?</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Anthem Blue Cross</td>
+                      <td><span class="net-badge net-inn">INN</span></td>
+                      <td>EDI 275 travels with the claim</td>
+                      <td>No</td>
+                    </tr>
+                    <tr>
+                      <td>UnitedHealthcare</td>
+                      <td><span class="net-badge net-oon">OON</span></td>
+                      <td>EDI 275 travels with the claim</td>
+                      <td>No</td>
+                    </tr>
+                    <tr>
+                      <td>Blue Shield of CA</td>
+                      <td><span class="net-badge net-oon">OON</span></td>
+                      <td>Portal / fax packet</td>
+                      <td>Yes</td>
+                    </tr>
+                    <tr>
+                      <td>Cigna</td>
+                      <td><span class="net-badge net-oon">OON</span></td>
+                      <td>Portal / fax packet</td>
+                      <td>Yes</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="field-help" style="margin-top:8px">OON PPO leads are asked for their plan's SPD / EOC before the visit.</div>
+              <a class="btn btn-ghost btn-sm" style="margin-top:8px" href="billing.html">Payer routing rules live in billing</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Result · verified 14 seconds ago</div>
+              <div class="callout callout-ok" style="margin-top:0"><strong>Coverage active</strong> · effective Jan 1, 2026 – Dec 31, 2026</div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <tbody>
+                    <tr><td>Plan type</td><td><strong>PPO</strong></td></tr>
+                    <tr><td>Network status</td><td><span class="net-badge net-inn">INN</span> Anthem Blue Cross</td></tr>
+                    <tr><td>Plan governance</td><td><span class="pill pill-muted">Fully insured / commercial</span></td></tr>
+                    <tr><td>Deductible</td><td>$1,200 met of $2,500</td></tr>
+                    <tr><td>Out-of-pocket max</td><td>$3,400 met of $7,500</td></tr>
+                    <tr><td>Coinsurance · INN</td><td>20% after deductible</td></tr>
+                    <tr><td>Office visit copay</td><td>$40</td></tr>
+                    <tr><td>Infusion benefit</td><td>Covered subject to medical necessity</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="seg-divider">Check history</div>
+              <div class="a-hist">
+                <div>Jul 21 · 9:41 AM · Marie · Active</div>
+                <div>Jul 18 · 4:22 PM · Marie · Active</div>
+                <div>Jul 12 · 9:14 AM · Marie · Active</div>
+              </div>
+
+              <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+                <button class="btn btn-primary" data-activate="a-09-booking">Book appointment</button>
+                <button class="btn btn-ghost" data-activate="a-08-lead-detail">Back to lead</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-12-drop-noshow" data-title="Drop / no-show">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/leads/rachel-okonkwo/drop</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Drop / no-show — Rachel Okonkwo</h2>
+        <p class="page-sub">When a lead is lost, a structured reason makes the pattern measurable later</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Reason</div>
+            <div class="field">
+              <label class="field-label">Lead</label>
+              <input class="field-input" type="text" value="Rachel Okonkwo" disabled>
+            </div>
+            <dl class="kv" style="margin-bottom:14px">
+              <dt>Linked appointment</dt>
+              <dd>New patient consult · Mon Jul 20 · 1:00 PM <span class="pill pill-st st-noshow">No-show</span></dd>
+            </dl>
+            <div class="field">
+              <label class="field-label">Primary reason</label>
+              <select class="field-select">
+                <option>Select a reason</option>
+                <option selected>Patient stopped responding</option>
+                <option>No insurance benefits / cannot afford</option>
+                <option>Chose another clinic</option>
+                <option>Geographic distance</option>
+                <option>Wanted a service we don't offer</option>
+                <option>Not a clinical fit</option>
+                <option>Patient requested removal</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Notes — optional</label>
+              <textarea class="field-textarea" rows="3" placeholder="Anything that would help us learn from this drop…"></textarea>
+            </div>
+            <div class="field">
+              <label class="field-label">Last touchpoint</label>
+              <input class="field-input" type="text" value="Text sent Jul 12 — no response after 3 follow-ups">
+            </div>
+            <div class="callout">Dropped leads stay searchable. If Rachel returns, the new inquiry links to this record automatically.</div>
+            <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+              <button class="btn btn-primary" data-activate="a-06-triage-dashboard" onclick="HCOS.toast('Rachel Okonkwo marked dropped — the lead stays searchable.', 'warn')">Mark as dropped</button>
+              <button class="btn btn-ghost" data-activate="a-06-triage-dashboard">Cancel</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Re-engagement before dropping</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Day 1 · follow-up text</span>
+                <span class="check-meta">Jul 6</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Day 3 · phone call</span>
+                <span class="check-meta">Jul 8 · voicemail</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Day 7 · final text</span>
+                <span class="check-meta">Jul 12</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon active">4</span>
+                <span class="check-label">Day 14 · mark dropped if still silent</span>
+                <span class="check-meta">Due Jul 20</span>
+              </li>
+            </ul>
+            <button class="btn btn-sm" style="margin-top:8px" onclick="HCOS.toast('One more text sent — if Rachel replies, the lead reopens on the dashboard.', 'ok')">Send one more text</button>
+            <div class="seg-divider">If she returns</div>
+            <div style="font-size:12.5px">The web form recognizes her phone number, reopens this lead, and the timeline picks up where it stopped — nothing is retyped.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -350,50 +714,40 @@
 
 </div>
 
-<script src="assets/hcos.js?v=3"></script>
+<script src="assets/hcos.js?v=4"></script>
 <script>
-  /* A-01 · funnel stages open their artifact below */
-  function aShow(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    el.style.outline = '2px solid var(--hx-navy)';
-    el.style.outlineOffset = '2px';
-    setTimeout(function () { el.style.outline = ''; el.style.outlineOffset = ''; }, 1200);
-  }
-
-  /* A-02 · filter chips select */
-  document.querySelectorAll('#a-02-triage .filter-chip').forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      document.querySelectorAll('#a-02-triage .filter-chip').forEach(function (c) { c.classList.remove('active'); });
-      chip.classList.add('active');
-    });
+  // Demo only: filter chips toggle their active state within a filter bar.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
   });
 
-  /* A-03 · kiosk check-in completes the code, then confirms */
-  function aKioskCheckIn() {
-    var cells = document.querySelectorAll('#a-kiosk-pin .kiosk-pin-cell');
-    if (cells[2] && !cells[2].textContent) {
-      cells[2].textContent = '4'; cells[2].classList.add('a-pin-filled');
-      cells[3].textContent = '9'; cells[3].classList.add('a-pin-filled');
+  // Demo only: one-click booking — visit type + slot selection feed the summary line.
+  var aVisit = 'New patient consult · 90 min · Dr. Drannikov';
+  var aSlot = 'Thu Jul 23 · 10:30 AM';
+  function aUpdateBookingSummary() {
+    var el = document.getElementById('a-book-selected');
+    if (el) el.innerHTML = '<strong>Selected:</strong> ' + aSlot + ' · ' + aVisit;
+  }
+  function aPickVisit(card) {
+    var cards = document.querySelectorAll('.a-visit-card');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+    card.classList.add('selected');
+    aVisit = card.getAttribute('data-visit');
+    aUpdateBookingSummary();
+  }
+  function aPickSlot(btn) {
+    var grid = document.getElementById('a-slot-grid');
+    if (grid) {
+      var btns = grid.querySelectorAll('button');
+      for (var i = 0; i < btns.length; i++) btns[i].classList.remove('btn-primary');
     }
-    HCOS.toast('Checked in — the visit flips to Arrived on the schedule.', 'ok');
-  }
-
-  /* A-04 · clicking a question selects it and loads it in the inspector */
-  document.querySelectorAll('#a-04-builder .fb-question').forEach(function (q) {
-    q.addEventListener('click', function () {
-      document.querySelectorAll('#a-04-builder .fb-question').forEach(function (x) { x.classList.remove('selected'); });
-      q.classList.add('selected');
-      var lbl = document.getElementById('a-insp-label');
-      var txt = q.querySelector('.a-q-text');
-      if (lbl && txt) lbl.value = txt.textContent;
-    });
-  });
-
-  /* A-04 · palette items add a question */
-  function aAddField(type) {
-    HCOS.toast(type + ' question added to the end of the form.', 'ok');
+    btn.classList.add('btn-primary');
+    aSlot = btn.getAttribute('data-slot');
+    aUpdateBookingSummary();
   }
 </script>
 </body>

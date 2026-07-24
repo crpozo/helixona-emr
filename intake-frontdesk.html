@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake · Front desk · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=4">
+<style>
+  .afd-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .afd-prow { display: flex; align-items: center; gap: 10px; }
+  .afd-pname { font-weight: 600; color: var(--hx-navy); }
+  .afd-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .afd-header-info { flex: 1; min-width: 220px; }
+  .afd-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+  .afd-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .afd-chip-link { cursor: pointer; text-decoration: none; }
+  .afd-resolve-btn { width: 100%; margin-bottom: 8px; text-align: left; }
+  .afd-check-circle { width: 70px; height: 70px; border-radius: 50%; background: var(--hx-navy); color: #fff; font-size: 36px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+</style>
+</head>
+<body data-page="intake-frontdesk" data-page-title="Intake · Front desk" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-29-today-schedule" data-title="Today's schedule">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/front-desk</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Today's schedule</h2>
+        <p class="page-sub">Tuesday, July 21 · 11:40 AM · every visit and its intake readiness</p>
+
+        <div class="afd-toolbar">
+          <div class="cal-nav">
+            <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">‹</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Already on today — Tuesday, July 21')">Today</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">›</button>
+            <span class="cal-date" style="margin-left:8px">Tuesday, July 21</span>
+          </div>
+          <div class="cal-views">
+            <button class="active">List</button>
+            <button onclick="window.location.href='schedule.html#/l-01-day'">Day</button>
+            <button onclick="window.location.href='schedule.html#/l-02-week'">Week</button>
+          </div>
+          <span style="flex:1"></span>
+          <a class="btn" href="schedule.html">Open full calendar</a>
+          <button class="btn btn-primary" data-activate="a-31-walkin">Register walk-in</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card">
+            <div class="stat-num">14</div>
+            <div class="stat-lbl">Appointments today</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">6</div>
+            <div class="stat-lbl">Patients ready</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Missing items</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">1</div>
+            <div class="stat-lbl">Action needed</div>
+          </div>
+        </div>
+
+        <div class="filters">
+          <span style="display:flex;gap:8px">
+            <button class="filter-chip active">All</button>
+            <button class="filter-chip">Ready</button>
+            <button class="filter-chip">Missing items</button>
+            <button class="filter-chip">Action needed</button>
+          </span>
+          <span style="display:flex;gap:8px">
+            <button class="filter-chip active">All types</button>
+            <button class="filter-chip">New patients</button>
+            <button class="filter-chip">Follow-ups</button>
+            <button class="filter-chip">Infusions</button>
+          </span>
+          <input class="search-input" type="search" placeholder="Search by patient name">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Patient</th>
+                <th>Appointment</th>
+                <th>Where</th>
+                <th>Visit status</th>
+                <th>Readiness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+                <td>8:30 – 10:00</td>
+                <td><div class="afd-prow"><span class="avatar">MW</span><span class="afd-pname">Marcus Webb</span></div></td>
+                <td>New patient consult · 90m</td>
+                <td>Dr. Drannikov</td>
+                <td><span class="pill pill-st st-done">Done</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+                <td>9:00 – 12:00</td>
+                <td><div class="afd-prow"><span class="avatar">MR</span><span class="afd-pname">Maya Reyes</span></div></td>
+                <td>NAD+ infusion · ~3 h</td>
+                <td>Chair 1 · Nick</td>
+                <td><span class="pill pill-st st-inchair">In chair</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+                <td>10:00 – 12:30</td>
+                <td><div class="afd-prow"><span class="avatar">DO</span><span class="afd-pname">Daniel Okafor</span></div></td>
+                <td>IV vitamin C 25 g · 2.5 h</td>
+                <td>Chair 2 · Bea</td>
+                <td><span class="pill pill-st st-inchair">In chair</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+                <td>10:30</td>
+                <td><div class="afd-prow"><span class="avatar">GL</span><span class="afd-pname">Grace Lindqvist</span></div></td>
+                <td>Follow-up · 30m</td>
+                <td>Dr. Drannikov</td>
+                <td><span class="pill pill-st st-inroom">In room</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-30-readiness-board">
+                <td>11:15</td>
+                <td><div class="afd-prow"><span class="avatar">SR</span><span class="afd-pname">Sofia Ramos</span></div></td>
+                <td>Lab draw · 15m</td>
+                <td>Chair 4 · Nate</td>
+                <td><span class="pill pill-st st-arrived">Arrived</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-30-readiness-board">
+                <td>11:30</td>
+                <td><div class="afd-prow"><span class="avatar">EP</span><span class="afd-pname">Elena Petrova</span></div></td>
+                <td>Telehealth · 30m</td>
+                <td>Telehealth · Dr. Drannikov</td>
+                <td><span class="pill pill-st st-arrived">Arrived</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-32-checkin-confirm">
+                <td>11:30 – 12:30</td>
+                <td><div class="afd-prow"><span class="avatar">PN</span><span class="afd-pname">Priya Natarajan</span></div></td>
+                <td>Myers' cocktail · 1 h</td>
+                <td>Chair 3 · Juan</td>
+                <td><span class="pill pill-st st-arrived">Arrived</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
+                <td>1:00 – 4:00 PM</td>
+                <td><div class="afd-prow"><span class="avatar">WH</span><span class="afd-pname">Walter Hsu</span></div></td>
+                <td>NAD+ infusion · ~3 h</td>
+                <td>Chair 1 · Nick</td>
+                <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-30-readiness-board">
+                <td>1:30 PM</td>
+                <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
+                <td>Follow-up · 30m</td>
+                <td>Dr. Drannikov</td>
+                <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+              </tr>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+                <td>2:00 PM</td>
+                <td><div class="afd-prow"><span class="avatar">GL</span><span class="afd-pname">Grace Lindqvist</span></div></td>
+                <td>Follow-up · 30m</td>
+                <td>Dr. Drannikov</td>
+                <td><span class="pill pill-st st-cancelled">Cancelled</span></td>
+                <td><span style="color:var(--muted)">—</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-30-readiness-board">
+                <td>2:00 – 3:00 PM</td>
+                <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
+                <td>Myers' cocktail · 1 h</td>
+                <td>Chair 4 · Nate</td>
+                <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+              </tr>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+                <td>2:00 PM</td>
+                <td><div class="afd-prow"><span class="avatar">MW</span><span class="afd-pname">Marcus Webb</span></div></td>
+                <td>Glutathione push · 30m</td>
+                <td>Chair 4 · Nate</td>
+                <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                <td><span class="pill pill-ok">Ready</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-30-readiness-board">
+                <td>3:00 – 4:30 PM</td>
+                <td><div class="afd-prow"><span class="avatar">TA</span><span class="afd-pname">Tom Alvarez</span></div></td>
+                <td>New patient consult · 90m</td>
+                <td>Dr. Drannikov</td>
+                <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                <td><span class="pill pill-err afd-chip-link" data-activate="a-30-readiness-board">Action needed</span></td>
+              </tr>
+              <tr class="row-click" data-activate="a-30-readiness-board">
+                <td>3:30 PM</td>
+                <td><div class="afd-prow"><span class="avatar">SR</span><span class="afd-pname">Sofia Ramos</span></div></td>
+                <td>Glutathione push · 30m</td>
+                <td>Chair 3 · Juan</td>
+                <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top:14px">Chair 4 is double-booked at 2:00 PM — Marcus Webb overlaps Nadia Boulos. Kept on purpose.</div>
+        <div class="field-help" style="margin-top:8px">Select a Missing items or Action needed chip to see what is missing and how to resolve it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-30-readiness-board" data-title="Readiness board">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/front-desk/readiness</span></div>
+      <div class="frame-body">
+
+        <div class="afd-header-row" style="margin-bottom:8px">
+          <div class="afd-header-info">
+            <h2 class="page-title">Patient readiness</h2>
+            <p class="page-sub" style="margin-bottom:0">Missing items before today's visits — resolve them before the patient reaches the room</p>
+          </div>
+          <button class="btn" data-activate="a-29-today-schedule">Back to today's schedule</button>
+        </div>
+
+        <div class="card" style="margin-bottom:12px">
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Today's visit</th>
+                  <th>Onboarding</th>
+                  <th>Missing items</th>
+                  <th>Readiness</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="afd-prow"><span class="avatar">TA</span><span class="afd-pname">Tom Alvarez</span></div></td>
+                  <td>3:00 PM · New patient consult</td>
+                  <td>6 of 8 complete</td>
+                  <td>
+                    <a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">Treatment consent</a>
+                    <a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">Financial responsibility</a>
+                  </td>
+                  <td><span class="pill pill-err">Action needed</span></td>
+                </tr>
+                <tr>
+                  <td><div class="afd-prow"><span class="avatar">SR</span><span class="afd-pname">Sofia Ramos</span></div></td>
+                  <td>11:15 AM · Lab draw</td>
+                  <td>8 of 8 complete</td>
+                  <td><a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">SPD document</a></td>
+                  <td><span class="pill pill-warn">Missing items</span></td>
+                </tr>
+                <tr>
+                  <td><div class="afd-prow"><span class="avatar">EP</span><span class="afd-pname">Elena Petrova</span></div></td>
+                  <td>11:30 AM · Telehealth follow-up</td>
+                  <td>8 of 8 complete</td>
+                  <td><a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">SPD document</a></td>
+                  <td><span class="pill pill-warn">Missing items</span></td>
+                </tr>
+                <tr>
+                  <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
+                  <td>1:30 PM · Follow-up</td>
+                  <td>8 of 8 complete</td>
+                  <td><a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">Pre-visit questionnaire</a></td>
+                  <td><span class="pill pill-warn">Missing items</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="callout callout-ok" style="margin-bottom:20px">Everyone else on today's schedule is ready — 6 patients, nothing missing.</div>
+
+        <div class="afd-header-row">
+          <span class="avatar lg">TA</span>
+          <div class="afd-header-info">
+            <div class="afd-name">Tom Alvarez</div>
+            <div class="afd-demo">New patient consult · today 3:00 PM · Dr. Drannikov · Cigna PPO</div>
+          </div>
+          <span class="pill pill-st st-scheduled">Scheduled</span>
+          <span class="pill pill-err">Action needed</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Onboarding checklist</div>
+            <ul class="check-list">
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Demographics</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Medical history</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Reason for visit</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">HIPAA consent</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label"><strong>Treatment consent</strong> — not signed</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon pending"></span>
+                <span class="check-label"><strong>Financial responsibility</strong> — not signed</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">ID uploaded</span>
+              </li>
+              <li class="check-item">
+                <span class="check-icon done">✓</span>
+                <span class="check-label">Insurance card uploaded</span>
+              </li>
+            </ul>
+            <div style="margin-top:12px">
+              <a class="btn btn-sm" href="intake-onboarding.html">Open onboarding record</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Resolve options</div>
+            <button class="btn afd-resolve-btn" onclick="HCOS.toast('Onboarding link re-sent by text to (949) 555-0176 — it expires in 7 days.', 'ok')">Resend SMS link to Tom</button>
+            <button class="btn afd-resolve-btn" onclick="HCOS.toast('Queued for the kiosk — the missing consents load first when Tom checks in.', 'ok')">Send to kiosk when he arrives</button>
+            <button class="btn afd-resolve-btn" onclick="HCOS.toast('(949) 555-0176 — the call outcome logs to the intake timeline.')">Call Tom now</button>
+            <button class="btn afd-resolve-btn" onclick="HCOS.toast('Handed off — Charlene walks Tom through the consents by phone.', 'ok')">Hand off to Charlene (Virtual)</button>
+            <button class="btn btn-ghost afd-resolve-btn" style="margin-bottom:0" onclick="HCOS.toast('Override recorded — the visit proceeds and unsigned consents stay flagged for Dr. Drannikov.', 'warn')">Override — proceed anyway</button>
+
+            <div class="seg-divider">Eligibility</div>
+            <div style="font-size:12.5px"><span class="pill pill-ok">Active</span> Cigna PPO <span class="net-badge net-oon">OON</span> · verified this morning</div>
+            <div class="field-help" style="margin-top:6px">SPD requested Jul 18 — the governing plan document has not arrived yet.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-31-walkin" data-title="Walk-in registration">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/front-desk/walk-in</span></div>
+      <div class="frame-body">
+        <h2 class="page-title">Walk-in registration</h2>
+        <p class="page-sub">Capture the basics now — the kiosk collects the rest in the lobby</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Patient</div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label">First name</label>
+                <input class="field-input" type="text" value="Rosa">
+              </div>
+              <div class="field">
+                <label class="field-label">Last name</label>
+                <input class="field-input" type="text" value="Delgado">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label">Date of birth</label>
+                <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+              </div>
+              <div class="field">
+                <label class="field-label">Mobile phone</label>
+                <input class="field-input" type="tel" value="(949) 555-0188">
+              </div>
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label class="field-label">Reason for visit</label>
+              <textarea class="field-textarea">Migraine today — asking about a same-day Myers' cocktail.</textarea>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Insurance — optional now</div>
+            <div class="field">
+              <label class="field-label">Payer</label>
+              <select class="field-select">
+                <option selected>Capture later</option>
+                <option>Anthem Blue Cross</option>
+                <option>Blue Shield of CA</option>
+                <option>UnitedHealthcare</option>
+                <option>Cigna</option>
+                <option>Self-pay</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label">Member ID</label>
+              <input class="field-input" type="text" placeholder="Can wait until check-in">
+            </div>
+
+            <div class="seg-divider">Send onboarding to</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="filter-chip active">Kiosk (in clinic)</button>
+              <button class="filter-chip">SMS link</button>
+              <button class="filter-chip">Both</button>
+            </div>
+
+            <div class="callout" style="margin-top:16px">On save, a one-time QR code prints at the front desk — Rosa scans it at the kiosk and finishes onboarding in the lobby.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-primary btn-lg" onclick="HCOS.toast('Walk-in registered — the QR code is printing at the front desk.', 'ok')">Register and print QR code</button>
+          <a class="btn" href="schedule.html#/l-03-book">Book same-day slot</a>
+          <a class="btn btn-ghost" href="intake-kiosk.html">Open kiosk check-in</a>
+        </div>
+        <div class="field-help" style="margin-top:8px">Five fields and the walk-in exists — everything else can wait.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-32-checkin-confirm" data-title="Check-in confirmation">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/intake/front-desk/check-in</span></div>
+      <div class="frame-body">
+
+        <div style="text-align:center;padding:30px 0 24px">
+          <div class="afd-check-circle">✓</div>
+          <h2 class="page-title" style="margin-bottom:6px">Priya Natarajan is checked in</h2>
+          <p class="page-sub" style="margin-bottom:10px">11:22 AM · 8 minutes early · Myers' cocktail at 11:30 · Chair 3</p>
+          <span class="pill pill-st st-arrived">Arrived</span>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Sent to chair team</div>
+            <div style="font-size:12.5px"><span class="dot dot-ok"></span>Juan notified · Chair 3</div>
+            <div class="field-help" style="margin-top:4px"><a href="intake-previsit.html">Pre-visit chart opened</a></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Sent to provider</div>
+            <div style="font-size:12.5px"><span class="dot dot-ok"></span>Dr. Drannikov notified</div>
+            <div class="field-help" style="margin-top:4px">Visit at 11:30 · orders on file</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Patient told</div>
+            <div style="font-size:12.5px">"Please take a seat — Juan will bring you back in a few minutes."</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:18px;justify-content:center;flex-wrap:wrap">
+          <button class="btn" onclick="HCOS.toast('Face sheet sent to the front desk printer.', 'ok')">Print encounter face sheet</button>
+          <button class="btn btn-primary" data-activate="a-29-today-schedule">Back to today's schedule</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=4"></script>
+<script>
+  // Demo only: filter chips toggle their active state within their own group.
+  document.addEventListener('click', function (ev) {
+    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
+    if (!chip || !chip.parentElement) return;
+    var chips = chip.parentElement.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+    chip.classList.add('active');
+  });
+</script>
+</body>
+</html>

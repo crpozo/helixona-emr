@@ -41,6 +41,29 @@
     { name: 'Security & audit', href: 'security.html', page: 'security' }
   ];
 
+  /* Second-level tabs inside the deep modules (rendered under the topbar) */
+  var SUBNAV = {
+    intake: [
+      ['Triage', 'intake.html'],
+      ['Public funnel', 'intake-funnel.html'],
+      ['Onboarding', 'intake-onboarding.html'],
+      ['Documents', 'intake-documents.html'],
+      ['Front desk', 'intake-frontdesk.html'],
+      ['Kiosk', 'intake-kiosk.html'],
+      ['Pre-visit', 'intake-previsit.html'],
+      ['Admin & builder', 'intake-admin.html']
+    ],
+    clinical: [
+      ['Provider', 'clinical.html'],
+      ['Chart', 'clinical-chart.html'],
+      ['Questionnaires', 'clinical-questionnaires.html'],
+      ['Infusion suite', 'clinical-infusion.html'],
+      ['Remote MA', 'clinical-remote.html'],
+      ['Templates & macros', 'clinical-templates.html'],
+      ['Governance', 'clinical-governance.html']
+    ]
+  };
+
   var body = document.body;
   var PAGE = body.getAttribute('data-page') || 'page';
   var PAGE_TITLE = body.getAttribute('data-page-title') || document.title;
@@ -87,7 +110,8 @@
     sb.appendChild(brand);
     MODULES.forEach(function (m) {
       if (m.group) { sb.appendChild(el('div', 'nav-group', esc(m.group))); return; }
-      var a = el('a', 'nav-item' + (m.page === PAGE ? ' active' : ''));
+      var active = m.page === PAGE || PAGE.indexOf(m.page + '-') === 0;
+      var a = el('a', 'nav-item' + (active ? ' active' : ''));
       a.href = m.href;
       a.innerHTML = '<span>' + esc(m.name) + '</span>';
       sb.appendChild(a);
@@ -144,6 +168,16 @@
       });
       var main = el('div', 'main');
       main.appendChild(buildTopbar());
+      var subnav = SUBNAV[PAGE.split('-')[0]];
+      if (subnav) {
+        var tabs = el('nav', 'subnav');
+        subnav.forEach(function (t) {
+          var a = el('a', 'subnav-tab' + (t[1] === PAGE + '.html' ? ' active' : ''), esc(t[0]));
+          a.href = t[1];
+          tabs.appendChild(a);
+        });
+        main.appendChild(tabs);
+      }
       chipsNav = el('nav', 'screen-chips');
       main.appendChild(chipsNav);
       var canvas = el('div', 'canvas');
