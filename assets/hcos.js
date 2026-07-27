@@ -61,6 +61,16 @@
       ['Remote MA', 'clinical-remote.html'],
       ['Templates & macros', 'clinical-templates.html'],
       ['Governance', 'clinical-governance.html']
+    ],
+    journey: [
+      ['Today', 'journey.html'],
+      ['My plan', 'journey-plan.html'],
+      ['Check-in', 'journey-checkin.html'],
+      ['Schedule', 'journey-schedule.html'],
+      ['Progress', 'journey-progress.html'],
+      ['Rewards', 'journey-rewards.html'],
+      ['Book a visit', 'journey-book.html'],
+      ['Care plan (staff)', 'journey-careplan.html']
     ]
   };
 

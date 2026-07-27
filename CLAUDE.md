@@ -145,6 +145,23 @@ clinical-remote.html   Remote MA pre/post-charting              b-18…b-20
 clinical-templates.html Shared templates + dot-phrases          b-21…b-23
 clinical-governance.html Co-sign, audit, quality, states        b-24…b-27
 
+Module J (Patient journey & education) carries the ported eCarePlan app (2026-07-21,
+from github.com/crpozo/helixona-module-careplan — a React/Tailwind patient POC app,
+converted gold→grayscale). Patient-facing screens render in .phone-frame; the staff
+care-plan authoring page is the one desktop screen. Sub-pages with journey tabs:
+journey.html            Today — patient home (module landing)     j-01…j-03
+journey-plan.html       My plan: journey path, activities, doses   j-plan-*
+journey-checkin.html    Guided check-in flow + celebration         j-checkin-*
+journey-schedule.html   By day / week / month / treatment          j-sched-*
+journey-progress.html   Adherence ring, streak, week history       j-progress-*
+journey-rewards.html    Points, tier ladder, catalog, badge wall   j-rewards-*
+journey-book.html       Book a visit (what→day→time→confirm)       j-book-*
+journey-careplan.html   Care plan authoring / staff entry (desktop) j-staff-*
+
+The care journey (7 stages Identification→Graduation), pacing, activity/supplement
+doses, tier ladder (Initiate→Radiant) and rewards are the eCarePlan's model. In
+grayscale: done/earned = ink, never gold or green.
+
 [remaining modules]   one high-level screen each, deepened in later passes
 assets/hcos.css       tokens + components — single source of truth
 assets/hcos.js        screen switching + the feedback widget

@@ -558,6 +558,21 @@ button { font-family: inherit; }
 .check-label { flex: 1; font-size: 13px; }
 .check-meta { font-size: 11px; color: var(--muted); }
 
+/* Meter — the canonical progress bar. Set the fill width inline.
+   <div class="meter"><div class="meter-fill" style="width:72%"></div></div> */
+.meter {
+  height: 6px;
+  background: var(--hx-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+.meter.lg { height: 8px; border-radius: 4px; }
+.meter.lg .meter-fill { border-radius: 4px; }
+.meter-row { display: flex; align-items: center; gap: 10px; }
+.meter-row .meter { flex: 1; }
+.meter-val { font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+
 .seg-divider {
   font-size: 10.5px;
   text-transform: uppercase;
@@ -1176,6 +1191,146 @@ button { font-family: inherit; }
   font-family: var(--font-ui);
 }
 .fbk-pin:hover { background: var(--hx-light); }
+
+/* ==========================================================================
+   CARE PLAN / PATIENT APP (Module J) — grayscale patient-facing components.
+   The old eCarePlan was gold + gamified; here done/earned = ink, locked = muted.
+   Patient screens render inside .phone-frame; these classes style their guts.
+   ========================================================================== */
+
+/* Big friendly patient buttons (chunky, press-down) */
+.bigbtn {
+  display: block;
+  width: 100%;
+  padding: 18px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 14px;
+  border: 2px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+.bigbtn-done { background: var(--ink); color: #fff; }
+.bigbtn-skip { border-color: var(--line); color: var(--muted); }
+
+/* Progress ring — grayscale conic fill; set --p (0–100) inline */
+.pring {
+  --p: 66;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: conic-gradient(var(--ink) calc(var(--p) * 1%), var(--line-soft) 0);
+  display: grid; place-items: center;
+  margin: 0 auto;
+}
+.pring-hole {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: #fff; display: grid; place-items: center; text-align: center;
+}
+.pring-num { font-size: 26px; font-weight: 700; color: var(--hx-navy); line-height: 1; }
+.pring-lbl { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+.pring.sm { width: 72px; height: 72px; }
+.pring.sm .pring-hole { width: 52px; height: 52px; }
+.pring.sm .pring-num { font-size: 16px; }
+
+/* Glanceable stat tiles (streak / points / week) */
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.tile {
+  border: 2px solid var(--line-soft); border-radius: 12px;
+  padding: 12px 10px; text-align: center; background: #fff;
+}
+.tile-num { font-size: 20px; font-weight: 700; color: var(--hx-navy); }
+.tile-lbl { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+/* Journey path — vertical stages with "you are here" */
+.journey-path { position: relative; padding-left: 8px; }
+.jstage { display: flex; gap: 12px; padding-bottom: 4px; position: relative; }
+.jstage-rail { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.jstage-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid var(--line); background: #fff;
+  display: grid; place-items: center; font-size: 11px; font-weight: 700; color: var(--muted);
+  z-index: 1;
+}
+.jstage-line { width: 2px; flex: 1; background: var(--line-soft); min-height: 18px; }
+.jstage.done .jstage-dot { background: var(--ink); border-color: var(--ink); color: #fff; }
+.jstage.done .jstage-line { background: var(--ink); }
+.jstage.current .jstage-dot { border-color: var(--ink); color: var(--ink); box-shadow: 0 0 0 4px var(--hx-light); }
+.jstage-body { padding-bottom: 16px; }
+.jstage-name { font-size: 13.5px; font-weight: 600; color: var(--hx-navy); }
+.jstage.current .jstage-name::after {
+  content: 'You are here';
+  display: inline-block; margin-left: 8px;
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  background: var(--ink); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: middle;
+}
+.jstage-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+
+/* Activity list rows (with dose for supplements/meds) */
+.act-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border: 1px solid var(--line-soft); border-radius: 10px; margin-bottom: 8px;
+}
+.act-check {
+  width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0;
+  border: 2px solid var(--line); display: grid; place-items: center; cursor: pointer;
+  font-size: 14px; color: transparent;
+}
+.act-check.done { background: var(--ink); border-color: var(--ink); color: #fff; }
+.act-body { flex: 1; min-width: 0; }
+.act-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+.act-meta { font-size: 11px; color: var(--muted); }
+.act-freq { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+/* Rewards — tier ladder, catalog card, redemption code */
+.tier-ladder { display: flex; gap: 4px; align-items: stretch; }
+.tier-step {
+  flex: 1; text-align: center; padding: 8px 4px;
+  border: 1px solid var(--line-soft); border-radius: 8px;
+  font-size: 10px; color: var(--muted); background: #fff;
+}
+.tier-step.reached { background: var(--hx-light); color: var(--ink); border-color: var(--line); font-weight: 600; }
+.tier-step.current { background: var(--ink); color: #fff; border-color: var(--ink); font-weight: 700; }
+.reward-card {
+  border: 2px solid var(--line-soft); border-radius: 12px; padding: 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.reward-cost { font-size: 12px; font-weight: 700; color: var(--hx-navy); }
+.redeem-code {
+  font-family: ui-monospace, monospace; font-size: 15px; font-weight: 700; letter-spacing: 2px;
+  border: 2px dashed var(--ink); border-radius: 8px; padding: 10px; text-align: center; color: var(--ink);
+}
+
+/* Badge wall */
+.badge-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; }
+.badge {
+  border: 1px solid var(--line-soft); border-radius: 12px; padding: 12px 6px; text-align: center;
+}
+.badge-ico {
+  width: 40px; height: 40px; border-radius: 50%; margin: 0 auto 6px;
+  display: grid; place-items: center; font-size: 18px;
+  background: var(--line-soft); color: var(--muted);
+}
+.badge.earned .badge-ico { background: var(--ink); color: #fff; }
+.badge-name { font-size: 10px; font-weight: 600; color: var(--hx-navy); }
+.badge.locked { opacity: 0.55; }
+
+/* Celebration screen */
+.celebrate { text-align: center; padding: 32px 16px; }
+.celebrate-ring { font-size: 52px; margin-bottom: 12px; }
+.celebrate h2 { font-size: 22px; margin-bottom: 6px; }
+
+/* Segmented control (by day / week / month / treatment) */
+.seg {
+  display: inline-flex; background: #F3F3F3; border-radius: 10px; padding: 3px; gap: 2px; flex-wrap: wrap;
+}
+.seg button {
+  border: none; background: transparent; padding: 6px 14px; font-size: 12px;
+  color: var(--muted); cursor: pointer; border-radius: 8px; font-family: inherit;
+}
+.seg button.active { background: #fff; color: var(--ink); font-weight: 600; box-shadow: var(--shadow-card); }
 
 /* ==========================================================================
    RESPONSIVE

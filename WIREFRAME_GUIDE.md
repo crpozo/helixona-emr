@@ -101,6 +101,8 @@ are patient-facing use `.phone-frame` (mobile) or `.kiosk-frame` instead of `.fr
 - **Tables**: `tbl` inside `tbl-wrap`
 - **Forms**: `field` `field-label` `field-input` `field-select` `field-textarea` `field-row` `field-help` `field-error` · `filters` `filter-chip` `search-input`
 - **Callouts**: `callout` + `callout-warn` `callout-err` `callout-ok`
+- **Meter (the ONE progress bar)**: `meter` > `meter-fill` (width inline), `meter lg` for 8px, `meter-row` + `meter-val`. Never hand-roll another bar — 12 pages once did, and they drifted.
+- **Care plan / patient app (Module J)**: `bigbtn`(+`bigbtn-done` `bigbtn-skip`) · `pring`(+`--p` inline, `pring-hole` `pring-num` `pring-lbl`, `.sm`) · `tiles`/`tile`/`tile-num`/`tile-lbl` · `journey-path`/`jstage`(+`done` `current`)/`jstage-dot`/`jstage-line`/`jstage-name`/`jstage-desc` · `act-row`/`act-check`(+`done`)/`act-name`/`act-meta`/`act-freq` · `tier-ladder`/`tier-step`(+`reached` `current`) · `reward-card`/`reward-cost`/`redeem-code` · `badge-wall`/`badge`(+`earned` `locked`)/`badge-ico`/`badge-name` · `celebrate` · `seg`
 - **Flow bits**: `timeline`/`timeline-item` · `check-list`/`check-item`+`check-icon done|pending|active|blocked` · `status-flow`/`status-step`(+`current`,`past`)/`status-arrow`
 - **Overlays**: `modal-overlay`>`modal`(+`modal-wide`) with `modal-head/-title/-sub/-close/-body/-foot` · `drawer-overlay`+`drawer` · toasts via `HCOS.toast(msg, 'ok'|'warn')`
 - **Calendar (Module L + anywhere a calendar appears)**: `cal` `cal-toolbar` `cal-nav` `cal-date` `cal-views` · day: `daycal-head` `daycal-band` `daycal-band-spacer` `daycal-col-head` `daycal-grid` `daycal-hours` `daycal-hour` `daycal-col` `daycal-slot` · `cal-now`+`cal-now-label` · `cal-appt` (+`st-*` status class, children `cal-appt-time/-name/-type`) · `conflict` · week: `weekcal-*`, `week-appt` · `cal-legend`
@@ -115,6 +117,16 @@ status pill); it must produce zero console errors.
 Page-specific CSS: allowed only in a small `<style>` in `<head>`, class names prefixed with
 the page letter (e.g. `.b-scribe-…`), and only for things the shared vocabulary genuinely
 lacks. If it feels general, it belongs in `assets/hcos.css` instead.
+
+**Consistency rule (Carlos, 2026-07-21): every page must look like the same product.**
+Page-local CSS is for LAYOUT ONLY (a grid, a column width, a one-off arrangement). The
+moment you are writing `border: 1px solid var(--line); border-radius: …; padding: …` you
+are re-implementing `.card` — use the shared class instead. Same for buttons, pills,
+tables, meters, callouts, and rings. When porting from another design system (the old
+module wireframes, the eCarePlan app), the source supplies CONTENT; the form is always
+this system: same radii (12px cards / 6px controls), same type scale, same grayscale
+tokens, same 8px rhythm. A ported screen that still looks like its origin is a defect,
+not a variation.
 
 ## Copy and design rules (from CLAUDE.md — enforced at review)
 
