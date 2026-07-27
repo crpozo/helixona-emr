@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient journey · Schedule · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .j-phone-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .j-phone-head .avatar { flex-shrink: 0; }
+  .j-title { font-size: 18px; font-weight: 600; color: var(--hx-navy); }
+  .j-title-sub { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .j-head-btn { margin-left: auto; flex-shrink: 0; }
+  .j-seg-row { display: flex; justify-content: center; margin-bottom: 16px; }
+  .j-count { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .j-count b { color: var(--ink); font-weight: 700; }
+  .j-sec { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
+  .j-sec.first { margin-top: 2px; }
+  .j-yes { border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 11.5px; font-weight: 600; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-family: inherit; white-space: nowrap; flex-shrink: 0; }
+  .act-row.j-done { background: var(--hx-band); border-color: var(--line); }
+  .act-row.j-done .j-yes { border-color: var(--line-soft); color: var(--muted); }
+  .j-foot { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+
+  /* Week view — progress dots per activity */
+  .j-note { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+  .j-wk-row { padding: 11px 0; border-bottom: 1px solid var(--line-soft); }
+  .j-wk-row:last-child { border-bottom: none; }
+  .j-wk-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .j-wk-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .j-wk-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .j-dots { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+  .j-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: #fff; }
+  .j-dot.on { background: var(--ink); border-color: var(--ink); }
+
+  /* Month view — compact grayscale calendar */
+  .j-cal { border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; background: #fff; }
+  .j-cal-nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); }
+  .j-cal-month { font-size: 13px; font-weight: 700; color: var(--hx-navy); }
+  .j-cal-arrow { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--line-soft); background: #fff; color: var(--muted); cursor: pointer; font-size: 13px; font-family: inherit; }
+  .j-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .j-cal-dow { text-align: center; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding: 7px 0 5px; }
+  .j-cal-cell { min-height: 44px; border-top: 1px solid var(--line-soft); border-left: 1px solid var(--line-soft); padding: 4px 0; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; background: #fff; }
+  .j-cal-cell:nth-child(7n+1) { border-left: none; }
+  .j-cal-cell.j-empty { background: var(--hx-band); cursor: default; }
+  .j-cal-cell.j-closed { background: var(--hx-band); cursor: default; }
+  .j-cal-num { font-size: 12px; font-weight: 600; color: var(--ink); width: 22px; height: 22px; display: grid; place-items: center; }
+  .j-cal-cell.j-past .j-cal-num { color: var(--muted); }
+  .j-cal-cell.j-today .j-cal-num { background: var(--ink); color: #fff; border-radius: 50%; }
+  .j-cal-closed-lbl { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .j-cal-dots { display: flex; gap: 2px; height: 5px; }
+  .j-cal-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--hx-accent); }
+  .j-cal-cell.j-past .j-cal-dot { background: var(--line); }
+  .j-cal-hint { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; }
+  .j-legend { display: flex; gap: 14px; justify-content: center; margin-top: 10px; }
+  .j-legend-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: var(--muted); }
+  .j-legend-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--hx-accent); }
+
+  /* Treatment view — one activity up close */
+  .j-tpick { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .j-tpill { border: 1px solid var(--line); background: #fff; color: var(--muted); font-size: 11.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; cursor: pointer; font-family: inherit; }
+  .j-tpill.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .j-feat { border: 2px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+  .j-feat-name { font-size: 18px; font-weight: 700; color: var(--hx-navy); }
+  .j-feat-freq { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .j-feat-days { display: flex; gap: 5px; margin: 14px 0 12px; }
+  .j-day-chip { flex: 1; text-align: center; font-size: 10px; font-weight: 700; padding: 7px 0; border-radius: 8px; border: 1px solid var(--line-soft); color: var(--muted); background: #fff; }
+  .j-day-chip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .j-day-chip.closed { background: var(--hx-band); color: var(--line); }
+  .j-feat-instr { font-size: 12.5px; line-height: 1.6; color: var(--ink); }
+  .j-hist-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+  .j-hist-row:last-child { border-bottom: none; }
+  .j-hist-wk { width: 78px; font-size: 11.5px; font-weight: 600; color: var(--hx-navy); flex-shrink: 0; }
+  .j-hist-cnt { margin-left: auto; font-size: 11px; color: var(--muted); white-space: nowrap; }
+</style>
+</head>
+<body data-page="journey-schedule" data-page-title="Patient journey · Schedule" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <!-- BY DAY (default) — just today's items, Yes ✓ / Undo -->
+  <section class="screen" id="j-sched-day" data-title="Today">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-phone-head">
+          <span class="avatar">MR</span>
+          <div>
+            <div class="j-title">Your schedule</div>
+            <div class="j-title-sub">Tuesday, July 21</div>
+          </div>
+          <a class="btn btn-sm j-head-btn" href="journey-book.html">Book</a>
+        </div>
+
+        <div class="j-seg-row">
+          <div class="seg">
+            <button class="active" data-activate="j-sched-day">By day</button>
+            <button data-activate="j-sched-week">By week</button>
+            <button data-activate="j-sched-month">By month</button>
+            <button data-activate="j-sched-treatment">By treatment</button>
+          </div>
+        </div>
+
+        <div class="j-count"><b>3 done</b> · 5 still to go today</div>
+
+        <div class="j-sec first">At the clinic today</div>
+        <div class="act-row">
+          <span class="act-check"></span>
+          <div class="act-body">
+            <div class="act-name">NAD+ infusion</div>
+            <div class="act-meta">1:00 PM · Chair 1 · with Nick</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Yes</button>
+        </div>
+
+        <div class="j-sec">At home today</div>
+        <div class="act-row">
+          <span class="act-check"></span>
+          <div class="act-body">
+            <div class="act-name">Rebounding</div>
+            <div class="act-meta">5 minutes, gentle · moves your lymph</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Yes</button>
+        </div>
+        <div class="act-row j-done">
+          <span class="act-check done">✓</span>
+          <div class="act-body">
+            <div class="act-name">Dry brushing</div>
+            <div class="act-meta">Done at 7:50 AM · toward the heart</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Undo</button>
+        </div>
+        <div class="act-row">
+          <span class="act-check"></span>
+          <div class="act-body">
+            <div class="act-name">Salt bath</div>
+            <div class="act-meta">20 minutes · this evening</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Yes</button>
+        </div>
+
+        <div class="j-sec">Supplements &amp; medicines</div>
+        <div class="act-row j-done">
+          <span class="act-check done">✓</span>
+          <div class="act-body">
+            <div class="act-name">Omega-3</div>
+            <div class="act-meta">2 caps · with breakfast · done 8:05 AM</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Undo</button>
+        </div>
+        <div class="act-row j-done">
+          <span class="act-check done">✓</span>
+          <div class="act-body">
+            <div class="act-name">Vitamin D3 + K2</div>
+            <div class="act-meta">5,000 IU · morning · done 8:05 AM</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Undo</button>
+        </div>
+        <div class="act-row">
+          <span class="act-check"></span>
+          <div class="act-body">
+            <div class="act-name">Magnesium glycinate</div>
+            <div class="act-meta">400 mg · before bed</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Yes</button>
+        </div>
+        <div class="act-row">
+          <span class="act-check"></span>
+          <div class="act-body">
+            <div class="act-name">LDN</div>
+            <div class="act-meta">3 mg · at bedtime</div>
+          </div>
+          <button class="j-yes" onclick="jToggle(this)">Yes</button>
+        </div>
+
+        <div class="j-foot">
+          <a class="bigbtn" href="journey-checkin.html">Start today's check-in</a>
+          <a class="btn btn-ghost" href="journey-plan.html">Open my plan</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BY WEEK — progress dots per activity -->
+  <section class="screen" id="j-sched-week" data-title="This week">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-phone-head">
+          <span class="avatar">MR</span>
+          <div>
+            <div class="j-title">Your schedule</div>
+            <div class="j-title-sub">Mon Jul 20 – Sun Jul 26</div>
+          </div>
+          <a class="btn btn-sm j-head-btn" href="journey-book.html">Book</a>
+        </div>
+
+        <div class="j-seg-row">
+          <div class="seg">
+            <button data-activate="j-sched-day">By day</button>
+            <button class="active" data-activate="j-sched-week">By week</button>
+            <button data-activate="j-sched-month">By month</button>
+            <button data-activate="j-sched-treatment">By treatment</button>
+          </div>
+        </div>
+
+        <div class="j-note">Each dot is one time this week. Filled means done. Clinic is closed Sunday.</div>
+
+        <div class="j-sec first">In-office treatments</div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Red Light</span><span class="j-wk-count">1 of 2</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Hydrogen inhalation</span><span class="j-wk-count">1 of 3</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Nano bath</span><span class="j-wk-count">0 of 1</span></div>
+          <div class="j-dots"><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">NAD+ infusion</span><span class="j-wk-count">0 of 1</span></div>
+          <div class="j-dots"><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">EBOO ozone</span><span class="j-wk-count">0 of 1</span></div>
+          <div class="j-dots"><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Salt room</span><span class="j-wk-count">0 of 1</span></div>
+          <div class="j-dots"><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Provider visit</span><span class="j-wk-count">0 of 1</span></div>
+          <div class="j-dots"><span class="j-dot"></span></div>
+        </div>
+
+        <div class="j-sec">At home</div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Rebounding</span><span class="j-wk-count">1 of 5</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Dry brushing</span><span class="j-wk-count">2 of 5</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Salt bath</span><span class="j-wk-count">0 of 3</span></div>
+          <div class="j-dots"><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+
+        <div class="j-sec">Supplements &amp; medicines</div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Omega-3 · 2 caps</span><span class="j-wk-count">2 of 7</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Vitamin D3 + K2 · 5,000 IU</span><span class="j-wk-count">2 of 7</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">Magnesium glycinate · 400 mg</span><span class="j-wk-count">1 of 7</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+        <div class="j-wk-row">
+          <div class="j-wk-top"><span class="j-wk-name">LDN · 3 mg</span><span class="j-wk-count">1 of 7</span></div>
+          <div class="j-dots"><span class="j-dot on"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span><span class="j-dot"></span></div>
+        </div>
+
+        <div class="j-foot">
+          <a class="btn btn-primary" href="journey-progress.html">See my progress</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BY MONTH — compact grayscale calendar overview -->
+  <section class="screen" id="j-sched-month" data-title="This month">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-phone-head">
+          <span class="avatar">MR</span>
+          <div>
+            <div class="j-title">Your schedule</div>
+            <div class="j-title-sub">July 2026</div>
+          </div>
+          <a class="btn btn-sm j-head-btn" href="journey-book.html">Book</a>
+        </div>
+
+        <div class="j-seg-row">
+          <div class="seg">
+            <button data-activate="j-sched-day">By day</button>
+            <button data-activate="j-sched-week">By week</button>
+            <button class="active" data-activate="j-sched-month">By month</button>
+            <button data-activate="j-sched-treatment">By treatment</button>
+          </div>
+        </div>
+
+        <div class="j-cal">
+          <div class="j-cal-nav">
+            <button class="j-cal-arrow" onclick="HCOS.toast('June has no visits booked yet.')" aria-label="Previous month">‹</button>
+            <span class="j-cal-month">July 2026</span>
+            <button class="j-cal-arrow" onclick="HCOS.toast('August visits appear once they are booked.')" aria-label="Next month">›</button>
+          </div>
+          <div class="j-cal-grid">
+            <span class="j-cal-dow">Mon</span>
+            <span class="j-cal-dow">Tue</span>
+            <span class="j-cal-dow">Wed</span>
+            <span class="j-cal-dow">Thu</span>
+            <span class="j-cal-dow">Fri</span>
+            <span class="j-cal-dow">Sat</span>
+            <span class="j-cal-dow">Sun</span>
+
+            <!-- Week of Jun 29 -->
+            <span class="j-cal-cell j-empty"></span>
+            <span class="j-cal-cell j-empty"></span>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">1</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">2</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">3</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">4</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-closed"><span class="j-cal-num">5</span><span class="j-cal-closed-lbl">closed</span></div>
+
+            <!-- Week of Jul 6 -->
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">6</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">7</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">8</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">9</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">10</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">11</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-closed"><span class="j-cal-num">12</span><span class="j-cal-closed-lbl">closed</span></div>
+
+            <!-- Week of Jul 13 -->
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">13</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">14</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">15</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">16</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">17</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-past" data-activate="j-sched-day"><span class="j-cal-num">18</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-closed"><span class="j-cal-num">19</span><span class="j-cal-closed-lbl">closed</span></div>
+
+            <!-- Week of Jul 20 (this week) -->
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">20</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-today" data-activate="j-sched-day"><span class="j-cal-num">21</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">22</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">23</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">24</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">25</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell j-closed"><span class="j-cal-num">26</span><span class="j-cal-closed-lbl">closed</span></div>
+
+            <!-- Week of Jul 27 -->
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">27</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">28</span><span class="j-cal-dots"><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">29</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">30</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <div class="j-cal-cell" data-activate="j-sched-day"><span class="j-cal-num">31</span><span class="j-cal-dots"><span class="j-cal-dot"></span><span class="j-cal-dot"></span></span></div>
+            <span class="j-cal-cell j-empty"></span>
+            <span class="j-cal-cell j-empty"></span>
+          </div>
+        </div>
+
+        <div class="j-legend">
+          <span class="j-legend-item"><span class="j-legend-dot"></span> a visit or treatment</span>
+          <span class="j-legend-item">Sundays closed</span>
+        </div>
+        <div class="j-cal-hint">Tap a day to see everything on it.</div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- BY TREATMENT — one activity up close, week-by-week history -->
+  <section class="screen" id="j-sched-treatment" data-title="One treatment">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-phone-head">
+          <span class="avatar">MR</span>
+          <div>
+            <div class="j-title">Your schedule</div>
+            <div class="j-title-sub">One treatment up close</div>
+          </div>
+          <a class="btn btn-sm j-head-btn" href="journey-book.html">Book</a>
+        </div>
+
+        <div class="j-seg-row">
+          <div class="seg">
+            <button data-activate="j-sched-day">By day</button>
+            <button data-activate="j-sched-week">By week</button>
+            <button data-activate="j-sched-month">By month</button>
+            <button class="active" data-activate="j-sched-treatment">By treatment</button>
+          </div>
+        </div>
+
+        <div class="j-tpick">
+          <button class="j-tpill active" data-treat="red-light" onclick="jPickTreat(this)">Red Light</button>
+          <button class="j-tpill" data-treat="hydrogen" onclick="jPickTreat(this)">Hydrogen</button>
+          <button class="j-tpill" data-treat="nad" onclick="jPickTreat(this)">NAD+ infusion</button>
+          <button class="j-tpill" data-treat="eboo" onclick="jPickTreat(this)">EBOO ozone</button>
+        </div>
+
+        <div class="j-feat">
+          <div class="j-feat-name" id="j-feat-name">Red Light</div>
+          <div class="j-feat-freq" id="j-feat-freq">2× / week · about 20 minutes</div>
+          <div class="j-feat-days" id="j-feat-days"></div>
+          <div class="j-feat-instr" id="j-feat-instr">Full-body red-light therapy to support your mitochondria and recovery.</div>
+        </div>
+
+        <div class="j-sec first">Week by week</div>
+        <div id="j-hist"></div>
+
+        <div class="j-foot">
+          <a class="btn btn-primary" href="journey-plan.html">See all in my plan</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+<script>
+  // Day view: each "Yes / Undo" control marks an item done or clears it.
+  function jToggle(btn) {
+    var row = btn.closest('.act-row');
+    if (!row) return;
+    var check = row.querySelector('.act-check');
+    var done = row.classList.toggle('j-done');
+    if (check) {
+      check.classList.toggle('done', done);
+      check.textContent = done ? '✓' : '';
+    }
+    btn.textContent = done ? 'Undo' : 'Yes';
+    var name = row.querySelector('.act-name');
+    if (window.HCOS && name) {
+      HCOS.toast(done ? ('Nice — ' + name.textContent + ' marked done.') : (name.textContent + ' cleared — you can mark it later.'), 'ok');
+    }
+  }
+
+  // Treatment view: swap the featured card + history when a pill is tapped.
+  var jTreatments = {
+    'red-light': {
+      name: 'Red Light',
+      freq: '2× / week · about 20 minutes',
+      days: [0, 3],
+      instr: 'Full-body red-light therapy to support your mitochondria and recovery.',
+      hist: [
+        ['This week', 1, 2],
+        ['Jul 13', 2, 2],
+        ['Jul 6', 2, 2],
+        ['Jun 29', 1, 2]
+      ]
+    },
+    'hydrogen': {
+      name: 'Hydrogen inhalation',
+      freq: '3× / week · about 30 minutes',
+      days: [0, 2, 4],
+      instr: 'Inhale molecular hydrogen to lower oxidative stress and inflammation.',
+      hist: [
+        ['This week', 1, 3],
+        ['Jul 13', 3, 3],
+        ['Jul 6', 2, 3],
+        ['Jun 29', 2, 3]
+      ]
+    },
+    'nad': {
+      name: 'NAD+ infusion',
+      freq: '1× / week · about 3 hours',
+      days: [1],
+      instr: 'Nutrient IV drip run slowly so your cells can absorb it — eat something light beforehand and hydrate well.',
+      hist: [
+        ['This week', 0, 1],
+        ['Jul 13', 1, 1],
+        ['Jul 6', 1, 1],
+        ['Jun 29', 1, 1]
+      ]
+    },
+    'eboo': {
+      name: 'EBOO ozone',
+      freq: '1× / week · about 60 minutes',
+      days: [4],
+      instr: 'EBOO ozone blood treatment with your provider — arrive well hydrated.',
+      hist: [
+        ['This week', 0, 1],
+        ['Jul 13', 1, 1],
+        ['Jul 6', 1, 1],
+        ['Jun 29', 0, 1]
+      ]
+    }
+  };
+  var jDayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  function jRenderTreat(key) {
+    var t = jTreatments[key];
+    if (!t) return;
+    document.getElementById('j-feat-name').textContent = t.name;
+    document.getElementById('j-feat-freq').textContent = t.freq;
+    document.getElementById('j-feat-instr').textContent = t.instr;
+
+    var daysWrap = document.getElementById('j-feat-days');
+    daysWrap.innerHTML = '';
+    for (var d = 0; d < 7; d++) {
+      var chip = document.createElement('span');
+      chip.className = 'j-day-chip';
+      if (d === 6) chip.className += ' closed';        // Sunday — clinic closed
+      else if (t.days.indexOf(d) !== -1) chip.className += ' on';
+      chip.textContent = jDayLabels[d];
+      daysWrap.appendChild(chip);
+    }
+
+    var hist = document.getElementById('j-hist');
+    hist.innerHTML = '';
+    t.hist.forEach(function (h) {
+      var row = document.createElement('div');
+      row.className = 'j-hist-row';
+      var wk = document.createElement('span');
+      wk.className = 'j-hist-wk';
+      wk.textContent = h[0];
+      var dots = document.createElement('span');
+      dots.className = 'j-dots';
+      dots.style.marginTop = '0';
+      for (var i = 0; i < h[2]; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'j-dot' + (i < h[1] ? ' on' : '');
+        dots.appendChild(dot);
+      }
+      var cnt = document.createElement('span');
+      cnt.className = 'j-hist-cnt';
+      cnt.textContent = h[1] + ' of ' + h[2];
+      row.appendChild(wk);
+      row.appendChild(dots);
+      row.appendChild(cnt);
+      hist.appendChild(row);
+    });
+  }
+
+  function jPickTreat(btn) {
+    var pills = document.querySelectorAll('.j-tpill');
+    for (var i = 0; i < pills.length; i++) pills[i].classList.remove('active');
+    btn.classList.add('active');
+    jRenderTreat(btn.getAttribute('data-treat'));
+  }
+
+  jRenderTreat('red-light');
+</script>
+</body>
+</html>

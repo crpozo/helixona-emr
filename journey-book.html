@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient journey · Book a visit · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .jb-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .jb-back { border: none; background: none; font-size: 20px; line-height: 1; color: var(--muted); cursor: pointer; padding: 2px 6px; border-radius: 8px; text-decoration: none; }
+  .jb-back:hover { background: var(--hx-band); color: var(--ink); }
+  .jb-prog { flex: 1; height: 8px; background: var(--hx-light); border-radius: 4px; overflow: hidden; }
+  .jb-prog-fill { height: 100%; background: var(--ink); border-radius: 4px; }
+  .jb-step { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  .jb-q { font-size: 20px; font-weight: 600; color: var(--hx-navy); text-align: center; margin: 6px 0 4px; }
+  .jb-sub { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 16px; }
+  .jb-opt { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 14px 16px; border: 2px solid var(--line); background: #fff; border-radius: 14px; margin-bottom: 10px; cursor: pointer; font-family: inherit; }
+  .jb-opt:hover { border-color: var(--ink); }
+  .jb-opt-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .jb-opt-meta { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .jb-opt-arrow { margin-left: auto; color: var(--muted); font-size: 16px; }
+  .jb-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .jb-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 16px 8px; border: 2px solid var(--line); background: #fff; border-radius: 14px; cursor: pointer; font-family: inherit; }
+  .jb-cell:hover { border-color: var(--ink); }
+  .jb-cell-dow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .jb-cell-day { font-size: 17px; font-weight: 700; color: var(--ink); }
+  .jb-cell-time { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .jb-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; }
+  .jb-sumcard { border: 2px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+  .jb-sumrow { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+  .jb-sumrow:last-child { border-bottom: none; }
+  .jb-sumlbl { width: 78px; flex-shrink: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .jb-sumval { font-size: 14px; font-weight: 600; color: var(--ink); }
+</style>
+</head>
+<body data-page="journey-book" data-page-title="Patient journey · Book a visit" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <!-- Step 1 — what -->
+  <section class="screen" id="j-book-what" data-title="Pick a treatment">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+        <div class="jb-top">
+          <a class="jb-back" href="journey.html" aria-label="Exit booking">✕</a>
+          <div class="jb-prog"><div class="jb-prog-fill" style="width:25%"></div></div>
+        </div>
+        <div class="jb-step">Step 1 of 4</div>
+        <div class="jb-q">What would you like to book?</div>
+        <div class="jb-sub">These are the in-office treatments in your plan.</div>
+
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Nano Bath">
+          <span><span class="jb-opt-name">Nano Bath</span><span class="jb-opt-meta">≈30 min · oxygenation soak</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Red Light">
+          <span><span class="jb-opt-name">Red Light</span><span class="jb-opt-meta">≈20 min · mitochondrial support</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Hydrogen Inhalation">
+          <span><span class="jb-opt-name">Hydrogen Inhalation</span><span class="jb-opt-meta">≈30 min · lowers oxidative stress</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Salt Room">
+          <span><span class="jb-opt-name">Salt Room</span><span class="jb-opt-meta">≈45 min · halotherapy</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="EBOO">
+          <span><span class="jb-opt-name">EBOO</span><span class="jb-opt-meta">≈60 min · ozone blood treatment</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="IV Therapy">
+          <span><span class="jb-opt-name">IV Therapy</span><span class="jb-opt-meta">≈45 min · nutrient drip</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Provider Visit">
+          <span><span class="jb-opt-name">Provider Visit</span><span class="jb-opt-meta">≈20 min · review labs &amp; plan</span></span>
+          <span class="jb-opt-arrow">›</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- Step 2 — day -->
+  <section class="screen" id="j-book-day" data-title="Pick a day">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+        <div class="jb-top">
+          <button class="jb-back" data-activate="j-book-what" aria-label="Go back">‹</button>
+          <div class="jb-prog"><div class="jb-prog-fill" style="width:50%"></div></div>
+        </div>
+        <div class="jb-step">Step 2 of 4</div>
+        <div class="jb-q">Pick a day</div>
+        <div class="jb-sub">for <span id="jb-what-sub">your treatment</span></div>
+
+        <div class="jb-grid">
+          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Wed, Jul 22">
+            <span class="jb-cell-dow">Wed</span><span class="jb-cell-day">Jul 22</span>
+          </button>
+          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Thu, Jul 23">
+            <span class="jb-cell-dow">Thu</span><span class="jb-cell-day">Jul 23</span>
+          </button>
+          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Fri, Jul 24">
+            <span class="jb-cell-dow">Fri</span><span class="jb-cell-day">Jul 24</span>
+          </button>
+          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Sat, Jul 25">
+            <span class="jb-cell-dow">Sat</span><span class="jb-cell-day">Jul 25</span>
+          </button>
+          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Mon, Jul 27">
+            <span class="jb-cell-dow">Mon</span><span class="jb-cell-day">Jul 27</span>
+          </button>
+          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Tue, Jul 28">
+            <span class="jb-cell-dow">Tue</span><span class="jb-cell-day">Jul 28</span>
+          </button>
+        </div>
+        <div class="jb-note">The clinic is closed Sundays.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- Step 3 — time -->
+  <section class="screen" id="j-book-time" data-title="Pick a time">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+        <div class="jb-top">
+          <button class="jb-back" data-activate="j-book-day" aria-label="Go back">‹</button>
+          <div class="jb-prog"><div class="jb-prog-fill" style="width:75%"></div></div>
+        </div>
+        <div class="jb-step">Step 3 of 4</div>
+        <div class="jb-q">Pick a start time</div>
+        <div class="jb-sub"><span id="jb-day-sub">Your day</span> · clinic hours 8:00 AM – 6:00 PM</div>
+
+        <div class="jb-grid">
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="9:00 AM"><span class="jb-cell-time">9:00 AM</span></button>
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="10:00 AM"><span class="jb-cell-time">10:00 AM</span></button>
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="11:00 AM"><span class="jb-cell-time">11:00 AM</span></button>
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="1:00 PM"><span class="jb-cell-time">1:00 PM</span></button>
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="2:00 PM"><span class="jb-cell-time">2:00 PM</span></button>
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="3:00 PM"><span class="jb-cell-time">3:00 PM</span></button>
+          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="4:00 PM"><span class="jb-cell-time">4:00 PM</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- Step 4 — confirm -->
+  <section class="screen" id="j-book-confirm" data-title="Confirm">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+        <div class="jb-top">
+          <button class="jb-back" data-activate="j-book-time" aria-label="Go back">‹</button>
+          <div class="jb-prog"><div class="jb-prog-fill" style="width:100%"></div></div>
+        </div>
+        <div class="jb-step">Step 4 of 4</div>
+        <div class="jb-q">Everything look right?</div>
+        <div class="jb-sub">One visit · we'll add it to your Today screen.</div>
+
+        <div class="jb-sumcard">
+          <div class="jb-sumrow">
+            <div class="jb-sumlbl">Treatment</div>
+            <div class="jb-sumval" id="jb-what">Red Light</div>
+          </div>
+          <div class="jb-sumrow">
+            <div class="jb-sumlbl">Day</div>
+            <div class="jb-sumval" id="jb-day">Wed, Jul 22</div>
+          </div>
+          <div class="jb-sumrow">
+            <div class="jb-sumlbl">Time</div>
+            <div class="jb-sumval" id="jb-time">10:00 AM</div>
+          </div>
+          <div class="jb-sumrow">
+            <div class="jb-sumlbl">Where</div>
+            <div class="jb-sumval">Helixona Clinic · Dr. Drannikov</div>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-bottom:16px">
+          <span class="pill pill-ok">No payment needed — part of your plan</span>
+        </div>
+
+        <button class="bigbtn bigbtn-done" id="jb-book-it">Book it</button>
+        <button class="bigbtn" data-activate="j-book-what">Change something</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+<script>
+  // Guided booking: carry each pick into the day sub-line, time sub-line, and
+  // the confirmation summary so the flow feels like the real app.
+  (function () {
+    var picks = { what: null, day: null, time: null };
+    document.addEventListener('click', function (ev) {
+      var el = ev.target.closest ? ev.target.closest('[data-pick]') : null;
+      if (!el) return;
+      var kind = el.getAttribute('data-pick');
+      var val = el.getAttribute('data-val');
+      picks[kind] = val;
+      var main = document.getElementById('jb-' + kind);
+      if (main) main.textContent = val;
+      if (kind === 'what') {
+        var sub = document.getElementById('jb-what-sub');
+        if (sub) sub.textContent = val;
+      }
+      if (kind === 'day') {
+        var dsub = document.getElementById('jb-day-sub');
+        if (dsub) dsub.textContent = val;
+      }
+    });
+
+    var bookIt = document.getElementById('jb-book-it');
+    if (bookIt) {
+      bookIt.addEventListener('click', function () {
+        HCOS.toast('Booked — it is on your Today screen.', 'ok');
+        setTimeout(function () { location.href = 'journey.html'; }, 950);
+      });
+    }
+  })();
+</script>
+</body>
+</html>

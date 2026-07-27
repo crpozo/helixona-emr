@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient journey · My plan · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .j-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .j-hd-name { font-size: 16px; font-weight: 600; color: var(--hx-navy); }
+  .j-hd-date { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .j-lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .j-goal { font-size: 19px; font-weight: 700; color: var(--hx-navy); line-height: 1.35; }
+  .j-stage-box { margin: 14px 0; }
+  .j-stage-name { font-size: 15px; font-weight: 700; color: var(--hx-navy); }
+  .j-stage-focus { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.55; }
+  .j-stage-foot { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .j-times { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--hx-navy); flex-shrink: 0; }
+  .j-scrn-title { font-size: 17px; font-weight: 700; color: var(--hx-navy); margin-bottom: 2px; }
+  .j-scrn-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+  .j-nav { display: flex; gap: 8px; margin-top: 14px; }
+  .j-nav .btn { flex: 1; }
+  .j-note { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 12px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 10px; }
+</style>
+</head>
+<body data-page="journey-plan" data-page-title="Patient journey · My plan" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-plan-goal" data-title="Your goal">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-hd">
+          <span class="avatar">MR</span>
+          <div>
+            <div class="j-hd-name">Maya's plan</div>
+            <div class="j-hd-date">Tuesday, July 21</div>
+          </div>
+        </div>
+
+        <div class="j-lbl">Your goal</div>
+        <div class="j-goal">Get my energy back and sleep through the night again.</div>
+
+        <div class="card j-stage-box">
+          <div class="j-lbl">Where you are now</div>
+          <div class="j-stage-name">Stabilization</div>
+          <div class="j-stage-focus">Calming inflammation and steadying your energy and sleep, so we build a stable baseline before the deeper work.</div>
+          <div class="j-stage-foot">
+            <span class="pill pill-muted">Standard pace</span>
+            <span class="pill pill-muted">Stage 2 of 7</span>
+          </div>
+        </div>
+
+        <button class="bigbtn" data-activate="j-plan-journey">See your care journey</button>
+
+        <div class="j-nav">
+          <a class="btn btn-sm" href="journey-checkin.html">Check in</a>
+          <a class="btn btn-sm" href="journey-schedule.html">See schedule</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-plan-journey" data-title="Care journey">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-scrn-title">Your care journey</div>
+        <div class="j-scrn-sub">Seven steps from finding the cause to protecting your progress. You are on step two.</div>
+
+        <div class="journey-path">
+          <div class="jstage done">
+            <div class="jstage-rail"><div class="jstage-dot">✓</div><div class="jstage-line"></div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Identification</div>
+              <div class="jstage-desc">We mapped your history, ran labs and diagnostics, and found the root drivers behind how you feel.</div>
+            </div>
+          </div>
+          <div class="jstage current">
+            <div class="jstage-rail"><div class="jstage-dot">2</div><div class="jstage-line"></div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Stabilization</div>
+              <div class="jstage-desc">We calm the system down — reduce inflammation, steady energy and sleep, and build a stable baseline.</div>
+            </div>
+          </div>
+          <div class="jstage">
+            <div class="jstage-rail"><div class="jstage-dot">3</div><div class="jstage-line"></div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Lead Actor 1</div>
+              <div class="jstage-desc">We focus on the single biggest driver of your symptoms and treat it directly.</div>
+            </div>
+          </div>
+          <div class="jstage">
+            <div class="jstage-rail"><div class="jstage-dot">4</div><div class="jstage-line"></div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Lead Actor 2</div>
+              <div class="jstage-desc">With the first driver handled, we move to the next priority system.</div>
+            </div>
+          </div>
+          <div class="jstage">
+            <div class="jstage-rail"><div class="jstage-dot">5</div><div class="jstage-line"></div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Lead Actor 3</div>
+              <div class="jstage-desc">We address the remaining contributing drivers one at a time.</div>
+            </div>
+          </div>
+          <div class="jstage">
+            <div class="jstage-rail"><div class="jstage-dot">6</div><div class="jstage-line"></div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Repair</div>
+              <div class="jstage-desc">Your body rebuilds — we support regeneration, resilience and full function.</div>
+            </div>
+          </div>
+          <div class="jstage">
+            <div class="jstage-rail"><div class="jstage-dot">7</div></div>
+            <div class="jstage-body">
+              <div class="jstage-name">Graduation</div>
+              <div class="jstage-desc">You hit your goals and move to a light maintenance rhythm to protect your progress.</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="bigbtn" data-activate="j-plan-activities">See this week's activities</button>
+        <button class="bigbtn bigbtn-skip" data-activate="j-plan-goal">Back to your goal</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-plan-activities" data-title="Activities">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-scrn-title">This week's activities</div>
+        <div class="j-scrn-sub">From your care team. The circle shows how many times to do each one this week.</div>
+
+        <div class="seg-divider" style="margin-top:0">In the clinic</div>
+
+        <div class="act-row">
+          <span class="j-times">1×</span>
+          <div class="act-body"><div class="act-name">Nano Bath</div><div class="act-meta">In the clinic · about 30 min</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">2×</span>
+          <div class="act-body"><div class="act-name">Red Light</div><div class="act-meta">In the clinic · about 20 min</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">3×</span>
+          <div class="act-body"><div class="act-name">Hydrogen Inhalation</div><div class="act-meta">In the clinic · about 30 min</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">1×</span>
+          <div class="act-body"><div class="act-name">Salt Room</div><div class="act-meta">In the clinic · about 45 min</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">1×</span>
+          <div class="act-body"><div class="act-name">EBOO</div><div class="act-meta">In the clinic · about 60 min · with your provider</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">1×</span>
+          <div class="act-body"><div class="act-name">IV Therapy</div><div class="act-meta">In the clinic · about 45 min</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">1×</span>
+          <div class="act-body"><div class="act-name">Provider Visit</div><div class="act-meta">In the clinic · about 20 min</div></div>
+        </div>
+
+        <div class="seg-divider">At home</div>
+
+        <div class="act-row">
+          <span class="j-times">5×</span>
+          <div class="act-body"><div class="act-name">Rebounding</div><div class="act-meta">At home · about 5 min</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">5×</span>
+          <div class="act-body"><div class="act-name">Dry Brushing</div><div class="act-meta">At home · about 5 min · before you shower</div></div>
+        </div>
+        <div class="act-row">
+          <span class="j-times">3×</span>
+          <div class="act-body"><div class="act-name">Salt Bath</div><div class="act-meta">At home · about 20 min</div></div>
+        </div>
+
+        <button class="bigbtn" data-activate="j-plan-supplements">See supplements and medicines</button>
+        <button class="bigbtn bigbtn-skip" data-activate="j-plan-journey">Back to your journey</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-plan-supplements" data-title="Supplements">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-scrn-title">Supplements and medicines</div>
+        <div class="j-scrn-sub">Take these every day, the way your care team prescribed them.</div>
+
+        <div class="act-row">
+          <div class="act-body"><div class="act-name">Omega-3</div><div class="act-meta">2 caps · with breakfast</div></div>
+          <span class="act-freq">Every day</span>
+        </div>
+        <div class="act-row">
+          <div class="act-body"><div class="act-name">Vitamin D3 + K2</div><div class="act-meta">5,000 IU · morning</div></div>
+          <span class="act-freq">Every day</span>
+        </div>
+        <div class="act-row">
+          <div class="act-body"><div class="act-name">Magnesium Glycinate</div><div class="act-meta">400 mg · before bed</div></div>
+          <span class="act-freq">Every day</span>
+        </div>
+        <div class="act-row">
+          <div class="act-body">
+            <div class="act-name">LDN (Low-Dose Naltrexone) <span class="pill pill-muted">Prescribed</span></div>
+            <div class="act-meta">3 mg · at bedtime</div>
+          </div>
+          <span class="act-freq">Every day</span>
+        </div>
+
+        <div class="j-note">Take your bedtime magnesium and LDN at the same time each night — that steady rhythm is part of getting your sleep back.</div>
+
+        <button class="bigbtn" onclick="HCOS.toast('Opening today’s check-in.', 'ok'); setTimeout(function(){ window.location.href = 'journey-checkin.html'; }, 700)">Check in on today</button>
+
+        <div class="j-nav">
+          <a class="btn btn-sm" href="journey-schedule.html">See schedule</a>
+          <button class="btn btn-sm" data-activate="j-plan-goal">Back to start</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+</body>
+</html>

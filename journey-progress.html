@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient journey · Progress · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .j-head { text-align: center; margin-bottom: 18px; }
+  .j-title { font-size: 24px; font-weight: 700; color: var(--hx-navy); }
+  .j-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .j-hero { text-align: center; border: 2px solid var(--line-soft); border-radius: 16px; padding: 22px 16px; margin-bottom: 14px; }
+  .j-hero-meta { margin-top: 14px; }
+  .j-hero-done { font-size: 14px; font-weight: 600; color: var(--muted); }
+  .j-hero-pts { font-size: 15px; font-weight: 700; color: var(--hx-navy); margin-top: 3px; }
+  .j-card { border: 2px solid var(--line-soft); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+  .j-streak { display: flex; align-items: center; gap: 14px; }
+  .j-streak-num { font-size: 38px; font-weight: 700; color: var(--hx-navy); line-height: 1; min-width: 46px; text-align: center; }
+  .j-streak-lbl { font-size: 15px; font-weight: 700; color: var(--hx-navy); }
+  .j-streak-best { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .j-nudge { margin-top: 12px; }
+  .j-week { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+  .j-week:last-child { border-bottom: none; }
+  .j-week-lbl { width: 78px; flex-shrink: 0; font-size: 12.5px; font-weight: 700; color: var(--hx-navy); }
+  .j-bar { flex: 1; height: 10px; background: var(--hx-light); border-radius: 5px; overflow: hidden; }
+  .j-bar-fill { height: 100%; background: var(--hx-accent); border-radius: 5px; }
+  .j-week-pct { width: 40px; flex-shrink: 0; text-align: right; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+  a.bigbtn.j-btn { text-decoration: none; }
+</style>
+</head>
+<body data-page="journey-progress" data-page-title="Patient journey · Progress" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-progress-week" data-title="This week">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-head">
+          <div class="j-title">Progress</div>
+          <div class="j-sub">Look how far you've come, Maya.</div>
+        </div>
+
+        <div class="j-hero">
+          <div class="pring" style="--p:24">
+            <div class="pring-hole">
+              <div class="pring-num">24%</div>
+              <div class="pring-lbl">this week</div>
+            </div>
+          </div>
+          <div class="j-hero-meta">
+            <div class="j-hero-done">12 of 51 done</div>
+            <div class="j-hero-pts">+105 points this week</div>
+          </div>
+        </div>
+
+        <div class="j-card">
+          <div class="j-streak">
+            <div class="j-streak-num">2</div>
+            <div>
+              <div class="j-streak-lbl">weeks in a row</div>
+              <div class="j-streak-best">Best ever: 2 · on-target weeks</div>
+            </div>
+          </div>
+          <span class="pill j-nudge">Log a bit more to keep your streak</span>
+        </div>
+
+        <button class="bigbtn" data-activate="j-progress-history">See your week by week</button>
+        <a class="bigbtn bigbtn-done j-btn" href="journey-rewards.html">See rewards</a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-progress-history" data-title="Week by week">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="j-head">
+          <div class="j-title">Week by week</div>
+          <div class="j-sub">Each bar is one week. A fuller bar means more done.</div>
+        </div>
+
+        <div class="j-card">
+          <div class="j-week">
+            <div class="j-week-lbl">Week 4 <span class="pill">now</span></div>
+            <div class="j-bar"><div class="j-bar-fill" style="width:24%"></div></div>
+            <div class="j-week-pct">24%</div>
+          </div>
+          <div class="j-week">
+            <div class="j-week-lbl">Week 3</div>
+            <div class="j-bar"><div class="j-bar-fill" style="width:96%"></div></div>
+            <div class="j-week-pct">96%</div>
+          </div>
+          <div class="j-week">
+            <div class="j-week-lbl">Week 2</div>
+            <div class="j-bar"><div class="j-bar-fill" style="width:88%"></div></div>
+            <div class="j-week-pct">88%</div>
+          </div>
+          <div class="j-week">
+            <div class="j-week-lbl">Week 1</div>
+            <div class="j-bar"><div class="j-bar-fill" style="width:67%"></div></div>
+            <div class="j-week-pct">67%</div>
+          </div>
+        </div>
+
+        <a class="bigbtn bigbtn-done j-btn" href="journey-rewards.html">See rewards</a>
+        <button class="bigbtn" data-activate="j-progress-week">Back to this week</button>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+</body>
+</html>

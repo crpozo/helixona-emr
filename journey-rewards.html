@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient journey · Rewards · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .jr-h1 { font-size: 22px; font-weight: 700; color: var(--hx-navy); }
+  .jr-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; margin-bottom: 14px; line-height: 1.5; }
+  .jr-hero { text-align: center; padding: 6px 0 2px; }
+  .jr-balance { font-size: 46px; font-weight: 700; color: var(--hx-navy); line-height: 1; }
+  .jr-balance-lbl { font-size: 12px; color: var(--muted); font-weight: 600; margin-top: 4px; }
+  .jr-lifetime { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .jr-tier-line { margin-top: 14px; font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .jr-tier-next { display: block; font-size: 12px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+  .jr-meter { height: 8px; background: var(--hx-light); border-radius: 4px; overflow: hidden; margin: 12px auto 0; max-width: 220px; }
+  .jr-meter-fill { height: 100%; background: var(--ink); border-radius: 4px; }
+  .jr-section-h { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin: 20px 0 10px; }
+  .jr-reward-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .jr-reward-title { font-size: 13.5px; font-weight: 700; color: var(--hx-navy); }
+  .jr-reward-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
+  .jr-code-row { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line-soft); border-radius: 12px; padding: 12px 14px; }
+  .jr-code-mini { font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700; letter-spacing: 1px; border: 1px dashed var(--line); border-radius: 8px; padding: 8px 10px; color: var(--ink); white-space: nowrap; }
+  .jr-nav { display: flex; gap: 8px; margin-top: 18px; }
+  .jr-badge-count { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 12px; }
+  .jr-note { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.5; margin-top: 16px; }
+</style>
+</head>
+<body data-page="journey-rewards" data-page-title="Patient journey · Rewards" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-rewards-balance" data-title="Your points">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="jr-h1">Rewards</div>
+        <div class="jr-sub">You earn points every time you check something off. Spend them on treats — or just watch them grow.</div>
+
+        <div class="jr-hero">
+          <div class="jr-balance">1,125</div>
+          <div class="jr-balance-lbl">points to spend</div>
+          <div class="jr-lifetime">1,475 earned all-time · 350 already spent</div>
+
+          <div class="jr-tier-line">
+            Silver
+            <span class="jr-tier-next">1,025 points to Gold</span>
+          </div>
+          <div class="jr-meter"><div class="jr-meter-fill" style="width:21%"></div></div>
+        </div>
+
+        <div class="jr-section-h">Your tier</div>
+        <div class="tier-ladder">
+          <div class="tier-step reached">Initiate<br>0</div>
+          <div class="tier-step reached">Bronze<br>400</div>
+          <div class="tier-step current">Silver<br>1,200</div>
+          <div class="tier-step">Gold<br>2,500</div>
+          <div class="tier-step">Platinum<br>4,500</div>
+          <div class="tier-step">Radiant<br>7,000</div>
+        </div>
+
+        <div class="jr-nav">
+          <button class="bigbtn bigbtn-done" style="margin-bottom:0" data-activate="j-rewards-catalog">See what you can get</button>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px" data-activate="j-rewards-badges">See your badges</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-rewards-catalog" data-title="Treat yourself">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="jr-h1">Treat yourself</div>
+        <div class="jr-sub">You have <strong>1,125 points</strong> to spend. Redeem one and show the code at the front desk.</div>
+
+        <div class="reward-card">
+          <div class="jr-reward-top">
+            <div>
+              <div class="jr-reward-title">10% off your next treatment</div>
+              <div class="jr-reward-desc">Apply to any single in-office treatment on your next visit.</div>
+            </div>
+            <span class="pill pill-muted">10% off</span>
+          </div>
+          <div class="reward-cost">500 pts</div>
+          <button class="btn btn-primary btn-sm jr-redeem" data-open-modal="#jrRedeem" data-reward="10% off your next treatment" data-code="HLX-10OFF-4T2K">Redeem</button>
+        </div>
+
+        <div class="reward-card" style="margin-top:12px">
+          <div class="jr-reward-top">
+            <div>
+              <div class="jr-reward-title">Helixona water bottle</div>
+              <div class="jr-reward-desc">Insulated and branded — stay hydrated between visits.</div>
+            </div>
+            <span class="pill pill-muted">Free</span>
+          </div>
+          <div class="reward-cost">250 pts</div>
+          <button class="btn btn-primary btn-sm jr-redeem" data-open-modal="#jrRedeem" data-reward="Helixona water bottle" data-code="HLX-BTL-9M3X">Redeem</button>
+        </div>
+
+        <div class="reward-card" style="margin-top:12px">
+          <div class="jr-reward-top">
+            <div>
+              <div class="jr-reward-title">Free Salt Room session</div>
+              <div class="jr-reward-desc">One complimentary 45-minute halotherapy session.</div>
+            </div>
+            <span class="pill pill-muted">Free</span>
+          </div>
+          <div class="reward-cost">350 pts</div>
+          <button class="btn btn-primary btn-sm jr-redeem" data-open-modal="#jrRedeem" data-reward="Free Salt Room session" data-code="HLX-SALT-K8R2">Redeem</button>
+        </div>
+
+        <div class="reward-card" style="margin-top:12px">
+          <div class="jr-reward-top">
+            <div>
+              <div class="jr-reward-title">Free Red Light add-on</div>
+              <div class="jr-reward-desc">Add a red-light session to any visit, on the house.</div>
+            </div>
+            <span class="pill pill-muted">Free</span>
+          </div>
+          <div class="reward-cost">400 pts</div>
+          <button class="btn btn-primary btn-sm jr-redeem" data-open-modal="#jrRedeem" data-reward="Free Red Light add-on" data-code="HLX-RLT-6W1N">Redeem</button>
+        </div>
+
+        <div class="reward-card" style="margin-top:12px">
+          <div class="jr-reward-top">
+            <div>
+              <div class="jr-reward-title">Complimentary InBody re-scan</div>
+              <div class="jr-reward-desc">A bonus InBody 970 body-composition scan to track your progress.</div>
+            </div>
+            <span class="pill pill-muted">Free</span>
+          </div>
+          <div class="reward-cost">600 pts</div>
+          <button class="btn btn-primary btn-sm jr-redeem" data-open-modal="#jrRedeem" data-reward="Complimentary InBody re-scan" data-code="HLX-INBD-3F9P">Redeem</button>
+        </div>
+
+        <div class="jr-section-h">Your codes</div>
+        <div class="jr-code-row">
+          <div class="jr-code-mini">HLX-SALT-7Q4K</div>
+          <div style="flex:1;min-width:0">
+            <div class="jr-reward-title" style="font-size:12.5px">Free Salt Room session</div>
+            <div class="act-meta">Redeemed Jun 20</div>
+          </div>
+          <span class="pill pill-muted">Used</span>
+        </div>
+
+        <div class="jr-nav">
+          <button class="btn btn-sm" style="flex:1" data-activate="j-rewards-balance">Back to points</button>
+          <button class="btn btn-sm" style="flex:1" data-activate="j-rewards-badges">Your badges</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-rewards-badges" data-title="Badges">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+      <div class="phone-body">
+
+        <div class="jr-h1">Badges</div>
+        <div class="jr-sub">Little wins along the way. The filled-in ones are yours.</div>
+        <div class="jr-badge-count">7 of 13 earned</div>
+
+        <div class="badge-wall">
+          <div class="badge earned" title="Log your very first activity.">
+            <div class="badge-ico">✦</div>
+            <div class="badge-name">First Step</div>
+          </div>
+          <div class="badge earned" title="Finish a week at or above your goal.">
+            <div class="badge-ico">◎</div>
+            <div class="badge-name">On Target</div>
+          </div>
+          <div class="badge earned" title="String together 2 on-target weeks in a row.">
+            <div class="badge-ico">⟳</div>
+            <div class="badge-name">Consistency</div>
+          </div>
+          <div class="badge locked" title="4 on-target weeks in a row (best so far: 2).">
+            <div class="badge-ico">⬢</div>
+            <div class="badge-name">Locked In</div>
+          </div>
+          <div class="badge locked" title="Complete 100% of a week (best: 96%).">
+            <div class="badge-ico">★</div>
+            <div class="badge-name">Perfect Week</div>
+          </div>
+          <div class="badge locked" title="Do every at-home activity in one week.">
+            <div class="badge-ico">⌂</div>
+            <div class="badge-name">Home Body</div>
+          </div>
+          <div class="badge earned" title="Complete all your in-office treatments in a week.">
+            <div class="badge-ico">⬤</div>
+            <div class="badge-name">Fully Charged</div>
+          </div>
+          <div class="badge earned" title="Reach the Stabilization stage.">
+            <div class="badge-ico">♥</div>
+            <div class="badge-name">Stabilized</div>
+          </div>
+          <div class="badge locked" title="Advance to a Lead Actor stage.">
+            <div class="badge-ico">◆</div>
+            <div class="badge-name">On the Attack</div>
+          </div>
+          <div class="badge locked" title="Reach the Graduation stage.">
+            <div class="badge-ico">▲</div>
+            <div class="badge-name">Graduate</div>
+          </div>
+          <div class="badge earned" title="Redeem your first reward.">
+            <div class="badge-ico">❖</div>
+            <div class="badge-name">Treat Yourself</div>
+          </div>
+          <div class="badge earned" title="Earn 400 lifetime points.">
+            <div class="badge-ico">●</div>
+            <div class="badge-name">Bronze Member</div>
+          </div>
+          <div class="badge locked" title="Earn 2,500 lifetime points.">
+            <div class="badge-ico">◉</div>
+            <div class="badge-name">Gold Member</div>
+          </div>
+        </div>
+
+        <div class="jr-note">Badges are just for fun — they never change your care.</div>
+
+        <div class="jr-nav">
+          <button class="btn btn-sm" style="flex:1" data-activate="j-rewards-balance">Back to points</button>
+          <button class="btn btn-sm" style="flex:1" data-activate="j-rewards-catalog">Treat yourself</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Redeem modal — shows the code to bring to the front desk -->
+<div class="modal-overlay" id="jrRedeem">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Show this at the front desk</div>
+        <div class="modal-sub" id="jrRedeemSub">Your reward is ready</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="redeem-code" id="jrRedeemCode">HLX-0000-0000</div>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5">Show this code at the front desk on your next visit. We'll apply it and take the points off your balance.</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-primary" data-close-modal>Got it</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+<script>
+  // Demo only: fill the redeem modal with the chosen reward's name + code, and
+  // confirm with a toast. The shared handler opens the modal (data-open-modal).
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest ? ev.target.closest('.jr-redeem') : null;
+    if (!btn) return;
+    var reward = btn.getAttribute('data-reward') || 'Your reward';
+    var code = btn.getAttribute('data-code') || 'HLX-0000-0000';
+    var sub = document.getElementById('jrRedeemSub');
+    var codeEl = document.getElementById('jrRedeemCode');
+    if (sub) sub.textContent = reward;
+    if (codeEl) codeEl.textContent = code;
+    HCOS.toast('Redeemed — show ' + code + ' at the front desk.', 'ok');
+  });
+</script>
+</body>
+</html>
