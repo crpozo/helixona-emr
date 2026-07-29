@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=6">
+<link rel="stylesheet" href="assets/hcos.css?v=7">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -60,13 +60,22 @@
             <label class="l-fl">
               <span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view" onchange="lApply()">
-                <option value="all">Everyone — provider and all four chairs</option>
-                <option value="infusion">Infusion suite only — Chairs 1 to 4</option>
-                <option value="clinic">Provider clinic only — Dr. Drannikov</option>
-                <option value="c1">Chair 1 · Nick</option>
-                <option value="c2">Chair 2 · Bea</option>
-                <option value="c3">Chair 3 · Juan</option>
-                <option value="c4">Chair 4 · Nate</option>
+                <optgroup label="Views">
+                  <option value="all">Everyone — 3 providers and 4 chairs</option>
+                  <option value="providers">Provider clinic — all three</option>
+                  <option value="infusion">Infusion suite — Chairs 1 to 4</option>
+                </optgroup>
+                <optgroup label="Providers">
+                  <option value="dr">Dr. Drannikov</option>
+                  <option value="bak">Dr. Bakman</option>
+                  <option value="bro">Brooke &middot; Physician Associate</option>
+                </optgroup>
+                <optgroup label="Infusion suite">
+                  <option value="c1">Chair 1 &middot; Nick &middot; Nurse</option>
+                  <option value="c2">Chair 2 &middot; Bea &middot; Medic</option>
+                  <option value="c3">Chair 3 &middot; Juan &middot; Medic</option>
+                  <option value="c4">Chair 4 &middot; Nate &middot; Medic</option>
+                </optgroup>
               </select>
             </label>
 
@@ -82,7 +91,7 @@
               </select>
             </label>
 
-            <span class="l-count" id="l-count">Showing all 14 appointments</span>
+            <span class="l-count" id="l-count">Showing all 19 appointments</span>
 
             <div class="l-view-group">
               <button class="view-lock locked" id="l-lockbtn"
@@ -97,6 +106,8 @@
             <div class="daycal-band">Infusion suite</div>
             <div class="daycal-col-head hours-head"></div>
             <div class="daycal-col-head" data-col="dr">Dr. Drannikov<span class="sub">Provider</span></div>
+            <div class="daycal-col-head" data-col="bak">Dr. Bakman<span class="sub">Provider</span></div>
+            <div class="daycal-col-head" data-col="bro">Brooke<span class="sub">Physician Associate</span></div>
             <div class="daycal-col-head" data-col="c1">Chair 1<span class="sub">Nick · Nurse</span></div>
             <div class="daycal-col-head" data-col="c2">Chair 2<span class="sub">Bea · Medic</span></div>
             <div class="daycal-col-head" data-col="c3">Chair 3<span class="sub">Juan · Medic</span></div>
@@ -150,6 +161,41 @@
                 <div class="cal-appt-time">3:00 – 4:30 PM</div>
                 <div class="cal-appt-name">Tom Alvarez</div>
                 <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
+              </div>
+            </div>
+
+            <!-- Dr. Bakman -->
+            <div class="daycal-col" data-col="bak">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-consult" style="top:88px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">9:00</div>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+              </div>
+              <div class="cal-appt st-confirmed t-consult" style="top:440px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">1:00 PM</div>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+              </div>
+              <div class="cal-appt st-scheduled t-consult" style="top:660px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">3:30 PM</div>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+              </div>
+            </div>
+
+            <!-- Brooke -->
+            <div class="daycal-col" data-col="bro">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-consult" style="top:176px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">10:00</div>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+              </div>
+              <div class="cal-appt st-scheduled t-consult" style="top:528px;height:40px" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
             </div>
 
@@ -241,8 +287,6 @@
         </div>
 
         <div class="l-cal-foot">
-          <div class="callout callout-warn" style="margin:0 0 12px">Chair 4 is double-booked at 2:00 PM — Marcus Webb overlaps Nadia Boulos. You can keep both.</div>
-
           <div class="grid-2">
             <div class="card">
               <div class="card-title">Running long today</div>
@@ -524,13 +568,6 @@
             </div>
             <div class="field-help" style="margin-top:6px">Priya Natarajan · 38 · Blue Shield of CA PPO · OON</div>
 
-            <div class="callout" style="margin-top:12px">
-              A new patient does not start here. Complex chronic, chronic, wellness and self-directed each
-              collect different things and lead somewhere different, so
-              <a href="patients.html#/pt-03-create">new patient creation</a> asks why they came first, then
-              comes back to book.
-            </div>
-
             <div class="seg-divider">Appointment</div>
             <div class="field">
               <label class="field-label">Appointment type</label>
@@ -749,7 +786,7 @@
   </div>
 </aside>
 
-<script src="assets/hcos.js?v=6"></script>
+<script src="assets/hcos.js?v=7"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -757,16 +794,17 @@
     var view = document.getElementById('l-view').value;
     var treat = document.getElementById('l-treat').value;
 
-    var wantCols = view === 'all' ? ['dr','c1','c2','c3','c4']
-      : view === 'infusion' ? ['c1','c2','c3','c4']
-      : view === 'clinic' ? ['dr'] : [view];
+    var PROVS = ['dr','bak','bro'], CHAIRS = ['c1','c2','c3','c4'];
+    var wantCols = view === 'all' ? PROVS.concat(CHAIRS)
+      : view === 'providers' ? PROVS
+      : view === 'infusion' ? CHAIRS : [view];
 
     document.querySelectorAll('[data-col]').forEach(function (el) {
       el.style.display = wantCols.indexOf(el.getAttribute('data-col')) === -1 ? 'none' : '';
     });
 
-    var pv = wantCols.indexOf('dr') !== -1 ? 1 : 0;
-    var nc = wantCols.filter(function (c) { return c !== 'dr'; }).length;
+    var pv = wantCols.filter(function (c) { return PROVS.indexOf(c) !== -1; }).length;
+    var nc = wantCols.filter(function (c) { return CHAIRS.indexOf(c) !== -1; }).length;
     var tmpl = '64px repeat(' + (pv + nc) + ', 1fr)';
     document.querySelector('.daycal-head').style.gridTemplateColumns = tmpl;
     document.querySelector('.daycal-grid').style.gridTemplateColumns = tmpl;
@@ -791,7 +829,7 @@
       if (colOk && treatOk) shown++;
     });
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
-      h.style.display = (view === 'all' || view === 'clinic') && treat === 'all' ? '' : 'none';
+      h.style.display = wantCols.indexOf('dr') !== -1 && treat === 'all' ? '' : 'none';
     });
 
     var el = document.getElementById('l-count');

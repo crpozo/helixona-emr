@@ -704,9 +704,9 @@ button { font-family: inherit; }
 .cal-views button.active { background: var(--hx-navy); color: #fff; }
 
 /* Column headers: hours rail + provider + infusion band */
-.daycal-head { display: grid; grid-template-columns: 64px repeat(5, 1fr); background: #fff; border-bottom: 1px solid var(--line); }
+.daycal-head { display: grid; grid-template-columns: 64px repeat(7, 1fr); background: #fff; border-bottom: 1px solid var(--line); }
 .daycal-band {
-  grid-column: 3 / span 4;
+  grid-column: 5 / span 4;
   text-align: center;
   font-size: 10px;
   text-transform: uppercase;
@@ -717,7 +717,7 @@ button { font-family: inherit; }
   padding: 4px 0;
   border-left: 1px solid var(--line-soft);
 }
-.daycal-band-spacer { grid-column: 1 / span 2; }
+.daycal-band-spacer { grid-column: 1 / span 4; }
 .daycal-col-head {
   padding: 8px 6px 10px;
   text-align: center;
@@ -729,7 +729,7 @@ button { font-family: inherit; }
 .daycal-col-head .sub { display: block; font-size: 10px; color: var(--muted); font-weight: 400; margin-top: 1px; }
 .daycal-col-head.hours-head { border-left: none; }
 
-.daycal-grid { display: grid; grid-template-columns: 64px repeat(5, 1fr); position: relative; }
+.daycal-grid { display: grid; grid-template-columns: 64px repeat(7, 1fr); position: relative; }
 .daycal-hours { background: #FBFBFB; border-right: none; }
 .daycal-hour {
   height: 88px;
