@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=5">
+<link rel="stylesheet" href="assets/hcos.css?v=6">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -51,6 +51,7 @@
             <div class="cal-views">
               <button class="active">Day</button>
               <button data-activate="l-02-week">Week</button>
+              <button data-activate="l-05-month">Month</button>
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
@@ -308,6 +309,7 @@
             <div class="cal-views">
               <button data-activate="l-01-day">Day</button>
               <button class="active">Week</button>
+              <button data-activate="l-05-month">Month</button>
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
@@ -406,6 +408,96 @@
 
         <div class="l-cal-foot">
           <div class="field-help" style="margin:0">Select any appointment to open its day.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-05-month" data-title="Month view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/month</span></div>
+      <div class="frame-body tight">
+        <div class="cal">
+
+          <div class="cal-toolbar">
+            <div class="cal-nav">
+              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows July 2026')">&lsaquo;</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Already on this month')">This month</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows July 2026')">&rsaquo;</button>
+              <span class="cal-date" style="margin-left:8px">July 2026</span>
+            </div>
+            <div class="cal-views">
+              <button data-activate="l-01-day">Day</button>
+              <button data-activate="l-02-week">Week</button>
+              <button class="active">Month</button>
+            </div>
+            <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
+          </div>
+
+          <div class="l-filters">
+            <span class="l-count">342 appointments this month &middot; busiest day Tuesday the 14th &middot; chairs 78% full</span>
+            <div class="l-view-group">
+              <button class="btn btn-sm" onclick="HCOS.toast('Month exported for the staffing meeting.', 'ok')">Export month</button>
+            </div>
+          </div>
+
+          <div class="monthcal">
+            <div class="monthcal-head">
+              <div class="monthcal-dow">Mon</div>
+              <div class="monthcal-dow">Tue</div>
+              <div class="monthcal-dow">Wed</div>
+              <div class="monthcal-dow">Thu</div>
+              <div class="monthcal-dow">Fri</div>
+              <div class="monthcal-dow">Sat</div>
+              <div class="monthcal-dow">Sun</div>
+            </div>
+            <div class="monthcal-grid">
+              <div class="monthcal-day outside"><div class="monthcal-daynum">29</div></div>
+              <div class="monthcal-day outside"><div class="monthcal-daynum">30</div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">2</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">3</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
+              <div class="monthcal-day closed"><div class="monthcal-daynum">5</div><div class="monthcal-closed-lbl">Closed</div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">6</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">7</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">10</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">11</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day closed"><div class="monthcal-daynum">12</div><div class="monthcal-closed-lbl">Closed</div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">13</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">14</div><div class="monthcal-count">16 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">15</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">17</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day closed"><div class="monthcal-daynum">19</div><div class="monthcal-closed-lbl">Closed</div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">20</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day today" data-activate="l-01-day"><div class="monthcal-daynum">21</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">23</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">24</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">25</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
+              <div class="monthcal-day closed"><div class="monthcal-daynum">26</div><div class="monthcal-closed-lbl">Closed</div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">27</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">28</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">29</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">30</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">31</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
+              <div class="monthcal-day outside"><div class="monthcal-daynum">1</div></div>
+              <div class="monthcal-day outside closed"><div class="monthcal-daynum">2</div><div class="monthcal-closed-lbl">Closed</div></div>
+            </div>
+          </div>
+
+          <div class="cal-legend">
+            <span class="cal-legend-item">Pick a day to open it</span>
+            <span class="cal-legend-item">The bar under each day is how full the chairs are</span>
+            <span class="cal-legend-item">Closed Sundays</span>
+          </div>
+
         </div>
       </div>
     </div>
@@ -657,7 +749,7 @@
   </div>
 </aside>
 
-<script src="assets/hcos.js?v=5"></script>
+<script src="assets/hcos.js?v=6"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.

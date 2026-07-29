@@ -918,6 +918,48 @@ button { font-family: inherit; }
 .week-appt.st-noshow { border: 1px dashed var(--st-noshow); border-left: 3px dashed var(--st-noshow); background: var(--st-noshow-bg); }
 .week-appt.st-cancelled { border-left-color: var(--st-cancelled); background: var(--st-cancelled-bg); opacity: 0.7; }
 
+/* Month view — the month at a glance, one cell per clinic day */
+.monthcal { border-top: 1px solid var(--line-soft); }
+.monthcal-head, .monthcal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.monthcal-head { background: #F7F7F7; border-bottom: 1px solid var(--line-soft); }
+.monthcal-dow {
+  padding: 8px 6px; text-align: center;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  font-weight: 600; color: var(--muted);
+  border-left: 1px solid var(--line-soft);
+}
+.monthcal-dow:first-child { border-left: none; }
+.monthcal-day {
+  min-height: 92px; padding: 6px 8px 8px;
+  border-left: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  cursor: pointer; position: relative; background: #fff;
+}
+.monthcal-day:nth-child(7n+1) { border-left: none; }
+.monthcal-day:hover { background: #FBFBFB; }
+.monthcal-day.outside { background: #FCFCFC; }
+.monthcal-day.outside .monthcal-daynum { color: var(--line); }
+.monthcal-day.closed { background: repeating-linear-gradient(135deg, #FCFCFC, #FCFCFC 6px, #F5F5F5 6px, #F5F5F5 12px); cursor: default; }
+.monthcal-day.today { box-shadow: inset 0 0 0 2px var(--ink); }
+.monthcal-daynum { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); }
+.monthcal-day.today .monthcal-daynum {
+  background: var(--ink); color: #fff;
+  width: 22px; height: 22px; line-height: 22px;
+  border-radius: 50%; text-align: center; display: inline-block;
+}
+.monthcal-count { font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+.monthcal-closed-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; }
+.monthcal-pips { display: flex; gap: 2px; flex-wrap: wrap; margin-top: 5px; }
+.monthcal-pip {
+  font-family: ui-monospace, monospace; font-size: 8px; font-weight: 700;
+  border: 1px solid var(--line); border-radius: 3px; padding: 0 2px; color: var(--muted);
+}
+.monthcal-load { position: absolute; left: 8px; right: 8px; bottom: 6px; }
+@media (max-width: 760px) {
+  .monthcal-day { min-height: 64px; padding: 4px 5px 6px; }
+  .monthcal-pips { display: none; }
+}
+
 /* Status flow strip (appointment detail) */
 .status-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin: 10px 0; }
 .status-step {
