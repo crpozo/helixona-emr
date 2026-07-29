@@ -37,12 +37,21 @@
     { name: 'Patient journey', href: 'journey.html', page: 'journey' },
     { name: 'Caregiver access', href: 'caregiver.html', page: 'caregiver' },
     { group: 'Practice' },
+    { name: 'Pricing & memberships', href: 'pricing.html', page: 'pricing' },
     { name: 'Reports', href: 'reporting.html', page: 'reporting' },
     { name: 'Security & audit', href: 'security.html', page: 'security' }
   ];
 
   /* Second-level tabs inside the deep modules (rendered under the topbar) */
   var SUBNAV = {
+    schedule: [
+      ['Calendar', 'schedule.html'],
+      ['Booking rules', 'schedule-rules.html']
+    ],
+    pricing: [
+      ['Price list', 'pricing.html'],
+      ['Memberships', 'pricing-memberships.html']
+    ],
     intake: [
       ['Triage', 'intake.html'],
       ['Public funnel', 'intake-funnel.html'],

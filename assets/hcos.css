@@ -799,6 +799,62 @@ button { font-family: inherit; }
 .cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
 .cal-appt.conflict { outline: 2px dashed #000; outline-offset: -2px; }
 
+/* Appointment TYPE — second visual channel, still grayscale.
+   Status = the fill ramp (light→dark). Type = left-edge pattern + initial marker.
+   In the real product these patterns become the treatment colour codes. */
+.cal-appt .type-mark, .week-appt .type-mark {
+  display: inline-block;
+  font-family: ui-monospace, monospace;
+  font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px;
+  border: 1px solid currentColor; border-radius: 3px;
+  padding: 0 3px; margin-right: 4px; vertical-align: 1px;
+  color: var(--muted);
+}
+.cal-appt.t-nad     { border-left-style: solid; border-left-width: 5px; }
+.cal-appt.t-ivc     { border-left-style: double; border-left-width: 5px; }
+.cal-appt.t-myers   { border-left-style: dashed; border-left-width: 5px; }
+.cal-appt.t-eboo    { border-left-style: dotted; border-left-width: 6px; }
+.cal-appt.t-consult { border-left-style: solid; border-left-width: 3px; }
+.cal-appt.t-lab     { border-left-style: dashed; border-left-width: 3px; }
+.cal-appt.t-tele    { border-left-style: dotted; border-left-width: 4px; }
+.week-appt.t-nad    { border-left-style: solid; border-left-width: 5px; }
+.week-appt.t-ivc    { border-left-style: double; border-left-width: 5px; }
+.week-appt.t-myers  { border-left-style: dashed; border-left-width: 5px; }
+.week-appt.t-eboo   { border-left-style: dotted; border-left-width: 6px; }
+
+/* Actor (who runs it) — a corner tag on the block */
+.cal-appt .actor-tag {
+  position: absolute; right: 5px; bottom: 4px;
+  font-size: 8.5px; color: var(--muted);
+  background: rgba(255,255,255,0.85); padding: 0 3px; border-radius: 3px;
+}
+
+/* AI drip warning on a block */
+.cal-appt.ai-warn { box-shadow: inset 0 0 0 2px var(--ink); }
+.cal-appt .ai-flag {
+  position: absolute; top: 3px; right: 4px;
+  font-size: 9px; font-weight: 700; color: var(--ink);
+}
+
+/* Filter groups — multi-select with a locked/saved view */
+.filter-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.filter-group-lbl {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--muted); font-weight: 700; margin-right: 2px;
+}
+.filter-chip.multi { padding-left: 8px; }
+.filter-chip.multi::before {
+  content: '☐'; margin-right: 5px; font-size: 11px;
+}
+.filter-chip.multi.active::before { content: '☑'; }
+.view-lock {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; color: var(--muted);
+  border: 1px dashed var(--line); border-radius: 14px; padding: 4px 11px;
+  background: #fff; cursor: pointer;
+}
+.view-lock.locked { border-style: solid; border-color: var(--ink); color: var(--ink); font-weight: 600; }
+
 .cal-legend {
   display: flex; gap: 14px;
   padding: 10px 16px;
