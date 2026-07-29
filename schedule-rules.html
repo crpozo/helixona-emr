@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking rules · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .lr-rule { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+  .lr-rule:last-child { border-bottom: none; }
+  .lr-rule-body { flex: 1; min-width: 0; }
+  .lr-rule-name { font-size: 13.5px; font-weight: 600; color: var(--hx-navy); }
+  .lr-rule-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+  .lr-enforce { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+  .lr-enforce button {
+    border: none; background: #fff; padding: 5px 11px; font-size: 11px;
+    color: var(--muted); cursor: pointer; font-family: inherit; border-right: 1px solid var(--line-soft);
+  }
+  .lr-enforce button:last-child { border-right: none; }
+  .lr-enforce button.on { background: var(--ink); color: #fff; font-weight: 600; }
+  .lr-scope { font-size: 10.5px; color: var(--muted); margin-top: 6px; font-family: ui-monospace, monospace; }
+  .lr-matrix td:first-child { font-weight: 500; }
+  .lr-when { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body data-page="schedule-rules" data-page-title="Booking rules" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="lr-01-rules" data-title="Booking rules">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/rules</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Booking rules</div>
+            <div class="page-sub">What the calendar allows, warns about, or refuses — set once, applied to every booking.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" onclick="HCOS.toast('Rule history opened — every change is logged with who made it.', 'ok')">Change history</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Rules saved. They apply to bookings from now on.', 'ok')">Save rules</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          Each rule chooses its own strength. <strong>Blocks</strong> refuse the booking outright.
+          <strong>Warns</strong> lets the front desk continue on purpose — that is how the clinic overbooks
+          a chair when it knows better. <strong>Allows</strong> turns the rule off without deleting it.
+        </div>
+
+        <div class="seg-divider">Double booking</div>
+        <div class="card" style="margin-bottom:18px">
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Two appointments in the same provider slot</div>
+              <div class="lr-rule-desc">A provider cannot be in two rooms at once. Refuses the second booking and offers the next open start time.</div>
+              <div class="lr-scope">applies to · Dr. Drannikov · Dr. Bakman · Brooke</div>
+            </div>
+            <div class="lr-enforce">
+              <button class="on" onclick="lrPick(this)">Blocks</button>
+              <button onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Two infusions in the same chair</div>
+              <div class="lr-rule-desc">Chairs are physical — the second patient has nowhere to sit. Warns rather than blocks, because a short push can share the tail of a long drip when the medic agrees.</div>
+              <div class="lr-scope">applies to · Chairs 1–4</div>
+            </div>
+            <div class="lr-enforce">
+              <button onclick="lrPick(this)">Blocks</button>
+              <button class="on" onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">One actor running two treatments at once</div>
+              <div class="lr-rule-desc">A medic can watch a running drip and start another, but cannot begin two at the same minute.</div>
+              <div class="lr-scope">applies to · Nick · Bea · Juan · Nate · Wesley</div>
+            </div>
+            <div class="lr-enforce">
+              <button onclick="lrPick(this)">Blocks</button>
+              <button class="on" onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="seg-divider">Start times and duration</div>
+        <div class="card" style="margin-bottom:18px">
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Medics start on the half hour</div>
+              <div class="lr-rule-desc">Thirty minutes is the start-time grid for the infusion team — it is not how long anything takes. A three-hour NAD+ still runs three hours; it just begins at :00 or :30.</div>
+              <div class="lr-scope">applies to · Chairs 1–4 · lab draws</div>
+            </div>
+            <div class="lr-enforce">
+              <button class="on" onclick="lrPick(this)">Blocks</button>
+              <button onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Use the patient's own duration, not the protocol default</div>
+              <div class="lr-rule-desc">When a patient has three or more past runs, booking reserves their real average. Maya Reyes books three hours twenty for NAD+, not three.</div>
+              <div class="lr-scope">needs · 3 past runs of the same treatment</div>
+            </div>
+            <div class="lr-enforce">
+              <button class="on" onclick="lrPick(this)">Blocks</button>
+              <button onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Infusion must finish before closing</div>
+              <div class="lr-rule-desc">A drip that would run past 6:00 PM cannot be started. The clinic closes and the chair must be clear.</div>
+              <div class="lr-scope">clinic hours · 8:00 AM – 6:00 PM · closed Sunday</div>
+            </div>
+            <div class="lr-enforce">
+              <button class="on" onclick="lrPick(this)">Blocks</button>
+              <button onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="seg-divider">Clinical prerequisites</div>
+        <div class="card">
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Intake must be complete before a first infusion</div>
+              <div class="lr-rule-desc">Consents, allergies and medications have to be on file before anything goes into a vein.</div>
+              <div class="lr-scope">applies to · first infusion of any series</div>
+            </div>
+            <div class="lr-enforce">
+              <button class="on" onclick="lrPick(this)">Blocks</button>
+              <button onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Readiness says pause</div>
+              <div class="lr-rule-desc">When the readiness engine returns Pause or Flare Recovery, escalating treatments stop until a provider clears it.</div>
+              <div class="lr-scope">source · <a href="readiness.html">Readiness engine</a></div>
+            </div>
+            <div class="lr-enforce">
+              <button onclick="lrPick(this)">Blocks</button>
+              <button class="on" onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+          <div class="lr-rule">
+            <div class="lr-rule-body">
+              <div class="lr-rule-name">Lab draw required before this protocol</div>
+              <div class="lr-rule-desc">High-dose IV vitamin C needs a current G6PD result on file.</div>
+              <div class="lr-scope">applies to · IV vitamin C 25 g and above</div>
+            </div>
+            <div class="lr-enforce">
+              <button class="on" onclick="lrPick(this)">Blocks</button>
+              <button onclick="lrPick(this)">Warns</button>
+              <button onclick="lrPick(this)">Allows</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="lr-02-insurance" data-title="Rules by coverage">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/rules/coverage</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Rules by coverage</div>
+            <div class="page-sub">The same booking is fine for one patient and refused for another — coverage decides.</div>
+          </div>
+          <button class="btn btn-primary" onclick="HCOS.toast('Coverage rules saved.', 'ok')">Save rules</button>
+        </div>
+
+        <div class="callout">
+          These run on top of the general rules. When both apply, the stricter one wins — a coverage
+          block cannot be overridden by a general warn.
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl lr-matrix">
+            <thead>
+              <tr>
+                <th>Coverage</th>
+                <th>Authorization</th>
+                <th>Visit cap</th>
+                <th>Booking beyond the cap</th>
+                <th>At out-of-pocket max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td>Not required for infusions</td>
+                <td>No cap</td>
+                <td><span class="pill pill-ok">Allows</span></td>
+                <td><span class="pill">Flag the front desk</span></td>
+              </tr>
+              <tr>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td>Benefits verified within 30 days</td>
+                <td>12 infusions per year</td>
+                <td><span class="pill pill-warn">Warns</span> <span class="lr-when">patient signs the estimate</span></td>
+                <td><span class="pill">Flag the front desk</span></td>
+              </tr>
+              <tr>
+                <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
+                <td>Required before the first infusion</td>
+                <td>8 infusions per year</td>
+                <td><span class="pill pill-err">Blocks</span> <span class="lr-when">until an appeal clears</span></td>
+                <td><span class="pill">Flag the front desk</span></td>
+              </tr>
+              <tr>
+                <td>Cigna <span class="net-badge net-oon">OON</span></td>
+                <td>Required · self-funded plans need the SPD on file</td>
+                <td>10 infusions per year</td>
+                <td><span class="pill pill-err">Blocks</span></td>
+                <td><span class="pill">Flag the front desk</span></td>
+              </tr>
+              <tr>
+                <td>Self-pay <span class="net-badge net-self">CASH</span></td>
+                <td>None</td>
+                <td>No cap</td>
+                <td><span class="pill pill-ok">Allows</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Membership <span class="net-badge net-self">PLAN</span></td>
+                <td>None</td>
+                <td>Whatever the tier includes</td>
+                <td><span class="pill pill-warn">Warns</span> <span class="lr-when">extra sessions bill at the member rate</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2" style="margin-top:18px">
+          <div class="card">
+            <div class="card-title">Out-of-pocket max reached</div>
+            <div class="lr-rule" style="border:none;padding-top:0">
+              <div class="lr-rule-body">
+                <div class="lr-rule-name">Flag every appointment and tell the front desk</div>
+                <div class="lr-rule-desc">Once a patient has met their out-of-pocket max, everything after it is covered differently. Each new booking is flagged so nobody quotes the old price, and the front desk gets a notice the moment it happens.</div>
+                <div class="lr-scope">Maya Reyes hit hers on Jul 14 · <a href="patients.html#/pt-02-profile">see her benefits</a></div>
+              </div>
+              <div class="lr-enforce">
+                <button class="on" onclick="lrPick(this)">Blocks</button>
+                <button onclick="lrPick(this)">Warns</button>
+                <button onclick="lrPick(this)">Allows</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Membership booking priority</div>
+            <div class="lr-rule" style="border:none;padding-top:0">
+              <div class="lr-rule-body">
+                <div class="lr-rule-name">Members reach the calendar first</div>
+                <div class="lr-rule-desc">Prime chair times open to members before everyone else. Higher tiers see them sooner — Radiant at 14 days out, Gold at 10, Silver at 7, everyone else at 3.</div>
+                <div class="lr-scope">tiers · <a href="pricing-memberships.html">Memberships</a></div>
+              </div>
+              <div class="lr-enforce">
+                <button class="on" onclick="lrPick(this)">Blocks</button>
+                <button onclick="lrPick(this)">Warns</button>
+                <button onclick="lrPick(this)">Allows</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="lr-03-reminders" data-title="Reminders">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/rules/reminders</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Reminders</div>
+            <div class="page-sub">What goes out before a visit, and who gets told when something changes.</div>
+          </div>
+          <button class="btn btn-primary" onclick="HCOS.toast('Reminder schedule saved.', 'ok')">Save reminders</button>
+        </div>
+
+        <div class="seg-divider">To patients</div>
+        <div class="tbl-wrap" style="margin-bottom:20px">
+          <table class="tbl">
+            <thead><tr><th>Appointment type</th><th>When</th><th>Channel</th><th>What it says</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="type-mark">CON</span>New patient consult</td>
+                <td>7 days · 2 days · 2 hours</td>
+                <td>Email, then text</td>
+                <td>Finish your intake before you come in</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Reminder opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="type-mark">NAD</span>NAD+ infusion</td>
+                <td>24 hours · 2 hours</td>
+                <td>Text</td>
+                <td>Eat first, drink water, plan for three hours in the chair</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Reminder opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="type-mark">IVC</span>IV vitamin C</td>
+                <td>24 hours</td>
+                <td>Text</td>
+                <td>Bring your G6PD result if you have not sent it</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Reminder opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="type-mark">TEL</span>Telehealth</td>
+                <td>15 minutes</td>
+                <td>Text with the link</td>
+                <td>Your visit starts in fifteen minutes</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Reminder opened for editing.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">To staff</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>What happens</th><th>Who hears about it</th><th>How</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td>A drip is running past its booked end</td>
+                <td>The chair's medic and the front desk</td>
+                <td>Banner on the day view</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Notification opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>A patient reaches their out-of-pocket max</td>
+                <td>Front desk and billing</td>
+                <td>Banner and a task</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Notification opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Kiosk check-in fails</td>
+                <td>Front desk</td>
+                <td>Banner, within seconds</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Notification opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>A booking is refused by a rule</td>
+                <td>Whoever tried to book it</td>
+                <td>On the booking screen, with the reason</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Notification opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td>Tomorrow has an unconfirmed new patient</td>
+                <td>Marie</td>
+                <td>Morning list</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Notification opened for editing.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+<script>
+  function lrPick(btn) {
+    var row = btn.parentNode;
+    Array.prototype.forEach.call(row.children, function (b) { b.classList.remove('on'); });
+    btn.classList.add('on');
+    HCOS.toast('Rule set to ' + btn.textContent.toLowerCase().replace(/s$/, '') + '.', 'ok');
+  }
+</script>
+</body>
+</html>

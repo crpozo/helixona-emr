@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Price list · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .pr-price { font-family: ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
+  .pr-price-main { font-weight: 700; color: var(--hx-navy); }
+  .pr-editable { border-bottom: 1px dashed var(--line); cursor: text; }
+  .pr-editable:hover { border-bottom-color: var(--ink); background: var(--hx-light); }
+  .pr-svc-name { font-weight: 600; color: var(--hx-navy); }
+  .pr-svc-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body data-page="pricing" data-page-title="Price list" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pr-01-list" data-title="Price list">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/pricing</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Price list</div>
+            <div class="page-sub">What the clinic charges — cash, member, and what goes on an insurance claim.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" onclick="HCOS.toast('Price list exported for the front desk binder.', 'ok')">Export list</button>
+            <button class="btn btn-primary" data-open-modal="#pr-add-modal">Add a service</button>
+          </div>
+        </div>
+
+        <div class="filters">
+          <button class="filter-chip active">All services</button>
+          <button class="filter-chip">Infusions</button>
+          <button class="filter-chip">Treatments</button>
+          <button class="filter-chip">Provider visits</button>
+          <button class="filter-chip">Labs</button>
+          <button class="filter-chip">Supplements</button>
+          <input class="search-input" placeholder="Search a service or billing code">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Billing code</th>
+                <th>Time in chair</th>
+                <th>Cash price</th>
+                <th>Member price</th>
+                <th>Billed to insurance</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">NAD</span>NAD+ infusion 500 mg</div><div class="pr-svc-meta">Infusion · chair</div></td>
+                <td><code>J3490</code></td>
+                <td>3 h</td>
+                <td class="pr-price pr-price-main pr-editable">$850</td>
+                <td class="pr-price pr-editable">$680</td>
+                <td class="pr-price">Billed · OON</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">IVC</span>IV vitamin C 25 g</div><div class="pr-svc-meta">Infusion · chair · G6PD required</div></td>
+                <td><code>J3490</code> · 50 units</td>
+                <td>2 h 30</td>
+                <td class="pr-price pr-price-main pr-editable">$425</td>
+                <td class="pr-price pr-editable">$340</td>
+                <td class="pr-price">$276.50 · Anthem</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">MYR</span>Myers' cocktail</div><div class="pr-svc-meta">Infusion · chair</div></td>
+                <td><code>J3490</code></td>
+                <td>1 h</td>
+                <td class="pr-price pr-price-main pr-editable">$225</td>
+                <td class="pr-price pr-editable">$180</td>
+                <td class="pr-price">Billed · OON</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">EBO</span>EBOO</div><div class="pr-svc-meta">Treatment · dedicated room</div></td>
+                <td><code>Cash only</code></td>
+                <td>2 h</td>
+                <td class="pr-price pr-price-main pr-editable">$1,200</td>
+                <td class="pr-price pr-editable">$950</td>
+                <td class="pr-price" style="color:var(--muted)">Not billed</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">GSH</span>Glutathione push</div><div class="pr-svc-meta">Infusion · chair</div></td>
+                <td><code>J3490</code></td>
+                <td>30 min</td>
+                <td class="pr-price pr-price-main pr-editable">$150</td>
+                <td class="pr-price pr-editable">$120</td>
+                <td class="pr-price">Billed · OON</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name">Nano bath</div><div class="pr-svc-meta">Treatment · room</div></td>
+                <td><code>Cash only</code></td>
+                <td>45 min</td>
+                <td class="pr-price pr-price-main pr-editable">$175</td>
+                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price" style="color:var(--muted)">Not billed</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name">Red light</div><div class="pr-svc-meta">Treatment · room</div></td>
+                <td><code>Cash only</code></td>
+                <td>25 min</td>
+                <td class="pr-price pr-price-main pr-editable">$95</td>
+                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price" style="color:var(--muted)">Not billed</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name">Hydrogen inhalation</div><div class="pr-svc-meta">Treatment · room</div></td>
+                <td><code>Cash only</code></td>
+                <td>30 min</td>
+                <td class="pr-price pr-price-main pr-editable">$85</td>
+                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price" style="color:var(--muted)">Not billed</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name">Salt room</div><div class="pr-svc-meta">Treatment · room</div></td>
+                <td><code>Cash only</code></td>
+                <td>45 min</td>
+                <td class="pr-price pr-price-main pr-editable">$65</td>
+                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price" style="color:var(--muted)">Not billed</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">CON</span>New patient consult</div><div class="pr-svc-meta">Provider visit · 90 min</div></td>
+                <td><code>99205</code></td>
+                <td>90 min</td>
+                <td class="pr-price pr-price-main pr-editable">$495</td>
+                <td class="pr-price pr-editable">$395</td>
+                <td class="pr-price">Billed · INN &amp; OON</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name"><span class="type-mark">F/U</span>Follow-up visit</div><div class="pr-svc-meta">Provider visit · 30 min</div></td>
+                <td><code>99214</code></td>
+                <td>30 min</td>
+                <td class="pr-price pr-price-main pr-editable">$225</td>
+                <td class="pr-price pr-editable">$180</td>
+                <td class="pr-price">Billed · INN &amp; OON</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><div class="pr-svc-name">Micronutrient panel</div><div class="pr-svc-meta">Lab · draw 15 min</div></td>
+                <td><code>82542</code></td>
+                <td>15 min</td>
+                <td class="pr-price pr-price-main pr-editable">$390</td>
+                <td class="pr-price pr-editable">$310</td>
+                <td class="pr-price">Billed · lab</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Service opened for editing.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          Cash and member prices are the clinic's own. The insurance column is what leaves on the claim —
+          for Anthem, IV vitamin C 25 g is 50 units of J3490 at $5.53, which is $276.50.
+          <a href="billing.html">See how claims are routed</a>.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pr-02-benefits" data-title="Benefits">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/pricing/benefits</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Benefits</div>
+            <div class="page-sub">The perks a membership can include — build a tier by picking from these.</div>
+          </div>
+          <button class="btn btn-primary" data-open-modal="#pr-benefit-modal">Add a benefit</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Benefit</th><th>What it gives</th><th>Counts against a cap</th><th>Used by</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Included sessions</strong></td>
+                <td>A number of treatments per month at no extra charge</td>
+                <td>Yes — the tier sets how many</td>
+                <td>Wellness · Restore · Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Member pricing</strong></td>
+                <td>The member column on every service</td>
+                <td>No</td>
+                <td>All tiers</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Early booking</strong></td>
+                <td>Sees prime chair times before non-members</td>
+                <td>No</td>
+                <td>Restore · Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Guest pass</strong></td>
+                <td>Brings someone along at member price</td>
+                <td>Yes — one per quarter</td>
+                <td>Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Supplement discount</strong></td>
+                <td>A percentage off everything on the shelf</td>
+                <td>No</td>
+                <td>Wellness · Restore · Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Annual panel</strong></td>
+                <td>One comprehensive lab panel a year, included</td>
+                <td>No</td>
+                <td>Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Provider access</strong></td>
+                <td>Messaging answered the same day</td>
+                <td>No</td>
+                <td>Restore · Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Rollover</strong></td>
+                <td>Unused sessions carry to next month</td>
+                <td>Yes — up to the tier's limit</td>
+                <td>Longevity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Benefit opened for editing.')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          A benefit on its own does nothing — it takes effect when a tier includes it.
+          <a href="pricing-memberships.html">Build the tiers</a>.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="pr-add-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Add a service</div>
+        <div class="modal-sub">It appears on the price list and in booking straight away.</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-label">Service name</label><input class="field-input" placeholder="Ozone therapy"></div>
+      <div class="field-row">
+        <div class="field"><label class="field-label">Category</label>
+          <select class="field-select"><option>Infusion</option><option>Treatment</option><option>Provider visit</option><option>Lab</option><option>Supplement</option></select>
+        </div>
+        <div class="field"><label class="field-label">Time in chair</label><input class="field-input" placeholder="45 min"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label class="field-label">Cash price</label><input class="field-input" placeholder="$0"></div>
+        <div class="field"><label class="field-label">Member price</label><input class="field-input" placeholder="$0"></div>
+      </div>
+      <div class="field"><label class="field-label">Billing code</label><input class="field-input" placeholder="Leave empty for cash only"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Service added to the price list.', 'ok')">Add service</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pr-benefit-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Add a benefit</div>
+        <div class="modal-sub">Then include it in whichever tiers should carry it.</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-label">Benefit name</label><input class="field-input" placeholder="Birthday session"></div>
+      <div class="field"><label class="field-label">What it gives</label><textarea class="field-textarea" placeholder="One free treatment during the member's birthday month"></textarea></div>
+      <div class="field" style="display:flex;align-items:center;gap:8px;font-size:12.5px">
+        <input type="checkbox" id="pr-cap" style="margin:0">
+        <label for="pr-cap">Counts against the tier's session cap</label>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Benefit added. Include it in a tier to switch it on.', 'ok')">Add benefit</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+</body>
+</html>

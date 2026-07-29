@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memberships · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=5">
+<style>
+  .pm-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
+  .pm-tier { border: 2px solid var(--line-soft); border-radius: 12px; padding: 18px; background: #fff; }
+  .pm-tier.featured { border-color: var(--ink); }
+  .pm-tier-name { font-size: 16px; font-weight: 700; color: var(--hx-navy); }
+  .pm-tier-price { font-size: 26px; font-weight: 700; color: var(--hx-navy); margin: 8px 0 2px; }
+  .pm-tier-price span { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .pm-tier-sub { font-size: 11.5px; color: var(--muted); margin-bottom: 14px; }
+  .pm-inc { list-style: none; padding: 0; margin: 0 0 14px; }
+  .pm-inc li { font-size: 12.5px; padding: 6px 0 6px 20px; position: relative; border-bottom: 1px solid var(--line-soft); }
+  .pm-inc li:last-child { border-bottom: none; }
+  .pm-inc li::before { content: '✓'; position: absolute; left: 0; font-weight: 700; color: var(--ink); }
+  .pm-inc li.out { color: var(--muted); }
+  .pm-inc li.out::before { content: '—'; color: var(--line); }
+  @media (max-width: 900px) { .pm-tiers { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="pricing-memberships" data-page-title="Memberships" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pm-01-tiers" data-title="Membership tiers">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/pricing/memberships</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Memberships</div>
+            <div class="page-sub">Build the tiers, pick what each one includes, and set who reaches the calendar first.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" onclick="HCOS.toast('Member roster opened.', 'ok')">See members</button>
+            <button class="btn btn-primary" data-open-modal="#pm-add-modal">Add a tier</button>
+          </div>
+        </div>
+
+        <div class="pm-tiers">
+
+          <div class="pm-tier">
+            <div class="pm-tier-name">Wellness</div>
+            <div class="pm-tier-price">$149<span> / month</span></div>
+            <div class="pm-tier-sub">For someone keeping steady. 84 members.</div>
+            <ul class="pm-inc">
+              <li>2 included sessions a month</li>
+              <li>Member pricing on everything</li>
+              <li>10% off supplements</li>
+              <li class="out">Early booking</li>
+              <li class="out">Annual panel</li>
+              <li class="out">Guest pass</li>
+            </ul>
+            <div class="field-help" style="margin-bottom:10px">Books 3 days ahead of non-members.</div>
+            <button class="btn" style="width:100%" onclick="HCOS.toast('Wellness tier opened for editing.')">Edit tier</button>
+          </div>
+
+          <div class="pm-tier featured">
+            <div class="pm-tier-name">Restore</div>
+            <div class="pm-tier-price">$349<span> / month</span></div>
+            <div class="pm-tier-sub">The one most chronic patients pick. 126 members.</div>
+            <ul class="pm-inc">
+              <li>5 included sessions a month</li>
+              <li>Member pricing on everything</li>
+              <li>15% off supplements</li>
+              <li>Early booking · 7 days</li>
+              <li>Same-day provider messaging</li>
+              <li class="out">Annual panel</li>
+              <li class="out">Guest pass</li>
+            </ul>
+            <div class="field-help" style="margin-bottom:10px">Books 7 days ahead of non-members.</div>
+            <button class="btn btn-primary" style="width:100%" onclick="HCOS.toast('Restore tier opened for editing.')">Edit tier</button>
+          </div>
+
+          <div class="pm-tier">
+            <div class="pm-tier-name">Longevity</div>
+            <div class="pm-tier-price">$749<span> / month</span></div>
+            <div class="pm-tier-sub">Everything, with room to spare. 31 members.</div>
+            <ul class="pm-inc">
+              <li>10 included sessions a month</li>
+              <li>Member pricing on everything</li>
+              <li>20% off supplements</li>
+              <li>Early booking · 14 days</li>
+              <li>Same-day provider messaging</li>
+              <li>Annual comprehensive panel</li>
+              <li>Guest pass each quarter</li>
+              <li>Unused sessions roll over, up to 5</li>
+            </ul>
+            <div class="field-help" style="margin-bottom:10px">Books 14 days ahead of non-members.</div>
+            <button class="btn" style="width:100%" onclick="HCOS.toast('Longevity tier opened for editing.')">Edit tier</button>
+          </div>
+
+        </div>
+
+        <div class="seg-divider">How the tiers compare</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Benefit</th><th>Pay as you go</th><th>Wellness</th><th>Restore</th><th>Longevity</th></tr></thead>
+            <tbody>
+              <tr><td>Monthly price</td><td>—</td><td>$149</td><td>$349</td><td>$749</td></tr>
+              <tr><td>Included sessions</td><td>0</td><td>2</td><td>5</td><td>10</td></tr>
+              <tr><td>Service pricing</td><td>Cash price</td><td>Member price</td><td>Member price</td><td>Member price</td></tr>
+              <tr><td>Supplement discount</td><td>—</td><td>10%</td><td>15%</td><td>20%</td></tr>
+              <tr><td>Books ahead of others by</td><td>—</td><td>3 days</td><td>7 days</td><td>14 days</td></tr>
+              <tr><td>Same-day provider messaging</td><td>—</td><td>—</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Annual panel</td><td>—</td><td>—</td><td>—</td><td>✓</td></tr>
+              <tr><td>Guest pass</td><td>—</td><td>—</td><td>—</td><td>Each quarter</td></tr>
+              <tr><td>Rollover</td><td>—</td><td>—</td><td>—</td><td>Up to 5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          Early booking is what the calendar enforces: prime chair times open to Longevity first, then
+          Restore, then Wellness, then everyone else. <a href="schedule-rules.html#/lr-02-insurance">See the rule</a>.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pm-02-members" data-title="Members">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/pricing/memberships/members</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Members</div>
+            <div class="page-sub">Who is on which tier, and how much of it they are using.</div>
+          </div>
+          <button class="btn btn-primary" onclick="HCOS.toast('Enrolment opened — pick a patient and a tier.')">Enrol a patient</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:16px">
+          <div class="card stat-card"><div class="stat-num">241</div><div class="stat-lbl">Members</div><div class="stat-sub">of 412 active patients</div></div>
+          <div class="card stat-card"><div class="stat-num">$71k</div><div class="stat-lbl">Monthly recurring</div><div class="stat-sub">membership revenue</div></div>
+          <div class="card stat-card"><div class="stat-num">63%</div><div class="stat-lbl">Sessions used</div><div class="stat-sub">of what tiers include</div></div>
+          <div class="card stat-card"><div class="stat-num">7</div><div class="stat-lbl">Lapsing this month</div><div class="stat-sub">card expiring or unpaid</div></div>
+        </div>
+
+        <div class="filters">
+          <button class="filter-chip active">All members</button>
+          <button class="filter-chip">Wellness</button>
+          <button class="filter-chip">Restore</button>
+          <button class="filter-chip">Longevity</button>
+          <button class="filter-chip">Barely using it</button>
+          <button class="filter-chip">Lapsing</button>
+          <input class="search-input" placeholder="Search a member">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Patient</th><th>Tier</th><th>Since</th><th>Sessions this month</th><th>Also billed to</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Maya Reyes</strong></td>
+                <td><span class="pill pill-navy">Restore</span></td>
+                <td>Mar 2026</td>
+                <td>
+                  <div class="meter-row"><div class="meter"><div class="meter-fill" style="width:80%"></div></div><span class="meter-val">4 of 5</span></div>
+                </td>
+                <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
+                <td><a class="btn btn-sm" href="patients.html#/pt-02-profile">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Walter Hsu</strong></td>
+                <td><span class="pill pill-navy">Longevity</span></td>
+                <td>Jan 2026</td>
+                <td>
+                  <div class="meter-row"><div class="meter"><div class="meter-fill" style="width:60%"></div></div><span class="meter-val">6 of 10</span></div>
+                </td>
+                <td>Cigna <span class="net-badge net-oon">OON</span></td>
+                <td><a class="btn btn-sm" href="patients.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Grace Lindqvist</strong></td>
+                <td><span class="pill">Wellness</span></td>
+                <td>Jun 2026</td>
+                <td>
+                  <div class="meter-row"><div class="meter"><div class="meter-fill" style="width:100%"></div></div><span class="meter-val">2 of 2</span></div>
+                </td>
+                <td><span class="net-badge net-self">CASH</span></td>
+                <td><a class="btn btn-sm" href="patients.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Priya Natarajan</strong></td>
+                <td><span class="pill pill-navy">Restore</span></td>
+                <td>Feb 2026</td>
+                <td>
+                  <div class="meter-row"><div class="meter"><div class="meter-fill" style="width:20%"></div></div><span class="meter-val">1 of 5</span></div>
+                </td>
+                <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
+                <td><a class="btn btn-sm" href="patients.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Daniel Okafor</strong></td>
+                <td><span class="pill">Wellness</span></td>
+                <td>May 2026</td>
+                <td>
+                  <div class="meter-row"><div class="meter"><div class="meter-fill" style="width:50%"></div></div><span class="meter-val">1 of 2</span></div>
+                </td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><a class="btn btn-sm" href="patients.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Marcus Webb</strong></td>
+                <td><span class="pill pill-muted">Pay as you go</span></td>
+                <td>—</td>
+                <td><span style="color:var(--muted);font-size:11.5px">Not a member</span></td>
+                <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Membership options shown to Marcus at checkout.')">Offer a tier</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top:16px">
+          Priya has used one of five sessions this month with nine days left. The front desk sees this at
+          check-in so it can offer to book the rest.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="pm-add-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Add a tier</div>
+        <div class="modal-sub">Name it, price it, then pick the benefits it carries.</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-row">
+        <div class="field"><label class="field-label">Tier name</label><input class="field-input" placeholder="Foundations"></div>
+        <div class="field"><label class="field-label">Monthly price</label><input class="field-input" placeholder="$0"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label class="field-label">Included sessions a month</label><input class="field-input" placeholder="0"></div>
+        <div class="field"><label class="field-label">Books ahead by</label>
+          <select class="field-select"><option>3 days</option><option>7 days</option><option>14 days</option><option>No early booking</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Benefits it includes</label>
+        <div class="filters" style="margin:0">
+          <button class="filter-chip active" onclick="this.classList.toggle('active')">Member pricing</button>
+          <button class="filter-chip active" onclick="this.classList.toggle('active')">Supplement discount</button>
+          <button class="filter-chip" onclick="this.classList.toggle('active')">Early booking</button>
+          <button class="filter-chip" onclick="this.classList.toggle('active')">Provider messaging</button>
+          <button class="filter-chip" onclick="this.classList.toggle('active')">Annual panel</button>
+          <button class="filter-chip" onclick="this.classList.toggle('active')">Guest pass</button>
+          <button class="filter-chip" onclick="this.classList.toggle('active')">Rollover</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Tier created. It shows at checkout and in new patient setup.', 'ok')">Add tier</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=5"></script>
+</body>
+</html>
