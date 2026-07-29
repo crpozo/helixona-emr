@@ -18,6 +18,8 @@
   .pt-payer { font-size: 15px; font-weight: 600; color: var(--hx-navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .pt-meter { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin-top: 6px; }
   .pt-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  .pf-sel { width: auto; min-width: 150px; font-size: 12.5px; padding: 6px 10px; }
+  .pf-count { font-size: 12px; color: var(--muted); margin-left: auto; align-self: center; white-space: nowrap; }
   .pt-paths { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   .pt-path {
     text-align: left; background: #fff; cursor: pointer; font-family: inherit;
@@ -67,42 +69,42 @@
           </div>
         </div>
 
-        <div class="filters" style="flex-direction:column;align-items:stretch;gap:8px">
-          <div class="filter-group">
-            <span class="filter-group-lbl">Status</span>
-            <button class="filter-chip active">Active</button>
-            <button class="filter-chip">Not admitted</button>
-            <button class="filter-chip">On hold</button>
-            <button class="filter-chip">Discharged</button>
-          </div>
-          <div class="filter-group">
-            <span class="filter-group-lbl">Patient type</span>
-            <button class="filter-chip multi active" data-f>Complex chronic</button>
-            <button class="filter-chip multi active" data-f>Chronic</button>
-            <button class="filter-chip multi active" data-f>Wellness</button>
-            <button class="filter-chip multi active" data-f>Self-directed</button>
-          </div>
-          <div class="filter-group">
-            <span class="filter-group-lbl">Coverage</span>
-            <button class="filter-chip multi active" data-f>In-network</button>
-            <button class="filter-chip multi active" data-f>Out-of-network</button>
-            <button class="filter-chip multi active" data-f>Self-pay</button>
-          </div>
-          <div class="filter-group">
-            <span class="filter-group-lbl">Membership</span>
-            <button class="filter-chip multi active" data-f>Longevity</button>
-            <button class="filter-chip multi active" data-f>Restore</button>
-            <button class="filter-chip multi active" data-f>Wellness</button>
-            <button class="filter-chip multi active" data-f>Pay as you go</button>
-          </div>
-          <div class="filter-group">
-            <span class="filter-group-lbl">Needs attention</span>
-            <button class="filter-chip">Out-of-pocket max met</button>
-            <button class="filter-chip">Intake incomplete</button>
-            <button class="filter-chip">SPD missing</button>
-            <button class="filter-chip">Readiness pause</button>
-            <input class="search-input" type="search" placeholder="Search by name, phone, or DOB">
-          </div>
+        <div class="filters">
+          <input class="search-input" type="search" id="pf-q" oninput="pfApply()" placeholder="Search by name, phone, or DOB">
+          <select class="field-select pf-sel" id="pf-status" onchange="pfApply()">
+            <option value="Active">Active</option>
+            <option value="all">Any status</option>
+            <option value="Not admitted">Not admitted</option>
+            <option value="On hold">On hold</option>
+            <option value="Discharged">Discharged</option>
+          </select>
+          <select class="field-select pf-sel" id="pf-type" onchange="pfApply()">
+            <option value="all">Any type</option>
+            <option>Complex chronic</option>
+            <option>Chronic</option>
+            <option>Wellness</option>
+            <option>Self-directed</option>
+          </select>
+          <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()">
+            <option value="all">Any membership</option>
+            <option>Longevity</option>
+            <option>Restore</option>
+            <option>Wellness</option>
+            <option>Pay as you go</option>
+          </select>
+          <select class="field-select pf-sel" id="pf-net" onchange="pfApply()">
+            <option value="all">Any coverage</option>
+            <option value="inn">In-network</option>
+            <option value="oon">Out-of-network</option>
+            <option value="self">Self-pay</option>
+          </select>
+          <select class="field-select pf-sel" id="pf-attn" onchange="pfApply()">
+            <option value="all">Anything to watch</option>
+            <option value="oop">Out-of-pocket max met</option>
+            <option value="spd">SPD missing</option>
+            <option value="readiness">Readiness needs review</option>
+          </select>
+          <span class="pf-count" id="pf-count"></span>
         </div>
 
         <div class="tbl-wrap">
@@ -120,7 +122,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Complex chronic" data-memb="Restore" data-net="oon" data-attn="oop" data-name="Maya Reyes" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">MR</span><span class="pt-pname">Maya Reyes</span></div></td>
                 <td>Complex chronic</td>
                 <td><span class="pill pill-navy">Restore</span></td>
@@ -130,7 +132,7 @@
                 <td><span class="pill pill-ok">Standard</span></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Chronic" data-memb="Wellness" data-net="inn" data-attn="" data-name="Daniel Okafor" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">DO</span><span class="pt-pname">Daniel Okafor</span></div></td>
                 <td>Chronic</td>
                 <td><span class="pill">Wellness</span></td>
@@ -140,7 +142,7 @@
                 <td><span class="pill pill-ok">Standard</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Complex chronic" data-memb="Restore" data-net="oon" data-attn="" data-name="Priya Natarajan" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">PN</span><span class="pt-pname">Priya Natarajan</span></div></td>
                 <td>Complex chronic</td>
                 <td><span class="pill pill-navy">Restore</span></td>
@@ -150,7 +152,7 @@
                 <td><span class="pill pill-navy">Gentle</span></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Tom Alvarez" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">Tom Alvarez</span></div></td>
                 <td>Self-directed</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
@@ -160,7 +162,7 @@
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Wellness" data-memb="Wellness" data-net="self" data-attn="" data-name="Grace Lindqvist" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">GL</span><span class="pt-pname">Grace Lindqvist</span></div></td>
                 <td>Wellness</td>
                 <td><span class="pill">Wellness</span></td>
@@ -170,7 +172,7 @@
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Chronic" data-memb="Pay as you go" data-net="inn" data-attn="" data-name="Marcus Webb" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">MW</span><span class="pt-pname">Marcus Webb</span></div></td>
                 <td>Chronic</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
@@ -180,7 +182,7 @@
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Wellness" data-memb="Pay as you go" data-net="oon" data-attn="spd readiness" data-name="Elena Petrova" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">EP</span><span class="pt-pname">Elena Petrova</span></div></td>
                 <td>Wellness</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
@@ -190,7 +192,7 @@
                 <td><span class="pill pill-warn">Pause</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Sofia Ramos" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">SR</span><span class="pt-pname">Sofia Ramos</span></div></td>
                 <td>Self-directed</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
@@ -200,7 +202,7 @@
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Complex chronic" data-memb="Longevity" data-net="oon" data-attn="" data-name="Walter Hsu" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">WH</span><span class="pt-pname">Walter Hsu</span></div></td>
                 <td>Complex chronic</td>
                 <td><span class="pill pill-navy">Longevity</span></td>
@@ -210,7 +212,7 @@
                 <td><span class="pill pill-ok">Standard</span></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-activate="pt-02-profile">
+              <tr class="row-click" data-type="Chronic" data-memb="Wellness" data-net="inn" data-attn="readiness" data-name="Nadia Boulos" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">NB</span><span class="pt-pname">Nadia Boulos</span></div></td>
                 <td>Chronic</td>
                 <td><span class="pill">Wellness</span></td>
@@ -557,6 +559,34 @@
 </script>
 
 <script>
+  // The list filters for real, so you can see what each control does.
+  function pfApply() {
+    var q = document.getElementById('pf-q').value.trim().toLowerCase();
+    var status = document.getElementById('pf-status').value;
+    var type = document.getElementById('pf-type').value;
+    var memb = document.getElementById('pf-memb').value;
+    var net = document.getElementById('pf-net').value;
+    var attn = document.getElementById('pf-attn').value;
+    var rows = document.querySelectorAll('tr.row-click');
+    var shown = 0;
+    rows.forEach(function (r) {
+      var ok = true;
+      if (q && r.getAttribute('data-name').toLowerCase().indexOf(q) === -1) ok = false;
+      if (type !== 'all' && r.getAttribute('data-type') !== type) ok = false;
+      if (memb !== 'all' && r.getAttribute('data-memb') !== memb) ok = false;
+      if (net !== 'all' && r.getAttribute('data-net') !== net) ok = false;
+      if (attn !== 'all' && (r.getAttribute('data-attn') || '').indexOf(attn) === -1) ok = false;
+      if (status === 'Not admitted' || status === 'On hold' || status === 'Discharged') ok = false;
+      r.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    var c = document.getElementById('pf-count');
+    if (status === 'Not admitted') c.textContent = 'No one is waiting to be admitted today';
+    else if (shown === rows.length) c.textContent = 'Showing all ' + rows.length + ' patients';
+    else c.textContent = 'Showing ' + shown + ' of ' + rows.length + ' patients';
+  }
+  document.addEventListener('DOMContentLoaded', pfApply);
+
   var PT_PATHS = {
     complex: {
       note: '<strong>Complex chronic.</strong> Nothing gets booked before the provider has the picture — full history, current labs, and a readiness read.',

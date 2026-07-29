@@ -16,6 +16,9 @@
     display: flex; flex-wrap: wrap; gap: 8px 22px;
     padding: 10px 16px; border-bottom: 1px solid var(--line-soft); background: #FBFBFB;
   }
+  .l-fl { display: flex; align-items: center; gap: 8px; }
+  .l-select { width: auto; min-width: 210px; font-size: 12.5px; padding: 6px 10px; }
+  .l-count { font-size: 12px; color: var(--muted); align-self: center; }
   .l-view-group { margin-left: auto; }
   .l-dur-row { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; font-size: 12px; }
   .l-dur-row .meter { flex: 1; max-width: 120px; }
@@ -53,41 +56,38 @@
           </div>
 
           <div class="l-filters">
-            <div class="filter-group">
-              <span class="filter-group-lbl">Team</span>
-              <button class="filter-chip multi active" data-f>Infusion</button>
-              <button class="filter-chip multi active" data-f>Provider clinic</button>
-              <button class="filter-chip multi" data-f>Front desk</button>
-              <button class="filter-chip multi" data-f>Lab</button>
-            </div>
-            <div class="filter-group">
-              <span class="filter-group-lbl">Providers</span>
-              <button class="filter-chip multi active" data-f>Dr. Drannikov</button>
-              <button class="filter-chip multi" data-f>Dr. Bakman</button>
-              <button class="filter-chip multi" data-f>Brooke</button>
-            </div>
-            <div class="filter-group">
-              <span class="filter-group-lbl">Actors</span>
-              <button class="filter-chip multi active" data-f>Nick</button>
-              <button class="filter-chip multi active" data-f>Bea</button>
-              <button class="filter-chip multi active" data-f>Juan</button>
-              <button class="filter-chip multi active" data-f>Nate</button>
-              <button class="filter-chip multi" data-f>Wesley</button>
-            </div>
-            <div class="filter-group">
+            <label class="l-fl">
+              <span class="filter-group-lbl">Show</span>
+              <select class="field-select l-select" id="l-view" onchange="lApply()">
+                <option value="all">Everyone — provider and all four chairs</option>
+                <option value="infusion">Infusion suite only — Chairs 1 to 4</option>
+                <option value="clinic">Provider clinic only — Dr. Drannikov</option>
+                <option value="c1">Chair 1 · Nick</option>
+                <option value="c2">Chair 2 · Bea</option>
+                <option value="c3">Chair 3 · Juan</option>
+                <option value="c4">Chair 4 · Nate</option>
+              </select>
+            </label>
+
+            <label class="l-fl">
               <span class="filter-group-lbl">Treatment</span>
-              <button class="filter-chip multi active" data-f>NAD+</button>
-              <button class="filter-chip multi active" data-f>IV vitamin C</button>
-              <button class="filter-chip multi active" data-f>Myers'</button>
-              <button class="filter-chip multi active" data-f>EBOO</button>
-              <button class="filter-chip multi active" data-f>Consults</button>
-            </div>
-            <div class="filter-group l-view-group">
+              <select class="field-select l-select" id="l-treat" onchange="lApply()">
+                <option value="all">All treatments</option>
+                <option value="t-nad">NAD+ · 2 today</option>
+                <option value="t-ivc">IV vitamin C · 1 today</option>
+                <option value="t-myers">Myers' and pushes · 2 today</option>
+                <option value="t-consult">Consults · 2 today</option>
+                <option value="t-tele">Telehealth · 1 today</option>
+              </select>
+            </label>
+
+            <span class="l-count" id="l-count">Showing all 14 appointments</span>
+
+            <div class="l-view-group">
               <button class="view-lock locked" id="l-lockbtn"
-                onclick="var b=this;b.classList.toggle('locked');HCOS.toast(b.classList.contains('locked')?'View locked — Yazmin opens here every morning.':'View unlocked — changes will not be saved.', 'ok')">
-                <span>🔒</span><span>Front desk view · locked for Yazmin</span>
+                onclick="var b=this;b.classList.toggle('locked');b.querySelector('span:last-child').textContent=b.classList.contains('locked')?'Saved as Yazmin\'s view':'Not saved';HCOS.toast(b.classList.contains('locked')?'Saved. Yazmin opens here every morning.':'Unlocked — changes will not be kept.', 'ok')">
+                <span>&#128274;</span><span>Saved as Yazmin's view</span>
               </button>
-              <button class="btn btn-sm" onclick="HCOS.toast('Saved. This is now your view every morning.', 'ok')">Save as my view</button>
             </div>
           </div>
 
@@ -95,11 +95,11 @@
             <div class="daycal-band-spacer"></div>
             <div class="daycal-band">Infusion suite</div>
             <div class="daycal-col-head hours-head"></div>
-            <div class="daycal-col-head">Dr. Drannikov<span class="sub">Provider</span></div>
-            <div class="daycal-col-head">Chair 1<span class="sub">Nick · Nurse</span></div>
-            <div class="daycal-col-head">Chair 2<span class="sub">Bea · Medic</span></div>
-            <div class="daycal-col-head">Chair 3<span class="sub">Juan · Medic</span></div>
-            <div class="daycal-col-head">Chair 4<span class="sub">Nate · Medic</span></div>
+            <div class="daycal-col-head" data-col="dr">Dr. Drannikov<span class="sub">Provider</span></div>
+            <div class="daycal-col-head" data-col="c1">Chair 1<span class="sub">Nick · Nurse</span></div>
+            <div class="daycal-col-head" data-col="c2">Chair 2<span class="sub">Bea · Medic</span></div>
+            <div class="daycal-col-head" data-col="c3">Chair 3<span class="sub">Juan · Medic</span></div>
+            <div class="daycal-col-head" data-col="c4">Chair 4<span class="sub">Nate · Medic</span></div>
           </div>
 
           <div class="daycal-grid">
@@ -117,7 +117,7 @@
             </div>
 
             <!-- Dr. Drannikov -->
-            <div class="daycal-col">
+            <div class="daycal-col" data-col="dr">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
               <div class="cal-appt st-done t-consult" style="top:44px;height:128px" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">8:30 – 10:00</div>
@@ -153,7 +153,7 @@
             </div>
 
             <!-- Chair 1 -->
-            <div class="daycal-col">
+            <div class="daycal-col" data-col="c1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
               <div class="cal-appt st-inchair t-nad ai-warn" style="top:88px;height:260px" data-open-drawer="#l-appt-drawer">
                 <span class="ai-flag" title="Running long">!</span>
@@ -171,7 +171,7 @@
             </div>
 
             <!-- Chair 2 -->
-            <div class="daycal-col">
+            <div class="daycal-col" data-col="c2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
               <div class="cal-appt st-inchair t-ivc" style="top:176px;height:216px" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:00 – 12:30</div>
@@ -182,7 +182,7 @@
             </div>
 
             <!-- Chair 3 -->
-            <div class="daycal-col">
+            <div class="daycal-col" data-col="c3">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
               <div class="cal-appt st-arrived t-myers" style="top:308px;height:84px" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">11:30 – 12:30</div>
@@ -198,7 +198,7 @@
             </div>
 
             <!-- Chair 4 -->
-            <div class="daycal-col">
+            <div class="daycal-col" data-col="c4">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
               <div class="cal-appt st-arrived" style="top:286px;height:18px;padding:1px 8px" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-name" style="font-size:10px">Sofia Ramos · 11:15 lab draw · 15m</div>
@@ -428,32 +428,15 @@
                 <label class="field-label">Find a patient</label>
                 <input class="search-input" style="width:100%;box-sizing:border-box" type="search" value="Priya Natarajan" placeholder="Search by name, phone, or DOB">
               </div>
-              <button class="btn" id="l-newpt-toggle" onclick="lToggleNewPt()">New patient</button>
+              <a class="btn" href="patients.html#/pt-03-create">New patient</a>
             </div>
             <div class="field-help" style="margin-top:6px">Priya Natarajan · 38 · Blue Shield of CA PPO · OON</div>
 
-            <div id="l-quick-create" style="display:none;border-top:1px solid var(--line-soft);margin-top:14px;padding-top:14px">
-              <div class="field-row">
-                <div class="field">
-                  <label class="field-label">First name</label>
-                  <input class="field-input" type="text" placeholder="First name">
-                </div>
-                <div class="field">
-                  <label class="field-label">Last name</label>
-                  <input class="field-input" type="text" placeholder="Last name">
-                </div>
-              </div>
-              <div class="field-row">
-                <div class="field">
-                  <label class="field-label">Mobile phone</label>
-                  <input class="field-input" type="tel" placeholder="(949) 555-0100">
-                </div>
-                <div class="field">
-                  <label class="field-label">Email</label>
-                  <input class="field-input" type="email" placeholder="name@example.com">
-                </div>
-              </div>
-              <div class="field-help">Four fields and the patient exists — intake collects everything else before the visit.</div>
+            <div class="callout" style="margin-top:12px">
+              A new patient does not start here. Complex chronic, chronic, wellness and self-directed each
+              collect different things and lead somewhere different, so
+              <a href="patients.html#/pt-03-create">new patient creation</a> asks why they came first, then
+              comes back to book.
             </div>
 
             <div class="seg-divider">Appointment</div>
@@ -676,6 +659,62 @@
 
 <script src="assets/hcos.js?v=5"></script>
 <script>
+  // The two filters actually filter: "Show" picks the columns, "Treatment" picks
+  // the appointments, and the count says what survived.
+  function lApply() {
+    var view = document.getElementById('l-view').value;
+    var treat = document.getElementById('l-treat').value;
+
+    var wantCols = view === 'all' ? ['dr','c1','c2','c3','c4']
+      : view === 'infusion' ? ['c1','c2','c3','c4']
+      : view === 'clinic' ? ['dr'] : [view];
+
+    document.querySelectorAll('[data-col]').forEach(function (el) {
+      el.style.display = wantCols.indexOf(el.getAttribute('data-col')) === -1 ? 'none' : '';
+    });
+
+    var pv = wantCols.indexOf('dr') !== -1 ? 1 : 0;
+    var nc = wantCols.filter(function (c) { return c !== 'dr'; }).length;
+    var tmpl = '64px repeat(' + (pv + nc) + ', 1fr)';
+    document.querySelector('.daycal-head').style.gridTemplateColumns = tmpl;
+    document.querySelector('.daycal-grid').style.gridTemplateColumns = tmpl;
+
+    var band = document.querySelector('.daycal-band');
+    var spacer = document.querySelector('.daycal-band-spacer');
+    if (nc === 0) {
+      band.style.display = 'none';
+      spacer.style.gridColumn = '1 / span ' + (1 + pv);
+    } else {
+      band.style.display = '';
+      spacer.style.gridColumn = '1 / span ' + (1 + pv);
+      band.style.gridColumn = (2 + pv) + ' / span ' + nc;
+    }
+
+    var shown = 0, total = 0;
+    document.querySelectorAll('.cal-appt').forEach(function (a) {
+      total++;
+      var colOk = wantCols.indexOf(a.closest('[data-col]').getAttribute('data-col')) !== -1;
+      var treatOk = treat === 'all' || a.classList.contains(treat);
+      a.style.display = (colOk && treatOk) ? '' : 'none';
+      if (colOk && treatOk) shown++;
+    });
+    document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
+      h.style.display = (view === 'all' || view === 'clinic') && treat === 'all' ? '' : 'none';
+    });
+
+    var el = document.getElementById('l-count');
+    el.textContent = (shown === total)
+      ? 'Showing all ' + total + ' appointments'
+      : 'Showing ' + shown + ' of ' + total + ' appointments';
+
+    var lock = document.getElementById('l-lockbtn');
+    if (lock && lock.classList.contains('locked') && !(view === 'all' && treat === 'all')) {
+      lock.classList.remove('locked');
+      lock.querySelector('span:last-child').textContent = 'Not saved';
+    }
+  }
+  lApply();
+
   // Multi-select filter chips — toggle on click, like the real filter bar.
   document.querySelectorAll('.filter-chip.multi[data-f]').forEach(function (c) {
     c.addEventListener('click', function () {
@@ -688,14 +727,6 @@
     });
   });
 
-  // Demo only: reveal the quick-create mini-form on "New patient".
-  function lToggleNewPt() {
-    var panel = document.getElementById('l-quick-create');
-    var btn = document.getElementById('l-newpt-toggle');
-    var open = panel.style.display !== 'none';
-    panel.style.display = open ? 'none' : 'block';
-    btn.textContent = open ? 'New patient' : 'Use existing patient';
-  }
 </script>
 </body>
 </html>
