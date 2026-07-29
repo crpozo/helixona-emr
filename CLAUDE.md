@@ -88,7 +88,13 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
 - Day view: time on the vertical axis; columns are **Dr. Drannikov + Chairs 1–4** grouped under an "Infusion Suite" band; a current-time line makes the calendar a live picture of the clinic day.
 - Status lifecycle — one vocabulary everywhere: **Scheduled → Confirmed → Arrived → In Room | In Chair → Done**; exits No-Show, Cancelled, Rescheduled.
 - Appointment types with real durations: New Patient Consult 90m · Follow-up 30m · Infusion (NAD+ ~3h, IV Vitamin C 25 g ~2.5h, Myers' Cocktail 1h, Glutathione push 30m) · Lab Draw 15m · Telehealth 30m.
-- Conflicts warn, never block — clinics overbook on purpose. Front-desk-first density: a full clinic day visible without scrolling.
+- **The 30-minute grid is the START-TIME granularity for medics, not a duration (Carlos, 2026-07-28).** Nothing is "30 minutes long" because of the grid — a 3 h NAD+ runs 3 h, it just begins at :00 or :30.
+- **Duration is per patient, not just per protocol.** The system tracks how long each patient actually takes for a given IV and books their own average once there are 3 past runs — Maya Reyes books 3 h 20 for NAD+, not 3 h. Blocks warn when a drip is running past its booked end.
+- **Conflicts: each rule sets its own strength (Carlos, 2026-07-28)** — Block / Warn / Allow, configured on `schedule-rules.html`. Provider double-book blocks; chair overlap warns (clinics overbook on purpose). Coverage rules layer on top and the stricter one wins.
+- Filters are multi-select across team, providers, actors and treatment, and a user can **lock a saved view** as their default.
+- **Two visual channels on the calendar, both grayscale**: status is the fill ramp (light→dark); treatment type is the left-edge pattern + an initial (NAD/IVC/MYR/EBO/CON); the corner tag is who runs it. In the real product those patterns become treatment colours.
+- **Membership = booking priority**: prime times open to Longevity 14 days out, Restore 7, Wellness 3.
+- Front-desk-first density: a full clinic day visible without scrolling.
 
 ## Payer knowledge (shapes every Module D screen)
 
