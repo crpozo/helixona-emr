@@ -294,6 +294,13 @@ These are the architectural clusters the review says must be solved once and the
 | **Grant/revoke caregiver access** | V | V | V | — | V | — | O | V | Patient consent controls scope; staff assists only under policy. |
 | **Edit or delete audit event** | — | — | — | — | — | — | — | — | No role may edit/delete append-only audit events. |
 
+### Corrections the review made to our own assumptions
+
+- **Clinical sequence** is **Stabilization → Root cause identification → Lead Actor 1/2/3 → Repair → Graduation.** Stabilization comes FIRST — calm the system before mapping root drivers. Same sequence and terms in staff and patient views.
+- **The physician is Dr. Eduard Drannikov.** One verified name everywhere: signatures, examples, templates.
+- **Self-directed / open access never means "no clinical clearance."** EBOO, every infusion and every push still require a signed order and current clearance. Booking is a HARD BLOCK until both exist.
+- **Person and Patient are one record, in one place.** `patients.html` holds the list (lifecycle filter, Patient by default), the identity record, find-or-create and the duplicate queue. There is no separate People section — `people.html` only redirects.
+
 ### Scheduling is one engine (C3)
 **Hard blocks** (never an ordinary warning): occupied chair or provider · missing signed order or clearance · contraindication · unsafe interval · unavailable supervision. **Eligible warnings** may be overridden only by a designated authority, **with a reason, logged**.
 
