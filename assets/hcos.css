@@ -1024,13 +1024,9 @@ button { font-family: inherit; }
 }
 /* inside a calendar block space is tight — shrink, but keep the gap */
 .cal-appt .type-mark, .week-appt .type-mark { font-size: 8.5px; padding: 0 4px; margin-right: 5px; }
-.cal-appt.t-nad     { border-left-style: solid; border-left-width: 7px; }
-.cal-appt.t-ivc     { border-left-style: double; border-left-width: 7px; }
-.cal-appt.t-myers   { border-left-style: dashed; border-left-width: 7px; }
-.cal-appt.t-eboo    { border-left-style: dotted; border-left-width: 8px; }
-.cal-appt.t-consult { border-left-style: solid; border-left-width: 5px; }
-.cal-appt.t-lab     { border-left-style: dashed; border-left-width: 5px; }
-.cal-appt.t-tele    { border-left-style: dotted; border-left-width: 6px; }
+/* One solid bar, the same width for every treatment. Dotted and dashed edges
+   broke up on a 30-minute block and read as noise instead of as a code. */
+.cal-appt[class*="t-"], .week-appt[class*="t-"] { border-left-style: solid; border-left-width: 6px; }
 .week-appt.t-nad    { border-left-style: solid; border-left-width: 5px; }
 .week-appt.t-ivc    { border-left-style: double; border-left-width: 5px; }
 .week-appt.t-myers  { border-left-style: dashed; border-left-width: 5px; }
@@ -1080,6 +1076,11 @@ button { font-family: inherit; }
 }
 .cal-legend-item { display: flex; align-items: center; gap: 6px; }
 .cal-legend-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); }
+/* Treatment keys show the block's own left bar, at the block's own width */
+.cal-legend-swatch[class*="sw-"] {
+  width: 6px; height: 16px; border-radius: 2px; border: none;
+  border-left: 6px solid var(--line);
+}
 
 /* Week view */
 .weekcal-head { display: grid; grid-template-columns: 64px repeat(5, 1fr); background: #F7F7F7; border-bottom: 1px solid var(--line-soft); }
