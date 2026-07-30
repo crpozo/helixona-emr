@@ -69,7 +69,7 @@
     <div class="phone-frame">
       <div class="phone-bar"><span>11:04</span><span>● ● ●</span></div>
       <div class="phone-body">
-        <div class="ad-eyebrow">Step 5 of 8</div>
+        <div class="ad-eyebrow">Step 10 of 12</div>
         <div class="ad-h">Upload your ID</div>
 
         <div class="seg-divider" style="margin-top:0">Front of ID</div>
@@ -124,7 +124,7 @@
         <div class="field-help">Read from the photo — fix anything that looks wrong.</div>
 
         <div class="prov">
-          <span><strong>Goes to</strong> your record <code>P-004990</code> <span class="appr pending">Pending review</span> · the front desk checks it against the photo, and your old value is kept either way · <a href="people.html#/pe-02-person">open</a></span>
+          <span><strong>Goes to</strong> your record <code>P-004990</code> <span class="appr pending">Pending review</span> · the front desk checks it against the photo, and your old value is kept either way</span>
         </div>
 
         <button class="btn btn-primary btn-lg" style="width:100%;margin-top:14px" data-activate="a-24-insurance-ocr">Confirm and continue</button>
@@ -138,7 +138,7 @@
     <div class="phone-frame">
       <div class="phone-bar"><span>11:07</span><span>● ● ●</span></div>
       <div class="phone-body">
-        <div class="ad-eyebrow">Step 6 of 8</div>
+        <div class="ad-eyebrow">Step 11 of 12</div>
         <div class="ad-h">Insurance card</div>
 
         <div class="seg-divider" style="margin-top:0">Front of card</div>
@@ -201,7 +201,7 @@
         <div class="field-help">Filled in from your card — fix anything that looks off. What you send is a suggestion until the front desk checks it against your photos.</div>
 
         <div class="prov">
-          <span><strong>Goes to</strong> your one coverage record <code>C-2287</code> <span class="appr pending">Pending review</span> · Yazmin at the front desk confirms it before anything is billed · <a href="intake.html#/a-11-eligibility">how we check coverage</a></span>
+          <span><strong>Goes to</strong> your one coverage record <code>C-2287</code> <span class="appr pending">Pending review</span> · Yazmin at the front desk confirms it before anything is billed</span>
         </div>
 
         <div class="seg-divider">Your benefits</div>
@@ -237,7 +237,7 @@
     <div class="phone-frame">
       <div class="phone-bar"><span>11:10</span><span>● ● ●</span></div>
       <div class="phone-body">
-        <div class="ad-eyebrow">Step 7 of 8 · out-of-network plans</div>
+        <div class="ad-eyebrow">Step 12 of 12 · out-of-network plans</div>
         <div class="ad-h">Your plan document</div>
 
         <div class="ad-sub" style="margin-top:0">
@@ -263,8 +263,8 @@
         </div>
 
         <button class="btn" style="width:100%;margin-bottom:8px" onclick="HCOS.toast('Instructions texted — where to find the document in the Cigna member portal.', 'ok')">Can't find it — text me instructions</button>
-        <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:6px" data-activate="a-26-pharmacy-prefs">Continue</button>
-        <button class="btn btn-ghost" style="width:100%;font-size:12px" data-activate="a-26-pharmacy-prefs">Skip for now</button>
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:6px" data-activate="a-26-pharmacy-prefs" onclick="HCOS.toast('Plan document filed with coverage C-2287 — billing reads it before your visit.', 'ok')">Save plan document and continue</button>
+        <button class="btn btn-ghost" style="width:100%;font-size:12px" data-activate="a-26-pharmacy-prefs" onclick="HCOS.toast('Skipped — nothing is filed yet, and your link lets you add it any time before your visit.')">Skip for now</button>
         <div class="field-help" style="margin-top:6px">Skipping is fine — your link lets you add it later, and we will remind you before your visit.</div>
       </div>
     </div>
@@ -275,7 +275,7 @@
     <div class="phone-frame">
       <div class="phone-bar"><span>11:13</span><span>● ● ●</span></div>
       <div class="phone-body">
-        <div class="ad-eyebrow">Step 8 of 8</div>
+        <div class="ad-eyebrow">Optional · before your visit</div>
         <div class="ad-h">Preferred pharmacy</div>
         <div class="ad-sub">Where would you like new prescriptions sent?</div>
 
@@ -285,15 +285,22 @@
           <div style="font-size:11.5px;color:var(--muted);margin-top:2px">5421 Walnut Ave, Irvine, CA 92604</div>
           <div style="font-size:11.5px;color:var(--muted)">(949) 555-2103</div>
         </div>
-        <button class="btn btn-sm" style="margin-bottom:14px" onclick="HCOS.toast('Pharmacy search opens — pick any pharmacy by name, city, or zip.')">Change pharmacy</button>
+        <button class="btn btn-sm" style="margin-bottom:8px" onclick="HCOS.toast('Pharmacy search opens — pick any pharmacy by name, city, or zip.')">Change pharmacy</button>
+
+        <div class="prov" style="margin-bottom:14px">
+          <span><strong>From</strong> your record <code>P-004990</code> · one pharmacy on file, and every prescription goes there until you change it here</span>
+        </div>
 
         <div class="seg-divider">Electronic prescribing</div>
         <div class="callout" style="margin-bottom:8px;font-size:11.5px">
           E-prescribing through Surescripts lets your provider send prescriptions straight to your pharmacy — no paper, no phone calls, faster pickup.
         </div>
-        <div class="ad-chip-pair" style="margin-bottom:14px">
+        <div class="ad-chip-pair" style="margin-bottom:8px">
           <button class="filter-chip active">Yes, link my pharmacy</button>
           <button class="filter-chip">No thanks</button>
+        </div>
+        <div class="prov" style="margin-bottom:14px">
+          <span><strong>Goes to</strong> your record <code>P-004990</code> <span class="appr pending">Pending review</span> · Yazmin at the front desk confirms the pharmacy before your first prescription is sent, and you can change this answer any time from your link</span>
         </div>
 
         <div class="seg-divider">Mail-order pharmacy (optional)</div>
@@ -326,6 +333,9 @@
           <div style="font-size:16px;font-weight:600;color:var(--hx-navy);margin:6px 0">Today, Tue Jul 21 · 3:00 PM</div>
           <div style="font-size:12.5px">New patient consult · 90 min<br>Dr. Drannikov</div>
         </div>
+        <div class="prov">
+          <span><strong>From</strong> appointment <code>A-7726</code> · booked with the front desk on Jul 20 · this page and the clinic read the same booking, so a new time keeps the same appointment</span>
+        </div>
 
         <div class="seg-divider">Where</div>
         <div style="font-size:12.5px">Helixona, Inc.<br>114 Pacifica, Suite 130<br>Irvine, CA 92618</div>
@@ -351,7 +361,7 @@
         </div>
 
         <button class="btn" style="width:100%;margin-top:14px" onclick="HCOS.toast('Added to your calendar — Tuesday, July 21 · 3:00 PM.', 'ok')">Add to calendar</button>
-        <a class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px;box-sizing:border-box;text-align:center" href="schedule.html#/l-01-day">Need a different time? Reschedule</a>
+        <a class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px;box-sizing:border-box;text-align:center" href="journey-book.html#/j-book-what">Need a different time? Reschedule</a>
       </div>
     </div>
   </section>
@@ -369,20 +379,27 @@
           </div>
         </div>
 
-        <div class="sms-bubble" style="margin-bottom:14px">Helixona: your intake is saved at step 5 of 8. Pick up where you left off — hcos.helixona.com/i/t4x9m. The same link works on any device.</div>
+        <div class="sms-bubble" style="margin-bottom:14px">Helixona: your intake is saved at step 10 of 12. Pick up where you left off — hcos.helixona.com/i/t4x9m. The same link works on any device.</div>
 
         <div class="card" style="margin-bottom:14px">
           <div class="seg-divider" style="margin-top:0">Your progress</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:6px"><strong>9 of 12 complete</strong> · about 4 minutes left</div>
+          <div class="meter" style="margin-bottom:10px"><div class="meter-fill" style="width:75%"></div></div>
           <ul class="check-list">
-            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Demographics</span></li>
-            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Medical history</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Verify it's you</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">About you</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Conditions</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Symptoms</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Allergies and sensitivities</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Medications</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Supplements</span></li>
             <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Reason for visit</span></li>
-            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Consents</span><span class="check-meta">HIPAA + treatment</span></li>
-            <li class="check-item"><span class="check-icon active">›</span><span class="check-label">ID upload</span><span class="check-meta">you are here</span></li>
-            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Insurance card</span></li>
-            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan document</span></li>
-            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Pharmacy</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Consents</span><span class="check-meta">5 documents</span></li>
+            <li class="check-item"><span class="check-icon active">›</span><span class="check-label">Upload ID</span><span class="check-meta">you are here</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Upload insurance card</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan document (SPD / EOC)</span></li>
           </ul>
+          <div class="field-help" style="margin-top:8px">Your preferred pharmacy comes after these — it is optional, and you can add it any time.</div>
         </div>
 
         <div class="callout callout-ok" style="font-size:11.5px">
@@ -394,6 +411,87 @@
       </div>
     </div>
   </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="a-doc-repository" data-title="Documents on file">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/documents</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Documents and consents</div>
+            <div class="page-sub">Maya Reyes &middot; everything signed, uploaded or extracted, in one place.</div>
+          </div>
+          <button class="btn btn-primary" onclick="HCOS.toast('Upload opened — the original file is always kept.')">Upload a document</button>
+        </div>
+
+        <div class="prov">
+          <span><strong>One repository</strong> &middot; identity, coverage, clinical and billing all read from here &middot; none of them keeps a copy</span>
+        </div>
+
+        <div class="filters">
+          <button class="filter-chip active">All</button>
+          <button class="filter-chip">Consents</button>
+          <button class="filter-chip">Identity</button>
+          <button class="filter-chip">Coverage</button>
+          <button class="filter-chip">Expiring</button>
+          <input class="search-input" placeholder="Search a document">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Document</th><th>Type</th><th>Version</th><th>Signed by</th><th>Effective</th><th>Expires</th><th>Source file</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Treatment consent</strong></td><td>Consent</td><td><span class="ver-chip">v3</span></td>
+                <td>Maya Reyes &middot; Mar 14</td><td>Mar 14, 2026</td><td>Mar 14, 2027</td><td>e-signature</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Opened the signed original.')">Open</button></td>
+              </tr>
+              <tr>
+                <td><strong>Financial policy</strong></td><td>Consent</td><td><span class="ver-chip">v2</span></td>
+                <td>Maya Reyes &middot; Mar 14</td><td>Mar 14, 2026</td><td>&mdash;</td><td>e-signature</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Opened the signed original.')">Open</button></td>
+              </tr>
+              <tr>
+                <td><strong>Communication preferences</strong></td><td>Consent</td><td><span class="ver-chip">v1</span></td>
+                <td>Maya Reyes &middot; Mar 14</td><td>Mar 14, 2026</td><td>&mdash;</td><td>e-signature</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Opened the signed original.')">Open</button></td>
+              </tr>
+              <tr>
+                <td><strong>Insurance card</strong></td><td>Identity</td><td><span class="ver-chip">v2</span></td>
+                <td>&mdash;</td><td>Jun 2, 2026</td><td>Dec 31, 2026</td><td>card photo &middot; <span class="clin-state reported">OCR proposed</span></td>
+                <td><button class="btn btn-sm" data-activate="a-24-insurance-ocr">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>Photo ID</strong></td><td>Identity</td><td><span class="ver-chip">v1</span></td>
+                <td>&mdash;</td><td>Mar 14, 2026</td><td>Aug 9, 2029</td><td>card photo</td>
+                <td><button class="btn btn-sm" data-activate="a-23-id-ocr">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>SPD &middot; plan document</strong></td><td>Coverage</td><td><span class="ver-chip">v1</span></td>
+                <td>&mdash;</td><td>Jul 2, 2026</td><td>Dec 31, 2026</td><td>118-page PDF</td>
+                <td><button class="btn btn-sm" data-activate="a-25-spd-upload">Open</button></td>
+              </tr>
+              <tr>
+                <td><strong>Infusion consent</strong></td><td>Consent</td><td><span class="ver-chip superseded">v1</span></td>
+                <td>Maya Reyes &middot; Mar 20</td><td>superseded by v2</td><td>&mdash;</td><td>e-signature</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Superseded versions stay readable — nothing is deleted.')">Open</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top:14px">
+          The insurance card expires Dec 31. Billing and estimates keep using the current one until a newer
+          card is confirmed. <a href="patients.html#/pt-02-profile">See her coverage</a>.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
 </div>
 

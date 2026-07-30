@@ -9,30 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/hcos.css?v=8">
 <style>
-  /* Page-local pieces the shared vocabulary lacks — all prefixed .b- */
+  /* Page-local pieces the shared vocabulary lacks — all prefixed .b-
+     LAYOUT ONLY: every box below is a .card in the markup. */
   .b-status-bar {
     display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
     padding: 12px 16px; margin-bottom: 16px;
-    background: var(--hx-band); border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    font-size: 12.5px; color: var(--ink);
+    font-size: 12.5px;
   }
   .b-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 4px; }
-  .b-sys {
-    background: #fff; border: 1px solid var(--line-soft);
-    border-left: 3px solid var(--line); border-radius: var(--radius-sm);
-    padding: 8px 10px;
-  }
+  .b-sys { padding: 8px 10px; border-left: 3px solid var(--line); }
   .b-sys.sev { border-left-color: var(--ink); }
   .b-sys.sub { border-left-style: dashed; border-left-color: var(--muted); }
   .b-sys-name { font-size: 11.5px; font-weight: 600; color: var(--hx-navy); }
   .b-sys-status { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .b-clin-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
   .b-clin-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
-  .b-proto {
-    background: #fff; border: 1px solid var(--line);
-    border-radius: var(--radius-sm); padding: 11px 13px; cursor: pointer; margin-bottom: 8px;
-  }
+  .b-proto { padding: 11px 13px; cursor: pointer; margin-bottom: 8px; }
   .b-proto:hover { border-color: var(--hx-navy); }
   .b-proto.selected { border-color: var(--ink); border-left: 3px solid var(--ink); }
   .b-proto-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
@@ -73,67 +65,107 @@
         <h2 class="page-title">Functional medicine timeline</h2>
         <p class="page-sub">The patient's story over time — the antecedents, triggers, and mediators that shape the plan.</p>
 
+        <div class="prov">
+          <span><strong>Reads</strong> the <a href="#b-05-problem-list" data-activate="b-05-problem-list">problem list</a>, results, <a href="clinical-questionnaires.html#/b-30-quest-results">questionnaire <code>Q-1180</code></a> and <a href="intake-onboarding.html#/a-16-conditions">her onboarding answers</a> — the timeline arranges them in time and keeps no copy</span>
+        </div>
+
         <div class="grid-sidebar">
           <div>
             <div class="seg-divider" style="margin-top:0">Life events and symptom onset</div>
             <div class="timeline">
               <div class="timeline-item">
                 <div class="timeline-time">Born · 1988</div>
-                <div class="timeline-body"><span class="pill pill-muted">Antecedent</span> Birth and early childhood — vaginal delivery, breastfed 9 months, no early antibiotics. Family history: maternal Hashimoto's, paternal celiac.</div>
+                <div class="timeline-body"><span class="pill pill-muted">Antecedent</span> Birth and early childhood — vaginal delivery, breastfed 9 months, no early antibiotics. Family history: maternal Hashimoto's, paternal celiac.
+                  <div class="clin-src"><span class="clin-state reported">Reported</span> Onboarding · history and family history · Jul 14 2026</div></div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-time">2012 · age 24</div>
-                <div class="timeline-body"><span class="pill pill-muted">Antecedent</span> Mononucleosis — confirmed EBV mono with 4 weeks of fatigue. Recovered at the time but reports never feeling "100%" since.</div>
+                <div class="timeline-body"><span class="pill pill-muted">Antecedent</span> Mononucleosis — confirmed EBV mono with 4 weeks of fatigue. Recovered at the time but reports never feeling "100%" since.
+                  <div class="clin-src"><span class="clin-state verified">Verified</span> Problem list · <code>B27.9</code> resolved · outside records, confirmed by Dr. Drannikov Mar 18 2026</div></div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-time">2016 – 2021</div>
-                <div class="timeline-body"><span class="pill pill-warn">Mediator</span> High-stress career period — tech industry, 60+ hour weeks, frequent travel, irregular sleep. Gradual onset of perimenstrual mood symptoms.</div>
+                <div class="timeline-body"><span class="pill pill-warn">Mediator</span> High-stress career period — tech industry, 60+ hour weeks, frequent travel, irregular sleep. Gradual onset of perimenstrual mood symptoms.
+                  <div class="clin-src"><span class="clin-state reported">Reported</span> Onboarding · lifestyle and stress · Jul 14 2026 — kept in her words</div></div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-time">2021</div>
-                <div class="timeline-body"><span class="pill pill-warn">Mediator</span> Hashimoto's diagnosis — subclinical hypothyroidism identified; started levothyroxine 50 mcg. Antibody titers not re-checked since.</div>
+                <div class="timeline-body"><span class="pill pill-warn">Mediator</span> Hashimoto's diagnosis — subclinical hypothyroidism identified; started levothyroxine. Antibody titers not re-checked since.
+                  <div class="clin-src"><span class="clin-state verified">Verified</span> Problem list · <code>E06.3</code> chronic · outside records 2021, confirmed by Dr. Drannikov Mar 18 2026 · the current dose is on the <a href="#b-06-med-rec" data-activate="b-06-med-rec">medication list</a></div></div>
               </div>
               <div class="timeline-item">
                 <div class="timeline-time">Aug 2024</div>
-                <div class="timeline-body"><span class="pill pill-err">Trigger</span> COVID-19 infection (acute) — moderate severity, 10-day acute phase, not hospitalized, no antivirals. Symptoms never fully resolved.</div>
+                <div class="timeline-body"><span class="pill pill-err">Trigger</span> COVID-19 infection (acute) — moderate severity, 10-day acute phase, not hospitalized, no antivirals. Symptoms never fully resolved.
+                  <div class="clin-src"><span class="clin-state verified">Verified</span> Problem list · <code>U07.1</code> resolved, flagged as the PASC trigger · resolved by Dr. Drannikov Mar 18 2026</div></div>
               </div>
               <div class="timeline-item muted">
                 <div class="timeline-time">Sep 2024 → present</div>
-                <div class="timeline-body"><span class="pill pill-navy">Current</span> Persistent fatigue, post-exertional malaise, brain fog, orthostatic intolerance, GI bloating, anxiety. Self-rated overall function: 4 of 10.</div>
+                <div class="timeline-body"><span class="pill pill-navy">Current</span> Persistent fatigue, post-exertional malaise, brain fog, orthostatic intolerance, GI bloating, anxiety. Self-rated overall function: 4 of 10.
+                  <div class="clin-src"><span class="clin-state reported">Reported</span> <a href="clinical-questionnaires.html#/b-30-quest-results">Fatigue questionnaire <code>Q-1180</code></a> · Jul 18 2026 — the confirmed problems sit on the <a href="#b-05-problem-list" data-activate="b-05-problem-list">problem list</a></div></div>
               </div>
             </div>
 
             <div class="seg-divider">Systems and matrix</div>
             <div class="b-matrix">
-              <div class="b-sys sev"><div class="b-sys-name">Energy / mitochondria</div><div class="b-sys-status">Severely impaired</div></div>
-              <div class="b-sys sub"><div class="b-sys-name">Hormones</div><div class="b-sys-status">Hashimoto's · suboptimal</div></div>
-              <div class="b-sys sub"><div class="b-sys-name">GI / microbiome</div><div class="b-sys-status">Dysbiosis symptoms</div></div>
-              <div class="b-sys sev"><div class="b-sys-name">Immune / inflammation</div><div class="b-sys-status">CRP elevated</div></div>
-              <div class="b-sys sub"><div class="b-sys-name">Detox / biotransformation</div><div class="b-sys-status">Symptoms present</div></div>
-              <div class="b-sys"><div class="b-sys-name">Cardiovascular</div><div class="b-sys-status">POTS suspected</div></div>
-              <div class="b-sys sub"><div class="b-sys-name">Structural</div><div class="b-sys-status">Hypermobility (+3)</div></div>
-              <div class="b-sys"><div class="b-sys-name">Mental / emotional</div><div class="b-sys-status">Anxiety present</div></div>
+              <div class="card b-sys sev"><div class="b-sys-name">Energy / mitochondria</div><div class="b-sys-status">Severely impaired</div>
+                <div class="clin-src"><span class="clin-state reported">Reported</span> Questionnaire <code>Q-1180</code> · Jul 18 2026</div></div>
+              <div class="card b-sys sub"><div class="b-sys-name">Hormones</div><div class="b-sys-status">Hashimoto's · suboptimal</div>
+                <div class="clin-src"><span class="clin-state verified">Verified</span> Problem list <code>E06.3</code> · TSH 3.8</div></div>
+              <div class="card b-sys sub"><div class="b-sys-name">GI / microbiome</div><div class="b-sys-status">Dysbiosis symptoms</div>
+                <div class="clin-src"><span class="clin-state reported">Reported</span> Onboarding conditions · Jul 14 2026</div></div>
+              <div class="card b-sys sev"><div class="b-sys-name">Immune / inflammation</div><div class="b-sys-status">CRP 6.2 mg/L · above range</div>
+                <div class="clin-src"><span class="clin-state verified">Verified</span> Result <code>L-8841</code> · Apr 8 2026</div></div>
+              <div class="card b-sys sub"><div class="b-sys-name">Detox / biotransformation</div><div class="b-sys-status">Symptoms present</div>
+                <div class="clin-src"><span class="clin-state reported">Reported</span> Questionnaire <code>Q-1180</code> · Jul 18 2026</div></div>
+              <div class="card b-sys"><div class="b-sys-name">Cardiovascular</div><div class="b-sys-status">POTS suspected</div>
+                <div class="clin-src"><span class="clin-state reconciled">Reconciled</span> Problem list <code>G90.A</code> · tilt-table pending</div></div>
+              <div class="card b-sys sub"><div class="b-sys-name">Structural</div><div class="b-sys-status">Hypermobility · Beighton 3 of 9</div>
+                <div class="clin-src"><span class="clin-state verified">Verified</span> Exam · Dr. Drannikov · Mar 18 2026</div></div>
+              <div class="card b-sys"><div class="b-sys-name">Mental / emotional</div><div class="b-sys-status">Anxiety present</div>
+                <div class="clin-src"><span class="clin-state reported">Reported</span> Onboarding conditions · Jul 14 2026</div></div>
             </div>
             <div class="field-help" style="margin-top:8px">Solid left edge — severe. Dashed — suboptimal, watch. Plain — stable or pending workup.</div>
+            <div class="prov">
+              <span><strong>Every tile</strong> reads the problem list, the latest result or the questionnaire named on it · the matrix stores nothing of its own · <a href="security.html#/g-01-audit">audit store</a></span>
+            </div>
           </div>
 
           <div>
             <div class="card">
               <div class="card-title">Working hypothesis</div>
-              <p style="font-size:12.5px;line-height:1.6;margin:0">Post-acute sequelae of COVID-19 (PASC) overlaid on chronic Hashimoto's and a suspected POTS phenotype. EBV reactivation possible. Mitochondrial dysfunction likely contributory.</p>
+              <p style="font-size:12.5px;line-height:1.6;margin:0">Post-acute sequelae of COVID-19 (PASC) overlaid on chronic Hashimoto's and a suspected POTS phenotype. EBV reactivation confirmed on the May 29 panel. Mitochondrial dysfunction likely contributory.</p>
+              <div class="prov" style="margin-top:10px">
+                <span><strong>Written by</strong> Dr. Drannikov · encounter <code>ENC-2026-0418</code> · May 22 2026 · amended by <a href="#b-12-amendment" data-activate="b-12-amendment">addendum</a> May 29 2026</span>
+              </div>
+              <div class="field-help">A hypothesis, not a diagnosis. Nothing here is on the problem list until it is confirmed there.</div>
               <button class="btn btn-sm" style="margin-top:12px" data-activate="b-05-problem-list">Open the problem list</button>
             </div>
-            <div class="card" style="margin-top:14px">
-              <div class="card-title">Suggested workup</div>
-              <ul class="b-workup">
-                <li>Comprehensive metabolic panel</li>
-                <li>Thyroid panel + TPO / Tg antibodies</li>
-                <li>EBV reactivation panel</li>
-                <li>Organic acids test (OAT)</li>
-                <li>Active B12 + MTHFR</li>
-                <li>Tilt-table or active stand test</li>
-              </ul>
-              <a class="btn btn-primary btn-sm" style="width:100%;margin-top:10px" href="labs.html#/c-01-orders">Send to lab orders</a>
+            <div class="ai-block" style="margin-top:14px">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Five tests would close the gaps in this timeline. The EBV reactivation panel is already resulted — May 29 2026 — so it is left off.
+                <ul class="b-workup">
+                  <li>Comprehensive metabolic panel</li>
+                  <li>Thyroid panel + TPO / Tg antibodies</li>
+                  <li>Organic acids test (OAT)</li>
+                  <li>Active B12 + MTHFR</li>
+                  <li>Tilt-table or active stand test</li>
+                </ul>
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> the problem list · results since Mar 2026 · questionnaire <code>Q-1180</code> · open orders</span>
+                <span><b>Model</b> workup-gaps-v1.2</span>
+                <span><b>Confidence</b> 0.68 — the OAT has no result on file either way</span>
+                <span><b>Reviewer</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <a class="btn btn-primary btn-sm" href="labs.html#/c-01-orders">Draft these as lab orders</a>
+                <button class="btn btn-sm" onclick="HCOS.toast('Dismissed with your name and the reason. Nothing was ordered and the timeline is unchanged.')">Not needed</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">A suggestion only — it cannot place or sign an order.</div>
             </div>
           </div>
         </div>
@@ -388,15 +420,18 @@
         <h2 class="page-title">Medication reconciliation</h2>
         <p class="page-sub">One list for medications and supplements. Reconciling changes what we trust about each entry — it does not start a second list.</p>
 
-        <div class="b-status-bar">
+        <div class="card b-status-bar">
           <div>Prepared by Charlene (MA) today 9:12 AM · <span class="appr pending">Pending approval</span> · last approved Apr 8 2026 by Dr. Drannikov</div>
           <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reconciliation approved by Dr. Drannikov — the list is current as of today.', 'ok')">Approve reconciliation</button>
         </div>
         <div class="prov">
           <span><strong>Reads</strong> <a href="intake-onboarding.html#/a-19-medications">onboarding medications</a> Jul 14 · pharmacy fills CVS Irvine #4421 Jul 19 · signed orders — none of them is copied here</span>
         </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> eCW writes prescriptions and fills until the medication domain activates in HCOS · HCOS reads them and owns the reconciliation you see here</span>
+        </div>
 
-        <div class="seg-divider" style="margin-top:0">Active medications and supplements (3)</div>
+        <div class="seg-divider" style="margin-top:0">Active medications and supplements (4)</div>
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
@@ -413,7 +448,7 @@
                   <div class="clin-src" style="margin-top:4px">Order <code>O-1044</code> <span class="ver-chip superseded">v3</span> · Dr. Drannikov</div>
                 </td>
                 <td><span class="pill pill-ok">Continue</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Only a signed order changes a dose. Opening order O-1044 to write the next version.')">Change by order</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only a signed order changes a dose. A new version of O-1044 is started under your name — the list moves when you sign it.')">Change by order</button></td>
               </tr>
               <tr>
                 <td>
@@ -439,9 +474,22 @@
                 <td><span class="pill pill-ok">Continue</span></td>
                 <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Approved as clinically active by Dr. Drannikov. It stays the same entry, now marked verified.', 'ok')">Approve as active</button></td>
               </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Cetirizine 10 mg PO daily</div>
+                  <div class="b-clin-meta">For seasonal allergies · started 2019 · she says she stopped it in Mar 2026</div>
+                </td>
+                <td>
+                  <span class="clin-state reported">Reported stopped</span>
+                  <div class="clin-src" style="margin-top:4px">Patient at check-in today · prepared by Charlene</div>
+                </td>
+                <td><span class="appr pending">Your decision</span></td>
+                <td><span class="clin-src">Decide it in the review below</span></td>
+              </tr>
             </tbody>
           </table>
         </div>
+        <div class="field-help">An entry stays active until a provider acts on it. A patient saying she stopped changes what we trust about it, not its state.</div>
 
         <div class="seg-divider">Charlene prepared these — they need your approval</div>
         <div class="callout callout-warn">
@@ -459,15 +507,15 @@
         </div>
         <div class="callout callout-warn">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
-            <strong>On the list, patient says stopped:</strong> Cetirizine 10 mg daily
-            <span class="clin-state reported">Reported</span>
+            <strong>Active on the list, she says she stopped it:</strong> Cetirizine 10 mg daily
+            <span class="clin-state reported">Reported stopped</span>
             <span class="appr pending">Pending approval</span>
           </div>
-          Was for seasonal allergies, stopped Mar 2026.
-          <div class="prov"><span><strong>From</strong> the patient at check-in today · prepared by Charlene</span></div>
+          Was for seasonal allergies; she says she stopped in Mar 2026. It stays active on the list, and safety checks keep reading it, until you decide.
+          <div class="prov"><span><strong>From</strong> the patient at check-in today · prepared by Charlene · the entry is the same one shown as active above</span></div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Discontinued by Dr. Drannikov with today\'s date — the entry keeps its start and stop dates.', 'ok')">Mark discontinued</button>
-            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Kept active. Your decision and the patient report are both recorded.')">Keep active</button>
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Discontinued by Dr. Drannikov with today\'s date — the same entry moves to discontinued and keeps its start and stop dates.', 'ok')">Mark discontinued</button>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Kept active. Your decision and the patient report are both recorded on the entry.')">Keep active</button>
           </div>
         </div>
 
@@ -486,10 +534,10 @@
             <span><b>Reviewer</b> Dr. Drannikov</span>
           </div>
           <div class="ai-actions">
-            <a class="btn btn-sm btn-primary" href="clinical.html#/b-09-orders">Open order O-1044</a>
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('List entry set to levothyroxine 75 mcg against signed order O-1044 v4, by Dr. Drannikov. v3 stays in the entry history.', 'ok')">Reconcile the list to v4</button>
             <button class="btn btn-sm" onclick="HCOS.toast('Dismissed with your name and the reason. The order and the fill history are unchanged.')">Not a discrepancy</button>
           </div>
-          <div class="field-help" style="margin-top:8px">A suggestion only — the dose changes when you sign the next version of the order.</div>
+          <div class="field-help" style="margin-top:8px">A suggestion only — accepting it moves the list to the signed version. A different dose still needs a new signed version of the order.</div>
         </div>
 
         <div class="seg-divider">Discontinued / historical</div>
@@ -498,8 +546,9 @@
             <tbody>
               <tr>
                 <td>
-                  <div class="b-clin-name">Cetirizine 10 mg daily</div>
-                  <div class="b-clin-meta">Started 2019 · stopped Mar 2026 by the patient · kept with both dates</div>
+                  <div class="b-clin-name">Ibuprofen 600 mg PO PRN</div>
+                  <div class="b-clin-meta">Started 2022 · discontinued Jan 12 2026 by Dr. Drannikov for GI symptoms · kept with both dates</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Prescribed</span> <span class="clin-src">Discontinued on the record by Dr. Drannikov · Jan 12 2026</span></div>
                 </td>
                 <td><span class="pill pill-muted">Inactive</span></td>
                 <td></td>
@@ -557,12 +606,15 @@
         <h2 class="page-title">Allergies and intolerances</h2>
         <p class="page-sub">One list. Allergies hard-block a matching order; intolerances warn. A patient report enters here and blocks straight away — review decides what it becomes.</p>
 
-        <div class="b-status-bar">
+        <div class="card b-status-bar">
           <div>Reconciled by Charlene (MA) today 9:04 AM · reconfirmed by the patient at check-in · <span class="appr pending">1 item pending your review</span></div>
           <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reviewed with no changes — recorded for today under Dr. Drannikov.', 'ok')">Confirm — no changes</button>
         </div>
         <div class="prov">
           <span><strong>Reads</strong> <a href="intake-onboarding.html#/a-18-allergies">onboarding allergies</a>, check-in and outside records — each entry keeps who said it and when</span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> the allergy list is written in HCOS since Jul 1 2026 · eCW receives a read-only copy · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
         </div>
 
         <div class="seg-divider" style="margin-top:0">Allergies — hard block</div>
@@ -713,7 +765,7 @@
           <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
         </div>
 
-        <div class="b-status-bar">
+        <div class="card b-status-bar">
           <div>
             <code>O-2291</code> <span class="ver-chip">v2</span> <span class="appr draft">Draft</span>
             &nbsp;·&nbsp; <span class="ver-chip superseded">v1</span> signed May 22 2026 by Dr. Drannikov — 2 of 6 infusions given under it
@@ -725,20 +777,26 @@
           </div>
         </div>
         <div class="prov">
-          <span><strong>Reads</strong> the allergy list, the problem list, result <code>L-8841</code> and readiness <span class="ver-chip">v3</span> · <strong>feeds</strong> scheduling, the bay board and the flowsheet by order number and version</span>
+          <span><strong>Reads</strong> the allergy list, the problem list, result <code>L-8841</code> and readiness <span class="ver-chip">v3</span> at the moment you open it</span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> orders are written in HCOS and nowhere else · eCW receives a read-only sync for orders · <a href="security.html#/g-01-audit">every version is in the audit store</a></span>
+        </div>
+        <div class="prov">
+          <span><strong>Downstream reads</strong> <code>O-2291</code> at its signed version — today that is <span class="ver-chip superseded">v1</span>. Scheduling, the chair and the flowsheet move to v2 only when v2 is signed; runs already given stay on the version they were given under.</span>
         </div>
 
         <div class="seg-divider" style="margin-top:0">Protocol template — pick one, the dose math follows</div>
         <div class="grid-3">
-          <div class="b-proto selected" onclick="bPickProtocol(this,'Myers cocktail')">
+          <div class="card b-proto selected" onclick="bPickProtocol(this,'myers')">
             <div class="b-proto-name">Myers' cocktail</div>
             <div class="b-proto-dose">5 g vitamin C + B-complex + B12 + calcium + magnesium in 100 mL saline · 117 mL total · 30 min at 234 mL/hr · ~1 h chair</div>
           </div>
-          <div class="b-proto" onclick="bPickProtocol(this,'NAD+ 500 mg')">
+          <div class="card b-proto" onclick="bPickProtocol(this,'nad')">
             <div class="b-proto-name">NAD+ 500 mg</div>
             <div class="b-proto-dose">500 mg NAD+ in 500 mL saline · start 100 mL/hr, titrate to 180 · ~3 h to limit flushing</div>
           </div>
-          <div class="b-proto" onclick="bPickProtocol(this,'IV vitamin C 25 g')">
+          <div class="card b-proto" onclick="bPickProtocol(this,'ivc')">
             <div class="b-proto-name">IV vitamin C 25 g</div>
             <div class="b-proto-dose">25 g ascorbic acid (500 mg/mL × 50 mL) in 250 mL saline · 50 billing units · ~2.5 h · a G6PD result is required before it can be signed</div>
           </div>
@@ -749,13 +807,13 @@
 
         <div class="grid-sidebar" style="margin-top:16px">
           <div>
-            <div class="seg-divider" style="margin-top:0">Components · Myers' cocktail</div>
+            <div class="seg-divider" style="margin-top:0">Components · <span id="b-comp-title">Myers' cocktail</span></div>
             <div class="tbl-wrap">
               <table class="tbl">
                 <thead>
                   <tr><th>Component</th><th>Concentration</th><th>Volume</th><th>Route</th></tr>
                 </thead>
-                <tbody>
+                <tbody id="b-comp-body">
                   <tr><td>B-complex 100</td><td>Standard</td><td>1 mL</td><td>IV push or admix</td></tr>
                   <tr><td>Vitamin B12 (methylcobalamin)</td><td>1,000 mcg/mL</td><td>1 mL</td><td>IV admix</td></tr>
                   <tr><td>Calcium gluconate</td><td>100 mg/mL</td><td>1 mL</td><td>IV admix</td></tr>
@@ -768,11 +826,11 @@
 
             <div class="seg-divider">Administration</div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Total volume</label><input class="field-input" value="117 mL" disabled></div>
-              <div class="field"><label class="field-label">Infusion duration</label><input class="field-input" value="30 minutes"></div>
+              <div class="field"><label class="field-label">Total volume</label><input class="field-input" id="b-vol" value="117 mL" disabled></div>
+              <div class="field"><label class="field-label">Infusion duration</label><input class="field-input" id="b-dur" value="30 minutes"></div>
             </div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Rate</label><input class="field-input" value="234 mL/hr" disabled></div>
+              <div class="field"><label class="field-label">Rate</label><input class="field-input" id="b-rate" value="234 mL/hr" disabled></div>
               <div class="field">
                 <label class="field-label">IV access</label>
                 <select class="field-select">
@@ -784,7 +842,7 @@
             </div>
             <div class="field">
               <label class="field-label">Pre-medication and special instructions</label>
-              <textarea class="field-textarea" rows="3">First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.</textarea>
+              <textarea class="field-textarea" id="b-premeds" rows="3">First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.</textarea>
             </div>
 
             <div class="seg-divider">Frequency, prerequisites and stop rules</div>
@@ -800,7 +858,7 @@
               </div>
             </div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Before the first infusion of this version</label><input class="field-input" value="CMP within 90 days · allergy list reviewed today"></div>
+              <div class="field"><label class="field-label">Before the first infusion of this version</label><input class="field-input" id="b-preflight" value="CMP within 90 days · allergy list reviewed today"></div>
               <div class="field"><label class="field-label">Order expires</label><input class="field-input" value="Oct 21, 2026 — or when the 6th infusion is given"></div>
             </div>
             <div class="field">
@@ -814,18 +872,20 @@
                 <span class="ai-badge">Suggested by HCOS</span>
                 <span class="ai-state suggested">Suggestion</span>
               </div>
-              <div class="ai-body">
-                Book 1 h 15 of chair time, not 1 h. Priya's last three Myers' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.
-              </div>
-              <div class="ai-meta">
-                <span><b>Read</b> 3 past administrations under <code>O-2291</code> v1</span>
-                <span><b>Model</b> duration-v1.4</span>
-                <span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>
-                <span><b>Reviewer</b> Dr. Drannikov</span>
-              </div>
-              <div class="ai-actions">
-                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Chair time set to 1 h 15 on this draft. It takes effect when you sign v2.', 'ok')">Use 1 h 15</button>
-                <button class="btn btn-sm" onclick="HCOS.toast('Kept the protocol default of 1 h. Your choice is recorded with your name.')">Keep 1 h</button>
+              <div id="b-ai-dur">
+                <div class="ai-body">
+                  Book 1 h 15 of chair time, not 1 h. Priya's last three Myers' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.
+                </div>
+                <div class="ai-meta">
+                  <span><b>Read</b> her last 3 Myers' administrations — 2 under <code>O-2291</code> v1 and the Mar 2026 trial run</span>
+                  <span><b>Model</b> duration-v1.4</span>
+                  <span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>
+                  <span><b>Reviewer</b> Dr. Drannikov</span>
+                </div>
+                <div class="ai-actions">
+                  <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Chair time set to 1 h 15 on this draft. It takes effect when you sign v2.', 'ok')">Use 1 h 15</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Kept the protocol default of 1 h. Your choice is recorded with your name.')">Keep 1 h</button>
+                </div>
               </div>
               <div class="field-help" style="margin-top:8px">A prediction only — it cannot place, change or sign an order.</div>
             </div>
@@ -859,11 +919,12 @@
             <div class="card" style="margin-top:14px">
               <div class="card-title">What this order drives</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Booking the six visits</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Bay board and chair time</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Flowsheet, documented against v2</span><span class="check-meta"><a href="clinical-infusion.html#/b-15-flowsheet">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Her plan of care</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Booking the six visits · cadence and expiry read from v1</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Chair time in the infusion suite</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness · a reported flare holds the next session</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending">·</span><span class="check-label">Sign and lock dispatches v2 — nothing moves before that</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
               </ul>
+              <div class="prov"><span><strong>None of them</strong> restates the protocol — each carries the order number and the version it was booked or documented on</span></div>
             </div>
             <div class="card" style="margin-top:14px">
               <div class="card-title">Cost and coverage</div>
@@ -877,8 +938,9 @@
             </div>
             <div class="card" style="margin-top:14px">
               <div class="card-title">Patient-facing summary</div>
-              <p style="font-size:12px;color:var(--muted);line-height:1.6;margin:0">"You'll receive 6 infusions of vitamins and minerals over 6 weeks. Each takes about 30 minutes. We monitor your vitals before, during, and after."</p>
+              <p id="b-patient-summary" style="font-size:12px;color:var(--muted);line-height:1.6;margin:0">"You'll receive 6 infusions of vitamins and minerals over 6 weeks, one a week. The drip itself runs about 30 minutes; plan on about an hour and a quarter in the chair, because we place the line, monitor your vitals throughout, and watch you for a few minutes afterwards."</p>
               <button class="btn btn-sm" style="width:100%;margin-top:10px" onclick="HCOS.toast('Summary sent — it is on the patient portal and in the next reminder.', 'ok')">Send to patient portal</button>
+              <div class="prov"><span><strong>Reads</strong> the chair time and cadence on this draft — the patient copy is generated from them, never typed twice</span></div>
             </div>
           </div>
         </div>
@@ -916,9 +978,22 @@
         <h2 class="page-title">Amendment / addendum</h2>
         <p class="page-sub">A signed encounter cannot be edited. To add or correct information, add a dated addendum that becomes part of the legal record.</p>
 
-        <div class="b-status-bar">
-          <div><span class="pill pill-navy">Locked</span> Original note ENC-2026-0418 · signed May 22, 2026 · 11:48 AM · every view and change is logged</div>
+        <div class="card b-status-bar">
+          <div><span class="pill pill-navy">Locked</span> Original note <code>ENC-2026-0418</code> <span class="appr approved">Signed</span> May 22, 2026 · 11:48 AM · every view and change is logged</div>
           <a class="btn btn-sm" href="security.html#/g-01-audit">Open the audit trail</a>
+        </div>
+
+        <div class="status-flow">
+          <span class="status-step past">Draft</span><span class="status-arrow">→</span>
+          <span class="status-step past">Reviewed</span><span class="status-arrow">→</span>
+          <span class="status-step past">Signed and locked</span><span class="status-arrow">→</span>
+          <span class="status-step current">Addendum <span class="appr draft">Draft</span></span>
+        </div>
+        <div class="prov">
+          <span><strong>One encounter</strong> <code>ENC-2026-0418</code> — the states are appended, never overwritten · this addendum is state 4 and does not touch the signed text · <a href="clinical-governance.html#/b-27-system-states">documentation states</a></span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> HCOS holds encounter states since Jul 1 2026 · eCW receives a read-only summary until full cutover</span>
         </div>
 
         <div class="callout callout-warn">
@@ -944,6 +1019,22 @@
         <div class="field">
           <label class="field-label">Addendum text</label>
           <textarea class="field-textarea" rows="6">EBV reactivation panel result received 2026-05-29 (7 days post-encounter): EBV early antigen IgG elevated at 1:160 with VCA-IgG positive — pattern consistent with EBV reactivation. This supports the working hypothesis discussed at the encounter. Plan amended to add: low-dose naltrexone 1.5 mg nightly × 30 days with reassessment, and L-lysine 1 g twice daily. Will call the patient today and document the call separately.</textarea>
+          <div class="prov">
+            <span><strong>Reads</strong> result <code>L-8903</code> · EBV reactivation panel, resulted May 29 2026 · <a href="labs.html#/c-01-orders">open orders and results</a> — the result stays exactly as it arrived</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Medications named in this addendum</div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon pending">·</span><span class="check-label">Low-dose naltrexone 1.5 mg nightly × 30 days</span><span class="check-meta"><span class="appr draft">No order yet</span></span></li>
+            <li class="check-item"><span class="check-icon pending">·</span><span class="check-label">L-lysine 1 g twice daily</span><span class="check-meta"><span class="appr draft">No order yet</span></span></li>
+          </ul>
+          <div class="prov"><span><strong>Writing them here changes nothing</strong> — only a signed order puts a medication on the <a href="#b-06-med-rec" data-activate="b-06-med-rec">medication list</a> or changes a dose</span></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Two orders drafted under your name — naltrexone as a prescription, L-lysine as a supplement. They reach the medication list when you sign them.', 'ok')">Draft both orders</button>
+            <button class="btn btn-sm" data-activate="b-06-med-rec">Open the medication list</button>
+          </div>
         </div>
 
         <div class="field">
@@ -973,7 +1064,7 @@
     <div class="modal-head">
       <div>
         <div class="modal-title">Sign order O-2291 v2</div>
-        <div class="modal-sub">Priya Natarajan · Myers' cocktail × 6 · Dr. Drannikov</div>
+        <div class="modal-sub">Priya Natarajan · <span id="b-sign-proto">Myers' cocktail</span> × 6 · Dr. Drannikov</div>
       </div>
       <button class="modal-close" data-close-modal>×</button>
     </div>
@@ -1020,12 +1111,103 @@
     chip.classList.add('active');
   });
 
-  // Demo only: pick an IV protocol template — highlights the card and confirms the switch.
-  function bPickProtocol(card, name) {
+  // The IV protocol templates. Picking one rewrites the components and the dose math
+  // on this draft — the template supplies the starting numbers, the signed order keeps them.
+  var B_PROTOCOLS = {
+    myers: {
+      name: "Myers' cocktail",
+      rows: [
+        ['B-complex 100', 'Standard', '1 mL', 'IV push or admix'],
+        ['Vitamin B12 (methylcobalamin)', '1,000 mcg/mL', '1 mL', 'IV admix'],
+        ['Calcium gluconate', '100 mg/mL', '1 mL', 'IV admix'],
+        ['Magnesium sulfate', '500 mg/mL', '4 mL', 'IV admix'],
+        ['Ascorbic acid (vitamin C)', '500 mg/mL', '10 mL (5 g)', 'IV admix'],
+        ['0.9% sodium chloride (diluent)', '—', '100 mL', 'IV bag']
+      ],
+      vol: '117 mL', dur: '30 minutes', rate: '234 mL/hr',
+      premeds: 'First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.',
+      preflight: 'CMP within 90 days · allergy list reviewed today',
+      summary: '"You\'ll receive 6 infusions of vitamins and minerals over 6 weeks, one a week. The drip itself runs about 30 minutes; plan on about an hour and a quarter in the chair, because we place the line, monitor your vitals throughout, and watch you for a few minutes afterwards."',
+      ai: '<div class="ai-body">Book 1 h 15 of chair time, not 1 h. Priya\'s last three Myers\' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.</div>'
+        + '<div class="ai-meta">'
+        + '<span><b>Read</b> her last 3 Myers\' administrations — 2 under <code>O-2291</code> v1 and the Mar 2026 trial run</span>'
+        + '<span><b>Model</b> duration-v1.4</span>'
+        + '<span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>'
+        + '<span><b>Reviewer</b> Dr. Drannikov</span></div>'
+        + '<div class="ai-actions">'
+        + '<button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Chair time set to 1 h 15 on this draft. It takes effect when you sign v2.\', \'ok\')">Use 1 h 15</button>'
+        + '<button class="btn btn-sm" onclick="HCOS.toast(\'Kept the protocol default of 1 h. Your choice is recorded with your name.\')">Keep 1 h</button></div>'
+    },
+    nad: {
+      name: 'NAD+ 500 mg',
+      rows: [
+        ['NAD+ (nicotinamide adenine dinucleotide)', '100 mg/mL', '5 mL (500 mg)', 'IV admix'],
+        ['0.9% sodium chloride (diluent)', '—', '500 mL', 'IV bag']
+      ],
+      vol: '505 mL', dur: '3 hours', rate: '100 mL/hr, titrate to 180',
+      premeds: 'Start at 100 mL/hr and titrate to 180 as tolerated. Chest tightness, cramping or flushing are rate-related — slow the rate, do not stop the line, and write the change on the flowsheet. Offer water and a light snack before start.',
+      preflight: 'CMP within 90 days · allergy list reviewed today',
+      summary: '"You\'ll receive 6 NAD+ infusions over 6 weeks, one a week. The drip runs about 3 hours and we start it slowly, because going faster can feel like tightness or flushing. Plan on most of a morning, and eat something beforehand."',
+      ai: '<div class="ai-body">Chair time falls back to the protocol default of 3 h. Priya has no past NAD+ runs, so there is no per-patient average to offer yet.</div>'
+        + '<div class="ai-meta">'
+        + '<span><b>Read</b> her past administrations — 0 NAD+ runs on file</span>'
+        + '<span><b>Model</b> duration-v1.4</span>'
+        + '<span><b>Confidence</b> none offered — it needs 3 past runs of a protocol before it predicts</span>'
+        + '<span><b>Reviewer</b> Dr. Drannikov</span></div>'
+        + '<div class="ai-actions">'
+        + '<button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Chair time set to the protocol default of 3 h on this draft. It takes effect when you sign v2.\', \'ok\')">Use the 3 h default</button>'
+        + '<button class="btn btn-sm" onclick="HCOS.toast(\'Set chair time by hand on the administration fields. Your value is recorded with your name.\')">Set it by hand</button></div>'
+    },
+    ivc: {
+      name: 'IV vitamin C 25 g',
+      rows: [
+        ['Ascorbic acid (vitamin C)', '500 mg/mL', '50 mL (25 g)', 'IV admix'],
+        ['0.9% sodium chloride (diluent)', '—', '250 mL', 'IV bag']
+      ],
+      vol: '300 mL', dur: '2 h 30 minutes', rate: '120 mL/hr',
+      premeds: 'Encourage food and fluids beforehand. Check a fingerstick glucose reading if she reports lightheadedness — high-dose ascorbate interferes with some glucometers. Slow the rate for nausea.',
+      preflight: 'G6PD result on file · CMP within 90 days · allergy list reviewed today',
+      summary: '"You\'ll receive 6 vitamin C infusions over 6 weeks, one a week. The drip runs about two and a half hours. We check a blood test for G6PD before the first one, and we monitor your vitals throughout."',
+      ai: '<div class="ai-body">Chair time falls back to the protocol default of 2 h 30. Priya has no past vitamin C runs, so there is no per-patient average to offer yet.</div>'
+        + '<div class="ai-meta">'
+        + '<span><b>Read</b> her past administrations — 0 vitamin C runs on file</span>'
+        + '<span><b>Model</b> duration-v1.4</span>'
+        + '<span><b>Confidence</b> none offered — it needs 3 past runs of a protocol before it predicts</span>'
+        + '<span><b>Reviewer</b> Dr. Drannikov</span></div>'
+        + '<div class="ai-actions">'
+        + '<button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Chair time set to the protocol default of 2 h 30 on this draft. It takes effect when you sign v2.\', \'ok\')">Use the 2 h 30 default</button>'
+        + '<button class="btn btn-sm" onclick="HCOS.toast(\'Set chair time by hand on the administration fields. Your value is recorded with your name.\')">Set it by hand</button></div>'
+    }
+  };
+
+  function bSetText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
+  function bSetValue(id, value) { var el = document.getElementById(id); if (el) el.value = value; }
+  function bSetHtml(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+
+  // Pick an IV protocol template — the components and the dose math follow it.
+  function bPickProtocol(card, key) {
+    var p = B_PROTOCOLS[key];
+    if (!p) return;
     var cards = document.querySelectorAll('.b-proto');
     for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
     card.classList.add('selected');
-    HCOS.toast('Loaded the ' + name + ' template — review the components and dose math, then save the order.', 'ok');
+
+    var rows = '';
+    for (var r = 0; r < p.rows.length; r++) {
+      rows += '<tr><td>' + p.rows[r][0] + '</td><td>' + p.rows[r][1] + '</td><td>' + p.rows[r][2] + '</td><td>' + p.rows[r][3] + '</td></tr>';
+    }
+    bSetHtml('b-comp-body', rows);
+    bSetText('b-comp-title', p.name);
+    bSetText('b-sign-proto', p.name);
+    bSetValue('b-vol', p.vol);
+    bSetValue('b-dur', p.dur);
+    bSetValue('b-rate', p.rate);
+    bSetValue('b-premeds', p.premeds);
+    bSetValue('b-preflight', p.preflight);
+    bSetText('b-patient-summary', p.summary);
+    bSetHtml('b-ai-dur', p.ai);
+
+    HCOS.toast('Loaded the ' + p.name + ' template on this draft — components, volume, rate and chair time follow it. Nothing changes for the patient until you sign v2.', 'ok');
   }
 </script>
 </body>

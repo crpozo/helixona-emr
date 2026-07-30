@@ -59,8 +59,7 @@
           <!-- MAIN column -->
           <div>
             <div class="card" style="padding:0;overflow:hidden">
-              <div class="card-title h-card-head">Prescriptions</div>
-              <div class="h-clin-meta" style="padding:2px 16px 10px">Two entries of the same list. Supplements are further down.</div>
+              <div class="card-title h-card-head" style="padding-bottom:10px">Prescriptions</div>
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
@@ -108,7 +107,7 @@
                 </table>
               </div>
               <div class="prov" style="margin:0 16px 14px">
-                <span><strong>Source of truth</strong> eCW writes prescriptions and fills until the medication domain activates in HCOS · HCOS reads them and appends its refill and dispense events</span>
+                <span><strong>Source of truth</strong> orders are written in HCOS and nowhere else · eCW transmits the prescription and writes the fill history until the medication domain activates · HCOS reads the fills and appends the requests made here</span>
               </div>
             </div>
 
@@ -225,12 +224,12 @@
             </div>
 
             <div class="card" style="margin-bottom:16px">
-              <div class="card-title">The same list appears in</div>
+              <div class="card-title">Read from this list</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Med reconciliation</span><span class="check-meta"><a href="clinical-chart.html#/b-06-med-rec">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Her plan — supplements</span><span class="check-meta"><a href="journey-plan.html#/j-plan-supplements">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Pre-infusion check</span><span class="check-meta"><a href="clinical-infusion.html#/b-14-preinfusion">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Sign and lock</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Reconciliation at every encounter</span><span class="check-meta"><a href="clinical-chart.html#/b-06-med-rec">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Maya's plan — supplements</span><span class="check-meta"><a href="journey-plan.html#/j-plan-supplements">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Five-rights check before every infusion</span><span class="check-meta"><a href="clinical-infusion.html#/b-14-preinfusion">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Sign and lock, on every encounter</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
               </ul>
             </div>
 
@@ -264,24 +263,29 @@
         <div class="page-title">Prescriptions and fills</div>
         <div class="page-sub">Tuesday, July 21 · requests, signatures and dispenses, each one against its list entry and order version</div>
 
+        <div class="prov" style="margin-bottom:16px">
+          <span><strong>Source of truth</strong> orders are written in HCOS and nowhere else · eCW transmits the prescription and writes the fill history until the medication domain activates · HCOS reads the fills and appends the requests below</span>
+          <span><strong>Signing here</strong> writes a new order version — the list entry moves with it and keeps every earlier version</span>
+        </div>
+
         <div class="grid-sidebar">
 
           <!-- MAIN column -->
           <div>
-            <div class="seg-divider" style="margin-top:0">Renewal requests (2)</div>
+            <div class="seg-divider" style="margin-top:0">Waiting for a signature (2)</div>
 
             <div class="card">
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
                 <div class="h-clin-name">Maya Reyes — low-dose naltrexone 4.5 mg</div>
                 <span class="appr pending">Waiting for signature</span>
               </div>
-              <div class="h-clin-meta">Requested by Maya in her journey view Sunday · prepared by Wesley Monday 5:02 PM · 0 refills left · last visit Jun 30</div>
+              <div class="h-clin-meta">Requested by Maya in her journey view Monday 4:10 PM · prepared by Wesley at 5:02 PM · 0 refills left · last visit Jun 30</div>
               <div class="prov">
                 <span><strong>Renews</strong> order <span class="h-code">O-3187</span> <span class="ver-chip">v1</span> · prescriber Brooke · entry <span class="h-code">M-2210</span></span>
                 <span>Signing writes <span class="ver-chip">v2</span> — v1 stays in the history</span>
               </div>
               <div class="h-row-actions">
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Renewal signed by Dr. Drannikov as order O-3187 v2 — sent to Empower Pharmacy. The list entry keeps v1 in its history.', 'ok')">Sign the renewal</button>
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Renewal signed by Dr. Drannikov as order O-3187 v2. It transmits to Empower Pharmacy through eCW until the medication domain activates. The list entry keeps v1 in its history.', 'ok')">Sign the renewal</button>
                 <button class="btn btn-sm" onclick="HCOS.toast('Sent to Brooke, the prescriber on record. It stays pending until she signs it.')">Send to Brooke to sign</button>
                 <a class="btn btn-ghost btn-sm" href="#h-01-meds" data-activate="h-01-meds">Open the list entry</a>
               </div>
@@ -289,17 +293,17 @@
 
             <div class="card" style="margin-top:12px">
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                <div class="h-clin-name">Grace Lindqvist — levothyroxine 50 mcg</div>
-                <span class="appr draft">Held — visit required</span>
+                <div class="h-clin-name">Grace Lindqvist — levothyroxine 75 mcg</div>
+                <span class="appr draft">Draft</span>
               </div>
-              <div class="h-clin-meta">Requested Monday · TSH 6.8 on the Jul 21 panel · Dr. Drannikov wants a visit before renewing</div>
+              <div class="h-clin-meta">Continue at the same dose · 90-day supply · 3 refills · recheck TSH in 8 weeks · written in her follow-up today, still in the note</div>
               <div class="prov">
-                <span><strong>Renews</strong> order <span class="h-code">O-2905</span> <span class="ver-chip">v3</span> · prescriber Dr. Drannikov · entry <span class="h-code">M-1188</span></span>
-                <span><strong>Held on</strong> result <span class="h-code">R-7741</span> · <a href="labs.html#/c-01-orders">open the result</a></span>
+                <span><strong>From</strong> order <span class="h-code">O-4477</span> <span class="ver-chip">v1</span> · prescriber Dr. Drannikov · encounter <span class="h-code">ENC-2026-07211</span></span>
+                <span>Nothing transmits until the encounter is signed and locked · her TSH came back 6.8 on today's thyroid panel and is flagged to Dr. Drannikov for the same visit</span>
               </div>
               <div class="h-row-actions">
-                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Booking request sent to Grace — a follow-up before renewal, with the reason explained.', 'ok')">Ask Grace to book</button>
-                <a class="btn btn-sm" href="schedule.html#/l-03-book">Book the visit now</a>
+                <a class="btn btn-primary btn-sm" href="clinical.html#/b-11-sign-lock">Open sign and lock</a>
+                <a class="btn btn-sm" href="labs.html#/c-01-orders">Open the thyroid panel</a>
                 <a class="btn btn-ghost btn-sm" href="clinical.html#/b-09-orders">Open the order</a>
               </div>
             </div>
@@ -383,7 +387,7 @@
                   <span class="check-meta">Pending</span>
                 </li>
               </ul>
-              <div class="callout callout-ok" style="margin-top:12px">Non-controlled prescriptions and supplements can be sent now.</div>
+              <div class="callout callout-ok" style="margin-top:12px">Non-controlled prescriptions transmit through eCW today. Supplements route to Fullscript.</div>
             </div>
 
             <div class="card" style="margin-top:16px">

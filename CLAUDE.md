@@ -211,36 +211,88 @@ New module screens may use simplified placeholder blocks for depth we don't have
 > is a *view* of the same record. It is a defect when a screen stores a competing copy, applies
 > different clinical or business rules, or lets an unauthorized role change an approved decision.
 
-### Canonical records — each exists once
-| Record | Governing rule |
-|---|---|
-| **Person / Patient Master** | One person. Lifecycle changes; identity never forks. |
-| **Lifecycle** | Inquiry → Lead → Scheduled → Onboarding → Patient → Inactive/Closed. Append status events; current status is derived. |
-| **Coverage** | One active coverage set. Eligibility is separate snapshot history. |
-| **Eligibility Snapshot** | Never overwrite a prior response; the latest valid snapshot is selected. |
-| **Appointment & Resources** | Transactional booking through one scheduling service; one appointment ID. |
-| **Encounter** | Draft → reviewed → signed/locked → addendum. |
-| **Problem List** | Longitudinal. A patient report is not automatically a confirmed diagnosis. |
-| **Allergy / Intolerance** | One list. Every safety check reads it. |
-| **Medication / Supplement** | One list preserving patient-reported vs reconciled vs prescribed. |
-| **Order** | Versioned. Downstream references order ID + version. |
-| **Result** | Original immutable; corrections are linked. |
-| **Readiness Assessment** | One current effective assessment plus history, with ruleset version and reviewer. |
-| **Plan of Care** | Versioned effective plan; physician/extender approval required. |
+### Canonical records — each exists once, with many controlled views
+
+| Canonical record | Core content | Authoritative input | Key governance rule |
+|---|---|---|---|
+| **Person / Patient Master** | Stable person ID, identifiers, demographics, contacts, preferred name, communication preferences | Inquiry form; eCW import; authorized correction | One person; lifecycle changes, identity does not fork. |
+| **Lifecycle** | Inquiry, Lead, Scheduled, Onboarding, Patient, Inactive/Closed; timestamps and reason | Workflow events | Append status events; current status is derived. |
+| **Coverage** | Payer, plan, member/group IDs, effective dates, card/document links | Card OCR + staff verification | One active coverage set; eligibility is separate snapshot history. |
+| **Eligibility Snapshot** | Response date, status, network, deductible/OOP/coinsurance, source response | Payer verification | Never overwrite prior response; latest valid snapshot is selected. |
+| **Appointment & Resources** | Appointment, service, provider/chair/room, duration, status, series, constraints | Central scheduling service | Transactional booking; one appointment ID. |
+| **Encounter** | Visit/administration context, participants, note state | Clinical documentation | Draft → reviewed → signed/locked → addendum. |
+| **Problem List** | Condition/problem, status, onset/resolution, verification, source | Provider reconciliation | Patient report is not automatically a confirmed diagnosis. |
+| **Allergy / Intolerance** | Substance, reaction, severity, category, status, source, verifier | Patient report + clinical verification | One list; every safety check reads it. |
+| **Medication / Supplement** | Item, dose, route, frequency, status, source, start/stop, reconciliation | Patient, pharmacy, prescription, provider | Preserve patient-reported vs reconciled vs prescribed states. |
+| **Order** | Type, item, dose/rate, cadence, prerequisites, expiration, stop/hold rules, signer | Physician/extender | Versioned; downstream references order ID/version. |
+| **Result** | Test/measurement, value, unit, reference/critical flags, source, reviewed status | Lab/interface/manual verified import | Original result immutable; corrections are linked. |
+| **Readiness Assessment** | Inputs, ruleset/version, result, rationale, reviewer, override | HCOS rules + clinician review | One current effective assessment plus history. |
+| **Plan of Care** | Goal, pathway, access level, stage, lead actor, pacing, plan items, stop/transition rules | Signed clinical decision | Versioned effective plan; physician/extender approval required. |
+| **Weekly Plan Item** | Activity/treatment/medication/supplement, frequency, timing, owner, completion rule | Approved plan version | Staff suggestion remains pending until approved where clinically meaningful. |
+| **Questionnaire / Response** | Definition/version, question IDs, scoring; response/source/time | Form builder + patient/staff | Definition and response are immutable versions; mappings are explicit. |
+| **Document / Consent** | Type, file, extraction, signer, version, effective/expiration dates | Upload/signature/OCR | OCR is proposed data; original file and consent evidence retained. |
+| **Communication / Task** | Message, template/version, channel, delivery, work item, owner, due/escalation | Workflow event or user | Separate message from task; both link to source event. |
+| **Treatment Administration** | Order reference, actual dose/rate/volume, vitals, staff, times, variance/adverse event | Nurse/medic documentation | Actuals never overwrite signed order. |
+| **Claim / RCM Work Item** | Encounter/order/coverage references, codes, submission, remittance, appeal | Billing workflow | Claims reference clinical records; billing edits cannot change signed note. |
+| **Caregiver Grant** | Patient, caregiver identity, scope, start/end, revocation, consent | Patient approval | Scope-based, time-limited when selected, immediately revocable. |
+| **Enterprise Audit Event** | Actor, role, action, record, time, source, before/after metadata, AI/system identity | Every component | Append-only; no administrator edits or deletes. |
+| **AI Provenance** | Use case, source records, model/ruleset version, prompt/context, output, confidence, reviewer/disposition | Every AI-enabled workflow | AI output never silently replaces human-approved record. |
+
+### The 18 duplicate/flow clusters — solve once, consume everywhere
+
+These are the architectural clusters the review says must be solved once and then consumed across the wireframe. Screen-level findings are symptoms of these.
+
+| # | Cluster | Required architecture | Priority |
+|---|---|---|---|
+| 1 | **Person identity and lifecycle** | One person record with lifecycle statuses: Inquiry → Lead → Scheduled/Onboarding → Patient → Inactive/Closed. No separate lead and patient identities. | Critical |
+| 2 | **Scheduling** | One appointment/resource engine with staff, intake and patient views. Same capacity, duration, cadence, order, clearance and override rules everywhere. | Critical |
+| 3 | **Coverage and benefits** | One coverage record plus immutable eligibility/benefit snapshots. Price/membership rules link to coverage but remain separate configuration. | High |
+| 4 | **Allergies and sensitivities** | One longitudinal allergy/intolerance record. Intake submits; provider/extender verifies; other screens display or record verification. | Critical |
+| 5 | **Medications and supplements** | One longitudinal list with patient-reported, reconciled, prescribed, active, held and discontinued states. Plan/check-in references the same items. | Critical |
+| 6 | **Conditions, symptoms and problems** | Patient-reported history remains attributable; provider verification creates/changes the longitudinal problem list; encounter assessment remains encounter-specific. | High |
+| 7 | **Signed plan, HCOS stage and weekly plan** | One versioned Plan of Care Builder. Physician/extender changes stage or weekly plan; staff submit suggestions. Patient views are projections of the approved version. | Critical |
+| 8 | **Readiness** | One versioned readiness assessment with inputs, ruleset, rationale, reviewer and override. All other screens consume it. | Critical |
+| 9 | **Orders and administration** | One signed order/version drives eligibility, booking, administration and billing. Flowsheet records actuals; it does not restate the order. | Critical |
+| 10 | **Clinical documentation and AI drafts** | Pre-chart and ambient documentation remain drafts with source links. Only the provider-approved note becomes legal record. | Critical |
+| 11 | **Questionnaires** | One survey engine with reusable questions, versioned definitions, scoring and destination mapping. Responses are stored once. | High |
+| 12 | **Audit trails** | One append-only enterprise audit event store with filtered domain views. Include reads, edits, AI/system actions and integration events. | High |
+| 13 | **Workflow/system states** | One workflow-state framework with domain-specific state machines and governed transitions; avoid duplicate state infrastructure. | High |
+| 14 | **Templates and content** | Use a shared versioning/publishing framework, while retaining distinct content types and owners. | Medium |
+| 15 | **Documents and consents** | One document/consent repository with document type, version, signer, effective date, expiration and source file. | High |
+| 16 | **Tasks, alerts and flags** | One task/alert framework with owner, due date, priority, source event, status and escalation; modules provide filtered queues. | High |
+| 17 | **Reports and dashboards** | Reports are read-only projections calculated from canonical data with metric definitions, refresh time and drill-through. | Medium |
+| 18 | **Clinical pathways vs access levels** | Keep pathway taxonomy separate from access level. Pathways: Complex Chronic Care, Health Optimization, Recovery, Vitality. Access: Comprehensive, Collaborative, Self-Directed/Open Access. | High |
 
 ### Two separate axes — never mix them (H7)
 - **Care pathway** (clinical): Complex Chronic Care · Health Optimization · Recovery · Vitality
 - **Access level** (business): Comprehensive · Collaborative · Self-Directed / Open Access
 
-### Who may do what (Roles & Approvals)
-A/E approve or edit · E edit/execute · S suggest/prepare · O owns their own data.
-- Create inquiry/person: Front Desk and PCC create; the system only *proposes* duplicates.
-- Promote lifecycle: Front Desk / PCC — the record stays the same record.
-- Reconcile problems, allergies, medications: MA/Nurse/PCC **suggest**; physician or extender approves.
-- Place, change or discontinue an order: physician or extender only.
-- Sign and lock an encounter: physician or extender. **AI cannot sign.**
-- Change HCOS stage or the approved weekly plan: physician or extender; everyone else suggests, and the suggestion stays Pending Approval with a rationale.
-- Approve or override readiness: system calculates, clinician approves or overrides **with a reason**.
+### Who may do what — Roles, suggestions and approval rights
+
+`A/E` approve or edit · `E` edit/execute · `S` suggest/prepare · `V` view · `O` owns their own data · `—` not permitted.
+
+| Action | Physician | Extender | MA | Nurse / Medic | Care Guide / PCC | Front Desk | Patient | AI / System | Governance note |
+|---|---|---|---|---|---|---|---|---|---|
+| **Create inquiry/person** | V | V | V | — | E | E | O | — | Front desk/PCC can create; system proposes duplicates. |
+| **Promote lifecycle Inquiry → Lead → Patient** | V | V | — | — | E | E | — | — | Identity remains the same record. |
+| **Edit administrative demographics** | V | V | E | — | E | E | O | — | Patient correction retains provenance; sensitive changes may require verification. |
+| **Submit conditions/symptoms/allergies/medications** | V | V | E | E | E | — | O | — | Submission is patient/staff-reported until reconciled. |
+| **Reconcile problem list** | A/E | A/E | S | S | S | — | — | S | AI may suggest; provider/extender approves. |
+| **Reconcile allergies** | A/E | A/E | S | S | S | — | — | S | Safety flags show immediately; clinical status approved by provider/extender. |
+| **Reconcile medications/supplements** | A/E | A/E | S | S | S | — | — | S | MA prepares; provider/extender approves. |
+| **Place/change/discontinue clinical order** | A/E | A/E | S | S | S | — | — | S | Only licensed provider/extender acts within scope. |
+| **Sign and lock encounter** | A/E | A/E | — | — | — | — | — | — | AI cannot sign. |
+| **Change HCOS stage** | A/E | A/E | S | S | S | — | — | S | Explicit user decision: physician or extender; staff suggest. |
+| **Change approved weekly plan** | A/E | A/E | S | S | S | — | — | S | Versioned approval required. |
+| **Complete assigned plan task** | V | V | E | E | E | — | O | — | Completion does not change plan definition. |
+| **Approve/override readiness** | A/E | A/E | S | S | S | — | — | S | System calculates; clinician approves/overrides with reason. |
+| **Book within approved constraints** | V | V | E | E | E | E | O | — | Patient sees eligible options; hard safety constraints enforced. |
+| **Override designated scheduling warning** | A/E | A/E | — | S | — | — | — | — | Only configured warning types; never hard safety blocks. |
+| **Document infusion administration** | V | V | S | A/E | V | — | — | — | Nurse/medic documents actuals; material variance escalates. |
+| **Document adverse event** | A/E | A/E | S | A/E | S | — | O | S | Immediate clinical escalation and linked event. |
+| **Publish questionnaire/template** | A/E | A/E | S | S | S | — | — | S | Clinical owner approves clinical content and scoring. |
+| **Grant/revoke caregiver access** | V | V | V | — | V | — | O | V | Patient consent controls scope; staff assists only under policy. |
+| **Edit or delete audit event** | — | — | — | — | — | — | — | — | No role may edit/delete append-only audit events. |
 
 ### Scheduling is one engine (C3)
 **Hard blocks** (never an ordinary warning): occupied chair or provider · missing signed order or clearance · contraindication · unsafe interval · unavailable supervision. **Eligible warnings** may be overridden only by a designated authority, **with a reason, logged**.

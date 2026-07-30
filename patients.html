@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/hcos.css?v=8">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
-  .pt-pname { font-weight: 600; color: var(--hx-navy); }
+  .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
   .pt-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
   .pt-header-info { flex: 1; min-width: 220px; }
   .pt-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
@@ -36,7 +36,8 @@
         <h2 class="page-title">Patients</h2>
         <p class="page-sub">Tuesday, July 21 · coverage and readiness at a glance</p>
         <div class="prov" style="margin-bottom:12px">
-          <span>Everyone here is a person at the <strong>Patient</strong> stage. Identity, lifecycle and duplicates live in the <a href="people.html#/pe-01-search">person master</a>.</span>
+          <span>Everyone here is at the <strong>Patient</strong> stage — derived from the events on the person record, never typed in. Identity, lifecycle and duplicates live in the <a href="people.html#/pe-01-search">person master</a>.</span>
+          <span>Someone still at Onboarding, like Tom Alvarez, appears once they are <a href="#pt-03-create" data-activate="pt-03-create">promoted to patient</a>.</span>
         </div>
 
         <div class="grid-4" style="margin-bottom:14px">
@@ -60,12 +61,10 @@
 
         <div class="filters">
           <input class="search-input" type="search" id="pf-q" oninput="pfApply()" placeholder="Search by name, phone, or DOB">
-          <select class="field-select pf-sel" id="pf-status" onchange="pfApply()">
-            <option value="Active">Active</option>
-            <option value="all">Any status</option>
-            <option value="Not admitted">Not admitted</option>
-            <option value="On hold">On hold</option>
-            <option value="Discharged">Discharged</option>
+          <select class="field-select pf-sel" id="pf-life" onchange="pfApply()">
+            <option value="Patient">Patient</option>
+            <option value="Inactive">Inactive / closed</option>
+            <option value="all">Any lifecycle stage</option>
           </select>
           <select class="field-select pf-sel" id="pf-path" onchange="pfApply()">
             <option value="all">Any care pathway</option>
@@ -78,7 +77,7 @@
             <option value="all">Any access level</option>
             <option>Comprehensive</option>
             <option>Collaborative</option>
-            <option>Self-directed</option>
+            <option value="Self-directed">Self-directed / open access</option>
           </select>
           <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()">
             <option value="all">Any membership</option>
@@ -102,7 +101,7 @@
           <span class="pf-count" id="pf-count"></span>
         </div>
 
-        <div class="tbl-wrap">
+        <div class="tbl-wrap" id="pf-table">
           <table class="tbl">
             <thead>
               <tr>
@@ -117,108 +116,120 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="row-click" data-path="Complex Chronic Care" data-access="Comprehensive" data-memb="Restore" data-net="oon" data-attn="oop" data-name="Maya Reyes" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">MR</span><span class="pt-pname">Maya Reyes</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Complex Chronic Care" data-access="Comprehensive" data-memb="Restore" data-net="oon" data-attn="oop" data-name="Maya Reyes" data-phone="(949) 555-0132" data-dob="Mar 14, 1974 03/14/1974" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">MR</span>
+                  <div><div class="pt-pname">Maya Reyes</div><div class="field-help">DOB Mar 14, 1974</div></div></div></td>
                 <td>Complex Chronic Care</td>
                 <td><span class="pill pill-navy">Comprehensive</span><div class="field-help">Restore</div></td>
                 <td>UnitedHealthcare PPO <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-navy">ERISA</span></td>
                 <td>Today · 1:00 PM · NAD+ infusion</td>
-                <td><span class="pill pill-ok">Standard</span></td>
+                <td><span class="pill pill-ok">Standard</span>
+                  <div class="clin-src" style="margin-top:4px"><a href="readiness.html#/i-01-readiness"><code>RA-1152</code></a> <span class="ver-chip">v5</span> · approved by Dr. Drannikov Jul 6</div></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Health Optimization" data-access="Collaborative" data-memb="Wellness" data-net="inn" data-attn="" data-name="Daniel Okafor" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">DO</span><span class="pt-pname">Daniel Okafor</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Health Optimization" data-access="Collaborative" data-memb="Wellness" data-net="inn" data-attn="" data-name="Daniel Okafor" data-phone="(949) 555-0147" data-dob="Sep 2, 1978 09/02/1978" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">DO</span>
+                  <div><div class="pt-pname">Daniel Okafor</div><div class="field-help">DOB Sep 2, 1978</div></div></div></td>
                 <td>Health Optimization</td>
                 <td><span class="pill">Collaborative</span><div class="field-help">Wellness</div></td>
                 <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Thu Jul 23 · 9:30 AM · IV vitamin C 25 g</td>
-                <td><span class="pill pill-ok">Standard</span></td>
+                <td><span class="pill pill-muted">Not on a program</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Recovery" data-access="Comprehensive" data-memb="Restore" data-net="oon" data-attn="" data-name="Priya Natarajan" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">PN</span><span class="pt-pname">Priya Natarajan</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Recovery" data-access="Comprehensive" data-memb="Restore" data-net="oon" data-attn="readiness" data-name="Priya Natarajan" data-phone="(949) 555-0158" data-dob="Jan 30, 1988 01/30/1988" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">PN</span>
+                  <div><div class="pt-pname">Priya Natarajan</div><div class="field-help">DOB Jan 30, 1988</div></div></div></td>
                 <td>Recovery</td>
                 <td><span class="pill pill-navy">Comprehensive</span><div class="field-help">Restore</div></td>
                 <td>Blue Shield of CA PPO <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Mon Jul 27 · 11:00 AM · Myers' cocktail</td>
-                <td><span class="pill pill-navy">Gentle</span></td>
+                <td><span class="pill pill-warn">Flare recovery</span>
+                  <div class="clin-src" style="margin-top:4px"><a href="readiness.html#/i-01-readiness"><code>RA-1206</code></a> <span class="ver-chip">v3</span> · pending with Dr. Drannikov since Jul 19</div></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Vitality" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Tom Alvarez" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">Tom Alvarez</span></div></td>
-                <td>Vitality</td>
-                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
-                <td>Cigna PPO <span class="net-badge net-oon">OON</span></td>
-                <td><span style="color:var(--muted)">—</span></td>
-                <td>Wed Jul 22 · 2:00 PM · Glutathione push</td>
-                <td><span style="color:var(--muted)">—</span></td>
-                <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
-              </tr>
-              <tr class="row-click" data-path="Vitality" data-access="Collaborative" data-memb="Wellness" data-net="self" data-attn="" data-name="Grace Lindqvist" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">GL</span><span class="pt-pname">Grace Lindqvist</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Vitality" data-access="Collaborative" data-memb="Wellness" data-net="self" data-attn="" data-name="Grace Lindqvist" data-phone="(949) 555-0164" data-dob="Nov 8, 1981 11/08/1981" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">GL</span>
+                  <div><div class="pt-pname">Grace Lindqvist</div><div class="field-help">DOB Nov 8, 1981</div></div></div></td>
                 <td>Vitality</td>
                 <td><span class="pill">Collaborative</span><div class="field-help">Wellness</div></td>
                 <td>Self-pay <span class="net-badge net-self">SELF</span></td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td>Fri Jul 24 · 10:00 AM · Follow-up</td>
-                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-ok">Standard</span>
+                  <div class="clin-src" style="margin-top:4px"><a href="readiness.html#/i-01-readiness"><code>RA-1174</code></a> <span class="ver-chip">v2</span> · approved by Dr. Drannikov Jul 15</div></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Health Optimization" data-access="Self-directed" data-memb="Pay as you go" data-net="inn" data-attn="" data-name="Marcus Webb" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">MW</span><span class="pt-pname">Marcus Webb</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Health Optimization" data-access="Self-directed" data-memb="Pay as you go" data-net="inn" data-attn="" data-name="Marcus Webb" data-phone="(949) 555-0171" data-dob="Apr 19, 1971 04/19/1971" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">MW</span>
+                  <div><div class="pt-pname">Marcus Webb</div><div class="field-help">DOB Apr 19, 1971</div></div></div></td>
                 <td>Health Optimization</td>
-                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
+                <td><span class="pill pill-muted">Self-directed / open access</span><div class="field-help">Pay as you go</div></td>
                 <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Today · 3:30 PM · New patient consult</td>
-                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-muted">Not on a program</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Health Optimization" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd readiness" data-name="Elena Petrova" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">EP</span><span class="pt-pname">Elena Petrova</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Health Optimization" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Elena Petrova" data-phone="(949) 555-0185" data-dob="Dec 3, 1992 12/03/1992" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">EP</span>
+                  <div><div class="pt-pname">Elena Petrova</div><div class="field-help">DOB Dec 3, 1992</div></div></div></td>
                 <td>Health Optimization</td>
-                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
+                <td><span class="pill pill-muted">Self-directed / open access</span><div class="field-help">Pay as you go</div></td>
                 <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Today · 2:00 PM · Telehealth follow-up</td>
-                <td><span class="pill pill-warn">Pause</span></td>
+                <td><span class="pill pill-muted">Not on a program</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Vitality" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Sofia Ramos" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">SR</span><span class="pt-pname">Sofia Ramos</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Vitality" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Sofia Ramos" data-phone="(949) 555-0193" data-dob="Jun 25, 1997 06/25/1997" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">SR</span>
+                  <div><div class="pt-pname">Sofia Ramos</div><div class="field-help">DOB Jun 25, 1997</div></div></div></td>
                 <td>Vitality</td>
-                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
+                <td><span class="pill pill-muted">Self-directed / open access</span><div class="field-help">Pay as you go</div></td>
                 <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Today · 11:15 AM · Lab draw</td>
-                <td><span style="color:var(--muted)">—</span></td>
+                <td><span class="pill pill-muted">Not on a program</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Health Optimization" data-access="Comprehensive" data-memb="Longevity" data-net="oon" data-attn="" data-name="Walter Hsu" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">WH</span><span class="pt-pname">Walter Hsu</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Health Optimization" data-access="Comprehensive" data-memb="Longevity" data-net="oon" data-attn="" data-name="Walter Hsu" data-phone="(949) 555-0108" data-dob="Feb 11, 1958 02/11/1958" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">WH</span>
+                  <div><div class="pt-pname">Walter Hsu</div><div class="field-help">DOB Feb 11, 1958</div></div></div></td>
                 <td>Health Optimization</td>
                 <td><span class="pill pill-navy">Comprehensive</span><div class="field-help">Longevity</div></td>
                 <td>Cigna <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-navy">ERISA</span></td>
                 <td>Thu Jul 23 · 1:00 PM · NAD+ infusion</td>
-                <td><span class="pill pill-ok">Standard</span></td>
+                <td><span class="pill pill-navy">Gentle</span>
+                  <div class="clin-src" style="margin-top:4px"><a href="readiness.html#/i-01-readiness"><code>RA-1218</code></a> <span class="ver-chip">v1</span> · approved by Dr. Bakman Jul 17</div></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-path="Complex Chronic Care" data-access="Collaborative" data-memb="Wellness" data-net="inn" data-attn="readiness" data-name="Nadia Boulos" data-activate="pt-02-profile">
-                <td><div class="pt-prow"><span class="avatar">NB</span><span class="pt-pname">Nadia Boulos</span></div></td>
+              <tr class="row-click" data-life="Patient" data-path="Complex Chronic Care" data-access="Collaborative" data-memb="Wellness" data-net="inn" data-attn="readiness" data-name="Nadia Boulos" data-phone="(949) 555-0126" data-dob="Aug 14, 1984 08/14/1984" data-activate="pt-02-profile">
+                <td><div class="pt-prow"><span class="avatar">NB</span>
+                  <div><div class="pt-pname">Nadia Boulos</div><div class="field-help">DOB Aug 14, 1984</div></div></div></td>
                 <td>Complex Chronic Care</td>
                 <td><span class="pill">Collaborative</span><div class="field-help">Wellness</div></td>
                 <td>Anthem <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Tue Jul 28 · 9:00 AM · Follow-up</td>
-                <td><span class="pill pill-err">Physician Review</span></td>
+                <td><span class="pill pill-err">Physician review</span>
+                  <div class="clin-src" style="margin-top:4px"><a href="readiness.html#/i-01-readiness"><code>RA-1211</code></a> <span class="ver-chip">v4</span> · pending with Dr. Bakman since Jul 19</div></td>
                 <td><span class="pill pill-warn">Questionnaire pending</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="empty-state" id="pf-empty" style="display:none">
+          <div>No patients match these filters.</div>
+          <div class="field-help">Inquiry, Lead, Scheduled and Onboarding are earlier stages — those people are in the <a href="people.html#/pe-01-search">person master</a>.</div>
+          <button class="btn btn-sm" style="margin-top:12px" onclick="pfReset()">Clear the filters</button>
+        </div>
+        <div class="prov">
+          <span><strong>Readiness</strong> is read from the <a href="readiness.html#/i-01-readiness">detox readiness engine</a> · ruleset v3.2 · run today 7:00 AM · this list keeps no copy and no one changes a result here.</span>
         </div>
       </div>
     </div>
@@ -252,6 +263,8 @@
                 <span class="pill pill-navy">Self-funded / ERISA</span>
               </div>
               <div class="field-help">Governance changes the appeal rules — self-funded plans follow ERISA timelines, not state insurance law.</div>
+              <div class="prov"><span><strong>From</strong> coverage <code>C-4182</code> — the one active set — and eligibility snapshot <span class="ver-chip">#3</span> · UnitedHealthcare answered Jul 14, 9:12 AM · asked by Bee · PCC · <a href="pricing.html#/pr-02-benefits">open the benefits</a></span></div>
+              <div class="prov"><span><strong>eCW writes</strong> coverage and eligibility until cutover · this screen reads them, holds no copy, and never edits a payer answer — a correction arrives as the next snapshot</span></div>
               <div class="callout callout-ok" style="margin-top:12px">SPD received Jul 2 · 118 pages · summary ready</div>
               <div class="seg-divider">OON benefits</div>
               <dl class="kv">
@@ -316,10 +329,11 @@
               <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">NAD+ series — detox program</div>
               <div class="field-help" style="margin-top:4px">Session 4 of 8 · next infusion today 1:00 PM</div>
               <div class="meter" style="max-width:260px;margin-top:8px"><div class="meter-fill" style="width:50%"></div></div>
+              <div class="prov"><span><strong>From</strong> signed order <code>O-2384</code> <span class="ver-chip">v3</span> <span class="appr approved">Approved</span> · Dr. Drannikov, Jul 6 · <a href="clinical-chart.html#/b-10-iv-order">open the order</a></span></div>
               <div style="margin-top:12px">
-                Readiness: <span class="pill pill-ok">Standard</span>
-                <span class="field-help" style="display:inline;margin-left:6px">cleared for standard pacing · reviewed Jul 20</span>
+                Readiness: <span class="pill pill-ok">Standard</span> <span class="appr approved">Approved</span>
               </div>
+              <div class="prov"><span><strong>From</strong> readiness <code>RA-1152</code> <span class="ver-chip">v5</span> · ruleset v3.2 · approved by Dr. Drannikov Jul 6, unchanged by the runs since · <a href="readiness.html#/i-01-readiness">open the assessment</a></span></div>
             </div>
 
           </div>
@@ -469,7 +483,7 @@
                   <span><b>Compared</b> name, date of birth, phone</span>
                   <span><b>Model</b> match-v2.1</span>
                   <span><b>Confidence</b> 0.91</span>
-                  <span><b>Decides</b> Haylee · front desk</span>
+                  <span><b>Decides</b> front desk or PCC · merging is never automatic</span>
                 </div>
                 <div class="ai-actions">
                   <a class="btn btn-sm btn-primary" href="people.html#/pe-03-duplicates">Review the match</a>
@@ -489,12 +503,12 @@
                 <span class="lifecycle-step">Patient</span>
                 <span class="lifecycle-step">Inactive</span>
               </div>
-              <div class="prov"><span>Status is <strong>derived</strong> from the events on the person record. Promoting appends one more event — it never rewrites the ones before it.</span></div>
+              <div class="prov"><span>Status is <strong>derived</strong> from the events on the person record — Onboarding since Jul 12. Promoting appends one more event; it never rewrites the ones before it.</span></div>
 
               <ul class="check-list" style="margin-top:12px">
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Identity confirmed against the person master</span><span class="check-meta">Haylee · today</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Identity confirmed against the person master</span><span class="check-meta">Haylee · front desk · today</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Consents on file — treatment, financial policy, communication</span><span class="check-meta">Jul 12</span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Coverage recorded — Cigna PPO, out-of-network</span><span class="check-meta"><a href="#pt-02-profile" data-activate="pt-02-profile">benefits</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Coverage recorded — Cigna PPO, out-of-network</span><span class="check-meta"><a href="intake.html#/a-11-eligibility">eligibility</a></span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan's governing document (SPD) requested Jul 14</span><span class="check-meta">does not block</span></li>
                 <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">EBOO medical clearance not signed</span><span class="check-meta">blocks EBOO only</span></li>
               </ul>
@@ -503,7 +517,7 @@
                 <button class="btn btn-primary btn-lg" onclick="HCOS.toast('Tom Alvarez is at Patient. Same record P-004990 — the promotion is on his history.', 'ok')">Promote to patient</button>
                 <button class="btn btn-lg" onclick="HCOS.toast('Intake link sent by text and email. It resumes where he left off.', 'ok')">Send the intake link</button>
               </div>
-              <div class="field-help" style="margin-top:8px">Signed in as Haylee · front desk. Front desk and PCC promote, and the promotion is written to the <a href="security.html#/g-01-audit">audit store</a> with your name.</div>
+              <div class="field-help" style="margin-top:8px">Front desk and PCC promote the lifecycle. The promotion is written to the <a href="security.html#/g-01-audit">audit store</a> with the name of whoever is signed in.</div>
             </div>
 
             <div class="card">
@@ -531,7 +545,7 @@
                 <div class="filters" style="margin:0;background:transparent;border:none;padding:0">
                   <button class="filter-chip">Comprehensive</button>
                   <button class="filter-chip">Collaborative</button>
-                  <button class="filter-chip active">Self-directed</button>
+                  <button class="filter-chip active">Self-directed / open access</button>
                 </div>
               </div>
               <div class="prov"><span><strong>From</strong> membership Pay as you go · <a href="pricing-memberships.html#/pm-01-tiers">tiers</a></span></div>
@@ -604,30 +618,46 @@
   // The list filters for real, so you can see what each control does.
   function pfApply() {
     var q = document.getElementById('pf-q').value.trim().toLowerCase();
-    var status = document.getElementById('pf-status').value;
+    var qDigits = q.replace(/\D/g, '');
+    var life = document.getElementById('pf-life').value;
     var path = document.getElementById('pf-path').value;
     var access = document.getElementById('pf-access').value;
     var memb = document.getElementById('pf-memb').value;
     var net = document.getElementById('pf-net').value;
     var attn = document.getElementById('pf-attn').value;
-    var rows = document.querySelectorAll('tr.row-click');
+    var rows = document.querySelectorAll('#pf-table tr.row-click');
     var shown = 0;
     rows.forEach(function (r) {
       var ok = true;
-      if (q && r.getAttribute('data-name').toLowerCase().indexOf(q) === -1) ok = false;
+      if (q) {
+        var hay = (r.getAttribute('data-name') + ' ' + r.getAttribute('data-phone') + ' ' + r.getAttribute('data-dob')).toLowerCase();
+        var hit = hay.indexOf(q) !== -1 || (qDigits.length > 1 && hay.replace(/\D/g, '').indexOf(qDigits) !== -1);
+        if (!hit) ok = false;
+      }
+      if (life !== 'all' && r.getAttribute('data-life') !== life) ok = false;
       if (path !== 'all' && r.getAttribute('data-path') !== path) ok = false;
       if (access !== 'all' && r.getAttribute('data-access') !== access) ok = false;
       if (memb !== 'all' && r.getAttribute('data-memb') !== memb) ok = false;
       if (net !== 'all' && r.getAttribute('data-net') !== net) ok = false;
       if (attn !== 'all' && (r.getAttribute('data-attn') || '').indexOf(attn) === -1) ok = false;
-      if (status === 'Not admitted' || status === 'On hold' || status === 'Discharged') ok = false;
       r.style.display = ok ? '' : 'none';
       if (ok) shown++;
     });
+    document.getElementById('pf-table').style.display = shown ? '' : 'none';
+    document.getElementById('pf-empty').style.display = shown ? 'none' : '';
     var c = document.getElementById('pf-count');
-    if (status === 'Not admitted') c.textContent = 'No one is waiting to be admitted today';
-    else if (shown === rows.length) c.textContent = 'Showing all ' + rows.length + ' patients';
+    if (shown === rows.length) c.textContent = 'Showing all ' + rows.length + ' patients';
     else c.textContent = 'Showing ' + shown + ' of ' + rows.length + ' patients';
+  }
+  function pfReset() {
+    document.getElementById('pf-q').value = '';
+    document.getElementById('pf-life').value = 'Patient';
+    document.getElementById('pf-path').value = 'all';
+    document.getElementById('pf-access').value = 'all';
+    document.getElementById('pf-memb').value = 'all';
+    document.getElementById('pf-net').value = 'all';
+    document.getElementById('pf-attn').value = 'all';
+    pfApply();
   }
   document.addEventListener('DOMContentLoaded', pfApply);
 </script>

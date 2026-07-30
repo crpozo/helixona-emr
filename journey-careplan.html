@@ -54,7 +54,7 @@
         </div>
 
         <div class="prov">
-          <span><strong>Built from</strong> signed orders <code>O-2291 v2</code>, <code>O-2314 v1</code>, <code>O-2288 v1</code> · readiness Standard <code>ruleset r-4.2</code> · medication list. Dose, route and cadence stay in those records.</span>
+          <span><strong>Built from</strong> signed orders <code>O-2384 v3</code> and <code>O-2288 v1</code> · readiness <code>RA-1152 v5</code> Standard · ruleset v3.2 · medication list. Dose, route and cadence stay in those records.</span>
         </div>
         <div class="prov">
           <span><strong>Written in HCOS.</strong> A plan summary document goes to eCW for as long as eCW is live.</span>
@@ -114,7 +114,7 @@
                 <div class="seg" id="poc-pacing" role="group" aria-label="Plan pacing">
                   <button type="button">Gentle</button>
                   <button type="button" class="active">Standard</button>
-                  <button type="button">Aggressive</button>
+                  <button type="button">Advanced</button>
                 </div>
                 <div class="field-help">Standard matches Maya's readiness result. Bee has proposed Gentle in version 5 above.</div>
               </div>
@@ -178,12 +178,12 @@
               </div>
               <div class="j-ev">
                 <span class="j-ev-ver"><span class="ver-chip">v4</span> <span class="appr approved">In effect</span></span>
-                <span class="j-ev-what">EBOO added after order <code>O-2314 v1</code> was signed</span>
+                <span class="j-ev-what">EBOO added to the plan — each cycle needs its own signed clearance</span>
                 <span class="j-ev-who">Dr. Drannikov · Jul 6</span>
               </div>
               <div class="j-ev">
                 <span class="j-ev-ver"><span class="ver-chip superseded">v3</span> <span class="appr superseded">Superseded</span></span>
-                <span class="j-ev-what">Moved to Stabilization; NAD+ cadence follows <code>O-2291 v2</code></span>
+                <span class="j-ev-what">Moved to Stabilization; NAD+ cadence follows <code>O-2384 v3</code></span>
                 <span class="j-ev-who">Dr. Drannikov · Jun 15</span>
               </div>
               <div class="j-ev">
@@ -217,20 +217,21 @@
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Orders this plan follows</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">NAD+ IV therapy · <code>O-2291 v2</code> · weekly to Sep 30</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">open</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">EBOO · <code>O-2314 v1</code> · weekly, clearance each cycle</span><span class="check-meta"><a href="clinical.html#/b-09-orders">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">NAD+ IV therapy · <code>O-2384 v3</code> · weekly, session 4 of 8</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">open</a></span></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">EBOO · clearance for this cycle is not signed — it cannot be booked</span><span class="check-meta"><a href="clinical.html#/b-09-orders">ask for clearance</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Provider visit · <code>O-2288 v1</code> · weekly</span><span class="check-meta"><a href="clinical.html#/b-09-orders">open</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Supplements and LDN · medication list</span><span class="check-meta"><a href="clinical-chart.html#/b-06-med-rec">open</a></span></li>
                 <li class="check-item"><span class="check-icon pending">•</span><span class="check-label">Lymphatic massage · no order needed</span><span class="check-meta">in v5</span></li>
               </ul>
-              <div class="field-help" style="margin-top:8px">The plan points at orders. It never restates dose, route or rate.</div>
+              <div class="field-help" style="margin-top:8px">The plan points at orders. It never restates dose, route or rate. A missing clearance is a hard block — no role overrides it.</div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Readiness</div>
               <dl class="kv">
+                <dt>Assessment</dt><dd><code>RA-1152</code> <span class="ver-chip">v5</span> <span class="appr approved">Current</span></dd>
                 <dt>Result</dt><dd>Standard</dd>
-                <dt>Ruleset</dt><dd>r-4.2</dd>
+                <dt>Ruleset</dt><dd>v3.2</dd>
                 <dt>Approved by</dt><dd>Dr. Drannikov · Jul 6</dd>
               </dl>
               <div class="prov"><span><strong>From</strong> the readiness assessment · <a href="readiness.html#/i-01-readiness">open</a></span></div>
@@ -277,7 +278,7 @@
         </div>
 
         <div class="callout" style="margin-bottom:14px">
-          <strong>Version 5 has 3 changes waiting for approval.</strong> They are marked below and take effect only when Dr. Drannikov approves.
+          <strong>Version 5 has 3 changes waiting for approval:</strong> pacing Standard → Gentle, plus the two plan items marked below. They take effect only when Dr. Drannikov approves.
           <div class="j-actions" style="margin-top:10px">
             <button class="btn btn-sm btn-primary" data-activate="j-staff-poc">Review version 5</button>
           </div>
@@ -290,6 +291,7 @@
                 <th>Item</th>
                 <th>Source</th>
                 <th style="text-align:right">Ordered / wk</th>
+                <th>Start / stop</th>
                 <th>Owner</th>
                 <th style="text-align:right">Points</th>
                 <th>State</th>
@@ -299,8 +301,9 @@
             <tbody>
               <tr>
                 <td><strong>NAD+ IV therapy</strong></td>
-                <td><code>O-2291 v2</code><div class="j-tag">Signed by Dr. Drannikov Jul 6 · ≈3 h drip</div></td>
+                <td><code>O-2384 v3</code><div class="j-tag">Signed by Dr. Drannikov Jul 6 · NAD+ 500 mg · ≈3 h drip</div></td>
                 <td style="text-align:right">1</td>
+                <td>Through session 8 of 8</td>
                 <td>Infusion suite · Bee</td>
                 <td style="text-align:right">40</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -308,17 +311,19 @@
               </tr>
               <tr>
                 <td><strong>EBOO</strong></td>
-                <td><code>O-2314 v1</code><div class="j-tag">Clearance required each cycle · 60 min with provider</div></td>
+                <td>Clearance order per cycle<div class="j-tag">60 min with provider · this cycle's clearance is not signed</div></td>
                 <td style="text-align:right">1</td>
+                <td>Each cycle, once cleared</td>
                 <td>Dr. Drannikov</td>
                 <td style="text-align:right">50</td>
-                <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical.html#/b-09-orders">Open order</a></td>
+                <td><span class="pill pill-err">Cannot be booked</span><div class="j-tag">Hard block — no role overrides it</div></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical.html#/b-09-orders">Ask for clearance</a></td>
               </tr>
               <tr>
                 <td><strong>Provider visit</strong></td>
                 <td><code>O-2288 v1</code><div class="j-tag">20 min check-in</div></td>
                 <td style="text-align:right">1</td>
+                <td>Through stage 2</td>
                 <td>Dr. Drannikov</td>
                 <td style="text-align:right">30</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -326,8 +331,9 @@
               </tr>
               <tr>
                 <td><strong>Nano bath</strong></td>
-                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">30 min soak · through stage 2</div></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">30 min soak</div></td>
                 <td style="text-align:right">1</td>
+                <td>Through stage 2</td>
                 <td>In office · Kyle</td>
                 <td style="text-align:right">20</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -337,6 +343,7 @@
                 <td><strong>Red light</strong></td>
                 <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">20 min</div></td>
                 <td style="text-align:right">2</td>
+                <td>Through stage 2</td>
                 <td>In office · Kyle</td>
                 <td style="text-align:right">15</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -346,6 +353,7 @@
                 <td><strong>Hydrogen inhalation</strong></td>
                 <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">30 min</div></td>
                 <td style="text-align:right">3</td>
+                <td>Through stage 2</td>
                 <td>In office · Kyle</td>
                 <td style="text-align:right">25</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -355,6 +363,7 @@
                 <td><strong>Salt room</strong></td>
                 <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">45 min halotherapy</div></td>
                 <td style="text-align:right">1</td>
+                <td>Through stage 2</td>
                 <td>In office · Kyle</td>
                 <td style="text-align:right">15</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -364,6 +373,7 @@
                 <td><strong>Rebounding</strong></td>
                 <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">≈5 min · lymph · v5 proposes 3 / wk</div></td>
                 <td style="text-align:right">5</td>
+                <td>No stop date · review each stage</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">10</td>
                 <td><span class="appr pending">Change pending</span></td>
@@ -373,6 +383,7 @@
                 <td><strong>Dry brushing</strong></td>
                 <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">before shower</div></td>
                 <td style="text-align:right">5</td>
+                <td>No stop date · review each stage</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">10</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -382,6 +393,7 @@
                 <td><strong>Salt bath</strong></td>
                 <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">Epsom · 20 min</div></td>
                 <td style="text-align:right">3</td>
+                <td>Through stage 2</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">10</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -391,6 +403,7 @@
                 <td><strong>Omega-3</strong></td>
                 <td><span class="clin-state reconciled">Reconciled</span> <span class="clin-src">medication list · 2 caps with breakfast</span><div class="j-tag">Patient-reported Mar 14 · reconciled by Bee Jun 2</div></td>
                 <td style="text-align:right">7</td>
+                <td>Until the medication list changes</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">5</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -400,6 +413,7 @@
                 <td><strong>Vitamin D3 + K2</strong></td>
                 <td><span class="clin-state verified">Verified</span> <span class="clin-src">medication list · 5,000 IU morning</span><div class="j-tag">Confirmed by Dr. Drannikov Jun 6</div></td>
                 <td style="text-align:right">7</td>
+                <td>Until the medication list changes</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">5</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -409,6 +423,7 @@
                 <td><strong>Magnesium glycinate</strong></td>
                 <td><span class="clin-state reconciled">Reconciled</span> <span class="clin-src">medication list · 400 mg before bed</span><div class="j-tag">Patient-reported Mar 14 · reconciled by Bee Jun 2</div></td>
                 <td style="text-align:right">7</td>
+                <td>Until the medication list changes</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">5</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -418,6 +433,7 @@
                 <td><strong>LDN</strong></td>
                 <td><span class="clin-state verified">Verified</span> <span class="clin-src">medication list · 3 mg at bedtime</span><div class="j-tag">Prescribed by Dr. Drannikov Jun 6</div></td>
                 <td style="text-align:right">7</td>
+                <td>Until the prescription changes</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">5</td>
                 <td><span class="appr approved">In plan</span></td>
@@ -427,6 +443,7 @@
                 <td><strong>Lymphatic massage</strong></td>
                 <td>Proposed plan item <span class="ver-chip">v5</span><div class="j-tag">Bee · Jul 20 · non-clinical support</div></td>
                 <td style="text-align:right">1</td>
+                <td>Two weeks, then review</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">10</td>
                 <td><span class="appr pending">Pending approval</span></td>
@@ -436,6 +453,7 @@
                 <td><strong>Turmeric</strong></td>
                 <td><span class="clin-state reported">Reported</span> <span class="clin-src">Maya's check-in · Jul 19</span><div class="j-tag">Not on the plan and not clinically active until it is reconciled</div></td>
                 <td style="text-align:right">—</td>
+                <td>—</td>
                 <td>At home · Maya</td>
                 <td style="text-align:right">—</td>
                 <td><span class="appr draft">Not in plan</span></td>
@@ -514,7 +532,7 @@
         </div>
 
         <div class="prov">
-          <span><strong>Ordered from</strong> plan of care <span class="ver-chip">v4</span> · <strong>actual from</strong> appointments, infusion administration records and Maya's check-ins. Nothing on this page is typed in.</span>
+          <span><strong>Ordered from</strong> plan of care <span class="ver-chip">v4</span> · <strong>actual from</strong> appointments, infusion administration records and Maya's check-ins. No count on this page is typed in.</span>
         </div>
 
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0">
@@ -552,7 +570,7 @@
             <div class="meter lg"><div class="meter-fill" style="width:24%"></div></div>
             <span class="meter-val">24% · below target so far</span>
           </div>
-          <div class="field-help" style="margin-top:8px">It is only Tuesday — three infusion days and most supplements are still ahead this week.</div>
+          <div class="field-help" style="margin-top:8px">It is only Tuesday — today's NAD+ drip is still running and most supplements are still ahead this week.</div>
         </div>
 
         <div class="tbl-wrap">
@@ -571,8 +589,8 @@
               <tr><td><strong>Red light</strong></td><td style="text-align:right">2</td><td style="text-align:right">1</td><td><a href="schedule.html#/l-04-appt">Appointment Jul 20 · Done</a></td><td style="text-align:right">50%</td></tr>
               <tr><td><strong>Hydrogen inhalation</strong></td><td style="text-align:right">3</td><td style="text-align:right">0</td><td class="j-tag">No appointment kept yet</td><td style="text-align:right">0%</td></tr>
               <tr><td><strong>Salt room</strong></td><td style="text-align:right">1</td><td style="text-align:right">1</td><td><a href="schedule.html#/l-04-appt">Appointment Jul 20 · Done</a></td><td style="text-align:right">100%</td></tr>
-              <tr><td><strong>EBOO</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td class="j-tag">Booked Jul 23 · Scheduled</td><td style="text-align:right">0%</td></tr>
-              <tr><td><strong>NAD+ IV therapy</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td><a href="clinical-infusion.html#/b-15-flowsheet">Booked Jul 22 · no administration yet</a></td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>EBOO</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td class="j-tag">Not booked — clearance for this cycle is not signed</td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>NAD+ IV therapy</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td><a href="clinical-infusion.html#/b-15-flowsheet">In chair now · Jul 21 · counts when the administration is complete</a></td><td style="text-align:right">0%</td></tr>
               <tr><td><strong>Provider visit</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td class="j-tag">Booked Jul 24 · Scheduled</td><td style="text-align:right">0%</td></tr>
               <tr><td><strong>Rebounding</strong></td><td style="text-align:right">5</td><td style="text-align:right">1</td><td><a href="journey-checkin.html#/j-checkin-activity">Check-in Jul 20</a></td><td style="text-align:right">20%</td></tr>
               <tr><td><strong>Dry brushing</strong></td><td style="text-align:right">5</td><td style="text-align:right">1</td><td><a href="journey-checkin.html#/j-checkin-activity">Check-in Jul 20</a></td><td style="text-align:right">20%</td></tr>
@@ -608,7 +626,7 @@
                 Adherence has been under target for three weeks and Maya reports swelling after NAD+ days. Gentler pacing for two weeks would fit her readiness result.
               </div>
               <div class="ai-meta">
-                <span><b>Read</b> check-ins, appointments, readiness <code>r-4.2</code>, plan <span class="ver-chip">v4</span></span>
+                <span><b>Read</b> check-ins, appointments, readiness <code>RA-1152</code> <span class="ver-chip">v5</span>, plan <span class="ver-chip">v4</span></span>
                 <span><b>Model</b> pacing-v1.3</span>
                 <span><b>Confidence</b> 0.71 — three weeks is a short run</span>
                 <span><b>Accepted by</b> Bee into proposal <span class="ver-chip">v5</span></span>
@@ -635,7 +653,7 @@
           <div class="j-actions">
             <button class="btn" data-activate="j-staff-patients">Back to roster</button>
             <button class="btn" onclick="HCOS.toast('Note added to week 4 with your name and time.','ok')">Add note</button>
-            <button class="btn btn-primary" data-activate="j-staff-poc">Propose a plan change</button>
+            <button class="btn btn-primary" data-activate="j-staff-poc">Open the plan of care</button>
           </div>
         </div>
 

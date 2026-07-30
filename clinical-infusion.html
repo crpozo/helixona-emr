@@ -18,9 +18,7 @@
   .bi-chair-staff { font-size: 11px; color: var(--muted); }
   .bi-chair-patient { font-size: 15px; font-weight: 600; color: var(--hx-navy); }
   .bi-chair-protocol { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .bi-meter { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin: 10px 0 6px; }
-  .bi-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
-  .bi-meter-fill.paused { background: repeating-linear-gradient(90deg, var(--hx-accent) 0 6px, #fff 6px 10px); }
+  .bi-chair .meter { margin: 10px 0 6px; }
   .bi-chair-time { font-size: 11.5px; color: var(--ink); }
   .bi-chair-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; }
   .bi-vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); overflow: hidden; margin: 8px 0 16px; }
@@ -30,10 +28,10 @@
   .bi-vval { font-size: 14px; font-weight: 600; color: var(--hx-navy); margin-top: 2px; }
   .bi-vval small { font-weight: 400; color: var(--muted); font-size: 11px; }
   .bi-vval.flag { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 3px; }
-  .bi-statusbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 11px 14px; background: #F7F7F7; border: 1px solid var(--line-soft); border-radius: var(--radius-sm); margin-bottom: 16px; font-size: 12.5px; }
-  .bi-statusbar .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bi-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; font-size: 12.5px; }
+  .bi-bar .bi-acts { display: flex; gap: 8px; flex-wrap: wrap; }
   .bi-flag-row td { background: #F1F1F1; }
-  .time-col { font-family: ui-monospace, monospace; white-space: nowrap; }
+  .bi-time-col { font-family: ui-monospace, monospace; white-space: nowrap; }
   .bi-check { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; margin-top: 8px; }
   .bi-check input { margin-top: 2px; flex-shrink: 0; }
   .bi-checklist { font-size: 12.5px; line-height: 1.95; }
@@ -41,9 +39,6 @@
   .bi-listrow { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
   .bi-listrow:last-child { border-bottom: none; }
   .bi-listrow-main { flex: 1; min-width: 0; }
-  .bi-sig { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px; min-height: 78px; display: flex; flex-direction: column; justify-content: center; }
-  .bi-sig-name { font-family: var(--font-display); font-size: 22px; color: var(--hx-navy); }
-  .bi-sig-meta { font-size: 10.5px; color: var(--muted); margin-top: 4px; font-family: ui-monospace, monospace; }
 </style>
 </head>
 <body data-page="clinical-infusion" data-page-title="Documentation · Infusion suite" data-shell="app">
@@ -60,6 +55,10 @@
         <p class="page-sub">Tuesday, July 21 · 11:40 AM · Chairs 1–4 · suite coordinator Bee (PCC)</p>
         <div class="prov">
           <span><strong>Reads</strong> the day calendar · signed orders · readiness · what has been given so far — refreshed 11:40 AM · <a href="schedule.html#/l-01-day">open the day calendar</a></span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> HCOS holds the infusion record since Jul 1 2026 · eCW receives a read-only sync of this domain</span>
+          <span>The board keeps no copy — every number here is read from the order, the readiness record and the flowsheet.</span>
         </div>
 
         <div class="grid-4" style="margin-bottom:16px">
@@ -90,9 +89,9 @@
             </div>
             <div class="bi-chair-patient">Maya Reyes</div>
             <div class="bi-chair-protocol">NAD+ 500 mg · session 4 of 8 · order <code>O-2384</code> <span class="ver-chip">v3</span></div>
-            <div class="bi-meter"><div class="bi-meter-fill" style="width:86%"></div></div>
-            <div class="bi-chair-time">86% given · started 9:05 AM · booked to 12:05 PM</div>
-            <div class="prov"><span><strong>From</strong> appointment <code>A-88214</code> · signed order <code>O-2384</code> v3 · readiness Standard</span></div>
+            <div class="meter"><div class="meter-fill" style="width:82%"></div></div>
+            <div class="bi-chair-time">82% given · started 9:05 AM · booked to 12:05 PM</div>
+            <div class="prov"><span><strong>From</strong> appointment <code>A-88214</code> · signed order <code>O-2384</code> v3 · readiness <code>RA-1152</code> v5 Standard</span></div>
             <div class="bi-chair-foot">
               <span class="field-help" style="margin:0">Open flowsheet →</span>
               <span class="pill pill-st st-inchair">In chair</span>
@@ -105,9 +104,9 @@
               <span class="bi-chair-staff"><span class="avatar" style="width:20px;height:20px;font-size:9px">BA</span> Bea · Medic</span>
             </div>
             <div class="bi-chair-patient">Daniel Okafor</div>
-            <div class="bi-chair-protocol">IV vitamin C 25 g · order <code>O-2402</code> <span class="ver-chip">v1</span></div>
-            <div class="bi-meter"><div class="bi-meter-fill paused" style="width:42%"></div></div>
-            <div class="bi-chair-time">Paused at 42% · nausea 11:28 AM · line kept open with saline</div>
+            <div class="bi-chair-protocol">IV vitamin C 25 g · session 4 of 6 · order <code>O-2402</code> <span class="ver-chip">v1</span></div>
+            <div class="meter"><div class="meter-fill" style="width:42%"></div></div>
+            <div class="bi-chair-time">Paused at 42% · started 10:25 AM · nausea 11:28 AM · line kept open with saline</div>
             <div class="prov"><span><strong>Held</strong> for Dr. Drannikov — only he may resume, reduce the rate or stop the series</span></div>
             <div class="bi-chair-foot">
               <span class="field-help" style="margin:0">Open incident report →</span>
@@ -121,10 +120,10 @@
               <span class="bi-chair-staff"><span class="avatar" style="width:20px;height:20px;font-size:9px">JN</span> Juan · Medic</span>
             </div>
             <div class="bi-chair-patient">Priya Natarajan</div>
-            <div class="bi-chair-protocol">Myers' cocktail · session 2 of 6 · order <code>O-2417</code> <span class="ver-chip">v2</span></div>
-            <div class="bi-meter"><div class="bi-meter-fill" style="width:0%"></div></div>
+            <div class="bi-chair-protocol">Myers' cocktail · session 3 of 6 · order <code>O-2291</code> <span class="ver-chip">v1</span></div>
+            <div class="meter"><div class="meter-fill" style="width:0%"></div></div>
             <div class="bi-chair-time">Seated 11:32 AM · five rights checked · start held</div>
-            <div class="prov"><span><strong>Waiting</strong> on Dr. Drannikov — magnesium reaction reported at check-in today, not reconciled</span></div>
+            <div class="prov"><span><strong>Waiting</strong> on Dr. Drannikov — readiness <code>RA-1206</code> v3 is flare recovery and still <span class="appr pending">Pending</span> since Jul 19</span></div>
             <div class="bi-chair-foot">
               <span class="field-help" style="margin:0">Verify and start →</span>
               <span class="pill pill-st st-arrived">Arrived</span>
@@ -138,9 +137,9 @@
             </div>
             <div class="bi-chair-patient" style="color:var(--muted);font-weight:400">Open until 2:00 PM</div>
             <div class="bi-chair-protocol">Next: Nadia Boulos · Myers' cocktail · 2:00 PM</div>
-            <div class="bi-meter"><div class="bi-meter-fill" style="width:0%"></div></div>
+            <div class="meter"><div class="meter-fill" style="width:0%"></div></div>
             <div class="bi-chair-time">Cannot start — readiness is Physician review required and no order is signed</div>
-            <div class="prov"><span><strong>Blocked by</strong> readiness Jul 19 · questionnaire still open — Dr. Bakman decides before the chair is used</span></div>
+            <div class="prov"><span><strong>Blocked by</strong> readiness <code>RA-1211</code> v4 · Jul 19 · check-in still open — Dr. Bakman decides before the chair is used</span></div>
             <div class="bi-chair-foot">
               <span class="field-help" style="margin:0">Open readiness →</span>
               <span class="pill pill-err">Blocked</span>
@@ -157,9 +156,9 @@
                 <span class="ai-badge">Suggested by HCOS</span>
                 <span class="ai-state suggested">Suggestion</span>
               </div>
-              <div class="ai-body">Maya Reyes has averaged 3 h 20 m for NAD+ across her last three sessions. Chair 1 should free at about 12:25 PM — 20 minutes after the booking.</div>
+              <div class="ai-body">Chair 1 is booked to 12:05 PM on the 3 h protocol, but Maya Reyes has averaged 3 h 20 m for NAD+ across her last three sessions, and today's rate reduction at 10:05 AM added about 11 minutes. At 11:40 AM she is 82% given with 2 h 35 m elapsed — this run is tracking to about 12:12 PM.</div>
               <div class="ai-meta">
-                <span><b>From</b> 3 past administrations · order <code>O-2384</code> v3</span>
+                <span><b>From</b> 3 past administrations · today's flowsheet · order <code>O-2384</code> v3</span>
                 <span><b>Model</b> iv-duration-v1.3</span>
                 <span><b>Confidence</b> 0.81 · ±12 min</span>
                 <span><b>Decides</b> Bee (PCC)</span>
@@ -194,9 +193,13 @@
         <span class="frame-url">hcos.helixona.com/clinical/infusion/chair-3/verify</span></div>
       <div class="frame-body">
         <h2 class="page-title">Five-rights verification — Chair 3</h2>
-        <p class="page-sub">Priya Natarajan · Myers' cocktail · session 2 of 6 · Juan (Medic) verifying · every right must clear before the infusion starts</p>
+        <p class="page-sub">Priya Natarajan · Myers' cocktail · session 3 of 6 · Juan (Medic) verifying · every right must clear before the infusion starts</p>
         <div class="prov">
-          <span><strong>From</strong> signed order <code>O-2417</code> <span class="ver-chip">v2</span> · the allergy list · readiness Jul 17 · appointment <code>A-88226</code> — what is recorded here is who checked, and when</span>
+          <span><strong>Reads</strong> signed order <code>O-2291</code> <span class="ver-chip">v1</span> · the allergy list · readiness <code>RA-1206</code> <span class="ver-chip">v3</span> · appointment <code>A-88226</code> — read live, never copied here</span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> the order, the allergy list and readiness are written in HCOS · eCW receives a read-only sync</span>
+          <span>This screen records one thing of its own: who checked each right, and when.</span>
         </div>
 
         <div class="bi-vitals">
@@ -219,21 +222,22 @@
             <label class="bi-check"><input type="checkbox" checked> Identity verified <span class="clin-src">Juan (Medic) · 11:36 AM</span></label>
 
             <div class="seg-divider">Right drug</div>
-            <div class="callout">Order: <strong>IV Myers' cocktail · standard</strong><br>Components: B-complex, B12, calcium, magnesium, vitamin C<br>Diluent: 0.9% normal saline 100 mL</div>
+            <div class="callout">Order: <strong>IV Myers' cocktail · standard</strong><br>Components: B-complex 100, B12 (methylcobalamin), calcium gluconate, magnesium sulfate, ascorbic acid<br>Diluent: 0.9% sodium chloride 100 mL</div>
             <label class="bi-check"><input type="checkbox" checked> Components match the signed order <span class="clin-src">Juan · 11:37 AM</span></label>
 
             <div class="seg-divider">Right dose</div>
-            <div class="callout">B-complex 1 mL · B12 1 mg · calcium 100 mg · magnesium 2 g · vitamin C 5 g<br>Total volume <strong>117 mL</strong> · rate <strong>117 mL/hr</strong> · duration <strong>60 min</strong></div>
+            <div class="callout">B-complex 100 · 1 mL · B12 1 mg · calcium gluconate 100 mg · magnesium sulfate 2 g · ascorbic acid 5 g<br>Total volume <strong>117 mL</strong> · rate <strong>234 mL/hr</strong> · infusion <strong>30 min</strong> · about 1 h in the chair</div>
             <label class="bi-check"><input type="checkbox" checked> Doses match the signed order <span class="clin-src">Juan · 11:37 AM</span></label>
 
             <div class="card" style="margin-top:14px">
               <div class="card-title">The order being carried out</div>
               <dl class="kv">
-                <dt>Order</dt><dd><code>O-2417</code> <span class="ver-chip">v2</span> <span class="appr approved">Approved</span></dd>
-                <dt>Signed by</dt><dd>Dr. Drannikov · Jul 20, 4:12 PM</dd>
-                <dt>Cadence</dt><dd>Weekly · 6 sessions · expires Sep 30</dd>
-                <dt>Stop rules</dt><dd>Stop for hives, chest pain or a systolic drop over 20 mmHg</dd>
+                <dt>Order</dt><dd><code>O-2291</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · <span class="ver-chip">v2</span> <span class="appr draft">Draft</span></dd>
+                <dt>Signed by</dt><dd>Dr. Drannikov · May 22, 2026 — 2 of 6 given under v1</dd>
+                <dt>Cadence</dt><dd>Weekly × 6 · expires Oct 21, 2026, or when the 6th is given</dd>
+                <dt>Stop rules</dt><dd>Stop for chest tightness, wheeze, rash, systolic below 90 or a fall of 20 from baseline. Slow the rate for warmth or flushing and write it on the flowsheet.</dd>
               </dl>
+              <div class="field-help">Today runs on v1. The v2 draft authorizes nothing until Dr. Drannikov signs it.</div>
               <div class="prov"><span><strong>Dispatched</strong> to the bay by sign and lock · <a href="clinical-chart.html#/b-10-iv-order">open the order</a> · <a href="clinical.html#/b-11-sign-lock">the encounter it came from</a></span></div>
             </div>
           </div>
@@ -244,35 +248,48 @@
             <label class="bi-check"><input type="checkbox" checked> IV access established and verified <span class="clin-src">Juan · 11:38 AM</span></label>
 
             <div class="seg-divider">Right time</div>
-            <div class="callout">Booked 11:30 AM · last Myers' Jul 14 — 7 days, within the ordered cadence</div>
+            <div class="callout">Booked 11:30 AM · last Myers' Jul 14 — 7 days, within the order's weekly cadence</div>
             <label class="bi-check"><input type="checkbox" checked> Interval confirmed against the order <span class="clin-src">Juan · 11:38 AM</span></label>
 
             <div class="seg-divider">Allergies and intolerances</div>
             <div class="bi-listrow">
-              <div class="bi-listrow-main"><strong>Sulfa</strong> — hives
-                <div class="clin-src">Confirmed by Dr. Drannikov · Mar 9, 2026</div></div>
+              <div class="bi-listrow-main"><strong>Sulfa drugs (sulfonamides)</strong> — rash, hives · moderate · hard block
+                <div class="clin-src">Dr. Drannikov · Mar 18, 2026</div></div>
               <span class="clin-state verified">Verified</span>
             </div>
             <div class="bi-listrow">
-              <div class="bi-listrow-main"><strong>Latex</strong> — contact rash
-                <div class="clin-src">Checked by Bee · Jul 14 · from the onboarding form</div></div>
+              <div class="bi-listrow-main"><strong>Shellfish</strong> — hives within an hour · blocking matching orders now
+                <div class="clin-src">Priya told Charlene at check-in today · <span class="appr pending">Pending Dr. Drannikov's review</span></div></div>
+              <span class="clin-state reported">Reported</span>
+            </div>
+            <div class="bi-listrow">
+              <div class="bi-listrow-main"><strong>Gluten</strong> — GI upset, brain fog · intolerance, warns
+                <div class="clin-src">Patient · checked by Charlene · Apr 8, 2026</div></div>
               <span class="clin-state reconciled">Reconciled</span>
             </div>
             <div class="bi-listrow">
-              <div class="bi-listrow-main"><strong>Magnesium</strong> — flushing and warmth
-                <div class="clin-src" id="bi-mag-src">Priya said so at check-in · today 11:31 AM · not reconciled</div></div>
-              <span class="clin-state reported" id="bi-mag-state">Reported</span>
+              <div class="bi-listrow-main"><strong>Dairy</strong> — bloating · intolerance, warns
+                <div class="clin-src">Patient · onboarding Jul 14, 2026</div></div>
+              <span class="clin-state reported">Reported</span>
             </div>
-            <div class="prov"><span><strong>One list.</strong> Every order, sign and pre-infusion check reads it · <a href="clinical-chart.html#/b-07-allergies">open the allergy list</a></span></div>
+            <div class="bi-listrow">
+              <div class="bi-listrow-main">Environmental · severe food · latex <span class="pill pill-muted">None reported</span></div>
+            </div>
+            <div class="prov"><span><strong>One list</strong>, read live from the chart. This screen shows it and never edits it — reconciling or verifying an entry happens on the allergy list, and only a physician or extender decides what a reported item becomes · <a href="clinical-chart.html#/b-07-allergies">open the allergy list</a></span></div>
+            <div class="callout" style="margin-top:10px">Checked against this order: nothing in the Myers' cocktail is sulfa- or shellfish-derived, so neither entry blocks today's session.</div>
 
             <div class="callout callout-warn" id="bi-variance" style="margin-top:12px">
-              <strong>Today's Myers' cocktail carries magnesium 2 g.</strong> What Priya reported an hour ago is not on the reconciled list, and Juan cannot clear it himself. Dr. Drannikov decides whether the order stands, the rate changes, or today's session waits.
+              <strong>Two things hold this start.</strong> Readiness <code>RA-1206</code> v3 came back flare recovery on Jul 19 and is still waiting on Dr. Drannikov, and the order carries an open warning — magnesium 1.6 mg/dL on Jun 2, while today's Myers' gives magnesium 2 g. Juan can clear neither: a physician or extender approves readiness and overrides an order warning, each with a reason.
             </div>
 
             <div class="seg-divider">Readiness and clearance</div>
             <dl class="kv">
-              <dt>Readiness</dt><dd>Standard · ruleset v2.4 · approved by Dr. Drannikov Jul 17 · <a href="readiness.html#/i-01-readiness">open</a></dd>
-              <dt>Order</dt><dd>Signed and current <span class="appr approved">Approved</span></dd>
+              <dt>Readiness</dt>
+              <dd><code>RA-1206</code> <span class="ver-chip">v3</span> · flare recovery · ruleset v3.2 · <span class="appr pending" id="bi-ready-state">Pending</span>
+                <div class="clin-src" id="bi-ready-src">Dr. Drannikov · waiting since Jul 19 · v2 was Standard on ruleset v2.4</div>
+                <a href="readiness.html#/i-01-readiness">open readiness</a></dd>
+              <dt>Order</dt><dd>Signed and current — <code>O-2291</code> v1 <span class="appr approved">Approved</span></dd>
+              <dt>Order warning</dt><dd>Magnesium 1.6 mg/dL · Jun 2 — override needs a physician and a reason</dd>
               <dt>Supervision</dt><dd>Dr. Drannikov on site — required for the first 15 min</dd>
               <dt>Consent</dt><dd>Given verbally for today's session · 11:34 AM</dd>
             </dl>
@@ -301,13 +318,17 @@
         <h2 class="page-title">Infusion flowsheet — Chair 1</h2>
         <p class="page-sub">Maya Reyes · NAD+ 500 mg · session 4 of 8 · Nick (Nurse) documenting</p>
         <div class="prov">
-          <span><strong>Against</strong> signed order <code>O-2384</code> <span class="ver-chip">v3</span> <span class="appr approved">Approved</span> · Dr. Drannikov, Jul 6 · appointment <code>A-88214</code> · <a href="clinical-chart.html#/b-10-iv-order">open the order</a></span>
+          <span><strong>Against</strong> signed order <code>O-2384</code> <span class="ver-chip">v3</span> <span class="appr approved">Approved</span> · Dr. Drannikov, Jul 6 · appointment <code>A-88214</code> · the order lives in Maya's chart and this flowsheet never restates it · <a href="patients.html#/pt-02-profile">open her chart</a></span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> HCOS writes the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
+          <span>Dose, rate and cadence stay in the order — this screen only records what was given.</span>
         </div>
 
-        <div class="bi-statusbar">
-          <div>Elapsed <strong>2 h 35 m</strong> of ~3 h · <span class="pill pill-st st-inchair">86% given</span> · rate <strong>85 mL/hr</strong> of 85 ordered</div>
-          <div class="acts">
-            <button class="btn btn-sm btn-danger" data-activate="b-17-adverse-event">Flag adverse event</button>
+        <div class="card bi-bar">
+          <div>Elapsed <strong>2 h 35 m</strong> of ~3 h · <span class="pill pill-st st-inchair">82% given</span> · rate <strong>85 mL/hr</strong> of 85 ordered</div>
+          <div class="bi-acts">
+            <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Adverse event opened for Maya Reyes — the infusion is paused, the line stays open, and Dr. Drannikov is paged.', 'warn')">Flag adverse event</button>
             <button class="btn btn-sm" data-open-modal="#bi-var-modal">Pause — record the reason</button>
             <button class="btn btn-sm" data-open-modal="#bi-obs-modal">Add timed observation</button>
             <button class="btn btn-sm btn-primary" data-activate="b-16-postinfusion" onclick="HCOS.toast('Infusion complete — finish the post-infusion documentation.', 'ok')">Complete infusion</button>
@@ -323,37 +344,37 @@
             </thead>
             <tbody>
               <tr>
-                <td class="time-col">9:00 AM</td><td>118/72</td><td>74</td><td>99%</td><td>—</td>
+                <td class="bi-time-col">9:00 AM</td><td>118/72</td><td>74</td><td>99%</td><td>—</td>
                 <td>Pre-infusion vitals · IV access left forearm 22 g · patent</td>
                 <td>Before start</td><td>NK</td>
               </tr>
               <tr>
-                <td class="time-col">9:05 AM</td><td>120/74</td><td>72</td><td>99%</td><td>85 mL/hr</td>
+                <td class="bi-time-col">9:05 AM</td><td>120/74</td><td>72</td><td>99%</td><td>85 mL/hr</td>
                 <td>Infusion started. Patient denies discomfort.</td>
                 <td>As ordered</td><td>NK</td>
               </tr>
               <tr>
-                <td class="time-col">9:35 AM</td><td>118/76</td><td>70</td><td>99%</td><td>85 mL/hr</td>
+                <td class="bi-time-col">9:35 AM</td><td>118/76</td><td>70</td><td>99%</td><td>85 mL/hr</td>
                 <td>30-min check. Tolerating well. Reading.</td>
                 <td>As ordered</td><td>NK</td>
               </tr>
               <tr class="bi-flag-row">
-                <td class="time-col">10:05 AM</td><td>110/68</td><td>78</td><td>98%</td><td>70 mL/hr</td>
+                <td class="bi-time-col">10:05 AM</td><td>110/68</td><td>78</td><td>98%</td><td>70 mL/hr</td>
                 <td><strong>Mild flushing</strong> reported, transient. Rate reduced to 70 mL/hr.</td>
                 <td>Below the ordered rate · reason: flushing · Dr. Drannikov approved 10:07 AM</td><td>NK</td>
               </tr>
               <tr>
-                <td class="time-col">10:35 AM</td><td>114/70</td><td>72</td><td>99%</td><td>70 mL/hr</td>
+                <td class="bi-time-col">10:35 AM</td><td>114/70</td><td>72</td><td>99%</td><td>70 mL/hr</td>
                 <td>Flushing resolved within 5 min. Comfortable. Continuing at reduced rate.</td>
                 <td>Below the ordered rate · approved 10:07 AM</td><td>NK</td>
               </tr>
               <tr>
-                <td class="time-col">11:05 AM</td><td>116/72</td><td>70</td><td>99%</td><td>85 mL/hr</td>
+                <td class="bi-time-col">11:05 AM</td><td>116/72</td><td>70</td><td>99%</td><td>85 mL/hr</td>
                 <td>Returned to the ordered rate. No further symptoms.</td>
                 <td>As ordered</td><td>NK</td>
               </tr>
               <tr>
-                <td class="time-col">11:35 AM</td><td>118/74</td><td>72</td><td>99%</td><td>85 mL/hr</td>
+                <td class="bi-time-col">11:35 AM</td><td>118/74</td><td>72</td><td>99%</td><td>85 mL/hr</td>
                 <td>Hourly check · tolerating well.</td>
                 <td>As ordered</td><td>NK</td>
               </tr>
@@ -369,7 +390,7 @@
           </div>
           <div class="card">
             <div class="card-title">Bag, lot and supplies</div>
-            <div style="font-size:12.5px">NAD+ 500 mg in 250 mL saline<br>Lot 4471-B · expires Mar 2027<br>Bag started 9:05 AM · ends ~12:00 PM</div>
+            <div style="font-size:12.5px">NAD+ 500 mg in 250 mL saline<br>Lot 4471-B · expires Mar 2027<br>Bag started 9:05 AM · ends ~12:12 PM</div>
             <button class="btn btn-sm" style="margin-top:10px" onclick="HCOS.toast('Bag change noted with the new lot and the time.', 'ok')">Document bag change</button>
           </div>
           <div class="card">
@@ -383,13 +404,14 @@
           <div class="card-title">Given against the order</div>
           <dl class="kv">
             <dt>Ordered</dt><dd>NAD+ 500 mg in 250 mL saline · 85 mL/hr · about 3 h · weekly, 8 sessions</dd>
-            <dt>Given so far</dt><dd>430 mg · 215 mL · 2 h 35 m</dd>
+            <dt>Given so far</dt><dd>410 mg · 205 mL · 2 h 35 m — 82% of the bag</dd>
             <dt>Rate now</dt><dd>85 mL/hr — as ordered</dd>
             <dt>Variances</dt><dd>1 · rate cut to 70 mL/hr at 10:05 AM for flushing, approved by Dr. Drannikov at 10:07 AM</dd>
             <dt>Stop rules</dt><dd>Stop for chest pain, hives, SpO₂ below 92% or a systolic drop over 20 mmHg</dd>
+            <dt>Tracking to</dt><dd>About 12:12 PM — the hour at 70 mL/hr added roughly 11 minutes</dd>
           </dl>
           <div class="prov">
-            <span><strong>Nothing here rewrites the order.</strong> A different drug, dose or ordered rate needs a new version from Dr. Drannikov · <a href="clinical-chart.html#/b-10-iv-order">open the order</a></span>
+            <span><strong>Nothing here rewrites the order.</strong> A different drug, dose or ordered rate needs a new signed version from Dr. Drannikov — <code>O-2384</code> v4 — and this flowsheet would then run against that version</span>
           </div>
         </div>
       </div>
@@ -407,10 +429,14 @@
         <div class="prov">
           <span><strong>Against</strong> signed order <code>O-2384</code> <span class="ver-chip">v3</span> · flowsheet Chair 1 · attaches to the encounter at co-sign · <a href="clinical-governance.html#/b-24-cosign">co-sign queue</a></span>
         </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> HCOS writes the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
+          <span>The order and the encounter keep their own records — this page closes the session, nothing else.</span>
+        </div>
 
-        <div class="bi-statusbar">
-          <div>Completed <strong>12:00 PM</strong> · total infusion time <strong>2 h 55 m</strong> · 1 minor event documented</div>
-          <div class="acts">
+        <div class="card bi-bar">
+          <div>Completed <strong>12:12 PM</strong> · total infusion time <strong>3 h 07 m</strong> · 1 minor event documented</div>
+          <div class="bi-acts">
             <button class="btn btn-sm btn-primary" data-activate="b-13-bay-board" onclick="HCOS.toast('Session closed — the flowsheet attaches to the encounter and Chair 1 frees up.', 'ok')">Complete and close session</button>
           </div>
         </div>
@@ -442,7 +468,7 @@
             </div>
 
             <div class="seg-divider">IV access removed</div>
-            <div class="callout">22 g peripheral · left forearm · removed 12:02 PM · pressure held 2 min · gauze and tape applied · no bleeding · no infiltration at removal</div>
+            <div class="callout">22 g peripheral · left forearm · removed 12:14 PM · pressure held 2 min · gauze and tape applied · no bleeding · no infiltration at removal</div>
 
             <div class="seg-divider">Discharge instructions given</div>
             <div class="bi-checklist">
@@ -459,8 +485,8 @@
               <div class="card-title">Session summary</div>
               <dl class="kv">
                 <dt>Start</dt><dd>9:05 AM</dd>
-                <dt>End</dt><dd>12:00 PM</dd>
-                <dt>Duration</dt><dd>2 h 55 m</dd>
+                <dt>End</dt><dd>12:12 PM</dd>
+                <dt>Duration</dt><dd>3 h 07 m · booked to 12:05 PM</dd>
                 <dt>Volume</dt><dd>250 mL</dd>
                 <dt>Events</dt><dd>1 minor · resolved</dd>
                 <dt>Nurse</dt><dd>Nick, RN</dd>
@@ -470,16 +496,15 @@
 
             <div class="card" style="margin-bottom:14px">
               <div class="card-title">Nurse signature</div>
-              <div class="bi-sig">
-                <div class="bi-sig-name">Nick, RN</div>
-                <div class="bi-sig-meta">12:06 PM · token f8-9c01</div>
-              </div>
+              <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">Nick, RN</div>
+              <div class="clin-src">Signed 12:18 PM · token f8-9c01</div>
             </div>
 
             <div class="card">
               <div class="card-title">Provider co-signature</div>
               <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Sessions with a documented event route to the supervising provider for co-sign.</div>
-              <a class="btn btn-sm" style="width:100%;text-align:center" href="clinical-governance.html">Send to Dr. Drannikov for co-sign</a>
+              <div style="margin-bottom:10px"><span class="appr pending">Pending Dr. Drannikov</span></div>
+              <a class="btn btn-sm" style="width:100%;text-align:center" href="clinical-governance.html#/b-24-cosign">Send to Dr. Drannikov for co-sign</a>
             </div>
           </div>
         </div>
@@ -496,7 +521,11 @@
         <h2 class="page-title">Adverse event / incident report — Chair 2</h2>
         <p class="page-sub">Daniel Okafor · IV vitamin C 25 g · paused at 42% · required for any symptom that interrupts or modifies an infusion</p>
         <div class="prov">
-          <span><strong>Linked to</strong> this administration · signed order <code>O-2402</code> <span class="ver-chip">v1</span> · appointment <code>A-88231</code> — the order text stays as Dr. Drannikov signed it</span>
+          <span><strong>Linked to</strong> this administration · signed order <code>O-2402</code> <span class="ver-chip">v1</span> · appointment <code>A-88231</code> — the order text stays as Dr. Drannikov signed it · <a href="patients.html">open Daniel's chart</a></span>
+        </div>
+        <div class="prov">
+          <span><strong>Source of truth</strong> HCOS writes the incident and the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
+          <span>Filing this creates a report, never a second order.</span>
         </div>
 
         <div class="callout callout-err">
@@ -576,7 +605,7 @@
 
             <div class="field">
               <label class="field-label">Narrative</label>
-              <textarea class="field-textarea" rows="6">Patient reported nausea approximately 30 min into the IV vitamin C 25 g infusion (rate 100 mL/hr, ~42% administered). Onset gradual. Mild diaphoresis observed. Repositioned semi-recumbent. Infusion paused immediately, line maintained with normal saline at TKO. Vitals: BP dropped from 118/72 baseline to 102/64, HR rose from 72 to 88. Dr. Drannikov notified at 11:29 AM and arriving at the bay. Plan pending provider assessment — likely ondansetron, observation, then decide on continuing or discontinuing.</textarea>
+              <textarea class="field-textarea" rows="6">Patient reported nausea 1 h 3 min into the IV vitamin C 25 g infusion — started 10:25 AM, 105 mL of 250 mL given at 100 mL/hr (~42%). Onset gradual. Mild diaphoresis observed. Repositioned semi-recumbent. Infusion paused immediately, line maintained with normal saline at TKO. Vitals: BP dropped from 118/72 baseline to 102/64, HR rose from 72 to 88. Dr. Drannikov notified at 11:29 AM and arriving at the bay. Plan pending provider assessment — likely ondansetron, observation, then decide on continuing or discontinuing.</textarea>
             </div>
 
             <div class="field">
@@ -613,7 +642,7 @@
 
         <div class="seg-divider">What filing this does</div>
         <ul class="check-list">
-          <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Files the event against today's administration and order <code>O-2402</code> v1 — the signed order is untouched</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">order</a></span></li>
+          <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Files the event against today's administration and order <code>O-2402</code> v1 — the signed order is untouched</span><span class="check-meta"><a href="patients.html">chart</a></span></li>
           <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Holds the rest of the series — Jul 24 and Jul 28 — until Dr. Drannikov releases them</span><span class="check-meta"><a href="schedule.html#/l-01-day">calendar</a></span></li>
           <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Sends Dr. Drannikov the decision: resume, reduce the rate, or discontinue</span><span class="check-meta">provider only</span></li>
           <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Adds today's reaction to Daniel's tolerance history for the next readiness run</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">readiness</a></span></li>
@@ -622,7 +651,7 @@
         </ul>
 
         <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center">
-          <button class="btn btn-ghost" data-activate="b-15-flowsheet">Back to flowsheet</button>
+          <button class="btn btn-ghost" data-activate="b-13-bay-board">Back to bay board</button>
           <button class="btn" onclick="HCOS.toast('Draft saved — finish the report from the bay board when the event resolves.', 'ok')">Save draft</button>
           <button class="btn" onclick="HCOS.toast('Dr. Drannikov paged again — the on-call phone is ringing.', 'warn')">Page provider again</button>
           <button class="btn btn-accent btn-lg" style="margin-left:auto" onclick="HCOS.toast('Filed. The series is held, Dr. Drannikov has the decision, and the audit store has the entry.', 'ok'); setTimeout(function(){ window.location.href = 'security.html#/g-01-audit'; }, 1200)">File the incident report</button>
@@ -665,31 +694,36 @@
   </div>
 </div>
 
-<!-- page-local modal: pause or change the rate away from what was ordered -->
+<!-- page-local modal: pause the drip and ask the physician for anything beyond it -->
 <div class="modal-overlay" id="bi-var-modal">
   <div class="modal">
     <div class="modal-head">
       <div>
         <div class="modal-title">Pause — record the reason</div>
-        <div class="modal-sub">Chair 1 · Maya Reyes · against order O-2384 v3 · ordered rate 85 mL/hr</div>
+        <div class="modal-sub">Chair 1 · Maya Reyes · Nick (Nurse) · against order O-2384 v3 · ordered rate 85 mL/hr</div>
       </div>
       <button class="modal-close" data-close-modal>&times;</button>
     </div>
     <div class="modal-body">
+      <div class="callout">Pausing and keeping the line open is Nick's to do, and it takes effect now. Rate, dose and stopping belong to the physician — ask for them here and they stay pending until he signs.</div>
       <div class="field-row">
-        <div class="field"><label class="field-label">Time</label><input class="field-input" value="11:40 AM"></div>
-        <div class="field">
-          <label class="field-label">What changes</label>
-          <select class="field-select">
-            <option selected>Pause · line kept open with saline</option>
-            <option>Rate below what was ordered</option>
-            <option>Stop the infusion</option>
-          </select>
-        </div>
+        <div class="field"><label class="field-label">Time paused</label><input class="field-input" value="11:40 AM"></div>
+        <div class="field"><label class="field-label">Line</label><input class="field-input" value="Kept open with saline at TKO" disabled></div>
       </div>
       <div class="field">
         <label class="field-label">Reason</label>
-        <textarea class="field-textarea" rows="3" placeholder="What you saw and why you are stepping away from the ordered rate…"></textarea>
+        <textarea class="field-textarea" rows="3" placeholder="What you saw and why you stopped the drip…"></textarea>
+        <div class="field-help">A reason is required. It goes on the flowsheet with your initials and into the audit store.</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Ask Dr. Drannikov for</label>
+        <select class="field-select">
+          <option selected>Nothing yet — pause only, he assesses at the chair</option>
+          <option>A rate below the ordered 85 mL/hr</option>
+          <option>Stopping today's infusion</option>
+          <option>A new signed version of the order</option>
+        </select>
+        <div class="field-help">Whatever you ask for is recorded as a request. It stays <span class="appr pending">Pending approval</span> until Dr. Drannikov signs it — the infusion does not resume, slow or stop on this screen.</div>
       </div>
       <div class="field">
         <label class="field-label">Provider told</label>
@@ -698,12 +732,12 @@
           <option>Dr. Bakman — on call</option>
           <option>Brooke, PA — on site</option>
         </select>
-        <div class="field-help">A reason is required, and anything outside the ordered dose or rate needs the provider's approval before it continues.</div>
       </div>
+      <div class="prov"><span><strong>Order <code>O-2384</code> v3 is untouched.</strong> A different dose or ordered rate is a new signed version from a physician or extender — this modal writes the pause, the reason and the request, nothing else</span></div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Paused at 11:40 AM with the reason, your initials, and Dr. Drannikov notified.', 'warn')">Pause and notify</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Paused at 11:40 AM with your reason and initials. Dr. Drannikov notified — any rate change or stop stays pending his signature.', 'warn')">Pause and notify Dr. Drannikov</button>
     </div>
   </div>
 </div>
@@ -715,23 +749,23 @@
   var ask = document.getElementById('bi-ask-review');
   var start = document.getElementById('bi-start');
   var variance = document.getElementById('bi-variance');
-  var state = document.getElementById('bi-mag-state');
-  var src = document.getElementById('bi-mag-src');
+  var state = document.getElementById('bi-ready-state');
+  var src = document.getElementById('bi-ready-src');
 
   if (ask) {
     ask.addEventListener('click', function () {
-      if (cleared) { HCOS.toast('Already reviewed at 11:41 AM by Dr. Drannikov.', 'ok'); return; }
+      if (cleared) { HCOS.toast('Already answered at 11:41 AM by Dr. Drannikov.', 'ok'); return; }
       HCOS.toast('Sent to Dr. Drannikov — Chair 3 stays in Arrived until he answers.', 'ok');
       setTimeout(function () {
         cleared = true;
-        if (state) { state.className = 'clin-state verified'; state.textContent = 'Verified'; }
-        if (src) { src.textContent = 'Intolerance confirmed by Dr. Drannikov · today 11:41 AM · give magnesium over the full 60 min, no push'; }
+        if (state) { state.className = 'appr approved'; state.textContent = 'Approved'; }
+        if (src) { src.textContent = 'Approved by Dr. Drannikov · today 11:41 AM · flare recovery stands, escalation stays held'; }
         if (variance) {
           variance.className = 'callout callout-ok';
-          variance.innerHTML = '<strong>Dr. Drannikov reviewed it at 11:41 AM.</strong> The order stands — magnesium over the full 60 minutes, warmth expected. The allergy list now carries the confirmed intolerance, so every later check sees it.';
+          variance.innerHTML = '<strong>Dr. Drannikov cleared the start at 11:41 AM.</strong> He approved readiness <code>RA-1206</code> v3 at flare recovery and overrode the magnesium warning with a reason — give the magnesium over the full 30 minutes at the ordered rate. Both decisions live on the readiness record and in the audit store, not on this screen.';
         }
         ask.className = 'btn btn-ghost';
-        ask.textContent = 'Reviewed 11:41 AM';
+        ask.textContent = 'Answered 11:41 AM';
         if (start) { start.className = 'btn btn-primary btn-lg'; }
         HCOS.toast('Dr. Drannikov answered — Chair 3 can start.', 'ok');
       }, 1100);
@@ -741,11 +775,11 @@
   if (start) {
     start.addEventListener('click', function () {
       if (!cleared) {
-        HCOS.toast('Cannot start — the magnesium reaction Priya reported today has not been reviewed. Ask Dr. Drannikov, or defer with a reason.', 'warn');
+        HCOS.toast('Cannot start — readiness RA-1206 v3 is still pending and the magnesium warning is not overridden. Ask Dr. Drannikov, or defer with a reason.', 'warn');
         return;
       }
-      HCOS.toast('Infusion started — the flowsheet is recording against order O-2417 v2.', 'ok');
-      HCOS.activate('b-15-flowsheet');
+      HCOS.toast('Infusion started at 11:42 AM — Chair 3 is in chair and the flowsheet is recording against order O-2291 v1.', 'ok');
+      HCOS.activate('b-13-bay-board');
     });
   }
 })();

@@ -32,11 +32,11 @@
         <span class="frame-url">hcos.helixona.com/intake/front-desk</span></div>
       <div class="frame-body">
         <h2 class="page-title">Today's schedule</h2>
-        <p class="page-sub">Tuesday, July 21 · 11:40 AM · every visit, who is checked in, and what the front desk still needs</p>
+        <p class="page-sub">Tuesday, July 21 · 11:40 AM · Dr. Drannikov and the infusion suite — who is checked in and what the front desk still needs</p>
 
         <div class="prov">
-          <span><strong>From</strong> the scheduling service · one appointment ID per visit · <a href="schedule.html#/l-01-day">day view</a></span>
-          <span><strong>Readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v2.4</span> · <a href="readiness.html#/i-01-readiness">engine</a></span>
+          <span><strong>Source of truth</strong> the HCOS scheduling service — one appointment ID per visit, no second copy here · eCW receives a read-only sync of this domain · <a href="schedule.html#/l-01-day">day view</a></span>
+          <span><strong>Readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v3.2</span> · written in HCOS since the module launched; eCW receives the approved summary · <a href="readiness.html#/i-01-readiness">engine</a></span>
         </div>
 
         <div class="afd-toolbar">
@@ -59,7 +59,7 @@
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
             <div class="stat-num">14</div>
-            <div class="stat-lbl">Appointments today</div>
+            <div class="stat-lbl">Appointments · Dr. Drannikov + chairs</div>
           </div>
           <div class="card stat-card">
             <div class="stat-num">7</div>
@@ -105,7 +105,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>8:30 – 10:00</td>
                 <td><div class="afd-prow"><span class="avatar">MW</span><span class="afd-pname">Marcus Webb</span></div></td>
                 <td>New patient consult · 90m</td>
@@ -114,7 +114,7 @@
                 <td><span class="pill pill-ok">Ready</span></td>
                 <td><span style="color:var(--muted)">Checked in 8:24</span></td>
               </tr>
-              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>9:00 – 12:00</td>
                 <td><div class="afd-prow"><span class="avatar">MR</span><span class="afd-pname">Maya Reyes</span></div></td>
                 <td>NAD+ infusion · ~3 h</td>
@@ -123,7 +123,7 @@
                 <td><span class="pill pill-ok">Ready</span></td>
                 <td><span style="color:var(--muted)">Checked in 8:52</span></td>
               </tr>
-              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>10:00 – 12:30</td>
                 <td><div class="afd-prow"><span class="avatar">DO</span><span class="afd-pname">Daniel Okafor</span></div></td>
                 <td>IV vitamin C 25 g · 2.5 h</td>
@@ -132,7 +132,7 @@
                 <td><span class="pill pill-ok">Ready</span></td>
                 <td><span style="color:var(--muted)">Checked in 9:55</span></td>
               </tr>
-              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>10:30</td>
                 <td><div class="afd-prow"><span class="avatar">GL</span><span class="afd-pname">Grace Lindqvist</span></div></td>
                 <td>Follow-up · 30m</td>
@@ -141,32 +141,32 @@
                 <td><span class="pill pill-ok">Ready</span></td>
                 <td><span style="color:var(--muted)">Checked in 10:21</span></td>
               </tr>
-              <tr class="row-click" data-activate="a-30-readiness-board">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>11:15</td>
                 <td><div class="afd-prow"><span class="avatar">SR</span><span class="afd-pname">Sofia Ramos</span></div></td>
                 <td>Lab draw · 15m</td>
                 <td>Chair 4 · Nate</td>
                 <td><span class="pill pill-st st-arrived">Arrived</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" onclick="event.stopPropagation(); HCOS.activate('a-30-readiness-board')">Front desk items</span></td>
                 <td><span style="color:var(--muted)">Checked in 11:08</span></td>
               </tr>
-              <tr class="row-click" data-activate="a-30-readiness-board">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>11:30</td>
                 <td><div class="afd-prow"><span class="avatar">EP</span><span class="afd-pname">Elena Petrova</span></div></td>
                 <td>Telehealth · 30m</td>
                 <td>Telehealth · Dr. Drannikov</td>
                 <td><span class="pill pill-st st-arrived">Arrived</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" onclick="event.stopPropagation(); HCOS.activate('a-30-readiness-board')">Front desk items</span></td>
                 <td><span style="color:var(--muted)">Joined 11:26</span></td>
               </tr>
-              <tr class="row-click" data-activate="a-32-checkin-confirm">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>11:30 – 12:30</td>
                 <td><div class="afd-prow"><span class="avatar">PN</span><span class="afd-pname">Priya Natarajan</span></div></td>
                 <td>Myers' cocktail · 1 h</td>
                 <td>Chair 3 · Juan</td>
                 <td><span class="pill pill-st st-arrived">Arrived</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
-                <td><span style="color:var(--muted)">Checked in 11:22</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.activate('a-32-checkin-confirm')">Open the 11:22 arrival</button></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>1:00 – 4:00 PM</td>
@@ -177,16 +177,16 @@
                 <td><span class="pill pill-ok">Ready</span></td>
                 <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Walter Hsu marked Arrived on appointment A-7712 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
-              <tr class="row-click" data-activate="a-30-readiness-board">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>1:30 PM</td>
                 <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
                 <td>Follow-up · 30m</td>
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" onclick="event.stopPropagation(); HCOS.activate('a-30-readiness-board')">Front desk items</span></td>
                 <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Nadia Boulos marked Arrived on appointment A-7718 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
-              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>2:00 PM</td>
                 <td><div class="afd-prow"><span class="avatar">GL</span><span class="afd-pname">Grace Lindqvist</span></div></td>
                 <td>Follow-up · 30m</td>
@@ -195,49 +195,49 @@
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span style="color:var(--muted)">—</span></td>
               </tr>
-              <tr class="row-click" data-activate="a-30-readiness-board">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>2:00 – 3:00 PM</td>
                 <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
                 <td>Myers' cocktail · 1 h</td>
                 <td>Chair 4 · Nate</td>
                 <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
-                <td><span class="pill pill-err afd-chip-link" data-activate="a-30-readiness-board">Blocked · readiness</span></td>
-                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Sent to Dr. Drannikov — he clears the readiness or moves the visit. The front desk cannot lift this block.', 'warn')">Ask Dr. Drannikov</button></td>
+                <td><span class="pill pill-err afd-chip-link" onclick="event.stopPropagation(); HCOS.activate('a-30-readiness-board')">Blocked · readiness</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Sent to Dr. Bakman — the readiness clears or the visit moves. The front desk cannot lift this block.', 'warn')">Ask Dr. Bakman</button></td>
               </tr>
-              <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
-                <td>2:00 PM</td>
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
+                <td>2:30 PM</td>
                 <td><div class="afd-prow"><span class="avatar">MW</span><span class="afd-pname">Marcus Webb</span></div></td>
                 <td>Glutathione push · 30m</td>
                 <td>Chair 4 · Nate</td>
                 <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
-                <td><span class="pill pill-ok">Ready</span></td>
+                <td><span class="pill pill-ok">Ready</span> <span class="clin-src">shares the tail of Chair 4</span></td>
                 <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Marcus Webb marked Arrived on appointment A-7724 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
-              <tr class="row-click" data-activate="a-30-readiness-board">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>3:00 – 4:30 PM</td>
                 <td><div class="afd-prow"><span class="avatar">TA</span><span class="afd-pname">Tom Alvarez</span></div></td>
                 <td>New patient consult · 90m</td>
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
-                <td><span class="pill pill-err afd-chip-link" data-activate="a-30-readiness-board">2 consents unsigned</span></td>
+                <td><span class="pill pill-warn afd-chip-link" onclick="event.stopPropagation(); HCOS.activate('a-30-readiness-board')">2 consents unsigned</span></td>
                 <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Tom Alvarez marked Arrived on appointment A-7726 — the unsigned consents stay flagged.', 'ok')">Check in</button></td>
               </tr>
-              <tr class="row-click" data-activate="a-30-readiness-board">
+              <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>3:30 PM</td>
                 <td><div class="afd-prow"><span class="avatar">SR</span><span class="afd-pname">Sofia Ramos</span></div></td>
                 <td>Glutathione push · 30m</td>
                 <td>Chair 3 · Juan</td>
                 <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" onclick="event.stopPropagation(); HCOS.activate('a-30-readiness-board')">Front desk items</span></td>
                 <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Sofia Ramos marked Arrived on appointment A-7729 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout callout-err" style="margin-top:14px">Nadia Boulos' 2:00 PM Myers' cocktail cannot start — readiness is Physician review. Dr. Drannikov clears it or moves the visit; this one is not overridable at the front desk. <a href="readiness.html#/i-01-readiness">Open her readiness</a></div>
+        <div class="callout callout-err" style="margin-top:14px">Nadia Boulos' 2:00 PM Myers' cocktail cannot start — readiness <code>RA-1211</code> <span class="ver-chip">v4</span> is Physician review, pending with Dr. Bakman since Jul 19. Dr. Bakman clears it or moves the visit; this one is not overridable at the front desk. <a href="readiness.html#/i-01-readiness">Open her readiness</a></div>
 
-        <div class="callout callout-warn" style="margin-top:10px">Chair 4 is double-booked at 2:00 PM — Marcus Webb overlaps Nadia Boulos. Overridden 9:12 AM by Karina · Operations Manager: "Glutathione push is 30 minutes and finishes before the Myers' cocktail hangs." <a href="security.html#/g-01-audit">See the log</a> · <a href="schedule-rules.html#/lr-01-rules">Chair overlap rule</a></div>
+        <div class="callout callout-warn" style="margin-top:10px">Chair 4 is shared at 2:30 PM — Marcus Webb's 30-minute glutathione push starts while Nadia Boulos' Myers' cocktail is still hanging. The chair rule warns rather than blocks; Nate agrees to the overlap or the push moves. <a href="schedule.html#/l-01-day">See it on the day view</a> · <a href="schedule-rules.html#/lr-01-rules">Chair overlap rule</a></div>
 
         <div class="ai-block">
           <div class="ai-head">
@@ -261,7 +261,7 @@
           </div>
         </div>
 
-        <div class="field-help" style="margin-top:8px">Select a Prerequisites chip to see what is missing and who resolves it. Visit status is set here; clinical clearance is not.</div>
+        <div class="field-help" style="margin-top:8px">Select a Prerequisites chip to see what is missing and who resolves it. A dashed chip is a front desk item; a solid chip is a clinical block only a physician lifts. Visit status is set here; clinical clearance is not. Dr. Bakman's and Brooke's visits are on the full calendar.</div>
       </div>
     </div>
   </section>
@@ -282,8 +282,8 @@
         </div>
 
         <div class="prov">
-          <span><strong>Clinical readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v2.4</span> · evaluated 7:00 AM · <a href="readiness.html#/i-01-readiness">engine</a></span>
-          <span><strong>Front desk items</strong> from the onboarding record · <a href="intake-onboarding.html">open</a></span>
+          <span><strong>Clinical readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v3.2</span> · evaluated 7:00 AM · HCOS-native since the module launched, eCW receives the approved summary · <a href="readiness.html#/i-01-readiness">engine</a></span>
+          <span><strong>Front desk items</strong> from the onboarding record · eCW writes demographics and coverage until those domains cut over; HCOS reads them · <a href="intake-onboarding.html">open</a></span>
         </div>
 
         <div class="card" style="margin-bottom:12px">
@@ -328,7 +328,8 @@
                   <td>1:30 PM · Follow-up</td>
                   <td>8 of 8 complete</td>
                   <td><a class="pill pill-warn afd-chip-link" href="clinical-questionnaires.html">Pre-visit questionnaire</a></td>
-                  <td><a class="pill pill-err afd-chip-link" href="readiness.html#/i-01-readiness">Physician review</a></td>
+                  <td><a class="pill pill-err afd-chip-link" href="readiness.html#/i-01-readiness">Physician review</a>
+                    <div class="clin-src" style="margin-top:4px"><code>RA-1211</code> <span class="ver-chip">v4</span> · pending with Dr. Bakman since Jul 19</div></td>
                 </tr>
                 <tr>
                   <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
@@ -337,7 +338,7 @@
                   <td><span style="color:var(--muted)">None</span></td>
                   <td>
                     <a class="pill pill-err afd-chip-link" href="readiness.html#/i-01-readiness">Physician review</a>
-                    <div class="clin-src" style="margin-top:4px">Blocked until Dr. Drannikov decides</div>
+                    <div class="clin-src" style="margin-top:4px"><code>RA-1211</code> <span class="ver-chip">v4</span> · blocked until Dr. Bakman decides</div>
                   </td>
                 </tr>
               </tbody>
@@ -345,7 +346,7 @@
           </div>
         </div>
 
-        <div class="callout callout-ok" style="margin-bottom:20px">Everyone else on today's schedule is ready — 7 patients, nothing missing.</div>
+        <div class="callout callout-ok" style="margin-bottom:20px">The other 7 visits on today's schedule are ready — 6 patients, nothing missing. Grace Lindqvist's cancelled 2:00 PM follow-up is not counted.</div>
 
         <div class="afd-header-row">
           <span class="avatar lg">TA</span>
@@ -354,7 +355,7 @@
             <div class="afd-demo">New patient consult · today 3:00 PM · Dr. Drannikov · Cigna PPO</div>
           </div>
           <span class="pill pill-st st-scheduled">Scheduled</span>
-          <span class="pill pill-err">2 consents unsigned</span>
+          <span class="pill pill-warn">2 consents unsigned</span>
           <span class="pill pill-muted">Readiness not assessed</span>
         </div>
 
@@ -409,18 +410,20 @@
             <button class="btn afd-resolve-btn" onclick="HCOS.toast('Queued for the kiosk — the missing consents load first when Tom checks in.', 'ok')">Send to kiosk when he arrives</button>
             <button class="btn afd-resolve-btn" onclick="HCOS.toast('(949) 555-0176 — the call outcome logs to the intake timeline.')">Call Tom now</button>
             <button class="btn afd-resolve-btn" onclick="HCOS.toast('Handed off — Charlene walks Tom through the consents by phone.', 'ok')">Hand off to Charlene (Virtual)</button>
-            <button class="btn afd-resolve-btn" style="margin-bottom:0" onclick="HCOS.toast('Sent to Dr. Drannikov with your note. The visit stays flagged until he decides.', 'warn')">Send to Dr. Drannikov to decide</button>
+            <button class="btn afd-resolve-btn" style="margin-bottom:0" onclick="HCOS.toast('Sent to Dr. Drannikov, who sees Tom at 3:00 PM. The consents stay flagged until he decides.', 'warn')">Send the consent exception to Dr. Drannikov</button>
 
             <div class="seg-divider">Who may do what</div>
             <dl class="kv">
               <dt>Front desk</dt><dd>Consents, documents, links, kiosk, visit status</dd>
-              <dt>Physician or extender</dt><dd>Clinical clearance, and any exception to it</dd>
+              <dt>Physician or extender</dt><dd>Clinical clearance, and any exception to it — the physician named on the assessment, not the visit</dd>
             </dl>
+            <div class="field-help">Nadia Boulos' readiness block is pending with Dr. Bakman; Tom's consents go to Dr. Drannikov, his provider today.</div>
 
             <div class="seg-divider">Eligibility</div>
             <div style="font-size:12.5px"><span class="pill pill-ok">Active</span> Cigna PPO <span class="net-badge net-oon">OON</span> · self-funded · ERISA</div>
             <div class="prov">
               <span><strong>Snapshot</strong> Jul 21, 7:02 AM · <code>ELIG-4471</code> · earlier responses kept</span>
+              <span><strong>Source of truth</strong> eCW writes coverage and eligibility until that domain cuts over; HCOS reads them</span>
               <span><a href="patients.html#/pt-02-profile">Coverage</a></span>
             </div>
             <div class="field-help">SPD requested Jul 18 — the governing plan document has not arrived yet.</div>
@@ -463,6 +466,7 @@
 
         <div class="prov">
           <span><strong>From</strong> the person master · one person, one record · <a href="people.html#/pe-01-search">open</a></span>
+          <span><strong>Source of truth</strong> eCW writes demographics until the person domain activates in HCOS · HCOS reads them and appends lifecycle events</span>
         </div>
 
         <div class="grid-sidebar">
@@ -528,7 +532,8 @@
                   <span><b>Compared</b> name, date of birth, phone, address</span>
                   <span><b>Model</b> match-v2.1</span>
                   <span><b>Confidence</b> 0.93</span>
-                  <span><b>Decides</b> Front desk or PCC — merging is never automatic</span>
+                  <span><b>Reviewer</b> Yazmin · Front desk</span>
+                  <span><b>Decides</b> Yazmin or a PCC — merging is never automatic, and never by HCOS</span>
                 </div>
                 <div class="ai-actions">
                   <a class="btn btn-sm" href="people.html#/pe-03-duplicates">Review both records</a>
@@ -661,20 +666,22 @@
         </div>
 
         <div class="prov">
-          <span><strong>Appointment</strong> <code>A-7719</code> · arrival event appended by Yazmin · <a href="schedule.html#/l-04-appt">open</a></span>
-          <span><strong>Readiness</strong> Flare recovery · cleared for Myers by Dr. Drannikov Jul 20 · <a href="readiness.html#/i-01-readiness">engine</a></span>
+          <span><strong>Appointment</strong> <code>A-7719</code> · arrival event appended by Yazmin on the HCOS scheduling service · eCW receives a read-only sync of this domain · <a href="schedule.html#/l-04-appt">open</a></span>
+          <span><strong>Readiness</strong> <code>RA-1206</code> <span class="ver-chip">v3</span> · Flare recovery · <span class="appr pending">Pending</span> Dr. Drannikov since Jul 19 · <a href="readiness.html#/i-01-readiness">engine</a></span>
         </div>
 
-        <div class="grid-3">
+        <div class="callout callout-warn" style="margin-top:12px">Readiness is Flare recovery and still pending with Dr. Drannikov since Jul 19 — Rule 2 held the escalation after Sunday's flare report. Today's session runs at the flare-recovery level under signed order <code>O-2291</code>; any escalation waits on his decision. The front desk records the arrival, never the clearance. <a href="readiness.html#/i-01-readiness">Open her readiness</a></div>
+
+        <div class="grid-3" style="margin-top:12px">
           <div class="card">
             <div class="card-title">Sent to chair team</div>
             <div style="font-size:12.5px"><span class="dot dot-ok"></span>Juan notified · Chair 3</div>
-            <div class="field-help" style="margin-top:4px"><a href="intake-previsit.html">Pre-visit chart opened</a></div>
+            <div class="field-help" style="margin-top:4px">Runs at the flare-recovery level · <a href="intake-previsit.html">pre-visit chart opened</a></div>
           </div>
           <div class="card">
             <div class="card-title">Sent to provider</div>
-            <div style="font-size:12.5px"><span class="dot dot-ok"></span>Dr. Drannikov notified</div>
-            <div class="field-help" style="margin-top:4px">Visit at 11:30 · orders on file</div>
+            <div style="font-size:12.5px"><span class="dot dot-ok"></span>Dr. Drannikov notified · readiness decision waiting</div>
+            <div class="field-help" style="margin-top:4px">Visit at 11:30 · order <code>O-2291</code> on file · escalation held until he decides</div>
           </div>
           <div class="card">
             <div class="card-title">Patient told</div>

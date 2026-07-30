@@ -264,6 +264,10 @@
           <div>
             <div class="page-title">Operational report</div>
             <div class="page-sub">Tuesday, July 21 · the clinic patient by patient, and what each one is worth.</div>
+            <div class="prov" style="margin-top:6px">
+              <span><strong>Calculated from</strong> appointments, claims, coverage and plan records &middot;
+              <strong>refreshed</strong> today 11:35 AM &middot; every figure drills through to its source</span>
+            </div>
           </div>
           <div class="app-user">
             <button class="btn" onclick="HCOS.toast('Report exported as a spreadsheet.', 'ok')">Export</button>
@@ -340,76 +344,76 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Patient</th><th>Type</th><th>Membership</th><th>Coverage</th>
+                <th>Patient</th><th>Care pathway</th><th>Access level</th><th>Coverage</th>
                 <th>Visits MTD</th><th>Billed</th><th>Patient owes</th><th>Watch</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Maya Reyes</strong></td><td>Complex chronic</td>
+                <td><strong>Maya Reyes</strong></td><td>Complex Chronic Care</td>
                 <td><span class="pill pill-navy">Restore</span></td>
                 <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
                 <td>6</td><td>$5,100</td><td>$0</td>
                 <td><span class="pill pill-err">Out-of-pocket max met</span></td>
               </tr>
               <tr>
-                <td><strong>Walter Hsu</strong></td><td>Complex chronic</td>
+                <td><strong>Walter Hsu</strong></td><td>Complex Chronic Care</td>
                 <td><span class="pill pill-navy">Longevity</span></td>
                 <td>Cigna <span class="net-badge net-oon">OON</span></td>
                 <td>6</td><td>$5,100</td><td>$1,840</td>
                 <td><span class="pill pill-warn">Self-funded · SPD on file</span></td>
               </tr>
               <tr>
-                <td><strong>Priya Natarajan</strong></td><td>Complex chronic</td>
+                <td><strong>Priya Natarajan</strong></td><td>Complex Chronic Care</td>
                 <td><span class="pill pill-navy">Restore</span></td>
                 <td>Blue Shield <span class="net-badge net-oon">OON</span></td>
                 <td>1</td><td>$225</td><td>$135</td>
                 <td><span class="pill pill-warn">1 of 5 sessions used</span></td>
               </tr>
               <tr>
-                <td><strong>Daniel Okafor</strong></td><td>Chronic</td>
-                <td><span class="pill">Wellness</span></td>
+                <td><strong>Daniel Okafor</strong></td><td>Recovery</td>
+                <td><span class="pill">Vitality</span></td>
                 <td>Anthem <span class="net-badge net-inn">INN</span></td>
                 <td>4</td><td>$1,700</td><td>$340</td>
                 <td>—</td>
               </tr>
               <tr>
-                <td><strong>Nadia Boulos</strong></td><td>Chronic</td>
-                <td><span class="pill">Wellness</span></td>
+                <td><strong>Nadia Boulos</strong></td><td>Recovery</td>
+                <td><span class="pill">Vitality</span></td>
                 <td>Anthem <span class="net-badge net-inn">INN</span></td>
                 <td>2</td><td>$450</td><td>$90</td>
                 <td><span class="pill pill-warn">Readiness · physician review</span></td>
               </tr>
               <tr>
-                <td><strong>Grace Lindqvist</strong></td><td>Wellness</td>
-                <td><span class="pill">Wellness</span></td>
+                <td><strong>Grace Lindqvist</strong></td><td>Vitality</td>
+                <td><span class="pill">Vitality</span></td>
                 <td><span class="net-badge net-self">CASH</span></td>
                 <td>3</td><td>$685</td><td>$0</td>
                 <td><span class="pill pill-warn">Tier fully used</span></td>
               </tr>
               <tr>
-                <td><strong>Tom Alvarez</strong></td><td>Self-directed</td>
+                <td><strong>Tom Alvarez</strong></td><td>Health Optimization</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
                 <td>Cigna <span class="net-badge net-oon">OON</span></td>
                 <td>1</td><td>$1,200</td><td>$1,200</td>
                 <td><span class="pill pill-warn">SPD requested</span></td>
               </tr>
               <tr>
-                <td><strong>Marcus Webb</strong></td><td>Chronic</td>
+                <td><strong>Marcus Webb</strong></td><td>Recovery</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
                 <td>Anthem <span class="net-badge net-inn">INN</span></td>
                 <td>1</td><td>$495</td><td>$99</td>
                 <td><span class="pill">Membership offered</span></td>
               </tr>
               <tr>
-                <td><strong>Sofia Ramos</strong></td><td>Self-directed</td>
+                <td><strong>Sofia Ramos</strong></td><td>Health Optimization</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
                 <td>Blue Shield <span class="net-badge net-oon">OON</span></td>
                 <td>2</td><td>$540</td><td>$324</td>
                 <td>—</td>
               </tr>
               <tr>
-                <td><strong>Elena Petrova</strong></td><td>Wellness</td>
+                <td><strong>Elena Petrova</strong></td><td>Vitality</td>
                 <td><span class="pill pill-muted">Pay as you go</span></td>
                 <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
                 <td>1</td><td>$225</td><td>$135</td>
@@ -421,21 +425,24 @@
 
         <div class="grid-3" style="margin-top:20px">
           <div class="card">
-            <div class="card-title">Patient mix</div>
-            <div class="l-op-row"><span>Complex chronic</span><div class="meter"><div class="meter-fill" style="width:24%"></div></div><span class="meter-val">99</span></div>
-            <div class="l-op-row"><span>Chronic</span><div class="meter"><div class="meter-fill" style="width:38%"></div></div><span class="meter-val">157</span></div>
-            <div class="l-op-row"><span>Wellness</span><div class="meter"><div class="meter-fill" style="width:27%"></div></div><span class="meter-val">111</span></div>
-            <div class="l-op-row"><span>Self-directed</span><div class="meter"><div class="meter-fill" style="width:11%"></div></div><span class="meter-val">45</span></div>
+            <div class="card-title">Care pathway mix</div>
+            <div class="prov"><span><strong>Definition</strong> pathway field on the plan of care, counted at its current version</span></div>
+            <div class="l-op-row"><span>Complex Chronic Care</span><div class="meter"><div class="meter-fill" style="width:24%"></div></div><span class="meter-val">99</span></div>
+            <div class="l-op-row"><span>Recovery</span><div class="meter"><div class="meter-fill" style="width:38%"></div></div><span class="meter-val">157</span></div>
+            <div class="l-op-row"><span>Vitality</span><div class="meter"><div class="meter-fill" style="width:27%"></div></div><span class="meter-val">111</span></div>
+            <div class="l-op-row"><span>Health Optimization</span><div class="meter"><div class="meter-fill" style="width:11%"></div></div><span class="meter-val">45</span></div>
           </div>
           <div class="card">
-            <div class="card-title">Membership mix</div>
+            <div class="card-title">Access level mix</div>
+            <div class="prov"><span><strong>Definition</strong> access level on the person record, counted today</span></div>
             <div class="l-op-row"><span>Longevity</span><div class="meter"><div class="meter-fill" style="width:13%"></div></div><span class="meter-val">31</span></div>
             <div class="l-op-row"><span>Restore</span><div class="meter"><div class="meter-fill" style="width:52%"></div></div><span class="meter-val">126</span></div>
-            <div class="l-op-row"><span>Wellness</span><div class="meter"><div class="meter-fill" style="width:35%"></div></div><span class="meter-val">84</span></div>
+            <div class="l-op-row"><span>Vitality</span><div class="meter"><div class="meter-fill" style="width:35%"></div></div><span class="meter-val">84</span></div>
             <div class="l-op-row"><span>Pay as you go</span><div class="meter"><div class="meter-fill" style="width:71%"></div></div><span class="meter-val">171</span></div>
           </div>
           <div class="card">
             <div class="card-title">Needs a person to act</div>
+            <div class="prov"><span><strong>Definition</strong> open work items owned by a named person</span></div>
             <ul class="check-list">
               <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">11 patients past their out-of-pocket max</span><span class="check-meta">quote nothing old</span></li>
               <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">7 memberships lapsing this month</span><span class="check-meta">card or payment</span></li>

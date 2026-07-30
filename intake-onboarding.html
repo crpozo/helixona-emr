@@ -20,9 +20,8 @@
   .ob-scale .filter-chip { flex: 1; text-align: center; padding-left: 0; padding-right: 0; }
   .ob-scale-ends { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); margin-top: 4px; }
   .ob-progress { background: var(--hx-light); border-radius: 8px; padding: 10px 14px; margin-bottom: 18px; font-size: 12px; color: var(--hx-navy); }
-  .ob-meter { height: 6px; background: var(--hx-light); border-radius: 3px; margin-top: 6px; overflow: hidden; }
-  .ob-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
-  .ob-card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; font-size: 12.5px; }
+  .ob-progress .meter { margin-top: 6px; }
+  .ob-card { padding: 12px 14px; margin-bottom: 8px; font-size: 12.5px; }
   .ob-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
   .ob-card.ob-hard { border-left: 3px solid var(--ink); }
   .ob-card.ob-soft { border-left: 3px dashed var(--muted); }
@@ -61,7 +60,7 @@
         </div>
         <div class="field">
           <label class="field-label">Last 4 of your phone number</label>
-          <input class="field-input" type="text" placeholder="0184">
+          <input class="field-input" type="text" placeholder="0119">
         </div>
 
         <button class="btn btn-primary btn-lg ob-full" data-activate="a-14-checklist" style="margin-top:18px">Verify and continue</button>
@@ -81,7 +80,7 @@
 
         <div class="ob-progress">
           <strong>1 of 12 complete</strong> · about 12 minutes remaining
-          <div class="ob-meter"><div class="ob-meter-fill" style="width:8%"></div></div>
+          <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
         </div>
 
         <ul class="check-list">
@@ -155,16 +154,16 @@
           <dt>Legal name</dt><dd>Sarah Anderson</dd>
           <dt>Date of birth</dt><dd>Mar 14, 1988</dd>
           <dt>Sex at birth</dt><dd>Female</dd>
-          <dt>Mobile</dt><dd>(949) 555-0184</dd>
-          <dt>Email</dt><dd>sarah@example.com</dd>
+          <dt>Mobile</dt><dd>(949) 555-0119</dd>
+          <dt>Email</dt><dd>sarah.a@example.com</dd>
           <dt>Address</dt><dd>2148 Alton Pkwy, Irvine, CA 92606</dd>
         </dl>
         <div class="prov">
-          <span><strong>From</strong> your record <code>P-005841</code> · you gave this on the inquiry form, Jul 15 · <a href="people.html#/pe-02-person">open</a></span>
+          <span><strong>Shown from</strong> the one record Helixona keeps for you, <code>P-004901</code> · you gave this on the inquiry form, Sun Jul 19 · <a href="people.html#/pe-02-person">open</a></span>
         </div>
 
         <div class="seg-divider">Something not right?</div>
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div class="ob-card-name"><strong>Email</strong><span class="appr pending">Pending review</span></div>
           </div>
@@ -207,7 +206,7 @@
           <input class="field-input" type="text" placeholder="Same as above, or different">
         </div>
         <div class="prov">
-          <span><strong>Saved to</strong> the same record <code>P-005841</code> — these three are yours to set</span>
+          <span><strong>Saved to</strong> the same record <code>P-004901</code> — these three are yours to set</span>
         </div>
 
         <div class="seg-divider">Emergency contact</div>
@@ -233,7 +232,7 @@
           <div class="field-help">Just one number is fine — we only call this person if we can't reach you in an emergency.</div>
         </div>
         <div class="prov">
-          <span><strong>Goes to</strong> your record <code>P-005841</code> · nowhere else</span>
+          <span><strong>Goes to</strong> your record <code>P-004901</code> · nowhere else</span>
         </div>
 
         <button class="btn btn-primary btn-lg ob-full" data-activate="a-16-conditions" style="margin-top:12px">Continue</button>
@@ -251,7 +250,7 @@
         <div class="ob-sub">Include conditions even if they're no longer active. This is your account of them — Dr. Drannikov confirms what becomes a diagnosis when you meet.</div>
 
         <div class="seg-divider" style="margin-top:0">Common conditions — tap any that apply</div>
-        <div class="ob-chips" style="margin-bottom:14px">
+        <div class="ob-chips" data-ob-condition-chips style="margin-bottom:14px">
           <button class="filter-chip active">Long COVID / PASC</button>
           <button class="filter-chip active">Hashimoto's thyroiditis</button>
           <button class="filter-chip">Autoimmune disorder</button>
@@ -279,10 +278,10 @@
         </div>
 
         <div class="seg-divider">Your selected conditions — add detail</div>
-        <div class="ob-card">
+        <div class="card ob-card" data-ob-condition="Long COVID / PASC">
           <div class="ob-card-head">
             <div class="ob-card-name"><strong>Long COVID / PASC</strong><span class="clin-state reported">Reported</span></div>
-            <button class="btn btn-sm" onclick="this.closest('.ob-card').remove(); HCOS.toast('Removed from what you reported. Your chart keeps the earlier version.', 'ok')">Remove</button>
+            <button class="btn btn-sm" data-ob-remove>Remove</button>
           </div>
           <div class="clin-src" style="margin-bottom:8px">You told us · Jul 21, 2026</div>
           <div class="field-row" style="gap:8px">
@@ -307,10 +306,10 @@
           <div class="ob-card-note">No provider has confirmed this one yet.</div>
         </div>
 
-        <div class="ob-card">
+        <div class="card ob-card" data-ob-condition="Hashimoto's thyroiditis">
           <div class="ob-card-head">
             <div class="ob-card-name"><strong>Hashimoto's thyroiditis</strong><span class="clin-state reported">Reported</span></div>
-            <button class="btn btn-sm" onclick="this.closest('.ob-card').remove(); HCOS.toast('Removed from what you reported. Your chart keeps the earlier version.', 'ok')">Remove</button>
+            <button class="btn btn-sm" data-ob-remove>Remove</button>
           </div>
           <div class="clin-src" style="margin-bottom:8px">You told us · Jul 21, 2026 · diagnosed elsewhere in 2020</div>
           <div class="field-row" style="gap:8px">
@@ -335,13 +334,13 @@
           <div class="ob-card-note">Records requested from your endocrinologist to confirm it.</div>
         </div>
 
-        <button class="btn btn-sm" style="margin-bottom:12px" onclick="HCOS.toast('Tap a chip above — it becomes a detail card here.', 'ok')">+ Add another condition</button>
+        <button class="btn btn-sm" id="ob-add-condition" style="margin-bottom:12px" onclick="HCOS.toast('Tap a chip above — it becomes a detail card here.', 'ok')">+ Add another condition</button>
 
         <div class="prov" style="margin-bottom:14px">
           <span><strong>Goes to</strong> your chart as reported by you · a provider decides what joins the <a href="clinical-chart.html#/b-05-problem-list">problem list</a></span>
         </div>
 
-        <button class="btn btn-primary btn-lg ob-full" data-activate="a-17-symptoms">Continue to symptoms</button>
+        <button class="btn btn-primary btn-lg ob-full" data-activate="a-17-symptoms">Continue</button>
       </div>
     </div>
   </section>
@@ -416,7 +415,7 @@
         </div>
 
         <div class="seg-divider">Severity and impact</div>
-        <div class="ob-card" style="margin-bottom:10px">
+        <div class="card ob-card" style="margin-bottom:10px">
           <strong>How would you rate your overall symptom severity today?</strong>
           <div class="ob-scale" data-chip-single>
             <button class="filter-chip">1</button>
@@ -475,7 +474,7 @@
 
         <div class="seg-divider" style="margin-top:0">Your allergies</div>
 
-        <div class="ob-card ob-hard">
+        <div class="card ob-card ob-hard">
           <div class="ob-card-head">
             <div class="ob-card-name"><strong>Sulfa drugs</strong><span class="clin-state reported">Reported</span></div>
             <button class="btn btn-sm">Edit</button>
@@ -510,7 +509,7 @@
           <div class="ob-card-note">Blocking sulfa in ordering already — it stays blocked while a provider verifies it.</div>
         </div>
 
-        <div class="ob-card ob-soft">
+        <div class="card ob-card ob-soft">
           <div class="ob-card-head">
             <div class="ob-card-name"><strong>Gluten</strong><span class="clin-state reported">Reported</span></div>
             <button class="btn btn-sm">Edit</button>
@@ -521,7 +520,7 @@
               <label class="field-label">Type</label>
               <select class="field-select">
                 <option>Drug</option>
-                <option selected>Food sensitivity</option>
+                <option selected>Food</option>
                 <option>Environmental</option>
                 <option>Latex</option>
                 <option>Contrast</option>
@@ -531,9 +530,10 @@
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Severity</label>
               <select class="field-select">
-                <option selected>Mild-moderate</option>
-                <option>Moderate</option>
+                <option>Mild</option>
+                <option selected>Moderate</option>
                 <option>Severe</option>
+                <option>Life-threatening</option>
               </select>
             </div>
           </div>
@@ -544,7 +544,7 @@
           <div class="ob-card-note">Warns during ordering — you have told us it is a sensitivity, not confirmed celiac.</div>
         </div>
 
-        <button class="btn btn-sm" style="margin-bottom:12px" onclick="HCOS.toast('New allergy card added below — describe the reaction.', 'ok')">+ Add allergy or sensitivity</button>
+        <button class="btn btn-sm" style="margin-bottom:12px" data-ob-add="allergy">+ Add allergy or sensitivity</button>
 
         <div class="prov" style="margin-bottom:14px">
           <span><strong>Goes to</strong> the one <a href="clinical-chart.html#/b-07-allergies">allergy list</a> every safety check reads · Nick reconciles it, Dr. Drannikov verifies it</span>
@@ -583,9 +583,9 @@
         <div class="ob-h">Prescription medications</div>
         <div class="ob-sub">Everything you're currently taking that requires a prescription. Nothing you add here is prescribed by Helixona — Dr. Drannikov goes through the list with you at your visit.</div>
 
-        <div class="seg-divider" style="margin-top:0">Your medications — 3 added</div>
+        <div class="seg-divider" id="ob-med-count" style="margin-top:0">Your medications — 3 added</div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Levothyroxine</strong> · 50 mcg <span class="clin-state reported">Reported</span></div>
@@ -610,7 +610,7 @@
           </div>
         </div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Sertraline</strong> · 50 mg <span class="clin-state reported">Reported</span></div>
@@ -635,7 +635,7 @@
           </div>
         </div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Estradiol</strong> · 0.5 mg <span class="clin-state reported">Reported</span></div>
@@ -660,7 +660,7 @@
           </div>
         </div>
 
-        <button class="btn btn-sm" style="margin-bottom:12px" onclick="HCOS.toast('New medication card added below — name, dose, and who prescribed it.', 'ok')">+ Add another medication</button>
+        <button class="btn btn-sm" style="margin-bottom:12px" data-ob-add="medication" data-ob-count="ob-med-count">+ Add another medication</button>
 
         <div class="prov" style="margin-bottom:14px">
           <span><strong>Goes to</strong> your one <a href="clinical-chart.html#/b-06-med-rec">medication and supplement list</a> as reported by you · a provider reconciles it before anything is prescribed</span>
@@ -686,9 +686,9 @@
         <div class="ob-h">Supplements you're taking</div>
         <div class="ob-sub">Vitamins, minerals, herbs, probiotics, peptides — anything over the counter or from a practitioner. They sit on the same list as your prescriptions, so interactions are caught.</div>
 
-        <div class="seg-divider" style="margin-top:0">Your supplements — 4 added</div>
+        <div class="seg-divider" id="ob-supp-count" style="margin-top:0">Your supplements — 4 added</div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Vitamin D3</strong> · 5,000 IU <span class="clin-state reported">Reported</span></div>
@@ -725,7 +725,7 @@
           </div>
         </div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Magnesium glycinate</strong> · 400 mg <span class="clin-state reported">Reported</span></div>
@@ -762,7 +762,7 @@
           </div>
         </div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Methylated B-complex</strong> · 1 cap <span class="clin-state reported">Reported</span></div>
@@ -783,29 +783,23 @@
           </div>
         </div>
 
-        <div class="ob-card">
+        <div class="card ob-card">
           <div class="ob-card-head">
             <div>
               <div class="ob-card-name"><strong>Curcumin phytosome</strong> · 500 mg <span class="clin-state reconciled">Reconciled</span></div>
               <span class="ob-med-sub">2x daily · with meals</span>
             </div>
-            <button class="btn btn-sm">Edit</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Correction sent. Charlene checks it before this entry changes — the reconciled version stays until then.', 'ok')">Send a correction</button>
           </div>
           <div class="clin-src" style="margin-bottom:8px">You told us Jul 15 · Charlene checked it with you by phone Jul 18</div>
-          <div class="field-row" style="gap:8px">
-            <div class="field" style="margin-bottom:0">
-              <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Thorne Meriva">
-            </div>
-            <div class="field" style="margin-bottom:0">
-              <label class="field-label">Started</label>
-              <input class="field-input" type="text" value="Feb 2026">
-            </div>
-          </div>
-          <div class="ob-card-note">Held before an infusion — Dr. Drannikov confirms that at your visit.</div>
+          <dl class="kv ob-kv">
+            <dt>Brand</dt><dd>Thorne Meriva</dd>
+            <dt>Started</dt><dd>Feb 2026</dd>
+          </dl>
+          <div class="ob-card-note">Charlene already confirmed this one with you, so it reads only here — send a correction and she reviews it. Held before an infusion — Dr. Drannikov confirms that at your visit.</div>
         </div>
 
-        <button class="btn btn-sm" style="margin-bottom:12px" onclick="HCOS.toast('New supplement card added below — brand and source matter clinically.', 'ok')">+ Add another supplement</button>
+        <button class="btn btn-sm" style="margin-bottom:12px" data-ob-add="supplement" data-ob-count="ob-supp-count">+ Add another supplement</button>
 
         <div class="prov" style="margin-bottom:14px">
           <span><strong>Same list</strong> as your medications · <a href="clinical-chart.html#/b-06-med-rec">medication and supplement list</a> · what you take and what is prescribed stay marked apart</span>
@@ -881,41 +875,47 @@
         <div class="ob-step">Step 9 of 12 — consents</div>
         <div class="ob-h" style="margin-bottom:14px">Sign and agree</div>
 
-        <ul class="check-list">
-          <li class="check-item">
+        <ul class="check-list" id="ob-consent-list">
+          <li class="check-item ob-item-link" data-ob-consent="hipaa">
             <div class="check-icon done">✓</div>
             <div class="check-label"><strong>HIPAA privacy notice</strong><div class="check-meta">Signed today, 11:41 AM</div></div>
           </li>
-          <li class="check-item">
+          <li class="check-item ob-item-link" data-ob-consent="treatment">
             <div class="check-icon active">→</div>
             <div class="check-label"><strong>Treatment consent</strong><div class="check-meta">Reading now — sign below</div></div>
           </li>
-          <li class="check-item">
+          <li class="check-item ob-item-link" data-ob-consent="financial">
             <div class="check-icon pending"></div>
             <div class="check-label"><strong>Financial responsibility</strong><div class="check-meta">Tap to read and sign</div></div>
           </li>
-          <li class="check-item">
+          <li class="check-item ob-item-link" data-ob-consent="telehealth">
             <div class="check-icon pending"></div>
             <div class="check-label"><strong>Telehealth consent</strong><div class="check-meta">Tap to read and sign</div></div>
           </li>
-          <li class="check-item">
+          <li class="check-item ob-item-link" data-ob-consent="media">
             <div class="check-icon pending"></div>
-            <div class="check-label">Photo / video (optional)</div>
+            <div class="check-label"><strong>Photo / video (optional)</strong><div class="check-meta">Tap to read and choose</div></div>
           </li>
         </ul>
 
-        <div class="seg-divider">Now signing: treatment consent</div>
-        <div class="ob-consent-doc">
+        <div class="seg-divider" id="ob-consent-head">Now signing: treatment consent</div>
+        <div class="ob-consent-doc" id="ob-consent-doc">
           I voluntarily consent to evaluation and treatment by the providers of Helixona, Inc. I understand the nature of functional medicine evaluation, including laboratory testing, intravenous therapy, and supplement recommendations. I understand I may refuse any treatment at any time. I have had the opportunity to ask questions about my care…
         </div>
 
-        <div class="field">
-          <label class="field-label">Type your full legal name to sign</label>
-          <input class="field-input" type="text" placeholder="Sarah Anderson">
+        <div id="ob-consent-sign">
+          <div class="field">
+            <label class="field-label">Type your full legal name to sign</label>
+            <input class="field-input" type="text" id="ob-consent-name" placeholder="Sarah Anderson">
+          </div>
+
+          <button class="btn btn-primary btn-lg ob-full" id="ob-consent-submit">Sign and continue</button>
+          <div class="field-help" id="ob-consent-next" style="margin-top:8px;text-align:center">Next: upload your ID, insurance card, and plan document.</div>
         </div>
 
-        <a class="btn btn-primary btn-lg ob-full" href="intake-documents.html" style="text-align:center" onclick="HCOS.toast('Treatment consent signed.', 'ok')">Sign and continue</a>
-        <div class="field-help" style="margin-top:8px;text-align:center">Next: upload your ID, insurance card, and plan document.</div>
+        <div id="ob-consent-signed" style="display:none">
+          <div class="callout callout-ok" id="ob-consent-signed-note">You signed this one today at 11:41 AM. A copy is in your documents — tap another consent above to keep going.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -924,20 +924,329 @@
 
 <script src="assets/hcos.js?v=8"></script>
 <script>
-  // Demo only: chips toggle on tap. Inside a [data-chip-single] group (severity
-  // scales, yes/no) exactly one chip stays active; everywhere else chips multi-select.
+(function () {
+  'use strict';
+
+  var TYPE_SELECT = '<select class="field-select"><option>Drug</option><option>Food</option>' +
+    '<option>Environmental</option><option>Latex</option><option>Contrast</option><option>Other</option></select>';
+  var SEV_SELECT = '<select class="field-select"><option>Mild</option><option>Moderate</option>' +
+    '<option>Severe</option><option>Life-threatening</option></select>';
+  var SOURCE_SELECT = '<select class="field-select"><option>Amazon</option><option>Fullscript</option>' +
+    '<option>Health food store</option><option>Practitioner office</option><option>Other</option></select>';
+
+  var TEMPLATES = {
+    allergy:
+      '<div class="card ob-card" data-ob-new>' +
+        '<div class="ob-card-head">' +
+          '<div class="ob-card-name"><strong>New allergy or sensitivity</strong><span class="clin-state reported">Reported</span></div>' +
+          '<button class="btn btn-sm" data-ob-remove>Remove</button>' +
+        '</div>' +
+        '<div class="clin-src" style="margin-bottom:8px">You are telling us now · Jul 21, 2026 · pending review by Nick, RN</div>' +
+        '<div class="field" style="margin-bottom:8px"><label class="field-label">What you react to</label>' +
+          '<input class="field-input" type="text" placeholder="Drug, food, material or exposure"></div>' +
+        '<div class="field-row" style="gap:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Type</label>' + TYPE_SELECT + '</div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Severity</label>' + SEV_SELECT + '</div>' +
+        '</div>' +
+        '<div class="field" style="margin:8px 0 0"><label class="field-label">Reaction</label>' +
+          '<input class="field-input" type="text" placeholder="What happened, and how soon"></div>' +
+      '</div>',
+    medication:
+      '<div class="card ob-card" data-ob-new>' +
+        '<div class="ob-card-head">' +
+          '<div class="ob-card-name"><strong>New medication</strong><span class="clin-state reported">Reported</span></div>' +
+          '<button class="btn btn-sm" data-ob-remove>Remove</button>' +
+        '</div>' +
+        '<div class="clin-src" style="margin-bottom:8px">You are telling us now · Jul 21, 2026</div>' +
+        '<div class="field-row" style="gap:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Medication</label>' +
+            '<input class="field-input" type="text" placeholder="Name on the bottle"></div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Dose and schedule</label>' +
+            '<input class="field-input" type="text" placeholder="50 mcg once daily"></div>' +
+        '</div>' +
+        '<div class="field-row" style="gap:8px;margin-top:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Brand</label>' +
+            '<input class="field-input" type="text" placeholder="Brand or generic"></div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Taken for</label>' +
+            '<input class="field-input" type="text" placeholder="What it treats"></div>' +
+        '</div>' +
+        '<div class="field" style="margin:8px 0 0"><label class="field-label">Prescribed by</label>' +
+          '<input class="field-input" type="text" placeholder="Who prescribes it"></div>' +
+      '</div>',
+    supplement:
+      '<div class="card ob-card" data-ob-new>' +
+        '<div class="ob-card-head">' +
+          '<div class="ob-card-name"><strong>New supplement</strong><span class="clin-state reported">Reported</span></div>' +
+          '<button class="btn btn-sm" data-ob-remove>Remove</button>' +
+        '</div>' +
+        '<div class="clin-src" style="margin-bottom:8px">You are telling us now · Jul 21, 2026</div>' +
+        '<div class="field-row" style="gap:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Supplement</label>' +
+            '<input class="field-input" type="text" placeholder="Name on the bottle"></div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Dose and schedule</label>' +
+            '<input class="field-input" type="text" placeholder="400 mg at night"></div>' +
+        '</div>' +
+        '<div class="field-row" style="gap:8px;margin-top:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Brand</label>' +
+            '<input class="field-input" type="text" placeholder="Who makes it"></div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Started</label>' +
+            '<input class="field-input" type="text" placeholder="Month and year"></div>' +
+        '</div>' +
+        '<div class="field-row" style="gap:8px;margin-top:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Recommended by</label>' +
+            '<input class="field-input" type="text" placeholder="Who suggested it"></div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Source</label>' + SOURCE_SELECT + '</div>' +
+        '</div>' +
+      '</div>',
+    condition:
+      '<div class="card ob-card" data-ob-condition="{{name}}">' +
+        '<div class="ob-card-head">' +
+          '<div class="ob-card-name"><strong>{{name}}</strong><span class="clin-state reported">Reported</span></div>' +
+          '<button class="btn btn-sm" data-ob-remove>Remove</button>' +
+        '</div>' +
+        '<div class="clin-src" style="margin-bottom:8px">You told us · Jul 21, 2026</div>' +
+        '<div class="field-row" style="gap:8px">' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">Onset</label>' +
+            '<input class="field-input" type="text" placeholder="Month and year"></div>' +
+          '<div class="field" style="margin-bottom:0"><label class="field-label">How it is now</label>' +
+            '<select class="field-select"><option selected>Bothering me</option><option>Comes and goes</option>' +
+            '<option>Getting better</option><option>Over with</option></select></div>' +
+        '</div>' +
+        '<div class="field" style="margin:8px 0 0"><label class="field-label">Notes (optional)</label>' +
+          '<input class="field-input" type="text" placeholder="Anything your care team should know"></div>' +
+        '<div class="ob-card-note">No provider has confirmed this one yet.</div>' +
+      '</div>'
+  };
+
+  var ADD_TOAST = {
+    allergy: 'New allergy card added below — describe the reaction.',
+    medication: 'New medication card added below — name, dose, and who prescribed it.',
+    supplement: 'New supplement card added below — brand and source matter clinically.'
+  };
+
+  function build(html) {
+    var box = document.createElement('div');
+    box.innerHTML = html;
+    return box.firstElementChild;
+  }
+
+  function toast(msg) {
+    if (window.HCOS && HCOS.toast) HCOS.toast(msg, 'ok');
+  }
+
+  // ---- item counts on the section divider -------------------------------
+  function refreshCount(addBtn) {
+    if (!addBtn) return;
+    var id = addBtn.getAttribute('data-ob-count');
+    if (!id) return;
+    var label = document.getElementById(id);
+    if (!label) return;
+    var n = 0, el = addBtn.previousElementSibling;
+    while (el && !el.classList.contains('seg-divider')) {
+      if (el.classList.contains('ob-card')) n++;
+      el = el.previousElementSibling;
+    }
+    label.textContent = label.textContent.replace(/—\s*\d+\s*added/, '— ' + n + ' added');
+  }
+
+  function addBtnAfter(card) {
+    var el = card.nextElementSibling;
+    while (el) {
+      if (el.getAttribute && el.getAttribute('data-ob-add')) return el;
+      el = el.nextElementSibling;
+    }
+    return null;
+  }
+
+  // ---- conditions: a chip and its detail card are one selection ----------
+  function conditionCard(name) {
+    var cards = document.querySelectorAll('[data-ob-condition]');
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i].getAttribute('data-ob-condition') === name) return cards[i];
+    }
+    return null;
+  }
+
+  function conditionChip(name) {
+    var box = document.querySelector('[data-ob-condition-chips]');
+    if (!box) return null;
+    var chips = box.querySelectorAll('.filter-chip');
+    for (var i = 0; i < chips.length; i++) {
+      if ((chips[i].textContent || '').trim() === name) return chips[i];
+    }
+    return null;
+  }
+
+  function syncCondition(chip) {
+    var anchor = document.getElementById('ob-add-condition');
+    if (!anchor) return;
+    var name = (chip.textContent || '').trim();
+    if (!name || name.charAt(0) === '+') return;
+    var card = conditionCard(name);
+    if (chip.classList.contains('active')) {
+      if (!card) {
+        anchor.parentNode.insertBefore(build(TEMPLATES.condition.replace(/{{name}}/g, name)), anchor);
+        toast(name + ' added — fill in the detail below.');
+      }
+    } else if (card) {
+      card.remove();
+      toast('Removed from what you reported. Your chart keeps the earlier version.');
+    }
+  }
+
+  // ---- consents ---------------------------------------------------------
+  var CONSENT_ORDER = ['hipaa', 'treatment', 'financial', 'telehealth', 'media'];
+  var CONSENTS = {
+    hipaa: {
+      title: 'HIPAA privacy notice', low: 'HIPAA privacy notice',
+      prompt: 'Tap to read and sign', signed: true, signedAt: '11:41 AM',
+      text: 'This notice describes how Helixona, Inc. uses and shares your health information, and how you can get access to it. We use it to treat you, to bill for that care, and to run the clinic. We never sell it. You may ask for a copy of your record, ask us to correct it, and ask who we have shared it with…'
+    },
+    treatment: {
+      title: 'Treatment consent', low: 'treatment consent',
+      prompt: 'Tap to read and sign', signed: false, signedAt: '',
+      text: 'I voluntarily consent to evaluation and treatment by the providers of Helixona, Inc. I understand the nature of functional medicine evaluation, including laboratory testing, intravenous therapy, and supplement recommendations. I understand I may refuse any treatment at any time. I have had the opportunity to ask questions about my care…'
+    },
+    financial: {
+      title: 'Financial responsibility', low: 'financial responsibility',
+      prompt: 'Tap to read and sign', signed: false, signedAt: '',
+      text: 'I understand that Helixona bills my insurance as a courtesy and that I am responsible for whatever my plan does not pay, including the deductible, coinsurance, and services my plan treats as out of network. An estimate given before a visit is an estimate, not a promise of coverage. Balances are due 30 days after the statement, and payment plans are available on request…'
+    },
+    telehealth: {
+      title: 'Telehealth consent', low: 'telehealth consent',
+      prompt: 'Tap to read and sign', signed: false, signedAt: '',
+      text: 'I consent to visits by video or phone. I understand a telehealth visit cannot include a physical exam, that the connection can fail, and that my provider may ask me to come into the clinic instead. A telehealth visit is documented in my chart exactly like an in-person visit, and I may ask for an in-person visit at any time…'
+    },
+    media: {
+      title: 'Photo / video consent', low: 'photo / video consent',
+      prompt: 'Tap to read and choose', signed: false, signedAt: '',
+      text: 'I may allow Helixona to photograph or record a treatment for my own record or for staff training. This one is optional: my care does not change if I say no, nothing is used publicly without a separate written permission, and I can withdraw this at any time…'
+    }
+  };
+  var currentConsent = 'treatment';
+
+  function nextUnsigned(skip) {
+    for (var i = 0; i < CONSENT_ORDER.length; i++) {
+      var k = CONSENT_ORDER[i];
+      if (k !== skip && !CONSENTS[k].signed) return k;
+    }
+    return null;
+  }
+
+  function renderConsent(key) {
+    var list = document.getElementById('ob-consent-list');
+    if (!list) return;
+    currentConsent = key;
+    var rows = list.querySelectorAll('[data-ob-consent]');
+    for (var i = 0; i < rows.length; i++) {
+      var k = rows[i].getAttribute('data-ob-consent'), c = CONSENTS[k];
+      var icon = rows[i].querySelector('.check-icon');
+      var meta = rows[i].querySelector('.check-meta');
+      if (c.signed) {
+        icon.className = 'check-icon done'; icon.textContent = '✓';
+        meta.textContent = 'Signed today, ' + c.signedAt;
+      } else if (k === key) {
+        icon.className = 'check-icon active'; icon.textContent = '→';
+        meta.textContent = 'Reading now — sign below';
+      } else {
+        icon.className = 'check-icon pending'; icon.textContent = '';
+        meta.textContent = c.prompt;
+      }
+    }
+    var cur = CONSENTS[key];
+    document.getElementById('ob-consent-head').textContent =
+      (cur.signed ? 'Signed: ' : 'Now signing: ') + cur.low;
+    document.getElementById('ob-consent-doc').textContent = cur.text;
+    document.getElementById('ob-consent-sign').style.display = cur.signed ? 'none' : '';
+    document.getElementById('ob-consent-signed').style.display = cur.signed ? '' : 'none';
+    document.getElementById('ob-consent-signed-note').textContent =
+      'You signed this one today at ' + cur.signedAt + '. A copy is in your documents — tap another consent above to keep going.';
+    var nk = nextUnsigned(key);
+    document.getElementById('ob-consent-next').textContent = nk
+      ? 'Next: ' + CONSENTS[nk].low + '.'
+      : 'Next: upload your ID, insurance card, and plan document.';
+  }
+
+  function signConsent() {
+    var cur = CONSENTS[currentConsent];
+    if (cur.signed) return;
+    cur.signed = true;
+    cur.signedAt = '11:55 AM';
+    var name = document.getElementById('ob-consent-name');
+    if (name) name.value = '';
+    var nk = nextUnsigned(currentConsent);
+    if (nk) {
+      toast(cur.title + ' signed. Next: ' + CONSENTS[nk].low + '.');
+      renderConsent(nk);
+    } else {
+      toast('All five consents signed — taking you to your uploads.');
+      renderConsent(currentConsent);
+      setTimeout(function () { window.location.href = 'intake-documents.html'; }, 900);
+    }
+  }
+
+  // ---- one delegated listener -------------------------------------------
   document.addEventListener('click', function (ev) {
-    var chip = ev.target.closest ? ev.target.closest('.filter-chip') : null;
-    if (!chip) return;
-    var single = chip.closest('[data-chip-single]');
+    if (!ev.target || !ev.target.closest) return;
+
+    var addBtn = ev.target.closest('[data-ob-add]');
+    if (addBtn) {
+      var kind = addBtn.getAttribute('data-ob-add');
+      if (TEMPLATES[kind]) {
+        addBtn.parentNode.insertBefore(build(TEMPLATES[kind]), addBtn);
+        refreshCount(addBtn);
+        toast(ADD_TOAST[kind]);
+      }
+      return;
+    }
+
+    var rm = ev.target.closest('[data-ob-remove]');
+    if (rm) {
+      var card = rm.closest('.ob-card');
+      if (!card) return;
+      var counter = addBtnAfter(card);
+      var cond = card.getAttribute('data-ob-condition');
+      var fresh = card.hasAttribute('data-ob-new');
+      if (cond) {
+        var chip = conditionChip(cond);
+        if (chip) chip.classList.remove('active');
+      }
+      card.remove();
+      refreshCount(counter);
+      toast(fresh
+        ? 'Removed before it was saved — nothing went to your chart.'
+        : 'Removed from what you reported. Your chart keeps the earlier version.');
+      return;
+    }
+
+    var consentRow = ev.target.closest('[data-ob-consent]');
+    if (consentRow) {
+      renderConsent(consentRow.getAttribute('data-ob-consent'));
+      return;
+    }
+
+    if (ev.target.closest('#ob-consent-submit')) {
+      signConsent();
+      return;
+    }
+
+    // Chips toggle on tap. Inside a [data-chip-single] group (severity scales,
+    // yes/no) exactly one chip stays active; everywhere else chips multi-select.
+    var chip2 = ev.target.closest('.filter-chip');
+    if (!chip2) return;
+    var single = chip2.closest('[data-chip-single]');
     if (single) {
       var chips = single.querySelectorAll('.filter-chip');
-      for (var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
-      chip.classList.add('active');
+      for (var j = 0; j < chips.length; j++) chips[j].classList.remove('active');
+      chip2.classList.add('active');
     } else {
-      chip.classList.toggle('active');
+      chip2.classList.toggle('active');
+      if (chip2.closest('[data-ob-condition-chips]')) syncCondition(chip2);
     }
   });
+
+  renderConsent('treatment');
+})();
 </script>
 </body>
 </html>

@@ -19,9 +19,6 @@
   .bq-meta strong { color: var(--hx-navy); font-weight: 600; }
   .bq-inst-actions { display: flex; gap: 8px; flex-wrap: wrap; }
   .bq-suggested { border-left: 3px solid var(--hx-navy); }
-  /* Progress bar */
-  .bq-progress { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; }
-  .bq-progress-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
   /* Phone questionnaire */
   .bq-phone-head { padding-bottom: 10px; border-bottom: 1px solid var(--line-soft); margin-bottom: 12px; }
   .bq-phone-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 600; }
@@ -43,8 +40,6 @@
   /* Score bars (results) */
   .bq-score-row { display: grid; grid-template-columns: 210px 1fr 96px; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
   .bq-score-lbl { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
-  .bq-meter { height: 8px; background: var(--hx-light); border-radius: 4px; overflow: hidden; }
-  .bq-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 4px; }
   .bq-score-val { text-align: right; font-family: ui-monospace, monospace; font-size: 12px; color: var(--hx-navy); font-weight: 600; }
   .bq-delta { color: var(--muted); font-weight: 500; margin-left: 6px; }
   .bq-trend-row { display: grid; grid-template-columns: 120px 1fr 54px; gap: 12px; align-items: center; padding: 8px 0; font-size: 12.5px; }
@@ -69,7 +64,7 @@
           <span class="avatar lg">NB</span>
           <div class="bq-header-info">
             <div class="bq-name">Nadia Boulos <span class="net-badge net-inn">INN</span></div>
-            <div class="bq-demo">41 · she/her · Anthem Blue Cross · pre-visit for follow-up Tue Jul 28 · readiness under Physician Review</div>
+            <div class="bq-demo">41 · she/her · Anthem Blue Cross · pre-visit for today's 1:30 PM follow-up · readiness under Physician Review</div>
           </div>
           <a class="btn btn-sm" href="clinical.html">Open chart</a>
           <a class="btn btn-primary btn-sm" href="clinical.html#/b-02-snapshot">See answers in chart</a>
@@ -116,17 +111,16 @@
             <span class="ai-state suggested">Suggestion</span>
           </div>
           <div class="ai-body">
-            Fatigue with an environmental exposure history — Mold History, Metabolic Assessment and SF-36 fit this visit.
+            Fatigue with an environmental exposure history. The Metabolic Assessment came in this morning and the Mold History is with her now — SF-36 would complete the picture before the 1:30 PM follow-up.
           </div>
           <div class="ai-meta">
-            <span><b>Read</b> reason for visit Jul 14 · symptom answers <code>R-4102</code> · problem list</span>
+            <span><b>Read</b> reason for visit Jul 14 · Metabolic Assessment <code>R-4512</code> · Mold History in progress <code>R-4488</code> · problem list</span>
             <span><b>Model</b> instrument-picker v1.3</span>
-            <span><b>Confidence</b> 0.71 — Mold History is the least certain of the three</span>
+            <span><b>Confidence</b> 0.71 — SF-36 adds the function detail the other two do not cover</span>
             <span><b>Reviewer</b> Dr. Drannikov</span>
           </div>
           <div class="ai-actions">
-            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Accepted by Dr. Drannikov — Nadia Boulos gets one portal link for all 3 questionnaires.', 'ok')">Accept and send all 3</button>
-            <button class="btn btn-sm" onclick="HCOS.toast('SF-36 dropped from the set, recorded with your name and the reason.')">Drop SF-36</button>
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Accepted by Dr. Drannikov — SF-36 goes out on the same portal link Nadia Boulos already has open.', 'ok')">Accept and send SF-36</button>
             <button class="btn btn-sm" onclick="HCOS.toast('Rejected. Recorded with your name and the reason.')">Reject the suggestion</button>
           </div>
         </div>
@@ -140,29 +134,29 @@
               <span><strong>Length</strong> 28 questions</span>
               <span><strong>Time</strong> ~10 min</span>
               <span><strong>Mode</strong> Provider-led or portal</span>
-              <span><strong>Last</strong> Never</span>
+              <span><strong>Last</strong> <span id="bq-lib-mold-last">In progress · 16 of 28 answered</span></span>
             </div>
             <div class="bq-inst-actions">
-              <button class="btn btn-primary btn-sm" data-activate="b-29-quest-administer">Administer now</button>
-              <button class="btn btn-sm" onclick="HCOS.toast('Mold History sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
+              <button class="btn btn-primary btn-sm" data-activate="b-29-quest-administer">Open the response in progress</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Reminder sent — Nadia can finish the remaining questions from her portal.', 'ok')">Remind Nadia to finish</button>
             </div>
-            <div class="prov"><span><strong>Definition</strong> <code>Q-118</code> · published by Shibani Jun 2 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-126</code> <span class="ver-chip">v2</span> · published by Shibani Jun 2 · <strong>Response</strong> <code>R-4488</code> · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card bq-suggested">
             <div class="bq-inst-name">Metabolic Assessment · MSQ-style <span class="ver-chip">v3</span> <span class="appr approved">Published</span></div>
-            <div class="bq-inst-desc">Functional-medicine symptom-burden survey across gut, blood sugar, adrenal, thyroid, liver, hormones, energy, and mood. Section subscores and a total that trends over time as a measure of treatment response.</div>
+            <div class="bq-inst-desc">Functional-medicine symptom-burden survey across gut, blood sugar, adrenal, thyroid, liver, hormones, energy, and mood. Opens with a short diet, energy and function section — how long symptoms have run and how the patient rates their function — then the symptom sections. Section subscores and a total that trends over time as a measure of treatment response.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> ~110 items</span>
               <span><strong>Time</strong> ~20 min</span>
               <span><strong>Mode</strong> Patient self-report</span>
-              <span><strong>Last</strong> Completed Jun 9</span>
+              <span><strong>Last</strong> Completed today 10:12 AM · total 118</span>
             </div>
             <div class="bq-inst-actions">
               <button class="btn btn-primary btn-sm" data-activate="b-30-quest-results">View results</button>
-              <button class="btn btn-sm" onclick="HCOS.toast('Metabolic Assessment sent — a fresh administration will trend against Jun 9.', 'ok')">Send to portal</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Metabolic Assessment sent — a fresh administration trends against the 118 recorded today.', 'ok')">Send to portal</button>
             </div>
-            <div class="prov"><span><strong>Definition</strong> <code>Q-042</code> · published by Shibani Apr 12 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-118</code> <span class="ver-chip">v3</span> · published by Shibani May 14 · <strong>Latest response</strong> <code>R-4512</code> · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card bq-suggested">
@@ -296,21 +290,21 @@
       <div class="frame-body">
 
         <h2 class="page-title">Mold History Questionnaire <span class="ver-chip">v2</span></h2>
-        <p class="page-sub">Nadia Boulos · Anthem Blue Cross INN · started in the room with Dr. Drannikov, patient finishing on their phone</p>
+        <p class="page-sub">Nadia Boulos · Anthem Blue Cross INN · answering on her phone before today's 1:30 PM follow-up</p>
 
         <div class="prov">
-          <span><strong>Definition</strong> <code>Q-118</code> <span class="ver-chip">v2</span> · <strong>Response</strong> <code>R-4488</code> — every answer lands in this one response and is never overwritten</span>
+          <span><strong>Definition</strong> <code>Q-126</code> <span class="ver-chip">v2</span> · <strong>Response</strong> <code>R-4488</code> — every answer lands in this one response and is never overwritten</span>
         </div>
 
         <div class="filters" style="justify-content:space-between">
           <div>
             <span class="pill pill-warn">In progress</span>
-            <span class="field-help" style="display:inline;margin-left:8px">Auto-saved 8 s ago · 16 of 28 answered · ~4 min to complete</span>
+            <span class="field-help" id="bq-status-line" style="display:inline;margin-left:8px">Auto-saved 8 s ago · 16 of 28 answered · ~4 min to complete</span>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-sm" onclick="HCOS.toast('Remaining questions sent — Nadia can finish the rest from her portal.', 'ok')">Send remaining to portal</button>
-            <button class="btn btn-sm" data-activate="b-28-quest-library" onclick="HCOS.toast('Saved — pick this instrument back up any time from the library.')">Save and continue later</button>
-            <button class="btn btn-primary btn-sm" data-activate="b-30-quest-results" onclick="HCOS.toast('Scoring — the flag profile is on the results screen.', 'ok')">Score answers</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Reminder sent — Nadia can finish the remaining questions from her portal.', 'ok')">Remind Nadia to finish</button>
+            <button class="btn btn-sm" data-activate="b-28-quest-library">Back to the library</button>
+            <button class="btn btn-primary btn-sm" data-activate="b-30-quest-results" onclick="bqScoreMold(); HCOS.toast('Scoring — the flag profile is on the results screen.', 'ok')">Score answers</button>
           </div>
         </div>
 
@@ -323,8 +317,8 @@
                   <div class="bq-phone-kicker">Helixona · pre-visit</div>
                   <div class="bq-phone-title">Mold History Questionnaire</div>
                 </div>
-                <div class="bq-phone-prog-lbl">16 of 28 answered · about 4 minutes left</div>
-                <div class="bq-progress"><div class="bq-progress-fill" style="width:57%"></div></div>
+                <div class="bq-phone-prog-lbl" id="bq-phone-progress">16 of 28 answered · about 4 minutes left</div>
+                <div class="meter"><div class="meter-fill" id="bq-progress-fill" style="width:57%"></div></div>
 
                 <div class="bq-sec-head"><span>Section 1 · Residence overview</span><span>5 of 5</span></div>
 
@@ -334,38 +328,38 @@
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">02</span>Does your home smell musty?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn" data-flag="Musty smell">Yes</span><span class="bq-choice">No</span></div>
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">03</span>Is mold visible anywhere inside your home?</div>
-                  <div class="bq-choices"><span class="bq-choice">Yes</span><span class="bq-choice picked">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice" data-flag="Visible mold">Yes</span><span class="bq-choice picked">No</span></div>
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">04</span>Does your home have a crawlspace or basement?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked">Yes</span><span class="bq-choice">No</span></div>
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">05</span>If yes, is the crawlspace or basement damp or musty?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span><span class="bq-choice">Not sure</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn" data-flag="Damp basement">Yes</span><span class="bq-choice">No</span><span class="bq-choice">Not sure</span></div>
                 </div>
 
                 <div class="bq-sec-head"><span>Section 2 · Water intrusion &amp; drainage</span><span>6 of 8</span></div>
 
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">06</span>Is there standing water inside or around your home?</div>
-                  <div class="bq-choices"><span class="bq-choice">Yes</span><span class="bq-choice picked">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice" data-flag="Standing water">Yes</span><span class="bq-choice picked">No</span></div>
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">07</span>Does the ground slope toward or away from the building?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Toward</span><span class="bq-choice">Away</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn" data-flag="Ground slopes toward home">Toward</span><span class="bq-choice">Away</span></div>
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">08</span>Do your gutters overflow during heavy rain?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span><span class="bq-choice">Not sure</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn" data-flag="Gutters overflow">Yes</span><span class="bq-choice">No</span><span class="bq-choice">Not sure</span></div>
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">11</span>Are water stains present on any ceilings, floors, or walls?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn" data-flag="Water stains">Yes</span><span class="bq-choice">No</span></div>
                 </div>
 
                 <div class="bq-sec-head"><span>Section 3 · Interior &amp; ventilation</span><span>5 of 8</span></div>
@@ -376,16 +370,16 @@
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">16</span>Are others in your household frequently sick?</div>
-                  <div class="bq-choices"><span class="bq-choice picked-warn">Yes</span><span class="bq-choice">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice picked-warn" data-flag="Household members frequently sick">Yes</span><span class="bq-choice">No</span></div>
                 </div>
                 <div class="bq-q dim">
                   <div class="bq-qtext"><span class="bq-qnum">17</span>Have you ever lived somewhere with confirmed or suspected mold or water damage?</div>
-                  <div class="bq-choices"><span class="bq-choice">Yes</span><span class="bq-choice">No</span></div>
+                  <div class="bq-choices"><span class="bq-choice" data-flag="Prior water-damaged home">Yes</span><span class="bq-choice">No</span></div>
                 </div>
 
                 <div class="bq-phone-foot">
-                  <span>10 more questions across 2 sections remain</span>
-                  <button class="btn btn-sm">Continue</button>
+                  <span id="bq-remaining">12 questions left to answer</span>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Nadia moves to the next unanswered question. Every answer saves to response R-4488 as she goes.')">Continue</button>
                 </div>
               </div>
             </div>
@@ -400,20 +394,20 @@
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Early flags from answers <span class="clin-state reported">Reported</span></div>
               <div class="clin-src" style="margin-bottom:8px">Nadia Boulos · Jul 21 · counted by scoring rules <span class="ver-chip">Mold v1.4</span></div>
-              <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <div id="bq-flag-list" style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
                 <span class="pill pill-warn">Musty smell</span>
                 <span class="pill pill-warn">Damp basement</span>
+                <span class="pill pill-warn">Ground slopes toward home</span>
                 <span class="pill pill-warn">Gutters overflow</span>
                 <span class="pill pill-warn">Water stains</span>
-                <span class="pill pill-warn">Ground slopes toward home</span>
                 <span class="pill pill-warn">Household members frequently sick</span>
               </div>
             </div>
 
             <div class="card">
               <div class="card-title">Running tally</div>
-              <div class="bq-tally">6 / 16 flags</div>
-              <div class="field-help">Trending toward moderate-likelihood exposure. Complete the full instrument to confirm before scoring.</div>
+              <div class="bq-tally" id="bq-flag-tally">6 / 16 flags</div>
+              <div class="field-help" id="bq-flag-note">Trending toward moderate-likelihood exposure. Complete the full instrument to confirm before scoring.</div>
             </div>
           </div>
         </div>
@@ -439,7 +433,7 @@
         </div>
 
         <div class="prov">
-          <span><strong>Responses</strong> <code>R-4471</code> Metabolic Assessment <span class="ver-chip">v3</span> · <code>R-4488</code> Mold History <span class="ver-chip">v2</span> — stored once, never re-keyed and never edited. A correction is a new administration.</span>
+          <span><strong>Responses</strong> <code>R-4512</code> Metabolic Assessment <code>Q-118</code> <span class="ver-chip">v3</span> · <code>R-4488</code> Mold History <code>Q-126</code> <span class="ver-chip">v2</span> — stored once, never re-keyed and never edited. A correction is a new administration.</span>
         </div>
 
         <div class="callout">Findings reach the note as a draft carrying its source link. Charlene pre-charts from these scores; Dr. Drannikov accepts them into the note he signs. <a href="clinical-remote.html#/b-19-precharting">Open pre-charting</a>.</div>
@@ -457,69 +451,69 @@
               </div>
               <div class="field-help" style="margin-bottom:8px">Optimal &lt; 10 · mild 10–49 · moderate 50–99 · high 100+. Section subscores below; the darker the bar, the more of that section's items were endorsed.</div>
               <div class="prov" style="margin-bottom:12px">
-                <span><strong>Response</strong> <code>R-4471</code> · submitted by Nadia Boulos from the portal Jul 21, 10:12 AM · scored by ruleset <span class="ver-chip">MSQ v2.1</span> — a fixed rule, not a model</span>
+                <span><strong>Response</strong> <code>R-4512</code> · definition <code>Q-118</code> <span class="ver-chip">v3</span> · submitted by Nadia Boulos from the portal today, 10:12 AM · scored by ruleset <span class="ver-chip">MSQ v2.1</span> — a fixed rule, not a model</span>
               </div>
 
               <div class="seg-divider" style="margin-top:0">Section subscores</div>
 
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Energy and mitochondria <span class="pill pill-warn">High</span></div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:69%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:69%"></div></div>
                 <div class="bq-score-val">22 / 32 <span class="bq-delta">▼6</span></div>
               </div>
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Adrenal and stress <span class="pill pill-warn">High</span></div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:63%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:63%"></div></div>
                 <div class="bq-score-val">20 / 32 <span class="bq-delta">▼4</span></div>
               </div>
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Gut and GI</div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:50%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:50%"></div></div>
                 <div class="bq-score-val">16 / 32 <span class="bq-delta">▼3</span></div>
               </div>
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Mind and mood</div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:47%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:47%"></div></div>
                 <div class="bq-score-val">15 / 32 <span class="bq-delta">▼3</span></div>
               </div>
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Liver and biliary</div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:54%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:54%"></div></div>
                 <div class="bq-score-val">13 / 24 <span class="bq-delta">▼4</span></div>
               </div>
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Hormone balance</div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:50%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:50%"></div></div>
                 <div class="bq-score-val">12 / 24 <span class="bq-delta">▼3</span></div>
               </div>
               <div class="bq-score-row">
                 <div class="bq-score-lbl">Blood sugar handling</div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:46%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:46%"></div></div>
                 <div class="bq-score-val">11 / 24 <span class="bq-delta">▼2</span></div>
               </div>
               <div class="bq-score-row" style="border-bottom:none">
                 <div class="bq-score-lbl">Thyroid</div>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:45%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:45%"></div></div>
                 <div class="bq-score-val">9 / 20 <span class="bq-delta">▼1</span></div>
               </div>
 
               <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Added to the note draft, linked to response R-4471. Dr. Drannikov accepts it into the note he signs.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-03-soap'; }, 900)">Add score to the note draft</button>
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Added to the note draft, linked to response R-4512. Dr. Drannikov accepts it into the note he signs.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-03-soap'; }, 900)">Add score to the note draft</button>
                 <button class="btn btn-sm" onclick="HCOS.toast('Re-administration sent — it becomes a new response and trends against today.', 'ok')">Send fresh administration</button>
               </div>
             </div>
 
             <div class="card">
               <div class="card-title">Mold History Questionnaire <span class="ver-chip">v2</span> <span class="clin-state reported">Reported</span></div>
-              <div style="font-size:12.5px;line-height:1.6;margin-bottom:4px">Flag-based instrument — no MSQ total. <strong>6 of 16 flags positive</strong> · <span class="pill pill-warn">Moderate likelihood</span> of environmental mold exposure.</div>
-              <div class="clin-src" style="margin-bottom:8px">Nadia Boulos · in room and portal · Jul 21 · counted by scoring rules <span class="ver-chip">Mold v1.4</span></div>
-              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+              <div style="font-size:12.5px;line-height:1.6;margin-bottom:4px">Flag-based instrument — no MSQ total. <strong id="bq-scored-count">6 of 16 flags positive</strong> · <span class="pill pill-warn" id="bq-scored-band">Moderate likelihood</span> of environmental mold exposure.</div>
+              <div class="clin-src" style="margin-bottom:8px">Nadia Boulos · portal · Jul 21 · counted by scoring rules <span class="ver-chip">Mold v1.4</span></div>
+              <div id="bq-scored-list" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
                 <span class="pill pill-warn">Musty smell</span>
                 <span class="pill pill-warn">Damp basement</span>
+                <span class="pill pill-warn">Ground slopes toward home</span>
                 <span class="pill pill-warn">Gutters overflow</span>
                 <span class="pill pill-warn">Water stains</span>
-                <span class="pill pill-warn">Slopes toward home</span>
-                <span class="pill pill-warn">Household often sick</span>
+                <span class="pill pill-warn">Household members frequently sick</span>
               </div>
               <div class="prov">
                 <span><strong>Patient report</strong> — a physician or extender decides what becomes a diagnosis on the <a href="clinical-chart.html#/b-05-problem-list">problem list</a>. Nothing here changes it.</span>
@@ -534,7 +528,7 @@
                 <div class="ai-meta">
                   <span><b>Read</b> response <code>R-4488</code> · flag ruleset <span class="ver-chip">Mold v1.4</span></span>
                   <span><b>Model</b> workup-hints v1.2</span>
-                  <span><b>Confidence</b> 0.64 — 6 of 16 flags, none confirmed by inspection</span>
+                  <span><b>Confidence</b> 0.64 — <span id="bq-scored-conf">6 of 16 flags</span>, none confirmed by inspection</span>
                   <span><b>Reviewer</b> Dr. Drannikov</span>
                 </div>
                 <div class="ai-actions">
@@ -554,16 +548,16 @@
               <div class="card-title">Trend vs last administration</div>
               <div class="bq-trend-row">
                 <span>Jun 9</span>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:80%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:80%"></div></div>
                 <span class="bq-score-val">144</span>
               </div>
               <div class="bq-trend-row">
                 <span><strong>Today</strong> Jul 21</span>
-                <div class="bq-meter"><div class="bq-meter-fill" style="width:66%"></div></div>
+                <div class="meter lg"><div class="meter-fill" style="width:66%"></div></div>
                 <span class="bq-score-val">118</span>
               </div>
               <div class="field-help" style="margin-top:8px">Symptom burden is falling as the detox program progresses — Energy and Adrenal remain the two highest sections.</div>
-              <div class="prov"><span><strong>Computed</strong> from responses <code>R-4471</code> and <code>R-4102</code> · the chart trend reads the same two numbers</span></div>
+              <div class="prov"><span><strong>Computed</strong> from responses <code>R-4512</code> and <code>R-4102</code> · the chart trend reads the same two numbers</span></div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -574,7 +568,7 @@
                     <tr><th>Date</th><th>Response</th><th>Version</th><th>Total</th><th>By</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>Jul 21</td><td><code>R-4471</code></td><td><span class="ver-chip">v3</span></td><td>118</td><td>Portal · self-report</td></tr>
+                    <tr><td>Jul 21</td><td><code>R-4512</code></td><td><span class="ver-chip">v3</span></td><td>118</td><td>Portal · self-report</td></tr>
                     <tr><td>Jun 9</td><td><code>R-4102</code></td><td><span class="ver-chip">v3</span></td><td>144</td><td>Portal · self-report</td></tr>
                     <tr><td>Apr 28</td><td><code>R-3860</code></td><td><span class="ver-chip superseded">v2</span></td><td>161</td><td>In room · Charlene</td></tr>
                   </tbody>
@@ -594,7 +588,7 @@
                 <li class="check-item">
                   <span class="check-icon done">✓</span>
                   <span class="check-label">Chart trend</span>
-                  <span class="check-meta">reads <code>R-4471</code> · <a href="clinical.html#/b-02-snapshot">open</a></span>
+                  <span class="check-meta">reads <code>R-4512</code> · <a href="clinical.html#/b-02-snapshot">open</a></span>
                 </li>
                 <li class="check-item">
                   <span class="check-icon active">→</span>
@@ -629,16 +623,99 @@
     chip.classList.add('active');
   });
 
-  // Demo only: tapping a choice on the phone selects it within its question.
+  // Demo only: tapping a choice on the phone answers that question, and the
+  // flag card, the running tally and the progress counters follow the answers.
+  var bqTotal = 28;
+  var bqAnswered = 16;
+
+  function bqSectionHead(q) {
+    var el = q.previousElementSibling;
+    while (el && !(el.classList && el.classList.contains('bq-sec-head'))) el = el.previousElementSibling;
+    return el;
+  }
+
+  function bqSetText(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  function bqRefreshProgress() {
+    var left = bqTotal - bqAnswered;
+    var mins = Math.max(1, Math.ceil(left / 3));
+    var fill = document.getElementById('bq-progress-fill');
+    if (fill) fill.style.width = Math.round((bqAnswered / bqTotal) * 100) + '%';
+    bqSetText('bq-phone-progress', bqAnswered + ' of ' + bqTotal + ' answered · about ' + mins + (mins === 1 ? ' minute left' : ' minutes left'));
+    bqSetText('bq-status-line', 'Auto-saved just now · ' + bqAnswered + ' of ' + bqTotal + ' answered · ~' + mins + ' min to complete');
+    bqSetText('bq-remaining', left === 0 ? 'All questions answered' : (left === 1 ? '1 question left to answer' : left + ' questions left to answer'));
+    bqSetText('bq-lib-mold-last', left === 0
+      ? 'Answered in full · waiting to be scored'
+      : 'In progress · ' + bqAnswered + ' of ' + bqTotal + ' answered');
+  }
+
+  function bqFlagPills(container) {
+    var raised = document.querySelectorAll('.bq-choice.picked-warn[data-flag]');
+    if (container) {
+      container.innerHTML = '';
+      for (var i = 0; i < raised.length; i++) {
+        var pill = document.createElement('span');
+        pill.className = 'pill pill-warn';
+        pill.textContent = raised[i].getAttribute('data-flag');
+        container.appendChild(pill);
+      }
+    }
+    return raised.length;
+  }
+
+  // Scoring runs when a person asks for it — the results screen keeps the
+  // scored profile of the answers as they stood at that moment.
+  function bqScoreMold() {
+    var count = bqFlagPills(document.getElementById('bq-scored-list'));
+    var band = count >= 8 ? 'High likelihood' : (count >= 3 ? 'Moderate likelihood' : 'Low likelihood');
+    bqSetText('bq-scored-count', count + ' of 16 flags positive');
+    bqSetText('bq-scored-band', band);
+    bqSetText('bq-scored-conf', count + ' of 16 flags');
+  }
+
+  function bqRefreshFlags() {
+    var list = document.getElementById('bq-flag-list');
+    if (!list) return;
+    var count = bqFlagPills(list);
+    if (!count) {
+      var none = document.createElement('span');
+      none.className = 'field-help';
+      none.textContent = 'No flags raised so far.';
+      list.appendChild(none);
+    }
+    bqSetText('bq-flag-tally', count + ' / 16 flags');
+    var band = count >= 8 ? 'high' : (count >= 3 ? 'moderate' : 'low');
+    bqSetText('bq-flag-note', count
+      ? 'Trending toward ' + band + '-likelihood exposure. Complete the full instrument to confirm before scoring.'
+      : 'Complete the full instrument before scoring.');
+  }
+
   document.addEventListener('click', function (ev) {
     var choice = ev.target.closest ? ev.target.closest('.bq-choice') : null;
     if (!choice || !choice.parentElement) return;
+    var question = choice.closest('.bq-q');
+    var wasAnswered = question ? !!question.querySelector('.bq-choice.picked, .bq-choice.picked-warn') : true;
     var group = choice.parentElement.querySelectorAll('.bq-choice');
     for (var i = 0; i < group.length; i++) {
       group[i].classList.remove('picked');
       group[i].classList.remove('picked-warn');
     }
-    choice.classList.add('picked');
+    choice.classList.add(choice.hasAttribute('data-flag') ? 'picked-warn' : 'picked');
+
+    if (question && !wasAnswered) {
+      question.classList.remove('dim');
+      var head = bqSectionHead(question);
+      if (head && head.lastElementChild) {
+        var counts = /(\d+)\s+of\s+(\d+)/.exec(head.lastElementChild.textContent);
+        if (counts) head.lastElementChild.textContent = (parseInt(counts[1], 10) + 1) + ' of ' + counts[2];
+      }
+      if (bqAnswered < bqTotal) bqAnswered++;
+      bqRefreshProgress();
+    }
+    bqRefreshFlags();
   });
 </script>
 </body>

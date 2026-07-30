@@ -61,6 +61,7 @@
                 <span class="filter-chip active" data-filter="all">Today</span>
                 <span class="filter-chip" data-filter="sign">Sign &amp; lock</span>
                 <span class="filter-chip" data-filter="chart">Chart access</span>
+                <span class="filter-chip" data-filter="clinical">Clinical</span>
                 <span class="filter-chip" data-filter="billing">Billing</span>
                 <span class="filter-chip" data-filter="admin">Admin changes</span>
                 <span class="filter-chip" data-filter="ecw">From eCW</span>
@@ -86,7 +87,7 @@
                   <div class="ai-actions">
                     <button class="btn btn-sm" id="g-ai-show">Show her access today</button>
                     <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Investigation opened for Shibani. The alert and your decision are appended — no existing line changed.', 'ok')">Open an investigation</button>
-                    <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Dismissed with your name and reason. Nothing in the store changed.', 'ok')">Not unusual</button>
+                    <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Marked not unusual. The alert and your decision are appended — no existing line changed.', 'ok')">Not unusual</button>
                   </div>
                 </div>
               </div>
@@ -121,66 +122,66 @@
                     <tr class="row-click" data-cat="sign"
                         data-ev="AE-40908" data-when="Tuesday, July 21 · 11:32 AM PT"
                         data-who="Dr. Drannikov · Provider" data-action="Encounter signed and locked"
-                        data-record="Encounter · ENC-2026-07211 v1 · Daniel Okafor" data-source="HCOS · Clinical"
+                        data-record="Encounter · ENC-2026-07211 v1 · Grace Lindqvist" data-source="HCOS · Clinical"
                         data-device="Exam room 2 · 10.0.1.21 · session 9a02-c4"
-                        data-changes="State~Reviewed~Signed and locked|Dispatched~none~Billing, labs, infusion suite"
+                        data-changes="State~Reviewed~Signed and locked|Dispatched~none~Labs, infusion bay, pharmacy, billing|Plan of care~v6 in force~v6 — approved separately, not by the signature"
                         data-open="clinical.html#/b-11-sign-lock" data-openlabel="Open the encounter">
                       <td><span class="g-when">11:32 AM</span></td>
                       <td><span class="g-who">Dr. Drannikov<span class="g-who-role">Provider</span></span></td>
                       <td>Encounter signed and locked</td>
-                      <td>Daniel Okafor<span class="g-rec">Encounter · ENC-2026-07211 v1</span></td>
+                      <td>Grace Lindqvist<span class="g-rec">Encounter · ENC-2026-07211 v1</span></td>
                       <td>HCOS · Clinical</td>
                     </tr>
-                    <tr class="row-click" data-cat="chart"
+                    <tr class="row-click" data-cat="clinical"
                         data-ev="AE-40901" data-when="Tuesday, July 21 · 11:15 AM PT"
-                        data-who="Charlene (Virtual) · Medical Assistant" data-action="Questionnaire answers filed as patient-reported"
-                        data-record="Questionnaire response · QR-3391 · Nadia Boulos" data-source="HCOS · Clinical questionnaires"
+                        data-who="Charlene (Virtual) · Medical Assistant" data-action="Questionnaire answers filed to the chart as patient-reported"
+                        data-record="Questionnaire response · R-4471 · Nadia Boulos" data-source="HCOS · Clinical questionnaires"
                         data-device="Remote · VPN 73.12.x · session 2f77-ab"
-                        data-changes="Patient-reported items~0~3 reported, waiting on reconciliation|Problem list~unchanged~unchanged — a report is not a diagnosis"
+                        data-changes="Patient-reported items~0~3 reported, waiting on reconciliation|Problem list~unchanged~unchanged — a report is not a diagnosis|Answers~submitted from the portal 10:12 AM~filed as submitted, never re-keyed"
                         data-open="clinical-questionnaires.html#/b-30-quest-results" data-openlabel="Open the questionnaire result">
                       <td><span class="g-when">11:15 AM</span></td>
                       <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
                       <td>Questionnaire answers filed <span class="clin-state reported">Reported</span></td>
-                      <td>Nadia Boulos<span class="g-rec">Questionnaire · QR-3391</span></td>
+                      <td>Nadia Boulos<span class="g-rec">Questionnaire response · R-4471</span></td>
                       <td>HCOS · Questionnaires</td>
                     </tr>
                     <tr class="row-click" data-cat="billing"
                         data-ev="AE-40894" data-when="Tuesday, July 21 · 10:58 AM PT"
-                        data-who="Kamalesh · Billing" data-action="Claim packet sent — Blue Shield portal upload"
-                        data-record="Claim · CLM-1044 v2 · Priya Natarajan" data-source="HCOS · Billing"
+                        data-who="Kamalesh · Billing" data-action="Documentation packet assembled — Blue Shield portal upload"
+                        data-record="Claim · CLM-1038 · Priya Natarajan" data-source="HCOS · Billing"
                         data-device="Billing · 10.0.1.31 · session 6d10-e2"
-                        data-changes="Claim state~Packet ready~Sent|Packet version~v1~v2"
+                        data-changes="Packet~Locked — waiting on the payer claim #~Assembled, cover sheet in review|Payer claim #~none~BSC-88214-07, received 8:52 AM|Claim state~Appeal~Appeal — sending the packet is its own line"
                         data-open="billing.html#/d-02-packet" data-openlabel="Open the documentation packet">
                       <td><span class="g-when">10:58 AM</span></td>
                       <td><span class="g-who">Kamalesh<span class="g-who-role">Billing</span></span></td>
-                      <td>Claim packet sent — Blue Shield portal</td>
-                      <td>Priya Natarajan<span class="g-rec">Claim · CLM-1044 v2</span></td>
+                      <td>Packet assembled — Blue Shield portal</td>
+                      <td>Priya Natarajan<span class="g-rec">Claim · CLM-1038</span></td>
                       <td>HCOS · Billing</td>
                     </tr>
                     <tr class="row-click" data-cat="admin"
                         data-ev="AE-40887" data-when="Tuesday, July 21 · 10:41 AM PT"
-                        data-who="Shibani · Admin" data-action="Caregiver access granted — appointments and plan"
+                        data-who="Shibani · Admin" data-action="Caregiver access granted — appointments and care plan"
                         data-record="Access grant · AG-0142 · Walter Hsu" data-source="HCOS · Caregiver portal"
                         data-device="Front office · 10.0.1.14 · session 1c93-40"
-                        data-changes="Scope~none~Appointments and plan|Expires~none~Oct 19, 2026|Granted to~none~Lena Hsu, daughter"
+                        data-changes="Granted to~none~Amy Hsu, daughter|Scope~none~Appointments and care plan — clinical notes never|Duration~none~Permanent, revocable at any time|Patient approval~none~Walter Hsu, by text 10:39 AM"
                         data-open="caregiver.html#/k-01-access" data-openlabel="Open the access grant">
                       <td><span class="g-when">10:41 AM</span></td>
                       <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
-                      <td>Caregiver access granted — 90 days</td>
+                      <td>Caregiver access granted — permanent</td>
                       <td>Walter Hsu<span class="g-rec">Access grant · AG-0142</span></td>
                       <td>HCOS · Caregiver</td>
                     </tr>
-                    <tr class="row-click" data-cat="chart"
-                        data-ev="AE-40871" data-when="Tuesday, July 21 · 10:12 AM PT"
-                        data-who="Bea · Medic" data-action="Infusion stop time recorded"
-                        data-record="Order · O-2291 v2 · Maya Reyes" data-source="HCOS · Infusion suite"
-                        data-device="Chair 2 · 10.0.1.44 · session 7e55-b9"
-                        data-changes="Stop time~none~10:12 AM|Volume infused~none~500 mL|Order version referenced~v2~v2"
+                    <tr class="row-click" data-cat="clinical"
+                        data-ev="AE-40871" data-when="Tuesday, July 21 · 10:05 AM PT"
+                        data-who="Nick · Nurse" data-action="Infusion rate reduced below the ordered rate — physician approval requested"
+                        data-record="Order · O-2384 v3 · Maya Reyes" data-source="HCOS · Infusion suite"
+                        data-device="Chair 1 · 10.0.1.44 · session 7e55-b9"
+                        data-changes="Rate~85 mL/hr as ordered~70 mL/hr|Reason~none~Mild flushing, transient|Approval~none~Requested from Dr. Drannikov — a nurse cannot clear it|Order version referenced~v3~v3"
                         data-open="clinical-infusion.html#/b-15-flowsheet" data-openlabel="Open the infusion record">
-                      <td><span class="g-when">10:12 AM</span></td>
-                      <td><span class="g-who">Bea<span class="g-who-role">Medic</span></span></td>
-                      <td>Infusion stop time recorded</td>
-                      <td>Maya Reyes<span class="g-rec">Order · O-2291 v2</span></td>
+                      <td><span class="g-when">10:05 AM</span></td>
+                      <td><span class="g-who">Nick<span class="g-who-role">Nurse</span></span></td>
+                      <td>Infusion rate reduced — approval requested</td>
+                      <td>Maya Reyes<span class="g-rec">Order · O-2384 v3</span></td>
                       <td>HCOS · Infusion</td>
                     </tr>
                     <tr class="row-click" data-cat="ecw"
@@ -211,15 +212,15 @@
                     </tr>
                     <tr class="row-click" data-cat="admin"
                         data-ev="AE-40840" data-when="Tuesday, July 21 · 9:20 AM PT"
-                        data-who="Shibani · Admin" data-action="Permission set approved"
-                        data-record="Permission set · PERM-v7" data-source="HCOS · Security"
+                        data-who="Shibani · Admin" data-action="Permission change proposal opened for review"
+                        data-record="Permission set · PERM-v8 · proposed" data-source="HCOS · Security"
                         data-device="Front office · 10.0.1.14 · session 1c93-40"
-                        data-changes="Operations Manager, billing~no access~view|Permission set in force~v6~v7|Reason~none~Karina covers claim follow-up on Fridays"
+                        data-changes="Review state~Waiting on Shibani since Jul 20~Under review|Proposed change~none~PCC gains schedule for Dr. Bakman, proposed by Karina|Permission set in force~v7~v7 — nothing moves until she approves"
                         data-open="" data-openlabel="">
                       <td><span class="g-when">9:20 AM</span></td>
                       <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
-                      <td>Permission set approved <span class="ver-chip">v7</span></td>
-                      <td>Whole clinic<span class="g-rec">Permission set · PERM-v7</span></td>
+                      <td>Permission change proposal opened <span class="ver-chip">v8</span> <span class="appr pending">Pending</span></td>
+                      <td>Whole clinic<span class="g-rec">Permission set · PERM-v8 · proposed</span></td>
                       <td>HCOS · Security</td>
                     </tr>
                     <tr class="row-click" data-cat="chart"
@@ -318,6 +319,10 @@
                       <td><span class="g-yes">✓</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
                     </tr>
                     <tr>
+                      <td><span class="g-role">Technician<span class="g-role-people">Kyle</span></span></td>
+                      <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
+                    </tr>
+                    <tr>
                       <td><span class="g-role">PCC<span class="g-role-people">Bee</span></span></td>
                       <td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td><td><span class="g-yes">✓</span></td><td><span class="g-no">—</span></td><td><span class="g-no">—</span></td>
                     </tr>
@@ -338,6 +343,9 @@
               </div>
 
               <div class="seg-divider" style="margin:14px 14px 0">Version history</div>
+              <div class="prov" style="margin:6px 14px 2px">
+                <span><strong>These are lines from the store above</strong>, filtered to <code>PERM-</code> — the matrix keeps no second log of its own</span>
+              </div>
               <div style="padding:4px 14px 0">
                 <div class="g-ev">
                   <span class="g-ev-when">Jul 20</span>
@@ -352,22 +360,22 @@
                   <span class="g-ev-ver"><span class="ver-chip">v7</span></span>
                 </div>
                 <div class="g-ev">
-                  <span class="g-ev-when">May 12</span>
+                  <span class="g-ev-when">Jul 2</span>
                   <span class="g-ev-what">Medic and Nurse gain chart write for infusion records <span class="appr superseded">Superseded</span>
-                    <span class="g-rec">Approved by Shibani · Admin</span></span>
+                    <span class="g-rec">Approved by Shibani · Admin · the infusion suite writes in HCOS from Jul 1</span></span>
                   <span class="g-ev-ver"><span class="ver-chip superseded">v6</span></span>
                 </div>
                 <div class="g-ev">
-                  <span class="g-ev-when">Mar 2</span>
+                  <span class="g-ev-when">Jul 1</span>
                   <span class="g-ev-what">Matrix set at go-live <span class="appr superseded">Superseded</span>
-                    <span class="g-rec">Approved by Shibani · Admin</span></span>
+                    <span class="g-rec">Approved by Shibani · Admin · the first set in force in HCOS, drafted during implementation</span></span>
                   <span class="g-ev-ver"><span class="ver-chip superseded">v5</span></span>
                 </div>
               </div>
 
               <div style="display:flex;gap:8px;padding:12px 14px;margin-top:8px;border-top:1px solid var(--line-soft);flex-wrap:wrap">
                 <button class="btn btn-primary btn-sm" data-open-modal="#g-modal-perm">Propose a permission change</button>
-                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('User accounts are managed in Settings → Users — Shibani only. Roles come from this matrix.', 'ok')">Manage users</button>
+                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Only Shibani adds or deactivates people, and access follows the role in this matrix. A deactivated account keeps its history.', 'ok')">Manage users</button>
               </div>
             </div>
 
@@ -484,6 +492,7 @@
             <option>Medical Assistant</option>
             <option>Medic</option>
             <option>Nurse</option>
+            <option>Technician</option>
             <option>Billing</option>
             <option>Operations Manager</option>
           </select>
@@ -534,10 +543,10 @@
       <div class="field">
         <label class="field-label">Patient</label>
         <select class="field-select">
+          <option>Priya Natarajan — in Chair 3 now</option>
+          <option>Maya Reyes — in Chair 1 now</option>
           <option>Walter Hsu</option>
-          <option>Maya Reyes</option>
           <option>Daniel Okafor</option>
-          <option>Priya Natarajan</option>
         </select>
       </div>
       <div class="field">
@@ -549,7 +558,7 @@
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" data-close-modal>Cancel</button>
-      <button class="btn btn-danger" data-close-modal onclick="HCOS.toast('Chart opened — Shibani paged, audit line appended.', 'warn')">Open chart and page Shibani</button>
+      <a class="btn btn-danger" data-close-modal href="clinical-chart.html#/b-07-allergies" style="text-decoration:none">Open chart and page Shibani</a>
     </div>
   </div>
 </div>
@@ -598,7 +607,7 @@
       cat = 'chart';
       if (search) search.value = 'Charlene';
       apply();
-      window.HCOS.toast('Filtered to Charlene’s chart access. Reviewing it changes nothing in the store.', 'ok');
+      window.HCOS.toast('Filtered to Charlene’s chart access — the page holds today’s most recent lines, and an export carries all 14. Reviewing changes nothing in the store.', 'ok');
     });
   }
 

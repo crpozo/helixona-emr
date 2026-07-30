@@ -19,8 +19,6 @@
   .a-feature-title { font-size: 13px; font-weight: 600; color: var(--hx-navy); margin-bottom: 4px; }
   .a-feature-body { font-size: 12px; color: var(--muted); line-height: 1.55; }
   .a-public-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 24px; border-top: 1px solid var(--line-soft); font-size: 11px; color: var(--muted); }
-  .a-progress { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin-bottom: 20px; }
-  .a-progress-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
   .a-step { margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
   .a-step:last-of-type { border-bottom: none; }
   .a-q { font-size: 13px; font-weight: 600; color: var(--hx-navy); line-height: 1.5; display: flex; gap: 8px; }
@@ -93,7 +91,7 @@
           <div>
             <div class="a-feature-ico">$</div>
             <div class="a-feature-title">Out-of-network with most PPOs</div>
-            <div class="a-feature-body">We submit out-of-network claims to Anthem, Blue Shield, UnitedHealthcare, and Cigna on your behalf. Cash and Medicare options also available.</div>
+            <div class="a-feature-body">We are in network with Anthem Blue Cross. For Blue Shield, UnitedHealthcare, and Cigna we submit out-of-network claims on your behalf. Cash and Medicare options also available.</div>
           </div>
         </div>
 
@@ -121,7 +119,7 @@
               <div style="font-size:11.5px;color:var(--muted);margin-top:3px">Become a patient · about 5 min</div>
             </div>
 
-            <div class="a-progress"><div class="a-progress-fill" style="width:70%"></div></div>
+            <div class="meter" style="margin-bottom:20px"><div class="meter-fill" style="width:70%"></div></div>
 
             <div class="a-step">
               <div class="a-q"><span class="a-qnum">1</span><span>I give my consent to receive text messages, emails, and phone calls from Helixona. I understand this consent can be revoked at any time. <span class="a-req">*</span></span></div>
@@ -196,7 +194,7 @@
               <label class="a-choice"><span class="a-letter">F</span>Podcast, article, or interview</label>
               <label class="a-choice"><span class="a-letter">G</span>Other</label>
 
-              <div class="a-conditional">
+              <div class="a-conditional" data-answer="Social media">
                 <div class="a-conditional-title">Which platform?</div>
                 <label class="a-choice selected"><span class="a-letter">a</span>Instagram</label>
                 <label class="a-choice"><span class="a-letter">b</span>Facebook</label>
@@ -228,7 +226,7 @@
             <div class="a-step">
               <div class="a-q"><span class="a-qnum">7</span><span>Upload a copy of your insurance card</span></div>
               <div class="a-qhelp">Front of card. Our team verifies your benefits before your visit. You can also share it later from your portal.</div>
-              <div class="a-upload" onclick="HCOS.toast('File upload arrives with the real build.', 'ok')">
+              <div class="a-upload" onclick="HCOS.toast('Card received — our team verifies your benefits before your visit.', 'ok')">
                 <div class="a-upload-title">Choose file or drag here</div>
                 <div class="a-upload-sub">JPG, PNG, or PDF · 10 MB max</div>
               </div>
@@ -254,7 +252,7 @@
         <div class="seg-divider" style="margin-top:0">Person record</div>
 
         <div class="card" style="margin-bottom:16px">
-          <div class="card-title">Searched before creating</div>
+          <div class="card-title">Duplicate check</div>
           <ul class="check-list">
             <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Full name — Marcus Webb</span><span class="check-meta">no match</span></li>
             <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Date of birth — Feb 9, 1971</span><span class="check-meta">no match</span></li>
@@ -285,7 +283,7 @@
         </div>
 
         <div class="card" style="margin-bottom:16px">
-          <div class="card-title">One person, created once</div>
+          <div class="card-title">Identity and lifecycle</div>
           <div class="a-person">
             <span class="avatar lg">MW</span>
             <div>
@@ -319,7 +317,7 @@
         </div>
 
         <div class="card" style="margin-bottom:16px">
-          <div class="card-title">What Marcus told us</div>
+          <div class="card-title">Patient-reported</div>
           <dl class="kv">
             <dt>Reason for the visit</dt><dd>Fatigue and slow recovery, about two years <span class="clin-state reported">Reported</span></dd>
             <dt>Insurance type</dt><dd>PPO <span class="clin-state reported">Reported</span></dd>
@@ -335,7 +333,7 @@
         </div>
 
         <div class="card">
-          <div class="card-title">Who may change what</div>
+          <div class="card-title">Permissions</div>
           <dl class="kv">
             <dt>The answers</dt><dd>Marcus owns them — a correction is added, the original answer is kept</dd>
             <dt>Administrative fields</dt><dd>Front desk · PCC, with their name on the change</dd>
@@ -422,7 +420,7 @@
             <li class="check-item">
               <span class="check-icon done">✓</span>
               <span class="check-label">Single-use signed link</span>
-              <span class="check-meta">expires Tue Jul 28</span>
+              <span class="check-meta">expires Sun Jul 26</span>
             </li>
             <li class="check-item">
               <span class="check-icon done">✓</span>
@@ -482,7 +480,13 @@
 
 <script src="assets/hcos.js?v=8"></script>
 <script>
-  // Demo only: tapping a choice selects it within its own group.
+  // Demo only: tapping a choice selects it within its own group, and a follow-up
+  // block belongs to one answer — it clears and hides when that answer changes.
+  function aChoiceLabel(el) {
+    var last = el.lastChild;
+    return ((last && last.nodeType === 3 ? last.nodeValue : el.textContent) || '').trim().toLowerCase();
+  }
+
   document.addEventListener('click', function (ev) {
     var choice = ev.target.closest ? ev.target.closest('.a-choice') : null;
     if (!choice || !choice.parentElement) return;
@@ -491,6 +495,21 @@
       if (kids[i].classList && kids[i].classList.contains('a-choice')) kids[i].classList.remove('selected');
     }
     choice.classList.add('selected');
+
+    if (choice.closest('.a-conditional')) return;
+    var step = choice.closest('.a-step');
+    if (!step) return;
+    var blocks = step.querySelectorAll('.a-conditional');
+    for (var b = 0; b < blocks.length; b++) {
+      var block = blocks[b];
+      var answer = (block.getAttribute('data-answer') || '').trim().toLowerCase();
+      if (answer && answer === aChoiceLabel(choice)) { block.style.display = ''; continue; }
+      block.style.display = 'none';
+      var picks = block.querySelectorAll('.a-choice.selected');
+      for (var p = 0; p < picks.length; p++) picks[p].classList.remove('selected');
+      var inputs = block.querySelectorAll('input');
+      for (var n = 0; n < inputs.length; n++) inputs[n].value = '';
+    }
   });
 </script>
 </body>

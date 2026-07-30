@@ -55,19 +55,19 @@
 
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
-            <div class="stat-num">12</div>
+            <div class="stat-num">7</div>
             <div class="stat-lbl">On today's schedule</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">3</div>
+            <div class="stat-num">1</div>
             <div class="stat-lbl">In progress</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">2</div>
+            <div class="stat-num">1</div>
             <div class="stat-lbl">Pending signature</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">5</div>
+            <div class="stat-num">1</div>
             <div class="stat-lbl">Signed today</div>
           </div>
         </div>
@@ -112,7 +112,7 @@
                 <td>IV vitamin C series</td>
                 <td><span class="pill pill-st st-done">Done</span></td>
                 <td><span class="pill pill-warn">Pending signature</span></td>
-                <td><button class="btn btn-primary btn-sm" data-activate="b-11-sign-lock">Sign</button></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-02-snapshot">Open</button></td>
               </tr>
               <tr class="row-click" data-activate="b-02-snapshot">
                 <td>11:15 AM</td>
@@ -162,8 +162,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="callout" style="margin-top:14px">Two notes still need a signature — the kind that used to follow Dr. Drannikov into the weekend. Sign and lock finishes each one, and everything downstream, in a single step.</div>
       </div>
     </div>
   </section>
@@ -181,20 +179,20 @@
             <div class="b-enc-name">Grace Lindqvist · 44 · she/her</div>
             <div class="b-enc-sub">MRN 2071 · Self-pay <span class="net-badge net-self">SELF</span> · encounter ENC-2026-07211 · follow-up · 30 min · today 11:15 AM</div>
           </div>
-          <a class="btn" href="clinical-chart.html#/b-04-timeline">Open full chart</a>
+          <button class="btn" data-open-drawer="#b-drawer-problems">Problem list</button>
           <button class="btn btn-primary" data-activate="b-03-soap">Open SOAP note</button>
         </div>
 
         <div class="b-encbar">
           <div><span class="appr draft">Draft</span> <span class="pill pill-navy">In progress</span> Started 11:15 AM · auto-saved 22 seconds ago</div>
           <div class="b-encbar-actions">
-            <a class="btn btn-sm" href="clinical-remote.html#/b-19-precharting">Pre-chart by Charlene</a>
+            <button class="btn btn-sm" data-activate="b-09-orders">Open orders</button>
             <button class="btn btn-sm btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
           </div>
         </div>
 
         <div class="prov">
-          <span>Everything below is <strong>read from the chart</strong>, current as of 11:37 AM. Change it where it lives.</span>
+          <span>Everything below is <strong>the record itself</strong>, current as of 11:37 AM — the encounter keeps no copy of it.</span>
           <span><strong>Writes</strong> HCOS · eCW receives a read-only sync for documentation</span>
         </div>
 
@@ -209,7 +207,7 @@
         </div>
 
         <div class="prov" style="margin-top:-8px;margin-bottom:14px">
-          <span><strong>From</strong> today's rooming · Charlene · 11:19 AM · <a href="clinical-remote.html#/b-19-precharting">pre-chart</a></span>
+          <span><strong>From</strong> today's rooming · Wesley · medical assistant · 11:19 AM</span>
         </div>
 
         <div class="grid-sidebar">
@@ -255,8 +253,9 @@
               </div>
               <div class="prov">
                 <span><strong>From</strong> the problem list · longitudinal, one per patient</span>
-                <span><a href="clinical-chart.html#/b-05-problem-list">Open the problem list</a></span>
+                <span>Changes are made on the list, not on this encounter</span>
               </div>
+              <button class="btn btn-sm" data-open-drawer="#b-drawer-problems">Open the problem list</button>
             </div>
 
             <div class="callout"><strong>Reason for today's visit, in her words:</strong> "I want to see if the higher thyroid dose is working — the exhaustion is a little better but the morning fog and word-finding are still there, and I'd like a plan I can actually stick to."</div>
@@ -273,7 +272,7 @@
                     <div class="clin-src">Checked by Charlene · Jul 20</div></div>
                 </div>
                 <div class="prov"><span>One list. The MA reconciles, the provider verifies.</span></div>
-                <a class="btn btn-sm" href="clinical-chart.html#/b-06-med-rec">Open the medication list</a>
+                <button class="btn btn-sm" data-open-drawer="#b-drawer-meds">Open the medication list</button>
               </div>
               <div class="card">
                 <div class="card-title">Allergies (1)</div>
@@ -282,7 +281,7 @@
                     <div class="clin-src">Dr. Drannikov · Mar 16</div></div>
                 </div>
                 <div class="prov"><span>The one list every safety check reads — infusion, pharmacy, orders.</span></div>
-                <a class="btn btn-sm" href="clinical-chart.html#/b-07-allergies">Open the allergy list</a>
+                <button class="btn btn-sm" data-open-drawer="#b-drawer-allergies">Open the allergy list</button>
               </div>
             </div>
 
@@ -295,7 +294,7 @@
                 Vitamin D came back at 18 ng/mL on Jul 14 while vitamin D3 5,000 IU has been on the list since March. The two do not agree — worth asking about adherence or absorption today.
               </div>
               <div class="ai-meta">
-                <span><b>Read</b> <a href="labs.html#/c-01-orders">result R-8841</a> · <a href="clinical-chart.html#/b-06-med-rec">medication list</a></span>
+                <span><b>Read</b> the <a href="labs.html#/c-01-orders">Jul 14 panel</a> · the medication list</span>
                 <span><b>Model</b> chart-compare v1.4</span>
                 <span><b>Confidence</b> 0.72 — adherence is not recorded</span>
                 <span><b>Reviewer</b> Dr. Drannikov</span>
@@ -322,7 +321,7 @@
                 </table>
               </div>
               <div class="prov">
-                <span><strong>From</strong> result <code>R-8841</code> · Vibrant Labs, released Jul 14 · originals are never edited, corrections are linked</span>
+                <span><strong>From</strong> the panel Vibrant Labs released Jul 14 · originals are never edited, corrections are linked</span>
               </div>
               <a class="btn btn-ghost btn-sm" href="labs.html#/c-01-orders">Open orders and results</a>
             </div>
@@ -334,9 +333,9 @@
               <ul class="check-list">
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Intake reviewed</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Vitals captured</span></li>
-                <li class="check-item"><span class="check-icon active">3</span><span class="check-label">HPI documented</span><span class="check-meta">In progress</span></li>
-                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Physical exam</span></li>
-                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Assessment and plan</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">HPI documented</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Physical exam</span></li>
+                <li class="check-item"><span class="check-icon active">5</span><span class="check-label">Assessment and plan</span><span class="check-meta">In progress</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Orders placed</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Signature</span></li>
               </ul>
@@ -344,22 +343,22 @@
 
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Readiness</div>
-              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Standard <span class="appr approved">Approved</span></div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Standard <span class="ver-chip">v2</span> <span class="appr approved">Approved</span></div>
               <div class="field-help">Current effective assessment · ruleset v3.2</div>
               <div class="prov"><span><strong>From</strong> <code>RA-1174</code> · approved by Dr. Drannikov Jul 15 · <a href="readiness.html#/i-01-readiness">open</a></span></div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Plan of care</div>
-              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Health Optimization <span class="ver-chip">v4</span> <span class="appr approved">Approved</span></div>
-              <div class="field-help">Care pathway. Access level is separate — Self-directed.</div>
-              <div class="prov"><span><strong>Approved by</strong> Dr. Drannikov · Jun 9 · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span></div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Vitality <span class="ver-chip">v6</span> <span class="appr approved">Approved</span></div>
+              <div class="field-help">Care pathway. Access level is separate — Collaborative.</div>
+              <div class="prov"><span><strong>Approved by</strong> Dr. Drannikov · Jun 9 · <a href="journey-careplan.html#/j-staff-patients">open the plan</a></span></div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Quick jump</div>
               <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-activate="b-03-soap">SOAP note</button>
-              <a class="btn btn-sm" style="width:100%;margin-bottom:6px" href="clinical-chart.html#/b-04-timeline">Functional medicine timeline</a>
+              <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-open-drawer="#b-drawer-meds">Medication list</button>
               <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-activate="b-09-orders">Orders</button>
               <button class="btn btn-sm" style="width:100%" data-activate="b-11-sign-lock">Sign and lock</button>
             </div>
@@ -368,6 +367,7 @@
               <div class="card-title">Care team</div>
               <div style="font-size:12.5px;line-height:1.9">
                 <div>Dr. Drannikov · Provider</div>
+                <div>Wesley · Medical assistant</div>
                 <div>Charlene · Medical assistant (virtual)</div>
                 <div>Bee · PCC</div>
               </div>
@@ -404,15 +404,15 @@
         </div>
 
         <div class="b-tabs">
-          <span class="b-tab active">S · Subjective</span>
-          <span class="b-tab active">O · Objective</span>
+          <span class="b-tab active" data-section="b-sec-subjective">S · Subjective</span>
+          <span class="b-tab" data-section="b-sec-objective">O · Objective</span>
           <span class="b-tab" data-activate="b-08-assessment">A · Assessment →</span>
           <span class="b-tab" data-activate="b-09-orders">P · Plan and orders →</span>
         </div>
 
         <div class="grid-sidebar">
           <div>
-            <div class="seg-divider" style="margin-top:0">Chief complaint</div>
+            <div class="seg-divider" style="margin-top:0" id="b-sec-subjective">Chief complaint</div>
             <input class="field-input" value="Fatigue follow-up and thyroid lab review">
 
             <div class="seg-divider">History of present illness</div>
@@ -453,7 +453,18 @@
               </div>
             </div>
 
-            <div class="callout callout-ok" style="margin-top:12px"><strong>From the intake questionnaire:</strong> 14 of 32 review-of-systems fields filled from Grace's own answers <span class="clin-state reported">Reported</span> — her original wording is kept and no one re-keyed a thing. <a href="clinical-questionnaires.html#/b-30-quest-results">See her answers</a>.</div>
+            <div class="prov" style="margin-top:12px">
+              <span><strong>From</strong> Grace's intake questionnaire · Mar 12 — 14 of 32 review-of-systems fields in her own words <span class="clin-state reported">Reported</span></span>
+              <span>Her response is kept as she wrote it; the note quotes it and never overwrites it</span>
+            </div>
+
+            <div class="seg-divider" id="b-sec-objective">Objective · physical exam</div>
+            <textarea class="field-textarea" rows="6">General: well-appearing, no acute distress, speech fluent with occasional word-finding pauses. Vitals reviewed as recorded at rooming. Neck: thyroid mildly enlarged, symmetric, non-tender, no discrete nodule, no cervical lymphadenopathy. Cardiovascular: regular rate and rhythm, no murmur; orthostatics — HR 72 supine to 94 standing at 3 minutes, blood pressure stable, mild lightheadedness reported. Respiratory: clear to auscultation bilaterally. Abdomen: soft, non-tender, no organomegaly. Skin: dry, diffuse hair thinning, no rash. Neurological: alert and oriented, cranial nerves intact, strength 5/5 throughout, no focal deficit.</textarea>
+
+            <div class="prov">
+              <span><strong>Vitals from</strong> today's rooming · Wesley · 11:19 AM — the note reads them from the encounter, it keeps no second copy</span>
+              <span><strong>Template</strong> Functional medicine — follow-up exam</span>
+            </div>
           </div>
 
           <div>
@@ -471,7 +482,7 @@
                   Drafted the history of present illness and 14 review-of-systems fields. Three passages are marked low confidence — the medication timeline, the orthostatic symptoms, and the sleep history.
                 </div>
                 <div class="ai-meta">
-                  <span><b>Sources</b> today's consult audio · <a href="clinical-questionnaires.html#/b-30-quest-results">intake answers</a> · <a href="labs.html#/c-01-orders">results Jul 14</a></span>
+                  <span><b>Sources</b> today's consult audio · Grace's intake answers · <a href="labs.html#/c-01-orders">results Jul 14</a></span>
                   <span><b>Model</b> scribe v3.1</span>
                   <span><b>Uncertainty</b> 3 low-confidence passages, marked in the text</span>
                   <span><b>Reviewer</b> Dr. Drannikov · signs</span>
@@ -483,7 +494,7 @@
                 </div>
               </div>
 
-              <div class="field-help">The scribe drafts and nothing more. It does not sign, order or diagnose — and it no longer fails mid-visit.</div>
+              <div class="field-help">The scribe drafts and nothing more. It does not sign, order or diagnose.</div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -492,6 +503,7 @@
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Chief complaint</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">HPI</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Review of systems</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Physical exam</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Past medical history</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Social history</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Lifestyle · sleep, diet, stress</span></li>
@@ -585,9 +597,10 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             </div>
 
             <div class="prov">
-              <span><strong>Reads</strong> the problem list · <a href="clinical-chart.html#/b-05-problem-list">open it</a></span>
+              <span><strong>Reads</strong> the problem list · one longitudinal list per patient</span>
               <span>A diagnosis on this encounter does not change the list until someone says so here</span>
             </div>
+            <button class="btn btn-sm" style="margin-top:8px" data-open-drawer="#b-drawer-problems">Open the problem list</button>
 
             <div style="display:flex;gap:8px;margin-top:12px">
               <input class="search-input" type="search" placeholder="Search ICD-10 code or diagnosis name" style="flex:1">
@@ -626,9 +639,9 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">What this assessment feeds</div>
               <ul class="check-list">
                 <li class="check-item"><span class="check-icon active">1</span><span class="check-label">Orders on this encounter</span><span class="check-meta"><a href="#b-09-orders" data-activate="b-09-orders">open</a></span></li>
-                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Problem list — only what you confirm</span><span class="check-meta"><a href="clinical-chart.html#/b-05-problem-list">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Problem list — only what you confirm</span><span class="check-meta"><button class="btn btn-ghost btn-sm" data-open-drawer="#b-drawer-problems">open</button></span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness · ruleset v3.2 recalculates</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
-                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care · draft <span class="ver-chip">v5</span></span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care · draft <span class="ver-chip">v7</span></span><span class="check-meta"><a href="journey-careplan.html#/j-staff-patients">open</a></span></li>
               </ul>
             </div>
 
@@ -677,7 +690,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         </div>
 
         <div class="filters">
-          <button class="filter-chip active">All (8)</button>
+          <button class="filter-chip active">All (9)</button>
           <button class="filter-chip">Labs (5)</button>
           <button class="filter-chip">IV (2)</button>
           <button class="filter-chip">Rx (1)</button>
@@ -739,22 +752,22 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <tr>
                 <td><strong>IV Myers' cocktail · series of 6 over 6 weeks</strong></td>
                 <td>B-complex, B12, calcium, magnesium, vitamin C 5 g · saline 100 mL · ~1 h · minimum 5 days between runs</td>
-                <td><span class="b-code">O-2291</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td>
-                <td><span class="appr draft">Draft</span></td>
-                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Change protocol</a></td>
+                <td><span class="b-code">O-3402</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td>
+                <td><span class="appr draft">v2 draft</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-open-modal="#b-protocol-modal">Change protocol</button></td>
               </tr>
               <tr>
                 <td><strong>Glutathione push 2,000 mg · single trial dose</strong></td>
                 <td>Saline 30 mL · IV push · ~30 min · assess response before adding to the series</td>
                 <td><span class="b-code">O-4476</span> <span class="ver-chip">v1</span></td>
                 <td><span class="appr draft">Draft</span></td>
-                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Change protocol</a></td>
+                <td><button class="btn btn-ghost btn-sm" data-open-modal="#b-protocol-modal">Change protocol</button></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="prov">
-          <span><strong>O-2291 v1</strong> superseded today — series went from 4 runs to 6. v1 stays on the record.</span>
+          <span><strong>O-3402 v1</strong> — signed Jun 9, series of 4 — superseded today by v2, series of 6. v1 stays on the record.</span>
           <span>Changing a protocol makes a new version; anything already booked keeps the version it was booked on.</span>
         </div>
 
@@ -826,14 +839,15 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             </dl>
           </div>
           <div class="card">
-            <div class="card-title">Where these orders are read</div>
+            <div class="card-title">Where these orders will be read</div>
             <ul class="check-list">
-              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Bay board runs <span class="b-code">O-2291 v2</span></span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
-              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Scheduling books the series from the same order</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
-              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness reads the interval and prerequisites</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
-              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Plan of care shows cadence and expiry</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
-              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Billing charges from the signed order</span><span class="check-meta"><a href="billing.html#/d-01-worklist">open</a></span></li>
+              <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Bay board runs the IV orders at the version signed</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
+              <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Scheduling books the series against the order ID and version</span><span class="check-meta"><a href="schedule.html#/l-01-day">open</a></span></li>
+              <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness reads the interval and prerequisites</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+              <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care shows cadence and expiry</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-patients">open</a></span></li>
+              <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Billing charges from the signed order</span><span class="check-meta"><a href="billing.html#/d-01-worklist">open</a></span></li>
             </ul>
+            <div class="prov"><span>Nothing on this list moves until the encounter is signed — each consumer then reads the order ID and version, never a copy.</span></div>
           </div>
         </div>
 
@@ -874,11 +888,11 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                     <tr><td>Physical exam</td><td>Complete · follow-up template</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Assessment</td><td>Narrative + 4 ICD-10 diagnoses</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Plan</td><td>Complete</td><td><span class="pill pill-ok">Ready</span></td></tr>
-                    <tr><td>Orders</td><td>8 drafts · 5 labs · 2 IV · 1 Rx · 1 supplement · <span class="b-code">O-2291 v2</span> among them</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Orders</td><td>9 drafts · 5 labs · 2 IV · 1 Rx · 1 supplement · <span class="b-code">O-3402 v2</span> among them</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Meds reconciled</td><td>1 change confirmed by you</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Allergies reviewed</td><td>Sulfa confirmed</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Care-team suggestions</td><td>1 from Bee · iron infusion, not placed</td><td><span class="appr pending">Stays pending</span></td></tr>
-                    <tr><td>Plan of care</td><td>Draft <span class="ver-chip">v5</span> built from today · effective plan is still <span class="ver-chip">v4</span></td><td><span class="appr draft">Needs your approval</span></td></tr>
+                    <tr><td>Plan of care</td><td>Draft <span class="ver-chip">v7</span> built from today · effective plan is still <span class="ver-chip">v6</span></td><td><span class="appr draft">Needs your approval</span></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -888,7 +902,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             </div>
 
             <div class="seg-divider">Provider attestation</div>
-            <div class="callout">By signing this encounter I attest that I personally evaluated this patient today, July 21, 2026, that the documentation above accurately reflects the services provided, and that the diagnoses are supported by the documentation. — Dr. Drannikov, MD · NPI 1407646755</div>
+            <div class="callout">By signing this encounter I attest that I personally evaluated this patient today, July 21, 2026, that the documentation above accurately reflects the services provided, and that the diagnoses are supported by the documentation. — Dr. Andriy Drannikov, MD · rendering provider · Helixona, Inc.</div>
             <div class="prov">
               <span><strong>Signs</strong> physician or extender only · the scribe drafted this note and cannot sign it</span>
             </div>
@@ -913,12 +927,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <div class="card-title">Approve now, or leave pending</div>
                 <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);margin-bottom:10px">
                   <input type="checkbox" checked style="margin-top:3px">
-                  <span>Approve the 8 orders at the versions listed above <span class="appr approved">Approved on sign</span></span>
+                  <span>Approve the 9 orders at the versions listed above <span class="appr approved">Approved on sign</span></span>
                 </label>
                 <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);margin-bottom:10px">
                   <input type="checkbox" style="margin-top:3px">
-                  <span>Approve plan of care <span class="ver-chip">v5</span> — adds the Myers' series and the vitamin D target
-                    <div class="field-help">Leave it unchecked and v4 stays the effective plan; v5 waits for you in the plan builder.</div></span>
+                  <span>Approve plan of care <span class="ver-chip">v7</span> — adds the Myers' series and the vitamin D target
+                    <div class="field-help">Leave it unchecked and v6 stays the effective plan; v7 waits for you in the plan builder.</div></span>
                 </label>
                 <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink)">
                   <input type="checkbox" style="margin-top:3px">
@@ -953,22 +967,22 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="seg-divider">Dispatched · Jul 21, 2026 · 11:52 AM</div>
               <ul class="check-list">
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Encounter locked · ENC-2026-07211</span><span class="check-meta"><a href="security.html#/g-01-audit">Audit store →</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">8 orders approved and finalized · <span class="b-code">O-2291 v2</span>, <span class="b-code">O-4471…4478 v1</span></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">9 orders approved and finalized · <span class="b-code">O-3402 v2</span>, <span class="b-code">O-4471…4478 v1</span></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">5 lab orders transmitted to the reference lab</span><span class="check-meta"><a href="labs.html#/c-01-orders">Orders and results →</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">2 IV protocols queued to the infusion bay board</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">Bay board →</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Prescription transmitted to the patient's pharmacy</span><span class="check-meta"><a href="pharmacy.html#/h-01-meds">Pharmacy →</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Charges generated for billing</span><span class="check-meta"><a href="billing.html#/d-01-worklist">Billing →</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Follow-up series opened in scheduling, booked against <span class="b-code">O-2291 v2</span></span><span class="check-meta"><a href="schedule.html#/l-03-book">Schedule →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Follow-up series opened in scheduling, booked against <span class="b-code">O-3402 v2</span></span><span class="check-meta"><a href="schedule.html#/l-01-day">Schedule →</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">3 tasks opened for Bee and Charlene</span><span class="check-meta"><a href="clinical-remote.html#/b-20-postvisit">Tasks →</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Patient portal notified · Open Notes compliant</span></li>
-                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care <span class="ver-chip">v5</span> saved as a draft <span class="appr pending">Waiting for you</span> · v4 is still the effective plan</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">Approve it →</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care <span class="ver-chip">v7</span> saved as a draft <span class="appr pending">Waiting for you</span> · v6 is still the effective plan</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-patients">Approve it →</a></span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness step unchanged at Standard · the suggestion stays pending</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">Readiness →</a></span></li>
               </ul>
-              <div class="callout callout-ok" style="margin-top:14px">Encounter locked. Everything you approved moved with one signature; what you did not approve is still waiting, and nothing changed the plan behind your back. The documentation ends here at the clinic, not in the weekend.</div>
+              <div class="callout callout-ok" style="margin-top:14px">Encounter locked. Everything you approved dispatched with one signature; what you did not approve is still waiting for you.</div>
               <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
                 <button class="btn btn-primary" data-activate="b-01-worklist">Back to worklist</button>
-                <a class="btn" href="journey-careplan.html#/j-staff-poc">Approve plan of care v5</a>
-                <a class="btn" href="clinical-chart.html#/b-12-amendment">Add an addendum</a>
+                <a class="btn" href="journey-careplan.html#/j-staff-patients">Approve plan of care v7</a>
+                <button class="btn" data-open-modal="#b-addendum-modal">Add an addendum</button>
               </div>
             </div>
           </div>
@@ -978,12 +992,36 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">Compliance checks</div>
               <ul class="check-list">
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Time-based billing supported · 30 min documented</span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">MDM level · moderate</span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Suggested CPT · 99214</span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Diagnosis codes match documentation</span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">No conflicting allergies</span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Provider NPI valid</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">No conflicting allergies · read from the allergy list</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Rendering provider on file · charges bill under group NPI 1407646755</span></li>
               </ul>
+              <div class="prov"><span>Fixed rules, not a model — each one reads the encounter and the canonical lists.</span></div>
+            </div>
+
+            <div class="ai-block" style="margin-top:0;margin-bottom:16px">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Coding suggestion for this encounter.
+                <div style="font-size:12.5px;line-height:2.1;margin-top:6px">
+                  <div>CPT <span class="b-code">99214</span> · established patient, moderate complexity</div>
+                  <div>MDM level · moderate</div>
+                  <div>Diagnosis codes match the documentation · 4 of 4</div>
+                </div>
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> today's note · the 4 diagnoses on this encounter · the 30 minutes documented</span>
+                <span><b>Model</b> coding-assist v2.0</span>
+                <span><b>Confidence</b> 0.83 — time and MDM both support the level</span>
+                <span><b>Decides</b> Dr. Drannikov · before signing</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('CPT 99214 accepted under your name. It bills from the signed encounter.', 'ok')">Accept 99214</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Level picker opened — choose the code you are signing behind.', 'ok')">Choose a different level</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Dismiss</button>
+              </div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -996,8 +1034,11 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
 
             <div class="card">
               <div class="card-title">If something is wrong</div>
-              <div class="field-help">Once signed, edits require a formal addendum and the original note is preserved.</div>
-              <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html#/b-12-amendment">View amendment flow</a>
+              <div class="field-help">Fix it in the note before you sign. Once signed, edits require a formal addendum and the original note is preserved.</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+                <button class="btn btn-sm" data-activate="b-03-soap">Keep editing the note</button>
+                <button class="btn btn-sm btn-ghost" data-open-modal="#b-addendum-modal">Start an addendum</button>
+              </div>
             </div>
           </div>
         </div>
@@ -1005,6 +1046,96 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       </div>
     </div>
   </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-tasks" data-title="Work items">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/work</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Work items</div>
+            <div class="page-sub">Dr. Drannikov &middot; Tuesday, July 21. Every task, alert and flag in the clinic, filtered to you.</div>
+          </div>
+          <button class="btn" onclick="HCOS.toast('Showing every open item in the clinic.')">See the whole clinic</button>
+        </div>
+
+        <div class="prov">
+          <span><strong>One work-item framework</strong> &middot; each module shows a filtered queue of the same items, never its own list</span>
+        </div>
+
+        <div class="filters">
+          <button class="filter-chip active">Mine</button>
+          <button class="filter-chip">Overdue</button>
+          <button class="filter-chip">Escalated</button>
+          <button class="filter-chip">Documentation</button>
+          <button class="filter-chip">Orders</button>
+          <button class="filter-chip">Billing</button>
+          <input class="search-input" placeholder="Search a work item">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Work item</th><th>Owner</th><th>Due</th><th>Priority</th><th>Raised by</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Co-sign Brooke's note</strong> &mdash; Walter Hsu, Jul 20</td>
+                <td>Dr. Drannikov</td><td>Today</td><td><span class="pill pill-err">High</span></td>
+                <td>Encounter signed</td><td><span class="appr pending">Waiting on you</span></td>
+                <td><a class="btn btn-sm" href="clinical-governance.html#/b-24-cosign">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Review Nadia Boulos readiness</strong> &mdash; engine returned Physician Review</td>
+                <td>Dr. Drannikov</td><td>Today</td><td><span class="pill pill-err">High</span></td>
+                <td>Readiness assessment</td><td><span class="appr pending">Waiting on you</span></td>
+                <td><a class="btn btn-sm" href="readiness.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Maya Reyes drip running long</strong> &mdash; 20 min past the booked end</td>
+                <td>Nick</td><td>Now</td><td><span class="pill pill-warn">Escalated</span></td>
+                <td>Administration event</td><td><span class="appr draft">In progress</span></td>
+                <td><a class="btn btn-sm" href="clinical-infusion.html#/b-15-flowsheet">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>G6PD result missing</strong> &mdash; blocks Daniel Okafor's next IV vitamin C</td>
+                <td>Wesley</td><td>Thu Jul 23</td><td><span class="pill pill-warn">Medium</span></td>
+                <td>Order prerequisite</td><td><span class="appr draft">Open</span></td>
+                <td><a class="btn btn-sm" href="labs.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Maya Reyes reached her out-of-pocket max</strong></td>
+                <td>Yazmin</td><td>Today</td><td><span class="pill pill-warn">Medium</span></td>
+                <td>Coverage event</td><td><span class="appr draft">Open</span></td>
+                <td><a class="btn btn-sm" href="patients.html#/pt-02-profile">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Two people may be the same</strong> &mdash; T. Alvarez and Tom Alvarez</td>
+                <td>Haylee</td><td>Jul 22</td><td><span class="pill">Normal</span></td>
+                <td>Identity match</td><td><span class="appr draft">Open</span></td>
+                <td><a class="btn btn-sm" href="people.html#/pe-03-duplicates">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Blue Shield claim waiting on a payer number</strong> &mdash; Priya Natarajan</td>
+                <td>Karina</td><td>Jul 24</td><td><span class="pill">Normal</span></td>
+                <td>Claim event</td><td><span class="appr draft">Open</span></td>
+                <td><a class="btn btn-sm" href="billing.html">Open</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px">
+          An item is owned by one person and escalates on its own when it passes its due time. Finishing it
+          never changes the record that raised it &mdash; it closes the task and leaves the trail.
+          <a href="security.html#/g-01-audit">See the audit</a>.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
 </div>
 
@@ -1019,21 +1150,237 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       <button class="modal-close" data-close-modal>×</button>
     </div>
     <div class="modal-body">
-      <div style="font-size:13px;margin-bottom:10px">Signing locks the encounter, approves 8 orders at their current version, and dispatches:</div>
+      <div style="font-size:13px;margin-bottom:10px">Signing locks the encounter, approves 9 orders at their current version, and dispatches:</div>
       <ul class="check-list">
         <li class="check-item"><span class="check-icon active">1</span><span class="check-label">5 lab orders → reference lab</span></li>
         <li class="check-item"><span class="check-icon active">2</span><span class="check-label">2 IV protocols → infusion bay board</span></li>
         <li class="check-item"><span class="check-icon active">3</span><span class="check-label">1 prescription → patient's pharmacy</span></li>
         <li class="check-item"><span class="check-icon active">4</span><span class="check-label">Charges → billing</span></li>
-        <li class="check-item"><span class="check-icon active">5</span><span class="check-label">Follow-up series → scheduling, against <span class="b-code">O-2291 v2</span></span></li>
+        <li class="check-item"><span class="check-icon active">5</span><span class="check-label">Follow-up series → scheduling, against <span class="b-code">O-3402 v2</span></span></li>
       </ul>
       <div class="prov">
-        <span>Plan of care <span class="ver-chip">v5</span> stays a draft and the readiness step stays at Standard — you did not approve those.</span>
+        <span>Plan of care <span class="ver-chip">v7</span> stays a draft and the readiness step stays at Standard — you did not approve those.</span>
       </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" data-close-modal>Keep editing</button>
       <button class="btn btn-accent" data-close-modal onclick="bSignLock()">Sign and lock</button>
+    </div>
+  </div>
+</div>
+
+<!-- Canonical clinical lists (page-local drawers, outside .screens) -->
+<div class="drawer-overlay" data-close-drawer="#b-drawer-problems"></div>
+<div class="drawer" id="b-drawer-problems">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Problem list — Grace Lindqvist</div>
+      <div class="modal-sub">MRN 2071 · one longitudinal list · every note, claim and safety check reads it here</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#b-drawer-problems">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="prov" style="margin-top:0">
+      <span><strong>Written in HCOS</strong> · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
+      <span>MA, nurse and PCC suggest · a physician or extender confirms</span>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>State</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Hashimoto's thyroiditis</td>
+            <td><span class="b-code">E06.3</span></td>
+            <td>2019</td>
+            <td><span class="clin-state verified">Verified</span><div class="clin-src">Dr. Drannikov · 2019</div></td>
+            <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.', 'ok')">Change status</button></td>
+          </tr>
+          <tr>
+            <td>Generalized fatigue · worse after exertion</td>
+            <td><span class="b-code">R53.83</span></td>
+            <td>Chronic</td>
+            <td><span class="clin-state verified">Verified</span><div class="clin-src">Dr. Drannikov · Mar 16</div></td>
+            <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.', 'ok')">Change status</button></td>
+          </tr>
+          <tr>
+            <td>Cognitive complaints · morning brain fog</td>
+            <td><span class="b-code">R41.840</span></td>
+            <td>Reported 2024</td>
+            <td><span class="clin-state reported">Reported</span><div class="clin-src">Grace · intake questionnaire Mar 12</div></td>
+            <td><button class="btn btn-sm" onclick="HCOS.toast('Confirmed on the list by Dr. Drannikov, effective today. Grace\'s original report is kept.', 'ok')">Confirm as a diagnosis</button></td>
+          </tr>
+          <tr>
+            <td>Vitamin D deficiency</td>
+            <td><span class="b-code">E55.9</span></td>
+            <td>2025</td>
+            <td><span class="clin-state reconciled">Reconciled</span><div class="clin-src">Charlene · Jul 20 · awaiting provider</div></td>
+            <td><button class="btn btn-sm" onclick="HCOS.toast('Verified by Dr. Drannikov, effective today. Charlene\'s reconciliation stays in the history.', 'ok')">Verify</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prov">
+      <span>A patient report is not a diagnosis until a physician or extender confirms it here.</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Problem added as active by Dr. Drannikov. Notes, claims and readiness read it from this list.', 'ok')">Add problem</button>
+      <button class="btn btn-sm" data-close-drawer="#b-drawer-problems">Back to the encounter</button>
+    </div>
+  </div>
+</div>
+
+<div class="drawer-overlay" data-close-drawer="#b-drawer-meds"></div>
+<div class="drawer" id="b-drawer-meds">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Medications and supplements — Grace Lindqvist</div>
+      <div class="modal-sub">MRN 2071 · one list · patient-reported, reconciled and prescribed are kept apart</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#b-drawer-meds">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="prov" style="margin-top:0">
+      <span><strong>Reconciled by</strong> Charlene · Jul 20 · verification is the provider's</span>
+      <span>Pharmacy, the infusion suite and every order read this list</span>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Medication</th><th>Source</th><th>State</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Levothyroxine 75 mcg</strong> PO daily</td>
+            <td>Prescribed · Dr. Drannikov · Jun 9</td>
+            <td><span class="clin-state verified">Verified</span></td>
+            <td><button class="btn btn-sm" data-activate="b-09-orders">Change by order</button></td>
+          </tr>
+          <tr>
+            <td><strong>Magnesium glycinate 400 mg</strong> PRN</td>
+            <td>Grace's own bottle · intake Mar 12</td>
+            <td><span class="clin-state reported">Reported</span></td>
+            <td><button class="btn btn-sm" onclick="HCOS.toast('Reconciled by Dr. Drannikov. Grace\'s original entry is kept beside it.', 'ok')">Reconcile</button></td>
+          </tr>
+          <tr>
+            <td><strong>Vitamin D3 5,000 IU</strong> daily</td>
+            <td>Checked by Charlene · Jul 20</td>
+            <td><span class="clin-state reconciled">Reconciled</span></td>
+            <td><button class="btn btn-sm" onclick="HCOS.toast('Verified by Dr. Drannikov, effective today.', 'ok')">Verify</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prov">
+      <span>Prescribing and discontinuing happen on an order — <button class="btn btn-ghost btn-sm" data-activate="b-09-orders">open orders</button></span>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn btn-sm" data-close-drawer="#b-drawer-meds">Back to the encounter</button>
+    </div>
+  </div>
+</div>
+
+<div class="drawer-overlay" data-close-drawer="#b-drawer-allergies"></div>
+<div class="drawer" id="b-drawer-allergies">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Allergies and intolerances — Grace Lindqvist</div>
+      <div class="modal-sub">MRN 2071 · the one list every safety check reads — infusion, pharmacy, orders</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#b-drawer-allergies">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Substance</th><th>Reaction</th><th>Severity</th><th>State</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Sulfa drugs</strong></td>
+            <td>Rash, hives</td>
+            <td><span class="pill pill-warn">Moderate</span></td>
+            <td><span class="clin-state verified">Verified</span><div class="clin-src">Dr. Drannikov · Mar 16</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prov">
+      <span><strong>Read by</strong> the infusion five rights · <a href="clinical-infusion.html#/b-13-bay-board">bay board</a> · pharmacy · every order on this encounter</span>
+      <span>Reviewed today at 11:22 AM · no change</span>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Allergy added by Dr. Drannikov. Every safety check reads it from this list immediately.', 'ok')">Add allergy</button>
+      <button class="btn btn-sm" onclick="HCOS.toast('Marked reviewed for today\'s encounter with your name and the time.', 'ok')">Mark reviewed</button>
+      <button class="btn btn-sm" data-close-drawer="#b-drawer-allergies">Back to the encounter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Change a protocol = new order version (page-local, outside .screens) -->
+<div class="modal-overlay" id="b-protocol-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Change the protocol?</div>
+        <div class="modal-sub">Grace Lindqvist · changing a placed order creates a new version — the old one is kept</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="field-label">What changes</label>
+        <select class="field-select">
+          <option>Number of runs in the series</option>
+          <option>Ingredients or dose</option>
+          <option>Minimum interval between runs</option>
+          <option>Infusion duration</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Reason for the change</label>
+        <textarea class="field-textarea" rows="3">Fatigue only partially improved after the first runs; extending the series and rechecking vitamin D at 12 weeks.</textarea>
+        <div class="field-help">The reason travels with the version and shows wherever the order is read.</div>
+      </div>
+      <div class="prov">
+        <span><strong>Changed by</strong> Dr. Drannikov · physician or extender only</span>
+        <span>Sessions already booked keep the version they were booked on</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal>Keep the current version</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Saved as a new version, draft until you sign. The previous version stays on the record.', 'ok')">Save as a new version</button>
+    </div>
+  </div>
+</div>
+
+<!-- Addendum to the signed encounter (page-local, outside .screens) -->
+<div class="modal-overlay" id="b-addendum-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Add an addendum</div>
+        <div class="modal-sub">ENC-2026-07211 · Grace Lindqvist · the original note is preserved word for word</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="field-label">Reason for the addendum</label>
+        <select class="field-select">
+          <option>Late result reviewed</option>
+          <option>Correction to the documentation</option>
+          <option>Clarification requested by billing</option>
+          <option>Additional history from the patient</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Addendum text</label>
+        <textarea class="field-textarea" rows="4" placeholder="What is being added, and why"></textarea>
+      </div>
+      <div class="prov">
+        <span><strong>Signs</strong> Dr. Drannikov · physician or extender only</span>
+        <span>The encounter shows "1 addendum" with its timestamp · the portal and billing are notified</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal>Cancel</button>
+      <button class="btn btn-accent" data-close-modal onclick="HCOS.toast('Addendum signed and appended to ENC-2026-07211 — audit store and billing notified. The original note is unchanged.', 'ok')">Sign the addendum</button>
     </div>
   </div>
 </div>
@@ -1049,6 +1396,25 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     chip.classList.add('active');
   });
 
+  // Demo only: the S / O tabs move between the two sections of this note.
+  document.addEventListener('click', function (ev) {
+    var tab = ev.target.closest ? ev.target.closest('.b-tab[data-section]') : null;
+    if (!tab || !tab.parentElement) return;
+    var tabs = tab.parentElement.querySelectorAll('.b-tab[data-section]');
+    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+    tab.classList.add('active');
+    var sec = document.getElementById(tab.getAttribute('data-section'));
+    if (sec && sec.scrollIntoView) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Demo only: moving to another screen closes any open list drawer behind it.
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('[data-activate]') : null;
+    if (!t) return;
+    var open = document.querySelectorAll('.drawer.open, .drawer-overlay.open');
+    for (var i = 0; i < open.length; i++) open[i].classList.remove('open');
+  });
+
   // Demo only: sign and lock swaps the encounter into its dispatched after-state.
   function bSignLock() {
     var before = document.getElementById('b-sign-before');
@@ -1059,7 +1425,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     if (after) after.style.display = 'block';
     if (dbefore) dbefore.style.display = 'none';
     if (dafter) dafter.style.display = 'block';
-    if (window.HCOS && HCOS.toast) HCOS.toast('Encounter signed and locked — 8 orders approved and dispatched. Plan of care v5 is still a draft waiting for you.', 'ok');
+    if (window.HCOS && HCOS.toast) HCOS.toast('Encounter signed and locked — 9 orders approved and dispatched. Plan of care v7 is still a draft waiting for you.', 'ok');
   }
 </script>
 </body>
