@@ -486,6 +486,102 @@
     </div>
   </section>
 
+  <!-- ============================================================ -->
+  <section class="screen" id="b-content-registry" data-title="Content registry">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/content</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Content registry</div>
+            <div class="page-sub">Everything the clinic publishes — note templates, dot-phrases, message templates and patient lessons — versioned the same way.</div>
+          </div>
+          <button class="btn btn-primary" onclick="HCOS.toast('New version drafted. The live one keeps serving until this is approved.', 'ok')">Draft a version</button>
+        </div>
+
+        <div class="prov">
+          <span><strong>One publishing framework</strong> &middot; content types keep their own owners and audiences,
+          but they all version, approve and take effect the same way</span>
+        </div>
+
+        <div class="filters">
+          <button class="filter-chip active">All content</button>
+          <button class="filter-chip">Note templates</button>
+          <button class="filter-chip">Dot-phrases</button>
+          <button class="filter-chip">Message templates</button>
+          <button class="filter-chip">Patient lessons</button>
+          <button class="filter-chip">Awaiting approval</button>
+          <input class="search-input" placeholder="Search content">
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Content</th><th>Type</th><th>Owner</th><th>Version</th><th>Effective</th><th>Audience</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Functional medicine follow-up</strong></td><td>Note template</td><td>Dr. Eduard Drannikov</td>
+                <td><span class="ver-chip">v5</span></td><td>Jun 12, 2026</td><td>Providers &middot; extenders</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><button class="btn btn-sm" data-activate="b-22-template-editor">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>IV standard visit note</strong></td><td>Note template</td><td>Dr. Eduard Drannikov</td>
+                <td><span class="ver-chip">v3</span></td><td>Apr 2, 2026</td><td>Providers &middot; nurses</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><button class="btn btn-sm" data-activate="b-22-template-editor">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>.detox-followup</strong></td><td>Dot-phrase</td><td>Dr. Eduard Drannikov</td>
+                <td><span class="ver-chip">v2</span></td><td>May 20, 2026</td><td>Shared clinic-wide</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><button class="btn btn-sm" data-activate="b-23-dot-phrases">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>.thyroid-panel</strong></td><td>Dot-phrase</td><td>Brooke</td>
+                <td><span class="ver-chip">v1</span></td><td>Jul 8, 2026</td><td>Brooke only</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><button class="btn btn-sm" data-activate="b-23-dot-phrases">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Infusion prep &mdash; 24 hours before</strong></td><td>Message template</td><td>Bee &middot; PCC</td>
+                <td><span class="ver-chip">v4</span></td><td>Jul 1, 2026</td><td>Patients with an infusion booked</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><a class="btn btn-sm" href="communication.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Why NAD+ takes three hours</strong></td><td>Patient lesson</td><td>Bee &middot; PCC</td>
+                <td><span class="ver-chip">v2</span></td><td>Jun 24, 2026</td><td>Patients on a NAD+ series</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><a class="btn btn-sm" href="journey.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>EBOO consent explainer</strong></td><td>Patient lesson</td><td>Bee &middot; PCC</td>
+                <td><span class="ver-chip">v1</span></td><td>&mdash;</td><td>Self-directed patients</td>
+                <td><span class="appr pending">Awaiting clinical approval</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Clinical content is approved by a provider or extender before it reaches a patient.')">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>Functional medicine follow-up</strong></td><td>Note template</td><td>Dr. Eduard Drannikov</td>
+                <td><span class="ver-chip superseded">v4</span></td><td>superseded Jun 12</td><td>&mdash;</td>
+                <td><span class="appr superseded">Superseded</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Notes written under v4 still render as they were written.')">See notes</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:14px">
+          A note written under v4 keeps rendering as v4. Publishing v5 changes what the next note starts from,
+          never what is already signed. <a href="security.html#/g-01-audit">Every publish is in the audit store</a>.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
 </div>
 
 <script src="assets/hcos.js?v=8"></script>

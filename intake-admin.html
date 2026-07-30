@@ -785,6 +785,114 @@
     </div>
   </section>
 
+  <!-- ============================================================ -->
+  <section class="screen" id="a-survey-engine" data-title="Survey engine">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/surveys</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Survey engine</div>
+            <div class="page-sub">One question bank behind intake forms, clinical questionnaires and readiness surveys.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="a-46-form-builder">Open the builder</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('New version drafted. Answers already given stay on the version they were given under.', 'ok')">Publish a version</button>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>One engine</strong> &middot; intake, clinical and readiness draw from the same questions &middot;
+          a response is stored once and stays tied to the version it was answered under</span>
+        </div>
+
+        <div class="seg-divider">Published surveys</div>
+        <div class="tbl-wrap" style="margin-bottom:20px">
+          <table class="tbl">
+            <thead><tr><th>Survey</th><th>Version</th><th>Used by</th><th>Scoring</th><th>Answers land in</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Initial inquiry</strong></td><td><span class="ver-chip">v4</span></td>
+                <td>Intake &middot; public funnel</td><td>None</td>
+                <td>Person record &middot; triage queue</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><button class="btn btn-sm" data-activate="a-46-form-builder">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Health history</strong></td><td><span class="ver-chip">v7</span></td>
+                <td>Intake &middot; onboarding</td><td>None</td>
+                <td>Conditions, allergies, medications &middot; all as <span class="clin-state reported">Reported</span></td>
+                <td><span class="appr approved">Live</span></td>
+                <td><button class="btn btn-sm" data-activate="a-46-form-builder">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Medical symptoms questionnaire</strong></td><td><span class="ver-chip">v3</span></td>
+                <td>Clinical &middot; readiness</td><td>Total plus 15 section scores</td>
+                <td>Questionnaire response &middot; readiness inputs</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><a class="btn btn-sm" href="clinical-questionnaires.html#/b-28-quest-library">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Detox readiness</strong></td><td><span class="ver-chip">v2</span></td>
+                <td>Readiness engine</td><td>Ruleset &middot; not a raw score</td>
+                <td>Readiness assessment</td>
+                <td><span class="appr approved">Live</span></td>
+                <td><a class="btn btn-sm" href="readiness.html">Open</a></td>
+              </tr>
+              <tr>
+                <td><strong>Post-infusion check</strong></td><td><span class="ver-chip">v1</span></td>
+                <td>Clinical &middot; infusion suite</td><td>Flags only</td>
+                <td>Encounter note draft</td>
+                <td><span class="appr pending">Awaiting clinical approval</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('The clinical owner approves content and scoring before it goes live.')">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>Health history</strong></td><td><span class="ver-chip superseded">v6</span></td>
+                <td>Intake &middot; onboarding</td><td>None</td>
+                <td>&mdash;</td>
+                <td><span class="appr superseded">Superseded Jun 2</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('118 responses still read under v6 — the version they were answered under.')">See responses</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Reusable questions</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead><tr><th>Question</th><th>Type</th><th>Used in</th></tr></thead>
+                <tbody>
+                  <tr><td>Current medications and supplements</td><td>Repeating list</td><td>3 surveys</td></tr>
+                  <tr><td>Known allergies and reactions</td><td>Repeating list</td><td>3 surveys</td></tr>
+                  <tr><td>Energy through the day</td><td>Scale 1&ndash;10</td><td>2 surveys</td></tr>
+                  <tr><td>Sleep quality last week</td><td>Scale 1&ndash;10</td><td>2 surveys</td></tr>
+                  <tr><td>What brings you in</td><td>Long answer</td><td>2 surveys</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="field-help" style="margin-top:8px">A question is written once. Changing it drafts a new survey version rather than altering answers already given.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Where answers go</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon done">&#10003;</span><span class="check-label">Health history &rarr; allergies, medications, conditions</span><span class="check-meta"><span class="clin-state reported">Reported</span></span></li>
+              <li class="check-item"><span class="check-icon done">&#10003;</span><span class="check-label">Symptoms questionnaire &rarr; readiness inputs</span><span class="check-meta"><a href="readiness.html">engine</a></span></li>
+              <li class="check-item"><span class="check-icon done">&#10003;</span><span class="check-label">Symptoms questionnaire &rarr; pre-charting draft</span><span class="check-meta"><a href="clinical-remote.html#/b-19-precharting">draft</a></span></li>
+              <li class="check-item"><span class="check-icon done">&#10003;</span><span class="check-label">Inquiry &rarr; person record and triage</span><span class="check-meta"><a href="intake.html">triage</a></span></li>
+            </ul>
+            <div class="prov"><span>Nothing a patient answers becomes clinically active on its own &mdash; it lands as reported and waits for reconciliation.</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
 </div>
 
 <!-- ============================================================ -->
