@@ -28,6 +28,11 @@
   .g-ev-ver { flex-shrink: 0; padding-top: 1px; }
   .g-roles th { font-size: 9.5px; }
   .g-roles td { font-size: 11.5px; }
+  .g-rec-tbl td { vertical-align: top; }
+  .r-dom { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .r-holds { font-size: 11.5px; color: var(--muted); max-width: 230px; }
+  .r-rule { font-size: 11.5px; max-width: 250px; }
+  .r-count { font-size: 11.5px; color: var(--muted); margin-left: auto; }
   .g-note { font-size: 10.5px; color: var(--muted); min-width: 200px; }
 </style>
 </head>
@@ -499,6 +504,140 @@
     </div>
   </section>
 
+  <!-- ============================================================ -->
+  <section class="screen" id="g-03-records" data-title="Canonical records">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/security/records</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Canonical records</div>
+            <div class="page-sub">Where each piece of information lives, who writes it, and which screens are only views of it</div>
+          </div>
+          <button class="btn" onclick="HCOS.toast('Registry exported. 22 records, with their owners and rules.', 'ok')">Export registry</button>
+        </div>
+
+        <div class="callout">
+          <strong>Information exists once, with many controlled views.</strong> A screen that shows a record
+          is a view of it. A screen that keeps its own copy, applies its own rules, or lets the wrong role
+          change an approved decision is a defect &mdash; not a variation.
+        </div>
+
+        <div class="filters" style="margin:14px 0 10px">
+          <button class="filter-chip active" data-rdom="all">All 22</button>
+          <button class="filter-chip" data-rdom="person">Person</button>
+          <button class="filter-chip" data-rdom="clinical">Clinical</button>
+          <button class="filter-chip" data-rdom="scheduling">Scheduling</button>
+          <button class="filter-chip" data-rdom="financial">Financial</button>
+          <button class="filter-chip" data-rdom="governance">Governance</button>
+          <span class="r-count" id="g-rec-count"></span>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl g-rec-tbl">
+            <thead><tr><th>Canonical record</th><th>Domain</th><th>What it holds</th><th>Written by</th>
+              <th>Governance rule</th><th>Lives in</th><th>Source of truth today</th></tr></thead>
+            <tbody id="g-rec-body">
+              <tr data-domain="person"><td><strong>Person / Patient Master</strong></td><td class="r-dom">Person</td><td class="r-holds">Stable person ID, identifiers, demographics, contacts, preferred name, communication preferences</td><td class="r-holds">Inquiry form · eCW import · authorized correction</td><td class="r-rule">One person. Lifecycle changes; identity does not fork.</td><td><a href="patients.html#/pt-05-identity">Identity record</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="person"><td><strong>Lifecycle</strong></td><td class="r-dom">Person</td><td class="r-holds">Inquiry, Lead, Scheduled, Onboarding, Patient, Inactive/Closed, with timestamps and reason</td><td class="r-holds">Workflow events</td><td class="r-rule">Append status events. Current status is derived, never typed.</td><td><a href="patients.html#/pt-01-list">Patient list</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="financial"><td><strong>Coverage</strong></td><td class="r-dom">Financial</td><td class="r-holds">Payer, plan, member and group IDs, effective dates, card and document links</td><td class="r-holds">Card OCR + staff verification</td><td class="r-rule">One active coverage set. Eligibility history stays separate.</td><td><a href="intake.html#/a-11-eligibility">Eligibility</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="financial"><td><strong>Eligibility Snapshot</strong></td><td class="r-dom">Financial</td><td class="r-holds">Response date, status, network, deductible, OOP, coinsurance, source response</td><td class="r-holds">Payer verification</td><td class="r-rule">Never overwrite a prior response. The latest valid snapshot is selected.</td><td><a href="intake.html#/a-11-eligibility">Eligibility</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="scheduling"><td><strong>Appointment &amp; Resources</strong></td><td class="r-dom">Scheduling</td><td class="r-holds">Appointment, service, provider, chair or room, duration, status, series, constraints</td><td class="r-holds">Central scheduling service</td><td class="r-rule">Transactional booking. One appointment ID everywhere.</td><td><a href="schedule.html#/l-01-day">Calendar</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Encounter</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Visit and administration context, participants, note state</td><td class="r-holds">Clinical documentation</td><td class="r-rule">Draft &rarr; reviewed &rarr; signed and locked &rarr; addendum.</td><td><a href="clinical-chart.html#/b-04-timeline">Timeline</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Problem List</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Condition, status, onset and resolution, verification, source</td><td class="r-holds">Provider reconciliation</td><td class="r-rule">A patient report is not automatically a confirmed diagnosis.</td><td><a href="clinical-chart.html#/b-05-problem-list">Problem list</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Allergy / Intolerance</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Substance, reaction, severity, category, status, source, verifier</td><td class="r-holds">Patient report + clinical verification</td><td class="r-rule">One list. Every safety check reads it.</td><td><a href="clinical-chart.html#/b-07-allergies">Allergies</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Medication / Supplement</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Item, dose, route, frequency, status, source, start and stop, reconciliation</td><td class="r-holds">Patient, pharmacy, prescription, provider</td><td class="r-rule">Keep patient-reported, reconciled and prescribed states distinct.</td><td><a href="clinical-chart.html#/b-06-med-rec">Med reconciliation</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Order</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Type, item, dose and rate, cadence, prerequisites, expiration, stop and hold rules, signer</td><td class="r-holds">Physician or extender</td><td class="r-rule">Versioned. Everything downstream references order ID and version.</td><td><a href="clinical.html#/b-09-orders">Orders</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Result</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Test, value, unit, reference and critical flags, source, reviewed status</td><td class="r-holds">Lab interface or verified manual import</td><td class="r-rule">The original result is immutable. Corrections are linked, not overwritten.</td><td><a href="labs.html#/c-01-orders">Orders &amp; results</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Readiness Assessment</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Inputs, ruleset version, result, rationale, reviewer, override</td><td class="r-holds">HCOS rules + clinician review</td><td class="r-rule">One current effective assessment, plus history.</td><td><a href="readiness.html#/i-02-assessment">Assessment record</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Plan of Care</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Goal, pathway, access level, stage, lead actor, pacing, plan items, stop and transition rules</td><td class="r-holds">Signed clinical decision</td><td class="r-rule">Versioned. Physician or extender approval required.</td><td><a href="journey-careplan.html#/j-staff-poc">Plan of care</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Weekly Plan Item</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Activity, treatment, medication or supplement, frequency, timing, owner, completion rule</td><td class="r-holds">Approved plan version</td><td class="r-rule">A staff suggestion stays pending until it is approved.</td><td><a href="journey-careplan.html#/j-staff-activities">Activities</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Questionnaire / Response</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Definition and version, question IDs, scoring; response, source and time</td><td class="r-holds">Form builder + patient or staff</td><td class="r-rule">Definitions and responses are immutable versions. Mappings are explicit.</td><td><a href="clinical-questionnaires.html#/b-28-quest-library">Library</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="governance"><td><strong>Document / Consent</strong></td><td class="r-dom">Governance</td><td class="r-holds">Type, file, extraction, signer, version, effective and expiration dates</td><td class="r-holds">Upload, signature, OCR</td><td class="r-rule">OCR is proposed data. The original file and the consent evidence are kept.</td><td><a href="intake-documents.html#/a-doc-repository">Documents on file</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="governance"><td><strong>Communication / Task</strong></td><td class="r-dom">Governance</td><td class="r-holds">Message, template version, channel, delivery, work item, owner, due and escalation</td><td class="r-holds">Workflow event or user</td><td class="r-rule">A message is not a task. Both link back to the source event.</td><td><a href="clinical.html#/b-tasks">Work items</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="clinical"><td><strong>Treatment Administration</strong></td><td class="r-dom">Clinical</td><td class="r-holds">Order reference, actual dose, rate and volume, vitals, staff, times, variance, adverse event</td><td class="r-holds">Nurse or medic documentation</td><td class="r-rule">Actuals never overwrite the signed order.</td><td><a href="clinical-infusion.html#/b-15-flowsheet">Flowsheet</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="financial"><td><strong>Claim / RCM Work Item</strong></td><td class="r-dom">Financial</td><td class="r-holds">Encounter, order and coverage references, codes, submission, remittance, appeal</td><td class="r-holds">Billing workflow</td><td class="r-rule">Claims reference clinical records. A billing edit cannot change a signed note.</td><td><a href="billing.html#/d-01-worklist">Claim worklist</a></td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr data-domain="governance"><td><strong>Caregiver Grant</strong></td><td class="r-dom">Governance</td><td class="r-holds">Patient, caregiver identity, scope, start and end, revocation, consent</td><td class="r-holds">Patient approval</td><td class="r-rule">Scope-based, time-limited when chosen, revocable immediately.</td><td><a href="caregiver.html#/k-01-access">Caregiver access</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="governance"><td><strong>Enterprise Audit Event</strong></td><td class="r-dom">Governance</td><td class="r-holds">Actor, role, action, record, time, source, before and after metadata, AI or system identity</td><td class="r-holds">Every component</td><td class="r-rule">Append-only. No administrator edits or deletes.</td><td><a href="#g-01-audit" data-activate="g-01-audit">Audit store</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+              <tr data-domain="governance"><td><strong>AI Provenance</strong></td><td class="r-dom">Governance</td><td class="r-holds">Use case, source records, model or ruleset version, prompt and context, output, confidence, reviewer, disposition</td><td class="r-holds">Every AI-enabled workflow</td><td class="r-rule">AI output never silently replaces a human-approved record.</td><td><a href="clinical-governance.html#/b-24-cosign">Co-sign queue</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:12px">
+          <span><strong>Source of truth today</strong> is not the same as where a screen appears. A record marked
+          <span class="pill pill-muted">eCW</span> is still shown all over HCOS &mdash; HCOS reads it and cannot write it
+          until that domain cuts over. <a href="#g-04-ecw" data-activate="g-04-ecw">See the cutover plan</a>.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="g-04-ecw" data-title="eCW ownership &amp; cutover">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/security/ecw-cutover</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">eCW ownership and cutover</div>
+            <div class="page-sub">Which system writes each domain today, and what has to be true before HCOS takes it over</div>
+          </div>
+          <button class="btn" onclick="HCOS.toast('Cutover change requested. Shibani and Vignesh approve; the date is logged.', 'ok')">Request a cutover date</button>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Until a domain activates in HCOS, eCW is its only writer and HCOS reads.</strong>
+          Two systems never write the same domain at the same time. Cutover happens one domain at a time,
+          and the rule in force is stated on the screen where the data appears.
+        </div>
+
+        <div class="grid-4" style="margin:14px 0">
+          <div class="card stat-card"><div class="stat-num">6</div>
+            <div class="stat-lbl">HCOS writes</div><div class="stat-sub">Live, with history migrated</div></div>
+          <div class="card stat-card"><div class="stat-num">2</div>
+            <div class="stat-lbl">In cutover</div><div class="stat-sub">Dual-run, eCW still legal</div></div>
+          <div class="card stat-card"><div class="stat-num">3</div>
+            <div class="stat-lbl">eCW writes</div><div class="stat-sub">HCOS reads only</div></div>
+          <div class="card stat-card"><div class="stat-num">0</div>
+            <div class="stat-lbl">Written by both</div><div class="stat-sub">Never allowed</div></div>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Domain</th><th>Writer today</th><th>The rule on screen</th><th>Cutover</th>
+              <th>Gate before HCOS takes it</th><th>What happens to history</th></tr></thead>
+            <tbody>
+              <tr data-state="hcos"><td><strong>Scheduling &amp; resources</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS books; eCW receives the appointment for billing continuity</td><td>Jul 1, 2026</td><td class="r-holds">Chair and provider capacity modelled, per-patient durations loaded</td><td class="r-holds">Full history migrated</td></tr>
+              <tr data-state="hcos"><td><strong>Person, identity &amp; lifecycle</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS is the person master; eCW holds a mirrored ID on each chart</td><td>Jul 1, 2026</td><td class="r-holds">Duplicate queue cleared below 0.5% of active patients</td><td class="r-holds">Full history migrated</td></tr>
+              <tr data-state="hcos"><td><strong>Readiness &amp; plan of care</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">Does not exist in eCW — HCOS only</td><td>Jul 1, 2026</td><td class="r-holds">Ruleset v3 approved by Dr. Drannikov</td><td class="r-holds">No eCW history to migrate</td></tr>
+              <tr data-state="hcos"><td><strong>Infusion administration</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS flowsheet is the record; the signed note posts back to eCW</td><td>Jul 14, 2026</td><td class="r-holds">Every active infusion order re-signed against an HCOS order ID</td><td class="r-holds">Administrations since Jan 2026 migrated</td></tr>
+              <tr data-state="hcos"><td><strong>Documents &amp; consents</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS repository; eCW keeps read-only copies of pre-cutover files</td><td>Jul 14, 2026</td><td class="r-holds">Consent expiry dates verified on every active patient</td><td class="r-holds">Files since 2024 migrated; older on request</td></tr>
+              <tr data-state="hcos"><td><strong>Audit</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS is the one audit store; eCW events stream in with a link back</td><td>Jul 1, 2026</td><td class="r-holds">Retention policy signed off</td><td class="r-holds">Append-only from Jul 1; earlier events readable in eCW</td></tr>
+              <tr data-state="cutover"><td><strong>Clinical documentation</strong></td><td><span class="appr pending">In cutover</span></td><td class="r-holds">eCW writes the legal note; HCOS drafts and reads</td><td>Sep 2026 (planned)</td><td class="r-holds">Sign-and-lock parity, addendum handling, and template migration</td><td class="r-holds">Notes stay in eCW until parity is proven</td></tr>
+              <tr data-state="cutover"><td><strong>Orders &amp; results</strong></td><td><span class="appr pending">In cutover</span></td><td class="r-holds">eCW writes; HCOS reads and links results to HCOS orders</td><td>Sep 2026 (planned)</td><td class="r-holds">Lab interfaces re-pointed and critical-value routing tested</td><td class="r-holds">Results stay immutable in eCW</td></tr>
+              <tr data-state="ecw"><td><strong>Medications &amp; allergies</strong></td><td><span class="appr draft">eCW writes</span></td><td class="r-holds">eCW is the only writer; HCOS reads and shows reconciliation state</td><td>Q4 2026 (not scheduled)</td><td class="r-holds">e-prescribing certification and pharmacy interface cutover</td><td class="r-holds">Reconciliation history follows the medication record</td></tr>
+              <tr data-state="ecw"><td><strong>Coverage &amp; eligibility</strong></td><td><span class="appr draft">eCW writes</span></td><td class="r-holds">eCW is the only writer; HCOS reads snapshots</td><td>Q4 2026 (not scheduled)</td><td class="r-holds">Payer connections re-credentialed under the HCOS submitter ID</td><td class="r-holds">Snapshots are never overwritten, so both are readable</td></tr>
+              <tr data-state="ecw"><td><strong>Billing &amp; claims</strong></td><td><span class="appr draft">eCW writes</span></td><td class="r-holds">eCW is the only writer; HCOS reads claim state into the worklist</td><td>Q1 2027 (not scheduled)</td><td class="r-holds">AnnexMed workflow ported and clearinghouse enrolment moved</td><td class="r-holds">Claims stay with the encounter that produced them</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:12px">
+          <span>Each domain maps to the records it owns &mdash;
+          <a href="#g-03-records" data-activate="g-03-records">the canonical record registry</a> names them.
+          A record cannot change owner without a dated cutover row here.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 
 </div>
 
@@ -621,9 +760,39 @@
       <a class="btn btn-danger" data-close-modal href="clinical-chart.html#/b-07-allergies" style="text-decoration:none">Open chart and page Shibani</a>
     </div>
   </div>
+
+
 </div>
 
 <script src="assets/hcos.js?v=15"></script>
+<script>
+/* Domain chips narrow the registry — the count is always the truth on screen. */
+(function () {
+  var chips = document.querySelectorAll('[data-rdom]');
+  var body = document.getElementById('g-rec-body');
+  if (!body) return;
+  function apply(dom) {
+    var shown = 0;
+    Array.prototype.forEach.call(body.rows, function (tr) {
+      var hit = dom === 'all' || tr.getAttribute('data-domain') === dom;
+      tr.style.display = hit ? '' : 'none';
+      if (hit) shown++;
+    });
+    document.getElementById('g-rec-count').textContent =
+      shown + (shown === 1 ? ' record' : ' records') + (dom === 'all' ? '' : ' in ' + dom);
+  }
+  Array.prototype.forEach.call(chips, function (c) {
+    c.setAttribute('data-hcos-handled', '1');
+    c.addEventListener('click', function () {
+      Array.prototype.forEach.call(chips, function (x) { x.classList.remove('active'); });
+      c.classList.add('active');
+      apply(c.getAttribute('data-rdom'));
+    });
+  });
+  apply('all');
+})();
+</script>
+
 <script>
 /* G-01: filter the one audit store, and open any line in full */
 (function () {

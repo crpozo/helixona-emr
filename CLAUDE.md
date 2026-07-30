@@ -168,6 +168,9 @@ The care journey (7 stages Identification→Graduation), pacing, activity/supple
 doses, tier ladder (Initiate→Radiant) and rewards are the eCarePlan's model. In
 grayscale: done/earned = ink, never gold or green.
 
+security.html         Audit store, roles matrix, canonical records,
+                      eCW ownership and cutover               g-01…g-04
+
 [remaining modules]   one high-level screen each, deepened in later passes
 assets/hcos.css       tokens + components — single source of truth
 assets/hcos.js        screen switching + the feedback widget
@@ -308,7 +311,7 @@ These are the architectural clusters the review says must be solved once and the
 AI prepares, summarizes, detects and suggests. **It does not sign, order, diagnose, merge, escalate or send.** Every AI surface shows: source(s) used, model/version, confidence or uncertainty, state (suggested / accepted / rejected), and the named human reviewer. Fail-safe: readiness fails **closed** to Physician Review Required; scheduling falls back to protocol defaults and hard constraints.
 
 ### eCW transition
-Before a domain activates in HCOS, **eCW is the only writer** for that domain; HCOS reads. Cutover is per domain, and the source-of-truth rule is stated on the screen.
+Before a domain activates in HCOS, **eCW is the only writer** for that domain; HCOS reads. Cutover is per domain, and the source-of-truth rule is stated on the screen. The per-domain register lives at `security.html#/g-04-ecw` (11 domains: 6 written by HCOS, 2 in cutover, 3 still eCW; **never** one written by both). The 22 canonical records above are registered at `security.html#/g-03-records`, each with its writer, its rule, the screen it lives in, and who owns it today.
 
 ### Shared components for all of the above (assets/hcos.css)
 `lifecycle`/`lifecycle-step` · `clin-state reported|reconciled|verified` + `clin-src` · `prov` (provenance line) · `ver-chip` + `appr draft|pending|approved|superseded` · `ai-block` (`ai-badge`, `ai-state`, `ai-meta`, `ai-actions`) · `match-row`/`match-score`. Never re-invent these per page.

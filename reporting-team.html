@@ -23,6 +23,7 @@
   .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
   .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
   .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .t-who { color: var(--muted); font-size: 11.5px; }
   .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
     background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
 </style>
@@ -80,24 +81,22 @@
           </div>
           </div>
           <div class="seg-divider">Team roll-up · manager view</div>
+          <div class="prov" style="margin-bottom:10px"><span>18 people on the roster. Per-person revenue and utilisation live in <a href="reporting-employees.html#/f-emp">Employees</a>.</span></div>
           <div class="tbl-wrap">
-            <table class="tbl"><thead><tr><th>Role</th><th>Headcount</th><th>Highlighted metric</th><th>Source</th></tr></thead><tbody>
-              <tr><td><strong>Provider · Dr. Eduard Drannikov</strong></td><td>1</td><td>Total appointments: 540</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Provider · Dr. Bakman</strong></td><td>1</td><td>Total appointments: 110</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Physician Associate · Brooke</strong></td><td>1</td><td>Total appointments: 386</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>PCC · Patient Care Coordinator</strong></td><td>1</td><td>PCC appointments: 412</td><td><span class="pill pill-muted">eCW appointment types + 8x8</span></td></tr>
-              <tr><td><strong>New Patient Advisor · Marie</strong></td><td>1</td><td>Total calls: 1,720</td><td><span class="pill pill-muted">8x8 + CRM</span></td></tr>
-              <tr><td><strong>Patient Guide</strong></td><td>1</td><td>Outbound calls: 680</td><td><span class="pill pill-muted">8x8 + eCW</span></td></tr>
-              <tr><td><strong>Front Desk</strong></td><td>3</td><td>Cash service sales: $42,700</td><td><span class="pill pill-muted">eCW + 8x8 by extension</span></td></tr>
-              <tr><td><strong>Medical Assistants</strong></td><td>1</td><td>Vitals taken: 2,310</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Virtual MA · Charlene</strong></td><td>1</td><td>Chart preps: 340</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Medics</strong></td><td>3</td><td>IV starts: 1,620</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Nurses · Nick</strong></td><td>1</td><td>EBOOs performed: 188</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Technician · Kyle</strong></td><td>1</td><td>Laser appointments: 186</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Lab draws</strong></td><td>0</td><td>Quest draws: 180</td><td><span class="pill pill-muted">eCW + lab portals</span></td></tr>
-              <tr><td><strong>Billing</strong></td><td>2</td><td>Insurance collections: $98,400</td><td><span class="pill pill-muted">eCW billing</span></td></tr>
-              <tr><td><strong>Operations Manager · Karina</strong></td><td>1</td><td>Average days of appointments per provider: 6.2 d</td><td><span class="pill pill-muted">eCW</span></td></tr>
-              <tr><td><strong>Admin · Shibani</strong></td><td>1</td><td>Schedule fill rate: 84%</td><td><span class="pill pill-muted">Admin portal</span></td></tr>
+            <table class="tbl"><thead><tr><th>Role</th><th>Who</th><th>Headcount</th><th>Highlighted metric</th><th>Source</th><th></th></tr></thead><tbody>
+              <tr><td><strong>Provider</strong></td><td class="t-who">Dr. Eduard Drannikov, Dr. Bakman</td><td>2</td><td>Total appointments: 650</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Physician Associate</strong></td><td class="t-who">Brooke</td><td>1</td><td>Total appointments: 386</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>PCC</strong></td><td class="t-who">Bee</td><td>1</td><td>PCC appointments: 412</td><td><span class="pill pill-muted">eCW appointment types + 8x8</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>New Patient Advisor</strong></td><td class="t-who">Marie</td><td>1</td><td>Total calls: 1,720</td><td><span class="pill pill-muted">8x8 + CRM</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Front Desk</strong></td><td class="t-who">Yazmin, Haylee</td><td>2</td><td>Cash service sales: $42,700</td><td><span class="pill pill-muted">eCW + 8x8 by extension</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Medical Assistant</strong></td><td class="t-who">Wesley</td><td>1</td><td>Vitals taken: 2,310</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Virtual MA</strong></td><td class="t-who">Charlene (Virtual)</td><td>1</td><td>Chart preps: 340</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Medic</strong></td><td class="t-who">Bea, Juan, Nate</td><td>3</td><td>IV starts: 1,620</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Nurse</strong></td><td class="t-who">Nick</td><td>1</td><td>EBOOs performed: 188</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Technician</strong></td><td class="t-who">Kyle</td><td>1</td><td>Laser appointments: 186</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Billing</strong></td><td class="t-who">Vignesh, Kamalesh</td><td>2</td><td>Insurance collections: $98,400</td><td><span class="pill pill-muted">eCW billing</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Operations Manager</strong></td><td class="t-who">Karina</td><td>1</td><td>Average days of appointments per provider: 6.2 d</td><td><span class="pill pill-muted">eCW</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
+              <tr><td><strong>Admin</strong></td><td class="t-who">Shibani</td><td>1</td><td>Schedule fill rate: 84%</td><td><span class="pill pill-muted">Admin portal</span></td><td><a href="reporting-employees.html#/f-emp">Open</a></td></tr>
             </tbody></table>
           </div>
 
