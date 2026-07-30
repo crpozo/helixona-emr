@@ -24,23 +24,28 @@
   --warn: #6E6E6E;
   --err: #1A1A1A;
 
-  /* Status lifecycle — light→dark ramp; the ONLY "color" system on the calendar */
-  --st-scheduled: #C9C9C9;
-  --st-confirmed: #9A9A9A;
-  --st-arrived: #6E6E6E;
-  --st-inroom: #3D3D3D;
-  --st-done: #1A1A1A;
-  --st-noshow: #4A4A4A;
-  --st-cancelled: #B3B3B3;
+  /* Status colour code — where the visit is right now.
+     Reads as a workflow, not a rainbow: nothing yet (grey) → patient said yes
+     (blue) → they are here and waiting on you (amber) → being treated (green)
+     → finished, so it recedes (slate). Exits are red and faded grey.
+     Treatment colour lives on the left edge; status owns the FILL, so the two
+     channels never fight. */
+  --st-scheduled: #9AA3B0;
+  --st-confirmed: #2E6DB4;
+  --st-arrived:   #D98A1F;
+  --st-inroom:    #2E8B57;
+  --st-done:      #5B6673;
+  --st-noshow:    #C0392B;
+  --st-cancelled: #A9B0B8;
 
-  /* Status tints (backgrounds for appointment blocks) */
-  --st-scheduled-bg: #FCFCFC;
-  --st-confirmed-bg: #F3F3F3;
-  --st-arrived-bg: #E9E9E9;
-  --st-inroom-bg: #DEDEDE;
-  --st-done-bg: #FFFFFF;
-  --st-noshow-bg: #FFFFFF;
-  --st-cancelled-bg: #F5F5F5;
+  /* Status tints — the block fill. Kept pale so the treatment edge stays loud. */
+  --st-scheduled-bg: #F5F6F8;
+  --st-confirmed-bg: #EAF2FA;
+  --st-arrived-bg:   #FCF4E6;
+  --st-inroom-bg:    #EAF6EF;
+  --st-done-bg:      #F1F3F5;
+  --st-noshow-bg:    #FBEDEB;
+  --st-cancelled-bg: #F6F7F8;
 
   --radius: 12px;
   --radius-sm: 6px;

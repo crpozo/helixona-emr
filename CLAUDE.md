@@ -188,9 +188,14 @@ Shared visibility — how "everyone edits" works on a static site: Carlos merges
 
 ## Design system (established — reuse, never reinvent)
 
-**GRAYSCALE ONLY (Carlos, 2026-07-21): black, white, and grays — no hue anywhere. It is a wireframe.** Never introduce a color; meaning comes from copy, shade, and border style (solid / dashed / dotted). Token names are historical but resolve to grays: `--hx-navy #1A1A1A` · `--hx-blue #3D3D3D` · `--hx-accent #6E6E6E` · `--hx-band #F7F7F7` · `--hx-light #EFEFEF` · ink `#1A1A1A` · muted `#737373` · lines `#DBDBDB / #E9E9E9`.
+**Colour code (Carlos, 2026-07-28) — two channels, two questions.** The wireframe was grayscale-only; it now carries a deliberate colour code and nothing else.
 
-Status is a light→dark grayscale ramp — the further along the visit, the darker (still the ONLY differentiation system on the calendar; appointment type is text): Scheduled `#C9C9C9` · Confirmed `#9A9A9A` · Arrived `#6E6E6E` · In Room/Chair `#3D3D3D` · Done `#1A1A1A` on white · No-Show dashed `#4A4A4A` · Cancelled `#B3B3B3` + strikethrough. Network badges read by border: INN solid · OON dashed · self-pay dotted.
+- **Status owns the FILL** — where the visit is right now, read as a workflow: Scheduled `#9AA3B0` grey (nothing yet) → Confirmed `#2E6DB4` blue (they said yes) → Arrived `#D98A1F` amber (here, waiting on you) → In Room / In Chair `#2E8B57` green (being treated) → Done `#5B6673` slate (finished, recedes). Exits: No-Show `#C0392B` red dashed · Cancelled `#A9B0B8` grey with strikethrough. Block fills are the pale `--st-*-bg` tints so the treatment edge stays loud.
+- **Treatment owns the LEFT EDGE and the initial chip** — NAD+ `#5B4B8A` · IV vitamin C `#B26B12` · Myers' and pushes `#1F6F6B` · EBOO `#9B3A3A` · consults and follow-ups `#2E5C8A` · telehealth `#3E7A4E` · lab draw `#6B5B3A`. The edge **pattern** stays alongside the colour so the board still reads printed or colour-blind.
+
+Everything outside those two systems stays black, white and grey. Structure, chrome, cards, tables and buttons are never coloured — colour means status or treatment, nothing else.
+
+Base tokens: `--hx-navy #1A1A1A` · `--hx-blue #3D3D3D` · `--hx-accent #6E6E6E` · `--hx-band #F7F7F7` · `--hx-light #EFEFEF` · ink `#1A1A1A` · muted `#737373` · lines `#DBDBDB / #E9E9E9`. Network badges read by border: INN solid · OON dashed · self-pay dotted.
 
 Type and copy: Inter everywhere; Fraunces only on the login hero and hub headline. Sentence case. Buttons say exactly what they do ("Book appointment", never "Submit") and keep their name through a flow. Errors say what happened and how to fix it. 8px spacing rhythm. App shell: navy sidebar 216px, band background, white cards, 12px radius.
 
