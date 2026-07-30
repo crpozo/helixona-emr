@@ -43,10 +43,10 @@
 
           <div class="cal-toolbar">
             <div class="cal-nav">
-              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">‹</button>
-              <button class="btn btn-sm" onclick="HCOS.toast('Already on today — Tuesday, July 21')">Today</button>
-              <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">›</button>
-              <span class="cal-date" style="margin-left:8px">Tuesday, July 21</span>
+              <button class="btn btn-sm" onclick="lDay(-1)">&lsaquo;</button>
+              <button class="btn btn-sm" onclick="lDay(0)">Today</button>
+              <button class="btn btn-sm" onclick="lDay(1)">&rsaquo;</button>
+              <span class="cal-date" id="l-date" style="margin-left:8px">Tuesday, July 21</span>
             </div>
             <div class="cal-views">
               <button class="active">Day</button>
@@ -132,33 +132,33 @@
             <!-- Dr. Drannikov -->
             <div class="daycal-col" data-col="dr">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-consult" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-done t-consult" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">8:30 – 10:00</div>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
               </div>
-              <div class="cal-appt st-inroom t-consult" style="top:220px;height:40px" data-appt="A-88208" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-inroom t-consult" style="top:220px;height:40px" data-appt="A-88208" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:30</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div class="cal-appt st-arrived t-tele" style="top:308px;height:40px" data-appt="A-88221" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-arrived t-tele" style="top:308px;height:40px" data-appt="A-88221" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">11:30</div>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <div class="cal-appt-type"><span class="type-mark">TEL</span>Telehealth · 30 min</div>
               </div>
-              <div class="cal-appt st-confirmed t-consult" style="top:484px;height:40px" data-appt="A-88238" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-confirmed t-consult" style="top:484px;height:40px" data-appt="A-88238" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">1:30 PM</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div class="cal-appt st-cancelled t-consult" style="top:528px;height:40px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-cancelled t-consult" style="top:528px;height:40px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">2:00 PM</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
               <div class="daycal-empty-hint l-hint-visible" style="top:528px;height:40px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
-              <div class="cal-appt st-scheduled t-consult" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-scheduled t-consult" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:00 – 4:30 PM</div>
                 <div class="cal-appt-name">Tom Alvarez</div>
                 <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
@@ -168,17 +168,17 @@
             <!-- Dr. Bakman -->
             <div class="daycal-col" data-col="bak">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-consult" style="top:88px;height:40px" data-appt="A-88205" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-done t-consult" style="top:88px;height:40px" data-appt="A-88205" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">9:00</div>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div class="cal-appt st-confirmed t-consult" style="top:440px;height:40px" data-appt="A-88235" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,4,5" class="cal-appt st-confirmed t-consult" style="top:440px;height:40px" data-appt="A-88235" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">1:00 PM</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div class="cal-appt st-scheduled t-consult" style="top:660px;height:40px" data-appt="A-88254" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,5" class="cal-appt st-scheduled t-consult" style="top:660px;height:40px" data-appt="A-88254" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:30 PM</div>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
@@ -188,12 +188,12 @@
             <!-- Brooke -->
             <div class="daycal-col" data-col="bro">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-consult" style="top:176px;height:40px" data-appt="A-88210" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-done t-consult" style="top:176px;height:40px" data-appt="A-88210" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:00</div>
                 <div class="cal-appt-name">Walter Hsu</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div class="cal-appt st-scheduled t-consult" style="top:528px;height:40px" data-appt="A-88243" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-scheduled t-consult" style="top:528px;height:40px" data-appt="A-88243" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">2:00 PM</div>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
@@ -203,7 +203,7 @@
             <!-- Chair 1 -->
             <div class="daycal-col" data-col="c1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-inchair t-nad ai-warn" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-inchair t-nad ai-warn" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer">
                 <span class="ai-flag" title="Running long">!</span>
                 <div class="cal-appt-time">9:00 – 12:00 · running to 12:20</div>
                 <div class="cal-appt-name">Maya Reyes</div>
@@ -221,7 +221,7 @@
             <!-- Chair 2 -->
             <div class="daycal-col" data-col="c2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-inchair t-ivc" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,4,5" class="cal-appt st-inchair t-ivc" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:00 – 12:30</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <div class="cal-appt-type"><span class="type-mark">IVC</span>IV vitamin C 25 g · runs on time</div>
@@ -232,7 +232,7 @@
             <!-- Chair 3 -->
             <div class="daycal-col" data-col="c3">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-arrived t-myers" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,5" class="cal-appt st-arrived t-myers" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">11:30 – 12:30</div>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-type"><span class="type-mark">MYR</span>Myers' cocktail · 1 h</div>
@@ -249,10 +249,10 @@
             <!-- Chair 4 -->
             <div class="daycal-col" data-col="c4">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-arrived t-lab" style="top:286px;height:18px;padding:1px 8px" data-appt="A-88219" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-arrived t-lab" style="top:286px;height:18px;padding:1px 8px" data-appt="A-88219" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-name" style="font-size:10px"><span class="type-mark">LAB</span>Sofia Ramos · 11:15 lab draw · 15m</div>
               </div>
-              <div class="cal-appt st-confirmed t-myers" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-confirmed t-myers" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">2:00 – 3:00 PM</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-type"><span class="type-mark">MYR</span>Myers' cocktail · 1 h</div>
@@ -979,6 +979,25 @@
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
+  var L_DAYS = [
+    { n: 1, label: 'Monday, July 20' },
+    { n: 2, label: 'Tuesday, July 21' },
+    { n: 3, label: 'Wednesday, July 22' },
+    { n: 4, label: 'Thursday, July 23' },
+    { n: 5, label: 'Friday, July 24' }
+  ];
+  var lCur = 1; /* index of Tuesday */
+
+  function lDay(step) {
+    lCur = step === 0 ? 1 : Math.max(0, Math.min(L_DAYS.length - 1, lCur + step));
+    var d = L_DAYS[lCur];
+    document.getElementById('l-date').textContent = d.label;
+    var now = document.querySelector('.cal-now');
+    if (now) now.style.display = d.n === 2 ? '' : 'none';
+    lApply();
+    if (step !== 0) HCOS.toast(d.label + (d.n === 2 ? ' — today' : ''), 'ok');
+  }
+
   function lSync(src) {
     var isView = src.id.indexOf('l-view') === 0;
     ['', '-w', '-m'].forEach(function (sfx) {
@@ -1021,10 +1040,12 @@
     var shown = 0, total = 0;
     document.querySelectorAll('.cal-appt').forEach(function (a) {
       total++;
+      var days = (a.getAttribute('data-days') || '2').split(',');
+      var dayOk = days.indexOf(String(L_DAYS[lCur].n)) !== -1;
       var colOk = wantCols.indexOf(a.closest('[data-col]').getAttribute('data-col')) !== -1;
       var treatOk = treat === 'all' || a.classList.contains(treat);
-      a.style.display = (colOk && treatOk) ? '' : 'none';
-      if (colOk && treatOk) shown++;
+      a.style.display = (colOk && treatOk && dayOk) ? '' : 'none';
+      if (colOk && treatOk && dayOk) shown++;
     });
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
       h.style.display = wantCols.indexOf('dr') !== -1 && treat === 'all' ? '' : 'none';
@@ -1059,9 +1080,8 @@
       : mDays + ' days run this treatment';
 
     var el = document.getElementById('l-count');
-    el.textContent = (shown === total)
-      ? 'Showing all ' + total + ' appointments'
-      : 'Showing ' + shown + ' of ' + total + ' appointments';
+    el.textContent = shown + (shown === 1 ? ' appointment' : ' appointments') + ' on ' +
+      L_DAYS[lCur].label.split(',')[0];
 
     var lock = document.getElementById('l-lockbtn');
     if (lock && lock.classList.contains('locked') && !(view === 'all' && treat === 'all')) {
