@@ -313,6 +313,34 @@ Before a domain activates in HCOS, **eCW is the only writer** for that domain; H
 ### Shared components for all of the above (assets/hcos.css)
 `lifecycle`/`lifecycle-step` · `clin-state reported|reconciled|verified` + `clin-src` · `prov` (provenance line) · `ver-chip` + `appr draft|pending|approved|superseded` · `ai-block` (`ai-badge`, `ai-state`, `ai-meta`, `ai-actions`) · `match-row`/`match-score`. Never re-invent these per page.
 
+## Dashboard rules (from DASHBOARD_SPEC.md, 2026-07-30)
+
+The spec's *behaviour* is adopted; its gold-and-black palette is not — the
+wireframe keeps grayscale plus the two clinical channels (status = fill,
+treatment = edge). Where the spec says "gold", read "our dark ink".
+
+- **Period and payment live in the header**, and only on the pages where they
+  change the numbers. The matrix is in `DASH_FILTERS` in `assets/hcos.js`:
+  Executive, Revenue, Patients, Employees and Treatments take both; Billing,
+  Marketing and Team take period only; Today, AI insights, Journey and Admin
+  take neither.
+- **Period is a multiplier where 1 = one month** (today 1/30.42 · week 0.25 ·
+  month 1 · quarter 3 · YTD 5.4). A figure scales only if it is a count or an
+  amount: mark it `data-vol`. Rates, averages and per-something never scale.
+  Add `data-pay` when the payment filter should also split it.
+- **A filtered-out series drops to zero**, it does not sit there greyed out
+  pretending to be data.
+- **Cash and insurance use one pair of tones everywhere** — `--pay-cash` mid
+  grey, `--pay-ins` near-black, applied through `.series-cash` / `.series-ins`
+  with a `.pay-key` legend. Never invent a new pair per chart.
+- **A delta pill is coloured by the metric, not by the arrow.** Falling is good
+  on a denial rate, a no-show rate or days in AR, and bad on revenue. The
+  vocabulary lives in `LOWER_IS_BETTER`; extend it there, never per page.
+- **A KPI card carrying `data-kpi="token"` is clickable** and narrows the tables
+  on its own screen to rows containing that token. One token per screen — three
+  cards that filter to the same rows is not a filter.
+- **Every figure is `tabular-nums`** so columns line up.
+
 ## Data rules
 
 **No PHI, ever.** Patients, appointments, notes, and claims in the wireframe are always synthetic. Clinic identity (name, address, phone, NPI) and staff first names are fine — they are the real users. Do not put the clinic TIN, payer account numbers, or any real patient detail anywhere in this repo.

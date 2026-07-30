@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=14">
+<link rel="stylesheet" href="assets/hcos.css?v=15">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -44,13 +44,17 @@
           <div class="app-user"><button class="btn">Export</button></div>
         </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">$908,300</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>$908,300</div>
               <div class="stat-lbl">Estimated (billed)</div><div class="stat-sub">Submitted to insurers — not money yet</div></div>
-            <div class="card stat-card"><div class="stat-num">$574,200</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>$574,200</div>
               <div class="stat-lbl">Expected (allowable)</div><div class="stat-sub">Contracted amount likely to be paid</div></div>
-            <div class="card stat-card"><div class="stat-num">$475,400</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>$475,400</div>
               <div class="stat-lbl">Revenue collected</div><div class="stat-sub">Actually received — recognized</div></div>
-            <div class="card stat-card"><div class="stat-num">$98,800</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>$98,800</div>
               <div class="stat-lbl">Appealing denial clawback</div><div class="stat-sub">Denials being appealed</div></div>
           </div>
           <div class="callout callout-warn" style="margin-bottom:18px">
@@ -58,33 +62,45 @@
             or claw back payments until it is in the bank. Every recoupment is appealed.
           </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">$291,800</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>$291,800</div>
               <div class="stat-lbl">Billed</div><div class="stat-sub">Claims billed in the period</div><div class="r-delta">&#9650; 6.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">12</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>12</div>
               <div class="stat-lbl">Pending claims</div><div class="stat-sub">Created, not yet sent</div><div class="r-delta">&#9660; 8.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">1.8 d</div>
+            <div class="card stat-card">
+              <div class="stat-num">1.8 d</div>
               <div class="stat-lbl">Average days to submit</div><div class="stat-sub">Encounter to claim sent</div><div class="r-delta">&#9650; 8.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">38.0 d</div>
+            <div class="card stat-card">
+              <div class="stat-num">38.0 d</div>
               <div class="stat-lbl">Average days to pay</div><div class="stat-sub">Weighted across payers</div><div class="r-delta">&#9660; 3.0%</div></div>
           </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">11%</div>
+            <div class="card stat-card">
+              <div class="stat-num">11%</div>
               <div class="stat-lbl">Total denial rate</div><div class="stat-sub">86 claims denied</div><div class="r-delta">&#9660; 1.5%</div></div>
-            <div class="card stat-card"><div class="stat-num">12</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>12</div>
               <div class="stat-lbl">Unlocked claims</div><div class="stat-sub">Open money until the provider closes it</div><div class="r-delta">&#9660; 14.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">41</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>41</div>
               <div class="stat-lbl">Appeals sent</div><div class="stat-sub">Total appeal submissions</div><div class="r-delta">&#9650; 6.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">34</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>34</div>
               <div class="stat-lbl">Unique claims appealed</div><div class="stat-sub">Distinct claims under appeal</div><div class="r-delta">&#9650; 4.0%</div></div>
           </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">286</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>286</div>
               <div class="stat-lbl">VOBs completed</div><div class="stat-sub">Verifications of benefits</div><div class="r-delta">&#9650; 5.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">12</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>12</div>
               <div class="stat-lbl">Open disputes</div><div class="stat-sub">Payer disputes in progress</div><div class="r-delta">&#9660; 8.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">$14,200</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>$14,200</div>
               <div class="stat-lbl">Write-offs</div><div class="stat-sub">Uncollectible balances</div><div class="r-delta">&#9660; 2.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">612</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol>612</div>
               <div class="stat-lbl">Claims paid</div><div class="stat-sub">Paid in full this period</div><div class="r-delta">&#9650; 5.0%</div></div>
           </div>
           <div class="grid-sidebar" style="margin-bottom:18px">
@@ -128,6 +144,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=14"></script>
+<script src="assets/hcos.js?v=15"></script>
 </body>
 </html>

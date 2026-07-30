@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=14">
+<link rel="stylesheet" href="assets/hcos.css?v=15">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -44,23 +44,31 @@
           <div class="app-user"><button class="btn">Export</button></div>
         </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">1,280</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>1,280</div>
               <div class="stat-lbl">Active patients</div><div class="stat-sub">Seen in the last 90 days</div><div class="r-delta">&#9650; 3.2%</div></div>
-            <div class="card stat-card"><div class="stat-num">96</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>96</div>
               <div class="stat-lbl">New patients</div><div class="stat-sub">New sign-ups in the period</div><div class="r-delta">&#9650; 12.5%</div></div>
-            <div class="card stat-card"><div class="stat-num">4.6 d</div>
+            <div class="card stat-card">
+              <div class="stat-num">4.6 d</div>
               <div class="stat-lbl">Wait for next appointment</div><div class="stat-sub">Average days waiting</div><div class="r-delta">&#9660; 6.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">3,240</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>3,240</div>
               <div class="stat-lbl">Total patients</div><div class="stat-sub">All patients on record</div></div>
           </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">412</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>412</div>
               <div class="stat-lbl">IV patients</div><div class="stat-sub">Distinct patients receiving IVs</div></div>
-            <div class="card stat-card"><div class="stat-num">128 / 164</div>
+            <div class="card stat-card">
+              <div class="stat-num">128 / 164</div>
               <div class="stat-lbl">Active IV patients</div><div class="stat-sub">78% of everyone with an IV script</div></div>
-            <div class="card stat-card"><div class="stat-num">438</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>438</div>
               <div class="stat-lbl">Following their plan of care</div><div class="stat-sub">34% of active patients</div></div>
-            <div class="card stat-card"><div class="stat-num">1,720</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>1,720</div>
               <div class="stat-lbl">Total calls</div><div class="stat-sub">Inbound and outbound this period</div></div>
           </div>
           <div class="grid-sidebar" style="margin-bottom:18px">
@@ -109,6 +117,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=14"></script>
+<script src="assets/hcos.js?v=15"></script>
 </body>
 </html>

@@ -47,6 +47,10 @@
   --st-noshow-bg:    #F7D5D0;
   --st-cancelled-bg: #EBEDEF;
 
+  /* Payment type — one pair of tones, used identically everywhere */
+  --pay-cash: #9E9E9E;
+  --pay-ins:  #1A1A1A;
+
   --radius: 12px;
   --radius-sm: 6px;
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -686,6 +690,59 @@ button { font-family: inherit; }
   border: 1px solid var(--ink); border-radius: 4px; padding: 2px 8px; white-space: nowrap;
 }
 @media (max-width: 760px) { .match-row { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   DASHBOARD FILTERS · DELTAS · PAYMENT SERIES  (per DASHBOARD_SPEC)
+   ========================================================================== */
+.dash-filters {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  padding: 9px 28px; background: #fff; border-bottom: 1px solid var(--line-soft);
+}
+.dash-fgroup { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.dash-flabel {
+  font-size: 9.5px; text-transform: uppercase; letter-spacing: .8px;
+  color: var(--muted); font-weight: 700; margin-right: 3px;
+}
+.dash-chip {
+  padding: 3px 10px; font-size: 11.5px; border-radius: 13px; font-family: inherit;
+  border: 1px solid var(--line); background: #fff; color: var(--muted); cursor: pointer;
+}
+.dash-chip:hover { border-color: var(--ink); color: var(--ink); }
+.dash-chip.active { background: var(--ink); color: #fff; border-color: var(--ink); font-weight: 600; }
+.dash-scope { margin-left: auto; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Delta pill — "good" flips with the metric, not with the arrow */
+.delta {
+  display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
+  font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 10px;
+  background: #fff; border: 1px solid var(--line); color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.delta.good { border-color: var(--st-inroom); color: var(--st-inroom); background: var(--st-inroom-bg); }
+.delta.bad  { border-color: var(--st-noshow); color: var(--st-noshow); background: var(--st-noshow-bg); }
+.delta.flat { border-style: dashed; }
+
+/* Cash and insurance read the same way on every page */
+.series-cash { background: var(--pay-cash) !important; }
+.series-ins  { background: var(--pay-ins)  !important; }
+.pay-key { display: flex; gap: 16px; align-items: center; margin-bottom: 10px; }
+.pay-key span { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--muted); }
+.pay-key i { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+/* A KPI you can click to filter the page below it */
+.stat-card.clickable { cursor: pointer; position: relative; }
+.stat-card.clickable::after {
+  content: 'Filter ▸'; position: absolute; top: 10px; right: 12px;
+  font-size: 9px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+  color: var(--line); transition: color .12s;
+}
+.stat-card.clickable:hover { border-color: var(--ink); }
+.stat-card.clickable:hover::after { color: var(--muted); }
+.stat-card.picked { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.stat-card.picked::after { content: 'Filtering ✕'; color: var(--ink); }
+
+/* Figures line up in columns */
+.stat-num, .meter-val, .tbl td, .kpi-num, .big-num { font-variant-numeric: tabular-nums; }
 
 /* ==========================================================================
    MODAL · TOAST · DRAWER

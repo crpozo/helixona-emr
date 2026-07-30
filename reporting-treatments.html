@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=14">
+<link rel="stylesheet" href="assets/hcos.css?v=15">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -44,13 +44,17 @@
           <div class="app-user"></div>
         </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">4,416</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>4,416</div>
               <div class="stat-lbl">Treatments delivered</div><div class="stat-sub">In the period</div></div>
-            <div class="card stat-card"><div class="stat-num">$468,000</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>$468,000</div>
               <div class="stat-lbl">Treatment revenue</div><div class="stat-sub">Across every modality</div></div>
-            <div class="card stat-card"><div class="stat-num">63%</div>
+            <div class="card stat-card">
+              <div class="stat-num">63%</div>
               <div class="stat-lbl">Average occupancy</div><div class="stat-sub">Booked against capacity</div></div>
-            <div class="card stat-card"><div class="stat-num">EBOO</div>
+            <div class="card stat-card">
+              <div class="stat-num">EBOO</div>
               <div class="stat-lbl">At capacity</div><div class="stat-sub">100% in Room 1 right now</div></div>
           </div>
           <div class="seg-divider">By treatment · revenue and occupancy</div>
@@ -106,6 +110,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=14"></script>
+<script src="assets/hcos.js?v=15"></script>
 </body>
 </html>

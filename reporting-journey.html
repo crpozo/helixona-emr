@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=14">
+<link rel="stylesheet" href="assets/hcos.css?v=15">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -44,13 +44,17 @@
           <div class="app-user"></div>
         </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">2</div>
+            <div class="card stat-card" data-kpi="active">
+              <div class="stat-num">2</div>
               <div class="stat-lbl">Active</div><div class="stat-sub">Coming in regularly</div></div>
-            <div class="card stat-card"><div class="stat-num">8</div>
+            <div class="card stat-card">
+              <div class="stat-num">8</div>
               <div class="stat-lbl">In pipeline</div><div class="stat-sub">Between lead and first appointment</div></div>
-            <div class="card stat-card"><div class="stat-num">1</div>
+            <div class="card stat-card" data-kpi="waitlist">
+              <div class="stat-num">1</div>
               <div class="stat-lbl">Waitlist</div><div class="stat-sub">Waiting for an opening</div></div>
-            <div class="card stat-card"><div class="stat-num">3</div>
+            <div class="card stat-card" data-kpi="declined">
+              <div class="stat-num">3</div>
               <div class="stat-lbl">Declined</div><div class="stat-sub">Left the funnel</div></div>
           </div>
           <div class="filters">
@@ -85,6 +89,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=14"></script>
+<script src="assets/hcos.js?v=15"></script>
 </body>
 </html>

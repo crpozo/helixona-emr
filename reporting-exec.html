@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=14">
+<link rel="stylesheet" href="assets/hcos.css?v=15">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -44,39 +44,48 @@
           <div class="app-user"><a class="btn" href="reporting-ai.html">AI insights</a><button class="btn btn-primary">Export</button></div>
         </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">$326,800</div>
+            <div class="card stat-card" data-kpi="revenue">
+              <div class="stat-num" data-vol data-pay>$326,800</div>
               <div class="stat-lbl">Total revenue</div><div class="stat-sub">Cash and insurance collected in the period</div><div class="r-delta">&#9650; 8.4%</div></div>
-            <div class="card stat-card"><div class="stat-num">$13,617</div>
+            <div class="card stat-card">
+              <div class="stat-num">$13,617</div>
               <div class="stat-lbl">Revenue per employee</div><div class="stat-sub">Productivity per team member</div><div class="r-delta">&#9650; 5.1%</div></div>
-            <div class="card stat-card"><div class="stat-num">1,280</div>
+            <div class="card stat-card" data-kpi="patients">
+              <div class="stat-num" data-vol data-pay>1,280</div>
               <div class="stat-lbl">Active patients</div><div class="stat-sub">Seen in the last 90 days</div><div class="r-delta">&#9650; 3.2%</div></div>
-            <div class="card stat-card"><div class="stat-num">$255</div>
+            <div class="card stat-card">
+              <div class="stat-num">$255</div>
               <div class="stat-lbl">Revenue per patient</div><div class="stat-sub">Average monthly ticket</div><div class="r-delta">&#9650; 2.7%</div></div>
           </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">96</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>96</div>
               <div class="stat-lbl">New patients</div><div class="stat-sub">New sign-ups in the period</div><div class="r-delta">&#9650; 12.5%</div></div>
-            <div class="card stat-card"><div class="stat-num">4.6 d</div>
+            <div class="card stat-card">
+              <div class="stat-num">4.6 d</div>
               <div class="stat-lbl">Wait for next appointment</div><div class="stat-sub">Average days waiting</div><div class="r-delta">&#9660; 6.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">82%</div>
+            <div class="card stat-card" data-kpi="occupancy">
+              <div class="stat-num">82%</div>
               <div class="stat-lbl">Unit occupancy</div><div class="stat-sub">Chairs and beds against daily capacity</div><div class="r-delta">&#9650; 4.0%</div></div>
-            <div class="card stat-card"><div class="stat-num">1,540</div>
+            <div class="card stat-card">
+              <div class="stat-num" data-vol data-pay>1,540</div>
               <div class="stat-lbl">IVs administered</div><div class="stat-sub">Total infusions in the period</div><div class="r-delta">&#9650; 6.8%</div></div>
           </div>
           <div class="grid-sidebar" style="margin-bottom:18px">
           <div class="card" ><div class="card-title">Monthly revenue · cash vs insurance</div>
+          <div class="pay-key"><span><i class="series-cash"></i> Cash</span><span><i class="series-ins"></i> Insurance</span></div>
           <div class="r-bars">
-            <div class="r-bar"><div class="r-bar-fill" style="height:63%"></div><span class="r-bar-lbl">Jan</span></div>
-            <div class="r-bar"><div class="r-bar-fill" style="height:70%"></div><span class="r-bar-lbl">Feb</span></div>
-            <div class="r-bar"><div class="r-bar-fill" style="height:77%"></div><span class="r-bar-lbl">Mar</span></div>
-            <div class="r-bar"><div class="r-bar-fill" style="height:85%"></div><span class="r-bar-lbl">Apr</span></div>
-            <div class="r-bar"><div class="r-bar-fill" style="height:91%"></div><span class="r-bar-lbl">May</span></div>
-            <div class="r-bar"><div class="r-bar-fill" style="height:96%"></div><span class="r-bar-lbl">Jun</span></div>
+            <div class="r-bar"><div class="r-bar-fill series-ins" style="height:37%"></div><div class="r-bar-fill series-cash" style="height:26%;border-radius:0 0 3px 3px"></div><span class="r-bar-lbl">Jan</span></div>
+            <div class="r-bar"><div class="r-bar-fill series-ins" style="height:41%"></div><div class="r-bar-fill series-cash" style="height:29%;border-radius:0 0 3px 3px"></div><span class="r-bar-lbl">Feb</span></div>
+            <div class="r-bar"><div class="r-bar-fill series-ins" style="height:45%"></div><div class="r-bar-fill series-cash" style="height:32%;border-radius:0 0 3px 3px"></div><span class="r-bar-lbl">Mar</span></div>
+            <div class="r-bar"><div class="r-bar-fill series-ins" style="height:49%"></div><div class="r-bar-fill series-cash" style="height:36%;border-radius:0 0 3px 3px"></div><span class="r-bar-lbl">Apr</span></div>
+            <div class="r-bar"><div class="r-bar-fill series-ins" style="height:53%"></div><div class="r-bar-fill series-cash" style="height:38%;border-radius:0 0 3px 3px"></div><span class="r-bar-lbl">May</span></div>
+            <div class="r-bar"><div class="r-bar-fill series-ins" style="height:56%"></div><div class="r-bar-fill series-cash" style="height:40%;border-radius:0 0 3px 3px"></div><span class="r-bar-lbl">Jun</span></div>
           </div>
           </div>
           <div class="card" ><div class="card-title">Operational alerts · need attention</div>
             <div class="r-alert"><span class="pill pill-warn">PCC</span><span>POC penetration: 64% vs target 70%.</span></div>
-            <div class="r-alert"><span class="pill pill-warn">Revenue</span><span>Monthly revenue: $326,800 vs target $340,000.</span></div>
+            <div class="r-alert"><span class="pill pill-warn">Revenue</span><span>Monthly revenue: <span data-vol data-pay>$326,800</span> vs target $340,000.</span></div>
             <div class="r-alert"><span class="pill pill-warn">Medics</span><span>Medic misses: 96 vs target 60.</span></div>
             <div class="r-alert"><span class="pill pill-warn">Front desk</span><span>Outbound calls: 960 vs target 1,200.</span></div>
             <div class="r-alert"><span class="pill pill-warn">Billing</span><span>Claim denial rate: 11% vs target 8%.</span></div>
@@ -122,6 +131,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=14"></script>
+<script src="assets/hcos.js?v=15"></script>
 </body>
 </html>

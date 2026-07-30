@@ -211,6 +211,8 @@
         });
         main.appendChild(tabs);
       }
+      var dashBar = buildDashFilters();
+      if (dashBar) main.appendChild(dashBar);
       chipsNav = el('nav', 'screen-chips');
       main.appendChild(chipsNav);
       var canvas = el('div', 'canvas');
@@ -225,6 +227,158 @@
     }
     /* SHELL === 'bare': chrome-free page (login) — no topbar, no chips.
        Screens navigate through their own in-card links; the widget still loads. */
+  }
+
+  /* ---------- dashboard filters · period + payment (DASHBOARD_SPEC) ----------
+     Which filters a page shows is declared here, not on the page: the header
+     only offers a filter where it actually changes the numbers. */
+  var DASH_FILTERS = {
+    'reporting-exec':       ['period', 'payment'],
+    'reporting-revenue':    ['period', 'payment'],
+    'reporting-billing':    ['period'],
+    'reporting-patients':   ['period', 'payment'],
+    'reporting-marketing':  ['period'],
+    'reporting-team':       ['period'],
+    'reporting-employees':  ['period', 'payment'],
+    'reporting-treatments': ['period', 'payment']
+  };
+  /* 1 = one month. A real build turns these into date-partitioned queries. */
+  var PERIODS = [
+    ['today',   'Today',       1 / 30.42],
+    ['week',    'This week',   0.25],
+    ['month',   'This month',  1],
+    ['quarter', 'Quarter',     3],
+    ['ytd',     'Year (YTD)',  5.4]
+  ];
+  var PAYMENTS = [['all', 'Cash + Insurance'], ['cash', 'Cash only'], ['insurance', 'Insurance only']];
+  var CASH_SHARE = 0.42;
+  var dash = { period: 'month', payment: 'all' };
+
+  function periodScale() {
+    for (var i = 0; i < PERIODS.length; i++) if (PERIODS[i][0] === dash.period) return PERIODS[i][2];
+    return 1;
+  }
+  function periodLabel() {
+    for (var i = 0; i < PERIODS.length; i++) if (PERIODS[i][0] === dash.period) return PERIODS[i][1];
+    return '';
+  }
+  function payMultiplier() {
+    return dash.payment === 'cash' ? CASH_SHARE : dash.payment === 'insurance' ? (1 - CASH_SHARE) : 1;
+  }
+
+  /* Re-render a figure from its monthly baseline, keeping the shape it was
+     written in: $326,800 stays money, 1,280 stays a count, 4.6 keeps a decimal. */
+  function reFormat(base, raw) {
+    var money = raw.indexOf('$') === 0;
+    var dec = /\.\d/.test(raw) ? (raw.split('.')[1].replace(/[^\d]/g, '').length) : 0;
+    var suffix = raw.replace(/^[$]?[\d,.]+/, '');
+    var v = base;
+    if (money && v >= 1000) dec = 0;
+    var out = v.toFixed(dec);
+    var parts = out.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return (money ? '$' : '') + parts.join('.') + suffix;
+  }
+
+  function applyDash() {
+    var scale = periodScale(), pay = payMultiplier();
+    Array.prototype.forEach.call(document.querySelectorAll('[data-vol]'), function (n) {
+      if (!n.dataset.volBase) {
+        n.dataset.volBase = n.textContent.trim();
+        n.dataset.volRaw = n.textContent.trim();
+      }
+      var base = parseFloat(n.dataset.volBase.replace(/[^\d.]/g, ''));
+      if (isNaN(base)) return;
+      var mult = scale * (n.hasAttribute('data-pay') ? pay : 1);
+      n.textContent = reFormat(base * mult, n.dataset.volRaw);
+    });
+    /* Series that belong to the payment type you filtered out drop to zero —
+       the bar shrinks, it does not sit there greyed out pretending to be data. */
+    Array.prototype.forEach.call(document.querySelectorAll('.series-cash, .series-ins'), function (b) {
+      if (b.closest('.pay-key')) return;              /* the key stays readable */
+      var isCash = b.classList.contains('series-cash');
+      var off = (dash.payment === 'cash' && !isCash) || (dash.payment === 'insurance' && isCash);
+      var dim = b.style.height ? 'height' : (b.style.width ? 'width' : '');
+      if (dim) {
+        if (!b.dataset.dimBase) b.dataset.dimBase = b.style[dim];
+        b.style[dim] = off ? '0%' : b.dataset.dimBase;
+      }
+      var row = b.closest('.r-hbar');
+      if (row) row.style.opacity = off ? '0.35' : '';
+    });
+    var scope = document.querySelector('.dash-scope');
+    if (scope) {
+      var pl = PAYMENTS.filter(function (p) { return p[0] === dash.payment; })[0];
+      scope.textContent = periodLabel() + ' · ' + (pl ? pl[1] : '');
+    }
+  }
+
+  function buildDashFilters() {
+    var which = DASH_FILTERS[PAGE];
+    if (!which) return null;
+    var bar = el('div', 'dash-filters');
+    function group(label, items, key) {
+      var g = el('div', 'dash-fgroup');
+      g.appendChild(el('span', 'dash-flabel', label));
+      items.forEach(function (it) {
+        var b = el('button', 'dash-chip' + (dash[key] === it[0] ? ' active' : ''), esc(it[1]));
+        b.setAttribute('data-hcos-handled', '1');
+        b.addEventListener('click', function () {
+          dash[key] = it[0];
+          Array.prototype.forEach.call(g.querySelectorAll('.dash-chip'), function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          applyDash();
+        });
+        g.appendChild(b);
+      });
+      return g;
+    }
+    if (which.indexOf('payment') >= 0) bar.appendChild(group('Payment', PAYMENTS, 'payment'));
+    if (which.indexOf('period') >= 0) bar.appendChild(group('Period', PERIODS, 'period'));
+    bar.appendChild(el('span', 'dash-scope', ''));
+    return bar;
+  }
+
+  /* Delta pills — a fall is good on a denial rate and bad on revenue, so the
+     metric decides the colour, never the arrow. */
+  var LOWER_IS_BETTER = /denial|denied|no.?show|cancell?ation|days to|wait|aging|backlog|overdue|churn|cost|outstanding|unbilled|unlocked|pending|unsent|unresolved|rework|error|readmis|drop|attrition|complaint|escalat|missing|expired|dispute|write.?off|refund|credit balance|leakage|gap/i;
+  function paintDeltas() {
+    Array.prototype.forEach.call(document.querySelectorAll('.r-delta'), function (d) {
+      if (d.dataset.painted) return;
+      d.dataset.painted = '1';
+      var txt = d.textContent.trim();
+      var down = txt.indexOf('▼') >= 0;
+      var card = d.closest('.stat-card') || d.parentElement;
+      var label = card ? (card.textContent || '') : '';
+      var lower = d.hasAttribute('data-lower-better') || LOWER_IS_BETTER.test(label);
+      var good = lower ? down : !down;
+      d.className = 'r-delta delta ' + (good ? 'good' : 'bad');
+      d.title = (good ? 'Moving the right way' : 'Moving the wrong way') +
+                ' — ' + (lower ? 'lower is better' : 'higher is better');
+    });
+  }
+
+  /* A KPI you can click narrows the tables under it to the rows it counts. */
+  function wireKpis() {
+    Array.prototype.forEach.call(document.querySelectorAll('.stat-card[data-kpi]'), function (card) {
+      card.classList.add('clickable');
+      card.setAttribute('data-hcos-handled', '1');
+      card.addEventListener('click', function () {
+        var screen = card.closest('.screen') || document;
+        var on = !card.classList.contains('picked');
+        Array.prototype.forEach.call(screen.querySelectorAll('.stat-card.picked'), function (c) { c.classList.remove('picked'); });
+        var token = (card.getAttribute('data-kpi') || '').toLowerCase();
+        var hits = 0;
+        Array.prototype.forEach.call(screen.querySelectorAll('.tbl tbody tr'), function (tr) {
+          var match = tr.textContent.toLowerCase().indexOf(token) >= 0;
+          tr.style.display = (on && !match) ? 'none' : '';
+          if (on && match) hits++;
+        });
+        if (on) card.classList.add('picked');
+        var lbl = card.querySelector('.stat-lbl');
+        toast(on ? (lbl ? lbl.textContent : token) + ' — ' + hits + ' matching rows' : 'Filter cleared');
+      });
+    });
   }
 
   /* ---------- screens + chips ---------- */
@@ -615,6 +769,9 @@
     buildChips();
     buildWidget();
     wireDelegation();
+    paintDeltas();
+    wireKpis();
+    applyDash();
 
     var initial = null;
     if (location.hash) {

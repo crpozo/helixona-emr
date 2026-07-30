@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=14">
+<link rel="stylesheet" href="assets/hcos.css?v=15">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -66,13 +66,17 @@
             </div>
           </div>
           <div class="grid-4" style="margin-bottom:18px">
-            <div class="card stat-card"><div class="stat-num">+8.4%</div>
+            <div class="card stat-card" data-kpi="revenue">
+              <div class="stat-num">+8.4%</div>
               <div class="stat-lbl">Revenue</div><div class="stat-sub">Month over month</div></div>
-            <div class="card stat-card"><div class="stat-num">$412.9k</div>
+            <div class="card stat-card">
+              <div class="stat-num">$412.9k</div>
               <div class="stat-lbl">Outstanding A/R</div><div class="stat-sub">Owed by insurers</div></div>
-            <div class="card stat-card"><div class="stat-num">&minus;4%</div>
+            <div class="card stat-card" data-kpi="conversion">
+              <div class="stat-num">&minus;4%</div>
               <div class="stat-lbl">Conversion</div><div class="stat-sub">Onboarding to first appointment</div></div>
-            <div class="card stat-card"><div class="stat-num">92%</div>
+            <div class="card stat-card" data-kpi="capacity">
+              <div class="stat-num">92%</div>
               <div class="stat-lbl">EBOO capacity</div><div class="stat-sub">Turning patients away</div></div>
           </div>
           <div class="seg-divider">Recommended actions</div>
@@ -97,6 +101,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=14"></script>
+<script src="assets/hcos.js?v=15"></script>
 </body>
 </html>
