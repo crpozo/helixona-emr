@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=8">
+<link rel="stylesheet" href="assets/hcos.css?v=11">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -31,6 +31,12 @@
   .pe-ev-when { width: 92px; flex-shrink: 0; color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace; }
   .pe-ev-what { flex: 1; }
   .pe-ev-who { color: var(--muted); font-size: 11px; white-space: nowrap; }
+  .pt-filters { flex-direction: column; align-items: stretch; gap: 10px; }
+  .pt-f-top { display: flex; align-items: center; gap: 14px; }
+  .pt-f-top .search-input { flex: 1; min-width: 0; }
+  .pt-f-top .pf-count { margin-left: 0; white-space: nowrap; }
+  .pt-f-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 8px; align-items: start; }
+  .pt-f-grid .pf-sel { width: 100%; min-width: 0; }
 </style>
 </head>
 <body data-page="patients" data-page-title="Patients" data-shell="app">
@@ -43,14 +49,17 @@
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/patients</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Patients</h2>
-        <p class="page-sub">Tuesday, July 21 · coverage and readiness at a glance</p>
-        <div class="prov" style="margin-bottom:12px">
-          <span>Everyone here is at the <strong>Patient</strong> stage — derived from the events on the person record, never typed in. Identity, lifecycle and duplicates live in the <a href="patients.html#/pt-04-find">person master</a>.</span>
-          <span>Someone still at Onboarding, like Tom Alvarez, appears once they are <a href="#pt-03-create" data-activate="pt-03-create">promoted to patient</a>.</span>
+        <div class="app-header">
+          <div>
+            <h2 class="page-title">Patients</h2>
+            <p class="page-sub" style="margin:0">Tuesday, July 21 · coverage and readiness at a glance</p>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="pt-06-duplicates">Duplicates</button>
+            <button class="btn btn-primary" data-activate="pt-04-find">Add a person</button>
+          </div>
         </div>
-
-        <div class="grid-4" style="margin-bottom:14px">
+<div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
             <div class="stat-num">412</div>
             <div class="stat-lbl">Active patients</div>
@@ -69,9 +78,13 @@
           </div>
         </div>
 
-        <div class="filters">
-          <input class="search-input" type="search" id="pf-q" oninput="pfApply()" placeholder="Search by name, phone, or DOB">
-          <select class="field-select pf-sel" id="pf-life" onchange="pfApply()">
+        <div class="filters pt-filters">
+          <div class="pt-f-top">
+            <input class="search-input" type="search" id="pf-q" oninput="pfApply()" placeholder="Search by name, phone, or DOB">
+            <span class="pf-count" id="pf-count"></span>
+          </div>
+          <div class="pt-f-grid">
+            <select class="field-select pf-sel" id="pf-life" onchange="pfApply()">
             <option value="Patient">Patient</option>
             <option value="Inquiry">Inquiry</option>
             <option value="Lead">Lead</option>
@@ -80,39 +93,39 @@
             <option value="Inactive">Inactive / closed</option>
             <option value="all">Any lifecycle stage</option>
           </select>
-          <select class="field-select pf-sel" id="pf-path" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-path" onchange="pfApply()">
             <option value="all">Any care pathway</option>
             <option>Complex Chronic Care</option>
             <option>Health Optimization</option>
             <option>Recovery</option>
             <option>Vitality</option>
           </select>
-          <select class="field-select pf-sel" id="pf-access" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-access" onchange="pfApply()">
             <option value="all">Any access level</option>
             <option>Comprehensive</option>
             <option>Collaborative</option>
             <option value="Self-directed">Self-directed / open access</option>
           </select>
-          <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()">
             <option value="all">Any membership</option>
             <option>Longevity</option>
             <option>Restore</option>
             <option>Wellness</option>
             <option>Pay as you go</option>
           </select>
-          <select class="field-select pf-sel" id="pf-net" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-net" onchange="pfApply()">
             <option value="all">Any coverage</option>
             <option value="inn">In-network</option>
             <option value="oon">Out-of-network</option>
             <option value="self">Self-pay</option>
           </select>
-          <select class="field-select pf-sel" id="pf-attn" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-attn" onchange="pfApply()">
             <option value="all">Anything to watch</option>
             <option value="oop">Out-of-pocket max met</option>
             <option value="spd">SPD missing</option>
             <option value="readiness">Readiness needs review</option>
           </select>
-          <span class="pf-count" id="pf-count"></span>
+          </div>
         </div>
 
         <div class="tbl-wrap" id="pf-table">
@@ -464,7 +477,7 @@
               </div>
               <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
                 <button class="btn btn-primary" onclick="HCOS.toast('Searched the person master by name, date of birth and phone.', 'ok')">Search people</button>
-                <a class="btn" href="patients.html#/pt-04-find">No match — create the person</a>
+                <button class="btn" onclick="document.getElementById('pt-create-card').scrollIntoView({behavior:'smooth',block:'center'});HCOS.toast('No match on file — fill in the four fields below.', 'ok')">No match — create the person</button>
               </div>
 
               <div class="tbl-wrap">
@@ -517,9 +530,7 @@
                 <span class="lifecycle-step">Patient</span>
                 <span class="lifecycle-step">Inactive</span>
               </div>
-              <div class="prov"><span>Status is <strong>derived</strong> from the events on the person record — Onboarding since Jul 12. Promoting appends one more event; it never rewrites the ones before it.</span></div>
-
-              <ul class="check-list" style="margin-top:12px">
+<ul class="check-list" style="margin-top:12px">
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Identity confirmed against the person master</span><span class="check-meta">Haylee · front desk · today</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Consents on file — treatment, financial policy, communication</span><span class="check-meta">Jul 12</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Coverage recorded — Cigna PPO, out-of-network</span><span class="check-meta"><a href="intake.html#/a-11-eligibility">eligibility</a></span></li>
@@ -707,7 +718,7 @@
             </div>
 
             <div class="card">
-              <div class="card-title">No match — create the person</div>
+              <div class="card-title" id="pt-create-card">No match — create the person</div>
               <div class="field-row">
                 <div class="field"><label class="field-label">First name</label><input class="field-input" placeholder="First name"></div>
                 <div class="field"><label class="field-label">Last name</label><input class="field-input" placeholder="Last name"></div>
@@ -784,11 +795,7 @@
           <span class="lifecycle-step current">Patient</span>
           <span class="lifecycle-step">Inactive</span>
         </div>
-        <div class="prov">
-          <span>Status is <strong>derived</strong> from the events below — it is never typed in.</span>
-        </div>
-
-        <div class="grid-sidebar" style="margin-top:16px">
+<div class="grid-sidebar" style="margin-top:16px">
           <div>
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Identity</div>
@@ -958,7 +965,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=8"></script>
+<script src="assets/hcos.js?v=11"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

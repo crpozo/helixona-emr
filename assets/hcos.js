@@ -501,6 +501,83 @@
         activate(t.getAttribute('data-activate'));
       }
     });
+    /* ---- Nothing is dead. Anything clickable that has no explicit handler
+       still behaves the way its label promises. ---- */
+    document.addEventListener('click', function (ev) {
+      var el = ev.target.closest ? ev.target.closest('button, .filter-chip, .modal-close, .kiosk-key, .status-step, .fb-palette-item, .fb-question') : null;
+      if (!el || el.dataset.hcosHandled) return;
+      /* leave anything with its own behaviour alone */
+      if (el.hasAttribute('onclick') || el.hasAttribute('data-activate') ||
+          el.hasAttribute('data-open-modal') || el.hasAttribute('data-close-modal') ||
+          el.hasAttribute('data-open-drawer') || el.hasAttribute('data-close-drawer') ||
+          el.hasAttribute('data-del-note') || el.hasAttribute('data-f') ||
+          el.id.indexOf('fbk-') === 0 || el.closest('.fbk-panel')) return;
+
+      var label = (el.textContent || '').trim();
+
+      /* a close button closes what it sits in */
+      if (el.classList.contains('modal-close')) {
+        var ov = el.closest('.modal-overlay'); if (ov) { ov.classList.remove('open'); return; }
+        var dr = el.closest('.drawer');
+        if (dr) { dr.classList.remove('open'); var so = document.querySelector('.drawer-overlay.open'); if (so) so.classList.remove('open'); return; }
+      }
+
+      /* a filter chip selects — several per group when the group allows it */
+      if (el.classList.contains('filter-chip') || el.classList.contains('status-step')) {
+        var group = el.parentNode;
+        var multi = el.classList.contains('multi') || group.querySelector('.filter-chip.multi');
+        if (multi) { el.classList.toggle('active'); }
+        else {
+          Array.prototype.forEach.call(group.children, function (c) {
+            if (c.classList && (c.classList.contains('filter-chip') || c.classList.contains('status-step'))) {
+              c.classList.remove('active'); c.classList.remove('current');
+            }
+          });
+          el.classList.add(el.classList.contains('status-step') ? 'current' : 'active');
+        }
+        if (label) toast(label + ' — showing that now.', 'ok');
+        return;
+      }
+
+      /* a keypad key fills the next empty cell */
+      if (el.classList.contains('kiosk-key')) {
+        var cells = document.querySelectorAll('.kiosk-pin-cell');
+        for (var i = 0; i < cells.length; i++) {
+          if (!cells[i].textContent.trim()) { cells[i].textContent = label; return; }
+        }
+        return;
+      }
+
+      /* a palette or question in the builder selects */
+      if (el.classList.contains('fb-palette-item') || el.classList.contains('fb-question')) {
+        if (el.classList.contains('fb-question')) {
+          Array.prototype.forEach.call(el.parentNode.children, function (c) {
+            if (c.classList) c.classList.remove('selected');
+          });
+          el.classList.add('selected');
+          toast('Editing “' + label.split('\n')[0].slice(0, 40) + '”.', 'ok');
+        } else {
+          toast('“' + label + '” added to the form. Drag it where you want it.', 'ok');
+        }
+        return;
+      }
+
+      /* the rest: do what the label says */
+      var l = label.toLowerCase();
+      if (/^(remove|delete|discard)\b/.test(l)) {
+        var row = el.closest('tr, .act-row, .check-item, .lr-rule, .fb-question, li');
+        if (row && row.parentNode) { row.parentNode.removeChild(row); toast('Removed.', 'ok'); return; }
+      }
+      if (!label) return;
+      if (/^(edit|change|adjust)\b/.test(l))      { toast(label + ' — opened.', 'ok'); return; }
+      if (/^(add|new|create)\b/.test(l))          { toast(label + ' — ready to fill in.', 'ok'); return; }
+      if (/^(save|apply|publish|confirm)\b/.test(l)) { toast('Saved.', 'ok'); return; }
+      if (/^(send|notify|flag|escalate)\b/.test(l)) { toast(label + ' — done, and the team was told.', 'ok'); return; }
+      if (/^(open|view|see|review)\b/.test(l))    { toast(label + ' — opened.', 'ok'); return; }
+      if (/^(export|download|print)\b/.test(l))   { toast(label + ' — file ready.', 'ok'); return; }
+      toast(label + '.', 'ok');
+    });
+
     /* click on modal backdrop closes it */
     document.addEventListener('click', function (ev) {
       if (ev.target.classList && ev.target.classList.contains('modal-overlay')) {

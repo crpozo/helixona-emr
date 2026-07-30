@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=8">
+<link rel="stylesheet" href="assets/hcos.css?v=11">
 <style>
   .l-op-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
   .l-op-row span:first-child { width: 104px; flex-shrink: 0; }
@@ -42,6 +42,17 @@
   .f-meter { flex: 1.6; height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; }
   .f-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
   .f-meter-val { width: 42px; text-align: right; font-weight: 600; font-size: 12.5px; color: var(--hx-navy); }
+  .f-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+  .f-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .f-hchart { display: flex; align-items: flex-end; gap: 6px; height: 130px; }
+  .f-hbar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .f-hbar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .f-hbar-lbl { font-size: 9px; color: var(--muted); margin-top: 5px; }
+  .f-seg { display: flex; height: 12px; border-radius: 6px; overflow: hidden; }
+  .f-seg-part { height: 100%; }
+  .f-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; color: var(--muted); }
+  .f-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
 </style>
 </head>
 <body data-page="reporting" data-page-title="Reporting &amp; admin" data-shell="app">
@@ -49,6 +60,153 @@
 <div class="screens">
 
   <!-- ============================================================ -->
+  <!-- ============================================================ -->
+  <section class="screen" id="f-03-today" data-title="Today">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/today</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Today <span class="f-live">Live</span></div>
+            <div class="page-sub">Tuesday, July 21 &middot; as of 2:57 PM</div>
+          </div>
+          <div class="app-user">
+            <button class="btn">Export today</button>
+            <a class="btn btn-primary" href="schedule.html">Open the calendar</a>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:14px">
+          <div class="card stat-card">
+            <div class="stat-num">38</div>
+            <div class="stat-lbl">Patients in today</div>
+            <div class="stat-sub">38 of 52 scheduled checked in</div>
+            <div class="f-delta">&#9650; 9% vs the same time yesterday</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">$11,050</div>
+            <div class="stat-lbl">Revenue today</div>
+            <div class="stat-sub">Cash $6,240 &middot; insurance $4,810</div>
+            <div class="f-delta">&#9650; 12% vs the same time yesterday</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">14</div>
+            <div class="stat-lbl">Appointments left</div>
+            <div class="stat-sub">Still on the schedule for today</div>
+            <div class="f-delta">&#9660; 0% vs the same time yesterday</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">5</div>
+            <div class="stat-lbl">New patients today</div>
+            <div class="stat-sub">First-time sign-ups checked in</div>
+            <div class="f-delta">&#9650; 25% vs the same time yesterday</div>
+          </div>
+        </div>
+        <div class="grid-4" style="margin-bottom:20px">
+          <div class="card stat-card">
+            <div class="stat-num">78%</div>
+            <div class="stat-lbl">Occupancy now</div>
+            <div class="stat-sub">Chairs and rooms in use right now</div>
+            <div class="f-delta">&#9650; 6% vs the same time yesterday</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">No-shows today</div>
+            <div class="stat-sub">Missed appointments so far</div>
+            <div class="f-delta">&#9660; 1% vs the same time yesterday</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">47</div>
+            <div class="stat-lbl">IVs today</div>
+            <div class="stat-sub">Infusions administered so far</div>
+            <div class="f-delta">&#9650; 8% vs the same time yesterday</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-num">6</div>
+            <div class="stat-lbl">EBOOs today</div>
+            <div class="stat-sub">EBOO procedures completed</div>
+            <div class="f-delta">&#9650; 20% vs the same time yesterday</div>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div class="card">
+            <div class="card-title">Arrivals by hour</div>
+            <div class="f-hchart">
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:25%"></div><span class="f-hbar-lbl">8am</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:62%"></div><span class="f-hbar-lbl">9am</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:88%"></div><span class="f-hbar-lbl">10am</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:75%"></div><span class="f-hbar-lbl">11am</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:38%"></div><span class="f-hbar-lbl">12pm</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:62%"></div><span class="f-hbar-lbl">1pm</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:75%"></div><span class="f-hbar-lbl">2pm</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:25%"></div><span class="f-hbar-lbl">3pm</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:12%"></div><span class="f-hbar-lbl">4pm</span></div>
+            <div class="f-hbar"><div class="f-hbar-fill" style="height:12%"></div><span class="f-hbar-lbl">5pm</span></div>
+            </div>
+            <div class="field-help" style="margin-top:8px">Checked in today &middot; the 10 AM peak is when the chairs fill.</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Appointments today</div>
+            <div style="font-size:22px;font-weight:700;color:var(--hx-navy)">55 scheduled</div>
+            <div class="f-seg" style="margin:12px 0">
+              <div class="f-seg-part" style="width:69%;background:var(--st-done)"></div>
+              <div class="f-seg-part" style="width:25%;background:var(--st-scheduled)"></div>
+              <div class="f-seg-part" style="width:6%;background:var(--st-noshow)"></div>
+            </div>
+            <div class="f-legend"><span><i style="background:var(--st-done)"></i>Completed 38</span>
+              <span><i style="background:var(--st-scheduled)"></i>Remaining 14</span>
+              <span><i style="background:var(--st-noshow)"></i>No-show 3</span></div>
+          </div>
+        </div>
+
+        <div class="seg-divider">Team on shift</div>
+        <div class="page-sub" style="margin-top:-6px">10 on shift &middot; 7 ahead of target</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Employee</th><th>Role</th><th>Patients</th><th>Revenue</th><th>Against today's target</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bea</strong></td><td>Medic</td><td>16</td><td>$1,450</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:93%"></div></div><span class="meter-val">112%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Nick</strong></td><td>Nurse</td><td>7</td><td>$3,100</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:92%"></div></div><span class="meter-val">111%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Charlene (Virtual)</strong></td><td>Virtual MA</td><td>12</td><td>$980</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:91%"></div></div><span class="meter-val">109%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Bee</strong></td><td>PCC</td><td>11</td><td>$1,400</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:90%"></div></div><span class="meter-val">108%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Dr. Eduard Drannikov</strong></td><td>Provider</td><td>18</td><td>$4,800</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:89%"></div></div><span class="meter-val">107%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Dr. Bakman</strong></td><td>Provider</td><td>16</td><td>$3,600</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:88%"></div></div><span class="meter-val">106%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Brooke</strong></td><td>Physician Associate</td><td>14</td><td>$2,900</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:87%"></div></div><span class="meter-val">104%</span></div></td>
+                <td><span class="pill pill-ok">Ahead</span></td></tr>
+              <tr><td><strong>Marie</strong></td><td>New Patient Advisor</td><td>9</td><td>$1,900</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:79%"></div></div><span class="meter-val">95%</span></div></td>
+                <td><span class="pill ">On track</span></td></tr>
+              <tr><td><strong>Kyle</strong></td><td>Technician</td><td>11</td><td>$720</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:75%"></div></div><span class="meter-val">90%</span></div></td>
+                <td><span class="pill ">On track</span></td></tr>
+              <tr><td><strong>Yazmin</strong></td><td>Front Desk</td><td>24</td><td>$2,100</td>
+                <td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:73%"></div></div><span class="meter-val">88%</span></div></td>
+                <td><span class="pill ">On track</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <section class="screen" id="f-01-dash" data-title="Leadership dashboard">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
@@ -458,6 +616,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=8"></script>
+<script src="assets/hcos.js?v=11"></script>
 </body>
 </html>

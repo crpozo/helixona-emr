@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=8">
+<link rel="stylesheet" href="assets/hcos.css?v=11">
 <style>
   .bi-board { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .bi-chair { display: block; text-decoration: none; color: inherit; cursor: pointer; position: relative; }
@@ -317,10 +317,7 @@
       <div class="frame-body">
         <h2 class="page-title">Infusion flowsheet — Chair 1</h2>
         <p class="page-sub">Maya Reyes · NAD+ 500 mg · session 4 of 8 · Nick (Nurse) documenting</p>
-        <div class="prov">
-          <span><strong>Against</strong> signed order <code>O-2384</code> <span class="ver-chip">v3</span> <span class="appr approved">Approved</span> · Dr. Drannikov, Jul 6 · appointment <code>A-88214</code> · the order lives in Maya's chart and this flowsheet never restates it · <a href="patients.html#/pt-02-profile">open her chart</a></span>
-        </div>
-        <div class="prov">
+<div class="prov">
           <span><strong>Source of truth</strong> HCOS writes the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
           <span>Dose, rate and cadence stay in the order — this screen only records what was given.</span>
         </div>
@@ -523,12 +520,8 @@
         <div class="prov">
           <span><strong>Linked to</strong> this administration · signed order <code>O-2402</code> <span class="ver-chip">v1</span> · appointment <code>A-88231</code> — the order text stays as Dr. Drannikov signed it · <a href="patients.html">open Daniel's chart</a></span>
         </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> HCOS writes the incident and the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
-          <span>Filing this creates a report, never a second order.</span>
-        </div>
-
-        <div class="callout callout-err">
+        
+<div class="callout callout-err">
           <strong>Adverse event in progress.</strong> Dr. Drannikov notified via push at 11:29 AM and is en route to the bay. Infusion is paused; line kept open with saline.
         </div>
 
@@ -742,7 +735,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=8"></script>
+<script src="assets/hcos.js?v=11"></script>
 <script>
 (function () {
   var cleared = false;

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=8">
+<link rel="stylesheet" href="assets/hcos.css?v=11">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -59,7 +59,7 @@
           <div class="l-filters">
             <label class="l-fl">
               <span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select" id="l-view" onchange="lApply()">
+              <select class="field-select l-select" id="l-view" onchange="lSync(this)">
                 <optgroup label="Views">
                   <option value="all">Everyone — 3 providers and 4 chairs</option>
                   <option value="providers">Provider clinic — all three</option>
@@ -81,7 +81,7 @@
 
             <label class="l-fl">
               <span class="filter-group-lbl">Treatment</span>
-              <select class="field-select l-select" id="l-treat" onchange="lApply()">
+              <select class="field-select l-select" id="l-treat" onchange="lSync(this)">
                 <option value="all">All treatments</option>
                 <option value="t-nad">NAD+ · 2 today</option>
                 <option value="t-ivc">IV vitamin C · 1 today</option>
@@ -364,6 +364,28 @@
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
+          <div class="l-filters">
+            <label class="l-fl"><span class="filter-group-lbl">Show</span>
+              <select class="field-select l-select" id="l-view-w" onchange="lSync(this)">
+                <optgroup label="Views"><option value="all">Everyone &mdash; 3 providers and 4 chairs</option>
+                  <option value="providers">Provider clinic &mdash; all three</option>
+                  <option value="infusion">Infusion suite &mdash; Chairs 1 to 4</option></optgroup>
+                <optgroup label="Providers"><option value="dr">Dr. Eduard Drannikov</option>
+                  <option value="bak">Dr. Bakman</option><option value="bro">Brooke</option></optgroup>
+                <optgroup label="Infusion suite"><option value="c1">Chair 1 &middot; Nick</option>
+                  <option value="c2">Chair 2 &middot; Bea</option><option value="c3">Chair 3 &middot; Juan</option>
+                  <option value="c4">Chair 4 &middot; Nate</option></optgroup>
+              </select></label>
+            <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
+              <select class="field-select l-select" id="l-treat-w" onchange="lSync(this)">
+                <option value="all">All treatments</option>
+                <option value="t-nad">NAD+</option><option value="t-ivc">IV vitamin C</option>
+                <option value="t-myers">Myers&rsquo; and pushes</option><option value="t-consult">Consults</option>
+                <option value="t-tele">Telehealth</option>
+              </select></label>
+            <span class="l-count" id="l-count-w">Showing everything</span>
+          </div>
+
 
           <div class="l-filters">
             <span class="l-count">Week columns show Dr. Drannikov and Chairs 1 to 4 &middot; Tuesday's other five appointments are with Dr. Bakman and Brooke</span>
@@ -398,58 +420,58 @@
             <!-- Mon Jul 20 -->
             <div class="weekcal-col">
               <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
-              <div class="week-appt st-done" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div class="week-appt st-done" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div class="week-appt st-noshow" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div class="week-appt st-done" style="top:56px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
-              <div class="week-appt st-done" style="top:280px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div data-col="dr" class="week-appt t-consult st-done" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-consult st-done" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-tele st-noshow" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="c1" class="week-appt t-nad st-done" style="top:56px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="c2" class="week-appt t-ivc st-done" style="top:280px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
             </div>
 
             <!-- Tue Jul 21 · today, mirrors the day view -->
             <div class="weekcal-col today">
               <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
-              <div class="week-appt st-done" style="top:28px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Marcus Webb</span>Consult</div>
-              <div class="week-appt st-inroom" style="top:140px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div class="week-appt st-arrived" style="top:196px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div class="week-appt st-confirmed" style="top:308px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div class="week-appt st-cancelled" style="top:336px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div class="week-appt st-scheduled" style="top:392px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Tom Alvarez</span>Consult</div>
-              <div class="week-appt st-inchair" style="top:56px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
-              <div class="week-appt st-inchair" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C</div>
-              <div class="week-appt st-arrived" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
-              <div class="week-appt st-arrived" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
-              <div class="week-appt st-confirmed" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
-              <div class="week-appt st-confirmed" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Myers'</div>
-              <div class="week-appt st-scheduled" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
-              <div class="week-appt st-scheduled" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-done" style="top:28px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Marcus Webb</span>Consult</div>
+              <div data-col="dr" class="week-appt t-consult st-inroom" style="top:140px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-tele st-arrived" style="top:196px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed" style="top:308px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-cancelled" style="top:336px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:392px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Tom Alvarez</span>Consult</div>
+              <div data-col="c1" class="week-appt t-nad st-inchair" style="top:56px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div data-col="c2" class="week-appt t-ivc st-inchair" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C</div>
+              <div data-col="c4" class="week-appt t-myers st-arrived" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="c3" class="week-appt t-myers st-arrived" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
+              <div data-col="c1" class="week-appt t-nad st-confirmed" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Myers'</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div data-col="c4" class="week-appt t-myers st-scheduled" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
             </div>
 
             <!-- Wed Jul 22 -->
             <div class="weekcal-col">
               <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
-              <div class="week-appt st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div class="week-appt st-confirmed" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div class="week-appt st-scheduled" style="top:112px;height:53px;left:50%" data-activate="l-01-day"><span class="n">Priya Natarajan</span>Myers'</div>
-              <div class="week-appt st-scheduled" style="top:336px;height:25px;left:50%" data-activate="l-01-day"><span class="n">Tom Alvarez</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-tele st-confirmed" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="c3" class="week-appt t-myers st-scheduled" style="top:112px;height:53px;left:50%" data-activate="l-01-day"><span class="n">Priya Natarajan</span>Myers'</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:336px;height:25px;left:50%" data-activate="l-01-day"><span class="n">Tom Alvarez</span></div>
             </div>
 
             <!-- Thu Jul 23 -->
             <div class="weekcal-col">
               <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
-              <div class="week-appt st-scheduled" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div class="week-appt st-scheduled" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
-              <div class="week-appt st-confirmed" style="top:84px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
-              <div class="week-appt st-scheduled" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
-              <div class="week-appt st-confirmed" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div data-col="c2" class="week-appt t-ivc st-confirmed" style="top:84px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div data-col="c3" class="week-appt t-myers st-scheduled" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
+              <div data-col="c1" class="week-appt t-nad st-confirmed" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
             </div>
 
             <!-- Fri Jul 24 -->
             <div class="weekcal-col">
               <div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div><div class="weekcal-slot"></div>
-              <div class="week-appt st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div class="week-appt st-confirmed" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div class="week-appt st-scheduled" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
-              <div class="week-appt st-scheduled" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="dr" class="week-appt t-tele st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="c1" class="week-appt t-nad st-scheduled" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div data-col="c4" class="week-appt t-myers st-scheduled" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
             </div>
           </div>
 
@@ -493,6 +515,28 @@
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
+          <div class="l-filters">
+            <label class="l-fl"><span class="filter-group-lbl">Show</span>
+              <select class="field-select l-select" id="l-view-m" onchange="lSync(this)">
+                <optgroup label="Views"><option value="all">Everyone &mdash; 3 providers and 4 chairs</option>
+                  <option value="providers">Provider clinic &mdash; all three</option>
+                  <option value="infusion">Infusion suite &mdash; Chairs 1 to 4</option></optgroup>
+                <optgroup label="Providers"><option value="dr">Dr. Eduard Drannikov</option>
+                  <option value="bak">Dr. Bakman</option><option value="bro">Brooke</option></optgroup>
+                <optgroup label="Infusion suite"><option value="c1">Chair 1 &middot; Nick</option>
+                  <option value="c2">Chair 2 &middot; Bea</option><option value="c3">Chair 3 &middot; Juan</option>
+                  <option value="c4">Chair 4 &middot; Nate</option></optgroup>
+              </select></label>
+            <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
+              <select class="field-select l-select" id="l-treat-m" onchange="lSync(this)">
+                <option value="all">All treatments</option>
+                <option value="t-nad">NAD+</option><option value="t-ivc">IV vitamin C</option>
+                <option value="t-myers">Myers&rsquo; and pushes</option><option value="t-consult">Consults</option>
+                <option value="t-tele">Telehealth</option>
+              </select></label>
+            <span class="l-count" id="l-count-m">Showing everything</span>
+          </div>
+
 
           <div class="l-filters">
             <span class="l-count">342 appointments this month &middot; busiest day Tuesday the 14th &middot; chairs 78% full</span>
@@ -514,37 +558,37 @@
             <div class="monthcal-grid">
               <div class="monthcal-day outside"><div class="monthcal-daynum">29</div></div>
               <div class="monthcal-day outside"><div class="monthcal-daynum">30</div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">2</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">3</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="1"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="2"><div class="monthcal-daynum">2</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="3"><div class="monthcal-daynum">3</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="4"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">5</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">6</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">7</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">10</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">11</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="6"><div class="monthcal-daynum">6</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="7"><div class="monthcal-daynum">7</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="8"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="9"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="10"><div class="monthcal-daynum">10</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="11"><div class="monthcal-daynum">11</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">12</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">13</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">14</div><div class="monthcal-count">16 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">15</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">17</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="13"><div class="monthcal-daynum">13</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="14"><div class="monthcal-daynum">14</div><div class="monthcal-count">16 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="15"><div class="monthcal-daynum">15</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="16"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="17"><div class="monthcal-daynum">17</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="18"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">19</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">20</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day today" data-activate="l-01-day"><div class="monthcal-daynum">21</div><div class="monthcal-count">19 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">23</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">24</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">25</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="20"><div class="monthcal-daynum">20</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day today" data-open-modal="#l-book-modal" data-day="21"><div class="monthcal-daynum">21</div><div class="monthcal-count">19 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">MYR</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="22"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="23"><div class="monthcal-daynum">23</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="24"><div class="monthcal-daynum">24</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="25"><div class="monthcal-daynum">25</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">26</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">27</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">28</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">29</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">30</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-activate="l-01-day"><div class="monthcal-daynum">31</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="27"><div class="monthcal-daynum">27</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="28"><div class="monthcal-daynum">28</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">MYR</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="29"><div class="monthcal-daynum">29</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">IVC</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="30"><div class="monthcal-daynum">30</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">NAD</span><span class="monthcal-pip">CON</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="31"><div class="monthcal-daynum">31</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MYR</span><span class="monthcal-pip">IVC</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
               <div class="monthcal-day outside"><div class="monthcal-daynum">1</div></div>
               <div class="monthcal-day outside closed"><div class="monthcal-daynum">2</div><div class="monthcal-closed-lbl">Closed</div></div>
             </div>
@@ -868,10 +912,82 @@
   <div class="drawer-body" id="l-dr-body"></div>
 </aside>
 
-<script src="assets/hcos.js?v=8"></script>
+
+<div class="modal-overlay" id="l-book-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Book an appointment</div>
+        <div class="modal-sub" id="l-book-when">July 2026</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="field-label">Patient</label>
+        <input class="field-input" id="l-book-patient" list="l-book-cast" placeholder="Search by name, phone or date of birth">
+        <datalist id="l-book-cast">
+          <option>Maya Reyes</option><option>Daniel Okafor</option><option>Priya Natarajan</option>
+          <option>Tom Alvarez</option><option>Grace Lindqvist</option><option>Marcus Webb</option>
+          <option>Elena Petrova</option><option>Sofia Ramos</option><option>Walter Hsu</option><option>Nadia Boulos</option>
+        </datalist>
+        <div class="field-help">No match? <a href="patients.html#/pt-04-find">Find or add the person</a> first.</div>
+      </div>
+      <div class="field">
+        <label class="field-label">Treatment</label>
+        <select class="field-select" id="l-book-treat">
+          <option>NAD+ infusion &middot; 3 h</option>
+          <option>IV vitamin C 25 g &middot; 2 h 30</option>
+          <option>Myers' cocktail &middot; 1 h</option>
+          <option>Glutathione push &middot; 30 min</option>
+          <option>EBOO &middot; 2 h</option>
+          <option>New patient consult &middot; 90 min</option>
+          <option>Follow-up &middot; 30 min</option>
+          <option>Lab draw &middot; 15 min</option>
+          <option>Telehealth &middot; 30 min</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Who runs it</label>
+          <select class="field-select">
+            <option>Chair 1 &middot; Nick</option><option>Chair 2 &middot; Bea</option>
+            <option>Chair 3 &middot; Juan</option><option>Chair 4 &middot; Nate</option>
+            <option>Dr. Eduard Drannikov</option><option>Dr. Bakman</option><option>Brooke</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Start time</label>
+          <select class="field-select">
+            <option>9:00 AM</option><option>9:30 AM</option><option>10:00 AM</option>
+            <option>10:30 AM</option><option>11:00 AM</option><option>1:00 PM</option>
+            <option>1:30 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="callout" id="l-book-note">Booking reserves this patient's own average, not the protocol default.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn" data-close-modal data-activate="l-03-book">More options</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Booked. It is on the day view.', 'ok')">Book appointment</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=11"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
+  function lSync(src) {
+    var isView = src.id.indexOf('l-view') === 0;
+    ['', '-w', '-m'].forEach(function (sfx) {
+      var el = document.getElementById((isView ? 'l-view' : 'l-treat') + sfx);
+      if (el && el !== src) el.value = src.value;
+    });
+    lApply();
+  }
+
   function lApply() {
     var view = document.getElementById('l-view').value;
     var treat = document.getElementById('l-treat').value;
@@ -913,6 +1029,34 @@
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
       h.style.display = wantCols.indexOf('dr') !== -1 && treat === 'all' ? '' : 'none';
     });
+
+    var wShown = 0, wTotal = 0;
+    document.querySelectorAll('.week-appt').forEach(function (a) {
+      wTotal++;
+      var c = a.getAttribute('data-col');
+      var colOk = !c || wantCols.indexOf(c) !== -1;
+      var tOk = treat === 'all' || a.classList.contains(treat);
+      a.style.display = (colOk && tOk) ? '' : 'none';
+      if (colOk && tOk) wShown++;
+    });
+    var wc = document.getElementById('l-count-w');
+    if (wc) wc.textContent = wShown === wTotal ? 'Showing all ' + wTotal + ' this week'
+      : 'Showing ' + wShown + ' of ' + wTotal + ' this week';
+
+    var MAP = { NAD: 't-nad', IVC: 't-ivc', MYR: 't-myers', CON: 't-consult', EBO: 't-eboo' };
+    var mDays = 0;
+    document.querySelectorAll('.monthcal-day').forEach(function (d) {
+      var pips = d.querySelectorAll('.monthcal-pip'), any = false;
+      pips.forEach(function (pip) {
+        var ok = treat === 'all' || MAP[pip.textContent.trim()] === treat;
+        pip.style.display = ok ? '' : 'none';
+        if (ok) any = true;
+      });
+      if (pips.length) { d.style.opacity = (treat === 'all' || any) ? '' : '0.4'; if (any) mDays++; }
+    });
+    var mc = document.getElementById('l-count-m');
+    if (mc) mc.textContent = treat === 'all' ? 'Every treatment this month'
+      : mDays + ' days run this treatment';
 
     var el = document.getElementById('l-count');
     el.textContent = (shown === total)
@@ -1545,6 +1689,26 @@
   lBook();
   lOpenAppt('A-88214');
 
+
+  document.addEventListener('click', function (ev) {
+    var cell = ev.target.closest ? ev.target.closest('.monthcal-day[data-day]') : null;
+    if (!cell) return;
+    var el = document.getElementById('l-book-when');
+    if (el) el.textContent = 'July ' + cell.getAttribute('data-day') + ', 2026';
+  });
+  document.addEventListener('change', function (ev) {
+    if (ev.target.id !== 'l-book-treat' && ev.target.id !== 'l-book-patient') return;
+    var p = (document.getElementById('l-book-patient').value || '').trim();
+    var t = document.getElementById('l-book-treat').value;
+    var note = document.getElementById('l-book-note');
+    if (p === 'Maya Reyes' && t.indexOf('NAD+') === 0) {
+      note.className = 'callout callout-warn';
+      note.textContent = 'Maya Reyes takes 3 h 20 for NAD+, not 3 h. The chair is held to match.';
+    } else {
+      note.className = 'callout';
+      note.textContent = "Booking reserves this patient's own average, not the protocol default.";
+    }
+  });
 </script>
 </body>
 </html>

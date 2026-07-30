@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=8">
+<link rel="stylesheet" href="assets/hcos.css?v=11">
 <style>
   .a-time { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
   .a-tmpl-card { cursor: pointer; margin-bottom: 6px; padding: 10px 12px; }
@@ -802,13 +802,7 @@
             <button class="btn btn-primary" onclick="HCOS.toast('New version drafted. Answers already given stay on the version they were given under.', 'ok')">Publish a version</button>
           </div>
         </div>
-
-        <div class="prov">
-          <span><strong>One engine</strong> &middot; intake, clinical and readiness draw from the same questions &middot;
-          a response is stored once and stays tied to the version it was answered under</span>
-        </div>
-
-        <div class="seg-divider">Published surveys</div>
+<div class="seg-divider">Published surveys</div>
         <div class="tbl-wrap" style="margin-bottom:20px">
           <table class="tbl">
             <thead><tr><th>Survey</th><th>Version</th><th>Used by</th><th>Scoring</th><th>Answers land in</th><th>Status</th><th></th></tr></thead>
@@ -1046,7 +1040,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=8"></script>
+<script src="assets/hcos.js?v=11"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

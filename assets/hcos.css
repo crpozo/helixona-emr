@@ -957,14 +957,16 @@ button { font-family: inherit; }
 
 /* Appointment TYPE — the second channel: left-edge pattern + initial marker.
    Pattern stays so the board still reads when printed or seen colour-blind. */
-.cal-appt .type-mark, .week-appt .type-mark {
+.type-mark {
   display: inline-block;
   font-family: ui-monospace, monospace;
-  font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px;
-  border: 1px solid var(--muted); border-radius: 3px;
-  padding: 0 4px; margin-right: 4px; vertical-align: 1px;
-  background: var(--muted); color: #fff;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
+  border: 1px solid var(--muted); border-radius: 4px;
+  padding: 1px 5px; margin-right: 6px; vertical-align: 1px;
+  background: var(--muted); color: #fff; white-space: nowrap;
 }
+/* inside a calendar block space is tight — shrink, but keep the gap */
+.cal-appt .type-mark, .week-appt .type-mark { font-size: 8.5px; padding: 0 4px; margin-right: 5px; }
 .cal-appt.t-nad     { border-left-style: solid; border-left-width: 7px; }
 .cal-appt.t-ivc     { border-left-style: double; border-left-width: 7px; }
 .cal-appt.t-myers   { border-left-style: dashed; border-left-width: 7px; }
@@ -1131,9 +1133,9 @@ button { font-family: inherit; }
 .status-step.past { background: var(--hx-light); color: var(--ink); border-color: transparent; }
 /* Each step wears its own status colour: done steps as a tint, the one you are
    on as the solid colour, the ones ahead still plain. */
-.status-step.past.st-scheduled { background: var(--st-scheduled-bg); color: #4A5260; }
-.status-step.past.st-confirmed { background: var(--st-confirmed-bg); color: #1F4C80; }
-.status-step.past.st-arrived   { background: var(--st-arrived-bg);   color: #8A5A12; }
+.status-step.past.st-scheduled { background: #DDE1E6; color: #3A424D; border-color: #C7CCD3; }
+.status-step.past.st-confirmed { background: #C2DAF4; color: #1A4372; border-color: #9EC2E8; }
+.status-step.past.st-arrived   { background: #F7DCAE; color: #7A4E0C; border-color: #E5B45F; }
 .status-step.past.st-inroom, .status-step.past.st-inchair { background: var(--st-inroom-bg); color: #1F6142; }
 .status-step.current.st-scheduled { background: var(--st-scheduled); border-color: var(--st-scheduled); }
 .status-step.current.st-confirmed { background: var(--st-confirmed); border-color: var(--st-confirmed); }
