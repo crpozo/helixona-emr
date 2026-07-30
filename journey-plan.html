@@ -18,12 +18,11 @@
   .j-stage-name { font-size: 15px; font-weight: 700; color: var(--hx-navy); }
   .j-stage-focus { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.55; }
   .j-stage-foot { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
-  .j-times { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--hx-navy); flex-shrink: 0; }
   .j-scrn-title { font-size: 17px; font-weight: 700; color: var(--hx-navy); margin-bottom: 2px; }
   .j-scrn-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
   .j-nav { display: flex; gap: 8px; margin-top: 14px; }
   .j-nav .btn { flex: 1; }
-  .j-note { font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 12px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 10px; }
+  .j-act { text-decoration: none; }
 </style>
 </head>
 <body data-page="journey-plan" data-page-title="Patient journey · My plan" data-shell="app">
@@ -57,6 +56,11 @@
           </div>
         </div>
 
+        <div class="prov">
+          <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6</span>
+          <span>Your goal, your stage and your pace change only when he approves a new version.</span>
+        </div>
+
         <button class="bigbtn" data-activate="j-plan-journey">See your care journey</button>
 
         <div class="j-nav">
@@ -76,6 +80,10 @@
 
         <div class="j-scrn-title">Your care journey</div>
         <div class="j-scrn-sub">Seven steps from finding the cause to protecting your progress. You are on step two.</div>
+
+        <div class="prov">
+          <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6</span>
+        </div>
 
         <div class="journey-path">
           <div class="jstage done">
@@ -143,53 +151,57 @@
       <div class="phone-body">
 
         <div class="j-scrn-title">This week's activities</div>
-        <div class="j-scrn-sub">From your care team. The circle shows how many times to do each one this week.</div>
+        <div class="j-scrn-sub">How many times to do each one this week. Tap any one to learn what it is.</div>
 
-        <div class="seg-divider" style="margin-top:0">In the clinic</div>
+        <div class="prov">
+          <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6</span>
+        </div>
 
-        <div class="act-row">
-          <span class="j-times">1×</span>
-          <div class="act-body"><div class="act-name">Nano Bath</div><div class="act-meta">In the clinic · about 30 min</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">2×</span>
-          <div class="act-body"><div class="act-name">Red Light</div><div class="act-meta">In the clinic · about 20 min</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">3×</span>
-          <div class="act-body"><div class="act-name">Hydrogen Inhalation</div><div class="act-meta">In the clinic · about 30 min</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">1×</span>
-          <div class="act-body"><div class="act-name">Salt Room</div><div class="act-meta">In the clinic · about 45 min</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">1×</span>
+        <div class="seg-divider">In the clinic</div>
+
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Nano bath</div><div class="act-meta">In the clinic · about 30 min</div></div>
+          <span class="act-freq">1 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Red light</div><div class="act-meta">In the clinic · about 20 min</div></div>
+          <span class="act-freq">2 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Hydrogen inhalation</div><div class="act-meta">In the clinic · about 30 min</div></div>
+          <span class="act-freq">3 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Salt room</div><div class="act-meta">In the clinic · about 45 min</div></div>
+          <span class="act-freq">1 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
           <div class="act-body"><div class="act-name">EBOO</div><div class="act-meta">In the clinic · about 60 min · with your provider</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">1×</span>
-          <div class="act-body"><div class="act-name">IV Therapy</div><div class="act-meta">In the clinic · about 45 min</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">1×</span>
-          <div class="act-body"><div class="act-name">Provider Visit</div><div class="act-meta">In the clinic · about 20 min</div></div>
-        </div>
+          <span class="act-freq">1 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">IV therapy</div><div class="act-meta">In the clinic · about 45 min</div></div>
+          <span class="act-freq">1 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Provider visit</div><div class="act-meta">In the clinic · about 20 min</div></div>
+          <span class="act-freq">1 × this week</span>
+        </a>
 
         <div class="seg-divider">At home</div>
 
-        <div class="act-row">
-          <span class="j-times">5×</span>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
           <div class="act-body"><div class="act-name">Rebounding</div><div class="act-meta">At home · about 5 min</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">5×</span>
-          <div class="act-body"><div class="act-name">Dry Brushing</div><div class="act-meta">At home · about 5 min · before you shower</div></div>
-        </div>
-        <div class="act-row">
-          <span class="j-times">3×</span>
-          <div class="act-body"><div class="act-name">Salt Bath</div><div class="act-meta">At home · about 20 min</div></div>
-        </div>
+          <span class="act-freq">5 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Dry brushing</div><div class="act-meta">At home · about 5 min · before you shower</div></div>
+          <span class="act-freq">5 × this week</span>
+        </a>
+        <a class="act-row j-act" href="journey.html#/j-03-learn">
+          <div class="act-body"><div class="act-name">Salt bath</div><div class="act-meta">At home · about 20 min</div></div>
+          <span class="act-freq">3 × this week</span>
+        </a>
 
         <button class="bigbtn" data-activate="j-plan-supplements">See supplements and medicines</button>
         <button class="bigbtn bigbtn-skip" data-activate="j-plan-journey">Back to your journey</button>
@@ -208,7 +220,7 @@
         <div class="j-scrn-sub">One list, kept by your care team. Take it the way it reads here.</div>
 
         <div class="prov">
-          <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 14</span>
+          <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6</span>
           <span><strong>Last checked with you</strong> Jul 14, by Charlene</span>
         </div>
 
@@ -230,7 +242,7 @@
             <div class="act-name">Low-dose naltrexone 4.5 mg</div>
             <div class="act-meta">One capsule at bedtime</div>
             <div style="margin-top:6px"><span class="clin-state verified">Prescribed</span> <span class="appr pending">Refill pending</span></div>
-            <div class="clin-src" style="margin-top:3px">Brooke · order O-3187 v1 · Empower Pharmacy, no refills left — she is signing the renewal</div>
+            <div class="clin-src" style="margin-top:3px">Brooke · order O-3187 v1 · Empower Pharmacy, no refills left — the renewal is waiting for a signature</div>
           </div>
           <span class="act-freq">Nightly</span>
         </div>
@@ -242,7 +254,7 @@
             <div class="act-name">Berberine 500 mg</div>
             <div class="act-meta">With lunch and with dinner</div>
             <div style="margin-top:6px"><span class="clin-state verified">Verified</span></div>
-            <div class="clin-src" style="margin-top:3px">Confirmed by Dr. Drannikov on your plan v4, Jul 14</div>
+            <div class="clin-src" style="margin-top:3px">Confirmed by Dr. Drannikov on your plan v4, Jul 6</div>
           </div>
           <span class="act-freq">Twice daily</span>
         </div>
@@ -253,7 +265,7 @@
             <div class="act-meta">Morning, on an empty stomach</div>
             <div class="act-meta" style="margin-top:4px"><span class="pill pill-warn">Hold</span> None on an infusion day — it is already in your drip</div>
             <div style="margin-top:6px"><span class="clin-state verified">Verified</span></div>
-            <div class="clin-src" style="margin-top:3px">Confirmed by Dr. Drannikov on your plan v4, Jul 14</div>
+            <div class="clin-src" style="margin-top:3px">Confirmed by Dr. Drannikov on your plan v4, Jul 6</div>
           </div>
           <span class="act-freq">Mornings</span>
         </div>
@@ -268,16 +280,26 @@
           <span class="act-freq">Nightly</span>
         </div>
 
+        <div class="act-row">
+          <div class="act-body">
+            <div class="act-name">Omega-3 (EPA/DHA) 2 g</div>
+            <div class="act-meta">Two capsules with breakfast</div>
+            <div style="margin-top:6px"><span class="clin-state reconciled">Reconciled</span></div>
+            <div class="clin-src" style="margin-top:3px">Yours — you told us on Mar 14, Bee reconciled it into your plan on Jun 2</div>
+          </div>
+          <span class="act-freq">Daily</span>
+        </div>
+
         <div class="seg-divider">You told us about these</div>
 
         <div class="act-row">
           <div class="act-body">
-            <div class="act-name">Omega-3 (EPA/DHA) 2 g</div>
-            <div class="act-meta">With breakfast, the way you told us you take it</div>
+            <div class="act-name">Turmeric</div>
+            <div class="act-meta">The way you take it — tell us the brand and strength when you can</div>
             <div style="margin-top:6px"><span class="clin-state reported">Reported</span></div>
-            <div class="clin-src" style="margin-top:3px">You told us at onboarding, Jul 14 — not part of your plan until Dr. Drannikov reviews it</div>
+            <div class="clin-src" style="margin-top:3px">You told us in your check-in, Jul 19 — not part of your plan until Dr. Drannikov reviews it</div>
           </div>
-          <span class="act-freq">Daily</span>
+          <span class="act-freq">Not counted yet</span>
         </div>
 
         <button class="btn btn-sm" style="width:100%" data-open-modal="#j-plan-report">Tell us about something else you take</button>
@@ -306,8 +328,8 @@
           <div style="margin-top:8px"><span class="ver-chip">v5</span> <span class="appr pending">Waiting for approval</span></div>
         </div>
 
-        <div class="j-note">Take your magnesium and your naltrexone at the same time each night — that steady rhythm is part of getting your sleep back.
-          <div class="clin-src" style="margin-top:6px">From your plan v4 · Dr. Drannikov, Jul 14</div>
+        <div class="callout">Take your magnesium and your naltrexone at the same time each night — that steady rhythm is part of getting your sleep back.
+          <div class="clin-src" style="margin-top:6px">From your plan v4 · Dr. Drannikov, Jul 6</div>
         </div>
 
         <button class="bigbtn" onclick="HCOS.toast('Opening today’s check-in.', 'ok'); setTimeout(function(){ window.location.href = 'journey-checkin.html'; }, 700)">Check in on today</button>
@@ -337,7 +359,7 @@
     <div class="modal-body">
       <div class="field">
         <label class="field-label" for="j-rep-name">What is it</label>
-        <input class="field-input" id="j-rep-name" placeholder="Turmeric — brand and strength if you know them">
+        <input class="field-input" id="j-rep-name" placeholder="Ashwagandha — brand and strength if you know them">
       </div>
       <div class="field-row">
         <div class="field">

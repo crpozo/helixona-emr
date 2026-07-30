@@ -11,9 +11,16 @@
 <style>
   .pr-price { font-family: ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
   .pr-price-main { font-weight: 700; color: var(--hx-navy); }
-  .pr-editable { border-bottom: 1px dashed var(--line); cursor: text; }
-  .pr-editable:hover { border-bottom-color: var(--ink); background: var(--hx-light); }
   .pr-svc-name { font-weight: 600; color: var(--hx-navy); }
+  /* The shared treatment chip carries its box only inside a calendar block;
+     here it sits in a table cell. Box only — colour comes from .tm-*. */
+  .pr-svc-name .type-mark {
+    display: inline-block; vertical-align: 1px;
+    font-family: ui-monospace, monospace;
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px;
+    border-style: solid; border-width: 1px; border-radius: 3px;
+    padding: 0 4px; margin-right: 6px;
+  }
   .pr-svc-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
 </style>
 </head>
@@ -68,47 +75,47 @@
             </thead>
             <tbody>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">NAD</span>NAD+ infusion 500 mg</div><div class="pr-svc-meta">Infusion · chair</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-nad">NAD</span>NAD+ infusion 500 mg</div><div class="pr-svc-meta">Infusion · chair</div></td>
                 <td><code>J3490</code></td>
                 <td>3 h</td>
-                <td class="pr-price pr-price-main pr-editable">$850</td>
-                <td class="pr-price pr-editable">$680</td>
+                <td class="pr-price pr-price-main">$850</td>
+                <td class="pr-price">$680</td>
                 <td class="pr-price">Billed · OON</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">IVC</span>IV vitamin C 25 g</div><div class="pr-svc-meta">Infusion · chair · G6PD required</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-ivc">IVC</span>IV vitamin C 25 g</div><div class="pr-svc-meta">Infusion · chair · G6PD required</div></td>
                 <td><code>J3490</code> · 50 units</td>
                 <td>2 h 30</td>
-                <td class="pr-price pr-price-main pr-editable">$425</td>
-                <td class="pr-price pr-editable">$340</td>
+                <td class="pr-price pr-price-main">$425</td>
+                <td class="pr-price">$340</td>
                 <td class="pr-price">$276.50 · Anthem</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">MYR</span>Myers' cocktail</div><div class="pr-svc-meta">Infusion · chair</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-myers">MYR</span>Myers' cocktail</div><div class="pr-svc-meta">Infusion · chair</div></td>
                 <td><code>J3490</code></td>
                 <td>1 h</td>
-                <td class="pr-price pr-price-main pr-editable">$225</td>
-                <td class="pr-price pr-editable">$180</td>
+                <td class="pr-price pr-price-main">$225</td>
+                <td class="pr-price">$180</td>
                 <td class="pr-price">Billed · OON</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">EBO</span>EBOO</div><div class="pr-svc-meta">Treatment · dedicated room</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-eboo">EBO</span>EBOO</div><div class="pr-svc-meta">Treatment · dedicated room</div></td>
                 <td><code>Cash only</code></td>
                 <td>2 h</td>
-                <td class="pr-price pr-price-main pr-editable">$1,200</td>
-                <td class="pr-price pr-editable">$950</td>
+                <td class="pr-price pr-price-main">$1,200</td>
+                <td class="pr-price">$950</td>
                 <td class="pr-price" style="color:var(--muted)">Not billed</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">GSH</span>Glutathione push</div><div class="pr-svc-meta">Infusion · chair</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-gsh">GSH</span>Glutathione push</div><div class="pr-svc-meta">Infusion · chair</div></td>
                 <td><code>J3490</code></td>
                 <td>30 min</td>
-                <td class="pr-price pr-price-main pr-editable">$150</td>
-                <td class="pr-price pr-editable">$120</td>
+                <td class="pr-price pr-price-main">$150</td>
+                <td class="pr-price">$120</td>
                 <td class="pr-price">Billed · OON</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
@@ -116,8 +123,8 @@
                 <td><div class="pr-svc-name">Nano bath</div><div class="pr-svc-meta">Treatment · room</div></td>
                 <td><code>Cash only</code></td>
                 <td>45 min</td>
-                <td class="pr-price pr-price-main pr-editable">$175</td>
-                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price pr-price-main">$175</td>
+                <td class="pr-price">Included</td>
                 <td class="pr-price" style="color:var(--muted)">Not billed</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
@@ -125,8 +132,8 @@
                 <td><div class="pr-svc-name">Red light</div><div class="pr-svc-meta">Treatment · room</div></td>
                 <td><code>Cash only</code></td>
                 <td>25 min</td>
-                <td class="pr-price pr-price-main pr-editable">$95</td>
-                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price pr-price-main">$95</td>
+                <td class="pr-price">Included</td>
                 <td class="pr-price" style="color:var(--muted)">Not billed</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
@@ -134,8 +141,8 @@
                 <td><div class="pr-svc-name">Hydrogen inhalation</div><div class="pr-svc-meta">Treatment · room</div></td>
                 <td><code>Cash only</code></td>
                 <td>30 min</td>
-                <td class="pr-price pr-price-main pr-editable">$85</td>
-                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price pr-price-main">$85</td>
+                <td class="pr-price">Included</td>
                 <td class="pr-price" style="color:var(--muted)">Not billed</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
@@ -143,26 +150,26 @@
                 <td><div class="pr-svc-name">Salt room</div><div class="pr-svc-meta">Treatment · room</div></td>
                 <td><code>Cash only</code></td>
                 <td>45 min</td>
-                <td class="pr-price pr-price-main pr-editable">$65</td>
-                <td class="pr-price pr-editable">Included</td>
+                <td class="pr-price pr-price-main">$65</td>
+                <td class="pr-price">Included</td>
                 <td class="pr-price" style="color:var(--muted)">Not billed</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">CON</span>New patient consult</div><div class="pr-svc-meta">Provider visit · 90 min</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-consult">CON</span>New patient consult</div><div class="pr-svc-meta">Provider visit · 90 min</div></td>
                 <td><code>99205</code></td>
                 <td>90 min</td>
-                <td class="pr-price pr-price-main pr-editable">$495</td>
-                <td class="pr-price pr-editable">$395</td>
+                <td class="pr-price pr-price-main">$495</td>
+                <td class="pr-price">$395</td>
                 <td class="pr-price">Billed · INN &amp; OON</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
               <tr>
-                <td><div class="pr-svc-name"><span class="type-mark">F/U</span>Follow-up visit</div><div class="pr-svc-meta">Provider visit · 30 min</div></td>
+                <td><div class="pr-svc-name"><span class="type-mark tm-consult">F/U</span>Follow-up visit</div><div class="pr-svc-meta">Provider visit · 30 min</div></td>
                 <td><code>99214</code></td>
                 <td>30 min</td>
-                <td class="pr-price pr-price-main pr-editable">$225</td>
-                <td class="pr-price pr-editable">$180</td>
+                <td class="pr-price pr-price-main">$225</td>
+                <td class="pr-price">$180</td>
                 <td class="pr-price">Billed · INN &amp; OON</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
@@ -170,8 +177,8 @@
                 <td><div class="pr-svc-name">Micronutrient panel</div><div class="pr-svc-meta">Lab · draw 15 min</div></td>
                 <td><code>82542</code></td>
                 <td>15 min</td>
-                <td class="pr-price pr-price-main pr-editable">$390</td>
-                <td class="pr-price pr-editable">$310</td>
+                <td class="pr-price pr-price-main">$390</td>
+                <td class="pr-price">$310</td>
                 <td class="pr-price">Billed · lab</td>
                 <td><button class="btn btn-sm" onclick="HCOS.toast('Opened in draft v13. Quotes keep using approved v12 until v13 is approved.')">Edit</button></td>
               </tr>
@@ -230,8 +237,8 @@
               <dl class="kv" style="margin-top:10px">
                 <dt>Coverage</dt><dd>Active</dd>
                 <dt>Deductible</dt>
-                <dd>$1,850 met of $3,000
-                  <div class="meter" style="max-width:220px;margin-top:4px"><div class="meter-fill" style="width:62%"></div></div>
+                <dd>$3,000 met of $3,000
+                  <div class="meter" style="max-width:220px;margin-top:4px"><div class="meter-fill" style="width:100%"></div></div>
                 </dd>
                 <dt>Coinsurance</dt><dd>40% after deductible</dd>
                 <dt>Out-of-pocket max</dt>

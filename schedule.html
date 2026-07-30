@@ -855,55 +855,17 @@
 
 </div>
 
-<!-- Shared appointment drawer — opens from any day-view block; shows Maya Reyes -->
+<!-- Shared appointment drawer — every calendar block opens its own appointment -->
 <div class="drawer-overlay" data-close-drawer="#l-appt-drawer"></div>
 <aside class="drawer" id="l-appt-drawer">
   <div class="drawer-head">
     <div>
-      <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">Maya Reyes</div>
-      <div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="type-mark tm-nad">NAD</span>NAD+ infusion · 9:00 – 12:00 · Chair 1 · Nick (Nurse)</div>
+      <div id="l-dr-name" style="font-size:15px;font-weight:600;color:var(--hx-navy)">&nbsp;</div>
+      <div id="l-dr-sub" style="font-size:11.5px;color:var(--muted);margin-top:2px">&nbsp;</div>
     </div>
     <button class="modal-close" data-close-drawer="#l-appt-drawer">×</button>
   </div>
-  <div class="drawer-body">
-    <div class="status-flow">
-      <span class="status-step past st-scheduled">Scheduled</span>
-      <span class="status-arrow">›</span>
-      <span class="status-step past st-confirmed">Confirmed</span>
-      <span class="status-arrow">›</span>
-      <span class="status-step past st-arrived">Arrived</span>
-      <span class="status-arrow">›</span>
-      <span class="status-step current st-inchair">In chair</span>
-      <span class="status-arrow">›</span>
-      <span class="status-step st-done" onclick="HCOS.toast('Maya Reyes marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
-    </div>
-
-    <div class="seg-divider">Appointment</div>
-    <dl class="kv">
-      <dt>Patient</dt>
-      <dd>Maya Reyes · 52</dd>
-      <dt>Coverage</dt>
-      <dd>UnitedHealthcare PPO · OON</dd>
-      <dt>When</dt>
-      <dd>Today · 9:00 AM – 12:00 PM</dd>
-      <dt>Where</dt>
-      <dd>Chair 1 · Nick (Nurse)</dd>
-      <dt>Arrived</dt>
-      <dd>8:52 AM · in chair since 9:05 AM</dd>
-      <dt>Readiness</dt>
-      <dd>Standard · reviewed Jul 20</dd>
-    </dl>
-
-    <div class="seg-divider">Protocol</div>
-    <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">NAD+ 500 mg · ~3 h drip</div>
-    <div class="field-help" style="margin-top:4px">Session 4 of 8 · rate titrated to comfort · vitals at start and hourly</div>
-
-    <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
-      <button class="btn btn-primary" onclick="HCOS.toast('Maya Reyes marked done — Chair 1 frees up on the day view.', 'ok')">Mark done</button>
-      <a class="btn" href="clinical.html">Open chart</a>
-      <a class="btn" href="clinical-infusion.html#/b-15-flowsheet">Infusion record</a>
-    </div>
-  </div>
+  <div class="drawer-body" id="l-dr-body"></div>
 </aside>
 
 <script src="assets/hcos.js?v=8"></script>
@@ -965,16 +927,217 @@
   }
   lApply();
 
-  // Multi-select filter chips — toggle on click, like the real filter bar.
-  document.querySelectorAll('.filter-chip.multi[data-f]').forEach(function (c) {
-    c.addEventListener('click', function () {
-      c.classList.toggle('active');
-      var lock = document.getElementById('l-lockbtn');
-      if (lock && lock.classList.contains('locked')) {
-        lock.classList.remove('locked');
-        lock.querySelector('span:last-child').textContent = 'Front desk view · edited, not saved';
-      }
-    });
+  // ---- The appointment record --------------------------------------------
+  // One appointment, one identifier. Every block on the calendar opens its own
+  // record, so the drawer is a view of that appointment and never a stand-in
+  // for another patient's visit.
+  var L_APPT = {
+    'A-88202': {n:'Marcus Webb', ag:'55', cv:'Anthem Blue Cross · INN', mk:'CON', mkc:'tm-consult',
+      tx:'New patient consult · 90 min', w:'Today · 8:30 – 10:00 AM', r:'Dr. Drannikov · Provider',
+      st:'done', room:'In room', a:'8:21 AM · in room 8:29 AM', rd:'First assessment taken at this visit',
+      pr:'New patient consult · 90 min', prn:'History, exam and plan · glutathione push ordered at the end of the visit',
+      p:'appointment <code>A-88202</code> — a consult needs no order',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88208': {n:'Grace Lindqvist', ag:'44', cv:'Self-pay', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 10:30 – 11:00 AM', r:'Dr. Drannikov · Provider',
+      st:'inroom', room:'In room', a:'10:22 AM · in room since 10:31 AM', rd:'Does not gate a follow-up',
+      pr:'Follow-up · 30 min', prn:'Thyroid panel still pending · results reviewed as soon as they land',
+      p:'appointment <code>A-88208</code> — a follow-up needs no order',
+      ch:['Open chart','clinical.html#/b-02-snapshot']},
+
+    'A-88221': {n:'Elena Petrova', ag:'33', cv:'UnitedHealthcare · OON', mk:'TEL', mkc:'tm-tele',
+      tx:'Telehealth · 30 min', w:'Today · 11:30 AM – 12:00 PM', r:'Dr. Drannikov · Provider',
+      st:'arrived', room:'In room', a:'Joined the video room 11:26 AM', rd:'Does not gate a telehealth visit',
+      pr:'Telehealth follow-up · 30 min', prn:'Video link sent by text · telehealth consent on file since Feb 2026',
+      p:'appointment <code>A-88221</code> — a telehealth follow-up needs no order',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88238': {n:'Nadia Boulos', ag:'41', cv:'Anthem · INN', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 1:30 – 2:00 PM', r:'Dr. Drannikov · Provider',
+      st:'confirmed', room:'In room', a:'', rd:'Physician review · Dr. Drannikov decides at this visit',
+      pr:'Follow-up · 30 min', prn:'Questionnaire still open — her answers land in the chart when she finishes it',
+      p:'appointment <code>A-88238</code> · readiness <code>RA-1211</code> <span class="ver-chip">v1</span> <span class="appr pending">Physician review</span>',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88240': {n:'Grace Lindqvist', ag:'44', cv:'Self-pay', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 2:00 – 2:30 PM', r:'Dr. Drannikov · Provider',
+      st:'cancelled', room:'In room', a:'', rd:'Does not gate a follow-up',
+      pr:'Follow-up · 30 min', prn:'Cancelled by Grace at 8:40 AM — the 2:00 PM slot is open on the day view',
+      p:'appointment <code>A-88240</code> — a cancelled appointment keeps its identifier and stays on the record',
+      ch:['Open chart','clinical.html#/b-02-snapshot']},
+
+    'A-88252': {n:'Tom Alvarez', ag:'61', cv:'Cigna PPO · OON', mk:'CON', mkc:'tm-consult',
+      tx:'New patient consult · 90 min', w:'Today · 3:00 – 4:30 PM', r:'Dr. Drannikov · Provider',
+      st:'scheduled', room:'In room', a:'', rd:'First assessment taken at this visit',
+      pr:'New patient consult · 90 min', prn:'Plan document (SPD) requested before the visit · glutathione push discussed, not yet ordered',
+      p:'appointment <code>A-88252</code> — a consult needs no order',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88205': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 9:00 – 9:30 AM', r:'Dr. Bakman · Provider',
+      st:'done', room:'In room', a:'8:54 AM · in room 9:02 AM', rd:'Does not gate a follow-up',
+      pr:'Follow-up · 30 min', prn:'Lab draw ordered from this visit at 11:15 · glutathione push booked for 3:30 PM',
+      p:'appointment <code>A-88205</code> — a follow-up needs no order',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88235': {n:'Daniel Okafor', ag:'47', cv:'Anthem Blue Cross · INN', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 1:00 – 1:30 PM', r:'Dr. Bakman · Provider',
+      st:'confirmed', room:'In room', a:'', rd:'Standard · reviewed Jul 6',
+      pr:'Follow-up · 30 min', prn:'Reviews the IV vitamin C series running in Chair 2 this morning',
+      p:'appointment <code>A-88235</code> — a follow-up needs no order',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88254': {n:'Priya Natarajan', ag:'38', cv:'Blue Shield of CA PPO · OON', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 3:30 – 4:00 PM', r:'Dr. Bakman · Provider',
+      st:'scheduled', room:'In room', a:'', rd:'Flare recovery since Sunday · escalation paused',
+      pr:'Follow-up · 30 min', prn:'Fatigue workup · reviews how this morning’s Myers’ run went',
+      p:'appointment <code>A-88254</code> · readiness <code>RA-1206</code> <span class="ver-chip">v3</span> — a follow-up needs no order',
+      ch:['Open chart','clinical-chart.html#/b-04-timeline']},
+
+    'A-88210': {n:'Walter Hsu', ag:'68', cv:'Cigna · OON (self-funded / ERISA)', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 10:00 – 10:30 AM', r:'Brooke · Physician associate',
+      st:'done', room:'In room', a:'9:48 AM · in room 10:01 AM', rd:'Standard · reviewed Jul 20',
+      pr:'Follow-up · 30 min', prn:'Pre-infusion check before the 1:00 PM NAD+ session in Chair 1',
+      p:'appointment <code>A-88210</code> — a follow-up needs no order',
+      ch:['Open patient record','patients.html#/pt-01-list']},
+
+    'A-88243': {n:'Maya Reyes', ag:'52', cv:'UnitedHealthcare PPO · OON', mk:'F/U', mkc:'tm-consult',
+      tx:'Follow-up · 30 min', w:'Today · 2:00 – 2:30 PM', r:'Brooke · Physician associate',
+      st:'scheduled', room:'In room', a:'', rd:'Standard · reviewed Jul 20',
+      pr:'Follow-up · 30 min', prn:'Detox program check-in after this morning’s NAD+ run',
+      p:'appointment <code>A-88243</code> — a follow-up needs no order',
+      ch:['Open profile','patients.html#/pt-02-profile']},
+
+    'A-88214': {n:'Maya Reyes', ag:'52', cv:'UnitedHealthcare PPO · OON', mk:'NAD', mkc:'tm-nad',
+      tx:'NAD+ infusion · 3 h', w:'Today · 9:00 AM – 12:00 PM', r:'Chair 1 · Nick (Nurse)',
+      st:'inchair', room:'In chair', a:'8:52 AM · in chair since 9:05 AM', rd:'Standard · reviewed Jul 20',
+      pr:'NAD+ 500 mg · ~3 h drip', prn:'Session 4 of 8 · rate titrated to comfort · tracking about 20 minutes past the booked end',
+      p:'appointment <code>A-88214</code> · signed order <code>O-2384</code> <span class="ver-chip">v3</span> <span class="appr approved">Approved</span> · readiness <code>RA-1152</code> <span class="ver-chip">v5</span>',
+      ch:['Open profile','patients.html#/pt-02-profile'], ex:['Infusion record','clinical-infusion.html#/b-15-flowsheet']},
+
+    'A-88247': {n:'Walter Hsu', ag:'68', cv:'Cigna · OON (self-funded / ERISA)', mk:'NAD', mkc:'tm-nad',
+      tx:'NAD+ infusion · 3 h', w:'Today · 1:00 – 4:00 PM', r:'Chair 1 · Nick (Nurse)',
+      st:'confirmed', room:'In chair', a:'', rd:'Standard · reviewed Jul 20',
+      pr:'NAD+ 500 mg · ~3 h drip', prn:'Session 5 of 8 · last session completed in 2 h 55 m with no reactions',
+      p:'appointment <code>A-88247</code> · signed order <code>O-2418</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · readiness <code>RA-1178</code> <span class="ver-chip">v2</span>',
+      full:true, ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+
+    'A-88231': {n:'Daniel Okafor', ag:'47', cv:'Anthem Blue Cross · INN', mk:'IVC', mkc:'tm-ivc',
+      tx:'IV vitamin C 25 g · 2.5 h', w:'Today · 10:00 AM – 12:30 PM', r:'Chair 2 · Bea (Medic)',
+      st:'inchair', room:'In chair', a:'9:51 AM · in chair since 10:04 AM', rd:'Standard · reviewed Jul 6',
+      pr:'IV vitamin C 25 g · ~2.5 h drip', prn:'Session 4 of 6 · G6PD on file · 50 billing units at $5.53',
+      p:'appointment <code>A-88231</code> · signed order <code>O-2402</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span>',
+      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+
+    'A-88226': {n:'Priya Natarajan', ag:'38', cv:'Blue Shield of CA PPO · OON', mk:'MYR', mkc:'tm-myers',
+      tx:'Myers’ cocktail · 1 h', w:'Today · 11:30 AM – 12:30 PM', r:'Chair 3 · Juan (Medic)',
+      st:'arrived', room:'In chair', a:'11:21 AM · chair ready at 11:30', rd:'Flare recovery · same protocol, same dose, no escalation',
+      pr:'Myers’ cocktail · 1 h', prn:'Session 3 of 6 · her own average is 1 h 15 including access and observation',
+      p:'appointment <code>A-88226</code> · signed order <code>O-2291</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · readiness <code>RA-1206</code> <span class="ver-chip">v3</span> — <span class="ver-chip">v2</span> of the order is a draft and does not authorize this run',
+      ch:['Open chart','clinical-chart.html#/b-04-timeline'], ex:['Pre-infusion checks','clinical-infusion.html#/b-14-preinfusion']},
+
+    'A-88256': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'GSH', mkc:'tm-gsh',
+      tx:'Glutathione push · 30 min', w:'Today · 3:30 – 4:00 PM', r:'Chair 3 · Juan (Medic)',
+      st:'scheduled', room:'In chair', a:'', rd:'Standard · reviewed Jun 30',
+      pr:'Glutathione 1,000 mg push · 30 min', prn:'Session 2 of 4 · booked after this morning’s lab draw',
+      p:'appointment <code>A-88256</code> · signed order <code>O-2431</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Bakman',
+      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+
+    'A-88219': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'LAB', mkc:'tm-lab',
+      tx:'Lab draw · 15 min', w:'Today · 11:15 – 11:30 AM', r:'Chair 4 · Nate (Medic)',
+      st:'arrived', room:'In chair', a:'11:09 AM · drawn 11:18 AM', rd:'Does not gate a lab draw',
+      pr:'Lab draw · 15 min', prn:'CBC and ferritin · ordered at this morning’s follow-up',
+      p:'appointment <code>A-88219</code> · lab order <code>O-2422</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Bakman',
+      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Orders and results','labs.html#/c-01-orders']},
+
+    'A-88241': {n:'Nadia Boulos', ag:'41', cv:'Anthem · INN', mk:'MYR', mkc:'tm-myers',
+      tx:'Myers’ cocktail · 1 h', w:'Today · 2:00 – 3:00 PM', r:'Chair 4 · Nate (Medic)',
+      st:'confirmed', room:'In chair', a:'', rd:'Physician review · today’s session runs at the current level, escalation waits on Dr. Drannikov',
+      pr:'Myers’ cocktail · 1 h', prn:'Session 2 of 6 · runs after her 1:30 PM follow-up',
+      p:'appointment <code>A-88241</code> · signed order <code>O-2409</code> <span class="ver-chip">v2</span> <span class="appr approved">Approved</span> · readiness <code>RA-1211</code> <span class="ver-chip">v1</span> <span class="appr pending">Physician review</span>',
+      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+
+    'A-88250': {n:'Marcus Webb', ag:'55', cv:'Anthem Blue Cross · INN', mk:'GSH', mkc:'tm-gsh',
+      tx:'Glutathione push · 30 min', w:'Today · 3:00 – 3:30 PM', r:'Chair 4 · Nate (Medic)',
+      st:'scheduled', room:'In chair', a:'', rd:'Standard · assessed at this morning’s consult',
+      pr:'Glutathione 1,000 mg push · 30 min', prn:'First push · Chair 4 is clear from 3:00 PM, after Nadia Boulos',
+      p:'appointment <code>A-88250</code> · signed order <code>O-2436</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Drannikov, today 9:52 AM',
+      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']}
+  };
+
+  function lNextStep(a) {
+    if (a.st === 'cancelled' || a.st === 'done') return null;
+    var map = { scheduled: 'Confirmed', confirmed: 'Arrived', arrived: a.room, inroom: 'Done', inchair: 'Done' };
+    return map[a.st] || null;
+  }
+
+  function lFlowHtml(a) {
+    var steps = [['st-scheduled', 'Scheduled'], ['st-confirmed', 'Confirmed'], ['st-arrived', 'Arrived'],
+                 [a.room === 'In room' ? 'st-inroom' : 'st-inchair', a.room], ['st-done', 'Done']];
+    var seq = ['scheduled', 'confirmed', 'arrived', 'room', 'done'];
+    var cur = seq.indexOf((a.st === 'inroom' || a.st === 'inchair') ? 'room' : a.st);
+    var h = '<div class="status-flow">';
+    for (var i = 0; i < steps.length; i++) {
+      h += '<span class="status-step ' + steps[i][0] + (i < cur ? ' past' : (i === cur ? ' current' : '')) + '">' + steps[i][1] + '</span>';
+      if (i < steps.length - 1) h += '<span class="status-arrow">&rsaquo;</span>';
+    }
+    return h + '</div>';
+  }
+
+  function lOpenAppt(id) {
+    var a = L_APPT[id];
+    if (!a) return;
+    document.getElementById('l-dr-name').textContent = a.n;
+    document.getElementById('l-dr-sub').innerHTML =
+      '<span class="type-mark ' + a.mkc + '">' + a.mk + '</span>' + a.tx + ' · ' + a.r;
+
+    var h = (a.st === 'cancelled')
+      ? '<div><span class="pill pill-st st-cancelled">Cancelled</span></div>'
+      : lFlowHtml(a);
+
+    h += '<div class="seg-divider">Appointment</div><dl class="kv">'
+       + '<dt>Appointment</dt><dd><code>' + id + '</code></dd>'
+       + '<dt>Patient</dt><dd>' + a.n + ' · ' + a.ag + '</dd>'
+       + '<dt>Coverage</dt><dd>' + a.cv + '</dd>'
+       + '<dt>When</dt><dd>' + a.w + '</dd>'
+       + '<dt>Where</dt><dd>' + a.r + '</dd>'
+       + (a.a ? '<dt>Arrived</dt><dd>' + a.a + '</dd>' : '')
+       + '<dt>Readiness</dt><dd>' + a.rd + '</dd>'
+       + '</dl>';
+
+    h += '<div class="seg-divider">Protocol</div>'
+       + '<div style="font-size:13px;font-weight:600;color:var(--hx-navy)">' + a.pr + '</div>'
+       + '<div class="field-help" style="margin-top:4px">' + a.prn + '</div>'
+       + '<div class="prov"><span><strong>From</strong> ' + a.p + '</span></div>';
+
+    var acts = [], step = lNextStep(a);
+    if (step) acts.push('<button class="btn btn-primary" onclick="lMark(\'' + id + '\')">Mark ' + step.toLowerCase() + '</button>');
+    if (a.st === 'cancelled') acts.push('<button class="btn btn-primary" onclick="lGo(\'l-03-book\')">Book a new time</button>');
+    if (a.full) acts.push('<button class="btn" onclick="lGo(\'l-04-appt\')">Open the full appointment</button>');
+    acts.push('<a class="btn" href="' + a.ch[1] + '">' + a.ch[0] + '</a>');
+    if (a.ex) acts.push('<a class="btn" href="' + a.ex[1] + '">' + a.ex[0] + '</a>');
+    document.getElementById('l-dr-body').innerHTML =
+      h + '<div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">' + acts.join('') + '</div>';
+  }
+
+  function lMark(id) {
+    var a = L_APPT[id], step = a ? lNextStep(a) : null;
+    if (!step) return;
+    HCOS.toast(a.n + ' marked ' + step.toLowerCase() + ' — the day view, the chair board and billing read the same appointment.', 'ok');
+  }
+
+  function lGo(screen) {
+    var d = document.getElementById('l-appt-drawer');
+    if (d) d.classList.remove('open');
+    var o = document.querySelector('.drawer-overlay[data-close-drawer="#l-appt-drawer"]');
+    if (o) o.classList.remove('open');
+    HCOS.activate(screen);
+  }
+
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('.cal-appt[data-appt]') : null;
+    if (b) lOpenAppt(b.getAttribute('data-appt'));
   });
 
   // ---- The scheduling service -------------------------------------------
@@ -993,7 +1156,7 @@
       c1: [[540,740,'Maya Reyes · NAD+']    ,[780,960,'Walter Hsu · NAD+']],
       c2: [[600,750,'Daniel Okafor · IV vitamin C 25 g']],
       c3: [[690,750,"Priya Natarajan · Myers' cocktail"],[930,960,'Sofia Ramos · glutathione push']],
-      c4: [[675,690,'Sofia Ramos · lab draw'],[840,900,"Nadia Boulos · Myers' cocktail"]]
+      c4: [[675,690,'Sofia Ramos · lab draw'],[840,900,"Nadia Boulos · Myers' cocktail"],[900,930,'Marcus Webb · glutathione push']]
     },
     jul22: {
       dr: [[540,570,'Grace Lindqvist · follow-up']],
@@ -1004,16 +1167,30 @@
     jul28: { dr: [], bak: [], bro: [], c1: [], c2: [], c3: [], c4: [] }
   };
 
+  // Orders belong to a patient, not to a treatment. This booking is for Priya
+  // Natarajan, so only the treatments she has a signed order for can be taken.
+  var L_PT = 'Priya Natarajan';
+
+  var L_DATE = { jul21: 'Tue, Jul 21', jul22: 'Wed, Jul 22', jul28: 'Tue, Jul 28' };
+
   var L_TX = {
-    myers: { name: "Myers' cocktail",    mins: 60,  patient: 75, iv: true,  order: 'O-2291' },
-    nad:   { name: 'NAD+ infusion',      mins: 180, iv: true,  order: null },
-    ivc:   { name: 'IV vitamin C 25 g',  mins: 150, iv: true,  order: null, needsLab: true },
-    gsh:   { name: 'Glutathione push',   mins: 30,  iv: true,  order: null },
-    fu:    { name: 'Follow-up',          mins: 30,  iv: false },
-    lab:   { name: 'Lab draw',           mins: 15,  iv: false, chairOk: true }
+    myers: { name: "Myers' cocktail",    low: "Myers' cocktail",   art: 'a',  mins: 60,  patient: 75, iv: true,
+             order: 'O-2291', ver: 'v1',
+             ordMeta: 'Dr. Drannikov, May 22 2026 · 2 of 6 given · v2 is a draft and does not authorize a booking',
+             every: 7, okDate: 'jul28' },
+    nad:   { name: 'NAD+ infusion',      low: 'NAD+ infusion',     art: 'a',  mins: 180, iv: true,  order: null },
+    ivc:   { name: 'IV vitamin C 25 g',  low: 'IV vitamin C 25 g', art: 'an', mins: 150, iv: true,  order: null, needsLab: true },
+    gsh:   { name: 'Glutathione push',   low: 'glutathione push',  art: 'a',  mins: 30,  iv: true,  order: null },
+    fu:    { name: 'Follow-up',          low: 'follow-up',         art: 'a',  mins: 30,  iv: false },
+    lab:   { name: 'Lab draw',           low: 'lab draw',          art: 'a',  mins: 15,  iv: false, chairOk: true }
   };
 
-  var lHoldLong = false, lReleased = false, lReleasedBy = '';
+  // "a Myers' cocktail" / "an IV vitamin C 25 g" — the treatment keeps its own name in a sentence.
+  function lName(tx, cap) { return (cap ? (tx.art === 'an' ? 'An' : 'A') : tx.art) + ' ' + tx.low; }
+
+  var L_TIMES = [600, 630, 780, 840, 930, 1050];
+
+  var lHoldLong = false, lRequested = false, lRequestTo = '';
 
   function lV(id) { return document.getElementById(id).value; }
   function lSet(id, v) { document.getElementById(id).value = v; }
@@ -1026,24 +1203,55 @@
     var h = Math.floor(m / 60), x = m % 60;
     return (h ? h + ' h' : '') + (h && x ? ' ' : '') + (x ? x + ' min' : '');
   }
+  function lDur(tx, hold) { return (hold && tx.patient) ? tx.patient : tx.mins; }
 
-  function lBook() {
-    var box = document.getElementById('l-bk-checks');
-    if (!box) return;
+  // Is the resource clear for the whole booking? An occupied chair or provider
+  // is a hard block everywhere — the calendar draws no overlap the engine refuses.
+  function lFree(res, date, start, end) {
+    var busy = (L_BUSY[date] && L_BUSY[date][res]) || [];
+    for (var i = 0; i < busy.length; i++) {
+      if (start < busy[i][1] && end > busy[i][0]) return false;
+    }
+    return true;
+  }
 
-    var key = lV('l-bk-type'), tx = L_TX[key];
-    var res = lV('l-bk-res'), date = lV('l-bk-date'), start = parseInt(lV('l-bk-time'), 10);
-    var dur = (lHoldLong && tx.patient) ? tx.patient : tx.mins;
-    var end = start + dur;
+  // Which resources can hold this treatment at all.
+  function lPool(key) {
+    var tx = L_TX[key];
+    return tx.iv ? ['c1', 'c2', 'c3', 'c4']
+      : (tx.chairOk ? ['dr', 'bak', 'bro', 'c1', 'c2', 'c3', 'c4'] : ['dr', 'bak', 'bro']);
+  }
+
+  // The latest listed start that still ends before close, keeps supervision and
+  // leaves the resource clear. Null when the day has no such start.
+  function lHoursFit(key, res, date, hold) {
+    var tx = L_TX[key], dur = lDur(tx, hold);
+    for (var i = L_TIMES.length - 1; i >= 0; i--) {
+      var s = L_TIMES[i];
+      if (s + dur > 1080) continue;
+      if (tx.iv && s >= 1020) continue;
+      if (!lFree(res, date, s, s + dur)) continue;
+      return s;
+    }
+    return null;
+  }
+
+  // One evaluation, used to render the checks AND to search for a slot that
+  // clears them — a repair button can never claim more than this returns.
+  function lEval(key, res, date, start, hold) {
+    var tx = L_TX[key];
+    var dur = lDur(tx, hold), end = start + dur;
     var isChair = res.charAt(0) === 'c';
     var checks = [], blocks = 0, warns = 0, needsProvider = false, hasWarnRule = false;
 
     // Resource — occupied chair or provider is never an ordinary warning.
     if (tx.iv && !isChair) {
-      checks.push(['block', 'An infusion needs a chair. ' + L_RES[res] + ' is a provider column.', '']);
+      checks.push(['block', 'An infusion needs a chair. ' + L_RES[res] + ' is a provider column.',
+        '<button class="btn btn-sm" onclick="lMoveRes()">Use a free chair</button>']);
       blocks++;
     } else if (!tx.iv && !tx.chairOk && isChair) {
-      checks.push(['block', 'A ' + tx.name.toLowerCase() + ' needs a provider. ' + L_RES[res] + ' is an infusion chair.', '']);
+      checks.push(['block', lName(tx, true) + ' needs a provider. ' + L_RES[res] + ' is an infusion chair.',
+        '<button class="btn btn-sm" onclick="lMoveRes()">Use a free provider</button>']);
       blocks++;
     } else {
       var busy = L_BUSY[date][res] || [], hit = null;
@@ -1059,28 +1267,28 @@
       }
     }
 
-    // Signed order — booking never stands in for one.
+    // Signed order — booking never stands in for one, and an order belongs to a patient.
     if (!tx.iv) {
-      checks.push(['ok', 'No order is needed for a ' + tx.name.toLowerCase() + '.', '']);
+      checks.push(['ok', 'No order is needed for ' + lName(tx) + '.', '']);
     } else if (tx.order) {
-      checks.push(['ok', 'Signed order <code>O-2291</code> <span class="ver-chip">v1</span> — Dr. Drannikov, May 22 2026 · 2 of 6 given · v2 is a draft and does not authorize a booking.',
+      checks.push(['ok', 'Signed order <code>' + tx.order + '</code> <span class="ver-chip">' + tx.ver + '</span> <span class="appr approved">Approved</span> — ' + tx.ordMeta + '.',
         '<a href="clinical-chart.html#/b-10-iv-order">order</a>']);
     } else {
-      checks.push(['block', 'No signed order for ' + tx.name + '. Only a physician or extender can place one.',
+      checks.push(['block', 'No signed order for ' + tx.name + ' on ' + L_PT + '&rsquo;s chart. Only a physician or extender can place one.',
         '<a href="clinical-chart.html#/b-10-iv-order">place the order</a>']);
       blocks++; needsProvider = true;
     }
 
     // Interval — the cadence lives on the order, not on the calendar.
     if (!tx.iv) {
-      checks.push(['ok', 'No cadence applies to a ' + tx.name.toLowerCase() + '.', '']);
+      checks.push(['ok', 'No cadence applies to ' + lName(tx) + '.', '']);
     } else if (!tx.order) {
       checks.push(['wait', 'The cadence is read from the signed order. There is none to read yet.', '']);
-    } else if (date === 'jul28') {
-      checks.push(['ok', 'Order <code>O-2291</code> allows one infusion every 7 days. Session 3 runs today at 11:30, so Jul 28 is the first date it allows.', '']);
+    } else if (date === tx.okDate) {
+      checks.push(['ok', 'Order <code>' + tx.order + '</code> allows one infusion every ' + tx.every + ' days. Session 3 runs today at 11:30, so ' + L_DATE[tx.okDate] + ' is the first date it allows.', '']);
     } else {
-      checks.push(['block', 'Order <code>O-2291</code> allows one infusion every 7 days. Session 3 runs today at 11:30 — ' + (date === 'jul21' ? 'the same day' : 'the next day') + ' is inside the interval.',
-        '<button class="btn btn-sm" onclick="lUseJul28()">Use Tue, Jul 28</button>']);
+      checks.push(['block', 'Order <code>' + tx.order + '</code> allows one infusion every ' + tx.every + ' days. Session 3 runs today at 11:30 — ' + (date === 'jul21' ? 'the same day' : 'the next day') + ' is inside the interval.',
+        '<button class="btn btn-sm" onclick="lUseOkDate()">Use ' + L_DATE[tx.okDate] + '</button>']);
       blocks++;
     }
 
@@ -1090,43 +1298,59 @@
 
     // Clearance.
     if (tx.needsLab) {
-      checks.push(['block', 'No current G6PD result on file. High-dose vitamin C cannot be booked until one is back.',
-        '<a href="labs.html">order the lab</a>']);
+      checks.push(['block', 'No current G6PD result on ' + L_PT + '&rsquo;s chart. High-dose vitamin C cannot be booked until one is back.',
+        '<a href="labs.html#/c-01-orders">order the lab</a>']);
       blocks++; needsProvider = true;
     } else if (tx.iv) {
       checks.push(['ok', 'Intake is complete — consents, allergies and medications on file since Mar 2026.', '']);
     } else {
-      checks.push(['ok', 'Nothing to clear for a ' + tx.name.toLowerCase() + '.', '']);
+      checks.push(['ok', 'Nothing to clear for ' + lName(tx) + '.', '']);
     }
 
     // Supervision and clinic hours.
+    var fit = lHoursFit(key, res, date, hold);
+    var fitBtn = (fit === null)
+      ? '<button class="btn btn-sm" onclick="lNextSafe()">Find a day it fits</button>'
+      : '<button class="btn btn-sm" onclick="lUseStart(' + fit + ')">Use ' + lClock(fit) + '</button>';
     if (end > 1080) {
-      checks.push(['block', 'A ' + lLen(dur) + ' booking that starts at ' + lClock(start) + ' ends at ' + lClock(end) + '. The clinic closes at 6:00 PM and the chair has to be clear.',
-        '<button class="btn btn-sm" onclick="lUse330()">Use 3:30 PM</button>']);
+      checks.push(['block', 'A ' + lLen(dur) + ' booking that starts at ' + lClock(start) + ' ends at ' + lClock(end) + '. The clinic closes at 6:00 PM and the chair has to be clear.', fitBtn]);
       blocks++;
     } else if (tx.iv && start >= 1020) {
-      checks.push(['block', 'No provider is on site after 5:00 PM. An infusion cannot run without supervision.',
-        '<button class="btn btn-sm" onclick="lUse330()">Use 3:30 PM</button>']);
+      checks.push(['block', 'No provider is on site after 5:00 PM. An infusion cannot run without supervision.', fitBtn]);
       blocks++;
     } else {
       checks.push(['ok', tx.iv ? 'Dr. Bakman is on site until 5:00 PM — supervision covers the whole run.' : 'The clinic is open for the whole booking.', '']);
     }
 
-    // Readiness — an eligible warning, released only by a designated authority.
+    // Readiness — an eligible warning. Front desk asks; only a physician or
+    // extender releases it, on their own worklist, with a reason.
     if (tx.iv) {
       hasWarnRule = true;
-      if (lReleased) {
-        checks.push(['ok', 'Readiness is Flare recovery. Released by ' + lReleasedBy + ' with a reason — same protocol, same dose.',
-          '<a href="security.html#/g-01-audit">audit</a>']);
+      warns++;
+      if (lRequested) {
+        checks.push(['wait', 'Readiness is Flare recovery since Sunday. Yazmin asked ' + lRequestTo + ' to release it — <span class="appr pending">Pending approval</span>. Front desk and PCC cannot release a clinical warning.',
+          '<a href="clinical.html#/b-01-worklist">worklist</a>']);
       } else {
         checks.push(['warn', 'Readiness is Flare recovery since Sunday — escalation is paused until a provider clears it. Same protocol and same dose, so a physician or extender may release it.',
           '<a href="readiness.html#/i-01-readiness">why</a>']);
-        warns++;
       }
     } else {
-      checks.push(['ok', 'Readiness does not gate a ' + tx.name.toLowerCase() + '.',
+      checks.push(['ok', 'Readiness does not gate ' + lName(tx) + '.',
         '<a href="readiness.html#/i-01-readiness">readiness</a>']);
     }
+
+    return { checks: checks, blocks: blocks, warns: warns, needsProvider: needsProvider,
+             hasWarnRule: hasWarnRule, dur: dur, end: end };
+  }
+
+  function lBook() {
+    var box = document.getElementById('l-bk-checks');
+    if (!box) return;
+
+    var key = lV('l-bk-type'), tx = L_TX[key];
+    var res = lV('l-bk-res'), date = lV('l-bk-date'), start = parseInt(lV('l-bk-time'), 10);
+    var r = lEval(key, res, date, start, lHoldLong);
+    var checks = r.checks, blocks = r.blocks, warns = r.warns, dur = r.dur, end = r.end;
 
     var ICON = { ok: ['done', '&#10003;'], block: ['blocked', '&#10005;'], warn: ['active', '!'], wait: ['pending', '&middot;'] };
     var html = '';
@@ -1144,7 +1368,9 @@
       v.innerHTML = '<strong>' + blocks + (blocks === 1 ? ' check refuses' : ' checks refuse') + ' this booking.</strong> These are hard checks — no role on this screen releases them. Fix what they name, or move the booking.';
     } else if (warns) {
       v.className = 'callout callout-warn';
-      v.innerHTML = '<strong>One warning is open.</strong> A physician or extender may release it with a reason, and the release travels with the appointment.';
+      v.innerHTML = lRequested
+        ? '<strong>One warning is open and the request is with ' + lRequestTo + '.</strong> Nothing is held meanwhile — the booking is taken only once they release it.'
+        : '<strong>One warning is open.</strong> Only a physician or extender releases it, with a reason. Front desk asks for the release, and the request travels with the appointment.';
     } else {
       v.className = 'callout callout-ok';
       v.innerHTML = '<strong>Every check passes.</strong> Booking reserves ' + L_RES[res] + ' from ' + lClock(start) + ' to ' + lClock(end) + ' and assigns one appointment identifier.';
@@ -1157,73 +1383,106 @@
 
     document.getElementById('l-bk-order').innerHTML = tx.iv
       ? (tx.order
-          ? '<span><strong>Against</strong> signed order <code>O-2291</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Drannikov — the appointment carries the order number and version downstream</span>'
-          : '<span><strong>No signed order</strong> for ' + tx.name + ' — nothing downstream could reference this booking</span>')
-      : '<span><strong>No order</strong> is required for a ' + tx.name.toLowerCase() + '</span>';
+          ? '<span><strong>Against</strong> signed order <code>' + tx.order + '</code> <span class="ver-chip">' + tx.ver + '</span> <span class="appr approved">Approved</span> · Dr. Drannikov — the appointment carries the order number and version downstream</span>'
+          : '<span><strong>No signed order</strong> for ' + tx.name + ' on ' + L_PT + '&rsquo;s chart — nothing downstream could reference this booking</span>')
+      : '<span><strong>No order</strong> is required for ' + lName(tx) + '</span>';
 
     document.getElementById('l-bk-ai').style.display = (key === 'myers') ? '' : 'none';
-    document.getElementById('l-bk-ovrcard').style.display = hasWarnRule ? '' : 'none';
+    document.getElementById('l-bk-ovrcard').style.display = r.hasWarnRule ? '' : 'none';
 
-    var ids = ['l-bk-btn-book', 'l-bk-btn-fix', 'l-bk-btn-ask', 'l-bk-btn-warn'];
-    var show = blocks ? (needsProvider ? 'l-bk-btn-ask' : 'l-bk-btn-fix')
-                      : (warns ? 'l-bk-btn-warn' : 'l-bk-btn-book');
+    var ids = ['l-bk-btn-book', 'l-bk-btn-fix', 'l-bk-btn-ask', 'l-bk-btn-warn', 'l-bk-btn-pending'];
+    var show = blocks ? (r.needsProvider ? 'l-bk-btn-ask' : 'l-bk-btn-fix')
+                      : (warns ? (lRequested ? 'l-bk-btn-pending' : 'l-bk-btn-warn') : 'l-bk-btn-book');
     for (var k = 0; k < ids.length; k++) {
       document.getElementById(ids[k]).style.display = (ids[k] === show) ? '' : 'none';
     }
   }
 
-  // A release is granted against one booking — changing the treatment withdraws it.
+  // A release request is made against one booking — changing the treatment withdraws it.
   function lTypeChange() {
     lHoldLong = false;
     var s = document.getElementById('l-bk-aistate');
     s.className = 'ai-state suggested';
     s.textContent = 'Suggestion';
-    if (lReleased) {
-      lReleased = false;
+    if (lRequested) {
+      lRequested = false;
       document.getElementById('l-bk-ovr-form').style.display = '';
       document.getElementById('l-bk-ovr-done').style.display = 'none';
-      HCOS.toast('Treatment changed, so the release by ' + lReleasedBy + ' no longer applies. A provider has to release the new booking.', 'warn');
+      HCOS.toast('Treatment changed, so the request to ' + lRequestTo + ' no longer applies. Ask again for the new booking.', 'warn');
     }
     lBook();
   }
 
+  // The first slot that actually clears every hard check — searched with the
+  // same engine that draws them, so this button never reports a false all-clear.
   function lNextSafe() {
-    lSet('l-bk-date', 'jul28');
-    lSet('l-bk-time', '630');
-    if (L_TX[lV('l-bk-type')].iv) lSet('l-bk-res', 'c2');
+    var key = lV('l-bk-type'), tx = L_TX[key];
+    var dates = ['jul21', 'jul22', 'jul28'], pool = lPool(key), cur = lV('l-bk-res');
+    var order = pool.indexOf(cur) === -1 ? pool
+      : [cur].concat(pool.filter(function (x) { return x !== cur; }));
+    for (var d = 0; d < dates.length; d++) {
+      for (var i = 0; i < order.length; i++) {
+        for (var t = 0; t < L_TIMES.length; t++) {
+          if (lEval(key, order[i], dates[d], L_TIMES[t], lHoldLong).blocks === 0) {
+            lSet('l-bk-date', dates[d]);
+            lSet('l-bk-res', order[i]);
+            lSet('l-bk-time', String(L_TIMES[t]));
+            lBook();
+            HCOS.toast('Moved to ' + L_DATE[dates[d]] + ' · ' + lClock(L_TIMES[t]) + ' · ' + L_RES[order[i]]
+              + ' — the first slot that clears every hard check.', 'ok');
+            return;
+          }
+        }
+      }
+    }
+    HCOS.toast('Nothing was moved. No start on Jul 21, 22 or 28 clears every hard check for '
+      + lName(tx) + ' — what the checks name has to change first.', 'warn');
+  }
+
+  // Same kind of resource, same time — the nearest honest repair for a wrong column.
+  function lMoveRes() {
+    var key = lV('l-bk-type'), tx = L_TX[key], date = lV('l-bk-date');
+    var start = parseInt(lV('l-bk-time'), 10), dur = lDur(tx, lHoldLong), pool = lPool(key);
+    for (var i = 0; i < pool.length; i++) {
+      if (lFree(pool[i], date, start, start + dur)) {
+        lSet('l-bk-res', pool[i]);
+        lBook();
+        HCOS.toast(L_RES[pool[i]] + ' is free at ' + lClock(start) + '. Moved there.', 'ok');
+        return;
+      }
+    }
+    HCOS.toast('Nothing of the right kind is free at ' + lClock(start) + ' on ' + L_DATE[date]
+      + '. Nothing was moved — try another time.', 'warn');
+  }
+
+  function lUseStart(m) {
+    lSet('l-bk-time', String(m));
     lBook();
-    HCOS.toast('Moved to Tue, Jul 28 · 10:30 AM · Chair 2 — the first slot that clears every hard check.', 'ok');
+    HCOS.toast('Moved to ' + lClock(m) + ' — it ends before the 6:00 PM close and a provider is on site.', 'ok');
   }
 
   function lNextFree() {
     var tx = L_TX[lV('l-bk-type')], date = lV('l-bk-date'), res = lV('l-bk-res');
-    var dur = (lHoldLong && tx.patient) ? tx.patient : tx.mins;
-    var opts = [600, 630, 780, 840, 930], busy = L_BUSY[date][res] || [];
-    for (var i = 0; i < opts.length; i++) {
-      var free = true;
-      for (var j = 0; j < busy.length; j++) {
-        if (opts[i] < busy[j][1] && opts[i] + dur > busy[j][0]) free = false;
-      }
-      if (free) {
-        lSet('l-bk-time', String(opts[i]));
-        lBook();
-        HCOS.toast(L_RES[res] + ' is free at ' + lClock(opts[i]) + '. Moved there.', 'ok');
-        return;
-      }
+    var dur = lDur(tx, lHoldLong);
+    for (var i = 0; i < L_TIMES.length; i++) {
+      var s = L_TIMES[i];
+      if (s + dur > 1080) continue;
+      if (tx.iv && s >= 1020) continue;
+      if (!lFree(res, date, s, s + dur)) continue;
+      lSet('l-bk-time', String(s));
+      lBook();
+      HCOS.toast(L_RES[res] + ' is free at ' + lClock(s) + '. Moved there.', 'ok');
+      return;
     }
-    HCOS.toast(L_RES[res] + ' has no free start left that day. Pick another chair or another date.', 'warn');
+    HCOS.toast(L_RES[res] + ' has no free start left that day that also ends before close. Nothing was moved — pick another chair or another date.', 'warn');
   }
 
-  function lUseJul28() {
-    lSet('l-bk-date', 'jul28');
+  function lUseOkDate() {
+    var tx = L_TX[lV('l-bk-type')];
+    if (!tx.okDate) return;
+    lSet('l-bk-date', tx.okDate);
     lBook();
-    HCOS.toast('Moved to Tue, Jul 28 — the first date the signed order allows.', 'ok');
-  }
-
-  function lUse330() {
-    lSet('l-bk-time', '930');
-    lBook();
-    HCOS.toast('Moved to 3:30 PM — it finishes before close and a provider is on site.', 'ok');
+    HCOS.toast('Moved to ' + L_DATE[tx.okDate] + ' — the first date the signed order allows.', 'ok');
   }
 
   function lAskProvider() {
@@ -1232,29 +1491,33 @@
 
   function lGoRelease() {
     document.getElementById('l-bk-reason').focus();
-    HCOS.toast('A physician or extender has to release the flare-recovery pause. Say who released it and why.', 'warn');
+    HCOS.toast('Front desk cannot release a clinical warning. Say what you know about this session and send the request to a provider.', 'warn');
   }
 
-  function lRelease() {
+  // Front desk suggests; a physician or extender approves. The request is
+  // recorded under the name of whoever asked — never under the provider's.
+  function lRequestRelease() {
     var r = document.getElementById('l-bk-reason'), err = document.getElementById('l-bk-reason-err');
     if (!r.value.replace(/\s/g, '')) { err.style.display = ''; r.focus(); return; }
     err.style.display = 'none';
-    lReleased = true;
-    lReleasedBy = document.getElementById('l-bk-auth').value.split(' · ')[0];
+    lRequested = true;
+    lRequestTo = document.getElementById('l-bk-auth').value.split(' · ')[0];
     document.getElementById('l-bk-ovr-form').style.display = 'none';
     document.getElementById('l-bk-ovr-done').style.display = '';
     document.getElementById('l-bk-ovr-line').innerHTML =
-      '<strong>Released by ' + lReleasedBy + '.</strong> ' + r.value + ' — kept with the rule, the name and the time.';
+      '<span class="appr pending">Pending approval</span> <strong>Asked ' + lRequestTo + ' at 11:41 AM.</strong> '
+      + r.value.replace(/</g, '&lt;')
+      + ' — requested by Yazmin · Front desk. ' + lRequestTo + ' releases it or refuses it; nothing is held meanwhile.';
     lBook();
-    HCOS.toast('Release recorded against ' + lReleasedBy + '. It is in the audit store.', 'ok');
+    HCOS.toast('Request sent to ' + lRequestTo + ' with your name and your reason. Only they can release it.', 'ok');
   }
 
-  function lUnrelease() {
-    lReleased = false;
+  function lWithdrawRequest() {
+    lRequested = false;
     document.getElementById('l-bk-ovr-form').style.display = '';
     document.getElementById('l-bk-ovr-done').style.display = 'none';
     lBook();
-    HCOS.toast('Release withdrawn. The warning is open again and the withdrawal is logged.', 'warn');
+    HCOS.toast('Request withdrawn. The warning is open again and the withdrawal is logged.', 'warn');
   }
 
   function lDurAccept() {
@@ -1276,11 +1539,11 @@
   }
 
   function lDoBook() {
-    HCOS.toast('Booked as appointment APT-2863 — one identifier, on the day view and the chair board.'
-      + (lReleased ? ' The release by ' + lReleasedBy + ' travels with it.' : ''), 'ok');
+    HCOS.toast('Booked as appointment A-88264 — one identifier, on the day view and the chair board.', 'ok');
   }
 
   lBook();
+  lOpenAppt('A-88214');
 
 </script>
 </body>

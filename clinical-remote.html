@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/hcos.css?v=8">
 <style>
-  .b-encbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:10px 14px; background:var(--hx-band); border:1px solid var(--line); border-radius:10px; margin-bottom:16px; }
-  .b-encbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
+  .b-rm-encbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+  .b-rm-encbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
   .b-dot { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
   .b-dotphrase { font-family:ui-monospace, monospace; font-size:11px; }
   .b-workup { font-size:12.5px; line-height:1.95; color:var(--ink); }
@@ -43,7 +43,7 @@
 
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
-            <div class="stat-num">7</div>
+            <div class="stat-num">5</div>
             <div class="stat-lbl">Pending pre-chart</div>
           </div>
           <div class="card stat-card">
@@ -51,7 +51,7 @@
             <div class="stat-lbl">Pre-charted today</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">2</div>
+            <div class="stat-num">1</div>
             <div class="stat-lbl">Awaiting intake</div>
           </div>
           <div class="card stat-card">
@@ -64,10 +64,12 @@
 
         <div class="filters" style="margin-top:14px">
           <input class="search-input" type="search" placeholder="Search by patient name or reason">
-          <button class="filter-chip active">Pending (7)</button>
-          <button class="filter-chip">Today only</button>
-          <button class="filter-chip">Tomorrow only</button>
+          <button class="filter-chip active">All open (7)</button>
+          <button class="filter-chip">Pending (5)</button>
+          <button class="filter-chip">Awaiting intake (1)</button>
           <button class="filter-chip">Flagged (1)</button>
+          <button class="filter-chip">Today (5)</button>
+          <button class="filter-chip">Tomorrow (2)</button>
         </div>
 
         <div class="tbl-wrap">
@@ -84,52 +86,60 @@
             </thead>
             <tbody>
               <tr class="row-click" data-activate="b-19-precharting">
-                <td><strong>Today · 1:30 PM</strong></td>
-                <td>Marcus Webb <span class="b-mrn">· Dr. Drannikov</span></td>
-                <td><span class="pill">New patient consult</span></td>
+                <td>Today · 1:00 PM</td>
+                <td>Daniel Okafor <span class="b-mrn">· Dr. Bakman</span></td>
+                <td><span class="pill pill-muted">Follow-up</span></td>
                 <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-warn">Not started</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start pre-chart</button></td>
+              </tr>
+              <tr>
+                <td>Today · 1:30 PM</td>
+                <td>Nadia Boulos <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill pill-muted">Follow-up</span></td>
+                <td><span class="pill pill-warn">Questionnaire pending</span></td>
+                <td><span class="pill pill-muted">Waiting on intake</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Reminder sent — Nadia Boulos gets the link to finish her questionnaire before 1:30 PM.', 'ok')">Send intake reminder</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td>Today · 2:00 PM</td>
+                <td>Maya Reyes <span class="b-mrn">· Brooke, PA</span></td>
+                <td><span class="pill pill-muted">Follow-up</span></td>
+                <td><span class="pill pill-ok">Complete</span></td>
+                <td><span class="pill pill-warn">Not started</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start pre-chart</button></td>
+              </tr>
+              <tr class="row-click" data-activate="b-19-precharting">
+                <td><strong>Today · 3:00 PM</strong></td>
+                <td>Tom Alvarez <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td><span class="pill">New patient consult</span></td>
+                <td><span class="pill pill-ok">Complete</span><div class="b-fact-note">2 consents unsigned · front desk chases them</div></td>
                 <td><span class="pill pill-warn">Not started</span></td>
                 <td><button class="btn btn-primary btn-sm" data-activate="b-19-precharting">Start pre-chart</button></td>
               </tr>
               <tr class="row-click" data-activate="b-19-precharting">
-                <td>Today · 2:00 PM</td>
-                <td>Daniel Okafor <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td>Today · 3:30 PM</td>
+                <td>Priya Natarajan <span class="b-mrn">· Dr. Bakman</span></td>
                 <td><span class="pill pill-muted">Follow-up</span></td>
                 <td><span class="pill pill-ok">Complete</span></td>
-                <td><span class="pill pill-warn">Awaiting MA</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start</button></td>
-              </tr>
-              <tr>
-                <td>Today · 3:00 PM</td>
-                <td>Tom Alvarez <span class="b-mrn">· Dr. Drannikov</span></td>
-                <td><span class="pill">New patient consult</span></td>
-                <td><span class="pill pill-warn">80% · SPD / EOC missing</span></td>
-                <td><span class="pill pill-muted">Waiting on intake</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Reminder sent — Tom Alvarez gets the link to finish intake and upload his SPD / EOC.', 'ok')">Send reminder</button></td>
+                <td><span class="pill pill-err">Flagged for provider review</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Open the flag</button></td>
               </tr>
               <tr class="row-click" data-activate="b-19-precharting">
                 <td>Tmrw · 9:00 AM</td>
                 <td>Grace Lindqvist <span class="b-mrn">· Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Follow-up</span></td>
                 <td><span class="pill pill-ok">Complete</span></td>
-                <td><span class="pill pill-muted">Scheduled for tomorrow</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start</button></td>
+                <td><span class="pill pill-warn">Not started</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start pre-chart</button></td>
               </tr>
               <tr class="row-click" data-activate="b-19-precharting">
-                <td>Tmrw · 10:30 AM</td>
-                <td>Priya Natarajan <span class="b-mrn">· Dr. Drannikov</span></td>
+                <td>Tmrw · 11:00 AM</td>
+                <td>Elena Petrova <span class="b-mrn">· Brooke, PA</span></td>
                 <td><span class="pill pill-muted">Follow-up</span></td>
                 <td><span class="pill pill-ok">Complete</span></td>
-                <td><span class="pill pill-err">Flagged for provider review</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">View flag</button></td>
-              </tr>
-              <tr class="row-click" data-activate="b-19-precharting">
-                <td>Tmrw · 2:00 PM</td>
-                <td>Elena Petrova <span class="b-mrn">· Dr. Drannikov</span></td>
-                <td><span class="pill pill-muted">Telehealth follow-up</span></td>
-                <td><span class="pill pill-ok">Complete</span></td>
-                <td><span class="pill pill-muted">Pending</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start</button></td>
+                <td><span class="pill pill-warn">Not started</span></td>
+                <td><button class="btn btn-ghost btn-sm" data-activate="b-19-precharting">Start pre-chart</button></td>
               </tr>
             </tbody>
           </table>
@@ -142,14 +152,14 @@
   <section class="screen" id="b-19-precharting" data-title="Pre-charting">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/clinical/precharting/marcus-webb</span></div>
+        <span class="frame-url">hcos.helixona.com/clinical/precharting/tom-alvarez</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Pre-charting — Marcus Webb</h2>
-        <p class="page-sub">New patient consult · Today · 1:30 PM · Dr. Drannikov · functional medicine intake</p>
+        <h2 class="page-title">Pre-charting — Tom Alvarez</h2>
+        <p class="page-sub">New patient consult · Today · 3:00 – 4:30 PM · Dr. Drannikov · functional medicine intake</p>
 
-        <div class="b-encbar">
-          <div><span class="appr draft">Draft</span> Encounter <code class="b-id">E-8841</code> · appointment <code class="b-id">A-2214</code> · auto-saved 4 seconds ago</div>
-          <div class="b-encbar-actions">
+        <div class="card b-rm-encbar">
+          <div><span class="appr draft">Draft</span> Encounter <code class="b-id">ENC-2026-07213</code> · appointment <code class="b-id">A-88252</code> · auto-saved 4 seconds ago</div>
+          <div class="b-rm-encbar-actions">
             <button class="btn btn-sm" onclick="HCOS.toast('Flagged for Dr. Drannikov — a review task is on his worklist. The chart is unchanged.', 'warn')">Flag for provider</button>
             <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Draft sent to Dr. Drannikov — it waits in his SOAP note until he accepts it. Nothing is signed.', 'ok'); setTimeout(function(){ window.location.href='clinical.html#/b-03-soap'; }, 1000)">Send draft to Dr. Drannikov</button>
           </div>
@@ -165,7 +175,7 @@
           <span class="status-step">Addendum</span>
         </div>
         <div class="prov" style="margin-bottom:14px">
-          <span><strong>One encounter</strong> <code>E-8841</code> — this screen prepares it, Dr. Drannikov owns and signs it. HCOS writes the encounter and sends eCW the signed copy.</span>
+          <span><strong>One encounter</strong> <code>ENC-2026-07213</code> on appointment <code>A-88252</code> — this screen prepares it, Dr. Drannikov owns and signs it. HCOS writes the encounter and sends eCW the signed copy.</span>
         </div>
 
         <div class="grid-sidebar">
@@ -210,7 +220,7 @@
                   </tr>
                   <tr>
                     <td class="b-fact">MCV 102, low-normal ferritin</td>
-                    <td><a href="clinical-chart.html#/b-04-timeline">Outside result R-4471</a></td>
+                    <td><a href="clinical-chart.html#/b-04-timeline">Outside result L-8790</a></td>
                     <td>Nov 12, 2025 · 8 months old</td>
                     <td><span class="clin-state reconciled">Reconciled</span><div class="b-fact-note">Charlene checked it against the PDF</div></td>
                   </tr>
@@ -240,7 +250,7 @@
                 <span class="ai-state suggested">Draft — not in the note</span>
               </div>
               <div class="ai-body">
-                <textarea class="field-textarea" rows="7">55 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
+                <textarea class="field-textarea" rows="7">61 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
                 <div class="b-dot">
                   <span class="pill pill-muted b-dotphrase">.veganhx</span>
                   <span class="pill pill-muted b-dotphrase">.macrocytosis</span>
@@ -248,7 +258,7 @@
                 </div>
               </div>
               <div class="ai-meta">
-                <span><b>Sources</b> questionnaire Q-118 v3 · outside result R-4471 · medication list</span>
+                <span><b>Sources</b> questionnaire Q-118 v3 · outside result L-8790 · medication list</span>
                 <span><b>Model</b> hpi-draft v1.4</span>
                 <span><b>Uncertainty</b> 1 sentence unsupported</span>
                 <span><b>Prepared by</b> Charlene · remote MA</span>
@@ -303,7 +313,7 @@
               <div style="font-size:12.5px"><strong>CBC · Nov 12, 2025 — outside lab</strong> <span class="clin-state reconciled">Reconciled</span></div>
               <div class="field-help" style="margin-top:2px">PDF · 2 pages · uploaded by the patient Jul 14 · macrocytosis flagged · checked by Charlene Jul 20</div>
               <div class="prov">
-                <span><strong>Filed as</strong> outside result <code>R-4471</code> · the original PDF is kept unchanged · <a href="clinical-chart.html#/b-04-timeline">open it in results</a></span>
+                <span><strong>Filed as</strong> outside result <code>L-8790</code> · the original PDF is kept unchanged · <a href="clinical-chart.html#/b-04-timeline">open it in results</a></span>
               </div>
               <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
                 <button class="btn btn-sm" onclick="HCOS.toast('Opening the outside CBC — 2 pages.')">View PDF</button>
@@ -363,12 +373,13 @@
         </div>
 
         <div class="filters">
-          <button class="filter-chip active">All open (14)</button>
+          <button class="filter-chip active">All open (16)</button>
           <button class="filter-chip">Lab results to route (4)</button>
           <button class="filter-chip">Patient messages (3)</button>
           <button class="filter-chip">Referrals to send (2)</button>
           <button class="filter-chip">Refills (3)</button>
           <button class="filter-chip">Documents to upload (2)</button>
+          <button class="filter-chip">Visits to book (2)</button>
         </div>
 
         <div class="seg-divider" style="margin-top:0">Today's worklist</div>
@@ -393,7 +404,7 @@
                 <td>Nadia Boulos <span class="net-badge net-inn">INN</span></td>
                 <td>Lab result</td>
                 <td><span class="pill pill-err">Urgent</span></td>
-                <td><a class="btn btn-primary btn-sm" href="labs.html">Open</a></td>
+                <td><a class="btn btn-primary btn-sm" href="labs.html#/c-01-orders">Open the result</a></td>
               </tr>
               <tr>
                 <td>
@@ -403,7 +414,7 @@
                 <td>Daniel Okafor <span class="net-badge net-inn">INN</span></td>
                 <td>Patient message</td>
                 <td><span class="pill pill-warn">Today</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Results message sent to Daniel Okafor — Routine – reassuring template.', 'ok')">Send</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Results message sent to Daniel Okafor — Routine – reassuring template.', 'ok')">Send results message</button></td>
               </tr>
               <tr>
                 <td>
@@ -418,22 +429,22 @@
               <tr>
                 <td>
                   <div class="b-tasktitle">Refill — levothyroxine 75 mcg</div>
-                  <div class="b-taskmeta">From signed order <code class="b-id">O-3318 v2</code> · Dr. Drannikov · transmit to CVS Irvine #4421</div>
+                  <div class="b-taskmeta">From signed order <code class="b-id">O-3318 v2</code> · signed by Dr. Drannikov · the MA releases it to CVS Irvine #4421 exactly as written; changing the dose or the pharmacy needs a new order from the prescriber</div>
                 </td>
                 <td>Grace Lindqvist <span class="net-badge net-self">SELF</span></td>
                 <td>Refill</td>
                 <td><span class="pill pill-muted">Today</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Levothyroxine 75 mcg transmitted to CVS Irvine #4421 via Surescripts.', 'ok')">Transmit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Levothyroxine 75 mcg sent to CVS Irvine #4421 via Surescripts on Dr. Drannikov\'s signed order O-3318 v2. The order is unchanged.', 'ok')">Send to pharmacy on Dr. Drannikov's order</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-tasktitle">Upload outside MRI report</div>
                   <div class="b-taskmeta">Patient delivered a disc · OCR and attach to the chart</div>
                 </td>
-                <td>Tom Alvarez <span class="net-badge net-oon">OON</span></td>
+                <td>Walter Hsu <span class="net-badge net-oon">OON</span></td>
                 <td>Document</td>
                 <td><span class="pill pill-muted">This week</span></td>
-                <td><a class="btn btn-sm" href="intake-documents.html">Upload</a></td>
+                <td><a class="btn btn-sm" href="intake-documents.html">Upload the report</a></td>
               </tr>
               <tr>
                 <td>
@@ -441,9 +452,9 @@
                   <div class="b-taskmeta">Myers' cocktail session 4 of 6 · from signed order <code class="b-id">O-3271 v1</code> · plan of care <span class="ver-chip">v4</span> · books in the one schedule, cadence rules apply</div>
                 </td>
                 <td>Priya Natarajan <span class="net-badge net-oon">OON</span></td>
-                <td>Scheduling</td>
+                <td>Visit to book</td>
                 <td><span class="pill pill-muted">This week</span></td>
-                <td><a class="btn btn-sm" href="schedule.html">Schedule</a></td>
+                <td><a class="btn btn-sm" href="schedule.html#/l-03-book">Book the follow-up</a></td>
               </tr>
             </tbody>
           </table>

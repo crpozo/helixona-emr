@@ -11,8 +11,6 @@
 <style>
   /* One guided question per screen — a calm, Duolingo-style check-in. */
   .j-flow { display: flex; flex-direction: column; min-height: 484px; }
-  .j-cbar { height: 12px; background: var(--hx-light); border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
-  .j-cbar-fill { height: 100%; background: var(--ink); border-radius: 6px; }
   .j-step-lbl { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: center; }
   .j-flow-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px 0; }
   .j-cicon { width: 92px; height: 92px; border-radius: 24px; background: var(--hx-light); display: grid; place-items: center; font-size: 34px; font-weight: 700; color: var(--ink); margin-bottom: 18px; }
@@ -30,9 +28,7 @@
   .j-lead { font-size: 23px; font-weight: 700; color: var(--hx-navy); text-align: center; margin-bottom: 4px; }
   .j-lead-sub { font-size: 12.5px; color: var(--muted); text-align: center; margin: 0 auto 16px; max-width: 250px; line-height: 1.5; }
   /* Done */
-  .j-check-ring { width: 92px; height: 92px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 44px; margin: 0 auto 14px; }
   .j-done-pts { font-size: 24px; font-weight: 800; color: var(--hx-navy); margin-top: 2px; }
-  .j-done-note { border: 1px solid var(--line-soft); border-radius: 12px; padding: 12px 14px; font-size: 12px; color: var(--muted); line-height: 1.55; text-align: left; margin-top: 16px; }
 </style>
 </head>
 <body data-page="journey-checkin" data-page-title="Patient journey · Check-in" data-shell="app">
@@ -59,10 +55,10 @@
         <div class="act-row">
           <span class="act-check"></span>
           <div class="act-body">
-            <div class="act-name">Red Light</div>
-            <div class="act-meta">Full-body red-light therapy</div>
+            <div class="act-name">Rebounding</div>
+            <div class="act-meta">Moves your lymph</div>
           </div>
-          <span class="act-freq">20 min</span>
+          <span class="act-freq">≈5 min</span>
         </div>
         <div class="act-row">
           <span class="act-check"></span>
@@ -81,7 +77,11 @@
           <span class="act-freq">3 mg</span>
         </div>
 
-        <button class="bigbtn bigbtn-done" data-activate="j-checkin-activity" style="margin-top:16px">Start</button>
+        <div class="prov j-cprov">
+          <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6 · <a href="journey-plan.html#/j-plan-activities">see your plan</a></span>
+        </div>
+
+        <button class="bigbtn bigbtn-done" data-activate="j-checkin-activity" data-log="reset" style="margin-top:16px">Start check-in</button>
         <a class="bigbtn bigbtn-skip" href="journey.html#/j-01-today" style="text-decoration:none">Not now</a>
 
       </div>
@@ -95,26 +95,26 @@
       <div class="phone-body">
         <div class="j-flow">
 
-          <div class="j-cbar"><div class="j-cbar-fill" style="width:50%"></div></div>
+          <div class="meter lg" style="margin-bottom:8px"><div class="meter-fill" style="width:50%"></div></div>
           <div class="j-step-lbl">Today's check-in · Step 1 of 2</div>
 
           <div class="j-flow-main">
             <div class="j-cicon">R</div>
-            <div class="j-cname">Red Light</div>
+            <div class="j-cname">Rebounding</div>
             <div class="j-cq">Did you do it today?</div>
             <div class="j-cpills">
-              <span class="pill pill-muted">20 min</span>
-              <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Red light supports your mitochondria and recovery — open the 2-minute read.', 'ok')">What is this?</button>
+              <span class="pill pill-muted">≈5 min</span>
+              <a class="btn btn-sm btn-ghost" href="journey.html#/j-03-learn">What is this?</a>
             </div>
-            <div class="j-cnote">Full-body red-light therapy to support your mitochondria and recovery.</div>
+            <div class="j-cnote">Gentle bouncing at home that keeps your lymph moving. About five minutes is plenty.</div>
             <div class="prov j-cprov">
-              <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 14 · <a href="journey-plan.html#/j-plan-activities">see your plan</a></span>
+              <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6 · <a href="journey-plan.html#/j-plan-activities">see your plan</a></span>
             </div>
           </div>
 
           <div class="j-flow-foot">
-            <button class="bigbtn bigbtn-done" data-activate="j-checkin-supplement" onclick="HCOS.toast('Saved: done today. Your plan stays the same.', 'ok')">I did it!</button>
-            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-supplement" onclick="HCOS.toast('Saved: not done today. Your plan stays the same.', 'ok')">Not yet</button>
+            <button class="bigbtn bigbtn-done" data-activate="j-checkin-supplement" data-log="activity" data-answer="done" onclick="HCOS.toast('Saved: done today. Your plan stays the same.', 'ok')">I did it!</button>
+            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-supplement" data-log="activity" data-answer="skip" onclick="HCOS.toast('Saved: not done today. Your plan stays the same.', 'ok')">Not yet</button>
           </div>
 
         </div>
@@ -129,7 +129,7 @@
       <div class="phone-body">
         <div class="j-flow">
 
-          <div class="j-cbar"><div class="j-cbar-fill" style="width:100%"></div></div>
+          <div class="meter lg" style="margin-bottom:8px"><div class="meter-fill" style="width:100%"></div></div>
           <div class="j-step-lbl">Today's check-in · Step 2 of 2</div>
 
           <div class="j-flow-main">
@@ -138,18 +138,19 @@
             <div class="j-cq">Did you take it today?</div>
             <div class="j-cpills">
               <span class="pill pill-muted">400 mg · before bed</span>
-              <span class="clin-state verified">Prescribed</span>
-              <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Magnesium glycinate helps calm your system for sleep — open the 2-minute read.', 'ok')">What is this?</button>
+              <span class="clin-state reconciled">Reconciled</span>
+              <a class="btn btn-sm btn-ghost" href="journey.html#/j-03-learn">What is this?</a>
             </div>
+            <div class="clin-src" style="margin-top:6px">Yours, over the counter — Charlene checked it with you on Jul 14</div>
             <div class="j-cnote">Take about 30 minutes before bed to support sleep.</div>
             <div class="prov j-cprov">
-              <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 14 · <a href="journey-plan.html#/j-plan-supplements">see your plan</a></span>
+              <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 6 · <a href="journey-plan.html#/j-plan-supplements">see your plan</a></span>
             </div>
           </div>
 
           <div class="j-flow-foot">
-            <button class="bigbtn bigbtn-done" data-activate="j-checkin-done" onclick="HCOS.toast('Saved: taken tonight at 8:33 PM. Your plan stays the same.', 'ok')">I took it</button>
-            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-done" onclick="HCOS.toast('Saved: not taken tonight. Your plan stays the same.', 'ok')">Not yet</button>
+            <button class="bigbtn bigbtn-done" data-activate="j-checkin-done" data-log="supplement" data-answer="done" onclick="HCOS.toast('Saved: taken tonight at 8:33 PM. Your plan stays the same.', 'ok')">I took it</button>
+            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-done" data-log="supplement" data-answer="skip" onclick="HCOS.toast('Saved: not taken tonight. Your plan stays the same.', 'ok')">Not yet</button>
             <button class="btn btn-sm j-cmore" data-open-modal="#jcReport">Something was different</button>
           </div>
 
@@ -165,22 +166,24 @@
       <div class="phone-body">
         <div class="celebrate">
 
-          <div class="j-check-ring">✓</div>
-          <h2>Nice work, Maya!</h2>
-          <div class="j-done-pts">+25 points today</div>
+          <div class="celebrate-ring">✓</div>
+          <h2 id="jcHead">Thanks for checking in, Maya</h2>
+          <div class="j-done-pts" id="jcPts">+10 points today</div>
 
           <div class="tiles" style="margin-top:16px">
-            <div class="tile"><div class="tile-num">+25</div><div class="tile-lbl">Points today</div></div>
-            <div class="tile"><div class="tile-num">3</div><div class="tile-lbl">Week streak</div></div>
-            <div class="tile"><div class="tile-num">2 of 3</div><div class="tile-lbl">Done today</div></div>
+            <div class="tile"><div class="tile-num" id="jcPtsTile">+10</div><div class="tile-lbl">Points today</div></div>
+            <a class="tile" href="journey-progress.html" style="text-decoration:none"><div class="tile-num">2</div><div class="tile-lbl">Week streak</div></a>
+            <div class="tile"><div class="tile-num" id="jcDoneTile">0 of 3</div><div class="tile-lbl">Done today</div></div>
           </div>
 
-          <div class="j-done-note">One saved for tonight — we'll remind you to take your LDN, 3 mg, at bedtime.</div>
+          <div class="card" style="margin-top:16px; text-align:left">
+            <div class="field-help" id="jcNote">Still open today: rebounding and your magnesium glycinate, 400 mg — and your LDN, 3 mg, at bedtime. We'll remind you tonight.</div>
+          </div>
           <div class="prov j-cprov">
             <span><strong>Saved</strong> as tonight's check-in against your plan <span class="ver-chip">v4</span> — nothing in your plan changed · <a href="journey-plan.html#/j-plan-supplements">see your plan</a></span>
           </div>
 
-          <a class="bigbtn bigbtn-done" href="journey.html#/j-01-today" style="text-decoration:none; margin-top:18px">Back to Today</a>
+          <a class="bigbtn bigbtn-done" href="journey.html#/j-01-today" style="text-decoration:none; margin-top:18px">Back to today</a>
 
         </div>
       </div>
@@ -250,5 +253,47 @@
 </div>
 
 <script src="assets/hcos.js?v=8"></script>
+<script>
+  // Demo only: the last screen reports back what Maya just answered. Nothing here changes the plan.
+  (function () {
+    var answers = { activity: null, supplement: null };
+
+    function paint() {
+      var doneCount = (answers.activity === 'done' ? 1 : 0) + (answers.supplement === 'done' ? 1 : 0);
+      // Omega-3 and vitamin D3 + K2 were already logged this morning; rebounding 10, magnesium 5.
+      var points = 10 + (answers.activity === 'done' ? 10 : 0) + (answers.supplement === 'done' ? 5 : 0);
+      var head = document.getElementById('jcHead');
+      var ptsLine = document.getElementById('jcPts');
+      var ptsTile = document.getElementById('jcPtsTile');
+      var doneTile = document.getElementById('jcDoneTile');
+      var note = document.getElementById('jcNote');
+      if (head) head.textContent = doneCount ? 'Nice work, Maya!' : 'Thanks for checking in, Maya';
+      if (ptsLine) ptsLine.textContent = '+' + points + ' points today';
+      if (ptsTile) ptsTile.textContent = '+' + points;
+      if (doneTile) doneTile.textContent = doneCount + ' of 3';
+      if (note) {
+        var open = [];
+        if (answers.activity !== 'done') open.push('rebounding');
+        if (answers.supplement !== 'done') open.push('your magnesium glycinate, 400 mg');
+        note.textContent = open.length
+          ? 'Still open today: ' + open.join(' and ') + ' — and your LDN, 3 mg, at bedtime. We\'ll remind you tonight.'
+          : 'One saved for tonight — we\'ll remind you to take your LDN, 3 mg, at bedtime.';
+      }
+    }
+
+    document.addEventListener('click', function (ev) {
+      var btn = ev.target && ev.target.closest ? ev.target.closest('[data-log]') : null;
+      if (!btn) return;
+      var key = btn.getAttribute('data-log');
+      if (key === 'reset') {
+        answers.activity = null;
+        answers.supplement = null;
+      } else {
+        answers[key] = btn.getAttribute('data-answer');
+      }
+      paint();
+    });
+  })();
+</script>
 </body>
 </html>

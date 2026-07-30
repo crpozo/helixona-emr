@@ -72,7 +72,15 @@
               <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Record</th><th>Source</th><th></th></tr>
             </thead>
             <tbody>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77412" data-when="Tuesday, July 21 · 11:38 AM PT"
+                  data-who="Shibani · Admin" data-action="Opened the intake audit view"
+                  data-record="Audit view · intake and onboarding"
+                  data-source="Front office · 10.0.1.14 · session 5c21-b8" data-domain="Intake · onboarding"
+                  data-changes=""
+                  data-prov="the clinic's audit store, filtered to intake and onboarding — reading it is itself an event"
+                  data-note="Reading the audit is recorded exactly like an edit. No one edits or deletes a line, including an admin."
+                  data-open="security.html#/g-01-audit" data-openlabel="Open the enterprise audit">
                 <td class="a-time">11:38 AM</td>
                 <td>Shibani · Admin</td>
                 <td>Opened the intake audit view</td>
@@ -80,7 +88,15 @@
                 <td>Front office · 10.0.1.14</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77408" data-when="Tuesday, July 21 · 11:21 AM PT"
+                  data-who="Marie · New Patient Advisor" data-action="Viewed person record — Maya Reyes · PHI"
+                  data-record="Person · P-004182 · Maya Reyes"
+                  data-source="Front office · 10.0.1.9 · session 3a14-e6" data-domain="Intake · onboarding"
+                  data-changes=""
+                  data-prov="person master P-004182 — the one record Helixona keeps for Maya Reyes"
+                  data-note="Nothing changed. A read is logged the same way an edit is."
+                  data-open="people.html#/pe-02-person" data-openlabel="Open the person record">
                 <td class="a-time">11:21 AM</td>
                 <td>Marie · New Patient Advisor</td>
                 <td>Viewed person record — Maya Reyes <span class="pill pill-muted">PHI</span></td>
@@ -88,15 +104,32 @@
                 <td>Front office · 10.0.1.9</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77401" data-when="Tuesday, July 21 · 10:41 AM PT"
+                  data-who="Charlene (Virtual) · Medical Assistant"
+                  data-action="Suggested medication and allergy changes — Nadia Boulos · pending"
+                  data-record="Questionnaire response · R-4471 · Nadia Boulos"
+                  data-source="Remote · VPN 73.12.x · session 2f77-ab" data-domain="Intake · onboarding"
+                  data-changes="Levothyroxine~50 mcg · verified Mar 16~75 mcg suggested — not active|Sulfa~Not on the allergy list~Sulfa — hives, patient reported|Medication and allergy lists~unchanged~unchanged until a physician or extender verifies"
+                  data-prov="questionnaire response R-4471 — Nadia's onboarding answers, submitted from the portal today at 10:12 AM"
+                  data-note="A suggestion does not change the medication or allergy list. Nothing is clinically active until a physician or extender verifies it."
+                  data-open="clinical-chart.html#/b-06-med-rec" data-openlabel="Open med reconciliation">
                 <td class="a-time">10:41 AM</td>
                 <td>Charlene (Virtual) · MA</td>
                 <td>Suggested medication and allergy changes — Nadia Boulos <span class="appr pending">Pending</span></td>
-                <td class="a-mono"><a href="clinical-questionnaires.html#/b-30-quest-results">R-4455</a></td>
+                <td class="a-mono"><a href="clinical-questionnaires.html#/b-30-quest-results">R-4471</a></td>
                 <td>Remote · VPN 73.12.x</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77396" data-when="Tuesday, July 21 · 10:12 AM PT"
+                  data-who="Haylee · Front Desk" data-action="Merged duplicate into Sofia Ramos — reason recorded"
+                  data-record="Person · P-005702 · Sofia Ramos"
+                  data-source="Front desk · 10.0.1.6 · session 4b1c-77" data-domain="Intake · onboarding"
+                  data-changes="Records~P-005702 and P-004411~One record, P-005702|Both histories~separate~kept on P-005702, nothing deleted|Reason~none~Same phone and date of birth, confirmed with the patient"
+                  data-prov="the duplicate review — P-004411 merged into P-005702, one person, one identity"
+                  data-note="A merge joins histories. It never deletes one, and it never creates a third record."
+                  data-open="people.html#/pe-03-duplicates" data-openlabel="Open duplicate review">
                 <td class="a-time">10:12 AM</td>
                 <td>Haylee · Front Desk</td>
                 <td>Merged duplicate into Sofia Ramos — reason recorded</td>
@@ -104,7 +137,15 @@
                 <td>Front desk · 10.0.1.6</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77388" data-when="Tuesday, July 21 · 9:41 AM PT"
+                  data-who="Marie · New Patient Advisor" data-action="Ran eligibility 270/271 — Daniel Okafor · Anthem"
+                  data-record="Eligibility snapshot · E-2214 · Daniel Okafor"
+                  data-source="Front office · 10.0.1.9 · session 3a14-e6" data-domain="Intake · onboarding"
+                  data-changes="Snapshot~none today~E-2214, received 9:41 AM|Earlier responses~kept~kept — a payer response is never overwritten|Coverage~Anthem Blue Cross · INN~unchanged"
+                  data-prov="eligibility snapshot E-2214 — the 271 response exactly as the payer sent it"
+                  data-note="Each check is its own snapshot. The latest valid one is the one screens read."
+                  data-open="intake.html#/a-11-eligibility" data-openlabel="Open the eligibility check">
                 <td class="a-time">9:41 AM</td>
                 <td>Marie · New Patient Advisor</td>
                 <td>Ran eligibility 270/271 — Daniel Okafor · Anthem</td>
@@ -112,7 +153,15 @@
                 <td>Front office · 10.0.1.9</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77381" data-when="Tuesday, July 21 · 9:14 AM PT"
+                  data-who="Maya Reyes · Patient" data-action="Signed HIPAA consent"
+                  data-record="Consent · C-0771 · Maya Reyes"
+                  data-source="Patient portal · magic link · session 7d90-c1" data-domain="Intake · onboarding"
+                  data-changes="HIPAA consent~not signed~Signed 9:14 AM|Signature evidence~none~kept with the version she signed|Consent document~unchanged~unchanged — the file itself is never rewritten"
+                  data-prov="consent record C-0771 — the signed document and its evidence stay together"
+                  data-note=""
+                  data-open="intake-onboarding.html#/a-22-consents" data-openlabel="Open the consent">
                 <td class="a-time">9:14 AM</td>
                 <td>Maya Reyes · Patient</td>
                 <td>Signed HIPAA consent</td>
@@ -120,15 +169,31 @@
                 <td>Patient portal · magic link</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77374" data-when="Tuesday, July 21 · 8:41 AM PT"
+                  data-who="Yazmin · Front Desk" data-action="Promoted to Scheduled — Marcus Webb"
+                  data-record="Person · P-004633 · Marcus Webb"
+                  data-source="Front desk · 10.0.1.6 · session 4b1c-77" data-domain="Intake · onboarding"
+                  data-changes="Lifecycle~Lead~Scheduled|Person record~P-004633~P-004633 — a status event appended to the same record|Identity~one person~one person, never a second record"
+                  data-prov="person master P-004633 — the record created from his inquiry on Jul 19"
+                  data-note="Lifecycle is a list of events. Promoting someone changes the status, never the identity."
+                  data-open="people.html#/pe-02-person" data-openlabel="Open the person record">
                 <td class="a-time">8:41 AM</td>
                 <td>Yazmin · Front Desk</td>
                 <td>Promoted to Scheduled — Marcus Webb</td>
-                <td class="a-mono"><a href="people.html#/pe-02-person">P-005114</a></td>
+                <td class="a-mono"><a href="people.html#/pe-02-person">P-004633</a></td>
                 <td>Front desk · 10.0.1.6</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77366" data-when="Tuesday, July 21 · 8:20 AM PT"
+                  data-who="Kiosk 1 · Suite lobby" data-action="Checked in — Priya Natarajan"
+                  data-record="Appointment · A-8841 · Priya Natarajan"
+                  data-source="Kiosk · 10.0.1.44" data-domain="Intake · onboarding"
+                  data-changes="Appointment status~Confirmed~Arrived|Appointment~A-8841~A-8841 — the same appointment, no second record|Front desk board~waiting~shows her as Arrived within seconds"
+                  data-prov="the scheduling service — the kiosk moves the appointment it was given, it does not create one"
+                  data-note=""
+                  data-open="intake-kiosk.html#/a-37-kiosk-complete" data-openlabel="Open the kiosk check-in">
                 <td class="a-time">8:20 AM</td>
                 <td>Kiosk 1 · Suite lobby</td>
                 <td>Checked in — Priya Natarajan</td>
@@ -136,7 +201,15 @@
                 <td>Kiosk · 10.0.1.44</td>
                 <td><button class="btn btn-ghost btn-sm" data-open-drawer="#a-audit-drawer">View</button></td>
               </tr>
-              <tr class="row-click" data-open-drawer="#a-audit-drawer">
+              <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
+                  data-ev="AE-77359" data-when="Tuesday, July 21 · 7:58 AM PT"
+                  data-who="Karina · Operations Manager" data-action="Sent onboarding packet — Tom Alvarez"
+                  data-record="Person · P-004990 · Tom Alvarez"
+                  data-source="Billing · 10.0.1.31 · session 6d10-e2" data-domain="Intake · onboarding"
+                  data-changes="Packet~not sent~Sent — New patient · PPO OON|Message~none~SMS from template onboard.welcome.v3|Reminder~none~queued for 24 h if the packet is still incomplete"
+                  data-prov="the onboarding packet sent on P-004990 — the message and its template are their own event"
+                  data-note=""
+                  data-open="intake.html#/a-10-packet" data-openlabel="Open the packet">
                 <td class="a-time">7:58 AM</td>
                 <td>Karina · Operations Manager</td>
                 <td>Sent onboarding packet — Tom Alvarez</td>
@@ -155,19 +228,20 @@
         <div class="ai-block">
           <div class="ai-head">
             <span class="ai-badge">Detected by HCOS</span>
-            <span class="ai-state suggested">Suggestion</span>
+            <span class="ai-state suggested">Needs a human</span>
           </div>
-          <div class="ai-body">Unusual access pattern: 14 person records opened from one remote session between 10:32 and 10:38, none with an appointment today.</div>
+          <div class="ai-body">Charlene (Virtual) opened 14 charts from a new remote address between 9:02 and 9:11 AM. Eleven of those patients have no visit or task with her today.</div>
           <div class="ai-meta">
-            <span><b>Read</b> 214 intake audit events, 10:00–11:40</span>
-            <span><b>Model</b> access-watch v1.3</span>
-            <span><b>Confidence</b> 0.71 — also fits a bulk packet run</span>
+            <span><b>Read</b> the audit store · Jul 21, 8:00–11:40 AM</span>
+            <span><b>Model</b> access-anomaly v1.3</span>
+            <span><b>Confidence</b> 0.72 — pattern only, no intent</span>
             <span><b>Reviewer</b> Shibani · Admin</span>
+            <span><b>Raised in</b> the enterprise audit — the same alert, shown here with the lines that are intake's</span>
             <span><b>Cannot</b> change, hide or add an event</span>
           </div>
           <div class="ai-actions">
             <a class="btn btn-sm btn-primary" href="security.html#/g-01-audit">Investigate in the enterprise audit</a>
-            <button class="btn btn-sm" onclick="HCOS.toast('Closed as expected — Karina was running the packet batch. Your name and reason are on the alert, the events are untouched.', 'ok')">Expected — close the alert</button>
+            <button class="btn btn-sm" data-open-modal="#a-alert-close">Mark not unusual</button>
           </div>
         </div>
 
@@ -213,13 +287,14 @@
 
           <div>
             <div class="seg-divider" style="margin-top:0">Editing: <span id="a-tmpl-title">New patient · PPO INN</span></div>
+            <div class="field-help" id="a-tmpl-meta" style="margin:0 0 8px">8 items · 12 min average</div>
 
             <div class="tbl-wrap">
               <table class="tbl">
                 <thead>
                   <tr><th>Step</th><th>Item</th><th>Required</th><th>Channel</th><th></th></tr>
                 </thead>
-                <tbody>
+                <tbody id="a-tmpl-items">
                   <tr>
                     <td>1</td><td>Demographics and emergency contact</td>
                     <td><span class="pill pill-muted">Required</span></td><td>Portal</td>
@@ -278,18 +353,31 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="a-44-notifications" data-title="Notifications">
+  <section class="screen" id="a-44-notifications" data-title="Messaging rules">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/intake/admin/notifications</span></div>
+        <span class="frame-url">hcos.helixona.com/settings/messaging-rules?domain=intake,onboarding</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Notifications</h2>
-        <p class="page-sub">Which events trigger which messages, on which channels — every message is templated and audited.</p>
 
-        <div class="filters">
-          <span class="field-help" style="margin:0">7 rules active</span>
-          <button class="btn btn-sm" style="margin-left:auto" data-activate="a-43-template-editor">Manage message templates</button>
-          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('New rule started — pick a trigger, audience, and channel.', 'ok')">New rule</button>
+        <div class="app-header">
+          <div>
+            <div class="page-title">Messaging rules — intake and onboarding</div>
+            <div class="page-sub">Which intake event sends which message, to whom, on which channel.</div>
+          </div>
+          <div class="app-user">
+            <span class="ver-chip">Rule set v9</span>
+            <span class="appr approved">Approved</span>
+            <a class="btn" href="schedule-rules.html#/lr-03-reminders">Open all messaging rules</a>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>From</strong> the clinic's messaging rules, filtered to <code>domain = intake, onboarding</code> · approved Jul 9 by Shibani · Admin · intake keeps no rules of its own · <a href="schedule-rules.html#/lr-03-reminders">every domain</a></span>
+        </div>
+
+        <div class="filters" style="margin-top:14px">
+          <span class="field-help" style="margin:0">6 of 23 rules · triggered by intake and onboarding events</span>
+          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('New rule started in the clinic rule set — pick an intake trigger, audience, channel and template. It goes into v10 draft; v9 stays in force.', 'ok')">New rule</button>
         </div>
 
         <div class="tbl-wrap">
@@ -302,63 +390,61 @@
                 <td>Onboarding packet sent</td>
                 <td>Patient</td>
                 <td><span class="pill pill-muted">SMS</span></td>
-                <td class="a-mono">onboard.welcome.v3</td>
+                <td class="a-mono">onboard.welcome <span class="ver-chip">v3</span></td>
                 <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened — edit trigger, audience, channel, and template.')">Edit</button></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened — trigger, audience, channel and the template version it sends. Changes go into v10 draft.')">Edit</button></td>
               </tr>
               <tr>
-                <td>Reminder · 24 h after send, still incomplete</td>
+                <td>Onboarding packet still incomplete · 24 h after it was sent</td>
                 <td>Patient</td>
                 <td><span class="pill pill-muted">SMS</span></td>
-                <td class="a-mono">onboard.reminder.24h.v2</td>
+                <td class="a-mono">onboard.reminder.24h <span class="ver-chip">v2</span></td>
                 <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
-              </tr>
-              <tr>
-                <td>Appointment confirmation</td>
-                <td>Patient</td>
-                <td><span class="pill pill-muted">SMS + Email</span></td>
-                <td class="a-mono">appt.confirm.v4</td>
-                <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened. Changes go into v10 draft; v9 stays in force.')">Edit</button></td>
               </tr>
               <tr>
                 <td>Eligibility check failed</td>
                 <td>Marie</td>
                 <td><span class="pill pill-muted">In-app</span></td>
-                <td class="a-mono">elig.fail.alert.v1</td>
+                <td class="a-mono">elig.fail.alert <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened. Changes go into v10 draft; v9 stays in force.')">Edit</button></td>
               </tr>
               <tr>
                 <td>Patient checked in</td>
                 <td>Charlene, Dr. Drannikov</td>
                 <td><span class="pill pill-muted">In-app + desktop</span></td>
-                <td class="a-mono">checkin.notify.v2</td>
+                <td class="a-mono">checkin.notify <span class="ver-chip">v2</span></td>
                 <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened. Changes go into v10 draft; v9 stays in force.')">Edit</button></td>
               </tr>
               <tr>
-                <td>Kiosk offline alert</td>
+                <td>Kiosk offline</td>
                 <td>Yazmin, Shibani</td>
                 <td><span class="pill pill-muted">SMS + In-app</span></td>
-                <td class="a-mono">kiosk.offline.v1</td>
+                <td class="a-mono">kiosk.offline <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened. Changes go into v10 draft; v9 stays in force.')">Edit</button></td>
               </tr>
               <tr>
                 <td>Pre-visit chart ready for provider</td>
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-muted">In-app</span></td>
-                <td class="a-mono">previsit.ready.v1</td>
+                <td class="a-mono">previsit.ready <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-ok">On</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened.')">Edit</button></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Rule opened. Changes go into v10 draft; v9 stays in force.')">Edit</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout callout-warn" style="margin-top:14px">The kiosk offline alert is the fix for today's silent failure — when a kiosk drops offline, Yazmin and Shibani are paged instead of finding out from a stranded patient.</div>
+        <div class="field-help" style="margin-top:8px">A template is written and versioned once and read by every rule that sends it — editing one changes it everywhere from the next version on. Every send is an event in the <a href="#/a-42-audit-log" data-activate="a-42-audit-log">audit store</a>.</div>
+
+        <div class="callout" style="margin-top:14px">Appointment reminders and confirmations are not intake rules. They are set once per appointment type — 7 d, 2 d and 2 h before a new patient consult, 24 h before an infusion — and a patient's “C” reply confirms the appointment on the calendar.
+          <a href="schedule-rules.html#/lr-03-reminders">Open appointment reminders</a> ·
+          <a href="communication.html#/e-01-inbox">see the messages that went out</a>.</div>
+
+        <div class="callout callout-warn" style="margin-top:14px">The kiosk offline rule is the fix for today's silent failure — when a kiosk drops offline, Yazmin and Shibani are paged instead of finding out from a stranded patient.</div>
       </div>
     </div>
   </section>
@@ -501,7 +587,7 @@
           </div>
           <div class="app-user">
             <a class="btn" href="intake-funnel.html#/a-02-inquiry">Preview as patient</a>
-            <button class="btn btn-primary" onclick="HCOS.toast('Version 5 published. The 812 answers already given stay on version 4 — no response is rewritten.', 'ok')">Publish version 5</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Version 5 published — Dr. Drannikov approved its clinical content first. The 812 answers already given stay on version 4; no response is rewritten.', 'ok')">Publish version 5</button>
           </div>
         </div>
 
@@ -514,7 +600,7 @@
         </div>
 
         <div class="prov">
-          <span><strong>Definition</strong> <code>F-014 v5</code> · audience Public inquiry · trigger Landing page · answers valid 12 months · published by Shibani, clinical content approved by Dr. Drannikov</span>
+          <span><strong>Definition</strong> <code>F-014</code> <span class="ver-chip">v5</span> <span class="appr draft">Draft</span> · drafted by Shibani · audience Public inquiry · trigger Landing page · answers valid 12 months · <span class="ver-chip">v4</span> is the version in force — published by Shibani Jun 2, clinical content approved by Dr. Drannikov</span>
         </div>
 
         <div class="fb-shell">
@@ -535,35 +621,51 @@
 
           <div class="fb-canvas">
             <div class="seg-divider" style="margin-top:0">Initial inquiry form</div>
-            <div class="fb-question selected" onclick="aPickQ(this)" data-q="Full name">
+            <div class="fb-question selected" onclick="aPickQ(this)" data-q="Full name"
+                 data-type="Short answer" data-dest="Person master · legal name" data-req="1"
+                 data-qid="QB-101" data-forms="in 3 forms">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Full name <span class="pill pill-muted">Required</span></div>
               <div class="field-help" style="margin-top:2px">Short answer · <span class="a-mono">QB-101</span> · goes to Person master, after a duplicate search</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="Phone">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Phone"
+                 data-type="Short answer" data-dest="Person master · contact details" data-req="1"
+                 data-qid="QB-102" data-forms="in 4 forms">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Phone <span class="pill pill-muted">Required</span></div>
               <div class="field-help" style="margin-top:2px">Short answer · <span class="a-mono">QB-102</span> · goes to Person master · matches returning people</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="Email">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Email"
+                 data-type="Short answer" data-dest="Person master · contact details" data-req="0"
+                 data-qid="QB-103" data-forms="in 4 forms">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Email <span class="pill pill-warn">Optional</span></div>
               <div class="field-help" style="margin-top:2px">Short answer · <span class="a-mono">QB-103</span> · goes to Person master</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="What brings you to Helixona?">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="What brings you to Helixona?"
+                 data-type="Short answer" data-dest="Encounter · reason for visit (draft)" data-req="1"
+                 data-qid="QB-110" data-forms="in 2 forms">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">What brings you to Helixona? <span class="pill pill-muted">Required</span></div>
               <div class="field-help" style="margin-top:2px">Short answer · <span class="a-mono">QB-110</span> · drafts the reason for visit — not a diagnosis</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="Which services interest you?">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Which services interest you?"
+                 data-type="Multiple choice" data-dest="Response only — no destination" data-req="1"
+                 data-qid="QB-120" data-forms="in this form only">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Which services interest you? <span class="pill pill-muted">Required</span></div>
-              <div class="field-help" style="margin-top:2px">Multiple choice · NAD+, IV vitamin C, Myers' cocktail, glutathione, detox program</div>
+              <div class="field-help" style="margin-top:2px">Multiple choice · <span class="a-mono">QB-120</span> · NAD+, IV vitamin C, Myers' cocktail, glutathione, detox program · stays on the response, books nothing</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="Do you have insurance you'd like us to check?">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Do you have insurance you'd like us to check?"
+                 data-type="Yes / No" data-dest="Coverage · payer (draft)" data-req="0"
+                 data-qid="QB-130" data-forms="in 2 forms">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Do you have insurance you'd like us to check? <span class="pill pill-warn">Optional</span></div>
-              <div class="field-help" style="margin-top:2px">Yes / No · a Yes reveals the payer and member ID fields · drafts coverage, runs no eligibility</div>
+              <div class="field-help" style="margin-top:2px">Yes / No · <span class="a-mono">QB-130</span> · a Yes reveals the payer and member ID fields · drafts coverage, runs no eligibility</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="How did you hear about us?">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="How did you hear about us?"
+                 data-type="Multiple choice" data-dest="Person master · source" data-req="0"
+                 data-qid="QB-140" data-forms="in this form only">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">How did you hear about us? <span class="pill pill-warn">Optional</span></div>
-              <div class="field-help" style="margin-top:2px">Multiple choice · goes to the person's source</div>
+              <div class="field-help" style="margin-top:2px">Multiple choice · <span class="a-mono">QB-140</span> · goes to the person's source</div>
             </div>
-            <div class="fb-question" onclick="aPickQ(this)" data-q="Okay to text and email you?">
+            <div class="fb-question" onclick="aPickQ(this)" data-q="Okay to text and email you?"
+                 data-type="Yes / No" data-dest="Contact consent record" data-req="1"
+                 data-qid="QB-115" data-forms="in 5 forms">
               <div style="font-size:13px;font-weight:600;color:var(--hx-navy)">Okay to text and email you? <span class="pill pill-muted">Required</span></div>
               <div class="field-help" style="margin-top:2px">Yes / No · <span class="a-mono">QB-115</span> · writes a contact consent record</div>
             </div>
@@ -577,7 +679,7 @@
             </div>
             <div class="field">
               <label class="field-label">Type</label>
-              <select class="field-select">
+              <select class="field-select" id="a-insp-type">
                 <option selected>Short answer</option>
                 <option>Multiple choice</option>
                 <option>Scale 1–10</option>
@@ -592,10 +694,13 @@
             </div>
             <div class="field">
               <label class="field-label">Where the answer goes</label>
-              <select class="field-select">
+              <select class="field-select" id="a-insp-dest">
                 <option selected>Person master · legal name</option>
+                <option>Person master · contact details</option>
+                <option>Person master · source</option>
                 <option>Encounter · reason for visit (draft)</option>
                 <option>Coverage · payer (draft)</option>
+                <option>Contact consent record</option>
                 <option>Medication list · patient-reported</option>
                 <option>Allergy list · patient-reported</option>
                 <option>Readiness input</option>
@@ -614,7 +719,7 @@
             </div>
             <ul class="check-list" style="margin:10px 0">
               <li class="check-item">
-                <span class="check-icon done">✓</span>
+                <span class="check-icon done" id="a-insp-req">✓</span>
                 <span class="check-label">Required</span>
               </li>
               <li class="check-item">
@@ -624,7 +729,7 @@
               </li>
             </ul>
             <div class="field-help">Logic lets a Yes on the insurance question reveal the payer and member ID fields.</div>
-            <div class="prov"><span><strong>Question</strong> <code>QB-101</code> · in 3 forms · edits apply from <span class="ver-chip">v5</span> on</span></div>
+            <div class="prov"><span id="a-insp-prov"><strong>Question</strong> <code>QB-101</code> · in 3 forms · edits apply from <span class="ver-chip">v5</span> on</span></div>
             <button class="btn btn-primary btn-sm" style="margin-top:6px;width:100%" onclick="HCOS.toast('Saved to version 5 draft. Answers already given keep the question they were asked.', 'ok')">Save question</button>
           </div>
         </div>
@@ -689,40 +794,42 @@
   <div class="drawer-head">
     <div>
       <div class="modal-title">Audit event</div>
-      <div class="modal-sub">Event <span class="a-mono">AE-77401</span> · append-only</div>
+      <div class="modal-sub">Event <span class="a-mono" id="a-ev-id">AE-77401</span> · appended once, never edited</div>
     </div>
     <button class="modal-close" data-close-drawer="#a-audit-drawer">×</button>
   </div>
   <div class="drawer-body">
     <dl class="kv">
-      <dt>Timestamp</dt><dd>Tuesday, July 21 · 10:41 AM PT</dd>
-      <dt>User</dt><dd>Charlene (Virtual) · Medical Assistant</dd>
-      <dt>Action</dt><dd>Suggested changes to the medication and allergy lists <span class="appr pending">Pending</span></dd>
-      <dt>Person</dt><dd>Nadia Boulos · <a href="people.html#/pe-02-person">P-004471</a></dd>
-      <dt>Source</dt><dd>Remote · VPN 73.12.x · session 8f2k-a19</dd>
-      <dt>Domain</dt><dd>Intake · onboarding</dd>
+      <dt>Timestamp</dt><dd id="a-ev-when">Tuesday, July 21 · 10:41 AM PT</dd>
+      <dt>User</dt><dd id="a-ev-who">Charlene (Virtual) · Medical Assistant</dd>
+      <dt>Action</dt><dd id="a-ev-action">Suggested medication and allergy changes — Nadia Boulos · pending</dd>
+      <dt>Record</dt><dd id="a-ev-record">Questionnaire response · R-4471 · Nadia Boulos</dd>
+      <dt>Source</dt><dd id="a-ev-source">Remote · VPN 73.12.x · session 2f77-ab</dd>
+      <dt>Domain</dt><dd id="a-ev-domain">Intake · onboarding</dd>
     </dl>
 
     <div class="prov">
-      <span><strong>From</strong> questionnaire response <code>R-4455</code> · onboarding medical history, answered Jul 20 · <a href="clinical-questionnaires.html#/b-30-quest-results">open the response</a></span>
+      <span id="a-ev-prov"><strong>From</strong> questionnaire response R-4471 — Nadia's onboarding answers, submitted from the portal today at 10:12 AM</span>
     </div>
 
-    <div class="seg-divider">What was suggested</div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr><th>List item</th><th>On the list now</th><th>Suggested</th><th>State</th></tr></thead>
-        <tbody>
-          <tr><td>Levothyroxine</td><td>50 mcg · verified Mar 16</td><td>75 mcg</td><td><span class="clin-state reconciled">Reconciled</span></td></tr>
-          <tr><td>Sulfa</td><td>Not on the list</td><td>Sulfa — hives</td><td><span class="clin-state reported">Reported</span></td></tr>
-        </tbody>
-      </table>
+    <div class="seg-divider">What changed</div>
+    <div id="a-ev-changes">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead>
+          <tbody>
+            <tr><td>Levothyroxine</td><td>50 mcg · verified Mar 16</td><td>75 mcg suggested — not active</td></tr>
+            <tr><td>Sulfa</td><td>Not on the allergy list</td><td>Sulfa — hives, patient reported</td></tr>
+            <tr><td>Medication and allergy lists</td><td>unchanged</td><td>unchanged until a physician or extender verifies</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="clin-src" style="margin-top:6px">Patient reported · Nadia Boulos · Jul 20 · reconciled by Charlene · waiting on Dr. Drannikov to verify</div>
 
-    <div class="callout" style="margin-top:14px">A suggestion does not change the medication or allergy list. Nothing is clinically active until a physician or extender verifies it.</div>
+    <div class="callout" style="margin-top:14px" id="a-ev-note">A suggestion does not change the medication or allergy list. Nothing is clinically active until a physician or extender verifies it.</div>
 
     <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-      <a class="btn" href="clinical-chart.html#/b-06-med-rec">Open med reconciliation</a>
+      <a class="btn" id="a-ev-open" href="clinical-chart.html#/b-06-med-rec">Open med reconciliation</a>
       <a class="btn btn-ghost" href="security.html#/g-01-audit">See this event in the enterprise audit</a>
       <button class="btn btn-ghost" data-close-drawer="#a-audit-drawer">Close</button>
     </div>
@@ -744,7 +851,7 @@
       <table class="tbl">
         <thead><tr><th>Version</th><th>State</th><th>Effective</th><th>Responses</th><th>Published by</th></tr></thead>
         <tbody>
-          <tr><td><span class="ver-chip">v5</span></td><td><span class="appr draft">Draft</span></td><td>—</td><td>0</td><td>Shibani</td></tr>
+          <tr><td><span class="ver-chip">v5</span></td><td><span class="appr draft">Draft</span></td><td>—</td><td>0</td><td>— · drafted by Shibani</td></tr>
           <tr><td><span class="ver-chip">v4</span></td><td><span class="appr approved">Approved</span></td><td>Jun 2, 2026</td><td>812</td><td>Shibani · content Dr. Drannikov</td></tr>
           <tr><td><span class="ver-chip superseded">v3</span></td><td><span class="appr superseded">Superseded</span></td><td>Feb 10 – Jun 1, 2026</td><td>1,447</td><td>Shibani</td></tr>
         </tbody>
@@ -756,6 +863,34 @@
     <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
       <button class="btn btn-primary" onclick="HCOS.toast('Version 5 published. Version 4 becomes superseded; its 812 responses are untouched.', 'ok')">Publish version 5</button>
       <button class="btn btn-ghost" data-close-drawer="#a-form-versions">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- page-local modal: dispose of an access alert, with a reason -->
+<div class="modal-overlay" id="a-alert-close">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Mark this alert not unusual</div>
+        <div class="modal-sub">Your name and your reason are appended to the alert — the events themselves never change</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <dl class="kv">
+        <dt>Alert</dt><dd>14 charts opened from a new remote address, 9:02–9:11 AM</dd>
+        <dt>Reviewer</dt><dd>Shibani · Admin</dd>
+      </dl>
+      <div class="field">
+        <label class="field-label">Why this access is expected</label>
+        <textarea class="field-textarea" rows="3">Charlene runs the remote pre-visit sweep every morning for the next day's patients. The new address is her replacement laptop, confirmed with her by phone at 11:30.</textarea>
+      </div>
+      <div class="field-help">A disposition without a reason is not recorded — the alert stays open until one is given.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Recorded as not unusual, with your name and your reason. The alert and your decision are appended — no event changed.', 'ok')">Record the reason and close the alert</button>
     </div>
   </div>
 </div>
@@ -814,23 +949,174 @@
     chip.classList.add('active');
   });
 
-  // Demo only: template list selection feeds the editing header.
+  function aEsc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Demo only: each onboarding template carries its own item list.
+  var A_TMPL = {
+    'New patient · PPO INN': {
+      meta: '8 items · 12 min average',
+      items: [
+        ['Demographics and emergency contact', 1, 'Portal'],
+        ['Medical history questionnaire', 1, 'Portal'],
+        ['Reason for visit', 1, 'Portal'],
+        ['HIPAA, treatment, and financial consents', 1, 'Portal / Kiosk'],
+        ['ID upload — driver license or passport', 1, 'Portal / Kiosk'],
+        ['Insurance card upload', 1, 'Portal / Kiosk'],
+        ['Pharmacy and supplement preferences', 0, 'Portal'],
+        ['Photo / video consent', 0, 'Portal']
+      ]
+    },
+    'New patient · PPO OON': {
+      meta: '9 items · 15 min average · adds the SPD / EOC request',
+      items: [
+        ['Demographics and emergency contact', 1, 'Portal'],
+        ['Medical history questionnaire', 1, 'Portal'],
+        ['Reason for visit', 1, 'Portal'],
+        ['HIPAA, treatment, and financial consents', 1, 'Portal / Kiosk'],
+        ['ID upload — driver license or passport', 1, 'Portal / Kiosk'],
+        ['Insurance card upload', 1, 'Portal / Kiosk'],
+        ['Plan document — SPD or EOC, asked for before the visit', 1, 'Portal'],
+        ['Pharmacy and supplement preferences', 0, 'Portal'],
+        ['Photo / video consent', 0, 'Portal']
+      ]
+    },
+    'Returning patient': {
+      meta: '4 items · 4 min average',
+      items: [
+        ['Confirm demographics and contact details', 1, 'Portal / Kiosk'],
+        ['What has changed since the last visit', 1, 'Portal'],
+        ['Medication, supplement and allergy update', 1, 'Portal'],
+        ['Consents — only the ones that expired', 0, 'Portal / Kiosk']
+      ]
+    },
+    'IV infusion only': {
+      meta: '6 items · 8 min average',
+      items: [
+        ['Demographics and emergency contact', 1, 'Portal'],
+        ['Medication, supplement and allergy list', 1, 'Portal'],
+        ['Infusion safety questions — pregnancy, G6PD, kidney history', 1, 'Portal'],
+        ['HIPAA, treatment, and financial consents', 1, 'Portal / Kiosk'],
+        ['ID upload — driver license or passport', 1, 'Portal / Kiosk'],
+        ['Payment method on file', 1, 'Portal']
+      ]
+    },
+    'Self-pay walk-in': {
+      meta: '5 items · 6 min average',
+      items: [
+        ['Demographics and emergency contact', 1, 'Kiosk'],
+        ['Reason for visit', 1, 'Kiosk'],
+        ['Medication, supplement and allergy list', 1, 'Kiosk'],
+        ['HIPAA, treatment, and financial consents', 1, 'Kiosk'],
+        ['Payment method on file', 1, 'Kiosk']
+      ]
+    }
+  };
+
+  // Demo only: template list selection swaps the items being edited.
   function aPickTmpl(card) {
     var cards = document.querySelectorAll('.a-tmpl-card');
     for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
     card.classList.add('selected');
+    var name = card.getAttribute('data-tmpl');
     var title = document.getElementById('a-tmpl-title');
-    if (title) title.textContent = card.getAttribute('data-tmpl');
+    if (title) title.textContent = name;
+    var tmpl = A_TMPL[name];
+    if (!tmpl) return;
+    var meta = document.getElementById('a-tmpl-meta');
+    if (meta) meta.textContent = tmpl.meta;
+    var body = document.getElementById('a-tmpl-items');
+    if (!body) return;
+    var html = '';
+    for (var j = 0; j < tmpl.items.length; j++) {
+      var it = tmpl.items[j];
+      html += '<tr><td>' + (j + 1) + '</td><td>' + aEsc(it[0]) + '</td>' +
+        '<td>' + (it[1] ? '<span class="pill pill-muted">Required</span>' : 'Optional') + '</td>' +
+        '<td>' + aEsc(it[2]) + '</td>' +
+        '<td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast(\'Item settings opened — edit label, help text, and channel.\')">Edit</button></td></tr>';
+    }
+    body.innerHTML = html;
   }
 
-  // Demo only: form-builder question selection feeds the inspector label.
+  // Demo only: question selection fills the whole inspector, not just the label.
+  function aSelect(sel, value) {
+    if (!sel || !value) return;
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].textContent === value) { sel.selectedIndex = i; return; }
+    }
+  }
+
   function aPickQ(q) {
     var qs = document.querySelectorAll('.fb-question');
     for (var i = 0; i < qs.length; i++) qs[i].classList.remove('selected');
     q.classList.add('selected');
     var label = document.getElementById('a-insp-label');
     if (label) label.value = q.getAttribute('data-q');
+    aSelect(document.getElementById('a-insp-type'), q.getAttribute('data-type'));
+    aSelect(document.getElementById('a-insp-dest'), q.getAttribute('data-dest'));
+    var req = document.getElementById('a-insp-req');
+    if (req) {
+      var on = q.getAttribute('data-req') === '1';
+      req.className = 'check-icon ' + (on ? 'done' : 'pending');
+      req.textContent = on ? '✓' : '';
+    }
+    var prov = document.getElementById('a-insp-prov');
+    if (prov) {
+      prov.innerHTML = '<strong>Question</strong> <code>' + aEsc(q.getAttribute('data-qid')) + '</code> · ' +
+        aEsc(q.getAttribute('data-forms')) + ' · edits apply from <span class="ver-chip">v5</span> on';
+    }
   }
+
+  // Demo only: every audit line opens as itself — actor, action, record, before/after.
+  (function () {
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#a-42-audit-log tr.a-ev'));
+    var openLink = document.getElementById('a-ev-open');
+    var changesBox = document.getElementById('a-ev-changes');
+    var noteBox = document.getElementById('a-ev-note');
+    var provBox = document.getElementById('a-ev-prov');
+    var fields = ['id', 'when', 'who', 'action', 'record', 'source', 'domain'];
+
+    function renderChanges(raw) {
+      if (!raw) {
+        return '<div class="callout">Nothing changed — this line records a read. Opening a person record is recorded the same way an edit is.</div>';
+      }
+      var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead><tbody>';
+      raw.split('|').forEach(function (part) {
+        var bits = part.split('~');
+        html += '<tr><td>' + aEsc(bits[0] || '') + '</td><td>' + aEsc(bits[1] || '—') + '</td><td>' + aEsc(bits[2] || '—') + '</td></tr>';
+      });
+      return html + '</tbody></table></div>';
+    }
+
+    rows.forEach(function (row) {
+      row.addEventListener('click', function () {
+        fields.forEach(function (f) {
+          var slot = document.getElementById('a-ev-' + f);
+          if (slot) slot.textContent = row.getAttribute('data-' + (f === 'id' ? 'ev' : f)) || '—';
+        });
+        if (provBox) {
+          provBox.innerHTML = '<strong>From</strong> ' + aEsc(row.getAttribute('data-prov') || 'the clinic\'s audit store');
+        }
+        if (changesBox) changesBox.innerHTML = renderChanges(row.getAttribute('data-changes'));
+        if (noteBox) {
+          var note = row.getAttribute('data-note') || '';
+          noteBox.textContent = note;
+          noteBox.style.display = note ? '' : 'none';
+        }
+        if (openLink) {
+          var href = row.getAttribute('data-open');
+          if (href) {
+            openLink.setAttribute('href', href);
+            openLink.textContent = row.getAttribute('data-openlabel') || 'Open the record';
+            openLink.style.display = '';
+          } else {
+            openLink.style.display = 'none';
+          }
+        }
+      });
+    });
+  })();
 </script>
 </body>
 </html>
