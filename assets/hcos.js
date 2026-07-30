@@ -38,7 +38,7 @@
     { name: 'Caregiver access', href: 'caregiver.html', page: 'caregiver' },
     { group: 'Practice' },
     { name: 'Pricing & memberships', href: 'pricing.html', page: 'pricing' },
-    { name: 'Reports', href: 'reporting.html', page: 'reporting' },
+    { name: 'Dashboards', href: 'reporting.html', page: 'reporting' },
     { name: 'Security & audit', href: 'security.html', page: 'security' }
   ];
 
