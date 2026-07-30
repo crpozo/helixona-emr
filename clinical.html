@@ -181,16 +181,21 @@
             <div class="b-enc-name">Grace Lindqvist · 44 · she/her</div>
             <div class="b-enc-sub">MRN 2071 · Self-pay <span class="net-badge net-self">SELF</span> · encounter ENC-2026-07211 · follow-up · 30 min · today 11:15 AM</div>
           </div>
-          <a class="btn" href="clinical-chart.html">Open full chart</a>
+          <a class="btn" href="clinical-chart.html#/b-04-timeline">Open full chart</a>
           <button class="btn btn-primary" data-activate="b-03-soap">Open SOAP note</button>
         </div>
 
         <div class="b-encbar">
-          <div><span class="pill pill-navy">In progress</span> Started 11:15 AM · auto-saved 22 seconds ago</div>
+          <div><span class="appr draft">Draft</span> <span class="pill pill-navy">In progress</span> Started 11:15 AM · auto-saved 22 seconds ago</div>
           <div class="b-encbar-actions">
-            <a class="btn btn-sm" href="clinical-remote.html">Pre-chart by Charlene</a>
+            <a class="btn btn-sm" href="clinical-remote.html#/b-19-precharting">Pre-chart by Charlene</a>
             <button class="btn btn-sm btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
           </div>
+        </div>
+
+        <div class="prov">
+          <span>Everything below is <strong>read from the chart</strong>, current as of 11:37 AM. Change it where it lives.</span>
+          <span><strong>Writes</strong> HCOS · eCW receives a read-only sync for documentation</span>
         </div>
 
         <div class="b-vitals">
@@ -203,6 +208,10 @@
           <div class="b-vital"><div class="b-vital-lbl">Fatigue</div><div class="b-vital-val">5 / 10</div></div>
         </div>
 
+        <div class="prov" style="margin-top:-8px;margin-bottom:14px">
+          <span><strong>From</strong> today's rooming · Charlene · 11:19 AM · <a href="clinical-remote.html#/b-19-precharting">pre-chart</a></span>
+        </div>
+
         <div class="grid-sidebar">
           <div>
             <div class="card" style="margin-bottom:16px">
@@ -210,7 +219,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>Status</th><th></th></tr>
+                    <tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>Status</th><th>State</th></tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -218,31 +227,35 @@
                       <td><span class="b-code">E06.3</span></td>
                       <td>2019</td>
                       <td><span class="pill pill-warn">Active</span></td>
-                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                      <td><span class="clin-state verified">Verified</span><div class="clin-src">Dr. Drannikov · 2019</div></td>
                     </tr>
                     <tr>
                       <td>Generalized fatigue · worse after exertion</td>
                       <td><span class="b-code">R53.83</span></td>
                       <td>Chronic</td>
                       <td><span class="pill pill-warn">Active</span></td>
-                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                      <td><span class="clin-state verified">Verified</span><div class="clin-src">Dr. Drannikov · Mar 16</div></td>
                     </tr>
                     <tr>
                       <td>Cognitive complaints · morning brain fog</td>
                       <td><span class="b-code">R41.840</span></td>
-                      <td>2024</td>
-                      <td><span class="pill pill-warn">Active</span></td>
-                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                      <td>Reported 2024</td>
+                      <td><span class="pill pill-muted">Not a diagnosis yet</span></td>
+                      <td><span class="clin-state reported">Reported</span><div class="clin-src">Grace · intake questionnaire Mar 12</div></td>
                     </tr>
                     <tr>
                       <td>Vitamin D deficiency</td>
                       <td><span class="b-code">E55.9</span></td>
                       <td>2025</td>
                       <td><span class="pill pill-warn">Active</span></td>
-                      <td><button class="btn btn-ghost btn-sm" data-activate="b-08-assessment">Edit</button></td>
+                      <td><span class="clin-state reconciled">Reconciled</span><div class="clin-src">Charlene · Jul 20 · awaiting provider</div></td>
                     </tr>
                   </tbody>
                 </table>
+              </div>
+              <div class="prov">
+                <span><strong>From</strong> the problem list · longitudinal, one per patient</span>
+                <span><a href="clinical-chart.html#/b-05-problem-list">Open the problem list</a></span>
               </div>
             </div>
 
@@ -251,19 +264,45 @@
             <div class="grid-2" style="margin-top:16px">
               <div class="card">
                 <div class="card-title">Medications (3)</div>
-                <div style="font-size:12.5px;line-height:1.9">
-                  <div>Levothyroxine 75 mcg PO daily</div>
-                  <div>Magnesium glycinate 400 mg PRN</div>
-                  <div>Vitamin D3 5,000 IU daily</div>
+                <div style="font-size:12.5px;line-height:1.6">
+                  <div style="margin-bottom:8px">Levothyroxine 75 mcg PO daily <span class="clin-state verified">Verified</span>
+                    <div class="clin-src">Prescribed · Dr. Drannikov · Jun 9</div></div>
+                  <div style="margin-bottom:8px">Magnesium glycinate 400 mg PRN <span class="clin-state reported">Reported</span>
+                    <div class="clin-src">Grace's own bottle · intake Mar 12</div></div>
+                  <div>Vitamin D3 5,000 IU daily <span class="clin-state reconciled">Reconciled</span>
+                    <div class="clin-src">Checked by Charlene · Jul 20</div></div>
                 </div>
-                <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html">Reconcile in chart</a>
+                <div class="prov"><span>One list. The MA reconciles, the provider verifies.</span></div>
+                <a class="btn btn-sm" href="clinical-chart.html#/b-06-med-rec">Open the medication list</a>
               </div>
               <div class="card">
                 <div class="card-title">Allergies (1)</div>
-                <div style="font-size:12.5px;line-height:1.9">
-                  <div>Sulfa drugs — rash, hives</div>
+                <div style="font-size:12.5px;line-height:1.6">
+                  <div>Sulfa drugs — rash, hives <span class="clin-state verified">Verified</span>
+                    <div class="clin-src">Dr. Drannikov · Mar 16</div></div>
                 </div>
-                <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html">Review in chart</a>
+                <div class="prov"><span>The one list every safety check reads — infusion, pharmacy, orders.</span></div>
+                <a class="btn btn-sm" href="clinical-chart.html#/b-07-allergies">Open the allergy list</a>
+              </div>
+            </div>
+
+            <div class="ai-block">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Vitamin D came back at 18 ng/mL on Jul 14 while vitamin D3 5,000 IU has been on the list since March. The two do not agree — worth asking about adherence or absorption today.
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> <a href="labs.html#/c-01-orders">result R-8841</a> · <a href="clinical-chart.html#/b-06-med-rec">medication list</a></span>
+                <span><b>Model</b> chart-compare v1.4</span>
+                <span><b>Confidence</b> 0.72 — adherence is not recorded</span>
+                <span><b>Reviewer</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" data-activate="b-03-soap" onclick="HCOS.toast('Carried into the note as a question to ask. It is not a diagnosis.', 'ok')">Carry into the note</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Not a discrepancy</button>
               </div>
             </div>
 
@@ -282,7 +321,10 @@
                   </tbody>
                 </table>
               </div>
-              <a class="btn btn-ghost btn-sm" style="margin-top:8px" href="labs.html">Open orders and results</a>
+              <div class="prov">
+                <span><strong>From</strong> result <code>R-8841</code> · Vibrant Labs, released Jul 14 · originals are never edited, corrections are linked</span>
+              </div>
+              <a class="btn btn-ghost btn-sm" href="labs.html#/c-01-orders">Open orders and results</a>
             </div>
           </div>
 
@@ -301,9 +343,23 @@
             </div>
 
             <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Readiness</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Standard <span class="appr approved">Approved</span></div>
+              <div class="field-help">Current effective assessment · ruleset v3.2</div>
+              <div class="prov"><span><strong>From</strong> <code>RA-1174</code> · approved by Dr. Drannikov Jul 15 · <a href="readiness.html#/i-01-readiness">open</a></span></div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Plan of care</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Health Optimization <span class="ver-chip">v4</span> <span class="appr approved">Approved</span></div>
+              <div class="field-help">Care pathway. Access level is separate — Self-directed.</div>
+              <div class="prov"><span><strong>Approved by</strong> Dr. Drannikov · Jun 9 · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span></div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
               <div class="card-title">Quick jump</div>
               <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-activate="b-03-soap">SOAP note</button>
-              <a class="btn btn-sm" style="width:100%;margin-bottom:6px" href="clinical-chart.html">Functional medicine timeline</a>
+              <a class="btn btn-sm" style="width:100%;margin-bottom:6px" href="clinical-chart.html#/b-04-timeline">Functional medicine timeline</a>
               <button class="btn btn-sm" style="width:100%;margin-bottom:6px" data-activate="b-09-orders">Orders</button>
               <button class="btn btn-sm" style="width:100%" data-activate="b-11-sign-lock">Sign and lock</button>
             </div>
@@ -340,9 +396,9 @@
         </div>
 
         <div class="b-encbar">
-          <div><span class="pill pill-warn">Draft</span> Auto-saved 6 seconds ago · template: <strong>Functional medicine — follow-up</strong></div>
+          <div><span class="appr draft">Draft</span> Auto-saved 6 seconds ago · signs: <strong>Dr. Drannikov</strong> · template: <strong>Functional medicine — follow-up</strong></div>
           <div class="b-encbar-actions">
-            <a class="btn btn-sm" href="clinical-templates.html">Change template</a>
+            <a class="btn btn-sm" href="clinical-templates.html#/b-21-template-library">Change template</a>
             <button class="btn btn-sm" onclick="HCOS.toast('Patient preview opened — this is the note Grace will see in her portal after sign.')">Preview as patient</button>
           </div>
         </div>
@@ -361,6 +417,11 @@
 
             <div class="seg-divider">History of present illness</div>
             <textarea class="field-textarea" rows="7">44 y/o woman returns for follow-up of persistent fatigue and Hashimoto's thyroiditis, six weeks after levothyroxine was increased from 50 to 75 mcg. Reports fatigue improved from 7/10 to 5/10 but still worse after physical or cognitive exertion, with post-exertional malaise lasting into the next day. Morning brain fog and word-finding difficulty persist. Sleep remains unrefreshing despite 8+ hours. Repeat thyroid panel and vitamin D were drawn last week and are reviewed today: TSH 3.8, vitamin D 18 ng/mL (low), ferritin low-normal, hs-CRP mildly elevated. Patient is motivated to add IV nutrient support and a structured supplement plan.</textarea>
+
+            <div class="prov">
+              <span><strong>Drafted by</strong> the scribe from today's audio <span class="appr draft">Not accepted yet</span></span>
+              <span>Dr. Drannikov reviews every line before it becomes the record</span>
+            </div>
 
             <div class="b-macros">
               <span class="b-macros-lbl">Shared macros</span>
@@ -392,15 +453,37 @@
               </div>
             </div>
 
-            <div class="callout callout-ok" style="margin-top:12px"><strong>From the intake questionnaire:</strong> 14 of 32 review-of-systems fields auto-populated from Grace's answers. Any field is editable; the original answers stay in the audit trail. No one re-keyed a thing.</div>
+            <div class="callout callout-ok" style="margin-top:12px"><strong>From the intake questionnaire:</strong> 14 of 32 review-of-systems fields filled from Grace's own answers <span class="clin-state reported">Reported</span> — her original wording is kept and no one re-keyed a thing. <a href="clinical-questionnaires.html#/b-30-quest-results">See her answers</a>.</div>
           </div>
 
           <div>
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">AI scribe</div>
-              <div class="b-scribe-wave">Microphone ready · ambient</div>
-              <button class="btn btn-primary btn-sm" style="width:100%;margin-bottom:8px" onclick="HCOS.toast('Ambient scribe recording — it drafts the note; you review every line before sign.', 'ok')">Start ambient recording</button>
-              <div class="field-help">Captures the consult and drafts the SOAP note. You review before sign — this is the scribe that no longer fails mid-visit.</div>
+              <div class="b-scribe-wave">Recording · 22 min · ambient</div>
+              <button class="btn btn-primary btn-sm" style="width:100%" onclick="HCOS.toast('Recording stopped. The draft is ready for your review — it is not the note until you accept it.', 'ok')">Stop and draft the note</button>
+
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Drafted by HCOS</span>
+                  <span class="ai-state suggested">Draft · not accepted</span>
+                </div>
+                <div class="ai-body">
+                  Drafted the history of present illness and 14 review-of-systems fields. Three passages are marked low confidence — the medication timeline, the orthostatic symptoms, and the sleep history.
+                </div>
+                <div class="ai-meta">
+                  <span><b>Sources</b> today's consult audio · <a href="clinical-questionnaires.html#/b-30-quest-results">intake answers</a> · <a href="labs.html#/c-01-orders">results Jul 14</a></span>
+                  <span><b>Model</b> scribe v3.1</span>
+                  <span><b>Uncertainty</b> 3 low-confidence passages, marked in the text</span>
+                  <span><b>Reviewer</b> Dr. Drannikov · signs</span>
+                </div>
+                <div class="ai-actions">
+                  <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Accepted into the draft with your name on it. The transcript and the original wording are kept.', 'ok')">Accept into the note</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the draft. Your changes are tracked against what the scribe wrote.', 'ok')">Edit before accepting</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Rejected. The draft is discarded; the transcript stays in the audit store.', 'ok')">Reject</button>
+                </div>
+              </div>
+
+              <div class="field-help">The scribe drafts and nothing more. It does not sign, order or diagnose — and it no longer fails mid-visit.</div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -444,7 +527,7 @@
           <button class="btn btn-primary" data-activate="b-09-orders">Continue to orders</button>
         </div>
 
-        <p class="page-sub" style="margin-top:0">Clinical reasoning plus the structured ICD-10 codes that drive both the problem list and the superbill.</p>
+        <p class="page-sub" style="margin-top:0">Clinical reasoning for this encounter. Diagnoses here are statements about today — putting one on the problem list is a separate, deliberate step.</p>
 
         <div class="grid-sidebar">
           <div>
@@ -463,57 +546,101 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             <div class="seg-divider">Diagnoses on this encounter</div>
             <div class="tbl-wrap">
               <table class="tbl">
-                <thead><tr><th>#</th><th>Diagnosis</th><th>ICD-10</th><th>Type</th><th></th></tr></thead>
+                <thead><tr><th>#</th><th>Diagnosis</th><th>ICD-10</th><th>Type</th><th>On the problem list</th><th></th></tr></thead>
                 <tbody>
                   <tr>
                     <td><strong>1</strong></td>
                     <td>Other malaise and fatigue</td>
                     <td><span class="b-code">R53.83</span></td>
                     <td><span class="pill">Primary</span></td>
-                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                    <td><span class="clin-state verified">On the list</span><div class="clin-src">Since Mar 16</div></td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed from this encounter. The problem list is untouched.', 'ok')">Remove</button></td>
                   </tr>
                   <tr>
                     <td>2</td>
                     <td>Hashimoto's thyroiditis</td>
                     <td><span class="b-code">E06.3</span></td>
                     <td><span class="pill pill-muted">Secondary</span></td>
-                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                    <td><span class="clin-state verified">On the list</span><div class="clin-src">Since 2019</div></td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed from this encounter. The problem list is untouched.', 'ok')">Remove</button></td>
                   </tr>
                   <tr>
                     <td>3</td>
                     <td>Vitamin D deficiency</td>
                     <td><span class="b-code">E55.9</span></td>
                     <td><span class="pill pill-muted">Secondary</span></td>
-                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                    <td><span class="clin-state reconciled">Reconciled</span><div class="clin-src">Charlene · Jul 20</div></td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Confirmed on the problem list, effective today, with your name on it.', 'ok')">Confirm on the list</button></td>
                   </tr>
                   <tr>
                     <td>4</td>
                     <td>Cognitive communication deficit</td>
                     <td><span class="b-code">R41.840</span></td>
                     <td><span class="pill pill-muted">Secondary</span></td>
-                    <td><button class="btn btn-ghost btn-sm">Remove</button></td>
+                    <td><span class="clin-state reported">Reported only</span><div class="clin-src">Grace · intake Mar 12</div></td>
+                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Added to the problem list as confirmed by you, effective today. Her original report is kept.', 'ok')">Add to the list</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
+            <div class="prov">
+              <span><strong>Reads</strong> the problem list · <a href="clinical-chart.html#/b-05-problem-list">open it</a></span>
+              <span>A diagnosis on this encounter does not change the list until someone says so here</span>
+            </div>
+
             <div style="display:flex;gap:8px;margin-top:12px">
               <input class="search-input" type="search" placeholder="Search ICD-10 code or diagnosis name" style="flex:1">
-              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Diagnosis added to this encounter — it flows to the problem list and the superbill on sign.', 'ok')">Add diagnosis</button>
+              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Diagnosis added to this encounter. Adding it to the problem list is a separate step.', 'ok')">Add diagnosis</button>
             </div>
           </div>
 
           <div>
-            <div class="card" style="margin-bottom:16px">
-              <div class="card-title">Smart suggestions</div>
-              <div class="field-help" style="margin-bottom:8px">Based on the note content</div>
-              <div style="font-size:12.5px;line-height:2.1">
-                <div><span class="b-code">E83.39</span> Disorder of mineral metabolism</div>
-                <div><span class="b-code">F41.1</span> Generalized anxiety</div>
-                <div><span class="b-code">E61.1</span> Iron deficiency</div>
-                <div><span class="b-code">G47.00</span> Insomnia, unspecified</div>
+            <div class="ai-block" style="margin-top:0;margin-bottom:16px">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Four codes appear in the note but are not on this encounter yet.
+                <div style="font-size:12.5px;line-height:2.1;margin-top:6px">
+                  <div><span class="b-code">E83.39</span> Disorder of mineral metabolism</div>
+                  <div><span class="b-code">F41.1</span> Generalized anxiety</div>
+                  <div><span class="b-code">E61.1</span> Iron deficiency</div>
+                  <div><span class="b-code">G47.00</span> Insomnia, unspecified</div>
+                </div>
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> today's note · <a href="labs.html#/c-01-orders">results Jul 14</a></span>
+                <span><b>Model</b> coding-assist v2.0</span>
+                <span><b>Confidence</b> 0.61–0.88 by code</span>
+                <span><b>Decides</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to this encounter under your name. The problem list is a separate step.', 'ok')">Add the ones you pick</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Dismiss</button>
               </div>
             </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">What this assessment feeds</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon active">1</span><span class="check-label">Orders on this encounter</span><span class="check-meta"><a href="#b-09-orders" data-activate="b-09-orders">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Problem list — only what you confirm</span><span class="check-meta"><a href="clinical-chart.html#/b-05-problem-list">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness · ruleset v3.2 recalculates</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care · draft <span class="ver-chip">v5</span></span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Who may do this</div>
+              <dl class="kv">
+                <dt>Author and sign</dt><dd>Dr. Drannikov · physician or extender</dd>
+                <dt>Suggest</dt><dd>MA · nurse · PCC — stays pending</dd>
+                <dt>Change the problem list</dt><dd>Physician or extender, as its own action</dd>
+              </dl>
+            </div>
+
             <div class="card">
               <div class="card-title">Coding tips</div>
               <div class="field-help">Pair each symptom code with its condition code so the problem list and the self-pay superbill both read clean. Grace is self-pay — no payer packet — but complete coding still drives her care plan and any claim she submits herself.</div>
@@ -542,7 +669,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           <button class="btn btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
         </div>
 
-        <p class="page-sub" style="margin-top:0">Every order for this encounter in one place — labs, IV protocols, prescriptions, supplements, referrals. Each is dispatched on sign and lock.</p>
+        <p class="page-sub" style="margin-top:0">Orders are placed here and nowhere else. Each one carries an ID and a version; the bay board, scheduling, pharmacy and the plan of care read that ID — they never restate the order.</p>
+
+        <div class="prov">
+          <span><strong>Placed by</strong> Dr. Drannikov · physician or extender only</span>
+          <span><strong>Writes</strong> HCOS · eCW receives a read-only sync for orders</span>
+        </div>
 
         <div class="filters">
           <button class="filter-chip active">All (8)</button>
@@ -554,68 +686,89 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Order added to this encounter — it dispatches on sign and lock.', 'ok')">Add order</button>
         </div>
 
-        <div class="seg-divider" style="margin-top:0">Lab orders <a class="btn btn-ghost btn-sm" style="margin-left:8px" href="labs.html">Open orders and results</a></div>
+        <div class="seg-divider" style="margin-top:0">Lab orders <a class="btn btn-ghost btn-sm" style="margin-left:8px" href="labs.html#/c-01-orders">Open orders and results</a></div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Order</th><th>Details</th><th>Priority</th></tr></thead>
+            <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Priority</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Comprehensive metabolic panel + CBC with differential</strong></td>
                 <td>Vibrant Labs · fasting · Dx R53.83</td>
+                <td><span class="b-code">O-4471</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Thyroid panel — TSH, fT4, fT3, rT3, TPO, Tg Ab</strong></td>
                 <td>Vibrant Labs · Dx E06.3 · optimal-target reporting requested</td>
+                <td><span class="b-code">O-4472</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Vitamin D, 25-OH — recheck</strong></td>
                 <td>Vibrant Labs · Dx E55.9 · recheck in 12 weeks</td>
+                <td><span class="b-code">O-4473</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Ferritin + iron panel</strong></td>
                 <td>Vibrant Labs · Dx R53.83 · low-normal on last draw</td>
+                <td><span class="b-code">O-4474</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Organic acids test (OAT)</strong></td>
                 <td>Mosaic Diagnostics · urine · 24-hour collection · $339</td>
+                <td><span class="b-code">O-4475</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-warn">Self-pay</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
             </tbody>
           </table>
         </div>
+        <div class="prov"><span>Draft until you sign. On sign each order becomes approved at the version shown, and the lab result comes back linked to that ID.</span></div>
 
         <div class="seg-divider">IV protocols</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Protocol</th><th>Details</th><th></th></tr></thead>
+            <thead><tr><th>Protocol</th><th>Details</th><th>Order ID</th><th>State</th><th></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>IV Myers' cocktail · series of 6 over 6 weeks</strong></td>
-                <td>B-complex, B12, calcium, magnesium, vitamin C 5 g · saline 100 mL · ~1 h</td>
-                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Edit protocol</a></td>
+                <td>B-complex, B12, calcium, magnesium, vitamin C 5 g · saline 100 mL · ~1 h · minimum 5 days between runs</td>
+                <td><span class="b-code">O-2291</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td>
+                <td><span class="appr draft">Draft</span></td>
+                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Change protocol</a></td>
               </tr>
               <tr>
                 <td><strong>Glutathione push 2,000 mg · single trial dose</strong></td>
                 <td>Saline 30 mL · IV push · ~30 min · assess response before adding to the series</td>
-                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Edit protocol</a></td>
+                <td><span class="b-code">O-4476</span> <span class="ver-chip">v1</span></td>
+                <td><span class="appr draft">Draft</span></td>
+                <td><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Change protocol</a></td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="prov">
+          <span><strong>O-2291 v1</strong> superseded today — series went from 4 runs to 6. v1 stays on the record.</span>
+          <span>Changing a protocol makes a new version; anything already booked keeps the version it was booked on.</span>
         </div>
 
         <div class="seg-divider">Prescriptions</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Prescription</th><th>Details</th><th>Type</th></tr></thead>
+            <thead><tr><th>Prescription</th><th>Details</th><th>Order ID</th><th>Type</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Levothyroxine 75 mcg PO daily</strong> · continue</td>
                 <td>90-day supply · 3 refills · recheck TSH in 8 weeks · transmits to the patient's pharmacy</td>
+                <td><span class="b-code">O-4477</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-muted">Refill</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
             </tbody>
           </table>
@@ -624,21 +777,67 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Supplements · Fullscript</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Supplement</th><th>Details</th><th>Route</th></tr></thead>
+            <thead><tr><th>Supplement</th><th>Details</th><th>Order ID</th><th>Route</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Vitamin D3 5,000 IU + K2 100 mcg daily</strong></td>
                 <td>Pure Encapsulations · 90-day supply · recheck vitamin D in 12 weeks</td>
+                <td><span class="b-code">O-4478</span> <span class="ver-chip">v1</span></td>
                 <td><span class="pill pill-muted">Fullscript</span></td>
+                <td><span class="appr draft">Draft</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
+        <div class="seg-divider">Suggested by the care team · not placed</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Suggestion</th><th>Reason given</th><th>Suggested by</th><th>State</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Iron infusion — ferric carboxymaltose 750 mg</strong></td>
+                <td>Ferritin 22 ng/mL with fatigue; oral iron poorly tolerated</td>
+                <td>Bee · PCC · today 11:31 AM</td>
+                <td><span class="appr pending">Pending approval</span></td>
+                <td>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Placed as O-4479 v1 under your name. It dispatches on sign and lock.', 'ok')">Place the order</button>
+                    <button class="btn btn-sm" onclick="HCOS.toast('Declined with your reason. Bee sees it on her list.', 'ok')">Decline</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prov"><span>A suggestion is not an order. It stays pending, with its reason, until a physician or extender places it.</span></div>
+
         <div class="seg-divider">Referrals</div>
         <div class="empty-state">No referrals on this encounter.</div>
 
-        <div class="callout callout-ok" style="margin-top:14px">On sign and lock: labs route to the reference lab, IV orders queue to the infusion bay board, the prescription transmits to the patient's pharmacy, supplements push to Fullscript, and charges generate for billing. Sign once — everything moves. <a href="clinical.html#/b-11-sign-lock">Review sign and lock →</a></div>
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card">
+            <div class="card-title">Who may do this</div>
+            <dl class="kv">
+              <dt>Place, change, discontinue</dt><dd>Dr. Drannikov · physician or extender only</dd>
+              <dt>Suggest</dt><dd>MA · nurse · PCC — stays pending, with a reason</dd>
+              <dt>Change a placed order</dt><dd>Makes a new version; the old one is kept</dd>
+              <dt>HCOS scribe</dt><dd>Drafts wording only — it never places an order</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <div class="card-title">Where these orders are read</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Bay board runs <span class="b-code">O-2291 v2</span></span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Scheduling books the series from the same order</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness reads the interval and prerequisites</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Plan of care shows cadence and expiry</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Billing charges from the signed order</span><span class="check-meta"><a href="billing.html#/d-01-worklist">open</a></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout callout-ok" style="margin-top:14px">On sign and lock every draft above is approved at the version shown and dispatched once: labs to the reference lab, IV orders to the infusion bay board, the prescription to the pharmacy, supplements to Fullscript, charges to billing. <a href="clinical.html#/b-11-sign-lock">Review sign and lock →</a></div>
 
       </div>
     </div>
@@ -675,16 +874,24 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                     <tr><td>Physical exam</td><td>Complete · follow-up template</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Assessment</td><td>Narrative + 4 ICD-10 diagnoses</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Plan</td><td>Complete</td><td><span class="pill pill-ok">Ready</span></td></tr>
-                    <tr><td>Orders</td><td>8 queued · 5 labs · 2 IV · 1 Rx · 1 supplement</td><td><span class="pill pill-ok">Ready</span></td></tr>
-                    <tr><td>Meds reconciled</td><td>1 change confirmed</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Orders</td><td>8 drafts · 5 labs · 2 IV · 1 Rx · 1 supplement · <span class="b-code">O-2291 v2</span> among them</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Meds reconciled</td><td>1 change confirmed by you</td><td><span class="pill pill-ok">Ready</span></td></tr>
                     <tr><td>Allergies reviewed</td><td>Sulfa confirmed</td><td><span class="pill pill-ok">Ready</span></td></tr>
+                    <tr><td>Care-team suggestions</td><td>1 from Bee · iron infusion, not placed</td><td><span class="appr pending">Stays pending</span></td></tr>
+                    <tr><td>Plan of care</td><td>Draft <span class="ver-chip">v5</span> built from today · effective plan is still <span class="ver-chip">v4</span></td><td><span class="appr draft">Needs your approval</span></td></tr>
                   </tbody>
                 </table>
+              </div>
+              <div class="prov">
+                <span><strong>Signing</strong> covers the encounter and its orders. The plan of care and the readiness step are approved separately, below.</span>
               </div>
             </div>
 
             <div class="seg-divider">Provider attestation</div>
             <div class="callout">By signing this encounter I attest that I personally evaluated this patient today, July 21, 2026, that the documentation above accurately reflects the services provided, and that the diagnoses are supported by the documentation. — Dr. Drannikov, MD · NPI 1407646755</div>
+            <div class="prov">
+              <span><strong>Signs</strong> physician or extender only · the scribe drafted this note and cannot sign it</span>
+            </div>
 
             <div class="seg-divider">Signature</div>
             <div id="b-sign-before">
@@ -701,13 +908,38 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
 
             <!-- Dispatch: before signing -->
             <div id="b-dispatch-before">
+              <div class="seg-divider">Decisions only you can make</div>
+              <div class="card">
+                <div class="card-title">Approve now, or leave pending</div>
+                <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);margin-bottom:10px">
+                  <input type="checkbox" checked style="margin-top:3px">
+                  <span>Approve the 8 orders at the versions listed above <span class="appr approved">Approved on sign</span></span>
+                </label>
+                <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);margin-bottom:10px">
+                  <input type="checkbox" style="margin-top:3px">
+                  <span>Approve plan of care <span class="ver-chip">v5</span> — adds the Myers' series and the vitamin D target
+                    <div class="field-help">Leave it unchecked and v4 stays the effective plan; v5 waits for you in the plan builder.</div></span>
+                </label>
+                <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink)">
+                  <input type="checkbox" style="margin-top:3px">
+                  <span>Move the readiness step from Standard to Advanced — suggested by ruleset v3.2
+                    <div class="field-help">Unchecked, the suggestion stays pending with its reason. Nothing changes the step on its own.</div></span>
+                </label>
+                <div class="prov">
+                  <span>Bee's iron-infusion suggestion is not on this list — it was never placed, so signing does not place it.</span>
+                </div>
+              </div>
+
               <div class="seg-divider">On sign and lock, this encounter dispatches at once</div>
               <ul class="check-list">
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Encounter locks · amendments become addenda</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Orders finalize at their current version</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Lab orders transmit to the reference lab</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">IV protocols queue to the infusion bay board</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Prescription transmits to the patient's pharmacy</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Charges generate for billing</span></li>
-                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Follow-up visits open in scheduling</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Follow-up visits open in scheduling, booked against the order</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Tasks open for the care team</span></li>
                 <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Patient portal notified · Open Notes compliant</span></li>
               </ul>
               <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
@@ -720,17 +952,23 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             <div id="b-dispatch-after" style="display:none">
               <div class="seg-divider">Dispatched · Jul 21, 2026 · 11:52 AM</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">5 lab orders transmitted to the reference lab</span><span class="check-meta"><a href="labs.html">Orders and results →</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">2 IV protocols queued to the infusion bay board</span><span class="check-meta"><a href="clinical-infusion.html">Bay board →</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Prescription transmitted to the patient's pharmacy</span><span class="check-meta"><a href="pharmacy.html">Pharmacy →</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Charges generated for billing</span><span class="check-meta"><a href="billing.html">Billing →</a></span></li>
-                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Follow-up infusion series opened in scheduling</span><span class="check-meta"><a href="schedule.html">Schedule →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Encounter locked · ENC-2026-07211</span><span class="check-meta"><a href="security.html#/g-01-audit">Audit store →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">8 orders approved and finalized · <span class="b-code">O-2291 v2</span>, <span class="b-code">O-4471…4478 v1</span></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">5 lab orders transmitted to the reference lab</span><span class="check-meta"><a href="labs.html#/c-01-orders">Orders and results →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">2 IV protocols queued to the infusion bay board</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">Bay board →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Prescription transmitted to the patient's pharmacy</span><span class="check-meta"><a href="pharmacy.html#/h-01-meds">Pharmacy →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Charges generated for billing</span><span class="check-meta"><a href="billing.html#/d-01-worklist">Billing →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Follow-up series opened in scheduling, booked against <span class="b-code">O-2291 v2</span></span><span class="check-meta"><a href="schedule.html#/l-03-book">Schedule →</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">3 tasks opened for Bee and Charlene</span><span class="check-meta"><a href="clinical-remote.html#/b-20-postvisit">Tasks →</a></span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Patient portal notified · Open Notes compliant</span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care <span class="ver-chip">v5</span> saved as a draft <span class="appr pending">Waiting for you</span> · v4 is still the effective plan</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">Approve it →</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness step unchanged at Standard · the suggestion stays pending</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">Readiness →</a></span></li>
               </ul>
-              <div class="callout callout-ok" style="margin-top:14px">Encounter locked. Everything downstream moved with one signature — the documentation ends here at the clinic, not in the weekend.</div>
+              <div class="callout callout-ok" style="margin-top:14px">Encounter locked. Everything you approved moved with one signature; what you did not approve is still waiting, and nothing changed the plan behind your back. The documentation ends here at the clinic, not in the weekend.</div>
               <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
                 <button class="btn btn-primary" data-activate="b-01-worklist">Back to worklist</button>
-                <a class="btn" href="clinical-chart.html">Add an addendum</a>
+                <a class="btn" href="journey-careplan.html#/j-staff-poc">Approve plan of care v5</a>
+                <a class="btn" href="clinical-chart.html#/b-12-amendment">Add an addendum</a>
               </div>
             </div>
           </div>
@@ -759,7 +997,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             <div class="card">
               <div class="card-title">If something is wrong</div>
               <div class="field-help">Once signed, edits require a formal addendum and the original note is preserved.</div>
-              <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html">View amendment flow</a>
+              <a class="btn btn-sm" style="margin-top:10px" href="clinical-chart.html#/b-12-amendment">View amendment flow</a>
             </div>
           </div>
         </div>
@@ -781,14 +1019,17 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       <button class="modal-close" data-close-modal>×</button>
     </div>
     <div class="modal-body">
-      <div style="font-size:13px;margin-bottom:10px">Signing dispatches the whole encounter at once:</div>
+      <div style="font-size:13px;margin-bottom:10px">Signing locks the encounter, approves 8 orders at their current version, and dispatches:</div>
       <ul class="check-list">
         <li class="check-item"><span class="check-icon active">1</span><span class="check-label">5 lab orders → reference lab</span></li>
         <li class="check-item"><span class="check-icon active">2</span><span class="check-label">2 IV protocols → infusion bay board</span></li>
         <li class="check-item"><span class="check-icon active">3</span><span class="check-label">1 prescription → patient's pharmacy</span></li>
         <li class="check-item"><span class="check-icon active">4</span><span class="check-label">Charges → billing</span></li>
-        <li class="check-item"><span class="check-icon active">5</span><span class="check-label">Follow-up series → scheduling</span></li>
+        <li class="check-item"><span class="check-icon active">5</span><span class="check-label">Follow-up series → scheduling, against <span class="b-code">O-2291 v2</span></span></li>
       </ul>
+      <div class="prov">
+        <span>Plan of care <span class="ver-chip">v5</span> stays a draft and the readiness step stays at Standard — you did not approve those.</span>
+      </div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" data-close-modal>Keep editing</button>
@@ -818,7 +1059,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     if (after) after.style.display = 'block';
     if (dbefore) dbefore.style.display = 'none';
     if (dafter) dafter.style.display = 'block';
-    if (window.HCOS && HCOS.toast) HCOS.toast('Encounter signed and locked — labs, infusion bay, pharmacy, billing, and scheduling all dispatched.', 'ok');
+    if (window.HCOS && HCOS.toast) HCOS.toast('Encounter signed and locked — 8 orders approved and dispatched. Plan of care v5 is still a draft waiting for you.', 'ok');
   }
 </script>
 </body>

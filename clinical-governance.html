@@ -12,6 +12,7 @@
   .gov-prow { display: flex; align-items: center; gap: 10px; }
   .gov-pname { font-weight: 600; color: var(--hx-navy); }
   .gov-mrn { font-size: 11px; color: var(--muted); }
+  .gov-rec { display: block; font-size: 11px; color: var(--muted); }
   .gov-metric { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
   .gov-metric:last-child { border-bottom: none; }
   .gov-metric b { color: var(--hx-navy); }
@@ -144,54 +145,198 @@
   <section class="screen" id="b-25-audit-log" data-title="Encounter audit log">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/documentation/audit/ENC-2026-04158</span></div>
+        <span class="frame-url">hcos.helixona.com/security/audit?encounter=ENC-2026-04158</span></div>
       <div class="frame-body">
 
         <div class="gov-header-row">
           <span class="avatar lg">MR</span>
           <div class="gov-header-info">
-            <div class="gov-enc-name">Encounter audit log — Maya Reyes</div>
-            <div class="gov-enc-sub">ENC-2026-04158 · follow-up · signed Jul 7 · complete history</div>
+            <div class="gov-enc-name">Audit — encounter ENC-2026-04158</div>
+            <div class="gov-enc-sub">Maya Reyes · follow-up · signed Jul 7 · 42 lines</div>
           </div>
-          <button class="btn btn-sm" onclick="HCOS.toast('Audit log exported — the CSV is downloading.', 'ok')">Export CSV</button>
-          <a class="btn btn-sm" href="security.html#/g-01-audit">Open in Security and audit</a>
+          <button class="btn btn-sm" onclick="HCOS.toast('Export prepared for Shibani — an admin releases it, and the export is itself a line in the store.', 'ok')">Export this range</button>
+          <a class="btn btn-sm btn-primary" href="security.html#/g-01-audit">Open the full audit store</a>
         </div>
 
-        <p class="page-sub">Every read, edit, sign, and release on this encounter. Required for HIPAA, payer audits, and the 21st Century Cures Act information-blocking rules.</p>
+        <div class="prov">
+          <span><strong>From</strong> the clinic's audit store, filtered to encounter <code>ENC-2026-04158</code> · documentation keeps no log of its own</span>
+        </div>
+        <div class="prov">
+          <span><strong>Append-only</strong> · reads, edits, AI actions and system actions land on the same lines · nobody, not even an admin, edits or deletes one</span>
+        </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search by action or user">
+          <input class="search-input" type="search" placeholder="Search by action, person, or record">
           <button class="filter-chip active">All (42)</button>
           <button class="filter-chip">Edits</button>
           <button class="filter-chip">Reads</button>
-          <button class="filter-chip">System actions</button>
+          <button class="filter-chip">AI actions</button>
+          <button class="filter-chip">System</button>
+          <button class="filter-chip">From eCW</button>
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Field / section</th><th>Before → after</th></tr>
+              <tr><th>When</th><th>Who</th><th>Action</th><th>Record</th><th>Before → after</th><th>Source</th></tr>
             </thead>
             <tbody>
-              <tr><td>Jul 7 · 11:48:34 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">SIGN_LOCK</code></td><td>encounter</td><td>draft → locked</td></tr>
-              <tr><td>Jul 7 · 11:48:31 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">EDIT</code></td><td>note.plan</td><td>Added "L-lysine 1 g BID"</td></tr>
-              <tr><td>Jul 7 · 11:46:12 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">ORDER_ADD</code></td><td>orders.iv</td><td>Added IV NAD+ × 4 sessions</td></tr>
-              <tr><td>Jul 7 · 11:44:08 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">EDIT</code></td><td>note.assessment</td><td>Edited 387 → 503 chars</td></tr>
-              <tr><td>Jul 7 · 11:30:47 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">DOT_EXPAND</code></td><td>note.hpi</td><td>".pemquery" expanded from a shared template</td></tr>
-              <tr><td>Jul 7 · 11:22:01 AM</td><td>Dr. Drannikov</td><td><code class="gov-code">ENCOUNTER_OPEN</code></td><td>—</td><td>Opened from the provider worklist</td></tr>
-              <tr><td>Jul 7 · 11:21:54 AM</td><td>System</td><td><code class="gov-code">SCRIBE_DRAFT</code></td><td>note</td><td>AI scribe draft ready before the note was opened</td></tr>
-              <tr><td>Jul 7 · 11:21:50 AM</td><td>System</td><td><code class="gov-code">VITALS_PUSH</code></td><td>vitals</td><td>Auto-populated from check-in</td></tr>
-              <tr><td>Jul 7 · 11:20:33 AM</td><td>Yazmin · Front Desk</td><td><code class="gov-code">CHECK_IN</code></td><td>encounter.state</td><td>Scheduled → Arrived</td></tr>
-              <tr><td>Jul 7 · 10:43:18 AM</td><td>Charlene · MA</td><td><code class="gov-code">PRECHART_RELEASE</code></td><td>—</td><td>Pre-chart released to the provider</td></tr>
-              <tr><td>Jul 7 · 10:31:12 AM</td><td>Charlene · MA</td><td><code class="gov-code">EDIT</code></td><td>prechart.scratchpad</td><td>848 chars saved</td></tr>
-              <tr><td>Jul 6 · 4:22:09 PM</td><td>System</td><td><code class="gov-code">QUESTIONNAIRE_SYNC</code></td><td>chart</td><td>Questionnaire answers flowed into the chart</td></tr>
-              <tr><td>Jul 9 · 8:12:04 AM</td><td>Shibani · Admin</td><td><code class="gov-code">READ</code></td><td>encounter</td><td>Viewed while assembling the billing packet</td></tr>
-              <tr><td>Jul 10 · 7:40:11 AM</td><td>Patient portal</td><td><code class="gov-code">PORTAL_READ</code></td><td>note</td><td>Patient viewed the released note</td></tr>
+              <tr>
+                <td>Jul 10 · 7:40:11 AM<span class="gov-rec">AE-38310</span></td>
+                <td>Maya Reyes · patient</td>
+                <td>Released note viewed</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 v1</span></td>
+                <td>—</td>
+                <td>Patient portal</td>
+              </tr>
+              <tr>
+                <td>Jul 9 · 8:12:04 AM<span class="gov-rec">AE-38204</span></td>
+                <td>Shibani · Admin</td>
+                <td>Encounter read while assembling the claim packet</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 v1</span></td>
+                <td>—</td>
+                <td>HCOS · Billing</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:48:34 AM<span class="gov-rec">AE-38041</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Encounter signed and locked</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 v1</span></td>
+                <td>Reviewed → Signed and locked</td>
+                <td>HCOS · Clinical</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:48:31 AM<span class="gov-rec">AE-38040</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Note edited · plan</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · note.plan</span></td>
+                <td>Added "L-lysine 1 g BID"</td>
+                <td>HCOS · Clinical</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:46:12 AM<span class="gov-rec">AE-38037</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Order placed · IV NAD+ × 4 sessions</td>
+                <td>Order<span class="gov-rec">O-2118 v1</span></td>
+                <td>None → Placed at <code class="gov-code">v1</code></td>
+                <td>HCOS · Clinical</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:44:08 AM<span class="gov-rec">AE-38033</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Note edited · assessment</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · note.assessment</span></td>
+                <td>387 → 503 characters</td>
+                <td>HCOS · Clinical</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:30:47 AM<span class="gov-rec">AE-38028</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Dot-phrase expanded · ".pemquery"</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · note.hpi</span></td>
+                <td>Shared template <code class="gov-code">T-14 v3</code> inserted</td>
+                <td>HCOS · Templates</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:24:06 AM<span class="gov-rec">AE-38022</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Scribe draft accepted into the note <span class="ai-state accepted">Accepted</span></td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · note</span></td>
+                <td>Suggested → Accepted, edited before signing</td>
+                <td>HCOS · Clinical</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:22:01 AM<span class="gov-rec">AE-38019</span></td>
+                <td>Dr. Drannikov · Provider</td>
+                <td>Encounter opened from the worklist</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158</span></td>
+                <td>—</td>
+                <td>HCOS · Clinical</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:21:54 AM<span class="gov-rec">AE-38017</span></td>
+                <td>HCOS · AI scribe</td>
+                <td>Draft prepared from the visit audio <span class="ai-state suggested">Suggested</span></td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · note</span></td>
+                <td>Nothing written to the chart — waiting for the provider</td>
+                <td>AI · scribe v4.2</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:21:50 AM<span class="gov-rec">AE-38016</span></td>
+                <td>System</td>
+                <td>Vitals filed from check-in</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · vitals</span></td>
+                <td>Empty → 6 values</td>
+                <td>HCOS · Front desk</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 11:20:33 AM<span class="gov-rec">AE-38014</span></td>
+                <td>Yazmin · Front Desk</td>
+                <td>Patient arrived</td>
+                <td>Appointment<span class="gov-rec">APT-77120</span></td>
+                <td>Confirmed → Arrived</td>
+                <td>HCOS · Scheduling</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 10:43:18 AM<span class="gov-rec">AE-37998</span></td>
+                <td>Charlene (Virtual) · Medical Assistant</td>
+                <td>Pre-chart released to the provider</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · pre-chart</span></td>
+                <td>Draft → Reviewed</td>
+                <td>HCOS · Remote MA</td>
+              </tr>
+              <tr>
+                <td>Jul 7 · 10:31:12 AM<span class="gov-rec">AE-37991</span></td>
+                <td>Charlene (Virtual) · Medical Assistant</td>
+                <td>Pre-chart edited</td>
+                <td>Encounter<span class="gov-rec">ENC-2026-04158 · pre-chart</span></td>
+                <td>848 characters saved</td>
+                <td>HCOS · Remote MA</td>
+              </tr>
+              <tr>
+                <td>Jul 6 · 4:22:09 PM<span class="gov-rec">AE-37940</span></td>
+                <td>System</td>
+                <td>Questionnaire answers filed <span class="clin-state reported">Reported</span></td>
+                <td>Questionnaire response<span class="gov-rec">QR-3120 · Maya Reyes</span></td>
+                <td>Problem list unchanged — a report is not a diagnosis</td>
+                <td>HCOS · Questionnaires</td>
+              </tr>
+              <tr>
+                <td>Jul 5 · 6:02:11 AM<span class="gov-rec">AE-37902</span></td>
+                <td>Interface</td>
+                <td>Prior result linked to this encounter</td>
+                <td>Result<span class="gov-rec">R-8841 · original kept</span></td>
+                <td>Linked, not copied</td>
+                <td>eCW · reads only until labs activate</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout" style="margin-top:16px">Audit entries are immutable. Reads — including the patient's own portal reads — and system actions (auto-saves, scribe drafts, eligibility checks) all appear here alongside user edits.</div>
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Detected by HCOS</span>
+            <span class="ai-state suggested">Needs a human</span>
+          </div>
+          <div class="ai-body">
+            One read of this encounter — Jul 9, 8:12 AM — came from outside any task or visit assigned that day.
+          </div>
+          <div class="ai-meta">
+            <span><b>Read</b> 42 audit lines on ENC-2026-04158</span>
+            <span><b>Model</b> access-anomaly v1.3</span>
+            <span><b>Confidence</b> 0.61 — packet work is a common reason</span>
+            <span><b>Reviewer</b> Shibani · Admin</span>
+            <span><b>Writes</b> nothing — the alert is its own appended line</span>
+          </div>
+          <div class="ai-actions">
+            <a class="btn btn-sm btn-primary" href="security.html#/g-01-audit">Open an investigation</a>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Dismissed with your name and reason. No line in the store changed.', 'ok')">Not unusual</button>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:16px">Nothing on this screen can be edited or deleted. A correction is made on the record itself and arrives here as a new line — to correct this encounter, add an addendum.
+          <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-12-amendment">Add an addendum</a></div>
+        </div>
       </div>
     </div>
   </section>
@@ -295,11 +440,191 @@
   <section class="screen" id="b-27-system-states" data-title="Documentation states">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/documentation/states</span></div>
+        <span class="frame-url">hcos.helixona.com/settings/workflow-states/documentation</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Documentation states</h2>
-        <p class="page-sub">What the clinician sees when things go sideways — the scribe drops, the network wobbles, a note can't be signed. Every state says what happened and how to move forward.</p>
 
+        <div class="gov-header-row">
+          <div class="gov-header-info">
+            <div class="gov-enc-name">Documentation states <span class="ver-chip">v3</span> <span class="appr approved">Approved</span></div>
+            <div class="gov-enc-sub">Workflow-state engine · documentation domain · effective Jul 6, 2026</div>
+          </div>
+          <a class="btn btn-sm" href="intake-admin.html#/a-45-system-states">Intake domain</a>
+          <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Proposed as v4 with your rationale. It stays pending until clinical governance approves it — v3 keeps running.', 'ok')">Propose a change</button>
+        </div>
+
+        <div class="prov">
+          <span><strong>One engine</strong> · every module configures the same states, guards and messages · this is the documentation domain, <span class="ver-chip superseded">v2</span> retired Jul 6</span>
+        </div>
+        <div class="prov">
+          <span><strong>Approved by</strong> Dr. Drannikov · clinical governance · <strong>implemented by</strong> Shibani · Admin · each version is appended to the <a href="security.html#/g-01-audit">audit store</a></span>
+        </div>
+        <div class="prov">
+          <span><strong>Writer</strong> HCOS holds encounter states since Jul 1, 2026 · eCW receives a read-only summary until full cutover</span>
+        </div>
+
+        <div class="seg-divider">Encounter states</div>
+        <div class="status-flow">
+          <span class="status-step">Draft</span><span class="status-arrow">→</span>
+          <span class="status-step">Reviewed</span><span class="status-arrow">→</span>
+          <span class="status-step">Signed and locked</span><span class="status-arrow">→</span>
+          <span class="status-step">Addendum</span>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>State change</th><th>Who may make it</th><th>What the engine does</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Draft → Reviewed</td>
+                <td>MA, nurse or PCC</td>
+                <td>Prepares only. Suggestions stay pending and nothing dispatches.</td>
+                <td><a class="btn btn-sm" href="clinical-remote.html#/b-19-precharting">Pre-charting</a></td>
+              </tr>
+              <tr>
+                <td>Reviewed → Signed and locked</td>
+                <td>Physician or extender</td>
+                <td>Runs the guards below, then dispatches billing, labs, infusion, pharmacy and scheduling at once.</td>
+                <td><a class="btn btn-sm" href="clinical.html#/b-11-sign-lock">Sign and lock</a></td>
+              </tr>
+              <tr>
+                <td>Care-team note → Co-signed</td>
+                <td>Supervising physician</td>
+                <td>Same guards as signing. The co-signature locks the note and dispatches it.</td>
+                <td><button class="btn btn-sm" data-activate="b-24-cosign">Co-sign queue</button></td>
+              </tr>
+              <tr>
+                <td>Signed and locked → Addendum</td>
+                <td>Physician or extender</td>
+                <td>The signed version stays intact; the addendum is a new version linked to it.</td>
+                <td><a class="btn btn-sm" href="clinical-chart.html#/b-12-amendment">Addendum</a></td>
+              </tr>
+              <tr>
+                <td>Signed and locked → Draft</td>
+                <td>Nobody</td>
+                <td>Not available in any module. A signed encounter is corrected by addendum, never reopened.</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Guards that run before a state changes</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Blocks <span class="pill pill-err">No override</span></div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">An order conflicts with the allergy list</span><span class="check-meta"><a href="clinical-chart.html#/b-07-allergies">Allergies</a></span></li>
+              <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">An infusion note has no signed order and version to reference</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">IV order</a></span></li>
+              <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">The signer did not evaluate the patient</span></li>
+              <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">No supervising physician is available to co-sign</span></li>
+              <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">The scribe tries to sign, order, or change a clinical list</span></li>
+            </ul>
+            <div class="field-help" style="margin-top:8px">A block is never shown as a dismissible warning. The state change does not happen until the cause is gone.</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Warnings <span class="pill pill-warn">Override with a reason</span></div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon active">!</span><span class="check-label">The assessment section is empty</span><span class="check-meta"><a href="clinical.html#/b-08-assessment">Assessment</a></span></li>
+              <li class="check-item"><span class="check-icon active">!</span><span class="check-label">The note repeats a prior visit almost word for word</span><span class="check-meta"><a href="#b-26-doc-quality" data-activate="b-26-doc-quality">Quality</a></span></li>
+              <li class="check-item"><span class="check-icon active">!</span><span class="check-label">A co-signature is past the 48-hour policy</span><span class="check-meta"><button class="btn btn-ghost btn-sm" data-activate="b-24-cosign">Queue</button></span></li>
+              <li class="check-item"><span class="check-icon active">!</span><span class="check-label">Portal release is being held from the patient</span></li>
+            </ul>
+            <div class="field-help" style="margin-top:8px">Only a physician or extender may override, and only with a reason. Your name and the reason go to the <a href="security.html#/g-01-audit">audit store</a>.</div>
+          </div>
+        </div>
+
+        <div class="seg-divider">Messages · documentation domain</div>
+        <div class="grid-2">
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Degraded · AI scribe dropped</div>
+            <div class="callout callout-warn" style="margin:0">
+              <strong>The AI scribe lost its audio connection.</strong> Your dictation is still recording on this device — the draft will catch up when the scribe reconnects, or you can type the note directly. Nothing said so far is lost.
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="HCOS.toast('Reconnecting the scribe — the draft will resume in a moment.', 'ok')">Reconnect scribe</button>
+                <a class="btn btn-sm" href="clinical.html#/b-03-soap">Type the note instead</a>
+              </div>
+            </div>
+            <div class="ai-block">
+              <div class="ai-head">
+                <span class="ai-badge">Drafted by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">The draft covers 11:22–11:41 AM. The three minutes after the drop are missing from the audio.</div>
+              <div class="ai-meta">
+                <span><b>Sources</b> visit audio · vitals from check-in</span>
+                <span><b>Model</b> scribe v4.2</span>
+                <span><b>Uncertainty</b> gap 11:41–11:44</span>
+                <span><b>Reviewer</b> Dr. Drannikov</span>
+                <span><b>Signs</b> never</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Draft accepted into the note as a suggestion you edited. It is still yours to sign.', 'ok')">Accept into the note</button>
+                <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Draft rejected with your name. It stays in the audit store and never reached the chart.', 'ok')">Reject the draft</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Blocked · allergy conflict</div>
+            <div class="callout callout-err" style="margin:0">
+              <strong>Can't sign and lock.</strong> The order for Bactrim conflicts with sulfa on Maya Reyes' allergy list. Remove the order or switch to an alternative — this one cannot be overridden. If the allergy is wrong, correct the list first and the block clears.
+              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-07-allergies">Review allergies</a></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Warning · required section empty</div>
+            <div class="callout callout-warn" style="margin:0">
+              <strong>The assessment section is empty.</strong> Add the assessment, then sign. A physician or extender may sign without it by giving a reason, which is kept with the note.
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <a class="btn btn-sm" href="clinical.html#/b-08-assessment">Jump to assessment</a>
+                <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Reason recorded with your name. The note is flagged in documentation quality.', 'ok')">Sign with a reason</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Error · lab order not sent</div>
+            <div class="callout callout-err" style="margin:0">
+              <strong>Lab order not transmitted.</strong> The lab interface returned a 503. Order <code class="gov-code">O-2118 v1</code> is held in the queue and retries every 5 minutes for one hour — the version does not change while it retries, and the patient's draw is unaffected.
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" onclick="HCOS.toast('Retrying order O-2118 v1 now — you will see it clear the queue if it goes through.', 'ok')">Retry now</button>
+                <a class="btn btn-sm" href="labs.html#/c-01-orders">Reroute in orders and results</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Locked · encounter signed</div>
+            <div class="callout" style="margin:0">
+              <strong>This encounter is locked.</strong> <code class="gov-code">ENC-2026-04158 v1</code> was signed Jul 7 · 11:48 AM by Dr. Drannikov and is the legal record. An addendum becomes v2 and links back to it — the original never changes.
+              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-12-amendment">Create an addendum</a></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Overdue · co-signature waiting</div>
+            <div class="callout callout-err" style="margin:0">
+              <strong>Two co-signatures are overdue.</strong> Infusion notes from Sat Jul 19 still need the supervising physician's co-signature — clinic policy is within 48 hours.
+              <div style="margin-top:8px"><button class="btn btn-sm" data-activate="b-24-cosign">Open co-sign queue</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="seg-divider" style="margin-top:0">Released · patient portal note</div>
+            <div class="callout callout-ok" style="margin:0">
+              This encounter note is now visible in the patient's portal under the 21st Century Cures Act. Last viewed by the patient: Jul 10 · 7:40 AM.
+              <div style="margin-top:8px"><button class="btn btn-sm" data-activate="b-25-audit-log">See it in the audit</button></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="seg-divider">Messages inherited from the engine</div>
         <div class="grid-2">
 
           <div class="card">
@@ -322,17 +647,6 @@
           </div>
 
           <div class="card">
-            <div class="seg-divider" style="margin-top:0">Degraded · AI scribe dropped</div>
-            <div class="callout callout-warn" style="margin:0">
-              <strong>The AI scribe lost its audio connection.</strong> Your dictation is still recording on this device — the draft will catch up when the scribe reconnects, or you can type the note directly. Nothing said so far is lost.
-              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-                <button class="btn btn-sm" onclick="HCOS.toast('Reconnecting the scribe — the draft will resume in a moment.', 'ok')">Reconnect scribe</button>
-                <a class="btn btn-sm" href="clinical.html#/b-03-soap">Type the note instead</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
             <div class="seg-divider" style="margin-top:0">Offline · network dropped</div>
             <div class="callout callout-warn" style="margin:0">
               <strong>You're working offline.</strong> Edits are saved on this device and will sync the moment the connection returns. Sign-and-lock is paused until then — it will finish on its own, nothing needs re-typing.
@@ -341,55 +655,17 @@
           </div>
 
           <div class="card">
-            <div class="seg-divider" style="margin-top:0">Error · lab order not sent</div>
-            <div class="callout callout-err" style="margin:0">
-              <strong>Lab order not transmitted.</strong> The lab interface returned a 503. The order is held in the queue and retries every 5 minutes for one hour — the patient's draw is unaffected.
-              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-                <button class="btn btn-sm" onclick="HCOS.toast('Retrying the lab order now — you will see it clear the queue if it goes through.', 'ok')">Retry now</button>
-                <a class="btn btn-sm" href="labs.html#/c-01-orders">Reroute in orders and results</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="seg-divider" style="margin-top:0">Blocked · allergy conflict</div>
-            <div class="callout callout-err" style="margin:0">
-              <strong>Can't sign and lock.</strong> The order for Bactrim conflicts with a documented sulfa allergy. Remove the order, switch to an alternative, or document an override with a reason before signing.
-              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-07-allergies">Review allergies</a></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="seg-divider" style="margin-top:0">Warning · required section empty</div>
-            <div class="callout callout-warn" style="margin:0">
-              <strong>The assessment section is empty.</strong> It's required before sign-and-lock. Add the assessment, then sign.
-              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical.html#/b-08-assessment">Jump to assessment</a></div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="seg-divider" style="margin-top:0">Locked · encounter signed</div>
+            <div class="seg-divider" style="margin-top:0">Permission · not your encounter</div>
             <div class="callout" style="margin:0">
-              <strong>This encounter is locked.</strong> It was signed Jul 7 · 11:48 AM by Dr. Drannikov. To add or correct anything, create an addendum — the original stays intact.
-              <div style="margin-top:8px"><a class="btn btn-sm" href="clinical-chart.html#/b-12-amendment">Create an addendum</a></div>
+              <strong>You can read this encounter but not sign it.</strong> Only the physician or extender who evaluated the patient signs. Send it to Dr. Drannikov, or add your findings as a suggestion.
+              <div style="margin-top:8px"><button class="btn btn-sm" onclick="HCOS.toast('Sent to Dr. Drannikov as a suggestion. It stays pending until he approves it.', 'ok')">Send as a suggestion</button></div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="seg-divider" style="margin-top:0">Overdue · co-signature waiting</div>
-            <div class="callout callout-err" style="margin:0">
-              <strong>Two co-signatures are overdue.</strong> RN infusion notes from Sat Jul 19 still need your co-signature — clinic policy is within 48 hours.
-              <div style="margin-top:8px"><button class="btn btn-sm" data-activate="b-24-cosign">Open co-sign queue</button></div>
-            </div>
-          </div>
+        </div>
 
-          <div class="card">
-            <div class="seg-divider" style="margin-top:0">Released · patient portal note</div>
-            <div class="callout callout-ok" style="margin:0">
-              This encounter note is now visible in the patient's portal under the 21st Century Cures Act. Last viewed by the patient: not yet.
-            </div>
-          </div>
-
+        <div class="prov" style="margin-top:14px">
+          <span><strong>Same wording everywhere</strong> · <a href="intake-admin.html#/a-45-system-states">intake shows these four</a> from this configuration — they are written once, not per module</span>
         </div>
       </div>
     </div>

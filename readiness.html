@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/hcos.css?v=8">
 <style>
   .i-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-  .i-lane { flex: 1 1 240px; min-width: 220px; }
+  .i-lane { flex: 1 1 200px; min-width: 190px; }
   .i-lane-label { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
   .i-chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .i-chip {
@@ -18,6 +18,8 @@
     border: 1px solid var(--line); border-radius: 999px;
     background: var(--hx-band); color: var(--ink); white-space: nowrap;
   }
+  a.i-chip { text-decoration: none; }
+  a.i-chip:hover { border-color: var(--ink); }
   .i-arrow { font-size: 20px; color: var(--muted); padding: 0 10px; }
   .i-engine {
     border: 2px solid var(--hx-navy); border-radius: var(--radius);
@@ -27,6 +29,7 @@
   .i-engine-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .i-pname { font-weight: 600; color: var(--hx-navy); text-decoration: none; }
   .i-pname:hover { text-decoration: underline; }
+  .i-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .i-why { font-size: 12.5px; color: var(--muted); }
   .i-fired { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
   .i-fired-src { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 3px; }
@@ -34,6 +37,15 @@
   .i-rule { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 13px; }
   .i-rule:last-of-type { border-bottom: 0; }
   .i-rule-num { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
+  .i-rule-body { flex: 1; }
+  .i-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .i-hist { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .i-hist:last-child { border-bottom: 0; }
+  .i-hist-when { width: 58px; flex-shrink: 0; color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace; }
+  .i-hist-what { flex: 1; }
+  .i-hist-who { color: var(--muted); font-size: 11px; white-space: nowrap; }
+  .i-id { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); }
+  .i-result { font-size: 15px; font-weight: 600; color: var(--hx-navy); }
 </style>
 </head>
 <body data-page="readiness" data-page-title="Readiness engine" data-shell="app">
@@ -46,30 +58,43 @@
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/readiness</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Detox readiness — Module 001</h2>
-        <p class="page-sub">Tuesday, July 21 · evaluated daily at 7:00 AM · physician rules outrank the engine</p>
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Detox readiness — Module 001</div>
+            <div class="page-sub">Tuesday, July 21 · the engine ran at 7:00 AM · ruleset v3.2</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="i-03-ruleset">Open the ruleset</button>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>Written here</strong> — one readiness record per patient, versioned. The front desk board, the bay board, IV orders and the plan of care read this one.</span>
+          <span>eCW receives the approved summary until it is retired.</span>
+        </div>
 
         <div class="card" style="margin-bottom:16px">
           <div class="i-flow">
             <div class="i-lane">
-              <div class="i-lane-label">Inputs</div>
+              <div class="i-lane-label">Inputs · read live</div>
               <div class="i-chips">
-                <span class="i-chip">Surveys</span>
-                <span class="i-chip">Symptoms</span>
-                <span class="i-chip">Labs</span>
-                <span class="i-chip">Physician rules</span>
-                <span class="i-chip">Home activities</span>
-                <span class="i-chip">Treatment history</span>
+                <a class="i-chip" href="clinical-questionnaires.html#/b-30-quest-results">Surveys</a>
+                <a class="i-chip" href="clinical-chart.html#/b-05-problem-list">Symptoms</a>
+                <a class="i-chip" href="labs.html#/c-01-orders">Labs</a>
+                <a class="i-chip" href="#i-03-ruleset" data-activate="i-03-ruleset">Physician rules</a>
+                <a class="i-chip" href="journey-plan.html#/j-plan-activities">Home activities</a>
+                <a class="i-chip" href="clinical-infusion.html#/b-15-flowsheet">Treatment history</a>
               </div>
             </div>
             <div class="i-arrow">→</div>
             <div class="i-engine">
               <div class="i-engine-name">Readiness engine</div>
-              <div class="i-engine-sub">Weighs every input · shows its work</div>
+              <div class="i-engine-sub">Ruleset v3.2 · shows its work</div>
             </div>
             <div class="i-arrow">→</div>
             <div class="i-lane">
-              <div class="i-lane-label">Outputs</div>
+              <div class="i-lane-label">Result</div>
               <div class="i-chips">
                 <span class="pill pill-navy">Gentle</span>
                 <span class="pill pill-ok">Standard</span>
@@ -79,85 +104,472 @@
                 <span class="pill pill-err">Physician review</span>
               </div>
             </div>
+            <div class="i-arrow">→</div>
+            <div class="i-lane" style="flex:0 1 170px;min-width:150px">
+              <div class="i-lane-label">Decision</div>
+              <div class="i-chips">
+                <span class="appr pending">Pending</span>
+                <span class="appr approved">Approved</span>
+                <span class="appr superseded">Overridden</span>
+              </div>
+              <div class="field-help" style="margin-top:6px">A physician or extender decides. The engine never does.</div>
+            </div>
           </div>
         </div>
 
         <div class="grid-sidebar">
           <div>
-            <div class="card">
+            <div class="card" style="margin-bottom:16px">
               <div class="card-title">Patients on the detox program</div>
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
                     <tr>
                       <th>Patient</th>
-                      <th>Program</th>
-                      <th>Current state</th>
+                      <th>Assessment</th>
+                      <th>Result</th>
+                      <th>Decision</th>
                       <th>Why</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><a class="i-pname" href="patients.html#/pt-02-profile">Maya Reyes</a></td>
-                      <td>NAD+ series · session 4 of 8</td>
+                      <td><a class="i-pname" href="patients.html#/pt-02-profile">Maya Reyes</a>
+                        <div class="i-sub">NAD+ series · session 4 of 8</div></td>
+                      <td><span class="i-id">RA-1152</span> <span class="ver-chip">v5</span>
+                        <div class="i-sub">Ruleset v3.2</div></td>
                       <td><span class="pill pill-ok">Standard</span></td>
-                      <td class="i-why">Symptom scores stable · labs current</td>
+                      <td><span class="appr approved">Approved</span>
+                        <div class="i-sub">Dr. Drannikov · Jul 6</div></td>
+                      <td class="i-why">Symptom scores stable · labs current · recalculated today, unchanged</td>
                       <td><button class="btn btn-sm" data-open-drawer="#i-why-maya">Open the why</button></td>
                     </tr>
                     <tr>
-                      <td><a class="i-pname" href="patients.html">Nadia Boulos</a></td>
-                      <td>Detox program · week 3</td>
+                      <td><a class="i-pname" href="patients.html">Nadia Boulos</a>
+                        <div class="i-sub">Detox program · week 3</div></td>
+                      <td><span class="i-id">RA-1211</span> <span class="ver-chip">v4</span>
+                        <div class="i-sub">Ruleset v3.2</div></td>
                       <td><span class="pill pill-err">Physician review</span></td>
-                      <td class="i-why">New symptom cluster in this week's survey — Dr. Drannikov decides, not the engine</td>
-                      <td><button class="btn btn-sm" data-open-drawer="#i-why-nadia">Open the why</button></td>
+                      <td><span class="appr pending">Pending</span>
+                        <div class="i-sub">Dr. Bakman · since Jul 19</div></td>
+                      <td class="i-why">Weekly check-in unanswered since Jul 13 and a new symptom cluster — the engine holds here</td>
+                      <td><button class="btn btn-sm btn-primary" data-activate="i-02-assessment">Review</button></td>
                     </tr>
                     <tr>
-                      <td><a class="i-pname" href="patients.html">Walter Hsu</a></td>
-                      <td>NAD+ series · session 1 of 6</td>
+                      <td><a class="i-pname" href="patients.html">Walter Hsu</a>
+                        <div class="i-sub">NAD+ series · session 1 of 6</div></td>
+                      <td><span class="i-id">RA-1218</span> <span class="ver-chip">v1</span>
+                        <div class="i-sub">Ruleset v3.2</div></td>
                       <td><span class="pill pill-navy">Gentle</span></td>
-                      <td class="i-why">Age + first series</td>
+                      <td><span class="appr approved">Approved</span>
+                        <div class="i-sub">Dr. Bakman · Jul 17</div></td>
+                      <td class="i-why">Rule 4 — age 65+ on a first series starts gentle</td>
                       <td><button class="btn btn-sm" data-open-drawer="#i-why-walter">Open the why</button></td>
                     </tr>
                     <tr>
-                      <td><a class="i-pname" href="patients.html">Priya Natarajan</a></td>
-                      <td>Myers' cocktail series</td>
+                      <td><a class="i-pname" href="patients.html">Priya Natarajan</a>
+                        <div class="i-sub">Myers' cocktail · session 2 of 6</div></td>
+                      <td><span class="i-id">RA-1206</span> <span class="ver-chip">v3</span>
+                        <div class="i-sub">Ruleset v3.2 · v2 ran on v2.4</div></td>
                       <td><span class="pill pill-warn">Flare recovery</span></td>
-                      <td class="i-why">Flare reported Sunday · escalation auto-paused</td>
+                      <td><span class="appr pending">Pending</span>
+                        <div class="i-sub">Dr. Drannikov · since Jul 19</div></td>
+                      <td class="i-why">Rule 2 held escalation after Sunday's flare report — it stays held until a physician decides</td>
                       <td><button class="btn btn-sm" data-open-drawer="#i-why-priya">Open the why</button></td>
                     </tr>
                     <tr>
-                      <td><a class="i-pname" href="patients.html">Grace Lindqvist</a></td>
-                      <td>Detox prep · thyroid panel first</td>
-                      <td><span class="pill pill-warn">Pause</span></td>
-                      <td class="i-why">Thyroid results pending</td>
+                      <td><a class="i-pname" href="patients.html">Grace Lindqvist</a>
+                        <div class="i-sub">Detox prep · thyroid panel first</div></td>
+                      <td><span class="i-id">RA-1174</span> <span class="ver-chip">v2</span>
+                        <div class="i-sub">Ruleset v3.2 · <span class="ver-chip superseded">v1</span></div></td>
+                      <td><span class="pill pill-ok">Standard</span></td>
+                      <td><span class="appr approved">Approved</span>
+                        <div class="i-sub">Dr. Drannikov · Jul 15</div></td>
+                      <td class="i-why">Pause lifted when the thyroid panel filed on Jul 14</td>
                       <td><button class="btn btn-sm" data-open-drawer="#i-why-grace">Open the why</button></td>
                     </tr>
                   </tbody>
                 </table>
+              </div>
+              <div class="prov">
+                <span><strong>Every row</strong> is the same record the chart, the bay board and the front desk show — none of them keeps a copy.</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Maya Reyes may be ready for advanced</div>
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Suggested by HCOS</span>
+                  <span class="ai-state suggested">Suggestion</span>
+                </div>
+                <div class="ai-body">
+                  Maya has logged 7 of 7 home activities for three weeks and her symptom scores have been flat since session 2. Sessions 5–8 could step up to advanced.
+                </div>
+                <div class="ai-meta">
+                  <span><b>Read</b> <a href="journey-plan.html#/j-plan-activities">home activities</a> · <a href="clinical-questionnaires.html#/b-30-quest-results">3 weekly check-ins</a> · <a href="clinical-infusion.html#/b-15-flowsheet">4 administrations</a></span>
+                  <span><b>Model</b> readiness-explain v1.2</span>
+                  <span><b>Confidence</b> 0.64 — no labs since Jul 10</span>
+                  <span><b>Decides</b> Dr. Drannikov</span>
+                  <span><b>A suggestion never changes the result</b></span>
+                </div>
+                <div class="ai-actions">
+                  <button class="btn btn-sm btn-primary" data-open-drawer="#i-why-maya">Open Maya's assessment</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Not now</button>
+                </div>
               </div>
             </div>
           </div>
 
           <div>
             <div class="card" style="margin-bottom:16px">
-              <div class="card-title">One survey engine</div>
-              <p style="font-size:13px">Readiness surveys, intake forms, and clinical questionnaires come from the same builder — one engine, not three. Answers file into the chart and feed this screen automatically.</p>
-              <a class="btn" href="intake-admin.html#/a-46-form-builder">Open the form builder</a>
+              <div class="card-title">Waiting on a physician</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon blocked">!</span>
+                  <span class="check-label">Nadia Boulos · physician review required</span>
+                  <span class="check-meta"><button class="btn btn-sm" data-open-drawer="#i-why-nadia">Review</button></span></li>
+                <li class="check-item"><span class="check-icon blocked">!</span>
+                  <span class="check-label">Priya Natarajan · flare recovery, escalation held</span>
+                  <span class="check-meta"><button class="btn btn-sm" data-open-drawer="#i-why-priya">Review</button></span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Both stay at the safer result until a physician or extender decides.</div>
             </div>
 
-            <div class="card">
-              <div class="card-title">Physician rules</div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Ruleset v3.2 <span class="appr approved">Approved</span></div>
+              <div class="field-help" style="margin-bottom:8px">Effective Jul 1 · approved by Dr. Drannikov · v3.3 proposed</div>
               <div class="i-rule">
                 <div class="i-rule-num">Rule 1</div>
-                <div>If a weekly survey shows a new symptom cluster, route to physician review — the engine never escalates on its own.</div>
+                <div class="i-rule-body">A new symptom cluster in a weekly check-in routes to physician review.</div>
               </div>
               <div class="i-rule">
                 <div class="i-rule-num">Rule 2</div>
-                <div>If a flare is reported, switch to flare recovery and pause escalation until Dr. Drannikov clears it.</div>
+                <div class="i-rule-body">A reported flare switches to flare recovery and holds escalation.</div>
               </div>
-              <div class="field-help" style="margin:8px 0 12px">A fired rule always outranks the engine's own recommendation.</div>
-              <button class="btn" onclick="HCOS.toast('Only providers edit rules — ask Dr. Drannikov or Dr. Bakman to change one.', 'warn')">Edit rules</button>
+              <div class="field-help" style="margin:8px 0 12px">A fired rule outranks the engine's own recommendation.</div>
+              <button class="btn" data-activate="i-03-ruleset">Open the ruleset</button>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Where this result is read</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Front desk readiness board</span><span class="check-meta"><a href="intake-frontdesk.html#/a-30-readiness-board">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Infusion bay board</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Five-rights verification</span><span class="check-meta"><a href="clinical-infusion.html#/b-14-preinfusion">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">IV order safety checks</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Booking a treatment</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Plan of care</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Pause and physician review are hard blocks on booking and on starting an infusion.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Who may do what</div>
+              <dl class="kv">
+                <dt>Calculate</dt><dd>The engine, daily at 7:00 AM</dd>
+                <dt>Approve or override</dt><dd>Physician or extender, with a reason</dd>
+                <dt>Flag new information</dt><dd>MA · nurse · PCC · front desk</dd>
+                <dt>Change the ruleset</dt><dd>Physician or extender approves a proposal</dd>
+                <dt>HCOS</dt><dd>Explains and suggests — it never escalates or changes a stage</dd>
+              </dl>
+              <div class="prov"><span><strong>Every decision</strong> lands in the audit store · <a href="security.html#/g-01-audit">open it</a></span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="i-02-assessment" data-title="Assessment record">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/readiness/RA-1211</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span class="avatar lg">NB</span>
+            <div>
+              <div class="page-title" style="margin:0">Nadia Boulos</div>
+              <div class="i-id">RA-1211 · 41 · detox program week 3 · evaluated Sunday, July 19 at 7:00 AM</div>
+            </div>
+          </div>
+          <div class="app-user">
+            <button class="btn btn-ghost" data-activate="i-01-readiness">Back to the board</button>
+            <a class="btn" href="patients.html">Open the chart</a>
+          </div>
+        </div>
+
+        <div class="card i-bar" style="margin-bottom:12px">
+          <div>
+            <span class="i-id">RA-1211</span> <span class="ver-chip">v4</span> <span class="appr pending">Pending</span>
+            &nbsp;·&nbsp; <span class="ver-chip superseded">v3</span> Standard, approved Jul 13 by Dr. Bakman
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="HCOS.toast('Four versions since Jun 30. A released version is never edited — a new result writes the next one.')">Version history</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Flagged for Dr. Bakman. Flagging does not change the result.', 'ok')">Flag new information</button>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>Reads</strong> the weekly check-in, the symptom list, result <code>L-8862</code>, home activities and ruleset v3.2 — live, never copied in.</span>
+          <span><strong>Read by</strong> the front desk board, the bay board and IV orders.</span>
+        </div>
+
+        <div class="callout callout-err" style="margin-top:12px">
+          <strong>Physician review required.</strong> Nadia's weekly check-in has not been answered since Jul 13. With a required input missing the engine holds at physician review — it does not estimate a result, and chair 4 stays blocked until Dr. Bakman decides.
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">What the engine read</div>
+
+              <div class="i-fired">
+                <div class="i-fired-src">Survey · weekly detox check-in · due Jul 19 · not answered</div>
+                <div class="i-fired-body">Not answered. Two reminders sent — <a href="clinical-questionnaires.html#/b-30-quest-results">open the questionnaire</a>.</div>
+              </div>
+              <div class="i-fired">
+                <div class="i-fired-src">Symptoms · weekly check-in · answered Mon Jul 13 <span class="clin-state reported">Reported</span></div>
+                <div class="i-fired-body">"Headaches most days, new nausea, sleep worse than last week" — three symptoms absent in weeks 1 and 2.
+                  <div class="clin-src">Nadia's own words · not a diagnosis until a provider says so</div></div>
+              </div>
+              <div class="i-fired">
+                <div class="i-fired-src">Lab · comprehensive metabolic panel <code>L-8862</code> · resulted Jul 15</div>
+                <div class="i-fired-body">ALT above her baseline trend — still in range, moving the wrong way. <a href="labs.html#/c-01-orders">Open the result</a>.</div>
+              </div>
+              <div class="i-fired">
+                <div class="i-fired-src">Home activities · week of Jul 13</div>
+                <div class="i-fired-body">4 of 7 days logged. <a href="journey-plan.html#/j-plan-activities">Open her plan</a>.</div>
+              </div>
+              <div class="i-fired">
+                <div class="i-fired-src">Treatment history · 2 Myers' cocktail sessions · last Jul 12</div>
+                <div class="i-fired-body">Both tolerated, no reaction recorded.</div>
+              </div>
+
+              <div class="seg-divider">Rules that fired</div>
+
+              <div class="i-fired">
+                <div class="i-fired-src">Rule 1 · deterministic · ruleset v3.2</div>
+                <div class="i-fired-body">A new symptom cluster in a weekly check-in routes to physician review.</div>
+              </div>
+              <div class="i-fired">
+                <div class="i-fired-src">Rule 3 · deterministic · ruleset v3.2</div>
+                <div class="i-fired-body">A required weekly input missing for 48 hours routes to physician review.</div>
+              </div>
+              <div class="field-help">Deterministic rules decided this result. The suggestion below did not.</div>
+
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Suggested by HCOS</span>
+                  <span class="ai-state suggested">Suggestion</span>
+                </div>
+                <div class="ai-body">
+                  The three symptoms Nadia reported on Jul 13 also appeared in the ten days before her Jun 24 flare. Worth asking about hydration and magnesium timing before the next session.
+                </div>
+                <div class="ai-meta">
+                  <span><b>Read</b> <a href="clinical-questionnaires.html#/b-30-quest-results">3 check-ins</a> · <a href="clinical-infusion.html#/b-15-flowsheet">2 administrations</a> · result <code>L-8862</code></span>
+                  <span><b>Model</b> readiness-explain v1.2</span>
+                  <span><b>Confidence</b> 0.68 — one prior flare only</span>
+                  <span><b>Reviewer</b> Dr. Bakman</span>
+                  <span><b>HCOS never sets a readiness result</b></span>
+                </div>
+                <div class="ai-actions">
+                  <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to the review note as a question to ask — accepted by Dr. Drannikov.', 'ok')">Add to the review note</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Rejected. Recorded with your name and the reason.', 'ok')">Not useful</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Version history</div>
+              <div class="i-hist"><span class="i-hist-when">Jun 30</span><span class="i-hist-what"><span class="ver-chip superseded">v1</span> Gentle · ruleset v2.4 · first assessment</span><span class="i-hist-who">Dr. Bakman</span></div>
+              <div class="i-hist"><span class="i-hist-when">Jul 6</span><span class="i-hist-what"><span class="ver-chip superseded">v2</span> Standard · ruleset v2.4 · session 1 tolerated</span><span class="i-hist-who">Dr. Bakman</span></div>
+              <div class="i-hist"><span class="i-hist-when">Jul 13</span><span class="i-hist-what"><span class="ver-chip superseded">v3</span> Standard · ruleset v3.2 · check-in stable</span><span class="i-hist-who">Dr. Bakman</span></div>
+              <div class="i-hist"><span class="i-hist-when">Jul 19</span><span class="i-hist-what"><span class="ver-chip">v4</span> Physician review required · ruleset v3.2 · waiting</span><span class="i-hist-who">engine</span></div>
+              <div class="field-help" style="margin-top:8px">Each version keeps the ruleset it ran on. Publishing a new ruleset never rewrites a released result.</div>
+              <div class="prov"><span><strong>Every line</strong> is in the audit store · <a href="security.html#/g-01-audit">open it</a></span></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Physician decision</div>
+              <div class="i-result">Physician review required</div>
+              <div class="field-help" style="margin-bottom:10px">Assigned to Dr. Bakman on Jul 19 · either physician or an extender may decide</div>
+
+              <div class="field">
+                <label class="field-label">Result</label>
+                <select class="field-select">
+                  <option>Physician review required — leave as calculated</option>
+                  <option>Pause</option>
+                  <option>Gentle</option>
+                  <option>Standard</option>
+                  <option>Advanced</option>
+                  <option>Flare recovery</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Reason — required to approve or override</label>
+                <textarea class="field-textarea" placeholder="Say what you decided and why. It goes on the record and to the care team."></textarea>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn btn-primary" onclick="HCOS.toast('Approved as v4 by Dr. Drannikov. The board, the bay board and IV orders read it now.', 'ok')">Approve this result</button>
+                <button class="btn" onclick="HCOS.toast('Override written as v5 with your reason. Dr. Bakman is notified and the audit store has it.', 'warn')">Override with a reason</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">An override writes the next version — a released assessment is never edited.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">What is blocked meanwhile</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Chair 4 · Myers' cocktail 2:00 PM</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">bay board</a></span></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Booking any infusion for Nadia</span><span class="check-meta"><a href="schedule.html#/l-03-book">booking</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Micronutrient panel in transit</span><span class="check-meta"><a href="labs.html#/c-01-orders">labs</a></span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Physician review is a hard block on booking and on starting an infusion. No one overrides it from those screens.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Who may do what</div>
+              <dl class="kv">
+                <dt>Calculate</dt><dd>The engine, on ruleset v3.2</dd>
+                <dt>Approve or override</dt><dd>Dr. Bakman · Dr. Drannikov · Brooke (PA)</dd>
+                <dt>Flag new information</dt><dd>MA · nurse · PCC · front desk</dd>
+                <dt>Chase the check-in</dt><dd>Bee (PCC) · Charlene (MA)</dd>
+                <dt>HCOS</dt><dd>Explains and suggests only</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="i-03-ruleset" data-title="Ruleset">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/readiness/ruleset</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Readiness ruleset</div>
+            <div class="page-sub">Every result carries the ruleset version it ran on</div>
+          </div>
+          <div class="app-user">
+            <button class="btn btn-ghost" data-activate="i-01-readiness">Back to the board</button>
+            <button class="btn" onclick="HCOS.toast('Proposal started. It stays pending until a physician or extender approves it.', 'ok')">Propose a change</button>
+          </div>
+        </div>
+
+        <div class="card i-bar" style="margin-bottom:12px">
+          <div>
+            <span class="ver-chip">v3.2</span> <span class="appr approved">Approved</span> effective Jul 1 · approved by Dr. Drannikov
+            &nbsp;·&nbsp; <span class="ver-chip superseded">v2.4</span> in force Apr 2 – Jun 30 · 41 released assessments still reference it
+          </div>
+          <button class="btn btn-sm" onclick="HCOS.toast('v2.4 was in force Apr 2 – Jun 30. Assessments released under it keep it — nothing was recalculated.')">Version history</button>
+        </div>
+
+        <div class="prov">
+          <span><strong>Applies to</strong> the 7:00 AM run and to every recalculation triggered by a new survey, result, order or flare report.</span>
+          <span>Publishing a version never rewrites a released assessment.</span>
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Rules in v3.2</div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 1</div>
+                <div class="i-rule-body">A new symptom cluster in a weekly check-in routes to physician review.
+                  <div class="i-sub">Fired 2 times in the last 7 days · last: Nadia Boulos, Jul 19</div></div>
+                <span class="pill pill-err">Physician review</span>
+              </div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 2</div>
+                <div class="i-rule-body">A reported flare switches the program to flare recovery and holds escalation until a physician clears it.
+                  <div class="i-sub">Fired 1 time in the last 7 days · last: Priya Natarajan, Jul 19</div></div>
+                <span class="pill pill-warn">Flare recovery</span>
+              </div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 3</div>
+                <div class="i-rule-body">A required weekly input missing for 48 hours routes to physician review — the engine never estimates a missing answer.
+                  <div class="i-sub">Fired 1 time in the last 7 days · last: Nadia Boulos, Jul 19</div></div>
+                <span class="pill pill-err">Physician review</span>
+              </div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 4</div>
+                <div class="i-rule-body">A first series, or age 65 and over, starts at gentle.
+                  <div class="i-sub">Fired 1 time in the last 7 days · last: Walter Hsu, Jul 17</div></div>
+                <span class="pill pill-navy">Gentle</span>
+              </div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 5</div>
+                <div class="i-rule-body">A prerequisite lab still pending holds the program at pause until the result files.
+                  <div class="i-sub">Fired 0 times in the last 7 days · last: Grace Lindqvist, Jul 8 — lifted Jul 14</div></div>
+                <span class="pill pill-warn">Pause</span>
+              </div>
+              <div class="field-help" style="margin-top:10px">A fired rule outranks the engine's own recommendation. Two rules that disagree resolve to the more cautious result.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Proposed · v3.3 <span class="appr pending">Pending</span></div>
+              <div class="i-rule">
+                <div class="i-rule-num">Rule 2</div>
+                <div class="i-rule-body">Hold escalation for 14 days after a flare instead of 7.
+                  <div class="i-sub">Proposed by Bee (PCC) · Jul 20</div></div>
+              </div>
+              <div class="callout" style="margin-top:10px">Bee's rationale: "Two of the four flares this quarter came back within ten days of restarting. Fourteen days matches what Dr. Drannikov has been doing by hand."</div>
+              <div class="field">
+                <label class="field-label">Decision note</label>
+                <textarea class="field-textarea" placeholder="Say what you decided and why."></textarea>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn btn-primary" onclick="HCOS.toast('v3.3 approved by Dr. Drannikov. Tomorrow’s 7:00 AM run uses it; released assessments keep v3.2.', 'ok')">Approve v3.3</button>
+                <button class="btn" onclick="HCOS.toast('Returned to Bee with your note. v3.2 stays in force.', 'warn')">Return with a note</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">A proposal stays pending until a physician or extender approves it. Nothing recalculates before then.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">What approving v3.3 does</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Tomorrow's 7:00 AM run uses v3.3</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Released assessments keep the version they ran on</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">A changed result still waits for a physician</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Bee is told, with your note</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">The change lands in the audit store</span><span class="check-meta"><a href="security.html#/g-01-audit">open</a></span></li>
+              </ul>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Where the inputs come from</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Weekly detox check-in · form v6</span><span class="check-meta"><a href="intake-admin.html#/a-46-form-builder">builder</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Symptoms and problems</span><span class="check-meta"><a href="clinical-chart.html#/b-05-problem-list">chart</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Results</span><span class="check-meta"><a href="labs.html#/c-01-orders">labs</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Home activities</span><span class="check-meta"><a href="journey-plan.html#/j-plan-activities">plan</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Administrations</span><span class="check-meta"><a href="clinical-infusion.html#/b-15-flowsheet">flowsheet</a></span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Intake forms, clinical questionnaires and readiness check-ins are built in one place and answered once.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Who may do what</div>
+              <dl class="kv">
+                <dt>Propose a change</dt><dd>Anyone on the care team, with a rationale</dd>
+                <dt>Approve a version</dt><dd>Physician or extender only</dd>
+                <dt>Publish</dt><dd>Approval publishes it — there is no separate step</dd>
+                <dt>HCOS</dt><dd>May draft wording — it cannot approve or publish</dd>
+              </dl>
             </div>
           </div>
         </div>
@@ -174,29 +586,35 @@
   <div class="drawer-head">
     <div>
       <div class="modal-title">Why standard — Maya Reyes</div>
-      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+      <div class="modal-sub">RA-1152 · v5 · ruleset v3.2 · recalculated today at 7:00 AM</div>
     </div>
     <button class="modal-close" data-close-drawer="#i-why-maya">×</button>
   </div>
   <div class="drawer-body">
-    <div style="margin-bottom:14px">
-      Current state: <span class="pill pill-ok">Standard</span>
+    <div style="margin-bottom:10px">
+      Result: <span class="pill pill-ok">Standard</span> <span class="appr approved">Approved</span>
     </div>
+    <div class="prov"><span><strong>Approved by</strong> Dr. Drannikov · Jul 6 · unchanged by the fifteen runs since</span></div>
 
-    <div class="seg-divider">What the engine weighed</div>
+    <div class="seg-divider">What the engine read</div>
 
     <div class="i-fired">
-      <div class="i-fired-src">Survey · weekly detox check-in · answered Mon Jul 20</div>
+      <div class="i-fired-src">Survey · weekly detox check-in · answered Mon Jul 20 <span class="clin-state reported">Reported</span></div>
       <div class="i-fired-body">Symptom scores level with weeks 1–3 — nothing new reported.</div>
     </div>
     <div class="i-fired">
       <div class="i-fired-src">Lab · comprehensive metabolic panel · resulted Jul 10</div>
       <div class="i-fired-body">All values tracking her baseline.</div>
     </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Home activities · week of Jul 13</div>
+      <div class="i-fired-body">7 of 7 days logged, third week running.</div>
+    </div>
 
-    <div class="field-help" style="margin-bottom:16px">No rules fired — the engine's own recommendation stands.</div>
+    <div class="field-help" style="margin-bottom:16px">No rules fired. The result is unchanged, so today's run did not write a new version.</div>
 
     <a class="btn btn-primary" href="patients.html#/pt-02-profile">Open Maya's profile</a>
+    <a class="btn" href="clinical-chart.html#/b-10-iv-order">Open her IV order</a>
   </div>
 </div>
 
@@ -205,34 +623,31 @@
   <div class="drawer-head">
     <div>
       <div class="modal-title">Why physician review — Nadia Boulos</div>
-      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+      <div class="modal-sub">RA-1211 · v4 · ruleset v3.2 · evaluated Sunday, July 19</div>
     </div>
     <button class="modal-close" data-close-drawer="#i-why-nadia">×</button>
   </div>
   <div class="drawer-body">
-    <div style="margin-bottom:14px">
-      Current state: <span class="pill pill-err">Physician review</span>
-      <span class="field-help" style="display:inline;margin-left:6px">was Standard until Monday's survey</span>
+    <div style="margin-bottom:10px">
+      Result: <span class="pill pill-err">Physician review</span> <span class="appr pending">Pending</span>
+      <span class="field-help" style="display:inline;margin-left:6px">was Standard on v3</span>
     </div>
+    <div class="prov"><span><strong>Assigned to</strong> Dr. Bakman · Jul 19 · escalation held until he decides</span></div>
 
-    <div class="seg-divider">Inputs that fired</div>
+    <div class="seg-divider">Rules that fired</div>
 
     <div class="i-fired">
-      <div class="i-fired-src">Survey · weekly detox check-in · answered Mon Jul 20</div>
-      <div class="i-fired-body">"Headaches most days, new nausea, sleep worse than last week" — three symptoms that were absent in weeks 1 and 2.</div>
+      <div class="i-fired-src">Rule 1 · deterministic · ruleset v3.2</div>
+      <div class="i-fired-body">A new symptom cluster in a weekly check-in routes to physician review.</div>
     </div>
     <div class="i-fired">
-      <div class="i-fired-src">Lab · comprehensive metabolic panel · resulted Jul 15</div>
-      <div class="i-fired-body">ALT above her baseline trend — still in range, moving the wrong way.</div>
-    </div>
-    <div class="i-fired">
-      <div class="i-fired-src">Physician rule · rule 1</div>
-      <div class="i-fired-body">New symptom cluster in a weekly survey routes to physician review. Dr. Drannikov decides, not the engine.</div>
+      <div class="i-fired-src">Rule 3 · deterministic · ruleset v3.2</div>
+      <div class="i-fired-body">The weekly check-in has been unanswered since Jul 13 — a missing required input holds here.</div>
     </div>
 
-    <div class="field-help" style="margin-bottom:16px">Home activities and treatment history were current — nothing else fired.</div>
+    <div class="field-help" style="margin-bottom:16px">The full record shows every input, the suggestion HCOS attached, and the decision controls.</div>
 
-    <button class="btn btn-primary" onclick="HCOS.toast('Sent to Dr. Drannikov for review.', 'ok')">Send to Dr. Drannikov</button>
+    <button class="btn btn-primary" data-activate="i-02-assessment">Open the assessment</button>
     <a class="btn" href="patients.html">Open the patient list</a>
   </div>
 </div>
@@ -242,27 +657,35 @@
   <div class="drawer-head">
     <div>
       <div class="modal-title">Why gentle — Walter Hsu</div>
-      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+      <div class="modal-sub">RA-1218 · v1 · ruleset v3.2 · evaluated Thursday, July 17</div>
     </div>
     <button class="modal-close" data-close-drawer="#i-why-walter">×</button>
   </div>
   <div class="drawer-body">
-    <div style="margin-bottom:14px">
-      Current state: <span class="pill pill-navy">Gentle</span>
+    <div style="margin-bottom:10px">
+      Result: <span class="pill pill-navy">Gentle</span> <span class="appr approved">Approved</span>
     </div>
+    <div class="prov"><span><strong>Approved by</strong> Dr. Bakman · Jul 17 · first assessment on this record</span></div>
 
-    <div class="seg-divider">What the engine weighed</div>
+    <div class="seg-divider">What the engine read</div>
 
     <div class="i-fired">
-      <div class="i-fired-src">Treatment history · reviewed Jul 21</div>
+      <div class="i-fired-src">Treatment history · reviewed Jul 17</div>
       <div class="i-fired-body">First NAD+ series, session 1 of 6 — no prior infusion response to draw on.</div>
     </div>
     <div class="i-fired">
-      <div class="i-fired-src">Profile · age 68</div>
-      <div class="i-fired-body">Age plus a first series sets the starting pace to gentle.</div>
+      <div class="i-fired-src">Person record · age 68</div>
+      <div class="i-fired-body">Read from the person record, not typed in here. <a href="people.html">Open it</a>.</div>
     </div>
 
-    <div class="field-help" style="margin-bottom:16px">No rules fired — gentle is the engine's starting point for a first series.</div>
+    <div class="seg-divider">Rules that fired</div>
+
+    <div class="i-fired">
+      <div class="i-fired-src">Rule 4 · deterministic · ruleset v3.2</div>
+      <div class="i-fired-body">A first series, or age 65 and over, starts at gentle.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">His next assessment runs after session 2, or sooner if a survey or result files.</div>
 
     <a class="btn" href="patients.html">Open the patient list</a>
   </div>
@@ -273,31 +696,40 @@
   <div class="drawer-head">
     <div>
       <div class="modal-title">Why flare recovery — Priya Natarajan</div>
-      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+      <div class="modal-sub">RA-1206 · v3 · ruleset v3.2 · evaluated Sunday, July 19</div>
     </div>
     <button class="modal-close" data-close-drawer="#i-why-priya">×</button>
   </div>
   <div class="drawer-body">
-    <div style="margin-bottom:14px">
-      Current state: <span class="pill pill-warn">Flare recovery</span>
-      <span class="field-help" style="display:inline;margin-left:6px">was Standard until Sunday's report</span>
+    <div style="margin-bottom:10px">
+      Result: <span class="pill pill-warn">Flare recovery</span> <span class="appr pending">Pending</span>
+      <span class="field-help" style="display:inline;margin-left:6px">was Standard on v2, approved Jul 17 under ruleset v2.4</span>
     </div>
+    <div class="prov"><span><strong>Waiting on</strong> Dr. Drannikov · escalation held meanwhile — the safer result stands until he decides</span></div>
 
-    <div class="seg-divider">Inputs that fired</div>
+    <div class="seg-divider">What the engine read</div>
 
     <div class="i-fired">
-      <div class="i-fired-src">Symptoms · flare report · Sun Jul 19</div>
-      <div class="i-fired-body">Fatigue flare reported after Saturday's Myers' cocktail session.</div>
+      <div class="i-fired-src">Symptoms · flare report · Sun Jul 19 <span class="clin-state reported">Reported</span></div>
+      <div class="i-fired-body">Fatigue flare reported after Saturday's Myers' cocktail session.
+        <div class="clin-src">Priya's own words · self-reported in the patient app</div></div>
     </div>
     <div class="i-fired">
-      <div class="i-fired-src">Physician rule · rule 2</div>
-      <div class="i-fired-body">A reported flare switches the program to flare recovery and pauses escalation until Dr. Drannikov clears it.</div>
+      <div class="i-fired-src">Order · <code>O-2291</code> · series of 6, signed by Dr. Drannikov</div>
+      <div class="i-fired-body">Session 2 of 6 is booked for today. <a href="clinical-chart.html#/b-10-iv-order">Open the order</a>.</div>
     </div>
 
-    <div class="field-help" style="margin-bottom:16px">Surveys and labs were current — nothing else fired.</div>
+    <div class="seg-divider">Rules that fired</div>
 
-    <button class="btn btn-primary" onclick="HCOS.toast('Sent to Dr. Drannikov for review.', 'ok')">Send to Dr. Drannikov</button>
-    <a class="btn" href="patients.html">Open the patient list</a>
+    <div class="i-fired">
+      <div class="i-fired-src">Rule 2 · deterministic · ruleset v3.2</div>
+      <div class="i-fired-body">A reported flare switches the program to flare recovery and holds escalation until a physician clears it.</div>
+    </div>
+
+    <div class="field-help" style="margin-bottom:16px">Surveys, labs and home activities were current — nothing else fired.</div>
+
+    <button class="btn btn-primary" onclick="HCOS.toast('Sent to Dr. Drannikov. The result stays at flare recovery until he decides.', 'ok')">Send to Dr. Drannikov</button>
+    <a class="btn" href="clinical-infusion.html#/b-13-bay-board">Open the bay board</a>
   </div>
 </div>
 
@@ -305,30 +737,48 @@
 <div class="drawer" id="i-why-grace">
   <div class="drawer-head">
     <div>
-      <div class="modal-title">Why pause — Grace Lindqvist</div>
-      <div class="modal-sub">Evaluated Tuesday, July 21 · 7:00 AM</div>
+      <div class="modal-title">Why standard — Grace Lindqvist</div>
+      <div class="modal-sub">RA-1174 · v2 · ruleset v3.2 · evaluated Tuesday, July 15</div>
     </div>
     <button class="modal-close" data-close-drawer="#i-why-grace">×</button>
   </div>
   <div class="drawer-body">
-    <div style="margin-bottom:14px">
-      Current state: <span class="pill pill-warn">Pause</span>
+    <div style="margin-bottom:10px">
+      Result: <span class="pill pill-ok">Standard</span> <span class="appr approved">Approved</span>
+      <span class="field-help" style="display:inline;margin-left:6px">was Pause on v1</span>
     </div>
+    <div class="prov"><span><strong>Approved by</strong> Dr. Drannikov · Jul 15 · the pause lifted when the thyroid panel filed</span></div>
 
-    <div class="seg-divider">Inputs that fired</div>
+    <div class="seg-divider">What changed</div>
 
     <div class="i-fired">
-      <div class="i-fired-src">Lab · thyroid panel · ordered Jul 14, results pending</div>
-      <div class="i-fired-body">Detox prep needs the thyroid result before a start date — the engine holds at pause until it files.</div>
+      <div class="i-fired-src">Lab · thyroid panel · ordered Jul 8, resulted Jul 14</div>
+      <div class="i-fired-body">Filing the result cleared rule 5 and the engine recalculated the same evening. <a href="labs.html#/c-01-orders">Open the result</a>.</div>
+    </div>
+    <div class="i-fired">
+      <div class="i-fired-src">Rule 5 · deterministic · ruleset v3.2 · no longer firing</div>
+      <div class="i-fired-body">A prerequisite lab still pending holds the program at pause. It held v1 from Jul 8 to Jul 14.</div>
     </div>
 
-    <div class="field-help" style="margin-bottom:16px">Surveys and home activities were current — nothing else fired.</div>
+    <div class="field-help" style="margin-bottom:16px">Her rising TSH trend is with Dr. Drannikov for review before Thursday's follow-up. If he changes the plan, readiness recalculates from that.</div>
 
-    <a class="btn btn-primary" href="labs.html">Open lab orders</a>
+    <a class="btn btn-primary" href="labs.html#/c-01-orders">Open lab orders</a>
     <a class="btn" href="patients.html">Open the patient list</a>
   </div>
 </div>
 
 <script src="assets/hcos.js?v=8"></script>
+<script>
+  /* Jumping to a screen from inside a why drawer closes the drawer behind it. */
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('.drawer [data-activate]') : null;
+    if (!t) return;
+    var d = t.closest('.drawer');
+    if (!d) return;
+    d.classList.remove('open');
+    var ovl = document.querySelector('.drawer-overlay[data-close-drawer="#' + d.id + '"]');
+    if (ovl) ovl.classList.remove('open');
+  });
+</script>
 </body>
 </html>

@@ -76,14 +76,16 @@
         </div>
 
         <h2 class="page-title">Questionnaires</h2>
-        <p class="page-sub">Pick an instrument to administer now, or send it to the patient portal so the provider walks in with results in hand. Answers flow into the chart automatically — nothing is re-keyed.</p>
+        <p class="page-sub">Administer an instrument now, or send it to the patient portal so the provider walks in with results in hand.</p>
 
-        <div class="callout">Questionnaires, intake forms, and readiness surveys run on one survey engine — build or edit any instrument once and it is available everywhere. <a href="intake-admin.html#/a-46-form-builder">Open the form builder</a>.</div>
+        <div class="prov">
+          <span><strong>From</strong> the questionnaire engine · 9 of 24 published definitions match clinical use and your role · versions are published in the <a href="intake-admin.html#/a-46-form-builder">form builder</a></span>
+        </div>
 
         <div class="grid-4" style="margin:14px 0">
           <div class="card stat-card">
             <div class="stat-num">9</div>
-            <div class="stat-lbl">Instruments available</div>
+            <div class="stat-lbl">Published to clinical use</div>
           </div>
           <div class="card stat-card">
             <div class="stat-num">3</div>
@@ -95,7 +97,7 @@
           </div>
           <div class="card stat-card">
             <div class="stat-num">27</div>
-            <div class="stat-lbl">Filed to chart this month</div>
+            <div class="stat-lbl">Responses stored this month</div>
           </div>
         </div>
 
@@ -108,18 +110,31 @@
           <button class="filter-chip">Intake packets</button>
         </div>
 
-        <div class="callout callout-ok">
-          <strong>Suggested for this visit</strong> — based on chief complaint (fatigue with environmental exposure history):
-          <span class="pill pill-warn">Mold History</span>
-          <span class="pill pill-warn">Metabolic Assessment</span>
-          <span class="pill pill-warn">SF-36 Quality of Life</span>
-          <button class="btn btn-sm" style="margin-left:8px" onclick="HCOS.toast('Bundle sent — Nadia Boulos gets one portal link for all 3 questionnaires.', 'ok')">Send all 3 to portal</button>
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Suggested by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">
+            Fatigue with an environmental exposure history — Mold History, Metabolic Assessment and SF-36 fit this visit.
+          </div>
+          <div class="ai-meta">
+            <span><b>Read</b> reason for visit Jul 14 · symptom answers <code>R-4102</code> · problem list</span>
+            <span><b>Model</b> instrument-picker v1.3</span>
+            <span><b>Confidence</b> 0.71 — Mold History is the least certain of the three</span>
+            <span><b>Reviewer</b> Dr. Drannikov</span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Accepted by Dr. Drannikov — Nadia Boulos gets one portal link for all 3 questionnaires.', 'ok')">Accept and send all 3</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('SF-36 dropped from the set, recorded with your name and the reason.')">Drop SF-36</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Rejected. Recorded with your name and the reason.')">Reject the suggestion</button>
+          </div>
         </div>
 
         <div class="seg-divider">Suggested for this visit</div>
         <div class="grid-2">
           <div class="card bq-suggested">
-            <div class="bq-inst-name">Mold History Questionnaire</div>
+            <div class="bq-inst-name">Mold History Questionnaire <span class="ver-chip">v2</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">Environmental exposure assessment — residence history, water intrusion, visible mold, dampness. Supports decisions about VCS testing, urinary mycotoxins, and detox pacing. Not diagnostic on its own.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> 28 questions</span>
@@ -131,10 +146,11 @@
               <button class="btn btn-primary btn-sm" data-activate="b-29-quest-administer">Administer now</button>
               <button class="btn btn-sm" onclick="HCOS.toast('Mold History sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-118</code> · published by Shibani Jun 2 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card bq-suggested">
-            <div class="bq-inst-name">Metabolic Assessment · MSQ-style</div>
+            <div class="bq-inst-name">Metabolic Assessment · MSQ-style <span class="ver-chip">v3</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">Functional-medicine symptom-burden survey across gut, blood sugar, adrenal, thyroid, liver, hormones, energy, and mood. Section subscores and a total that trends over time as a measure of treatment response.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> ~110 items</span>
@@ -146,10 +162,11 @@
               <button class="btn btn-primary btn-sm" data-activate="b-30-quest-results">View results</button>
               <button class="btn btn-sm" onclick="HCOS.toast('Metabolic Assessment sent — a fresh administration will trend against Jun 9.', 'ok')">Send to portal</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-042</code> · published by Shibani Apr 12 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card bq-suggested">
-            <div class="bq-inst-name">SF-36 · Quality of Life</div>
+            <div class="bq-inst-name">SF-36 · Quality of Life <span class="ver-chip">v1</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">Validated 36-item instrument across 8 domains — physical function, role limits, pain, social, emotional, vitality, mental health, general health. A baseline and serial measure of how the patient is actually doing.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> 36 items</span>
@@ -161,10 +178,11 @@
               <button class="btn btn-primary btn-sm" onclick="HCOS.toast('SF-36 sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
               <button class="btn btn-sm" data-activate="b-29-quest-administer">Administer now</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-077</code> · published by Dr. Bakman Feb 3 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card bq-suggested">
-            <div class="bq-inst-name">Lyme Symptom Severity</div>
+            <div class="bq-inst-name">Lyme Symptom Severity <span class="ver-chip">v2</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">30-item 0–4 severity rating across constitutional, musculoskeletal, neurologic, autonomic, and cognitive clusters. A score profile that aligns suggests a tickborne workup.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> 30 items</span>
@@ -176,13 +194,14 @@
               <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Lyme Symptom Severity sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
               <button class="btn btn-sm" data-activate="b-29-quest-administer">Administer now</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-091</code> · published by Shibani May 20 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
         </div>
 
         <div class="seg-divider">All instruments</div>
         <div class="grid-2">
           <div class="card">
-            <div class="bq-inst-name">Brain Region Localization</div>
+            <div class="bq-inst-name">Brain Region Localization <span class="ver-chip">v1</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">Autonomic and epileptiform symptom checklist used by neurologically-focused care. Helps localize regions and guide further workup during the encounter.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> 22 items</span>
@@ -193,10 +212,11 @@
             <div class="bq-inst-actions">
               <button class="btn btn-primary btn-sm" data-activate="b-29-quest-administer">Administer now</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-104</code> · published by Dr. Bakman Mar 9 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card">
-            <div class="bq-inst-name">New Patient Packet</div>
+            <div class="bq-inst-name">New Patient Packet <span class="ver-chip">v6</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">Full intake — demographics, medical story, past medical &amp; surgical history, meds, supplements, allergies, social/family history, lifestyle, ACEs, chronological timeline. 7 pages.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> ~120 fields</span>
@@ -206,12 +226,13 @@
             </div>
             <div class="bq-inst-actions">
               <a class="btn btn-primary btn-sm" href="clinical.html#/b-02-snapshot">View responses</a>
-              <button class="btn btn-sm" onclick="HCOS.toast('Update request sent — Nadia can confirm or change intake answers from the portal.', 'ok')">Request update</button>
+              <button class="btn btn-sm" onclick="HCOS.toast('Update request sent — Nadia confirms or changes her answers in a new response. The intake response stays as it was.', 'ok')">Request update</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-001</code> · the same packet <a href="intake-onboarding.html#/a-15-demographics">onboarding</a> uses · published by Shibani Jan 8</span></div>
           </div>
 
           <div class="card">
-            <div class="bq-inst-name">L2/L3 New Patient Packet</div>
+            <div class="bq-inst-name">L2/L3 New Patient Packet <span class="ver-chip">v4</span> <span class="appr approved">Published</span></div>
             <div class="bq-inst-desc">Extended intake for tier-2/tier-3 services (EBOO, Erchonia laser, advanced IV protocols). Adds support team, implanted devices, anticoagulant allergies, and G6PD status.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> ~95 fields</span>
@@ -222,25 +243,45 @@
             <div class="bq-inst-actions">
               <button class="btn btn-primary btn-sm" onclick="HCOS.toast('L2/L3 New Patient Packet sent — portal link on its way to Nadia Boulos.', 'ok')">Send to portal</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-002</code> · published by Shibani Feb 26 · <a href="intake-admin.html#/a-46-form-builder">form builder</a></span></div>
           </div>
 
           <div class="card">
-            <div class="bq-inst-name">L2/L3 Follow-up Packet</div>
+            <div class="bq-inst-name">L2/L3 Follow-up Packet <span class="ver-chip">v2</span> <span class="appr draft">Draft</span></div>
             <div class="bq-inst-desc">Follow-up version of the L2/L3 intake. Prefills prior answers and asks the patient to confirm or update. Sent before every L2/L3 follow-up encounter.</div>
             <div class="bq-meta">
               <span><strong>Length</strong> ~60 fields</span>
               <span><strong>Time</strong> ~12 min</span>
               <span><strong>Mode</strong> Patient · portal</span>
-              <span><strong>Last</strong> Not yet applicable</span>
+              <span><strong>Last</strong> Version 1 retired Jun 30</span>
             </div>
             <div class="bq-inst-actions">
-              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('L2/L3 Follow-up sent — it prefills prior answers for Nadia to confirm.', 'ok')">Send to portal</button>
+              <a class="btn btn-sm" href="intake-admin.html#/a-46-form-builder">Open in the form builder</a>
+              <button class="btn btn-sm" onclick="HCOS.toast('Shibani has the request — v2 can be sent once clinical admin publishes it.', 'ok')">Ask clinical admin to publish</button>
             </div>
+            <div class="prov"><span><strong>Definition</strong> <code>Q-003</code> · <span class="ver-chip superseded">v1</span> retired Jun 30 · responses keep the version they were answered on</span></div>
           </div>
         </div>
 
-        <div class="callout callout-ok" style="margin-top:16px">
-          <strong>How it fits the visit:</strong> patient self-report instruments go to the portal before the visit so the provider walks in with results in hand; provider-led instruments are administered conversationally in the room. Every score attaches to the chart, lands in the SOAP note's Subjective section, and trends on the results screen — no answer is re-keyed by hand.
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card">
+            <div class="card-title">Who may do what</div>
+            <dl class="kv">
+              <dt>Publish a definition</dt><dd>Clinical admin, in the form builder</dd>
+              <dt>Administer or send</dt><dd>Provider · MA · PCC</dd>
+              <dt>Interpret a score</dt><dd>Physician or extender</dd>
+              <dt>Change a submitted answer</dt><dd>No one — a new administration is taken</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <div class="card-title">Where answers are written</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">HCOS holds the response</span><span class="check-meta">one record, versioned</span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Chart reads it with a source link</span><span class="check-meta"><a href="clinical.html#/b-02-snapshot">open</a></span></li>
+              <li class="check-item"><span class="check-icon active">→</span><span class="check-label">eCW receives the signed summary only</span><span class="check-meta">until cutover</span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Every send and acceptance is logged</span><span class="check-meta"><a href="security.html#/g-01-audit">audit</a></span></li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -254,8 +295,12 @@
         <span class="frame-url">hcos.helixona.com/documentation/questionnaires/mold-history</span></div>
       <div class="frame-body">
 
-        <h2 class="page-title">Mold History Questionnaire</h2>
+        <h2 class="page-title">Mold History Questionnaire <span class="ver-chip">v2</span></h2>
         <p class="page-sub">Nadia Boulos · Anthem Blue Cross INN · started in the room with Dr. Drannikov, patient finishing on their phone</p>
+
+        <div class="prov">
+          <span><strong>Definition</strong> <code>Q-118</code> <span class="ver-chip">v2</span> · <strong>Response</strong> <code>R-4488</code> — every answer lands in this one response and is never overwritten</span>
+        </div>
 
         <div class="filters" style="justify-content:space-between">
           <div>
@@ -353,7 +398,8 @@
             </div>
 
             <div class="card" style="margin-bottom:16px">
-              <div class="card-title">Early flags from answers</div>
+              <div class="card-title">Early flags from answers <span class="clin-state reported">Reported</span></div>
+              <div class="clin-src" style="margin-bottom:8px">Nadia Boulos · Jul 21 · counted by scoring rules <span class="ver-chip">Mold v1.4</span></div>
               <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
                 <span class="pill pill-warn">Musty smell</span>
                 <span class="pill pill-warn">Damp basement</span>
@@ -387,25 +433,32 @@
           <span class="avatar lg">NB</span>
           <div class="bq-header-info">
             <div class="bq-name">Nadia Boulos <span class="net-badge net-inn">INN</span></div>
-            <div class="bq-demo">Results and scoring · scores feed the chart and the readiness Physician Review</div>
+            <div class="bq-demo">Scored responses · the chart, pre-charting and the readiness engine all read these</div>
           </div>
-          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Filed to chart — scores are in Nadia Boulos’s Subjective section and trending on the chart.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-02-snapshot'; }, 900)">File all results to chart</button>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Added to the note draft with a link back to each response. Dr. Drannikov accepts or edits before signing — nothing is filed on its own.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-03-soap'; }, 900)">Add findings to the note draft</button>
         </div>
 
-        <div class="callout callout-ok">Answers flow straight into the chart — no one re-keys them. Charlene pre-charts from these scores before the visit. <a href="clinical-remote.html#/b-19-precharting">See how answers pre-chart the note</a>.</div>
+        <div class="prov">
+          <span><strong>Responses</strong> <code>R-4471</code> Metabolic Assessment <span class="ver-chip">v3</span> · <code>R-4488</code> Mold History <span class="ver-chip">v2</span> — stored once, never re-keyed and never edited. A correction is a new administration.</span>
+        </div>
+
+        <div class="callout">Findings reach the note as a draft carrying its source link. Charlene pre-charts from these scores; Dr. Drannikov accepts them into the note he signs. <a href="clinical-remote.html#/b-19-precharting">Open pre-charting</a>.</div>
 
         <div class="grid-sidebar" style="margin-top:16px">
           <div>
             <div class="card" style="margin-bottom:16px">
-              <div class="card-title">Metabolic Assessment · MSQ-style symptom burden</div>
+              <div class="card-title">Metabolic Assessment · MSQ-style symptom burden <span class="ver-chip">v3</span></div>
               <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px">
                 <div class="stat-num" style="font-size:34px">118</div>
                 <div>
                   <span class="pill pill-warn">Elevated burden</span>
-                  <div class="field-help" style="margin-top:4px">Down 26 from 144 on Jun 9 · improving · supports the detox program and a Physician Review</div>
+                  <div class="field-help" style="margin-top:4px">Down 26 from 144 on Jun 9 · improving</div>
                 </div>
               </div>
-              <div class="field-help" style="margin-bottom:12px">Optimal &lt; 10 · mild 10–49 · moderate 50–99 · high 100+. Section subscores below; the darker the bar, the more of that section's items were endorsed.</div>
+              <div class="field-help" style="margin-bottom:8px">Optimal &lt; 10 · mild 10–49 · moderate 50–99 · high 100+. Section subscores below; the darker the bar, the more of that section's items were endorsed.</div>
+              <div class="prov" style="margin-bottom:12px">
+                <span><strong>Response</strong> <code>R-4471</code> · submitted by Nadia Boulos from the portal Jul 21, 10:12 AM · scored by ruleset <span class="ver-chip">MSQ v2.1</span> — a fixed rule, not a model</span>
+              </div>
 
               <div class="seg-divider" style="margin-top:0">Section subscores</div>
 
@@ -451,14 +504,15 @@
               </div>
 
               <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Filed to chart — Metabolic Assessment score is in the Subjective section.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-02-snapshot'; }, 900)">File to chart</button>
-                <button class="btn btn-sm" onclick="HCOS.toast('Re-administration sent — the next result will trend against today.', 'ok')">Send fresh administration</button>
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Added to the note draft, linked to response R-4471. Dr. Drannikov accepts it into the note he signs.', 'ok'); setTimeout(function(){ window.location.href = 'clinical.html#/b-03-soap'; }, 900)">Add score to the note draft</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Re-administration sent — it becomes a new response and trends against today.', 'ok')">Send fresh administration</button>
               </div>
             </div>
 
             <div class="card">
-              <div class="card-title">Mold History Questionnaire · just submitted</div>
-              <div style="font-size:12.5px;line-height:1.6;margin-bottom:8px">Flag-based instrument — no MSQ total. <strong>6 of 16 flags positive</strong> · <span class="pill pill-warn">Moderate likelihood</span> of environmental mold exposure.</div>
+              <div class="card-title">Mold History Questionnaire <span class="ver-chip">v2</span> <span class="clin-state reported">Reported</span></div>
+              <div style="font-size:12.5px;line-height:1.6;margin-bottom:4px">Flag-based instrument — no MSQ total. <strong>6 of 16 flags positive</strong> · <span class="pill pill-warn">Moderate likelihood</span> of environmental mold exposure.</div>
+              <div class="clin-src" style="margin-bottom:8px">Nadia Boulos · in room and portal · Jul 21 · counted by scoring rules <span class="ver-chip">Mold v1.4</span></div>
               <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
                 <span class="pill pill-warn">Musty smell</span>
                 <span class="pill pill-warn">Damp basement</span>
@@ -467,7 +521,28 @@
                 <span class="pill pill-warn">Slopes toward home</span>
                 <span class="pill pill-warn">Household often sick</span>
               </div>
-              <div class="field-help">Recommend VCS testing and urinary mycotoxins before advancing detox pacing.</div>
+              <div class="prov">
+                <span><strong>Patient report</strong> — a physician or extender decides what becomes a diagnosis on the <a href="clinical-chart.html#/b-05-problem-list">problem list</a>. Nothing here changes it.</span>
+              </div>
+
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Suggested by HCOS</span>
+                  <span class="ai-state suggested">Suggestion</span>
+                </div>
+                <div class="ai-body">Consider VCS testing and urinary mycotoxins before detox pacing advances.</div>
+                <div class="ai-meta">
+                  <span><b>Read</b> response <code>R-4488</code> · flag ruleset <span class="ver-chip">Mold v1.4</span></span>
+                  <span><b>Model</b> workup-hints v1.2</span>
+                  <span><b>Confidence</b> 0.64 — 6 of 16 flags, none confirmed by inspection</span>
+                  <span><b>Reviewer</b> Dr. Drannikov</span>
+                </div>
+                <div class="ai-actions">
+                  <a class="btn btn-sm btn-primary" href="clinical.html#/b-09-orders">Open orders to decide</a>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Rejected. Recorded with your name and the reason.')">Not now</button>
+                </div>
+              </div>
+
               <div style="margin-top:12px">
                 <button class="btn btn-sm" data-activate="b-29-quest-administer">Back to the questionnaire</button>
               </div>
@@ -488,6 +563,7 @@
                 <span class="bq-score-val">118</span>
               </div>
               <div class="field-help" style="margin-top:8px">Symptom burden is falling as the detox program progresses — Energy and Adrenal remain the two highest sections.</div>
+              <div class="prov"><span><strong>Computed</strong> from responses <code>R-4471</code> and <code>R-4102</code> · the chart trend reads the same two numbers</span></div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -495,35 +571,43 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Date</th><th>Total</th><th>By</th></tr>
+                    <tr><th>Date</th><th>Response</th><th>Version</th><th>Total</th><th>By</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>Jul 21</td><td>118</td><td>Portal · self-report</td></tr>
-                    <tr><td>Jun 9</td><td>144</td><td>Portal · self-report</td></tr>
-                    <tr><td>Apr 28</td><td>161</td><td>In room · Charlene</td></tr>
+                    <tr><td>Jul 21</td><td><code>R-4471</code></td><td><span class="ver-chip">v3</span></td><td>118</td><td>Portal · self-report</td></tr>
+                    <tr><td>Jun 9</td><td><code>R-4102</code></td><td><span class="ver-chip">v3</span></td><td>144</td><td>Portal · self-report</td></tr>
+                    <tr><td>Apr 28</td><td><code>R-3860</code></td><td><span class="ver-chip superseded">v2</span></td><td>161</td><td>In room · Charlene</td></tr>
                   </tbody>
                 </table>
               </div>
+              <div class="field-help" style="margin-top:8px">Each administration keeps the definition version it was answered on. Publishing a new version never rewrites an old response.</div>
             </div>
 
             <div class="card">
-              <div class="card-title">Where these scores go</div>
+              <div class="card-title">Who reads these scores</div>
               <ul class="check-list">
                 <li class="check-item">
-                  <span class="check-icon done">✓</span>
-                  <span class="check-label">SOAP · Subjective section</span>
+                  <span class="check-icon pending">·</span>
+                  <span class="check-label">SOAP · Subjective</span>
+                  <span class="check-meta">draft, waiting for Dr. Drannikov · <a href="clinical.html#/b-03-soap">open</a></span>
                 </li>
                 <li class="check-item">
                   <span class="check-icon done">✓</span>
-                  <span class="check-label">Chart trend graph</span>
+                  <span class="check-label">Chart trend</span>
+                  <span class="check-meta">reads <code>R-4471</code> · <a href="clinical.html#/b-02-snapshot">open</a></span>
                 </li>
                 <li class="check-item">
                   <span class="check-icon active">→</span>
                   <span class="check-label">Readiness engine</span>
-                  <span class="check-meta">Physician Review</span>
+                  <span class="check-meta">Physician Review · <a href="readiness.html#/i-01-readiness">open</a></span>
+                </li>
+                <li class="check-item">
+                  <span class="check-icon done">✓</span>
+                  <span class="check-label">Audit store</span>
+                  <span class="check-meta">every send and acceptance · <a href="security.html#/g-01-audit">open</a></span>
                 </li>
               </ul>
-              <a class="btn btn-sm" style="margin-top:4px" href="readiness.html">Open readiness review</a>
+              <div class="prov"><span>Readiness reads this response — it is not changed from here. Only a physician or extender approves or overrides a readiness result, with a reason.</span></div>
             </div>
           </div>
         </div>

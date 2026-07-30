@@ -19,6 +19,9 @@
   .b-tasktitle { font-weight:600; color:var(--hx-navy); }
   .b-taskmeta { font-size:11px; color:var(--muted); margin-top:2px; line-height:1.5; }
   .b-mrn { font-size:11px; color:var(--muted); }
+  .b-id { font-family:ui-monospace, monospace; font-size:11px; color:var(--muted); }
+  .b-fact { font-size:12.5px; }
+  .b-fact-note { font-size:11px; color:var(--muted); margin-top:2px; }
 </style>
 </head>
 <body data-page="clinical-remote" data-page-title="Documentation · Remote MA" data-shell="app">
@@ -33,6 +36,10 @@
       <div class="frame-body">
         <h2 class="page-title">Pre-charting queue</h2>
         <p class="page-sub">Tuesday, July 21 · today's and tomorrow's charts scrubbed before the provider walks in — no more "did you look at the intake?"</p>
+
+        <div class="prov" style="margin-bottom:12px">
+          <span><strong>From</strong> the day <a href="schedule.html">schedule</a> · intake status from the <a href="clinical-questionnaires.html#/b-28-quest-library">questionnaire engine</a> · pre-chart state from each encounter. This queue keeps no list of its own.</span>
+        </div>
 
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
@@ -141,71 +148,200 @@
         <p class="page-sub">New patient consult · Today · 1:30 PM · Dr. Drannikov · functional medicine intake</p>
 
         <div class="b-encbar">
-          <div><span class="pill pill-warn">Pre-charting</span> Auto-saved 4 seconds ago · provider opens the encounter at 1:30 PM</div>
+          <div><span class="appr draft">Draft</span> Encounter <code class="b-id">E-8841</code> · appointment <code class="b-id">A-2214</code> · auto-saved 4 seconds ago</div>
           <div class="b-encbar-actions">
-            <button class="btn btn-sm" onclick="HCOS.toast('Flagged for Dr. Drannikov — the B12 workup note is pinned to the encounter.', 'warn')">Flag for provider</button>
-            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Released to Dr. Drannikov — your summary is waiting in his SOAP note. Nothing is signed.', 'ok'); setTimeout(function(){ window.location.href='clinical.html'; }, 1000)">Finish and release to provider</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Flagged for Dr. Drannikov — a review task is on his worklist. The chart is unchanged.', 'warn')">Flag for provider</button>
+            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Draft sent to Dr. Drannikov — it waits in his SOAP note until he accepts it. Nothing is signed.', 'ok'); setTimeout(function(){ window.location.href='clinical.html#/b-03-soap'; }, 1000)">Send draft to Dr. Drannikov</button>
           </div>
+        </div>
+
+        <div class="status-flow" style="margin-top:0">
+          <span class="status-step current">Draft · Charlene</span>
+          <span class="status-arrow">→</span>
+          <span class="status-step">Reviewed by the provider</span>
+          <span class="status-arrow">→</span>
+          <span class="status-step">Signed and locked</span>
+          <span class="status-arrow">→</span>
+          <span class="status-step">Addendum</span>
+        </div>
+        <div class="prov" style="margin-bottom:14px">
+          <span><strong>One encounter</strong> <code>E-8841</code> — this screen prepares it, Dr. Drannikov owns and signs it. HCOS writes the encounter and sends eCW the signed copy.</span>
         </div>
 
         <div class="grid-sidebar">
           <div>
-            <div class="seg-divider" style="margin-top:0">Intake summary — filed from the patient questionnaire</div>
-            <div class="callout"><strong>Patient reports:</strong> "I've been vegetarian for 20 years, mostly active, but for the last 18 months I've felt increasingly fatigued. My PCP ran basic labs that came back 'normal' but I'm still exhausted. I want to find the root cause, not just take another supplement."</div>
-            <div class="field-help" style="margin-top:6px">These answers came straight from the questionnaire — nothing was re-typed. <a href="clinical-questionnaires.html">Open the full questionnaire</a>.</div>
-
-            <div class="seg-divider">HPI draft — assembled from the questionnaire, MA reviews</div>
-            <textarea class="field-textarea" rows="7">55 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
-            <div class="b-dot">
-              <span class="pill pill-muted b-dotphrase">.veganhx</span>
-              <span class="pill pill-muted b-dotphrase">.macrocytosis</span>
-              <span class="pill pill-muted b-dotphrase">.fatigueworkup</span>
+            <div class="seg-divider" style="margin-top:0">The patient's own words</div>
+            <div class="callout"><strong>Reason for visit:</strong> "I've been vegetarian for 20 years, mostly active, but for the last 18 months I've felt increasingly fatigued. My PCP ran basic labs that came back 'normal' but I'm still exhausted. I want to find the root cause, not just take another supplement."</div>
+            <div class="prov">
+              <span class="clin-state reported">Reported</span>
+              <span><strong>From</strong> reason for visit · questionnaire <code>Q-118</code> <span class="ver-chip">v3</span> · Jul 14 · <a href="intake-onboarding.html#/a-21-reason">open the original</a></span>
             </div>
-            <div class="field-help" style="margin-top:6px">Dot-phrases pull in shared macros — the same library the provider uses. <a href="clinical-templates.html">Manage dot-phrases</a>.</div>
+            <div class="field-help" style="margin-top:6px">Stored once and never edited — this is the patient's statement, not the note. <a href="clinical-questionnaires.html#/b-30-quest-results">See every answer</a>.</div>
 
-            <div class="seg-divider">Suggested workup for provider review</div>
-            <div class="b-workup">
-              <div><span>▸</span>Vitamin B12 — active B12 / holoTC if available</div>
-              <div><span>▸</span>Methylmalonic acid (MMA)</div>
-              <div><span>▸</span>Homocysteine</div>
-              <div><span>▸</span>MTHFR polymorphism (C677T, A1298C)</div>
-              <div><span>▸</span>Ferritin with % saturation, TIBC</div>
-              <div><span>▸</span>TSH + fT4 + fT3 + TPO / Tg antibodies</div>
-              <div><span>▸</span>DEXA scan referral — long-term vegetarian</div>
+            <div class="seg-divider">What the draft is built on</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Fact</th>
+                    <th>Where it lives</th>
+                    <th>As of</th>
+                    <th>Trust</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="b-fact">Fatigue, 18 months, function 6/10</td>
+                    <td><a href="clinical-questionnaires.html#/b-30-quest-results">Questionnaire Q-118 v3</a></td>
+                    <td>Jul 14 · 7 days old</td>
+                    <td><span class="clin-state reported">Reported</span></td>
+                  </tr>
+                  <tr>
+                    <td class="b-fact">Vegetarian 20+ years</td>
+                    <td><a href="clinical-questionnaires.html#/b-30-quest-results">Questionnaire Q-118 v3</a></td>
+                    <td>Jul 14 · 7 days old</td>
+                    <td><span class="clin-state reported">Reported</span></td>
+                  </tr>
+                  <tr>
+                    <td class="b-fact">Family history — pernicious anemia (mother)</td>
+                    <td><a href="clinical-chart.html#/b-05-problem-list">Clinical history</a></td>
+                    <td>Jul 14 · 7 days old</td>
+                    <td><span class="clin-state reported">Reported</span></td>
+                  </tr>
+                  <tr>
+                    <td class="b-fact">MCV 102, low-normal ferritin</td>
+                    <td><a href="clinical-chart.html#/b-04-timeline">Outside result R-4471</a></td>
+                    <td>Nov 12, 2025 · 8 months old</td>
+                    <td><span class="clin-state reconciled">Reconciled</span><div class="b-fact-note">Charlene checked it against the PDF</div></td>
+                  </tr>
+                  <tr>
+                    <td class="b-fact">No known drug allergies</td>
+                    <td><a href="clinical-chart.html#/b-07-allergies">Allergy list</a></td>
+                    <td>Jul 14 · 7 days old</td>
+                    <td><span class="clin-state reported">Reported</span><div class="b-fact-note">Dr. Drannikov verifies at the visit</div></td>
+                  </tr>
+                  <tr>
+                    <td class="b-fact">No prescription medications · 3 supplements</td>
+                    <td><a href="clinical-chart.html#/b-06-med-rec">Medication list</a></td>
+                    <td>Jul 20 · 1 day old</td>
+                    <td><span class="clin-state reconciled">Reconciled</span><div class="b-fact-note">Charlene called the patient</div></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="field-help" style="margin-top:6px">Suggestions only — nothing is ordered until the provider signs. <a href="labs.html">Labs and orders</a>.</div>
+            <div class="prov">
+              <span><strong>Every line above lives in one place</strong> — this screen reads it and never keeps its own copy.</span>
+            </div>
+
+            <div class="seg-divider">HPI draft</div>
+            <div class="ai-block">
+              <div class="ai-head">
+                <span class="ai-badge">Assembled by HCOS</span>
+                <span class="ai-state suggested">Draft — not in the note</span>
+              </div>
+              <div class="ai-body">
+                <textarea class="field-textarea" rows="7">55 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
+                <div class="b-dot">
+                  <span class="pill pill-muted b-dotphrase">.veganhx</span>
+                  <span class="pill pill-muted b-dotphrase">.macrocytosis</span>
+                  <span class="pill pill-muted b-dotphrase">.fatigueworkup</span>
+                </div>
+              </div>
+              <div class="ai-meta">
+                <span><b>Sources</b> questionnaire Q-118 v3 · outside result R-4471 · medication list</span>
+                <span><b>Model</b> hpi-draft v1.4</span>
+                <span><b>Uncertainty</b> 1 sentence unsupported</span>
+                <span><b>Prepared by</b> Charlene · remote MA</span>
+                <span><b>Accepts it into the note</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Your edits are saved to the draft. It is still a draft until Dr. Drannikov accepts it.', 'ok')">Save my edits to the draft</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Rebuilt from the sources above — your edited sentences were kept.')">Rebuild from sources</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Draft discarded. Dr. Drannikov writes the HPI himself; the sources are untouched.', 'warn')">Discard the draft</button>
+              </div>
+            </div>
+            <div class="callout callout-warn"><strong>Check before you release:</strong> "No prior B12 testing" is not in any answer — it was inferred from the labs the patient uploaded. Ask him, then edit the sentence or take it out.</div>
+            <div class="prov">
+              <span><strong>Goes to</strong> the SOAP note as suggested text · only Dr. Drannikov turns it into the note and signs · <a href="clinical.html#/b-03-soap">open the note</a></span>
+            </div>
+            <div class="field-help" style="margin-top:6px">Dot-phrases pull in shared macros — the same library the provider uses. <a href="clinical-templates.html#/b-23-dot-phrases">Manage dot-phrases</a>.</div>
+
+            <div class="seg-divider">Suggested workup</div>
+            <div class="ai-block">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                <div class="b-workup">
+                  <div><span>▸</span>Vitamin B12 — active B12 / holoTC if available</div>
+                  <div><span>▸</span>Methylmalonic acid (MMA)</div>
+                  <div><span>▸</span>Homocysteine</div>
+                  <div><span>▸</span>MTHFR polymorphism (C677T, A1298C)</div>
+                  <div><span>▸</span>Ferritin with % saturation, TIBC</div>
+                  <div><span>▸</span>TSH + fT4 + fT3 + TPO / Tg antibodies</div>
+                  <div><span>▸</span>DEXA scan referral — long-term vegetarian</div>
+                </div>
+              </div>
+              <div class="ai-meta">
+                <span><b>Sources</b> vegetarian 20+ years · MCV 102 · family history of pernicious anemia</span>
+                <span><b>Model</b> workup-suggest v0.9</span>
+                <span><b>Confidence</b> 0.71 — moderate</span>
+                <span><b>Places the order</b> Dr. Drannikov or Brooke, PA</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Sent as suggestions. They wait in Orders with your name on them until the provider places them.', 'ok')">Send suggestions to the provider</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Removed from the suggestion list for this encounter.')">Remove a suggestion</button>
+              </div>
+            </div>
+            <div class="prov">
+              <span><strong>Not an order</strong> — orders are placed once, by a physician or extender, in <a href="clinical.html#/b-09-orders">Orders</a>. Nothing here reaches <a href="labs.html#/c-01-orders">the lab</a>.</span>
+            </div>
 
             <div class="seg-divider">Outside records uploaded</div>
             <div class="card" style="margin-bottom:0">
-              <div style="font-size:12.5px"><strong>CBC · Nov 12, 2025 — outside lab</strong></div>
-              <div class="field-help" style="margin-top:2px">PDF · 2 pages · uploaded by patient · macrocytosis flagged · MA reviewed</div>
+              <div style="font-size:12.5px"><strong>CBC · Nov 12, 2025 — outside lab</strong> <span class="clin-state reconciled">Reconciled</span></div>
+              <div class="field-help" style="margin-top:2px">PDF · 2 pages · uploaded by the patient Jul 14 · macrocytosis flagged · checked by Charlene Jul 20</div>
+              <div class="prov">
+                <span><strong>Filed as</strong> outside result <code>R-4471</code> · the original PDF is kept unchanged · <a href="clinical-chart.html#/b-04-timeline">open it in results</a></span>
+              </div>
               <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
                 <button class="btn btn-sm" onclick="HCOS.toast('Opening the outside CBC — 2 pages.')">View PDF</button>
-                <button class="btn btn-sm" onclick="HCOS.toast('Outside CBC pushed to Marcus Webb\'s chart — the provider sees it in results.', 'ok')">Push to chart</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Linked to today\'s encounter as an outside result. The original stays as it arrived and Dr. Drannikov reviews it.', 'ok')">Link to this encounter</button>
               </div>
             </div>
           </div>
 
           <div>
             <div class="card">
-              <div class="card-title">Flags for provider</div>
+              <div class="card-title">Flags for the provider <span class="appr pending">Pending</span></div>
               <div class="b-workup">
-                <div><span>▸</span>Mild macrocytosis (MCV 102) on outside CBC</div>
+                <div><span>▸</span>Mild macrocytosis (MCV 102) on the outside CBC</div>
                 <div><span>▸</span>Vegetarian 20+ years · B12 status not assessed</div>
                 <div><span>▸</span>Family history of pernicious anemia (mother)</div>
-                <div><span>▸</span>Suggest B12 workup as priority</div>
+                <div><span>▸</span>Charlene suggests the B12 workup first</div>
               </div>
+              <div class="prov">
+                <span><strong>Flags open a review task</strong> — they never add to the <a href="clinical-chart.html#/b-05-problem-list">problem list</a>. Only Dr. Drannikov does that.</span>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Who does what here</div>
+              <dl class="kv">
+                <dt>Prepare the draft</dt><dd>Charlene · remote MA</dd>
+                <dt>Accept into the note</dt><dd>Dr. Drannikov · or Brooke, PA</dd>
+                <dt>Place orders</dt><dd>Physician or extender only</dd>
+                <dt>Sign and lock</dt><dd>Physician or extender only</dd>
+                <dt>HCOS</dt><dd>Assembles and suggests · never signs, orders or diagnoses</dd>
+              </dl>
+              <div class="field-help" style="margin-top:8px">Every accept, edit and reject is recorded with the name behind it. <a href="security.html#/g-01-audit">See the audit trail</a>.</div>
             </div>
 
             <div class="card" style="margin-top:14px">
               <div class="card-title">Provider time saved</div>
               <div class="b-timesaved">~12 min</div>
               <div class="field-help" style="margin:0">Estimated review time this pre-chart saves Dr. Drannikov. Tracked across the team.</div>
-            </div>
-
-            <div class="card" style="margin-top:14px">
-              <div class="card-title">Hand-off</div>
-              <div style="font-size:12.5px;color:var(--muted);line-height:1.6">When you finish, your summary lands inside the encounter's SOAP note, ready for the provider to edit and confirm. Nothing is auto-signed.</div>
             </div>
           </div>
         </div>
@@ -221,6 +357,10 @@
       <div class="frame-body">
         <h2 class="page-title">Post-visit tasks</h2>
         <p class="page-sub">Tasks generated the moment the provider signs land here to close out — replacing the sticky notes and the "did anyone send those results?" thread</p>
+
+        <div class="prov" style="margin-bottom:12px">
+          <span><strong>From</strong> signed encounters and the orders they carry · closing a task never changes the note or the order behind it · <a href="clinical.html#/b-11-sign-lock">sign and lock</a></span>
+        </div>
 
         <div class="filters">
           <button class="filter-chip active">All open (14)</button>
@@ -248,7 +388,7 @@
               <tr>
                 <td>
                   <div class="b-tasktitle">Route abnormal lab to provider</div>
-                  <div class="b-taskmeta">CMP shows K+ 5.4 · flagged · provider review before any patient message · from Vibrant Labs</div>
+                  <div class="b-taskmeta">CMP shows K+ 5.4 · from signed order <code class="b-id">O-3290 v1</code> · Vibrant Labs · the result stays exactly as it arrived; the provider reviews it before any patient message</div>
                 </td>
                 <td>Nadia Boulos <span class="net-badge net-inn">INN</span></td>
                 <td>Lab result</td>
@@ -278,7 +418,7 @@
               <tr>
                 <td>
                   <div class="b-tasktitle">Refill — levothyroxine 75 mcg</div>
-                  <div class="b-taskmeta">Signed by provider · transmit to CVS Irvine #4421 · standard</div>
+                  <div class="b-taskmeta">From signed order <code class="b-id">O-3318 v2</code> · Dr. Drannikov · transmit to CVS Irvine #4421</div>
                 </td>
                 <td>Grace Lindqvist <span class="net-badge net-self">SELF</span></td>
                 <td>Refill</td>
@@ -298,7 +438,7 @@
               <tr>
                 <td>
                   <div class="b-tasktitle">Schedule follow-up</div>
-                  <div class="b-taskmeta">Myers' cocktail session 4 · per provider plan · ideally next week</div>
+                  <div class="b-taskmeta">Myers' cocktail session 4 of 6 · from signed order <code class="b-id">O-3271 v1</code> · plan of care <span class="ver-chip">v4</span> · books in the one schedule, cadence rules apply</div>
                 </td>
                 <td>Priya Natarajan <span class="net-badge net-oon">OON</span></td>
                 <td>Scheduling</td>

@@ -78,12 +78,26 @@
           <div class="ad-mock-big" style="margin:16px 0 6px">ALVAREZ, TOM</div>
           <div>DL D8742219 · EXP 02/09/2028</div>
         </div>
-        <div class="ad-captured">✓ Captured — reads clearly</div>
+        <div class="ad-captured">✓ Photo stored with your record</div>
 
         <div class="seg-divider">Back of ID</div>
         <div class="ad-upload" onclick="HCOS.toast('Back of ID captured.', 'ok')">
           <div class="ad-upload-ic">↑</div>
           Tap to capture the back of your ID
+        </div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Read by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">Tom Alvarez · born 02/09/1965 · California driver license D8742219, expires 02/09/2028.</div>
+          <div class="ai-meta">
+            <span><b>From</b> front of ID photo · Jul 21, 11:04 AM</span>
+            <span><b>Model</b> id-ocr-v1.4</span>
+            <span><b>Confidence</b> 0.98 name · 0.83 license number</span>
+            <span><b>Confirms</b> Yazmin · Front desk</span>
+          </div>
         </div>
 
         <div class="seg-divider">Confirm what we read</div>
@@ -109,6 +123,10 @@
         </div>
         <div class="field-help">Read from the photo — fix anything that looks wrong.</div>
 
+        <div class="prov">
+          <span><strong>Goes to</strong> your record <code>P-004990</code> <span class="appr pending">Pending review</span> · the front desk checks it against the photo, and your old value is kept either way · <a href="people.html#/pe-02-person">open</a></span>
+        </div>
+
         <button class="btn btn-primary btn-lg" style="width:100%;margin-top:14px" data-activate="a-24-insurance-ocr">Confirm and continue</button>
         <button class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px" data-activate="a-28-save-resume">Save and finish later</button>
       </div>
@@ -133,10 +151,27 @@
             <span><span class="ad-mock-lbl">Group</span><br><strong>77103-B</strong></span>
           </div>
         </div>
-        <div class="ad-captured">✓ Captured · 99% confidence</div>
+        <div class="ad-captured">✓ Photo stored with your record</div>
 
         <div class="seg-divider">Back of card</div>
-        <div class="ad-captured" style="margin-bottom:10px">✓ Captured</div>
+        <div class="ad-captured" style="margin-bottom:10px">✓ Photo stored with your record</div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Read by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">Cigna PPO · member U8834-2210-7 · group 77103-B. Read from the two photos you just took.</div>
+          <div class="ai-meta">
+            <span><b>From</b> front and back photos · Jul 21, 11:07 AM</span>
+            <span><b>Model</b> card-ocr-v1.4</span>
+            <span><b>Confidence</b> 0.99 member ID · 0.71 RxBIN — the small print is faint</span>
+            <span><b>Confirms</b> Yazmin · Front desk</span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-sm" onclick="HCOS.toast('Take the front again — the photo you already sent is kept either way.')">Retake the photo</button>
+          </div>
+        </div>
 
         <div class="seg-divider">Confirm what we read</div>
         <div class="field">
@@ -163,13 +198,36 @@
             <input class="field-input" type="text" value="H4">
           </div>
         </div>
-        <div class="field-help">Filled in from your card — fix anything that looks off.</div>
+        <div class="field-help">Filled in from your card — fix anything that looks off. What you send is a suggestion until the front desk checks it against your photos.</div>
 
-        <div class="callout callout-ok" style="margin-top:12px;font-size:11.5px">
-          We checked your benefits — coverage is <strong>active</strong>, out-of-network <span class="net-badge net-oon">OON</span> with our clinic. You will see a cost estimate before any service.
+        <div class="prov">
+          <span><strong>Goes to</strong> your one coverage record <code>C-2287</code> <span class="appr pending">Pending review</span> · Yazmin at the front desk confirms it before anything is billed · <a href="intake.html#/a-11-eligibility">how we check coverage</a></span>
         </div>
 
-        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:10px" data-activate="a-25-spd-upload">Confirm and continue</button>
+        <div class="seg-divider">Your benefits</div>
+        <div class="card" style="padding:12px 14px">
+          <div class="card-title" style="margin-bottom:8px">Snapshot <span class="ver-chip">#1</span> · Jul 21, 11:07 AM</div>
+          <div class="callout callout-ok" style="margin-top:0;font-size:11.5px">
+            Coverage is <strong>active</strong> · Helixona is out-of-network <span class="net-badge net-oon">OON</span> with your Cigna PPO. You will see a cost estimate before any service.
+          </div>
+          <div class="prov" style="margin-bottom:0">
+            <span><strong>From</strong> the answer Cigna returned at 11:07 AM, kept exactly as it came back · we check again once your card is confirmed, and that answer is added next to this one</span>
+          </div>
+        </div>
+
+        <div class="seg-divider">Where your card is now</div>
+        <ul class="check-list">
+          <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Photos received and stored</span><span class="check-meta">11:07 AM</span></li>
+          <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Read from the photos</span><span class="check-meta">card-ocr-v1.4</span></li>
+          <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Benefits snapshot #1</span><span class="check-meta">Cigna · 11:07 AM</span></li>
+          <li class="check-item"><span class="check-icon active">›</span><span class="check-label">Front desk confirms the card against the photos</span><span class="check-meta">Yazmin</span></li>
+          <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Benefits checked again on the confirmed card</span><span class="check-meta">snapshot #2</span></li>
+        </ul>
+        <div class="prov">
+          <span><strong>One place only</strong> · your insurance lives in a single record that every screen reads — you never send your card twice, and no check ever erases an earlier one</span>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:10px" data-activate="a-25-spd-upload" onclick="HCOS.toast('Sent to the front desk. Your coverage on file changes once Yazmin confirms it against the photos.', 'ok')">Confirm and continue</button>
       </div>
     </div>
   </section>
@@ -198,6 +256,10 @@
           <div class="ad-upload-ic">↑</div>
           Tap to upload your SPD or EOC
           <div class="ad-upload-note">PDF · up to 30 MB</div>
+        </div>
+
+        <div class="prov" style="margin-top:-8px;margin-bottom:14px">
+          <span><strong>Filed with</strong> your coverage <code>C-2287</code> · billing reads it before your visit · it does not change what your plan pays</span>
         </div>
 
         <button class="btn" style="width:100%;margin-bottom:8px" onclick="HCOS.toast('Instructions texted — where to find the document in the Cigna member portal.', 'ok')">Can't find it — text me instructions</button>

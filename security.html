@@ -20,6 +20,12 @@
   .g-when { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); white-space: nowrap; }
   .g-who { white-space: nowrap; }
   .g-who .g-who-role { display: block; font-size: 10.5px; color: var(--muted); }
+  .g-rec { display: block; font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--muted); margin-top: 1px; }
+  .g-ev { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .g-ev:last-child { border-bottom: none; }
+  .g-ev-when { width: 56px; flex-shrink: 0; color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace; padding-top: 2px; }
+  .g-ev-what { flex: 1; }
+  .g-ev-ver { flex-shrink: 0; padding-top: 1px; }
 </style>
 </head>
 <body data-page="security" data-page-title="Security &amp; compliance" data-shell="app">
@@ -34,7 +40,7 @@
       <div class="frame-body">
 
         <div class="page-title">Security &amp; compliance</div>
-        <div class="page-sub">Tuesday, July 21 · roles, permissions, and the trail that proves them</div>
+        <div class="page-sub">Tuesday, July 21 · the clinic's one audit store, and the permissions it proves</div>
 
         <div class="grid-sidebar">
 
@@ -42,8 +48,233 @@
           <div>
 
             <div class="card" style="padding:0;overflow:hidden">
-              <div class="card-title" style="padding:14px 14px 0;margin-bottom:10px">Roles &amp; permissions</div>
-              <div style="font-size:11.5px;color:var(--muted);padding:0 14px;margin:-4px 0 10px">One matrix for the whole clinic. Sign &amp; lock belongs to providers only — that is what makes a signature mean something. Changes to this matrix write their own audit line.</div>
+              <div class="card-title" style="padding:14px 14px 0;margin-bottom:8px">Audit store <span class="pill pill-muted">Append-only</span></div>
+              <div class="prov" style="margin:0 14px 4px">
+                <span><strong>Every module writes here</strong> · chart, intake, infusion, billing, plan of care and readiness show a filtered view of these same lines — none of them keeps a second log</span>
+              </div>
+              <div class="prov" style="margin:0 14px 10px">
+                <span><strong>Written in HCOS</strong> since Jul 1 2026 · lab and pharmacy events arrive from eCW until those domains activate, and each one keeps a link to its <code>eCW</code> record</span>
+              </div>
+
+              <div class="g-audit-bar">
+                <input class="search-input" id="g-audit-search" type="text" placeholder="Search by person, patient, record, or action…">
+                <span class="filter-chip active" data-filter="all">Today</span>
+                <span class="filter-chip" data-filter="sign">Sign &amp; lock</span>
+                <span class="filter-chip" data-filter="chart">Chart access</span>
+                <span class="filter-chip" data-filter="billing">Billing</span>
+                <span class="filter-chip" data-filter="admin">Admin changes</span>
+                <span class="filter-chip" data-filter="ecw">From eCW</span>
+                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Export prepared for Shibani — an admin releases it, and the export is itself a line in the store.', 'ok')">Export a range</button>
+              </div>
+
+              <div style="padding:12px 14px 0">
+                <div class="ai-block" style="margin:0">
+                  <div class="ai-head">
+                    <span class="ai-badge">Detected by HCOS</span>
+                    <span class="ai-state suggested">Needs a human</span>
+                  </div>
+                  <div class="ai-body">
+                    Charlene (Virtual) opened 14 charts from a new remote address between 9:02 and 9:11 AM. Eleven of those patients have no visit or task with her today.
+                  </div>
+                  <div class="ai-meta">
+                    <span><b>Read</b> 1,482 audit lines · Jul 21, 8:00–11:40 AM</span>
+                    <span><b>Model</b> access-anomaly v1.3</span>
+                    <span><b>Confidence</b> 0.72 — pattern only, no intent</span>
+                    <span><b>Reviewer</b> Shibani · Admin</span>
+                    <span><b>Writes</b> nothing — the alert is its own appended line</span>
+                  </div>
+                  <div class="ai-actions">
+                    <button class="btn btn-sm" id="g-ai-show">Show her access today</button>
+                    <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Investigation opened for Shibani. The alert and your decision are appended — no existing line changed.', 'ok')">Open an investigation</button>
+                    <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Dismissed with your name and reason. Nothing in the store changed.', 'ok')">Not unusual</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field-help" id="g-audit-count" style="padding:10px 14px 0;margin:0">Showing 12 of 1,482 events · Tuesday, July 21</div>
+
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>When</th>
+                      <th>Who</th>
+                      <th>Action</th>
+                      <th>Record</th>
+                      <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody id="g-audit-rows">
+                    <tr class="row-click" data-cat="chart"
+                        data-ev="AE-40912" data-when="Tuesday, July 21 · 11:38 AM PT"
+                        data-who="Yazmin · Front Desk" data-action="Chart opened"
+                        data-record="Person · P-004182 · Maya Reyes" data-source="HCOS · Patients"
+                        data-device="Front desk · 10.0.1.6 · session 4b1c-77"
+                        data-changes=""
+                        data-open="people.html#/pe-02-person" data-openlabel="Open the person record">
+                      <td><span class="g-when">11:38 AM</span></td>
+                      <td><span class="g-who">Yazmin<span class="g-who-role">Front Desk</span></span></td>
+                      <td>Chart opened</td>
+                      <td>Maya Reyes<span class="g-rec">Person · P-004182</span></td>
+                      <td>HCOS · Patients</td>
+                    </tr>
+                    <tr class="row-click" data-cat="sign"
+                        data-ev="AE-40908" data-when="Tuesday, July 21 · 11:32 AM PT"
+                        data-who="Dr. Drannikov · Provider" data-action="Encounter signed and locked"
+                        data-record="Encounter · ENC-2026-07211 v1 · Daniel Okafor" data-source="HCOS · Clinical"
+                        data-device="Exam room 2 · 10.0.1.21 · session 9a02-c4"
+                        data-changes="State~Reviewed~Signed and locked|Dispatched~none~Billing, labs, infusion suite"
+                        data-open="clinical.html#/b-11-sign-lock" data-openlabel="Open the encounter">
+                      <td><span class="g-when">11:32 AM</span></td>
+                      <td><span class="g-who">Dr. Drannikov<span class="g-who-role">Provider</span></span></td>
+                      <td>Encounter signed and locked</td>
+                      <td>Daniel Okafor<span class="g-rec">Encounter · ENC-2026-07211 v1</span></td>
+                      <td>HCOS · Clinical</td>
+                    </tr>
+                    <tr class="row-click" data-cat="chart"
+                        data-ev="AE-40901" data-when="Tuesday, July 21 · 11:15 AM PT"
+                        data-who="Charlene (Virtual) · Medical Assistant" data-action="Questionnaire answers filed as patient-reported"
+                        data-record="Questionnaire response · QR-3391 · Nadia Boulos" data-source="HCOS · Clinical questionnaires"
+                        data-device="Remote · VPN 73.12.x · session 2f77-ab"
+                        data-changes="Patient-reported items~0~3 reported, waiting on reconciliation|Problem list~unchanged~unchanged — a report is not a diagnosis"
+                        data-open="clinical-questionnaires.html#/b-30-quest-results" data-openlabel="Open the questionnaire result">
+                      <td><span class="g-when">11:15 AM</span></td>
+                      <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
+                      <td>Questionnaire answers filed <span class="clin-state reported">Reported</span></td>
+                      <td>Nadia Boulos<span class="g-rec">Questionnaire · QR-3391</span></td>
+                      <td>HCOS · Questionnaires</td>
+                    </tr>
+                    <tr class="row-click" data-cat="billing"
+                        data-ev="AE-40894" data-when="Tuesday, July 21 · 10:58 AM PT"
+                        data-who="Kamalesh · Billing" data-action="Claim packet sent — Blue Shield portal upload"
+                        data-record="Claim · CLM-1044 v2 · Priya Natarajan" data-source="HCOS · Billing"
+                        data-device="Billing · 10.0.1.31 · session 6d10-e2"
+                        data-changes="Claim state~Packet ready~Sent|Packet version~v1~v2"
+                        data-open="billing.html#/d-02-packet" data-openlabel="Open the documentation packet">
+                      <td><span class="g-when">10:58 AM</span></td>
+                      <td><span class="g-who">Kamalesh<span class="g-who-role">Billing</span></span></td>
+                      <td>Claim packet sent — Blue Shield portal</td>
+                      <td>Priya Natarajan<span class="g-rec">Claim · CLM-1044 v2</span></td>
+                      <td>HCOS · Billing</td>
+                    </tr>
+                    <tr class="row-click" data-cat="admin"
+                        data-ev="AE-40887" data-when="Tuesday, July 21 · 10:41 AM PT"
+                        data-who="Shibani · Admin" data-action="Caregiver access granted — appointments and plan"
+                        data-record="Access grant · AG-0142 · Walter Hsu" data-source="HCOS · Caregiver portal"
+                        data-device="Front office · 10.0.1.14 · session 1c93-40"
+                        data-changes="Scope~none~Appointments and plan|Expires~none~Oct 19, 2026|Granted to~none~Lena Hsu, daughter"
+                        data-open="caregiver.html#/k-01-access" data-openlabel="Open the access grant">
+                      <td><span class="g-when">10:41 AM</span></td>
+                      <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
+                      <td>Caregiver access granted — 90 days</td>
+                      <td>Walter Hsu<span class="g-rec">Access grant · AG-0142</span></td>
+                      <td>HCOS · Caregiver</td>
+                    </tr>
+                    <tr class="row-click" data-cat="chart"
+                        data-ev="AE-40871" data-when="Tuesday, July 21 · 10:12 AM PT"
+                        data-who="Bea · Medic" data-action="Infusion stop time recorded"
+                        data-record="Order · O-2291 v2 · Maya Reyes" data-source="HCOS · Infusion suite"
+                        data-device="Chair 2 · 10.0.1.44 · session 7e55-b9"
+                        data-changes="Stop time~none~10:12 AM|Volume infused~none~500 mL|Order version referenced~v2~v2"
+                        data-open="clinical-infusion.html#/b-15-flowsheet" data-openlabel="Open the infusion record">
+                      <td><span class="g-when">10:12 AM</span></td>
+                      <td><span class="g-who">Bea<span class="g-who-role">Medic</span></span></td>
+                      <td>Infusion stop time recorded</td>
+                      <td>Maya Reyes<span class="g-rec">Order · O-2291 v2</span></td>
+                      <td>HCOS · Infusion</td>
+                    </tr>
+                    <tr class="row-click" data-cat="ecw"
+                        data-ev="AE-40863" data-when="Tuesday, July 21 · 9:58 AM PT"
+                        data-who="eCW interface · System" data-action="Result filed from eCW"
+                        data-record="Result · R-77120 · Grace Lindqvist" data-source="eCW · lab domain still writes there"
+                        data-device="Interface · FHIR R4 · message 88213"
+                        data-changes="Thyroid panel~Pending~Resulted|Original document~none~kept immutable, corrections link to it"
+                        data-open="labs.html#/c-01-orders" data-openlabel="Open orders and results">
+                      <td><span class="g-when">9:58 AM</span></td>
+                      <td><span class="g-who">eCW interface<span class="g-who-role">System</span></span></td>
+                      <td>Result filed from eCW</td>
+                      <td>Grace Lindqvist<span class="g-rec">Result · R-77120</span></td>
+                      <td>eCW · lab domain</td>
+                    </tr>
+                    <tr class="row-click" data-cat="chart"
+                        data-ev="AE-40855" data-when="Tuesday, July 21 · 9:47 AM PT"
+                        data-who="Marie · New Patient Advisor" data-action="Chart opened"
+                        data-record="Person · P-004990 · Tom Alvarez" data-source="HCOS · Intake triage"
+                        data-device="Front office · 10.0.1.9 · session 3ba1-2d"
+                        data-changes=""
+                        data-open="intake.html#/a-08-lead-detail" data-openlabel="Open the lead">
+                      <td><span class="g-when">9:47 AM</span></td>
+                      <td><span class="g-who">Marie<span class="g-who-role">New Patient Advisor</span></span></td>
+                      <td>Chart opened</td>
+                      <td>Tom Alvarez<span class="g-rec">Person · P-004990</span></td>
+                      <td>HCOS · Intake</td>
+                    </tr>
+                    <tr class="row-click" data-cat="admin"
+                        data-ev="AE-40840" data-when="Tuesday, July 21 · 9:20 AM PT"
+                        data-who="Shibani · Admin" data-action="Permission set approved"
+                        data-record="Permission set · PERM-v7" data-source="HCOS · Security"
+                        data-device="Front office · 10.0.1.14 · session 1c93-40"
+                        data-changes="Operations Manager, billing~no access~view|Permission set in force~v6~v7|Reason~none~Karina covers claim follow-up on Fridays"
+                        data-open="" data-openlabel="">
+                      <td><span class="g-when">9:20 AM</span></td>
+                      <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
+                      <td>Permission set approved <span class="ver-chip">v7</span></td>
+                      <td>Whole clinic<span class="g-rec">Permission set · PERM-v7</span></td>
+                      <td>HCOS · Security</td>
+                    </tr>
+                    <tr class="row-click" data-cat="chart"
+                        data-ev="AE-40829" data-when="Tuesday, July 21 · 9:11 AM PT"
+                        data-who="Charlene (Virtual) · Medical Assistant" data-action="Chart opened"
+                        data-record="Person · P-003877 · Walter Hsu" data-source="HCOS · Remote pre-charting"
+                        data-device="Remote · VPN 73.12.x · new address · session 2f77-ab"
+                        data-changes=""
+                        data-open="clinical-remote.html#/b-19-precharting" data-openlabel="Open pre-charting">
+                      <td><span class="g-when">9:11 AM</span></td>
+                      <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
+                      <td>Chart opened</td>
+                      <td>Walter Hsu<span class="g-rec">Person · P-003877</span></td>
+                      <td>HCOS · Remote</td>
+                    </tr>
+                    <tr class="row-click" data-cat="chart"
+                        data-ev="AE-40824" data-when="Tuesday, July 21 · 9:06 AM PT"
+                        data-who="Charlene (Virtual) · Medical Assistant" data-action="Chart opened"
+                        data-record="Person · P-005702 · Sofia Ramos" data-source="HCOS · Remote pre-charting"
+                        data-device="Remote · VPN 73.12.x · new address · session 2f77-ab"
+                        data-changes=""
+                        data-open="clinical-remote.html#/b-18-precharting-queue" data-openlabel="Open the pre-charting queue">
+                      <td><span class="g-when">9:06 AM</span></td>
+                      <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
+                      <td>Chart opened</td>
+                      <td>Sofia Ramos<span class="g-rec">Person · P-005702</span></td>
+                      <td>HCOS · Remote</td>
+                    </tr>
+                    <tr class="row-click" data-cat="admin"
+                        data-ev="AE-40822" data-when="Tuesday, July 21 · 8:02 AM PT"
+                        data-who="Haylee · Front Desk" data-action="Signed in — new device, two-step verified"
+                        data-record="Session · S-4471 · Haylee" data-source="HCOS · Sign in"
+                        data-device="Front desk iPad · first use · 10.0.1.51"
+                        data-changes="Trusted devices~2~3|Two-step code~sent~verified"
+                        data-open="login.html" data-openlabel="See the sign-in flow">
+                      <td><span class="g-when">8:02 AM</span></td>
+                      <td><span class="g-who">Haylee<span class="g-who-role">Front Desk</span></span></td>
+                      <td>Signed in — new device, two-step verified</td>
+                      <td>Haylee<span class="g-rec">Session · S-4471</span></td>
+                      <td>HCOS · Sign in</td>
+                    </tr>
+                    <tr id="g-audit-empty" style="display:none">
+                      <td colspan="5" style="color:var(--muted);font-size:12px;padding:16px 14px">No audit lines match — clear the search or switch back to Today.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
+              <div class="card-title" style="padding:14px 14px 0;margin-bottom:8px">Roles &amp; permissions <span class="ver-chip">v7</span> <span class="appr approved">Approved</span></div>
+              <div class="prov" style="margin:0 14px 8px">
+                <span><strong>Permission set</strong> <code>PERM-v7</code> · approved by Shibani · Admin · in force since Jul 6 2026 · replaces <span class="ver-chip superseded">v6</span></span>
+              </div>
+              <div class="field-help" style="padding:0 14px;margin:0 0 10px">One matrix for the whole clinic. Sign and lock belongs to providers only — that is what makes a signature mean something.</div>
               <div class="tbl-wrap">
                 <table class="tbl g-perm-tbl">
                   <thead>
@@ -105,88 +336,38 @@
                   </tbody>
                 </table>
               </div>
-              <div style="display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line-soft)">
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Role editing opens here — every change writes its own audit line.', 'ok')">Edit a role</button>
-                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('User accounts are managed in Settings → Users — Shibani only.', 'ok')">Manage users</button>
-              </div>
-            </div>
 
-            <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
-              <div class="card-title" style="padding:14px 14px 0;margin-bottom:10px">Audit trail</div>
-              <div style="font-size:11.5px;color:var(--muted);padding:0 14px;margin:-4px 0 10px">Append-only — no line is ever edited or deleted. Filter by person, patient, or action; export the range an auditor asks for.</div>
-              <div class="g-audit-bar">
-                <input class="search-input" id="g-audit-search" type="text" placeholder="Search by person, patient, or action…">
-                <span class="filter-chip active" data-filter="all">Today</span>
-                <span class="filter-chip" data-filter="sign">Sign &amp; lock</span>
-                <span class="filter-chip" data-filter="chart">Chart access</span>
-                <span class="filter-chip" data-filter="billing">Billing</span>
-                <span class="filter-chip" data-filter="admin">Admin changes</span>
-                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Audit log exported as CSV — Jul 1 to Jul 21, 1,482 lines.', 'ok')">Export audit log</button>
+              <div class="seg-divider" style="margin:14px 14px 0">Version history</div>
+              <div style="padding:4px 14px 0">
+                <div class="g-ev">
+                  <span class="g-ev-when">Jul 20</span>
+                  <span class="g-ev-what">PCC to schedule for Dr. Bakman — proposed by Karina <span class="appr pending">Pending</span>
+                    <span class="g-rec">Waiting on Shibani · Admin · v7 stays in force until she approves</span></span>
+                  <span class="g-ev-ver"><span class="ver-chip">v8</span></span>
+                </div>
+                <div class="g-ev">
+                  <span class="g-ev-when">Jul 6</span>
+                  <span class="g-ev-what">Operations Manager gains billing view <span class="appr approved">In force</span>
+                    <span class="g-rec">Approved by Shibani · Admin · Karina covers claim follow-up on Fridays</span></span>
+                  <span class="g-ev-ver"><span class="ver-chip">v7</span></span>
+                </div>
+                <div class="g-ev">
+                  <span class="g-ev-when">May 12</span>
+                  <span class="g-ev-what">Medic and Nurse gain chart write for infusion records <span class="appr superseded">Superseded</span>
+                    <span class="g-rec">Approved by Shibani · Admin</span></span>
+                  <span class="g-ev-ver"><span class="ver-chip superseded">v6</span></span>
+                </div>
+                <div class="g-ev">
+                  <span class="g-ev-when">Mar 2</span>
+                  <span class="g-ev-what">Matrix set at go-live <span class="appr superseded">Superseded</span>
+                    <span class="g-rec">Approved by Shibani · Admin</span></span>
+                  <span class="g-ev-ver"><span class="ver-chip superseded">v5</span></span>
+                </div>
               </div>
-              <div class="tbl-wrap">
-                <table class="tbl">
-                  <thead>
-                    <tr>
-                      <th>When</th>
-                      <th>Who</th>
-                      <th>Action</th>
-                      <th>Patient / screen</th>
-                    </tr>
-                  </thead>
-                  <tbody id="g-audit-rows">
-                    <tr data-cat="chart">
-                      <td><span class="g-when">Jul 21 · 11:38 AM</span></td>
-                      <td><span class="g-who">Yazmin<span class="g-who-role">Front Desk</span></span></td>
-                      <td>Chart viewed</td>
-                      <td>Maya Reyes · Patients / profile</td>
-                    </tr>
-                    <tr data-cat="sign">
-                      <td><span class="g-when">Jul 21 · 11:32 AM</span></td>
-                      <td><span class="g-who">Dr. Drannikov<span class="g-who-role">Provider</span></span></td>
-                      <td>Note signed &amp; locked — dispatched to billing, labs, infusion</td>
-                      <td>Daniel Okafor · Clinical / sign &amp; lock</td>
-                    </tr>
-                    <tr data-cat="chart">
-                      <td><span class="g-when">Jul 21 · 11:15 AM</span></td>
-                      <td><span class="g-who">Charlene (Virtual)<span class="g-who-role">Medical Assistant</span></span></td>
-                      <td>Questionnaire filed to chart</td>
-                      <td>Nadia Boulos · Clinical / questionnaire</td>
-                    </tr>
-                    <tr data-cat="billing">
-                      <td><span class="g-when">Jul 21 · 10:58 AM</span></td>
-                      <td><span class="g-who">Kamalesh<span class="g-who-role">Billing</span></span></td>
-                      <td>Claim packet sent — Blue Shield portal upload</td>
-                      <td>Priya Natarajan · Billing / packet</td>
-                    </tr>
-                    <tr data-cat="admin">
-                      <td><span class="g-when">Jul 21 · 10:41 AM</span></td>
-                      <td><span class="g-who">Shibani<span class="g-who-role">Admin</span></span></td>
-                      <td>Caregiver access granted — appointments + plan, 90 days</td>
-                      <td>Walter Hsu · Caregiver portal</td>
-                    </tr>
-                    <tr data-cat="chart">
-                      <td><span class="g-when">Jul 21 · 10:12 AM</span></td>
-                      <td><span class="g-who">Bea<span class="g-who-role">Medic</span></span></td>
-                      <td>Infusion record updated — stop time entered</td>
-                      <td>Maya Reyes · Clinical / infusion</td>
-                    </tr>
-                    <tr data-cat="chart">
-                      <td><span class="g-when">Jul 21 · 9:47 AM</span></td>
-                      <td><span class="g-who">Marie<span class="g-who-role">New Patient Advisor</span></span></td>
-                      <td>Chart viewed</td>
-                      <td>Tom Alvarez · Intake / triage</td>
-                    </tr>
-                    <tr data-cat="admin">
-                      <td><span class="g-when">Jul 21 · 8:02 AM</span></td>
-                      <td><span class="g-who">Haylee<span class="g-who-role">Front Desk</span></span></td>
-                      <td>Signed in — new device, two-step verified</td>
-                      <td>— · Sign in</td>
-                    </tr>
-                    <tr id="g-audit-empty" style="display:none">
-                      <td colspan="4" style="color:var(--muted);font-size:12px;padding:16px 14px">No audit lines match — clear the search or switch back to Today.</td>
-                    </tr>
-                  </tbody>
-                </table>
+
+              <div style="display:flex;gap:8px;padding:12px 14px;margin-top:8px;border-top:1px solid var(--line-soft);flex-wrap:wrap">
+                <button class="btn btn-primary btn-sm" data-open-modal="#g-modal-perm">Propose a permission change</button>
+                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('User accounts are managed in Settings → Users — Shibani only. Roles come from this matrix.', 'ok')">Manage users</button>
               </div>
             </div>
 
@@ -196,8 +377,31 @@
           <div>
 
             <div class="card">
+              <div class="card-title">Who may do this</div>
+              <dl class="kv" style="grid-template-columns:104px 1fr">
+                <dt>Read</dt><dd>All staff, limited to what their role may see</dd>
+                <dt>Export</dt><dd>Shibani · Admin</dd>
+                <dt>Permissions</dt><dd>Anyone proposes · Shibani approves</dd>
+                <dt>Edit, delete</dt><dd>No one, admins included</dd>
+                <dt>HCOS AI</dt><dd>Flags patterns · never writes a line</dd>
+              </dl>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Views over this store</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Person history</span><span class="check-meta"><a href="people.html#/pe-02-person">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Intake and consent events</span><span class="check-meta"><a href="intake-admin.html#/a-42-audit-log">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Documentation and co-sign</span><span class="check-meta"><a href="clinical-governance.html#/b-25-audit-log">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Plan of care versions</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness decisions</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Each one filters these lines. None of them keeps its own log.</div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
               <div class="card-title">Sessions &amp; sign-in</div>
-              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Secure without sign-in fatigue — the audit trail starts at the front door.</div>
+              <div class="field-help" style="margin:0 0 10px">Secure without sign-in fatigue — the trail starts at the front door.</div>
               <dl class="kv">
                 <dt>Two-step code</dt><dd>New devices only</dd>
                 <dt>Known devices</dt><dd>One-screen sign-in</dd>
@@ -209,14 +413,15 @@
 
             <div class="card" style="margin-top:16px">
               <div class="card-title">Break the glass</div>
-              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">In an emergency, any clinician can open a chart outside their permissions — with a written reason.</div>
-              <div class="callout callout-warn">Emergency access opens the chart immediately, requires a reason, and pages Shibani. The reason and everything viewed land in the audit trail.</div>
+              <div class="field-help" style="margin:0 0 10px">In an emergency, any clinician can open a chart outside their permissions — with a written reason.</div>
+              <div class="callout callout-warn">Emergency access opens the chart immediately, requires a reason, and pages Shibani. The reason and everything viewed are appended to the store.</div>
               <button class="btn btn-danger btn-sm" style="margin-top:12px" data-open-modal="#g-modal-glass">Request emergency chart access</button>
             </div>
 
             <div class="card" style="margin-top:16px">
               <div class="card-title">Retention</div>
-              <div style="font-size:12.5px;color:var(--ink);line-height:1.55">Audit lines are append-only — never edited, never deleted — and kept for 7 years, alongside the charts they describe. Deactivating a user keeps their history; nothing an auditor needs ever disappears.</div>
+              <div style="font-size:12.5px;color:var(--ink);line-height:1.55">Lines are appended — never edited, never deleted — and kept for 7 years alongside the records they describe. Deactivating a user keeps their history; nothing an auditor needs ever disappears.</div>
+              <div class="prov"><span><strong>Corrections</strong> are new lines that link to the one they correct · <code>AE-</code> identifiers are never reused</span></div>
             </div>
 
           </div>
@@ -229,13 +434,99 @@
 
 </div>
 
+<!-- Audit event detail (outside .screens) -->
+<div class="drawer-overlay" data-close-drawer="#g-event"></div>
+<div class="drawer" id="g-event">
+  <div class="drawer-head">
+    <div>
+      <div class="modal-title">Audit line <span id="g-ev-id">AE-00000</span></div>
+      <div class="modal-sub">Appended once — it cannot be edited or deleted</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#g-event">×</button>
+  </div>
+  <div class="drawer-body">
+    <dl class="kv">
+      <dt>When</dt><dd id="g-ev-when"></dd>
+      <dt>Who</dt><dd id="g-ev-who"></dd>
+      <dt>Action</dt><dd id="g-ev-action"></dd>
+      <dt>Record</dt><dd id="g-ev-record"></dd>
+      <dt>Source</dt><dd id="g-ev-source"></dd>
+      <dt>Device</dt><dd id="g-ev-device"></dd>
+    </dl>
+
+    <div class="seg-divider">What changed</div>
+    <div id="g-ev-changes"></div>
+
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <a class="btn btn-primary" id="g-ev-open" href="#" style="text-decoration:none">Open the record</a>
+      <button class="btn btn-ghost" data-close-drawer="#g-event">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Propose a permission change (outside .screens) -->
+<div class="modal-overlay" id="g-modal-perm">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Propose a permission change</div>
+        <div class="modal-sub">Becomes permission set v8 · Shibani approves it · v7 stays in force meanwhile</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-row">
+        <div class="field">
+          <label class="field-label">Role</label>
+          <select class="field-select">
+            <option>PCC</option>
+            <option>Front Desk</option>
+            <option>Medical Assistant</option>
+            <option>Medic</option>
+            <option>Nurse</option>
+            <option>Billing</option>
+            <option>Operations Manager</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Permission</label>
+          <select class="field-select">
+            <option>Chart read</option>
+            <option>Chart write</option>
+            <option>Schedule</option>
+            <option>Billing</option>
+            <option>Settings</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Change</label>
+        <select class="field-select">
+          <option>Grant it</option>
+          <option>Remove it</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Reason (required)</label>
+        <textarea class="field-textarea" placeholder="e.g. Bee covers Dr. Bakman's Friday bookings and cannot see his day."></textarea>
+        <div class="field-help">The proposal, your reason and Shibani's decision each become their own line in the store.</div>
+      </div>
+      <div class="callout callout-warn">Sign and lock cannot be granted here. It belongs to providers, and that rule is not editable.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Proposed as permission set v8 — waiting on Shibani. Nothing changes until she approves it.', 'ok')">Send the proposal to Shibani</button>
+    </div>
+  </div>
+</div>
+
 <!-- Break-the-glass modal (outside .screens) -->
 <div class="modal-overlay" id="g-modal-glass">
   <div class="modal">
     <div class="modal-head">
       <div>
         <div class="modal-title">Break the glass — emergency chart access</div>
-        <div class="modal-sub">Opens the chart now · pages Shibani · writes the audit line</div>
+        <div class="modal-sub">Opens the chart now · pages Shibani · appends the audit line</div>
       </div>
       <button class="modal-close" data-close-modal>×</button>
     </div>
@@ -252,24 +543,26 @@
       <div class="field">
         <label class="field-label">Reason for emergency access (required)</label>
         <textarea class="field-textarea" placeholder="e.g. Patient in chair reporting chest tightness — need allergy list and current medications now."></textarea>
-        <div class="field-help">Your name, this reason, and every screen you open are written to the audit trail.</div>
+        <div class="field-help">Your name, this reason, and every screen you open are appended to the store.</div>
       </div>
       <div class="callout callout-warn">Shibani is paged the moment you continue and reviews every break-the-glass event the same day.</div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" data-close-modal>Cancel</button>
-      <button class="btn btn-danger" data-close-modal onclick="HCOS.toast('Chart opened — Shibani paged, audit line written.', 'warn')">Open chart and page Shibani</button>
+      <button class="btn btn-danger" data-close-modal onclick="HCOS.toast('Chart opened — Shibani paged, audit line appended.', 'warn')">Open chart and page Shibani</button>
     </div>
   </div>
 </div>
 
 <script src="assets/hcos.js?v=8"></script>
 <script>
+/* G-01: filter the one audit store, and open any line in full */
 (function () {
   var search = document.getElementById('g-audit-search');
   var chips = Array.prototype.slice.call(document.querySelectorAll('.g-audit-bar .filter-chip'));
   var rows = Array.prototype.slice.call(document.querySelectorAll('#g-audit-rows tr[data-cat]'));
   var empty = document.getElementById('g-audit-empty');
+  var count = document.getElementById('g-audit-count');
   var cat = 'all';
 
   function apply() {
@@ -283,6 +576,7 @@
       if (show) shown++;
     });
     if (empty) empty.style.display = shown ? 'none' : '';
+    if (count) count.textContent = 'Showing ' + shown + ' of 1,482 events · Tuesday, July 21';
   }
 
   chips.forEach(function (chip) {
@@ -295,6 +589,62 @@
   });
 
   if (search) search.addEventListener('input', apply);
+
+  /* the anomaly alert filters the store — it never changes it */
+  var aiShow = document.getElementById('g-ai-show');
+  if (aiShow) {
+    aiShow.addEventListener('click', function () {
+      chips.forEach(function (c) { c.classList.toggle('active', c.getAttribute('data-filter') === 'chart'); });
+      cat = 'chart';
+      if (search) search.value = 'Charlene';
+      apply();
+      window.HCOS.toast('Filtered to Charlene’s chart access. Reviewing it changes nothing in the store.', 'ok');
+    });
+  }
+
+  /* every line opens in full: actor, action, record, source and before/after */
+  var drawer = document.getElementById('g-event');
+  var overlay = document.querySelector('.drawer-overlay[data-close-drawer="#g-event"]');
+  var openLink = document.getElementById('g-ev-open');
+  var changesBox = document.getElementById('g-ev-changes');
+  var fields = ['id', 'when', 'who', 'action', 'record', 'source', 'device'];
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function renderChanges(raw) {
+    if (!raw) {
+      return '<div class="callout">Nothing changed — this line records a read. Opening a chart is recorded the same way an edit is.</div>';
+    }
+    var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead><tbody>';
+    raw.split('|').forEach(function (part) {
+      var bits = part.split('~');
+      html += '<tr><td>' + esc(bits[0] || '') + '</td><td>' + esc(bits[1] || '—') + '</td><td>' + esc(bits[2] || '—') + '</td></tr>';
+    });
+    return html + '</tbody></table></div>';
+  }
+
+  rows.forEach(function (row) {
+    row.addEventListener('click', function (ev) {
+      if (ev.target.closest('a, button')) return;
+      fields.forEach(function (f) {
+        var slot = document.getElementById('g-ev-' + (f === 'id' ? 'id' : f));
+        if (slot) slot.textContent = row.getAttribute('data-' + (f === 'id' ? 'ev' : f)) || '—';
+      });
+      if (changesBox) changesBox.innerHTML = renderChanges(row.getAttribute('data-changes'));
+      var href = row.getAttribute('data-open');
+      if (href) {
+        openLink.setAttribute('href', href);
+        openLink.textContent = row.getAttribute('data-openlabel') || 'Open the record';
+        openLink.style.display = '';
+      } else {
+        openLink.style.display = 'none';
+      }
+      drawer.classList.add('open');
+      if (overlay) overlay.classList.add('open');
+    });
+  });
 })();
 </script>
 </body>

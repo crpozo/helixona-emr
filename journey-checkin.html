@@ -20,6 +20,8 @@
   .j-cq { font-size: 15px; font-weight: 600; color: var(--muted); margin-top: 6px; }
   .j-cpills { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; align-items: center; margin-top: 14px; }
   .j-cnote { font-size: 12px; color: var(--muted); margin-top: 16px; max-width: 260px; line-height: 1.55; }
+  .j-cprov { max-width: 288px; margin: 14px auto 0; text-align: left; }
+  .j-cmore { display: block; margin: 10px auto 0; }
   .j-flow-foot { margin-top: 12px; }
   /* Start intro */
   .j-greet-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
@@ -105,11 +107,14 @@
               <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Red light supports your mitochondria and recovery — open the 2-minute read.', 'ok')">What is this?</button>
             </div>
             <div class="j-cnote">Full-body red-light therapy to support your mitochondria and recovery.</div>
+            <div class="prov j-cprov">
+              <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 14 · <a href="journey-plan.html#/j-plan-activities">see your plan</a></span>
+            </div>
           </div>
 
           <div class="j-flow-foot">
-            <button class="bigbtn bigbtn-done" data-activate="j-checkin-supplement">I did it!</button>
-            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-supplement">Not yet</button>
+            <button class="bigbtn bigbtn-done" data-activate="j-checkin-supplement" onclick="HCOS.toast('Saved: done today. Your plan stays the same.', 'ok')">I did it!</button>
+            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-supplement" onclick="HCOS.toast('Saved: not done today. Your plan stays the same.', 'ok')">Not yet</button>
           </div>
 
         </div>
@@ -133,14 +138,19 @@
             <div class="j-cq">Did you take it today?</div>
             <div class="j-cpills">
               <span class="pill pill-muted">400 mg · before bed</span>
+              <span class="clin-state verified">Prescribed</span>
               <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Magnesium glycinate helps calm your system for sleep — open the 2-minute read.', 'ok')">What is this?</button>
             </div>
             <div class="j-cnote">Take about 30 minutes before bed to support sleep.</div>
+            <div class="prov j-cprov">
+              <span><strong>From</strong> your plan <span class="ver-chip">v4</span> · approved by Dr. Drannikov, Jul 14 · <a href="journey-plan.html#/j-plan-supplements">see your plan</a></span>
+            </div>
           </div>
 
           <div class="j-flow-foot">
-            <button class="bigbtn bigbtn-done" data-activate="j-checkin-done">I did it!</button>
-            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-done">Not yet</button>
+            <button class="bigbtn bigbtn-done" data-activate="j-checkin-done" onclick="HCOS.toast('Saved: taken tonight at 8:33 PM. Your plan stays the same.', 'ok')">I took it</button>
+            <button class="bigbtn bigbtn-skip" data-activate="j-checkin-done" onclick="HCOS.toast('Saved: not taken tonight. Your plan stays the same.', 'ok')">Not yet</button>
+            <button class="btn btn-sm j-cmore" data-open-modal="#jcReport">Something was different</button>
           </div>
 
         </div>
@@ -166,6 +176,9 @@
           </div>
 
           <div class="j-done-note">One saved for tonight — we'll remind you to take your LDN, 3 mg, at bedtime.</div>
+          <div class="prov j-cprov">
+            <span><strong>Saved</strong> as tonight's check-in against your plan <span class="ver-chip">v4</span> — nothing in your plan changed · <a href="journey-plan.html#/j-plan-supplements">see your plan</a></span>
+          </div>
 
           <a class="bigbtn bigbtn-done" href="journey.html#/j-01-today" style="text-decoration:none; margin-top:18px">Back to Today</a>
 
@@ -174,6 +187,66 @@
     </div>
   </section>
 
+</div>
+
+<!-- Report a difference — it goes to the care team, it does not change the plan -->
+<div class="modal-overlay" id="jcReport">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Tell your care team</div>
+        <div class="modal-sub">Magnesium glycinate · 400 mg before bed · your plan <span class="ver-chip">v4</span></div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="field">
+        <label class="field-label">What was different tonight?</label>
+        <select class="field-select">
+          <option>I took less than my plan says</option>
+          <option>I took more than my plan says</option>
+          <option>I took it at a different time</option>
+          <option>I skipped it</option>
+          <option>I stopped taking it</option>
+          <option>It gave me a side effect</option>
+          <option>I took something that is not on my plan</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label class="field-label">How much you took</label><input class="field-input" placeholder="200 mg"></div>
+        <div class="field"><label class="field-label">When</label><input class="field-input" value="Tonight, about 8:15 PM"></div>
+      </div>
+      <div class="field">
+        <label class="field-label">Anything they should know</label>
+        <textarea class="field-textarea" placeholder="Felt groggy in the morning, so I halved it."></textarea>
+      </div>
+
+      <div class="prov">
+        <span>Anything you add here shows on your list as <span class="clin-state reported">Reported</span> <span class="clin-src">by you, Jul 21</span> until your care team checks it.</span>
+      </div>
+
+      <div class="ai-block">
+        <div class="ai-head">
+          <span class="ai-badge">Noticed by HCOS</span>
+          <span class="ai-state suggested">Suggestion</span>
+        </div>
+        <div class="ai-body">Three of your last seven nights were below 400 mg. Your care team sees this next to your note.</div>
+        <div class="ai-meta">
+          <span><b>From</b> your last 7 check-ins · plan <span class="ver-chip">v4</span></span>
+          <span><b>Model</b> adherence-v1.3 · confidence 0.82</span>
+          <span><b>Read by</b> Bee, PCC</span>
+        </div>
+      </div>
+
+      <div class="callout">Bee reads these each morning and can pass it to your provider. Your plan and your supplement list stay as they are until Dr. Drannikov approves a change. If something feels serious, call us at (949) 257-2644.</div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Sent to your care team. Bee reviews it today — your plan does not change until Dr. Drannikov approves.', 'ok')">Send to my care team</button>
+    </div>
+  </div>
 </div>
 
 <script src="assets/hcos.js?v=8"></script>

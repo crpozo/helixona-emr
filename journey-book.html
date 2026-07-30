@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/hcos.css?v=8">
 <style>
+  .jb-layout { display: flex; gap: 28px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+  .jb-side { width: 340px; max-width: 100%; display: flex; flex-direction: column; gap: 16px; }
   .jb-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
   .jb-back { border: none; background: none; font-size: 20px; line-height: 1; color: var(--muted); cursor: pointer; padding: 2px 6px; border-radius: 8px; text-decoration: none; }
   .jb-back:hover { background: var(--hx-band); color: var(--ink); }
@@ -17,17 +19,26 @@
   .jb-step { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: center; }
   .jb-q { font-size: 20px; font-weight: 600; color: var(--hx-navy); text-align: center; margin: 6px 0 4px; }
   .jb-sub { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 16px; }
+  .jb-hd { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin: 18px 0 8px; }
   .jb-opt { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 14px 16px; border: 2px solid var(--line); background: #fff; border-radius: 14px; margin-bottom: 10px; cursor: pointer; font-family: inherit; }
   .jb-opt:hover { border-color: var(--ink); }
-  .jb-opt-name { font-size: 15px; font-weight: 700; color: var(--ink); }
-  .jb-opt-meta { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .jb-opt-body { min-width: 0; }
+  .jb-opt-name { font-size: 15px; font-weight: 700; color: var(--ink); display: block; }
+  .jb-opt-meta { font-size: 11.5px; color: var(--muted); margin-top: 1px; display: block; }
   .jb-opt-arrow { margin-left: auto; color: var(--muted); font-size: 16px; }
+  .jb-off { border-style: dashed; cursor: default; }
+  .jb-off:hover { border-color: var(--line); }
+  .jb-off .jb-opt-name { color: var(--muted); font-weight: 600; }
+  .jb-off-act { margin-left: auto; flex-shrink: 0; }
   .jb-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .jb-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 16px 8px; border: 2px solid var(--line); background: #fff; border-radius: 14px; cursor: pointer; font-family: inherit; }
   .jb-cell:hover { border-color: var(--ink); }
+  .jb-cell.jb-off:hover { border-color: var(--line); }
   .jb-cell-dow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
   .jb-cell-day { font-size: 17px; font-weight: 700; color: var(--ink); }
   .jb-cell-time { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .jb-cell-meta { font-size: 10.5px; color: var(--muted); text-align: center; margin-top: 2px; }
+  .jb-off .jb-cell-day, .jb-off .jb-cell-time { color: var(--muted); }
   .jb-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; }
   .jb-sumcard { border: 2px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
   .jb-sumrow { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
@@ -41,157 +52,318 @@
 <div class="screens">
 
   <!-- ============================================================ -->
-  <!-- Step 1 — what -->
+  <!-- Step 1 — what: only what the approved plan and signed orders allow -->
   <section class="screen" id="j-book-what" data-title="Pick a treatment">
-    <div class="phone-frame">
-      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
-      <div class="phone-body">
-        <div class="jb-top">
-          <a class="jb-back" href="journey.html" aria-label="Exit booking">✕</a>
-          <div class="jb-prog"><div class="jb-prog-fill" style="width:25%"></div></div>
-        </div>
-        <div class="jb-step">Step 1 of 4</div>
-        <div class="jb-q">What would you like to book?</div>
-        <div class="jb-sub">These are the in-office treatments in your plan.</div>
+    <div class="jb-layout">
 
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Nano Bath">
-          <span><span class="jb-opt-name">Nano Bath</span><span class="jb-opt-meta">≈30 min · oxygenation soak</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Red Light">
-          <span><span class="jb-opt-name">Red Light</span><span class="jb-opt-meta">≈20 min · mitochondrial support</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Hydrogen Inhalation">
-          <span><span class="jb-opt-name">Hydrogen Inhalation</span><span class="jb-opt-meta">≈30 min · lowers oxidative stress</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Salt Room">
-          <span><span class="jb-opt-name">Salt Room</span><span class="jb-opt-meta">≈45 min · halotherapy</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="EBOO">
-          <span><span class="jb-opt-name">EBOO</span><span class="jb-opt-meta">≈60 min · ozone blood treatment</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="IV Therapy">
-          <span><span class="jb-opt-name">IV Therapy</span><span class="jb-opt-meta">≈45 min · nutrient drip</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
-        <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Provider Visit">
-          <span><span class="jb-opt-name">Provider Visit</span><span class="jb-opt-meta">≈20 min · review labs &amp; plan</span></span>
-          <span class="jb-opt-arrow">›</span>
-        </button>
+      <div class="phone-frame">
+        <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+        <div class="phone-body">
+          <div class="jb-top">
+            <a class="jb-back" href="journey.html" aria-label="Exit booking">✕</a>
+            <div class="jb-prog"><div class="jb-prog-fill" style="width:25%"></div></div>
+          </div>
+          <div class="jb-step">Step 1 of 4</div>
+          <div class="jb-q">What would you like to book?</div>
+          <div class="jb-sub">These are the visits your plan lets you book yourself.</div>
+
+          <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Nano bath">
+            <span class="jb-opt-body"><span class="jb-opt-name">Nano bath</span><span class="jb-opt-meta">30 min · oxygenation soak</span><span class="jb-opt-meta">1 a week · none booked yet</span></span>
+            <span class="jb-opt-arrow">›</span>
+          </button>
+          <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Red light">
+            <span class="jb-opt-body"><span class="jb-opt-name">Red light</span><span class="jb-opt-meta">20 min · mitochondrial support</span><span class="jb-opt-meta">2 a week · 1 left</span></span>
+            <span class="jb-opt-arrow">›</span>
+          </button>
+          <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Hydrogen inhalation">
+            <span class="jb-opt-body"><span class="jb-opt-name">Hydrogen inhalation</span><span class="jb-opt-meta">30 min · lowers oxidative stress</span><span class="jb-opt-meta">3 a week · 2 left</span></span>
+            <span class="jb-opt-arrow">›</span>
+          </button>
+          <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Salt room">
+            <span class="jb-opt-body"><span class="jb-opt-name">Salt room</span><span class="jb-opt-meta">45 min · halotherapy</span><span class="jb-opt-meta">1 a week · none booked yet</span></span>
+            <span class="jb-opt-arrow">›</span>
+          </button>
+          <button class="jb-opt" data-activate="j-book-day" data-pick="what" data-val="Provider visit">
+            <span class="jb-opt-body"><span class="jb-opt-name">Provider visit</span><span class="jb-opt-meta">20 min · review labs and plan</span><span class="jb-opt-meta">Dr. Drannikov · 1 a week</span></span>
+            <span class="jb-opt-arrow">›</span>
+          </button>
+
+          <div class="jb-hd">The clinic books these for you</div>
+
+          <div class="jb-opt jb-off">
+            <span class="jb-opt-body"><span class="jb-opt-name">NAD+ infusion</span><span class="jb-opt-meta">Session 5 of 8 is set for Thu, Jul 23 · 1:00 PM</span><span class="jb-opt-meta">One a week under Dr. Drannikov's order</span></span>
+            <a class="btn btn-sm jb-off-act" href="journey.html#/j-02-visit">See visit</a>
+          </div>
+          <div class="jb-opt jb-off">
+            <span class="jb-opt-body"><span class="jb-opt-name">EBOO</span><span class="jb-opt-meta">60 min · ozone blood treatment</span><span class="jb-opt-meta">Dr. Drannikov signs a clearance before each cycle</span></span>
+            <button class="btn btn-sm jb-off-act" onclick="HCOS.toast('Sent to your care team. Only your provider can add a treatment or clear this cycle.', 'ok')">Ask about it</button>
+          </div>
+
+          <button class="bigbtn" onclick="HCOS.toast('Sent to your care team. Bee will call you about it.', 'ok')">Ask about something else</button>
+        </div>
       </div>
+
+      <div class="jb-side">
+        <div class="card">
+          <div class="card-title">What Maya can book herself</div>
+          <div class="prov" style="margin-top:0">
+            <span><strong>From</strong> plan of care <span class="ver-chip">v4</span> <span class="appr approved">Approved</span> · Dr. Drannikov, effective Jul 6 · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span>
+          </div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Nano bath</span><span class="check-meta">Plan item v4 · 1 / wk</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Red light</span><span class="check-meta">Plan item v4 · 2 / wk</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Hydrogen inhalation</span><span class="check-meta">Plan item v4 · 3 / wk</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Salt room</span><span class="check-meta">Plan item v4 · 1 / wk</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Provider visit</span><span class="check-meta"><a href="clinical.html#/b-09-orders">O-2288 v1</a></span></li>
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">NAD+ IV therapy — this week's session is booked</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">O-2291 v2</a></span></li>
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">EBOO — clearance not signed for this cycle</span><span class="check-meta"><a href="clinical.html#/b-09-orders">O-2314 v1</a></span></li>
+          </ul>
+          <div class="field-help" style="margin-top:8px">An option appears only while its plan item or signed order is current and the week's count is not used up. Dose, route and cadence stay in those records.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Who may do what</div>
+          <dl class="kv">
+            <dt>Books from this list</dt><dd>Maya</dd>
+            <dt>Adds a treatment</dt><dd>Physician or extender</dd>
+            <dt>Changes the plan</dt><dd>Physician or extender · <a href="journey-careplan.html#/j-staff-poc">plan of care</a></dd>
+            <dt>The app</dt><dd>Offers approved options only — it never writes an order</dd>
+          </dl>
+          <div class="prov">
+            <span><strong>Asking about something</strong> raises a request for the care team. It does not change the plan.</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- Step 2 — day -->
+  <!-- Step 2 — day: availability read from the central resource calendar -->
   <section class="screen" id="j-book-day" data-title="Pick a day">
-    <div class="phone-frame">
-      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
-      <div class="phone-body">
-        <div class="jb-top">
-          <button class="jb-back" data-activate="j-book-what" aria-label="Go back">‹</button>
-          <div class="jb-prog"><div class="jb-prog-fill" style="width:50%"></div></div>
-        </div>
-        <div class="jb-step">Step 2 of 4</div>
-        <div class="jb-q">Pick a day</div>
-        <div class="jb-sub">for <span id="jb-what-sub">your treatment</span></div>
+    <div class="jb-layout">
 
-        <div class="jb-grid">
-          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Wed, Jul 22">
-            <span class="jb-cell-dow">Wed</span><span class="jb-cell-day">Jul 22</span>
-          </button>
-          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Thu, Jul 23">
-            <span class="jb-cell-dow">Thu</span><span class="jb-cell-day">Jul 23</span>
-          </button>
-          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Fri, Jul 24">
-            <span class="jb-cell-dow">Fri</span><span class="jb-cell-day">Jul 24</span>
-          </button>
-          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Sat, Jul 25">
-            <span class="jb-cell-dow">Sat</span><span class="jb-cell-day">Jul 25</span>
-          </button>
-          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Mon, Jul 27">
-            <span class="jb-cell-dow">Mon</span><span class="jb-cell-day">Jul 27</span>
-          </button>
-          <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Tue, Jul 28">
-            <span class="jb-cell-dow">Tue</span><span class="jb-cell-day">Jul 28</span>
-          </button>
+      <div class="phone-frame">
+        <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+        <div class="phone-body">
+          <div class="jb-top">
+            <button class="jb-back" data-activate="j-book-what" aria-label="Go back">‹</button>
+            <div class="jb-prog"><div class="jb-prog-fill" style="width:50%"></div></div>
+          </div>
+          <div class="jb-step">Step 2 of 4</div>
+          <div class="jb-q">Pick a day</div>
+          <div class="jb-sub">for <span id="jb-what-sub">red light</span> · we hold <span id="jb-hold-sub">20 minutes</span></div>
+
+          <div class="jb-grid">
+            <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Wed, Jul 22">
+              <span class="jb-cell-dow">Wed</span><span class="jb-cell-day">Jul 22</span><span class="jb-cell-meta">4 times</span>
+            </button>
+            <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Thu, Jul 23">
+              <span class="jb-cell-dow">Thu</span><span class="jb-cell-day">Jul 23</span><span class="jb-cell-meta">2 times · you're here at 1:00</span>
+            </button>
+            <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Fri, Jul 24">
+              <span class="jb-cell-dow">Fri</span><span class="jb-cell-day">Jul 24</span><span class="jb-cell-meta">3 times</span>
+            </button>
+            <div class="jb-cell jb-off">
+              <span class="jb-cell-dow">Sat</span><span class="jb-cell-day">Jul 25</span><span class="jb-cell-meta">Fully booked</span>
+            </div>
+            <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Mon, Jul 27">
+              <span class="jb-cell-dow">Mon</span><span class="jb-cell-day">Jul 27</span><span class="jb-cell-meta">5 times</span>
+            </button>
+            <button class="jb-cell" data-activate="j-book-time" data-pick="day" data-val="Tue, Jul 28">
+              <span class="jb-cell-dow">Tue</span><span class="jb-cell-day">Jul 28</span><span class="jb-cell-meta">4 times · last day open to you</span>
+            </button>
+          </div>
+          <div class="jb-note">The clinic is closed Sundays. Your Restore membership opens times 7 days ahead — through Tue, Jul 28.</div>
         </div>
-        <div class="jb-note">The clinic is closed Sundays.</div>
       </div>
+
+      <div class="jb-side">
+        <div class="card">
+          <div class="card-title">Where these days come from</div>
+          <div class="prov" style="margin-top:0">
+            <span><strong>From</strong> the HCOS scheduling service · resource calendar for <span id="jb-room-2">the light room</span> · booking rules <span class="ver-chip">v6</span> <span class="appr approved">Approved</span> · <a href="schedule.html#/l-01-day">open the day view</a></span>
+          </div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Plan item or signed order is current</span><span class="check-meta" id="jb-src-2">Plan of care v4</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Room and staff free for the whole hold</span><span class="check-meta">Resource calendar</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Interval the plan allows</span><span class="check-meta" id="jb-left-2">1 left this week</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness Standard · ruleset r-4.2</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Booking window for her membership</span><span class="check-meta"><a href="pricing-memberships.html#/pm-01-tiers">Restore · 7 days</a></span></li>
+          </ul>
+          <div class="field-help" style="margin-top:8px">A day the rules do not allow is never offered. The app filters the one calendar — it does not keep a patient copy of availability.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Days the rules removed</div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Sat, Jul 25 — light room booked all day</span><span class="check-meta">Resource</span></li>
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Sun, Jul 26 — clinic closed</span><span class="check-meta">Hours</span></li>
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Wed, Jul 29 onward — outside her booking window</span><span class="check-meta">Membership</span></li>
+          </ul>
+          <div class="prov">
+            <span><strong>Front desk sees the same days</strong> on <a href="schedule.html#/l-03-book">the booking screen</a> — one engine, one set of rules.</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- Step 3 — time -->
+  <!-- Step 3 — time: patient-specific duration, same capacity service -->
   <section class="screen" id="j-book-time" data-title="Pick a time">
-    <div class="phone-frame">
-      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
-      <div class="phone-body">
-        <div class="jb-top">
-          <button class="jb-back" data-activate="j-book-day" aria-label="Go back">‹</button>
-          <div class="jb-prog"><div class="jb-prog-fill" style="width:75%"></div></div>
-        </div>
-        <div class="jb-step">Step 3 of 4</div>
-        <div class="jb-q">Pick a start time</div>
-        <div class="jb-sub"><span id="jb-day-sub">Your day</span> · clinic hours 8:00 AM – 6:00 PM</div>
+    <div class="jb-layout">
 
-        <div class="jb-grid">
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="9:00 AM"><span class="jb-cell-time">9:00 AM</span></button>
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="10:00 AM"><span class="jb-cell-time">10:00 AM</span></button>
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="11:00 AM"><span class="jb-cell-time">11:00 AM</span></button>
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="1:00 PM"><span class="jb-cell-time">1:00 PM</span></button>
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="2:00 PM"><span class="jb-cell-time">2:00 PM</span></button>
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="3:00 PM"><span class="jb-cell-time">3:00 PM</span></button>
-          <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="4:00 PM"><span class="jb-cell-time">4:00 PM</span></button>
+      <div class="phone-frame">
+        <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+        <div class="phone-body">
+          <div class="jb-top">
+            <button class="jb-back" data-activate="j-book-day" aria-label="Go back">‹</button>
+            <div class="jb-prog"><div class="jb-prog-fill" style="width:75%"></div></div>
+          </div>
+          <div class="jb-step">Step 3 of 4</div>
+          <div class="jb-q">Pick a start time</div>
+          <div class="jb-sub"><span id="jb-day-sub">Wed, Jul 22</span> · we hold <span id="jb-hold-3">20 minutes</span> for you</div>
+
+          <div class="jb-grid">
+            <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="9:00 AM"><span class="jb-cell-time">9:00 AM</span></button>
+            <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="10:00 AM"><span class="jb-cell-time">10:00 AM</span></button>
+            <div class="jb-cell jb-off"><span class="jb-cell-time">11:00 AM</span><span class="jb-cell-meta">Room taken</span></div>
+            <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="1:00 PM"><span class="jb-cell-time">1:00 PM</span></button>
+            <button class="jb-cell" data-activate="j-book-confirm" data-pick="time" data-val="2:00 PM"><span class="jb-cell-time">2:00 PM</span></button>
+            <div class="jb-cell jb-off"><span class="jb-cell-time">3:30 PM</span><span class="jb-cell-meta">Nobody on to run it</span></div>
+            <div class="jb-cell jb-off"><span class="jb-cell-time">5:30 PM</span><span class="jb-cell-meta">Ends after we close</span></div>
+          </div>
+          <div class="jb-note">Your pick is held for 10 minutes while you confirm.</div>
         </div>
       </div>
+
+      <div class="jb-side">
+        <div class="card">
+          <div class="card-title">Times come from the same capacity service</div>
+          <div class="prov" style="margin-top:0">
+            <span><strong>From</strong> the HCOS scheduling service · <span id="jb-room-3">light room</span> · the screen front desk uses is <a href="schedule.html#/l-03-book">Book appointment</a></span>
+          </div>
+
+          <div class="ai-block">
+            <div class="ai-head">
+              <span class="ai-badge">Suggested by HCOS</span>
+              <span class="ai-state accepted">Accepted</span>
+            </div>
+            <div class="ai-body">
+              Hold <span id="jb-ai-hold">20 minutes</span> for Maya's <span id="jb-ai-what">red light</span>, not the protocol time. Her last three ran <span id="jb-ai-runs">19, 21 and 20 minutes</span>.
+            </div>
+            <div class="ai-meta">
+              <span><b>Read</b> her last 3 visits for this treatment</span>
+              <span><b>Model</b> duration-v1.4</span>
+              <span><b>Confidence</b> <span id="jb-ai-conf">0.88</span> — three runs is the smallest sample it uses</span>
+              <span><b>Accepted by</b> Yazmin · Front desk · Jul 20</span>
+            </div>
+            <div class="field-help" style="margin-top:8px">A prediction of length only. It cannot free a room, shorten an interval or clear a check.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Times the rules removed</div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">11:00 AM — room taken by another visit</span><span class="check-meta">Resource</span></li>
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">3:30 PM — Kyle is off from 3:00</span><span class="check-meta">Staffing</span></li>
+            <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">5:30 PM — the hold runs past 6:00 PM</span><span class="check-meta">Hours</span></li>
+          </ul>
+          <dl class="kv" style="margin-top:10px">
+            <dt>Held for</dt><dd>10 minutes</dd>
+            <dt>The hold lives on</dt><dd>The appointment record, not this page</dd>
+            <dt>If it expires</dt><dd>The time goes back on the clinic calendar</dd>
+          </dl>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- Step 4 — confirm -->
+  <!-- Step 4 — confirm: the same appointment transaction staff commits -->
   <section class="screen" id="j-book-confirm" data-title="Confirm">
-    <div class="phone-frame">
-      <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
-      <div class="phone-body">
-        <div class="jb-top">
-          <button class="jb-back" data-activate="j-book-time" aria-label="Go back">‹</button>
-          <div class="jb-prog"><div class="jb-prog-fill" style="width:100%"></div></div>
-        </div>
-        <div class="jb-step">Step 4 of 4</div>
-        <div class="jb-q">Everything look right?</div>
-        <div class="jb-sub">One visit · we'll add it to your Today screen.</div>
+    <div class="jb-layout">
 
-        <div class="jb-sumcard">
-          <div class="jb-sumrow">
-            <div class="jb-sumlbl">Treatment</div>
-            <div class="jb-sumval" id="jb-what">Red Light</div>
+      <div class="phone-frame">
+        <div class="phone-bar"><span>11:41 AM</span><span>LTE ▪▪▪</span></div>
+        <div class="phone-body">
+          <div class="jb-top">
+            <button class="jb-back" data-activate="j-book-time" aria-label="Go back">‹</button>
+            <div class="jb-prog"><div class="jb-prog-fill" style="width:100%"></div></div>
           </div>
-          <div class="jb-sumrow">
-            <div class="jb-sumlbl">Day</div>
-            <div class="jb-sumval" id="jb-day">Wed, Jul 22</div>
-          </div>
-          <div class="jb-sumrow">
-            <div class="jb-sumlbl">Time</div>
-            <div class="jb-sumval" id="jb-time">10:00 AM</div>
-          </div>
-          <div class="jb-sumrow">
-            <div class="jb-sumlbl">Where</div>
-            <div class="jb-sumval">Helixona Clinic · Dr. Drannikov</div>
-          </div>
-        </div>
+          <div class="jb-step">Step 4 of 4</div>
+          <div class="jb-q">Everything look right?</div>
+          <div class="jb-sub">Held until 11:51 AM · we check the room and your plan once more when you tap Book it.</div>
 
-        <div style="text-align:center;margin-bottom:16px">
-          <span class="pill pill-ok">No payment needed — part of your plan</span>
-        </div>
+          <div class="jb-sumcard">
+            <div class="jb-sumrow">
+              <div class="jb-sumlbl">Treatment</div>
+              <div class="jb-sumval" id="jb-what">Red light</div>
+            </div>
+            <div class="jb-sumrow">
+              <div class="jb-sumlbl">Day</div>
+              <div class="jb-sumval" id="jb-day">Wed, Jul 22</div>
+            </div>
+            <div class="jb-sumrow">
+              <div class="jb-sumlbl">Time</div>
+              <div class="jb-sumval" id="jb-time">10:00 AM</div>
+            </div>
+            <div class="jb-sumrow">
+              <div class="jb-sumlbl">Runs</div>
+              <div class="jb-sumval" id="jb-runs">about 20 minutes</div>
+            </div>
+            <div class="jb-sumrow">
+              <div class="jb-sumlbl">Where</div>
+              <div class="jb-sumval" id="jb-where">Helixona clinic · light room · Kyle</div>
+            </div>
+            <div class="jb-sumrow">
+              <div class="jb-sumlbl">Plan</div>
+              <div class="jb-sumval" id="jb-plan">From your plan · Dr. Drannikov</div>
+            </div>
+          </div>
 
-        <button class="bigbtn bigbtn-done" id="jb-book-it">Book it</button>
-        <button class="bigbtn" data-activate="j-book-what">Change something</button>
+          <div style="text-align:center;margin-bottom:16px">
+            <span class="pill pill-ok">No payment today — included in your membership</span>
+          </div>
+
+          <button class="bigbtn bigbtn-done" id="jb-book-it">Book it</button>
+          <button class="bigbtn" data-activate="j-book-what">Change something</button>
+        </div>
       </div>
+
+      <div class="jb-side">
+        <div class="card">
+          <div class="card-title">Checks that run at the moment of booking</div>
+          <ul class="check-list" id="jb-final">
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Room and staff still free for the hold</span><span class="check-meta">Resource</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan item or signed order still current</span><span class="check-meta" id="jb-src-4">Plan of care v4</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Clearance on file for this treatment</span><span class="check-meta">Clinical</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Interval since the last one meets the plan</span><span class="check-meta">Cadence</span></li>
+            <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness Standard · ruleset r-4.2</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+          </ul>
+          <div class="prov">
+            <span><strong>Commits through</strong> the HCOS scheduling service — one appointment, one number, the record front desk opens · eCW receives a read-only sync of this domain</span>
+          </div>
+          <div class="field-help">If a check fails now, nothing is booked and the time goes back on the calendar.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Who may do what</div>
+          <dl class="kv">
+            <dt>Books</dt><dd>Maya, from the approved options</dd>
+            <dt>Releases a warning</dt><dd>Physician or extender, with a reason · <a href="schedule.html#/l-03-book">booking screen</a></dd>
+            <dt>Nobody releases</dt><dd>A taken room or provider · a missing order or clearance · an interval shorter than the plan allows · nobody on site to run it</dd>
+            <dt>Logged</dt><dd>Every booking, with who, when and which rule · <a href="security.html#/g-01-audit">audit trail</a></dd>
+          </dl>
+          <div class="prov">
+            <span><strong>Appointment</strong> gets its number at commit and opens at <a href="schedule.html#/l-04-appt">appointment detail</a> — the patient app never holds a second copy.</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -199,33 +371,105 @@
 
 <script src="assets/hcos.js?v=8"></script>
 <script>
-  // Guided booking: carry each pick into the day sub-line, time sub-line, and
-  // the confirmation summary so the flow feels like the real app.
+  // Guided booking: each pick carries the canonical facts of that plan item or
+  // order — hold length, room, cadence left, and the record it comes from —
+  // into the later steps, so the patient app never restates them on its own.
   (function () {
-    var picks = { what: null, day: null, time: null };
+    var TX = {
+      'Nano bath': {
+        hold: '35 minutes', runs: 'about 30 minutes', room: 'nano suite',
+        roomThe: 'the nano suite', where: 'Helixona clinic · nano suite · Kyle',
+        src: 'Plan of care v4', left: 'none booked this week',
+        ai: 'nano bath', past: '34, 36 and 33 minutes', conf: '0.81',
+        plan: 'From your plan · Dr. Drannikov'
+      },
+      'Red light': {
+        hold: '20 minutes', runs: 'about 20 minutes', room: 'light room',
+        roomThe: 'the light room', where: 'Helixona clinic · light room · Kyle',
+        src: 'Plan of care v4', left: '1 left this week',
+        ai: 'red light', past: '19, 21 and 20 minutes', conf: '0.88',
+        plan: 'From your plan · Dr. Drannikov'
+      },
+      'Hydrogen inhalation': {
+        hold: '30 minutes', runs: 'about 30 minutes', room: 'therapy room',
+        roomThe: 'the therapy room', where: 'Helixona clinic · therapy room · Kyle',
+        src: 'Plan of care v4', left: '2 left this week',
+        ai: 'hydrogen inhalation', past: '30, 31 and 29 minutes', conf: '0.90',
+        plan: 'From your plan · Dr. Drannikov'
+      },
+      'Salt room': {
+        hold: '45 minutes', runs: 'about 45 minutes', room: 'salt room',
+        roomThe: 'the salt room', where: 'Helixona clinic · salt room · Kyle',
+        src: 'Plan of care v4', left: 'none booked this week',
+        ai: 'salt room', past: '44, 47 and 45 minutes', conf: '0.85',
+        plan: 'From your plan · Dr. Drannikov'
+      },
+      'Provider visit': {
+        hold: '25 minutes', runs: 'about 20 minutes', room: 'room 2',
+        roomThe: 'room 2', where: 'Helixona clinic · room 2 · Dr. Drannikov',
+        src: 'Signed order O-2288 v1', left: 'none booked this week',
+        ai: 'provider visit', past: '22, 26 and 24 minutes', conf: '0.79',
+        plan: 'From Dr. Drannikov’s order'
+      }
+    };
+
+    function set(id, text) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function applyTreatment(name) {
+      var t = TX[name];
+      if (!t) return;
+      set('jb-what-sub', t.ai);
+      set('jb-hold-sub', t.hold);
+      set('jb-hold-3', t.hold);
+      set('jb-room-2', t.roomThe);
+      set('jb-room-3', t.room);
+      set('jb-src-2', t.src);
+      set('jb-src-4', t.src);
+      set('jb-left-2', t.left);
+      set('jb-ai-hold', t.hold);
+      set('jb-ai-what', t.ai);
+      set('jb-ai-runs', t.past);
+      set('jb-ai-conf', t.conf);
+      set('jb-runs', t.runs);
+      set('jb-where', t.where);
+      set('jb-plan', t.plan);
+    }
+
     document.addEventListener('click', function (ev) {
       var el = ev.target.closest ? ev.target.closest('[data-pick]') : null;
       if (!el) return;
       var kind = el.getAttribute('data-pick');
       var val = el.getAttribute('data-val');
-      picks[kind] = val;
       var main = document.getElementById('jb-' + kind);
       if (main) main.textContent = val;
-      if (kind === 'what') {
-        var sub = document.getElementById('jb-what-sub');
-        if (sub) sub.textContent = val;
-      }
-      if (kind === 'day') {
-        var dsub = document.getElementById('jb-day-sub');
-        if (dsub) dsub.textContent = val;
-      }
+      if (kind === 'what') applyTreatment(val);
+      if (kind === 'day') set('jb-day-sub', val);
     });
 
+    // Booking commits through the scheduling service: the hard checks run again
+    // at this instant, then the appointment gets its one number.
     var bookIt = document.getElementById('jb-book-it');
     if (bookIt) {
       bookIt.addEventListener('click', function () {
-        HCOS.toast('Booked — it is on your Today screen.', 'ok');
-        setTimeout(function () { location.href = 'journey.html'; }, 950);
+        var items = document.querySelectorAll('#jb-final .check-icon');
+        if (!items.length) return;
+        bookIt.disabled = true;
+        bookIt.textContent = 'Checking the room and your plan…';
+        var i = 0;
+        var tick = setInterval(function () {
+          if (i < items.length) {
+            items[i].className = 'check-icon done';
+            items[i].textContent = '✓';
+            i++;
+            return;
+          }
+          clearInterval(tick);
+          HCOS.toast('Booked — appointment A-88240 is on the clinic calendar.', 'ok');
+          setTimeout(function () { location.href = 'journey.html'; }, 950);
+        }, 220);
       });
     }
   })();

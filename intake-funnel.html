@@ -49,7 +49,9 @@
   .a-fineprint { font-size: 10.5px; color: var(--muted); text-align: center; margin-top: 10px; line-height: 1.5; }
   .a-req { color: var(--ink); font-weight: 700; }
   .a-msg-link { color: var(--ink); text-decoration: underline; cursor: pointer; }
-  @media (max-width: 900px) { .a-features { grid-template-columns: 1fr; } }
+  .a-split { display: grid; grid-template-columns: 376px minmax(0, 1fr); gap: 24px; align-items: start; }
+  .a-person { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 900px) { .a-features { grid-template-columns: 1fr; } .a-split { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body data-page="intake-funnel" data-page-title="Intake · Public funnel" data-shell="app">
@@ -106,147 +108,252 @@
 
   <!-- ============================================================ -->
   <section class="screen" id="a-02-inquiry" data-title="Inquiry form">
-    <div class="phone-frame">
-      <div class="phone-bar"><span>11:40</span><span>helixona.com</span><span>•••</span></div>
-      <div class="phone-body">
+    <div class="a-split">
 
-        <div style="text-align:center;padding:4px 0 14px">
-          <div style="font-size:16px;font-weight:600;color:var(--hx-navy)">Welcome to Helixona</div>
-          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">Become a patient · about 5 min</div>
-        </div>
+      <div>
+        <div class="seg-divider" style="margin-top:0">Inquiry form</div>
+        <div class="phone-frame">
+          <div class="phone-bar"><span>8:41</span><span>helixona.com</span><span>•••</span></div>
+          <div class="phone-body">
 
-        <div class="a-progress"><div class="a-progress-fill" style="width:70%"></div></div>
-
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">1</span><span>I give my consent to receive text messages, emails, and phone calls from Helixona. I understand this consent can be revoked at any time. <span class="a-req">*</span></span></div>
-          <div class="a-qhelp">At Helixona, we stay in close communication with our patients to support their healing journey.</div>
-          <label class="a-choice selected"><span class="a-letter">A</span>Yes</label>
-          <label class="a-choice"><span class="a-letter">B</span>No</label>
-        </div>
-
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">2</span><span>Contact information <span class="a-req">*</span></span></div>
-          <div class="a-qhelp">Please provide your full contact information.</div>
-          <div class="field">
-            <label class="field-label">Your full name *</label>
-            <input class="field-input" type="text" placeholder="First Last">
-          </div>
-          <div class="field">
-            <label class="field-label">Date of birth *</label>
-            <input class="field-input" type="text" placeholder="MM/DD/YYYY">
-          </div>
-          <div class="field">
-            <label class="field-label">Best contact phone number</label>
-            <input class="field-input" type="tel" placeholder="(949) 555-0100">
-          </div>
-          <div class="field">
-            <label class="field-label">Email address</label>
-            <input class="field-input" type="email" placeholder="name@example.com">
-          </div>
-        </div>
-
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">3</span><span>Home address</span></div>
-          <div class="a-qhelp">Used for claim submission and clinic correspondence.</div>
-          <div class="field">
-            <label class="field-label">Address</label>
-            <input class="field-input" type="text" placeholder="Street address">
-          </div>
-          <div class="field">
-            <label class="field-label">Address line 2</label>
-            <input class="field-input" type="text" placeholder="Apt / suite (optional)">
-          </div>
-          <div class="field-row">
-            <div class="field">
-              <label class="field-label">City</label>
-              <input class="field-input" type="text">
+            <div style="text-align:center;padding:4px 0 14px">
+              <div style="font-size:16px;font-weight:600;color:var(--hx-navy)">Welcome to Helixona</div>
+              <div style="font-size:11.5px;color:var(--muted);margin-top:3px">Become a patient · about 5 min</div>
             </div>
-            <div class="field">
-              <label class="field-label">State</label>
-              <input class="field-input" type="text" placeholder="CA" style="text-transform:uppercase">
+
+            <div class="a-progress"><div class="a-progress-fill" style="width:70%"></div></div>
+
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">1</span><span>I give my consent to receive text messages, emails, and phone calls from Helixona. I understand this consent can be revoked at any time. <span class="a-req">*</span></span></div>
+              <div class="a-qhelp">At Helixona, we stay in close communication with our patients to support their healing journey.</div>
+              <label class="a-choice selected"><span class="a-letter">A</span>Yes</label>
+              <label class="a-choice"><span class="a-letter">B</span>No</label>
             </div>
-          </div>
-          <div class="field">
-            <label class="field-label">Zip code</label>
-            <input class="field-input" type="text" placeholder="92618">
-          </div>
-        </div>
 
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">4</span><span>What brings you in?</span></div>
-          <div class="a-qhelp">A sentence or two is fine. We'll go deeper later.</div>
-          <textarea class="field-textarea" rows="3" placeholder="e.g. Chronic fatigue since COVID, looking for a real workup"></textarea>
-        </div>
-
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">5</span><span>How did you hear about us?</span></div>
-          <div class="a-qhelp">Helps us know what's working — and follow up on referrals.</div>
-          <label class="a-choice selected"><span class="a-letter">A</span>Social media</label>
-          <label class="a-choice"><span class="a-letter">B</span>Online search</label>
-          <label class="a-choice"><span class="a-letter">C</span>Doctor referral</label>
-          <label class="a-choice"><span class="a-letter">D</span>Friend or family referral</label>
-          <label class="a-choice"><span class="a-letter">E</span>Helixona website (direct)</label>
-          <label class="a-choice"><span class="a-letter">F</span>Podcast, article, or interview</label>
-          <label class="a-choice"><span class="a-letter">G</span>Other</label>
-
-          <div class="a-conditional">
-            <div class="a-conditional-title">Which platform?</div>
-            <label class="a-choice selected"><span class="a-letter">a</span>Instagram</label>
-            <label class="a-choice"><span class="a-letter">b</span>Facebook</label>
-            <label class="a-choice"><span class="a-letter">c</span>TikTok</label>
-            <label class="a-choice"><span class="a-letter">d</span>YouTube</label>
-            <label class="a-choice"><span class="a-letter">e</span>X / Twitter</label>
-            <label class="a-choice"><span class="a-letter">f</span>LinkedIn</label>
-            <label class="a-choice"><span class="a-letter">g</span>Reddit</label>
-            <label class="a-choice"><span class="a-letter">h</span>Other platform</label>
-            <div class="field" style="margin:10px 0 0">
-              <label class="field-label">Whose account or post (optional)</label>
-              <input class="field-input" type="text" placeholder="@account or post link if you remember">
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">2</span><span>Contact information <span class="a-req">*</span></span></div>
+              <div class="a-qhelp">Please provide your full contact information.</div>
+              <div class="field">
+                <label class="field-label">Your full name *</label>
+                <input class="field-input" type="text" value="Marcus Webb" placeholder="First Last">
+              </div>
+              <div class="field">
+                <label class="field-label">Date of birth *</label>
+                <input class="field-input" type="text" value="02/09/1971" placeholder="MM/DD/YYYY">
+              </div>
+              <div class="field">
+                <label class="field-label">Best contact phone number</label>
+                <input class="field-input" type="tel" value="(949) 555-0173" placeholder="(949) 555-0100">
+              </div>
+              <div class="field">
+                <label class="field-label">Email address</label>
+                <input class="field-input" type="email" value="m.webb@example.com" placeholder="name@example.com">
+                <div class="field-help">If you have contacted us before, use the same phone and email — we will continue the intake you already started instead of opening a second file.</div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">6</span><span>What type of health insurance do you currently have? <span class="a-req">*</span></span></div>
-          <label class="a-choice"><span class="a-letter">A</span>PPO insurance</label>
-          <label class="a-choice"><span class="a-letter">B</span>HMO insurance</label>
-          <label class="a-choice selected"><span class="a-letter">C</span>Medicare with PPO</label>
-          <label class="a-choice"><span class="a-letter">D</span>Medicare with HMO</label>
-          <label class="a-choice"><span class="a-letter">E</span>Medicare with Medicaid (Medi-Medi)</label>
-          <label class="a-choice"><span class="a-letter">F</span>Medi-Cal / Medicaid</label>
-          <label class="a-choice"><span class="a-letter">G</span>Uninsured (cash only)</label>
-          <label class="a-choice"><span class="a-letter">H</span>Other type of coverage</label>
-        </div>
-
-        <div class="a-step">
-          <div class="a-q"><span class="a-qnum">7</span><span>Upload a copy of your insurance card</span></div>
-          <div class="a-qhelp">Front of card. We use this to verify your benefits before your visit. You can also share it later from your portal.</div>
-          <div class="a-upload" onclick="HCOS.toast('File upload arrives with the real build.', 'ok')">
-            <div class="a-upload-title">Choose file or drag here</div>
-            <div class="a-upload-sub">JPG, PNG, or PDF · 10 MB max</div>
-          </div>
-          <div class="a-upload-file">
-            <div class="a-file-ico">✓</div>
-            <div style="flex:1">
-              <div style="font-weight:600;color:var(--hx-navy)">medicare-card-front.jpg</div>
-              <div style="font-size:11px;color:var(--muted)">1.8 MB · uploaded · card details read automatically after you submit</div>
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">3</span><span>Home address</span></div>
+              <div class="a-qhelp">Used for claim submission and clinic correspondence.</div>
+              <div class="field">
+                <label class="field-label">Address</label>
+                <input class="field-input" type="text" value="142 Bayview Terrace" placeholder="Street address">
+              </div>
+              <div class="field">
+                <label class="field-label">Address line 2</label>
+                <input class="field-input" type="text" placeholder="Apt / suite (optional)">
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">City</label>
+                  <input class="field-input" type="text" value="Irvine">
+                </div>
+                <div class="field">
+                  <label class="field-label">State</label>
+                  <input class="field-input" type="text" value="CA" placeholder="CA" style="text-transform:uppercase">
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label">Zip code</label>
+                <input class="field-input" type="text" value="92618" placeholder="92618">
+              </div>
             </div>
-            <button class="btn btn-sm">Replace</button>
+
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">4</span><span>What brings you in?</span></div>
+              <div class="a-qhelp">A sentence or two is fine. We'll go deeper later.</div>
+              <textarea class="field-textarea" rows="3" placeholder="e.g. Chronic fatigue since COVID, looking for a real workup">Fatigue and slow recovery for about two years. I want a real workup, not another referral.</textarea>
+            </div>
+
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">5</span><span>How did you hear about us?</span></div>
+              <div class="a-qhelp">Helps us know what's working — and follow up on referrals.</div>
+              <label class="a-choice selected"><span class="a-letter">A</span>Social media</label>
+              <label class="a-choice"><span class="a-letter">B</span>Online search</label>
+              <label class="a-choice"><span class="a-letter">C</span>Doctor referral</label>
+              <label class="a-choice"><span class="a-letter">D</span>Friend or family referral</label>
+              <label class="a-choice"><span class="a-letter">E</span>Helixona website (direct)</label>
+              <label class="a-choice"><span class="a-letter">F</span>Podcast, article, or interview</label>
+              <label class="a-choice"><span class="a-letter">G</span>Other</label>
+
+              <div class="a-conditional">
+                <div class="a-conditional-title">Which platform?</div>
+                <label class="a-choice selected"><span class="a-letter">a</span>Instagram</label>
+                <label class="a-choice"><span class="a-letter">b</span>Facebook</label>
+                <label class="a-choice"><span class="a-letter">c</span>TikTok</label>
+                <label class="a-choice"><span class="a-letter">d</span>YouTube</label>
+                <label class="a-choice"><span class="a-letter">e</span>X / Twitter</label>
+                <label class="a-choice"><span class="a-letter">f</span>LinkedIn</label>
+                <label class="a-choice"><span class="a-letter">g</span>Reddit</label>
+                <label class="a-choice"><span class="a-letter">h</span>Other platform</label>
+                <div class="field" style="margin:10px 0 0">
+                  <label class="field-label">Whose account or post (optional)</label>
+                  <input class="field-input" type="text" placeholder="@account or post link if you remember">
+                </div>
+              </div>
+            </div>
+
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">6</span><span>What type of health insurance do you currently have? <span class="a-req">*</span></span></div>
+              <label class="a-choice selected"><span class="a-letter">A</span>PPO insurance</label>
+              <label class="a-choice"><span class="a-letter">B</span>HMO insurance</label>
+              <label class="a-choice"><span class="a-letter">C</span>Medicare with PPO</label>
+              <label class="a-choice"><span class="a-letter">D</span>Medicare with HMO</label>
+              <label class="a-choice"><span class="a-letter">E</span>Medicare with Medicaid (Medi-Medi)</label>
+              <label class="a-choice"><span class="a-letter">F</span>Medi-Cal / Medicaid</label>
+              <label class="a-choice"><span class="a-letter">G</span>Uninsured (cash only)</label>
+              <label class="a-choice"><span class="a-letter">H</span>Other type of coverage</label>
+            </div>
+
+            <div class="a-step">
+              <div class="a-q"><span class="a-qnum">7</span><span>Upload a copy of your insurance card</span></div>
+              <div class="a-qhelp">Front of card. Our team verifies your benefits before your visit. You can also share it later from your portal.</div>
+              <div class="a-upload" onclick="HCOS.toast('File upload arrives with the real build.', 'ok')">
+                <div class="a-upload-title">Choose file or drag here</div>
+                <div class="a-upload-sub">JPG, PNG, or PDF · 10 MB max</div>
+              </div>
+              <div class="a-upload-file">
+                <div class="a-file-ico">✓</div>
+                <div style="flex:1">
+                  <div style="font-weight:600;color:var(--hx-navy)">insurance-card-front.jpg</div>
+                  <div style="font-size:11px;color:var(--muted)">1.8 MB · uploaded · our team reads the card and confirms your benefits with the payer</div>
+                </div>
+                <button class="btn btn-sm">Replace</button>
+              </div>
+              <div class="a-qhelp" style="margin-top:10px">Skip this if you don't have your card handy — our team will ask for it before scheduling.</div>
+            </div>
+
+            <button class="btn btn-primary btn-lg" style="width:100%;margin-top:4px" data-activate="a-03-check-email" onclick="HCOS.toast('Inquiry received — your secure link is on its way by email and text.', 'ok')">Get my secure link</button>
+            <div class="a-fineprint">By submitting, you agree that Helixona may contact you at the email and phone provided. We never share your information.</div>
+
           </div>
-          <div class="a-qhelp" style="margin-top:10px">Skip this if you don't have your card handy — our team will ask for it before scheduling.</div>
         </div>
-
-        <button class="btn btn-primary btn-lg" style="width:100%;margin-top:4px" data-activate="a-03-check-email" onclick="HCOS.toast('Inquiry received — your secure link is on its way by email and text.', 'ok')">Get my secure link</button>
-        <div class="a-fineprint">By submitting, you agree that Helixona may contact you at the email and phone provided. We never share your information.</div>
-
       </div>
+
+      <div>
+        <div class="seg-divider" style="margin-top:0">Person record</div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">Searched before creating</div>
+          <ul class="check-list">
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Full name — Marcus Webb</span><span class="check-meta">no match</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Date of birth — Feb 9, 1971</span><span class="check-meta">no match</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Mobile — (949) •••-0173</span><span class="check-meta">no match</span></li>
+            <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Email — m.webb@example.com</span><span class="check-meta">no match</span></li>
+          </ul>
+
+          <div class="ai-block">
+            <div class="ai-head">
+              <span class="ai-badge">Suggested by HCOS</span>
+              <span class="ai-state suggested">Suggestion</span>
+            </div>
+            <div class="ai-body">
+              Nobody on file matches this submission — the closest record shares the last name only and differs on date of birth, phone and email.
+            </div>
+            <div class="ai-meta">
+              <span><b>Compared</b> name, date of birth, phone, email</span>
+              <span><b>Model</b> match-v2.1</span>
+              <span><b>Best score</b> 0.31 · review starts at 0.70</span>
+              <span><b>Confirms</b> Marie · New Patient Advisor</span>
+              <span><b>Never creates or merges on its own</b></span>
+            </div>
+            <div class="ai-actions">
+              <a class="btn btn-sm" href="people.html#/pe-01-search">Search the person master</a>
+              <a class="btn btn-sm" href="people.html#/pe-03-duplicates">Compare with a person on file</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">One person, created once</div>
+          <div class="a-person">
+            <span class="avatar lg">MW</span>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Marcus Webb</div>
+              <div class="field-help"><code>P-004633</code> · 55 · he/him</div>
+            </div>
+          </div>
+
+          <div class="lifecycle" style="margin-bottom:6px">
+            <span class="lifecycle-step current">Inquiry</span>
+            <span class="lifecycle-step">Lead</span>
+            <span class="lifecycle-step">Scheduled</span>
+            <span class="lifecycle-step">Onboarding</span>
+            <span class="lifecycle-step">Patient</span>
+            <span class="lifecycle-step">Inactive</span>
+          </div>
+          <div class="prov">
+            <span><strong>From</strong> the public inquiry form <code>helixona.com/become-a-patient</code> · person <code>P-004633</code> · answers stay attributed to Marcus</span>
+          </div>
+          <div class="prov">
+            <span><strong>Promoted, never re-created</strong> — triage, the front desk and booking all append to <code>P-004633</code> · <a href="intake.html#/a-07-new-lead">triage</a></span>
+          </div>
+          <div class="prov">
+            <span><strong>Source of truth</strong> eCW writes demographics until the person domain activates in HCOS · the inquiry is appended here and mirrored to eCW</span>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <a class="btn btn-sm" href="people.html#/pe-01-search">Open the person master</a>
+            <a class="btn btn-sm" href="intake.html#/a-06-triage-dashboard">Open in triage</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">What Marcus told us</div>
+          <dl class="kv">
+            <dt>Reason for the visit</dt><dd>Fatigue and slow recovery, about two years <span class="clin-state reported">Reported</span></dd>
+            <dt>Insurance type</dt><dd>PPO <span class="clin-state reported">Reported</span></dd>
+            <dt>Card image</dt><dd>insurance-card-front.jpg · received</dd>
+            <dt>Contact consent</dt><dd>Text, email and phone · Yes</dd>
+          </dl>
+          <div class="prov">
+            <span><strong>A patient statement, not a diagnosis</strong> — it reaches the problem list only when a provider confirms it · <a href="clinical-chart.html#/b-05-problem-list">problem list</a></span>
+          </div>
+          <div class="prov">
+            <span><strong>Not a coverage record yet</strong> — triage verifies benefits and keeps every payer response as its own snapshot · <a href="intake.html#/a-11-eligibility">eligibility</a></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Who may change what</div>
+          <dl class="kv">
+            <dt>The answers</dt><dd>Marcus owns them — a correction is added, the original answer is kept</dd>
+            <dt>Administrative fields</dt><dd>Front desk · PCC, with their name on the change</dd>
+            <dt>Promote lifecycle</dt><dd>Front desk · PCC — the record stays the same record</dd>
+            <dt>Merge duplicates</dt><dd>Front desk · PCC, with a reason</dd>
+            <dt>System</dt><dd>Proposes candidates only</dd>
+          </dl>
+          <div class="field-help" style="margin-top:8px"><a href="security.html#/g-01-audit">Every change is in the audit store</a>.</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================================================ -->
   <section class="screen" id="a-03-check-email" data-title="Check your email">
     <div class="phone-frame">
-      <div class="phone-bar"><span>11:40</span><span>helixona.com</span><span>•••</span></div>
+      <div class="phone-bar"><span>8:43</span><span>helixona.com</span><span>•••</span></div>
       <div class="phone-body" style="text-align:center;padding:40px 24px">
 
         <div class="a-status-ico">✓</div>
@@ -255,11 +362,11 @@
 
         <div class="a-contact-box">
           <div class="a-contact-lbl">Email</div>
-          <div class="a-contact-val">rosa.delgado@example.com</div>
+          <div class="a-contact-val">m.webb@example.com</div>
         </div>
         <div class="a-contact-box" style="margin-bottom:22px">
           <div class="a-contact-lbl">Text message</div>
-          <div class="a-contact-val">+1 (949) 555-0184</div>
+          <div class="a-contact-val">+1 (949) 555-0173</div>
         </div>
 
         <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:10px" data-activate="a-04-magic-link">Open the email</button>
@@ -281,12 +388,12 @@
         <div class="msg-preview">
           <div class="msg-header">
             <div class="msg-header-row"><div class="msg-header-lbl">From</div><div><strong>Helixona</strong> &lt;hello@helixona.com&gt;</div></div>
-            <div class="msg-header-row"><div class="msg-header-lbl">To</div><div>rosa.delgado@example.com</div></div>
+            <div class="msg-header-row"><div class="msg-header-lbl">To</div><div>m.webb@example.com</div></div>
             <div class="msg-header-row"><div class="msg-header-lbl">Subject</div><div><strong>Your Helixona intake link is ready</strong></div></div>
           </div>
           <div class="msg-body">
             <div style="font-size:22px;font-weight:600;color:var(--hx-navy);margin-bottom:14px">Helixona</div>
-            <p style="margin:0 0 12px">Hi Rosa,</p>
+            <p style="margin:0 0 12px">Hi Marcus,</p>
             <p style="margin:0 0 12px">Thank you for reaching out to Helixona. We received your inquiry and want to learn a bit more about your health so we can prepare for your visit.</p>
             <p style="margin:0 0 4px">Tap below to continue your intake — it takes about 10 minutes, and you can pause and pick up where you left off.</p>
             <a class="msg-cta" href="intake-onboarding.html">Continue my intake</a>
@@ -301,9 +408,9 @@
       <div>
         <div class="seg-divider" style="margin-top:0">Text message</div>
         <div class="phone-frame" style="width:320px">
-          <div class="phone-bar"><span>11:41</span><span>Messages</span><span>•••</span></div>
+          <div class="phone-bar"><span>8:44</span><span>Messages</span><span>•••</span></div>
           <div class="phone-body" style="background:var(--hx-band);padding:18px 14px;min-height:0">
-            <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px">Today 11:41 AM</div>
+            <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:12px">Sun Jul 19 · 8:44 PM</div>
             <div style="font-size:11px;color:var(--muted);text-align:center;margin-bottom:6px">Helixona</div>
             <div class="sms-bubble">Helixona: Thanks for reaching out! Continue your intake here (expires in 7 days, pause &amp; resume anytime):<br><br><a class="a-msg-link" href="intake-onboarding.html">https://helixona.app/i/a8f2-3392-bc41</a><br><br>Reply STOP to opt out. Reply HELP for help.</div>
           </div>
@@ -323,6 +430,11 @@
             </li>
             <li class="check-item">
               <span class="check-icon done">✓</span>
+              <span class="check-label">Reopens person P-004633 — it never starts a second record</span>
+              <span class="check-meta"><a href="people.html#/pe-01-search" style="color:var(--muted)">person master</a></span>
+            </li>
+            <li class="check-item">
+              <span class="check-icon done">✓</span>
               <span class="check-label">No health information in the link — everything is gated behind it</span>
             </li>
             <li class="check-item">
@@ -332,7 +444,7 @@
             <li class="check-item">
               <span class="check-icon done">✓</span>
               <span class="check-label">Every use of the link is logged</span>
-              <span class="check-meta"><a href="security.html" style="color:var(--muted)">audit trail</a></span>
+              <span class="check-meta"><a href="security.html#/g-01-audit" style="color:var(--muted)">audit trail</a></span>
             </li>
           </ul>
         </div>
@@ -353,8 +465,8 @@
 
         <div class="a-contact-box" style="margin-bottom:20px">
           <div class="a-contact-lbl">We have on file</div>
-          <div class="a-contact-val">rosa.delgado@example.com</div>
-          <div class="a-contact-val">+1 (949) 555-0184</div>
+          <div class="a-contact-val">m.webb@example.com</div>
+          <div class="a-contact-val">+1 (949) 555-0173</div>
         </div>
 
         <button class="btn btn-primary btn-lg" style="width:100%;margin-bottom:10px" onclick="HCOS.toast('New link sent — check your email and text. It is good for 7 days.', 'ok'); setTimeout(function(){ HCOS.activate('a-03-check-email'); }, 900)">Send me a new link</button>

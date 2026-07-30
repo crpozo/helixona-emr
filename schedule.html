@@ -255,8 +255,8 @@
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-type">Myers' cocktail · 1 h</div>
               </div>
-              <div class="cal-appt st-scheduled conflict" style="top:528px;height:40px;left:34%;z-index:2" data-open-drawer="#l-appt-drawer">
-                <div class="cal-appt-time">2:00 PM</div>
+              <div class="cal-appt st-scheduled conflict" style="top:572px;height:40px;left:34%;z-index:2" data-open-drawer="#l-appt-drawer">
+                <div class="cal-appt-time">2:30 PM · shares the tail of Chair 4</div>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-type"><span class="type-mark">GSH</span>Glutathione push · 30 min</div>
               </div>
@@ -406,7 +406,7 @@
               <div class="week-appt st-arrived" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
               <div class="week-appt st-confirmed" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
               <div class="week-appt st-confirmed" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Myers'</div>
-              <div class="week-appt st-scheduled conflict" style="top:336px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div class="week-appt st-scheduled conflict" style="top:362px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
               <div class="week-appt st-scheduled" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
             </div>
 
@@ -553,35 +553,70 @@
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/book</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Book appointment</h2>
-        <p class="page-sub">Tuesday, July 21 · from the day view</p>
 
-        <div class="grid-2">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Book appointment</div>
+            <div class="page-sub">Yazmin · Front desk — the same checks run wherever a booking starts.</div>
+          </div>
+          <div class="app-user">
+            <a class="btn" href="schedule-rules.html#/lr-01-rules">Booking rules</a>
+            <button class="btn" data-activate="l-01-day">Back to day view</button>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>Source of truth</strong> the HCOS scheduling service — one appointment, one identifier, every calendar and chair board reads it · eCW receives a read-only sync of this domain</span>
+        </div>
+
+        <div class="grid-2" style="margin-top:16px">
           <div class="card">
             <div class="card-title">Patient</div>
             <div style="display:flex;gap:10px;align-items:flex-end">
               <div class="field" style="flex:1;margin-bottom:0">
                 <label class="field-label">Find a patient</label>
-                <input class="search-input" style="width:100%;box-sizing:border-box" type="search" value="Priya Natarajan" placeholder="Search by name, phone, or DOB">
+                <input class="search-input" style="width:100%;box-sizing:border-box" type="search" value="Priya Natarajan" placeholder="Search by name, phone, or date of birth">
               </div>
-              <a class="btn" href="patients.html#/pt-03-create">New patient</a>
+              <a class="btn" href="people.html#/pe-01-search">Find or create</a>
             </div>
             <div class="field-help" style="margin-top:6px">Priya Natarajan · 38 · Blue Shield of CA PPO · OON</div>
+            <div class="prov">
+              <span><strong>From</strong> person master <code>P-004377</code> · <a href="people.html#/pe-02-person">open the record</a> — booking never creates a second identity</span>
+            </div>
 
-            <div class="seg-divider">Appointment</div>
+            <div class="seg-divider">Treatment</div>
             <div class="field">
               <label class="field-label">Appointment type</label>
-              <select class="field-select">
-                <option>New patient consult · 90 min</option>
-                <option>Follow-up · 30 min</option>
-                <option>NAD+ infusion · 3 h</option>
-                <option>IV vitamin C 25 g · 2.5 h</option>
-                <option selected>Myers' cocktail · 1 h</option>
-                <option>Glutathione push · 30 min</option>
-                <option>Lab draw · 15 min</option>
-                <option>Telehealth · 30 min</option>
+              <select class="field-select" id="l-bk-type" onchange="lTypeChange()">
+                <option value="myers" selected>Myers' cocktail · 1 h</option>
+                <option value="nad">NAD+ infusion · 3 h</option>
+                <option value="ivc">IV vitamin C 25 g · 2.5 h</option>
+                <option value="gsh">Glutathione push · 30 min</option>
+                <option value="fu">Follow-up · 30 min</option>
+                <option value="lab">Lab draw · 15 min</option>
               </select>
-              <div class="field-help">The duration holds the chair automatically — Myers' cocktail blocks 1 h.</div>
+            </div>
+            <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
+
+            <div class="ai-block" id="l-bk-ai">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested" id="l-bk-aistate">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Hold 1 h 15 of chair time, not 1 h. Priya's last three Myers' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> 3 past administrations under <code>O-2291</code> v1</span>
+                <span><b>Model</b> duration-v1.4</span>
+                <span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>
+                <span><b>Reviewer</b> Yazmin · Front desk</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="lDurAccept()">Hold 1 h 15</button>
+                <button class="btn btn-sm" onclick="lDurReject()">Keep 1 h</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">A prediction. It cannot clear a check, shorten an interval or free a chair.</div>
             </div>
           </div>
 
@@ -589,39 +624,95 @@
             <div class="card-title">Time and place</div>
             <div class="field">
               <label class="field-label">Provider or chair</label>
-              <select class="field-select">
-                <option>Dr. Drannikov · Provider</option>
-                <option>Dr. Bakman · Provider</option>
-                <option>Brooke · Physician associate</option>
-                <option>Chair 1 · Nick (Nurse)</option>
-                <option selected>Chair 2 · Bea (Medic)</option>
-                <option>Chair 3 · Juan (Medic)</option>
-                <option>Chair 4 · Nate (Medic)</option>
+              <select class="field-select" id="l-bk-res" onchange="lBook()">
+                <option value="dr">Dr. Drannikov · Provider</option>
+                <option value="bak">Dr. Bakman · Provider</option>
+                <option value="bro">Brooke · Physician associate</option>
+                <option value="c1">Chair 1 · Nick (Nurse)</option>
+                <option value="c2" selected>Chair 2 · Bea (Medic)</option>
+                <option value="c3">Chair 3 · Juan (Medic)</option>
+                <option value="c4">Chair 4 · Nate (Medic)</option>
               </select>
             </div>
             <div class="field-row">
               <div class="field">
                 <label class="field-label">Date</label>
-                <input class="field-input" type="text" value="Tue, Jul 21">
+                <select class="field-select" id="l-bk-date" onchange="lBook()">
+                  <option value="jul21" selected>Tue, Jul 21 · today</option>
+                  <option value="jul22">Wed, Jul 22</option>
+                  <option value="jul28">Tue, Jul 28</option>
+                </select>
               </div>
               <div class="field">
                 <label class="field-label">Start time</label>
-                <select class="field-select">
-                  <option>10:00 AM</option>
-                  <option selected>10:30 AM</option>
-                  <option>11:00 AM</option>
-                  <option>11:30 AM</option>
-                  <option>2:00 PM</option>
-                  <option>2:30 PM</option>
+                <select class="field-select" id="l-bk-time" onchange="lBook()">
+                  <option value="600">10:00 AM</option>
+                  <option value="630" selected>10:30 AM</option>
+                  <option value="780">1:00 PM</option>
+                  <option value="840">2:00 PM</option>
+                  <option value="930">3:30 PM</option>
+                  <option value="1050">5:30 PM</option>
                 </select>
               </div>
             </div>
-            <div class="callout callout-warn">Chair 2 already has Daniel Okafor 10:00–12:30. You can book anyway — conflicts warn, never block.</div>
+            <div class="field-help" id="l-bk-window">&nbsp;</div>
+
+            <div class="seg-divider">Who may do what</div>
+            <dl class="kv">
+              <dt>Books</dt><dd>Front desk · PCC</dd>
+              <dt>Releases a warning</dt><dd>Physician or extender, with a reason</dd>
+              <dt>Nobody releases</dt><dd>An occupied chair or provider · a missing signed order or clearance · a contraindication · an interval shorter than the order allows · no supervision on site</dd>
+            </dl>
           </div>
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:16px;align-items:center">
-          <button class="btn btn-primary btn-lg" data-activate="l-01-day" onclick="HCOS.toast('Appointment booked — it is on the day view.', 'ok')">Book appointment</button>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Checks before this booking is taken</div>
+          <div class="callout" id="l-bk-verdict"><span>&nbsp;</span></div>
+          <ul class="check-list" id="l-bk-checks"></ul>
+          <div class="prov">
+            <span><strong>Rules</strong> booking rules <span class="ver-chip">v6</span> <span class="appr approved">Approved</span> · a hard check belongs to the scheduling service and cannot be set to a warning · <a href="schedule-rules.html#/lr-01-rules">open the rules</a></span>
+          </div>
+        </div>
+
+        <div class="card" id="l-bk-ovrcard" style="margin-top:16px">
+          <div class="card-title">Release the warning</div>
+          <div id="l-bk-ovr-form">
+            <div class="callout callout-warn">
+              <strong>Readiness is Flare recovery.</strong> Escalation is paused until a provider clears it. This booking keeps the same protocol and the same dose, so a physician or extender may release it.
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label">Released by</label>
+                <select class="field-select" id="l-bk-auth">
+                  <option>Dr. Drannikov · Provider</option>
+                  <option>Dr. Bakman · Provider</option>
+                  <option>Brooke · Physician associate</option>
+                </select>
+                <div class="field-help">Front desk and PCC cannot release a clinical warning.</div>
+              </div>
+              <div class="field">
+                <label class="field-label">Reason</label>
+                <textarea class="field-textarea" rows="2" id="l-bk-reason" placeholder="Why this session is safe to keep"></textarea>
+                <div class="field-error" id="l-bk-reason-err" style="display:none">Nothing was released — the reason is empty. Write why this session is safe; it is stored with the name of whoever released it.</div>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="lRelease()">Record the release</button>
+          </div>
+          <div id="l-bk-ovr-done" style="display:none">
+            <div class="callout callout-ok" id="l-bk-ovr-line"><span>&nbsp;</span></div>
+            <button class="btn" onclick="lUnrelease()">Undo the release</button>
+          </div>
+          <div class="prov">
+            <span><strong>Written to</strong> the audit store with the name, the rule and the reason · <a href="security.html#/g-01-audit">open the audit trail</a></span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:16px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-primary btn-lg" id="l-bk-btn-book" style="display:none" onclick="lDoBook()">Book appointment</button>
+          <button class="btn btn-primary btn-lg" id="l-bk-btn-fix" style="display:none" onclick="lNextSafe()">Find the next time that passes</button>
+          <button class="btn btn-primary btn-lg" id="l-bk-btn-ask" style="display:none" onclick="lAskProvider()">Ask a provider for what is missing</button>
+          <button class="btn btn-primary btn-lg" id="l-bk-btn-warn" style="display:none" onclick="lGoRelease()">Release the warning to book</button>
           <button class="btn btn-ghost" data-activate="l-01-day">Back to day view</button>
         </div>
       </div>
@@ -856,6 +947,311 @@
       }
     });
   });
+
+  // ---- The scheduling service -------------------------------------------
+  // One engine. Hard checks refuse the booking; eligible warnings are released
+  // by a named authority with a reason, and the release is logged.
+  var L_RES = {
+    dr: 'Dr. Drannikov', bak: 'Dr. Bakman', bro: 'Brooke',
+    c1: 'Chair 1 · Nick', c2: 'Chair 2 · Bea', c3: 'Chair 3 · Juan', c4: 'Chair 4 · Nate'
+  };
+
+  var L_BUSY = {
+    jul21: {
+      dr: [[510,600,'Marcus Webb · new patient consult'],[630,660,'Grace Lindqvist · follow-up'],[690,720,'Elena Petrova · telehealth'],[810,840,'Nadia Boulos · follow-up'],[900,990,'Tom Alvarez · new patient consult']],
+      bak: [[540,570,'Sofia Ramos · follow-up'],[780,810,'Daniel Okafor · follow-up'],[930,960,'Priya Natarajan · follow-up']],
+      bro: [[600,630,'Walter Hsu · follow-up'],[840,870,'Maya Reyes · follow-up']],
+      c1: [[540,740,'Maya Reyes · NAD+']    ,[780,960,'Walter Hsu · NAD+']],
+      c2: [[600,750,'Daniel Okafor · IV vitamin C 25 g']],
+      c3: [[690,750,"Priya Natarajan · Myers' cocktail"],[930,960,'Sofia Ramos · glutathione push']],
+      c4: [[675,690,'Sofia Ramos · lab draw'],[840,900,"Nadia Boulos · Myers' cocktail"]]
+    },
+    jul22: {
+      dr: [[540,570,'Grace Lindqvist · follow-up']],
+      bak: [], bro: [[660,690,'Elena Petrova · follow-up']],
+      c1: [[600,780,'Walter Hsu · NAD+']], c2: [],
+      c3: [[660,720,"Nadia Boulos · Myers' cocktail"]], c4: []
+    },
+    jul28: { dr: [], bak: [], bro: [], c1: [], c2: [], c3: [], c4: [] }
+  };
+
+  var L_TX = {
+    myers: { name: "Myers' cocktail",    mins: 60,  patient: 75, iv: true,  order: 'O-2291' },
+    nad:   { name: 'NAD+ infusion',      mins: 180, iv: true,  order: null },
+    ivc:   { name: 'IV vitamin C 25 g',  mins: 150, iv: true,  order: null, needsLab: true },
+    gsh:   { name: 'Glutathione push',   mins: 30,  iv: true,  order: null },
+    fu:    { name: 'Follow-up',          mins: 30,  iv: false },
+    lab:   { name: 'Lab draw',           mins: 15,  iv: false, chairOk: true }
+  };
+
+  var lHoldLong = false, lReleased = false, lReleasedBy = '';
+
+  function lV(id) { return document.getElementById(id).value; }
+  function lSet(id, v) { document.getElementById(id).value = v; }
+  function lClock(m) {
+    var h = Math.floor(m / 60), x = m % 60, ap = h >= 12 ? 'PM' : 'AM', hh = h % 12;
+    if (hh === 0) hh = 12;
+    return hh + ':' + (x < 10 ? '0' : '') + x + ' ' + ap;
+  }
+  function lLen(m) {
+    var h = Math.floor(m / 60), x = m % 60;
+    return (h ? h + ' h' : '') + (h && x ? ' ' : '') + (x ? x + ' min' : '');
+  }
+
+  function lBook() {
+    var box = document.getElementById('l-bk-checks');
+    if (!box) return;
+
+    var key = lV('l-bk-type'), tx = L_TX[key];
+    var res = lV('l-bk-res'), date = lV('l-bk-date'), start = parseInt(lV('l-bk-time'), 10);
+    var dur = (lHoldLong && tx.patient) ? tx.patient : tx.mins;
+    var end = start + dur;
+    var isChair = res.charAt(0) === 'c';
+    var checks = [], blocks = 0, warns = 0, needsProvider = false, hasWarnRule = false;
+
+    // Resource — occupied chair or provider is never an ordinary warning.
+    if (tx.iv && !isChair) {
+      checks.push(['block', 'An infusion needs a chair. ' + L_RES[res] + ' is a provider column.', '']);
+      blocks++;
+    } else if (!tx.iv && !tx.chairOk && isChair) {
+      checks.push(['block', 'A ' + tx.name.toLowerCase() + ' needs a provider. ' + L_RES[res] + ' is an infusion chair.', '']);
+      blocks++;
+    } else {
+      var busy = L_BUSY[date][res] || [], hit = null;
+      for (var i = 0; i < busy.length; i++) {
+        if (start < busy[i][1] && end > busy[i][0]) { hit = busy[i]; break; }
+      }
+      if (hit) {
+        checks.push(['block', L_RES[res] + ' is taken ' + lClock(hit[0]) + ' – ' + lClock(hit[1]) + ' by ' + hit[2] + ' — the whole slot, not the tail of a drip.',
+          '<button class="btn btn-sm" onclick="lNextFree()">Next free start</button>']);
+        blocks++;
+      } else {
+        checks.push(['ok', L_RES[res] + ' is free ' + lClock(start) + ' – ' + lClock(end) + '.', '']);
+      }
+    }
+
+    // Signed order — booking never stands in for one.
+    if (!tx.iv) {
+      checks.push(['ok', 'No order is needed for a ' + tx.name.toLowerCase() + '.', '']);
+    } else if (tx.order) {
+      checks.push(['ok', 'Signed order <code>O-2291</code> <span class="ver-chip">v1</span> — Dr. Drannikov, May 22 2026 · 2 of 6 given · v2 is a draft and does not authorize a booking.',
+        '<a href="clinical-chart.html#/b-10-iv-order">order</a>']);
+    } else {
+      checks.push(['block', 'No signed order for ' + tx.name + '. Only a physician or extender can place one.',
+        '<a href="clinical-chart.html#/b-10-iv-order">place the order</a>']);
+      blocks++; needsProvider = true;
+    }
+
+    // Interval — the cadence lives on the order, not on the calendar.
+    if (!tx.iv) {
+      checks.push(['ok', 'No cadence applies to a ' + tx.name.toLowerCase() + '.', '']);
+    } else if (!tx.order) {
+      checks.push(['wait', 'The cadence is read from the signed order. There is none to read yet.', '']);
+    } else if (date === 'jul28') {
+      checks.push(['ok', 'Order <code>O-2291</code> allows one infusion every 7 days. Session 3 runs today at 11:30, so Jul 28 is the first date it allows.', '']);
+    } else {
+      checks.push(['block', 'Order <code>O-2291</code> allows one infusion every 7 days. Session 3 runs today at 11:30 — ' + (date === 'jul21' ? 'the same day' : 'the next day') + ' is inside the interval.',
+        '<button class="btn btn-sm" onclick="lUseJul28()">Use Tue, Jul 28</button>']);
+      blocks++;
+    }
+
+    // Allergies and contraindications — read from the one list.
+    checks.push(['ok', 'Allergy list read — sulfa <span class="clin-state verified">Verified</span> and shellfish <span class="clin-state reported">Reported</span>, blocking since check-in. Nothing in ' + (tx.iv ? 'the ' + tx.name + ' protocol' : 'this visit type') + ' matches.',
+      '<a href="clinical-chart.html#/b-07-allergies">allergy list</a>']);
+
+    // Clearance.
+    if (tx.needsLab) {
+      checks.push(['block', 'No current G6PD result on file. High-dose vitamin C cannot be booked until one is back.',
+        '<a href="labs.html">order the lab</a>']);
+      blocks++; needsProvider = true;
+    } else if (tx.iv) {
+      checks.push(['ok', 'Intake is complete — consents, allergies and medications on file since Mar 2026.', '']);
+    } else {
+      checks.push(['ok', 'Nothing to clear for a ' + tx.name.toLowerCase() + '.', '']);
+    }
+
+    // Supervision and clinic hours.
+    if (end > 1080) {
+      checks.push(['block', 'A ' + lLen(dur) + ' booking that starts at ' + lClock(start) + ' ends at ' + lClock(end) + '. The clinic closes at 6:00 PM and the chair has to be clear.',
+        '<button class="btn btn-sm" onclick="lUse330()">Use 3:30 PM</button>']);
+      blocks++;
+    } else if (tx.iv && start >= 1020) {
+      checks.push(['block', 'No provider is on site after 5:00 PM. An infusion cannot run without supervision.',
+        '<button class="btn btn-sm" onclick="lUse330()">Use 3:30 PM</button>']);
+      blocks++;
+    } else {
+      checks.push(['ok', tx.iv ? 'Dr. Bakman is on site until 5:00 PM — supervision covers the whole run.' : 'The clinic is open for the whole booking.', '']);
+    }
+
+    // Readiness — an eligible warning, released only by a designated authority.
+    if (tx.iv) {
+      hasWarnRule = true;
+      if (lReleased) {
+        checks.push(['ok', 'Readiness is Flare recovery. Released by ' + lReleasedBy + ' with a reason — same protocol, same dose.',
+          '<a href="security.html#/g-01-audit">audit</a>']);
+      } else {
+        checks.push(['warn', 'Readiness is Flare recovery since Sunday — escalation is paused until a provider clears it. Same protocol and same dose, so a physician or extender may release it.',
+          '<a href="readiness.html#/i-01-readiness">why</a>']);
+        warns++;
+      }
+    } else {
+      checks.push(['ok', 'Readiness does not gate a ' + tx.name.toLowerCase() + '.',
+        '<a href="readiness.html#/i-01-readiness">readiness</a>']);
+    }
+
+    var ICON = { ok: ['done', '&#10003;'], block: ['blocked', '&#10005;'], warn: ['active', '!'], wait: ['pending', '&middot;'] };
+    var html = '';
+    for (var j = 0; j < checks.length; j++) {
+      var ic = ICON[checks[j][0]];
+      html += '<li class="check-item"><span class="check-icon ' + ic[0] + '">' + ic[1] + '</span>'
+            + '<span class="check-label">' + checks[j][1] + '</span>'
+            + '<span class="check-meta">' + checks[j][2] + '</span></li>';
+    }
+    box.innerHTML = html;
+
+    var v = document.getElementById('l-bk-verdict');
+    if (blocks) {
+      v.className = 'callout callout-err';
+      v.innerHTML = '<strong>' + blocks + (blocks === 1 ? ' check refuses' : ' checks refuse') + ' this booking.</strong> These are hard checks — no role on this screen releases them. Fix what they name, or move the booking.';
+    } else if (warns) {
+      v.className = 'callout callout-warn';
+      v.innerHTML = '<strong>One warning is open.</strong> A physician or extender may release it with a reason, and the release travels with the appointment.';
+    } else {
+      v.className = 'callout callout-ok';
+      v.innerHTML = '<strong>Every check passes.</strong> Booking reserves ' + L_RES[res] + ' from ' + lClock(start) + ' to ' + lClock(end) + ' and assigns one appointment identifier.';
+    }
+
+    document.getElementById('l-bk-window').textContent =
+      'Holds ' + L_RES[res] + ' ' + lClock(start) + ' – ' + lClock(end) + ' · ' + lLen(dur) +
+      ((lHoldLong && tx.patient) ? ' from her own past runs' : ' from the protocol') +
+      ' · the identifier is assigned when you book.';
+
+    document.getElementById('l-bk-order').innerHTML = tx.iv
+      ? (tx.order
+          ? '<span><strong>Against</strong> signed order <code>O-2291</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Drannikov — the appointment carries the order number and version downstream</span>'
+          : '<span><strong>No signed order</strong> for ' + tx.name + ' — nothing downstream could reference this booking</span>')
+      : '<span><strong>No order</strong> is required for a ' + tx.name.toLowerCase() + '</span>';
+
+    document.getElementById('l-bk-ai').style.display = (key === 'myers') ? '' : 'none';
+    document.getElementById('l-bk-ovrcard').style.display = hasWarnRule ? '' : 'none';
+
+    var ids = ['l-bk-btn-book', 'l-bk-btn-fix', 'l-bk-btn-ask', 'l-bk-btn-warn'];
+    var show = blocks ? (needsProvider ? 'l-bk-btn-ask' : 'l-bk-btn-fix')
+                      : (warns ? 'l-bk-btn-warn' : 'l-bk-btn-book');
+    for (var k = 0; k < ids.length; k++) {
+      document.getElementById(ids[k]).style.display = (ids[k] === show) ? '' : 'none';
+    }
+  }
+
+  // A release is granted against one booking — changing the treatment withdraws it.
+  function lTypeChange() {
+    lHoldLong = false;
+    var s = document.getElementById('l-bk-aistate');
+    s.className = 'ai-state suggested';
+    s.textContent = 'Suggestion';
+    if (lReleased) {
+      lReleased = false;
+      document.getElementById('l-bk-ovr-form').style.display = '';
+      document.getElementById('l-bk-ovr-done').style.display = 'none';
+      HCOS.toast('Treatment changed, so the release by ' + lReleasedBy + ' no longer applies. A provider has to release the new booking.', 'warn');
+    }
+    lBook();
+  }
+
+  function lNextSafe() {
+    lSet('l-bk-date', 'jul28');
+    lSet('l-bk-time', '630');
+    if (L_TX[lV('l-bk-type')].iv) lSet('l-bk-res', 'c2');
+    lBook();
+    HCOS.toast('Moved to Tue, Jul 28 · 10:30 AM · Chair 2 — the first slot that clears every hard check.', 'ok');
+  }
+
+  function lNextFree() {
+    var tx = L_TX[lV('l-bk-type')], date = lV('l-bk-date'), res = lV('l-bk-res');
+    var dur = (lHoldLong && tx.patient) ? tx.patient : tx.mins;
+    var opts = [600, 630, 780, 840, 930], busy = L_BUSY[date][res] || [];
+    for (var i = 0; i < opts.length; i++) {
+      var free = true;
+      for (var j = 0; j < busy.length; j++) {
+        if (opts[i] < busy[j][1] && opts[i] + dur > busy[j][0]) free = false;
+      }
+      if (free) {
+        lSet('l-bk-time', String(opts[i]));
+        lBook();
+        HCOS.toast(L_RES[res] + ' is free at ' + lClock(opts[i]) + '. Moved there.', 'ok');
+        return;
+      }
+    }
+    HCOS.toast(L_RES[res] + ' has no free start left that day. Pick another chair or another date.', 'warn');
+  }
+
+  function lUseJul28() {
+    lSet('l-bk-date', 'jul28');
+    lBook();
+    HCOS.toast('Moved to Tue, Jul 28 — the first date the signed order allows.', 'ok');
+  }
+
+  function lUse330() {
+    lSet('l-bk-time', '930');
+    lBook();
+    HCOS.toast('Moved to 3:30 PM — it finishes before close and a provider is on site.', 'ok');
+  }
+
+  function lAskProvider() {
+    HCOS.toast('Sent to the provider worklist with the patient, the treatment and what is missing. No slot is held until it comes back signed.', 'ok');
+  }
+
+  function lGoRelease() {
+    document.getElementById('l-bk-reason').focus();
+    HCOS.toast('A physician or extender has to release the flare-recovery pause. Say who released it and why.', 'warn');
+  }
+
+  function lRelease() {
+    var r = document.getElementById('l-bk-reason'), err = document.getElementById('l-bk-reason-err');
+    if (!r.value.replace(/\s/g, '')) { err.style.display = ''; r.focus(); return; }
+    err.style.display = 'none';
+    lReleased = true;
+    lReleasedBy = document.getElementById('l-bk-auth').value.split(' · ')[0];
+    document.getElementById('l-bk-ovr-form').style.display = 'none';
+    document.getElementById('l-bk-ovr-done').style.display = '';
+    document.getElementById('l-bk-ovr-line').innerHTML =
+      '<strong>Released by ' + lReleasedBy + '.</strong> ' + r.value + ' — kept with the rule, the name and the time.';
+    lBook();
+    HCOS.toast('Release recorded against ' + lReleasedBy + '. It is in the audit store.', 'ok');
+  }
+
+  function lUnrelease() {
+    lReleased = false;
+    document.getElementById('l-bk-ovr-form').style.display = '';
+    document.getElementById('l-bk-ovr-done').style.display = 'none';
+    lBook();
+    HCOS.toast('Release withdrawn. The warning is open again and the withdrawal is logged.', 'warn');
+  }
+
+  function lDurAccept() {
+    lHoldLong = true;
+    var s = document.getElementById('l-bk-aistate');
+    s.className = 'ai-state accepted';
+    s.textContent = 'Accepted by Yazmin';
+    lBook();
+    HCOS.toast('Chair time set to 1 h 15 from her own runs. The checks ran again.', 'ok');
+  }
+
+  function lDurReject() {
+    lHoldLong = false;
+    var s = document.getElementById('l-bk-aistate');
+    s.className = 'ai-state rejected';
+    s.textContent = 'Rejected by Yazmin';
+    lBook();
+    HCOS.toast('Kept the protocol hour. Your choice is recorded with your name.');
+  }
+
+  function lDoBook() {
+    HCOS.toast('Booked as appointment APT-2863 — one identifier, on the day view and the chair board.'
+      + (lReleased ? ' The release by ' + lReleasedBy + ' travels with it.' : ''), 'ok');
+  }
+
+  lBook();
 
 </script>
 </body>

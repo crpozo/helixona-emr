@@ -11,14 +11,18 @@
 <style>
   .j-patientbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .j-patientbar .avatar { width: 42px; height: 42px; font-size: 14px; }
-  .j-pb-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
-  .j-pb-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .j-pb-spacer { flex: 1; }
-  .j-num { width: 68px; text-align: right; padding: 6px 8px; margin: 0; }
-  .j-addgrid { display: grid; grid-template-columns: 2fr 1.2fr 1fr 0.9fr 0.9fr 1.2fr; gap: 10px; align-items: end; }
+  .j-tag { font-size: 11px; color: var(--muted); }
+  .j-id { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); }
+  .j-ev { display: flex; gap: 12px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .j-ev:last-child { border-bottom: none; }
+  .j-ev-ver { width: 96px; flex-shrink: 0; }
+  .j-ev-what { flex: 1; }
+  .j-ev-who { color: var(--muted); font-size: 11px; white-space: nowrap; }
+  .j-addgrid { display: grid; grid-template-columns: 1.6fr 1.4fr 0.8fr 1fr 1.6fr; gap: 10px; align-items: end; }
   .j-addgrid .field { margin-bottom: 0; }
   .j-cellinput { padding: 6px 8px; margin: 0; }
-  .j-tag { font-size: 11px; color: var(--muted); }
+  .j-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .j-actions-split { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
   @media (max-width: 780px) { .j-addgrid { grid-template-columns: 1fr 1fr; } }
 </style>
 </head>
@@ -27,109 +31,222 @@
 <div class="screens">
 
   <!-- ============================================================ -->
-  <!-- j-staff-poc — plan of care: stage, pacing, goal for Maya Reyes -->
+  <!-- j-staff-poc — versioned plan of care builder for Maya Reyes -->
   <section class="screen" id="j-staff-poc" data-title="Plan of care">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/care-plan</span></div>
+        <span class="frame-url">hcos.helixona.com/care-plan/P-004182</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Plan of care</h2>
-        <p class="page-sub">The workhorse where staff author the plan the patient app follows week by week</p>
 
-        <div class="callout callout-warn" style="margin-bottom:16px">
-          Entered by hand today from eCW. Save writes the plan the patient sees on Today, My plan and Rewards. A future eCW sync will pull ordered visits and actuals automatically — this page is shaped for that handoff.
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span class="avatar lg">MR</span>
+            <div>
+              <div class="page-title" style="margin:0">Maya Reyes</div>
+              <div class="j-id">P-004182 · 52 · Dr. Drannikov · plan of care
+                <span class="ver-chip">v4</span> <span class="appr approved">Approved</span> effective Jul 6</div>
+            </div>
+          </div>
+          <div class="app-user">
+            <a class="btn" href="people.html#/pe-02-person">Open the person record</a>
+            <a class="btn" href="patients.html#/pt-02-profile">Open the chart</a>
+          </div>
         </div>
 
-        <div class="j-patientbar">
-          <span class="avatar">MR</span>
+        <div class="prov">
+          <span><strong>Built from</strong> signed orders <code>O-2291 v2</code>, <code>O-2314 v1</code>, <code>O-2288 v1</code> · readiness Standard <code>ruleset r-4.2</code> · medication list. Dose, route and cadence stay in those records.</span>
+        </div>
+        <div class="prov">
+          <span><strong>Written in HCOS.</strong> A plan summary document goes to eCW for as long as eCW is live.</span>
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+
           <div>
-            <div class="j-pb-name">Maya Reyes</div>
-            <div class="j-pb-sub">ECW-48213 · 52 · Detox &amp; NAD+ program · Dr. Drannikov</div>
-          </div>
-          <div class="j-pb-spacer"></div>
-          <div class="field" style="margin:0;min-width:230px">
-            <label class="field-label" for="poc-patient">Editing patient</label>
-            <select class="field-select" id="poc-patient" onchange="HCOS.toast('Switched to ' + this.options[this.selectedIndex].text + '. Load their plan to edit.','ok')">
-              <option>Maya Reyes — ECW-48213</option>
-              <option>Walter Hsu — ECW-51770</option>
-              <option>Priya Natarajan — ECW-53102</option>
-              <option>Nadia Boulos — ECW-49006</option>
-              <option>Grace Lindqvist — ECW-50881</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="grid-sidebar">
-
-          <div class="card">
-            <div class="card-title">Stage &amp; pacing</div>
-
-            <div class="field">
-              <label class="field-label" for="poc-stage">Stage — where Maya is on the care journey</label>
-              <select class="field-select" id="poc-stage">
-                <option value="identification">Identification — map history, diagnostics and root drivers</option>
-                <option value="stabilization" selected>Stabilization — calm inflammation, steady energy and sleep</option>
-                <option value="lead_actor_1">Lead Actor 1 — treat the single biggest driver</option>
-                <option value="lead_actor_2">Lead Actor 2 — move to the next priority system</option>
-                <option value="lead_actor_3">Lead Actor 3 — address remaining drivers one at a time</option>
-                <option value="repair">Repair — support regeneration and full function</option>
-                <option value="graduation">Graduation — light maintenance to protect progress</option>
-              </select>
-              <div class="field-help">Stabilization is stage 2 of 7. It sets which lessons and badges the app surfaces.</div>
-            </div>
-
-            <div class="field">
-              <label class="field-label">Pacing</label>
-              <div class="seg" id="poc-pacing" role="group" aria-label="Plan pacing">
-                <button type="button">Gentle</button>
-                <button type="button" class="active">Standard</button>
-                <button type="button">Aggressive</button>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Version 5 is waiting for your approval</div>
+              <div class="prov" style="margin-top:0">
+                <span><strong>Proposed by</strong> Bee · PCC · Jul 20 · <strong>approves</strong> Dr. Drannikov · started from HCOS suggestion <code>pacing-v1.3</code> (confidence 0.71)</span>
               </div>
-              <div class="field-help">Standard is the recommended cadence — steady, balanced progress. Matches Maya's readiness result.</div>
+              <div class="tbl-wrap" style="margin-top:10px">
+                <table class="tbl">
+                  <thead>
+                    <tr><th>What changes</th><th>Approved <span class="ver-chip">v4</span></th><th>Proposed <span class="ver-chip">v5</span></th><th>Source</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><strong>Pacing</strong></td><td>Standard</td><td>Gentle</td><td class="j-tag">Adherence 24% at midweek</td></tr>
+                    <tr><td><strong>Rebounding</strong></td><td>5 / wk</td><td>3 / wk</td><td class="j-tag">Plan item · non-clinical support</td></tr>
+                    <tr><td><strong>Lymphatic massage</strong></td><td>Not on the plan</td><td>1 / wk</td><td class="j-tag">New plan item · no order needed</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="field" style="margin-top:12px">
+                <label class="field-label" for="poc-rationale">Rationale from Bee</label>
+                <textarea class="field-textarea" id="poc-rationale" readonly>Maya is at 24% adherence midweek and reports swelling the day after NAD+. Gentler pacing for two weeks, fewer rebounding days, add lymphatic massage.</textarea>
+              </div>
+              <div class="j-actions">
+                <button class="btn btn-primary" onclick="HCOS.toast('Version 5 approved and effective now. Maya\'s app is reading v5 and the approval is in the audit store.','ok')">Approve and publish version 5</button>
+                <button class="btn" onclick="HCOS.toast('Sent back to Bee with your note. Version 4 stays in effect.','warn')">Return to Bee with a note</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">Only a physician or extender can approve. Until then Maya keeps following version 4.</div>
             </div>
 
-            <div class="field-row">
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Stage &amp; pacing</div>
+
               <div class="field">
-                <label class="field-label" for="poc-target">Adherence target (%)</label>
-                <input class="field-input" id="poc-target" type="number" min="10" max="100" step="5" value="80">
+                <label class="field-label" for="poc-stage">Stage — where Maya is on the care journey</label>
+                <select class="field-select" id="poc-stage">
+                  <option value="identification">Identification — map history, diagnostics and root drivers</option>
+                  <option value="stabilization" selected>Stabilization — calm inflammation, steady energy and sleep</option>
+                  <option value="lead_actor_1">Lead Actor 1 — treat the single biggest driver</option>
+                  <option value="lead_actor_2">Lead Actor 2 — move to the next priority system</option>
+                  <option value="lead_actor_3">Lead Actor 3 — address remaining drivers one at a time</option>
+                  <option value="repair">Repair — support regeneration and full function</option>
+                  <option value="graduation">Graduation — light maintenance to protect progress</option>
+                </select>
+                <div class="field-help">Stage 2 of 7. It sets which lessons and badges the app surfaces.</div>
+              </div>
+
+              <div class="field">
+                <label class="field-label">Pacing</label>
+                <div class="seg" id="poc-pacing" role="group" aria-label="Plan pacing">
+                  <button type="button">Gentle</button>
+                  <button type="button" class="active">Standard</button>
+                  <button type="button">Aggressive</button>
+                </div>
+                <div class="field-help">Standard matches Maya's readiness result. Bee has proposed Gentle in version 5 above.</div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label" for="poc-target">Adherence target (%)</label>
+                  <input class="field-input" id="poc-target" type="number" min="10" max="100" step="5" value="80">
+                </div>
+                <div class="field">
+                  <label class="field-label" for="poc-start">Plan start (week 1)</label>
+                  <input class="field-input" id="poc-start" type="date" value="2026-06-29">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="poc-focus">Current focus (lead actor)</label>
+                <input class="field-input" id="poc-focus" type="text" value="Calming inflammation and steadying energy &amp; sleep.">
+              </div>
+
+              <div class="field">
+                <label class="field-label" for="poc-goal">Patient goal — in Maya's words</label>
+                <textarea class="field-textarea" id="poc-goal">Get my energy back and sleep through the night again.</textarea>
+                <div class="field-help">Maya wrote this at onboarding. Edit only to correct a typo — her wording is the record.</div>
+              </div>
+
+              <div class="j-actions">
+                <button class="btn btn-primary" onclick="HCOS.toast('Version 6 approved and effective now. Version 5 is superseded and kept.','ok')">Approve and publish version 6</button>
+                <button class="btn" onclick="HCOS.toast('Saved as the version 6 draft. Maya still follows version 4.','ok')">Save version 6 draft</button>
+                <button class="btn" data-activate="j-staff-activities">Edit plan items</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">Signed in as Dr. Drannikov · provider — your changes publish as a new version. MA, nurse and PCC edits arrive as proposals with a rationale.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Pathway and access level</div>
+              <div class="field">
+                <label class="field-label" for="poc-pathway">Care pathway — clinical</label>
+                <select class="field-select" id="poc-pathway">
+                  <option selected>Complex Chronic Care</option>
+                  <option>Health Optimization</option>
+                  <option>Recovery</option>
+                  <option>Vitality</option>
+                </select>
+                <div class="field-help">Set here by the provider. Changing it publishes a new plan version.</div>
               </div>
               <div class="field">
-                <label class="field-label" for="poc-start">Plan start (week 1)</label>
-                <input class="field-input" id="poc-start" type="date" value="2026-06-29">
+                <label class="field-label">Access level — business</label>
+                <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Comprehensive</div>
+                <div class="prov"><span><strong>From</strong> membership Restore · <a href="pricing-memberships.html">memberships</a></span></div>
+                <div class="field-help">How Maya engages and pays. It never changes the clinical pathway, and the pathway never changes it.</div>
               </div>
             </div>
 
-            <div class="field">
-              <label class="field-label" for="poc-focus">Current focus (lead actor)</label>
-              <input class="field-input" id="poc-focus" type="text" value="Calming inflammation and steadying energy &amp; sleep.">
+            <div class="card">
+              <div class="card-title">Version history</div>
+              <div class="j-ev">
+                <span class="j-ev-ver"><span class="ver-chip">v5</span> <span class="appr pending">Pending</span></span>
+                <span class="j-ev-what">Gentler pacing, rebounding 3 / wk, add lymphatic massage</span>
+                <span class="j-ev-who">Bee · Jul 20</span>
+              </div>
+              <div class="j-ev">
+                <span class="j-ev-ver"><span class="ver-chip">v4</span> <span class="appr approved">In effect</span></span>
+                <span class="j-ev-what">EBOO added after order <code>O-2314 v1</code> was signed</span>
+                <span class="j-ev-who">Dr. Drannikov · Jul 6</span>
+              </div>
+              <div class="j-ev">
+                <span class="j-ev-ver"><span class="ver-chip superseded">v3</span> <span class="appr superseded">Superseded</span></span>
+                <span class="j-ev-what">Moved to Stabilization; NAD+ cadence follows <code>O-2291 v2</code></span>
+                <span class="j-ev-who">Dr. Drannikov · Jun 15</span>
+              </div>
+              <div class="j-ev">
+                <span class="j-ev-ver"><span class="ver-chip superseded">v2</span> <span class="appr superseded">Superseded</span></span>
+                <span class="j-ev-what">Supplements reconciled into the plan</span>
+                <span class="j-ev-who">Dr. Drannikov · Jun 2</span>
+              </div>
+              <div class="field-help" style="margin-top:8px"><a href="security.html#/g-01-audit">Every version, proposal and approval is in the audit store</a>.</div>
             </div>
 
-            <div class="field">
-              <label class="field-label" for="poc-goal">Patient goal — in Maya's words</label>
-              <textarea class="field-textarea" id="poc-goal">Get my energy back and sleep through the night again.</textarea>
-            </div>
-
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn btn-primary" onclick="HCOS.toast('Plan of care saved. Maya\'s app will refresh the journey and goal.','ok')">Save plan of care</button>
-              <button class="btn" data-activate="j-staff-activities">Edit activities</button>
-            </div>
           </div>
 
-          <div class="card">
-            <div class="card-title">What the patient sees</div>
-            <dl class="kv" style="margin-bottom:12px">
-              <dt>Journey</dt><dd>Stabilization · stage 2 of 7</dd>
-              <dt>Pacing</dt><dd>Standard</dd>
-              <dt>This week</dt><dd>Week 4</dd>
-              <dt>Points</dt><dd>1,475 all-time · Silver tier</dd>
-            </dl>
-            <div class="seg-divider"></div>
-            <div class="field-help" style="margin-top:12px">Edits here flow straight to the patient-facing screens.</div>
-            <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
-              <a class="btn btn-sm" href="journey.html">Preview Today view</a>
-              <a class="btn btn-sm" href="journey-plan.html">Preview My plan</a>
-              <a class="btn btn-sm" href="patients.html">Open patient chart</a>
+          <div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">What the patient sees</div>
+              <dl class="kv" style="margin-bottom:12px">
+                <dt>Journey</dt><dd>Stabilization · stage 2 of 7</dd>
+                <dt>Pacing</dt><dd>Standard</dd>
+                <dt>This week</dt><dd>Week 4</dd>
+                <dt>Points</dt><dd>1,475 all-time · Silver tier</dd>
+              </dl>
+              <div class="prov"><span>Maya's app reads <span class="ver-chip">v4</span>. Version 5 stays out of sight until it is approved.</span></div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+                <a class="btn btn-sm" href="journey.html">Preview Today view</a>
+                <a class="btn btn-sm" href="journey-plan.html">Preview My plan</a>
+                <a class="btn btn-sm" href="journey-progress.html#/j-progress-week">Preview progress</a>
+              </div>
             </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Orders this plan follows</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">NAD+ IV therapy · <code>O-2291 v2</code> · weekly to Sep 30</span><span class="check-meta"><a href="clinical-chart.html#/b-10-iv-order">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">EBOO · <code>O-2314 v1</code> · weekly, clearance each cycle</span><span class="check-meta"><a href="clinical.html#/b-09-orders">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Provider visit · <code>O-2288 v1</code> · weekly</span><span class="check-meta"><a href="clinical.html#/b-09-orders">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Supplements and LDN · medication list</span><span class="check-meta"><a href="clinical-chart.html#/b-06-med-rec">open</a></span></li>
+                <li class="check-item"><span class="check-icon pending">•</span><span class="check-label">Lymphatic massage · no order needed</span><span class="check-meta">in v5</span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">The plan points at orders. It never restates dose, route or rate.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Readiness</div>
+              <dl class="kv">
+                <dt>Result</dt><dd>Standard</dd>
+                <dt>Ruleset</dt><dd>r-4.2</dd>
+                <dt>Approved by</dt><dd>Dr. Drannikov · Jul 6</dd>
+              </dl>
+              <div class="prov"><span><strong>From</strong> the readiness assessment · <a href="readiness.html#/i-01-readiness">open</a></span></div>
+              <div class="field-help">Pacing may be gentler than readiness allows, never bolder.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Who may do what</div>
+              <dl class="kv">
+                <dt>Stage, pacing, plan items</dt><dd>Physician · extender approves</dd>
+                <dt>Proposals</dt><dd>PCC · MA · nurse, with a rationale</dd>
+                <dt>Adherence</dt><dd>Maya, from her check-ins</dd>
+                <dt>System</dt><dd>Suggests only — it never approves</dd>
+              </dl>
+            </div>
+
           </div>
 
         </div>
@@ -138,74 +255,209 @@
   </section>
 
   <!-- ============================================================ -->
-  <!-- j-staff-activities — editable table of plan activities -->
+  <!-- j-staff-activities — plan items, each pointing at its source record -->
   <section class="screen" id="j-staff-activities" data-title="Activities">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/care-plan</span></div>
+        <span class="frame-url">hcos.helixona.com/care-plan/P-004182</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Activities</h2>
-        <p class="page-sub">Maya Reyes · ECW-48213 · 14 items on the plan of care</p>
 
-        <div class="callout callout-warn" style="margin-bottom:14px">
-          Ordered frequency and dose entered by hand from the provider's plan. Times / week and points are what the app scores adherence and rewards against.
+        <div class="app-header">
+          <div>
+            <div class="page-title">Activities</div>
+            <div class="j-id">Maya Reyes · P-004182 · plan of care <span class="ver-chip">v4</span> <span class="appr approved">Approved</span> · 14 items</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="j-staff-poc">Back to plan of care</button>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>Every item points at</strong> a signed order, a plan instruction or the medication list. Frequency lives in the plan version; dose and route live in the source.</span>
+        </div>
+
+        <div class="callout" style="margin-bottom:14px">
+          <strong>Version 5 has 3 changes waiting for approval.</strong> They are marked below and take effect only when Dr. Drannikov approves.
+          <div class="j-actions" style="margin-top:10px">
+            <button class="btn btn-sm btn-primary" data-activate="j-staff-poc">Review version 5</button>
+          </div>
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
               <tr>
-                <th>Activity</th>
-                <th>Category</th>
-                <th>Location</th>
-                <th style="text-align:right">Times / wk</th>
+                <th>Item</th>
+                <th>Source</th>
+                <th style="text-align:right">Ordered / wk</th>
+                <th>Owner</th>
                 <th style="text-align:right">Points</th>
-                <th>Dose / timing</th>
+                <th>State</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Nano Bath</strong></td><td>In-office treatment</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="1"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="20"></td><td class="j-tag">30 min soak</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Nano Bath from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Red Light</strong></td><td>In-office treatment</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="2"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="15"></td><td class="j-tag">20 min</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Red Light from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Hydrogen Inhalation</strong></td><td>In-office treatment</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="3"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="25"></td><td class="j-tag">30 min</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Hydrogen Inhalation from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Salt Room</strong></td><td>In-office treatment</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="1"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="15"></td><td class="j-tag">45 min halotherapy</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Salt Room from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>EBOO</strong></td><td>In-office treatment</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="1"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="50"></td><td class="j-tag">60 min · with provider</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed EBOO from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>NAD+ IV therapy</strong></td><td>IV therapy</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="1"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="40"></td><td class="j-tag">≈3 h drip</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed NAD+ IV therapy from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Provider Visit</strong></td><td>Office visit</td><td>In office</td><td style="text-align:right"><input class="field-input j-num" type="number" value="1"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="30"></td><td class="j-tag">20 min check-in</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Provider Visit from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Rebounding</strong></td><td>At-home</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="5"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="10"></td><td class="j-tag">≈5 min · lymph</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Rebounding from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Dry Brushing</strong></td><td>At-home</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="5"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="10"></td><td class="j-tag">before shower</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Dry Brushing from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Salt Bath</strong></td><td>At-home</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="3"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="10"></td><td class="j-tag">Epsom · 20 min</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Salt Bath from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Omega-3</strong></td><td>Supplement</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="7"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="5"></td><td class="j-tag">2 caps · with breakfast</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Omega-3 from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Vitamin D3 + K2</strong></td><td>Supplement</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="7"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="5"></td><td class="j-tag">5,000 IU · morning</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Vitamin D3 + K2 from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>Magnesium Glycinate</strong></td><td>Supplement</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="7"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="5"></td><td class="j-tag">400 mg · before bed</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed Magnesium Glycinate from the plan.','warn')">Remove</button></td></tr>
-              <tr><td><strong>LDN</strong></td><td>Medication</td><td>At home</td><td style="text-align:right"><input class="field-input j-num" type="number" value="7"></td><td style="text-align:right"><input class="field-input j-num" type="number" value="5"></td><td class="j-tag">3 mg · at bedtime</td><td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed LDN from the plan.','warn')">Remove</button></td></tr>
+              <tr>
+                <td><strong>NAD+ IV therapy</strong></td>
+                <td><code>O-2291 v2</code><div class="j-tag">Signed by Dr. Drannikov Jul 6 · ≈3 h drip</div></td>
+                <td style="text-align:right">1</td>
+                <td>Infusion suite · Bee</td>
+                <td style="text-align:right">40</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-10-iv-order">Open order</a></td>
+              </tr>
+              <tr>
+                <td><strong>EBOO</strong></td>
+                <td><code>O-2314 v1</code><div class="j-tag">Clearance required each cycle · 60 min with provider</div></td>
+                <td style="text-align:right">1</td>
+                <td>Dr. Drannikov</td>
+                <td style="text-align:right">50</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical.html#/b-09-orders">Open order</a></td>
+              </tr>
+              <tr>
+                <td><strong>Provider visit</strong></td>
+                <td><code>O-2288 v1</code><div class="j-tag">20 min check-in</div></td>
+                <td style="text-align:right">1</td>
+                <td>Dr. Drannikov</td>
+                <td style="text-align:right">30</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical.html#/b-09-orders">Open order</a></td>
+              </tr>
+              <tr>
+                <td><strong>Nano bath</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">30 min soak · through stage 2</div></td>
+                <td style="text-align:right">1</td>
+                <td>In office · Kyle</td>
+                <td style="text-align:right">20</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+              </tr>
+              <tr>
+                <td><strong>Red light</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">20 min</div></td>
+                <td style="text-align:right">2</td>
+                <td>In office · Kyle</td>
+                <td style="text-align:right">15</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+              </tr>
+              <tr>
+                <td><strong>Hydrogen inhalation</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">30 min</div></td>
+                <td style="text-align:right">3</td>
+                <td>In office · Kyle</td>
+                <td style="text-align:right">25</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+              </tr>
+              <tr>
+                <td><strong>Salt room</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">45 min halotherapy</div></td>
+                <td style="text-align:right">1</td>
+                <td>In office · Kyle</td>
+                <td style="text-align:right">15</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+              </tr>
+              <tr>
+                <td><strong>Rebounding</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">≈5 min · lymph · v5 proposes 3 / wk</div></td>
+                <td style="text-align:right">5</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">10</td>
+                <td><span class="appr pending">Change pending</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" data-activate="j-staff-poc">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>Dry brushing</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">before shower</div></td>
+                <td style="text-align:right">5</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">10</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+              </tr>
+              <tr>
+                <td><strong>Salt bath</strong></td>
+                <td>Plan instruction <span class="ver-chip">v4</span><div class="j-tag">Epsom · 20 min</div></td>
+                <td style="text-align:right">3</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">10</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+              </tr>
+              <tr>
+                <td><strong>Omega-3</strong></td>
+                <td><span class="clin-state reconciled">Reconciled</span> <span class="clin-src">medication list · 2 caps with breakfast</span><div class="j-tag">Patient-reported Mar 14 · reconciled by Bee Jun 2</div></td>
+                <td style="text-align:right">7</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">5</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-06-med-rec">Open list</a></td>
+              </tr>
+              <tr>
+                <td><strong>Vitamin D3 + K2</strong></td>
+                <td><span class="clin-state verified">Verified</span> <span class="clin-src">medication list · 5,000 IU morning</span><div class="j-tag">Confirmed by Dr. Drannikov Jun 6</div></td>
+                <td style="text-align:right">7</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">5</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-06-med-rec">Open list</a></td>
+              </tr>
+              <tr>
+                <td><strong>Magnesium glycinate</strong></td>
+                <td><span class="clin-state reconciled">Reconciled</span> <span class="clin-src">medication list · 400 mg before bed</span><div class="j-tag">Patient-reported Mar 14 · reconciled by Bee Jun 2</div></td>
+                <td style="text-align:right">7</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">5</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-06-med-rec">Open list</a></td>
+              </tr>
+              <tr>
+                <td><strong>LDN</strong></td>
+                <td><span class="clin-state verified">Verified</span> <span class="clin-src">medication list · 3 mg at bedtime</span><div class="j-tag">Prescribed by Dr. Drannikov Jun 6</div></td>
+                <td style="text-align:right">7</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">5</td>
+                <td><span class="appr approved">In plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-06-med-rec">Open list</a></td>
+              </tr>
+              <tr>
+                <td><strong>Lymphatic massage</strong></td>
+                <td>Proposed plan item <span class="ver-chip">v5</span><div class="j-tag">Bee · Jul 20 · non-clinical support</div></td>
+                <td style="text-align:right">1</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">10</td>
+                <td><span class="appr pending">Pending approval</span></td>
+                <td style="text-align:right"><button class="btn btn-ghost btn-sm" data-activate="j-staff-poc">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>Turmeric</strong></td>
+                <td><span class="clin-state reported">Reported</span> <span class="clin-src">Maya's check-in · Jul 19</span><div class="j-tag">Not on the plan and not clinically active until it is reconciled</div></td>
+                <td style="text-align:right">—</td>
+                <td>At home · Maya</td>
+                <td style="text-align:right">—</td>
+                <td><span class="appr draft">Not in plan</span></td>
+                <td style="text-align:right"><a class="btn btn-ghost btn-sm" href="clinical-chart.html#/b-06-med-rec">Reconcile</a></td>
+              </tr>
             </tbody>
           </table>
         </div>
 
         <div class="card" style="margin-top:16px">
-          <div class="card-title">Add activity</div>
+          <div class="card-title">Add a plan item</div>
           <div class="j-addgrid">
             <div class="field">
-              <label class="field-label" for="add-name">Name</label>
+              <label class="field-label" for="add-name">Item</label>
               <input class="field-input j-cellinput" id="add-name" type="text" placeholder="e.g. Lymphatic massage">
             </div>
             <div class="field">
-              <label class="field-label" for="add-cat">Category</label>
-              <select class="field-select j-cellinput" id="add-cat">
-                <option>In-office treatment</option>
-                <option>IV therapy</option>
-                <option>Office visit</option>
-                <option>At-home</option>
-                <option>Supplement</option>
-                <option>Medication</option>
-              </select>
-            </div>
-            <div class="field">
-              <label class="field-label" for="add-loc">Location</label>
-              <select class="field-select j-cellinput" id="add-loc">
-                <option>In office</option>
-                <option>At home</option>
+              <label class="field-label" for="add-src">Source</label>
+              <select class="field-select j-cellinput" id="add-src">
+                <option>Signed order — pick from Maya's orders</option>
+                <option>Medication &amp; supplement list</option>
+                <option>Plan instruction — no order needed</option>
               </select>
             </div>
             <div class="field">
@@ -213,50 +465,72 @@
               <input class="field-input j-cellinput" id="add-times" type="number" min="0" max="21" value="1">
             </div>
             <div class="field">
-              <label class="field-label" for="add-points">Points</label>
-              <input class="field-input j-cellinput" id="add-points" type="number" min="0" value="10">
+              <label class="field-label" for="add-owner">Owner</label>
+              <select class="field-select j-cellinput" id="add-owner">
+                <option>At home · Maya</option>
+                <option>In office · Kyle</option>
+                <option>Infusion suite · Bee</option>
+                <option>Dr. Drannikov</option>
+              </select>
             </div>
             <div class="field">
-              <label class="field-label" for="add-dose">Dose / timing</label>
-              <input class="field-input j-cellinput" id="add-dose" type="text" placeholder="e.g. 400 mg · bed">
+              <label class="field-label" for="add-stop">Start / stop rule</label>
+              <input class="field-input j-cellinput" id="add-stop" type="text" placeholder="e.g. through stage 2, or until Sep 30">
             </div>
           </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap">
-            <span class="field-help" style="margin:0">Times / week and points are edited inline in the table — changes save as you go.</span>
-            <div style="display:flex;gap:10px">
+          <div class="field" style="margin-top:12px;max-width:560px">
+            <label class="field-label" for="add-why">Rationale</label>
+            <input class="field-input" id="add-why" type="text" placeholder="Why this item, in one line">
+          </div>
+          <div class="j-actions-split">
+            <span class="field-help" style="margin:0">A clinical item needs a signed order first. Items without an order are non-clinical support.</span>
+            <div class="j-actions">
               <button class="btn" data-activate="j-staff-log">Go to weekly log</button>
-              <button class="btn btn-primary" onclick="HCOS.toast('Activity added to Maya\'s plan of care.','ok')">Add activity</button>
+              <button class="btn btn-primary" onclick="HCOS.toast('Added to the version 6 draft. It reaches Maya\'s app when you approve the version.','ok')">Add to version 6 draft</button>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- j-staff-log — log this week's actual visits vs the ordered plan -->
+  <!-- j-staff-log — ordered vs actual, computed from the source records -->
   <section class="screen" id="j-staff-log" data-title="Weekly log">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/care-plan</span></div>
+        <span class="frame-url">hcos.helixona.com/care-plan/P-004182</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Weekly log — ordered vs actual</h2>
-        <p class="page-sub">Maya Reyes · enter the visits actually completed this week; adherence and points follow</p>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Weekly log — ordered vs actual</div>
+            <div class="j-id">Maya Reyes · P-004182 · week 4 · Jul 20 – Jul 26</div>
+          </div>
+          <div class="app-user">
+            <a class="btn" href="journey-progress.html#/j-progress-week">Open Maya's progress</a>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>Ordered from</strong> plan of care <span class="ver-chip">v4</span> · <strong>actual from</strong> appointments, infusion administration records and Maya's check-ins. Nothing on this page is typed in.</span>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:14px 0">
           <div class="seg" id="log-week" role="group" aria-label="Week">
             <button type="button">Week 1</button>
             <button type="button">Week 2</button>
             <button type="button">Week 3</button>
             <button type="button" class="active">Week 4 · current</button>
           </div>
-          <button class="btn btn-sm" onclick="HCOS.toast('Added week 5 to the log.','ok')">Add next week</button>
+          <a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day view</a>
         </div>
 
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
             <div class="stat-num">12 / 51</div>
-            <div class="stat-lbl">Visits logged</div>
+            <div class="stat-lbl">Counted so far</div>
           </div>
           <div class="card stat-card">
             <div class="stat-num">24%</div>
@@ -264,7 +538,7 @@
           </div>
           <div class="card stat-card">
             <div class="stat-num">80%</div>
-            <div class="stat-lbl">Target</div>
+            <div class="stat-lbl">Target · plan v4</div>
           </div>
           <div class="card stat-card">
             <div class="stat-num">Tue</div>
@@ -286,43 +560,85 @@
             <thead>
               <tr>
                 <th>Activity</th>
-                <th>Location</th>
                 <th style="text-align:right">Ordered / wk</th>
-                <th style="text-align:right">Actual this week</th>
+                <th style="text-align:right">Actual</th>
+                <th>Counted from</th>
                 <th style="text-align:right">%</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td><strong>Nano Bath</strong></td><td>In office</td><td style="text-align:right">1</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="1" value="1"></td><td style="text-align:right">100%</td></tr>
-              <tr><td><strong>Red Light</strong></td><td>In office</td><td style="text-align:right">2</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="2" value="1"></td><td style="text-align:right">50%</td></tr>
-              <tr><td><strong>Hydrogen Inhalation</strong></td><td>In office</td><td style="text-align:right">3</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="3" value="0"></td><td style="text-align:right">0%</td></tr>
-              <tr><td><strong>Salt Room</strong></td><td>In office</td><td style="text-align:right">1</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="1" value="1"></td><td style="text-align:right">100%</td></tr>
-              <tr><td><strong>EBOO</strong></td><td>In office</td><td style="text-align:right">1</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="1" value="0"></td><td style="text-align:right">0%</td></tr>
-              <tr><td><strong>NAD+ IV therapy</strong></td><td>In office</td><td style="text-align:right">1</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="1" value="0"></td><td style="text-align:right">0%</td></tr>
-              <tr><td><strong>Provider Visit</strong></td><td>In office</td><td style="text-align:right">1</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="1" value="0"></td><td style="text-align:right">0%</td></tr>
-              <tr><td><strong>Rebounding</strong></td><td>At home</td><td style="text-align:right">5</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="5" value="1"></td><td style="text-align:right">20%</td></tr>
-              <tr><td><strong>Dry Brushing</strong></td><td>At home</td><td style="text-align:right">5</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="5" value="1"></td><td style="text-align:right">20%</td></tr>
-              <tr><td><strong>Salt Bath</strong></td><td>At home</td><td style="text-align:right">3</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="3" value="0"></td><td style="text-align:right">0%</td></tr>
-              <tr><td><strong>Omega-3</strong></td><td>At home</td><td style="text-align:right">7</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="7" value="2"></td><td style="text-align:right">29%</td></tr>
-              <tr><td><strong>Vitamin D3 + K2</strong></td><td>At home</td><td style="text-align:right">7</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="7" value="2"></td><td style="text-align:right">29%</td></tr>
-              <tr><td><strong>Magnesium Glycinate</strong></td><td>At home</td><td style="text-align:right">7</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="7" value="1"></td><td style="text-align:right">14%</td></tr>
-              <tr><td><strong>LDN</strong></td><td>At home</td><td style="text-align:right">7</td><td style="text-align:right"><input class="field-input j-num" type="number" min="0" max="7" value="2"></td><td style="text-align:right">29%</td></tr>
+              <tr><td><strong>Nano bath</strong></td><td style="text-align:right">1</td><td style="text-align:right">1</td><td><a href="schedule.html#/l-04-appt">Appointment Jul 20 · Done</a></td><td style="text-align:right">100%</td></tr>
+              <tr><td><strong>Red light</strong></td><td style="text-align:right">2</td><td style="text-align:right">1</td><td><a href="schedule.html#/l-04-appt">Appointment Jul 20 · Done</a></td><td style="text-align:right">50%</td></tr>
+              <tr><td><strong>Hydrogen inhalation</strong></td><td style="text-align:right">3</td><td style="text-align:right">0</td><td class="j-tag">No appointment kept yet</td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>Salt room</strong></td><td style="text-align:right">1</td><td style="text-align:right">1</td><td><a href="schedule.html#/l-04-appt">Appointment Jul 20 · Done</a></td><td style="text-align:right">100%</td></tr>
+              <tr><td><strong>EBOO</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td class="j-tag">Booked Jul 23 · Scheduled</td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>NAD+ IV therapy</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td><a href="clinical-infusion.html#/b-15-flowsheet">Booked Jul 22 · no administration yet</a></td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>Provider visit</strong></td><td style="text-align:right">1</td><td style="text-align:right">0</td><td class="j-tag">Booked Jul 24 · Scheduled</td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>Rebounding</strong></td><td style="text-align:right">5</td><td style="text-align:right">1</td><td><a href="journey-checkin.html#/j-checkin-activity">Check-in Jul 20</a></td><td style="text-align:right">20%</td></tr>
+              <tr><td><strong>Dry brushing</strong></td><td style="text-align:right">5</td><td style="text-align:right">1</td><td><a href="journey-checkin.html#/j-checkin-activity">Check-in Jul 20</a></td><td style="text-align:right">20%</td></tr>
+              <tr><td><strong>Salt bath</strong></td><td style="text-align:right">3</td><td style="text-align:right">0</td><td class="j-tag">No check-in yet</td><td style="text-align:right">0%</td></tr>
+              <tr><td><strong>Omega-3</strong></td><td style="text-align:right">7</td><td style="text-align:right">2</td><td><a href="journey-checkin.html#/j-checkin-supplement">Check-ins Jul 20, Jul 21</a></td><td style="text-align:right">29%</td></tr>
+              <tr><td><strong>Vitamin D3 + K2</strong></td><td style="text-align:right">7</td><td style="text-align:right">2</td><td><a href="journey-checkin.html#/j-checkin-supplement">Check-ins Jul 20, Jul 21</a></td><td style="text-align:right">29%</td></tr>
+              <tr><td><strong>Magnesium glycinate</strong></td><td style="text-align:right">7</td><td style="text-align:right">1</td><td><a href="journey-checkin.html#/j-checkin-supplement">Check-in Jul 20</a></td><td style="text-align:right">14%</td></tr>
+              <tr><td><strong>LDN</strong></td><td style="text-align:right">7</td><td style="text-align:right">2</td><td><a href="journey-checkin.html#/j-checkin-supplement">Check-ins Jul 20, Jul 21</a></td><td style="text-align:right">29%</td></tr>
             </tbody>
           </table>
         </div>
 
-        <div class="field" style="margin-top:16px;max-width:520px">
-          <label class="field-label" for="log-note">Week note</label>
-          <textarea class="field-textarea" id="log-note" placeholder="Clinical note for this week (optional)…"></textarea>
+        <div class="grid-2" style="margin-top:16px">
+
+          <div class="card">
+            <div class="card-title">A number looks wrong — fix it at its source</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon active">→</span><span class="check-label">A visit happened but is not counted</span><span class="check-meta"><a href="schedule.html#/l-04-appt">appointment</a></span></li>
+              <li class="check-item"><span class="check-icon active">→</span><span class="check-label">The infusion ran differently than ordered</span><span class="check-meta"><a href="clinical-infusion.html#/b-15-flowsheet">flowsheet</a></span></li>
+              <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Maya took a dose but did not check in</span><span class="check-meta"><a href="journey-checkin.html#/j-checkin-supplement">check-in</a></span></li>
+              <li class="check-item"><span class="check-icon active">→</span><span class="check-label">The weekly amount itself is wrong</span><span class="check-meta"><a href="#j-staff-poc" data-activate="j-staff-poc">plan version</a></span></li>
+            </ul>
+            <div class="field-help" style="margin-top:8px">Corrections are made where the record lives, and the earlier value is kept.</div>
+          </div>
+
+          <div class="card">
+            <div class="ai-block" style="margin-top:0">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state accepted">Accepted</span>
+              </div>
+              <div class="ai-body">
+                Adherence has been under target for three weeks and Maya reports swelling after NAD+ days. Gentler pacing for two weeks would fit her readiness result.
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> check-ins, appointments, readiness <code>r-4.2</code>, plan <span class="ver-chip">v4</span></span>
+                <span><b>Model</b> pacing-v1.3</span>
+                <span><b>Confidence</b> 0.71 — three weeks is a short run</span>
+                <span><b>Accepted by</b> Bee into proposal <span class="ver-chip">v5</span></span>
+                <span><b>Approves</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" data-activate="j-staff-poc">Open proposal v5</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Suggestion dismissed with your name and reason. The plan is unchanged.','warn')">Dismiss</button>
+              </div>
+            </div>
+            <div class="field-help">A suggestion never changes pacing, an order or the plan on its own.</div>
+          </div>
+
         </div>
 
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-          <span class="field-help" style="margin:0">This is Maya's current week — actuals feed her progress ring and streak.</span>
-          <div style="display:flex;gap:10px">
+        <div class="field" style="margin-top:16px;max-width:520px">
+          <label class="field-label" for="log-note">Note to the care team</label>
+          <textarea class="field-textarea" id="log-note" placeholder="What the team should know about this week…"></textarea>
+          <div class="field-help">Appended to the week with your name and time. It does not change any count above.</div>
+        </div>
+
+        <div class="j-actions-split">
+          <span class="field-help" style="margin:0">Week 4 stays open until Sunday; counts keep updating as visits and check-ins land.</span>
+          <div class="j-actions">
             <button class="btn" data-activate="j-staff-patients">Back to roster</button>
-            <button class="btn btn-primary" onclick="HCOS.toast('Weekly log saved. Maya\'s progress ring updated.','ok')">Save weekly log</button>
+            <button class="btn" onclick="HCOS.toast('Note added to week 4 with your name and time.','ok')">Add note</button>
+            <button class="btn btn-primary" data-activate="j-staff-poc">Propose a plan change</button>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -334,10 +650,18 @@
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/care-plan</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Care-plan program</h2>
-        <p class="page-sub">Patients on an active plan of care · pick one to author their plan</p>
 
-        <div class="grid-3" style="margin-bottom:14px">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Care-plan program</div>
+            <div class="page-sub">Patients on a plan of care · pick one to open their plan</div>
+          </div>
+          <div class="app-user">
+            <a class="btn" href="people.html#/pe-01-search">Find a person</a>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin:14px 0">
           <div class="card stat-card">
             <div class="stat-num">5</div>
             <div class="stat-lbl">On a plan</div>
@@ -347,17 +671,17 @@
             <div class="stat-lbl">On track this week</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">3</div>
-            <div class="stat-lbl">Logs due today</div>
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Waiting for your approval</div>
           </div>
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search by name, ECW ID, or program">
+          <input class="search-input" type="search" placeholder="Search by name or person ID">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">On track</button>
           <button class="filter-chip">Behind</button>
-          <button class="filter-chip">Log due</button>
+          <button class="filter-chip">Waiting for approval</button>
           <a class="btn btn-primary btn-sm" href="patients.html" style="margin-left:auto">Open patient chart</a>
         </div>
 
@@ -366,73 +690,74 @@
             <thead>
               <tr>
                 <th>Patient</th>
-                <th>ECW ID</th>
-                <th>Program</th>
+                <th>Person</th>
+                <th>Care pathway</th>
                 <th>Stage</th>
-                <th style="text-align:right">Items</th>
+                <th>Plan</th>
                 <th style="text-align:right">This week</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr class="row-click" data-activate="j-staff-poc">
-                <td><div class="j-patientbar" style="margin:0;gap:10px"><span class="avatar" style="width:30px;height:30px;font-size:11px">MR</span><span style="font-weight:600;color:var(--hx-navy)">Maya Reyes</span> <span class="pill pill-navy">Live in app</span></div></td>
-                <td>ECW-48213</td>
-                <td>Detox &amp; NAD+</td>
+                <td><div class="j-patientbar" style="margin:0;gap:10px"><span class="avatar" style="width:30px;height:30px;font-size:11px">MR</span><span style="font-weight:600;color:var(--hx-navy)">Maya Reyes</span></div></td>
+                <td class="j-id">P-004182</td>
+                <td>Complex Chronic Care</td>
                 <td>Stabilization</td>
-                <td style="text-align:right">14</td>
+                <td><span class="ver-chip">v4</span> <span class="appr pending">v5 pending</span></td>
                 <td style="text-align:right"><span class="pill pill-muted">24%</span></td>
-                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Edit plan</button></td>
+                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Open plan</button></td>
               </tr>
               <tr class="row-click" data-activate="j-staff-poc">
                 <td><div class="j-patientbar" style="margin:0;gap:10px"><span class="avatar" style="width:30px;height:30px;font-size:11px">WH</span><span style="font-weight:600;color:var(--hx-navy)">Walter Hsu</span></div></td>
-                <td>ECW-51770</td>
-                <td>NAD+ series</td>
+                <td class="j-id">P-003877</td>
+                <td>Health Optimization</td>
                 <td>Lead Actor 1</td>
-                <td style="text-align:right">6</td>
+                <td><span class="ver-chip">v2</span> <span class="appr approved">Approved</span></td>
                 <td style="text-align:right"><span class="pill pill-ok">88%</span></td>
-                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Edit plan</button></td>
+                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Open plan</button></td>
               </tr>
               <tr class="row-click" data-activate="j-staff-poc">
                 <td><div class="j-patientbar" style="margin:0;gap:10px"><span class="avatar" style="width:30px;height:30px;font-size:11px">PN</span><span style="font-weight:600;color:var(--hx-navy)">Priya Natarajan</span></div></td>
-                <td>ECW-53102</td>
-                <td>Fatigue workup</td>
+                <td class="j-id">P-004520</td>
+                <td>Recovery</td>
                 <td>Identification</td>
-                <td style="text-align:right">4</td>
+                <td><span class="ver-chip">v1</span> <span class="appr pending">v2 pending</span></td>
                 <td style="text-align:right"><span class="pill pill-muted">41%</span></td>
-                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Edit plan</button></td>
+                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Open plan</button></td>
               </tr>
               <tr class="row-click" data-activate="j-staff-poc">
                 <td><div class="j-patientbar" style="margin:0;gap:10px"><span class="avatar" style="width:30px;height:30px;font-size:11px">NB</span><span style="font-weight:600;color:var(--hx-navy)">Nadia Boulos</span></div></td>
-                <td>ECW-49006</td>
-                <td>Detox readiness</td>
+                <td class="j-id">P-004688</td>
+                <td>Complex Chronic Care</td>
                 <td>Identification</td>
-                <td style="text-align:right">3</td>
+                <td><span class="ver-chip">v1</span> <span class="appr draft">Draft</span></td>
                 <td style="text-align:right"><span class="pill pill-ok">92%</span></td>
-                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Edit plan</button></td>
+                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Open plan</button></td>
               </tr>
               <tr class="row-click" data-activate="j-staff-poc">
                 <td><div class="j-patientbar" style="margin:0;gap:10px"><span class="avatar" style="width:30px;height:30px;font-size:11px">GL</span><span style="font-weight:600;color:var(--hx-navy)">Grace Lindqvist</span></div></td>
-                <td>ECW-50881</td>
-                <td>Wellness</td>
+                <td class="j-id">P-004301</td>
+                <td>Vitality</td>
                 <td>Repair</td>
-                <td style="text-align:right">7</td>
+                <td><span class="ver-chip">v6</span> <span class="appr approved">Approved</span></td>
                 <td style="text-align:right"><span class="pill pill-muted">63%</span></td>
-                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Edit plan</button></td>
+                <td style="text-align:right"><button class="btn btn-sm" data-activate="j-staff-poc">Open plan</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout callout-warn" style="margin-top:16px">
-          The full chart, insurance and history live in Patients. This roster is just the care-plan slice — one place to author the plan the patient app follows.
+        <div class="prov">
+          <span><strong>Reads</strong> the person master, plan versions, appointments and check-ins. This roster keeps nothing of its own — Nadia's draft plan waits on readiness <a href="readiness.html#/i-01-readiness">physician review</a>.</span>
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <button class="btn btn-primary" data-activate="j-staff-poc">Edit Maya's plan</button>
+        <div class="j-actions" style="margin-top:14px">
+          <button class="btn btn-primary" data-activate="j-staff-poc">Open Maya's plan</button>
           <a class="btn" href="patients.html">Open patient chart</a>
-          <button class="btn" onclick="HCOS.toast('New care-plan patient created. Add their activities next.','ok')">New plan patient</button>
+          <a class="btn" href="people.html#/pe-01-search">Find a person</a>
         </div>
+
       </div>
     </div>
   </section>
@@ -451,7 +776,7 @@
     if (seg.id === 'log-week') {
       HCOS.toast('Showing ' + btn.textContent.replace(' · current', '') + '.', 'ok');
     } else if (seg.id === 'poc-pacing') {
-      HCOS.toast('Pacing set to ' + btn.textContent + '.', 'ok');
+      HCOS.toast('Pacing set to ' + btn.textContent + ' in the version 6 draft. Approve it to publish.', 'ok');
     }
   });
 </script>

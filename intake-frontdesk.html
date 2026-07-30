@@ -32,7 +32,12 @@
         <span class="frame-url">hcos.helixona.com/intake/front-desk</span></div>
       <div class="frame-body">
         <h2 class="page-title">Today's schedule</h2>
-        <p class="page-sub">Tuesday, July 21 · 11:40 AM · every visit and its intake readiness</p>
+        <p class="page-sub">Tuesday, July 21 · 11:40 AM · every visit, who is checked in, and what the front desk still needs</p>
+
+        <div class="prov">
+          <span><strong>From</strong> the scheduling service · one appointment ID per visit · <a href="schedule.html#/l-01-day">day view</a></span>
+          <span><strong>Readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v2.4</span> · <a href="readiness.html#/i-01-readiness">engine</a></span>
+        </div>
 
         <div class="afd-toolbar">
           <div class="cal-nav">
@@ -57,16 +62,16 @@
             <div class="stat-lbl">Appointments today</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">6</div>
-            <div class="stat-lbl">Patients ready</div>
+            <div class="stat-num">7</div>
+            <div class="stat-lbl">Ready</div>
           </div>
           <div class="card stat-card">
-            <div class="stat-num">3</div>
-            <div class="stat-lbl">Missing items</div>
+            <div class="stat-num">5</div>
+            <div class="stat-lbl">Front desk items</div>
           </div>
           <div class="card stat-card">
             <div class="stat-num">1</div>
-            <div class="stat-lbl">Action needed</div>
+            <div class="stat-lbl">Blocked — needs a provider</div>
           </div>
         </div>
 
@@ -74,8 +79,8 @@
           <span style="display:flex;gap:8px">
             <button class="filter-chip active">All</button>
             <button class="filter-chip">Ready</button>
-            <button class="filter-chip">Missing items</button>
-            <button class="filter-chip">Action needed</button>
+            <button class="filter-chip">Front desk items</button>
+            <button class="filter-chip">Blocked</button>
           </span>
           <span style="display:flex;gap:8px">
             <button class="filter-chip active">All types</button>
@@ -95,7 +100,8 @@
                 <th>Appointment</th>
                 <th>Where</th>
                 <th>Visit status</th>
-                <th>Readiness</th>
+                <th>Prerequisites</th>
+                <th>Check-in</th>
               </tr>
             </thead>
             <tbody>
@@ -106,6 +112,7 @@
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-done">Done</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><span style="color:var(--muted)">Checked in 8:24</span></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
                 <td>9:00 – 12:00</td>
@@ -114,6 +121,7 @@
                 <td>Chair 1 · Nick</td>
                 <td><span class="pill pill-st st-inchair">In chair</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><span style="color:var(--muted)">Checked in 8:52</span></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
                 <td>10:00 – 12:30</td>
@@ -122,6 +130,7 @@
                 <td>Chair 2 · Bea</td>
                 <td><span class="pill pill-st st-inchair">In chair</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><span style="color:var(--muted)">Checked in 9:55</span></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
                 <td>10:30</td>
@@ -130,6 +139,7 @@
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-inroom">In room</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><span style="color:var(--muted)">Checked in 10:21</span></td>
               </tr>
               <tr class="row-click" data-activate="a-30-readiness-board">
                 <td>11:15</td>
@@ -137,7 +147,8 @@
                 <td>Lab draw · 15m</td>
                 <td>Chair 4 · Nate</td>
                 <td><span class="pill pill-st st-arrived">Arrived</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><span style="color:var(--muted)">Checked in 11:08</span></td>
               </tr>
               <tr class="row-click" data-activate="a-30-readiness-board">
                 <td>11:30</td>
@@ -145,7 +156,8 @@
                 <td>Telehealth · 30m</td>
                 <td>Telehealth · Dr. Drannikov</td>
                 <td><span class="pill pill-st st-arrived">Arrived</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><span style="color:var(--muted)">Joined 11:26</span></td>
               </tr>
               <tr class="row-click" data-activate="a-32-checkin-confirm">
                 <td>11:30 – 12:30</td>
@@ -154,6 +166,7 @@
                 <td>Chair 3 · Juan</td>
                 <td><span class="pill pill-st st-arrived">Arrived</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><span style="color:var(--muted)">Checked in 11:22</span></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-04-appt'">
                 <td>1:00 – 4:00 PM</td>
@@ -162,6 +175,7 @@
                 <td>Chair 1 · Nick</td>
                 <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Walter Hsu marked Arrived on appointment A-7712 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
               <tr class="row-click" data-activate="a-30-readiness-board">
                 <td>1:30 PM</td>
@@ -169,7 +183,8 @@
                 <td>Follow-up · 30m</td>
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Nadia Boulos marked Arrived on appointment A-7718 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
                 <td>2:00 PM</td>
@@ -178,6 +193,7 @@
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-cancelled">Cancelled</span></td>
                 <td><span style="color:var(--muted)">—</span></td>
+                <td><span style="color:var(--muted)">—</span></td>
               </tr>
               <tr class="row-click" data-activate="a-30-readiness-board">
                 <td>2:00 – 3:00 PM</td>
@@ -185,7 +201,8 @@
                 <td>Myers' cocktail · 1 h</td>
                 <td>Chair 4 · Nate</td>
                 <td><span class="pill pill-st st-confirmed">Confirmed</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+                <td><span class="pill pill-err afd-chip-link" data-activate="a-30-readiness-board">Blocked · readiness</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Sent to Dr. Drannikov — he clears the readiness or moves the visit. The front desk cannot lift this block.', 'warn')">Ask Dr. Drannikov</button></td>
               </tr>
               <tr class="row-click" onclick="window.location.href='schedule.html#/l-01-day'">
                 <td>2:00 PM</td>
@@ -194,6 +211,7 @@
                 <td>Chair 4 · Nate</td>
                 <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
                 <td><span class="pill pill-ok">Ready</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Marcus Webb marked Arrived on appointment A-7724 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
               <tr class="row-click" data-activate="a-30-readiness-board">
                 <td>3:00 – 4:30 PM</td>
@@ -201,7 +219,8 @@
                 <td>New patient consult · 90m</td>
                 <td>Dr. Drannikov</td>
                 <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
-                <td><span class="pill pill-err afd-chip-link" data-activate="a-30-readiness-board">Action needed</span></td>
+                <td><span class="pill pill-err afd-chip-link" data-activate="a-30-readiness-board">2 consents unsigned</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Tom Alvarez marked Arrived on appointment A-7726 — the unsigned consents stay flagged.', 'ok')">Check in</button></td>
               </tr>
               <tr class="row-click" data-activate="a-30-readiness-board">
                 <td>3:30 PM</td>
@@ -209,14 +228,40 @@
                 <td>Glutathione push · 30m</td>
                 <td>Chair 3 · Juan</td>
                 <td><span class="pill pill-st st-scheduled">Scheduled</span></td>
-                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Missing items</span></td>
+                <td><span class="pill pill-warn afd-chip-link" data-activate="a-30-readiness-board">Front desk items</span></td>
+                <td><button class="btn btn-sm" onclick="event.stopPropagation(); HCOS.toast('Sofia Ramos marked Arrived on appointment A-7729 — same appointment, no second record.', 'ok')">Check in</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout callout-warn" style="margin-top:14px">Chair 4 is double-booked at 2:00 PM — Marcus Webb overlaps Nadia Boulos. Kept on purpose.</div>
-        <div class="field-help" style="margin-top:8px">Select a Missing items or Action needed chip to see what is missing and how to resolve it.</div>
+        <div class="callout callout-err" style="margin-top:14px">Nadia Boulos' 2:00 PM Myers' cocktail cannot start — readiness is Physician review. Dr. Drannikov clears it or moves the visit; this one is not overridable at the front desk. <a href="readiness.html#/i-01-readiness">Open her readiness</a></div>
+
+        <div class="callout callout-warn" style="margin-top:10px">Chair 4 is double-booked at 2:00 PM — Marcus Webb overlaps Nadia Boulos. Overridden 9:12 AM by Karina · Operations Manager: "Glutathione push is 30 minutes and finishes before the Myers' cocktail hangs." <a href="security.html#/g-01-audit">See the log</a> · <a href="schedule-rules.html#/lr-01-rules">Chair overlap rule</a></div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Suggested by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">
+            Maya Reyes runs NAD+ in 3 h 20 on average, not 3 h. Today's drip is tracking 18 minutes past the booked end and Chair 1 turns over to Walter Hsu at 1:00 PM.
+          </div>
+          <div class="ai-meta">
+            <span><b>Sources</b> 4 past NAD+ runs · today's pump start</span>
+            <span><b>Model</b> duration-v1.3</span>
+            <span><b>Confidence</b> 0.81 · ± 14 min</span>
+            <span><b>Reviewer</b> Yazmin · Front desk</span>
+            <span><b>Limits</b> suggests time only — never lifts a block</span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Accepted — Chair 1 holds 20 more minutes and Walter Hsu keeps 1:00 PM. Saved with your name.', 'ok')">Hold Chair 1 for 20 minutes</button>
+            <a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day view</a>
+            <button class="btn btn-sm" onclick="HCOS.toast('Dismissed — the booked 3 h stands. Saved with your name.')">Keep the booked end time</button>
+          </div>
+        </div>
+
+        <div class="field-help" style="margin-top:8px">Select a Prerequisites chip to see what is missing and who resolves it. Visit status is set here; clinical clearance is not.</div>
       </div>
     </div>
   </section>
@@ -231,9 +276,14 @@
         <div class="afd-header-row" style="margin-bottom:8px">
           <div class="afd-header-info">
             <h2 class="page-title">Patient readiness</h2>
-            <p class="page-sub" style="margin-bottom:0">Missing items before today's visits — resolve them before the patient reaches the room</p>
+            <p class="page-sub" style="margin-bottom:0">What is still missing before today's visits, and who resolves it</p>
           </div>
           <button class="btn" data-activate="a-29-today-schedule">Back to today's schedule</button>
+        </div>
+
+        <div class="prov">
+          <span><strong>Clinical readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v2.4</span> · evaluated 7:00 AM · <a href="readiness.html#/i-01-readiness">engine</a></span>
+          <span><strong>Front desk items</strong> from the onboarding record · <a href="intake-onboarding.html">open</a></span>
         </div>
 
         <div class="card" style="margin-bottom:12px">
@@ -244,8 +294,8 @@
                   <th>Patient</th>
                   <th>Today's visit</th>
                   <th>Onboarding</th>
-                  <th>Missing items</th>
-                  <th>Readiness</th>
+                  <th>Front desk items</th>
+                  <th>Clinical readiness</th>
                 </tr>
               </thead>
               <tbody>
@@ -254,38 +304,48 @@
                   <td>3:00 PM · New patient consult</td>
                   <td>6 of 8 complete</td>
                   <td>
-                    <a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">Treatment consent</a>
-                    <a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">Financial responsibility</a>
+                    <a class="pill pill-warn afd-chip-link" href="intake-onboarding.html#/a-22-consents">Treatment consent</a>
+                    <a class="pill pill-warn afd-chip-link" href="intake-onboarding.html#/a-22-consents">Financial responsibility</a>
                   </td>
-                  <td><span class="pill pill-err">Action needed</span></td>
+                  <td><span class="pill pill-muted">Not assessed</span> <span class="clin-src">first visit</span></td>
                 </tr>
                 <tr>
                   <td><div class="afd-prow"><span class="avatar">SR</span><span class="afd-pname">Sofia Ramos</span></div></td>
                   <td>11:15 AM · Lab draw</td>
                   <td>8 of 8 complete</td>
-                  <td><a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">SPD document</a></td>
-                  <td><span class="pill pill-warn">Missing items</span></td>
+                  <td><a class="pill pill-warn afd-chip-link" href="intake-documents.html#/a-25-spd-upload">SPD document</a></td>
+                  <td><span class="pill pill-muted">Not on a program</span></td>
                 </tr>
                 <tr>
                   <td><div class="afd-prow"><span class="avatar">EP</span><span class="afd-pname">Elena Petrova</span></div></td>
                   <td>11:30 AM · Telehealth follow-up</td>
                   <td>8 of 8 complete</td>
-                  <td><a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">SPD document</a></td>
-                  <td><span class="pill pill-warn">Missing items</span></td>
+                  <td><a class="pill pill-warn afd-chip-link" href="intake-documents.html#/a-25-spd-upload">SPD document</a></td>
+                  <td><span class="pill pill-muted">Not on a program</span></td>
                 </tr>
                 <tr>
                   <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
                   <td>1:30 PM · Follow-up</td>
                   <td>8 of 8 complete</td>
-                  <td><a class="pill pill-warn afd-chip-link" href="intake-onboarding.html">Pre-visit questionnaire</a></td>
-                  <td><span class="pill pill-warn">Missing items</span></td>
+                  <td><a class="pill pill-warn afd-chip-link" href="clinical-questionnaires.html">Pre-visit questionnaire</a></td>
+                  <td><a class="pill pill-err afd-chip-link" href="readiness.html#/i-01-readiness">Physician review</a></td>
+                </tr>
+                <tr>
+                  <td><div class="afd-prow"><span class="avatar">NB</span><span class="afd-pname">Nadia Boulos</span></div></td>
+                  <td>2:00 PM · Myers' cocktail · Chair 4</td>
+                  <td>8 of 8 complete</td>
+                  <td><span style="color:var(--muted)">None</span></td>
+                  <td>
+                    <a class="pill pill-err afd-chip-link" href="readiness.html#/i-01-readiness">Physician review</a>
+                    <div class="clin-src" style="margin-top:4px">Blocked until Dr. Drannikov decides</div>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <div class="callout callout-ok" style="margin-bottom:20px">Everyone else on today's schedule is ready — 6 patients, nothing missing.</div>
+        <div class="callout callout-ok" style="margin-bottom:20px">Everyone else on today's schedule is ready — 7 patients, nothing missing.</div>
 
         <div class="afd-header-row">
           <span class="avatar lg">TA</span>
@@ -294,7 +354,8 @@
             <div class="afd-demo">New patient consult · today 3:00 PM · Dr. Drannikov · Cigna PPO</div>
           </div>
           <span class="pill pill-st st-scheduled">Scheduled</span>
-          <span class="pill pill-err">Action needed</span>
+          <span class="pill pill-err">2 consents unsigned</span>
+          <span class="pill pill-muted">Readiness not assessed</span>
         </div>
 
         <div class="grid-2">
@@ -334,8 +395,11 @@
                 <span class="check-label">Insurance card uploaded</span>
               </li>
             </ul>
+            <div class="prov">
+              <span><strong>From</strong> the onboarding record · started Jul 19 by Tom · <a href="intake-onboarding.html#/a-14-checklist">open</a></span>
+            </div>
             <div style="margin-top:12px">
-              <a class="btn btn-sm" href="intake-onboarding.html">Open onboarding record</a>
+              <a class="btn btn-sm" href="intake-onboarding.html#/a-14-checklist">Open onboarding record</a>
             </div>
           </div>
 
@@ -345,11 +409,42 @@
             <button class="btn afd-resolve-btn" onclick="HCOS.toast('Queued for the kiosk — the missing consents load first when Tom checks in.', 'ok')">Send to kiosk when he arrives</button>
             <button class="btn afd-resolve-btn" onclick="HCOS.toast('(949) 555-0176 — the call outcome logs to the intake timeline.')">Call Tom now</button>
             <button class="btn afd-resolve-btn" onclick="HCOS.toast('Handed off — Charlene walks Tom through the consents by phone.', 'ok')">Hand off to Charlene (Virtual)</button>
-            <button class="btn btn-ghost afd-resolve-btn" style="margin-bottom:0" onclick="HCOS.toast('Override recorded — the visit proceeds and unsigned consents stay flagged for Dr. Drannikov.', 'warn')">Override — proceed anyway</button>
+            <button class="btn afd-resolve-btn" style="margin-bottom:0" onclick="HCOS.toast('Sent to Dr. Drannikov with your note. The visit stays flagged until he decides.', 'warn')">Send to Dr. Drannikov to decide</button>
+
+            <div class="seg-divider">Who may do what</div>
+            <dl class="kv">
+              <dt>Front desk</dt><dd>Consents, documents, links, kiosk, visit status</dd>
+              <dt>Physician or extender</dt><dd>Clinical clearance, and any exception to it</dd>
+            </dl>
 
             <div class="seg-divider">Eligibility</div>
-            <div style="font-size:12.5px"><span class="pill pill-ok">Active</span> Cigna PPO <span class="net-badge net-oon">OON</span> · verified this morning</div>
-            <div class="field-help" style="margin-top:6px">SPD requested Jul 18 — the governing plan document has not arrived yet.</div>
+            <div style="font-size:12.5px"><span class="pill pill-ok">Active</span> Cigna PPO <span class="net-badge net-oon">OON</span> · self-funded · ERISA</div>
+            <div class="prov">
+              <span><strong>Snapshot</strong> Jul 21, 7:02 AM · <code>ELIG-4471</code> · earlier responses kept</span>
+              <span><a href="patients.html#/pt-02-profile">Coverage</a></span>
+            </div>
+            <div class="field-help">SPD requested Jul 18 — the governing plan document has not arrived yet.</div>
+          </div>
+        </div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Suggested by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">
+            Tom answers texts within minutes and arrives early. Sending the link now and queuing the same two consents to the kiosk usually clears both before a 3:00 PM visit.
+          </div>
+          <div class="ai-meta">
+            <span><b>Sources</b> onboarding record · 3 past reminder replies</span>
+            <span><b>Model</b> intake-route-v1.1</span>
+            <span><b>Confidence</b> 0.72</span>
+            <span><b>Reviewer</b> Haylee · Front desk</span>
+            <span><b>Rule</b> consents R-14, R-16 are deterministic — AI suggests the route only</span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Accepted — link sent and both consents queued to the kiosk. Saved with your name.', 'ok')">Send the link and queue the kiosk</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Dismissed — nothing was sent. Saved with your name.')">Not this time</button>
           </div>
         </div>
 
@@ -364,72 +459,189 @@
         <span class="frame-url">hcos.helixona.com/intake/front-desk/walk-in</span></div>
       <div class="frame-body">
         <h2 class="page-title">Walk-in registration</h2>
-        <p class="page-sub">Capture the basics now — the kiosk collects the rest in the lobby</p>
+        <p class="page-sub">Find them first — most walk-ins are already in HCOS</p>
 
-        <div class="grid-2">
-          <div class="card">
-            <div class="card-title">Patient</div>
-            <div class="field-row">
-              <div class="field">
-                <label class="field-label">First name</label>
-                <input class="field-input" type="text" value="Rosa">
+        <div class="prov">
+          <span><strong>From</strong> the person master · one person, one record · <a href="people.html#/pe-01-search">open</a></span>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Search before creating</div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Name</label>
+                  <input class="field-input" type="text" value="T. Alvarez">
+                </div>
+                <div class="field">
+                  <label class="field-label">Date of birth</label>
+                  <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+                </div>
               </div>
-              <div class="field">
-                <label class="field-label">Last name</label>
-                <input class="field-input" type="text" value="Delgado">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Mobile phone</label>
+                  <input class="field-input" type="tel" value="(949) 555-0176">
+                </div>
+                <div class="field">
+                  <label class="field-label">Email</label>
+                  <input class="field-input" type="text" placeholder="name@example.com">
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="HCOS.toast('Searched name, date of birth, phone and email across the person master.', 'ok')">Search the person master</button>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">1 probable match — at the desk compared with Tom Alvarez · P-004990</div>
+
+              <div class="match-row">
+                <div class="match-side"><dl class="kv"><dt>Name at the desk</dt><dd>T. Alvarez</dd></dl></div>
+                <div class="match-side"><dl class="kv"><dt>On file</dt><dd class="match-diff">Tom Alvarez</dd></dl></div>
+                <span class="match-score">0.87</span>
+              </div>
+              <div class="match-row">
+                <div class="match-side"><dl class="kv"><dt>Mobile</dt><dd>(949) •••-0176</dd></dl></div>
+                <div class="match-side"><dl class="kv"><dt>Mobile</dt><dd>(949) •••-0176</dd></dl></div>
+                <span class="match-score">1.00</span>
+              </div>
+              <div class="match-row">
+                <div class="match-side"><dl class="kv"><dt>Lifecycle</dt><dd>—</dd></dl></div>
+                <div class="match-side"><dl class="kv"><dt>Lifecycle</dt><dd>Scheduled since Jul 20</dd></dl></div>
+                <span class="match-score">—</span>
+              </div>
+              <div class="match-row">
+                <div class="match-side"><dl class="kv"><dt>Today</dt><dd>Walk-in, 11:44 AM</dd></dl></div>
+                <div class="match-side"><dl class="kv"><dt>Today</dt><dd>New patient consult 3:00 PM · Dr. Drannikov</dd></dl></div>
+                <span class="match-score">—</span>
+              </div>
+
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Suggested by HCOS</span>
+                  <span class="ai-state suggested">Suggestion</span>
+                </div>
+                <div class="ai-body">
+                  Same phone and the same booking made yesterday. A second record, T. Alvarez P-005610, was created at that booking and is waiting on the duplicate queue.
+                </div>
+                <div class="ai-meta">
+                  <span><b>Compared</b> name, date of birth, phone, address</span>
+                  <span><b>Model</b> match-v2.1</span>
+                  <span><b>Confidence</b> 0.93</span>
+                  <span><b>Decides</b> Front desk or PCC — merging is never automatic</span>
+                </div>
+                <div class="ai-actions">
+                  <a class="btn btn-sm" href="people.html#/pe-03-duplicates">Review both records</a>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+                <button class="btn btn-primary" onclick="HCOS.toast('Walk-in added to Tom Alvarez P-004990 — appointment A-7731 and an arrival event on the same record.', 'ok')">Use Tom Alvarez · P-004990</button>
+                <button class="btn" onclick="HCOS.toast('Marked as a different person with your name and reason. Create them below.')">Different person</button>
               </div>
             </div>
-            <div class="field-row">
-              <div class="field">
-                <label class="field-label">Date of birth</label>
-                <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+
+            <div class="card">
+              <div class="card-title">No match — create the person</div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">First name</label>
+                  <input class="field-input" type="text" placeholder="First name">
+                </div>
+                <div class="field">
+                  <label class="field-label">Last name</label>
+                  <input class="field-input" type="text" placeholder="Last name">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label">Date of birth</label>
+                  <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+                </div>
+                <div class="field">
+                  <label class="field-label">Mobile phone</label>
+                  <input class="field-input" type="tel" placeholder="(949) 555-0100">
+                </div>
               </div>
               <div class="field">
-                <label class="field-label">Mobile phone</label>
-                <input class="field-input" type="tel" value="(949) 555-0188">
+                <label class="field-label">Starting lifecycle status</label>
+                <select class="field-select">
+                  <option>Inquiry — they walked in and asked</option>
+                  <option selected>Scheduled — a same-day slot is booked</option>
+                </select>
               </div>
-            </div>
-            <div class="field" style="margin-bottom:0">
-              <label class="field-label">Reason for visit</label>
-              <textarea class="field-textarea">Migraine today — asking about a same-day Myers' cocktail.</textarea>
+              <button class="btn btn-primary" onclick="HCOS.toast('Person created once, then promoted with the walk-in appointment. Same record from here on.', 'ok')">Create person and register the walk-in</button>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-title">Insurance — optional now</div>
-            <div class="field">
-              <label class="field-label">Payer</label>
-              <select class="field-select">
-                <option selected>Capture later</option>
-                <option>Anthem Blue Cross</option>
-                <option>Blue Shield of CA</option>
-                <option>UnitedHealthcare</option>
-                <option>Cigna</option>
-                <option>Self-pay</option>
-              </select>
-            </div>
-            <div class="field">
-              <label class="field-label">Member ID</label>
-              <input class="field-input" type="text" placeholder="Can wait until check-in">
-            </div>
-
-            <div class="seg-divider">Send onboarding to</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <button class="filter-chip active">Kiosk (in clinic)</button>
-              <button class="filter-chip">SMS link</button>
-              <button class="filter-chip">Both</button>
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Lifecycle · Tom Alvarez</div>
+              <div class="lifecycle">
+                <span class="lifecycle-step past">Inquiry</span>
+                <span class="lifecycle-step past">Lead</span>
+                <span class="lifecycle-step current">Scheduled</span>
+                <span class="lifecycle-step">Onboarding</span>
+                <span class="lifecycle-step">Patient</span>
+                <span class="lifecycle-step">Inactive</span>
+              </div>
+              <div class="prov">
+                <span><strong>Derived</strong> from the events on the person record · <a href="people.html#/pe-02-person">history</a></span>
+              </div>
+              <div class="field-help">Registering a walk-in appends an arrival event. It never starts a second identity.</div>
             </div>
 
-            <div class="callout" style="margin-top:16px">On save, a one-time QR code prints at the front desk — Rosa scans it at the kiosk and finishes onboarding in the lobby.</div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">This walk-in</div>
+              <div class="field">
+                <label class="field-label">Reason for visit</label>
+                <textarea class="field-textarea">Headache since Sunday — asking whether the consult can start earlier.</textarea>
+              </div>
+              <div class="seg-divider">Send onboarding to</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="filter-chip active">Kiosk (in clinic)</button>
+                <button class="filter-chip">SMS link</button>
+                <button class="filter-chip">Both</button>
+              </div>
+              <div class="prov">
+                <span><strong>Booked</strong> through the scheduling service · one appointment ID · <a href="schedule.html#/l-03-book">slots</a></span>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <a class="btn" href="schedule.html#/l-03-book">Book a same-day slot</a>
+                <button class="btn" onclick="HCOS.toast('One-time QR code printing at the front desk — it opens the two unsigned consents at the kiosk.', 'ok')">Print the kiosk QR code</button>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Coverage</div>
+              <dl class="kv">
+                <dt>Payer</dt><dd>Cigna PPO <span class="net-badge net-oon">OON</span></dd>
+                <dt>Governance</dt><dd>Self-funded · ERISA</dd>
+                <dt>Eligibility</dt><dd>Snapshot Jul 21, 7:02 AM</dd>
+              </dl>
+              <div class="prov">
+                <span><strong>One active coverage</strong> · cards are captured at the kiosk, never re-keyed here · <a href="patients.html#/pt-02-profile">open</a></span>
+              </div>
+              <a class="btn btn-sm" href="intake-kiosk.html#/a-34-kiosk-id">Capture the card at the kiosk</a>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Who may do this</div>
+              <dl class="kv">
+                <dt>Create</dt><dd>Front desk · PCC</dd>
+                <dt>Promote lifecycle</dt><dd>Front desk · PCC</dd>
+                <dt>Merge duplicates</dt><dd>Front desk · PCC, with a reason</dd>
+                <dt>Clinical status</dt><dd>Physician or extender only</dd>
+                <dt>System</dt><dd>Proposes candidates only</dd>
+              </dl>
+            </div>
           </div>
         </div>
 
         <div style="display:flex;gap:10px;margin-top:16px;align-items:center;flex-wrap:wrap">
-          <button class="btn btn-primary btn-lg" onclick="HCOS.toast('Walk-in registered — the QR code is printing at the front desk.', 'ok')">Register and print QR code</button>
-          <a class="btn" href="schedule.html#/l-03-book">Book same-day slot</a>
           <a class="btn btn-ghost" href="intake-kiosk.html">Open kiosk check-in</a>
+          <a class="btn btn-ghost" href="people.html#/pe-03-duplicates">Duplicate queue</a>
         </div>
-        <div class="field-help" style="margin-top:8px">Five fields and the walk-in exists — everything else can wait.</div>
       </div>
     </div>
   </section>
@@ -446,6 +658,11 @@
           <h2 class="page-title" style="margin-bottom:6px">Priya Natarajan is checked in</h2>
           <p class="page-sub" style="margin-bottom:10px">11:22 AM · 8 minutes early · Myers' cocktail at 11:30 · Chair 3</p>
           <span class="pill pill-st st-arrived">Arrived</span>
+        </div>
+
+        <div class="prov">
+          <span><strong>Appointment</strong> <code>A-7719</code> · arrival event appended by Yazmin · <a href="schedule.html#/l-04-appt">open</a></span>
+          <span><strong>Readiness</strong> Flare recovery · cleared for Myers by Dr. Drannikov Jul 20 · <a href="readiness.html#/i-01-readiness">engine</a></span>
         </div>
 
         <div class="grid-3">

@@ -16,23 +16,9 @@
   .pt-name { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
   .pt-demo { font-size: 12px; color: var(--muted); margin-top: 2px; }
   .pt-payer { font-size: 15px; font-weight: 600; color: var(--hx-navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .pt-meter { height: 6px; background: var(--hx-light); border-radius: 3px; overflow: hidden; margin-top: 6px; }
-  .pt-meter-fill { height: 100%; background: var(--hx-accent); border-radius: 3px; }
+  .pt-id { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); }
   .pf-sel { width: auto; min-width: 150px; font-size: 12.5px; padding: 6px 10px; }
   .pf-count { font-size: 12px; color: var(--muted); margin-left: auto; align-self: center; white-space: nowrap; }
-  .pt-paths { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .pt-path {
-    text-align: left; background: #fff; cursor: pointer; font-family: inherit;
-    border: 2px solid var(--line-soft); border-radius: 12px; padding: 16px;
-    display: flex; flex-direction: column; gap: 6px;
-  }
-  .pt-path:hover { border-color: var(--muted); }
-  .pt-path.on { border-color: var(--ink); background: var(--hx-light); }
-  .pt-path-name { font-size: 14px; font-weight: 700; color: var(--hx-navy); }
-  .pt-path-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .pt-path-meta { font-size: 10.5px; color: var(--muted); font-family: ui-monospace, monospace; margin-top: auto; padding-top: 6px; }
-  @media (max-width: 900px) { .pt-paths { grid-template-columns: 1fr 1fr; } }
-  .pt-create-card { max-width: 480px; margin: 0 auto; }
   .pt-team-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
   .pt-team-role { font-size: 11px; color: var(--muted); }
 </style>
@@ -49,6 +35,9 @@
       <div class="frame-body">
         <h2 class="page-title">Patients</h2>
         <p class="page-sub">Tuesday, July 21 · coverage and readiness at a glance</p>
+        <div class="prov" style="margin-bottom:12px">
+          <span>Everyone here is a person at the <strong>Patient</strong> stage. Identity, lifecycle and duplicates live in the <a href="people.html#/pe-01-search">person master</a>.</span>
+        </div>
 
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
@@ -78,11 +67,17 @@
             <option value="On hold">On hold</option>
             <option value="Discharged">Discharged</option>
           </select>
-          <select class="field-select pf-sel" id="pf-type" onchange="pfApply()">
-            <option value="all">Any type</option>
-            <option>Complex chronic</option>
-            <option>Chronic</option>
-            <option>Wellness</option>
+          <select class="field-select pf-sel" id="pf-path" onchange="pfApply()">
+            <option value="all">Any care pathway</option>
+            <option>Complex Chronic Care</option>
+            <option>Health Optimization</option>
+            <option>Recovery</option>
+            <option>Vitality</option>
+          </select>
+          <select class="field-select pf-sel" id="pf-access" onchange="pfApply()">
+            <option value="all">Any access level</option>
+            <option>Comprehensive</option>
+            <option>Collaborative</option>
             <option>Self-directed</option>
           </select>
           <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()">
@@ -112,8 +107,8 @@
             <thead>
               <tr>
                 <th>Patient</th>
-                <th>Type</th>
-                <th>Membership</th>
+                <th>Care pathway</th>
+                <th>Access level</th>
                 <th>Coverage</th>
                 <th>Plan governance</th>
                 <th>Next appointment</th>
@@ -122,100 +117,100 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="row-click" data-type="Complex chronic" data-memb="Restore" data-net="oon" data-attn="oop" data-name="Maya Reyes" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Complex Chronic Care" data-access="Comprehensive" data-memb="Restore" data-net="oon" data-attn="oop" data-name="Maya Reyes" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">MR</span><span class="pt-pname">Maya Reyes</span></div></td>
-                <td>Complex chronic</td>
-                <td><span class="pill pill-navy">Restore</span></td>
+                <td>Complex Chronic Care</td>
+                <td><span class="pill pill-navy">Comprehensive</span><div class="field-help">Restore</div></td>
                 <td>UnitedHealthcare PPO <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-navy">ERISA</span></td>
                 <td>Today · 1:00 PM · NAD+ infusion</td>
                 <td><span class="pill pill-ok">Standard</span></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Chronic" data-memb="Wellness" data-net="inn" data-attn="" data-name="Daniel Okafor" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Health Optimization" data-access="Collaborative" data-memb="Wellness" data-net="inn" data-attn="" data-name="Daniel Okafor" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">DO</span><span class="pt-pname">Daniel Okafor</span></div></td>
-                <td>Chronic</td>
-                <td><span class="pill">Wellness</span></td>
+                <td>Health Optimization</td>
+                <td><span class="pill">Collaborative</span><div class="field-help">Wellness</div></td>
                 <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Thu Jul 23 · 9:30 AM · IV vitamin C 25 g</td>
                 <td><span class="pill pill-ok">Standard</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Complex chronic" data-memb="Restore" data-net="oon" data-attn="" data-name="Priya Natarajan" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Recovery" data-access="Comprehensive" data-memb="Restore" data-net="oon" data-attn="" data-name="Priya Natarajan" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">PN</span><span class="pt-pname">Priya Natarajan</span></div></td>
-                <td>Complex chronic</td>
-                <td><span class="pill pill-navy">Restore</span></td>
+                <td>Recovery</td>
+                <td><span class="pill pill-navy">Comprehensive</span><div class="field-help">Restore</div></td>
                 <td>Blue Shield of CA PPO <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Mon Jul 27 · 11:00 AM · Myers' cocktail</td>
                 <td><span class="pill pill-navy">Gentle</span></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Tom Alvarez" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Vitality" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Tom Alvarez" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">Tom Alvarez</span></div></td>
-                <td>Self-directed</td>
-                <td><span class="pill pill-muted">Pay as you go</span></td>
+                <td>Vitality</td>
+                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
                 <td>Cigna PPO <span class="net-badge net-oon">OON</span></td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td>Wed Jul 22 · 2:00 PM · Glutathione push</td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Wellness" data-memb="Wellness" data-net="self" data-attn="" data-name="Grace Lindqvist" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Vitality" data-access="Collaborative" data-memb="Wellness" data-net="self" data-attn="" data-name="Grace Lindqvist" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">GL</span><span class="pt-pname">Grace Lindqvist</span></div></td>
-                <td>Wellness</td>
-                <td><span class="pill">Wellness</span></td>
+                <td>Vitality</td>
+                <td><span class="pill">Collaborative</span><div class="field-help">Wellness</div></td>
                 <td>Self-pay <span class="net-badge net-self">SELF</span></td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td>Fri Jul 24 · 10:00 AM · Follow-up</td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Chronic" data-memb="Pay as you go" data-net="inn" data-attn="" data-name="Marcus Webb" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Health Optimization" data-access="Self-directed" data-memb="Pay as you go" data-net="inn" data-attn="" data-name="Marcus Webb" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">MW</span><span class="pt-pname">Marcus Webb</span></div></td>
-                <td>Chronic</td>
-                <td><span class="pill pill-muted">Pay as you go</span></td>
+                <td>Health Optimization</td>
+                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
                 <td>Anthem Blue Cross <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Today · 3:30 PM · New patient consult</td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Wellness" data-memb="Pay as you go" data-net="oon" data-attn="spd readiness" data-name="Elena Petrova" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Health Optimization" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd readiness" data-name="Elena Petrova" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">EP</span><span class="pt-pname">Elena Petrova</span></div></td>
-                <td>Wellness</td>
-                <td><span class="pill pill-muted">Pay as you go</span></td>
+                <td>Health Optimization</td>
+                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
                 <td>UnitedHealthcare <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Today · 2:00 PM · Telehealth follow-up</td>
                 <td><span class="pill pill-warn">Pause</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Sofia Ramos" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Vitality" data-access="Self-directed" data-memb="Pay as you go" data-net="oon" data-attn="spd" data-name="Sofia Ramos" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">SR</span><span class="pt-pname">Sofia Ramos</span></div></td>
-                <td>Self-directed</td>
-                <td><span class="pill pill-muted">Pay as you go</span></td>
+                <td>Vitality</td>
+                <td><span class="pill pill-muted">Self-directed</span><div class="field-help">Pay as you go</div></td>
                 <td>Blue Shield of CA <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Today · 11:15 AM · Lab draw</td>
                 <td><span style="color:var(--muted)">—</span></td>
                 <td><span class="pill pill-warn">SPD requested</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Complex chronic" data-memb="Longevity" data-net="oon" data-attn="" data-name="Walter Hsu" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Health Optimization" data-access="Comprehensive" data-memb="Longevity" data-net="oon" data-attn="" data-name="Walter Hsu" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">WH</span><span class="pt-pname">Walter Hsu</span></div></td>
-                <td>Complex chronic</td>
-                <td><span class="pill pill-navy">Longevity</span></td>
+                <td>Health Optimization</td>
+                <td><span class="pill pill-navy">Comprehensive</span><div class="field-help">Longevity</div></td>
                 <td>Cigna <span class="net-badge net-oon">OON</span></td>
                 <td><span class="pill pill-navy">ERISA</span></td>
                 <td>Thu Jul 23 · 1:00 PM · NAD+ infusion</td>
                 <td><span class="pill pill-ok">Standard</span></td>
                 <td><span class="pill pill-ok">SPD on file ✓</span> <span class="pill pill-muted">Consent ✓</span></td>
               </tr>
-              <tr class="row-click" data-type="Chronic" data-memb="Wellness" data-net="inn" data-attn="readiness" data-name="Nadia Boulos" data-activate="pt-02-profile">
+              <tr class="row-click" data-path="Complex Chronic Care" data-access="Collaborative" data-memb="Wellness" data-net="inn" data-attn="readiness" data-name="Nadia Boulos" data-activate="pt-02-profile">
                 <td><div class="pt-prow"><span class="avatar">NB</span><span class="pt-pname">Nadia Boulos</span></div></td>
-                <td>Chronic</td>
-                <td><span class="pill">Wellness</span></td>
+                <td>Complex Chronic Care</td>
+                <td><span class="pill">Collaborative</span><div class="field-help">Wellness</div></td>
                 <td>Anthem <span class="net-badge net-inn">INN</span></td>
                 <td><span class="pill pill-muted">Commercial</span></td>
                 <td>Tue Jul 28 · 9:00 AM · Follow-up</td>
@@ -263,7 +258,7 @@
                 <dt>Deductible</dt>
                 <dd>
                   $1,850 met of $3,000
-                  <div class="pt-meter" style="max-width:220px"><div class="pt-meter-fill" style="width:62%"></div></div>
+                  <div class="meter" style="max-width:220px;margin-top:4px"><div class="meter-fill" style="width:62%"></div></div>
                 </dd>
                 <dt>Coinsurance</dt>
                 <dd>40% after deductible</dd>
@@ -320,7 +315,7 @@
               <div class="card-title">Active protocol</div>
               <div style="font-size:13.5px;font-weight:600;color:var(--hx-navy)">NAD+ series — detox program</div>
               <div class="field-help" style="margin-top:4px">Session 4 of 8 · next infusion today 1:00 PM</div>
-              <div class="pt-meter" style="max-width:260px;margin-top:8px"><div class="pt-meter-fill" style="width:50%"></div></div>
+              <div class="meter" style="max-width:260px;margin-top:8px"><div class="meter-fill" style="width:50%"></div></div>
               <div style="margin-top:12px">
                 Readiness: <span class="pill pill-ok">Standard</span>
                 <span class="field-help" style="display:inline;margin-left:6px">cleared for standard pacing · reviewed Jul 20</span>
@@ -330,6 +325,19 @@
           </div>
 
           <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Care pathway</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Complex Chronic Care <span class="ver-chip">v4</span> <span class="appr approved">Approved</span></div>
+              <div class="prov"><span><strong>From</strong> plan of care <span class="ver-chip">v4</span> · approved by Dr. Drannikov Jun 9 · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span></div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Access level</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Comprehensive</div>
+              <div class="prov"><span><strong>From</strong> membership Restore · <a href="pricing-memberships.html#/pm-01-tiers">tiers</a></span></div>
+              <div class="field-help" style="margin-top:6px">How Maya engages and pays. It never sets the clinical pathway, and the pathway never sets it.</div>
+            </div>
+
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Consent flags</div>
               <ul class="check-list">
@@ -400,143 +408,177 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="pt-03-create" data-title="New patient">
+  <section class="screen" id="pt-03-create" data-title="Promote to patient">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/patients/new</span></div>
+        <span class="frame-url">hcos.helixona.com/patients/promote</span></div>
       <div class="frame-body">
 
-        <h2 class="page-title">New patient</h2>
-        <p class="page-sub">One door in. What the patient came for decides the rest.</p>
-
-        <div class="seg-divider">Why are they here?</div>
-        <div class="pt-paths">
-
-          <button class="pt-path" onclick="ptPick(this,'complex')">
-            <span class="pt-path-name">Complex chronic</span>
-            <span class="pt-path-desc">Several systems involved, a long road. Full history, labs and a provider plan before anything is booked.</span>
-            <span class="pt-path-meta">Consult 90 min · full intake · readiness required</span>
-          </button>
-
-          <button class="pt-path" onclick="ptPick(this,'chronic')">
-            <span class="pt-path-name">Chronic</span>
-            <span class="pt-path-desc">One condition to work on over months. Standard intake and a treatment series.</span>
-            <span class="pt-path-meta">Consult 90 min · full intake</span>
-          </button>
-
-          <button class="pt-path" onclick="ptPick(this,'wellness')">
-            <span class="pt-path-name">Wellness</span>
-            <span class="pt-path-desc">Feeling well, staying well. Lighter intake, membership does most of the work.</span>
-            <span class="pt-path-meta">Short consult · brief intake</span>
-          </button>
-
-          <button class="pt-path" onclick="ptPick(this,'self')">
-            <span class="pt-path-name">Self-directed</span>
-            <span class="pt-path-desc">Knows exactly what they want — EBOO and nothing else. No plan, no series, just the treatment and its safety checks.</span>
-            <span class="pt-path-meta">No consult · safety screen only</span>
-          </button>
-
+        <div class="app-header">
+          <div>
+            <div class="page-title">Promote to patient</div>
+            <div class="page-sub">Find the person first. Promotion moves the same record forward — it never makes a second one.</div>
+          </div>
+          <div class="app-user">
+            <a class="btn" href="people.html#/pe-01-search">Person master</a>
+          </div>
         </div>
 
-        <div id="pt-path-panel" style="display:none">
+        <div class="grid-sidebar">
+          <div>
 
-          <div class="callout" id="pt-path-note" style="margin-top:18px"></div>
-
-          <div class="grid-sidebar" style="margin-top:16px">
-            <div>
-              <div class="card" style="margin-bottom:16px">
-                <div class="card-title">Who they are</div>
-                <div class="field-row">
-                  <div class="field"><label class="field-label">First name</label><input class="field-input" placeholder="First name"></div>
-                  <div class="field"><label class="field-label">Last name</label><input class="field-input" placeholder="Last name"></div>
-                </div>
-                <div class="field-row">
-                  <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
-                  <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
-                </div>
-                <div class="field"><label class="field-label">Email</label><input class="field-input" placeholder="name@example.com"></div>
-                <div class="field" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
-                  <input type="checkbox" id="pt-consent-text" checked style="margin:0">
-                  <label for="pt-consent-text">Okay to text — reminders and scheduling only</label>
-                </div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">1 · Find the person</div>
+              <div class="field-row">
+                <div class="field"><label class="field-label">Name</label><input class="field-input" value="Tom Alvarez"></div>
+                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
+                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+                <button class="btn btn-primary" onclick="HCOS.toast('Searched the person master by name, date of birth and phone.', 'ok')">Search people</button>
+                <a class="btn" href="people.html#/pe-01-search">No match — create the person</a>
               </div>
 
-              <div class="card" style="margin-bottom:16px">
-                <div class="card-title">How they are paying</div>
-                <div class="field">
-                  <label class="field-label">Choose one</label>
-                  <div class="filters" style="margin:0;background:transparent;border:none;padding:0">
-                    <button class="filter-chip active" onclick="ptPay(this,'ins')">Insurance</button>
-                    <button class="filter-chip" onclick="ptPay(this,'cash')">Pay as you go</button>
-                    <button class="filter-chip" onclick="ptPay(this,'member')">Membership</button>
-                  </div>
-                </div>
-
-                <div id="pt-pay-ins">
-                  <div class="field-row">
-                    <div class="field"><label class="field-label">Payer</label>
-                      <select class="field-select">
-                        <option>Anthem Blue Cross · in-network</option>
-                        <option selected>UnitedHealthcare · out-of-network</option>
-                        <option>Blue Shield of CA · out-of-network</option>
-                        <option>Cigna · out-of-network</option>
-                      </select>
-                    </div>
-                    <div class="field"><label class="field-label">Member ID</label><input class="field-input" placeholder="From the card"></div>
-                  </div>
-                  <div class="callout callout-warn" style="margin:0">
-                    Out-of-network. Benefits have to be verified before the first infusion, and we ask for the
-                    plan's governing document (SPD or EOC) — the front desk requests it with the magic link.
-                  </div>
-                </div>
-
-                <div id="pt-pay-cash" style="display:none">
-                  <div class="callout" style="margin:0">
-                    Cash prices come straight from the <a href="pricing.html">price list</a>. No verification,
-                    no authorization, no claim — the visit is quoted and paid at the desk.
-                  </div>
-                </div>
-
-                <div id="pt-pay-member" style="display:none">
-                  <div class="field">
-                    <label class="field-label">Tier</label>
-                    <select class="field-select">
-                      <option>Wellness · $149 a month · 2 sessions</option>
-                      <option selected>Restore · $349 a month · 5 sessions</option>
-                      <option>Longevity · $749 a month · 10 sessions</option>
-                    </select>
-                  </div>
-                  <div class="callout" style="margin:0">
-                    Member pricing applies from today, and they book ahead of non-members.
-                    <a href="pricing-memberships.html">Compare the tiers</a>.
-                  </div>
-                </div>
+              <div class="tbl-wrap">
+                <table class="tbl">
+                  <thead><tr><th>Person</th><th>Lifecycle</th><th>Came from</th><th></th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">Tom Alvarez</span><span class="pt-id">P-004990</span></div></td>
+                      <td><span class="lifecycle-step current" style="border-radius:12px">Onboarding</span></td>
+                      <td>Inquiry form · Jul 6</td>
+                      <td><span class="pill pill-navy">Selected</span></td>
+                    </tr>
+                    <tr>
+                      <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">T. Alvarez</span><span class="pt-id">P-005610</span></div></td>
+                      <td><span class="lifecycle-step current" style="border-radius:12px">Inquiry</span></td>
+                      <td>Booking · Jul 20</td>
+                      <td><a class="btn btn-sm" href="people.html#/pe-03-duplicates">Compare</a></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <div class="card">
-                <div class="card-title" id="pt-intake-title">What intake will ask</div>
-                <ul class="check-list" id="pt-intake-list"></ul>
-                <div class="field-help" style="margin-top:6px">The patient answers these on their phone through the magic link — nobody re-keys them.</div>
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Suggested by HCOS</span>
+                  <span class="ai-state suggested">Suggestion</span>
+                </div>
+                <div class="ai-body">P-005610 may be the same person as P-004990 — same date of birth and phone, the name was typed short when the visit was booked.</div>
+                <div class="ai-meta">
+                  <span><b>Compared</b> name, date of birth, phone</span>
+                  <span><b>Model</b> match-v2.1</span>
+                  <span><b>Confidence</b> 0.91</span>
+                  <span><b>Decides</b> Haylee · front desk</span>
+                </div>
+                <div class="ai-actions">
+                  <a class="btn btn-sm btn-primary" href="people.html#/pe-03-duplicates">Review the match</a>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Not a match</button>
+                </div>
               </div>
+              <div class="prov"><span><strong>From</strong> person master <code>P-004990</code> · merging is never automatic · <a href="people.html#/pe-02-person">open the person</a></span></div>
             </div>
 
-            <div>
-              <div class="card" style="margin-bottom:16px">
-                <div class="card-title">What happens next</div>
-                <ul class="check-list" id="pt-next-list"></ul>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">2 · Move the lifecycle forward</div>
+              <div class="lifecycle" style="margin-bottom:6px">
+                <span class="lifecycle-step past">Inquiry</span>
+                <span class="lifecycle-step past">Lead</span>
+                <span class="lifecycle-step past">Scheduled</span>
+                <span class="lifecycle-step current">Onboarding</span>
+                <span class="lifecycle-step">Patient</span>
+                <span class="lifecycle-step">Inactive</span>
               </div>
-              <div class="card">
-                <div class="card-title">Setup</div>
-                <div class="field-help" style="margin-bottom:8px">These four paths and the forms behind them are configured in intake.</div>
-                <a class="btn btn-sm" href="intake-admin.html#/a-46-form-builder">Edit the forms</a>
-                <a class="btn btn-sm" href="intake.html">Triage console</a>
+              <div class="prov"><span>Status is <strong>derived</strong> from the events on the person record. Promoting appends one more event — it never rewrites the ones before it.</span></div>
+
+              <ul class="check-list" style="margin-top:12px">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Identity confirmed against the person master</span><span class="check-meta">Haylee · today</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Consents on file — treatment, financial policy, communication</span><span class="check-meta">Jul 12</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Coverage recorded — Cigna PPO, out-of-network</span><span class="check-meta"><a href="#pt-02-profile" data-activate="pt-02-profile">benefits</a></span></li>
+                <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan's governing document (SPD) requested Jul 14</span><span class="check-meta">does not block</span></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">EBOO medical clearance not signed</span><span class="check-meta">blocks EBOO only</span></li>
+              </ul>
+
+              <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn btn-primary btn-lg" onclick="HCOS.toast('Tom Alvarez is at Patient. Same record P-004990 — the promotion is on his history.', 'ok')">Promote to patient</button>
+                <button class="btn btn-lg" onclick="HCOS.toast('Intake link sent by text and email. It resumes where he left off.', 'ok')">Send the intake link</button>
               </div>
+              <div class="field-help" style="margin-top:8px">Signed in as Haylee · front desk. Front desk and PCC promote, and the promotion is written to the <a href="security.html#/g-01-audit">audit store</a> with your name.</div>
             </div>
+
+            <div class="card">
+              <div class="card-title">3 · Pathway and access level</div>
+              <div class="field">
+                <label class="field-label" for="pt-pathway">Care pathway — clinical</label>
+                <select class="field-select" id="pt-pathway">
+                  <option>Complex Chronic Care</option>
+                  <option>Health Optimization</option>
+                  <option>Recovery</option>
+                  <option selected>Vitality</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="pt-pathway-why">Why this pathway</label>
+                <input class="field-input" id="pt-pathway-why" value="Came in for EBOO only; no chronic condition reported at intake.">
+              </div>
+              <div style="margin-bottom:10px"><span class="ver-chip">v1 draft</span> <span class="appr pending">Pending approval</span></div>
+              <button class="btn" onclick="HCOS.toast('Proposed Vitality with your rationale. It stays pending until Dr. Drannikov or Brooke approves it.', 'ok')">Propose this pathway</button>
+              <div class="prov"><span><strong>Approved on</strong> the plan of care · physician or extender only · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span></div>
+
+              <div class="seg-divider">Access level</div>
+              <div class="field">
+                <label class="field-label">How he engages and pays</label>
+                <div class="filters" style="margin:0;background:transparent;border:none;padding:0">
+                  <button class="filter-chip">Comprehensive</button>
+                  <button class="filter-chip">Collaborative</button>
+                  <button class="filter-chip active">Self-directed</button>
+                </div>
+              </div>
+              <div class="prov"><span><strong>From</strong> membership Pay as you go · <a href="pricing-memberships.html#/pm-01-tiers">tiers</a></span></div>
+              <div class="field-help" style="margin-top:6px">Set by front desk or PCC. It never sets the clinical pathway, and the pathway never sets it.</div>
+            </div>
+
           </div>
 
-          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
-            <button class="btn btn-primary btn-lg" onclick="HCOS.toast('Patient created and the intake link is on its way.', 'ok'); setTimeout(function(){ window.location.href = 'schedule.html#/l-03-book'; }, 900)">Create patient and book</button>
-            <button class="btn btn-lg" onclick="HCOS.toast('Patient created. Intake link sent — book when they answer.', 'ok')">Create and send intake only</button>
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">EBOO safety checks</div>
+              <div class="callout callout-err" style="margin-top:0">EBOO cannot be booked: the medical clearance for this cycle is not signed. Ask Dr. Drannikov or Brooke to review and sign it, then book.</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Treatment-specific consent</span><span class="check-meta">Jul 12</span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">G6PD result on file</span><span class="check-meta"><a href="labs.html#/c-01-orders">result</a></span></li>
+                <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Anticoagulants and implanted devices reviewed</span><span class="check-meta">Charlene</span></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Medical clearance signed for this cycle</span><span class="check-meta">missing</span></li>
+              </ul>
+              <div class="prov"><span><strong>Reads</strong> the one allergy list, the medication list and readiness <code>RA-1180</code> · clearance is signed as order <code>O-2314</code></span></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+                <a class="btn btn-sm btn-primary" href="clinical.html#/b-09-orders">Ask for clearance</a>
+                <button class="btn btn-sm" onclick="HCOS.toast('EBOO stays blocked until the clearance is signed. This block cannot be overridden.', 'warn')">Book EBOO</button>
+              </div>
+              <div class="field-help" style="margin-top:6px">Hard block — no role overrides it. The glutathione push on Wed Jul 22 is not affected.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Who may do what</div>
+              <dl class="kv">
+                <dt>Create the person</dt><dd>Front desk · PCC, in the <a href="people.html#/pe-01-search">person master</a></dd>
+                <dt>Promote lifecycle</dt><dd>Front desk · PCC</dd>
+                <dt>Access level</dt><dd>Front desk · PCC, from the membership</dd>
+                <dt>Care pathway</dt><dd>Proposed by staff · approved by physician or extender</dd>
+                <dt>EBOO clearance</dt><dd>Physician or extender only</dd>
+                <dt>System</dt><dd>Proposes duplicate candidates · never merges</dd>
+              </dl>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Where each piece is written</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Person, lifecycle and duplicates — HCOS</span><span class="check-meta">live</span></li>
+                <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Coverage and eligibility — eCW writes, HCOS reads</span><span class="check-meta">until cutover</span></li>
+                <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Orders and results — eCW writes, HCOS reads</span><span class="check-meta">until cutover</span></li>
+              </ul>
+              <div class="prov"><span><strong>Synced</strong> from eCW nightly · last run today 5:10 AM</span></div>
+            </div>
           </div>
         </div>
 
@@ -563,7 +605,8 @@
   function pfApply() {
     var q = document.getElementById('pf-q').value.trim().toLowerCase();
     var status = document.getElementById('pf-status').value;
-    var type = document.getElementById('pf-type').value;
+    var path = document.getElementById('pf-path').value;
+    var access = document.getElementById('pf-access').value;
     var memb = document.getElementById('pf-memb').value;
     var net = document.getElementById('pf-net').value;
     var attn = document.getElementById('pf-attn').value;
@@ -572,7 +615,8 @@
     rows.forEach(function (r) {
       var ok = true;
       if (q && r.getAttribute('data-name').toLowerCase().indexOf(q) === -1) ok = false;
-      if (type !== 'all' && r.getAttribute('data-type') !== type) ok = false;
+      if (path !== 'all' && r.getAttribute('data-path') !== path) ok = false;
+      if (access !== 'all' && r.getAttribute('data-access') !== access) ok = false;
       if (memb !== 'all' && r.getAttribute('data-memb') !== memb) ok = false;
       if (net !== 'all' && r.getAttribute('data-net') !== net) ok = false;
       if (attn !== 'all' && (r.getAttribute('data-attn') || '').indexOf(attn) === -1) ok = false;
@@ -586,52 +630,6 @@
     else c.textContent = 'Showing ' + shown + ' of ' + rows.length + ' patients';
   }
   document.addEventListener('DOMContentLoaded', pfApply);
-
-  var PT_PATHS = {
-    complex: {
-      note: '<strong>Complex chronic.</strong> Nothing gets booked before the provider has the picture — full history, current labs, and a readiness read.',
-      intake: [['done','Full history and timeline'],['done','Conditions, symptoms and allergies'],['done','Medications and supplements, with doses'],['done','Prior treatment history'],['done','Insurance card and SPD upload'],['done','All consents']],
-      next: [['active','Book a 90-minute consult with Dr. Drannikov'],['pending','Readiness engine reads the intake answers'],['pending','Provider builds the care plan'],['pending','Treatment series scheduled from the plan']]
-    },
-    chronic: {
-      note: '<strong>Chronic.</strong> One condition, worked over months. Standard intake, then a consult and a series.',
-      intake: [['done','History and timeline'],['done','Conditions, symptoms and allergies'],['done','Medications and supplements'],['done','Insurance card upload'],['done','All consents']],
-      next: [['active','Book a 90-minute consult'],['pending','Provider sets the plan and pacing'],['pending','Series scheduled']]
-    },
-    wellness: {
-      note: '<strong>Wellness.</strong> Feeling well and staying that way. Lighter intake — enough to treat safely.',
-      intake: [['done','Brief health questionnaire'],['done','Allergies and current medications'],['done','Goals in their own words'],['done','Consents']],
-      next: [['active','Book a short consult or start a membership'],['pending','Treatments booked as they like']]
-    },
-    self: {
-      note: '<strong>Self-directed.</strong> They know what they want — EBOO and nothing else. No plan and no series, but the safety checks still run.',
-      intake: [['done','Allergies and current medications'],['done','Conditions that rule the treatment out'],['done','Treatment-specific consent'],['pending','No history, no goals, no plan']],
-      next: [['active','Safety screen for the treatment they asked for'],['pending','Book the treatment'],['pending','Offer a membership if they come back']]
-    }
-  };
-  function ptRender(list, items) {
-    list.innerHTML = items.map(function (it) {
-      return '<li class="check-item"><span class="check-icon ' + it[0] + '">' +
-        (it[0] === 'done' ? '✓' : it[0] === 'active' ? '→' : '') +
-        '</span><span class="check-label">' + it[1] + '</span></li>';
-    }).join('');
-  }
-  function ptPick(btn, key) {
-    document.querySelectorAll('.pt-path').forEach(function (b) { b.classList.remove('on'); });
-    btn.classList.add('on');
-    var cfg = PT_PATHS[key];
-    document.getElementById('pt-path-panel').style.display = 'block';
-    document.getElementById('pt-path-note').innerHTML = cfg.note;
-    ptRender(document.getElementById('pt-intake-list'), cfg.intake);
-    ptRender(document.getElementById('pt-next-list'), cfg.next);
-  }
-  function ptPay(btn, kind) {
-    btn.parentNode.querySelectorAll('.filter-chip').forEach(function (c) { c.classList.remove('active'); });
-    btn.classList.add('active');
-    document.getElementById('pt-pay-ins').style.display = kind === 'ins' ? 'block' : 'none';
-    document.getElementById('pt-pay-cash').style.display = kind === 'cash' ? 'block' : 'none';
-    document.getElementById('pt-pay-member').style.display = kind === 'member' ? 'block' : 'none';
-  }
 </script>
 </body>
 </html>

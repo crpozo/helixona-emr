@@ -12,28 +12,32 @@
   .h-patient-strip { display: flex; align-items: center; gap: 14px; }
   .h-patient-name { font-size: 15px; font-weight: 600; color: var(--hx-navy); }
   .h-patient-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .h-strip-actions { margin-left: auto; display: flex; gap: 8px; }
-  .h-refill-item { border: 1px solid var(--line-soft); border-radius: 8px; padding: 12px; }
-  .h-refill-item + .h-refill-item { margin-top: 10px; }
-  .h-refill-name { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); }
-  .h-refill-meta { font-size: 11.5px; color: var(--muted); margin: 3px 0 10px; }
+  .h-strip-actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .h-clin-name { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); }
+  .h-clin-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .h-code { font-family: ui-monospace, monospace; font-size: 11px; }
+  .h-card-head { padding: 14px 16px 0; }
+  .h-card-foot { padding: 12px 16px; border-top: 1px solid var(--line-soft); display: flex; gap: 8px; flex-wrap: wrap; }
+  .h-row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 </style>
 </head>
 <body data-page="pharmacy" data-page-title="Pharmacy &amp; medication" data-shell="app">
 
 <div class="screens">
 
-  <!-- ============================================================ -->
+  <!-- ============================================================
+       H-01 · The medication and supplement list, read here
+       ============================================================ -->
   <section class="screen" id="h-01-meds" data-title="Medications &amp; supplements">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/pharmacy/maya-reyes</span></div>
       <div class="frame-body">
 
-        <div class="page-title">Pharmacy &amp; medication</div>
-        <div class="page-sub">Tuesday, July 21 · prescriptions, the supplement protocol, and the refill queue</div>
+        <div class="page-title">Medications and supplements</div>
+        <div class="page-sub">Tuesday, July 21 · one list per patient — pharmacy reads it and records what it does to it</div>
 
-        <div class="card h-patient-strip" style="margin-bottom:16px">
+        <div class="card h-patient-strip" style="margin-bottom:10px">
           <span class="avatar lg">MR</span>
           <div>
             <div class="h-patient-name"><a href="patients.html#/pt-02-profile" style="color:inherit;text-decoration:none">Maya Reyes</a></div>
@@ -41,8 +45,13 @@
           </div>
           <div class="h-strip-actions">
             <a class="btn btn-ghost btn-sm" href="patients.html#/pt-02-profile">Open full chart</a>
-            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('New prescription drafted — it dispatches when the provider signs.', 'ok')">Write new prescription</button>
+            <a class="btn btn-primary btn-sm" href="clinical.html#/b-09-orders">Write a prescription order</a>
           </div>
+        </div>
+
+        <div class="prov" style="margin-bottom:16px">
+          <span><strong>Reads</strong> the medication and supplement list · reconciled Jul 14 by Charlene, approved by Dr. Drannikov · <a href="clinical-chart.html#/b-06-med-rec">open reconciliation</a></span>
+          <span><strong>Changes</strong> by a signed order or the next reconciliation — not from this page</span>
         </div>
 
         <div class="grid-sidebar">
@@ -50,83 +59,305 @@
           <!-- MAIN column -->
           <div>
             <div class="card" style="padding:0;overflow:hidden">
-              <div class="card-title" style="padding:14px 16px 0">Active medications</div>
-              <div style="font-size:11.5px;color:var(--muted);padding:2px 16px 10px">Prescriptions only — the supplement protocol is below.</div>
+              <div class="card-title h-card-head">Prescriptions</div>
+              <div class="h-clin-meta" style="padding:2px 16px 10px">Two entries of the same list. Supplements are further down.</div>
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
                     <tr>
                       <th>Medication</th>
                       <th>Directions</th>
-                      <th>Prescriber</th>
-                      <th>Status</th>
+                      <th>Trust and source</th>
+                      <th>Pharmacy</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Metformin 500 mg tablet</strong></td>
+                      <td>
+                        <div class="h-clin-name">Metformin 500 mg tablet</div>
+                        <div class="h-clin-meta">Entry <span class="h-code">M-2104</span> · started Feb 2026</div>
+                      </td>
                       <td>One tablet twice daily, with meals</td>
-                      <td>Dr. Drannikov</td>
-                      <td><span class="pill pill-ok">Active · 2 refills left</span></td>
+                      <td>
+                        <span class="clin-state verified">Prescribed</span>
+                        <div class="clin-src" style="margin-top:4px">Order <span class="h-code">O-3120</span> <span class="ver-chip">v2</span> · Dr. Drannikov</div>
+                      </td>
+                      <td>
+                        <div class="h-clin-meta" style="margin:0">CVS Irvine #4421 · filled Jul 19 · 2 refills left</div>
+                      </td>
+                      <td><a class="btn btn-sm" href="clinical.html#/b-09-orders">Change by order</a></td>
                     </tr>
                     <tr>
-                      <td><strong>Low-dose naltrexone 4.5 mg capsule</strong> <span style="font-size:11px;color:var(--muted)">(compounded)</span></td>
+                      <td>
+                        <div class="h-clin-name">Low-dose naltrexone 4.5 mg capsule</div>
+                        <div class="h-clin-meta">Entry <span class="h-code">M-2210</span> · compounded</div>
+                      </td>
                       <td>One capsule nightly, at bedtime</td>
-                      <td>Brooke</td>
-                      <td><span class="pill pill-warn">Refill requested · 0 left</span></td>
+                      <td>
+                        <span class="clin-state verified">Prescribed</span>
+                        <div class="clin-src" style="margin-top:4px">Order <span class="h-code">O-3187</span> <span class="ver-chip">v1</span> · Brooke</div>
+                      </td>
+                      <td>
+                        <div class="h-clin-meta" style="margin:0">Empower Pharmacy · 0 refills left</div>
+                        <div style="margin-top:4px"><span class="appr pending">Renewal waiting for signature</span></div>
+                      </td>
+                      <td><a class="btn btn-sm btn-primary" href="#h-02-fills" data-activate="h-02-fills">Open the renewal</a></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <div class="prov" style="margin:0 16px 14px">
+                <span><strong>Source of truth</strong> eCW writes prescriptions and fills until the medication domain activates in HCOS · HCOS reads them and appends its refill and dispense events</span>
+              </div>
             </div>
 
-            <div class="callout callout-warn" style="margin-top:16px"><strong>Interaction check — Berberine + metformin.</strong> Both lower blood glucose; the combined effect can overshoot. Monitor glucose while the detox stack runs. Flagged for Dr. Drannikov — the supplement row below carries the same flag.</div>
+            <div class="ai-block">
+              <div class="ai-head">
+                <span class="ai-badge">Detected by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Berberine and metformin both lower blood glucose. Together the effect can overshoot while the detox stack runs — glucose monitoring is not on the plan.
+              </div>
+              <div class="ai-meta">
+                <span><b>Compared</b> list entries <span class="h-code">M-2104</span> and <span class="h-code">S-0918</span> · order <span class="h-code">O-3120</span> v2 · plan of care <span class="ver-chip">v4</span></span>
+                <span><b>Model</b> interaction-check-v1.4</span>
+                <span><b>Confidence</b> 0.88 — supplement brand and actual dose are patient-stated</span>
+                <span><b>Reviewer</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Flag accepted by Dr. Drannikov — it stays on both entries until it is resolved. Nothing on the list changed.', 'ok')">Accept the flag</button>
+                <a class="btn btn-sm" href="clinical-chart.html#/b-06-med-rec">Review in reconciliation</a>
+                <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Dismissed with your name and the reason. Both entries and their sources are unchanged.')">Not a concern</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">A flag only — monitoring becomes real when the plan of care is approved at the next version.</div>
+            </div>
 
             <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
-              <div class="card-title" style="padding:14px 16px 0">Supplement protocol — NAD+ support stack</div>
-              <div style="font-size:11.5px;color:var(--muted);padding:2px 16px 10px">Each row is tagged to the protocol it serves.</div>
+              <div class="card-title h-card-head">Supplement protocol — NAD+ support stack</div>
+              <div class="prov" style="margin:6px 16px 12px">
+                <span><strong>From</strong> plan of care <span class="ver-chip">v4</span> · approved by Dr. Drannikov Jul 14 · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span>
+                <span>Reported items stay reported until a provider approves them in <a href="clinical-chart.html#/b-06-med-rec">reconciliation</a></span>
+              </div>
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
                     <tr>
                       <th>Supplement</th>
-                      <th>Dose</th>
-                      <th>Timing</th>
+                      <th>Dose and timing</th>
+                      <th>Trust and source</th>
                       <th>Protocol</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Berberine</strong> <span class="pill pill-warn" style="margin-left:6px">Interaction flag</span></td>
-                      <td>500 mg</td>
-                      <td>With lunch and dinner</td>
+                      <td>
+                        <div class="h-clin-name">Berberine <span class="pill pill-warn" style="margin-left:4px">Interaction flag</span></div>
+                        <div class="h-clin-meta">Entry <span class="h-code">S-0918</span></div>
+                      </td>
+                      <td>500 mg · with lunch and dinner</td>
+                      <td>
+                        <span class="clin-state verified">Verified</span>
+                        <div class="clin-src" style="margin-top:4px">Plan of care <span class="ver-chip">v4</span> · Dr. Drannikov Jul 14</div>
+                      </td>
                       <td><span class="pill pill-muted">Detox program · glucose support</span></td>
                     </tr>
                     <tr>
-                      <td><strong>Liposomal glutathione</strong></td>
-                      <td>500 mg</td>
-                      <td>Morning, empty stomach</td>
+                      <td>
+                        <div class="h-clin-name">Liposomal glutathione</div>
+                        <div class="h-clin-meta">Entry <span class="h-code">S-0919</span></div>
+                      </td>
+                      <td>500 mg · morning, empty stomach</td>
+                      <td>
+                        <span class="clin-state verified">Verified</span>
+                        <div class="clin-src" style="margin-top:4px">Plan of care <span class="ver-chip">v4</span> · Dr. Drannikov Jul 14</div>
+                      </td>
                       <td><span class="pill pill-muted">Detox program</span></td>
                     </tr>
                     <tr>
-                      <td><strong>Magnesium glycinate</strong></td>
-                      <td>400 mg</td>
-                      <td>Evening, with food</td>
+                      <td>
+                        <div class="h-clin-name">Magnesium glycinate</div>
+                        <div class="h-clin-meta">Entry <span class="h-code">S-0904</span></div>
+                      </td>
+                      <td>400 mg · evening, with food</td>
+                      <td>
+                        <span class="clin-state reconciled">Reconciled</span>
+                        <div class="clin-src" style="margin-top:4px">Maya's own · checked with her by Charlene Jul 14</div>
+                      </td>
                       <td><span class="pill pill-muted">NAD+ series support</span></td>
                     </tr>
                     <tr>
-                      <td><strong>Omega-3 (EPA/DHA)</strong></td>
-                      <td>2 g</td>
-                      <td>With breakfast</td>
-                      <td><span class="pill pill-muted">Foundation</span></td>
+                      <td>
+                        <div class="h-clin-name">Omega-3 (EPA/DHA)</div>
+                        <div class="h-clin-meta">Entry <span class="h-code">S-0931</span></div>
+                      </td>
+                      <td>2 g · with breakfast</td>
+                      <td>
+                        <span class="clin-state reported">Reported</span>
+                        <div class="clin-src" style="margin-top:4px">Maya · <a href="intake-onboarding.html#/a-20-supplements">onboarding supplements</a> Jul 14</div>
+                      </td>
+                      <td><span class="pill pill-muted">Not on the protocol</span></td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div style="padding:12px 16px;border-top:1px solid var(--line-soft);display:flex;gap:8px">
-                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Protocol opened for adjustment — changes apply to every supplement tagged to it.', 'ok')">Adjust protocol</button>
-                <button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Supplement list sent to Maya’s patient journey view.', 'ok')">Share with patient</button>
+              <div class="h-card-foot">
+                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Suggested to Dr. Drannikov — pending approval. The protocol stays at v4 until he approves the next version.', 'ok')">Suggest a protocol change</button>
+                <a class="btn btn-ghost btn-sm" href="journey-careplan.html#/j-staff-poc">Open plan of care v4</a>
+                <a class="btn btn-ghost btn-sm" href="journey-plan.html#/j-plan-supplements">See what Maya sees</a>
               </div>
+            </div>
+          </div>
+
+          <!-- SIDE column -->
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Where each entry comes from</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Onboarding medications</span><span class="check-meta"><a href="intake-onboarding.html#/a-19-medications">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Onboarding supplements</span><span class="check-meta"><a href="intake-onboarding.html#/a-20-supplements">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Signed orders</span><span class="check-meta"><a href="clinical.html#/b-09-orders">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Plan of care v4</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Pharmacy fills and refills</span><span class="check-meta"><a href="#h-02-fills" data-activate="h-02-fills">open</a></span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Each one is appended to the same entry. None of them starts a second list.</div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">The same list appears in</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Med reconciliation</span><span class="check-meta"><a href="clinical-chart.html#/b-06-med-rec">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Her plan — supplements</span><span class="check-meta"><a href="journey-plan.html#/j-plan-supplements">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Pre-infusion check</span><span class="check-meta"><a href="clinical-infusion.html#/b-14-preinfusion">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Sign and lock</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Who may do what</div>
+              <dl class="kv">
+                <dt>Prepare a request</dt><dd>MA · pharmacy staff</dd>
+                <dt>Sign a prescription or renewal</dt><dd>Physician · extender</dd>
+                <dt>Change a dose</dt><dd>Only by signing a new order version</dd>
+                <dt>Approve a reported supplement</dt><dd>Physician · extender, in reconciliation</dd>
+                <dt>System</dt><dd>Compares and flags · never changes the list</dd>
+              </dl>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       H-02 · Prescriptions, renewals and fills — events on the list
+       ============================================================ -->
+  <section class="screen" id="h-02-fills" data-title="Prescriptions &amp; fills">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/pharmacy/fills</span></div>
+      <div class="frame-body">
+
+        <div class="page-title">Prescriptions and fills</div>
+        <div class="page-sub">Tuesday, July 21 · requests, signatures and dispenses, each one against its list entry and order version</div>
+
+        <div class="grid-sidebar">
+
+          <!-- MAIN column -->
+          <div>
+            <div class="seg-divider" style="margin-top:0">Renewal requests (2)</div>
+
+            <div class="card">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <div class="h-clin-name">Maya Reyes — low-dose naltrexone 4.5 mg</div>
+                <span class="appr pending">Waiting for signature</span>
+              </div>
+              <div class="h-clin-meta">Requested by Maya in her journey view Sunday · prepared by Wesley Monday 5:02 PM · 0 refills left · last visit Jun 30</div>
+              <div class="prov">
+                <span><strong>Renews</strong> order <span class="h-code">O-3187</span> <span class="ver-chip">v1</span> · prescriber Brooke · entry <span class="h-code">M-2210</span></span>
+                <span>Signing writes <span class="ver-chip">v2</span> — v1 stays in the history</span>
+              </div>
+              <div class="h-row-actions">
+                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Renewal signed by Dr. Drannikov as order O-3187 v2 — sent to Empower Pharmacy. The list entry keeps v1 in its history.', 'ok')">Sign the renewal</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Sent to Brooke, the prescriber on record. It stays pending until she signs it.')">Send to Brooke to sign</button>
+                <a class="btn btn-ghost btn-sm" href="#h-01-meds" data-activate="h-01-meds">Open the list entry</a>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:12px">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <div class="h-clin-name">Grace Lindqvist — levothyroxine 50 mcg</div>
+                <span class="appr draft">Held — visit required</span>
+              </div>
+              <div class="h-clin-meta">Requested Monday · TSH 6.8 on the Jul 21 panel · Dr. Drannikov wants a visit before renewing</div>
+              <div class="prov">
+                <span><strong>Renews</strong> order <span class="h-code">O-2905</span> <span class="ver-chip">v3</span> · prescriber Dr. Drannikov · entry <span class="h-code">M-1188</span></span>
+                <span><strong>Held on</strong> result <span class="h-code">R-7741</span> · <a href="labs.html#/c-01-orders">open the result</a></span>
+              </div>
+              <div class="h-row-actions">
+                <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Booking request sent to Grace — a follow-up before renewal, with the reason explained.', 'ok')">Ask Grace to book</button>
+                <a class="btn btn-sm" href="schedule.html#/l-03-book">Book the visit now</a>
+                <a class="btn btn-ghost btn-sm" href="clinical.html#/b-09-orders">Open the order</a>
+              </div>
+            </div>
+
+            <div class="seg-divider">Pharmacy events</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>When</th><th>Event</th><th>Entry and order</th><th>Who</th><th>Written by</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Jul 20 · 5:02 PM</td>
+                    <td>Renewal prepared, waiting for a signature</td>
+                    <td><span class="h-code">M-2210</span> · <span class="h-code">O-3187</span> <span class="ver-chip">v1</span></td>
+                    <td>Wesley · MA</td>
+                    <td><span class="pill pill-muted">HCOS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Jul 20 · 4:10 PM</td>
+                    <td>Refill requested</td>
+                    <td><span class="h-code">M-2210</span></td>
+                    <td>Maya Reyes · patient</td>
+                    <td><span class="pill pill-muted">HCOS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Jul 19</td>
+                    <td>Dispensed — 60 tablets, 30 days</td>
+                    <td><span class="h-code">M-2104</span> · <span class="h-code">O-3120</span> <span class="ver-chip">v2</span></td>
+                    <td>CVS Irvine #4421</td>
+                    <td><span class="pill pill-muted">eCW sync</span></td>
+                  </tr>
+                  <tr>
+                    <td>Jul 14</td>
+                    <td>Supplement protocol approved</td>
+                    <td>Plan of care <span class="ver-chip">v4</span></td>
+                    <td>Dr. Drannikov · Provider</td>
+                    <td><span class="pill pill-muted">HCOS</span></td>
+                  </tr>
+                  <tr>
+                    <td>Jul 6</td>
+                    <td>Prescription sent to the compounding pharmacy</td>
+                    <td><span class="h-code">M-2210</span> · <span class="h-code">O-3187</span> <span class="ver-chip">v1</span></td>
+                    <td>Brooke · Physician Associate</td>
+                    <td><span class="pill pill-muted">eCW sync</span></td>
+                  </tr>
+                  <tr>
+                    <td>Jun 12</td>
+                    <td>Dose raised — 500 mg twice daily</td>
+                    <td><span class="h-code">M-2104</span> · <span class="h-code">O-3120</span> <span class="ver-chip superseded">v1</span> → <span class="ver-chip">v2</span></td>
+                    <td>Dr. Drannikov · Provider</td>
+                    <td><span class="pill pill-muted">eCW sync</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="prov">
+              <span><strong>Every line here is one entry in the audit store</strong> · <a href="security.html#/g-01-audit">open it</a> — pharmacy keeps no separate log</span>
             </div>
           </div>
 
@@ -156,21 +387,24 @@
             </div>
 
             <div class="card" style="margin-top:16px">
-              <div class="card-title">Refill queue</div>
-              <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Requests from patients, answered without a phone-tag loop.</div>
-              <div class="h-refill-item">
-                <div class="h-refill-name">Maya Reyes — Low-dose naltrexone 4.5 mg</div>
-                <div class="h-refill-meta">Requested Sunday · 0 refills left · last visit June 30 · prescriber Brooke</div>
-                <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Refill approved — queued for the compounding pharmacy when Brooke signs.', 'ok')">Approve refill</button>
-              </div>
-              <div class="h-refill-item">
-                <div class="h-refill-name">Grace Lindqvist — Levothyroxine 50 mcg</div>
-                <div class="h-refill-meta">Requested Monday · TSH high on July 21 panel · Dr. Drannikov wants a visit before renewing</div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-accent btn-sm" onclick="HCOS.toast('Booking request sent to Grace — a follow-up before renewal, with the reason explained.', 'ok')">Ask the patient to book</button>
-                  <a class="btn btn-ghost btn-sm" href="schedule.html#/l-03-book">Book the visit now</a>
-                </div>
-              </div>
+              <div class="card-title">Pharmacies on file</div>
+              <dl class="kv">
+                <dt>Retail</dt><dd>CVS Irvine #4421</dd>
+                <dt>Compounding</dt><dd>Empower Pharmacy</dd>
+                <dt>Mail order</dt><dd>None on file</dd>
+              </dl>
+              <div class="field-help" style="margin-top:8px">Kept on the person record — confirmed with the patient at check-in.</div>
+              <a class="btn btn-sm" style="margin-top:10px" href="people.html#/pe-02-person">Open the person record</a>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Who signs what</div>
+              <dl class="kv">
+                <dt>Renewal</dt><dd>Prescriber on record, or physician · extender</dd>
+                <dt>New prescription</dt><dd>Physician · extender, as an order</dd>
+                <dt>Hold a renewal</dt><dd>Physician · extender, with a reason</dd>
+                <dt>System</dt><dd>Prepares and routes · never signs</dd>
+              </dl>
             </div>
           </div>
 

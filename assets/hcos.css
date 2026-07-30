@@ -893,9 +893,60 @@ button { font-family: inherit; }
 .cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
 .cal-appt.conflict { outline: 2px dashed #000; outline-offset: -2px; }
 
-/* Appointment TYPE — second visual channel, still grayscale.
-   Status = the fill ramp (light→dark). Type = left-edge pattern + initial marker.
-   In the real product these patterns become the treatment colour codes. */
+/* ==========================================================================
+   TREATMENT COLOUR CODES — the ONE exception to the grayscale rule
+   (Carlos, 2026-07-28). Colour identifies the TREATMENT and nothing else.
+   Status keeps the grayscale fill ramp, so both channels still read at once:
+   shade = where the visit is, colour + edge pattern = what the treatment is.
+   ========================================================================== */
+:root {
+  --tx-nad:     #5B4B8A;  /* NAD+ */
+  --tx-ivc:     #B26B12;  /* IV vitamin C */
+  --tx-myers:   #1F6F6B;  /* Myers' and pushes */
+  --tx-eboo:    #9B3A3A;  /* EBOO */
+  --tx-consult: #2E5C8A;  /* consults and follow-ups */
+  --tx-tele:    #3E7A4E;  /* telehealth */
+  --tx-lab:     #6B5B3A;  /* lab draw */
+}
+
+/* The block's left edge carries the treatment colour, the fill stays status */
+.cal-appt.t-nad     { border-left-color: var(--tx-nad); }
+.cal-appt.t-ivc     { border-left-color: var(--tx-ivc); }
+.cal-appt.t-myers   { border-left-color: var(--tx-myers); }
+.cal-appt.t-eboo    { border-left-color: var(--tx-eboo); }
+.cal-appt.t-consult { border-left-color: var(--tx-consult); }
+.cal-appt.t-lab     { border-left-color: var(--tx-lab); }
+.cal-appt.t-tele    { border-left-color: var(--tx-tele); }
+.week-appt.t-nad    { border-left-color: var(--tx-nad); }
+.week-appt.t-ivc    { border-left-color: var(--tx-ivc); }
+.week-appt.t-myers  { border-left-color: var(--tx-myers); }
+.week-appt.t-eboo   { border-left-color: var(--tx-eboo); }
+
+/* The initial chip is the colour key, wherever it appears */
+.t-nad     > .cal-appt-type > .type-mark,
+.type-mark.tm-nad     { color: var(--tx-nad);     border-color: var(--tx-nad); }
+.t-ivc     > .cal-appt-type > .type-mark,
+.type-mark.tm-ivc     { color: var(--tx-ivc);     border-color: var(--tx-ivc); }
+.t-myers   > .cal-appt-type > .type-mark,
+.type-mark.tm-myers   { color: var(--tx-myers);   border-color: var(--tx-myers); }
+.t-eboo    > .cal-appt-type > .type-mark,
+.type-mark.tm-eboo    { color: var(--tx-eboo);    border-color: var(--tx-eboo); }
+.t-consult > .cal-appt-type > .type-mark,
+.type-mark.tm-consult { color: var(--tx-consult); border-color: var(--tx-consult); }
+.t-tele    > .cal-appt-type > .type-mark,
+.type-mark.tm-tele    { color: var(--tx-tele);    border-color: var(--tx-tele); }
+.type-mark.tm-lab     { color: var(--tx-lab);     border-color: var(--tx-lab); }
+.type-mark.tm-gsh     { color: var(--tx-myers);   border-color: var(--tx-myers); }
+
+/* Legend swatches carry the same colour */
+.cal-legend-swatch.sw-nad     { border-left-color: var(--tx-nad) !important; }
+.cal-legend-swatch.sw-ivc     { border-left-color: var(--tx-ivc) !important; }
+.cal-legend-swatch.sw-myers   { border-left-color: var(--tx-myers) !important; }
+.cal-legend-swatch.sw-eboo    { border-left-color: var(--tx-eboo) !important; }
+.cal-legend-swatch.sw-consult { border-left-color: var(--tx-consult) !important; }
+
+/* Appointment TYPE — the second channel: left-edge pattern + initial marker.
+   Pattern stays so the board still reads when printed or seen colour-blind. */
 .cal-appt .type-mark, .week-appt .type-mark {
   display: inline-block;
   font-family: ui-monospace, monospace;

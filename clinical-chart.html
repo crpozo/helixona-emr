@@ -156,21 +156,26 @@
             <span class="avatar lg">PN</span>
             <div>
               <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
-              <div class="app-logo-sub">Problem list · source of truth for assessments and claim diagnoses</div>
+              <div class="app-logo-sub">Problem list · MRN 30418 · one longitudinal list, read everywhere</div>
             </div>
           </div>
           <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
         </div>
 
         <h2 class="page-title">Problem list</h2>
-        <p class="page-sub">Every active problem flows into the assessment of each note and onto the diagnosis lines of each claim.</p>
+        <p class="page-sub">One list that follows her across encounters. Notes, claims and readiness read it here — none of them keeps a copy.</p>
+
+        <div class="prov">
+          <span><strong>Written in HCOS</strong> since Jul 1 2026 · eCW receives a summary copy · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
+        </div>
 
         <div class="filters">
           <button class="filter-chip active">Active (6)</button>
+          <button class="filter-chip">Patient-reported (2)</button>
           <button class="filter-chip">Resolved (2)</button>
           <button class="filter-chip">All</button>
           <input class="search-input" type="search" placeholder="Search ICD-10 or problem name">
-          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Problem added to the active list — it now flows into the assessment and the claim.', 'ok')">Add problem</button>
+          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Problem added as active by Dr. Drannikov. Notes and claims read it from here.', 'ok')">Add problem</button>
         </div>
 
         <div class="tbl-wrap">
@@ -183,58 +188,127 @@
                 <td>
                   <div class="b-clin-name">Post-acute sequelae of COVID-19</div>
                   <div class="b-clin-meta">Onset 2024-08 · linked: fatigue, brain fog, orthostatic intolerance · working diagnosis</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Dr. Drannikov · encounter ENC-2026-0418 · May 22 2026</span></div>
                 </td>
                 <td><span class="pill pill-muted">U09.9</span></td>
                 <td><span class="pill pill-warn">Chronic · Active</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.')">Change status</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Brain fog and cognitive complaints</div>
                   <div class="b-clin-meta">Onset 2024-09 · worse mornings · linked to PASC</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Dr. Drannikov · encounter ENC-2026-0418 · May 22 2026</span></div>
                 </td>
                 <td><span class="pill pill-muted">R41.840</span></td>
                 <td><span class="pill pill-warn">Active</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.')">Change status</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Generalized fatigue</div>
                   <div class="b-clin-meta">Chronic · worse after exertion · post-exertional malaise characteristics</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Reported at onboarding Mar 2026, confirmed by Dr. Drannikov Mar 18</span></div>
                 </td>
                 <td><span class="pill pill-muted">R53.83</span></td>
                 <td><span class="pill pill-warn">Chronic · Active</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.')">Change status</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Hashimoto's thyroiditis</div>
                   <div class="b-clin-meta">Diagnosed 2021 · on levothyroxine · TSH 3.8 (suboptimal for functional target)</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Outside records 2021 · confirmed by Dr. Drannikov Mar 18 2026</span></div>
                 </td>
                 <td><span class="pill pill-muted">E06.3</span></td>
                 <td><span class="pill pill-warn">Chronic · Active</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.')">Change status</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Vitamin D deficiency</div>
                   <div class="b-clin-meta">Confirmed lab 2026-04-08 · 18 ng/mL · target &gt; 50</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Result <code>L-8841</code> · accepted by Dr. Drannikov Apr 9 2026</span></div>
                 </td>
                 <td><span class="pill pill-muted">E55.9</span></td>
                 <td><span class="pill pill-err">New</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.')">Change status</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Postural orthostatic tachycardia syndrome (suspected)</div>
                   <div class="b-clin-meta">Based on history of orthostatic HR increase · workup pending</div>
+                  <div class="b-clin-meta"><span class="clin-state reconciled">Reconciled</span> <span class="clin-src">Entered by Dr. Drannikov · stays suspected until the tilt-table result</span></div>
                 </td>
                 <td><span class="pill pill-muted">G90.A</span></td>
                 <td><span class="pill pill-muted">Suspected</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. The previous status stays in this problem\'s history.')">Change status</button></td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="seg-divider">Patient-reported — on the list, not a diagnosis</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead>
+              <tr><th>What she told us</th><th>Trust</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Histamine intolerance</div>
+                  <div class="b-clin-meta">"Flushing and a headache within twenty minutes of aged cheese or red wine" — kept in her words</div>
+                </td>
+                <td>
+                  <span class="clin-state reported">Reported</span>
+                  <div class="clin-src" style="margin-top:4px">Onboarding · conditions · Jul 14 2026</div>
+                </td>
+                <td style="white-space:nowrap">
+                  <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Confirmed as an active problem by Dr. Drannikov. Her original words stay attached to it.', 'ok')">Confirm as a problem</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Kept as reported history. It stays visible and is not a diagnosis.')">Keep as reported</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="b-clin-name">Mold exposure in a previous apartment</div>
+                  <div class="b-clin-meta">"2019 to 2021, visible mould in the bathroom" — offered as a possible trigger</div>
+                </td>
+                <td>
+                  <span class="clin-state reported">Reported</span>
+                  <div class="clin-src" style="margin-top:4px">Fatigue questionnaire <code>Q-1180</code> · Jul 18 2026</div>
+                </td>
+                <td style="white-space:nowrap">
+                  <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Confirmed as an active problem by Dr. Drannikov. Her original words stay attached to it.', 'ok')">Confirm as a problem</button>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Kept as reported history. It stays visible and is not a diagnosis.')">Keep as reported</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prov">
+          <span><strong>From</strong> <a href="intake-onboarding.html#/a-16-conditions">onboarding conditions</a> and <a href="clinical-questionnaires.html#/b-30-quest-results">questionnaire <code>Q-1180</code></a> — stored once, never re-typed into the chart</span>
+        </div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Suggested by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">
+            The Jul 18 questionnaire scores orthostatic symptoms higher than the Mar intake. POTS is on the list as suspected and the tilt-table order is still open.
+          </div>
+          <div class="ai-meta">
+            <span><b>Read</b> questionnaire <code>Q-1180</code> · problem list · open orders</span>
+            <span><b>Model</b> chart-compare-v1.3</span>
+            <span><b>Confidence</b> 0.72 — the two forms word the symptom differently</span>
+            <span><b>Reviewer</b> Dr. Drannikov</span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to today\'s assessment draft with the questionnaire linked. Nothing on the problem list changed.', 'ok')">Add to the assessment draft</button>
+            <a class="btn btn-sm" href="clinical-questionnaires.html#/b-30-quest-results">Open the questionnaire</a>
+            <button class="btn btn-sm" onclick="HCOS.toast('Dismissed with your name and the reason. The questionnaire is unchanged.')">Not useful</button>
+          </div>
         </div>
 
         <div class="seg-divider">Resolved</div>
@@ -245,29 +319,45 @@
                 <td>
                   <div class="b-clin-name">Acute COVID-19 infection</div>
                   <div class="b-clin-meta">Aug 2024 · resolved · now flagged as the PASC trigger</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Resolved by Dr. Drannikov Mar 18 2026 · kept for context</span></div>
                 </td>
                 <td><span class="pill pill-muted">U07.1</span></td>
                 <td><span class="pill pill-muted">Resolved</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. Resolved problems stay on the list and off the claim.')">Change status</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Infectious mononucleosis</div>
                   <div class="b-clin-meta">2012 · resolved · historical, may be relevant to the current presentation</div>
+                  <div class="b-clin-meta"><span class="clin-state verified">Verified</span> <span class="clin-src">Outside records · confirmed by Dr. Drannikov Mar 18 2026</span></div>
                 </td>
                 <td><span class="pill pill-muted">B27.9</span></td>
                 <td><span class="pill pill-muted">Resolved</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this problem — changes save straight to the chart.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Status changed by Dr. Drannikov. Resolved problems stay on the list and off the claim.')">Change status</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout" style="margin-top:18px">
-          Each active problem flows into the assessment of every note and onto the diagnosis lines of every claim. Resolved problems are kept for context but excluded from billing.
-          <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
-            <a class="btn btn-sm" href="clinical.html#/b-03-soap">Open the SOAP note</a>
-            <a class="btn btn-sm" href="billing.html#/d-01-worklist">See the claim worklist</a>
+        <div class="grid-2" style="margin-top:18px">
+          <div class="card">
+            <div class="card-title">Who may change a problem</div>
+            <dl class="kv">
+              <dt>Add, confirm, resolve</dt><dd>Physician · extender</dd>
+              <dt>Prepare and suggest</dt><dd>MA · nurse · PCC</dd>
+              <dt>Patient report</dt><dd>Kept in her words, never confirmed on its own</dd>
+              <dt>System</dt><dd>Compares and flags · never diagnoses</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <div class="card-title">Read from this list</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Assessment in every note</span><span class="check-meta"><a href="clinical.html#/b-08-assessment">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Diagnosis lines on every claim</span><span class="check-meta"><a href="billing.html#/d-01-worklist">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Order safety checks</span><span class="check-meta"><a href="#b-10-iv-order" data-activate="b-10-iv-order">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness inputs</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
+            </ul>
+            <div class="field-help" style="margin-top:8px">Resolved problems stay for context and stay off the claim.</div>
           </div>
         </div>
 
@@ -289,72 +379,117 @@
             <span class="avatar lg">PN</span>
             <div>
               <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
-              <div class="app-logo-sub">Medication reconciliation · intake vs. chart vs. pharmacy on file</div>
+              <div class="app-logo-sub">Medication and supplement list · one list, reconciled at every encounter</div>
             </div>
           </div>
           <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
         </div>
 
         <h2 class="page-title">Medication reconciliation</h2>
-        <p class="page-sub">Required every encounter — 30 seconds when nothing has changed.</p>
+        <p class="page-sub">One list for medications and supplements. Reconciling changes what we trust about each entry — it does not start a second list.</p>
 
         <div class="b-status-bar">
-          <div>Last reconciled Apr 8, 2026 by Charlene (MA) · <span class="pill pill-warn">2 differences detected</span></div>
-          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reconciliation confirmed — the chart, intake, and pharmacy now match.', 'ok')">Confirm reconciliation</button>
+          <div>Prepared by Charlene (MA) today 9:12 AM · <span class="appr pending">Pending approval</span> · last approved Apr 8 2026 by Dr. Drannikov</div>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reconciliation approved by Dr. Drannikov — the list is current as of today.', 'ok')">Approve reconciliation</button>
+        </div>
+        <div class="prov">
+          <span><strong>Reads</strong> <a href="intake-onboarding.html#/a-19-medications">onboarding medications</a> Jul 14 · pharmacy fills CVS Irvine #4421 Jul 19 · signed orders — none of them is copied here</span>
         </div>
 
-        <div class="seg-divider" style="margin-top:0">Active medications (3)</div>
+        <div class="seg-divider" style="margin-top:0">Active medications and supplements (3)</div>
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Medication</th><th>Source</th><th>Decision</th><th></th></tr>
+              <tr><th>Medication or supplement</th><th>Trust and source</th><th>Decision</th><th></th></tr>
             </thead>
             <tbody>
               <tr>
                 <td>
                   <div class="b-clin-name">Levothyroxine 50 mcg PO daily</div>
-                  <div class="b-clin-meta">Dr. Drannikov · started 2021 · for Hashimoto's · CVS Irvine #4421</div>
+                  <div class="b-clin-meta">For Hashimoto's · started 2021 · filled at CVS Irvine #4421</div>
                 </td>
-                <td><span class="pill pill-muted">Rx on file</span></td>
+                <td>
+                  <span class="clin-state verified">Prescribed</span>
+                  <div class="clin-src" style="margin-top:4px">Order <code>O-1044</code> <span class="ver-chip superseded">v3</span> · Dr. Drannikov</div>
+                </td>
                 <td><span class="pill pill-ok">Continue</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this medication — changes save to the chart and route to pharmacy.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only a signed order changes a dose. Opening order O-1044 to write the next version.')">Change by order</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Sertraline 50 mg PO daily</div>
                   <div class="b-clin-meta">Prescribed by an outside PCP · patient reports no benefit · consider taper after acute workup</div>
                 </td>
-                <td><span class="pill pill-muted">External</span></td>
+                <td>
+                  <span class="clin-state reconciled">Reconciled</span>
+                  <div class="clin-src" style="margin-top:4px">Outside PCP · checked with the patient by Charlene today</div>
+                </td>
                 <td><span class="pill pill-warn">Continue · review</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this medication — changes save to the chart and route to pharmacy.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Marked for review at today\'s encounter. A taper needs a signed order.')">Flag for review</button></td>
               </tr>
               <tr>
                 <td>
                   <div class="b-clin-name">Magnesium glycinate 400 mg PO PRN</div>
-                  <div class="b-clin-meta">Self-administered OTC · for sleep · reports modest benefit</div>
+                  <div class="b-clin-meta">Over the counter · for sleep · reports modest benefit</div>
                 </td>
-                <td><span class="pill pill-muted">OTC</span></td>
+                <td>
+                  <span class="clin-state reported">Reported</span>
+                  <div class="clin-src" style="margin-top:4px">Patient · <a href="intake-onboarding.html#/a-20-supplements">onboarding supplements</a> Jul 14 2026</div>
+                </td>
                 <td><span class="pill pill-ok">Continue</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this medication — changes save to the chart and route to pharmacy.')">Edit</button></td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Approved as clinically active by Dr. Drannikov. It stays the same entry, now marked verified.', 'ok')">Approve as active</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="seg-divider">Differences flagged</div>
+        <div class="seg-divider">Charlene prepared these — they need your approval</div>
         <div class="callout callout-warn">
-          <strong>Patient reports taking, not in chart:</strong> Vitamin D3 5,000 IU daily — started about a month ago, self-purchased. Matches the new vitamin D deficiency problem.
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
+            <strong>Taking, not on the list:</strong> Vitamin D3 5,000 IU daily
+            <span class="clin-state reported">Reported</span>
+            <span class="appr pending">Pending approval</span>
+          </div>
+          Started about a month ago, self-purchased. Matches the new vitamin D deficiency problem.
+          <div class="prov"><span><strong>From</strong> <a href="intake-onboarding.html#/a-20-supplements">onboarding supplements</a> Jul 14 · prepared by Charlene</span></div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-            <button class="btn btn-sm" onclick="HCOS.toast('Vitamin D3 5,000 IU added to the active medication list.', 'ok')">Add to chart</button>
-            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Left off the chart — the difference is cleared from this reconciliation.')">Ignore</button>
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Vitamin D3 approved as active by Dr. Drannikov — same entry, same list, source kept.', 'ok')">Approve as active</button>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Kept as patient-reported. It stays on the list and is not clinically active.')">Keep as reported</button>
           </div>
         </div>
         <div class="callout callout-warn">
-          <strong>In the chart, patient reports stopped:</strong> Cetirizine 10 mg daily — was for seasonal allergies, stopped Mar 2026.
-          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-            <button class="btn btn-sm" onclick="HCOS.toast('Cetirizine marked discontinued — moved to the historical list.', 'ok')">Mark discontinued</button>
-            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Cetirizine kept active — no change to the chart.')">Keep active</button>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
+            <strong>On the list, patient says stopped:</strong> Cetirizine 10 mg daily
+            <span class="clin-state reported">Reported</span>
+            <span class="appr pending">Pending approval</span>
           </div>
+          Was for seasonal allergies, stopped Mar 2026.
+          <div class="prov"><span><strong>From</strong> the patient at check-in today · prepared by Charlene</span></div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Discontinued by Dr. Drannikov with today\'s date — the entry keeps its start and stop dates.', 'ok')">Mark discontinued</button>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Kept active. Your decision and the patient report are both recorded.')">Keep active</button>
+          </div>
+        </div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Suggested by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">
+            The list still reads levothyroxine 50 mcg. Order <code>O-1044</code> <span class="ver-chip">v4</span>, signed May 22, raised it to 75 mcg and the Jul 19 fill matches v4.
+          </div>
+          <div class="ai-meta">
+            <span><b>Compared</b> list entry · order <code>O-1044</code> v3 and v4 · pharmacy fill Jul 19</span>
+            <span><b>Model</b> med-compare-v2.0</span>
+            <span><b>Confidence</b> 0.81 — one fill record has no written date</span>
+            <span><b>Reviewer</b> Dr. Drannikov</span>
+          </div>
+          <div class="ai-actions">
+            <a class="btn btn-sm btn-primary" href="clinical.html#/b-09-orders">Open order O-1044</a>
+            <button class="btn btn-sm" onclick="HCOS.toast('Dismissed with your name and the reason. The order and the fill history are unchanged.')">Not a discrepancy</button>
+          </div>
+          <div class="field-help" style="margin-top:8px">A suggestion only — the dose changes when you sign the next version of the order.</div>
         </div>
 
         <div class="seg-divider">Discontinued / historical</div>
@@ -364,19 +499,35 @@
               <tr>
                 <td>
                   <div class="b-clin-name">Cetirizine 10 mg daily</div>
-                  <div class="b-clin-meta">Discontinued by patient · Mar 2026</div>
+                  <div class="b-clin-meta">Started 2019 · stopped Mar 2026 by the patient · kept with both dates</div>
                 </td>
                 <td><span class="pill pill-muted">Inactive</span></td>
                 <td></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Cetirizine restored to the active list.', 'ok')">Restore</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Restarted by Dr. Drannikov — same entry, new start date, the stop stays in its history.', 'ok')">Restart</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="callout" style="margin-top:16px">
-          The pharmacy column reads from what the pharmacy has on file — reconciliation clears the differences before any new order is written.
-          <div style="margin-top:10px"><a class="btn btn-sm" href="pharmacy.html">Open medications and pharmacy</a></div>
+        <div class="grid-2" style="margin-top:18px">
+          <div class="card">
+            <div class="card-title">Who may do what</div>
+            <dl class="kv">
+              <dt>Prepare the reconciliation</dt><dd>MA · nurse · PCC</dd>
+              <dt>Approve it</dt><dd>Physician · extender</dd>
+              <dt>Change a dose</dt><dd>Only by signing a new order version</dd>
+              <dt>System</dt><dd>Compares sources and flags · never reconciles on its own</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <div class="card-title">The same list appears in</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Medications and pharmacy</span><span class="check-meta"><a href="pharmacy.html#/h-01-meds">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Her plan — supplements</span><span class="check-meta"><a href="journey-plan.html#/j-plan-supplements">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Pre-infusion check</span><span class="check-meta"><a href="clinical-infusion.html#/b-14-preinfusion">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Sign and lock</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -397,64 +548,112 @@
             <span class="avatar lg">PN</span>
             <div>
               <div class="app-logo"><a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
-              <div class="app-logo-sub">Allergies and intolerances · checked against every order</div>
+              <div class="app-logo-sub">Allergies and intolerances · the one list every safety check reads</div>
             </div>
           </div>
           <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
         </div>
 
         <h2 class="page-title">Allergies and intolerances</h2>
-        <p class="page-sub">Hard-block allergies stop inappropriate orders. Soft intolerances surface as warnings but do not block.</p>
+        <p class="page-sub">One list. Allergies hard-block a matching order; intolerances warn. A patient report enters here and blocks straight away — review decides what it becomes.</p>
 
         <div class="b-status-bar">
-          <div>Last reviewed Apr 8, 2026 by Charlene (MA) · reconfirmed by patient at check-in today</div>
-          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Allergies confirmed — no changes. Review recorded for today.', 'ok')">Confirm — no changes</button>
+          <div>Reconciled by Charlene (MA) today 9:04 AM · reconfirmed by the patient at check-in · <span class="appr pending">1 item pending your review</span></div>
+          <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reviewed with no changes — recorded for today under Dr. Drannikov.', 'ok')">Confirm — no changes</button>
+        </div>
+        <div class="prov">
+          <span><strong>Reads</strong> <a href="intake-onboarding.html#/a-18-allergies">onboarding allergies</a>, check-in and outside records — each entry keeps who said it and when</span>
         </div>
 
         <div class="seg-divider" style="margin-top:0">Allergies — hard block</div>
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Substance</th><th>Reaction</th><th>Type</th><th>Enforcement</th><th></th></tr>
+              <tr><th>Substance</th><th>Reaction</th><th>Trust and source</th><th>Enforcement</th><th></th></tr>
             </thead>
             <tbody>
               <tr>
                 <td>
                   <div class="b-clin-name">Sulfa drugs (sulfonamides)</div>
-                  <div class="b-clin-meta">Verified by patient · onset childhood</div>
+                  <div class="b-clin-meta">Onset childhood · reported at onboarding Mar 2026</div>
                 </td>
                 <td>Rash, hives · moderate</td>
-                <td><span class="pill pill-err">Allergy</span></td>
+                <td>
+                  <span class="clin-state verified">Verified</span>
+                  <div class="clin-src" style="margin-top:4px">Dr. Drannikov · Mar 18 2026</div>
+                </td>
                 <td><span class="pill pill-warn">Hard block</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this allergy — changes recheck every open order.')">Edit</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Changed by Dr. Drannikov — every open order is rechecked and the previous entry is kept.')">Change</button></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="seg-divider">Sensitivities — soft warn</div>
+        <div class="seg-divider">Reported by the patient — pending your review</div>
+        <div class="callout callout-warn">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
+            <strong>Shellfish — hives within an hour, told to Charlene at check-in today</strong>
+            <span class="clin-state reported">Reported</span>
+            <span class="pill pill-warn">Blocking now</span>
+          </div>
+          It blocks matching orders from the moment it was written down. Your review decides whether it stays an allergy, becomes an intolerance, or comes off with a reason.
+          <div class="prov"><span><strong>From</strong> the patient at check-in · <a href="intake-onboarding.html#/a-18-allergies">her onboarding answers</a> · kept in her words</span></div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Verified by Dr. Drannikov — same entry, now verified, still hard-blocking.', 'ok')">Verify as allergy</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Recorded as an intolerance by Dr. Drannikov — orders warn instead of blocking.')">Record as intolerance</button>
+            <button class="btn btn-sm btn-ghost" onclick="HCOS.toast('Taking it off needs a reason. The entry stays in the history and in the audit store.')">Take off — needs a reason</button>
+          </div>
+        </div>
+
+        <div class="ai-block">
+          <div class="ai-head">
+            <span class="ai-badge">Suggested by HCOS</span>
+            <span class="ai-state suggested">Suggestion</span>
+          </div>
+          <div class="ai-body">
+            Two sources disagree. Onboarding on Jul 14 recorded no shellfish reaction; at check-in today she described hives within an hour. Nothing in her open IV order contains shellfish-derived components.
+          </div>
+          <div class="ai-meta">
+            <span><b>Compared</b> onboarding Jul 14 · check-in today · order <code>O-2291</code> v2</span>
+            <span><b>Model</b> allergy-compare-v1.1</span>
+            <span><b>Confidence</b> 0.90 — the two answers use different wording</span>
+            <span><b>Reviewer</b> Dr. Drannikov</span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to today\'s note with both sources linked. The list is unchanged until you review the entry.', 'ok')">Note the difference</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Dismissed with your name and the reason. Both answers stay on file.')">Not a difference</button>
+          </div>
+        </div>
+
+        <div class="seg-divider">Intolerances — warn</div>
         <div class="tbl-wrap">
           <table class="tbl">
             <tbody>
               <tr>
                 <td>
-                  <div class="b-clin-name">Gluten (self-reported sensitivity)</div>
+                  <div class="b-clin-name">Gluten</div>
                   <div class="b-clin-meta">Not biopsy-confirmed celiac · self-elimination 2022</div>
                 </td>
                 <td>GI upset, brain fog</td>
-                <td><span class="pill pill-warn">Sensitivity</span></td>
-                <td><span class="pill pill-muted">Soft warn</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this sensitivity — changes recheck every open order.')">Edit</button></td>
+                <td>
+                  <span class="clin-state reconciled">Reconciled</span>
+                  <div class="clin-src" style="margin-top:4px">Patient · checked by Charlene Apr 8 2026</div>
+                </td>
+                <td><span class="pill pill-muted">Warn</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Changed by Dr. Drannikov — every open order is rechecked and the previous entry is kept.')">Change</button></td>
               </tr>
               <tr>
                 <td>
-                  <div class="b-clin-name">Dairy (self-reported)</div>
+                  <div class="b-clin-name">Dairy</div>
                   <div class="b-clin-meta">Tolerates aged cheese in small amounts</div>
                 </td>
                 <td>Bloating</td>
-                <td><span class="pill pill-warn">Sensitivity</span></td>
-                <td><span class="pill pill-muted">Soft warn</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing this sensitivity — changes recheck every open order.')">Edit</button></td>
+                <td>
+                  <span class="clin-state reported">Reported</span>
+                  <div class="clin-src" style="margin-top:4px">Patient · <a href="intake-onboarding.html#/a-18-allergies">onboarding</a> Jul 14 2026</div>
+                </td>
+                <td><span class="pill pill-muted">Warn</span></td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Verified by Dr. Drannikov — same entry, now verified.', 'ok')">Verify</button></td>
               </tr>
             </tbody>
           </table>
@@ -467,11 +666,27 @@
           <span>Latex <span class="pill pill-muted">None reported</span></span>
         </div>
 
-        <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="HCOS.toast('Allergy or sensitivity added — it is now checked against every order.', 'ok')">Add allergy or sensitivity</button>
+        <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="HCOS.toast('Added to the list and checked against every open order straight away.', 'ok')">Add allergy or intolerance</button>
 
-        <div class="callout" style="margin-top:18px">
-          Everything here is checked against every IV protocol, prescription, and supplement order. The sulfa flag blocks any sulfa-containing prescription from being signed.
-          <div style="margin-top:10px"><button class="btn btn-sm" data-activate="b-10-iv-order">See the IV order safety check</button></div>
+        <div class="grid-2" style="margin-top:18px">
+          <div class="card">
+            <div class="card-title">Who may change an entry</div>
+            <dl class="kv">
+              <dt>Verify, downgrade, remove</dt><dd>Physician · extender, with a reason</dd>
+              <dt>Write down a patient report</dt><dd>MA · nurse · PCC · front desk</dd>
+              <dt>Patient report</dt><dd>Blocks immediately, waits for review</dd>
+              <dt>System</dt><dd>Compares sources and flags · never edits the list</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <div class="card-title">Every safety check reads this list</div>
+            <ul class="check-list">
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">IV infusion order</span><span class="check-meta"><a href="#b-10-iv-order" data-activate="b-10-iv-order">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Pre-infusion check at the chair</span><span class="check-meta"><a href="clinical-infusion.html#/b-14-preinfusion">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Sign and lock</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
+              <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Prescriptions and supplements</span><span class="check-meta"><a href="pharmacy.html#/h-01-meds">open</a></span></li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -492,18 +707,25 @@
             <span class="avatar lg">PN</span>
             <div>
               <div class="app-logo">IV infusion order — <a href="patients.html">Priya Natarajan</a> <span class="net-badge net-oon" style="margin-left:6px">OON</span></div>
-              <div class="app-logo-sub">Series of 6 · encounter ENC-2026-0418 · ordered by Dr. Drannikov</div>
+              <div class="app-logo-sub">Order O-2291 · series of 6 · encounter ENC-2026-0418 · ordered by Dr. Drannikov</div>
             </div>
           </div>
           <div class="app-user"><span class="avatar">DD</span> Dr. Drannikov · Provider</div>
         </div>
 
         <div class="b-status-bar">
-          <div>Active template: <strong>Myers' cocktail · standard</strong> · <span class="pill pill-ok">Sulfa allergy checked — no conflict</span></div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-sm" onclick="HCOS.toast('Template history — every edit is versioned with who changed what.')">View template history</button>
-            <button class="btn btn-primary btn-sm" onclick="HCOS.toast('IV order saved — it is queued for the infusion bay and travels with the note at sign.', 'ok')">Save order</button>
+          <div>
+            <code>O-2291</code> <span class="ver-chip">v2</span> <span class="appr draft">Draft</span>
+            &nbsp;·&nbsp; <span class="ver-chip superseded">v1</span> signed May 22 2026 by Dr. Drannikov — 2 of 6 infusions given under it
           </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="HCOS.toast('v1 signed May 22 · v2 drafted today. A signed version is never edited — signing writes the next one.')">Version history</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('Draft saved as v2. Nothing downstream moves until it is signed.')">Save draft</button>
+            <button class="btn btn-primary btn-sm" data-open-modal="#b-modal-sign-order">Sign order</button>
+          </div>
+        </div>
+        <div class="prov">
+          <span><strong>Reads</strong> the allergy list, the problem list, result <code>L-8841</code> and readiness <span class="ver-chip">v3</span> · <strong>feeds</strong> scheduling, the bay board and the flowsheet by order number and version</span>
         </div>
 
         <div class="seg-divider" style="margin-top:0">Protocol template — pick one, the dose math follows</div>
@@ -518,8 +740,11 @@
           </div>
           <div class="b-proto" onclick="bPickProtocol(this,'IV vitamin C 25 g')">
             <div class="b-proto-name">IV vitamin C 25 g</div>
-            <div class="b-proto-dose">25 g ascorbic acid (500 mg/mL × 50 mL) in 250 mL saline · 50 billing units · ~2.5 h · G6PD checked before high-dose C</div>
+            <div class="b-proto-dose">25 g ascorbic acid (500 mg/mL × 50 mL) in 250 mL saline · 50 billing units · ~2.5 h · a G6PD result is required before it can be signed</div>
           </div>
+        </div>
+        <div class="prov">
+          <span><strong>Templates</strong> are the starting numbers · this order keeps its own signed values from the moment you sign it</span>
         </div>
 
         <div class="grid-sidebar" style="margin-top:16px">
@@ -562,7 +787,7 @@
               <textarea class="field-textarea" rows="3">First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.</textarea>
             </div>
 
-            <div class="seg-divider">Frequency</div>
+            <div class="seg-divider">Frequency, prerequisites and stop rules</div>
             <div class="field-row">
               <div class="field"><label class="field-label">Total infusions</label><input class="field-input" value="6"></div>
               <div class="field">
@@ -574,18 +799,71 @@
                 </select>
               </div>
             </div>
+            <div class="field-row">
+              <div class="field"><label class="field-label">Before the first infusion of this version</label><input class="field-input" value="CMP within 90 days · allergy list reviewed today"></div>
+              <div class="field"><label class="field-label">Order expires</label><input class="field-input" value="Oct 21, 2026 — or when the 6th infusion is given"></div>
+            </div>
+            <div class="field">
+              <label class="field-label">Stop rules — the medic stops and calls the provider</label>
+              <textarea class="field-textarea" rows="2">Stop for chest tightness, wheeze, rash, systolic below 90 or a fall of 20 from baseline. Slow the rate for warmth or flushing and write it on the flowsheet.</textarea>
+            </div>
+            <div class="field-help">Scheduling reads the cadence and the expiry from here. The flowsheet documents against this order and version — neither of them keeps its own copy.</div>
+
+            <div class="ai-block">
+              <div class="ai-head">
+                <span class="ai-badge">Suggested by HCOS</span>
+                <span class="ai-state suggested">Suggestion</span>
+              </div>
+              <div class="ai-body">
+                Book 1 h 15 of chair time, not 1 h. Priya's last three Myers' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.
+              </div>
+              <div class="ai-meta">
+                <span><b>Read</b> 3 past administrations under <code>O-2291</code> v1</span>
+                <span><b>Model</b> duration-v1.4</span>
+                <span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>
+                <span><b>Reviewer</b> Dr. Drannikov</span>
+              </div>
+              <div class="ai-actions">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Chair time set to 1 h 15 on this draft. It takes effect when you sign v2.', 'ok')">Use 1 h 15</button>
+                <button class="btn btn-sm" onclick="HCOS.toast('Kept the protocol default of 1 h. Your choice is recorded with your name.')">Keep 1 h</button>
+              </div>
+              <div class="field-help" style="margin-top:8px">A prediction only — it cannot place, change or sign an order.</div>
+            </div>
           </div>
 
           <div>
             <div class="card">
               <div class="card-title">Safety checks</div>
               <ul class="check-list">
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Sulfa allergy · no conflict</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">No G6PD contraindication</div></li>
-                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Renal function — last eGFR 92</div></li>
-                <li class="check-item"><span class="check-icon blocked">!</span><div class="check-label">Hashimoto's · monitor</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Sulfa allergy · nothing in this order contains sulfonamides</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Shellfish reported today · no conflict with these components</div></li>
+                <li class="check-item"><span class="check-icon done">✓</span><div class="check-label">Renal function · eGFR 92 · Apr 8 2026</div></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><div class="check-label">Magnesium 1.6 mg/dL on Jun 2 — warning, may be overridden with a reason</div></li>
               </ul>
-              <a class="btn btn-sm" style="margin-top:8px" data-activate="b-07-allergies">Open the allergy list</a>
+              <div class="prov"><span><strong>From</strong> the allergy list, result <code>L-8841</code> and readiness <span class="ver-chip">v3</span> — read live, never copied into this order</span></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sm" data-activate="b-07-allergies">Open the allergy list</button>
+                <a class="btn btn-sm" href="readiness.html#/i-01-readiness">Open readiness</a>
+              </div>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">What stops this order</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon blocked">!</span><div class="check-label">Hard block · a component she is allergic to</div></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><div class="check-label">Hard block · no G6PD result, for vitamin C above 15 g</div></li>
+                <li class="check-item"><span class="check-icon blocked">!</span><div class="check-label">Hard block · readiness Pause or Physician review</div></li>
+                <li class="check-item"><span class="check-icon pending">·</span><div class="check-label">Warning · an out-of-range lab or a short interval</div></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">Hard blocks cannot be overridden by anyone. A warning may be overridden by Dr. Drannikov or an extender, with a reason that goes to the audit store.</div>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">What this order drives</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Booking the six visits</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Bay board and chair time</span><span class="check-meta"><a href="clinical-infusion.html#/b-13-bay-board">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Flowsheet, documented against v2</span><span class="check-meta"><a href="clinical-infusion.html#/b-15-flowsheet">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Her plan of care</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-poc">open</a></span></li>
+              </ul>
             </div>
             <div class="card" style="margin-top:14px">
               <div class="card-title">Cost and coverage</div>
@@ -594,7 +872,8 @@
                 <dt>Series of 6</dt><dd>$1,050 with package discount</dd>
                 <dt>Insurance</dt><dd>Blue Shield of CA <span class="net-badge net-oon">OON</span> · superbill provided</dd>
               </dl>
-              <div class="field-help" style="margin-top:8px">Out-of-network Blue Shield PPO — Priya pays at time of service; the superbill lists each CPT/HCPCS code and diagnosis so she can claim her plan's out-of-network allowable.</div>
+              <div class="prov"><span><strong>From</strong> the price list and her coverage snapshot Jul 14 · <a href="pricing.html#/pr-02-benefits">open benefits</a></span></div>
+              <div class="field-help">Out-of-network Blue Shield PPO — Priya pays at time of service; the superbill lists each CPT/HCPCS code and diagnosis so she can claim her plan's out-of-network allowable.</div>
             </div>
             <div class="card" style="margin-top:14px">
               <div class="card-title">Patient-facing summary</div>
@@ -604,9 +883,10 @@
           </div>
         </div>
 
-        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-          <button class="btn btn-primary" onclick="HCOS.toast('IV order saved — it is queued for the infusion bay and travels with the note at sign.', 'ok')">Save order</button>
+        <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-primary" data-open-modal="#b-modal-sign-order">Sign order</button>
           <a class="btn" href="clinical.html#/b-11-sign-lock">Send to sign and lock</a>
+          <span class="field-help" style="margin:0">Only a physician or extender signs. An MA or nurse may prepare a draft for you.</span>
         </div>
 
       </div>
@@ -685,6 +965,27 @@
     </div>
   </section>
 
+</div>
+
+<!-- Sign-order confirm modal — outside .screens -->
+<div class="modal-overlay" id="b-modal-sign-order">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Sign order O-2291 v2</div>
+        <div class="modal-sub">Priya Natarajan · Myers' cocktail × 6 · Dr. Drannikov</div>
+      </div>
+      <button class="modal-close" data-close-modal>×</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;margin:0 0 12px">Signing writes version 2 and supersedes v1. Scheduling, the bay board and the flowsheet move to v2; the two infusions already given stay documented against v1.</p>
+      <div class="callout" style="margin:0">Only a physician or extender signs an order. Your name, the time and the version go to the audit store.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Keep editing</button>
+      <button class="btn btn-accent" data-close-modal onclick="HCOS.toast('Order O-2291 v2 signed by Dr. Drannikov — scheduling and the infusion bay now read v2.', 'ok')">Sign order</button>
+    </div>
+  </div>
 </div>
 
 <!-- Sign-addendum confirm modal — outside .screens -->
