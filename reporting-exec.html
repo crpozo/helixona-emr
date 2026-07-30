@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Executive · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-exec" data-page-title="Reports · Executive" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-exec" data-title="Executive overview">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/executive</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Executive overview</div>
+            <div class="page-sub">The period at a glance · June 2026</div>
+          </div>
+          <div class="app-user"><a class="btn" href="reporting-ai.html">AI insights</a><button class="btn btn-primary">Export</button></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">$326,800</div>
+              <div class="stat-lbl">Total revenue</div><div class="stat-sub">Cash and insurance collected in the period</div><div class="r-delta">&#9650; 8.4%</div></div>
+            <div class="card stat-card"><div class="stat-num">$13,617</div>
+              <div class="stat-lbl">Revenue per employee</div><div class="stat-sub">Productivity per team member</div><div class="r-delta">&#9650; 5.1%</div></div>
+            <div class="card stat-card"><div class="stat-num">1,280</div>
+              <div class="stat-lbl">Active patients</div><div class="stat-sub">Seen in the last 90 days</div><div class="r-delta">&#9650; 3.2%</div></div>
+            <div class="card stat-card"><div class="stat-num">$255</div>
+              <div class="stat-lbl">Revenue per patient</div><div class="stat-sub">Average monthly ticket</div><div class="r-delta">&#9650; 2.7%</div></div>
+          </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">96</div>
+              <div class="stat-lbl">New patients</div><div class="stat-sub">New sign-ups in the period</div><div class="r-delta">&#9650; 12.5%</div></div>
+            <div class="card stat-card"><div class="stat-num">4.6 d</div>
+              <div class="stat-lbl">Wait for next appointment</div><div class="stat-sub">Average days waiting</div><div class="r-delta">&#9660; 6.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">82%</div>
+              <div class="stat-lbl">Unit occupancy</div><div class="stat-sub">Chairs and beds against daily capacity</div><div class="r-delta">&#9650; 4.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">1,540</div>
+              <div class="stat-lbl">IVs administered</div><div class="stat-sub">Total infusions in the period</div><div class="r-delta">&#9650; 6.8%</div></div>
+          </div>
+          <div class="grid-sidebar" style="margin-bottom:18px">
+          <div class="card" ><div class="card-title">Monthly revenue · cash vs insurance</div>
+          <div class="r-bars">
+            <div class="r-bar"><div class="r-bar-fill" style="height:63%"></div><span class="r-bar-lbl">Jan</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:70%"></div><span class="r-bar-lbl">Feb</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:77%"></div><span class="r-bar-lbl">Mar</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:85%"></div><span class="r-bar-lbl">Apr</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:91%"></div><span class="r-bar-lbl">May</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:96%"></div><span class="r-bar-lbl">Jun</span></div>
+          </div>
+          </div>
+          <div class="card" ><div class="card-title">Operational alerts · need attention</div>
+            <div class="r-alert"><span class="pill pill-warn">PCC</span><span>POC penetration: 64% vs target 70%.</span></div>
+            <div class="r-alert"><span class="pill pill-warn">Revenue</span><span>Monthly revenue: $326,800 vs target $340,000.</span></div>
+            <div class="r-alert"><span class="pill pill-warn">Medics</span><span>Medic misses: 96 vs target 60.</span></div>
+            <div class="r-alert"><span class="pill pill-warn">Front desk</span><span>Outbound calls: 960 vs target 1,200.</span></div>
+            <div class="r-alert"><span class="pill pill-warn">Billing</span><span>Claim denial rate: 11% vs target 8%.</span></div>
+            <div class="r-alert"><span class="pill pill-warn">Growth</span><span>EBOO needs its own landing page — 212 booked, high demand.</span></div>
+          </div>
+          </div>
+          <div class="grid-sidebar">
+          <div class="card" ><div class="card-title">Patient funnel · lead to first appointment</div>
+            <div class="r-funnel-step"><span>Leads</span><div class="meter"><div class="meter-fill" style="width:100%"></div></div><span class="meter-val">420 · 100%</span></div>
+            <div class="r-funnel-step"><span>Contacted</span><div class="meter"><div class="meter-fill" style="width:76%"></div></div><span class="meter-val">318 · 76%</span></div>
+            <div class="r-funnel-step"><span>Onboarding</span><div class="meter"><div class="meter-fill" style="width:49%"></div></div><span class="meter-val">204 · 49%</span></div>
+            <div class="r-funnel-step"><span>Patients</span><div class="meter"><div class="meter-fill" style="width:31%"></div></div><span class="meter-val">132 · 31%</span></div>
+            <div class="r-funnel-step"><span>First appointment booked</span><div class="meter"><div class="meter-fill" style="width:23%"></div></div><span class="meter-val">96 · 23%</span></div>
+            <div class="r-funnel-step"><span>Denied or declined</span><div class="meter"><div class="meter-fill" style="width:10%"></div></div><span class="meter-val">44 · 10%</span></div>
+          </div>
+          <div class="card" ><div class="card-title">Revenue by modality</div>
+            <div class="r-hbar"><span>EBOO</span><div class="meter"><div class="meter-fill" style="width:87%"></div></div><span class="meter-val">$121,300</span></div>
+            <div class="r-hbar"><span>IV Therapy</span><div class="meter"><div class="meter-fill" style="width:69%"></div></div><span class="meter-val">$96,400</span></div>
+            <div class="r-hbar"><span>Platelet-Rich Plasma (PRP)</span><div class="meter"><div class="meter-fill" style="width:56%"></div></div><span class="meter-val">$78,200</span></div>
+            <div class="r-hbar"><span>Erchonia Laser Therapy</span><div class="meter"><div class="meter-fill" style="width:23%"></div></div><span class="meter-val">$31,800</span></div>
+            <div class="r-hbar"><span>Chiro</span><div class="meter"><div class="meter-fill" style="width:20%"></div></div><span class="meter-val">$28,400</span></div>
+            <div class="r-hbar"><span>Neuromuscular Therapy</span><div class="meter"><div class="meter-fill" style="width:19%"></div></div><span class="meter-val">$26,800</span></div>
+            <div class="r-hbar"><span>LymphStar LET Therapy</span><div class="meter"><div class="meter-fill" style="width:16%"></div></div><span class="meter-val">$22,100</span></div>
+            <div class="r-hbar"><span>BEMER Therapy</span><div class="meter"><div class="meter-fill" style="width:13%"></div></div><span class="meter-val">$18,400</span></div>
+          </div>
+          </div>
+          <div class="seg-divider">Goals that trigger the alerts</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Goal</th><th>Against target</th><th>Status</th></tr></thead><tbody>
+              <tr><td>POC penetration</td><td>64% / target 70%</td><td><span class="pill pill-warn">Off target</span></td></tr>
+              <tr><td>Monthly revenue</td><td>$326,800 / target $340,000</td><td><span class="pill pill-warn">Off target</span></td></tr>
+              <tr><td>Medic misses</td><td>96 / target 60 — lower is better</td><td><span class="pill pill-warn">Off target</span></td></tr>
+              <tr><td>Outbound calls</td><td>960 / target 1,200</td><td><span class="pill pill-warn">Off target</span></td></tr>
+              <tr><td>Claim denial rate</td><td>11% / target 8% — lower is better</td><td><span class="pill pill-warn">Off target</span></td></tr>
+              <tr><td>Unit occupancy</td><td>82% / target 80%</td><td><span class="pill pill-ok">On track</span></td></tr>
+              <tr><td>New patients</td><td>96 / target 90</td><td><span class="pill pill-ok">On track</span></td></tr>
+            </tbody></table>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

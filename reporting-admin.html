@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Admin · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-admin" data-page-title="Reports · Admin" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-admin" data-title="Admin">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/admin</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Admin</div>
+            <div class="page-sub">Goals, people and permissions behind the dashboards</div>
+          </div>
+          <div class="app-user"><button class="btn btn-primary">Add a goal</button></div>
+        </div>
+          <div class="grid-2" style="margin-bottom:18px">
+            <div class="card">
+              <div class="card-title">Company goals</div>
+              <div style="font-size:22px;font-weight:700;color:var(--hx-navy)">7 goals · 5 off target</div>
+              <div class="field-help" style="margin-bottom:10px">These targets are what raise the alerts on the executive overview.</div>
+              <a class="btn btn-sm" href="reporting-exec.html">See the alerts</a>
+              <button class="btn btn-sm btn-primary">Add a goal</button>
+            </div>
+            <div class="card">
+              <div class="card-title">Employees</div>
+              <div style="font-size:22px;font-weight:700;color:var(--hx-navy)">18 employees</div>
+              <div class="field-help" style="margin-bottom:10px">Add, edit or remove team members and their roles.</div>
+              <a class="btn btn-sm" href="reporting-employees.html">Open the roster</a>
+              <button class="btn btn-sm btn-primary">Add an employee</button>
+            </div>
+            <div class="card">
+              <div class="card-title">Roles and permissions</div>
+              <div style="font-size:22px;font-weight:700;color:var(--hx-navy)">16 roles</div>
+              <div class="field-help" style="margin-bottom:10px">What each role may see and do — approvals live here.</div>
+              <a class="btn btn-sm" href="security.html#/g-02-roles">Open roles and approval rights</a>
+            </div>
+            <div class="card">
+              <div class="card-title">Metrics by role</div>
+              <div style="font-size:22px;font-weight:700;color:var(--hx-navy)">16 roles configured</div>
+              <div class="field-help" style="margin-bottom:10px">Which metric each role is measured by, and where it comes from.</div>
+              <a class="btn btn-sm" href="reporting-team.html">Open team and roles</a>
+            </div>
+          </div>
+          <div class="seg-divider">Goals that drive the alerts</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Goal</th><th>Current</th><th>Target</th><th>Status</th><th></th></tr></thead><tbody>
+              <tr><td>POC penetration</td><td>64%</td><td>70%</td><td><span class="pill pill-warn">Off target</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+              <tr><td>Monthly revenue</td><td>$326,800</td><td>$340,000</td><td><span class="pill pill-warn">Off target</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+              <tr><td>Medic misses</td><td>96</td><td>60 · lower is better</td><td><span class="pill pill-warn">Off target</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+              <tr><td>Outbound calls</td><td>960</td><td>1,200</td><td><span class="pill pill-warn">Off target</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+              <tr><td>Claim denial rate</td><td>11%</td><td>8% · lower is better</td><td><span class="pill pill-warn">Off target</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+              <tr><td>Unit occupancy</td><td>82%</td><td>80%</td><td><span class="pill pill-ok">On track</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+              <tr><td>New patients</td><td>96</td><td>90</td><td><span class="pill pill-ok">On track</span></td><td><button class="btn btn-sm">Edit</button></td></tr>
+            </tbody></table>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

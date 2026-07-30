@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Treatments · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-treatments" data-page-title="Reports · Treatments" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-treat" data-title="Treatments">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/treatments</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Treatments</div>
+            <div class="page-sub">What gets delivered, what it earns, and where the room runs out</div>
+          </div>
+          <div class="app-user"></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">4,416</div>
+              <div class="stat-lbl">Treatments delivered</div><div class="stat-sub">In the period</div></div>
+            <div class="card stat-card"><div class="stat-num">$468,000</div>
+              <div class="stat-lbl">Treatment revenue</div><div class="stat-sub">Across every modality</div></div>
+            <div class="card stat-card"><div class="stat-num">63%</div>
+              <div class="stat-lbl">Average occupancy</div><div class="stat-sub">Booked against capacity</div></div>
+            <div class="card stat-card"><div class="stat-num">EBOO</div>
+              <div class="stat-lbl">At capacity</div><div class="stat-sub">100% in Room 1 right now</div></div>
+          </div>
+          <div class="seg-divider">By treatment · revenue and occupancy</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Treatment</th><th>Revenue</th><th>Occupancy</th></tr></thead><tbody>
+              <tr><td><strong>EBOO</strong></td><td>$121,300</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:92%"></div></div><span class="meter-val">92%</span></div></td></tr>
+              <tr><td><strong>IV Therapy</strong></td><td>$96,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:81%"></div></div><span class="meter-val">81%</span></div></td></tr>
+              <tr><td><strong>Platelet-Rich Plasma (PRP)</strong></td><td>$78,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:64%"></div></div><span class="meter-val">64%</span></div></td></tr>
+              <tr><td><strong>Erchonia Laser Therapy</strong></td><td>$31,800</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:58%"></div></div><span class="meter-val">58%</span></div></td></tr>
+              <tr><td><strong>Chiro</strong></td><td>$28,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:55%"></div></div><span class="meter-val">55%</span></div></td></tr>
+              <tr><td><strong>Neuromuscular Therapy</strong></td><td>$26,800</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:52%"></div></div><span class="meter-val">52%</span></div></td></tr>
+              <tr><td><strong>LymphStar LET Therapy</strong></td><td>$22,100</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:48%"></div></div><span class="meter-val">48%</span></div></td></tr>
+              <tr><td><strong>BEMER Therapy</strong></td><td>$18,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:44%"></div></div><span class="meter-val">44%</span></div></td></tr>
+              <tr><td><strong>BioCharger</strong></td><td>$12,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:38%"></div></div><span class="meter-val">38%</span></div></td></tr>
+              <tr><td><strong>SCENAR Therapy</strong></td><td>$9,800</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:34%"></div></div><span class="meter-val">34%</span></div></td></tr>
+              <tr><td><strong>Biomodulator Therapy</strong></td><td>$8,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:31%"></div></div><span class="meter-val">31%</span></div></td></tr>
+              <tr><td><strong>MEAD Analysis</strong></td><td>$6,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:27%"></div></div><span class="meter-val">27%</span></div></td></tr>
+            </tbody></table>
+          </div>
+          <div class="grid-sidebar" style="margin-top:18px">
+          <div class="card" ><div class="card-title">Occupancy by unit · booked against capacity today</div>
+            <div class="r-hbar"><span>IV Suite A</span><div class="meter"><div class="meter-fill" style="width:88%"></div></div><span class="meter-val">7/8 · 88%</span></div>
+            <div class="r-hbar"><span>IV Suite B</span><div class="meter"><div class="meter-fill" style="width:75%"></div></div><span class="meter-val">6/8 · 75%</span></div>
+            <div class="r-hbar"><span>EBOO Room 1</span><div class="meter"><div class="meter-fill" style="width:100%"></div></div><span class="meter-val">4/4 · 100%</span></div>
+            <div class="r-hbar"><span>EBOO Room 2</span><div class="meter"><div class="meter-fill" style="width:75%"></div></div><span class="meter-val">3/4 · 75%</span></div>
+            <div class="r-hbar"><span>Exam Room 1</span><div class="meter"><div class="meter-fill" style="width:83%"></div></div><span class="meter-val">5/6 · 83%</span></div>
+            <div class="r-hbar"><span>Exam Room 2</span><div class="meter"><div class="meter-fill" style="width:67%"></div></div><span class="meter-val">4/6 · 67%</span></div>
+            <div class="r-hbar"><span>Laser / PRP</span><div class="meter"><div class="meter-fill" style="width:80%"></div></div><span class="meter-val">4/5 · 80%</span></div>
+          </div>
+          <div class="card" ><div class="card-title">Occupancy by hour · the daily curve</div>
+          <div class="r-bars">
+            <div class="r-bar"><div class="r-bar-fill" style="height:38%"></div><span class="r-bar-lbl">8am</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:62%"></div><span class="r-bar-lbl">9am</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:84%"></div><span class="r-bar-lbl">10am</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:92%"></div><span class="r-bar-lbl">11am</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:58%"></div><span class="r-bar-lbl">12pm</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:76%"></div><span class="r-bar-lbl">1pm</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:88%"></div><span class="r-bar-lbl">2pm</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:71%"></div><span class="r-bar-lbl">3pm</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:54%"></div><span class="r-bar-lbl">4pm</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:32%"></div><span class="r-bar-lbl">5pm</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:18%"></div><span class="r-bar-lbl">6pm</span></div>
+          </div>
+          </div>
+          </div>
+          <div class="callout callout-warn" style="margin-top:14px">
+            EBOO Room 1 is at 100% and EBOO earns the most per patient. It is the constraint worth solving.
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

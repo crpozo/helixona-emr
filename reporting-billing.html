@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Insurance & billing · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-billing" data-page-title="Reports · Insurance & billing" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-bill" data-title="Insurance & billing">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/billing</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Insurance and billing</div>
+            <div class="page-sub">What was billed, what is allowable, and what actually landed</div>
+          </div>
+          <div class="app-user"><button class="btn">Export</button></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">$908,300</div>
+              <div class="stat-lbl">Estimated (billed)</div><div class="stat-sub">Submitted to insurers — not money yet</div></div>
+            <div class="card stat-card"><div class="stat-num">$574,200</div>
+              <div class="stat-lbl">Expected (allowable)</div><div class="stat-sub">Contracted amount likely to be paid</div></div>
+            <div class="card stat-card"><div class="stat-num">$475,400</div>
+              <div class="stat-lbl">Revenue collected</div><div class="stat-sub">Actually received — recognized</div></div>
+            <div class="card stat-card"><div class="stat-num">$98,800</div>
+              <div class="stat-lbl">Appealing denial clawback</div><div class="stat-sub">Denials being appealed</div></div>
+          </div>
+          <div class="callout callout-warn" style="margin-bottom:18px">
+            Only collected money counts as revenue. Billed amounts are an estimate — insurers can deny, delay
+            or claw back payments until it is in the bank. Every recoupment is appealed.
+          </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">$291,800</div>
+              <div class="stat-lbl">Billed</div><div class="stat-sub">Claims billed in the period</div><div class="r-delta">&#9650; 6.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">12</div>
+              <div class="stat-lbl">Pending claims</div><div class="stat-sub">Created, not yet sent</div><div class="r-delta">&#9660; 8.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">1.8 d</div>
+              <div class="stat-lbl">Average days to submit</div><div class="stat-sub">Encounter to claim sent</div><div class="r-delta">&#9650; 8.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">38.0 d</div>
+              <div class="stat-lbl">Average days to pay</div><div class="stat-sub">Weighted across payers</div><div class="r-delta">&#9660; 3.0%</div></div>
+          </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">11%</div>
+              <div class="stat-lbl">Total denial rate</div><div class="stat-sub">86 claims denied</div><div class="r-delta">&#9660; 1.5%</div></div>
+            <div class="card stat-card"><div class="stat-num">12</div>
+              <div class="stat-lbl">Unlocked claims</div><div class="stat-sub">Open money until the provider closes it</div><div class="r-delta">&#9660; 14.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">41</div>
+              <div class="stat-lbl">Appeals sent</div><div class="stat-sub">Total appeal submissions</div><div class="r-delta">&#9650; 6.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">34</div>
+              <div class="stat-lbl">Unique claims appealed</div><div class="stat-sub">Distinct claims under appeal</div><div class="r-delta">&#9650; 4.0%</div></div>
+          </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">286</div>
+              <div class="stat-lbl">VOBs completed</div><div class="stat-sub">Verifications of benefits</div><div class="r-delta">&#9650; 5.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">12</div>
+              <div class="stat-lbl">Open disputes</div><div class="stat-sub">Payer disputes in progress</div><div class="r-delta">&#9660; 8.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">$14,200</div>
+              <div class="stat-lbl">Write-offs</div><div class="stat-sub">Uncollectible balances</div><div class="r-delta">&#9660; 2.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">612</div>
+              <div class="stat-lbl">Claims paid</div><div class="stat-sub">Paid in full this period</div><div class="r-delta">&#9650; 5.0%</div></div>
+          </div>
+          <div class="grid-sidebar" style="margin-bottom:18px">
+          <div class="card" ><div class="card-title">Billed against collected · month over month</div>
+          <div class="r-bars">
+            <div class="r-bar"><div class="r-bar-fill" style="height:70%"></div><span class="r-bar-lbl">Jan</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:77%"></div><span class="r-bar-lbl">Feb</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:83%"></div><span class="r-bar-lbl">Mar</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:89%"></div><span class="r-bar-lbl">Apr</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:93%"></div><span class="r-bar-lbl">May</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:97%"></div><span class="r-bar-lbl">Jun</span></div>
+          </div>
+          </div>
+          <div class="card" ><div class="card-title">Denials by category</div>
+            <div class="r-hbar"><span>Office visits</span><div class="meter"><div class="meter-fill" style="width:30%"></div></div><span class="meter-val">18</span></div>
+            <div class="r-hbar"><span>IVs</span><div class="meter"><div class="meter-fill" style="width:87%"></div></div><span class="meter-val">52</span></div>
+            <div class="r-hbar"><span>Diagnostics</span><div class="meter"><div class="meter-fill" style="width:40%"></div></div><span class="meter-val">24</span></div>
+            <div class="r-hbar"><span>Procedures</span><div class="meter"><div class="meter-fill" style="width:63%"></div></div><span class="meter-val">38</span></div>
+            <div class="r-hbar"><span>Labs</span><div class="meter"><div class="meter-fill" style="width:20%"></div></div><span class="meter-val">12</span></div>
+          </div>
+          </div>
+          <div class="seg-divider">Claims by payer · $432,900 owed to the clinic</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Payer</th><th>Claims</th><th>Billed</th><th>Allowable</th><th>Paid</th><th>Owed</th><th>Days to pay</th><th>Denial %</th></tr></thead><tbody>
+              <tr><td>BlueShield</td><td>182</td><td>$248,000</td><td>$152,000</td><td>$121,000</td><td><strong>$127,000</strong></td><td>182d</td><td>9%</td></tr>
+              <tr><td>Aetna</td><td>134</td><td>$176,500</td><td>$110,300</td><td>$92,400</td><td><strong>$84,100</strong></td><td>46d</td><td>12%</td></tr>
+              <tr><td>Cigna</td><td>98</td><td>$132,400</td><td>$82,900</td><td>$70,100</td><td><strong>$62,300</strong></td><td>39d</td><td>8%</td></tr>
+              <tr><td>UnitedHealthcare</td><td>121</td><td>$158,900</td><td>$96,200</td><td>$74,800</td><td><strong>$84,100</strong></td><td>52d</td><td>14%</td></tr>
+              <tr><td>Medicare</td><td>156</td><td>$121,300</td><td>$88,700</td><td>$81,900</td><td><strong>$39,400</strong></td><td>28d</td><td>6%</td></tr>
+              <tr><td>Humana</td><td>64</td><td>$71,200</td><td>$44,100</td><td>$35,200</td><td><strong>$36,000</strong></td><td>41d</td><td>10%</td></tr>
+            </tbody></table>
+          </div>
+          <div class="callout callout-warn" style="margin-top:14px">
+            BlueShield holds $127,000 on a 182-day cycle — the largest exposure, and $46,000 of it is over 90 days.
+            <a href="billing.html#/d-03-era">Open the appeals pipeline</a>.
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

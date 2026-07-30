@@ -71,6 +71,20 @@
       ['Templates & macros', 'clinical-templates.html'],
       ['Governance', 'clinical-governance.html']
     ],
+    reporting: [
+      ['Today', 'reporting.html'],
+      ['Executive', 'reporting-exec.html'],
+      ['AI insights', 'reporting-ai.html'],
+      ['Revenue', 'reporting-revenue.html'],
+      ['Insurance & billing', 'reporting-billing.html'],
+      ['Patients', 'reporting-patients.html'],
+      ['Patient journey', 'reporting-journey.html'],
+      ['Marketing', 'reporting-marketing.html'],
+      ['Team & roles', 'reporting-team.html'],
+      ['Employees', 'reporting-employees.html'],
+      ['Treatments', 'reporting-treatments.html'],
+      ['Admin', 'reporting-admin.html']
+    ],
     journey: [
       ['Today', 'journey.html'],
       ['My plan', 'journey-plan.html'],

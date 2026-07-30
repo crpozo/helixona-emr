@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Marketing · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-marketing" data-page-title="Reports · Marketing" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-mkt" data-title="Marketing">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/marketing</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Marketing</div>
+            <div class="page-sub">Where the leads come from, and what earns attention</div>
+          </div>
+          <div class="app-user"></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">48,200</div>
+              <div class="stat-lbl">Total followers</div><div class="stat-sub">Across all social channels</div><div class="r-delta">&#9650; 3.4%</div></div>
+            <div class="card stat-card"><div class="stat-num">1,640</div>
+              <div class="stat-lbl">New followers</div><div class="stat-sub">This period</div><div class="r-delta">&#9650; 12.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">21,400</div>
+              <div class="stat-lbl">Website sessions</div><div class="stat-sub">Google Analytics</div><div class="r-delta">&#9650; 8.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">18,900</div>
+              <div class="stat-lbl">Emails sent</div><div class="stat-sub">Mailchimp campaigns</div><div class="r-delta">&#9650; 5.0%</div></div>
+          </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">38%</div>
+              <div class="stat-lbl">Email open rate</div><div class="stat-sub">Average across campaigns</div><div class="r-delta">&#9650; 2.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">286</div>
+              <div class="stat-lbl">Leads from marketing</div><div class="stat-sub">Attributed to campaigns</div><div class="r-delta">&#9650; 9.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">312</div>
+              <div class="stat-lbl">Google reviews</div><div class="stat-sub">4.8 stars on Google Business</div><div class="r-delta">&#9650; 4.0%</div></div>
+            <div class="card stat-card"><div class="stat-num">4.8</div>
+              <div class="stat-lbl">Average rating</div><div class="stat-sub">Google Business</div></div>
+          </div>
+          <div class="grid-sidebar" style="margin-bottom:18px">
+          <div class="card" ><div class="card-title">Leads · month over month</div>
+          <div class="r-bars">
+            <div class="r-bar"><div class="r-bar-fill" style="height:60%"></div><span class="r-bar-lbl">Jan</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:66%"></div><span class="r-bar-lbl">Feb</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:71%"></div><span class="r-bar-lbl">Mar</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:79%"></div><span class="r-bar-lbl">Apr</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:87%"></div><span class="r-bar-lbl">May</span></div>
+            <div class="r-bar"><div class="r-bar-fill" style="height:95%"></div><span class="r-bar-lbl">Jun</span></div>
+          </div>
+          </div>
+          <div class="card" ><div class="card-title">Leads by channel</div>
+            <div class="r-hbar"><span>Instagram</span><div class="meter"><div class="meter-fill" style="width:82%"></div></div><span class="meter-val">82</span></div>
+            <div class="r-hbar"><span>Facebook</span><div class="meter"><div class="meter-fill" style="width:44%"></div></div><span class="meter-val">44</span></div>
+            <div class="r-hbar"><span>Google / SEO</span><div class="meter"><div class="meter-fill" style="width:68%"></div></div><span class="meter-val">68</span></div>
+            <div class="r-hbar"><span>TikTok</span><div class="meter"><div class="meter-fill" style="width:94%"></div></div><span class="meter-val">94</span></div>
+            <div class="r-hbar"><span>X</span><div class="meter"><div class="meter-fill" style="width:12%"></div></div><span class="meter-val">12</span></div>
+            <div class="r-hbar"><span>YouTube</span><div class="meter"><div class="meter-fill" style="width:26%"></div></div><span class="meter-val">26</span></div>
+            <div class="r-hbar"><span>Email</span><div class="meter"><div class="meter-fill" style="width:38%"></div></div><span class="meter-val">38</span></div>
+            <div class="r-hbar"><span>Referral</span><div class="meter"><div class="meter-fill" style="width:56%"></div></div><span class="meter-val">56</span></div>
+          </div>
+          </div>
+          <div class="seg-divider">Post performance · ranked by engagement</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Post</th><th>Channel and reach</th><th>Engagement</th></tr></thead><tbody>
+              <tr><td><strong>EBOO before/after reel</strong></td><td>TikTok · 142,000 reach</td><td><span class="pill">9.8%</span></td></tr>
+              <tr><td><strong>IV drip menu walkthrough</strong></td><td>Instagram · 38,400 reach</td><td><span class="pill">7.2%</span></td></tr>
+              <tr><td><strong>Patient testimonial: chronic fatigue</strong></td><td>YouTube · 21,000 reach</td><td><span class="pill">6.1%</span></td></tr>
+              <tr><td><strong>Dr. Drannikov Q&amp;A clip</strong></td><td>Instagram · 26,700 reach</td><td><span class="pill">5.4%</span></td></tr>
+              <tr><td><strong>PRP explained in 30s</strong></td><td>TikTok · 54,000 reach</td><td><span class="pill">4.9%</span></td></tr>
+              <tr><td><strong>Clinic tour photo dump</strong></td><td>Facebook · 12,300 reach</td><td><span class="pill">2.1%</span></td></tr>
+              <tr><td><strong>Hours update post</strong></td><td>X · 6,400 reach</td><td><span class="pill">1.2%</span></td></tr>
+              <tr><td><strong>Holiday closure notice</strong></td><td>Facebook · 8,900 reach</td><td><span class="pill">0.8%</span></td></tr>
+            </tbody></table>
+          </div>
+          <div class="seg-divider">Email campaigns</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Campaign</th><th>Sent</th><th>Open rate</th><th>Click rate</th><th>Leads</th></tr></thead><tbody>
+              <tr><td><strong>EBOO awareness</strong></td><td>6,200</td><td>42%</td><td>7.1%</td><td>88</td></tr>
+              <tr><td><strong>June IV specials</strong></td><td>5,400</td><td>39%</td><td>5.8%</td><td>54</td></tr>
+              <tr><td><strong>HRT re-engagement</strong></td><td>3,900</td><td>34%</td><td>4.2%</td><td>31</td></tr>
+              <tr><td><strong>New patient welcome</strong></td><td>3,400</td><td>51%</td><td>9.4%</td><td>42</td></tr>
+            </tbody></table>
+          </div>
+          <div class="seg-divider">Followers by channel</div>
+          <div class="card" ><div class="card-title">Social audience</div>
+            <div class="r-hbar"><span>Instagram</span><div class="meter"><div class="meter-fill" style="width:99%"></div></div><span class="meter-val">24,800</span></div>
+            <div class="r-hbar"><span>TikTok</span><div class="meter"><div class="meter-fill" style="width:74%"></div></div><span class="meter-val">18,600</span></div>
+            <div class="r-hbar"><span>Facebook</span><div class="meter"><div class="meter-fill" style="width:57%"></div></div><span class="meter-val">14,200</span></div>
+            <div class="r-hbar"><span>Email</span><div class="meter"><div class="meter-fill" style="width:37%"></div></div><span class="meter-val">9,200</span></div>
+            <div class="r-hbar"><span>X</span><div class="meter"><div class="meter-fill" style="width:36%"></div></div><span class="meter-val">8,900</span></div>
+            <div class="r-hbar"><span>YouTube</span><div class="meter"><div class="meter-fill" style="width:25%"></div></div><span class="meter-val">6,300</span></div>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

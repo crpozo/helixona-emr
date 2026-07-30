@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Employees · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-employees" data-page-title="Reports · Employees" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-emp" data-title="Employees">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/employees</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Employees</div>
+            <div class="page-sub">Per-employee revenue and utilisation · June 2026</div>
+          </div>
+          <div class="app-user"><button class="btn">Export CSV</button></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">18</div>
+              <div class="stat-lbl">Employees shown</div><div class="stat-sub">Across every role</div></div>
+            <div class="card stat-card"><div class="stat-num">$572,200</div>
+              <div class="stat-lbl">Attributed revenue</div><div class="stat-sub">Average utilisation 91%</div></div>
+            <div class="card stat-card"><div class="stat-num">Dr. Drannikov</div>
+              <div class="stat-lbl">Top performer</div><div class="stat-sub">$96,400 attributed</div></div>
+            <div class="card stat-card"><div class="stat-num">91%</div>
+              <div class="stat-lbl">Average utilisation</div><div class="stat-sub">Across the team</div></div>
+          </div>
+          <div class="filters">
+            <input class="search-input" placeholder="Search an employee">
+            <button class="filter-chip active">All</button><button class="filter-chip">Provider</button>
+            <button class="filter-chip">Medic</button><button class="filter-chip">Nurse</button>
+            <button class="filter-chip">Front Desk</button><button class="filter-chip">Billing</button>
+          </div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Employee</th><th>Role</th><th>Attributed revenue</th><th>Utilisation</th></tr></thead><tbody>
+              <tr><td><strong>Dr. Eduard Drannikov</strong></td><td>Provider</td><td>$96,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:96%"></div></div><span class="meter-val">96%</span></div></td></tr>
+              <tr><td><strong>Dr. Bakman</strong></td><td>Provider</td><td>$71,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:94%"></div></div><span class="meter-val">94%</span></div></td></tr>
+              <tr><td><strong>Brooke</strong></td><td>Physician Associate</td><td>$58,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:91%"></div></div><span class="meter-val">91%</span></div></td></tr>
+              <tr><td><strong>Vignesh</strong></td><td>Billing</td><td>$52,300</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:93%"></div></div><span class="meter-val">93%</span></div></td></tr>
+              <tr><td><strong>Kamalesh</strong></td><td>Billing</td><td>$46,100</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:88%"></div></div><span class="meter-val">88%</span></div></td></tr>
+              <tr><td><strong>Nick</strong></td><td>Nurse</td><td>$41,600</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:95%"></div></div><span class="meter-val">95%</span></div></td></tr>
+              <tr><td><strong>Bea</strong></td><td>Medic</td><td>$30,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:93%"></div></div><span class="meter-val">93%</span></div></td></tr>
+              <tr><td><strong>Yazmin</strong></td><td>Front Desk</td><td>$24,100</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:94%"></div></div><span class="meter-val">94%</span></div></td></tr>
+              <tr><td><strong>Juan</strong></td><td>Medic</td><td>$24,100</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:87%"></div></div><span class="meter-val">87%</span></div></td></tr>
+              <tr><td><strong>Marie</strong></td><td>New Patient Advisor</td><td>$24,000</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:92%"></div></div><span class="meter-val">92%</span></div></td></tr>
+              <tr><td><strong>Nate</strong></td><td>Medic</td><td>$20,900</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:82%"></div></div><span class="meter-val">82%</span></div></td></tr>
+              <tr><td><strong>Bee</strong></td><td>PCC</td><td>$18,900</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:90%"></div></div><span class="meter-val">90%</span></div></td></tr>
+              <tr><td><strong>Haylee</strong></td><td>Front Desk</td><td>$18,600</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:86%"></div></div><span class="meter-val">86%</span></div></td></tr>
+              <tr><td><strong>Kyle</strong></td><td>Technician</td><td>$18,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:89%"></div></div><span class="meter-val">89%</span></div></td></tr>
+              <tr><td><strong>Charlene (Virtual)</strong></td><td>Virtual MA</td><td>$14,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:91%"></div></div><span class="meter-val">91%</span></div></td></tr>
+              <tr><td><strong>Wesley</strong></td><td>Medical Assistant</td><td>$12,800</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:88%"></div></div><span class="meter-val">88%</span></div></td></tr>
+              <tr><td><strong>Karina</strong></td><td>Operations Manager</td><td>&mdash;</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:90%"></div></div><span class="meter-val">90%</span></div></td></tr>
+              <tr><td><strong>Shibani</strong></td><td>Admin</td><td>&mdash;</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:90%"></div></div><span class="meter-val">90%</span></div></td></tr>
+            </tbody></table>
+          </div>
+          <div class="callout" style="margin-top:14px">
+            Revenue is attributed, not earned individually — a single visit can credit a provider, a medic and
+            the front desk. <a href="reporting-team.html">See how each role is measured</a>.
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

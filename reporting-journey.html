@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Patient journey · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-journey" data-page-title="Reports · Patient journey" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-jour" data-title="Patient journey">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/journey</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Patient journey</div>
+            <div class="page-sub">Where each person is, and how long they have been there</div>
+          </div>
+          <div class="app-user"></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">2</div>
+              <div class="stat-lbl">Active</div><div class="stat-sub">Coming in regularly</div></div>
+            <div class="card stat-card"><div class="stat-num">8</div>
+              <div class="stat-lbl">In pipeline</div><div class="stat-sub">Between lead and first appointment</div></div>
+            <div class="card stat-card"><div class="stat-num">1</div>
+              <div class="stat-lbl">Waitlist</div><div class="stat-sub">Waiting for an opening</div></div>
+            <div class="card stat-card"><div class="stat-num">3</div>
+              <div class="stat-lbl">Declined</div><div class="stat-sub">Left the funnel</div></div>
+          </div>
+          <div class="filters">
+            <button class="filter-chip active">All</button><button class="filter-chip">Lead</button>
+            <button class="filter-chip">Contacted</button><button class="filter-chip">Onboarding</button>
+            <button class="filter-chip">Patient</button><button class="filter-chip">First appointment</button>
+            <button class="filter-chip">Active</button><button class="filter-chip">Waitlist</button>
+            <button class="filter-chip">Declined</button>
+          </div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Patient</th><th>Current stage</th><th>Modality</th><th>Coordinator</th><th>Next appointment</th><th>In pipeline</th></tr></thead><tbody>
+              <tr><td><strong>Olivia Bennett</strong></td><td><span class="pill pill-ok">Active</span></td><td>IV Therapy</td><td>Marie</td><td>Jun 9, 2026</td><td>171d</td></tr>
+              <tr><td><strong>Marcus Hale</strong></td><td><span class="pill">First appointment</span></td><td>EBOO</td><td>Marie</td><td>Jun 6, 2026</td><td>72d</td></tr>
+              <tr><td><strong>Sophia Nguyen</strong></td><td><span class="pill pill-ok">Patient</span></td><td>Chiro</td><td>Marie</td><td>Jun 5, 2026</td><td>64d</td></tr>
+              <tr><td><strong>James Carter</strong></td><td><span class="pill">Onboarding</span></td><td>Erchonia Laser Therapy</td><td>Marie</td><td>—</td><td>60d</td></tr>
+              <tr><td><strong>Emma Rodriguez</strong></td><td><span class="pill">Contacted</span></td><td>BEMER Therapy</td><td>Marie</td><td>—</td><td>59d</td></tr>
+              <tr><td><strong>Liam Foster</strong></td><td><span class="pill">Lead</span></td><td>IV Therapy</td><td>Marie</td><td>—</td><td>57d</td></tr>
+              <tr><td><strong>Ava Mitchell</strong></td><td><span class="pill pill-warn">Waitlist</span></td><td>EBOO</td><td>Marie</td><td>—</td><td>67d</td></tr>
+              <tr><td><strong>Noah Pearson</strong></td><td><span class="pill pill-err">Declined · cost</span></td><td>Chiro</td><td>Marie</td><td>—</td><td>70d</td></tr>
+              <tr><td><strong>Isabella Reed</strong></td><td><span class="pill pill-ok">Active</span></td><td>IV Therapy</td><td>Marie</td><td>Jun 7, 2026</td><td>197d</td></tr>
+              <tr><td><strong>Ethan Brooks</strong></td><td><span class="pill">First appointment</span></td><td>Erchonia Laser Therapy</td><td>Marie</td><td>Jun 10, 2026</td><td>74d</td></tr>
+              <tr><td><strong>Mia Coleman</strong></td><td><span class="pill pill-ok">Patient</span></td><td>BEMER Therapy</td><td>Marie</td><td>Jun 8, 2026</td><td>62d</td></tr>
+              <tr><td><strong>Lucas Ward</strong></td><td><span class="pill">Lead</span></td><td>EBOO</td><td>Marie</td><td>—</td><td>58d</td></tr>
+              <tr><td><strong>Grace Sullivan</strong></td><td><span class="pill pill-err">Declined · out of network</span></td><td>IV Therapy</td><td>Marie</td><td>—</td><td>73d</td></tr>
+              <tr><td><strong>Henry Diaz</strong></td><td><span class="pill pill-err">Declined · unresponsive</span></td><td>Erchonia Laser Therapy</td><td>Marie</td><td>—</td><td>71d</td></tr>
+            </tbody></table>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>

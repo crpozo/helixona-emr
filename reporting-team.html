@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports · Team & roles · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=13">
+<style>
+  .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
+  .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+  .r-bar { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; }
+  .r-bar-fill { width: 100%; background: var(--hx-navy); border-radius: 3px 3px 0 0; min-height: 3px; }
+  .r-bar-fill.alt { background: var(--st-scheduled); }
+  .r-bar-lbl { font-size: 9.5px; color: var(--muted); margin-top: 5px; }
+  .r-hbar { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 12px; }
+  .r-hbar span:first-child { width: 168px; flex-shrink: 0; }
+  .r-hbar .meter { flex: 1; }
+  .r-alert { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .r-alert:last-child { border-bottom: none; }
+  .r-funnel-step { display: flex; align-items: center; gap: 12px; padding: 7px 0; font-size: 12.5px; }
+  .r-funnel-step span:first-child { width: 130px; flex-shrink: 0; font-weight: 600; color: var(--hx-navy); }
+  .r-funnel-step .meter { flex: 1; max-width: 320px; }
+  .r-live { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    background: var(--st-inroom); color: #fff; padding: 2px 8px; border-radius: 10px; vertical-align: 3px; }
+</style>
+</head>
+<body data-page="reporting-team" data-page-title="Reports · Team & roles" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="f-team" data-title="Team & roles">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/reports/team</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Team and roles</div>
+            <div class="page-sub">What each role is measured by, and where the number comes from</div>
+          </div>
+          <div class="app-user"></div>
+        </div>
+          <div class="grid-4" style="margin-bottom:18px">
+            <div class="card stat-card"><div class="stat-num">20</div>
+              <div class="stat-lbl">Employees</div><div class="stat-sub">Across sixteen roles</div></div>
+            <div class="card stat-card"><div class="stat-num">540</div>
+              <div class="stat-lbl">Dr. Drannikov appointments</div><div class="stat-sub">The busiest provider</div></div>
+            <div class="card stat-card"><div class="stat-num">512</div>
+              <div class="stat-lbl">Locked charts</div><div class="stat-sub">14 still unlocked</div></div>
+            <div class="card stat-card"><div class="stat-num">84%</div>
+              <div class="stat-lbl">Schedule fill rate</div><div class="stat-sub">Against capacity</div></div>
+          </div>
+          <div class="card" style="margin-bottom:18px">
+            <div class="card-title">Provider · Dr. Eduard Drannikov</div>
+            <div class="field-help" style="margin-bottom:10px">All appointment types, hormone replacement therapy, PRP and procedures &middot; source eCW</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Appointment type</th><th>Count</th></tr></thead><tbody>
+              <tr><td>New patient</td><td>96</td></tr>
+              <tr><td>New patient follow-up</td><td>88</td></tr>
+              <tr><td>Follow-up</td><td>356</td></tr>
+              <tr><td>Established new patient</td><td>72</td></tr>
+              <tr><td>Pellets — female</td><td>44</td></tr>
+              <tr><td>Pellets — male</td><td>31</td></tr>
+              <tr><td>Hormone replacement therapy</td><td>58</td></tr>
+              <tr><td>PRP</td><td>34</td></tr>
+              <tr><td>Prolozone</td><td>48</td></tr>
+              <tr><td>TPI</td><td>62</td></tr>
+              <tr><td>Acupuncture</td><td>84</td></tr>
+              <tr><td>Microcurrent</td><td>52</td></tr>
+              <tr><td>Telemedicine</td><td>76</td></tr>
+              <tr><td>Transfer of care</td><td>18</td></tr>
+            </tbody></table>
+          </div>
+          </div>
+          <div class="seg-divider">Team roll-up · manager view</div>
+          <div class="tbl-wrap">
+            <table class="tbl"><thead><tr><th>Role</th><th>Headcount</th><th>Highlighted metric</th><th>Source</th></tr></thead><tbody>
+              <tr><td><strong>Provider · Dr. Eduard Drannikov</strong></td><td>1</td><td>Total appointments: 540</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Provider · Dr. Bakman</strong></td><td>1</td><td>Total appointments: 110</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Physician Associate · Brooke</strong></td><td>1</td><td>Total appointments: 386</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>PCC · Patient Care Coordinator</strong></td><td>1</td><td>PCC appointments: 412</td><td><span class="pill pill-muted">eCW appointment types + 8x8</span></td></tr>
+              <tr><td><strong>New Patient Advisor · Marie</strong></td><td>1</td><td>Total calls: 1,720</td><td><span class="pill pill-muted">8x8 + CRM</span></td></tr>
+              <tr><td><strong>Patient Guide</strong></td><td>1</td><td>Outbound calls: 680</td><td><span class="pill pill-muted">8x8 + eCW</span></td></tr>
+              <tr><td><strong>Front Desk</strong></td><td>3</td><td>Cash service sales: $42,700</td><td><span class="pill pill-muted">eCW + 8x8 by extension</span></td></tr>
+              <tr><td><strong>Medical Assistants</strong></td><td>1</td><td>Vitals taken: 2,310</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Virtual MA · Charlene</strong></td><td>1</td><td>Chart preps: 340</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Medics</strong></td><td>3</td><td>IV starts: 1,620</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Nurses · Nick</strong></td><td>1</td><td>EBOOs performed: 188</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Technician · Kyle</strong></td><td>1</td><td>Laser appointments: 186</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Lab draws</strong></td><td>0</td><td>Quest draws: 180</td><td><span class="pill pill-muted">eCW + lab portals</span></td></tr>
+              <tr><td><strong>Billing</strong></td><td>2</td><td>Insurance collections: $98,400</td><td><span class="pill pill-muted">eCW billing</span></td></tr>
+              <tr><td><strong>Operations Manager · Karina</strong></td><td>1</td><td>Average days of appointments per provider: 6.2 d</td><td><span class="pill pill-muted">eCW</span></td></tr>
+              <tr><td><strong>Admin · Shibani</strong></td><td>1</td><td>Schedule fill rate: 84%</td><td><span class="pill pill-muted">Admin portal</span></td></tr>
+            </tbody></table>
+          </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=13"></script>
+</body>
+</html>
