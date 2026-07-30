@@ -29,6 +29,7 @@
     { name: 'Documentation', href: 'clinical.html', page: 'clinical' },
     { name: 'Orders & results', href: 'labs.html', page: 'labs' },
     { name: 'Medications', href: 'pharmacy.html', page: 'pharmacy' },
+    { name: 'Treatments & therapies', href: 'treatments.html', page: 'treatments' },
     { name: 'Messages', href: 'communication.html', page: 'communication' },
     { name: 'Billing', href: 'billing.html', page: 'billing' },
     { group: 'Programs' },
