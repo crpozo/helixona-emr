@@ -969,7 +969,7 @@ button { font-family: inherit; }
 :root {
   --tx-nad:     #5B4B8A;  /* NAD+ */
   --tx-ivc:     #B26B12;  /* IV vitamin C */
-  --tx-myers:   #1F6F6B;  /* Myers' and pushes */
+  --tx-flow:   #1F6F6B;  /* Foundational Flow and pushes */
   --tx-eboo:    #9B3A3A;  /* EBOO */
   --tx-consult: #2E5C8A;  /* consults and follow-ups */
   --tx-tele:    #3E7A4E;  /* telehealth */
@@ -979,14 +979,14 @@ button { font-family: inherit; }
 /* The block's left edge carries the treatment colour, the fill stays status */
 .cal-appt.t-nad     { border-left-color: var(--tx-nad); }
 .cal-appt.t-ivc     { border-left-color: var(--tx-ivc); }
-.cal-appt.t-myers   { border-left-color: var(--tx-myers); }
+.cal-appt.t-flow   { border-left-color: var(--tx-flow); }
 .cal-appt.t-eboo    { border-left-color: var(--tx-eboo); }
 .cal-appt.t-consult { border-left-color: var(--tx-consult); }
 .cal-appt.t-lab     { border-left-color: var(--tx-lab); }
 .cal-appt.t-tele    { border-left-color: var(--tx-tele); }
 .week-appt.t-nad    { border-left-color: var(--tx-nad); }
 .week-appt.t-ivc    { border-left-color: var(--tx-ivc); }
-.week-appt.t-myers  { border-left-color: var(--tx-myers); }
+.week-appt.t-flow  { border-left-color: var(--tx-flow); }
 .week-appt.t-eboo   { border-left-color: var(--tx-eboo); }
 
 /* The initial chip is the colour key, wherever it appears */
@@ -994,8 +994,8 @@ button { font-family: inherit; }
 .type-mark.tm-nad     { background: var(--tx-nad);     border-color: var(--tx-nad);     color: #fff; }
 .t-ivc     > .cal-appt-type > .type-mark,
 .type-mark.tm-ivc     { background: var(--tx-ivc);     border-color: var(--tx-ivc);     color: #fff; }
-.t-myers   > .cal-appt-type > .type-mark,
-.type-mark.tm-myers   { background: var(--tx-myers);   border-color: var(--tx-myers);   color: #fff; }
+.t-flow   > .cal-appt-type > .type-mark,
+.type-mark.tm-flow   { background: var(--tx-flow);   border-color: var(--tx-flow);   color: #fff; }
 .t-eboo    > .cal-appt-type > .type-mark,
 .type-mark.tm-eboo    { background: var(--tx-eboo);    border-color: var(--tx-eboo);    color: #fff; }
 .t-consult > .cal-appt-type > .type-mark,
@@ -1003,12 +1003,12 @@ button { font-family: inherit; }
 .t-tele    > .cal-appt-type > .type-mark,
 .type-mark.tm-tele    { background: var(--tx-tele);    border-color: var(--tx-tele);    color: #fff; }
 .type-mark.tm-lab     { background: var(--tx-lab);     border-color: var(--tx-lab);     color: #fff; }
-.type-mark.tm-gsh     { background: var(--tx-myers);   border-color: var(--tx-myers);   color: #fff; }
+.type-mark.tm-gsh     { background: var(--tx-flow);   border-color: var(--tx-flow);   color: #fff; }
 
 /* Legend swatches carry the same colour */
 .cal-legend-swatch.sw-nad     { border-left-color: var(--tx-nad) !important; }
 .cal-legend-swatch.sw-ivc     { border-left-color: var(--tx-ivc) !important; }
-.cal-legend-swatch.sw-myers   { border-left-color: var(--tx-myers) !important; }
+.cal-legend-swatch.sw-flow   { border-left-color: var(--tx-flow) !important; }
 .cal-legend-swatch.sw-eboo    { border-left-color: var(--tx-eboo) !important; }
 .cal-legend-swatch.sw-consult { border-left-color: var(--tx-consult) !important; }
 
@@ -1029,7 +1029,7 @@ button { font-family: inherit; }
 .cal-appt[class*="t-"], .week-appt[class*="t-"] { border-left-style: solid; border-left-width: 6px; }
 .week-appt.t-nad    { border-left-style: solid; border-left-width: 5px; }
 .week-appt.t-ivc    { border-left-style: double; border-left-width: 5px; }
-.week-appt.t-myers  { border-left-style: dashed; border-left-width: 5px; }
+.week-appt.t-flow  { border-left-style: dashed; border-left-width: 5px; }
 .week-appt.t-eboo   { border-left-style: dotted; border-left-width: 6px; }
 
 /* Actor (who runs it) — a corner tag on the block */

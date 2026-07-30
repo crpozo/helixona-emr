@@ -88,7 +88,7 @@
     ],
     journey: [
       ['Today', 'journey.html'],
-      ['My plan', 'journey-plan.html'],
+      ['Plan & orders', 'journey-plan.html'],
       ['Check-in', 'journey-checkin.html'],
       ['Schedule', 'journey-schedule.html'],
       ['Progress', 'journey-progress.html'],

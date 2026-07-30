@@ -29,6 +29,18 @@
   .j-lead-sub { font-size: 12.5px; color: var(--muted); text-align: center; margin: 0 auto 16px; max-width: 250px; line-height: 1.5; }
   /* Done */
   .j-done-pts { font-size: 24px; font-weight: 800; color: var(--hx-navy); margin-top: 2px; }
+  .j-face-row { display: flex; gap: 8px; justify-content: space-between; margin: 10px 0 4px; }
+  .j-face {
+    flex: 1; border: 1px solid var(--line); background: #fff; border-radius: 12px;
+    padding: 10px 4px 8px; text-align: center; cursor: pointer; font-family: inherit;
+  }
+  .j-face:hover { border-color: var(--ink); }
+  .j-face.picked { border-color: var(--ink); background: var(--hx-band); box-shadow: inset 0 0 0 1px var(--ink); }
+  .j-face-glyph { display: block; font-size: 22px; line-height: 1.1; }
+  .j-face-lbl { display: block; font-size: 9.5px; color: var(--muted); margin-top: 3px; }
+  .j-face.picked .j-face-lbl { color: var(--ink); font-weight: 600; }
+  .j-q { font-size: 13.5px; font-weight: 600; color: var(--hx-navy); margin-top: 14px; }
+  .j-q-sub { font-size: 11.5px; color: var(--muted); }
 </style>
 </head>
 <body data-page="journey-checkin" data-page-title="Patient journey · Check-in" data-shell="app">
@@ -83,6 +95,69 @@
 
         <button class="bigbtn bigbtn-done" data-activate="j-checkin-activity" data-log="reset" style="margin-top:16px">Start check-in</button>
         <a class="bigbtn bigbtn-skip" href="journey.html#/j-01-today" style="text-decoration:none">Not now</a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <section class="screen" id="j-checkin-feeling" data-title="How you feel">
+    <div class="phone-frame">
+      <div class="phone-bar"><span>8:32 PM</span><span>LTE &#9642;&#9642;&#9642;</span></div>
+      <div class="phone-body">
+
+        <div class="j-lead">How are you feeling?</div>
+        <div class="j-lead-sub">Four taps, evening of Tuesday, July 21. Your doctor sees these as a line over time,
+        not as one bad day.</div>
+
+        <div class="j-q">Pain</div>
+        <div class="j-q-sub">How much pain today?</div>
+        <div class="j-face-row">
+          <button class="j-face" data-q="0" data-v="0"><span class="j-face-glyph">&#128512;</span><span class="j-face-lbl">None</span></button>
+          <button class="j-face picked" data-q="0" data-v="1"><span class="j-face-glyph">&#128522;</span><span class="j-face-lbl">A little</span></button>
+          <button class="j-face" data-q="0" data-v="2"><span class="j-face-glyph">&#128528;</span><span class="j-face-lbl">Some</span></button>
+          <button class="j-face" data-q="0" data-v="3"><span class="j-face-glyph">&#128577;</span><span class="j-face-lbl">A lot</span></button>
+          <button class="j-face" data-q="0" data-v="4"><span class="j-face-glyph">&#128546;</span><span class="j-face-lbl">Worst yet</span></button>
+        </div>
+
+        <div class="j-q">Energy</div>
+        <div class="j-q-sub">How was your energy?</div>
+        <div class="j-face-row">
+          <button class="j-face" data-q="1" data-v="0"><span class="j-face-glyph">&#128577;</span><span class="j-face-lbl">Flat</span></button>
+          <button class="j-face" data-q="1" data-v="1"><span class="j-face-glyph">&#128578;</span><span class="j-face-lbl">Low</span></button>
+          <button class="j-face picked" data-q="1" data-v="2"><span class="j-face-glyph">&#128528;</span><span class="j-face-lbl">Okay</span></button>
+          <button class="j-face" data-q="1" data-v="3"><span class="j-face-glyph">&#128522;</span><span class="j-face-lbl">Good</span></button>
+          <button class="j-face" data-q="1" data-v="4"><span class="j-face-glyph">&#128512;</span><span class="j-face-lbl">Great</span></button>
+        </div>
+
+        <div class="j-q">Mood</div>
+        <div class="j-q-sub">How did you feel in yourself?</div>
+        <div class="j-face-row">
+          <button class="j-face" data-q="2" data-v="0"><span class="j-face-glyph">&#128577;</span><span class="j-face-lbl">Very low</span></button>
+          <button class="j-face" data-q="2" data-v="1"><span class="j-face-glyph">&#128578;</span><span class="j-face-lbl">Low</span></button>
+          <button class="j-face" data-q="2" data-v="2"><span class="j-face-glyph">&#128528;</span><span class="j-face-lbl">Even</span></button>
+          <button class="j-face picked" data-q="2" data-v="3"><span class="j-face-glyph">&#128522;</span><span class="j-face-lbl">Good</span></button>
+          <button class="j-face" data-q="2" data-v="4"><span class="j-face-glyph">&#128512;</span><span class="j-face-lbl">Great</span></button>
+        </div>
+
+        <div class="j-q">Clarity of thinking</div>
+        <div class="j-q-sub">How clear was your thinking?</div>
+        <div class="j-face-row">
+          <button class="j-face" data-q="3" data-v="0"><span class="j-face-glyph">&#128577;</span><span class="j-face-lbl">Very foggy</span></button>
+          <button class="j-face" data-q="3" data-v="1"><span class="j-face-glyph">&#128578;</span><span class="j-face-lbl">Foggy</span></button>
+          <button class="j-face picked" data-q="3" data-v="2"><span class="j-face-glyph">&#128528;</span><span class="j-face-lbl">Okay</span></button>
+          <button class="j-face" data-q="3" data-v="3"><span class="j-face-glyph">&#128522;</span><span class="j-face-lbl">Clear</span></button>
+          <button class="j-face" data-q="3" data-v="4"><span class="j-face-glyph">&#128512;</span><span class="j-face-lbl">Sharp</span></button>
+        </div>
+
+        <div class="prov" style="margin-top:14px">
+          <span>Asked every morning and every evening. Morning is already answered
+          &mdash; <a href="journey-progress.html#/j-progress-week">see the last two weeks</a>.</span>
+        </div>
+
+        <button class="bigbtn" data-activate="j-checkin-activity" onclick="HCOS.toast('Evening check-in saved. It lands on your chart, not in a separate app.', 'ok')">Save and carry on</button>
+        <button class="bigbtn bigbtn-skip" data-activate="j-checkin-done">Skip tonight</button>
 
       </div>
     </div>
@@ -253,6 +328,23 @@
 </div>
 
 <script src="assets/hcos.js?v=16"></script>
+<script>
+/* One face per question, and the answer sticks. */
+(function () {
+  var faces = document.querySelectorAll('.j-face');
+  Array.prototype.forEach.call(faces, function (f) {
+    f.setAttribute('data-hcos-handled', '1');
+    f.addEventListener('click', function () {
+      var q = f.getAttribute('data-q');
+      Array.prototype.forEach.call(document.querySelectorAll('.j-face[data-q="' + q + '"]'), function (x) {
+        x.classList.remove('picked');
+      });
+      f.classList.add('picked');
+    });
+  });
+})();
+</script>
+
 <script>
   // Demo only: the last screen reports back what Maya just answered. Nothing here changes the plan.
   (function () {

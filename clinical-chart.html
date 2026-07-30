@@ -785,8 +785,8 @@
 
         <div class="seg-divider" style="margin-top:0">Protocol template — pick one, the dose math follows</div>
         <div class="grid-3">
-          <div class="card b-proto selected" onclick="bPickProtocol(this,'myers')">
-            <div class="b-proto-name">Myers' cocktail</div>
+          <div class="card b-proto selected" onclick="bPickProtocol(this,'flow')">
+            <div class="b-proto-name">Foundational Flow 10</div>
             <div class="b-proto-dose">5 g vitamin C + B-complex + B12 + calcium + magnesium in 100 mL saline · 117 mL total · 30 min at 234 mL/hr · ~1 h chair</div>
           </div>
           <div class="card b-proto" onclick="bPickProtocol(this,'nad')">
@@ -804,7 +804,7 @@
 
         <div class="grid-sidebar" style="margin-top:16px">
           <div>
-            <div class="seg-divider" style="margin-top:0">Components · <span id="b-comp-title">Myers' cocktail</span></div>
+            <div class="seg-divider" style="margin-top:0">Components · <span id="b-comp-title">Foundational Flow 10</span></div>
             <div class="tbl-wrap">
               <table class="tbl">
                 <thead>
@@ -871,10 +871,10 @@
               </div>
               <div id="b-ai-dur">
                 <div class="ai-body">
-                  Book 1 h 15 of chair time, not 1 h. Priya's last three Myers' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.
+                  Book 1 h 15 of chair time, not 1 h. Priya's last three Foundational Flow runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.
                 </div>
                 <div class="ai-meta">
-                  <span><b>Read</b> her last 3 Myers' administrations — 2 under <code>O-2291</code> v1 and the Mar 2026 trial run</span>
+                  <span><b>Read</b> her last 3 Foundational Flow administrations — 2 under <code>O-2291</code> v1 and the Mar 2026 trial run</span>
                   <span><b>Model</b> duration-v1.4</span>
                   <span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>
                   <span><b>Reviewer</b> Dr. Drannikov</span>
@@ -999,7 +999,7 @@
 
         <div class="seg-divider">Original encounter (read-only)</div>
         <div class="card" style="background:var(--hx-band)">
-          <div style="font-size:12.5px;line-height:1.7"><strong>Plan (excerpt):</strong> Start IV Myers' cocktail series of 6. NAD+ trial after Myers. Recheck TSH in 8 weeks on increased levothyroxine 75 mcg.</div>
+          <div style="font-size:12.5px;line-height:1.7"><strong>Plan (excerpt):</strong> Start IV Foundational Flow 10 series of 6. NAD+ trial after Foundational Flow. Recheck TSH in 8 weeks on increased levothyroxine 75 mcg.</div>
         </div>
 
         <div class="field" style="margin-top:16px">
@@ -1061,7 +1061,7 @@
     <div class="modal-head">
       <div>
         <div class="modal-title">Sign order O-2291 v2</div>
-        <div class="modal-sub">Priya Natarajan · <span id="b-sign-proto">Myers' cocktail</span> × 6 · Dr. Drannikov</div>
+        <div class="modal-sub">Priya Natarajan · <span id="b-sign-proto">Foundational Flow 10</span> × 6 · Dr. Drannikov</div>
       </div>
       <button class="modal-close" data-close-modal>×</button>
     </div>
@@ -1111,8 +1111,8 @@
   // The IV protocol templates. Picking one rewrites the components and the dose math
   // on this draft — the template supplies the starting numbers, the signed order keeps them.
   var B_PROTOCOLS = {
-    myers: {
-      name: "Myers' cocktail",
+    flow: {
+      name: "Foundational Flow 10",
       rows: [
         ['B-complex 100', 'Standard', '1 mL', 'IV push or admix'],
         ['Vitamin B12 (methylcobalamin)', '1,000 mcg/mL', '1 mL', 'IV admix'],
@@ -1125,9 +1125,9 @@
       premeds: 'First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.',
       preflight: 'CMP within 90 days · allergy list reviewed today',
       summary: '"You\'ll receive 6 infusions of vitamins and minerals over 6 weeks, one a week. The drip itself runs about 30 minutes; plan on about an hour and a quarter in the chair, because we place the line, monitor your vitals throughout, and watch you for a few minutes afterwards."',
-      ai: '<div class="ai-body">Book 1 h 15 of chair time, not 1 h. Priya\'s last three Myers\' runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.</div>'
+      ai: '<div class="ai-body">Book 1 h 15 of chair time, not 1 h. Priya\'s last three Foundational Flow runs took 1 h 12, 1 h 18 and 1 h 14 including access and observation.</div>'
         + '<div class="ai-meta">'
-        + '<span><b>Read</b> her last 3 Myers\' administrations — 2 under <code>O-2291</code> v1 and the Mar 2026 trial run</span>'
+        + '<span><b>Read</b> her last 3 Foundational Flow administrations — 2 under <code>O-2291</code> v1 and the Mar 2026 trial run</span>'
         + '<span><b>Model</b> duration-v1.4</span>'
         + '<span><b>Confidence</b> 0.86 — three runs is the smallest sample it will use</span>'
         + '<span><b>Reviewer</b> Dr. Drannikov</span></div>'

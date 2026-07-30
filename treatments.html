@@ -357,6 +357,54 @@
     </div>
   </section>
 
+
+  <!-- ============================================================ -->
+  <section class="screen" id="t-06-codes" data-title="Types &amp; colour codes">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/treatments/codes</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Types and colour codes</div>
+            <div class="page-sub">The taxonomy behind the calendar &mdash; type, subtype, letters and colour, editable in one place</div>
+          </div>
+          <button class="btn btn-primary" data-open-modal="#t-code-modal">New subtype</button>
+        </div>
+
+        <div class="callout">
+          <strong>The colour code is data, not styling.</strong> A subtype owns its letters and its colour here,
+          and every screen reads them &mdash; the block edge on
+          <a href="schedule.html#/l-01-day">the calendar</a>, the chip in the appointment detail, the legend,
+          and the treatment filter. Change it here and it changes everywhere at once.
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:14px">
+          <table class="tbl">
+            <thead><tr><th>Type</th><th>Subtype</th><th>Letters</th><th>Colour</th>
+              <th>Treatments that use it</th><th>Where it shows</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>Infusion</td><td><strong>NAD+ infusion</strong></td><td><span class="type-mark tm-nad">NAD</span></td><td><span class="t-swatch" style="background:var(--tx-nad)"></span>Purple</td><td class="t-uses">NAD add on · Foundational Flow with NAD</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Infusion</td><td><strong>IV vitamin C</strong></td><td><span class="type-mark tm-ivc">IVC</span></td><td><span class="t-swatch" style="background:var(--tx-ivc)"></span>Amber</td><td class="t-uses">Mega C 15 / 25 / 50 / 75 / 100</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Infusion</td><td><strong>Foundational Flow &amp; pushes</strong></td><td><span class="type-mark tm-flo">FLO</span></td><td><span class="t-swatch" style="background:var(--tx-flow)"></span>Teal</td><td class="t-uses">Foundational Flow 5–50 · Glut add on · Hydration</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Procedure</td><td><strong>EBOO</strong></td><td><span class="type-mark tm-ebo">EBO</span></td><td><span class="t-swatch" style="background:var(--tx-eboo)"></span>Red</td><td class="t-uses">EBOO</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Visit</td><td><strong>Consults &amp; follow-ups</strong></td><td><span class="type-mark tm-con">CON</span></td><td><span class="t-swatch" style="background:var(--tx-consult)"></span>Blue</td><td class="t-uses">New patient · follow-up · transfer of care</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Visit</td><td><strong>Telehealth</strong></td><td><span class="type-mark tm-tel">TEL</span></td><td><span class="t-swatch" style="background:var(--tx-tele)"></span>Green</td><td class="t-uses">Telehealth consult · remote follow-up</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Diagnostic</td><td><strong>Lab draw</strong></td><td><span class="type-mark tm-lab">LAB</span></td><td><span class="t-swatch" style="background:var(--tx-lab)"></span>Brown</td><td class="t-uses">Quest draw · in-house panel</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:12px">
+          <span>Two channels, never mixed: <strong>status is the fill</strong> of the block and
+          <strong>subtype is the edge</strong>. A subtype cannot take a status colour, and a status cannot take
+          a subtype colour &mdash; that is what keeps a glance readable.</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ============================================================ -->
@@ -456,6 +504,57 @@
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
       <button class="btn btn-primary" onclick="HCOS.toast('Logged. Lot decremented, v7 stamped, 2 units released to billing.', 'ok')" data-close-modal>Save</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="t-code-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Subtype and colour</div>
+        <div class="modal-sub">Changing this changes the calendar, the legend and the filters together</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label class="field-label">Type</label>
+        <select class="field-input">
+          <option>Infusion</option><option>Procedure</option><option>Visit</option>
+          <option>Diagnostic</option><option>Therapy</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Subtype</label>
+        <input class="field-input" type="text" value="IV vitamin C">
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="field-label">Letters on the block</label>
+          <input class="field-input" type="text" value="IVC" maxlength="4">
+        </div>
+        <div class="field">
+          <label class="field-label">Colour</label>
+          <select class="field-input">
+            <option>Amber</option><option>Purple</option><option>Teal</option>
+            <option>Red</option><option>Blue</option><option>Green</option><option>Brown</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Treatments in this subtype</label>
+        <input class="field-input" type="text" value="Mega C 15 / 25 / 50 / 75 / 100">
+      </div>
+      <div class="prov" style="margin-top:4px">
+        <span>18 appointments already carry this subtype. They keep their history; only the way they are
+        drawn from now on changes.</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" onclick="HCOS.toast('Saved. The calendar, the legend and the filters now read the new code.', 'ok')" data-close-modal>Save</button>
     </div>
   </div>
 </div>
