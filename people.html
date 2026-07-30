@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Person master · HCOS Wireframe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/hcos.css?v=8">
+<style>
+  .pe-id { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); }
+  .pe-hit { display: flex; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--line-soft); border-radius: 8px; margin-bottom: 8px; }
+  .pe-hit-body { flex: 1; min-width: 0; }
+  .pe-hit-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .pe-hit-meta { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .pe-ev { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+  .pe-ev:last-child { border-bottom: none; }
+  .pe-ev-when { width: 92px; flex-shrink: 0; color: var(--muted); font-size: 11px; font-family: ui-monospace, monospace; }
+  .pe-ev-what { flex: 1; }
+  .pe-ev-who { color: var(--muted); font-size: 11px; white-space: nowrap; }
+</style>
+</head>
+<body data-page="people" data-page-title="Person master" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pe-01-search" data-title="Find or create">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/people</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Find the person</div>
+            <div class="page-sub">Every door into HCOS starts here — inquiry, phone call, walk-in, booking, kiosk.</div>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Search before creating</div>
+              <div class="field-row">
+                <div class="field"><label class="field-label">Name</label><input class="field-input" value="Maya Reyes"></div>
+                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
+                <div class="field"><label class="field-label">Email</label><input class="field-input" placeholder="name@example.com"></div>
+              </div>
+              <button class="btn btn-primary" onclick="HCOS.toast('Searched name, date of birth, phone and email.', 'ok')">Search</button>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">3 possible matches</div>
+
+              <div class="pe-hit">
+                <span class="avatar">MR</span>
+                <div class="pe-hit-body">
+                  <div class="pe-hit-name">Maya Reyes <span class="pe-id">P-004182</span></div>
+                  <div class="pe-hit-meta">52 · (949) •••-0142 · m.reyes@example.com</div>
+                  <div style="margin-top:6px"><span class="lifecycle-step current" style="border-radius:12px">Patient</span></div>
+                </div>
+                <a class="btn btn-primary btn-sm" href="#pe-02-person" data-activate="pe-02-person">Open</a>
+              </div>
+
+              <div class="pe-hit">
+                <span class="avatar">MR</span>
+                <div class="pe-hit-body">
+                  <div class="pe-hit-name">M. Reyes <span class="pe-id">P-005537</span></div>
+                  <div class="pe-hit-meta">52 · (949) •••-0142 · no email · created at the kiosk Jul 2</div>
+                  <div style="margin-top:6px"><span class="lifecycle-step current" style="border-radius:12px">Inquiry</span></div>
+                </div>
+                <a class="btn btn-sm" href="#pe-03-duplicates" data-activate="pe-03-duplicates">Compare</a>
+              </div>
+
+              <div class="pe-hit">
+                <span class="avatar">MA</span>
+                <div class="pe-hit-body">
+                  <div class="pe-hit-name">Maya Alvarez <span class="pe-id">P-003910</span></div>
+                  <div class="pe-hit-meta">44 · (714) •••-8830 · different date of birth</div>
+                  <div style="margin-top:6px"><span class="lifecycle-step current" style="border-radius:12px">Inactive</span></div>
+                </div>
+                <button class="btn btn-sm" onclick="HCOS.toast('Marked as a different person. It will not be suggested again.', 'ok')">Not the same</button>
+              </div>
+
+              <div class="ai-block">
+                <div class="ai-head">
+                  <span class="ai-badge">Suggested by HCOS</span>
+                  <span class="ai-state suggested">Suggestion</span>
+                </div>
+                <div class="ai-body">
+                  P-005537 looks like the same person as P-004182 — same phone, same date of birth, name is a shortened form.
+                </div>
+                <div class="ai-meta">
+                  <span><b>Compared</b> name, date of birth, phone, address</span>
+                  <span><b>Confidence</b> 0.94</span>
+                  <span><b>Decides</b> Front desk or PCC</span>
+                </div>
+                <div class="ai-actions">
+                  <a class="btn btn-sm btn-primary" href="#pe-03-duplicates" data-activate="pe-03-duplicates">Review the match</a>
+                  <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Not a match</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">No match — create the person</div>
+              <div class="field-row">
+                <div class="field"><label class="field-label">First name</label><input class="field-input" placeholder="First name"></div>
+                <div class="field"><label class="field-label">Last name</label><input class="field-input" placeholder="Last name"></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
+                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
+              </div>
+              <div class="field">
+                <label class="field-label">Starting lifecycle status</label>
+                <select class="field-select">
+                  <option>Inquiry — they asked about us</option>
+                  <option>Lead — triage has them</option>
+                  <option>Scheduled — a visit is booked</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="HCOS.toast('Person created at Inquiry. Promote them as they progress — never create them twice.', 'ok')">Create person</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Where this person can come from</div>
+              <ul class="check-list">
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Public inquiry form</span><span class="check-meta"><a href="intake-funnel.html#/a-02-inquiry">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Triage — new lead</span><span class="check-meta"><a href="intake.html#/a-07-new-lead">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Walk-in registration</span><span class="check-meta"><a href="intake-frontdesk.html#/a-31-walkin">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Booking an appointment</span><span class="check-meta"><a href="schedule.html#/l-03-book">open</a></span></li>
+                <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Imported from eCW</span><span class="check-meta">nightly</span></li>
+              </ul>
+              <div class="field-help" style="margin-top:8px">All of them search here first. None of them creates a second identity.</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Who may do this</div>
+              <dl class="kv">
+                <dt>Create</dt><dd>Front desk · PCC</dd>
+                <dt>Promote lifecycle</dt><dd>Front desk · PCC</dd>
+                <dt>Merge duplicates</dt><dd>Front desk · PCC, with a reason</dd>
+                <dt>System</dt><dd>Proposes candidates only</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pe-02-person" data-title="Person record">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/people/P-004182</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span class="avatar lg">MR</span>
+            <div>
+              <div class="page-title" style="margin:0">Maya Reyes</div>
+              <div class="pe-id">P-004182 · 52 · she/her · created from the inquiry form Mar 2, 2026</div>
+            </div>
+          </div>
+          <div class="app-user">
+            <a class="btn" href="patients.html#/pt-02-profile">Open the chart</a>
+            <button class="btn btn-primary" onclick="HCOS.toast('Correction saved with your name and the previous value kept.', 'ok')">Save correction</button>
+          </div>
+        </div>
+
+        <div class="seg-divider">Lifecycle</div>
+        <div class="lifecycle" style="margin-bottom:6px">
+          <span class="lifecycle-step past">Inquiry</span>
+          <span class="lifecycle-step past">Lead</span>
+          <span class="lifecycle-step past">Scheduled</span>
+          <span class="lifecycle-step past">Onboarding</span>
+          <span class="lifecycle-step current">Patient</span>
+          <span class="lifecycle-step">Inactive</span>
+        </div>
+        <div class="prov">
+          <span>Status is <strong>derived</strong> from the events below — it is never typed in.</span>
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Identity</div>
+              <dl class="kv">
+                <dt>Legal name</dt><dd>Maya Reyes</dd>
+                <dt>Preferred name</dt><dd>Maya</dd>
+                <dt>Date of birth</dt><dd>Mar 14, 1974</dd>
+                <dt>Mobile</dt><dd>(949) •••-0142 · okay to text</dd>
+                <dt>Email</dt><dd>m.reyes@example.com</dd>
+                <dt>Address</dt><dd>Irvine, CA</dd>
+                <dt>Language</dt><dd>English</dd>
+              </dl>
+              <div class="prov">
+                <span><strong>Source</strong> inquiry form, Mar 2 2026 · corrected by Yazmin Jun 18 · <code>P-004182</code></span>
+              </div>
+            </div>
+
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Roles this person holds</div>
+              <div class="filters" style="margin:0;background:transparent;border:none;padding:0">
+                <span class="pill pill-navy">Patient</span>
+                <span class="pill">Member · Restore</span>
+                <span class="pill">Caregiver for Walter Hsu</span>
+              </div>
+              <div class="field-help" style="margin-top:8px">One person, several roles. Each role is granted separately and can be revoked without touching the identity.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">History</div>
+              <div class="pe-ev"><span class="pe-ev-when">Mar 2</span><span class="pe-ev-what">Person created from the public inquiry form</span><span class="pe-ev-who">system</span></div>
+              <div class="pe-ev"><span class="pe-ev-when">Mar 3</span><span class="pe-ev-what">Promoted to Lead — triage picked it up</span><span class="pe-ev-who">Marie</span></div>
+              <div class="pe-ev"><span class="pe-ev-when">Mar 9</span><span class="pe-ev-what">Promoted to Scheduled — first consult booked</span><span class="pe-ev-who">Yazmin</span></div>
+              <div class="pe-ev"><span class="pe-ev-when">Mar 14</span><span class="pe-ev-what">Onboarding finished — consents and history on file</span><span class="pe-ev-who">Maya</span></div>
+              <div class="pe-ev"><span class="pe-ev-when">Mar 16</span><span class="pe-ev-what">Promoted to Patient after the first visit</span><span class="pe-ev-who">Dr. Drannikov</span></div>
+              <div class="pe-ev"><span class="pe-ev-when">Jun 18</span><span class="pe-ev-what">Email corrected — previous value kept</span><span class="pe-ev-who">Yazmin</span></div>
+              <div class="pe-ev"><span class="pe-ev-when">Jul 6</span><span class="pe-ev-what">Duplicate P-005537 merged into this record</span><span class="pe-ev-who">Haylee</span></div>
+              <div class="field-help" style="margin-top:8px"><a href="security.html#/g-01-audit">Every line above is in the audit store</a>.</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Care pathway</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Complex Chronic Care</div>
+              <div class="field-help">The clinical journey. Set by the provider, changes with the plan.</div>
+              <div class="prov"><span><strong>From</strong> Plan of care <span class="ver-chip">v4</span> · <a href="journey-careplan.html#/j-staff-poc">open</a></span></div>
+            </div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Access level</div>
+              <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Comprehensive</div>
+              <div class="field-help">How they engage and pay. Independent of the clinical pathway.</div>
+              <div class="prov"><span><strong>Membership</strong> Restore · <a href="pricing-memberships.html">tiers</a></span></div>
+            </div>
+            <div class="card">
+              <div class="card-title">Coverage</div>
+              <dl class="kv">
+                <dt>Payer</dt><dd>UnitedHealthcare PPO <span class="net-badge net-oon">OON</span></dd>
+                <dt>Governance</dt><dd>Self-funded · ERISA</dd>
+                <dt>Eligibility</dt><dd>Snapshot Jul 14 · <a href="patients.html#/pt-02-profile">benefits</a></dd>
+              </dl>
+              <div class="field-help" style="margin-top:6px">One active coverage. Each payer response is kept as its own snapshot — none is overwritten.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="pe-03-duplicates" data-title="Duplicates">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/people/duplicates</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Possible duplicates</div>
+            <div class="page-sub">The system proposes. A person decides, and says why.</div>
+          </div>
+          <div class="app-user"><span class="pill pill-warn">4 waiting</span></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">Maya Reyes · P-004182 &nbsp;compared with&nbsp; M. Reyes · P-005537</div>
+
+          <div class="match-row">
+            <div class="match-side"><dl class="kv"><dt>Name</dt><dd>Maya Reyes</dd></dl></div>
+            <div class="match-side"><dl class="kv"><dt>Name</dt><dd class="match-diff">M. Reyes</dd></dl></div>
+            <span class="match-score">0.88</span>
+          </div>
+          <div class="match-row">
+            <div class="match-side"><dl class="kv"><dt>Date of birth</dt><dd>Mar 14, 1974</dd></dl></div>
+            <div class="match-side"><dl class="kv"><dt>Date of birth</dt><dd>Mar 14, 1974</dd></dl></div>
+            <span class="match-score">1.00</span>
+          </div>
+          <div class="match-row">
+            <div class="match-side"><dl class="kv"><dt>Mobile</dt><dd>(949) •••-0142</dd></dl></div>
+            <div class="match-side"><dl class="kv"><dt>Mobile</dt><dd>(949) •••-0142</dd></dl></div>
+            <span class="match-score">1.00</span>
+          </div>
+          <div class="match-row">
+            <div class="match-side"><dl class="kv"><dt>Email</dt><dd>m.reyes@example.com</dd></dl></div>
+            <div class="match-side"><dl class="kv"><dt>Email</dt><dd class="match-diff">none on file</dd></dl></div>
+            <span class="match-score">—</span>
+          </div>
+          <div class="match-row">
+            <div class="match-side"><dl class="kv"><dt>Created</dt><dd>Inquiry form · Mar 2</dd></dl></div>
+            <div class="match-side"><dl class="kv"><dt>Created</dt><dd class="match-diff">Kiosk walk-in · Jul 2</dd></dl></div>
+            <span class="match-score">—</span>
+          </div>
+
+          <div class="ai-block">
+            <div class="ai-head">
+              <span class="ai-badge">Suggested by HCOS</span>
+              <span class="ai-state suggested">Suggestion</span>
+            </div>
+            <div class="ai-body">Same date of birth and phone. The kiosk created a second record because the name was typed short.</div>
+            <div class="ai-meta">
+              <span><b>Overall</b> 0.94</span>
+              <span><b>Model</b> match-v2.1</span>
+              <span><b>Merging is never automatic</b></span>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label class="field-label">Reason (required to merge)</label>
+            <input class="field-input" value="Same date of birth and phone; kiosk shortened the name.">
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="HCOS.toast('Merged into P-004182. Both histories kept, the merge is in the audit store.', 'ok')">Merge into P-004182</button>
+            <button class="btn" onclick="HCOS.toast('Kept apart. They will not be suggested again.', 'ok')">Different people</button>
+          </div>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Candidate pair</th><th>Matched on</th><th>Score</th><th>Came from</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>T. Alvarez</strong> · P-005610 &nbsp;/&nbsp; Tom Alvarez · P-004990</td>
+                <td>Date of birth, phone</td>
+                <td><span class="match-score">0.91</span></td>
+                <td>Booking · Jul 20</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Opened for review.')">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>Sofia Ramos</strong> · P-005702 &nbsp;/&nbsp; Sofía Ramos · P-004411</td>
+                <td>Name with accent, email</td>
+                <td><span class="match-score">0.86</span></td>
+                <td>Inquiry form · Jul 19</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Opened for review.')">Review</button></td>
+              </tr>
+              <tr>
+                <td><strong>W. Hsu</strong> · P-005688 &nbsp;/&nbsp; Walter Hsu · P-003877</td>
+                <td>Phone, address</td>
+                <td><span class="match-score">0.79</span></td>
+                <td>Walk-in · Jul 18</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Opened for review.')">Review</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=8"></script>
+</body>
+</html>

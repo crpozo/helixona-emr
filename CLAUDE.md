@@ -198,6 +198,57 @@ New module screens may use simplified placeholder blocks for depth we don't have
 
 **The shell is the real product's chrome (Carlos, 2026-07-21): a real EMR menu, not wireframe scaffolding.** Sidebar groups: Clinic (Schedule · Patients · Documentation · Orders & results · Medications · Messages · Billing), Programs (Intake · Readiness · Patient journey · Caregiver access), Practice (Reports · Security & audit) — no module letters, no status dots, no "wireframe" labels. Sidebar foot = signed-in user card (Dr. Drannikov · Provider · Sign out). Topbar = page title + global search. Wireframe meta lives only in the floating feedback widget and hub.html.
 
+## Architecture rules (from the HCOS Wireframe Architecture Review, 2026-07-28)
+
+131 screens were audited. 26 Critical and 27 High findings all reduce to one rule:
+
+> **Information exists once, with many controlled views.** A screen may look different when it
+> is a *view* of the same record. It is a defect when a screen stores a competing copy, applies
+> different clinical or business rules, or lets an unauthorized role change an approved decision.
+
+### Canonical records — each exists once
+| Record | Governing rule |
+|---|---|
+| **Person / Patient Master** | One person. Lifecycle changes; identity never forks. |
+| **Lifecycle** | Inquiry → Lead → Scheduled → Onboarding → Patient → Inactive/Closed. Append status events; current status is derived. |
+| **Coverage** | One active coverage set. Eligibility is separate snapshot history. |
+| **Eligibility Snapshot** | Never overwrite a prior response; the latest valid snapshot is selected. |
+| **Appointment & Resources** | Transactional booking through one scheduling service; one appointment ID. |
+| **Encounter** | Draft → reviewed → signed/locked → addendum. |
+| **Problem List** | Longitudinal. A patient report is not automatically a confirmed diagnosis. |
+| **Allergy / Intolerance** | One list. Every safety check reads it. |
+| **Medication / Supplement** | One list preserving patient-reported vs reconciled vs prescribed. |
+| **Order** | Versioned. Downstream references order ID + version. |
+| **Result** | Original immutable; corrections are linked. |
+| **Readiness Assessment** | One current effective assessment plus history, with ruleset version and reviewer. |
+| **Plan of Care** | Versioned effective plan; physician/extender approval required. |
+
+### Two separate axes — never mix them (H7)
+- **Care pathway** (clinical): Complex Chronic Care · Health Optimization · Recovery · Vitality
+- **Access level** (business): Comprehensive · Collaborative · Self-Directed / Open Access
+
+### Who may do what (Roles & Approvals)
+A/E approve or edit · E edit/execute · S suggest/prepare · O owns their own data.
+- Create inquiry/person: Front Desk and PCC create; the system only *proposes* duplicates.
+- Promote lifecycle: Front Desk / PCC — the record stays the same record.
+- Reconcile problems, allergies, medications: MA/Nurse/PCC **suggest**; physician or extender approves.
+- Place, change or discontinue an order: physician or extender only.
+- Sign and lock an encounter: physician or extender. **AI cannot sign.**
+- Change HCOS stage or the approved weekly plan: physician or extender; everyone else suggests, and the suggestion stays Pending Approval with a rationale.
+- Approve or override readiness: system calculates, clinician approves or overrides **with a reason**.
+
+### Scheduling is one engine (C3)
+**Hard blocks** (never an ordinary warning): occupied chair or provider · missing signed order or clearance · contraindication · unsafe interval · unavailable supervision. **Eligible warnings** may be overridden only by a designated authority, **with a reason, logged**.
+
+### AI governance (H8)
+AI prepares, summarizes, detects and suggests. **It does not sign, order, diagnose, merge, escalate or send.** Every AI surface shows: source(s) used, model/version, confidence or uncertainty, state (suggested / accepted / rejected), and the named human reviewer. Fail-safe: readiness fails **closed** to Physician Review Required; scheduling falls back to protocol defaults and hard constraints.
+
+### eCW transition
+Before a domain activates in HCOS, **eCW is the only writer** for that domain; HCOS reads. Cutover is per domain, and the source-of-truth rule is stated on the screen.
+
+### Shared components for all of the above (assets/hcos.css)
+`lifecycle`/`lifecycle-step` · `clin-state reported|reconciled|verified` + `clin-src` · `prov` (provenance line) · `ver-chip` + `appr draft|pending|approved|superseded` · `ai-block` (`ai-badge`, `ai-state`, `ai-meta`, `ai-actions`) · `match-row`/`match-score`. Never re-invent these per page.
+
 ## Data rules
 
 **No PHI, ever.** Patients, appointments, notes, and claims in the wireframe are always synthetic. Clinic identity (name, address, phone, NPI) and staff first names are fine — they are the real users. Do not put the clinic TIN, payer account numbers, or any real patient detail anywhere in this repo.

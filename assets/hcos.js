@@ -25,6 +25,7 @@
   var MODULES = [
     { group: 'Clinic' },
     { name: 'Schedule', href: 'schedule.html', page: 'schedule' },
+    { name: 'People', href: 'people.html', page: 'people' },
     { name: 'Patients', href: 'patients.html', page: 'patients' },
     { name: 'Documentation', href: 'clinical.html', page: 'clinical' },
     { name: 'Orders & results', href: 'labs.html', page: 'labs' },

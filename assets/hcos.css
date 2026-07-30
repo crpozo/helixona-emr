@@ -589,6 +589,100 @@ button { font-family: inherit; }
 .kv dd { margin: 0; color: var(--ink); font-weight: 500; }
 
 /* ==========================================================================
+   ARCHITECTURE COMPONENTS — one implementation each, used across modules.
+   These exist because the same idea was being re-invented per domain.
+   ========================================================================== */
+
+/* Person lifecycle — identity is created once and promoted, never re-created */
+.lifecycle { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+.lifecycle-step {
+  font-size: 11px; padding: 5px 12px;
+  border: 1px solid var(--line); background: #fff; color: var(--muted);
+  border-right: none;
+}
+.lifecycle-step:first-child { border-radius: 14px 0 0 14px; }
+.lifecycle-step:last-child { border-radius: 0 14px 14px 0; border-right: 1px solid var(--line); }
+.lifecycle-step.past { background: var(--hx-light); color: var(--ink); }
+.lifecycle-step.current { background: var(--ink); color: #fff; border-color: var(--ink); font-weight: 700; }
+
+/* Canonical clinical list state — one list, three levels of trust */
+.clin-state {
+  display: inline-block; font-size: 9.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 2px 8px; border-radius: 10px; background: #fff; white-space: nowrap;
+}
+.clin-state.reported   { border: 1px dashed var(--muted); color: var(--muted); }
+.clin-state.reconciled { border: 1px solid var(--muted); color: var(--ink); }
+.clin-state.verified   { border: 1px solid var(--ink); background: var(--ink); color: #fff; }
+.clin-src { font-size: 10.5px; color: var(--muted); }
+
+/* Provenance — what this came from. Never re-keyed, always traceable. */
+.prov {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 11px; color: var(--muted);
+  border-left: 2px solid var(--line); padding: 4px 0 4px 10px; margin: 6px 0;
+}
+.prov strong { color: var(--ink); font-weight: 600; }
+.prov code { font-family: ui-monospace, monospace; font-size: 10.5px; }
+
+/* Version + approval — plans and orders are versioned and approved, not edited */
+.ver-chip {
+  display: inline-block; font-family: ui-monospace, monospace;
+  font-size: 10.5px; font-weight: 700;
+  border: 1px solid var(--ink); border-radius: 4px; padding: 1px 6px; color: var(--ink);
+}
+.ver-chip.superseded { border-color: var(--line); color: var(--muted); text-decoration: line-through; }
+.appr {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 2px 9px; border-radius: 10px; background: #fff; white-space: nowrap;
+}
+.appr.draft      { border: 1px dashed var(--muted); color: var(--muted); }
+.appr.pending    { border: 1px solid var(--muted); color: var(--ink); }
+.appr.approved   { border: 1px solid var(--ink); background: var(--ink); color: #fff; }
+.appr.superseded { border: 1px solid var(--line); color: var(--muted); }
+
+/* AI provenance — nothing generated acts until a named human accepts it */
+.ai-block {
+  border: 1px solid var(--line); border-left: 4px solid var(--ink);
+  border-radius: var(--radius-sm); padding: 12px 14px; background: #FBFBFB; margin: 10px 0;
+}
+.ai-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.ai-badge {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+  border: 1px solid var(--ink); border-radius: 4px; padding: 1px 6px; color: var(--ink);
+}
+.ai-state {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 2px 8px; border-radius: 10px; background: #fff;
+}
+.ai-state.suggested { border: 1px dashed var(--muted); color: var(--muted); }
+.ai-state.accepted  { border: 1px solid var(--ink); background: var(--ink); color: #fff; }
+.ai-state.rejected  { border: 1px solid var(--muted); color: var(--muted); text-decoration: line-through; }
+.ai-body { font-size: 12.5px; line-height: 1.55; color: var(--ink); }
+.ai-meta {
+  font-size: 10.5px; color: var(--muted); margin-top: 8px;
+  padding-top: 8px; border-top: 1px solid var(--line-soft);
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.ai-meta b { color: var(--ink); font-weight: 600; }
+.ai-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+/* Match candidates — duplicate people, side by side */
+.match-row {
+  display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px;
+  align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line-soft);
+}
+.match-side { font-size: 12.5px; }
+.match-side dt { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.match-diff { background: var(--hx-light); font-weight: 600; }
+.match-score {
+  font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700;
+  border: 1px solid var(--ink); border-radius: 4px; padding: 2px 8px; white-space: nowrap;
+}
+@media (max-width: 760px) { .match-row { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
    MODAL · TOAST · DRAWER
    ========================================================================== */
 
