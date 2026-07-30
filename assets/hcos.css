@@ -1127,8 +1127,19 @@ button { font-family: inherit; }
   cursor: pointer;
   font-weight: 500;
 }
-.status-step.current { color: #fff; background: var(--hx-navy); border-color: var(--hx-navy); font-weight: 600; }
+.status-step.current { color: #fff; background: var(--hx-navy); border-color: var(--hx-navy); font-weight: 700; }
 .status-step.past { background: var(--hx-light); color: var(--ink); border-color: transparent; }
+/* Each step wears its own status colour: done steps as a tint, the one you are
+   on as the solid colour, the ones ahead still plain. */
+.status-step.past.st-scheduled { background: var(--st-scheduled-bg); color: #4A5260; }
+.status-step.past.st-confirmed { background: var(--st-confirmed-bg); color: #1F4C80; }
+.status-step.past.st-arrived   { background: var(--st-arrived-bg);   color: #8A5A12; }
+.status-step.past.st-inroom, .status-step.past.st-inchair { background: var(--st-inroom-bg); color: #1F6142; }
+.status-step.current.st-scheduled { background: var(--st-scheduled); border-color: var(--st-scheduled); }
+.status-step.current.st-confirmed { background: var(--st-confirmed); border-color: var(--st-confirmed); }
+.status-step.current.st-arrived   { background: var(--st-arrived);   border-color: var(--st-arrived); }
+.status-step.current.st-inroom, .status-step.current.st-inchair { background: var(--st-inroom); border-color: var(--st-inroom); }
+.status-step.current.st-done      { background: var(--st-done);      border-color: var(--st-done); }
 .status-arrow { color: var(--line); font-size: 12px; }
 
 /* ==========================================================================

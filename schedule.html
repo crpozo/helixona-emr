@@ -731,7 +731,7 @@
           <span class="avatar lg">WH</span>
           <div class="l-appt-header-info">
             <div class="l-appt-name">Walter Hsu</div>
-            <div class="l-appt-demo">NAD+ infusion · today 1:00 – 4:00 PM · Chair 1 · Nick (Nurse)</div>
+            <div class="l-appt-demo"><span class="type-mark tm-nad">NAD</span>NAD+ infusion · today 1:00 – 4:00 PM · Chair 1 · Nick (Nurse)</div>
           </div>
           <span class="pill pill-st st-confirmed">Confirmed</span>
           <button class="btn" data-activate="l-01-day">Back to day view</button>
@@ -740,15 +740,15 @@
         <div class="card" style="margin-bottom:16px">
           <div class="card-title">Status</div>
           <div class="status-flow">
-            <span class="status-step past">Scheduled</span>
+            <span class="status-step past st-scheduled">Scheduled</span>
             <span class="status-arrow">›</span>
-            <span class="status-step current">Confirmed</span>
+            <span class="status-step current st-confirmed">Confirmed</span>
             <span class="status-arrow">›</span>
-            <span class="status-step" onclick="HCOS.toast('Walter Hsu marked arrived — the chair team sees it instantly.', 'ok')">Arrived</span>
+            <span class="status-step st-arrived" onclick="HCOS.toast('Walter Hsu marked arrived — the chair team sees it instantly.', 'ok')">Arrived</span>
             <span class="status-arrow">›</span>
-            <span class="status-step" onclick="HCOS.toast('Walter Hsu is in the chair — the infusion record opens for Nick.', 'ok')">In chair</span>
+            <span class="status-step st-inchair" onclick="HCOS.toast('Walter Hsu is in the chair — the infusion record opens for Nick.', 'ok')">In chair</span>
             <span class="status-arrow">›</span>
-            <span class="status-step" onclick="HCOS.toast('Marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
+            <span class="status-step st-done" onclick="HCOS.toast('Marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
           </div>
           <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
             <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Marked no-show — the 1:00 PM chair hold is released.', 'warn')">Mark no-show</button>
@@ -833,21 +833,21 @@
   <div class="drawer-head">
     <div>
       <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">Maya Reyes</div>
-      <div style="font-size:11.5px;color:var(--muted);margin-top:2px">NAD+ infusion · 9:00 – 12:00 · Chair 1 · Nick (Nurse)</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:2px"><span class="type-mark tm-nad">NAD</span>NAD+ infusion · 9:00 – 12:00 · Chair 1 · Nick (Nurse)</div>
     </div>
     <button class="modal-close" data-close-drawer="#l-appt-drawer">×</button>
   </div>
   <div class="drawer-body">
     <div class="status-flow">
-      <span class="status-step past">Scheduled</span>
+      <span class="status-step past st-scheduled">Scheduled</span>
       <span class="status-arrow">›</span>
-      <span class="status-step past">Confirmed</span>
+      <span class="status-step past st-confirmed">Confirmed</span>
       <span class="status-arrow">›</span>
-      <span class="status-step past">Arrived</span>
+      <span class="status-step past st-arrived">Arrived</span>
       <span class="status-arrow">›</span>
-      <span class="status-step current">In chair</span>
+      <span class="status-step current st-inchair">In chair</span>
       <span class="status-arrow">›</span>
-      <span class="status-step" onclick="HCOS.toast('Maya Reyes marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
+      <span class="status-step st-done" onclick="HCOS.toast('Maya Reyes marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
     </div>
 
     <div class="seg-divider">Appointment</div>
