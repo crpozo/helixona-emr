@@ -39,13 +39,13 @@
   --st-cancelled: #A9B0B8;
 
   /* Status tints — the block fill. Kept pale so the treatment edge stays loud. */
-  --st-scheduled-bg: #F5F6F8;
-  --st-confirmed-bg: #EAF2FA;
-  --st-arrived-bg:   #FCF4E6;
-  --st-inroom-bg:    #EAF6EF;
-  --st-done-bg:      #F1F3F5;
-  --st-noshow-bg:    #FBEDEB;
-  --st-cancelled-bg: #F6F7F8;
+  --st-scheduled-bg: #E6E9ED;
+  --st-confirmed-bg: #CFE1F6;
+  --st-arrived-bg:   #FAE3BC;
+  --st-inroom-bg:    #C9E9D7;
+  --st-done-bg:      #DCE0E5;
+  --st-noshow-bg:    #F7D5D0;
+  --st-cancelled-bg: #EBEDEF;
 
   --radius: 12px;
   --radius-sm: 6px;
@@ -884,7 +884,12 @@ button { font-family: inherit; }
   line-height: 1.3;
   transition: box-shadow 0.12s, z-index 0s;
 }
-.cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.2); z-index: 5; }
+.cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 5; }
+.cal-appt.st-scheduled { border-color: #C7CCD3; }
+.cal-appt.st-confirmed { border-color: #9EC2E8; }
+.cal-appt.st-arrived   { border-color: #E5B45F; }
+.cal-appt.st-inroom, .cal-appt.st-inchair { border-color: #7CC79C; }
+.cal-appt.st-done      { border-color: #BCC3CB; }
 .cal-appt-time { font-size: 9.5px; color: var(--muted); font-weight: 500; font-family: ui-monospace, monospace; }
 .cal-appt-name { font-size: 11.5px; font-weight: 600; color: var(--hx-navy); margin: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt-type { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -929,19 +934,19 @@ button { font-family: inherit; }
 
 /* The initial chip is the colour key, wherever it appears */
 .t-nad     > .cal-appt-type > .type-mark,
-.type-mark.tm-nad     { color: var(--tx-nad);     border-color: var(--tx-nad); }
+.type-mark.tm-nad     { background: var(--tx-nad);     border-color: var(--tx-nad);     color: #fff; }
 .t-ivc     > .cal-appt-type > .type-mark,
-.type-mark.tm-ivc     { color: var(--tx-ivc);     border-color: var(--tx-ivc); }
+.type-mark.tm-ivc     { background: var(--tx-ivc);     border-color: var(--tx-ivc);     color: #fff; }
 .t-myers   > .cal-appt-type > .type-mark,
-.type-mark.tm-myers   { color: var(--tx-myers);   border-color: var(--tx-myers); }
+.type-mark.tm-myers   { background: var(--tx-myers);   border-color: var(--tx-myers);   color: #fff; }
 .t-eboo    > .cal-appt-type > .type-mark,
-.type-mark.tm-eboo    { color: var(--tx-eboo);    border-color: var(--tx-eboo); }
+.type-mark.tm-eboo    { background: var(--tx-eboo);    border-color: var(--tx-eboo);    color: #fff; }
 .t-consult > .cal-appt-type > .type-mark,
-.type-mark.tm-consult { color: var(--tx-consult); border-color: var(--tx-consult); }
+.type-mark.tm-consult { background: var(--tx-consult); border-color: var(--tx-consult); color: #fff; }
 .t-tele    > .cal-appt-type > .type-mark,
-.type-mark.tm-tele    { color: var(--tx-tele);    border-color: var(--tx-tele); }
-.type-mark.tm-lab     { color: var(--tx-lab);     border-color: var(--tx-lab); }
-.type-mark.tm-gsh     { color: var(--tx-myers);   border-color: var(--tx-myers); }
+.type-mark.tm-tele    { background: var(--tx-tele);    border-color: var(--tx-tele);    color: #fff; }
+.type-mark.tm-lab     { background: var(--tx-lab);     border-color: var(--tx-lab);     color: #fff; }
+.type-mark.tm-gsh     { background: var(--tx-myers);   border-color: var(--tx-myers);   color: #fff; }
 
 /* Legend swatches carry the same colour */
 .cal-legend-swatch.sw-nad     { border-left-color: var(--tx-nad) !important; }
@@ -956,17 +961,17 @@ button { font-family: inherit; }
   display: inline-block;
   font-family: ui-monospace, monospace;
   font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px;
-  border: 1px solid currentColor; border-radius: 3px;
-  padding: 0 3px; margin-right: 4px; vertical-align: 1px;
-  color: var(--muted);
+  border: 1px solid var(--muted); border-radius: 3px;
+  padding: 0 4px; margin-right: 4px; vertical-align: 1px;
+  background: var(--muted); color: #fff;
 }
-.cal-appt.t-nad     { border-left-style: solid; border-left-width: 5px; }
-.cal-appt.t-ivc     { border-left-style: double; border-left-width: 5px; }
-.cal-appt.t-myers   { border-left-style: dashed; border-left-width: 5px; }
-.cal-appt.t-eboo    { border-left-style: dotted; border-left-width: 6px; }
-.cal-appt.t-consult { border-left-style: solid; border-left-width: 3px; }
-.cal-appt.t-lab     { border-left-style: dashed; border-left-width: 3px; }
-.cal-appt.t-tele    { border-left-style: dotted; border-left-width: 4px; }
+.cal-appt.t-nad     { border-left-style: solid; border-left-width: 7px; }
+.cal-appt.t-ivc     { border-left-style: double; border-left-width: 7px; }
+.cal-appt.t-myers   { border-left-style: dashed; border-left-width: 7px; }
+.cal-appt.t-eboo    { border-left-style: dotted; border-left-width: 8px; }
+.cal-appt.t-consult { border-left-style: solid; border-left-width: 5px; }
+.cal-appt.t-lab     { border-left-style: dashed; border-left-width: 5px; }
+.cal-appt.t-tele    { border-left-style: dotted; border-left-width: 6px; }
 .week-appt.t-nad    { border-left-style: solid; border-left-width: 5px; }
 .week-appt.t-ivc    { border-left-style: double; border-left-width: 5px; }
 .week-appt.t-myers  { border-left-style: dashed; border-left-width: 5px; }
@@ -1015,7 +1020,7 @@ button { font-family: inherit; }
   align-items: center;
 }
 .cal-legend-item { display: flex; align-items: center; gap: 6px; }
-.cal-legend-swatch { width: 10px; height: 10px; border-radius: 3px; border: 1px solid var(--line); }
+.cal-legend-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); }
 
 /* Week view */
 .weekcal-head { display: grid; grid-template-columns: 64px repeat(5, 1fr); background: #F7F7F7; border-bottom: 1px solid var(--line-soft); }
