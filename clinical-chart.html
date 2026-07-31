@@ -36,6 +36,8 @@
   }
   .b-sigpad:hover { border-color: var(--hx-navy); color: var(--ink); }
   .b-workup { font-size: 12.5px; line-height: 2; color: var(--ink); margin: 6px 0 0; }
+  .la-rank { font-weight: 700; color: var(--hx-navy); vertical-align: top; padding-top: 12px; white-space: nowrap; }
+  .la-rolls { font-size: 11.5px; color: var(--muted); max-width: 250px; vertical-align: top; padding-top: 12px; }
 </style>
 </head>
 <body data-page="clinical-chart" data-page-title="Documentation · Chart" data-shell="app">
@@ -64,6 +66,15 @@
 
         <h2 class="page-title">Functional medicine timeline</h2>
         <p class="page-sub">The patient's story over time — the antecedents, triggers, and mediators that shape the plan.</p>
+        <div class="lead-bar">
+          <span class="lead-lbl">Lead actors</span>
+          <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Post-viral immune dysregulation<span class="lead-ins">U09.9 &middot; PASC</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Chronic Lyme complex<span class="lead-ins">A69.20 &middot; Lyme disease</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mast cell activation<span class="lead-ins">D89.40 &middot; MCAS</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mitochondrial insufficiency<span class="lead-ins">R53.83 &middot; Malaise and fatigue</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Thyroid autoimmunity<span class="lead-ins">E06.3 &middot; Hashimoto's</span></a>
+          <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 5 &rsaquo;</a>
+        </div>
 
         <div class="prov">
           <span><strong>Reads</strong> the <a href="#b-05-problem-list" data-activate="b-05-problem-list">problem list</a>, results, <a href="clinical-questionnaires.html#/b-30-quest-results">questionnaire <code>Q-1180</code></a> and <a href="intake-onboarding.html#/a-16-conditions">her onboarding answers</a> — the timeline arranges them in time and keeps no copy</span>
@@ -193,10 +204,138 @@
 
         <h2 class="page-title">Problem list</h2>
         <p class="page-sub">One list that follows her across encounters. Notes, claims and readiness read it here — none of them keeps a copy.</p>
+        <div class="lead-bar">
+          <span class="lead-lbl">Lead actors</span>
+          <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Post-viral immune dysregulation<span class="lead-ins">U09.9 &middot; PASC</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Chronic Lyme complex<span class="lead-ins">A69.20 &middot; Lyme disease</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mast cell activation<span class="lead-ins">D89.40 &middot; MCAS</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mitochondrial insufficiency<span class="lead-ins">R53.83 &middot; Malaise and fatigue</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Thyroid autoimmunity<span class="lead-ins">E06.3 &middot; Hashimoto's</span></a>
+          <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 5 &rsaquo;</a>
+        </div>
 
         <div class="prov">
           <span><strong>Written in HCOS</strong> since Jul 1 2026 · eCW receives a summary copy · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
         </div>
+
+                <div class="seg-divider">Lead actors &mdash; what we are fighting, and what we may call it</div>
+
+        <div class="callout">
+          <strong>Two naming systems, on purpose.</strong> A payer will accept &ldquo;Lyme disease&rdquo; and
+          nothing more specific. The clinic&rsquo;s own lead actor carries the detail the doctor actually treats
+          &mdash; the co-infections, the flare pattern, the driver. Neither name replaces the other: the clinic name
+          drives the plan, the payer name drives <a href="billing.html#/d-01-worklist">the claim</a>.
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:12px">
+          <table class="tbl">
+            <thead><tr><th style="width:44px">#</th><th>Lead actor</th><th>Problems that roll up under it</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="la-rank">1 <span class="pill pill-ok">Main</span></td>
+                <td>
+                  <div class="la-pair">
+                    <div>
+                      <div class="la-head">Our lead actor</div>
+                      <div class="la-name">Post-viral immune dysregulation with autonomic involvement</div>
+                      <div class="la-sub">Since Aug 2024</div>
+                    </div>
+                    <div>
+                      <div class="la-head">What the payer accepts</div>
+                      <div class="la-name">Post-acute sequelae of COVID-19</div>
+                      <div class="la-sub"><span class="pill pill-muted">U09.9</span> billable</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="la-rolls">Brain fog · orthostatic intolerance · post-exertional malaise · generalized fatigue</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only Dr. Drannikov reclassifies a lead actor. The previous classification stays in the history.', 'ok')">Reclassify</button></td>
+              </tr>
+              <tr>
+                <td class="la-rank">2</td>
+                <td>
+                  <div class="la-pair">
+                    <div>
+                      <div class="la-head">Our lead actor</div>
+                      <div class="la-name">Chronic Lyme complex with co-infection burden</div>
+                      <div class="la-sub">Since Mar 2023</div>
+                    </div>
+                    <div>
+                      <div class="la-head">What the payer accepts</div>
+                      <div class="la-name">Lyme disease, unspecified</div>
+                      <div class="la-sub"><span class="pill pill-muted">A69.20</span> billable</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="la-rolls">Migratory arthralgia · night sweats · Bartonella serology pending</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only Dr. Drannikov reclassifies a lead actor. The previous classification stays in the history.', 'ok')">Reclassify</button></td>
+              </tr>
+              <tr>
+                <td class="la-rank">3</td>
+                <td>
+                  <div class="la-pair">
+                    <div>
+                      <div class="la-head">Our lead actor</div>
+                      <div class="la-name">Mast cell activation driving flare cycles</div>
+                      <div class="la-sub">Since Jan 2025</div>
+                    </div>
+                    <div>
+                      <div class="la-head">What the payer accepts</div>
+                      <div class="la-name">Mast cell activation syndrome</div>
+                      <div class="la-sub"><span class="pill pill-muted">D89.40</span> billable</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="la-rolls">Flushing · urticaria · food and scent reactivity</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only Dr. Drannikov reclassifies a lead actor. The previous classification stays in the history.', 'ok')">Reclassify</button></td>
+              </tr>
+              <tr>
+                <td class="la-rank">4</td>
+                <td>
+                  <div class="la-pair">
+                    <div>
+                      <div class="la-head">Our lead actor</div>
+                      <div class="la-name">Mitochondrial insufficiency limiting exertion</div>
+                      <div class="la-sub">Since Sep 2024</div>
+                    </div>
+                    <div>
+                      <div class="la-head">What the payer accepts</div>
+                      <div class="la-name">Malaise and fatigue, other</div>
+                      <div class="la-sub"><span class="pill pill-muted">R53.83</span> billable</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="la-rolls">Post-exertional crash · lactate rise on effort</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only Dr. Drannikov reclassifies a lead actor. The previous classification stays in the history.', 'ok')">Reclassify</button></td>
+              </tr>
+              <tr>
+                <td class="la-rank">5</td>
+                <td>
+                  <div class="la-pair">
+                    <div>
+                      <div class="la-head">Our lead actor</div>
+                      <div class="la-name">Thyroid autoimmunity, undertreated at functional target</div>
+                      <div class="la-sub">Since 2021</div>
+                    </div>
+                    <div>
+                      <div class="la-head">What the payer accepts</div>
+                      <div class="la-name">Hashimoto's thyroiditis</div>
+                      <div class="la-sub"><span class="pill pill-muted">E06.3</span> billable</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="la-rolls">TSH 3.8 · antibodies elevated · on levothyroxine</td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Only Dr. Drannikov reclassifies a lead actor. The previous classification stays in the history.', 'ok')">Reclassify</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:10px">
+          <span>Ranked by the doctor, not by the system. The top five ride along on every one of her screens as
+          breadcrumbs, so nobody opens a chart and forgets what the visit is really about.</span>
+        </div>
+
+        <div class="seg-divider">Problem list &mdash; the detail underneath</div>
 
         <div class="filters">
           <button class="filter-chip active">Active (6)</button>
@@ -416,6 +555,15 @@
 
         <h2 class="page-title">Medication reconciliation</h2>
         <p class="page-sub">One list for medications and supplements. Reconciling changes what we trust about each entry — it does not start a second list.</p>
+        <div class="lead-bar">
+          <span class="lead-lbl">Lead actors</span>
+          <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Post-viral immune dysregulation<span class="lead-ins">U09.9 &middot; PASC</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Chronic Lyme complex<span class="lead-ins">A69.20 &middot; Lyme disease</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mast cell activation<span class="lead-ins">D89.40 &middot; MCAS</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mitochondrial insufficiency<span class="lead-ins">R53.83 &middot; Malaise and fatigue</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Thyroid autoimmunity<span class="lead-ins">E06.3 &middot; Hashimoto's</span></a>
+          <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 5 &rsaquo;</a>
+        </div>
 
         <div class="card b-status-bar">
           <div>Prepared by Charlene (MA) today 9:12 AM · <span class="appr pending">Pending approval</span> · last approved Apr 8 2026 by Dr. Drannikov</div>
@@ -602,6 +750,15 @@
 
         <h2 class="page-title">Allergies and intolerances</h2>
         <p class="page-sub">One list. Allergies hard-block a matching order; intolerances warn. A patient report enters here and blocks straight away — review decides what it becomes.</p>
+        <div class="lead-bar">
+          <span class="lead-lbl">Lead actors</span>
+          <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Post-viral immune dysregulation<span class="lead-ins">U09.9 &middot; PASC</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Chronic Lyme complex<span class="lead-ins">A69.20 &middot; Lyme disease</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mast cell activation<span class="lead-ins">D89.40 &middot; MCAS</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mitochondrial insufficiency<span class="lead-ins">R53.83 &middot; Malaise and fatigue</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Thyroid autoimmunity<span class="lead-ins">E06.3 &middot; Hashimoto's</span></a>
+          <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 5 &rsaquo;</a>
+        </div>
 
         <div class="card b-status-bar">
           <div>Reconciled by Charlene (MA) today 9:04 AM · reconfirmed by the patient at check-in · <span class="appr pending">1 item pending your review</span></div>
@@ -974,6 +1131,15 @@
 
         <h2 class="page-title">Amendment / addendum</h2>
         <p class="page-sub">A signed encounter cannot be edited. To add or correct information, add a dated addendum that becomes part of the legal record.</p>
+        <div class="lead-bar">
+          <span class="lead-lbl">Lead actors</span>
+          <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Post-viral immune dysregulation<span class="lead-ins">U09.9 &middot; PASC</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Chronic Lyme complex<span class="lead-ins">A69.20 &middot; Lyme disease</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mast cell activation<span class="lead-ins">D89.40 &middot; MCAS</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mitochondrial insufficiency<span class="lead-ins">R53.83 &middot; Malaise and fatigue</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Thyroid autoimmunity<span class="lead-ins">E06.3 &middot; Hashimoto's</span></a>
+          <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 5 &rsaquo;</a>
+        </div>
 
         <div class="card b-status-bar">
           <div><span class="pill pill-navy">Locked</span> Original note <code>ENC-2026-0418</code> <span class="appr approved">Signed</span> May 22, 2026 · 11:48 AM · every view and change is logged</div>

@@ -692,6 +692,61 @@ button { font-family: inherit; }
 @media (max-width: 760px) { .match-row { grid-template-columns: 1fr; } }
 
 /* ==========================================================================
+   LEAD ACTORS · what the doctor is actually fighting, on every patient screen
+   ========================================================================== */
+.lead-bar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 9px 12px; margin: 10px 0 14px;
+  background: var(--hx-band); border: 1px solid var(--line-soft); border-radius: var(--radius);
+}
+.lead-lbl {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px;
+  color: var(--muted); margin-right: 2px; white-space: nowrap;
+}
+.lead-chip {
+  display: inline-block; padding: 4px 11px; border-radius: 13px;
+  border: 1px solid var(--line); background: #fff; font-size: 11.5px; color: var(--ink);
+  text-decoration: none; line-height: 1.25;
+}
+a.lead-chip:hover { border-color: var(--ink); }
+.lead-chip.main { background: var(--ink); color: #fff; border-color: var(--ink); font-weight: 600; }
+.lead-chip .lead-ins { display: block; font-size: 9.5px; color: var(--muted); margin-top: 1px; }
+.lead-chip.main .lead-ins { color: rgba(255,255,255,.72); }
+.lead-more { font-size: 11px; color: var(--muted); text-decoration: none; }
+.lead-more:hover { color: var(--ink); }
+
+/* The two naming systems, side by side on the problem list */
+.la-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.la-pair > div { padding: 9px 12px; }
+.la-pair > div:first-child { border-right: 1px solid var(--line-soft); }
+.la-head {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px;
+  color: var(--muted); margin-bottom: 4px;
+}
+.la-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+.la-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+@media (max-width: 900px) {
+  .la-pair { grid-template-columns: 1fr; }
+  .la-pair > div:first-child { border-right: none; border-bottom: 1px solid var(--line-soft); }
+}
+
+/* ==========================================================================
+   PATIENT-REPORTED SURVEY · four questions, morning and evening, over time
+   ========================================================================== */
+.srv-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--line-soft); }
+.srv-row:last-child { border-bottom: none; }
+.srv-name { width: 118px; flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--hx-navy); }
+.srv-spark { display: flex; align-items: flex-end; gap: 2px; height: 34px; flex: 1; min-width: 0; }
+.srv-bar { flex: 1; min-width: 3px; background: var(--st-scheduled); border-radius: 1px 1px 0 0; }
+.srv-bar.pm { background: var(--hx-navy); }
+.srv-now { width: 62px; flex-shrink: 0; text-align: right; font-size: 12.5px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.srv-trend { width: 74px; flex-shrink: 0; text-align: right; }
+.srv-key { display: flex; gap: 14px; align-items: center; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.srv-key i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 5px; vertical-align: -1px; }
+.srv-days { display: flex; gap: 2px; margin-top: 4px; font-size: 9px; color: var(--muted); }
+.srv-days span { flex: 1; text-align: center; }
+
+/* ==========================================================================
    DASHBOARD FILTERS · DELTAS · PAYMENT SERIES  (per DASHBOARD_SPEC)
    ========================================================================== */
 .dash-filters {
