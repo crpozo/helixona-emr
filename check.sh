@@ -29,5 +29,33 @@ if dups: bad.append(f"ids de pantalla duplicados: {dups}")
 print("\n".join(bad) if bad else f"OK · {len(allids)} pantallas · 0 enlaces rotos")
 sys.exit(1 if bad else 0)
 PY
-node -e "new Function(require('fs').readFileSync('assets/hcos.js','utf8'))" || { echo "JS SYNTAX BAD"; fail=1; }
+node -e "new Function(require('fs').readFileSync('assets/hcos.js','utf8'))" || { 
+
+echo "JS SYNTAX BAD"; fail=1; }
+
+# --- botones que prometen un cambio que no ocurre ---
+python3 - <<'PYCHK'
+import re, glob, sys
+bad = []
+for f in sorted(glob.glob('*.html')):
+    s = open(f).read()
+    for m in re.finditer(r'<button([^>]*)>(.*?)</button>', s, re.S):
+        attrs, label = m.group(1), re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        oc = re.search(r'onclick="([^"]*)"', attrs)
+        if not oc: continue
+        t = re.search(r"toast\('([^']{0,80})", oc.group(1))
+        if not t: continue
+        claim = t.group(1).lower()
+        if not re.search(r'\b(added|removed|deleted|created)\b', claim): continue
+        if re.search(r'document\.|\.remove\(|insertBefore|appendChild', oc.group(1)): continue
+        if 'data-row-add' in attrs or 'data-row-del' in attrs: continue
+        if 'data-activate' in attrs or 'data-open-modal' in attrs: continue
+        bad.append('%s: "%s" dice "%s"' % (f, label[:32], t.group(1)[:44]))
+if bad:
+    print('BOTONES QUE MIENTEN (%d):' % len(bad))
+    for b in bad[:12]: print('  ' + b)
+    sys.exit(1)
+PYCHK
+[ $? -ne 0 ] && fail=1
+
 exit $fail

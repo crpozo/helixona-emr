@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=16">
+<link rel="stylesheet" href="assets/hcos.css?v=18">
 <style>
   .i-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .i-lane { flex: 1 1 200px; min-width: 190px; }
@@ -381,7 +381,7 @@
                   <span><b>HCOS never sets a readiness result</b></span>
                 </div>
                 <div class="ai-actions">
-                  <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to the review note as a question to ask — accepted by Dr. Drannikov.', 'ok')">Add to the review note</button>
+                  <button data-row-add class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to the review note as a question to ask — accepted by Dr. Drannikov.', 'ok')">Add to the review note</button>
                   <button class="btn btn-sm" onclick="HCOS.toast('Rejected — recorded with your name and the time. It stays on the record as rejected.', 'ok')">Not useful</button>
                 </div>
               </div>
@@ -764,7 +764,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=16"></script>
+<script src="assets/hcos.js?v=18"></script>
 <script>
   /* Jumping to a screen from inside a why drawer closes the drawer behind it. */
   document.addEventListener('click', function (ev) {

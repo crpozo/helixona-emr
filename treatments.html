@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=16">
+<link rel="stylesheet" href="assets/hcos.css?v=18">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -449,7 +449,7 @@
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" onclick="HCOS.toast('Draft created. It needs Dr. Drannikov\'s approval before it can be booked.', 'ok')" data-close-modal>Create draft</button>
+      <button data-row-add class="btn btn-primary" onclick="HCOS.toast('Draft created. It needs Dr. Drannikov\'s approval before it can be booked.', 'ok')" data-close-modal>Create draft</button>
     </div>
   </div>
 </div>
@@ -559,7 +559,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=16"></script>
+<script src="assets/hcos.js?v=18"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=16">
+<link rel="stylesheet" href="assets/hcos.css?v=18">
 <style>
   .j-patientbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .j-patientbar .avatar { width: 42px; height: 42px; font-size: 14px; }
@@ -337,7 +337,7 @@
                 <td>In office · Kyle</td>
                 <td style="text-align:right">20</td>
                 <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+                <td style="text-align:right"><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
               </tr>
               <tr>
                 <td><strong>Red light</strong></td>
@@ -347,7 +347,7 @@
                 <td>In office · Kyle</td>
                 <td style="text-align:right">15</td>
                 <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+                <td style="text-align:right"><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
               </tr>
               <tr>
                 <td><strong>Hydrogen inhalation</strong></td>
@@ -357,7 +357,7 @@
                 <td>In office · Kyle</td>
                 <td style="text-align:right">25</td>
                 <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+                <td style="text-align:right"><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
               </tr>
               <tr>
                 <td><strong>Salt room</strong></td>
@@ -367,7 +367,7 @@
                 <td>In office · Kyle</td>
                 <td style="text-align:right">15</td>
                 <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+                <td style="text-align:right"><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
               </tr>
               <tr>
                 <td><strong>Rebounding</strong></td>
@@ -387,7 +387,7 @@
                 <td>At home · Maya</td>
                 <td style="text-align:right">10</td>
                 <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+                <td style="text-align:right"><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
               </tr>
               <tr>
                 <td><strong>Salt bath</strong></td>
@@ -397,7 +397,7 @@
                 <td>At home · Maya</td>
                 <td style="text-align:right">10</td>
                 <td><span class="appr approved">In plan</span></td>
-                <td style="text-align:right"><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
+                <td style="text-align:right"><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Change added to the version 6 draft. Approve the version to publish it.','ok')">Change</button></td>
               </tr>
               <tr>
                 <td><strong>Omega-3</strong></td>
@@ -504,7 +504,7 @@
             <span class="field-help" style="margin:0">A clinical item needs a signed order first. Items without an order are non-clinical support.</span>
             <div class="j-actions">
               <button class="btn" data-activate="j-staff-log">Go to weekly log</button>
-              <button class="btn btn-primary" onclick="HCOS.toast('Added to the version 6 draft. It reaches Maya\'s app when you approve the version.','ok')">Add to version 6 draft</button>
+              <button data-row-add class="btn btn-primary" onclick="HCOS.toast('Added to the version 6 draft. It reaches Maya\'s app when you approve the version.','ok')">Add to version 6 draft</button>
             </div>
           </div>
         </div>
@@ -652,7 +652,7 @@
           <span class="field-help" style="margin:0">Week 4 stays open until Sunday; counts keep updating as visits and check-ins land.</span>
           <div class="j-actions">
             <button class="btn" data-activate="j-staff-patients">Back to roster</button>
-            <button class="btn" onclick="HCOS.toast('Note added to week 4 with your name and time.','ok')">Add note</button>
+            <button data-row-add class="btn" onclick="HCOS.toast('Note added to week 4 with your name and time.','ok')">Add note</button>
             <button class="btn btn-primary" data-activate="j-staff-poc">Open the plan of care</button>
           </div>
         </div>
@@ -782,7 +782,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=16"></script>
+<script src="assets/hcos.js?v=18"></script>
 <script>
   // Segmented controls (pacing, week) — click to activate; a couple toast.
   document.addEventListener('click', function (ev) {

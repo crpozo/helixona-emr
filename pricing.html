@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=16">
+<link rel="stylesheet" href="assets/hcos.css?v=18">
 <style>
   .pr-price { font-family: ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
   .pr-price-main { font-weight: 700; color: var(--hx-navy); }
@@ -471,7 +471,7 @@
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Service added to draft v13. Tom Bakman approves the version before it quotes.', 'ok')">Add service</button>
+      <button data-row-add class="btn btn-primary" data-close-modal onclick="HCOS.toast('Service added to draft v13. Tom Bakman approves the version before it quotes.', 'ok')">Add service</button>
     </div>
   </div>
 </div>
@@ -496,11 +496,11 @@
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Benefit added to draft v7. Include it in a tier, then approve v7 to switch it on.', 'ok')">Add benefit</button>
+      <button data-row-add class="btn btn-primary" data-close-modal onclick="HCOS.toast('Benefit added to draft v7. Include it in a tier, then approve v7 to switch it on.', 'ok')">Add benefit</button>
     </div>
   </div>
 </div>
 
-<script src="assets/hcos.js?v=16"></script>
+<script src="assets/hcos.js?v=18"></script>
 </body>
 </html>

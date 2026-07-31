@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=16">
+<link rel="stylesheet" href="assets/hcos.css?v=18">
 <style>
   .ad-eyebrow { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
   .ad-h { font-size: 18px; font-weight: 600; color: var(--hx-navy); margin: 4px 0 14px; }
@@ -360,7 +360,7 @@
           <div style="margin-top:8px"><button class="btn btn-sm" data-activate="a-25-spd-upload">Upload plan document</button></div>
         </div>
 
-        <button class="btn" style="width:100%;margin-top:14px" onclick="HCOS.toast('Added to your calendar — Tuesday, July 21 · 3:00 PM.', 'ok')">Add to calendar</button>
+        <button data-row-add class="btn" style="width:100%;margin-top:14px" onclick="HCOS.toast('Added to your calendar — Tuesday, July 21 · 3:00 PM.', 'ok')">Add to calendar</button>
         <a class="btn btn-ghost" style="width:100%;font-size:12px;margin-top:6px;box-sizing:border-box;text-align:center" href="journey-book.html#/j-book-what">Need a different time? Reschedule</a>
       </div>
     </div>
@@ -472,7 +472,7 @@
               <tr>
                 <td><strong>Infusion consent</strong></td><td>Consent</td><td><span class="ver-chip superseded">v1</span></td>
                 <td>Maya Reyes &middot; Mar 20</td><td>superseded by v2</td><td>&mdash;</td><td>e-signature</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Superseded versions stay readable — nothing is deleted.')">Open</button></td>
+                <td><button data-row-del class="btn btn-sm" onclick="HCOS.toast('Superseded versions stay readable — nothing is deleted.')">Open</button></td>
               </tr>
             </tbody>
           </table>
@@ -490,7 +490,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=16"></script>
+<script src="assets/hcos.js?v=18"></script>
 <script>
   // Demo only: filter chips toggle their active state within a chip pair.
   document.addEventListener('click', function (ev) {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=16">
+<link rel="stylesheet" href="assets/hcos.css?v=18">
 <style>
   .b-prow { display: flex; align-items: center; gap: 10px; }
   .b-pname { font-weight: 600; color: var(--hx-navy); }
@@ -626,7 +626,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                     <td><span class="b-code">R53.83</span></td>
                     <td><span class="pill">Primary</span></td>
                     <td><span class="clin-state verified">On the list</span><div class="clin-src">Since Mar 16</div></td>
-                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed from this encounter. The problem list is untouched.', 'ok')">Remove</button></td>
+                    <td><button data-row-del class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed from this encounter. The problem list is untouched.', 'ok')">Remove</button></td>
                   </tr>
                   <tr>
                     <td>2</td>
@@ -634,7 +634,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                     <td><span class="b-code">E06.3</span></td>
                     <td><span class="pill pill-muted">Secondary</span></td>
                     <td><span class="clin-state verified">On the list</span><div class="clin-src">Since 2019</div></td>
-                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed from this encounter. The problem list is untouched.', 'ok')">Remove</button></td>
+                    <td><button data-row-del class="btn btn-ghost btn-sm" onclick="HCOS.toast('Removed from this encounter. The problem list is untouched.', 'ok')">Remove</button></td>
                   </tr>
                   <tr>
                     <td>3</td>
@@ -650,7 +650,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                     <td><span class="b-code">R41.840</span></td>
                     <td><span class="pill pill-muted">Secondary</span></td>
                     <td><span class="clin-state reported">Reported only</span><div class="clin-src">Grace · intake Mar 12</div></td>
-                    <td><button class="btn btn-ghost btn-sm" onclick="HCOS.toast('Added to the problem list as confirmed by you, effective today. Her original report is kept.', 'ok')">Add to the list</button></td>
+                    <td><button data-row-add class="btn btn-ghost btn-sm" onclick="HCOS.toast('Added to the problem list as confirmed by you, effective today. Her original report is kept.', 'ok')">Add to the list</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -664,7 +664,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
 
             <div style="display:flex;gap:8px;margin-top:12px">
               <input class="search-input" type="search" placeholder="Search ICD-10 code or diagnosis name" style="flex:1">
-              <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Diagnosis added to this encounter. Adding it to the problem list is a separate step.', 'ok')">Add diagnosis</button>
+              <button data-row-add class="btn btn-primary btn-sm" onclick="HCOS.toast('Diagnosis added to this encounter. Adding it to the problem list is a separate step.', 'ok')">Add diagnosis</button>
             </div>
           </div>
 
@@ -690,7 +690,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <span><b>Decides</b> Dr. Drannikov</span>
               </div>
               <div class="ai-actions">
-                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to this encounter under your name. The problem list is a separate step.', 'ok')">Add the ones you pick</button>
+                <button data-row-add class="btn btn-sm btn-primary" onclick="HCOS.toast('Added to this encounter under your name. The problem list is a separate step.', 'ok')">Add the ones you pick</button>
                 <button class="btn btn-sm" onclick="HCOS.toast('Dismissed. Recorded with your name and the reason.', 'ok')">Dismiss</button>
               </div>
             </div>
@@ -1099,7 +1099,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               </div>
               <div class="field">
                 <label class="field-label">Attach a document</label>
-                <button class="btn btn-sm" onclick="HCOS.toast('Attachment added to the order. It travels with the order ID, not with the note.', 'ok')">Upload a file</button>
+                <button data-row-add class="btn btn-sm" onclick="HCOS.toast('Attachment added to the order. It travels with the order ID, not with the note.', 'ok')">Upload a file</button>
                 <span style="font-size:11px;color:var(--muted);margin-left:8px">G6PD result &middot; PDF &middot; 84 KB</span>
               </div>
             </div>
@@ -1615,7 +1615,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       <span>A patient report is not a diagnosis until a physician or extender confirms it here.</span>
     </div>
     <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-      <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Problem added as active by Dr. Drannikov. Notes, claims and readiness read it from this list.', 'ok')">Add problem</button>
+      <button data-row-add class="btn btn-primary btn-sm" onclick="HCOS.toast('Problem added as active by Dr. Drannikov. Notes, claims and readiness read it from this list.', 'ok')">Add problem</button>
       <button class="btn btn-sm" data-close-drawer="#b-drawer-problems">Back to the encounter</button>
     </div>
   </div>
@@ -1697,7 +1697,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       <span>Reviewed today at 11:22 AM · no change</span>
     </div>
     <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-      <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Allergy added by Dr. Drannikov. Every safety check reads it from this list immediately.', 'ok')">Add allergy</button>
+      <button data-row-add class="btn btn-primary btn-sm" onclick="HCOS.toast('Allergy added by Dr. Drannikov. Every safety check reads it from this list immediately.', 'ok')">Add allergy</button>
       <button class="btn btn-sm" onclick="HCOS.toast('Marked reviewed for today\'s encounter with your name and the time.', 'ok')">Mark reviewed</button>
       <button class="btn btn-sm" data-close-drawer="#b-drawer-allergies">Back to the encounter</button>
     </div>
@@ -1777,7 +1777,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   </div>
 </div>
 
-<script src="assets/hcos.js?v=16"></script>
+<script src="assets/hcos.js?v=18"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

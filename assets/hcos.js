@@ -670,6 +670,51 @@
         activate(t.getAttribute('data-activate'));
       }
     });
+    /* ---- A button that says "added" has to add something, and one that says
+       "removed" has to remove it. Declarative, so no page hand-rolls it. ---- */
+    document.addEventListener('click', function (ev) {
+      var el = ev.target.closest ? ev.target.closest('[data-row-add],[data-row-del]') : null;
+      if (!el) return;
+
+      if (el.hasAttribute('data-row-del')) {
+        var row = el.closest('tr, .ob-card, .act-row, .check-item, .lr-rule, .b-sugg, .card-row, li');
+        if (row && row.parentNode) row.parentNode.removeChild(row);
+        return;
+      }
+
+      /* find the list this button belongs to */
+      var scope = el.closest('.card, .screen') || document;
+      var sel = el.getAttribute('data-row-add');
+      var host = null;
+      if (sel) {
+        host = scope.querySelector(sel);
+      } else {
+        /* the list this button belongs to is the next one after it, not the first
+           one on the screen — a page can hold several tables */
+        var lists = Array.prototype.slice.call(scope.querySelectorAll('tbody, .ob-cards'));
+        for (var i = 0; i < lists.length; i++) {
+          if (el.compareDocumentPosition(lists[i]) & Node.DOCUMENT_POSITION_FOLLOWING) { host = lists[i]; break; }
+        }
+        if (!host) host = lists[lists.length - 1] || null;
+      }
+      if (!host || !host.lastElementChild) return;
+
+      var clone = host.lastElementChild.cloneNode(true);
+      /* blank it out — a new line is empty, not a copy of somebody else's data */
+      var cells = clone.querySelectorAll('td, .ob-card-title, .ob-card-note, .act-name, .act-meta');
+      Array.prototype.forEach.call(cells, function (c, i) {
+        var keep = c.querySelector('button, select, input, textarea');
+        if (keep) return;
+        c.innerHTML = i === 0 ? '<em style="color:var(--muted)">New entry &mdash; fill this in</em>'
+                              : '<span style="color:var(--line)">&mdash;</span>';
+      });
+      var pill = clone.querySelector('.pill, .appr, .clin-state');
+      if (pill) { pill.className = 'appr draft'; pill.textContent = 'Draft'; }
+      clone.setAttribute('data-row-new', '1');
+      host.appendChild(clone);
+      clone.scrollIntoView({ block: 'nearest' });
+    });
+
     /* ---- Nothing is dead. Anything clickable that has no explicit handler
        still behaves the way its label promises. ---- */
     document.addEventListener('click', function (ev) {
