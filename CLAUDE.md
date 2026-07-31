@@ -87,12 +87,12 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
 
 - Day view: time on the vertical axis; columns are **Dr. Drannikov + Chairs 1–4** grouped under an "Infusion Suite" band; a current-time line makes the calendar a live picture of the clinic day.
 - Status lifecycle — one vocabulary everywhere: **Scheduled → Confirmed → Arrived → In Room | In Chair → Done**; exits No-Show, Cancelled, Rescheduled.
-- Appointment types with real durations: New Patient Consult 90m · Follow-up 30m · Infusion (NAD+ ~3h, IV Vitamin C 25 g ~2.5h, Myers' Cocktail 1h, Glutathione push 30m) · Lab Draw 15m · Telehealth 30m.
+- Appointment types with real durations: New Patient Consult 90m · Follow-up 30m · Infusion (NAD+ ~3h, Mega C 50 ~2h, Foundational Flow 10 ~1h, Glutathione push 30m) · Lab Draw 15m · Telehealth 30m.
 - **The 30-minute grid is the START-TIME granularity for medics, not a duration (Carlos, 2026-07-28).** Nothing is "30 minutes long" because of the grid — a 3 h NAD+ runs 3 h, it just begins at :00 or :30.
 - **Duration is per patient, not just per protocol.** The system tracks how long each patient actually takes for a given IV and books their own average once there are 3 past runs — Maya Reyes books 3 h 20 for NAD+, not 3 h. Blocks warn when a drip is running past its booked end.
 - **Conflicts: each rule sets its own strength (Carlos, 2026-07-28)** — Block / Warn / Allow, configured on `schedule-rules.html`. Provider double-book blocks; chair overlap warns (clinics overbook on purpose). Coverage rules layer on top and the stricter one wins.
 - Filters are multi-select across team, providers, actors and treatment, and a user can **lock a saved view** as their default.
-- **Two visual channels on the calendar, both grayscale**: status is the fill ramp (light→dark); treatment type is the left-edge pattern + an initial (NAD/IVC/MYR/EBO/CON); the corner tag is who runs it. In the real product those patterns become treatment colours.
+- **Two visual channels on the calendar, both grayscale**: status is the fill ramp (light→dark); treatment type is the left-edge pattern + an initial (NAD/IVC/FLO/EBO/CON); the corner tag is who runs it. In the real product those patterns become treatment colours.
 - **Membership = booking priority**: prime times open to Longevity 14 days out, Restore 7, Wellness 3.
 - Front-desk-first density: a full clinic day visible without scrolling.
 
@@ -194,7 +194,7 @@ Shared visibility — how "everyone edits" works on a static site: Carlos merges
 **Colour code (Carlos, 2026-07-28) — two channels, two questions.** The wireframe was grayscale-only; it now carries a deliberate colour code and nothing else.
 
 - **Status owns the FILL** — where the visit is right now, read as a workflow: Scheduled `#9AA3B0` grey (nothing yet) → Confirmed `#2E6DB4` blue (they said yes) → Arrived `#D98A1F` amber (here, waiting on you) → In Room / In Chair `#2E8B57` green (being treated) → Done `#5B6673` slate (finished, recedes). Exits: No-Show `#C0392B` red dashed · Cancelled `#A9B0B8` grey with strikethrough. Block fills are the pale `--st-*-bg` tints so the treatment edge stays loud.
-- **Treatment owns the LEFT EDGE and the initial chip** — NAD+ `#5B4B8A` · IV vitamin C `#B26B12` · Myers' and pushes `#1F6F6B` · EBOO `#9B3A3A` · consults and follow-ups `#2E5C8A` · telehealth `#3E7A4E` · lab draw `#6B5B3A`. The edge **pattern** stays alongside the colour so the board still reads printed or colour-blind.
+- **Treatment owns the LEFT EDGE and the initial chip** — NAD+ `#5B4B8A` · IV vitamin C `#B26B12` · Foundational Flow and pushes `#1F6F6B` · EBOO `#9B3A3A` · consults and follow-ups `#2E5C8A` · telehealth `#3E7A4E` · lab draw `#6B5B3A`. The edge **pattern** stays alongside the colour so the board still reads printed or colour-blind.
 
 - **Trend owns its own tokens** — `--trend-good #2F7D4F` / `--trend-bad #B03A2E`, used only by
   delta pills on the dashboards. It is deliberately NOT the clinical green and red: "revenue is up"
