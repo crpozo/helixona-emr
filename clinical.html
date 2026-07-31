@@ -38,6 +38,14 @@
   .b-sig-name { font-size: 20px; font-style: italic; color: var(--hx-navy); }
   .b-sig-hint { font-size: 12px; color: var(--muted); }
   .b-sig-meta { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: ui-monospace, monospace; }
+  .o-when { font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+  .o-by { display: block; font-family: var(--font-ui); font-size: 10.5px; color: var(--ink); font-weight: 600; margin-top: 1px; }
+  .o-kind { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; margin-top: 4px; }
+  .o-kind-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; background: #fff; cursor: pointer; text-align: left; font-family: inherit; }
+  .o-kind-card:hover { border-color: var(--ink); }
+  .o-kind-name { font-size: 13.5px; font-weight: 700; color: var(--hx-navy); }
+  .o-kind-sub { font-size: 11.5px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  .o-kind-int { font-size: 10.5px; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line-soft); }
 </style>
 </head>
 <body data-page="clinical" data-page-title="Documentation" data-shell="app">
@@ -180,6 +188,7 @@
             <div class="b-enc-sub">MRN 2071 · Self-pay <span class="net-badge net-self">SELF</span> · encounter ENC-2026-07211 · follow-up · 30 min · today 11:15 AM</div>
           </div>
           <button class="btn" data-open-drawer="#b-drawer-problems">Problem list</button>
+          <button class="btn" data-activate="b-order-new">Add an order</button>
           <button class="btn btn-primary" data-activate="b-03-soap">Open SOAP note</button>
         </div>
 
@@ -747,46 +756,46 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           <button class="filter-chip">Rx (1)</button>
           <button class="filter-chip">Supplements (1)</button>
           <button class="filter-chip">Referrals (0)</button>
-          <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Order added to this encounter — it dispatches on sign and lock.', 'ok')">Add order</button>
+          <button class="btn btn-primary btn-sm" style="margin-left:auto" data-activate="b-order-new">Add order</button>
         </div>
 
         <div class="seg-divider" style="margin-top:0">Lab orders <a class="btn btn-ghost btn-sm" style="margin-left:8px" href="labs.html#/c-01-orders">Open orders and results</a></div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Priority</th><th>State</th></tr></thead>
+            <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Priority</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Comprehensive metabolic panel + CBC with differential</strong></td>
                 <td>Vibrant Labs · fasting · Dx R53.83</td>
-                <td><span class="b-code">O-4471</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4471</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Thyroid panel — TSH, fT4, fT3, rT3, TPO, Tg Ab</strong></td>
                 <td>Vibrant Labs · Dx E06.3 · optimal-target reporting requested</td>
-                <td><span class="b-code">O-4472</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4472</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Vitamin D, 25-OH — recheck</strong></td>
                 <td>Vibrant Labs · Dx E55.9 · recheck in 12 weeks</td>
-                <td><span class="b-code">O-4473</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4473</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Ferritin + iron panel</strong></td>
                 <td>Vibrant Labs · Dx R53.83 · low-normal on last draw</td>
-                <td><span class="b-code">O-4474</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4474</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>Organic acids test (OAT)</strong></td>
                 <td>Mosaic Diagnostics · urine · 24-hour collection · $339</td>
-                <td><span class="b-code">O-4475</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4475</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-warn">Self-pay</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
@@ -798,19 +807,19 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">IV protocols</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Protocol</th><th>Details</th><th>Order ID</th><th>State</th><th></th></tr></thead>
+            <thead><tr><th>Protocol</th><th>Details</th><th>Order ID</th><th>Placed</th><th>State</th><th></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>IV Foundational Flow 10 · series of 6 over 6 weeks</strong></td>
                 <td>B-complex, B12, calcium, magnesium, vitamin C 5 g · saline 100 mL · ~1 h · minimum 5 days between runs</td>
-                <td><span class="b-code">O-3402</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td>
+                <td><span class="b-code">O-3402</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="appr draft">v2 draft</span></td>
                 <td><button class="btn btn-ghost btn-sm" data-open-modal="#b-protocol-modal">Change protocol</button></td>
               </tr>
               <tr>
                 <td><strong>Glutathione push 2,000 mg · single trial dose</strong></td>
                 <td>Saline 30 mL · IV push · ~30 min · assess response before adding to the series</td>
-                <td><span class="b-code">O-4476</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4476</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="appr draft">Draft</span></td>
                 <td><button class="btn btn-ghost btn-sm" data-open-modal="#b-protocol-modal">Change protocol</button></td>
               </tr>
@@ -822,15 +831,41 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           <span>Changing a protocol makes a new version; anything already booked keeps the version it was booked on.</span>
         </div>
 
+        <div class="seg-divider">Therapies and procedures</div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Therapy</th><th>Details</th><th>Order ID</th><th>Placed</th><th>State</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Erchonia laser &middot; violet &middot; course of 10</strong></td>
+                <td>Protocol V-2 &middot; 20 min &middot; twice weekly &middot; Room 2 &middot; technician may run it</td>
+                <td><span class="b-code">O-4481</span> <span class="ver-chip">v1</span></td>
+                <td class="o-when">Jul 21 &middot; 11:38 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="appr draft">Draft</span></td>
+              </tr>
+              <tr>
+                <td><strong>EBOO &middot; course of 6</strong></td>
+                <td>120 min &middot; every other week &middot; provider present &middot; requires current clearance</td>
+                <td><span class="b-code">O-4482</span> <span class="ver-chip">v1</span></td>
+                <td class="o-when">Jul 21 &middot; 11:39 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="appr draft">Draft</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prov"><span>Read from <a href="treatments.html#/t-03-therapies">the therapy catalogue</a>.
+        On sign, each one appears on <a href="journey-plan.html#/j-plan-orders">her plan</a> in plain words and on
+        <a href="schedule.html#/l-01-day">the calendar</a> with the room and staff it needs.</span></div>
+
         <div class="seg-divider">Prescriptions</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Prescription</th><th>Details</th><th>Order ID</th><th>Type</th><th>State</th></tr></thead>
+            <thead><tr><th>Prescription</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Type</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Levothyroxine 75 mcg PO daily</strong> · continue</td>
                 <td>90-day supply · 3 refills · recheck TSH in 8 weeks · transmits to the patient's pharmacy</td>
-                <td><span class="b-code">O-4477</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4477</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:36 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Refill</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
@@ -841,12 +876,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Supplements · Fullscript</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Supplement</th><th>Details</th><th>Order ID</th><th>Route</th><th>State</th></tr></thead>
+            <thead><tr><th>Supplement</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Route</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Vitamin D3 5,000 IU + K2 100 mcg daily</strong></td>
                 <td>Pure Encapsulations · 90-day supply · recheck vitamin D in 12 weeks</td>
-                <td><span class="b-code">O-4478</span> <span class="ver-chip">v1</span></td>
+                <td><span class="b-code">O-4478</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:36 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Fullscript</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
@@ -903,6 +938,317 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         </div>
 
         <div class="callout callout-ok" style="margin-top:14px">On sign and lock every draft above is approved at the version shown and dispatched once: labs to the reference lab, IV orders to the infusion bay board, the prescription to the pharmacy, supplements to Fullscript, charges to billing. <a href="clinical.html#/b-11-sign-lock">Review sign and lock →</a></div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-order-new" data-title="New order">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/orders/new</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">New order</div>
+            <div class="b-enc-sub">Grace Lindqvist &middot; MRN 2071 &middot; encounter ENC-2026-07211</div>
+          </div>
+          <button class="btn" data-activate="b-09-orders">Back to orders</button>
+        </div>
+
+        <p class="page-sub" style="margin-top:0">What kind of order is it? What you can pick is what the
+        integrations actually support &mdash; the two that have none say so instead of pretending.</p>
+
+        <div class="prov">
+          <span><strong>Ordered by</strong> Dr. Eduard Drannikov &middot; physician or extender only.
+          Staff may prepare an order; only a provider signs it.</span>
+        </div>
+
+        <div class="o-kind">
+          <button class="o-kind-card" data-activate="b-order-detail">
+            <div class="o-kind-name">Lab</div>
+            <div class="o-kind-sub">Blood, urine, saliva or stool panels</div>
+            <div class="o-kind-int">Vibrant Labs &middot; Quest &middot; Mosaic &middot; in-house draw</div>
+          </button>
+          <button class="o-kind-card" data-activate="b-order-detail">
+            <div class="o-kind-name">Infusion</div>
+            <div class="o-kind-sub">An IV recipe from the catalogue, with its bags and run time</div>
+            <div class="o-kind-int">Reads <a href="treatments.html#/t-01-catalogue">Treatments</a> &mdash; 26 recipes</div>
+          </button>
+          <button class="o-kind-card" data-activate="b-order-detail">
+            <div class="o-kind-name">Therapy or procedure</div>
+            <div class="o-kind-sub">EBOO, Erchonia laser, PRP, BEMER, chiro and the rest</div>
+            <div class="o-kind-int">Reads <a href="treatments.html#/t-03-therapies">Treatments</a> &mdash; 9 therapies</div>
+          </button>
+          <button class="o-kind-card" data-activate="b-order-rx">
+            <div class="o-kind-name">Prescription</div>
+            <div class="o-kind-sub">A medication sent to the patient&rsquo;s pharmacy</div>
+            <div class="o-kind-int">DoseSpot e-prescribing &middot; surescripts pharmacy directory</div>
+          </button>
+          <button class="o-kind-card" data-activate="b-order-detail">
+            <div class="o-kind-name">Supplement</div>
+            <div class="o-kind-sub">A protocol supplement, dispensed or recommended</div>
+            <div class="o-kind-int">Fullscript &middot; in-house dispensary</div>
+          </button>
+          <button class="o-kind-card" data-activate="b-order-detail">
+            <div class="o-kind-name">Imaging</div>
+            <div class="o-kind-sub">Ultrasound, DEXA, MRI or CT at an outside centre</div>
+            <div class="o-kind-int"><span class="pill pill-muted">No integration yet</span> ordered on paper</div>
+          </button>
+          <button class="o-kind-card" data-activate="b-order-detail">
+            <div class="o-kind-name">Referral</div>
+            <div class="o-kind-sub">To a specialist inside or outside the network</div>
+            <div class="o-kind-int"><span class="pill pill-muted">No integration yet</span> ordered on paper</div>
+          </button>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          An infusion or a therapy ordered here also lands on
+          <a href="journey-plan.html#/j-plan-orders">the patient&rsquo;s plan</a>, so they see what is happening
+          and what to do, and on <a href="schedule.html#/l-01-day">the calendar</a> for the chair, the room and the
+          staff it needs.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-order-detail" data-title="Order detail">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/orders/new/infusion</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Infusion order</div>
+            <div class="b-enc-sub">Grace Lindqvist &middot; MRN 2071 &middot; draft &middot; not yet signed</div>
+          </div>
+          <button class="btn" data-activate="b-order-new">Change kind</button>
+          <button class="btn btn-primary" onclick="HCOS.toast('Draft saved. It dispatches when Dr. Drannikov signs and locks the encounter.', 'ok')">Save draft</button>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card">
+              <div class="card-title">What to give</div>
+              <div class="field">
+                <label class="field-label">Recipe</label>
+                <select class="field-input" id="b-ord-recipe">
+                  <option>Mega C 50 &middot; 2 bags &middot; 120 min</option>
+                  <option>Mega C 25 &middot; 2 bags &middot; 90 min</option>
+                  <option>Foundational Flow 10 &middot; 1 bag &middot; 60 min</option>
+                  <option>Detox Prime &middot; 1 bag + 1 push &middot; 75 min</option>
+                  <option>Chelation &middot; 1 bag &middot; 120 min</option>
+                  <option>Hydration &middot; 1 bag &middot; 45 min</option>
+                </select>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">Add-on</label>
+                  <select class="field-input">
+                    <option>None</option>
+                    <option>NAD add on &middot; +60 min</option>
+                    <option>Glut add on &middot; +10 min</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Chair time for this patient</label>
+                  <select class="field-input">
+                    <option>120 min &middot; catalogue default</option>
+                    <option>150 min &middot; reduced rate</option>
+                    <option>180 min &middot; reduced rate, first run</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">How many</label>
+                  <input class="field-input" type="text" value="Series of 6">
+                </div>
+                <div class="field">
+                  <label class="field-label">Minimum interval</label>
+                  <select class="field-input">
+                    <option>5 days between runs</option>
+                    <option>7 days between runs</option>
+                    <option>No minimum</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Why</div>
+              <div class="field">
+                <label class="field-label">Linked lead actor</label>
+                <select class="field-input">
+                  <option>Mould-driven inflammatory response &middot; T65.891A</option>
+                  <option>Gut dysbiosis with permeability &middot; K58.9</option>
+                  <option>HPA axis dysregulation &middot; E27.40</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Instructions for the nurse or medic</label>
+                <textarea class="field-input" rows="3">Start at 200 mL/h. Slow if she reports burning at the site. Confirm G6PD on file before the first run.</textarea>
+              </div>
+              <div class="field">
+                <label class="field-label">Attach a document</label>
+                <button class="btn btn-sm" onclick="HCOS.toast('Attachment added to the order. It travels with the order ID, not with the note.', 'ok')">Upload a file</button>
+                <span style="font-size:11px;color:var(--muted);margin-left:8px">G6PD result &middot; PDF &middot; 84 KB</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Before it can run</div>
+              <div class="g-ev"><div class="g-ev-when">1</div><div class="g-ev-what">
+                <strong>Signed order</strong> &mdash; on sign and lock</div>
+                <div class="g-ev-ver"><span class="appr draft">Pending</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">2</div><div class="g-ev-what">
+                <strong>Current clearance</strong> &mdash; expires Aug 14</div>
+                <div class="g-ev-ver"><span class="appr approved">Met</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">3</div><div class="g-ev-what">
+                <strong>G6PD on file</strong> &mdash; resulted May 2, normal</div>
+                <div class="g-ev-ver"><span class="appr approved">Met</span></div></div>
+              <div class="callout callout-warn" style="margin-top:10px">
+                Booking is a <strong>hard block</strong> until the order is signed. It is not a warning anyone can
+                click past.
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">What it will cost her</div>
+              <dl class="kv">
+                <dt>Coverage</dt><dd><span class="pill pill-muted">Cash only</span></dd>
+                <dt>Per run</dt><dd>$385 &middot; $310 as a member</dd>
+                <dt>Series of 6</dt><dd>$2,310 at member price</dd>
+                <dt>She is</dt><dd>Self-pay &mdash; no claim will be filed</dd>
+              </dl>
+              <div class="prov" style="margin-top:10px">
+                <span>Read from <a href="treatments.html#/t-02-recipe">the recipe</a> and
+                <a href="pricing.html#/pr-01-list">the price list</a>. She sees this before she agrees to the series.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-order-rx" data-title="Prescription">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/orders/new/prescription</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Prescription</div>
+            <div class="b-enc-sub">Grace Lindqvist &middot; MRN 2071 &middot; draft &middot; not yet signed</div>
+          </div>
+          <button class="btn" data-activate="b-order-new">Change kind</button>
+          <button class="btn btn-primary" onclick="HCOS.toast('Prescription queued. It transmits to Ridgeway Pharmacy when Dr. Drannikov signs.', 'ok')">Save draft</button>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card">
+              <div class="card-title">The medication</div>
+              <div class="field">
+                <label class="field-label">Drug</label>
+                <input class="field-input" type="text" value="Low-dose naltrexone">
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">Strength</label>
+                  <select class="field-input"><option>3 mg</option><option>1.5 mg</option><option>4.5 mg</option></select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Form</label>
+                  <select class="field-input"><option>Capsule &middot; compounded</option><option>Tablet</option><option>Liquid</option></select>
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label">Directions the patient reads</label>
+                <input class="field-input" type="text" value="Take one capsule by mouth at bedtime">
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">Quantity</label>
+                  <input class="field-input" type="text" value="30 capsules">
+                </div>
+                <div class="field">
+                  <label class="field-label">Refills</label>
+                  <select class="field-input"><option>2</option><option>0</option><option>1</option><option>3</option><option>5</option></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Where it goes</div>
+              <div class="field">
+                <label class="field-label">Pharmacy</label>
+                <select class="field-input">
+                  <option>Ridgeway Compounding &middot; Irvine &middot; her usual</option>
+                  <option>Empower Pharmacy &middot; mail order</option>
+                  <option>CVS &middot; Jamboree Rd</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Dispense as written</label>
+                <select class="field-input"><option>Substitution allowed</option><option>Dispense as written</option></select>
+              </div>
+              <div class="field">
+                <label class="field-label">Note to the pharmacist</label>
+                <textarea class="field-input" rows="2">Compound in avicel, no lactose filler &mdash; patient reacts.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Safety checks</div>
+              <div class="g-ev"><div class="g-ev-when">&#10003;</div><div class="g-ev-what">
+                <strong>Allergies</strong> &mdash; no conflict with her list</div>
+                <div class="g-ev-ver"><span class="appr approved">Clear</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">!</div><div class="g-ev-what">
+                <strong>Interaction</strong> &mdash; opioid analgesics are blocked while on naltrexone.
+                Flagged for the chart, not a block.</div>
+                <div class="g-ev-ver"><span class="appr pending">Noted</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">&#10003;</div><div class="g-ev-what">
+                <strong>Duplicate therapy</strong> &mdash; nothing similar active</div>
+                <div class="g-ev-ver"><span class="appr approved">Clear</span></div></div>
+              <div class="prov" style="margin-top:10px">
+                <span>Checked against <a href="clinical-chart.html#/b-06-med-rec">her reconciled medication list</a>
+                and <a href="clinical-chart.html#/b-07-allergies">her allergy list</a> &mdash; not against a copy.</span>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Who may sign this</div>
+              <dl class="kv">
+                <dt>Prescriber</dt><dd>Dr. Eduard Drannikov &middot; Provider</dd>
+                <dt>May also sign</dt><dd>Extender, within scope</dd>
+                <dt>May prepare</dt><dd>MA, nurse, medic &mdash; as a draft only</dd>
+                <dt>AI</dt><dd>May suggest. Never signs.</dd>
+              </dl>
+              <div class="prov" style="margin-top:10px">
+                <span>Same rule for every order in the system &mdash;
+                <a href="security.html#/g-02-roles">the roles matrix</a>.</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
