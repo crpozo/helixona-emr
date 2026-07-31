@@ -45,6 +45,24 @@
   .bt-list { font-size: 12.5px; line-height: 1.9; }
   .bt-list .muted { color: var(--muted); }
   @media (max-width: 900px) { .bt-editor { grid-template-columns: 1fr; } }
+  .lay-cols { display: grid; grid-template-columns: 1fr 300px; gap: 16px; align-items: start; }
+  .lay-list { display: flex; flex-direction: column; gap: 8px; }
+  .lay-widget { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line);
+    border-radius: var(--radius); background: #fff; cursor: grab; }
+  .lay-widget:active { cursor: grabbing; }
+  .lay-widget.dragging { opacity: .4; border-style: dashed; }
+  .lay-widget.over { border-color: var(--ink); box-shadow: inset 0 2px 0 var(--ink); }
+  .lay-grip { color: var(--line); font-size: 13px; letter-spacing: -2px; flex-shrink: 0; }
+  .lay-body { flex: 1; min-width: 0; }
+  .lay-name { font-size: 13px; font-weight: 600; color: var(--hx-navy); }
+  .lay-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .lay-x { border: none; background: none; color: var(--muted); font-size: 16px; cursor: pointer; padding: 0 4px; font-family: inherit; }
+  .lay-x:hover { color: var(--ink); }
+  .dot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .dot-preview { background: var(--hx-band); border: 1px solid var(--line-soft); border-radius: var(--radius);
+    padding: 12px; font-size: 12.5px; line-height: 1.6; }
+  .dot-token { background: var(--ink); color: #fff; padding: 1px 6px; border-radius: 4px; font-size: 11px;
+    font-family: ui-monospace, monospace; }
 </style>
 </head>
 <body data-page="clinical-templates" data-page-title="Documentation · Templates & macros" data-shell="app">
@@ -57,8 +75,16 @@
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/clinical/templates</span></div>
       <div class="frame-body">
-        <h2 class="page-title">Note templates</h2>
-        <p class="page-sub">Every note template in one library — each defines its sections, default content, dot-phrases, and required fields. Built once, shared across providers, edited per encounter.</p>
+        <div class="app-header">
+          <div>
+            <h2 class="page-title" style="margin:0">Note templates</h2>
+            <p class="page-sub" style="margin:2px 0 0">Every note template in one library — each defines its sections, default content, dot-phrases, and required fields. Built once, shared across providers, edited per encounter.</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-shrink:0">
+            <button class="btn" data-activate="b-layout-editor">Arrange a view</button>
+            <button class="btn btn-primary" data-activate="b-22-template-editor">New template</button>
+          </div>
+        </div>
 
         <div class="grid-4" style="margin-bottom:14px">
           <div class="card stat-card">
@@ -413,7 +439,7 @@
                 <td><button class="bt-share" data-scope="clinic" onclick="btToggleShare(this)">Shared · clinic</button></td>
                 <td>92&times;</td>
                 <td>Dr. Drannikov</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .pots — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.pem</span></td>
@@ -421,7 +447,7 @@
                 <td><button class="bt-share" data-scope="clinic" onclick="btToggleShare(this)">Shared · clinic</button></td>
                 <td>67&times;</td>
                 <td>Dr. Drannikov</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .pem — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.fmonset</span></td>
@@ -429,7 +455,7 @@
                 <td><button class="bt-share" data-scope="clinic" onclick="btToggleShare(this)">Shared · clinic</button></td>
                 <td>148&times;</td>
                 <td>Dr. Drannikov</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .fmonset — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.hashioptimize</span></td>
@@ -437,7 +463,7 @@
                 <td><button class="bt-share" data-scope="personal" onclick="btToggleShare(this)">Private · mine</button></td>
                 <td>34&times;</td>
                 <td>Dr. Drannikov</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .hashioptimize — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.floworder</span></td>
@@ -445,7 +471,7 @@
                 <td><button class="bt-share" data-scope="clinic" onclick="btToggleShare(this)">Shared · clinic</button></td>
                 <td>418&times;</td>
                 <td>Shibani</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .floworder — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.sulfaallergy</span></td>
@@ -453,7 +479,7 @@
                 <td><button class="bt-share" data-scope="clinic" onclick="btToggleShare(this)">Shared · clinic</button></td>
                 <td>211&times;</td>
                 <td>Shibani</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .sulfaallergy — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.cognitive</span></td>
@@ -461,7 +487,7 @@
                 <td><button class="bt-share" data-scope="personal" onclick="btToggleShare(this)">Private · mine</button></td>
                 <td>52&times;</td>
                 <td>Dr. Drannikov</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .cognitive — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
               <tr>
                 <td><span class="bt-code">.lymeherx</span></td>
@@ -469,7 +495,7 @@
                 <td><button class="bt-share" data-scope="clinic" onclick="btToggleShare(this)">Shared · clinic</button></td>
                 <td>43&times;</td>
                 <td>Dr. Drannikov</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing .lymeherx — trigger, expansion text, and tokens.', 'ok')">Edit</button></td>
+                <td><button class="btn btn-sm" data-activate="b-dot-editor">Edit</button></td>
               </tr>
             </tbody>
           </table>
@@ -582,9 +608,238 @@
   </section>
 
 
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-dot-editor" data-title="Edit a dot-phrase">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/templates/dot-phrases/.floworder</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Edit <code>.floworder</code></div>
+            <div class="page-sub">Trigger, what it expands to, and the tokens it fills from the chart</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn" data-activate="b-23-dot-phrases">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved as v4. The previous version stays available to anyone whose note already used it.', 'ok')">Save as new version</button>
+          </div>
+        </div>
+
+        <div class="prov">
+          <span><strong>v3</strong> <span class="appr approved">Published</span> by Dr. Drannikov &middot; used 214 times &middot;
+          <a href="clinical-templates.html#/b-content-registry">where it is used</a></span>
+        </div>
+
+        <div class="dot-grid" style="margin-top:14px">
+          <div class="card">
+            <div class="card-title">Definition</div>
+            <div class="field">
+              <label class="field-label">Trigger</label>
+              <input class="field-input" type="text" value=".floworder">
+            </div>
+            <div class="field">
+              <label class="field-label">Expands to</label>
+              <textarea class="field-input" rows="7">IV Foundational Flow {{strength}} ordered for {{patient.first}} — series of {{count}} over {{weeks}} weeks. Minimum {{interval}} days between runs. Chair time {{duration}}. Linked to {{lead_actor}}. Ordered by {{provider}} on {{today}}.</textarea>
+            </div>
+            <div class="field">
+              <label class="field-label">Who may use it</label>
+              <select class="field-input">
+                <option>Any provider or extender</option>
+                <option>Providers only</option>
+                <option>Anyone clinical</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Preview, filled from Grace&rsquo;s chart</div>
+            <div class="dot-preview">
+              IV Foundational Flow <span class="dot-token">10</span> ordered for
+              <span class="dot-token">Grace</span> &mdash; series of <span class="dot-token">6</span> over
+              <span class="dot-token">6</span> weeks. Minimum <span class="dot-token">5</span> days between runs.
+              Chair time <span class="dot-token">60 min</span>. Linked to
+              <span class="dot-token">Mould-driven inflammatory response</span>. Ordered by
+              <span class="dot-token">Dr. Eduard Drannikov</span> on <span class="dot-token">Jul 21, 2026</span>.
+            </div>
+            <div class="prov" style="margin-top:12px">
+              <span>Tokens read the chart at the moment of expansion. A dot-phrase never stores a value &mdash;
+              if the chart changes afterwards, the note keeps what was true when it was written.</span>
+            </div>
+            <div class="callout callout-warn" style="margin-top:12px">
+              Editing a published phrase creates a new version. Notes already written keep the version they used,
+              so an old note never silently changes.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-layout-editor" data-title="Arrange a view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/templates/layouts/patient-snapshot</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Arrange the patient snapshot</div>
+            <div class="page-sub">Drag the widgets into the order you want. Each role keeps its own arrangement.</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn" onclick="HCOS.toast('Reset to the clinic default arrangement.', 'ok')">Reset to default</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved for Provider. Everyone in that role sees this arrangement; they can still override it for themselves.', 'ok')">Save for this role</button>
+          </div>
+        </div>
+
+        <div class="filters" style="margin-bottom:14px">
+          <span class="dash-flabel">View</span>
+          <select class="field-input" style="max-width:220px">
+            <option>Patient snapshot</option>
+            <option>Worklist</option>
+            <option>Infusion bay board</option>
+            <option>Front desk board</option>
+          </select>
+          <span class="dash-flabel" style="margin-left:10px">Role</span>
+          <select class="field-input" style="max-width:200px">
+            <option>Provider</option><option>Extender</option><option>MA</option>
+            <option>Nurse / Medic</option><option>Care Guide / PCC</option><option>Front Desk</option>
+          </select>
+        </div>
+
+        <div class="lay-cols">
+          <div class="card">
+            <div class="card-title">On the snapshot, top to bottom</div>
+            <div class="lay-list" id="b-lay-list">
+            <div class="lay-widget" draggable="true" data-w="0">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Lead actors</div><div class="lay-sub">Up to five, main one first</div></div>
+              <span class="pill pill-muted">Pinned</span>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="1">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Vitals</div><div class="lay-sub">BP, HR, temp, SpO2, weight, BMI, height</div></div>
+              <span class="pill pill-muted">Pinned</span>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="2">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">How she says she feels</div><div class="lay-sub">Four survey questions over 7 days</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="3">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Active problems</div><div class="lay-sub">With ICD-10 and verification state</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="4">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Allergies</div><div class="lay-sub">One list, safety-checked everywhere</div></div>
+              <span class="pill pill-muted">Pinned</span>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="5">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Medications</div><div class="lay-sub">Reconciled, prescribed and patient-reported</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="6">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Recent results</div><div class="lay-sub">Last 90 days, criticals first</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="7">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Encounter checklist</div><div class="lay-sub">What is still missing before sign</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="8">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Plan of care</div><div class="lay-sub">Current approved version and stage</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            <div class="lay-widget" draggable="true" data-w="9">
+              <span class="lay-grip">&#8942;&#8942;</span>
+              <div class="lay-body"><div class="lay-name">Upcoming appointments</div><div class="lay-sub">Next three, with treatment code</div></div>
+              <button class="lay-x" title="Remove from this view">&times;</button>
+            </div>
+            </div>
+            <div class="prov" style="margin-top:12px">
+              <span>Pinned widgets cannot be removed &mdash; lead actors, vitals and allergies are on every
+              clinical view by policy, whatever anyone drags.</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">What this changes</div>
+              <dl class="kv" style="grid-template-columns:110px 1fr">
+                <dt>Applies to</dt><dd>Everyone with the Provider role</dd>
+                <dt>Overridable</dt><dd>Yes, per person</dd>
+                <dt>Does not change</dt><dd>What the record contains &mdash; only what is shown first</dd>
+                <dt>Audited</dt><dd>Layout changes land in the audit store</dd>
+              </dl>
+              <div class="prov" style="margin-top:10px">
+                <span>Arranging a view is a display preference, never a permission. A widget you cannot see
+                is still a widget you could not have edited.</span>
+              </div>
+            </div>
+            <div class="callout" style="margin-top:16px">
+              Same editor serves every board in the system. The snapshot is only the example.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </div>
 
 <script src="assets/hcos.js?v=16"></script>
+<script>
+/* Real drag and drop — the arrangement is the point, so it has to actually move. */
+(function () {
+  var list = document.getElementById('b-lay-list');
+  if (!list) return;
+  var dragged = null;
+  list.addEventListener('dragstart', function (ev) {
+    dragged = ev.target.closest('.lay-widget');
+    if (dragged) dragged.classList.add('dragging');
+  });
+  list.addEventListener('dragend', function () {
+    if (dragged) dragged.classList.remove('dragging');
+    Array.prototype.forEach.call(list.querySelectorAll('.over'), function (x) { x.classList.remove('over'); });
+    dragged = null;
+  });
+  list.addEventListener('dragover', function (ev) {
+    ev.preventDefault();
+    var over = ev.target.closest('.lay-widget');
+    if (!over || over === dragged) return;
+    Array.prototype.forEach.call(list.querySelectorAll('.over'), function (x) { x.classList.remove('over'); });
+    over.classList.add('over');
+  });
+  list.addEventListener('drop', function (ev) {
+    ev.preventDefault();
+    var over = ev.target.closest('.lay-widget');
+    if (!over || !dragged || over === dragged) return;
+    var items = Array.prototype.slice.call(list.children);
+    if (items.indexOf(dragged) < items.indexOf(over)) over.after(dragged); else over.before(dragged);
+    over.classList.remove('over');
+    HCOS.toast(dragged.querySelector('.lay-name').textContent + ' moved. Save to apply it to the role.', 'ok');
+  });
+  list.addEventListener('click', function (ev) {
+    var x = ev.target.closest('.lay-x');
+    if (!x) return;
+    var w = x.closest('.lay-widget');
+    var name = w.querySelector('.lay-name').textContent;
+    w.remove();
+    HCOS.toast(name + ' removed from this view. The record still holds it.', 'ok');
+  });
+})();
+</script>
+
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {
