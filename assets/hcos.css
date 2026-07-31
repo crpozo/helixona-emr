@@ -48,6 +48,16 @@
   --st-cancelled-bg: #EBEDEF;
 
   /* Payment type — one pair of tones, used identically everywhere */
+  /* Trend — a third channel, independent of the clinical ramp so the two
+     can be retuned without dragging each other along */
+  --trend-good:    #2F7D4F;
+  --trend-bad:     #B03A2E;
+  --trend-good-bg: #E7F2EB;
+  --trend-bad-bg:  #F9E7E4;
+
+  /* A generic second chart series — neutral, so it never reads as a status */
+  --series-2: #B8B8B8;
+
   --pay-cash: #9E9E9E;
   --pay-ins:  #1A1A1A;
 
@@ -773,8 +783,8 @@ a.lead-chip:hover { border-color: var(--ink); }
   background: #fff; border: 1px solid var(--line); color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
-.delta.good { border-color: var(--st-inroom); color: var(--st-inroom); background: var(--st-inroom-bg); }
-.delta.bad  { border-color: var(--st-noshow); color: var(--st-noshow); background: var(--st-noshow-bg); }
+.delta.good { border-color: var(--trend-good); color: var(--trend-good); background: var(--trend-good-bg); }
+.delta.bad  { border-color: var(--trend-bad);  color: var(--trend-bad);  background: var(--trend-bad-bg); }
 .delta.flat { border-style: dashed; }
 
 /* Cash and insurance read the same way on every page */

@@ -196,7 +196,16 @@ Shared visibility — how "everyone edits" works on a static site: Carlos merges
 - **Status owns the FILL** — where the visit is right now, read as a workflow: Scheduled `#9AA3B0` grey (nothing yet) → Confirmed `#2E6DB4` blue (they said yes) → Arrived `#D98A1F` amber (here, waiting on you) → In Room / In Chair `#2E8B57` green (being treated) → Done `#5B6673` slate (finished, recedes). Exits: No-Show `#C0392B` red dashed · Cancelled `#A9B0B8` grey with strikethrough. Block fills are the pale `--st-*-bg` tints so the treatment edge stays loud.
 - **Treatment owns the LEFT EDGE and the initial chip** — NAD+ `#5B4B8A` · IV vitamin C `#B26B12` · Myers' and pushes `#1F6F6B` · EBOO `#9B3A3A` · consults and follow-ups `#2E5C8A` · telehealth `#3E7A4E` · lab draw `#6B5B3A`. The edge **pattern** stays alongside the colour so the board still reads printed or colour-blind.
 
-Everything outside those two systems stays black, white and grey. Structure, chrome, cards, tables and buttons are never coloured — colour means status or treatment, nothing else.
+- **Trend owns its own tokens** — `--trend-good #2F7D4F` / `--trend-bad #B03A2E`, used only by
+  delta pills on the dashboards. It is deliberately NOT the clinical green and red: "revenue is up"
+  must not share a swatch with "the patient is in the chair", or retuning the clinical ramp silently
+  moves the dashboards with it.
+- **A generic second chart series is `--series-2 #B8B8B8`**, a neutral. A chart series is not a status.
+
+Everything outside those systems stays black, white and grey. Structure, chrome, cards, tables and
+buttons are never coloured. A status colour may only ever mean that status: the funnel's
+Completed / Remaining / No-show legitimately uses the ramp because those *are* appointment statuses,
+but "below par stock" is not, and is marked in words (`.t-par`) so it reads printed and colour-blind.
 
 Base tokens: `--hx-navy #1A1A1A` · `--hx-blue #3D3D3D` · `--hx-accent #6E6E6E` · `--hx-band #F7F7F7` · `--hx-light #EFEFEF` · ink `#1A1A1A` · muted `#737373` · lines `#DBDBDB / #E9E9E9`. Network badges read by border: INN solid · OON dashed · self-pay dotted.
 
