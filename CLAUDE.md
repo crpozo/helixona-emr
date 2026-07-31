@@ -344,6 +344,56 @@ treatment = edge). Where the spec says "gold", read "our dark ink".
   cards that filter to the same rows is not a filter.
 - **Every figure is `tabular-nums`** so columns line up.
 
+## Treatments and therapies (Module T, added 2026-07-31)
+
+`treatments.html` is the clinic's recipe book and the only place a treatment is
+defined. Six screens: catalogue, recipe detail, therapies and procedures,
+inventory, administration log, and types and colour codes.
+
+- **26 IV recipes and add-ons**, each with its own bags, pushes, run time and
+  components. There is no Myers' cocktail — that is a spa drip, and the clinic's
+  base recipe is Foundational Flow. The calendar code is FLO, not MYR.
+- **9 therapies and procedures**, each carrying only the variables that belong to
+  it: a laser has a diode colour and a protocol, EBOO has a circuit, a manual
+  therapy has neither.
+- **Chair time is per patient, not per recipe.** The catalogue default is a
+  starting point; the booked duration is the patient's own, and the difference is
+  a recorded variance, never a silent correction.
+- **Whether a treatment is billable is a property of the treatment**, set here and
+  read by booking and by billing. It is never re-decided at the desk.
+- **One administration entry has four consequences**: it decrements the lot,
+  stamps the recipe version onto the chart, records the variance, and releases
+  units to billing. Staff enter it once, in the flow.
+- Recipes are versioned and approved. An administration is stamped with the
+  version that was live when it ran, so an old chart never shows today's recipe.
+- Concentrations and stability windows marked "to confirm" are placeholders
+  awaiting clinical sign-off. Never present one as settled.
+
+## Lead actors (added 2026-07-31)
+
+The doctor treats a driver; the payer pays for a code; those are not the same
+name. Every patient carries **two classifications per problem**: the clinic's own
+lead actor, which is more specific and carries the co-infections and the flare
+pattern, and the name the payer accepts. The clinic name drives the plan, the
+payer name drives the claim.
+
+The doctor ranks them and flags a main one. The **top five ride along as
+breadcrumbs (`.lead-bar`) on every screen of that patient** — chart, snapshot and
+profile — so nobody opens a chart and forgets what the visit is about.
+
+## Buttons must not lie (added 2026-07-31)
+
+A button that announces "added" and changes nothing is worse than a dead button,
+because the reviewer believes it. Declarative attributes in `assets/hcos.js`:
+
+- `data-row-add` appends a blank row to the list that follows the button
+- `data-row-del` removes the row the button sits in
+- a button may instead carry `data-activate` when the real outcome is navigation
+
+`check.sh` fails the build on any button whose toast claims a change it cannot
+make. Chips in a "tick everything that applies" group must carry `multi`, or
+answering one silently unticks the last.
+
 ## Data rules
 
 **No PHI, ever.** Patients, appointments, notes, and claims in the wireframe are always synthetic. Clinic identity (name, address, phone, NPI) and staff first names are fine — they are the real users. Do not put the clinic TIN, payer account numbers, or any real patient detail anywhere in this repo.
