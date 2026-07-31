@@ -153,7 +153,7 @@ Shared synthetic patient cast — reuse these names across pages so screens tell
 |---|---|---|---|
 | Maya Reyes | 52 | UnitedHealthcare PPO · OON | NAD+ series, detox program, readiness Standard |
 | Daniel Okafor | 47 | Anthem Blue Cross · INN | IV vitamin C 25 g series (J3490: 50 units = $276.50) |
-| Priya Natarajan | 38 | Blue Shield of CA PPO · OON | Myers' cocktail, fatigue workup, claim in appeals |
+| Priya Natarajan | 38 | Blue Shield of CA PPO · OON | Foundational Flow 10, fatigue workup, claim in appeals |
 | Tom Alvarez | 61 | Cigna PPO · OON | New patient, glutathione push, SPD requested |
 | Grace Lindqvist | 44 | Self-pay | Follow-up, thyroid panel pending |
 | Marcus Webb | 55 | Anthem Blue Cross · INN | New patient consult 90m |

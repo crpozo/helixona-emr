@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=19">
+<link rel="stylesheet" href="assets/hcos.css?v=20">
 <style>
   /* Page-local pieces the shared vocabulary lacks — all prefixed .b-
      LAYOUT ONLY: every box below is a .card in the markup. */
@@ -933,6 +933,15 @@
         <div class="prov">
           <span><strong>Reads</strong> the allergy list, the problem list, result <code>L-8841</code> and readiness <span class="ver-chip">v3</span> at the moment you open it</span>
         </div>
+        <div class="lead-bar">
+          <span class="lead-lbl">Lead actors</span>
+          <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Post-viral immune dysregulation<span class="lead-ins">U09.9 &middot; PASC</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Chronic Lyme complex<span class="lead-ins">A69.20 &middot; Lyme disease</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mast cell activation<span class="lead-ins">D89.40 &middot; MCAS</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Mitochondrial insufficiency<span class="lead-ins">R53.83 &middot; Malaise and fatigue</span></a>
+          <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Thyroid autoimmunity<span class="lead-ins">E06.3 &middot; Hashimoto's</span></a>
+          <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 5 &rsaquo;</a>
+        </div>
         <div class="prov">
           <span><strong>Source of truth</strong> orders are written in HCOS and nowhere else · eCW receives a read-only sync for orders · <a href="security.html#/g-01-audit">every version is in the audit store</a></span>
         </div>
@@ -1263,7 +1272,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=19"></script>
+<script src="assets/hcos.js?v=20"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

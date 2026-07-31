@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=19">
+<link rel="stylesheet" href="assets/hcos.css?v=20">
 <style>
   .b-prow { display: flex; align-items: center; gap: 10px; }
   .b-pname { font-weight: 600; color: var(--hx-navy); }
@@ -38,8 +38,6 @@
   .b-sig-name { font-size: 20px; font-style: italic; color: var(--hx-navy); }
   .b-sig-hint { font-size: 12px; color: var(--muted); }
   .b-sig-meta { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: ui-monospace, monospace; }
-  .o-when { font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
-  .o-by { display: block; font-family: var(--font-ui); font-size: 10.5px; color: var(--ink); font-weight: 600; margin-top: 1px; }
   .o-kind { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 12px; margin-top: 4px; }
   .o-kind-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; background: #fff; cursor: pointer; text-align: left; font-family: inherit; }
   .o-kind-card:hover { border-color: var(--ink); }
@@ -969,7 +967,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         </div>
 
         <div class="o-kind">
-          <button class="o-kind-card" data-activate="b-order-detail">
+          <button class="o-kind-card" data-activate="b-order-lab">
             <div class="o-kind-name">Lab</div>
             <div class="o-kind-sub">Blood, urine, saliva or stool panels</div>
             <div class="o-kind-int">Vibrant Labs &middot; Quest &middot; Mosaic &middot; in-house draw</div>
@@ -989,12 +987,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             <div class="o-kind-sub">A medication sent to the patient&rsquo;s pharmacy</div>
             <div class="o-kind-int">DoseSpot e-prescribing &middot; surescripts pharmacy directory</div>
           </button>
-          <button class="o-kind-card" data-activate="b-order-detail">
+          <button class="o-kind-card" data-activate="b-order-rx">
             <div class="o-kind-name">Supplement</div>
             <div class="o-kind-sub">A protocol supplement, dispensed or recommended</div>
             <div class="o-kind-int">Fullscript &middot; in-house dispensary</div>
           </button>
-          <button class="o-kind-card" data-activate="b-order-detail">
+          <button class="o-kind-card" data-activate="b-order-lab">
             <div class="o-kind-name">Imaging</div>
             <div class="o-kind-sub">Ultrasound, DEXA, MRI or CT at an outside centre</div>
             <div class="o-kind-int"><span class="pill pill-muted">No integration yet</span> ordered on paper</div>
@@ -1099,7 +1097,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               </div>
               <div class="field">
                 <label class="field-label">Attach a document</label>
-                <button data-row-add class="btn btn-sm" onclick="HCOS.toast('Attachment added to the order. It travels with the order ID, not with the note.', 'ok')">Upload a file</button>
+                <button class="btn btn-sm" onclick="var sp=document.createElement('span');sp.style.cssText='font-size:11px;color:var(--muted);margin-left:8px';sp.textContent='New upload · PDF · 96 KB';this.parentNode.appendChild(sp);HCOS.toast('Attachment added to the order. It travels with the order ID, not with the note.', 'ok')">Upload a file</button>
                 <span style="font-size:11px;color:var(--muted);margin-left:8px">G6PD result &middot; PDF &middot; 84 KB</span>
               </div>
             </div>
@@ -1135,6 +1133,145 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <span>Read from <a href="treatments.html#/t-02-recipe">the recipe</a> and
                 <a href="pricing.html#/pr-01-list">the price list</a>. She sees this before she agrees to the series.</span>
               </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================ -->
+  <section class="screen" id="b-order-lab" data-title="Lab order">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/clinical/grace-lindqvist/orders/new/lab</span></div>
+      <div class="frame-body">
+
+        <div class="b-header-row">
+          <span class="avatar lg">GL</span>
+          <div class="b-header-info">
+            <div class="b-enc-name">Lab order</div>
+            <div class="b-enc-sub">Grace Lindqvist &middot; MRN 2071 &middot; draft &middot; not yet signed</div>
+          </div>
+          <button class="btn" data-activate="b-order-new">Change kind</button>
+          <button class="btn btn-primary" onclick="HCOS.toast('Draft saved. It dispatches when Dr. Drannikov signs and locks the encounter.', 'ok')">Save draft</button>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card">
+              <div class="card-title">What to test</div>
+              <div class="field">
+                <label class="field-label">Type of lab</label>
+                <select class="field-input">
+                  <option>Blood panel &middot; Vibrant Labs</option>
+                  <option>Blood panel &middot; Quest</option>
+                  <option>Urine &middot; Mosaic Diagnostics</option>
+                  <option>Stool &middot; GI-MAP</option>
+                  <option>Saliva &middot; DUTCH hormones</option>
+                  <option>In-house draw &middot; point of care</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Panel</label>
+                <select class="field-input">
+                  <option>Thyroid panel &mdash; TSH, fT4, fT3, rT3, TPO, Tg Ab</option>
+                  <option>CMP &mdash; pre-infusion</option>
+                  <option>Micronutrient panel</option>
+                  <option>Mycotoxin panel</option>
+                  <option>Organic acids test (OAT)</option>
+                  <option>G6PD &mdash; required before high-dose vitamin C</option>
+                </select>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">Priority</label>
+                  <select class="field-input">
+                    <option>Routine</option>
+                    <option>Before her next infusion</option>
+                    <option>Stat &middot; call with the result</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Collection</label>
+                  <select class="field-input">
+                    <option>Draw in clinic &middot; 15 min slot</option>
+                    <option>Kit shipped to the patient</option>
+                    <option>Reference lab walk-in</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">Fasting</label>
+                  <select class="field-input"><option>Not required</option><option>8 hours</option><option>12 hours</option></select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Repeat</label>
+                  <select class="field-input"><option>Once</option><option>Every 12 weeks</option><option>With each plan review</option></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Why</div>
+              <div class="field">
+                <label class="field-label">Linked lead actor</label>
+                <select class="field-input">
+                  <option>Mould-driven inflammatory response &middot; T65.891A</option>
+                  <option>Gut dysbiosis with permeability &middot; K58.9</option>
+                  <option>HPA axis dysregulation &middot; E27.40</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Note to the lab</label>
+                <textarea class="field-input" rows="2">Optimal-target reporting requested. Prior TSH 3.8 on Jun 2.</textarea>
+              </div>
+              <div class="field">
+                <label class="field-label">Attach a document</label>
+                <button class="btn btn-sm" onclick="var sp=document.createElement('span');sp.style.cssText='font-size:11px;color:var(--muted);margin-left:8px';sp.textContent='New upload · PDF · 96 KB';this.parentNode.appendChild(sp);HCOS.toast('Attachment added to the order. It travels with the order ID, not with the note.', 'ok')">Upload a file</button>
+                <span style="font-size:11px;color:var(--muted);margin-left:8px">Prior thyroid result &middot; PDF &middot; 122 KB</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">What happens on sign</div>
+              <div class="g-ev"><div class="g-ev-when">1</div><div class="g-ev-what">
+                <strong>Requisition prints</strong> at the front desk, or the kit ships</div>
+                <div class="g-ev-ver"><span class="appr draft">Pending</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">2</div><div class="g-ev-what">
+                <strong>Draw slot offered</strong> &mdash; 15 min, next visit or sooner</div>
+                <div class="g-ev-ver"><span class="appr draft">Pending</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">3</div><div class="g-ev-what">
+                <strong>Result returns linked</strong> to order O-&hellip; and lands in
+                <a href="labs.html#/c-01-orders">Orders &amp; results</a></div>
+                <div class="g-ev-ver"><span class="appr draft">Pending</span></div></div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">What it will cost her</div>
+              <dl class="kv">
+                <dt>Coverage</dt><dd><span class="pill pill-muted">Self-pay</span></dd>
+                <dt>Panel price</dt><dd>$189 &middot; Vibrant direct</dd>
+                <dt>Draw fee</dt><dd>$25 in clinic</dd>
+              </dl>
+              <div class="prov" style="margin-top:10px">
+                <span>She sees the price before the draw &mdash; a surprise invoice is a broken screen.</span>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px">
+              <div class="card-title">Who may sign this</div>
+              <dl class="kv">
+                <dt>Orders</dt><dd>Dr. Eduard Drannikov &middot; Provider</dd>
+                <dt>May also sign</dt><dd>Extender, within scope</dd>
+                <dt>May prepare</dt><dd>MA, nurse, medic &mdash; draft only</dd>
+                <dt>AI</dt><dd>May suggest. Never signs.</dd>
+              </dl>
             </div>
           </div>
         </div>
@@ -1777,7 +1914,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   </div>
 </div>
 
-<script src="assets/hcos.js?v=19"></script>
+<script src="assets/hcos.js?v=20"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {
