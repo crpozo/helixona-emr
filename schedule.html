@@ -121,22 +121,13 @@
             <div class="daycal-band">Infusion suite</div>
             <div class="daycal-col-head hours-head"></div>
             <div class="daycal-col-head" data-col="dr">Dr. Drannikov<span class="sub">Provider</span></div>
-            <div class="daycal-col-head" data-col="bak">
-              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer">
-                <span class="cal-appt-time">12:30 &middot; confirmed</span>
-                <span class="cal-appt-name">Marcus Webb</span>
-                <span class="cal-appt-type"><span class="type-mark tm-pel">PEL</span> Pellets &middot; 40m</span>
-              </div>Dr. Bakman<span class="sub">Provider</span></div>
-            <div class="daycal-col-head" data-col="bro">
-              <div data-days="2" class="cal-appt st-checkout ty-energ" style="top:132px;height:40px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
-                <span class="cal-appt-time">9:30 &middot; checkout</span>
-                <span class="cal-appt-name">Nadia Boulos</span>
-                <span class="cal-appt-type"><span class="type-mark tm-acu">ACU</span> Acupuncture &middot; 45m</span>
-              </div>Brooke<span class="sub">Physician Associate</span></div>
+            <div class="daycal-col-head" data-col="bak">Dr. Bakman<span class="sub">Provider</span></div>
+            <div class="daycal-col-head" data-col="bro">Brooke<span class="sub">Physician Associate</span></div>
             <div class="daycal-col-head" data-col="c1">IV 1<span class="sub">Nick · Nurse</span></div>
             <div class="daycal-col-head" data-col="c2">IV 2<span class="sub">Bea · Medic</span></div>
             <div class="daycal-col-head" data-col="c3">IV 3<span class="sub">Juan · Medic</span></div>
             <div class="daycal-col-head" data-col="c4">IV 4<span class="sub">Nate · Medic</span></div>
+            <div class="daycal-col-head" data-col="room1">Room 1<span class="sub">Exam · procedures</span></div>
           </div>
 
           <div class="daycal-grid">
@@ -291,7 +282,24 @@
             </div>
 
             <div class="cal-now" style="top:323px"><span class="cal-now-label">11:40 AM</span></div>
-          </div>
+            <div class="daycal-col" data-col="room1" style="position:relative">
+              <div data-days="2" class="cal-appt st-checkout ty-energ" style="top:132px;height:40px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">9:30 &middot; checkout</span>
+                <span class="cal-appt-name">Nadia Boulos</span>
+                <span class="cal-appt-type"><span class="type-mark tm-acu">ACU</span> Acupuncture &middot; 45m</span>
+              </div>
+              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">12:30 &middot; confirmed</span>
+                <span class="cal-appt-name">Marcus Webb</span>
+                <span class="cal-appt-type"><span class="type-mark tm-pel">PEL</span> Pellets &middot; 40m</span>
+              </div>
+              <div data-days="2,3" class="cal-appt st-arrived ty-treat" style="top:264px;height:40px" data-appt="A-88233" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">11:00 &middot; arrived</span>
+                <span class="cal-appt-name">Sofia Ramos</span>
+                <span class="cal-appt-type"><span class="type-mark tm-flow" style="background:var(--ty-treat);border-color:var(--ty-treat)">LAS</span> Erchonia laser &middot; 20m</span>
+              </div>
+            </div>
+          </div>/div>
 
           <div class="cal-legend">
             <span class="cal-legend-item" style="font-weight:600;color:var(--ink)">1 &middot; Status &middot; the fill</span>
@@ -395,14 +403,25 @@
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view-w" onchange="lSync(this)">
-                <optgroup label="Views"><option value="all">Everyone &mdash; 3 providers and 4 chairs</option>
-                  <option value="providers">Provider clinic &mdash; all three</option>
-                  <option value="infusion">Infusion suite &mdash; Chairs 1 to 4</option></optgroup>
-                <optgroup label="Providers"><option value="dr">Dr. Eduard Drannikov</option>
-                  <option value="bak">Dr. Bakman</option><option value="bro">Brooke</option></optgroup>
-                <optgroup label="Infusion suite"><option value="c1">IV 1 &middot; Nick</option>
-                  <option value="c2">IV 2 &middot; Bea</option><option value="c3">IV 3 &middot; Juan</option>
-                  <option value="c4">IV 4 &middot; Nate</option></optgroup>
+                <optgroup label="Views">
+                  <option value="all">Everyone &mdash; all resources</option>
+                  <option value="providers">Providers &mdash; all three</option>
+                  <option value="infusion">Infusion suite &mdash; IV 1 to 4</option>
+                </optgroup>
+                <optgroup label="Providers">
+                  <option value="dr">Dr. Drannikov</option>
+                  <option value="bak">Dr. Bakman</option>
+                  <option value="bro">Brooke &middot; Physician Associate</option>
+                </optgroup>
+                <optgroup label="Resources &middot; IV">
+                  <option value="c1">IV 1 &middot; Nick</option>
+                  <option value="c2">IV 2 &middot; Bea</option>
+                  <option value="c3">IV 3 &middot; Juan</option>
+                  <option value="c4">IV 4 &middot; Nate</option>
+                </optgroup>
+                <optgroup label="Rooms">
+                  <option value="room1">Room 1 &middot; exam &amp; procedures</option>
+                </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select" id="l-treat-w" onchange="lSync(this)">
@@ -428,7 +447,7 @@
 
 
           <div class="l-filters">
-            <span class="l-count">Week columns show Dr. Drannikov and Chairs 1 to 4 &middot; Tuesday's other five appointments are with Dr. Bakman and Brooke</span>
+            <span class="l-count">Week columns show Dr. Drannikov and IV 1 to 4 &middot; Tuesday's other five appointments are with Dr. Bakman and Brooke</span>
             <div class="l-view-group">
               <button class="btn btn-sm" data-activate="l-01-day">Open Tuesday with every provider</button>
             </div>
@@ -558,14 +577,25 @@
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view-m" onchange="lSync(this)">
-                <optgroup label="Views"><option value="all">Everyone &mdash; 3 providers and 4 chairs</option>
-                  <option value="providers">Provider clinic &mdash; all three</option>
-                  <option value="infusion">Infusion suite &mdash; Chairs 1 to 4</option></optgroup>
-                <optgroup label="Providers"><option value="dr">Dr. Eduard Drannikov</option>
-                  <option value="bak">Dr. Bakman</option><option value="bro">Brooke</option></optgroup>
-                <optgroup label="Infusion suite"><option value="c1">IV 1 &middot; Nick</option>
-                  <option value="c2">IV 2 &middot; Bea</option><option value="c3">IV 3 &middot; Juan</option>
-                  <option value="c4">IV 4 &middot; Nate</option></optgroup>
+                <optgroup label="Views">
+                  <option value="all">Everyone &mdash; all resources</option>
+                  <option value="providers">Providers &mdash; all three</option>
+                  <option value="infusion">Infusion suite &mdash; IV 1 to 4</option>
+                </optgroup>
+                <optgroup label="Providers">
+                  <option value="dr">Dr. Drannikov</option>
+                  <option value="bak">Dr. Bakman</option>
+                  <option value="bro">Brooke &middot; Physician Associate</option>
+                </optgroup>
+                <optgroup label="Resources &middot; IV">
+                  <option value="c1">IV 1 &middot; Nick</option>
+                  <option value="c2">IV 2 &middot; Bea</option>
+                  <option value="c3">IV 3 &middot; Juan</option>
+                  <option value="c4">IV 4 &middot; Nate</option>
+                </optgroup>
+                <optgroup label="Rooms">
+                  <option value="room1">Room 1 &middot; exam &amp; procedures</option>
+                </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select" id="l-treat-m" onchange="lSync(this)">
@@ -1034,7 +1064,7 @@
                 <dd><code>O-2418</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Drannikov, Jun 9 2026</dd>
                 <dt>Series</dt>
                 <dd>Session 5 of 8</dd>
-                <dt>Chair</dt>
+                <dt>Resource</dt>
                 <dd>IV 1 · Nick (Nurse)</dd>
                 <dt>Pre-checks</dt>
                 <dd>Vitals + hydration on arrival · rate titrated to comfort</dd>
@@ -1251,8 +1281,8 @@
   function lApply() {
     var view = document.getElementById('l-view').value;
 
-    var PROVS = ['dr','bak','bro'], CHAIRS = ['c1','c2','c3','c4'];
-    var wantCols = view === 'all' ? PROVS.concat(CHAIRS)
+    var PROVS = ['dr','bak','bro'], CHAIRS = ['c1','c2','c3','c4'], ROOMS = ['room1'];
+    var wantCols = view === 'all' ? PROVS.concat(CHAIRS).concat(ROOMS)
       : view === 'providers' ? PROVS
       : view === 'infusion' ? CHAIRS : [view];
 
@@ -1262,7 +1292,7 @@
 
     var pv = wantCols.filter(function (c) { return PROVS.indexOf(c) !== -1; }).length;
     var nc = wantCols.filter(function (c) { return CHAIRS.indexOf(c) !== -1; }).length;
-    var tmpl = '64px repeat(' + (pv + nc) + ', 1fr)';
+    var tmpl = '64px repeat(' + wantCols.length + ', 1fr)';
     document.querySelector('.daycal-head').style.gridTemplateColumns = tmpl;
     document.querySelector('.daycal-grid').style.gridTemplateColumns = tmpl;
 
@@ -1305,7 +1335,7 @@
     if (wc) wc.textContent = wShown === wTotal ? 'Showing all ' + wTotal + ' this week'
       : 'Showing ' + wShown + ' of ' + wTotal + ' this week';
 
-    var MAP = { NAD: 't-nad', IVC: 't-ivc', FLO: 't-flow', CON: 't-consult', EBO: 't-eboo' };
+    var MAP = { NAD: 't-nad', IVC: 't-ivc', FLO: 't-flow', CON: 't-consult', EBO: 't-eboo', TEL: 't-tele', LAB: 't-lab', ACU: 'acu', PEL: 'pel', LAS: 'las' };
     var mDays = 0;
     document.querySelectorAll('.monthcal-day').forEach(function (d) {
       var pips = d.querySelectorAll('.monthcal-pip'), any = false;
