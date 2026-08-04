@@ -34,11 +34,20 @@
   .m-name { font-weight: 700; white-space: nowrap; }
   .m-when { white-space: nowrap; font-variant-numeric: tabular-nums; }
   .tbl-scroll { overflow-x: auto; }
-  .gantt td { text-align: center; padding: 8px 4px; min-width: 74px; }
-  .gantt td.g-ws { text-align: left; min-width: 240px; font-size: 12.5px; }
-  .g-bar { display: block; height: 14px; border-radius: 3px; }
+  .gantt { table-layout: fixed; min-width: 860px; }
+  .gantt .g-ws-h { width: 250px; }
+  .gantt td.g-ws { text-align: left; font-size: 12.5px; }
+  .gantt th.g-yr { text-align: center; border-bottom: none; padding-bottom: 2px; }
+  .gantt th.g-mo { text-align: center; padding: 4px 0 8px; font-size: 9.5px; }
+  .gantt td { padding: 12px 0; text-align: center; }
+  .gantt td.g-on { padding: 12px 0; }
+  .g-bar { display: block; height: 14px; }
   .g-full { background: var(--ink); }
-  .g-part { background: var(--part); }
+  .g-win { background: var(--part); }
+  .g-s { border-radius: 4px 0 0 4px; }
+  .g-e { border-radius: 0 4px 4px 0; }
+  .g-s.g-e { border-radius: 4px; }
+  .g-m { white-space: nowrap; }
   .g-mile { display: inline-block; background: #fff; border: 2px solid var(--ink); border-radius: 12px;
     font-size: 10.5px; font-weight: 700; padding: 2px 9px; white-space: nowrap; }
   .g-key { display: flex; gap: 20px; font-size: 11.5px; color: var(--muted); margin-top: 8px; align-items: center; }
@@ -103,24 +112,27 @@
     </table>
   </div>
 
-  <h2><span class="n">3</span>Timeline by quarter</h2>
+  <h2><span class="n">3</span>Timeline by month</h2>
   <div class="tbl-scroll">
     <table class="gantt">
-      <thead><tr><th>Workstream</th><th>Q3 2026</th><th>Q4 2026</th><th>Q1 2027</th><th>Q2 2027</th><th>Q3 2027</th><th>Q4 2027</th></tr></thead>
+      <thead>
+        <tr><th rowspan="2" class="g-ws-h">Workstream</th><th colspan="5" class="g-yr">2026</th><th colspan="12" class="g-yr">2027</th></tr>
+        <tr><th class="g-mo">Aug</th><th class="g-mo">Sep</th><th class="g-mo">Oct</th><th class="g-mo">Nov</th><th class="g-mo">Dec</th><th class="g-mo">Jan</th><th class="g-mo">Feb</th><th class="g-mo">Mar</th><th class="g-mo">Apr</th><th class="g-mo">May</th><th class="g-mo">Jun</th><th class="g-mo">Jul</th><th class="g-mo">Aug</th><th class="g-mo">Sep</th><th class="g-mo">Oct</th><th class="g-mo">Nov</th><th class="g-mo">Dec</th></tr>
+      </thead>
       <tbody>
-        <tr><td class="g-ws">Design · wireframes and specifications (Modules C to L)</td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td class="g-ws">Infrastructure · eClinicalWorks migration to Helixona AWS</td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td><td></td></tr>
-        <tr><td class="g-ws">Data integration · export, daily updates, real time</td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td></tr>
-        <tr><td class="g-ws">Platform · shared data model, security, survey engine</td><td></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td><td></td></tr>
-        <tr><td class="g-ws">Module construction · staged builds</td><td></td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td></tr>
-        <tr><td class="g-ws">Go-lives</td><td></td><td></td><td><span class="g-mile">M1 · Feb</span></td><td></td><td><span class="g-mile">M2 · Aug</span></td><td><span class="g-mile">M3 · Dec</span></td></tr>
+        <tr><td class="g-ws">Design · wireframes and specifications (Modules C to L)</td><td class="g-on"><span class="g-bar g-full g-s"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full g-e"></span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Infrastructure · eClinicalWorks migration to Helixona AWS</td><td class="g-on"><span class="g-bar g-full g-s"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-win g-e"></span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Data integration · export, daily updates, real time</td><td class="g-on"><span class="g-bar g-full g-s"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-win g-e"></span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Platform · shared data model, security, survey engine</td><td></td><td></td><td class="g-on"><span class="g-bar g-full g-s"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full g-e"></span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Module construction · staged builds</td><td></td><td></td><td></td><td class="g-on"><span class="g-bar g-full g-s"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full"></span></td><td class="g-on"><span class="g-bar g-full g-e"></span></td></tr>
+        <tr><td class="g-ws">Go-lives</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="g-m"><span class="g-mile">M1</span></td><td></td><td></td><td></td><td></td><td></td><td class="g-m"><span class="g-mile">M2</span></td><td></td><td></td><td></td><td class="g-m"><span class="g-mile">M3</span></td></tr>
       </tbody>
     </table>
   </div>
   <div class="g-key">
-    <span><i style="background:var(--ink)"></i>Full activity</span>
-    <span><i style="background:var(--part)"></i>Partial quarter</span>
-    <span><span class="g-mile" style="margin-right:6px">M&middot;</span>Go-live milestone</span>
+    <span><i style="background:var(--ink)"></i>Active</span>
+    <span><i style="background:var(--part)"></i>Finishing window</span>
+    <span><span class="g-mile" style="margin-right:6px">M&middot;</span>Go-live milestone &mdash; targets in section 2</span>
   </div>
 
   <h2><span class="n">4</span>Phase detail</h2>
