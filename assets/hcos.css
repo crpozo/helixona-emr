@@ -67,6 +67,13 @@
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-pop: 0 12px 40px rgba(0, 0, 0, 0.18);
+
+  /* TYPE — pale fill per type */
+  --ty-visit-bg: #E7EEF6;
+  --ty-proc-bg:  #F6E7E7;
+  --ty-iv-bg:    #E2F0EF;
+  --ty-energ-bg: #EAE6F3;
+  --ty-treat-bg: #F7EDDF;
 }
 
 * { box-sizing: border-box; }
@@ -1028,40 +1035,15 @@ a.lead-chip:hover { border-color: var(--ink); }
   border-radius: 5px;
   padding: 4px 8px;
   border: 1px solid var(--line-soft);
-  border-left: 3px solid var(--st-scheduled);
-  background: var(--st-scheduled-bg);
+  border-left: 6px solid var(--line);
+  background: #fff;
   cursor: pointer;
   overflow: hidden;
   z-index: 1;
   font-size: 10.5px;
   line-height: 1.3;
-  transition: box-shadow 0.12s, z-index 0s;
 }
-.cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 5; }
-.cal-appt.st-scheduled { border-color: #C7CCD3; }
-.cal-appt.st-confirmed { border-color: #9EC2E8; }
-.cal-appt.st-arrived   { border-color: #E5B45F; }
-.cal-appt.st-inroom, .cal-appt.st-inchair { border-color: #7CC79C; }
-.cal-appt.st-done      { border-color: #BCC3CB; }
-.cal-appt-time { font-size: 9.5px; color: var(--muted); font-weight: 500; font-family: ui-monospace, monospace; }
-.cal-appt-name { font-size: 11.5px; font-weight: 600; color: var(--hx-navy); margin: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-appt-type { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-appt.st-scheduled { border-left-color: var(--st-scheduled); background: var(--st-scheduled-bg); }
-.cal-appt.st-confirmed { border-left-color: var(--st-confirmed); background: var(--st-confirmed-bg); }
-.cal-appt.st-arrived { border-left-color: var(--st-arrived); background: var(--st-arrived-bg); }
-.cal-appt.st-inroom, .cal-appt.st-inchair { border-left-color: var(--st-inroom); background: var(--st-inroom-bg); }
-.cal-appt.st-done { border-left-color: var(--st-done); background: var(--st-done-bg); }
-.cal-appt.st-noshow { border: 1px dashed var(--st-noshow); border-left: 3px dashed var(--st-noshow); background: var(--st-noshow-bg); }
-.cal-appt.st-cancelled { border-left-color: var(--st-cancelled); background: var(--st-cancelled-bg); opacity: 0.7; }
-.cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
-.cal-appt.conflict { outline: 2px dashed #000; outline-offset: -2px; }
 
-/* ==========================================================================
-   TREATMENT COLOUR CODES — the ONE exception to the grayscale rule
-   (Carlos, 2026-07-28). Colour identifies the TREATMENT and nothing else.
-   Status keeps the grayscale fill ramp, so both channels still read at once:
-   shade = where the visit is, colour + edge pattern = what the treatment is.
-   ========================================================================== */
 :root {
   /* TYPE — the left edge. Five types, one colour each. */
   --ty-visit:  #2E5C8A;  /* office visit */
@@ -1083,133 +1065,49 @@ a.lead-chip:hover { border-color: var(--ink); }
   --tx-lab:     #6B5B3A;  /* lab draw */
 }
 
-/* The block's left edge carries the treatment colour, the fill stays status */
-.cal-appt.t-nad     { border-left-color: var(--tx-nad); }
-.cal-appt.t-ivc     { border-left-color: var(--tx-ivc); }
-.cal-appt.t-flow   { border-left-color: var(--tx-flow); }
-.cal-appt.t-eboo    { border-left-color: var(--tx-eboo); }
-.cal-appt.t-consult { border-left-color: var(--tx-consult); }
-.cal-appt.t-lab     { border-left-color: var(--tx-lab); }
-.cal-appt.t-tele    { border-left-color: var(--tx-tele); }
-.week-appt.t-nad    { border-left-color: var(--tx-nad); }
-.week-appt.t-ivc    { border-left-color: var(--tx-ivc); }
-.week-appt.t-flow  { border-left-color: var(--tx-flow); }
-.week-appt.t-eboo   { border-left-color: var(--tx-eboo); }
+/* ---- COLOUR = TYPE · what it is ---- */
+.cal-appt.ty-visit, .week-appt.ty-visit { border-left-color: var(--ty-visit); background: var(--ty-visit-bg); }
+.cal-appt.ty-proc,  .week-appt.ty-proc  { border-left-color: var(--ty-proc);  background: var(--ty-proc-bg); }
+.cal-appt.ty-iv,    .week-appt.ty-iv    { border-left-color: var(--ty-iv);    background: var(--ty-iv-bg); }
+.cal-appt.ty-energ, .week-appt.ty-energ { border-left-color: var(--ty-energ); background: var(--ty-energ-bg); }
+.cal-appt.ty-treat, .week-appt.ty-treat { border-left-color: var(--ty-treat); background: var(--ty-treat-bg); }
 
-/* The initial chip is the colour key, wherever it appears */
-.t-nad     > .cal-appt-type > .type-mark,
-.type-mark.tm-nad     { background: var(--tx-nad);     border-color: var(--tx-nad);     color: #fff; }
-.t-ivc     > .cal-appt-type > .type-mark,
-.type-mark.tm-ivc     { background: var(--tx-ivc);     border-color: var(--tx-ivc);     color: #fff; }
-.t-flow   > .cal-appt-type > .type-mark,
-.type-mark.tm-flow   { background: var(--tx-flow);   border-color: var(--tx-flow);   color: #fff; }
-.t-eboo    > .cal-appt-type > .type-mark,
-.type-mark.tm-eboo    { background: var(--tx-eboo);    border-color: var(--tx-eboo);    color: #fff; }
-.t-consult > .cal-appt-type > .type-mark,
-.type-mark.tm-consult { background: var(--tx-consult); border-color: var(--tx-consult); color: #fff; }
-.t-tele    > .cal-appt-type > .type-mark,
-.type-mark.tm-tele    { background: var(--tx-tele);    border-color: var(--tx-tele);    color: #fff; }
-.type-mark.tm-lab     { background: var(--tx-lab);     border-color: var(--tx-lab);     color: #fff; }
-.type-mark.tm-gsh     { background: var(--tx-flow);   border-color: var(--tx-flow);   color: #fff; }
+/* ---- SHADE = STATUS · where it stands ----
+   Not yet here = ghost · here and active = ringed · finished = faded.
+   The word on the block says exactly which; colour never changes. */
+.cal-appt.st-scheduled { background: #fff; border-style: dashed; border-left-style: solid; }
+.cal-appt.st-scheduled .cal-appt-name { color: var(--muted); }
+.cal-appt.st-arrived,
+.cal-appt.st-inroom, .cal-appt.st-inchair,
+.cal-appt.st-checkout { border-color: var(--ink); border-left-color: inherit; }
+.cal-appt.st-inroom, .cal-appt.st-inchair { border-width: 2px; border-left-width: 6px; }
+.cal-appt.st-done { opacity: .55; }
+.cal-appt.st-cancelled { opacity: .45; }
+.cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
+.cal-appt.st-noshow { background: #fff; border: 1.5px dashed var(--st-noshow); border-left: 6px solid var(--st-noshow); }
 
-/* Legend swatches carry the same colour */
-.cal-legend-swatch.sw-nad     { border-left-color: var(--tx-nad) !important; }
-.cal-legend-swatch.sw-ivc     { border-left-color: var(--tx-ivc) !important; }
-.cal-legend-swatch.sw-flow   { border-left-color: var(--tx-flow) !important; }
-.cal-legend-swatch.sw-eboo    { border-left-color: var(--tx-eboo) !important; }
-.cal-legend-swatch.sw-consult { border-left-color: var(--tx-consult) !important; }
+/* the status, written on the block — no decoding required */
+.cal-appt::after {
+  position: absolute; top: 3px; right: 5px;
+  font-size: 8px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  color: var(--muted);
+}
+.cal-appt.st-scheduled::after { content: 'Scheduled'; }
+.cal-appt.st-confirmed::after { content: 'Confirmed'; }
+.cal-appt.st-arrived::after   { content: 'Arrived'; color: var(--ink); }
+.cal-appt.st-inroom::after, .cal-appt.st-inchair::after { content: 'In progress'; color: var(--ink); }
+.cal-appt.st-checkout::after  { content: 'Checkout'; color: var(--ink); }
+.cal-appt.st-done::after      { content: 'Done'; }
+.cal-appt.st-noshow::after    { content: 'No-show'; color: var(--st-noshow); }
+.cal-appt.st-cancelled::after { content: 'Cancelled'; }
 
-/* Appointment TYPE — the second channel: left-edge pattern + initial marker.
-   Pattern stays so the board still reads when printed or seen colour-blind. */
+/* ---- LETTERS = SUBTYPE · the exact treatment — mono, colour stays with type ---- */
 .type-mark {
-  display: inline-block;
-  font-family: ui-monospace, monospace;
-  font-size: 9.5px; font-weight: 700; letter-spacing: 0.6px;
-  border: 1px solid var(--muted); border-radius: 4px;
-  padding: 1px 5px; margin-right: 6px; vertical-align: 1px;
-  background: var(--muted); color: #fff; white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 26px; padding: 0 4px; height: 14px; border-radius: 3px;
+  font-size: 8.5px; font-weight: 800; letter-spacing: .4px;
+  background: #fff; border: 1px solid var(--ink); color: var(--ink);
 }
-/* inside a calendar block space is tight — shrink, but keep the gap */
-.cal-appt .type-mark, .week-appt .type-mark { font-size: 8.5px; padding: 0 4px; margin-right: 5px; }
-/* One solid bar, the same width for every treatment. Dotted and dashed edges
-   broke up on a 30-minute block and read as noise instead of as a code. */
-.cal-appt[class*="t-"], .week-appt[class*="t-"] { border-left-style: solid; border-left-width: 6px; }
-.week-appt.t-nad    { border-left-style: solid; border-left-width: 5px; }
-.week-appt.t-ivc    { border-left-style: double; border-left-width: 5px; }
-.week-appt.t-flow  { border-left-style: dashed; border-left-width: 5px; }
-.week-appt.t-eboo   { border-left-style: dotted; border-left-width: 6px; }
-
-/* Actor (who runs it) — a corner tag on the block */
-.cal-appt .actor-tag {
-  position: absolute; right: 5px; bottom: 4px;
-  font-size: 8.5px; color: var(--muted);
-  background: rgba(255,255,255,0.85); padding: 0 3px; border-radius: 3px;
-}
-
-/* AI drip warning on a block */
-.cal-appt.ai-warn { box-shadow: inset 0 0 0 2px var(--ink); }
-.cal-appt .ai-flag {
-  position: absolute; top: 3px; right: 4px;
-  font-size: 9px; font-weight: 700; color: var(--ink);
-}
-
-/* Filter groups — multi-select with a locked/saved view */
-.filter-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.filter-group-lbl {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
-  color: var(--muted); font-weight: 700; margin-right: 2px;
-}
-.filter-chip.multi { padding-left: 8px; }
-.filter-chip.multi::before {
-  content: '☐'; margin-right: 5px; font-size: 11px;
-}
-.filter-chip.multi.active::before { content: '☑'; }
-.view-lock {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11.5px; color: var(--muted);
-  border: 1px dashed var(--line); border-radius: 14px; padding: 4px 11px;
-  background: #fff; cursor: pointer;
-}
-.view-lock.locked { border-style: solid; border-color: var(--ink); color: var(--ink); font-weight: 600; }
-
-.cal-legend {
-  display: flex; gap: 14px;
-  padding: 10px 16px;
-  background: #FBFBFB;
-  border-top: 1px solid var(--line-soft);
-  font-size: 11px; color: var(--muted);
-  flex-wrap: wrap;
-  align-items: center;
-}
-.cal-legend-item { display: flex; align-items: center; gap: 6px; }
-.cal-legend-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); }
-/* Treatment keys show the block's own left bar, at the block's own width */
-.cal-legend-swatch[class*="sw-"] {
-  width: 6px; height: 16px; border-radius: 2px; border: none;
-  border-left: 6px solid var(--line);
-}
-
-/* TYPE edge — level 2 of the three-level code */
-.cal-appt.ty-visit, .week-appt.ty-visit { border-left-color: var(--ty-visit); }
-.cal-appt.ty-proc,  .week-appt.ty-proc  { border-left-color: var(--ty-proc); }
-.cal-appt.ty-iv,    .week-appt.ty-iv    { border-left-color: var(--ty-iv); }
-.cal-appt.ty-energ, .week-appt.ty-energ { border-left-color: var(--ty-energ); }
-.cal-appt.ty-treat, .week-appt.ty-treat { border-left-color: var(--ty-treat); }
-.cal-appt.st-checkout { border-left-color: var(--st-checkout); background: var(--st-checkout-bg); }
-.type-mark.tm-acu { background: var(--ty-energ); border-color: var(--ty-energ); color: #fff; }
-.type-mark.tm-pel { background: var(--ty-proc); border-color: var(--ty-proc); color: #fff; }
-
-/* Hover zoom — the whole appointment, readable without opening it */
-.appt-zoom {
-  position: fixed; z-index: 1200; width: 280px; pointer-events: none;
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
-  box-shadow: var(--shadow-pop); padding: 12px 14px; font-size: 12px; line-height: 1.5;
-  opacity: 0; transition: opacity .1s;
-}
-.appt-zoom.show { opacity: 1; }
-.appt-zoom .az-name { font-size: 13.5px; font-weight: 700; color: var(--hx-navy); }
-.appt-zoom .az-meta { color: var(--muted); font-size: 11px; }
-.appt-zoom .az-row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
 
 /* Week view */
 .weekcal-head { display: grid; grid-template-columns: 64px repeat(5, 1fr); background: #F7F7F7; border-bottom: 1px solid var(--line-soft); }
