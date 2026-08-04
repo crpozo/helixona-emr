@@ -226,37 +226,45 @@
           <span><strong>From</strong> today's rooming · Wesley · medical assistant · 11:19 AM</span>
         </div>
         <div class="card" style="margin-top:14px">
-          <div class="card-title">How she says she feels &middot; last 7 days</div>
-          <div class="srv-key">
+          <div class="card-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span>How she says she feels &middot; <span id="srv-range-lbl">last 7 days</span></span>
+            <span class="srv-range" style="display:flex;gap:6px;margin-left:auto">
+              <button class="filter-chip active" data-srv-range="7d" data-hcos-handled="1">7 days</button>
+              <button class="filter-chip" data-srv-range="30d" data-hcos-handled="1">30 days</button>
+              <button class="filter-chip" data-srv-range="3m" data-hcos-handled="1">3 months</button>
+              <button class="filter-chip" data-srv-range="12m" data-hcos-handled="1">12 months</button>
+            </span>
+          </div>
+          <div class="srv-key" id="srv-key">
             <span><i style="background:var(--st-scheduled)"></i>Morning</span>
             <span><i style="background:var(--hx-navy)"></i>Evening</span>
             <span style="margin-left:auto">Four questions, twice a day, on a 1&ndash;5 face scale</span>
           </div>
-            <div class="srv-row">
+            <div class="srv-row" data-srv="Pain">
               <div class="srv-name">Pain</div>
               <div class="srv-spark"><div class="srv-bar" style="height:60%" title="Pain morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Pain evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Pain morning · 3 of 5"></div><div class="srv-bar pm" style="height:80%" title="Pain evening · 4 of 5"></div><div class="srv-bar" style="height:80%" title="Pain morning · 4 of 5"></div><div class="srv-bar pm" style="height:60%" title="Pain evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Pain morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Pain evening · 3 of 5"></div><div class="srv-bar" style="height:40%" title="Pain morning · 2 of 5"></div><div class="srv-bar pm" style="height:60%" title="Pain evening · 3 of 5"></div><div class="srv-bar" style="height:40%" title="Pain morning · 2 of 5"></div><div class="srv-bar pm" style="height:40%" title="Pain evening · 2 of 5"></div><div class="srv-bar" style="height:40%" title="Pain morning · 2 of 5"></div><div class="srv-bar pm" style="height:40%" title="Pain evening · 2 of 5"></div></div>
               <div class="srv-now">2 / 5</div>
               <div class="srv-trend"><span class="delta good" title="Lower is better">&#9660;</span></div>
             </div>
-            <div class="srv-row">
+            <div class="srv-row" data-srv="Energy">
               <div class="srv-name">Energy</div>
               <div class="srv-spark"><div class="srv-bar" style="height:40%" title="Energy morning · 2 of 5"></div><div class="srv-bar pm" style="height:40%" title="Energy evening · 2 of 5"></div><div class="srv-bar" style="height:40%" title="Energy morning · 2 of 5"></div><div class="srv-bar pm" style="height:20%" title="Energy evening · 1 of 5"></div><div class="srv-bar" style="height:40%" title="Energy morning · 2 of 5"></div><div class="srv-bar pm" style="height:40%" title="Energy evening · 2 of 5"></div><div class="srv-bar" style="height:60%" title="Energy morning · 3 of 5"></div><div class="srv-bar pm" style="height:40%" title="Energy evening · 2 of 5"></div><div class="srv-bar" style="height:60%" title="Energy morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Energy evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Energy morning · 3 of 5"></div><div class="srv-bar pm" style="height:80%" title="Energy evening · 4 of 5"></div><div class="srv-bar" style="height:80%" title="Energy morning · 4 of 5"></div><div class="srv-bar pm" style="height:60%" title="Energy evening · 3 of 5"></div></div>
               <div class="srv-now">4 / 5</div>
               <div class="srv-trend"><span class="delta good" title="Higher is better">&#9650;</span></div>
             </div>
-            <div class="srv-row">
+            <div class="srv-row" data-srv="Mood">
               <div class="srv-name">Mood</div>
               <div class="srv-spark"><div class="srv-bar" style="height:60%" title="Mood morning · 3 of 5"></div><div class="srv-bar pm" style="height:40%" title="Mood evening · 2 of 5"></div><div class="srv-bar" style="height:60%" title="Mood morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Mood evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Mood morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Mood evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Mood morning · 3 of 5"></div><div class="srv-bar pm" style="height:80%" title="Mood evening · 4 of 5"></div><div class="srv-bar" style="height:80%" title="Mood morning · 4 of 5"></div><div class="srv-bar pm" style="height:60%" title="Mood evening · 3 of 5"></div><div class="srv-bar" style="height:80%" title="Mood morning · 4 of 5"></div><div class="srv-bar pm" style="height:80%" title="Mood evening · 4 of 5"></div><div class="srv-bar" style="height:80%" title="Mood morning · 4 of 5"></div><div class="srv-bar pm" style="height:80%" title="Mood evening · 4 of 5"></div></div>
               <div class="srv-now">4 / 5</div>
               <div class="srv-trend"><span class="delta good" title="Higher is better">&#9650;</span></div>
             </div>
-            <div class="srv-row">
+            <div class="srv-row" data-srv="Clarity">
               <div class="srv-name">Clarity</div>
               <div class="srv-spark"><div class="srv-bar" style="height:40%" title="Clarity morning · 2 of 5"></div><div class="srv-bar pm" style="height:40%" title="Clarity evening · 2 of 5"></div><div class="srv-bar" style="height:40%" title="Clarity morning · 2 of 5"></div><div class="srv-bar pm" style="height:40%" title="Clarity evening · 2 of 5"></div><div class="srv-bar" style="height:60%" title="Clarity morning · 3 of 5"></div><div class="srv-bar pm" style="height:40%" title="Clarity evening · 2 of 5"></div><div class="srv-bar" style="height:60%" title="Clarity morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Clarity evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Clarity morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Clarity evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Clarity morning · 3 of 5"></div><div class="srv-bar pm" style="height:60%" title="Clarity evening · 3 of 5"></div><div class="srv-bar" style="height:60%" title="Clarity morning · 3 of 5"></div><div class="srv-bar pm" style="height:80%" title="Clarity evening · 4 of 5"></div></div>
               <div class="srv-now">3 / 5</div>
               <div class="srv-trend"><span class="delta good" title="Higher is better">&#9650;</span></div>
             </div>
-          <div class="srv-days">
+          <div class="srv-days" id="srv-days">
             <span>Jul 15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>Jul 21</span>
           </div>
           <div class="prov" style="margin-top:10px">
@@ -1915,6 +1923,71 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
 </div>
 
 <script src="assets/hcos.js?v=22"></script>
+<script>
+/* The line across months is the point — one card, four ranges. 7-day keeps the
+   morning/evening split; longer ranges aggregate, because 730 half-day bars
+   would be noise, not history. */
+(function () {
+  var SRV = {
+    '30d': { data: {"Pain": [2.5, 2.9, 2.3, 2.7, 2.7, 2.2, 2.8, 2.5, 2.3, 2.9, 2.3, 2.4, 2.8, 2.1, 2.6, 2.6, 2.1, 2.7, 2.3, 2.2, 2.7, 2.1, 2.4, 2.6, 2.0, 2.6, 2.4, 2.0, 2.6, 2.1], "Energy": [3.2, 3.5, 3.8, 3.2, 3.7, 3.6, 3.3, 3.9, 3.4, 3.4, 3.9, 3.3, 3.7, 3.8, 3.3, 3.9, 3.7, 3.4, 4.0, 3.5, 3.6, 4.0, 3.4, 3.9, 3.9, 3.4, 4.1, 3.7, 3.6, 4.1], "Mood": [3.6, 3.9, 3.3, 3.8, 3.7, 3.3, 4.0, 3.5, 3.5, 4.0, 3.4, 3.8, 3.9, 3.4, 4.0, 3.8, 3.5, 4.1, 3.6, 3.7, 4.1, 3.5, 3.9, 4.0, 3.5, 4.1, 3.8, 3.6, 4.2, 3.7], "Clarity": [3.2, 2.9, 3.6, 3.1, 3.1, 3.6, 2.9, 3.3, 3.5, 2.9, 3.5, 3.3, 3.0, 3.6, 3.1, 3.2, 3.6, 3.0, 3.5, 3.5, 3.0, 3.6, 3.3, 3.1, 3.7, 3.1, 3.4, 3.7, 3.0, 3.6]}, lbl: ["Jun 22", "Jun 23", "Jun 24", "Jun 25", "Jun 26", "Jun 27", "Jun 28", "Jun 29", "Jun 30", "Jul 1", "Jul 2", "Jul 3", "Jul 4", "Jul 5", "Jul 6", "Jul 7", "Jul 8", "Jul 9", "Jul 10", "Jul 11", "Jul 12", "Jul 13", "Jul 14", "Jul 15", "Jul 16", "Jul 17", "Jul 18", "Jul 19", "Jul 20", "Jul 21"], unit: 'daily average', title: 'last 30 days',
+             axis: ['Jun 22', 'Jun 29', 'Jul 7', 'Jul 14', 'Jul 21'] },
+    '3m':  { data: {"Pain": [2.9, 3.2, 2.7, 2.9, 2.9, 2.5, 2.9, 2.6, 2.4, 2.7, 2.3, 2.3, 2.5], "Energy": [2.8, 3.1, 3.3, 3.0, 3.4, 3.4, 3.2, 3.7, 3.4, 3.5, 3.9, 3.5, 3.8], "Mood": [3.4, 3.6, 3.2, 3.7, 3.6, 3.4, 3.9, 3.6, 3.6, 4.0, 3.6, 3.9, 4.1], "Clarity": [2.9, 2.7, 3.2, 2.9, 3.0, 3.3, 2.9, 3.3, 3.4, 3.0, 3.5, 3.4, 3.2]}, lbl: ["Apr 27", "May 4", "May 11", "May 18", "May 25", "Jun 1", "Jun 8", "Jun 15", "Jun 22", "Jun 29", "Jul 6", "Jul 13", "Jul 20"], unit: 'weekly average', title: 'last 3 months',
+             axis: ['Apr 27', 'May 18', 'Jun 8', 'Jun 29', 'Jul 20'] },
+    '12m': { data: {"Pain": [4.2, 4.0, 4.1, 3.8, 3.6, 3.7, 3.4, 3.1, 3.0, 2.8, 2.6, 2.3], "Energy": [1.8, 2.0, 1.9, 2.2, 2.4, 2.3, 2.6, 2.9, 3.0, 3.2, 3.5, 3.8], "Mood": [2.4, 2.3, 2.6, 2.5, 2.8, 3.0, 2.9, 3.2, 3.4, 3.3, 3.6, 3.9], "Clarity": [1.9, 2.1, 2.0, 2.3, 2.2, 2.5, 2.7, 2.6, 2.9, 3.0, 3.2, 3.4]}, lbl: ["Aug 2025", "Sep", "Oct", "Nov", "Dec", "Jan 2026", "Feb", "Mar", "Apr", "May", "Jun", "Jul"], unit: 'monthly average', title: 'last 12 months',
+             axis: ['Aug 2025', 'Nov', 'Feb 2026', 'May', 'Jul'] }
+  };
+  var saved7 = {};
+  var rows = document.querySelectorAll('.srv-row[data-srv]');
+  Array.prototype.forEach.call(rows, function (r) {
+    saved7[r.getAttribute('data-srv')] = r.querySelector('.srv-spark').innerHTML;
+  });
+  var keyEl = document.getElementById('srv-key');
+  var key7 = keyEl.innerHTML;
+  var days7 = document.getElementById('srv-days').innerHTML;
+
+  function render(range) {
+    var lblEl = document.getElementById('srv-range-lbl');
+    var daysEl = document.getElementById('srv-days');
+    if (range === '7d') {
+      Array.prototype.forEach.call(rows, function (r) {
+        r.querySelector('.srv-spark').innerHTML = saved7[r.getAttribute('data-srv')];
+      });
+      keyEl.innerHTML = key7;
+      daysEl.innerHTML = days7;
+      lblEl.textContent = 'last 7 days';
+      return;
+    }
+    var cfg = SRV[range];
+    Array.prototype.forEach.call(rows, function (r) {
+      var name = r.getAttribute('data-srv');
+      var vals = cfg.data[name];
+      var html = '';
+      for (var i = 0; i < vals.length; i++) {
+        html += '<div class="srv-bar pm" style="height:' + Math.round(vals[i] * 20) +
+                '%" title="' + name + ' · ' + cfg.lbl[i] + ' · ' + vals[i] + ' of 5"></div>';
+      }
+      r.querySelector('.srv-spark').innerHTML = html;
+    });
+    keyEl.innerHTML = '<span><i style="background:var(--hx-navy)"></i>' +
+      cfg.unit.charAt(0).toUpperCase() + cfg.unit.slice(1) + '</span>' +
+      '<span style="margin-left:auto">One bar per ' + ({daily:'day', weekly:'week', monthly:'month'})[cfg.unit.split(' ')[0]] + ' · 1–5 face scale</span>';
+    var axis = '';
+    for (var a = 0; a < cfg.axis.length; a++) axis += '<span>' + cfg.axis[a] + '</span>';
+    daysEl.innerHTML = axis;
+    lblEl.textContent = cfg.title;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-srv-range]'), function (b) {
+    b.addEventListener('click', function () {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-srv-range]'), function (x) {
+        x.classList.remove('active');
+      });
+      b.classList.add('active');
+      render(b.getAttribute('data-srv-range'));
+    });
+  });
+})();
+</script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {
