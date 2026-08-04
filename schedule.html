@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=28">
+<link rel="stylesheet" href="assets/hcos.css?v=30">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -310,17 +310,17 @@
             <div class="cal-now" style="top:323px"><span class="cal-now-label">11:40 AM</span></div>
             <div class="daycal-col" data-col="room1" style="position:relative">
               <div data-days="2" class="cal-appt st-checkout ty-energ" style="top:132px;height:40px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
-                <span class="cal-appt-time">9:30 &middot; checkout</span>
+                <span class="cal-appt-time">9:30 &ndash; 10:15</span>
                 <span class="cal-appt-name">Nadia Boulos</span>
                 <span class="cal-appt-type"><span class="type-mark tm-acu">ACU</span> Acupuncture &middot; 45m</span>
               </div>
               <div data-days="2,4" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer">
-                <span class="cal-appt-time">12:30 &middot; confirmed</span>
+                <span class="cal-appt-time">12:30 &ndash; 1:10</span>
                 <span class="cal-appt-name">Marcus Webb</span>
                 <span class="cal-appt-type"><span class="type-mark tm-pel">PEL</span> Pellets &middot; 40m</span>
               </div>
               <div data-days="2,3" class="cal-appt st-arrived ty-treat" data-sub="las" style="top:264px;height:40px" data-appt="A-88233" data-open-drawer="#l-appt-drawer">
-                <span class="cal-appt-time">11:00 &middot; arrived</span>
+                <span class="cal-appt-time">11:00 &ndash; 11:20</span>
                 <span class="cal-appt-name">Sofia Ramos</span>
                 <span class="cal-appt-type"><span class="type-mark tm-flow" style="background:var(--ty-treat);border-color:var(--ty-treat)">LAS</span> Erchonia laser &middot; 20m</span>
               </div>
@@ -1213,7 +1213,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=28"></script>
+<script src="assets/hcos.js?v=30"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.

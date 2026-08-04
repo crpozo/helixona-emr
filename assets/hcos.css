@@ -1086,20 +1086,23 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
 .cal-appt.st-noshow { background: #fff; border: 1.5px dashed var(--st-noshow); border-left: 6px solid var(--st-noshow); }
 
-/* the status, written on the block — no decoding required */
-.cal-appt::after {
-  position: absolute; top: 3px; right: 5px;
+/* the status, written on the block — floated so the text makes room for it */
+.cal-appt::before {
+  float: right; margin: 0 0 2px 6px;
   font-size: 8px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
   color: var(--muted);
 }
-.cal-appt.st-scheduled::after { content: 'Scheduled'; }
-.cal-appt.st-confirmed::after { content: 'Confirmed'; }
-.cal-appt.st-arrived::after   { content: 'Arrived'; color: var(--ink); }
-.cal-appt.st-inroom::after, .cal-appt.st-inchair::after { content: 'In progress'; color: var(--ink); }
-.cal-appt.st-checkout::after  { content: 'Checkout'; color: var(--ink); }
-.cal-appt.st-done::after      { content: 'Done'; }
-.cal-appt.st-noshow::after    { content: 'No-show'; color: var(--st-noshow); }
-.cal-appt.st-cancelled::after { content: 'Cancelled'; }
+.cal-appt.st-scheduled::before { content: 'Scheduled'; }
+.cal-appt.st-confirmed::before { content: 'Confirmed'; }
+.cal-appt.st-arrived::before   { content: 'Arrived'; color: var(--ink); }
+.cal-appt.st-inroom::before, .cal-appt.st-inchair::before { content: 'In progress'; color: var(--ink); }
+.cal-appt.st-checkout::before  { content: 'Checkout'; color: var(--ink); }
+.cal-appt.st-done::before      { content: 'Done'; }
+.cal-appt.st-noshow::before    { content: 'No-show'; color: var(--st-noshow); }
+.cal-appt.st-cancelled::before { content: 'Cancelled'; }
+
+/* subtype chip breathes before the text that follows it */
+.cal-appt .type-mark, .week-appt .type-mark { margin-right: 3px; }
 
 /* ---- LETTERS = SUBTYPE · the exact treatment — mono, colour stays with type ---- */
 .type-mark {
@@ -1108,6 +1111,61 @@ a.lead-chip:hover { border-color: var(--ink); }
   font-size: 8.5px; font-weight: 800; letter-spacing: .4px;
   background: #fff; border: 1px solid var(--ink); color: var(--ink);
 }
+
+/* Restored calendar rules — casualties of the redesign slice */
+.cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.25); z-index: 5; }
+.cal-appt-time { font-size: 9.5px; color: var(--muted); font-weight: 500; font-family: ui-monospace, monospace; }
+.cal-appt-type { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-appt.conflict { outline: 2px dashed #000; outline-offset: -2px; }
+.cal-legend-swatch.sw-nad { border-left-color: var(--tx-nad) !important; }
+.cal-legend-swatch.sw-ivc { border-left-color: var(--tx-ivc) !important; }
+.cal-legend-swatch.sw-flow { border-left-color: var(--tx-flow) !important; }
+.cal-legend-swatch.sw-eboo { border-left-color: var(--tx-eboo) !important; }
+.cal-legend-swatch.sw-consult { border-left-color: var(--tx-consult) !important; }
+.cal-appt .actor-tag {
+  position: absolute; right: 5px; bottom: 4px;
+  font-size: 8.5px; color: var(--muted);
+  background: rgba(255,255,255,0.85); padding: 0 3px; border-radius: 3px;
+}
+.cal-appt.ai-warn { box-shadow: inset 0 0 0 2px var(--ink); }
+.cal-appt .ai-flag {
+  position: absolute; top: 3px; right: 4px;
+  font-size: 9px; font-weight: 700; color: var(--ink);
+}
+.filter-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.filter-group-lbl {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--muted); font-weight: 700; margin-right: 2px;
+}
+.filter-chip.multi { padding-left: 8px; }
+.filter-chip.multi::before {
+  content: '☐'; margin-right: 5px; font-size: 11px;
+}
+.filter-chip.multi.active::before { content: '☑'; }
+.view-lock {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; color: var(--muted);
+  border: 1px dashed var(--line); border-radius: 14px; padding: 4px 11px;
+  background: #fff; cursor: pointer;
+}
+.view-lock.locked { border-style: solid; border-color: var(--ink); color: var(--ink); font-weight: 600; }
+.cal-legend {
+  display: flex; gap: 14px;
+  padding: 10px 16px;
+  background: #FBFBFB;
+  border-top: 1px solid var(--line-soft);
+  font-size: 11px; color: var(--muted);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cal-legend-item { display: flex; align-items: center; gap: 6px; }
+.cal-legend-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.15); }
+.cal-legend-swatch[class*="sw-"] {
+  width: 6px; height: 16px; border-radius: 2px; border: none;
+  border-left: 6px solid var(--line);
+}
+
+.cal-appt-name { font-size: 11.5px; font-weight: 600; color: var(--hx-navy); margin: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* Hover zoom — the whole appointment, readable without opening it */
 .appt-zoom {
