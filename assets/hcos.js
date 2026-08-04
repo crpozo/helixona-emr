@@ -832,6 +832,14 @@
     if (initial) activate(initial, true);
     else refreshFeedbackUI();
 
+    /* Links like href="page.html#/screen-id" clicked while already on that page
+       only change the hash — listen, so they switch screens like everything else. */
+    window.addEventListener('hashchange', function () {
+      var hid = location.hash.replace(/^#\/?/, '');
+      if (!hid || (currentScreen && currentScreen.id === hid)) return;
+      activate(hid);
+    });
+
     /* the browser's native #hash anchor-jump fights the screen switcher — undo it
        (only on screen pages; plain anchors like index.html#feedback must keep working) */
     if (screens.length) {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=22">
+<link rel="stylesheet" href="assets/hcos.css?v=23">
 <style>
   .b-prow { display: flex; align-items: center; gap: 10px; }
   .b-pname { font-weight: 600; color: var(--hx-navy); }
@@ -770,35 +770,35 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           <table class="tbl">
             <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Priority</th><th>State</th></tr></thead>
             <tbody>
-              <tr>
+              <tr data-activate="b-order-lab" data-lab-order="O-4471" data-lab-name="Comprehensive metabolic panel + CBC with differential">
                 <td><strong>Comprehensive metabolic panel + CBC with differential</strong></td>
                 <td>Vibrant Labs · fasting · Dx R53.83</td>
                 <td><span class="b-code">O-4471</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
-              <tr>
+              <tr data-activate="b-order-lab" data-lab-order="O-4472" data-lab-name="Thyroid panel &mdash; TSH, fT4, fT3, rT3, TPO, Tg Ab">
                 <td><strong>Thyroid panel — TSH, fT4, fT3, rT3, TPO, Tg Ab</strong></td>
                 <td>Vibrant Labs · Dx E06.3 · optimal-target reporting requested</td>
                 <td><span class="b-code">O-4472</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
-              <tr>
+              <tr data-activate="b-order-lab" data-lab-order="O-4473" data-lab-name="Vitamin D, 25-OH &mdash; recheck">
                 <td><strong>Vitamin D, 25-OH — recheck</strong></td>
                 <td>Vibrant Labs · Dx E55.9 · recheck in 12 weeks</td>
                 <td><span class="b-code">O-4473</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
-              <tr>
+              <tr data-activate="b-order-lab" data-lab-order="O-4474" data-lab-name="Ferritin + iron panel">
                 <td><strong>Ferritin + iron panel</strong></td>
                 <td>Vibrant Labs · Dx R53.83 · low-normal on last draw</td>
                 <td><span class="b-code">O-4474</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
-              <tr>
+              <tr data-activate="b-order-lab" data-lab-order="O-4475" data-lab-name="Organic acids test (OAT)">
                 <td><strong>Organic acids test (OAT)</strong></td>
                 <td>Mosaic Diagnostics · urine · 24-hour collection · $339</td>
                 <td><span class="b-code">O-4475</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
@@ -1922,7 +1922,35 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   </div>
 </div>
 
-<script src="assets/hcos.js?v=22"></script>
+<script src="assets/hcos.js?v=23"></script>
+<script>
+/* Opening a lab order from the table shows THAT order, not the blank form. */
+(function () {
+  document.addEventListener('click', function (ev) {
+    var tr = ev.target.closest ? ev.target.closest('tr[data-lab-order]') : null;
+    if (!tr) return;
+    var scr = document.getElementById('b-order-lab');
+    if (!scr) return;
+    var name = tr.getAttribute('data-lab-name');
+    scr.querySelector('.b-enc-name').textContent = 'Lab order';
+    scr.querySelector('.b-enc-sub').innerHTML =
+      'Grace Lindqvist &middot; MRN 2071 &middot; <span class="b-code">' + tr.getAttribute('data-lab-order') +
+      '</span> <span class="ver-chip">v1</span> &middot; draft &middot; not yet signed';
+    var sel = scr.querySelectorAll('select')[1];
+    var hit = false;
+    Array.prototype.forEach.call(sel.options, function (o) {
+      var plain = name.replace(/&mdash;/g, '\u2014');
+      if (o.text.slice(0, 12) === plain.slice(0, 12)) { o.selected = true; hit = true; }
+    });
+    if (!hit) {
+      var o = document.createElement('option');
+      o.textContent = name.replace(/&mdash;/g, '\u2014');
+      o.selected = true;
+      sel.insertBefore(o, sel.firstChild);
+    }
+  });
+})();
+</script>
 <script>
 /* The line across months is the point — one card, four ranges. 7-day keeps the
    morning/evening split; longer ranges aggregate, because 730 half-day bars

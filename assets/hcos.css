@@ -701,6 +701,10 @@ button { font-family: inherit; }
 }
 @media (max-width: 760px) { .match-row { grid-template-columns: 1fr; } }
 
+/* A row that opens something behaves like it */
+.tbl tbody tr[data-activate] { cursor: pointer; }
+.tbl tbody tr[data-activate]:hover td { background: var(--hx-band); }
+
 /* When an order was placed, and by whom — one look on every orders table */
 .o-when { font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
 .o-by { display: block; font-family: var(--font-ui), sans-serif; font-size: 10.5px; color: var(--ink); font-weight: 600; margin-top: 1px; }
