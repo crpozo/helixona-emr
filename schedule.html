@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=27">
+<link rel="stylesheet" href="assets/hcos.css?v=28">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -84,29 +84,55 @@
             </label>
 
             <div class="l-fl" style="flex-direction:column;align-items:flex-start;gap:4px">
-              <span class="filter-group-lbl">Type &middot; pick several</span>
-              <span id="l-ty-chips" style="display:flex;gap:5px;flex-wrap:wrap">
-                <button class="filter-chip multi active" data-ty="all" data-hcos-handled="1">All</button>
-                <button class="filter-chip multi" data-ty="ty-visit" data-hcos-handled="1">Office visit</button>
-                <button class="filter-chip multi" data-ty="ty-proc" data-hcos-handled="1">Procedure</button>
-                <button class="filter-chip multi" data-ty="ty-iv" data-hcos-handled="1">IV</button>
-                <button class="filter-chip multi" data-ty="ty-energ" data-hcos-handled="1">Energetics</button>
-                <button class="filter-chip multi" data-ty="ty-treat" data-hcos-handled="1">Treatment</button>
-              </span>
-              <span id="l-sub-chips" style="display:flex;gap:5px;flex-wrap:wrap">
-                <button class="filter-chip multi" data-sub="t-consult" data-ty-of="ty-visit" data-hcos-handled="1">Consults &amp; FU</button>
-                <button class="filter-chip multi" data-sub="t-tele" data-ty-of="ty-visit" data-hcos-handled="1">Telehealth</button>
-                <button class="filter-chip multi" data-sub="t-eboo" data-ty-of="ty-proc" data-hcos-handled="1">EBOO</button>
-                <button class="filter-chip multi" data-sub="t-lab" data-ty-of="ty-proc" data-hcos-handled="1">Lab draw</button>
-                <button class="filter-chip multi" data-sub="pel" data-ty-of="ty-proc" data-hcos-handled="1">Pellets</button>
-                <button class="filter-chip multi" data-sub="t-nad" data-ty-of="ty-iv" data-hcos-handled="1">NAD+</button>
-                <button class="filter-chip multi" data-sub="t-ivc" data-ty-of="ty-iv" data-hcos-handled="1">Mega C</button>
-                <button class="filter-chip multi" data-sub="t-flow" data-ty-of="ty-iv" data-hcos-handled="1">Foundational Flow</button>
-                <button class="filter-chip multi" data-sub="acu" data-ty-of="ty-energ" data-hcos-handled="1">Acupuncture</button>
-              </span>
+              <span class="filter-group-lbl">Type &amp; subtype</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <div class="msel" id="l-msel-ty">
+                  <button class="msel-field" data-hcos-handled="1" type="button">
+                    <span class="msel-field-lbl">All types</span><span class="msel-caret">&#9662;</span>
+                  </button>
+                  <div class="msel-panel">
+                    <input class="msel-search" placeholder="Search types&hellip;">
+                    <div class="msel-opts">
+                      <label class="msel-opt" data-ty="ty-visit"><input type="checkbox">Office visit</label>
+                      <label class="msel-opt" data-ty="ty-proc"><input type="checkbox">Procedure</label>
+                      <label class="msel-opt" data-ty="ty-iv"><input type="checkbox">IV</label>
+                      <label class="msel-opt" data-ty="ty-energ"><input type="checkbox">Energetics</label>
+                      <label class="msel-opt" data-ty="ty-treat"><input type="checkbox">Treatment</label>
+                    </div>
+                    <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
+                  </div>
+                </div>
+                <div class="msel" id="l-msel-sub">
+                  <button class="msel-field" data-hcos-handled="1" type="button">
+                    <span class="msel-field-lbl">All subtypes</span><span class="msel-caret">&#9662;</span>
+                  </button>
+                  <div class="msel-panel">
+                    <input class="msel-search" placeholder="Search subtypes&hellip;">
+                    <div class="msel-opts">
+                      <div class="msel-group" data-ty-of="ty-visit">Office visit</div>
+                      <label class="msel-opt" data-sub="t-consult" data-ty-of="ty-visit"><input type="checkbox">Consults &amp; FU</label>
+                      <label class="msel-opt" data-sub="t-tele" data-ty-of="ty-visit"><input type="checkbox">Telehealth</label>
+                      <div class="msel-group" data-ty-of="ty-proc">Procedure</div>
+                      <label class="msel-opt" data-sub="t-eboo" data-ty-of="ty-proc"><input type="checkbox">EBOO</label>
+                      <label class="msel-opt" data-sub="t-lab" data-ty-of="ty-proc"><input type="checkbox">Lab draw</label>
+                      <label class="msel-opt" data-sub="pel" data-ty-of="ty-proc"><input type="checkbox">Pellets</label>
+                      <div class="msel-group" data-ty-of="ty-iv">IV</div>
+                      <label class="msel-opt" data-sub="t-nad" data-ty-of="ty-iv"><input type="checkbox">NAD+</label>
+                      <label class="msel-opt" data-sub="t-ivc" data-ty-of="ty-iv"><input type="checkbox">Mega C</label>
+                      <label class="msel-opt" data-sub="t-flow" data-ty-of="ty-iv"><input type="checkbox">Foundational Flow</label>
+                      <div class="msel-group" data-ty-of="ty-energ">Energetics</div>
+                      <label class="msel-opt" data-sub="acu" data-ty-of="ty-energ"><input type="checkbox">Acupuncture</label>
+                      <div class="msel-group" data-ty-of="ty-treat">Treatment</div>
+                      <label class="msel-opt" data-sub="las" data-ty-of="ty-treat"><input type="checkbox">Erchonia laser</label>
+                    </div>
+                    <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <span class="l-count" id="l-count">Showing all 19 appointments</span>
+          <span class="l-count" id="l-count">Showing all 19 appointments</span>
 
             <div class="l-view-group">
               <button class="view-lock locked" id="l-lockbtn"
@@ -293,13 +319,13 @@
                 <span class="cal-appt-name">Marcus Webb</span>
                 <span class="cal-appt-type"><span class="type-mark tm-pel">PEL</span> Pellets &middot; 40m</span>
               </div>
-              <div data-days="2,3" class="cal-appt st-arrived ty-treat" style="top:264px;height:40px" data-appt="A-88233" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,3" class="cal-appt st-arrived ty-treat" data-sub="las" style="top:264px;height:40px" data-appt="A-88233" data-open-drawer="#l-appt-drawer">
                 <span class="cal-appt-time">11:00 &middot; arrived</span>
                 <span class="cal-appt-name">Sofia Ramos</span>
                 <span class="cal-appt-type"><span class="type-mark tm-flow" style="background:var(--ty-treat);border-color:var(--ty-treat)">LAS</span> Erchonia laser &middot; 20m</span>
               </div>
             </div>
-          </div>/div>
+          </div>
 
           <div class="cal-legend">
             <span class="cal-legend-item" style="font-weight:700;color:var(--ink)">Colour = what it is</span>
@@ -367,7 +393,7 @@
           </div>
         </div>
       </div>
-    </div>
+    
   </section>
 
   <!-- ============================================================ -->
@@ -1187,7 +1213,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=27"></script>
+<script src="assets/hcos.js?v=28"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -2080,6 +2106,74 @@
     });
     if (typeof lTypeChange === 'function') lTypeChange();
   }
+
+  /* ---------- searchable multi-selects drive the same lSel state ---------- */
+  (function () {
+    var TY_NAMES = { 'ty-visit': 'Office visit', 'ty-proc': 'Procedure', 'ty-iv': 'IV',
+                     'ty-energ': 'Energetics', 'ty-treat': 'Treatment' };
+    function summarize() {
+      var f1 = document.querySelector('#l-msel-ty .msel-field-lbl');
+      var f2 = document.querySelector('#l-msel-sub .msel-field-lbl');
+      if (f1) f1.textContent = lSel.types.length
+        ? lSel.types.map(function (t) { return TY_NAMES[t]; }).join(' · ') : 'All types';
+      if (f2) f2.textContent = lSel.subs.length ? lSel.subs.length + ' selected' : 'All subtypes';
+      document.querySelectorAll('.msel-opt[data-ty]').forEach(function (o) {
+        o.querySelector('input').checked = lSel.types.indexOf(o.getAttribute('data-ty')) !== -1;
+      });
+      document.querySelectorAll('.msel-opt[data-sub], .msel-group[data-ty-of]').forEach(function (o) {
+        var of = o.getAttribute('data-ty-of');
+        o.style.display = (!lSel.types.length || lSel.types.indexOf(of) !== -1) ? '' : 'none';
+        var inp = o.querySelector && o.querySelector('input');
+        if (inp) inp.checked = lSel.subs.indexOf(o.getAttribute('data-sub')) !== -1;
+      });
+    }
+    window.lChipsRefresh = summarize;   /* week/month selects round-trip through it */
+
+    document.addEventListener('click', function (ev) {
+      var f = ev.target.closest ? ev.target.closest('.msel-field') : null;
+      if (f) {
+        var m = f.closest('.msel');
+        document.querySelectorAll('.msel.open').forEach(function (x) { if (x !== m) x.classList.remove('open'); });
+        m.classList.toggle('open');
+        var srch = m.querySelector('.msel-search');
+        if (m.classList.contains('open') && srch) srch.focus();
+        return;
+      }
+      var clr = ev.target.closest ? ev.target.closest('.msel-clear') : null;
+      if (clr) {
+        if (clr.closest('#l-msel-ty')) { lSel.types = []; lSel.subs = []; } else lSel.subs = [];
+        summarize(); lApply(); return;
+      }
+      if (!ev.target.closest || !ev.target.closest('.msel'))
+        document.querySelectorAll('.msel.open').forEach(function (x) { x.classList.remove('open'); });
+    });
+
+    document.addEventListener('change', function (ev) {
+      var o = ev.target.closest ? ev.target.closest('.msel-opt') : null;
+      if (!o) return;
+      if (o.hasAttribute('data-ty')) {
+        var k = o.getAttribute('data-ty'), i = lSel.types.indexOf(k);
+        if (i === -1) lSel.types.push(k); else lSel.types.splice(i, 1);
+        lSel.subs = lSel.subs.filter(function (sk) {
+          var opt = document.querySelector('.msel-opt[data-sub="' + sk + '"]');
+          return !opt || !lSel.types.length || lSel.types.indexOf(opt.getAttribute('data-ty-of')) !== -1;
+        });
+      } else {
+        var sk = o.getAttribute('data-sub'), j = lSel.subs.indexOf(sk);
+        if (j === -1) lSel.subs.push(sk); else lSel.subs.splice(j, 1);
+      }
+      summarize(); lApply();
+    });
+
+    document.addEventListener('input', function (ev) {
+      if (!ev.target.classList || !ev.target.classList.contains('msel-search')) return;
+      var q = ev.target.value.toLowerCase();
+      ev.target.closest('.msel-panel').querySelectorAll('.msel-opt').forEach(function (o) {
+        o.classList.toggle('hidden', !!q && o.textContent.toLowerCase().indexOf(q) === -1);
+      });
+    });
+    summarize();
+  })();
 </script>
 </body>
 </html>
