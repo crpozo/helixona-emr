@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=24">
+<link rel="stylesheet" href="assets/hcos.css?v=25">
 <style>
   .lr-rule { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
   .lr-rule:last-child { border-bottom: none; }
@@ -388,9 +388,95 @@
     </div>
   </section>
 
+
+  <!-- ============================================================ -->
+  <section class="screen" id="sr-new-rule" data-title="Create a rule">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/rules/new</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Create a booking rule</div>
+            <div class="page-sub">Your own rule, in plain pieces &mdash; when it matches, it blocks, warns or allows</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn" data-activate="lr-01-rules">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Rule saved as draft. It enforces nothing until Dr. Drannikov approves it.', 'ok')">Save draft</button>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div>
+            <div class="card">
+              <div class="card-title">The rule</div>
+              <div class="field">
+                <label class="field-label">Name &mdash; say what it protects</label>
+                <input class="field-input" type="text" value="No pellets without a level drawn in 90 days">
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">Applies to &middot; type</label>
+                  <select class="field-input"><option>Procedure</option><option>IV</option><option>Office visit</option><option>Energetics</option><option>Treatment</option><option>Any</option></select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Subtype</label>
+                  <select class="field-input"><option>Pellets &middot; Ext pellets</option><option>PRP</option><option>EBOO</option><option>Any of the type</option></select>
+                </div>
+              </div>
+              <div class="seg-divider">When&hellip;</div>
+              <div class="lr-rule" style="display:flex;gap:8px;align-items:center;padding:6px 0;font-size:12.5px">
+                <select class="field-input" style="max-width:220px"><option>Last matching lab result</option><option>Order status</option><option>Days since last same subtype</option><option>Patient coverage</option><option>Resource</option></select>
+                <select class="field-input" style="max-width:130px"><option>is older than</option><option>is missing</option><option>equals</option><option>is less than</option></select>
+                <input class="field-input" style="max-width:110px" value="90 days">
+                <button class="btn btn-sm" data-row-del>Remove</button>
+              </div>
+              <div class="lr-rule" style="display:flex;gap:8px;align-items:center;padding:6px 0;font-size:12.5px">
+                <select class="field-input" style="max-width:220px"><option selected>Order status</option><option>Last matching lab result</option></select>
+                <select class="field-input" style="max-width:130px"><option selected>is missing</option><option>equals</option></select>
+                <input class="field-input" style="max-width:110px" value="signed">
+                <button class="btn btn-sm" data-row-del>Remove</button>
+              </div>
+              <button class="btn btn-sm" data-row-add onclick="HCOS.toast('Condition added — all conditions must match for the rule to fire.', 'ok')">+ Add a condition</button>
+
+              <div class="seg-divider">&hellip;then</div>
+              <div class="filters" style="border:none;padding:0">
+                <button class="filter-chip">Block &mdash; nobody overrides</button>
+                <button class="filter-chip active">Warn &mdash; designated authority may release</button>
+                <button class="filter-chip">Allow &mdash; note it, let it pass</button>
+              </div>
+              <div class="field" style="margin-top:8px">
+                <label class="field-label">Who may release the warning</label>
+                <select class="field-input"><option>Physician or extender, with a reason, logged</option><option>Physician only</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Before it goes live</div>
+              <div class="g-ev"><div class="g-ev-when">1</div><div class="g-ev-what"><strong>Draft</strong> &mdash; you are here</div>
+                <div class="g-ev-ver"><span class="appr draft">Draft</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">2</div><div class="g-ev-what"><strong>Preview</strong> &mdash; run against this month: would have fired 4 times</div>
+                <div class="g-ev-ver"><span class="appr pending">Pending</span></div></div>
+              <div class="g-ev"><div class="g-ev-when">3</div><div class="g-ev-what"><strong>Approval</strong> &mdash; a clinical rule needs Dr. Drannikov</div>
+                <div class="g-ev-ver"><span class="appr pending">Pending</span></div></div>
+              <div class="prov" style="margin-top:10px">
+                <span>Hard safety blocks &mdash; occupied resource, missing signed order, contraindication, unsafe interval,
+                no supervision &mdash; are built in and cannot be edited away by a custom rule.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<script src="assets/hcos.js?v=24"></script>
+<script src="assets/hcos.js?v=25"></script>
 <script>
   function lrPick(btn) {
     var row = btn.parentNode;

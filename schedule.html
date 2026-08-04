@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=24">
+<link rel="stylesheet" href="assets/hcos.css?v=25">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -61,36 +61,50 @@
               <span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view" onchange="lSync(this)">
                 <optgroup label="Views">
-                  <option value="all">Everyone — 3 providers and 4 chairs</option>
-                  <option value="providers">Provider clinic — all three</option>
-                  <option value="infusion">Infusion suite — Chairs 1 to 4</option>
+                  <option value="all">Everyone &mdash; all resources</option>
+                  <option value="providers">Providers &mdash; all three</option>
+                  <option value="infusion">Infusion suite &mdash; IV 1 to 4</option>
                 </optgroup>
                 <optgroup label="Providers">
                   <option value="dr">Dr. Drannikov</option>
                   <option value="bak">Dr. Bakman</option>
                   <option value="bro">Brooke &middot; Physician Associate</option>
                 </optgroup>
-                <optgroup label="Infusion suite">
-                  <option value="c1">Chair 1 &middot; Nick &middot; Nurse</option>
-                  <option value="c2">Chair 2 &middot; Bea &middot; Medic</option>
-                  <option value="c3">Chair 3 &middot; Juan &middot; Medic</option>
-                  <option value="c4">Chair 4 &middot; Nate &middot; Medic</option>
+                <optgroup label="Resources &middot; IV">
+                  <option value="c1">IV 1 &middot; Nick &middot; Nurse</option>
+                  <option value="c2">IV 2 &middot; Bea &middot; Medic</option>
+                  <option value="c3">IV 3 &middot; Juan &middot; Medic</option>
+                  <option value="c4">IV 4 &middot; Nate &middot; Medic</option>
+                </optgroup>
+                <optgroup label="Rooms">
+                  <option value="room1">Room 1 &middot; exam</option>
+                  <option value="room2">Room 2 &middot; procedures</option>
                 </optgroup>
               </select>
             </label>
 
-            <label class="l-fl">
-              <span class="filter-group-lbl">Treatment</span>
-              <select class="field-select l-select" id="l-treat" onchange="lSync(this)">
-                <option value="all">All treatments</option>
-                <option value="t-nad">NAD+ · 2 today</option>
-                <option value="t-ivc">IV vitamin C · 1 today</option>
-                <option value="t-flow">Foundational Flow and pushes · 4 today</option>
-                <option value="t-consult">Consults and follow-ups · 10 today</option>
-                <option value="t-tele">Telehealth · 1 today</option>
-                <option value="t-lab">Lab draw · 1 today</option>
-              </select>
-            </label>
+            <div class="l-fl" style="flex-direction:column;align-items:flex-start;gap:4px">
+              <span class="filter-group-lbl">Type &middot; pick several</span>
+              <span id="l-ty-chips" style="display:flex;gap:5px;flex-wrap:wrap">
+                <button class="filter-chip multi active" data-ty="all" data-hcos-handled="1">All</button>
+                <button class="filter-chip multi" data-ty="ty-visit" data-hcos-handled="1">Office visit</button>
+                <button class="filter-chip multi" data-ty="ty-proc" data-hcos-handled="1">Procedure</button>
+                <button class="filter-chip multi" data-ty="ty-iv" data-hcos-handled="1">IV</button>
+                <button class="filter-chip multi" data-ty="ty-energ" data-hcos-handled="1">Energetics</button>
+                <button class="filter-chip multi" data-ty="ty-treat" data-hcos-handled="1">Treatment</button>
+              </span>
+              <span id="l-sub-chips" style="display:flex;gap:5px;flex-wrap:wrap">
+                <button class="filter-chip multi" data-sub="t-consult" data-ty-of="ty-visit" data-hcos-handled="1">Consults &amp; FU</button>
+                <button class="filter-chip multi" data-sub="t-tele" data-ty-of="ty-visit" data-hcos-handled="1">Telehealth</button>
+                <button class="filter-chip multi" data-sub="t-eboo" data-ty-of="ty-proc" data-hcos-handled="1">EBOO</button>
+                <button class="filter-chip multi" data-sub="t-lab" data-ty-of="ty-proc" data-hcos-handled="1">Lab draw</button>
+                <button class="filter-chip multi" data-sub="pel" data-ty-of="ty-proc" data-hcos-handled="1">Pellets</button>
+                <button class="filter-chip multi" data-sub="t-nad" data-ty-of="ty-iv" data-hcos-handled="1">NAD+</button>
+                <button class="filter-chip multi" data-sub="t-ivc" data-ty-of="ty-iv" data-hcos-handled="1">Mega C</button>
+                <button class="filter-chip multi" data-sub="t-flow" data-ty-of="ty-iv" data-hcos-handled="1">Foundational Flow</button>
+                <button class="filter-chip multi" data-sub="acu" data-ty-of="ty-energ" data-hcos-handled="1">Acupuncture</button>
+              </span>
+            </div>
 
             <span class="l-count" id="l-count">Showing all 19 appointments</span>
 
@@ -107,12 +121,22 @@
             <div class="daycal-band">Infusion suite</div>
             <div class="daycal-col-head hours-head"></div>
             <div class="daycal-col-head" data-col="dr">Dr. Drannikov<span class="sub">Provider</span></div>
-            <div class="daycal-col-head" data-col="bak">Dr. Bakman<span class="sub">Provider</span></div>
-            <div class="daycal-col-head" data-col="bro">Brooke<span class="sub">Physician Associate</span></div>
-            <div class="daycal-col-head" data-col="c1">Chair 1<span class="sub">Nick · Nurse</span></div>
-            <div class="daycal-col-head" data-col="c2">Chair 2<span class="sub">Bea · Medic</span></div>
-            <div class="daycal-col-head" data-col="c3">Chair 3<span class="sub">Juan · Medic</span></div>
-            <div class="daycal-col-head" data-col="c4">Chair 4<span class="sub">Nate · Medic</span></div>
+            <div class="daycal-col-head" data-col="bak">
+              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">12:30 &middot; confirmed</span>
+                <span class="cal-appt-name">Marcus Webb</span>
+                <span class="cal-appt-type"><span class="type-mark tm-pel">PEL</span> Pellets &middot; 40m</span>
+              </div>Dr. Bakman<span class="sub">Provider</span></div>
+            <div class="daycal-col-head" data-col="bro">
+              <div data-days="2" class="cal-appt st-checkout ty-energ" style="top:132px;height:40px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">9:30 &middot; checkout</span>
+                <span class="cal-appt-name">Nadia Boulos</span>
+                <span class="cal-appt-type"><span class="type-mark tm-acu">ACU</span> Acupuncture &middot; 45m</span>
+              </div>Brooke<span class="sub">Physician Associate</span></div>
+            <div class="daycal-col-head" data-col="c1">IV 1<span class="sub">Nick · Nurse</span></div>
+            <div class="daycal-col-head" data-col="c2">IV 2<span class="sub">Bea · Medic</span></div>
+            <div class="daycal-col-head" data-col="c3">IV 3<span class="sub">Juan · Medic</span></div>
+            <div class="daycal-col-head" data-col="c4">IV 4<span class="sub">Nate · Medic</span></div>
           </div>
 
           <div class="daycal-grid">
@@ -132,33 +156,33 @@
             <!-- Dr. Drannikov -->
             <div class="daycal-col" data-col="dr">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2" class="cal-appt st-done t-consult" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-done t-consult ty-visit" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">8:30 – 10:00</div>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-inroom t-consult" style="top:220px;height:40px" data-appt="A-88208" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-inroom t-consult ty-visit" style="top:220px;height:40px" data-appt="A-88208" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:30</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div data-days="2,4" class="cal-appt st-arrived t-tele" style="top:308px;height:40px" data-appt="A-88221" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-arrived t-tele ty-visit" style="top:308px;height:40px" data-appt="A-88221" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">11:30</div>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <div class="cal-appt-type"><span class="type-mark">TEL</span>Telehealth · 30 min</div>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-confirmed t-consult" style="top:484px;height:40px" data-appt="A-88238" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-confirmed t-consult ty-visit" style="top:484px;height:40px" data-appt="A-88238" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">1:30 PM</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-cancelled t-consult" style="top:528px;height:40px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-cancelled t-consult ty-visit" style="top:528px;height:40px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">2:00 PM</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
               <div class="daycal-empty-hint l-hint-visible" style="top:528px;height:40px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
-              <div data-days="2" class="cal-appt st-scheduled t-consult" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-scheduled t-consult ty-visit" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:00 – 4:30 PM</div>
                 <div class="cal-appt-name">Tom Alvarez</div>
                 <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
@@ -168,17 +192,17 @@
             <!-- Dr. Bakman -->
             <div class="daycal-col" data-col="bak">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,3" class="cal-appt st-done t-consult" style="top:88px;height:40px" data-appt="A-88205" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:88px;height:40px" data-appt="A-88205" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">9:00</div>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div data-days="1,2,4,5" class="cal-appt st-confirmed t-consult" style="top:440px;height:40px" data-appt="A-88235" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,4,5" class="cal-appt st-confirmed t-consult ty-visit" style="top:440px;height:40px" data-appt="A-88235" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">1:00 PM</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div data-days="1,2,5" class="cal-appt st-scheduled t-consult" style="top:660px;height:40px" data-appt="A-88254" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,5" class="cal-appt st-scheduled t-consult ty-visit" style="top:660px;height:40px" data-appt="A-88254" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:30 PM</div>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
@@ -188,29 +212,29 @@
             <!-- Brooke -->
             <div class="daycal-col" data-col="bro">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,3" class="cal-appt st-done t-consult" style="top:176px;height:40px" data-appt="A-88210" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:176px;height:40px" data-appt="A-88210" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:00</div>
                 <div class="cal-appt-name">Walter Hsu</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div data-days="2,4" class="cal-appt st-scheduled t-consult" style="top:528px;height:40px" data-appt="A-88243" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-scheduled t-consult ty-visit" style="top:528px;height:40px" data-appt="A-88243" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">2:00 PM</div>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
             </div>
 
-            <!-- Chair 1 -->
+            <!-- IV 1 -->
             <div class="daycal-col" data-col="c1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2,4" class="cal-appt st-inchair t-nad ai-warn" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-inchair t-nad ai-warn ty-iv" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer">
                 <span class="ai-flag" title="Running long">!</span>
                 <div class="cal-appt-time">9:00 – 12:00 · running to 12:20</div>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <div class="cal-appt-type"><span class="type-mark">NAD</span>NAD+ · books 3 h, she takes 3 h 20</div>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-nad" style="top:440px;height:260px" data-appt="A-88247" data-open-drawer="#l-appt-drawer">
+              <div class="cal-appt st-confirmed t-nad ty-iv" style="top:440px;height:260px" data-appt="A-88247" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">1:00 – 4:00 PM</div>
                 <div class="cal-appt-name">Walter Hsu</div>
                 <div class="cal-appt-type"><span class="type-mark">NAD</span>NAD+ infusion · 3 h typical</div>
@@ -218,10 +242,10 @@
               </div>
             </div>
 
-            <!-- Chair 2 -->
+            <!-- IV 2 -->
             <div class="daycal-col" data-col="c2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,4,5" class="cal-appt st-inchair t-ivc" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,4,5" class="cal-appt st-inchair t-ivc ty-iv" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">10:00 – 12:30</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <div class="cal-appt-type"><span class="type-mark">IVC</span>IV vitamin C 25 g · runs on time</div>
@@ -229,16 +253,16 @@
               </div>
             </div>
 
-            <!-- Chair 3 -->
+            <!-- IV 3 -->
             <div class="daycal-col" data-col="c3">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2,5" class="cal-appt st-arrived t-flow" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,5" class="cal-appt st-arrived t-flow ty-iv" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">11:30 – 12:30</div>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-type"><span class="type-mark">FLO</span>Foundational Flow 10 · 1 h</div>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-scheduled t-flow" style="top:660px;height:40px" data-appt="A-88256" data-open-drawer="#l-appt-drawer">
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:660px;height:40px" data-appt="A-88256" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:30 PM</div>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-type"><span class="type-mark">GSH</span>Glutathione push · 30 min</div>
@@ -246,19 +270,19 @@
               </div>
             </div>
 
-            <!-- Chair 4 -->
+                                        <!-- IV 4 --><!-- IV 4 -->
             <div class="daycal-col" data-col="c4">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2" class="cal-appt st-arrived t-lab" style="top:286px;height:18px;padding:1px 8px" data-appt="A-88219" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-arrived t-lab ty-proc" style="top:286px;height:18px;padding:1px 8px" data-appt="A-88219" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-name" style="font-size:10px"><span class="type-mark">LAB</span>Sofia Ramos · 11:15 lab draw · 15m</div>
               </div>
-              <div data-days="2" class="cal-appt st-confirmed t-flow" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-confirmed t-flow ty-iv" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">2:00 – 3:00 PM</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-type"><span class="type-mark">FLO</span>Foundational Flow 10 · 1 h</div>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-scheduled t-flow" style="top:616px;height:40px" data-appt="A-88250" data-open-drawer="#l-appt-drawer">
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:616px;height:40px" data-appt="A-88250" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:00 PM</div>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-type"><span class="type-mark">GSH</span>Glutathione push · 30 min</div>
@@ -270,26 +294,30 @@
           </div>
 
           <div class="cal-legend">
-            <span class="cal-legend-item" style="font-weight:600;color:var(--ink)">Status &middot; the fill</span>
+            <span class="cal-legend-item" style="font-weight:600;color:var(--ink)">1 &middot; Status &middot; the fill</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-scheduled)"></span>Scheduled</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-confirmed)"></span>Confirmed</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-arrived)"></span>Arrived</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-inroom)"></span>In room / In chair</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-inroom)"></span>In progress</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-checkout)"></span>Checkout</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-done)"></span>Done</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-noshow-bg);border-style:dashed;border-color:var(--st-noshow)"></span>No-show</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-cancelled)"></span>Cancelled</span>
           </div>
-
           <div class="cal-legend">
-            <span class="cal-legend-item" style="font-weight:600;color:var(--ink)">Treatment &middot; the edge</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-nad);border-color:var(--tx-nad)"></span><span class="type-mark tm-nad">NAD</span>NAD+ infusion</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-ivc);border-color:var(--tx-ivc)"></span><span class="type-mark tm-ivc">IVC</span>IV vitamin C</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-flow);border-color:var(--tx-flow)"></span><span class="type-mark tm-flow">FLO</span>Foundational Flow &amp; pushes</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-eboo);border-color:var(--tx-eboo)"></span><span class="type-mark tm-eboo">EBO</span>EBOO</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-consult);border-color:var(--tx-consult)"></span><span class="type-mark tm-consult">CON</span>Consults &amp; follow-ups</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-tele);border-color:var(--tx-tele)"></span><span class="type-mark tm-tele">TEL</span>Telehealth</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--tx-lab);border-color:var(--tx-lab)"></span><span class="type-mark tm-lab">LAB</span>Lab draw</span>
-            <span class="cal-legend-item" style="color:var(--muted)">corner tag = who runs it</span>
+            <span class="cal-legend-item" style="font-weight:600;color:var(--ink)">2 &middot; Type &middot; the edge</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch sw-flow" style="border-left-color:var(--ty-visit) !important"></span>Office visit</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch sw-flow" style="border-left-color:var(--ty-proc) !important"></span>Procedure</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch sw-flow" style="border-left-color:var(--ty-iv) !important"></span>IV</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch sw-flow" style="border-left-color:var(--ty-energ) !important"></span>Energetics</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch sw-flow" style="border-left-color:var(--ty-treat) !important"></span>Treatment</span>
+          </div>
+          <div class="cal-legend">
+            <span class="cal-legend-item" style="font-weight:600;color:var(--ink)">3 &middot; Subtype &middot; the chip</span>
+            <span class="cal-legend-item"><span class="type-mark tm-consult">NP</span>New patient &middot; FU &middot; Ext variants</span>
+            <span class="cal-legend-item"><span class="type-mark tm-acu">ACU</span>Acupuncture</span>
+            <span class="cal-legend-item"><span class="type-mark tm-pel">PEL</span>Pellets &middot; PRP</span>
+            <span class="cal-legend-item"><span class="type-mark tm-flow">FLO</span>Mito Boost &middot; MCAS &middot; EBOO Boost &hellip;</span>
+            <span class="cal-legend-item" style="color:var(--muted)">corner tag = who runs it &middot; <a href="treatments.html#/t-06-codes">edit the codes</a></span>
           </div>
         </div>
 
@@ -300,10 +328,10 @@
               <div class="callout" style="margin:0 0 10px">
                 <strong>Maya Reyes will finish about 12:20, not 12:00.</strong>
                 Her last four NAD+ runs averaged 3 h 20 — she drips slower than the protocol books for.
-                Chair 1 is free at 1:00, so Walter Hsu is not at risk yet.
+                IV 1 is free at 1:00, so Walter Hsu is not at risk yet.
               </div>
               <div class="filters" style="margin:0;background:transparent;border:none;padding:0;gap:6px">
-                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Chair 1 held until 12:30 — Walter Hsu keeps his 1:00 start.', 'ok')">Hold the chair to 12:30</button>
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('IV 1 held until 12:30 — Walter Hsu keeps his 1:00 start.', 'ok')">Hold the chair to 12:30</button>
                 <button class="btn btn-sm" onclick="HCOS.toast('Nick notified — he is watching the drip rate.', 'ok')">Tell Nick</button>
               </div>
             </div>
@@ -372,16 +400,28 @@
                   <option value="infusion">Infusion suite &mdash; Chairs 1 to 4</option></optgroup>
                 <optgroup label="Providers"><option value="dr">Dr. Eduard Drannikov</option>
                   <option value="bak">Dr. Bakman</option><option value="bro">Brooke</option></optgroup>
-                <optgroup label="Infusion suite"><option value="c1">Chair 1 &middot; Nick</option>
-                  <option value="c2">Chair 2 &middot; Bea</option><option value="c3">Chair 3 &middot; Juan</option>
-                  <option value="c4">Chair 4 &middot; Nate</option></optgroup>
+                <optgroup label="Infusion suite"><option value="c1">IV 1 &middot; Nick</option>
+                  <option value="c2">IV 2 &middot; Bea</option><option value="c3">IV 3 &middot; Juan</option>
+                  <option value="c4">IV 4 &middot; Nate</option></optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select" id="l-treat-w" onchange="lSync(this)">
-                <option value="all">All treatments</option>
-                <option value="t-nad">NAD+</option><option value="t-ivc">IV vitamin C</option>
-                <option value="t-flow">Foundational Flow &amp; pushes</option><option value="t-consult">Consults</option>
-                <option value="t-tele">Telehealth</option>
+                <optgroup label="Type">
+                  <option value="all">All types</option>
+                  <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
+                  <option value="ty:ty-proc">Procedure &mdash; all subtypes</option>
+                  <option value="ty:ty-iv">IV &mdash; all subtypes</option>
+                  <option value="ty:ty-energ">Energetics &mdash; all subtypes</option>
+                </optgroup>
+                <optgroup label="Subtype">
+                  <option value="t-nad">IV &middot; NAD+</option>
+                  <option value="t-ivc">IV &middot; Mega C</option>
+                  <option value="t-flow">IV &middot; Foundational Flow</option>
+                  <option value="t-consult">Office visit &middot; consults &amp; FU</option>
+                  <option value="t-tele">Office visit &middot; telehealth</option>
+                  <option value="t-eboo">Procedure &middot; EBOO</option>
+                  <option value="t-lab">Procedure &middot; lab draw</option>
+                </optgroup>
               </select></label>
             <span class="l-count" id="l-count-w">Showing everything</span>
           </div>
@@ -420,58 +460,58 @@
             <!-- Mon Jul 20 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div>
-              <div data-col="dr" class="week-appt t-consult st-done" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-consult st-done" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-tele st-noshow" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="c1" class="week-appt t-nad st-done" style="top:56px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
-              <div data-col="c2" class="week-appt t-ivc st-done" style="top:280px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-tele st-noshow ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="c1" class="week-appt t-nad st-done ty-iv" style="top:56px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="c2" class="week-appt t-ivc st-done ty-iv" style="top:280px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
             </div>
 
             <!-- Tue Jul 21 · today, mirrors the day view -->
             <div class="weekcal-col today">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div>
-              <div data-col="dr" class="week-appt t-consult st-done" style="top:28px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Marcus Webb</span>Consult</div>
-              <div data-col="dr" class="week-appt t-consult st-inroom" style="top:140px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-tele st-arrived" style="top:196px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="dr" class="week-appt t-consult st-confirmed" style="top:308px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-consult st-cancelled" style="top:336px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:392px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Tom Alvarez</span>Consult</div>
-              <div data-col="c1" class="week-appt t-nad st-inchair" style="top:56px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
-              <div data-col="c2" class="week-appt t-ivc st-inchair" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C</div>
-              <div data-col="c4" class="week-appt t-flow st-arrived" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
-              <div data-col="c3" class="week-appt t-flow st-arrived" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
-              <div data-col="c1" class="week-appt t-nad st-confirmed" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
-              <div data-col="dr" class="week-appt t-consult st-confirmed" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Foundational Flow</div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
-              <div data-col="c4" class="week-appt t-flow st-scheduled" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:28px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Marcus Webb</span>Consult</div>
+              <div data-col="dr" class="week-appt t-consult st-inroom ty-visit" style="top:140px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-tele st-arrived ty-visit" style="top:196px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:308px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-cancelled ty-visit" style="top:336px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:392px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Tom Alvarez</span>Consult</div>
+              <div data-col="c1" class="week-appt t-nad st-inchair ty-iv" style="top:56px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div data-col="c2" class="week-appt t-ivc st-inchair ty-iv" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C</div>
+              <div data-col="c4" class="week-appt t-flow st-arrived ty-iv" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="c3" class="week-appt t-flow st-arrived ty-iv" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
+              <div data-col="c1" class="week-appt t-nad st-confirmed ty-iv" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Foundational Flow</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div data-col="c4" class="week-appt t-flow st-scheduled ty-iv" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
             </div>
 
             <!-- Wed Jul 22 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-tele st-confirmed" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="c3" class="week-appt t-flow st-scheduled" style="top:112px;height:53px;left:50%" data-activate="l-01-day"><span class="n">Priya Natarajan</span>Foundational Flow</div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:336px;height:25px;left:50%" data-activate="l-01-day"><span class="n">Tom Alvarez</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-tele st-confirmed ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="c3" class="week-appt t-flow st-scheduled ty-iv" style="top:112px;height:53px;left:50%" data-activate="l-01-day"><span class="n">Priya Natarajan</span>Foundational Flow</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:336px;height:25px;left:50%" data-activate="l-01-day"><span class="n">Tom Alvarez</span></div>
             </div>
 
             <!-- Thu Jul 23 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
-              <div data-col="c2" class="week-appt t-ivc st-confirmed" style="top:84px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
-              <div data-col="c3" class="week-appt t-flow st-scheduled" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
-              <div data-col="c1" class="week-appt t-nad st-confirmed" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
+              <div data-col="c2" class="week-appt t-ivc st-confirmed ty-iv" style="top:84px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div data-col="c3" class="week-appt t-flow st-scheduled ty-iv" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
+              <div data-col="c1" class="week-appt t-nad st-confirmed ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
             </div>
 
             <!-- Fri Jul 24 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div>
-              <div data-col="dr" class="week-appt t-tele st-scheduled" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="dr" class="week-appt t-consult st-confirmed" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="c1" class="week-appt t-nad st-scheduled" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
-              <div data-col="c4" class="week-appt t-flow st-scheduled" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="dr" class="week-appt t-tele st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="c1" class="week-appt t-nad st-scheduled ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div data-col="c4" class="week-appt t-flow st-scheduled ty-iv" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
             </div>
           </div>
 
@@ -479,7 +519,7 @@
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-scheduled)"></span>Scheduled</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-confirmed)"></span>Confirmed</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-arrived)"></span>Arrived</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-inroom)"></span>In room / In chair</span>
+            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-inroom)"></span>In progress</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-done)"></span>Done</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-noshow-bg);border-style:dashed;border-color:var(--st-noshow)"></span>No-show</span>
             <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--st-cancelled)"></span>Cancelled</span>
@@ -523,16 +563,28 @@
                   <option value="infusion">Infusion suite &mdash; Chairs 1 to 4</option></optgroup>
                 <optgroup label="Providers"><option value="dr">Dr. Eduard Drannikov</option>
                   <option value="bak">Dr. Bakman</option><option value="bro">Brooke</option></optgroup>
-                <optgroup label="Infusion suite"><option value="c1">Chair 1 &middot; Nick</option>
-                  <option value="c2">Chair 2 &middot; Bea</option><option value="c3">Chair 3 &middot; Juan</option>
-                  <option value="c4">Chair 4 &middot; Nate</option></optgroup>
+                <optgroup label="Infusion suite"><option value="c1">IV 1 &middot; Nick</option>
+                  <option value="c2">IV 2 &middot; Bea</option><option value="c3">IV 3 &middot; Juan</option>
+                  <option value="c4">IV 4 &middot; Nate</option></optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select" id="l-treat-m" onchange="lSync(this)">
-                <option value="all">All treatments</option>
-                <option value="t-nad">NAD+</option><option value="t-ivc">IV vitamin C</option>
-                <option value="t-flow">Foundational Flow &amp; pushes</option><option value="t-consult">Consults</option>
-                <option value="t-tele">Telehealth</option>
+                <optgroup label="Type">
+                  <option value="all">All types</option>
+                  <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
+                  <option value="ty:ty-proc">Procedure &mdash; all subtypes</option>
+                  <option value="ty:ty-iv">IV &mdash; all subtypes</option>
+                  <option value="ty:ty-energ">Energetics &mdash; all subtypes</option>
+                </optgroup>
+                <optgroup label="Subtype">
+                  <option value="t-nad">IV &middot; NAD+</option>
+                  <option value="t-ivc">IV &middot; Mega C</option>
+                  <option value="t-flow">IV &middot; Foundational Flow</option>
+                  <option value="t-consult">Office visit &middot; consults &amp; FU</option>
+                  <option value="t-tele">Office visit &middot; telehealth</option>
+                  <option value="t-eboo">Procedure &middot; EBOO</option>
+                  <option value="t-lab">Procedure &middot; lab draw</option>
+                </optgroup>
               </select></label>
             <span class="l-count" id="l-count-m">Showing everything</span>
           </div>
@@ -594,6 +646,26 @@
             </div>
           </div>
 
+          <div class="card" style="margin:0 16px 14px">
+            <div class="card-title">Capacity this month &middot; July</div>
+            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">IV suite</span>
+              <div class="meter" style="flex:1"><div class="meter-fill" style="width:74%"></div></div>
+              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">74% full &middot; 31 slots left</span></div>
+            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">Office visits</span>
+              <div class="meter" style="flex:1"><div class="meter-fill" style="width:81%"></div></div>
+              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">81% full &middot; 22 slots left</span></div>
+            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">Procedures &middot; pellets, PRP, EBOO</span>
+              <div class="meter" style="flex:1"><div class="meter-fill" style="width:60%"></div></div>
+              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">60% full &middot; 20 slots left</span></div>
+            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">Energetics &middot; acupuncture</span>
+              <div class="meter" style="flex:1"><div class="meter-fill" style="width:35%"></div></div>
+              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">35% full &middot; 26 slots left</span></div>
+            <style>#l-05-month .r-hbar { display:flex; align-items:center; gap:10px; font-size:12px; }</style>
+            <div class="prov" style="margin-top:8px">
+              <span>Slots come from resource hours minus booked time, per type. Filter a treatment above and the
+              board dims the days that cannot take it.</span>
+            </div>
+          </div>
           <div class="cal-legend">
             <span class="cal-legend-item">Pick a day to open it</span>
             <span class="cal-legend-item">The bar under each day is how full the chairs are</span>
@@ -601,6 +673,68 @@
           </div>
 
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-06-filters" data-title="Filter setup">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/filters</span></div>
+      <div class="frame-body">
+
+        <div class="app-header">
+          <div>
+            <div class="page-title">Filter setup</div>
+            <div class="page-sub">Build the views your team actually uses &mdash; then lock one as your default</div>
+          </div>
+          <button class="btn btn-primary" data-row-add data-row-add-target="#l-fs-body" onclick="HCOS.toast('Filter added below — name it and pick its pieces.', 'ok')">New filter</button>
+        </div>
+
+        <div class="callout">
+          <strong>A filter is three linked levels.</strong> Pick the types and the subtypes narrow to match;
+          pick resources and the board shows only those columns. Saved filters appear in everyone&rsquo;s
+          Show menu; a <em>locked</em> filter is that person&rsquo;s default every morning.
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:14px">
+          <table class="tbl">
+            <thead><tr><th>Filter</th><th>Show</th><th>Types</th><th>Subtypes</th><th>Owner</th><th>Default</th><th></th></tr></thead>
+            <tbody id="l-fs-body">
+              <tr>
+                <td><strong>Yazmin&rsquo;s desk</strong></td>
+                <td>Providers + IV 1&ndash;4</td>
+                <td>All</td><td>All</td>
+                <td>Yazmin &middot; Front desk</td>
+                <td><span class="pill pill-ok">Locked</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing — same three levels, same hierarchy.', 'ok')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Infusion day</strong></td>
+                <td>IV 1&ndash;4 only</td>
+                <td>IV</td><td>NAD+ &middot; Mega C &middot; Foundational Flow</td>
+                <td>Nick &middot; Nurse</td>
+                <td><span class="pill pill-muted">&mdash;</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing — same three levels, same hierarchy.', 'ok')">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Procedures &amp; energetics</strong></td>
+                <td>Rooms 1&ndash;2 + Brooke</td>
+                <td>Procedure &middot; Energetics</td><td>Pellets &middot; PRP &middot; Acupuncture</td>
+                <td>Shibani &middot; Admin</td>
+                <td><span class="pill pill-muted">&mdash;</span></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing — same three levels, same hierarchy.', 'ok')">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:12px">
+          <span>Saved filters are configuration, not code &mdash; front desk builds them without asking anyone.
+          The hierarchy is enforced: a filter cannot pair a subtype with a type that does not own it.</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -643,18 +777,72 @@
             </div>
 
             <div class="seg-divider">Treatment</div>
-            <div class="field">
-              <label class="field-label">Appointment type</label>
-              <select class="field-select" id="l-bk-type" onchange="lTypeChange()">
-                <option value="flow" selected>Foundational Flow 10 · 1 h</option>
-                <option value="nad">NAD+ infusion · 3 h</option>
-                <option value="ivc">IV vitamin C 25 g · 2.5 h</option>
-                <option value="gsh">Glutathione push · 30 min</option>
-                <option value="fu">Follow-up · 30 min</option>
-                <option value="lab">Lab draw · 15 min</option>
-              </select>
+            <div class="grid-2">
+              <div class="field">
+                <label class="field-label">Type</label>
+                <select class="field-select" id="l-bk-ty" onchange="lBkTy()">
+                  <option value="iv" selected>IV</option>
+                  <option value="visit">Office visit</option>
+                  <option value="proc">Procedure</option>
+                  <option value="energ">Energetics</option>
+                  <option value="treat">Treatment</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="field-label">Subtype &mdash; follows the type</label>
+                <select class="field-select" id="l-bk-type" onchange="lTypeChange()">
+                  <option value="flow" selected>Foundational Flow 10 &middot; 1 h</option>
+                  <option value="nad">NAD+ infusion &middot; 3 h</option>
+                  <option value="ivc">Mega C 25 &middot; 2.5 h</option>
+                  <option value="gsh">Glutathione push &middot; 30 min</option>
+                </select>
+              </div>
             </div>
             <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
+            <div class="card" style="margin-top:12px">
+              <div class="card-title">Orders for this patient &middot; order = prescription</div>
+              <div class="g-ev">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>Foundational Flow 10 &middot; O-3402</strong> <span class="ver-chip">v2</span>
+                  &mdash; active &middot; 2 of 6 given &middot; <strong>valid to Sep 14, 2026</strong> &middot; 55 days left
+                  <span class="prov" style="display:block;margin-top:2px"><span>Signed by Dr. Drannikov, May 22 &middot;
+                  <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
+              <div class="g-ev" id="l-bk-expired">
+                <div class="g-ev-when">!</div>
+                <div class="g-ev-what"><strong>NAD+ infusion &middot; O-2288</strong> <span class="ver-chip">v1</span>
+                  &mdash; <strong>expired Jul 1, 2026</strong> &middot; 8 of 8 given
+                  <span class="prov" style="display:block;margin-top:2px"><span>An expired order does not authorize a booking.
+                  You can continue &mdash; the appointment books as <strong>tentative</strong> until Dr. Drannikov approves the renewal.</span></span>
+                  <label style="display:flex;gap:7px;align-items:flex-start;margin-top:7px;font-size:12px;cursor:pointer">
+                    <input type="checkbox" id="l-bk-ack" style="margin-top:2px">
+                    I understand this books tentatively, pending the doctor&rsquo;s approval
+                  </label>
+                  <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+                    <button class="btn btn-sm btn-primary" onclick="var a=document.getElementById('l-bk-ack'); if(!a.checked){HCOS.toast('Tick the acknowledgement first — the note is the record.', 'warn');return;} HCOS.toast('Renewal requested from Dr. Drannikov. The slot books as TENTATIVE and confirms itself when he signs.', 'ok')">Request renewal &amp; book tentative</button>
+                    <a class="btn btn-sm" href="clinical.html#/b-09-orders">See the order in detail</a>
+                  </div></div>
+                <div class="g-ev-ver"><span class="appr pending">Expired</span></div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:12px">
+              <div class="card-title">Linked appointments &mdash; follow the main one</div>
+              <label style="display:flex;gap:7px;align-items:center;font-size:12.5px;cursor:pointer;padding:3px 0">
+                <input type="checkbox" checked> Lab draw &middot; 15 min &middot; the visit before, per the order&rsquo;s prerequisites
+              </label>
+              <label style="display:flex;gap:7px;align-items:center;font-size:12.5px;cursor:pointer;padding:3px 0">
+                <input type="checkbox" checked> Next infusion of the series &middot; minimum 5 days later
+              </label>
+              <label style="display:flex;gap:7px;align-items:center;font-size:12.5px;cursor:pointer;padding:3px 0">
+                <input type="checkbox"> Provider follow-up &middot; 30 min &middot; after session 3 of 6
+              </label>
+              <div class="prov" style="margin-top:6px">
+                <span>Linked appointments move together: drag the main one and its children re-offer their slots.</span>
+              </div>
+            </div>
+
 
             <div class="ai-block" id="l-bk-ai">
               <div class="ai-head">
@@ -679,17 +867,17 @@
           </div>
 
           <div class="card">
-            <div class="card-title">Time and place</div>
+            <div class="card-title">Resource and time</div>
             <div class="field">
-              <label class="field-label">Provider or chair</label>
+              <label class="field-label">Resource</label>
               <select class="field-select" id="l-bk-res" onchange="lBook()">
                 <option value="dr">Dr. Drannikov · Provider</option>
                 <option value="bak">Dr. Bakman · Provider</option>
                 <option value="bro">Brooke · Physician associate</option>
-                <option value="c1">Chair 1 · Nick (Nurse)</option>
-                <option value="c2" selected>Chair 2 · Bea (Medic)</option>
-                <option value="c3">Chair 3 · Juan (Medic)</option>
-                <option value="c4">Chair 4 · Nate (Medic)</option>
+                <option value="c1">IV 1 · Nick (Nurse)</option>
+                <option value="c2" selected>IV 2 · Bea (Medic)</option>
+                <option value="c3">IV 3 · Juan (Medic)</option>
+                <option value="c4">IV 4 · Nate (Medic)</option>
               </select>
             </div>
             <div class="field-row">
@@ -715,14 +903,7 @@
             </div>
             <div class="field-help" id="l-bk-window">&nbsp;</div>
 
-            <div class="seg-divider">Who may do what</div>
-            <dl class="kv">
-              <dt>Books</dt><dd>Front desk · PCC</dd>
-              <dt>Asks for a release</dt><dd>Front desk · PCC — the request carries their name and reason</dd>
-              <dt>Releases a warning</dt><dd>Physician or extender only, with a reason, on their own worklist</dd>
-              <dt>Nobody releases</dt><dd>An occupied chair or provider · a missing signed order or clearance · a contraindication · an interval shorter than the order allows · no supervision on site</dd>
-            </dl>
-          </div>
+                      </div>
         </div>
 
         <div class="card" style="margin-top:16px">
@@ -790,7 +971,7 @@
           <span class="avatar lg">WH</span>
           <div class="l-appt-header-info">
             <div class="l-appt-name">Walter Hsu</div>
-            <div class="l-appt-demo"><span class="type-mark tm-nad">NAD</span>NAD+ infusion · today 1:00 – 4:00 PM · Chair 1 · Nick (Nurse)</div>
+            <div class="l-appt-demo"><span class="type-mark tm-nad">NAD</span>NAD+ infusion · today 1:00 – 4:00 PM · IV 1 · Nick (Nurse)</div>
           </div>
           <span class="pill pill-st st-confirmed">Confirmed</span>
           <button class="btn" data-activate="l-01-day">Back to day view</button>
@@ -811,7 +992,7 @@
             <span class="status-arrow">›</span>
             <span class="status-step st-inchair" onclick="HCOS.toast('Walter Hsu is in the chair — the infusion record opens for Nick.', 'ok')">In chair</span>
             <span class="status-arrow">›</span>
-            <span class="status-step st-done" onclick="HCOS.toast('Marked done — Chair 1 frees up on the day view.', 'ok')">Done</span>
+            <span class="status-step st-done" onclick="HCOS.toast('Marked done — IV 1 frees up on the day view.', 'ok')">Done</span>
           </div>
           <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
             <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Marked no-show — the 1:00 PM chair hold is released.', 'warn')">Mark no-show</button>
@@ -854,7 +1035,7 @@
                 <dt>Series</dt>
                 <dd>Session 5 of 8</dd>
                 <dt>Chair</dt>
-                <dd>Chair 1 · Nick (Nurse)</dd>
+                <dd>IV 1 · Nick (Nurse)</dd>
                 <dt>Pre-checks</dt>
                 <dd>Vitals + hydration on arrival · rate titrated to comfort</dd>
                 <dt>Last session</dt>
@@ -951,8 +1132,8 @@
         <div class="field">
           <label class="field-label">Who runs it</label>
           <select class="field-select">
-            <option>Chair 1 &middot; Nick</option><option>Chair 2 &middot; Bea</option>
-            <option>Chair 3 &middot; Juan</option><option>Chair 4 &middot; Nate</option>
+            <option>IV 1 &middot; Nick</option><option>IV 2 &middot; Bea</option>
+            <option>IV 3 &middot; Juan</option><option>IV 4 &middot; Nate</option>
             <option>Dr. Eduard Drannikov</option><option>Dr. Bakman</option><option>Brooke</option>
           </select>
         </div>
@@ -975,7 +1156,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=24"></script>
+<script src="assets/hcos.js?v=25"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -998,18 +1179,77 @@
     if (step !== 0) HCOS.toast(d.label + (d.n === 2 ? ' — today' : ''), 'ok');
   }
 
+  var lSel = { types: [], subs: [] };   /* empty = everything */
+
+  function lMatchEl(el) {
+    var tyOk = !lSel.types.length || lSel.types.some(function (t) { return el.classList.contains(t); });
+    var subOk = !lSel.subs.length || lSel.subs.some(function (k) {
+      return el.classList.contains(k) || (el.getAttribute('data-sub') === k) ||
+             !!el.querySelector('.tm-' + k.replace('t-', ''));
+    });
+    return tyOk && subOk;
+  }
+
+  function lChipsRefresh() {
+    document.querySelectorAll('[data-ty]').forEach(function (c) {
+      c.classList.toggle('active', c.getAttribute('data-ty') === 'all' ? !lSel.types.length
+        : lSel.types.indexOf(c.getAttribute('data-ty')) !== -1);
+    });
+    document.querySelectorAll('[data-sub]').forEach(function (c) {
+      if (!c.classList.contains('filter-chip')) return;
+      var of = c.getAttribute('data-ty-of');
+      c.style.display = (!lSel.types.length || lSel.types.indexOf(of) !== -1) ? '' : 'none';
+      c.classList.toggle('active', lSel.subs.indexOf(c.getAttribute('data-sub')) !== -1);
+    });
+  }
+
+  document.addEventListener('click', function (ev) {
+    var ty = ev.target.closest ? ev.target.closest('.filter-chip[data-ty]') : null;
+    var sub = ev.target.closest ? ev.target.closest('.filter-chip[data-sub]') : null;
+    if (!ty && !sub) return;
+    if (ty) {
+      var k = ty.getAttribute('data-ty');
+      if (k === 'all') { lSel.types = []; lSel.subs = []; }
+      else {
+        var at = lSel.types.indexOf(k);
+        if (at === -1) lSel.types.push(k); else lSel.types.splice(at, 1);
+        lSel.subs = lSel.subs.filter(function (sk) {
+          var chip = document.querySelector('[data-sub="' + sk + '"]');
+          return !chip || !lSel.types.length || lSel.types.indexOf(chip.getAttribute('data-ty-of')) !== -1;
+        });
+      }
+    } else {
+      var sk = sub.getAttribute('data-sub');
+      var ai = lSel.subs.indexOf(sk);
+      if (ai === -1) lSel.subs.push(sk); else lSel.subs.splice(ai, 1);
+    }
+    lChipsRefresh();
+    lApply();
+  });
+
   function lSync(src) {
     var isView = src.id.indexOf('l-view') === 0;
-    ['', '-w', '-m'].forEach(function (sfx) {
-      var el = document.getElementById((isView ? 'l-view' : 'l-treat') + sfx);
-      if (el && el !== src) el.value = src.value;
-    });
+    if (isView) {
+      ['', '-w', '-m'].forEach(function (sfx) {
+        var el = document.getElementById('l-view' + sfx);
+        if (el && el !== src) el.value = src.value;
+      });
+    } else {
+      var v = src.value;
+      if (v === 'all') { lSel.types = []; lSel.subs = []; }
+      else if (v.indexOf('ty:') === 0) { lSel.types = [v.slice(3)]; lSel.subs = []; }
+      else { lSel.types = []; lSel.subs = [v]; }
+      ['l-treat-w', 'l-treat-m'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el !== src) el.value = v;
+      });
+      lChipsRefresh();
+    }
     lApply();
   }
 
   function lApply() {
     var view = document.getElementById('l-view').value;
-    var treat = document.getElementById('l-treat').value;
 
     var PROVS = ['dr','bak','bro'], CHAIRS = ['c1','c2','c3','c4'];
     var wantCols = view === 'all' ? PROVS.concat(CHAIRS)
@@ -1042,13 +1282,14 @@
       total++;
       var days = (a.getAttribute('data-days') || '2').split(',');
       var dayOk = days.indexOf(String(L_DAYS[lCur].n)) !== -1;
-      var colOk = wantCols.indexOf(a.closest('[data-col]').getAttribute('data-col')) !== -1;
-      var treatOk = treat === 'all' || a.classList.contains(treat);
+      var colEl = a.closest('[data-col]');
+      var colOk = !colEl || wantCols.indexOf(colEl.getAttribute('data-col')) !== -1;
+      var treatOk = lMatchEl(a);
       a.style.display = (colOk && treatOk && dayOk) ? '' : 'none';
       if (colOk && treatOk && dayOk) shown++;
     });
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
-      h.style.display = wantCols.indexOf('dr') !== -1 && treat === 'all' ? '' : 'none';
+      h.style.display = wantCols.indexOf('dr') !== -1 && !lSel.types.length && !lSel.subs.length ? '' : 'none';
     });
 
     var wShown = 0, wTotal = 0;
@@ -1056,7 +1297,7 @@
       wTotal++;
       var c = a.getAttribute('data-col');
       var colOk = !c || wantCols.indexOf(c) !== -1;
-      var tOk = treat === 'all' || a.classList.contains(treat);
+      var tOk = lMatchEl(a);
       a.style.display = (colOk && tOk) ? '' : 'none';
       if (colOk && tOk) wShown++;
     });
@@ -1069,22 +1310,27 @@
     document.querySelectorAll('.monthcal-day').forEach(function (d) {
       var pips = d.querySelectorAll('.monthcal-pip'), any = false;
       pips.forEach(function (pip) {
-        var ok = treat === 'all' || MAP[pip.textContent.trim()] === treat;
+        var key = MAP[pip.textContent.trim()];
+        var chip = key ? document.querySelector('[data-sub="' + key + '"]') : null;
+        var tyOf = chip ? chip.getAttribute('data-ty-of') : null;
+        var tyOk = !lSel.types.length || (tyOf && lSel.types.indexOf(tyOf) !== -1);
+        var subOk = !lSel.subs.length || (key && lSel.subs.indexOf(key) !== -1);
+        var ok = tyOk && subOk;
         pip.style.display = ok ? '' : 'none';
         if (ok) any = true;
       });
-      if (pips.length) { d.style.opacity = (treat === 'all' || any) ? '' : '0.4'; if (any) mDays++; }
+      if (pips.length) { d.style.opacity = ((!lSel.types.length && !lSel.subs.length) || any) ? '' : '0.4'; if (any) mDays++; }
     });
     var mc = document.getElementById('l-count-m');
-    if (mc) mc.textContent = treat === 'all' ? 'Every treatment this month'
-      : mDays + ' days run this treatment';
+    if (mc) mc.textContent = (!lSel.types.length && !lSel.subs.length) ? 'Every treatment this month'
+      : mDays + ' days run this selection';
 
     var el = document.getElementById('l-count');
     el.textContent = shown + (shown === 1 ? ' appointment' : ' appointments') + ' on ' +
       L_DAYS[lCur].label.split(',')[0];
 
     var lock = document.getElementById('l-lockbtn');
-    if (lock && lock.classList.contains('locked') && !(view === 'all' && treat === 'all')) {
+    if (lock && lock.classList.contains('locked') && !(view === 'all' && !lSel.types.length && !lSel.subs.length)) {
       lock.classList.remove('locked');
       lock.querySelector('span:last-child').textContent = 'Not saved';
     }
@@ -1148,7 +1394,7 @@
     'A-88235': {n:'Daniel Okafor', ag:'47', cv:'Anthem Blue Cross · INN', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 1:00 – 1:30 PM', r:'Dr. Bakman · Provider',
       st:'confirmed', room:'In room', a:'', rd:'Standard · reviewed Jul 6',
-      pr:'Follow-up · 30 min', prn:'Reviews the IV vitamin C series running in Chair 2 this morning',
+      pr:'Follow-up · 30 min', prn:'Reviews the IV vitamin C series running in IV 2 this morning',
       p:'appointment <code>A-88235</code> — a follow-up needs no order',
       ch:['Open patient record','patients.html#/pt-01-list']},
 
@@ -1162,7 +1408,7 @@
     'A-88210': {n:'Walter Hsu', ag:'68', cv:'Cigna · OON (self-funded / ERISA)', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 10:00 – 10:30 AM', r:'Brooke · Physician associate',
       st:'done', room:'In room', a:'9:48 AM · in room 10:01 AM', rd:'Standard · reviewed Jul 20',
-      pr:'Follow-up · 30 min', prn:'Pre-infusion check before the 1:00 PM NAD+ session in Chair 1',
+      pr:'Follow-up · 30 min', prn:'Pre-infusion check before the 1:00 PM NAD+ session in IV 1',
       p:'appointment <code>A-88210</code> — a follow-up needs no order',
       ch:['Open patient record','patients.html#/pt-01-list']},
 
@@ -1174,58 +1420,58 @@
       ch:['Open profile','patients.html#/pt-02-profile']},
 
     'A-88214': {n:'Maya Reyes', ag:'52', cv:'UnitedHealthcare PPO · OON', mk:'NAD', mkc:'tm-nad',
-      tx:'NAD+ infusion · 3 h', w:'Today · 9:00 AM – 12:00 PM', r:'Chair 1 · Nick (Nurse)',
+      tx:'NAD+ infusion · 3 h', w:'Today · 9:00 AM – 12:00 PM', r:'IV 1 · Nick (Nurse)',
       st:'inchair', room:'In chair', a:'8:52 AM · in chair since 9:05 AM', rd:'Standard · reviewed Jul 20',
       pr:'NAD+ 500 mg · ~3 h drip', prn:'Session 4 of 8 · rate titrated to comfort · tracking about 20 minutes past the booked end',
       p:'appointment <code>A-88214</code> · signed order <code>O-2384</code> <span class="ver-chip">v3</span> <span class="appr approved">Approved</span> · readiness <code>RA-1152</code> <span class="ver-chip">v5</span>',
       ch:['Open profile','patients.html#/pt-02-profile'], ex:['Infusion record','clinical-infusion.html#/b-15-flowsheet']},
 
     'A-88247': {n:'Walter Hsu', ag:'68', cv:'Cigna · OON (self-funded / ERISA)', mk:'NAD', mkc:'tm-nad',
-      tx:'NAD+ infusion · 3 h', w:'Today · 1:00 – 4:00 PM', r:'Chair 1 · Nick (Nurse)',
+      tx:'NAD+ infusion · 3 h', w:'Today · 1:00 – 4:00 PM', r:'IV 1 · Nick (Nurse)',
       st:'confirmed', room:'In chair', a:'', rd:'Standard · reviewed Jul 20',
       pr:'NAD+ 500 mg · ~3 h drip', prn:'Session 5 of 8 · last session completed in 2 h 55 m with no reactions',
       p:'appointment <code>A-88247</code> · signed order <code>O-2418</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · readiness <code>RA-1178</code> <span class="ver-chip">v2</span>',
       full:true, ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88231': {n:'Daniel Okafor', ag:'47', cv:'Anthem Blue Cross · INN', mk:'IVC', mkc:'tm-ivc',
-      tx:'IV vitamin C 25 g · 2.5 h', w:'Today · 10:00 AM – 12:30 PM', r:'Chair 2 · Bea (Medic)',
+      tx:'IV vitamin C 25 g · 2.5 h', w:'Today · 10:00 AM – 12:30 PM', r:'IV 2 · Bea (Medic)',
       st:'inchair', room:'In chair', a:'9:51 AM · in chair since 10:04 AM', rd:'Standard · reviewed Jul 6',
       pr:'IV vitamin C 25 g · ~2.5 h drip', prn:'Session 4 of 6 · G6PD on file · 50 billing units at $5.53',
       p:'appointment <code>A-88231</code> · signed order <code>O-2402</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span>',
       ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88226': {n:'Priya Natarajan', ag:'38', cv:'Blue Shield of CA PPO · OON', mk:'FLO', mkc:'tm-flow',
-      tx:'Foundational Flow 10 · 1 h', w:'Today · 11:30 AM – 12:30 PM', r:'Chair 3 · Juan (Medic)',
+      tx:'Foundational Flow 10 · 1 h', w:'Today · 11:30 AM – 12:30 PM', r:'IV 3 · Juan (Medic)',
       st:'arrived', room:'In chair', a:'11:21 AM · chair ready at 11:30', rd:'Flare recovery · same protocol, same dose, no escalation',
       pr:'Foundational Flow 10 · 1 h', prn:'Session 3 of 6 · her own average is 1 h 15 including access and observation',
       p:'appointment <code>A-88226</code> · signed order <code>O-2291</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · readiness <code>RA-1206</code> <span class="ver-chip">v3</span> — <span class="ver-chip">v2</span> of the order is a draft and does not authorize this run',
       ch:['Open chart','clinical-chart.html#/b-04-timeline'], ex:['Pre-infusion checks','clinical-infusion.html#/b-14-preinfusion']},
 
     'A-88256': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'GSH', mkc:'tm-gsh',
-      tx:'Glutathione push · 30 min', w:'Today · 3:30 – 4:00 PM', r:'Chair 3 · Juan (Medic)',
+      tx:'Glutathione push · 30 min', w:'Today · 3:30 – 4:00 PM', r:'IV 3 · Juan (Medic)',
       st:'scheduled', room:'In chair', a:'', rd:'Standard · reviewed Jun 30',
       pr:'Glutathione 1,000 mg push · 30 min', prn:'Session 2 of 4 · booked after this morning’s lab draw',
       p:'appointment <code>A-88256</code> · signed order <code>O-2431</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Bakman',
       ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88219': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'LAB', mkc:'tm-lab',
-      tx:'Lab draw · 15 min', w:'Today · 11:15 – 11:30 AM', r:'Chair 4 · Nate (Medic)',
+      tx:'Lab draw · 15 min', w:'Today · 11:15 – 11:30 AM', r:'IV 4 · Nate (Medic)',
       st:'arrived', room:'In chair', a:'11:09 AM · drawn 11:18 AM', rd:'Does not gate a lab draw',
       pr:'Lab draw · 15 min', prn:'CBC and ferritin · ordered at this morning’s follow-up',
       p:'appointment <code>A-88219</code> · lab order <code>O-2422</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Bakman',
       ch:['Open patient record','patients.html#/pt-01-list'], ex:['Orders and results','labs.html#/c-01-orders']},
 
     'A-88241': {n:'Nadia Boulos', ag:'41', cv:'Anthem · INN', mk:'FLO', mkc:'tm-flow',
-      tx:'Foundational Flow 10 · 1 h', w:'Today · 2:00 – 3:00 PM', r:'Chair 4 · Nate (Medic)',
+      tx:'Foundational Flow 10 · 1 h', w:'Today · 2:00 – 3:00 PM', r:'IV 4 · Nate (Medic)',
       st:'confirmed', room:'In chair', a:'', rd:'Physician review · today’s session runs at the current level, escalation waits on Dr. Drannikov',
       pr:'Foundational Flow 10 · 1 h', prn:'Session 2 of 6 · runs after her 1:30 PM follow-up',
       p:'appointment <code>A-88241</code> · signed order <code>O-2409</code> <span class="ver-chip">v2</span> <span class="appr approved">Approved</span> · readiness <code>RA-1211</code> <span class="ver-chip">v1</span> <span class="appr pending">Physician review</span>',
       ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88250': {n:'Marcus Webb', ag:'55', cv:'Anthem Blue Cross · INN', mk:'GSH', mkc:'tm-gsh',
-      tx:'Glutathione push · 30 min', w:'Today · 3:00 – 3:30 PM', r:'Chair 4 · Nate (Medic)',
+      tx:'Glutathione push · 30 min', w:'Today · 3:00 – 3:30 PM', r:'IV 4 · Nate (Medic)',
       st:'scheduled', room:'In chair', a:'', rd:'Standard · assessed at this morning’s consult',
-      pr:'Glutathione 1,000 mg push · 30 min', prn:'First push · Chair 4 is clear from 3:00 PM, after Nadia Boulos',
+      pr:'Glutathione 1,000 mg push · 30 min', prn:'First push · IV 4 is clear from 3:00 PM, after Nadia Boulos',
       p:'appointment <code>A-88250</code> · signed order <code>O-2436</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Drannikov, today 9:52 AM',
       ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']}
   };
@@ -1309,7 +1555,7 @@
   // by a named authority with a reason, and the release is logged.
   var L_RES = {
     dr: 'Dr. Drannikov', bak: 'Dr. Bakman', bro: 'Brooke',
-    c1: 'Chair 1 · Nick', c2: 'Chair 2 · Bea', c3: 'Chair 3 · Juan', c4: 'Chair 4 · Nate'
+    c1: 'IV 1 · Nick', c2: 'IV 2 · Bea', c3: 'IV 3 · Juan', c4: 'IV 4 · Nate'
   };
 
   var L_BUSY = {
@@ -1342,6 +1588,19 @@
              order: 'O-2291', ver: 'v1',
              ordMeta: 'Dr. Drannikov, May 22 2026 · 2 of 6 given · v2 is a draft and does not authorize a booking',
              every: 7, okDate: 'jul28' },
+    np:    { name: 'New patient visit',      low: 'new patient visit',      art: 'a', mins: 90,  iv: false, order: null },
+    npfu:  { name: 'New patient FU',          low: 'new patient follow-up',  art: 'a', mins: 45,  iv: false, order: null },
+    xnp:   { name: 'Ext new patient visit',   low: 'extended new patient',   art: 'an', mins: 120, iv: false, order: null },
+    xnpfu: { name: 'Ext new patient FU',      low: 'extended NP follow-up',  art: 'an', mins: 60,  iv: false, order: null },
+    xfu:   { name: 'Ext follow-up',           low: 'extended follow-up',     art: 'an', mins: 45,  iv: false, order: null },
+    pel:   { name: 'Pellets',                 low: 'pellet insertion',       art: 'a', mins: 40,  iv: false, order: null, needsLab: true },
+    xpel:  { name: 'Ext pellets',             low: 'extended pellets',       art: 'an', mins: 60,  iv: false, order: null, needsLab: true },
+    prp:   { name: 'PRP',                     low: 'PRP procedure',          art: 'a', mins: 90,  iv: false, order: null },
+    eboo:  { name: 'EBOO',                    low: 'EBOO procedure',         art: 'an', mins: 120, iv: true,  order: null },
+    acu:   { name: 'Acupuncture',             low: 'acupuncture session',    art: 'an', mins: 45,  iv: false, order: null },
+    mito:  { name: 'Mito Boost',              low: 'Mito Boost',             art: 'a', mins: 75,  iv: true,  order: null },
+    mcas:  { name: 'MCAS',                    low: 'MCAS protocol',          art: 'an', mins: 75,  iv: true,  order: null },
+    ebb:   { name: 'EBOO Boost',              low: 'EBOO Boost',             art: 'an', mins: 120, iv: true,  order: null },
     nad:   { name: 'NAD+ infusion',      low: 'NAD+ infusion',     art: 'a',  mins: 180, iv: true,  order: null },
     ivc:   { name: 'IV vitamin C 25 g',  low: 'IV vitamin C 25 g', art: 'an', mins: 150, iv: true,  order: null, needsLab: true },
     gsh:   { name: 'Glutathione push',   low: 'glutathione push',  art: 'a',  mins: 30,  iv: true,  order: null },
@@ -1729,6 +1988,67 @@
       note.textContent = "Booking reserves this patient's own average, not the protocol default.";
     }
   });
+
+  /* ---------- hover zoom: the whole appointment without opening it ---------- */
+  (function () {
+    var zoom = document.createElement('div');
+    zoom.className = 'appt-zoom';
+    document.body.appendChild(zoom);
+    var TY_LBL = { 'ty-visit': 'Office visit', 'ty-proc': 'Procedure', 'ty-iv': 'IV',
+                   'ty-energ': 'Energetics', 'ty-treat': 'Treatment' };
+    var PATTERN = {
+      'Maya Reyes': 'Runs long — last 3 NAD+ averaged 3 h 20 against 3 h booked. Book her late in the day.',
+      'Walter Hsu': 'Two late arrivals in the last month — confirm the evening before.'
+    };
+    document.addEventListener('mouseover', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('.cal-appt, .week-appt') : null;
+      if (!b) { zoom.classList.remove('show'); return; }
+      var name = (b.querySelector('.cal-appt-name') || {}).textContent || b.textContent.trim().split('\n')[0];
+      var time = (b.querySelector('.cal-appt-time') || {}).textContent || '';
+      var type = (b.querySelector('.cal-appt-type') || {}).textContent || '';
+      var ty = Object.keys(TY_LBL).filter(function (k) { return b.classList.contains(k); })[0];
+      var st = (b.className.match(/st-([a-z]+)/) || [])[1] || 'scheduled';
+      var col = b.closest('[data-col]');
+      var res = col ? (document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') || {}).textContent : '';
+      var pat = PATTERN[name] ? '<div class="az-row" style="color:var(--ink)"><strong>AI pattern:</strong>&nbsp;' + PATTERN[name] + '</div>' : '';
+      zoom.innerHTML = '<div class="az-name">' + name + '</div>' +
+        '<div class="az-meta">' + time + (res ? ' &middot; ' + res.replace(/(Nurse|Medic|Provider|Physician Associate)/, ' · $1') : '') + '</div>' +
+        '<div class="az-row">' +
+        '<span class="pill pill-muted">' + st.charAt(0).toUpperCase() + st.slice(1) + '</span>' +
+        (ty ? '<span class="pill pill-navy">' + TY_LBL[ty] + '</span>' : '') +
+        '<span style="font-size:11px;color:var(--muted)">' + type.trim() + '</span></div>' + pat +
+        '<div class="az-row" style="color:var(--muted);font-size:10.5px">Click to open the full detail</div>';
+      var r = b.getBoundingClientRect();
+      var x = Math.min(r.right + 10, window.innerWidth - 296);
+      var y = Math.min(Math.max(r.top, 10), window.innerHeight - 170);
+      zoom.style.left = x + 'px'; zoom.style.top = y + 'px';
+      zoom.classList.add('show');
+    });
+    document.addEventListener('mouseout', function (ev) {
+      if (ev.target.closest && ev.target.closest('.cal-appt, .week-appt')) zoom.classList.remove('show');
+    });
+  })();
+
+
+  var L_SUBS = {
+    iv:    [['flow', 'Foundational Flow 10 · 1 h', 1], ['nad', 'NAD+ infusion · 3 h', 0], ['ivc', 'Mega C 25 · 2.5 h', 0], ['gsh', 'Glutathione push · 30 min', 0]],
+    visit: [['np', 'New patient · 90 min', 1], ['npfu', 'New patient FU · 45 min', 0], ['fu', 'FU · 30 min', 0],
+            ['xnp', 'Ext · New patient · 2 h', 0], ['xnpfu', 'Ext · New patient FU · 1 h', 0], ['xfu', 'Ext · FU · 45 min', 0]],
+    proc:  [['pel', 'Pellets · 40 min', 1], ['xpel', 'Ext · Pellets · 1 h', 0], ['prp', 'PRP · 90 min', 0], ['eboo', 'EBOO · 2 h', 0]],
+    energ: [['acu', 'Acupuncture · 45 min', 1]],
+    treat: [['mito', 'Mito Boost · 75 min', 1], ['mcas', 'MCAS · 75 min', 0], ['ebb', 'EBOO Boost · 2 h', 0]]
+  };
+  function lBkTy() {
+    var ty = document.getElementById('l-bk-ty').value;
+    var sel = document.getElementById('l-bk-type');
+    sel.innerHTML = '';
+    L_SUBS[ty].forEach(function (o) {
+      var opt = document.createElement('option');
+      opt.value = o[0]; opt.textContent = o[1]; if (o[2]) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    if (typeof lTypeChange === 'function') lTypeChange();
+  }
 </script>
 </body>
 </html>

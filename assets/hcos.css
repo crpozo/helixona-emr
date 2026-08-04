@@ -1063,6 +1063,17 @@ a.lead-chip:hover { border-color: var(--ink); }
    shade = where the visit is, colour + edge pattern = what the treatment is.
    ========================================================================== */
 :root {
+  /* TYPE — the left edge. Five types, one colour each. */
+  --ty-visit:  #2E5C8A;  /* office visit */
+  --ty-proc:   #9B3A3A;  /* procedure */
+  --ty-iv:     #1F6F6B;  /* IV */
+  --ty-energ:  #5B4B8A;  /* energetics */
+  --ty-treat:  #B26B12;  /* treatment */
+
+  /* Checkout — after the treatment, before the door */
+  --st-checkout:    #7A6AA8;
+  --st-checkout-bg: #E4DFF0;
+
   --tx-nad:     #5B4B8A;  /* NAD+ */
   --tx-ivc:     #B26B12;  /* IV vitamin C */
   --tx-flow:   #1F6F6B;  /* Foundational Flow and pushes */
@@ -1177,6 +1188,28 @@ a.lead-chip:hover { border-color: var(--ink); }
   width: 6px; height: 16px; border-radius: 2px; border: none;
   border-left: 6px solid var(--line);
 }
+
+/* TYPE edge — level 2 of the three-level code */
+.cal-appt.ty-visit, .week-appt.ty-visit { border-left-color: var(--ty-visit); }
+.cal-appt.ty-proc,  .week-appt.ty-proc  { border-left-color: var(--ty-proc); }
+.cal-appt.ty-iv,    .week-appt.ty-iv    { border-left-color: var(--ty-iv); }
+.cal-appt.ty-energ, .week-appt.ty-energ { border-left-color: var(--ty-energ); }
+.cal-appt.ty-treat, .week-appt.ty-treat { border-left-color: var(--ty-treat); }
+.cal-appt.st-checkout { border-left-color: var(--st-checkout); background: var(--st-checkout-bg); }
+.type-mark.tm-acu { background: var(--ty-energ); border-color: var(--ty-energ); color: #fff; }
+.type-mark.tm-pel { background: var(--ty-proc); border-color: var(--ty-proc); color: #fff; }
+
+/* Hover zoom — the whole appointment, readable without opening it */
+.appt-zoom {
+  position: fixed; z-index: 1200; width: 280px; pointer-events: none;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow-pop); padding: 12px 14px; font-size: 12px; line-height: 1.5;
+  opacity: 0; transition: opacity .1s;
+}
+.appt-zoom.show { opacity: 1; }
+.appt-zoom .az-name { font-size: 13.5px; font-weight: 700; color: var(--hx-navy); }
+.appt-zoom .az-meta { color: var(--muted); font-size: 11px; }
+.appt-zoom .az-row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
 
 /* Week view */
 .weekcal-head { display: grid; grid-template-columns: 64px repeat(5, 1fr); background: #F7F7F7; border-bottom: 1px solid var(--line-soft); }

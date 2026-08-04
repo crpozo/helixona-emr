@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=24">
+<link rel="stylesheet" href="assets/hcos.css?v=25">
 <style>
   .b-prow { display: flex; align-items: center; gap: 10px; }
   .b-pname { font-weight: 600; color: var(--hx-navy); }
@@ -805,40 +805,40 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider" style="margin-top:0">Lab orders <a class="btn btn-ghost btn-sm" style="margin-left:8px" href="labs.html#/c-01-orders">Open orders and results</a></div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Priority</th><th>State</th></tr></thead>
+            <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>Priority</th><th>State</th></tr></thead>
             <tbody>
               <tr data-activate="b-order-lab" data-lab-order="O-4471" data-lab-name="Comprehensive metabolic panel + CBC with differential">
                 <td><strong>Comprehensive metabolic panel + CBC with differential</strong></td>
                 <td>Vibrant Labs · fasting · Dx R53.83</td>
-                <td><span class="b-code">O-4471</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4471</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Oct 19, 2026</td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr data-activate="b-order-lab" data-lab-order="O-4472" data-lab-name="Thyroid panel &mdash; TSH, fT4, fT3, rT3, TPO, Tg Ab">
                 <td><strong>Thyroid panel — TSH, fT4, fT3, rT3, TPO, Tg Ab</strong></td>
                 <td>Vibrant Labs · Dx E06.3 · optimal-target reporting requested</td>
-                <td><span class="b-code">O-4472</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4472</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Oct 19, 2026</td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr data-activate="b-order-lab" data-lab-order="O-4473" data-lab-name="Vitamin D, 25-OH &mdash; recheck">
                 <td><strong>Vitamin D, 25-OH — recheck</strong></td>
                 <td>Vibrant Labs · Dx E55.9 · recheck in 12 weeks</td>
-                <td><span class="b-code">O-4473</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4473</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Oct 19, 2026</td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr data-activate="b-order-lab" data-lab-order="O-4474" data-lab-name="Ferritin + iron panel">
                 <td><strong>Ferritin + iron panel</strong></td>
                 <td>Vibrant Labs · Dx R53.83 · low-normal on last draw</td>
-                <td><span class="b-code">O-4474</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4474</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Oct 19, 2026</td>
                 <td><span class="pill pill-muted">Routine</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr data-activate="b-order-lab" data-lab-order="O-4475" data-lab-name="Organic acids test (OAT)">
                 <td><strong>Organic acids test (OAT)</strong></td>
                 <td>Mosaic Diagnostics · urine · 24-hour collection · $339</td>
-                <td><span class="b-code">O-4475</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4475</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Oct 19, 2026</td>
                 <td><span class="pill pill-warn">Self-pay</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
@@ -850,23 +850,32 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">IV protocols</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Protocol</th><th>Details</th><th>Order ID</th><th>Placed</th><th>State</th><th></th></tr></thead>
+            <thead><tr><th>Protocol</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>State</th><th></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>IV Foundational Flow 10 · series of 6 over 6 weeks</strong></td>
                 <td>B-complex, B12, calcium, magnesium, vitamin C 5 g · saline 100 mL · ~1 h · minimum 5 days between runs</td>
-                <td><span class="b-code">O-3402</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-3402</span> <span class="ver-chip superseded">v1</span> <span class="ver-chip">v2</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Sep 14, 2026</td>
                 <td><span class="appr draft">v2 draft</span></td>
                 <td><button class="btn btn-ghost btn-sm" data-open-modal="#b-protocol-modal">Change protocol</button></td>
               </tr>
               <tr>
                 <td><strong>Glutathione push 2,000 mg · single trial dose</strong></td>
                 <td>Saline 30 mL · IV push · ~30 min · assess response before adding to the series</td>
-                <td><span class="b-code">O-4476</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4476</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:34 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">&mdash;</td>
                 <td><span class="appr draft">Draft</span></td>
                 <td><button class="btn btn-ghost btn-sm" data-open-modal="#b-protocol-modal">Change protocol</button></td>
               </tr>
-            </tbody>
+                          <tr>
+                <td><strong>NAD+ infusion &middot; series of 8 &mdash; complete</strong></td>
+                <td>8 of 8 given &middot; renewal requested from the schedule Jul 21</td>
+                <td><span class="b-code">O-2288</span> <span class="ver-chip">v1</span></td>
+                <td class="o-when">Jan 12 &middot; 9:02 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td class="o-when"><span class="pill pill-warn">Expired Jul 1</span></td>
+                <td><span class="appr superseded">Complete</span></td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Renewal drafted as O-2288 v2. It dispatches when Dr. Drannikov signs — the tentative booking confirms itself.', 'ok')">Renew</button></td>
+              </tr>
+</tbody>
           </table>
         </div>
         <div class="prov">
@@ -877,20 +886,20 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Therapies and procedures</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Therapy</th><th>Details</th><th>Order ID</th><th>Placed</th><th>State</th></tr></thead>
+            <thead><tr><th>Therapy</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Erchonia laser &middot; violet &middot; course of 10</strong></td>
                 <td>Protocol V-2 &middot; 20 min &middot; twice weekly &middot; Room 2 &middot; technician may run it</td>
                 <td><span class="b-code">O-4481</span> <span class="ver-chip">v1</span></td>
-                <td class="o-when">Jul 21 &middot; 11:38 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td class="o-when">Jul 21 &middot; 11:38 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Nov 21, 2026</td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
               <tr>
                 <td><strong>EBOO &middot; course of 6</strong></td>
                 <td>120 min &middot; every other week &middot; provider present &middot; requires current clearance</td>
                 <td><span class="b-code">O-4482</span> <span class="ver-chip">v1</span></td>
-                <td class="o-when">Jul 21 &middot; 11:39 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td class="o-when">Jul 21 &middot; 11:39 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Jan 21, 2027</td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
             </tbody>
@@ -903,12 +912,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Prescriptions</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Prescription</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Type</th><th>State</th></tr></thead>
+            <thead><tr><th>Prescription</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>Type</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Levothyroxine 75 mcg PO daily</strong> · continue</td>
                 <td>90-day supply · 3 refills · recheck TSH in 8 weeks · transmits to the patient's pharmacy</td>
-                <td><span class="b-code">O-4477</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:36 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4477</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:36 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">&mdash;</td>
                 <td><span class="pill pill-muted">Refill</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
@@ -919,12 +928,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Supplements · Fullscript</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Supplement</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Route</th><th>State</th></tr></thead>
+            <thead><tr><th>Supplement</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>Route</th><th>State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Vitamin D3 5,000 IU + K2 100 mcg daily</strong></td>
                 <td>Pure Encapsulations · 90-day supply · recheck vitamin D in 12 weeks</td>
-                <td><span class="b-code">O-4478</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:36 AM<span class="o-by">Dr. Drannikov</span></td>
+                <td><span class="b-code">O-4478</span> <span class="ver-chip">v1</span></td><td class="o-when">Jul 21 &middot; 11:36 AM<span class="o-by">Dr. Drannikov</span></td><td class="o-when">Jul 6, 2027</td>
                 <td><span class="pill pill-muted">Fullscript</span></td>
                 <td><span class="appr draft">Draft</span></td>
               </tr>
@@ -1959,7 +1968,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   </div>
 </div>
 
-<script src="assets/hcos.js?v=24"></script>
+<script src="assets/hcos.js?v=25"></script>
 <script>
 /* Opening a lab order from the table shows THAT order, not the blank form. */
 (function () {

@@ -92,7 +92,16 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
 - **Duration is per patient, not just per protocol.** The system tracks how long each patient actually takes for a given IV and books their own average once there are 3 past runs — Maya Reyes books 3 h 20 for NAD+, not 3 h. Blocks warn when a drip is running past its booked end.
 - **Conflicts: each rule sets its own strength (Carlos, 2026-07-28)** — Block / Warn / Allow, configured on `schedule-rules.html`. Provider double-book blocks; chair overlap warns (clinics overbook on purpose). Coverage rules layer on top and the stricter one wins.
 - Filters are multi-select across team, providers, actors and treatment, and a user can **lock a saved view** as their default.
-- **Two visual channels on the calendar, both grayscale**: status is the fill ramp (light→dark); treatment type is the left-edge pattern + an initial (NAD/IVC/FLO/EBO/CON); the corner tag is who runs it. In the real product those patterns become treatment colours.
+- **Three levels on every appointment (Carlos, 2026-08-04)** — the visual code has three channels:
+  **Status = the fill** (Scheduled → Confirmed → Arrived → In progress → Checkout `#7A6AA8` → Done);
+  **Type = the left edge**, five types: office visit `--ty-visit`, procedure `--ty-proc`, IV `--ty-iv`, energetics `--ty-energ`, treatment `--ty-treat`;
+  **Subtype = the initial chip** (NP/FU/Ext variants · acupuncture · pellets/PRP · Mito Boost/MCAS/EBOO Boost · NAD/Mega C/Foundational Flow). The corner tag is who runs it.
+- **Filters are hierarchical**: picking Types narrows which Subtype chips are offered; both are multi-select; the same state drives day, week and month. Saved custom filters are built on the Filter setup screen (`l-06-filters`) and lockable as a personal default.
+- **Chairs are gone — resources are general**: columns are IV 1–4 under the Infusion suite band, plus Rooms; the booking form's location field is "Resource".
+- **An appointment type is linked to the provider's order** (order = prescription): the booking screen shows the patient's active orders with validity dates and their expired ones; an expired order can proceed only with an acknowledged note, booking as TENTATIVE until Dr. Drannikov approves the renewal. Orders show duration and expiration everywhere (`b-09-orders` has an Expires column) and click through to the orders page.
+- **Linked appointments** follow the main one (lab draw before, next of series, provider FU) and re-offer their slots when the main moves.
+- **AI pattern warnings on booking and hover**: patients who run long or arrive late are flagged with the pattern and a suggestion ("book her late in the day"), with provenance.
+- **Month view shows capacity per treatment** — % full and slots left this month, per type.
 - **Membership = booking priority**: prime times open to Longevity 14 days out, Restore 7, Wellness 3.
 - Front-desk-first density: a full clinic day visible without scrolling.
 
