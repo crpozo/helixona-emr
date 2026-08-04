@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HCOS Delivery Schedule &middot; Helixona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #1A1A1A; --muted: #737373; --line: #DBDBDB; --line-soft: #E9E9E9;
+    --band: #F7F7F7; --light: #EFEFEF; --part: #B8B8B8;
+  }
+  body { font-family: 'Inter', -apple-system, sans-serif; color: var(--ink); background: #fff;
+    font-size: 14px; line-height: 1.6; }
+  .doc { max-width: 920px; margin: 0 auto; padding: 56px 28px 80px; }
+  .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 26px; margin-bottom: 40px; }
+  .masthead h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-size: 40px; line-height: 1.12; }
+  .masthead .sub { font-size: 15px; color: var(--muted); margin-top: 8px; }
+  .masthead .meta { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; font-size: 11.5px;
+    color: var(--muted); text-transform: uppercase; letter-spacing: .8px; font-weight: 600; }
+  .masthead .meta a { color: var(--ink); }
+  h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 400; font-size: 24px; margin: 44px 0 14px;
+    padding-top: 22px; border-top: 1px solid var(--line-soft); }
+  h2 .n { color: var(--muted); margin-right: 10px; }
+  p { margin-bottom: 12px; max-width: 74ch; }
+  a { color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0 6px; }
+  th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: .8px;
+    color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  .m-name { font-weight: 700; white-space: nowrap; }
+  .m-when { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tbl-scroll { overflow-x: auto; }
+  .gantt td { text-align: center; padding: 8px 4px; min-width: 74px; }
+  .gantt td.g-ws { text-align: left; min-width: 240px; font-size: 12.5px; }
+  .g-bar { display: block; height: 14px; border-radius: 3px; }
+  .g-full { background: var(--ink); }
+  .g-part { background: var(--part); }
+  .g-mile { display: inline-block; background: #fff; border: 2px solid var(--ink); border-radius: 12px;
+    font-size: 10.5px; font-weight: 700; padding: 2px 9px; white-space: nowrap; }
+  .g-key { display: flex; gap: 20px; font-size: 11.5px; color: var(--muted); margin-top: 8px; align-items: center; }
+  .g-key i { display: inline-block; width: 22px; height: 11px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .phase { border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin: 16px 0; }
+  .phase-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px;
+    flex-wrap: wrap; margin-bottom: 10px; }
+  .phase-head h3 { font-size: 16.5px; font-weight: 700; }
+  .phase-when { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .phase ul { list-style: none; }
+  .phase li { padding: 7px 0 7px 18px; border-top: 1px solid var(--line-soft); position: relative; }
+  .phase li:first-child { border-top: none; }
+  .phase li::before { content: ''; position: absolute; left: 0; top: 15px; width: 8px; height: 8px;
+    border-radius: 2px; background: var(--ink); }
+  ol.assum { margin: 10px 0 0 20px; }
+  ol.assum li { margin-bottom: 8px; max-width: 74ch; }
+  .foot { margin-top: 56px; padding-top: 18px; border-top: 2px solid var(--ink); font-size: 12px;
+    color: var(--muted); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  @media print {
+    .doc { padding: 0; max-width: none; }
+    .phase { break-inside: avoid; }
+    a { text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <header class="masthead">
+    <h1>HCOS Delivery Schedule</h1>
+    <div class="sub">Helixona Clinical Operating System &middot; Path from eClinicalWorks to full replacement</div>
+    <div class="meta">
+      <span>Prepared for Helixona leadership</span>
+      <span>Updated August 2026</span>
+      <span>Single schedule of record</span>
+      <span><a href="../">Review the wireframe</a></span>
+    </div>
+  </header>
+
+  <h2><span class="n">1</span>Delivery approach</h2>
+  <p>HCOS goes live in <strong>three stages</strong> instead of a single cutover. Each stage puts working
+  capability in front of the team while eClinicalWorks keeps running underneath, so patient care and billing
+  continue without interruption at any point in the transition.</p>
+  <p>Two moves make this possible. First, eClinicalWorks migrates to Helixona&rsquo;s own AWS environment,
+  which gives HCOS live access to the complete clinical database while both systems coexist. Second, design
+  and integration work run in parallel with that migration, so construction starts the moment the foundations
+  are ready.</p>
+  <p>The starting point is further along than a blank page: the <a href="../">collaborative wireframe</a>
+  already covers all 12 modules across 174 screens — Modules A and B at full depth, plus Scheduling, Patients,
+  Treatments &amp; therapies and the patient journey — and the team annotates it directly. That wireframe is
+  the scope reference this schedule builds.</p>
+
+  <h2><span class="n">2</span>Go-live milestones</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Milestone</th><th>Target</th><th>What is live</th></tr></thead>
+      <tbody>
+        <tr><td class="m-name">M1 · First modules live</td><td class="m-when">February 2027</td><td>Detox Readiness Engine, clinical questionnaires and the patient Today View operate for staff and patients. eClinicalWorks remains the system of record.</td></tr>
+        <tr><td class="m-name">M2 · Clinical operations</td><td class="m-when">August 2027</td><td>Visits, notes, orders, the infusion suite and scheduling run in HCOS. Infusion billing units calculate automatically from recorded times.</td></tr>
+        <tr><td class="m-name">M3 · Full replacement</td><td class="m-when">December 2027</td><td>Billing, labs, pharmacy, communications and reporting complete the system. eClinicalWorks becomes a read-only archive.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="n">3</span>Timeline by quarter</h2>
+  <div class="tbl-scroll">
+    <table class="gantt">
+      <thead><tr><th>Workstream</th><th>Q3 2026</th><th>Q4 2026</th><th>Q1 2027</th><th>Q2 2027</th><th>Q3 2027</th><th>Q4 2027</th></tr></thead>
+      <tbody>
+        <tr><td class="g-ws">Design · wireframes and specifications (Modules C to L)</td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Infrastructure · eClinicalWorks migration to Helixona AWS</td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Data integration · export, daily updates, real time</td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Platform · shared data model, security, survey engine</td><td></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-part"></span></td><td></td><td></td><td></td></tr>
+        <tr><td class="g-ws">Module construction · staged builds</td><td></td><td><span class="g-bar g-part"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td><td><span class="g-bar g-full"></span></td></tr>
+        <tr><td class="g-ws">Go-lives</td><td></td><td></td><td><span class="g-mile">M1 · Feb</span></td><td></td><td><span class="g-mile">M2 · Aug</span></td><td><span class="g-mile">M3 · Dec</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="g-key">
+    <span><i style="background:var(--ink)"></i>Full activity</span>
+    <span><i style="background:var(--part)"></i>Partial quarter</span>
+    <span><span class="g-mile" style="margin-right:6px">M&middot;</span>Go-live milestone</span>
+  </div>
+
+  <h2><span class="n">4</span>Phase detail</h2>
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 1 · Design and foundations</h3><span class="phase-when">August to November 2026</span></div>
+      <ul>
+        <li><strong>Shared data model.</strong> The <strong>22 canonical records</strong> every module uses — person/patient master, encounter, order, result, coverage, eligibility snapshot, plan of care, treatment administration, claim, audit event and the rest — already catalogued in the architecture review and registered on the wireframe’s Security module. Defined once, before construction, to prevent rework.</li>
+        <li><strong>Wireframes for the remaining modules.</strong> The collaborative wireframe is already live at <a href="../">the review site</a> with all 12 modules at high level — 174 screens, Modules A and B at full depth, plus deep passes on Scheduling, Patients, Treatments &amp; therapies and the patient journey. Phase 1 deepens the remaining modules to buildable specification, reviewed with the team through the same feedback loop used for Modules A and B.</li>
+        <li><strong>eClinicalWorks migration to Helixona AWS.</strong> Follows the migration plan already presented (13 to 17 weeks). Result: full, continuous access to the clinic’s database while both systems coexist.</li>
+        <li><strong>Integration work starts now, in parallel.</strong> The complete data export request to eClinicalWorks and the daily update feed begin against the current cloud system — not after the migration, alongside it.</li>
+        <li><strong>DEA / EPCS certification begins.</strong> Electronic prescribing of controlled substances has a long external lead time and the pharmacy module depends on it, so the process starts here, three phases early. The FHIR R4 lab-feed certification (2 to 4 weeks, sandbox endpoint already available) is scheduled the same way, ahead of the labs build.</li>
+        <li><strong>Billing rule validation.</strong> The billing team confirms every documented rule before any rule is written into software: infusion time thresholds, the Anthem J3490 ascorbic-acid unit methodology (1 unit = 500&#8202;mg), per-payer documentation routing (EDI&#8202;275 with the claim for Anthem and UHC; claim-number-first portal packets for Blue Shield and Cigna), and the standing policy that every recoupment is appealed.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 2 · Platform core and first module</h3><span class="phase-when">October 2026 to January 2027</span></div>
+      <ul>
+        <li><strong>Security, roles and the audit trail.</strong> The foundation every module inherits — the role and approval-rights matrix and the append-only enterprise audit store, both already specified screen-by-screen on the wireframe’s Security module.</li>
+        <li><strong>One survey engine.</strong> Intake forms, clinical questionnaires and patient check-ins are a single engine with versioned definitions and explicit chart mappings — not three parallel builds. This is what ends the re-keying of questionnaire answers.</li>
+        <li><strong>Real-time data capture.</strong> Activates once the self-hosted eClinicalWorks environment is live.</li>
+        <li><strong>Detox Readiness Engine construction.</strong> The first production intelligence module: surveys, symptoms, labs, physician rules and treatment history in; Gentle / Standard / Advanced / Pause / Flare Recovery / Physician Review out. Fails closed to Physician Review.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 3 · First go-live and clinical core</h3><span class="phase-when">February to July 2027</span></div>
+      <ul>
+        <li><strong>February — Milestone 1.</strong> Readiness Engine, questionnaires and the Today View go live, reading current patient data from eClinicalWorks.</li>
+        <li><strong>Clinical core construction continues.</strong> Encounters with a reliable ambient scribe and sign-and-lock that dispatches to labs, infusion, billing, pharmacy and scheduling at once; the infusion suite with Five Rights verification; orders with labs, infusions, prescriptions and therapies as first-class categories; intake; the caregiver portal; and scheduling with per-patient infusion durations and per-rule Block / Warn / Allow conflict strengths.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 4 · Clinical operations live</h3><span class="phase-when">August 2027</span></div>
+      <ul>
+        <li><strong>July is a shadow month.</strong> The team documents in HCOS while output is compared side by side with eClinicalWorks.</li>
+        <li><strong>August — Milestone 2.</strong> Providers document in HCOS. The infusion suite records start and stop times and calculates billing units automatically, removing the manual entry step that causes claim corrections today.</li>
+        <li><strong>Charges flow to billing.</strong> Through the current clearinghouse process (Waystar), unchanged — the billing team’s workflow does not move until Phase 5.</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 5 · Full replacement</h3><span class="phase-when">September to December 2027</span></div>
+      <ul>
+        <li><strong>Remaining modules.</strong> Revenue cycle with the configurable rules engine and the out-of-network documentation packets (FAIR Health benchmarks, plan-governance classification); labs on the certified FHIR feed; pharmacy with certified electronic prescribing; patient communications; reporting and administration.</li>
+        <li><strong>Historical data verified, then archived.</strong> Historical data is verified inside HCOS, then eClinicalWorks moves to a low-cost read-only archive.</li>
+        <li><strong>December — Milestone 3.</strong> HCOS is the clinic’s single system.</li>
+      </ul>
+    </div>
+
+  <h2><span class="n">5</span>Dependencies and risks</h2>
+  <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>Dependency or risk</th><th>Impact if it slips</th><th>How it is managed</th></tr></thead>
+      <tbody>
+        <tr><td><strong>eClinicalWorks responsiveness on the migration and the full data export</strong></td><td>Delays move Phases 1 and 2, and the schedule shifts week for week</td><td>Support engagement opened early, and the migration plan is already defined and presented</td></tr>
+        <tr><td><strong>DEA certification for electronic prescribing of controlled substances</strong></td><td>Affects the pharmacy module only, not the go-live milestones</td><td>Process starts in Phase 1 because the external lead time is long</td></tr>
+        <tr><td><strong>FHIR R4 certification for the eClinicalWorks lab feed</strong></td><td>Affects the labs module in Phase 5; a 2 to 4 week external lead</td><td>Sandbox endpoint already available; certification is scheduled ahead of the labs build</td></tr>
+        <tr><td><strong>Billing rule validation</strong></td><td>A rule cannot be written into software until the billing team confirms it</td><td>Rules are documented in the scoping workbook and validated before construction</td></tr>
+        <tr><td><strong>Scope additions</strong></td><td>New features move dates</td><td>Changes are reviewed against this schedule before they are accepted</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2><span class="n">6</span>Assumptions</h2>
+  <ol class="assum">
+      <li>The migration completes inside the 13 to 17 week window in the migration report.</li>
+      <li>Module scope follows the approved wireframes — the live review site is the scope reference.</li>
+      <li>No patient data enters development environments at any point.</li>
+      <li>Dates are reviewed monthly and this page is updated as the single schedule of record.</li>
+  </ol>
+
+  <footer class="foot">
+    <span>Helixona, Inc. &middot; 114 Pacifica, Suite 130, Irvine, CA 92618</span>
+    <span><a href="../">Wireframe</a> &middot; <a href="../hub.html">Module map</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
