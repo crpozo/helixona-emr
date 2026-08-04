@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=20">
+<link rel="stylesheet" href="assets/hcos.css?v=22">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -277,10 +277,10 @@
               <div class="pt-demo">52 · Female · DOB Mar 14, 1974 · (949) 555-0132 · maya.reyes@example.com</div>
               <div class="lead-bar">
                 <span class="lead-lbl">Lead actors</span>
-                <a class="lead-chip main" href="clinical-chart.html#/b-05-problem-list">Neuroinflammation with cognitive impact<span class="lead-ins">G93.40 &middot; Encephalopathy</span></a>
-                <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Post-exertional fatigue syndrome<span class="lead-ins">G93.32 &middot; Chronic fatigue syndrome</span></a>
-                <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list">Methylation impairment<span class="lead-ins">E53.8 &middot; B12 deficiency</span></a>
-                <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">All 3 &rsaquo;</a>
+                <a class="lead-chip lead-main" href="clinical-chart.html#/b-05-problem-list"><span class="lead-body" title="Neuroinflammation with cognitive impact — payer: G93.40 · Encephalopathy"><span class="lead-name">Neuroinflammation with cognitive impact</span><span class="lead-ins">G93.40 &middot; Encephalopathy</span></span></a>
+                <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list"><span class="lead-body" title="Post-exertional fatigue syndrome — payer: G93.32 · Chronic fatigue syndrome"><span class="lead-name">Post-exertional fatigue syndrome</span><span class="lead-ins">G93.32 &middot; Chronic fatigue syndrome</span></span></a>
+                <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list"><span class="lead-body" title="Methylation impairment — payer: E53.8 · B12 deficiency"><span class="lead-name">Methylation impairment</span><span class="lead-ins">E53.8 &middot; B12 deficiency</span></span></a>
+                <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">Problem list &rsaquo;</a>
               </div>
             
             </div>
@@ -973,7 +973,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=20"></script>
+<script src="assets/hcos.js?v=22"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {
