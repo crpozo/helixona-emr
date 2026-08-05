@@ -13,6 +13,7 @@
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
   .l-chip-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
   .l-filters {
+    position: relative; z-index: 30;
     display: flex; flex-wrap: wrap; gap: 8px 22px;
     padding: 10px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
   }
@@ -129,12 +130,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+              
           </div>
-
-          <span class="l-count" id="l-count">Showing all 19 appointments</span>
-
-            <div class="l-view-group">
+          <div class="l-view-group" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+              <span class="l-count" id="l-count">Showing all 19 appointments</span>
               <button class="view-lock locked" id="l-lockbtn"
                 onclick="var b=this;b.classList.toggle('locked');b.querySelector('span:last-child').textContent=b.classList.contains('locked')?'Saved as Yazmin\'s view':'Not saved';HCOS.toast(b.classList.contains('locked')?'Saved. Yazmin opens here every morning.':'Unlocked — changes will not be kept.', 'ok')">
                 <span>&#128274;</span><span>Saved as Yazmin's view</span>
@@ -142,6 +141,7 @@
             </div>
           </div>
 
+            
           <div class="daycal-head">
             <div class="daycal-band-spacer"></div>
             <div class="daycal-band">Infusion suite</div>
@@ -346,6 +346,7 @@
             <span class="cal-legend-item" style="color:var(--muted)">the word on each block says exactly which &middot;
               <span class="type-mark">NAD</span> letters = the exact treatment &middot; <a href="treatments.html#/t-06-codes">edit codes</a></span>
           </div>
+        </div>
         </div>
 
         <div class="l-cal-foot">
