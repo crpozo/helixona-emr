@@ -1167,6 +1167,11 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 .cal-appt-name { font-size: 11.5px; font-weight: 600; color: var(--hx-navy); margin: 1px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+/* Times never fragment around the floated status word */
+.cal-appt-time { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the AI flag floats beside the status word instead of sitting on top of it */
+.cal-appt .ai-flag { position: static; float: right; margin: 0 0 0 4px; }
+
 /* Hover zoom — the whole appointment, readable without opening it */
 .appt-zoom {
   position: fixed; z-index: 1200; width: 280px; pointer-events: none;

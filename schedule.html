@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=30">
+<link rel="stylesheet" href="assets/hcos.css?v=31">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -145,6 +145,7 @@
           <div class="daycal-head">
             <div class="daycal-band-spacer"></div>
             <div class="daycal-band">Infusion suite</div>
+            <div class="daycal-band-spacer" id="l-band-tail"></div>
             <div class="daycal-col-head hours-head"></div>
             <div class="daycal-col-head" data-col="dr">Dr. Drannikov<span class="sub">Provider</span></div>
             <div class="daycal-col-head" data-col="bak">Dr. Bakman<span class="sub">Provider</span></div>
@@ -198,7 +199,7 @@
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
               </div>
-              <div class="daycal-empty-hint l-hint-visible" style="top:528px;height:40px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
+              <div class="daycal-empty-hint l-hint-visible" style="top:554px;height:40px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
               <div data-days="2" class="cal-appt st-scheduled t-consult ty-visit" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer">
                 <div class="cal-appt-time">3:00 – 4:30 PM</div>
                 <div class="cal-appt-name">Tom Alvarez</div>
@@ -1213,7 +1214,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=30"></script>
+<script src="assets/hcos.js?v=31"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -1322,6 +1323,14 @@
     var tmpl = '64px repeat(' + wantCols.length + ', 1fr)';
     document.querySelector('.daycal-head').style.gridTemplateColumns = tmpl;
     document.querySelector('.daycal-grid').style.gridTemplateColumns = tmpl;
+    /* the band row must cover every track, or row two slides one to the left */
+    var nr = wantCols.filter(function (c) { return ROOMS.indexOf(c) !== -1; }).length;
+    var spacer = document.querySelector('.daycal-band-spacer');
+    var band = document.querySelector('.daycal-band');
+    var tail = document.getElementById('l-band-tail');
+    if (spacer) spacer.style.gridColumn = '1 / span ' + (1 + pv);
+    if (band) { band.style.display = nc ? '' : 'none'; band.style.gridColumn = (2 + pv) + ' / span ' + Math.max(nc, 1); }
+    if (tail) { tail.style.display = nr ? '' : 'none'; tail.style.gridColumn = (2 + pv + nc) + ' / span ' + Math.max(nr, 1); }
 
     var band = document.querySelector('.daycal-band');
     var spacer = document.querySelector('.daycal-band-spacer');
