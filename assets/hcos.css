@@ -994,6 +994,8 @@ a.lead-chip:hover { border-color: var(--ink); }
   font-family: ui-monospace, monospace;
 }
 .daycal-col { position: relative; border-left: 1px solid var(--line-soft); }
+.daycal-scroll { overflow-x: auto; }
+.daycal-scroll .daycal-head, .daycal-scroll .daycal-grid { min-width: max-content; }
 .daycal-slot { height: 88px; border-bottom: 1px solid var(--line-soft); }
 .daycal-slot-half { position: absolute; left: 0; right: 0; border-bottom: 1px dashed #F0F0F0; pointer-events: none; }
 .daycal-empty-hint {
@@ -1090,14 +1092,14 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 /* ---- THE BLOCK ---- */
 .cal-appt {
-  position: absolute; left: 4px; right: 4px;
+  position: absolute; left: 5px; right: 5px;
   container-type: size; container-name: appt;
   display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 0 4px; align-content: start;
-  padding: 2px 7px 2px 11px;
+  padding: 5px 9px 5px 14px;
   border: 1px solid color-mix(in srgb, var(--h) 45%, #fff);
   border-radius: 4px; background: #fff;
   overflow: hidden; cursor: pointer; z-index: 1;
-  font-size: 10.5px; line-height: 1.25; color: var(--ink);
+  font-size: 10.5px; line-height: 1.4; color: var(--ink);
 }
 .cal-appt::before {                     /* the rail keeps full chroma at every status */
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
@@ -1107,7 +1109,7 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 /* children live in permanent cells — nothing reflows between 18px and 260px */
 .cal-appt-sub {
-  grid-row: 1; grid-column: 1; font-size: 10px; font-weight: 800; letter-spacing: .15px;
+  grid-row: 1; grid-column: 1; font-size: 10.5px; font-weight: 800; letter-spacing: .15px;
   color: var(--h-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .cal-appt .ai-flag { grid-row: 1; grid-column: 2; position: static; float: none;
@@ -1115,8 +1117,8 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt-time { grid-row: 3; grid-column: 1; justify-self: start; min-width: 0;
   font: 500 9px/1.35 ui-monospace, monospace; color: var(--blk-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-appt-name { grid-row: 2; grid-column: 1 / -1; margin: 0;
-  font-size: 11.5px; font-weight: 600; color: #1A1A1A;
+.cal-appt-name { grid-row: 2; grid-column: 1 / -1; margin: 1px 0 0;
+  font-size: 12px; font-weight: 600; color: #1A1A1A;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt-type { grid-row: 3; grid-column: 2; justify-self: end;
   font-size: 9.5px; color: var(--blk-muted);
@@ -1155,12 +1157,22 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.st-cancelled::before { background-image: linear-gradient(#B4B4B4,#B4B4B4); }
 
 /* ---- the black bar: printed only where a human is being waited on ---- */
-.cal-appt.st-arrived, .cal-appt.st-checkout, .cal-appt.st-noshow { padding-bottom: 11px; }
+.cal-appt.st-arrived, .cal-appt.st-checkout, .cal-appt.st-noshow { padding-bottom: 16px; }
+/* a 30-minute block plus a bar has 25px of content room — the type fits into it */
+.cal-appt[style*="height:46px"].st-arrived .cal-appt-sub,
+.cal-appt[style*="height:46px"].st-checkout .cal-appt-sub,
+.cal-appt[style*="height:46px"].st-noshow .cal-appt-sub { font-size: 9px; line-height: 1.1; }
+.cal-appt[style*="height:46px"].st-arrived .cal-appt-name,
+.cal-appt[style*="height:46px"].st-checkout .cal-appt-name,
+.cal-appt[style*="height:46px"].st-noshow .cal-appt-name { font-size: 10.5px; line-height: 1.15; margin-top: 0; }
+.cal-appt[style*="height:46px"].st-arrived,
+.cal-appt[style*="height:46px"].st-checkout,
+.cal-appt[style*="height:46px"].st-noshow { padding-top: 2px; }
 .cal-appt.st-arrived::after, .cal-appt.st-checkout::after, .cal-appt.st-noshow::after {
   position: absolute; left: 0; right: 0; bottom: 0;
-  height: 11px; line-height: 11px; padding: 0 6px;
+  height: 13px; line-height: 13px; padding: 0 7px;
   background: #1A1A1A; color: #fff;
-  font: 700 7.5px/11px var(--font-ui), sans-serif; letter-spacing: .6px; text-transform: uppercase;
+  font: 700 8px/13px var(--font-ui), sans-serif; letter-spacing: .6px; text-transform: uppercase;
   white-space: nowrap; overflow: hidden;
 }
 .cal-appt.st-arrived::after  { content: 'Arrived \00b7 waiting'; }
@@ -1176,13 +1188,16 @@ a.lead-chip:hover { border-color: var(--ink); }
 /* a real column is ~120px — the descriptor never fits beside the time there */
 @container appt (max-width: 210px) { .cal-appt-type { display: none; } }
 @container appt (max-height: 58px) { .cal-appt-time { display: none; } }
-@container appt (max-height: 56px) {
-  .cal-appt-sub { font-size: 9.5px; line-height: 1.15; }
-  .cal-appt-time { font-size: 8.5px; line-height: 1.15; }
-  .cal-appt-name { font-size: 11px; line-height: 1.2; }
+@container appt (max-height: 62px) {
+  .cal-appt-sub { font-size: 9.5px; line-height: 1.2; }
+  .cal-appt-time { font-size: 8.5px; line-height: 1.2; }
+  .cal-appt-name { font-size: 11px; line-height: 1.25; margin-top: 0; }
   .cal-appt .actor-tag { display: none; }
 }
-@container appt (max-height: 44px) { .cal-appt-name { line-height: 1.15; } }
+@container appt (max-height: 44px) { .cal-appt-name { line-height: 1.2; } }
+/* a 30-minute block still owns three legible lines — the hour row grew to allow it */
+.cal-appt { min-height: 46px; }
+.cal-appt.mini { min-height: 0; }
 
 /* the 15-minute block is too short for a query to save — it gets a real class */
 .cal-appt.mini { grid-template-columns: auto 1fr; align-items: center; padding: 0 7px 0 11px; }
