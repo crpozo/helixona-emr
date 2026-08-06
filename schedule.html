@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=51">
+<link rel="stylesheet" href="assets/hcos.css?v=53">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -368,54 +368,74 @@
           </div>
 
           <div class="leg">
-            <div class="leg-row">
-              <span class="leg-lbl">How to read it</span>
+            <div class="leg-open">
               <div class="cal-appt ty-iv st-arrived leg-spec">
                 <span class="cal-appt-sub">NAD+</span>
                 <span class="cal-appt-time">9:00</span>
                 <span class="cal-appt-name">Maya Reyes</span>
               </div>
-              <div class="leg-ticks">
-                <div><span class="leg-n">1</span><b>The colour and its texture</b> &mdash; what kind of appointment it is</div>
-                <div><span class="leg-n">2</span><b>The word</b> &mdash; which exact treatment, written out</div>
-                <div><span class="leg-n">3</span><b>How dark the block is</b> &mdash; how far into the visit they are &middot;
-                  a <span class="leg-bar">black bar</span> means someone is waiting on you</div>
+              <div class="leg-rule">
+                Every block answers three questions:<br>
+                <b>the colour</b> says what kind of appointment it is &middot;
+                <b>the word</b> says which exact treatment &middot;
+                <b>how dark it is</b> says where the patient stands.
               </div>
             </div>
+
             <div class="leg-row">
-              <span class="leg-lbl">The five kinds</span>
-              <span class="leg-fam ty-visit"><i></i>Office visit</span>
-              <span class="leg-fam ty-proc"><i></i>Procedure</span>
-              <span class="leg-fam ty-iv"><i></i>IV</span>
-              <span class="leg-fam ty-energ"><i></i>Energetics</span>
-              <span class="leg-fam ty-treat"><i></i>Treatment</span>
-            </div>
-                        <div class="leg-row">
-              <span class="leg-lbl">The treatments<br>&mdash; level three</span>
-              <div class="leg-subs">
-                <span class="leg-fam ty-visit"><span class="leg-sub">New patient</span></span>
-                <span class="leg-fam ty-visit"><span class="leg-sub">Follow-up</span></span>
-                <span class="leg-fam ty-visit"><span class="leg-sub">Telehealth</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">EBOO</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">Pellets</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">PRP</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">NAD+</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">Mega C</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">Foundational Flow</span></span>
-                <span class="leg-fam ty-energ"><span class="leg-sub">Acupuncture</span></span>
-                <span class="leg-fam ty-treat"><span class="leg-sub">Erchonia</span></span>
-                <span class="leg-sub-more">&hellip; and every other recipe, each written in its own family&rsquo;s colour</span>
+              <div class="leg-key"><span class="leg-n">1</span>
+                <span class="leg-key-txt"><b>The colour</b><span>what kind</span></span></div>
+              <div class="leg-items">
+                <span class="leg-fam ty-visit"><i></i>Office visit</span>
+                <span class="leg-fam ty-proc"><i></i>Procedure</span>
+                <span class="leg-fam ty-iv"><i></i>IV</span>
+                <span class="leg-fam ty-energ"><i></i>Energetics</span>
+                <span class="leg-fam ty-treat"><i></i>Treatment</span>
               </div>
             </div>
+
             <div class="leg-row">
-              <span class="leg-lbl">Where they stand</span>
-              <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
-              <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
-              <a href="treatments.html#/t-06-codes" style="font-size:11px;margin-left:auto">Edit the codes &rsaquo;</a>
+              <div class="leg-key"><span class="leg-n">2</span>
+                <span class="leg-key-txt"><b>The word</b><span>which one</span></span></div>
+              <div class="leg-items">
+                <span class="ty-visit"><span class="leg-sub">New patient</span></span>
+                <span class="ty-visit"><span class="leg-sub">Follow-up</span></span>
+                <span class="ty-visit"><span class="leg-sub">Telehealth</span></span>
+                <span class="ty-proc"><span class="leg-sub">EBOO</span></span>
+                <span class="ty-proc"><span class="leg-sub">Pellets</span></span>
+                <span class="ty-proc"><span class="leg-sub">PRP</span></span>
+                <span class="ty-iv"><span class="leg-sub">NAD+</span></span>
+                <span class="ty-iv"><span class="leg-sub">Mega C</span></span>
+                <span class="ty-iv"><span class="leg-sub">Foundational Flow</span></span>
+                <span class="ty-energ"><span class="leg-sub">Acupuncture</span></span>
+                <span class="ty-treat"><span class="leg-sub">Erchonia laser</span></span>
+                <span class="leg-sub-more">&mdash; each written in the colour of its own kind</span>
+              </div>
+            </div>
+
+            <div class="leg-row">
+              <div class="leg-key"><span class="leg-n">3</span>
+                <span class="leg-key-txt"><b>How dark</b><span>where they stand</span></span></div>
+              <div class="leg-items">
+                <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
+                <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+              </div>
+            </div>
+
+            <div class="leg-row leg-foot">
+              <div class="leg-key"><span class="leg-n">&#9679;</span>
+                <span class="leg-key-txt"><b>The black bar</b><span>needs you</span></span></div>
+              <div class="leg-items">
+                <span class="leg-bar">Arrived &middot; waiting</span>
+                <span class="leg-bar">Ready to check out</span>
+                <span class="leg-bar">No-show</span>
+                <span class="leg-sub-more">&mdash; the only black marks on the board, so they find you first</span>
+                <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
+              </div>
             </div>
           </div>
         </div>
@@ -627,54 +647,74 @@
           </div>
 
           <div class="leg">
-            <div class="leg-row">
-              <span class="leg-lbl">How to read it</span>
+            <div class="leg-open">
               <div class="cal-appt ty-iv st-arrived leg-spec">
                 <span class="cal-appt-sub">NAD+</span>
                 <span class="cal-appt-time">9:00</span>
                 <span class="cal-appt-name">Maya Reyes</span>
               </div>
-              <div class="leg-ticks">
-                <div><span class="leg-n">1</span><b>The colour and its texture</b> &mdash; what kind of appointment it is</div>
-                <div><span class="leg-n">2</span><b>The word</b> &mdash; which exact treatment, written out</div>
-                <div><span class="leg-n">3</span><b>How dark the block is</b> &mdash; how far into the visit they are &middot;
-                  a <span class="leg-bar">black bar</span> means someone is waiting on you</div>
+              <div class="leg-rule">
+                Every block answers three questions:<br>
+                <b>the colour</b> says what kind of appointment it is &middot;
+                <b>the word</b> says which exact treatment &middot;
+                <b>how dark it is</b> says where the patient stands.
               </div>
             </div>
+
             <div class="leg-row">
-              <span class="leg-lbl">The five kinds</span>
-              <span class="leg-fam ty-visit"><i></i>Office visit</span>
-              <span class="leg-fam ty-proc"><i></i>Procedure</span>
-              <span class="leg-fam ty-iv"><i></i>IV</span>
-              <span class="leg-fam ty-energ"><i></i>Energetics</span>
-              <span class="leg-fam ty-treat"><i></i>Treatment</span>
-            </div>
-                        <div class="leg-row">
-              <span class="leg-lbl">The treatments<br>&mdash; level three</span>
-              <div class="leg-subs">
-                <span class="leg-fam ty-visit"><span class="leg-sub">New patient</span></span>
-                <span class="leg-fam ty-visit"><span class="leg-sub">Follow-up</span></span>
-                <span class="leg-fam ty-visit"><span class="leg-sub">Telehealth</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">EBOO</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">Pellets</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">PRP</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">NAD+</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">Mega C</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">Foundational Flow</span></span>
-                <span class="leg-fam ty-energ"><span class="leg-sub">Acupuncture</span></span>
-                <span class="leg-fam ty-treat"><span class="leg-sub">Erchonia</span></span>
-                <span class="leg-sub-more">&hellip; and every other recipe, each written in its own family&rsquo;s colour</span>
+              <div class="leg-key"><span class="leg-n">1</span>
+                <span class="leg-key-txt"><b>The colour</b><span>what kind</span></span></div>
+              <div class="leg-items">
+                <span class="leg-fam ty-visit"><i></i>Office visit</span>
+                <span class="leg-fam ty-proc"><i></i>Procedure</span>
+                <span class="leg-fam ty-iv"><i></i>IV</span>
+                <span class="leg-fam ty-energ"><i></i>Energetics</span>
+                <span class="leg-fam ty-treat"><i></i>Treatment</span>
               </div>
             </div>
+
             <div class="leg-row">
-              <span class="leg-lbl">Where they stand</span>
-              <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
-              <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
-              <a href="treatments.html#/t-06-codes" style="font-size:11px;margin-left:auto">Edit the codes &rsaquo;</a>
+              <div class="leg-key"><span class="leg-n">2</span>
+                <span class="leg-key-txt"><b>The word</b><span>which one</span></span></div>
+              <div class="leg-items">
+                <span class="ty-visit"><span class="leg-sub">New patient</span></span>
+                <span class="ty-visit"><span class="leg-sub">Follow-up</span></span>
+                <span class="ty-visit"><span class="leg-sub">Telehealth</span></span>
+                <span class="ty-proc"><span class="leg-sub">EBOO</span></span>
+                <span class="ty-proc"><span class="leg-sub">Pellets</span></span>
+                <span class="ty-proc"><span class="leg-sub">PRP</span></span>
+                <span class="ty-iv"><span class="leg-sub">NAD+</span></span>
+                <span class="ty-iv"><span class="leg-sub">Mega C</span></span>
+                <span class="ty-iv"><span class="leg-sub">Foundational Flow</span></span>
+                <span class="ty-energ"><span class="leg-sub">Acupuncture</span></span>
+                <span class="ty-treat"><span class="leg-sub">Erchonia laser</span></span>
+                <span class="leg-sub-more">&mdash; each written in the colour of its own kind</span>
+              </div>
+            </div>
+
+            <div class="leg-row">
+              <div class="leg-key"><span class="leg-n">3</span>
+                <span class="leg-key-txt"><b>How dark</b><span>where they stand</span></span></div>
+              <div class="leg-items">
+                <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
+                <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+              </div>
+            </div>
+
+            <div class="leg-row leg-foot">
+              <div class="leg-key"><span class="leg-n">&#9679;</span>
+                <span class="leg-key-txt"><b>The black bar</b><span>needs you</span></span></div>
+              <div class="leg-items">
+                <span class="leg-bar">Arrived &middot; waiting</span>
+                <span class="leg-bar">Ready to check out</span>
+                <span class="leg-bar">No-show</span>
+                <span class="leg-sub-more">&mdash; the only black marks on the board, so they find you first</span>
+                <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
+              </div>
             </div>
           </div>
         </div>
@@ -827,54 +867,74 @@
             <style>#l-05-month .r-hbar { display:flex; align-items:center; gap:10px; font-size:12px; }</style>
           </div>
           <div class="leg">
-            <div class="leg-row">
-              <span class="leg-lbl">How to read it</span>
+            <div class="leg-open">
               <div class="cal-appt ty-iv st-arrived leg-spec">
                 <span class="cal-appt-sub">NAD+</span>
                 <span class="cal-appt-time">9:00</span>
                 <span class="cal-appt-name">Maya Reyes</span>
               </div>
-              <div class="leg-ticks">
-                <div><span class="leg-n">1</span><b>The colour and its texture</b> &mdash; what kind of appointment it is</div>
-                <div><span class="leg-n">2</span><b>The word</b> &mdash; which exact treatment, written out</div>
-                <div><span class="leg-n">3</span><b>How dark the block is</b> &mdash; how far into the visit they are &middot;
-                  a <span class="leg-bar">black bar</span> means someone is waiting on you</div>
+              <div class="leg-rule">
+                Every block answers three questions:<br>
+                <b>the colour</b> says what kind of appointment it is &middot;
+                <b>the word</b> says which exact treatment &middot;
+                <b>how dark it is</b> says where the patient stands.
               </div>
             </div>
+
             <div class="leg-row">
-              <span class="leg-lbl">The five kinds</span>
-              <span class="leg-fam ty-visit"><i></i>Office visit</span>
-              <span class="leg-fam ty-proc"><i></i>Procedure</span>
-              <span class="leg-fam ty-iv"><i></i>IV</span>
-              <span class="leg-fam ty-energ"><i></i>Energetics</span>
-              <span class="leg-fam ty-treat"><i></i>Treatment</span>
-            </div>
-                        <div class="leg-row">
-              <span class="leg-lbl">The treatments<br>&mdash; level three</span>
-              <div class="leg-subs">
-                <span class="leg-fam ty-visit"><span class="leg-sub">New patient</span></span>
-                <span class="leg-fam ty-visit"><span class="leg-sub">Follow-up</span></span>
-                <span class="leg-fam ty-visit"><span class="leg-sub">Telehealth</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">EBOO</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">Pellets</span></span>
-                <span class="leg-fam ty-proc"><span class="leg-sub">PRP</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">NAD+</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">Mega C</span></span>
-                <span class="leg-fam ty-iv"><span class="leg-sub">Foundational Flow</span></span>
-                <span class="leg-fam ty-energ"><span class="leg-sub">Acupuncture</span></span>
-                <span class="leg-fam ty-treat"><span class="leg-sub">Erchonia</span></span>
-                <span class="leg-sub-more">&hellip; and every other recipe, each written in its own family&rsquo;s colour</span>
+              <div class="leg-key"><span class="leg-n">1</span>
+                <span class="leg-key-txt"><b>The colour</b><span>what kind</span></span></div>
+              <div class="leg-items">
+                <span class="leg-fam ty-visit"><i></i>Office visit</span>
+                <span class="leg-fam ty-proc"><i></i>Procedure</span>
+                <span class="leg-fam ty-iv"><i></i>IV</span>
+                <span class="leg-fam ty-energ"><i></i>Energetics</span>
+                <span class="leg-fam ty-treat"><i></i>Treatment</span>
               </div>
             </div>
+
             <div class="leg-row">
-              <span class="leg-lbl">Where they stand</span>
-              <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
-              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
-              <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
-              <a href="treatments.html#/t-06-codes" style="font-size:11px;margin-left:auto">Edit the codes &rsaquo;</a>
+              <div class="leg-key"><span class="leg-n">2</span>
+                <span class="leg-key-txt"><b>The word</b><span>which one</span></span></div>
+              <div class="leg-items">
+                <span class="ty-visit"><span class="leg-sub">New patient</span></span>
+                <span class="ty-visit"><span class="leg-sub">Follow-up</span></span>
+                <span class="ty-visit"><span class="leg-sub">Telehealth</span></span>
+                <span class="ty-proc"><span class="leg-sub">EBOO</span></span>
+                <span class="ty-proc"><span class="leg-sub">Pellets</span></span>
+                <span class="ty-proc"><span class="leg-sub">PRP</span></span>
+                <span class="ty-iv"><span class="leg-sub">NAD+</span></span>
+                <span class="ty-iv"><span class="leg-sub">Mega C</span></span>
+                <span class="ty-iv"><span class="leg-sub">Foundational Flow</span></span>
+                <span class="ty-energ"><span class="leg-sub">Acupuncture</span></span>
+                <span class="ty-treat"><span class="leg-sub">Erchonia laser</span></span>
+                <span class="leg-sub-more">&mdash; each written in the colour of its own kind</span>
+              </div>
+            </div>
+
+            <div class="leg-row">
+              <div class="leg-key"><span class="leg-n">3</span>
+                <span class="leg-key-txt"><b>How dark</b><span>where they stand</span></span></div>
+              <div class="leg-items">
+                <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
+                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
+                <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+              </div>
+            </div>
+
+            <div class="leg-row leg-foot">
+              <div class="leg-key"><span class="leg-n">&#9679;</span>
+                <span class="leg-key-txt"><b>The black bar</b><span>needs you</span></span></div>
+              <div class="leg-items">
+                <span class="leg-bar">Arrived &middot; waiting</span>
+                <span class="leg-bar">Ready to check out</span>
+                <span class="leg-bar">No-show</span>
+                <span class="leg-sub-more">&mdash; the only black marks on the board, so they find you first</span>
+                <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
+              </div>
             </div>
           </div>
 
@@ -1488,7 +1548,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=51"></script>
+<script src="assets/hcos.js?v=53"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.

@@ -1059,31 +1059,31 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 
 /* TYPE — declared on the compound selector only, so filter chips never inherit a hue */
-.cal-appt.ty-visit, .week-appt.ty-visit, .leg-fam.ty-visit {
+.cal-appt.ty-visit, .week-appt.ty-visit, .leg-fam.ty-visit, .leg-items > .ty-visit {
   --h:var(--ty-visit); --h-ink:var(--ty-visit-ink);
   --h38:var(--ty-visit-38); --h18:var(--ty-visit-18); --h08:var(--ty-visit-08);
   --rail:linear-gradient(var(--h),var(--h));
   --rail-inv:linear-gradient(#fff,#fff);
 }
-.cal-appt.ty-proc, .week-appt.ty-proc, .leg-fam.ty-proc {
+.cal-appt.ty-proc, .week-appt.ty-proc, .leg-fam.ty-proc, .leg-items > .ty-proc {
   --h:var(--ty-proc); --h-ink:var(--ty-proc-ink);
   --h38:var(--ty-proc-38); --h18:var(--ty-proc-18); --h08:var(--ty-proc-08);
   --rail:repeating-linear-gradient(180deg,var(--h) 0 7px,transparent 7px 12px);
   --rail-inv:repeating-linear-gradient(180deg,#fff 0 7px,transparent 7px 12px);
 }
-.cal-appt.ty-iv, .week-appt.ty-iv, .leg-fam.ty-iv {
+.cal-appt.ty-iv, .week-appt.ty-iv, .leg-fam.ty-iv, .leg-items > .ty-iv {
   --h:var(--ty-iv); --h-ink:var(--ty-iv-ink);
   --h38:var(--ty-iv-38); --h18:var(--ty-iv-18); --h08:var(--ty-iv-08);
   --rail:repeating-linear-gradient(180deg,var(--h) 0 3px,transparent 3px 7px);
   --rail-inv:repeating-linear-gradient(180deg,#fff 0 3px,transparent 3px 7px);
 }
-.cal-appt.ty-energ, .week-appt.ty-energ, .leg-fam.ty-energ {
+.cal-appt.ty-energ, .week-appt.ty-energ, .leg-fam.ty-energ, .leg-items > .ty-energ {
   --h:var(--ty-energ); --h-ink:var(--ty-energ-ink);
   --h38:var(--ty-energ-38); --h18:var(--ty-energ-18); --h08:var(--ty-energ-08);
   --rail:linear-gradient(90deg,var(--h) 0 2px,transparent 2px 3px,var(--h) 3px 5px);
   --rail-inv:linear-gradient(90deg,#fff 0 2px,transparent 2px 3px,#fff 3px 5px);
 }
-.cal-appt.ty-treat, .week-appt.ty-treat, .leg-fam.ty-treat {
+.cal-appt.ty-treat, .week-appt.ty-treat, .leg-fam.ty-treat, .leg-items > .ty-treat {
   --h:var(--ty-treat); --h-ink:var(--ty-treat-ink);
   --h38:var(--ty-treat-38); --h18:var(--ty-treat-18); --h08:var(--ty-treat-08);
   --rail:repeating-linear-gradient(135deg,var(--h) 0 2px,transparent 2px 5px);
@@ -1321,25 +1321,30 @@ a.lead-chip:hover { border-color: var(--ink); }
 .chip.active.is-ok::after { color: #fff; }
 
 /* the legend teaches the anatomy before the vocabulary */
-.leg { border-top: 1px solid var(--line-soft); background: #FBFBFB; padding: 20px 22px; }
-.leg-row {
-  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
-  padding: 14px 0; border-top: 1px solid var(--line-soft);
-}
-.leg-row:first-child { padding-top: 0; border-top: none; }
-.leg-row:last-child { padding-bottom: 0; }
-.leg-lbl {
-  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .9px;
-  color: var(--muted); width: 132px; flex-shrink: 0; line-height: 1.4;
-}
+.leg { border-top: 1px solid var(--line-soft); background: #FBFBFB; padding: 18px 22px 20px; }
+
+/* the opening line: one specimen, one sentence */
+.leg-open { display: flex; align-items: center; gap: 20px; padding-bottom: 16px; }
 .leg-spec { position: relative; left: auto; right: auto; width: 176px; height: 56px; flex-shrink: 0; }
-.leg-ticks { font-size: 11.5px; color: var(--muted); line-height: 2; }
-.leg-ticks b { color: var(--ink); font-weight: 700; }
-.leg-ticks .leg-n {
-  display: inline-block; width: 17px; height: 17px; border-radius: 50%;
-  background: var(--ink); color: #fff; font-size: 9.5px; font-weight: 700;
-  text-align: center; line-height: 17px; margin-right: 8px;
+.leg-rule { font-size: 13px; line-height: 1.7; color: var(--muted); }
+.leg-rule b { color: var(--ink); font-weight: 700; }
+
+/* three numbered rows — the number is what ties a row to the block above it */
+.leg-row {
+  display: grid; grid-template-columns: 152px 1fr; align-items: center;
+  gap: 20px; padding: 13px 0; border-top: 1px solid var(--line-soft);
 }
+.leg-key { display: flex; align-items: center; gap: 9px; }
+.leg-n {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--ink); color: #fff; font-size: 10.5px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.leg-key-txt { line-height: 1.3; }
+.leg-key-txt b { display: block; font-size: 11.5px; font-weight: 700; color: var(--ink); }
+.leg-key-txt span { display: block; font-size: 10.5px; color: var(--muted); }
+.leg-items { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
 .leg-fam { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); }
 .leg-fam i { width: 5px; height: 19px; border-radius: 1px; display: inline-block; background-image: var(--rail); }
 .leg-st { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
@@ -1349,12 +1354,11 @@ a.lead-chip:hover { border-color: var(--ink); }
   font: 700 8px/15px var(--font-ui), sans-serif; letter-spacing: .6px;
   text-transform: uppercase; padding: 0 7px;
 }
-/* level three: the words themselves, each in its family's ink */
-.leg-subs { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-.leg-sub {
-  font-size: 11.5px; font-weight: 800; letter-spacing: .15px; color: var(--h-ink);
-}
-.leg-sub-more { font-size: 11px; color: var(--muted); font-weight: 400; }
+.leg-items > span[class^="ty-"], .leg-items > span[class*=" ty-"] { display: inline-flex; }
+.leg-sub { font-size: 12px; font-weight: 800; letter-spacing: .15px; color: var(--h-ink); }
+.leg-sub-more { font-size: 11px; color: var(--muted); }
+.leg-foot { padding-top: 12px; font-size: 11px; }
+@media (max-width: 900px) { .leg-row { grid-template-columns: 1fr; gap: 8px; } }
 
 /* week view — same channels, half scale, no bar */
 .week-appt { position: relative; border: 1px solid color-mix(in srgb, var(--h) 45%, #fff);
