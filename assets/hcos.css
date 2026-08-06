@@ -68,12 +68,6 @@
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-pop: 0 12px 40px rgba(0, 0, 0, 0.18);
 
-  /* TYPE — pale fill per type */
-  --ty-visit-bg: #E7EEF6;
-  --ty-proc-bg:  #F6E7E7;
-  --ty-iv-bg:    #E2F0EF;
-  --ty-energ-bg: #EAE6F3;
-  --ty-treat-bg: #F7EDDF;
 }
 
 * { box-sizing: border-box; }
