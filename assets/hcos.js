@@ -382,6 +382,62 @@
     });
   }
 
+  /* ---------- review state: which screens the team has settled ----------
+     Wireframe meta, kept beside the notes it belongs with. Stored per browser,
+     exported with the notes so approvals travel the same way feedback does. */
+  var APPR_KEY = 'hcos-approved-v1';
+  function approvals() {
+    try { return JSON.parse(localStorage.getItem(APPR_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function saveApprovals(a) {
+    try { localStorage.setItem(APPR_KEY, JSON.stringify(a)); } catch (e) {}
+  }
+  function apprKey(id) { return PAGE + '/' + id; }
+  function isApproved(id) { return !!approvals()[apprKey(id)]; }
+
+  function buildApprovalBar() {
+    if (!screens.length) return;
+    var bar = el('div', 'appr-bar');
+    bar.id = 'hcos-appr-bar';
+    bar.innerHTML =
+      '<span class="appr-state"><i></i><span id="hcos-appr-word">Not reviewed yet</span></span>' +
+      '<span class="appr-note" id="hcos-appr-note">Mark it approved when this screen needs no more changes.</span>' +
+      '<span class="appr-count" id="hcos-appr-count"></span>' +
+      '<button class="btn btn-sm appr-toggle" id="hcos-appr-btn" data-hcos-handled="1">Mark approved</button>';
+    var canvas = document.querySelector('.canvas-inner');
+    if (canvas) canvas.insertBefore(bar, canvas.firstChild);
+    bar.querySelector('#hcos-appr-btn').addEventListener('click', function () {
+      var a = approvals(), k = apprKey(currentScreen ? currentScreen.id : '');
+      if (a[k]) { delete a[k]; } else { a[k] = { at: new Date().toISOString().slice(0, 10) }; }
+      saveApprovals(a);
+      refreshApproval();
+      toast(a[k] ? 'Approved. It shows a green tick in the screen row.'
+                 : 'Approval removed — it is open for changes again.', 'ok');
+    });
+    refreshApproval();
+  }
+
+  function refreshApproval() {
+    var bar = document.getElementById('hcos-appr-bar');
+    if (!bar || !currentScreen) return;
+    var a = approvals(), rec = a[apprKey(currentScreen.id)];
+    bar.classList.toggle('is-ok', !!rec);
+    document.getElementById('hcos-appr-word').textContent = rec ? 'Approved' : 'Not reviewed yet';
+    document.getElementById('hcos-appr-note').textContent = rec
+      ? 'Approved ' + rec.at + ' — no more changes needed on this screen.'
+      : 'Mark it approved when this screen needs no more changes.';
+    document.getElementById('hcos-appr-btn').textContent = rec ? 'Remove approval' : 'Mark approved';
+    var done = 0;
+    screens.forEach(function (sc) { if (a[apprKey(sc.id)]) done++; });
+    document.getElementById('hcos-appr-count').textContent =
+      done + ' of ' + screens.length + ' screens on this page approved';
+    if (chipsNav) {
+      Array.prototype.forEach.call(chipsNav.querySelectorAll('.chip'), function (c) {
+        c.classList.toggle('is-ok', !!a[apprKey(c.getAttribute('data-screen'))]);
+      });
+    }
+  }
+
   /* ---------- screens + chips ---------- */
   function collectScreens() {
     var secs = document.querySelectorAll('.screen');
@@ -412,6 +468,7 @@
       });
     }
     currentScreen = target;
+    refreshApproval();
     if (topScreenEl) {
       topScreenEl.textContent = target.title;
     }
@@ -814,6 +871,7 @@
     collectScreens();
     buildChips();
     buildWidget();
+    buildApprovalBar();
     wireDelegation();
     paintDeltas();
     wireKpis();

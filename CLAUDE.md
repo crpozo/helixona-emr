@@ -435,6 +435,22 @@ because the reviewer believes it. Declarative attributes in `assets/hcos.js`:
 make. Chips in a "tick everything that applies" group must carry `multi`, or
 answering one silently unticks the last.
 
+## Screen approval (added 2026-08-06)
+
+Every screen carries a review bar above it, in the wireframe chrome — never in
+product UI. **Mark approved** turns it green and puts a green tick on that
+screen's chip, so the chip row shows at a glance which screens are settled and
+which still want work. The bar also counts: "4 of 7 screens on this page
+approved".
+
+- Stored per browser in `localStorage` under `hcos-approved-v1`, keyed
+  `page/screen-id`, alongside the person's own notes.
+- **Export my notes** now exports `{ notes, approved }` together, so an
+  approval travels the same way feedback does and Carlos can merge both.
+- The green is `--review-ok #1E7A3E`, its own token. It is deliberately not the
+  clinical in-progress green and not the dashboard trend green: a review state
+  is not a clinical status, and the three must be retunable apart.
+
 ## Data rules
 
 **No PHI, ever.** Patients, appointments, notes, and claims in the wireframe are always synthetic. Clinic identity (name, address, phone, NPI) and staff first names are fine — they are the real users. Do not put the clinic TIN, payer account numbers, or any real patient detail anywhere in this repo.
