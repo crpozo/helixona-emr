@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .g-perm-tbl th, .g-perm-tbl td { text-align: center; }
   .g-perm-tbl th:first-child, .g-perm-tbl td:first-child { text-align: left; }
@@ -348,9 +348,6 @@
               </div>
 
               <div class="seg-divider" style="margin:14px 14px 0">Version history</div>
-              <div class="prov" style="margin:6px 14px 2px">
-                <span><strong>These are lines from the store above</strong>, filtered to <code>PERM-</code> — the matrix keeps no second log of its own</span>
-              </div>
               <div style="padding:4px 14px 0">
                 <div class="g-ev">
                   <span class="g-ev-when">Jul 20</span>
@@ -434,7 +431,6 @@
             <div class="card" style="margin-top:16px">
               <div class="card-title">Retention</div>
               <div style="font-size:12.5px;color:var(--ink);line-height:1.55">Lines are appended — never edited, never deleted — and kept for 7 years alongside the records they describe. Deactivating a user keeps their history; nothing an auditor needs ever disappears.</div>
-              <div class="prov"><span><strong>Corrections</strong> are new lines that link to the one they correct · <code>AE-</code> identifiers are never reused</span></div>
             </div>
 
           </div>
@@ -459,13 +455,6 @@
           </div>
           <button class="btn btn-primary" onclick="HCOS.toast('Change requested. Role changes are approved by Shibani and logged.', 'ok')">Request a change</button>
         </div>
-
-        <div class="prov">
-          <span><strong>A/E</strong> approve or edit &middot; <strong>E</strong> edit or execute &middot;
-          <strong>S</strong> suggest or prepare &middot; <strong>view</strong> read only &middot;
-          <strong>O</strong> owns their own data &middot; &mdash; no access</span>
-        </div>
-
         <div class="tbl-wrap">
             <table class="tbl g-roles">
               <thead><tr><th>Action</th><th>Physician</th><th>Extender</th><th>MA</th><th>Nurse / Medic</th><th>Care Guide / PCC</th><th>Front Desk</th><th>Patient</th><th>AI / System</th><th>Governance note</th></tr></thead>
@@ -565,13 +554,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span><strong>Source of truth today</strong> is not the same as where a screen appears. A record marked
-          <span class="pill pill-muted">eCW</span> is still shown all over HCOS &mdash; HCOS reads it and cannot write it
-          until that domain cuts over. <a href="#g-04-ecw" data-activate="g-04-ecw">See the cutover plan</a>.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -627,13 +609,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span>Each domain maps to the records it owns &mdash;
-          <a href="#g-03-records" data-activate="g-03-records">the canonical record registry</a> names them.
-          A record cannot change owner without a dated cutover row here.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -764,7 +739,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
 /* Domain chips narrow the registry — the count is always the truth on screen. */
 (function () {

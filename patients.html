@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -255,9 +255,6 @@
           <div class="field-help">Inquiry, Lead, Scheduled and Onboarding are earlier stages — those people are in the <a href="patients.html#/pt-04-find">person master</a>.</div>
           <button class="btn btn-sm" style="margin-top:12px" onclick="pfReset()">Clear the filters</button>
         </div>
-        <div class="prov">
-          <span><strong>Readiness</strong> is read from the <a href="readiness.html#/i-01-readiness">detox readiness engine</a> · ruleset v3.2 · run today 7:00 AM · this list keeps no copy and no one changes a result here.</span>
-        </div>
       </div>
     </div>
   </section>
@@ -299,7 +296,7 @@
               </div>
               <div class="field-help">Governance changes the appeal rules — self-funded plans follow ERISA timelines, not state insurance law.</div>
               <div class="prov"><span><strong>From</strong> coverage <code>C-4182</code> — the one active set — and eligibility snapshot <span class="ver-chip">#3</span> · UnitedHealthcare answered Jul 14, 9:12 AM · asked by Bee · PCC · <a href="pricing.html#/pr-02-benefits">open the benefits</a></span></div>
-              <div class="prov"><span><strong>eCW writes</strong> coverage and eligibility until cutover · this screen reads them, holds no copy, and never edits a payer answer — a correction arrives as the next snapshot</span></div>
+
               <div class="callout callout-ok" style="margin-top:12px">SPD received Jul 2 · 118 pages · summary ready</div>
               <div class="seg-divider">OON benefits</div>
               <dl class="kv">
@@ -383,7 +380,6 @@
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Access level</div>
               <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Comprehensive</div>
-              <div class="prov"><span><strong>From</strong> membership Restore · <a href="pricing-memberships.html#/pm-01-tiers">tiers</a></span></div>
               <div class="field-help" style="margin-top:6px">How Maya engages and pays. It never sets the clinical pathway, and the pathway never sets it.</div>
             </div>
 
@@ -570,8 +566,6 @@
               </div>
               <div style="margin-bottom:10px"><span class="ver-chip">v1 draft</span> <span class="appr pending">Pending approval</span></div>
               <button class="btn" onclick="HCOS.toast('Proposed Vitality with your rationale. It stays pending until Dr. Drannikov or Brooke approves it.', 'ok')">Propose this pathway</button>
-              <div class="prov"><span><strong>Approved on</strong> the plan of care · physician or extender only · <a href="journey-careplan.html#/j-staff-poc">open the plan</a></span></div>
-
               <div class="seg-divider">Access level</div>
               <div class="field">
                 <label class="field-label">How he engages and pays</label>
@@ -591,9 +585,7 @@
                 <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Treatment-specific consent for EBOO</span><span class="check-meta">not signed yet</span></li>
                 <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Signed order and medical clearance</span><span class="check-meta">physician or extender · <a href="schedule-rules.html#/lr-01-rules">the rule</a></span></li>
               </ul>
-              <div class="prov"><span><strong>Booking is blocked</strong> until the order and clearance exist &middot; this is a hard block, not a warning</span></div>
 
-              <div class="prov"><span><strong>From</strong> membership Pay as you go · <a href="pricing-memberships.html#/pm-01-tiers">tiers</a></span></div>
               <div class="field-help" style="margin-top:6px">Set by front desk or PCC. It never sets the clinical pathway, and the pathway never sets it.</div>
             </div>
 
@@ -636,7 +628,6 @@
                 <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Coverage and eligibility — eCW writes, HCOS reads</span><span class="check-meta">until cutover</span></li>
                 <li class="check-item"><span class="check-icon active">→</span><span class="check-label">Orders and results — eCW writes, HCOS reads</span><span class="check-meta">until cutover</span></li>
               </ul>
-              <div class="prov"><span><strong>Synced</strong> from eCW nightly · last run today 5:10 AM</span></div>
             </div>
           </div>
         </div>
@@ -855,7 +846,6 @@
               <div class="card-title">Access level</div>
               <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Comprehensive</div>
               <div class="field-help">How they engage and pay. Independent of the clinical pathway.</div>
-              <div class="prov"><span><strong>Membership</strong> Restore · <a href="pricing-memberships.html">tiers</a></span></div>
             </div>
             <div class="card">
               <div class="card-title">Coverage</div>
@@ -973,7 +963,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

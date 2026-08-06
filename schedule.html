@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -791,10 +791,6 @@
               <div class="meter" style="flex:1"><div class="meter-fill" style="width:35%"></div></div>
               <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">35% full &middot; 26 slots left</span></div>
             <style>#l-05-month .r-hbar { display:flex; align-items:center; gap:10px; font-size:12px; }</style>
-            <div class="prov" style="margin-top:8px">
-              <span>Slots come from resource hours minus booked time, per type. Filter a treatment above and the
-              board dims the days that cannot take it.</span>
-            </div>
           </div>
           <div class="leg">
             <div class="leg-row">
@@ -888,12 +884,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span>Saved filters are configuration, not code &mdash; front desk builds them without asking anyone.
-          The hierarchy is enforced: a filter cannot pair a subtype with a type that does not own it.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -1003,10 +993,6 @@
                   <option>Everyone with the Nurse role</option>
                 </select>
               </div>
-              <div class="prov" style="margin-top:8px">
-                <span>A locked filter is what that person&rsquo;s calendar opens to every morning. They can
-                still change it for the day &mdash; the lock only sets the starting point.</span>
-              </div>
             </div>
 
             <div class="card" style="margin-top:16px">
@@ -1015,10 +1001,6 @@
                 Mega C added to the subtypes &middot; Nick</div></div>
               <div class="g-ev"><div class="g-ev-when">Jun 02</div><div class="g-ev-what">
                 Created from &ldquo;Everyone&rdquo; &middot; Nick</div></div>
-              <div class="prov" style="margin-top:8px">
-                <span>Filters are configuration, not code &mdash; every change is logged in
-                <a href="security.html#/g-01-audit">the audit store</a>.</span>
-              </div>
             </div>
           </div>
         </div>
@@ -1044,11 +1026,6 @@
             <button class="btn" data-activate="l-01-day">Back to day view</button>
           </div>
         </div>
-
-        <div class="prov">
-          <span><strong>Source of truth</strong> the HCOS scheduling service — one appointment, one identifier, every calendar and chair board reads it · eCW receives a read-only sync of this domain</span>
-        </div>
-
         <div class="grid-2" style="margin-top:16px">
           <div class="card">
             <div class="card-title">Patient</div>
@@ -1081,7 +1058,7 @@
                 <select class="field-select" id="l-bk-type" onchange="lTypeChange()">
                   <option value="flow" selected>Foundational Flow 10 &middot; 1 h</option>
                   <option value="nad">NAD+ infusion &middot; 3 h</option>
-                  <option value="ivc">Mega C 25 &middot; 2.5 h</option>
+                  <option value="mega" value="ivc">Mega C 25 &middot; 2.5 h</option>
                   <option value="gsh">Glutathione push &middot; 30 min</option>
                 </select>
               </div>
@@ -1089,7 +1066,7 @@
             <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
             <div class="card" style="margin-top:12px">
               <div class="card-title">Orders for this patient &middot; order = prescription</div>
-              <div class="g-ev">
+              <div class="g-ev" data-order-for="flow">
                 <div class="g-ev-when">&#10003;</div>
                 <div class="g-ev-what"><strong>Foundational Flow 10 &middot; O-3402</strong> <span class="ver-chip">v2</span>
                   &mdash; active &middot; 2 of 6 given &middot; <strong>valid to Sep 14, 2026</strong> &middot; 55 days left
@@ -1097,7 +1074,37 @@
                   <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
                 <div class="g-ev-ver"><span class="appr approved">Active</span></div>
               </div>
-              <div class="g-ev" id="l-bk-expired">
+              <div class="g-ev" data-order-for="ivc">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>Mega C 25 &middot; O-3511</strong> <span class="ver-chip">v1</span>
+                  &mdash; active &middot; 1 of 4 given &middot; <strong>valid to Nov 2, 2026</strong> &middot; 104 days left
+                  <span class="prov" style="display:block;margin-top:2px"><span>Signed by Dr. Drannikov, Jul 2 &middot;
+                  <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
+              <div class="g-ev" id="l-bk-noorder" style="display:none">
+                <div class="g-ev-when">&mdash;</div>
+                <div class="g-ev-what"><strong>This treatment</strong> &mdash; <strong>no order on file</strong>
+                  <span class="prov" style="display:block;margin-top:2px"><span>Nothing signed for it.
+                  Booking needs an order first.</span></span>
+                  <div style="display:flex;gap:8px;margin-top:7px;flex-wrap:wrap">
+                    <button class="btn btn-sm" onclick="HCOS.toast('Request sent to Dr. Drannikov. The slot is held for 24 hours while he decides.', 'ok')">Request an order</button>
+                    <a class="btn btn-ghost btn-sm" href="clinical.html#/b-order-new">Place one now</a>
+                  </div></div>
+                <div class="g-ev-ver"><span class="appr draft">Needed</span></div>
+              </div>
+              <div class="g-ev" data-order-for="gsh">
+                <div class="g-ev-when">&mdash;</div>
+                <div class="g-ev-what"><strong>Glutathione push</strong> &mdash; <strong>no order on file</strong>
+                  <span class="prov" style="display:block;margin-top:2px"><span>Nothing signed for this treatment.
+                  Booking it needs an order first &mdash; ask Dr. Drannikov for one.</span></span>
+                  <div style="display:flex;gap:8px;margin-top:7px;flex-wrap:wrap">
+                    <button class="btn btn-sm" onclick="HCOS.toast('Request sent to Dr. Drannikov. The slot is held for 24 hours while he decides.', 'ok')">Request an order</button>
+                    <a class="btn btn-ghost btn-sm" href="clinical.html#/b-order-new">Place one now</a>
+                  </div></div>
+                <div class="g-ev-ver"><span class="appr draft">Needed</span></div>
+              </div>
+              <div class="g-ev" id="l-bk-expired" data-order-for="nad">
                 <div class="g-ev-when">!</div>
                 <div class="g-ev-what"><strong>NAD+ infusion &middot; O-2288</strong> <span class="ver-chip">v1</span>
                   &mdash; <strong>expired Jul 1, 2026</strong> &middot; 8 of 8 given
@@ -1126,9 +1133,6 @@
               <label style="display:flex;gap:7px;align-items:center;font-size:12.5px;cursor:pointer;padding:3px 0">
                 <input type="checkbox"> Provider follow-up &middot; 30 min &middot; after session 3 of 6
               </label>
-              <div class="prov" style="margin-top:6px">
-                <span>Linked appointments move together: drag the main one and its children re-offer their slots.</span>
-              </div>
             </div>
 
 
@@ -1231,9 +1235,6 @@
             <div class="callout" id="l-bk-ovr-line"><span>&nbsp;</span></div>
             <button class="btn" onclick="lWithdrawRequest()">Withdraw the request</button>
           </div>
-          <div class="prov">
-            <span><strong>Written to</strong> the audit store — who asked, the rule, the reason and who it went to · the release itself is written when the provider makes it · <a href="security.html#/g-01-audit">open the audit trail</a></span>
-          </div>
         </div>
 
         <div style="display:flex;gap:10px;margin-top:16px;align-items:center;flex-wrap:wrap">
@@ -1264,11 +1265,6 @@
           <span class="pill pill-st st-confirmed">Confirmed</span>
           <button class="btn" data-activate="l-01-day">Back to day view</button>
         </div>
-
-        <div class="prov">
-          <span><strong>Source of truth</strong> the HCOS scheduling service · appointment <code>A-88247</code> — one identifier, read by the calendar, the chair board, the flowsheet and billing · eCW receives a read-only sync of this domain</span>
-        </div>
-
         <div class="card" style="margin-bottom:16px">
           <div class="card-title">Status</div>
           <div class="status-flow">
@@ -1355,9 +1351,6 @@
               <div class="card-title">Readiness</div>
               <a class="pill pill-ok" href="readiness.html#/i-01-readiness" style="text-decoration:none">Standard</a>
               <div class="field-help" style="margin-top:8px">Cleared for standard pacing · reviewed Jul 20 · select the chip to see how the score was made.</div>
-              <div class="prov">
-                <span><strong>From</strong> readiness assessment <code>RA-1178</code> <span class="ver-chip">v2</span> <span class="appr approved">Approved</span> · reviewed by Dr. Drannikov — scheduling reads it, never sets it</span>
-              </div>
             </div>
           </div>
         </div>
@@ -1444,7 +1437,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -2345,6 +2338,7 @@
       sel.appendChild(opt);
     });
     if (typeof lTypeChange === 'function') lTypeChange();
+    if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   }
 
   /* ---------- searchable multi-selects drive the same lSel state ---------- */
@@ -2413,6 +2407,36 @@
       });
     });
     summarize();
+  })();
+
+  /* Picking a subtype points at ITS order — every offered subtype has one, and
+     "no order on file" is an answer, not an absence. */
+  (function () {
+    var sel = document.getElementById('l-bk-type');
+    if (!sel) return;
+    function focusOrder() {
+      var k = sel.value || 'flow';
+      var any = false;
+      document.querySelectorAll('[data-order-for]').forEach(function (row) {
+        var mine = row.getAttribute('data-order-for') === k;
+        row.style.display = mine ? '' : 'none';
+        if (mine) any = true;
+      });
+      /* a subtype nobody has ordered yet still gets an honest answer */
+      var none = document.getElementById('l-bk-noorder');
+      if (none) {
+        none.style.display = any ? 'none' : '';
+        if (!any) none.querySelector('strong').textContent =
+          sel.options[sel.selectedIndex].text.split('\u00b7')[0].trim();
+      }
+      var exp = document.getElementById('l-bk-expired');
+      var showsExpired = exp && exp.style.display !== 'none';
+      var btn = document.getElementById('l-bk-btn-book');
+      if (btn) btn.textContent = showsExpired ? 'Book tentative \u2014 pending approval' : 'Book appointment';
+    }
+    window.lFocusOrder = focusOrder;
+    sel.addEventListener('change', function () { setTimeout(focusOrder, 0); });
+    focusOrder();
   })();
 </script>
 </body>

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .gov-prow { display: flex; align-items: center; gap: 10px; }
   .gov-pname { font-weight: 600; color: var(--hx-navy); }
@@ -42,10 +42,6 @@
       <div class="frame-body">
         <h2 class="page-title">Co-signature queue</h2>
         <p class="page-sub">Tuesday, July 21 · notes and orders drafted by the care team that need Dr. Drannikov's co-signature — no more "did anyone co-sign that?"</p>
-
-        <div class="prov">
-          <span><strong>From</strong> encounters sitting in <strong>Reviewed</strong> · the co-signature signs and locks the encounter itself — this queue keeps no copy of the note</span>
-        </div>
         <div class="prov">
           <span><strong>Rule</strong> documentation states <span class="ver-chip">v3</span> · Care-team note → Co-signed · supervising physician only · <a href="#b-27-system-states" data-activate="b-27-system-states">documentation states</a></span>
         </div>
@@ -167,9 +163,6 @@
 
         <div class="prov">
           <span><strong>From</strong> the clinic's audit store, filtered to encounter <code>ENC-2026-04158</code> · documentation keeps no log of its own</span>
-        </div>
-        <div class="prov">
-          <span><strong>Append-only</strong> · reads, edits, AI actions and system actions land on the same lines · nobody, not even an admin, edits or deletes one</span>
         </div>
 
         <div class="filters">
@@ -364,11 +357,6 @@
       <div class="frame-body">
         <h2 class="page-title">Documentation quality</h2>
         <p class="page-sub">July 2026 · practice-wide health of clinical documentation — spot bottlenecks and drift without reading individual notes. Documentation that ends at the clinic, not in the weekend.</p>
-
-        <div class="prov">
-          <span><strong>Counted from</strong> the encounter record and the <a href="security.html#/g-01-audit">audit store</a> · July 1–21, 2026 · read-only — no figure here is stored twice or edited</span>
-        </div>
-
         <div class="grid-4" style="margin:14px 0 16px">
           <div class="card stat-card">
             <div class="stat-num">81%</div>
@@ -476,9 +464,6 @@
         </div>
         <div class="prov">
           <span><strong>Approved by</strong> Dr. Drannikov · clinical governance · <strong>implemented by</strong> Shibani · Admin · domain <span class="ver-chip superseded">v2</span> retired Jul 6 · each version is appended to the <a href="security.html#/g-01-audit">audit store</a></span>
-        </div>
-        <div class="prov">
-          <span><strong>Writer</strong> HCOS holds encounter states since Jul 1, 2026 · eCW receives a read-only summary until full cutover</span>
         </div>
 
         <div class="seg-divider">Encounter states</div>
@@ -682,10 +667,6 @@
           </div>
 
         </div>
-
-        <div class="prov" style="margin-top:14px">
-          <span><strong>Inherited</strong> · loading, empty, offline and permission are not written per domain — documentation fills in the encounter it is showing and keeps the framework's wording</span>
-        </div>
       </div>
     </div>
   </section>
@@ -735,7 +716,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -95,15 +95,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span><strong>Bags, pushes and run times are the clinic&rsquo;s own numbers, not a guess.</strong>
-          They drive chair time on <a href="schedule.html#/l-01-day">the calendar</a>, the summary the patient reads in
-          <a href="journey-plan.html#/j-plan-activities">their plan</a>, and the units that reach
-          <a href="billing.html#/d-01-worklist">the claim</a>. Concentrations on every recipe carry a
-          clinical approval and a version &mdash; nobody edits a live recipe in place.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -142,10 +133,6 @@
               <tr><td><strong>B-complex</strong></td><td class="t-num">2 mL</td><td>2 mL</td><td class="t-lot">LOT-1188</td><td>Additive</td></tr>
                   </tbody>
                 </table>
-              </div>
-              <div class="prov" style="margin-top:10px">
-                <span>Every component draws from <a href="#t-04-inventory" data-activate="t-04-inventory">inventory</a>.
-                Logging an administration decrements the lot, so on-hand is a consequence of work done, never a number somebody types.</span>
               </div>
             </div>
 
@@ -189,10 +176,6 @@
                 <dt>Codes</dt><dd>Not submitted &mdash; documented for the record</dd>
                 <dt>Units billed</dt><dd>Bags administered, from the log</dd>
               </dl>
-              <div class="prov" style="margin-top:10px">
-                <span>Whether a treatment is doable on insurance is a property of the treatment, set here,
-                and read by booking and by billing. It is never decided again at the desk.</span>
-              </div>
             </div>
 
             <div class="card" style="margin-top:16px">
@@ -207,10 +190,6 @@
               <div class="g-ev"><div class="g-ev-when">Jan 18</div><div class="g-ev-what">
                 <strong>v5</strong> &mdash; B-complex added.</div>
                 <div class="g-ev-ver"><span class="appr superseded">Superseded</span></div></div>
-              <div class="prov" style="margin-top:10px">
-                <span>An administration is stamped with the version that was live when it ran, so an old chart
-                never shows today&rsquo;s recipe.</span>
-              </div>
             </div>
           </div>
         </div>
@@ -257,13 +236,6 @@
           EBOO has a circuit and a filter; PRP has a spin and a volume; a manual therapy has neither.
           The setup screen shows the fields that belong to that therapy and nothing else.
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span>Therapies are an order category of their own, next to labs and prescriptions. Ordering one puts it
-          on <a href="journey-plan.html#/j-plan-activities">the patient&rsquo;s plan</a> so they know what is
-          happening and what to do, and on <a href="schedule.html#/l-01-day">the calendar</a> for the room and the staff it needs.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -304,12 +276,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span>Highlighted rows are below par. On-hand falls when an administration is logged, never by hand &mdash;
-          which is what makes <a href="#t-05-log" data-activate="t-05-log">the log</a> worth keeping.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -350,12 +316,6 @@
           version onto the chart, records any variance against the booked time, and hands billing the units it
           needs. Staff enter it once, in the flow, and nothing is re-keyed afterwards.
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span>Actuals never overwrite the signed order &mdash; a variance is recorded, not corrected away.
-          The log is append-only and lands in <a href="security.html#/g-01-audit">the audit store</a>.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -398,11 +358,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:12px">
-          <span>Three levels, one look each: <strong>colour = type</strong>, <strong>shade = status</strong> and <strong>letters = subtype</strong>. Only the type owns a hue; status is the block&rsquo;s shade and its written word &mdash; that is what keeps a glance readable.</span>
-        </div>
-
       </div>
     </div>
   </section>
@@ -548,10 +503,6 @@
         <label class="field-label">Treatments in this subtype</label>
         <input class="field-input" type="text" value="Mega C 15 / 25 / 50 / 75 / 100">
       </div>
-      <div class="prov" style="margin-top:4px">
-        <span>18 appointments already carry this subtype. They keep their history; only the way they are
-        drawn from now on changes.</span>
-      </div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
@@ -560,7 +511,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {

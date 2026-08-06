@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .i-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .i-lane { flex: 1 1 200px; min-width: 190px; }
@@ -74,12 +74,6 @@
             <button class="btn" data-activate="i-03-ruleset">Open the ruleset</button>
           </div>
         </div>
-
-        <div class="prov">
-          <span><strong>Written here</strong> — one readiness record per patient, versioned. The front desk board, the bay board, IV orders and the plan of care read this one.</span>
-          <span>eCW receives the approved summary until it is retired.</span>
-        </div>
-
         <div class="card" style="margin-bottom:16px">
           <div class="i-flow">
             <div class="i-lane">
@@ -276,7 +270,6 @@
                 <dt>Change the ruleset</dt><dd>Physician or extender approves a proposal</dd>
                 <dt>HCOS</dt><dd>Explains and suggests — it never escalates or changes a stage</dd>
               </dl>
-              <div class="prov"><span><strong>Every decision</strong> lands in the audit store · <a href="security.html#/g-01-audit">open it</a></span></div>
             </div>
           </div>
         </div>
@@ -394,7 +387,6 @@
               <div class="i-hist"><span class="i-hist-when">Jul 13</span><span class="i-hist-what"><span class="ver-chip superseded">v3</span> Standard · ruleset v3.2 · check-in stable</span><span class="i-hist-who">Dr. Bakman</span></div>
               <div class="i-hist"><span class="i-hist-when">Jul 19</span><span class="i-hist-what"><span class="ver-chip">v4</span> Physician review required · ruleset v3.2 · waiting</span><span class="i-hist-who">engine</span></div>
               <div class="field-help" style="margin-top:8px">Each version keeps the ruleset it ran on. Publishing a new ruleset never rewrites a released result.</div>
-              <div class="prov"><span><strong>Every line</strong> is in the audit store · <a href="security.html#/g-01-audit">open it</a></span></div>
             </div>
           </div>
 
@@ -764,7 +756,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   /* Jumping to a screen from inside a why drawer closes the drawer behind it. */
   document.addEventListener('click', function (ev) {

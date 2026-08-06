@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   /* Page-local pieces the shared vocabulary lacks — all prefixed .b-
      LAYOUT ONLY: every box below is a .card in the markup. */
@@ -75,11 +75,6 @@
           <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list"><span class="lead-body" title="Thyroid autoimmunity — payer: E06.3 · Hashimoto's"><span class="lead-name">Thyroid autoimmunity</span><span class="lead-ins">E06.3 &middot; Hashimoto's</span></span></a>
           <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">Problem list &rsaquo;</a>
         </div>
-
-        <div class="prov">
-          <span><strong>Reads</strong> the <a href="#b-05-problem-list" data-activate="b-05-problem-list">problem list</a>, results, <a href="clinical-questionnaires.html#/b-30-quest-results">questionnaire <code>Q-1180</code></a> and <a href="intake-onboarding.html#/a-16-conditions">her onboarding answers</a> — the timeline arranges them in time and keeps no copy</span>
-        </div>
-
         <div class="grid-sidebar">
           <div>
             <div class="seg-divider" style="margin-top:0">Life events and symptom onset</div>
@@ -213,11 +208,6 @@
           <a class="lead-chip" href="clinical-chart.html#/b-05-problem-list"><span class="lead-body" title="Thyroid autoimmunity — payer: E06.3 · Hashimoto's"><span class="lead-name">Thyroid autoimmunity</span><span class="lead-ins">E06.3 &middot; Hashimoto's</span></span></a>
           <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">Problem list &rsaquo;</a>
         </div>
-
-        <div class="prov">
-          <span><strong>Written in HCOS</strong> since Jul 1 2026 · eCW receives a summary copy · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
-        </div>
-
                 <div class="seg-divider">Lead actors &mdash; what we are fighting, and what we may call it</div>
 
         <div class="callout">
@@ -329,12 +319,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov" style="margin-top:10px">
-          <span>Ranked by the doctor, not by the system. The top five ride along on every one of her screens as
-          breadcrumbs, so nobody opens a chart and forgets what the visit is really about.</span>
-        </div>
-
         <div class="seg-divider">Problem list &mdash; the detail underneath</div>
 
         <div class="filters">
@@ -572,9 +556,6 @@
         <div class="prov">
           <span><strong>Reads</strong> <a href="intake-onboarding.html#/a-19-medications">onboarding medications</a> Jul 14 · pharmacy fills CVS Irvine #4421 Jul 19 · signed orders — none of them is copied here</span>
         </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> eCW writes prescriptions and fills until the medication domain activates in HCOS · HCOS reads them and owns the reconciliation you see here</span>
-        </div>
 
         <div class="seg-divider" style="margin-top:0">Active medications and supplements (4)</div>
         <div class="tbl-wrap">
@@ -764,13 +745,6 @@
           <div>Reconciled by Charlene (MA) today 9:04 AM · reconfirmed by the patient at check-in · <span class="appr pending">1 item pending your review</span></div>
           <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Reviewed with no changes — recorded for today under Dr. Drannikov.', 'ok')">Confirm — no changes</button>
         </div>
-        <div class="prov">
-          <span><strong>Reads</strong> <a href="intake-onboarding.html#/a-18-allergies">onboarding allergies</a>, check-in and outside records — each entry keeps who said it and when</span>
-        </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> the allergy list is written in HCOS since Jul 1 2026 · eCW receives a read-only copy · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
-        </div>
-
         <div class="seg-divider" style="margin-top:0">Allergies — hard block</div>
         <div class="tbl-wrap">
           <table class="tbl">
@@ -803,7 +777,6 @@
             <span class="pill pill-warn">Blocking now</span>
           </div>
           It blocks matching orders from the moment it was written down. Your review decides whether it stays an allergy, becomes an intolerance, or comes off with a reason.
-          <div class="prov"><span><strong>From</strong> the patient at check-in · <a href="intake-onboarding.html#/a-18-allergies">her onboarding answers</a> · kept in her words</span></div>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Verified by Dr. Drannikov — same entry, now verified, still hard-blocking.', 'ok')">Verify as allergy</button>
             <button class="btn btn-sm" onclick="HCOS.toast('Recorded as an intolerance by Dr. Drannikov — orders warn instead of blocking.')">Record as intolerance</button>
@@ -943,9 +916,6 @@
           <a class="lead-more" href="clinical-chart.html#/b-05-problem-list">Problem list &rsaquo;</a>
         </div>
         <div class="prov">
-          <span><strong>Source of truth</strong> orders are written in HCOS and nowhere else · eCW receives a read-only sync for orders · <a href="security.html#/g-01-audit">every version is in the audit store</a></span>
-        </div>
-        <div class="prov">
           <span><strong>Downstream reads</strong> <code>O-2291</code> at its signed version — today that is <span class="ver-chip superseded">v1</span>. Scheduling, the chair and the flowsheet move to v2 only when v2 is signed; runs already given stay on the version they were given under.</span>
         </div>
 
@@ -964,10 +934,6 @@
             <div class="b-proto-dose">25 g ascorbic acid (500 mg/mL × 50 mL) in 250 mL saline · 50 billing units · ~2.5 h · a G6PD result is required before it can be signed</div>
           </div>
         </div>
-        <div class="prov">
-          <span><strong>Templates</strong> are the starting numbers · this order keeps its own signed values from the moment you sign it</span>
-        </div>
-
         <div class="grid-sidebar" style="margin-top:16px">
           <div>
             <div class="seg-divider" style="margin-top:0">Components · <span id="b-comp-title">Foundational Flow 10</span></div>
@@ -1087,7 +1053,6 @@
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Readiness · a reported flare holds the next session</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">open</a></span></li>
                 <li class="check-item"><span class="check-icon pending">·</span><span class="check-label">Sign and lock dispatches v2 — nothing moves before that</span><span class="check-meta"><a href="clinical.html#/b-11-sign-lock">open</a></span></li>
               </ul>
-              <div class="prov"><span><strong>None of them</strong> restates the protocol — each carries the order number and the version it was booked or documented on</span></div>
             </div>
             <div class="card" style="margin-top:14px">
               <div class="card-title">Cost and coverage</div>
@@ -1103,7 +1068,6 @@
               <div class="card-title">Patient-facing summary</div>
               <p id="b-patient-summary" style="font-size:12px;color:var(--muted);line-height:1.6;margin:0">"You'll receive 6 infusions of vitamins and minerals over 6 weeks, one a week. The drip itself runs about 30 minutes; plan on about an hour and a quarter in the chair, because we place the line, monitor your vitals throughout, and watch you for a few minutes afterwards."</p>
               <button class="btn btn-sm" style="width:100%;margin-top:10px" onclick="HCOS.toast('Summary sent — it is on the patient portal and in the next reminder.', 'ok')">Send to patient portal</button>
-              <div class="prov"><span><strong>Reads</strong> the chair time and cadence on this draft — the patient copy is generated from them, never typed twice</span></div>
             </div>
           </div>
         </div>
@@ -1164,9 +1128,6 @@
         <div class="prov">
           <span><strong>One encounter</strong> <code>ENC-2026-0418</code> — the states are appended, never overwritten · this addendum is state 4 and does not touch the signed text · <a href="clinical-governance.html#/b-27-system-states">documentation states</a></span>
         </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> HCOS holds encounter states since Jul 1 2026 · eCW receives a read-only summary until full cutover</span>
-        </div>
 
         <div class="callout callout-warn">
           <strong>Why an addendum, not an edit:</strong> the original note is the legal record at the moment of sign. Amending keeps the original verbatim and appends new content with a fresh timestamp, signature, and reason — meeting HIPAA, payer audit, and 21 CFR Part 11 standards.
@@ -1202,7 +1163,6 @@
             <li class="check-item"><span class="check-icon pending">·</span><span class="check-label">Low-dose naltrexone 1.5 mg nightly × 30 days</span><span class="check-meta"><span class="appr draft">No order yet</span></span></li>
             <li class="check-item"><span class="check-icon pending">·</span><span class="check-label">L-lysine 1 g twice daily</span><span class="check-meta"><span class="appr draft">No order yet</span></span></li>
           </ul>
-          <div class="prov"><span><strong>Writing them here changes nothing</strong> — only a signed order puts a medication on the <a href="#b-06-med-rec" data-activate="b-06-med-rec">medication list</a> or changes a dose</span></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Two orders drafted under your name — naltrexone as a prescription, L-lysine as a supplement. They reach the medication list when you sign them.', 'ok')">Draft both orders</button>
             <button class="btn btn-sm" data-activate="b-06-med-rec">Open the medication list</button>
@@ -1272,7 +1232,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

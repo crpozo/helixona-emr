@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .j-patientbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .j-patientbar .avatar { width: 42px; height: 42px; font-size: 14px; }
@@ -55,9 +55,6 @@
 
         <div class="prov">
           <span><strong>Built from</strong> signed orders <code>O-2384 v3</code> and <code>O-2288 v1</code> · readiness <code>RA-1152 v5</code> Standard · ruleset v3.2 · medication list. Dose, route and cadence stay in those records.</span>
-        </div>
-        <div class="prov">
-          <span><strong>Written in HCOS.</strong> A plan summary document goes to eCW for as long as eCW is live.</span>
         </div>
 
         <div class="grid-sidebar" style="margin-top:16px">
@@ -164,7 +161,6 @@
               <div class="field">
                 <label class="field-label">Access level — business</label>
                 <div style="font-size:14px;font-weight:600;color:var(--hx-navy)">Comprehensive</div>
-                <div class="prov"><span><strong>From</strong> membership Restore · <a href="pricing-memberships.html">memberships</a></span></div>
                 <div class="field-help">How Maya engages and pays. It never changes the clinical pathway, and the pathway never changes it.</div>
               </div>
             </div>
@@ -234,7 +230,6 @@
                 <dt>Ruleset</dt><dd>v3.2</dd>
                 <dt>Approved by</dt><dd>Dr. Drannikov · Jul 6</dd>
               </dl>
-              <div class="prov"><span><strong>From</strong> the readiness assessment · <a href="readiness.html#/i-01-readiness">open</a></span></div>
               <div class="field-help">Pacing may be gentler than readiness allows, never bolder.</div>
             </div>
 
@@ -272,11 +267,6 @@
             <button class="btn" data-activate="j-staff-poc">Back to plan of care</button>
           </div>
         </div>
-
-        <div class="prov">
-          <span><strong>Every item points at</strong> a signed order, a plan instruction or the medication list. Frequency lives in the plan version; dose and route live in the source.</span>
-        </div>
-
         <div class="callout" style="margin-bottom:14px">
           <strong>Version 5 has 3 changes waiting for approval:</strong> pacing Standard → Gentle, plus the two plan items marked below. They take effect only when Dr. Drannikov approves.
           <div class="j-actions" style="margin-top:10px">
@@ -765,11 +755,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov">
-          <span><strong>Reads</strong> the person master, plan versions, appointments and check-ins. This roster keeps nothing of its own — Nadia's draft plan waits on readiness <a href="readiness.html#/i-01-readiness">physician review</a>.</span>
-        </div>
-
         <div class="j-actions" style="margin-top:14px">
           <button class="btn btn-primary" data-activate="j-staff-poc">Open Maya's plan</button>
           <a class="btn" href="patients.html">Open patient chart</a>
@@ -782,7 +767,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Segmented controls (pacing, week) — click to activate; a couple toast.
   document.addEventListener('click', function (ev) {

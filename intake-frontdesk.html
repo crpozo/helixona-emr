@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .afd-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
   .afd-prow { display: flex; align-items: center; gap: 10px; }
@@ -33,12 +33,6 @@
       <div class="frame-body">
         <h2 class="page-title">Today's schedule</h2>
         <p class="page-sub">Tuesday, July 21 · 11:40 AM · Dr. Drannikov and the infusion suite — who is checked in and what the front desk still needs</p>
-
-        <div class="prov">
-          <span><strong>Source of truth</strong> the HCOS scheduling service — one appointment ID per visit, no second copy here · eCW receives a read-only sync of this domain · <a href="schedule.html#/l-01-day">day view</a></span>
-          <span><strong>Readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v3.2</span> · written in HCOS since the module launched; eCW receives the approved summary · <a href="readiness.html#/i-01-readiness">engine</a></span>
-        </div>
-
         <div class="afd-toolbar">
           <div class="cal-nav">
             <button class="btn btn-sm" onclick="HCOS.toast('Wireframe shows Tuesday, July 21')">‹</button>
@@ -280,12 +274,6 @@
           </div>
           <button class="btn" data-activate="a-29-today-schedule">Back to today's schedule</button>
         </div>
-
-        <div class="prov">
-          <span><strong>Clinical readiness</strong> from the readiness assessment · ruleset <span class="ver-chip">v3.2</span> · evaluated 7:00 AM · HCOS-native since the module launched, eCW receives the approved summary · <a href="readiness.html#/i-01-readiness">engine</a></span>
-          <span><strong>Front desk items</strong> from the onboarding record · eCW writes demographics and coverage until those domains cut over; HCOS reads them · <a href="intake-onboarding.html">open</a></span>
-        </div>
-
         <div class="card" style="margin-bottom:12px">
           <div class="tbl-wrap">
             <table class="tbl">
@@ -421,11 +409,6 @@
 
             <div class="seg-divider">Eligibility</div>
             <div style="font-size:12.5px"><span class="pill pill-ok">Active</span> Cigna PPO <span class="net-badge net-oon">OON</span> · self-funded · ERISA</div>
-            <div class="prov">
-              <span><strong>Snapshot</strong> Jul 21, 7:02 AM · <code>ELIG-4471</code> · earlier responses kept</span>
-              <span><strong>Source of truth</strong> eCW writes coverage and eligibility until that domain cuts over; HCOS reads them</span>
-              <span><a href="patients.html#/pt-02-profile">Coverage</a></span>
-            </div>
             <div class="field-help">SPD requested Jul 18 — the governing plan document has not arrived yet.</div>
           </div>
         </div>
@@ -463,12 +446,6 @@
       <div class="frame-body">
         <h2 class="page-title">Walk-in registration</h2>
         <p class="page-sub">Find them first — most walk-ins are already in HCOS</p>
-
-        <div class="prov">
-          <span><strong>From</strong> the person master · one person, one record · <a href="patients.html#/pt-04-find">open</a></span>
-          <span><strong>Source of truth</strong> eCW writes demographics until the person domain activates in HCOS · HCOS reads them and appends lifecycle events</span>
-        </div>
-
         <div class="grid-sidebar">
           <div>
             <div class="card" style="margin-bottom:16px">
@@ -590,9 +567,6 @@
                 <span class="lifecycle-step">Patient</span>
                 <span class="lifecycle-step">Inactive</span>
               </div>
-              <div class="prov">
-                <span><strong>Derived</strong> from the events on the person record · <a href="patients.html#/pt-05-identity">history</a></span>
-              </div>
               <div class="field-help">Registering a walk-in appends an arrival event. It never starts a second identity.</div>
             </div>
 
@@ -608,9 +582,6 @@
                 <button class="filter-chip">SMS link</button>
                 <button class="filter-chip">Both</button>
               </div>
-              <div class="prov">
-                <span><strong>Booked</strong> through the scheduling service · one appointment ID · <a href="schedule.html#/l-03-book">slots</a></span>
-              </div>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
                 <a class="btn" href="schedule.html#/l-03-book">Book a same-day slot</a>
                 <button class="btn" onclick="HCOS.toast('One-time QR code printing at the front desk — it opens the two unsigned consents at the kiosk.', 'ok')">Print the kiosk QR code</button>
@@ -624,9 +595,6 @@
                 <dt>Governance</dt><dd>Self-funded · ERISA</dd>
                 <dt>Eligibility</dt><dd>Snapshot Jul 21, 7:02 AM</dd>
               </dl>
-              <div class="prov">
-                <span><strong>One active coverage</strong> · cards are captured at the kiosk, never re-keyed here · <a href="patients.html#/pt-02-profile">open</a></span>
-              </div>
               <a class="btn btn-sm" href="intake-kiosk.html#/a-34-kiosk-id">Capture the card at the kiosk</a>
             </div>
 
@@ -664,12 +632,6 @@
           <p class="page-sub" style="margin-bottom:10px">11:22 AM · 8 minutes early · Foundational Flow 10 at 11:30 · Chair 3</p>
           <span class="pill pill-st st-arrived">Arrived</span>
         </div>
-
-        <div class="prov">
-          <span><strong>Appointment</strong> <code>A-7719</code> · arrival event appended by Yazmin on the HCOS scheduling service · eCW receives a read-only sync of this domain · <a href="schedule.html#/l-04-appt">open</a></span>
-          <span><strong>Readiness</strong> <code>RA-1206</code> <span class="ver-chip">v3</span> · Flare recovery · <span class="appr pending">Pending</span> Dr. Drannikov since Jul 19 · <a href="readiness.html#/i-01-readiness">engine</a></span>
-        </div>
-
         <div class="callout callout-warn" style="margin-top:12px">Readiness is Flare recovery and still pending with Dr. Drannikov since Jul 19 — Rule 2 held the escalation after Sunday's flare report. Today's session runs at the flare-recovery level under signed order <code>O-2291</code>; any escalation waits on his decision. The front desk records the arrival, never the clearance. <a href="readiness.html#/i-01-readiness">Open her readiness</a></div>
 
         <div class="grid-3" style="margin-top:12px">
@@ -700,7 +662,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Demo only: filter chips toggle their active state within their own group.
   document.addEventListener('click', function (ev) {

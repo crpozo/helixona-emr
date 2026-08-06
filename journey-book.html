@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   /* Layout only — every box here is a shared component (.act-row, .tile, .card,
      .kv, .meter); these rules place them and nothing else. */
@@ -122,9 +122,6 @@
             <dt>Changes the plan</dt><dd>Physician or extender · <a href="journey-careplan.html#/j-staff-poc">plan of care</a></dd>
             <dt>The app</dt><dd>Offers approved options only — it never writes an order</dd>
           </dl>
-          <div class="prov">
-            <span><strong>Asking about something</strong> raises a request for the care team. It does not change the plan.</span>
-          </div>
         </div>
       </div>
 
@@ -194,9 +191,6 @@
             <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Sun, Jul 26 — clinic closed</span><span class="check-meta">Hours</span></li>
             <li class="check-item"><span class="check-icon blocked">!</span><span class="check-label">Wed, Jul 29 onward — outside her booking window</span><span class="check-meta">Membership</span></li>
           </ul>
-          <div class="prov">
-            <span><strong>Front desk sees the same days</strong> on <a href="schedule.html#/l-03-book">the booking screen</a> — one engine, one set of rules.</span>
-          </div>
         </div>
       </div>
 
@@ -235,10 +229,6 @@
       <div class="jb-side">
         <div class="card">
           <div class="card-title">Times come from the same capacity service</div>
-          <div class="prov" style="margin-top:0">
-            <span><strong>From</strong> the HCOS scheduling service · <span id="jb-room-3">light room</span> · the screen front desk uses is <a href="schedule.html#/l-03-book">Book appointment</a></span>
-          </div>
-
           <div class="ai-block">
             <div class="ai-head">
               <span class="ai-badge">Suggested by HCOS</span>
@@ -321,9 +311,6 @@
             <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Week's count still not used up</span><span class="check-meta">Cadence</span></li>
             <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Readiness Standard · <code>RA-1152</code> v5 · ruleset v3.2</span><span class="check-meta"><a href="readiness.html#/i-01-readiness">Dr. Drannikov · Jul 6</a></span></li>
           </ul>
-          <div class="prov">
-            <span><strong>Commits through</strong> the HCOS scheduling service — one appointment, one number, the record front desk opens · eCW receives a read-only sync of this domain</span>
-          </div>
           <div class="field-help">If a check fails now, nothing is booked and the time goes back on the calendar.</div>
         </div>
 
@@ -335,9 +322,6 @@
             <dt>Nobody releases</dt><dd>A taken room or provider · a missing order or clearance · a week's count already used · nobody on site to run it</dd>
             <dt>Logged</dt><dd>Every booking, with who, when and which rule · <a href="security.html#/g-01-audit">audit trail</a></dd>
           </dl>
-          <div class="prov">
-            <span><strong>Appointment</strong> gets its number at commit and lands on <a href="schedule.html#/l-01-day">the clinic day view</a> — the patient app never holds a second copy.</span>
-          </div>
         </div>
       </div>
 
@@ -346,7 +330,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Guided booking: each pick carries the canonical facts of that plan item —
   // hold length, room, count left, the record it comes from and who accepted the

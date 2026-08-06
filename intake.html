@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .a-prow { display: flex; align-items: center; gap: 10px; }
   .a-pname { font-weight: 600; color: var(--hx-navy); }
@@ -147,10 +147,6 @@
             </tbody>
           </table>
         </div>
-
-        <div class="prov">
-          <span><strong>One row per person</strong> — triage shows the lifecycle status held on the person master, not a copy of it · <a href="patients.html#/pt-04-find">person master</a></span>
-        </div>
       </div>
     </div>
   </section>
@@ -189,9 +185,6 @@
                 </div>
               </div>
               <button class="btn btn-primary" onclick="HCOS.toast('Searched name, date of birth, phone and email.', 'ok')">Search</button>
-              <div class="prov">
-                <span><strong>Source of truth</strong> eCW writes demographics until the person domain activates in HCOS · HCOS reads them and appends lifecycle events</span>
-              </div>
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -443,9 +436,6 @@
               <span class="check-meta"><a href="clinical-chart.html#/b-06-med-rec">Medications</a></span>
             </li>
           </ul>
-          <div class="prov">
-            <span><strong>From</strong> the medical history questionnaire, today 9:02 AM · <span class="clin-src">said by the patient, not yet reconciled</span></span>
-          </div>
           <button class="btn btn-sm" style="margin-top:10px" onclick="HCOS.toast('Sent to Dr. Drannikov. Triage can flag a reported item, never make it clinically active.', 'ok')">Ask a provider to review</button>
         </div>
 
@@ -764,9 +754,6 @@
                 </div>
               </div>
               <button class="btn btn-primary" onclick="HCOS.toast('270 sent to Anthem Blue Cross. The response is kept as snapshot #5 — snapshot #4 stays exactly as it came back.', 'ok')">Run eligibility check</button>
-              <div class="prov">
-                <span><strong>Who runs this</strong> billing, front desk and PCC · clinical users read the result · nobody edits a stored response</span>
-              </div>
             </div>
 
             <div class="card">
@@ -827,11 +814,6 @@
                   </tbody>
                 </table>
               </div>
-
-              <div class="prov">
-                <span><strong>From</strong> the 271 response Anthem returned · <a href="#" onclick="HCOS.toast('Opened the raw 271 response behind snapshot #4.'); return false;">read the raw response</a> · scheduling and estimates read this snapshot</span>
-              </div>
-
               <div class="ai-block">
                 <div class="ai-head">
                   <span class="ai-badge">Summarized by HCOS</span>
@@ -891,10 +873,6 @@
                   </tbody>
                 </table>
               </div>
-              <div class="prov">
-                <span><strong>Nothing here is overwritten</strong> · a failed exchange is kept as evidence, and the latest valid snapshot is the one downstream screens read · <a href="security.html#/g-01-audit">audit store</a></span>
-              </div>
-
               <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
                 <button class="btn btn-primary" data-activate="a-09-booking">Book appointment</button>
                 <button class="btn btn-ghost" data-activate="a-08-lead-detail">Back to the person</button>
@@ -936,9 +914,6 @@
               <dt>Appointment</dt>
               <dd>New patient consult · Mon Jul 20 · 1:00 PM · <code>A-4388</code> <span class="pill pill-st st-noshow">No-show</span></dd>
             </dl>
-            <div class="prov" style="margin-bottom:14px">
-              <span><strong>No-show belongs to the appointment</strong>, set on <a href="schedule.html#/l-04-appt">the schedule</a> — it is not a status on the person</span>
-            </div>
             <div class="field">
               <label class="field-label">Primary reason</label>
               <select class="field-select">
@@ -965,9 +940,6 @@
             <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
               <button class="btn btn-primary" data-activate="a-06-triage-dashboard" onclick="HCOS.toast('Rachel Okonkwo set to Inactive with your reason. The record, the appointment and the whole timeline stay.', 'warn')">Set lifecycle to Inactive</button>
               <button class="btn btn-ghost" data-activate="a-06-triage-dashboard">Cancel</button>
-            </div>
-            <div class="prov">
-              <span><strong>Who may do this</strong> front desk · PCC · every status change is written with your name to the <a href="security.html#/g-01-audit">audit store</a></span>
             </div>
           </div>
 
@@ -1007,7 +979,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

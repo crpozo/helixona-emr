@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .ob-brand { text-align: center; padding: 26px 0 18px; }
   .ob-brand-name { font-size: 22px; font-weight: 600; color: var(--hx-navy); }
@@ -335,11 +335,6 @@
         </div>
 
         <button class="btn btn-sm" id="ob-add-condition" style="margin-bottom:12px" onclick="HCOS.toast('Tap a chip above — it becomes a detail card here.', 'ok')">+ Add another condition</button>
-
-        <div class="prov" style="margin-bottom:14px">
-          <span><strong>Goes to</strong> your chart as reported by you · a provider decides what joins the <a href="clinical-chart.html#/b-05-problem-list">problem list</a></span>
-        </div>
-
         <button class="btn btn-primary btn-lg ob-full" data-activate="a-17-symptoms">Continue</button>
       </div>
     </div>
@@ -545,11 +540,6 @@
         </div>
 
         <button class="btn btn-sm" style="margin-bottom:12px" data-ob-add="allergy">+ Add allergy or sensitivity</button>
-
-        <div class="prov" style="margin-bottom:14px">
-          <span><strong>Goes to</strong> the one <a href="clinical-chart.html#/b-07-allergies">allergy list</a> every safety check reads · Nick reconciles it, Dr. Drannikov verifies it</span>
-        </div>
-
         <div class="seg-divider">No known reactions to</div>
         <div class="ob-chips" style="margin-bottom:14px">
           <button class="filter-chip multi">Penicillin</button>
@@ -661,11 +651,6 @@
         </div>
 
         <button class="btn btn-sm" style="margin-bottom:12px" data-ob-add="medication" data-ob-count="ob-med-count">+ Add another medication</button>
-
-        <div class="prov" style="margin-bottom:14px">
-          <span><strong>Goes to</strong> your one <a href="clinical-chart.html#/b-06-med-rec">medication and supplement list</a> as reported by you · a provider reconciles it before anything is prescribed</span>
-        </div>
-
         <div class="seg-divider">Quick add</div>
         <div class="ob-med-sub" style="margin-bottom:8px">Or import from your pharmacy via SureScripts — CVS Irvine #4421 is on file.</div>
         <button class="btn ob-full" style="margin-bottom:14px" onclick="HCOS.toast('Import requested — pharmacy items arrive marked reported, for you to confirm.', 'ok')">Import from CVS Irvine #4421</button>
@@ -800,11 +785,6 @@
         </div>
 
         <button class="btn btn-sm" style="margin-bottom:12px" data-ob-add="supplement" data-ob-count="ob-supp-count">+ Add another supplement</button>
-
-        <div class="prov" style="margin-bottom:14px">
-          <span><strong>Same list</strong> as your medications · <a href="clinical-chart.html#/b-06-med-rec">medication and supplement list</a> · what you take and what is prescribed stay marked apart</span>
-        </div>
-
         <div class="seg-divider">Quick add</div>
         <button class="btn ob-full" style="margin-bottom:10px" onclick="HCOS.toast('Import requested — Fullscript items arrive marked reported, for you to confirm.', 'ok')">Import from Fullscript account</button>
         <button class="btn ob-full" style="margin-bottom:18px" onclick="HCOS.toast('Snap each bottle label — names are read into this list for your review.', 'ok')">Snap photos of your bottles</button>
@@ -918,7 +898,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
 (function () {
   'use strict';

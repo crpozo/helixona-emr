@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .pr-price { font-family: ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
   .pr-price-main { font-weight: 700; color: var(--hx-navy); }
@@ -228,7 +228,7 @@
                 <dt>Active since</dt><dd>Jan 1, 2026</dd>
               </dl>
               <div class="prov"><span><strong>From</strong> coverage <code>C-4182</code> — the one active set for this person · <a href="patients.html#/pt-02-profile">open it in the chart</a></span></div>
-              <div class="prov"><span><strong>eCW writes</strong> coverage and eligibility until cutover · this screen reads them and holds no copy</span></div>
+
             </div>
 
             <div class="card" style="margin-bottom:16px">
@@ -247,7 +247,6 @@
                 </dd>
                 <dt>Docs method</dt><dd>EDI 275 with the claim · via clearinghouse</dd>
               </dl>
-              <div class="prov"><span><strong>Kept as it came back</strong> · a payer answer is never edited — a correction arrives as the next snapshot · <a href="security.html#/g-01-audit">see the log</a></span></div>
             </div>
 
             <div class="ai-block">
@@ -318,7 +317,6 @@
                 <dt>Plan pays</dt><dd>100% — out-of-pocket max reached</dd>
                 <dt>Maya owes</dt><dd><strong style="font-size:15px">$0</strong></dd>
               </dl>
-              <div class="prov"><span><strong>Price</strong> price list <span class="ver-chip">v12</span> · <strong>Benefit</strong> snapshot <span class="ver-chip">#3</span> · <strong>Membership</strong> Restore</span></div>
               <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
                 <button class="btn btn-primary btn-sm" onclick="HCOS.toast('Estimate saved to the 1:00 PM visit — it names price list v12 and snapshot #3.', 'ok')">Save the estimate to the visit</button>
                 <button class="btn btn-sm" data-activate="pr-01-list">Open the price list</button>
@@ -467,7 +465,6 @@
         <div class="field"><label class="field-label">Member price</label><input class="field-input" placeholder="$0"></div>
       </div>
       <div class="field"><label class="field-label">Billing code</label><input class="field-input" placeholder="Leave empty for cash only"></div>
-      <div class="prov" style="margin-bottom:0"><span><strong>Price is ours</strong> · what a plan pays comes back from the payer, service by service, and is not set here</span></div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
@@ -492,7 +489,6 @@
         <input type="checkbox" id="pr-cap" style="margin:0">
         <label for="pr-cap">Counts against the tier's session cap</label>
       </div>
-      <div class="prov" style="margin-bottom:0"><span><strong>A membership rule</strong> · it sets price and access, never what a plan pays</span></div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
@@ -501,6 +497,6 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 </body>
 </html>

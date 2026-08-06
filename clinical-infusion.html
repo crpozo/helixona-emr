@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .bi-board { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .bi-chair { display: block; text-decoration: none; color: inherit; cursor: pointer; position: relative; }
@@ -53,14 +53,6 @@
       <div class="frame-body">
         <h2 class="page-title">Infusion bay board</h2>
         <p class="page-sub">Tuesday, July 21 · 11:40 AM · Chairs 1–4 · suite coordinator Bee (PCC)</p>
-        <div class="prov">
-          <span><strong>Reads</strong> the day calendar · signed orders · readiness · what has been given so far — refreshed 11:40 AM · <a href="schedule.html#/l-01-day">open the day calendar</a></span>
-        </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> HCOS holds the infusion record since Jul 1 2026 · eCW receives a read-only sync of this domain</span>
-          <span>The board keeps no copy — every number here is read from the order, the readiness record and the flowsheet.</span>
-        </div>
-
         <div class="grid-4" style="margin-bottom:16px">
           <div class="card stat-card">
             <div class="stat-num">1</div>
@@ -179,7 +171,6 @@
               <dt>Chair and time</dt><dd>Front desk, on the day calendar</dd>
               <dt>HCOS</dt><dd>Predicts and flags — it never starts, holds or moves a treatment</dd>
             </dl>
-            <div class="prov"><span><strong>Every change</strong> lands in the audit store · <a href="security.html#/g-01-audit">open it</a></span></div>
           </div>
         </div>
       </div>
@@ -196,10 +187,6 @@
         <p class="page-sub">Priya Natarajan · Foundational Flow 10 · session 3 of 6 · Juan (Medic) verifying · every right must clear before the infusion starts</p>
         <div class="prov">
           <span><strong>Reads</strong> signed order <code>O-2291</code> <span class="ver-chip">v1</span> · the allergy list · readiness <code>RA-1206</code> <span class="ver-chip">v3</span> · appointment <code>A-88226</code> — read live, never copied here</span>
-        </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> the order, the allergy list and readiness are written in HCOS · eCW receives a read-only sync</span>
-          <span>This screen records one thing of its own: who checked each right, and when.</span>
         </div>
 
         <div class="bi-vitals">
@@ -238,7 +225,6 @@
                 <dt>Stop rules</dt><dd>Stop for chest tightness, wheeze, rash, systolic below 90 or a fall of 20 from baseline. Slow the rate for warmth or flushing and write it on the flowsheet.</dd>
               </dl>
               <div class="field-help">Today runs on v1. The v2 draft authorizes nothing until Dr. Drannikov signs it.</div>
-              <div class="prov"><span><strong>Dispatched</strong> to the bay by sign and lock · <a href="clinical-chart.html#/b-10-iv-order">open the order</a> · <a href="clinical.html#/b-11-sign-lock">the encounter it came from</a></span></div>
             </div>
           </div>
 
@@ -275,7 +261,6 @@
             <div class="bi-listrow">
               <div class="bi-listrow-main">Environmental · severe food · latex <span class="pill pill-muted">None reported</span></div>
             </div>
-            <div class="prov"><span><strong>One list</strong>, read live from the chart. This screen shows it and never edits it — reconciling or verifying an entry happens on the allergy list, and only a physician or extender decides what a reported item becomes · <a href="clinical-chart.html#/b-07-allergies">open the allergy list</a></span></div>
             <div class="callout" style="margin-top:10px">Checked against this order: nothing in the Foundational Flow 10 is sulfa- or shellfish-derived, so neither entry blocks today's session.</div>
 
             <div class="callout callout-warn" id="bi-variance" style="margin-top:12px">
@@ -317,11 +302,6 @@
       <div class="frame-body">
         <h2 class="page-title">Infusion flowsheet — Chair 1</h2>
         <p class="page-sub">Maya Reyes · NAD+ 500 mg · session 4 of 8 · Nick (Nurse) documenting</p>
-<div class="prov">
-          <span><strong>Source of truth</strong> HCOS writes the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
-          <span>Dose, rate and cadence stay in the order — this screen only records what was given.</span>
-        </div>
-
         <div class="card bi-bar">
           <div>Elapsed <strong>2 h 35 m</strong> of ~3 h · <span class="pill pill-st st-inchair">82% given</span> · rate <strong>85 mL/hr</strong> of 85 ordered</div>
           <div class="bi-acts">
@@ -425,10 +405,6 @@
         <p class="page-sub">Maya Reyes · NAD+ 500 mg · finalize discharge vitals, tolerance, IV removal, and instructions</p>
         <div class="prov">
           <span><strong>Against</strong> signed order <code>O-2384</code> <span class="ver-chip">v3</span> · flowsheet Chair 1 · attaches to the encounter at co-sign · <a href="clinical-governance.html#/b-24-cosign">co-sign queue</a></span>
-        </div>
-        <div class="prov">
-          <span><strong>Source of truth</strong> HCOS writes the administration record since Jul 1 2026 · eCW receives a read-only sync</span>
-          <span>The order and the encounter keep their own records — this page closes the session, nothing else.</span>
         </div>
 
         <div class="card bi-bar">
@@ -735,7 +711,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
 (function () {
   var cleared = false;

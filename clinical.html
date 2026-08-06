@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=44">
+<link rel="stylesheet" href="assets/hcos.css?v=48">
 <style>
   .b-prow { display: flex; align-items: center; gap: 10px; }
   .b-pname { font-weight: 600; color: var(--hx-navy); }
@@ -206,12 +206,6 @@
             <button class="btn btn-sm btn-accent" data-activate="b-11-sign-lock">Sign and lock</button>
           </div>
         </div>
-
-        <div class="prov">
-          <span>Everything below is <strong>the record itself</strong>, current as of 11:37 AM — the encounter keeps no copy of it.</span>
-          <span><strong>Writes</strong> HCOS · eCW receives a read-only sync for documentation</span>
-        </div>
-
         <div class="b-vitals">
           <div class="b-vital"><div class="b-vital-lbl">BP</div><div class="b-vital-val">118 / 76</div></div>
           <div class="b-vital"><div class="b-vital-lbl">HR</div><div class="b-vital-val">72</div></div>
@@ -267,12 +261,6 @@
           <div class="srv-days" id="srv-days">
             <span>Jul 15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>Jul 21</span>
           </div>
-          <div class="prov" style="margin-top:10px">
-            <span><strong>Patient-reported</strong> from her check-ins &middot;
-            <a href="journey-checkin.html#/j-checkin-feeling">the questions she sees</a> &middot;
-            not a vital and not a diagnosis &mdash; it is the line, not the day, that matters.
-            <a href="clinical-questionnaires.html#/b-30-quest-results">Full scoring and history</a></span>
-          </div>
         </div>
 
         <div class="grid-sidebar">
@@ -317,10 +305,6 @@
                   </tbody>
                 </table>
               </div>
-              <div class="prov">
-                <span><strong>From</strong> the problem list · longitudinal, one per patient</span>
-                <span>Changes are made on the list, not on this encounter</span>
-              </div>
               <button class="btn btn-sm" data-open-drawer="#b-drawer-problems">Open the problem list</button>
             </div>
 
@@ -337,7 +321,6 @@
                   <div>Vitamin D3 5,000 IU daily <span class="clin-state reconciled">Reconciled</span>
                     <div class="clin-src">Checked by Charlene · Jul 20</div></div>
                 </div>
-                <div class="prov"><span>One list. The MA reconciles, the provider verifies.</span></div>
                 <button class="btn btn-sm" data-open-drawer="#b-drawer-meds">Open the medication list</button>
               </div>
               <div class="card">
@@ -346,7 +329,6 @@
                   <div>Sulfa drugs — rash, hives <span class="clin-state verified">Verified</span>
                     <div class="clin-src">Dr. Drannikov · Mar 16</div></div>
                 </div>
-                <div class="prov"><span>The one list every safety check reads — infusion, pharmacy, orders.</span></div>
                 <button class="btn btn-sm" data-open-drawer="#b-drawer-allergies">Open the allergy list</button>
               </div>
             </div>
@@ -698,11 +680,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 </tbody>
               </table>
             </div>
-
-            <div class="prov">
-              <span><strong>Reads</strong> the problem list · one longitudinal list per patient</span>
-              <span>A diagnosis on this encounter does not change the list until someone says so here</span>
-            </div>
             <button class="btn btn-sm" style="margin-top:8px" data-open-drawer="#b-drawer-problems">Open the problem list</button>
 
             <div style="display:flex;gap:8px;margin-top:12px">
@@ -786,12 +763,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         </div>
 
         <p class="page-sub" style="margin-top:0">Orders are placed here and nowhere else. Each one carries an ID and a version; the bay board, scheduling, pharmacy and the plan of care read that ID — they never restate the order.</p>
-
-        <div class="prov">
-          <span><strong>Placed by</strong> Dr. Drannikov · physician or extender only</span>
-          <span><strong>Writes</strong> HCOS · eCW receives a read-only sync for orders</span>
-        </div>
-
         <div class="filters">
           <button class="filter-chip active">All (9)</button>
           <button class="filter-chip">Labs (5)</button>
@@ -845,8 +816,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             </tbody>
           </table>
         </div>
-        <div class="prov"><span>Draft until you sign. On sign each order becomes approved at the version shown, and the lab result comes back linked to that ID.</span></div>
-
         <div class="seg-divider">IV protocols</div>
         <div class="tbl-wrap">
           <table class="tbl">
@@ -905,10 +874,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             </tbody>
           </table>
         </div>
-        <div class="prov"><span>Read from <a href="treatments.html#/t-03-therapies">the therapy catalogue</a>.
-        On sign, each one appears on <a href="journey-plan.html#/j-plan-orders">her plan</a> in plain words and on
-        <a href="schedule.html#/l-01-day">the calendar</a> with the room and staff it needs.</span></div>
-
         <div class="seg-divider">Prescriptions</div>
         <div class="tbl-wrap">
           <table class="tbl">
@@ -961,8 +926,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             </tbody>
           </table>
         </div>
-        <div class="prov"><span>A suggestion is not an order. It stays pending, with its reason, until a physician or extender places it.</span></div>
-
         <div class="seg-divider">Referrals</div>
         <div class="empty-state">No referrals on this encounter.</div>
 
@@ -985,7 +948,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Plan of care shows cadence and expiry</span><span class="check-meta"><a href="journey-careplan.html#/j-staff-patients">open</a></span></li>
               <li class="check-item"><span class="check-icon pending"></span><span class="check-label">Billing charges from the signed order</span><span class="check-meta"><a href="billing.html#/d-01-worklist">open</a></span></li>
             </ul>
-            <div class="prov"><span>Nothing on this list moves until the encounter is signed — each consumer then reads the order ID and version, never a copy.</span></div>
           </div>
         </div>
 
@@ -1184,10 +1146,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <dt>She is</dt><dd>Self-pay &mdash; no claim will be filed</dd>
                 <dt>Valid until</dt><dd>Sep 14, 2026 &middot; 6 runs or 4 months, whichever comes first</dd>
               </dl>
-              <div class="prov" style="margin-top:10px">
-                <span>Read from <a href="treatments.html#/t-02-recipe">the recipe</a> and
-                <a href="pricing.html#/pr-01-list">the price list</a>. She sees this before she agrees to the series.</span>
-              </div>
             </div>
           </div>
         </div>
@@ -1315,9 +1273,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <dt>Panel price</dt><dd>$189 &middot; Vibrant direct</dd>
                 <dt>Draw fee</dt><dd>$25 in clinic</dd>
               </dl>
-              <div class="prov" style="margin-top:10px">
-                <span>She sees the price before the draw &mdash; a surprise invoice is a broken screen.</span>
-              </div>
             </div>
 
             <div class="card" style="margin-top:16px">
@@ -1421,10 +1376,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="g-ev"><div class="g-ev-when">&#10003;</div><div class="g-ev-what">
                 <strong>Duplicate therapy</strong> &mdash; nothing similar active</div>
                 <div class="g-ev-ver"><span class="appr approved">Clear</span></div></div>
-              <div class="prov" style="margin-top:10px">
-                <span>Checked against <a href="clinical-chart.html#/b-06-med-rec">her reconciled medication list</a>
-                and <a href="clinical-chart.html#/b-07-allergies">her allergy list</a> &mdash; not against a copy.</span>
-              </div>
             </div>
 
             <div class="card" style="margin-top:16px">
@@ -1436,10 +1387,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <dt>AI</dt><dd>May suggest. Never signs.</dd>
                 <dt>Valid until</dt><dd>Jul 6, 2027 &middot; one year with refills</dd>
               </dl>
-              <div class="prov" style="margin-top:10px">
-                <span>Same rule for every order in the system &mdash;
-                <a href="security.html#/g-02-roles">the roles matrix</a>.</span>
-              </div>
             </div>
           </div>
         </div>
@@ -1487,17 +1434,10 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                   </tbody>
                 </table>
               </div>
-              <div class="prov">
-                <span><strong>Signing</strong> covers the encounter and its orders. The plan of care and the readiness step are approved separately, below.</span>
-              </div>
             </div>
 
             <div class="seg-divider">Provider attestation</div>
             <div class="callout">By signing this encounter I attest that I personally evaluated this patient today, July 21, 2026, that the documentation above accurately reflects the services provided, and that the diagnoses are supported by the documentation. — Dr. Eduard Drannikov, MD · rendering provider · Helixona, Inc.</div>
-            <div class="prov">
-              <span><strong>Signs</strong> physician or extender only · the scribe drafted this note and cannot sign it</span>
-            </div>
-
             <div class="seg-divider">Signature</div>
             <div id="b-sign-before">
               <div class="b-sig">
@@ -1530,9 +1470,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                   <span>Move the readiness step from Standard to Advanced — suggested by ruleset v3.2
                     <div class="field-help">Unchecked, the suggestion stays pending with its reason. Nothing changes the step on its own.</div></span>
                 </label>
-                <div class="prov">
-                  <span>Bee's iron-infusion suggestion is not on this list — it was never placed, so signing does not place it.</span>
-                </div>
               </div>
 
               <div class="seg-divider">On sign and lock, this encounter dispatches at once</div>
@@ -1586,7 +1523,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">No conflicting allergies · read from the allergy list</span></li>
                 <li class="check-item"><span class="check-icon done">✓</span><span class="check-label">Rendering provider on file · charges bill under group NPI 1407646755</span></li>
               </ul>
-              <div class="prov"><span>Fixed rules, not a model — each one reads the encounter and the canonical lists.</span></div>
             </div>
 
             <div class="ai-block" style="margin-top:0;margin-bottom:16px">
@@ -1766,10 +1702,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     <button class="modal-close" data-close-drawer="#b-drawer-problems">×</button>
   </div>
   <div class="drawer-body">
-    <div class="prov" style="margin-top:0">
-      <span><strong>Written in HCOS</strong> · <a href="security.html#/g-01-audit">every change is in the audit store</a></span>
-      <span>MA, nurse and PCC suggest · a physician or extender confirms</span>
-    </div>
     <div class="tbl-wrap">
       <table class="tbl">
         <thead><tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>State</th><th></th></tr></thead>
@@ -1804,9 +1736,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="prov">
-      <span>A patient report is not a diagnosis until a physician or extender confirms it here.</span>
     </div>
     <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
       <button data-row-add class="btn btn-primary btn-sm" onclick="HCOS.toast('Problem added as active by Dr. Drannikov. Notes, claims and readiness read it from this list.', 'ok')">Add problem</button>
@@ -1854,9 +1783,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         </tbody>
       </table>
     </div>
-    <div class="prov">
-      <span>Prescribing and discontinuing happen on an order — <button class="btn btn-ghost btn-sm" data-activate="b-09-orders">open orders</button></span>
-    </div>
     <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
       <button class="btn btn-sm" data-close-drawer="#b-drawer-meds">Back to the encounter</button>
     </div>
@@ -1885,10 +1811,6 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           </tr>
         </tbody>
       </table>
-    </div>
-    <div class="prov">
-      <span><strong>Read by</strong> the infusion five rights · <a href="clinical-infusion.html#/b-13-bay-board">bay board</a> · pharmacy · every order on this encounter</span>
-      <span>Reviewed today at 11:22 AM · no change</span>
     </div>
     <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
       <button data-row-add class="btn btn-primary btn-sm" onclick="HCOS.toast('Allergy added by Dr. Drannikov. Every safety check reads it from this list immediately.', 'ok')">Add allergy</button>
@@ -1971,7 +1893,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   </div>
 </div>
 
-<script src="assets/hcos.js?v=44"></script>
+<script src="assets/hcos.js?v=48"></script>
 <script>
 /* Opening a lab order from the table shows THAT order, not the blank form. */
 (function () {
