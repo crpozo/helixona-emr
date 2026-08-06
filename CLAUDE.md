@@ -92,15 +92,33 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
 - **Duration is per patient, not just per protocol.** The system tracks how long each patient actually takes for a given IV and books their own average once there are 3 past runs — Maya Reyes books 3 h 20 for NAD+, not 3 h. Blocks warn when a drip is running past its booked end.
 - **Conflicts: each rule sets its own strength (Carlos, 2026-07-28)** — Block / Warn / Allow, configured on `schedule-rules.html`. Provider double-book blocks; chair overlap warns (clinics overbook on purpose). Coverage rules layer on top and the stricter one wins.
 - Filters are multi-select across team, providers, actors and treatment, and a user can **lock a saved view** as their default.
-- **Three levels, one look each (Carlos, 2026-08-04, redesigned same day for digestibility)** —
-  one sentence: **colour says WHAT it is · shade says WHERE it stands · letters say the detail.**
-  **Type owns the only hue**: the block's pale fill + solid left edge (office visit blue, procedure red,
-  IV teal, energetics purple, treatment amber — `--ty-*` and `--ty-*-bg`).
-  **Status is the block's state, never a second hue**: scheduled = ghost (white, dashed border) ·
-  confirmed = tinted · arrived / in progress / checkout = tinted + ink ring · done = faded 55% ·
-  no-show = dashed red outline · cancelled = faded + strikethrough — and the status WORD is printed on
-  every block (CSS `::after`), so nothing needs decoding. **Subtype = monochrome letter chip**
-  (ink on white — colour never leaves the type channel). Corner tag = who runs it.
+- **Three levels, one look each (Carlos, 2026-08-06, third pass — designed by an independent
+  three-way panel after two rejected attempts).** One sentence a receptionist can repeat:
+  **the colour says WHAT it is · the word says WHICH one · how dark the block is says WHERE it
+  stands — and a black bar means someone is waiting on you.**
+  - **TYPE owns the hue, in two places and nowhere else**: a 5px `::before` rail carrying a
+    per-type *texture* (visit solid · procedure dash · IV dot · energetics split · treatment
+    hatch) so the code survives greyscale and colour blindness, plus the subtype word's ink.
+    Tokens `--ty-*` / `--ty-*-ink`. The five pale `--ty-*-bg` fills are **deleted**: measured at
+    2.4% luminance spread, they were noise pretending to be signal and they occupied
+    `background`, which status needs.
+  - **SUBTYPE owns the words**: the real English name — "NAD+", "Mega C", "Acupuncture",
+    "Foundational Flow" — set in its parent type's ink, first on line one. Three-letter chips are
+    gone from calendar blocks (`.type-mark` stays everywhere else). This is what makes the levels
+    read as *nested*: the only coloured text on a block is the subtype, in its family's hue.
+  - **STATUS owns weight**, on a dilution of the block's own hue — never a second palette:
+    scheduled ghost (white + dashed) · confirmed 18% · arrived/checkout 38% + ink ring ·
+    in progress 100% + white text + inverted rail · done 8% + faded rail. The two exits leave the
+    ramp and drop hue entirely: no-show grey hatch + dashed ink, cancelled white + strikethrough
+    + grey rail.
+  - **The status word is printed on only three of eight statuses** — the ones where a human owes
+    an action (ARRIVED · WAITING / READY TO CHECK OUT / NO-SHOW) — as a full-width black bar on
+    the block's bottom edge. Because every block shares `left:4px;right:4px`, the bars line up
+    into a column of call-to-action strips, the only pure black marks on a tinted board.
+    `.cal.st-words` is the opt-in that prints all eight.
+  - Layout is a 3-row grid with permanent cells, so nothing reflows between an 18px lab draw and
+    a 3-hour infusion; container queries drop the descriptor, then the time, as height and width
+    shrink. `--blk-muted #4A4A4A` replaces `--muted` on blocks, which fails contrast on tints.
 - **Filters are hierarchical**: picking Types narrows which Subtype chips are offered; both are multi-select; the same state drives day, week and month. Saved custom filters are built on the Filter setup screen (`l-06-filters`) and lockable as a personal default.
 - **Chairs are gone — resources are general**: columns are IV 1–4 under the Infusion suite band, plus Rooms; the booking form's location field is "Resource".
 - **An appointment type is linked to the provider's order** (order = prescription): the booking screen shows the patient's active orders with validity dates and their expired ones; an expired order can proceed only with an acknowledged note, booking as TENTATIVE until Dr. Drannikov approves the renewal. Orders show duration and expiration everywhere (`b-09-orders` has an Expires column) and click through to the orders page.

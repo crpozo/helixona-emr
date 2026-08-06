@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=32">
+<link rel="stylesheet" href="assets/hcos.css?v=36">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -174,88 +174,101 @@
             <!-- Dr. Drannikov -->
             <div class="daycal-col" data-col="dr">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2" class="cal-appt st-done t-consult ty-visit" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-done t-consult ty-visit" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer" data-st="Done">
                 <div class="cal-appt-time">8:30 – 10:00</div>
                 <div class="cal-appt-name">Marcus Webb</div>
-                <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
+                <span class="cal-appt-sub">New patient</span>
+                <span class="cal-appt-type">consult · 90 min</span>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-inroom t-consult ty-visit" style="top:220px;height:40px" data-appt="A-88208" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-inroom t-consult ty-visit" style="top:220px;height:40px" data-appt="A-88208" data-open-drawer="#l-appt-drawer" data-st="In progress">
                 <div class="cal-appt-time">10:30</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="2,4" class="cal-appt st-arrived t-tele ty-visit" style="top:308px;height:40px" data-appt="A-88221" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-arrived t-tele ty-visit" style="top:308px;height:40px" data-appt="A-88221" data-open-drawer="#l-appt-drawer" data-st="Arrived">
                 <div class="cal-appt-time">11:30</div>
                 <div class="cal-appt-name">Elena Petrova</div>
-                <div class="cal-appt-type"><span class="type-mark">TEL</span>Telehealth · 30 min</div>
+                <span class="cal-appt-sub">Telehealth</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-confirmed t-consult ty-visit" style="top:484px;height:40px" data-appt="A-88238" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-confirmed t-consult ty-visit" style="top:484px;height:40px" data-appt="A-88238" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
                 <div class="cal-appt-time">1:30 PM</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-cancelled t-consult ty-visit" style="top:528px;height:40px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-cancelled t-consult ty-visit" style="top:528px;height:40px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer" data-st="Cancelled">
                 <div class="cal-appt-time">2:00 PM</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
               <div class="daycal-empty-hint l-hint-visible" style="top:554px;height:40px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
-              <div data-days="2" class="cal-appt st-scheduled t-consult ty-visit" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-scheduled t-consult ty-visit" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
                 <div class="cal-appt-time">3:00 – 4:30 PM</div>
                 <div class="cal-appt-name">Tom Alvarez</div>
-                <div class="cal-appt-type"><span class="type-mark">CON</span>New patient consult · 90 min</div>
+                <span class="cal-appt-sub">New patient</span>
+                <span class="cal-appt-type">consult · 90 min</span>
               </div>
             </div>
 
             <!-- Dr. Bakman -->
             <div class="daycal-col" data-col="bak">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:88px;height:40px" data-appt="A-88205" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:88px;height:40px" data-appt="A-88205" data-open-drawer="#l-appt-drawer" data-st="Done">
                 <div class="cal-appt-time">9:00</div>
                 <div class="cal-appt-name">Sofia Ramos</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,4,5" class="cal-appt st-confirmed t-consult ty-visit" style="top:440px;height:40px" data-appt="A-88235" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,4,5" class="cal-appt st-confirmed t-consult ty-visit" style="top:440px;height:40px" data-appt="A-88235" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
                 <div class="cal-appt-time">1:00 PM</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,5" class="cal-appt st-scheduled t-consult ty-visit" style="top:660px;height:40px" data-appt="A-88254" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,5" class="cal-appt st-scheduled t-consult ty-visit" style="top:660px;height:40px" data-appt="A-88254" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
                 <div class="cal-appt-time">3:30 PM</div>
                 <div class="cal-appt-name">Priya Natarajan</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
             </div>
 
             <!-- Brooke -->
             <div class="daycal-col" data-col="bro">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:176px;height:40px" data-appt="A-88210" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:176px;height:40px" data-appt="A-88210" data-open-drawer="#l-appt-drawer" data-st="Done">
                 <div class="cal-appt-time">10:00</div>
                 <div class="cal-appt-name">Walter Hsu</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="2,4" class="cal-appt st-scheduled t-consult ty-visit" style="top:528px;height:40px" data-appt="A-88243" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-scheduled t-consult ty-visit" style="top:528px;height:40px" data-appt="A-88243" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
                 <div class="cal-appt-time">2:00 PM</div>
                 <div class="cal-appt-name">Maya Reyes</div>
-                <div class="cal-appt-type"><span class="type-mark">F/U</span>Follow-up · 30 min</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
               </div>
             </div>
 
             <!-- IV 1 -->
             <div class="daycal-col" data-col="c1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2,4" class="cal-appt st-inchair t-nad ai-warn ty-iv" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-inchair t-nad ai-warn ty-iv" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer" data-st="In progress">
                 <span class="ai-flag" title="Running long">!</span>
                 <div class="cal-appt-time">9:00 – 12:00 · running to 12:20</div>
                 <div class="cal-appt-name">Maya Reyes</div>
-                <div class="cal-appt-type"><span class="type-mark">NAD</span>NAD+ · books 3 h, she takes 3 h 20</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">books 3 h, she takes 3 h 20</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-nad ty-iv" style="top:440px;height:260px" data-appt="A-88247" data-open-drawer="#l-appt-drawer">
+              <div class="cal-appt st-confirmed t-nad ty-iv" style="top:440px;height:260px" data-appt="A-88247" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
                 <div class="cal-appt-time">1:00 – 4:00 PM</div>
                 <div class="cal-appt-name">Walter Hsu</div>
-                <div class="cal-appt-type"><span class="type-mark">NAD</span>NAD+ infusion · 3 h typical</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">nfusion · 3 h typical</span>
                 <span class="actor-tag">Nick</span>
               </div>
             </div>
@@ -263,10 +276,11 @@
             <!-- IV 2 -->
             <div class="daycal-col" data-col="c2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,4,5" class="cal-appt st-inchair t-ivc ty-iv" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
+              <div data-days="1,2,4,5" class="cal-appt st-inchair t-ivc ty-iv" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer" data-st="In progress">
                 <div class="cal-appt-time">10:00 – 12:30</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
-                <div class="cal-appt-type"><span class="type-mark">IVC</span>IV vitamin C 25 g · runs on time</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">IV vitamin C 25 g · runs on time</span>
                 <span class="actor-tag">Bea</span>
               </div>
             </div>
@@ -274,16 +288,18 @@
             <!-- IV 3 -->
             <div class="daycal-col" data-col="c3">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2,5" class="cal-appt st-arrived t-flow ty-iv" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,5" class="cal-appt st-arrived t-flow ty-iv" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer" data-st="Arrived">
                 <div class="cal-appt-time">11:30 – 12:30</div>
                 <div class="cal-appt-name">Priya Natarajan</div>
-                <div class="cal-appt-type"><span class="type-mark">FLO</span>Foundational Flow 10 · 1 h</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">10 · 1 h</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:660px;height:40px" data-appt="A-88256" data-open-drawer="#l-appt-drawer">
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:660px;height:40px" data-appt="A-88256" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
                 <div class="cal-appt-time">3:30 PM</div>
                 <div class="cal-appt-name">Sofia Ramos</div>
-                <div class="cal-appt-type"><span class="type-mark">GSH</span>Glutathione push · 30 min</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push · 30 min</span>
                 <span class="actor-tag">Juan</span>
               </div>
             </div>
@@ -291,73 +307,97 @@
                                         <!-- IV 4 --><!-- IV 4 -->
             <div class="daycal-col" data-col="c4">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2" class="cal-appt st-arrived t-lab ty-proc" style="top:286px;height:18px;padding:1px 8px" data-appt="A-88219" data-open-drawer="#l-appt-drawer">
-                <div class="cal-appt-name" style="font-size:10px"><span class="type-mark">LAB</span>Sofia Ramos · 11:15 lab draw · 15m</div>
+              <div data-days="2" class="cal-appt st-arrived t-lab ty-proc mini" style="top:286px;height:18px;" data-appt="A-88219" data-open-drawer="#l-appt-drawer" data-st="Arrived">
+                <span class="cal-appt-sub">Lab draw</span>
+                <div class="cal-appt-name">Sofia Ramos</div>
               </div>
-              <div data-days="2" class="cal-appt st-confirmed t-flow ty-iv" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-confirmed t-flow ty-iv" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
                 <div class="cal-appt-time">2:00 – 3:00 PM</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
-                <div class="cal-appt-type"><span class="type-mark">FLO</span>Foundational Flow 10 · 1 h</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">10 · 1 h</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:616px;height:40px" data-appt="A-88250" data-open-drawer="#l-appt-drawer">
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:616px;height:40px" data-appt="A-88250" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
                 <div class="cal-appt-time">3:00 PM</div>
                 <div class="cal-appt-name">Marcus Webb</div>
-                <div class="cal-appt-type"><span class="type-mark">GSH</span>Glutathione push · 30 min</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push · 30 min</span>
                 <span class="actor-tag">Nate</span>
               </div>
             </div>
 
             <div class="cal-now" style="top:323px"><span class="cal-now-label">11:40 AM</span></div>
             <div class="daycal-col" data-col="room1" style="position:relative">
-              <div data-days="2" class="cal-appt st-checkout ty-energ" style="top:132px;height:40px" data-appt="A-88231" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-checkout ty-energ" style="top:132px;height:40px" data-appt="A-88231" data-open-drawer="#l-appt-drawer" data-st="Checkout">
                 <span class="cal-appt-time">9:30 &ndash; 10:15</span>
                 <span class="cal-appt-name">Nadia Boulos</span>
-                <span class="cal-appt-type"><span class="type-mark tm-acu">ACU</span> Acupuncture &middot; 45m</span>
+                <span class="cal-appt-sub">Acupuncture</span>
+                <span class="cal-appt-type">45m</span>
               </div>
-              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
                 <span class="cal-appt-time">12:30 &ndash; 1:10</span>
                 <span class="cal-appt-name">Marcus Webb</span>
-                <span class="cal-appt-type"><span class="type-mark tm-pel">PEL</span> Pellets &middot; 40m</span>
+                <span class="cal-appt-sub">Pellets</span>
+                <span class="cal-appt-type">40m</span>
               </div>
-              <div data-days="2,3" class="cal-appt st-arrived ty-treat" data-sub="las" style="top:264px;height:40px" data-appt="A-88233" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,3" class="cal-appt st-arrived ty-treat" data-sub="las" style="top:264px;height:40px" data-appt="A-88233" data-open-drawer="#l-appt-drawer" data-st="Arrived">
                 <span class="cal-appt-time">11:00 &ndash; 11:20</span>
                 <span class="cal-appt-name">Sofia Ramos</span>
-                <span class="cal-appt-type"><span class="type-mark tm-flow" style="background:var(--ty-treat);border-color:var(--ty-treat)">LAS</span> Erchonia laser &middot; 20m</span>
+                <span class="cal-appt-sub">Erchonia</span>
+                <span class="cal-appt-type">laser &middot; 20m</span>
               </div>
             </div>
             <div class="daycal-col" data-col="room2">
-              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" data-sub="t-eboo" style="top:44px;height:128px" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
+              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" data-sub="t-eboo" style="top:44px;height:128px" data-appt="A-88240" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
                 <span class="cal-appt-time">8:30 &ndash; 10:30</span>
                 <span class="cal-appt-name">Priya Natarajan</span>
-                <span class="cal-appt-type"><span class="type-mark">EBO</span> EBOO &middot; 2 h</span>
+                <span class="cal-appt-sub">EBOO</span>
+                <span class="cal-appt-type">2 h</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div data-days="2" class="cal-appt st-scheduled ty-proc" data-sub="prp" style="top:396px;height:80px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
+              <div data-days="2" class="cal-appt st-scheduled ty-proc" data-sub="prp" style="top:396px;height:80px" data-appt="A-88241" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
                 <span class="cal-appt-time">12:30 &ndash; 2:00</span>
                 <span class="cal-appt-name">Walter Hsu</span>
-                <span class="cal-appt-type"><span class="type-mark">PRP</span> PRP &middot; 90m</span>
+                <span class="cal-appt-sub">PRP</span>
+                <span class="cal-appt-type">90m</span>
               </div>
             </div>
           </div>
 
-          <div class="cal-legend">
-            <span class="cal-legend-item" style="font-weight:700;color:var(--ink)">Colour = what it is</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-visit-bg);border-left:5px solid var(--ty-visit)"></span>Office visit</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-proc-bg);border-left:5px solid var(--ty-proc)"></span>Procedure</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg);border-left:5px solid var(--ty-iv)"></span>IV</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-energ-bg);border-left:5px solid var(--ty-energ)"></span>Energetics</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-treat-bg);border-left:5px solid var(--ty-treat)"></span>Treatment</span>
-          </div>
-          <div class="cal-legend">
-            <span class="cal-legend-item" style="font-weight:700;color:var(--ink)">Shade = where it stands</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:#fff;border:1px dashed var(--line)"></span>Not here yet</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg)"></span>Confirmed</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg);border:2px solid var(--ink)"></span>Here &middot; in progress</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg);opacity:.5"></span>Done</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:#fff;border:1.5px dashed var(--st-noshow)"></span>No-show</span>
-            <span class="cal-legend-item" style="color:var(--muted)">the word on each block says exactly which &middot;
-              <span class="type-mark">NAD</span> letters = the exact treatment &middot; <a href="treatments.html#/t-06-codes">edit codes</a></span>
+          <div class="leg">
+            <div class="leg-row">
+              <span class="leg-lbl">How to read it</span>
+              <div class="cal-appt ty-iv st-arrived leg-spec">
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-time">9:00</span>
+                <span class="cal-appt-name">Maya Reyes</span>
+              </div>
+              <div class="leg-ticks">
+                <div><span class="leg-n">1</span><b>The colour and its texture</b> &mdash; what kind of appointment it is</div>
+                <div><span class="leg-n">2</span><b>The word</b> &mdash; which exact treatment, written out</div>
+                <div><span class="leg-n">3</span><b>How dark the block is</b> &mdash; how far into the visit they are &middot;
+                  a <span class="leg-bar">black bar</span> means someone is waiting on you</div>
+              </div>
+            </div>
+            <div class="leg-row">
+              <span class="leg-lbl">The five kinds</span>
+              <span class="leg-fam ty-visit"><i></i>Office visit</span>
+              <span class="leg-fam ty-proc"><i></i>Procedure</span>
+              <span class="leg-fam ty-iv"><i></i>IV</span>
+              <span class="leg-fam ty-energ"><i></i>Energetics</span>
+              <span class="leg-fam ty-treat"><i></i>Treatment</span>
+            </div>
+            <div class="leg-row">
+              <span class="leg-lbl">Where they stand</span>
+              <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
+              <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+              <a href="treatments.html#/t-06-codes" style="font-size:11px;margin-left:auto">Edit the codes &rsaquo;</a>
+            </div>
           </div>
         </div>
         </div>
@@ -512,78 +552,94 @@
             <!-- Mon Jul 20 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div>
-              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-tele st-noshow ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="c1" class="week-appt t-nad st-done ty-iv" style="top:56px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
-              <div data-col="c2" class="week-appt t-ivc st-done ty-iv" style="top:280px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Done"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day" data-st="Done"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-tele st-noshow ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day" data-st="No-show"><span class="n">Elena Petrova</span></div>
+              <div data-col="c1" class="week-appt t-nad st-done ty-iv" style="top:56px;height:165px;left:50%" data-activate="l-01-day" data-st="Done"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="c2" class="week-appt t-ivc st-done ty-iv" style="top:280px;height:137px;left:50%" data-activate="l-01-day" data-st="Done"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
             </div>
 
             <!-- Tue Jul 21 · today, mirrors the day view -->
             <div class="weekcal-col today">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div>
-              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:28px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Marcus Webb</span>Consult</div>
-              <div data-col="dr" class="week-appt t-consult st-inroom ty-visit" style="top:140px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-tele st-arrived ty-visit" style="top:196px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:308px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-consult st-cancelled ty-visit" style="top:336px;height:25px;right:55%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:392px;height:81px;right:55%" data-activate="l-01-day"><span class="n">Tom Alvarez</span>Consult</div>
-              <div data-col="c1" class="week-appt t-nad st-inchair ty-iv" style="top:56px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
-              <div data-col="c2" class="week-appt t-ivc st-inchair ty-iv" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C</div>
-              <div data-col="c4" class="week-appt t-flow st-arrived ty-iv" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
-              <div data-col="c3" class="week-appt t-flow st-arrived ty-iv" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
-              <div data-col="c1" class="week-appt t-nad st-confirmed ty-iv" style="top:280px;height:165px;left:47%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
-              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day"><span class="n">Nadia Boulos</span>Foundational Flow</div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
-              <div data-col="c4" class="week-appt t-flow st-scheduled ty-iv" style="top:420px;height:25px;left:62%" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-done ty-visit" style="top:28px;height:81px;right:55%" data-activate="l-01-day" data-st="Done"><span class="n">Marcus Webb</span>Consult</div>
+              <div data-col="dr" class="week-appt t-consult st-inroom ty-visit" style="top:140px;height:25px;right:55%" data-activate="l-01-day" data-st="In progress"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-tele st-arrived ty-visit" style="top:196px;height:25px;right:55%" data-activate="l-01-day" data-st="Arrived"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:308px;height:25px;right:55%" data-activate="l-01-day" data-st="Confirmed"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-cancelled ty-visit" style="top:336px;height:25px;right:55%" data-activate="l-01-day" data-st="Cancelled"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:392px;height:81px;right:55%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Tom Alvarez</span>Consult</div>
+              <div data-col="c1" class="week-appt t-nad st-inchair ty-iv" style="top:56px;height:165px;left:47%" data-activate="l-01-day" data-st="In progress"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div data-col="c2" class="week-appt t-ivc st-inchair ty-iv" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day" data-st="In progress"><span class="n">Daniel Okafor</span>IV vit C</div>
+              <div data-col="c4" class="week-appt t-flow st-arrived ty-iv" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day" data-st="Arrived"><span class="n">Sofia Ramos</span></div>
+              <div data-col="c3" class="week-appt t-flow st-arrived ty-iv" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day" data-st="Arrived"><span class="n">Priya Natarajan</span></div>
+              <div data-col="c1" class="week-appt t-nad st-confirmed ty-iv" style="top:280px;height:165px;left:47%" data-activate="l-01-day" data-st="Confirmed"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day" data-st="Confirmed"><span class="n">Nadia Boulos</span>Foundational Flow</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day" data-st="Scheduled"><span class="n">Marcus Webb</span></div>
+              <div data-col="c4" class="week-appt t-flow st-scheduled ty-iv" style="top:420px;height:25px;left:62%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Sofia Ramos</span></div>
             </div>
 
             <!-- Wed Jul 22 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-tele st-confirmed ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="c3" class="week-appt t-flow st-scheduled ty-iv" style="top:112px;height:53px;left:50%" data-activate="l-01-day"><span class="n">Priya Natarajan</span>Foundational Flow</div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:336px;height:25px;left:50%" data-activate="l-01-day"><span class="n">Tom Alvarez</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="dr" class="week-appt t-tele st-confirmed ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day" data-st="Confirmed"><span class="n">Elena Petrova</span></div>
+              <div data-col="c3" class="week-appt t-flow st-scheduled ty-iv" style="top:112px;height:53px;left:50%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Priya Natarajan</span>Foundational Flow</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:336px;height:25px;left:50%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Tom Alvarez</span></div>
             </div>
 
             <!-- Thu Jul 23 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Marcus Webb</span></div>
-              <div data-col="c2" class="week-appt t-ivc st-confirmed ty-iv" style="top:84px;height:137px;left:50%" data-activate="l-01-day"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
-              <div data-col="c3" class="week-appt t-flow st-scheduled ty-iv" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Priya Natarajan</span></div>
-              <div data-col="c1" class="week-appt t-nad st-confirmed ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Nadia Boulos</span></div>
+              <div data-col="dr" class="week-appt t-consult st-scheduled ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Marcus Webb</span></div>
+              <div data-col="c2" class="week-appt t-ivc st-confirmed ty-iv" style="top:84px;height:137px;left:50%" data-activate="l-01-day" data-st="Confirmed"><span class="n">Daniel Okafor</span>IV vit C · 2.5 h</div>
+              <div data-col="c3" class="week-appt t-flow st-scheduled ty-iv" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day" data-st="Scheduled"><span class="n">Priya Natarajan</span></div>
+              <div data-col="c1" class="week-appt t-nad st-confirmed ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day" data-st="Confirmed"><span class="n">Walter Hsu</span>NAD+ · 3 h</div>
             </div>
 
             <!-- Fri Jul 24 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div>
-              <div data-col="dr" class="week-appt t-tele st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Elena Petrova</span></div>
-              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="c1" class="week-appt t-nad st-scheduled ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
-              <div data-col="c4" class="week-appt t-flow st-scheduled ty-iv" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day"><span class="n">Sofia Ramos</span></div>
+              <div data-col="dr" class="week-appt t-tele st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-consult st-confirmed ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day" data-st="Confirmed"><span class="n">Grace Lindqvist</span></div>
+              <div data-col="c1" class="week-appt t-nad st-scheduled ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day" data-st="Scheduled"><span class="n">Maya Reyes</span>NAD+ · 3 h</div>
+              <div data-col="c4" class="week-appt t-flow st-scheduled ty-iv" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day" data-st="Scheduled"><span class="n">Sofia Ramos</span></div>
             </div>
           </div>
 
-          <div class="cal-legend">
-            <span class="cal-legend-item" style="font-weight:700;color:var(--ink)">Colour = what it is</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-visit-bg);border-left:5px solid var(--ty-visit)"></span>Office visit</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-proc-bg);border-left:5px solid var(--ty-proc)"></span>Procedure</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg);border-left:5px solid var(--ty-iv)"></span>IV</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-energ-bg);border-left:5px solid var(--ty-energ)"></span>Energetics</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-treat-bg);border-left:5px solid var(--ty-treat)"></span>Treatment</span>
-          </div>
-          <div class="cal-legend">
-            <span class="cal-legend-item" style="font-weight:700;color:var(--ink)">Shade = where it stands</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:#fff;border:1px dashed var(--line)"></span>Not here yet</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg)"></span>Confirmed</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg);border:2px solid var(--ink)"></span>Here &middot; in progress</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:var(--ty-iv-bg);opacity:.5"></span>Done</span>
-            <span class="cal-legend-item"><span class="cal-legend-swatch" style="background:#fff;border:1.5px dashed var(--st-noshow)"></span>No-show</span>
-            <span class="cal-legend-item" style="color:var(--muted)">the word on each block says exactly which &middot;
-              <span class="type-mark">NAD</span> letters = the exact treatment &middot; <a href="treatments.html#/t-06-codes">edit codes</a></span>
+          <div class="leg">
+            <div class="leg-row">
+              <span class="leg-lbl">How to read it</span>
+              <div class="cal-appt ty-iv st-arrived leg-spec">
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-time">9:00</span>
+                <span class="cal-appt-name">Maya Reyes</span>
+              </div>
+              <div class="leg-ticks">
+                <div><span class="leg-n">1</span><b>The colour and its texture</b> &mdash; what kind of appointment it is</div>
+                <div><span class="leg-n">2</span><b>The word</b> &mdash; which exact treatment, written out</div>
+                <div><span class="leg-n">3</span><b>How dark the block is</b> &mdash; how far into the visit they are &middot;
+                  a <span class="leg-bar">black bar</span> means someone is waiting on you</div>
+              </div>
+            </div>
+            <div class="leg-row">
+              <span class="leg-lbl">The five kinds</span>
+              <span class="leg-fam ty-visit"><i></i>Office visit</span>
+              <span class="leg-fam ty-proc"><i></i>Procedure</span>
+              <span class="leg-fam ty-iv"><i></i>IV</span>
+              <span class="leg-fam ty-energ"><i></i>Energetics</span>
+              <span class="leg-fam ty-treat"><i></i>Treatment</span>
+            </div>
+            <div class="leg-row">
+              <span class="leg-lbl">Where they stand</span>
+              <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
+              <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+              <a href="treatments.html#/t-06-codes" style="font-size:11px;margin-left:auto">Edit the codes &rsaquo;</a>
+            </div>
           </div>
         </div>
 
@@ -738,10 +794,39 @@
               board dims the days that cannot take it.</span>
             </div>
           </div>
-          <div class="cal-legend">
-            <span class="cal-legend-item">Pick a day to open it</span>
-            <span class="cal-legend-item">The bar under each day is how full the chairs are</span>
-            <span class="cal-legend-item">Closed Sundays</span>
+          <div class="leg">
+            <div class="leg-row">
+              <span class="leg-lbl">How to read it</span>
+              <div class="cal-appt ty-iv st-arrived leg-spec">
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-time">9:00</span>
+                <span class="cal-appt-name">Maya Reyes</span>
+              </div>
+              <div class="leg-ticks">
+                <div><span class="leg-n">1</span><b>The colour and its texture</b> &mdash; what kind of appointment it is</div>
+                <div><span class="leg-n">2</span><b>The word</b> &mdash; which exact treatment, written out</div>
+                <div><span class="leg-n">3</span><b>How dark the block is</b> &mdash; how far into the visit they are &middot;
+                  a <span class="leg-bar">black bar</span> means someone is waiting on you</div>
+              </div>
+            </div>
+            <div class="leg-row">
+              <span class="leg-lbl">The five kinds</span>
+              <span class="leg-fam ty-visit"><i></i>Office visit</span>
+              <span class="leg-fam ty-proc"><i></i>Procedure</span>
+              <span class="leg-fam ty-iv"><i></i>IV</span>
+              <span class="leg-fam ty-energ"><i></i>Energetics</span>
+              <span class="leg-fam ty-treat"><i></i>Treatment</span>
+            </div>
+            <div class="leg-row">
+              <span class="leg-lbl">Where they stand</span>
+              <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
+              <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
+              <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+              <a href="treatments.html#/t-06-codes" style="font-size:11px;margin-left:auto">Edit the codes &rsaquo;</a>
+            </div>
           </div>
 
         </div>
@@ -1228,7 +1313,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=32"></script>
+<script src="assets/hcos.js?v=36"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
