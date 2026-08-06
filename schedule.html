@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=31">
+<link rel="stylesheet" href="assets/hcos.css?v=32">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -61,23 +61,22 @@
             <label class="l-fl">
               <span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view" onchange="lSync(this)">
-                <optgroup label="Views">
-                  <option value="all">Everyone &mdash; all resources</option>
-                  <option value="providers">Providers &mdash; all three</option>
-                  <option value="infusion">Infusion suite &mdash; IV 1 to 4</option>
-                </optgroup>
+                <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
+                  <option value="providers">All providers</option>
                   <option value="dr">Dr. Drannikov</option>
                   <option value="bak">Dr. Bakman</option>
                   <option value="bro">Brooke &middot; Physician Associate</option>
                 </optgroup>
                 <optgroup label="Resources &middot; IV">
+                  <option value="infusion">All IV resources</option>
                   <option value="c1">IV 1 &middot; Nick &middot; Nurse</option>
                   <option value="c2">IV 2 &middot; Bea &middot; Medic</option>
                   <option value="c3">IV 3 &middot; Juan &middot; Medic</option>
                   <option value="c4">IV 4 &middot; Nate &middot; Medic</option>
                 </optgroup>
                 <optgroup label="Rooms">
+                  <option value="rooms">All rooms</option>
                   <option value="room1">Room 1 &middot; exam</option>
                   <option value="room2">Room 2 &middot; procedures</option>
                 </optgroup>
@@ -154,7 +153,8 @@
             <div class="daycal-col-head" data-col="c2">IV 2<span class="sub">Bea · Medic</span></div>
             <div class="daycal-col-head" data-col="c3">IV 3<span class="sub">Juan · Medic</span></div>
             <div class="daycal-col-head" data-col="c4">IV 4<span class="sub">Nate · Medic</span></div>
-            <div class="daycal-col-head" data-col="room1">Room 1<span class="sub">Exam · procedures</span></div>
+            <div class="daycal-col-head" data-col="room1">Room 1<span class="sub">Exam</span></div>
+            <div class="daycal-col-head" data-col="room2">Room 2<span class="sub">Procedures</span></div>
           </div>
 
           <div class="daycal-grid">
@@ -326,6 +326,19 @@
                 <span class="cal-appt-type"><span class="type-mark tm-flow" style="background:var(--ty-treat);border-color:var(--ty-treat)">LAS</span> Erchonia laser &middot; 20m</span>
               </div>
             </div>
+            <div class="daycal-col" data-col="room2">
+              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" data-sub="t-eboo" style="top:44px;height:128px" data-appt="A-88240" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">8:30 &ndash; 10:30</span>
+                <span class="cal-appt-name">Priya Natarajan</span>
+                <span class="cal-appt-type"><span class="type-mark">EBO</span> EBOO &middot; 2 h</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div data-days="2" class="cal-appt st-scheduled ty-proc" data-sub="prp" style="top:396px;height:80px" data-appt="A-88241" data-open-drawer="#l-appt-drawer">
+                <span class="cal-appt-time">12:30 &ndash; 2:00</span>
+                <span class="cal-appt-name">Walter Hsu</span>
+                <span class="cal-appt-type"><span class="type-mark">PRP</span> PRP &middot; 90m</span>
+              </div>
+            </div>
           </div>
 
           <div class="cal-legend">
@@ -423,24 +436,24 @@
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view-w" onchange="lSync(this)">
-                <optgroup label="Views">
-                  <option value="all">Everyone &mdash; all resources</option>
-                  <option value="providers">Providers &mdash; all three</option>
-                  <option value="infusion">Infusion suite &mdash; IV 1 to 4</option>
-                </optgroup>
+                <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
+                  <option value="providers">All providers</option>
                   <option value="dr">Dr. Drannikov</option>
                   <option value="bak">Dr. Bakman</option>
                   <option value="bro">Brooke &middot; Physician Associate</option>
                 </optgroup>
                 <optgroup label="Resources &middot; IV">
-                  <option value="c1">IV 1 &middot; Nick</option>
-                  <option value="c2">IV 2 &middot; Bea</option>
-                  <option value="c3">IV 3 &middot; Juan</option>
-                  <option value="c4">IV 4 &middot; Nate</option>
+                  <option value="infusion">All IV resources</option>
+                  <option value="c1">IV 1 &middot; Nick &middot; Nurse</option>
+                  <option value="c2">IV 2 &middot; Bea &middot; Medic</option>
+                  <option value="c3">IV 3 &middot; Juan &middot; Medic</option>
+                  <option value="c4">IV 4 &middot; Nate &middot; Medic</option>
                 </optgroup>
                 <optgroup label="Rooms">
-                  <option value="room1">Room 1 &middot; exam &amp; procedures</option>
+                  <option value="rooms">All rooms</option>
+                  <option value="room1">Room 1 &middot; exam</option>
+                  <option value="room2">Room 2 &middot; procedures</option>
                 </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
@@ -606,24 +619,24 @@
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
               <select class="field-select l-select" id="l-view-m" onchange="lSync(this)">
-                <optgroup label="Views">
-                  <option value="all">Everyone &mdash; all resources</option>
-                  <option value="providers">Providers &mdash; all three</option>
-                  <option value="infusion">Infusion suite &mdash; IV 1 to 4</option>
-                </optgroup>
+                <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
+                  <option value="providers">All providers</option>
                   <option value="dr">Dr. Drannikov</option>
                   <option value="bak">Dr. Bakman</option>
                   <option value="bro">Brooke &middot; Physician Associate</option>
                 </optgroup>
                 <optgroup label="Resources &middot; IV">
-                  <option value="c1">IV 1 &middot; Nick</option>
-                  <option value="c2">IV 2 &middot; Bea</option>
-                  <option value="c3">IV 3 &middot; Juan</option>
-                  <option value="c4">IV 4 &middot; Nate</option>
+                  <option value="infusion">All IV resources</option>
+                  <option value="c1">IV 1 &middot; Nick &middot; Nurse</option>
+                  <option value="c2">IV 2 &middot; Bea &middot; Medic</option>
+                  <option value="c3">IV 3 &middot; Juan &middot; Medic</option>
+                  <option value="c4">IV 4 &middot; Nate &middot; Medic</option>
                 </optgroup>
                 <optgroup label="Rooms">
-                  <option value="room1">Room 1 &middot; exam &amp; procedures</option>
+                  <option value="rooms">All rooms</option>
+                  <option value="room1">Room 1 &middot; exam</option>
+                  <option value="room2">Room 2 &middot; procedures</option>
                 </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
@@ -1215,7 +1228,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=31"></script>
+<script src="assets/hcos.js?v=32"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -1310,10 +1323,11 @@
   function lApply() {
     var view = document.getElementById('l-view').value;
 
-    var PROVS = ['dr','bak','bro'], CHAIRS = ['c1','c2','c3','c4'], ROOMS = ['room1'];
+    var PROVS = ['dr','bak','bro'], CHAIRS = ['c1','c2','c3','c4'], ROOMS = ['room1','room2'];
     var wantCols = view === 'all' ? PROVS.concat(CHAIRS).concat(ROOMS)
       : view === 'providers' ? PROVS
-      : view === 'infusion' ? CHAIRS : [view];
+      : view === 'infusion' ? CHAIRS
+      : view === 'rooms' ? ROOMS : [view];
 
     document.querySelectorAll('[data-col]').forEach(function (el) {
       el.style.display = wantCols.indexOf(el.getAttribute('data-col')) === -1 ? 'none' : '';
