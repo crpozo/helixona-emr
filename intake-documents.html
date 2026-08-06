@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .ad-eyebrow { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
   .ad-h { font-size: 18px; font-weight: 600; color: var(--hx-navy); margin: 4px 0 14px; }
@@ -104,21 +104,21 @@
         <div class="field-row">
           <div class="field">
             <label class="field-label">Name</label>
-            <input class="field-input" type="text" value="Tom Alvarez">
+            <input class="field-input" type="text" value="Tom Alvarez" aria-label="Name">
           </div>
           <div class="field">
             <label class="field-label">Date of birth</label>
-            <input class="field-input" type="text" value="02/09/1965">
+            <input class="field-input" type="text" value="02/09/1965" aria-label="Date of birth">
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label class="field-label">License number</label>
-            <input class="field-input" type="text" value="D8742219">
+            <input class="field-input" type="text" value="D8742219" aria-label="License number">
           </div>
           <div class="field">
             <label class="field-label">Expires</label>
-            <input class="field-input" type="text" value="02/09/2028">
+            <input class="field-input" type="text" value="02/09/2028" aria-label="Expires">
           </div>
         </div>
         <div class="field-help">Read from the photo — fix anything that looks wrong.</div>
@@ -176,26 +176,26 @@
         <div class="seg-divider">Confirm what we read</div>
         <div class="field">
           <label class="field-label">Payer</label>
-          <input class="field-input" type="text" value="Cigna PPO">
+          <input class="field-input" type="text" value="Cigna PPO" aria-label="Payer">
         </div>
         <div class="field-row">
           <div class="field">
             <label class="field-label">Member ID</label>
-            <input class="field-input" type="text" value="U8834-2210-7">
+            <input class="field-input" type="text" value="U8834-2210-7" aria-label="Member ID">
           </div>
           <div class="field">
             <label class="field-label">Group number</label>
-            <input class="field-input" type="text" value="77103-B">
+            <input class="field-input" type="text" value="77103-B" aria-label="Group number">
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label class="field-label">RxBIN</label>
-            <input class="field-input" type="text" value="555321">
+            <input class="field-input" type="text" value="555321" aria-label="RxBIN">
           </div>
           <div class="field">
             <label class="field-label">PCN</label>
-            <input class="field-input" type="text" value="H4">
+            <input class="field-input" type="text" value="H4" aria-label="PCN">
           </div>
         </div>
         <div class="field-help">Filled in from your card — fix anything that looks off. What you send is a suggestion until the front desk checks it against your photos.</div>
@@ -301,7 +301,7 @@
           If your plan has a mail-order option for maintenance medications, add it here.
         </div>
         <div class="field">
-          <input class="field-input" type="text" placeholder="Mail-order pharmacy name (optional)">
+          <input class="field-input" type="text" placeholder="Mail-order pharmacy name (optional)" aria-label="Mail-order pharmacy name (optional)">
         </div>
         <div class="field-help">Supplements are separate — they come later with your care plan, not through your pharmacy.</div>
 
@@ -425,12 +425,12 @@
           <button class="filter-chip">Identity</button>
           <button class="filter-chip">Coverage</button>
           <button class="filter-chip">Expiring</button>
-          <input class="search-input" placeholder="Search a document">
+          <input class="search-input" placeholder="Search a document" aria-label="Search a document">
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Document</th><th>Type</th><th>Version</th><th>Signed by</th><th>Effective</th><th>Expires</th><th>Source file</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Document</th><th scope="col">Type</th><th scope="col">Version</th><th scope="col">Signed by</th><th scope="col">Effective</th><th scope="col">Expires</th><th scope="col">Source file</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Treatment consent</strong></td><td>Consent</td><td><span class="ver-chip">v3</span></td>
@@ -483,7 +483,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a chip pair.
   document.addEventListener('click', function (ev) {

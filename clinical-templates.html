@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .bt-tname { font-weight: 600; color: var(--hx-navy); }
   .bt-tdesc { font-size: 11.5px; color: var(--muted); margin-top: 3px; max-width: 440px; line-height: 1.5; }
@@ -106,7 +106,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search templates by name, section, or dot-phrase">
+          <input class="search-input" type="search" placeholder="Search templates by name, section, or dot-phrase" aria-label="Search templates by name, section, or dot-phrase">
           <button class="filter-chip active">All (8)</button>
           <button class="filter-chip">SOAP (5)</button>
           <button class="filter-chip">IV protocols (2)</button>
@@ -121,13 +121,13 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Template</th>
-                <th>Type</th>
-                <th>Owner</th>
-                <th>Shared with</th>
-                <th>Used</th>
-                <th>Last edited</th>
-                <th></th>
+                <th scope="col">Template</th>
+                <th scope="col">Type</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Shared with</th>
+                <th scope="col">Used</th>
+                <th scope="col">Last edited</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -286,12 +286,12 @@
             <div class="seg-divider" style="margin-top:0">Section · chief complaint</div>
             <div class="field">
               <label class="field-label">Display name</label>
-              <input class="field-input" type="text" value="Chief complaint">
+              <input class="field-input" type="text" value="Chief complaint" aria-label="Display name">
             </div>
             <div class="field-row">
               <div class="field">
                 <label class="field-label">Required?</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Required?">
                   <option selected>Yes</option>
                   <option>Soft — warn at sign time</option>
                   <option>No</option>
@@ -299,7 +299,7 @@
               </div>
               <div class="field">
                 <label class="field-label">Field type</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Field type">
                   <option selected>Short text</option>
                   <option>Long text</option>
                   <option>Structured</option>
@@ -307,16 +307,16 @@
               </div>
               <div class="field">
                 <label class="field-label">Max length</label>
-                <input class="field-input" type="text" value="200 characters">
+                <input class="field-input" type="text" value="200 characters" aria-label="Max length">
               </div>
             </div>
             <div class="field">
               <label class="field-label">Default content / prompt</label>
-              <textarea class="field-textarea" rows="3">Patient presents for [select: new patient functional medicine evaluation / follow-up / consultation]. Primary complaint: ___.</textarea>
+              <textarea class="field-textarea" rows="3" aria-label="Default content / prompt">Patient presents for [select: new patient functional medicine evaluation / follow-up / consultation]. Primary complaint: ___.</textarea>
             </div>
             <div class="field">
               <label class="field-label">Auto-populate from intake</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Auto-populate from intake">
                 <option selected>Yes — pull "Reason for visit" from intake, provider edits</option>
                 <option>No — provider drafts from scratch</option>
               </select>
@@ -344,7 +344,7 @@
               </dl>
               <div class="field" style="margin-top:12px;margin-bottom:0">
                 <label class="field-label">Who can use this template</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Who can use this template">
                   <option>Private — only me</option>
                   <option selected>Brooke</option>
                   <option>My care team</option>
@@ -401,7 +401,7 @@
         <p class="page-sub">Type a dot-phrase in any note — for example <span class="bt-code">.detox-followup</span> — and it expands into the configured text. Personal phrases are yours alone; shared phrases reach every provider with one click.</p>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search dot-phrases by trigger or text">
+          <input class="search-input" type="search" placeholder="Search dot-phrases by trigger or text" aria-label="Search dot-phrases by trigger or text">
           <button class="filter-chip active">All (9)</button>
           <button class="filter-chip">Mine (2)</button>
           <button class="filter-chip">Clinic-wide (7)</button>
@@ -416,12 +416,12 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Trigger</th>
-                <th>Expansion (preview)</th>
-                <th>Scope</th>
-                <th>Used</th>
-                <th>Owner</th>
-                <th></th>
+                <th scope="col">Trigger</th>
+                <th scope="col">Expansion (preview)</th>
+                <th scope="col">Scope</th>
+                <th scope="col">Used</th>
+                <th scope="col">Owner</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -533,12 +533,12 @@
           <button class="filter-chip">Message templates</button>
           <button class="filter-chip">Patient lessons</button>
           <button class="filter-chip">Awaiting approval</button>
-          <input class="search-input" placeholder="Search content">
+          <input class="search-input" placeholder="Search content" aria-label="Search content">
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Content</th><th>Type</th><th>Owner</th><th>Version</th><th>Effective</th><th>Audience</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Content</th><th scope="col">Type</th><th scope="col">Owner</th><th scope="col">Version</th><th scope="col">Effective</th><th scope="col">Audience</th><th scope="col">Status</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Functional medicine follow-up</strong></td><td>Note template</td><td>Dr. Eduard Drannikov</td>
@@ -631,15 +631,15 @@
             <div class="card-title">Definition</div>
             <div class="field">
               <label class="field-label">Trigger</label>
-              <input class="field-input" type="text" value=".floworder">
+              <input class="field-input" type="text" value=".floworder" aria-label="Trigger">
             </div>
             <div class="field">
               <label class="field-label">Expands to</label>
-              <textarea class="field-input" rows="7">IV Foundational Flow {{strength}} ordered for {{patient.first}} — series of {{count}} over {{weeks}} weeks. Minimum {{interval}} days between runs. Chair time {{duration}}. Linked to {{lead_actor}}. Ordered by {{provider}} on {{today}}.</textarea>
+              <textarea class="field-input" rows="7" aria-label="Expands to">IV Foundational Flow {{strength}} ordered for {{patient.first}} — series of {{count}} over {{weeks}} weeks. Minimum {{interval}} days between runs. Chair time {{duration}}. Linked to {{lead_actor}}. Ordered by {{provider}} on {{today}}.</textarea>
             </div>
             <div class="field">
               <label class="field-label">Who may use it</label>
-              <select class="field-input">
+              <select class="field-input" aria-label="Who may use it">
                 <option>Any provider or extender</option>
                 <option>Providers only</option>
                 <option>Anyone clinical</option>
@@ -688,14 +688,14 @@
 
         <div class="filters" style="margin-bottom:14px">
           <span class="dash-flabel">View</span>
-          <select class="field-input" style="max-width:220px">
+          <select class="field-input" style="max-width:220px" aria-label="Field">
             <option>Patient snapshot</option>
             <option>Worklist</option>
             <option>Infusion bay board</option>
             <option>Front desk board</option>
           </select>
           <span class="dash-flabel" style="margin-left:10px">Role</span>
-          <select class="field-input" style="max-width:200px">
+          <select class="field-input" style="max-width:200px" aria-label="Field">
             <option>Provider</option><option>Extender</option><option>MA</option>
             <option>Nurse / Medic</option><option>Care Guide / PCC</option><option>Front Desk</option>
           </select>
@@ -779,7 +779,7 @@
   </section>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 /* Real drag and drop — the arrangement is the point, so it has to actually move. */
 (function () {

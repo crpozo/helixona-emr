@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   /* One guided question per screen — a calm, Duolingo-style check-in. */
   .j-flow { display: flex; flex-direction: column; min-height: 484px; }
@@ -275,7 +275,7 @@
 
       <div class="field">
         <label class="field-label">What was different tonight?</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="What was different tonight?">
           <option>I took less than my plan says</option>
           <option>I took more than my plan says</option>
           <option>I took it at a different time</option>
@@ -286,12 +286,12 @@
         </select>
       </div>
       <div class="field-row">
-        <div class="field"><label class="field-label">How much you took</label><input class="field-input" placeholder="200 mg"></div>
-        <div class="field"><label class="field-label">When</label><input class="field-input" value="Tonight, about 8:15 PM"></div>
+        <div class="field"><label class="field-label">How much you took</label><input class="field-input" placeholder="200 mg" aria-label="How much you took"></div>
+        <div class="field"><label class="field-label">When</label><input class="field-input" value="Tonight, about 8:15 PM" aria-label="When"></div>
       </div>
       <div class="field">
         <label class="field-label">Anything they should know</label>
-        <textarea class="field-textarea" placeholder="Felt groggy in the morning, so I halved it."></textarea>
+        <textarea class="field-textarea" placeholder="Felt groggy in the morning, so I halved it." aria-label="Anything they should know"></textarea>
       </div>
 
       <div class="prov">
@@ -321,7 +321,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 /* One face per question, and the answer sticks. */
 (function () {

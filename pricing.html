@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .pr-price { font-family: ui-monospace, monospace; font-size: 12.5px; white-space: nowrap; }
   .pr-price-main { font-weight: 700; color: var(--hx-navy); }
@@ -57,20 +57,20 @@
           <button class="filter-chip">Provider visits</button>
           <button class="filter-chip">Labs</button>
           <button class="filter-chip">Supplements</button>
-          <input class="search-input" placeholder="Search a service or billing code">
+          <input class="search-input" placeholder="Search a service or billing code" aria-label="Search a service or billing code">
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
               <tr>
-                <th>Service</th>
-                <th>Billing code</th>
-                <th>Time in chair</th>
-                <th>Cash price</th>
-                <th>Member price</th>
-                <th>Billed to insurance</th>
-                <th></th>
+                <th scope="col">Service</th>
+                <th scope="col">Billing code</th>
+                <th scope="col">Time in chair</th>
+                <th scope="col">Cash price</th>
+                <th scope="col">Member price</th>
+                <th scope="col">Billed to insurance</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -275,7 +275,7 @@
               <div class="card-title">Earlier answers</div>
               <div class="tbl-wrap">
                 <table class="tbl">
-                  <thead><tr><th>Snapshot</th><th>Answered</th><th>What it said</th><th>Asked by</th><th></th></tr></thead>
+                  <thead><tr><th scope="col">Snapshot</th><th scope="col">Answered</th><th scope="col">What it said</th><th scope="col">Asked by</th><th scope="col"></th></tr></thead>
                   <tbody>
                     <tr>
                       <td><span class="ver-chip">#3</span></td>
@@ -368,7 +368,7 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Benefit</th><th>What it gives</th><th>Counts against a cap</th><th>Used by</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Benefit</th><th scope="col">What it gives</th><th scope="col">Counts against a cap</th><th scope="col">Used by</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Included sessions</strong></td>
@@ -453,18 +453,18 @@
       <button class="modal-close" data-close-modal>×</button>
     </div>
     <div class="modal-body">
-      <div class="field"><label class="field-label">Service name</label><input class="field-input" placeholder="Ozone therapy"></div>
+      <div class="field"><label class="field-label">Service name</label><input class="field-input" placeholder="Ozone therapy" aria-label="Service name"></div>
       <div class="field-row">
         <div class="field"><label class="field-label">Category</label>
-          <select class="field-select"><option>Infusion</option><option>Treatment</option><option>Provider visit</option><option>Lab</option><option>Supplement</option></select>
+          <select class="field-select" aria-label="Category"><option>Infusion</option><option>Treatment</option><option>Provider visit</option><option>Lab</option><option>Supplement</option></select>
         </div>
-        <div class="field"><label class="field-label">Time in chair</label><input class="field-input" placeholder="45 min"></div>
+        <div class="field"><label class="field-label">Time in chair</label><input class="field-input" placeholder="45 min" aria-label="Time in chair"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label class="field-label">Cash price</label><input class="field-input" placeholder="$0"></div>
-        <div class="field"><label class="field-label">Member price</label><input class="field-input" placeholder="$0"></div>
+        <div class="field"><label class="field-label">Cash price</label><input class="field-input" placeholder="$0" aria-label="Cash price"></div>
+        <div class="field"><label class="field-label">Member price</label><input class="field-input" placeholder="$0" aria-label="Member price"></div>
       </div>
-      <div class="field"><label class="field-label">Billing code</label><input class="field-input" placeholder="Leave empty for cash only"></div>
+      <div class="field"><label class="field-label">Billing code</label><input class="field-input" placeholder="Leave empty for cash only" aria-label="Billing code"></div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
@@ -483,8 +483,8 @@
       <button class="modal-close" data-close-modal>×</button>
     </div>
     <div class="modal-body">
-      <div class="field"><label class="field-label">Benefit name</label><input class="field-input" placeholder="Birthday session"></div>
-      <div class="field"><label class="field-label">What it gives</label><textarea class="field-textarea" placeholder="One free treatment during the member's birthday month"></textarea></div>
+      <div class="field"><label class="field-label">Benefit name</label><input class="field-input" placeholder="Birthday session" aria-label="Benefit name"></div>
+      <div class="field"><label class="field-label">What it gives</label><textarea class="field-textarea" placeholder="One free treatment during the member's birthday month" aria-label="What it gives"></textarea></div>
       <div class="field" style="display:flex;align-items:center;gap:8px;font-size:12.5px">
         <input type="checkbox" id="pr-cap" style="margin:0">
         <label for="pr-cap">Counts against the tier's session cap</label>
@@ -497,6 +497,6 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 </body>
 </html>

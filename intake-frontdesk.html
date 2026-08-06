@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .afd-toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
   .afd-prow { display: flex; align-items: center; gap: 10px; }
@@ -82,20 +82,20 @@
             <button class="filter-chip">Follow-ups</button>
             <button class="filter-chip">Infusions</button>
           </span>
-          <input class="search-input" type="search" placeholder="Search by patient name">
+          <input class="search-input" type="search" placeholder="Search by patient name" aria-label="Search by patient name">
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
               <tr>
-                <th>Time</th>
-                <th>Patient</th>
-                <th>Appointment</th>
-                <th>Where</th>
-                <th>Visit status</th>
-                <th>Prerequisites</th>
-                <th>Check-in</th>
+                <th scope="col">Time</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Appointment</th>
+                <th scope="col">Where</th>
+                <th scope="col">Visit status</th>
+                <th scope="col">Prerequisites</th>
+                <th scope="col">Check-in</th>
               </tr>
             </thead>
             <tbody>
@@ -279,11 +279,11 @@
             <table class="tbl">
               <thead>
                 <tr>
-                  <th>Patient</th>
-                  <th>Today's visit</th>
-                  <th>Onboarding</th>
-                  <th>Front desk items</th>
-                  <th>Clinical readiness</th>
+                  <th scope="col">Patient</th>
+                  <th scope="col">Today's visit</th>
+                  <th scope="col">Onboarding</th>
+                  <th scope="col">Front desk items</th>
+                  <th scope="col">Clinical readiness</th>
                 </tr>
               </thead>
               <tbody>
@@ -453,21 +453,21 @@
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Name</label>
-                  <input class="field-input" type="text" value="T. Alvarez">
+                  <input class="field-input" type="text" value="T. Alvarez" aria-label="Name">
                 </div>
                 <div class="field">
                   <label class="field-label">Date of birth</label>
-                  <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+                  <input class="field-input" type="text" placeholder="MM/DD/YYYY" aria-label="Date of birth">
                 </div>
               </div>
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Mobile phone</label>
-                  <input class="field-input" type="tel" value="(949) 555-0176">
+                  <input class="field-input" type="tel" value="(949) 555-0176" aria-label="Mobile phone">
                 </div>
                 <div class="field">
                   <label class="field-label">Email</label>
-                  <input class="field-input" type="text" placeholder="name@example.com">
+                  <input class="field-input" type="text" placeholder="name@example.com" aria-label="Email">
                 </div>
               </div>
               <button class="btn btn-primary" onclick="HCOS.toast('Searched name, date of birth, phone and email across the person master.', 'ok')">Search the person master</button>
@@ -528,26 +528,26 @@
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">First name</label>
-                  <input class="field-input" type="text" placeholder="First name">
+                  <input class="field-input" type="text" placeholder="First name" aria-label="First name">
                 </div>
                 <div class="field">
                   <label class="field-label">Last name</label>
-                  <input class="field-input" type="text" placeholder="Last name">
+                  <input class="field-input" type="text" placeholder="Last name" aria-label="Last name">
                 </div>
               </div>
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Date of birth</label>
-                  <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+                  <input class="field-input" type="text" placeholder="MM/DD/YYYY" aria-label="Date of birth">
                 </div>
                 <div class="field">
                   <label class="field-label">Mobile phone</label>
-                  <input class="field-input" type="tel" placeholder="(949) 555-0100">
+                  <input class="field-input" type="tel" placeholder="(949) 555-0100" aria-label="Mobile phone">
                 </div>
               </div>
               <div class="field">
                 <label class="field-label">Starting lifecycle status</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Starting lifecycle status">
                   <option>Inquiry — they walked in and asked</option>
                   <option selected>Scheduled — a same-day slot is booked</option>
                 </select>
@@ -574,7 +574,7 @@
               <div class="card-title">This walk-in</div>
               <div class="field">
                 <label class="field-label">Reason for visit</label>
-                <textarea class="field-textarea">Headache since Sunday — asking whether the consult can start earlier.</textarea>
+                <textarea class="field-textarea" aria-label="Reason for visit">Headache since Sunday — asking whether the consult can start earlier.</textarea>
               </div>
               <div class="seg-divider">Send onboarding to</div>
               <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -662,7 +662,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within their own group.
   document.addEventListener('click', function (ev) {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .a-prow { display: flex; align-items: center; gap: 10px; }
   .a-pname { font-weight: 600; color: var(--hx-navy); }
@@ -56,7 +56,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search tomorrow's patients by name or visit type">
+          <input class="search-input" type="search" placeholder="Search tomorrow's patients by name or visit type" aria-label="Search tomorrow's patients by name or visit type">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">Reviewed</button>
           <button class="filter-chip">Review now</button>
@@ -70,12 +70,12 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Time</th>
-                <th>Patient</th>
-                <th>Visit type</th>
-                <th>Chart review</th>
-                <th>Flags</th>
-                <th></th>
+                <th scope="col">Time</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Visit type</th>
+                <th scope="col">Chart review</th>
+                <th scope="col">Flags</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -203,7 +203,7 @@
 
             <div class="card" style="margin-top:14px">
               <div class="seg-divider" style="margin-top:0">What I'd like Dr. Drannikov to see first</div>
-              <textarea class="field-textarea" rows="4">Patient suspects a functional cause. Worth a thyroid panel, cortisol curve, and heavy-metals screen. Consider B12 / folate methylation labs given the brain-fog pattern.</textarea>
+              <textarea class="field-textarea" rows="4" aria-label="Field">Patient suspects a functional cause. Worth a thyroid panel, cortisol curve, and heavy-metals screen. Consider B12 / folate methylation labs given the brain-fog pattern.</textarea>
               <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
                 <button class="btn btn-sm" onclick="HCOS.toast('Note saved — it opens with the chart for Dr. Drannikov.', 'ok')">Save note for provider</button>
                 <button class="btn btn-ghost btn-sm" data-activate="a-41-flag-provider">Flag items for provider</button>
@@ -286,7 +286,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle active state; Flag buttons confirm they were added.
   document.addEventListener('click', function (ev) {

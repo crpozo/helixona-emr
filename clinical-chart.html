@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   /* Page-local pieces the shared vocabulary lacks — all prefixed .b-
      LAYOUT ONLY: every box below is a .card in the markup. */
@@ -219,7 +219,7 @@
 
         <div class="tbl-wrap" style="margin-top:12px">
           <table class="tbl">
-            <thead><tr><th style="width:44px">#</th><th>Lead actor</th><th>Problems that roll up under it</th><th></th></tr></thead>
+            <thead><tr><th scope="col" style="width:44px">#</th><th scope="col">Lead actor</th><th scope="col">Problems that roll up under it</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td class="la-rank">1 <span class="pill pill-ok">Main</span></td>
@@ -326,14 +326,14 @@
           <button class="filter-chip">Patient-reported (2)</button>
           <button class="filter-chip">Resolved (2)</button>
           <button class="filter-chip">All</button>
-          <input class="search-input" type="search" placeholder="Search ICD-10 or problem name">
+          <input class="search-input" type="search" placeholder="Search ICD-10 or problem name" aria-label="Search ICD-10 or problem name">
           <button data-row-add class="btn btn-primary btn-sm" style="margin-left:auto" onclick="HCOS.toast('Problem added as active by Dr. Drannikov. Notes and claims read it from here.', 'ok')">Add problem</button>
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Problem</th><th>ICD-10</th><th>Status</th><th></th></tr>
+              <tr><th scope="col">Problem</th><th scope="col">ICD-10</th><th scope="col">Status</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr>
@@ -404,7 +404,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>What she told us</th><th>Trust</th><th></th></tr>
+              <tr><th scope="col">What she told us</th><th scope="col">Trust</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr>
@@ -561,7 +561,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Medication or supplement</th><th>Trust and source</th><th>Decision</th><th></th></tr>
+              <tr><th scope="col">Medication or supplement</th><th scope="col">Trust and source</th><th scope="col">Decision</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr>
@@ -749,7 +749,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Substance</th><th>Reaction</th><th>Trust and source</th><th>Enforcement</th><th></th></tr>
+              <tr><th scope="col">Substance</th><th scope="col">Reaction</th><th scope="col">Trust and source</th><th scope="col">Enforcement</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr>
@@ -940,7 +940,7 @@
             <div class="tbl-wrap">
               <table class="tbl">
                 <thead>
-                  <tr><th>Component</th><th>Concentration</th><th>Volume</th><th>Route</th></tr>
+                  <tr><th scope="col">Component</th><th scope="col">Concentration</th><th scope="col">Volume</th><th scope="col">Route</th></tr>
                 </thead>
                 <tbody id="b-comp-body">
                   <tr><td>B-complex 100</td><td>Standard</td><td>1 mL</td><td>IV push or admix</td></tr>
@@ -955,14 +955,14 @@
 
             <div class="seg-divider">Administration</div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Total volume</label><input class="field-input" id="b-vol" value="117 mL" disabled></div>
-              <div class="field"><label class="field-label">Infusion duration</label><input class="field-input" id="b-dur" value="30 minutes"></div>
+              <div class="field"><label class="field-label">Total volume</label><input class="field-input" id="b-vol" value="117 mL" disabled aria-label="Total volume"></div>
+              <div class="field"><label class="field-label">Infusion duration</label><input class="field-input" id="b-dur" value="30 minutes" aria-label="Infusion duration"></div>
             </div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Rate</label><input class="field-input" id="b-rate" value="234 mL/hr" disabled></div>
+              <div class="field"><label class="field-label">Rate</label><input class="field-input" id="b-rate" value="234 mL/hr" disabled aria-label="Rate"></div>
               <div class="field">
                 <label class="field-label">IV access</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="IV access">
                   <option selected>Peripheral 22 g preferred</option>
                   <option>Peripheral 20 g</option>
                   <option>Port (if in place)</option>
@@ -971,15 +971,15 @@
             </div>
             <div class="field">
               <label class="field-label">Pre-medication and special instructions</label>
-              <textarea class="field-textarea" id="b-premeds" rows="3">First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.</textarea>
+              <textarea class="field-textarea" id="b-premeds" rows="3" aria-label="Pre-medication and special instructions">First infusion: start slow over 45 min to assess tolerance. Magnesium can cause warmth or flushing — counsel the patient before start. Ondansetron 4 mg PO 30 min before, only if nausea was reported with prior IV therapy.</textarea>
             </div>
 
             <div class="seg-divider">Frequency, prerequisites and stop rules</div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Total infusions</label><input class="field-input" value="6"></div>
+              <div class="field"><label class="field-label">Total infusions</label><input class="field-input" value="6" aria-label="Total infusions"></div>
               <div class="field">
                 <label class="field-label">Cadence</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Cadence">
                   <option selected>Weekly × 6</option>
                   <option>Twice weekly × 6</option>
                   <option>Every other week × 6</option>
@@ -987,12 +987,12 @@
               </div>
             </div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Before the first infusion of this version</label><input class="field-input" id="b-preflight" value="CMP within 90 days · allergy list reviewed today"></div>
-              <div class="field"><label class="field-label">Order expires</label><input class="field-input" value="Oct 21, 2026 — or when the 6th infusion is given"></div>
+              <div class="field"><label class="field-label">Before the first infusion of this version</label><input class="field-input" id="b-preflight" value="CMP within 90 days · allergy list reviewed today" aria-label="Before the first infusion of this version"></div>
+              <div class="field"><label class="field-label">Order expires</label><input class="field-input" value="Oct 21, 2026 — or when the 6th infusion is given" aria-label="Order expires"></div>
             </div>
             <div class="field">
               <label class="field-label">Stop rules — the medic stops and calls the provider</label>
-              <textarea class="field-textarea" rows="2">Stop for chest tightness, wheeze, rash, systolic below 90 or a fall of 20 from baseline. Slow the rate for warmth or flushing and write it on the flowsheet.</textarea>
+              <textarea class="field-textarea" rows="2" aria-label="Stop rules — the medic stops and calls the provider">Stop for chest tightness, wheeze, rash, systolic below 90 or a fall of 20 from baseline. Slow the rate for warmth or flushing and write it on the flowsheet.</textarea>
             </div>
             <div class="field-help">Scheduling reads the cadence and the expiry from here. The flowsheet documents against this order and version — neither of them keeps its own copy.</div>
 
@@ -1140,7 +1140,7 @@
 
         <div class="field" style="margin-top:16px">
           <label class="field-label">Reason for addendum</label>
-          <select class="field-select">
+          <select class="field-select" aria-label="Reason for addendum">
             <option selected>Lab result came back after the encounter</option>
             <option>Patient communication clarified a symptom</option>
             <option>Correction to medication dose / wrong drug entered</option>
@@ -1151,7 +1151,7 @@
 
         <div class="field">
           <label class="field-label">Addendum text</label>
-          <textarea class="field-textarea" rows="6">EBV reactivation panel result received 2026-05-29 (7 days post-encounter): EBV early antigen IgG elevated at 1:160 with VCA-IgG positive — pattern consistent with EBV reactivation. This supports the working hypothesis discussed at the encounter. Plan amended to add: low-dose naltrexone 1.5 mg nightly × 30 days with reassessment, and L-lysine 1 g twice daily. Will call the patient today and document the call separately.</textarea>
+          <textarea class="field-textarea" rows="6" aria-label="Addendum text">EBV reactivation panel result received 2026-05-29 (7 days post-encounter): EBV early antigen IgG elevated at 1:160 with VCA-IgG positive — pattern consistent with EBV reactivation. This supports the working hypothesis discussed at the encounter. Plan amended to add: low-dose naltrexone 1.5 mg nightly × 30 days with reassessment, and L-lysine 1 g twice daily. Will call the patient today and document the call separately.</textarea>
           <div class="prov">
             <span><strong>Reads</strong> result <code>L-8903</code> · EBV reactivation panel, resulted May 29 2026 · <a href="labs.html#/c-01-orders">open orders and results</a> — the result stays exactly as it arrived</span>
           </div>
@@ -1232,7 +1232,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

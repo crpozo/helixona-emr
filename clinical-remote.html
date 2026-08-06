@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .b-rm-encbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
   .b-rm-encbar-actions { display:flex; gap:8px; flex-wrap:wrap; }
@@ -58,7 +58,7 @@
         <div class="callout">Questionnaire answers already flow into every chart automatically — the MA reviews and scrubs, never re-keys. <a href="clinical-questionnaires.html">See where answers come from</a>.</div>
 
         <div class="filters" style="margin-top:14px">
-          <input class="search-input" type="search" placeholder="Search by patient name or reason">
+          <input class="search-input" type="search" placeholder="Search by patient name or reason" aria-label="Search by patient name or reason">
           <button class="filter-chip active">All open (7)</button>
           <button class="filter-chip">Pending (5)</button>
           <button class="filter-chip">Awaiting intake (1)</button>
@@ -71,12 +71,12 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Appointment</th>
-                <th>Patient</th>
-                <th>Visit type</th>
-                <th>Intake</th>
-                <th>Pre-chart status</th>
-                <th></th>
+                <th scope="col">Appointment</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Visit type</th>
+                <th scope="col">Intake</th>
+                <th scope="col">Pre-chart status</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -188,10 +188,10 @@
               <table class="tbl">
                 <thead>
                   <tr>
-                    <th>Fact</th>
-                    <th>Where it lives</th>
-                    <th>As of</th>
-                    <th>Trust</th>
+                    <th scope="col">Fact</th>
+                    <th scope="col">Where it lives</th>
+                    <th scope="col">As of</th>
+                    <th scope="col">Trust</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -241,7 +241,7 @@
                 <span class="ai-state suggested">Draft — not in the note</span>
               </div>
               <div class="ai-body">
-                <textarea class="field-textarea" rows="7">61 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
+                <textarea class="field-textarea" rows="7" aria-label="Field">61 y/o M presents for new patient functional medicine evaluation. Chief complaint: progressive fatigue over 18 months. 20+ year vegetarian. Self-rated function 6/10. Sleep onset normal, but reports waking 3 AM nightly with mind racing. Bowel pattern loose 2–3×/week, irregular. Denies fever, weight change, night sweats. Stress moderate (tech sector, recent reorg). Notable: family history of pernicious anemia (mother). No prior B12 testing per patient. Patient uploaded outside labs from Nov 2025 — CBC with mild macrocytosis (MCV 102), low-normal ferritin.</textarea>
                 <div class="b-dot">
                   <span class="pill pill-muted b-dotphrase">.veganhx</span>
                   <span class="pill pill-muted b-dotphrase">.macrocytosis</span>
@@ -370,11 +370,11 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Task</th>
-                <th>Patient</th>
-                <th>Category</th>
-                <th>Priority</th>
-                <th></th>
+                <th scope="col">Task</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Category</th>
+                <th scope="col">Priority</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -449,7 +449,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

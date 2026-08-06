@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .ob-brand { text-align: center; padding: 26px 0 18px; }
   .ob-brand-name { font-size: 22px; font-weight: 600; color: var(--hx-navy); }
@@ -56,11 +56,11 @@
         <div class="seg-divider" style="margin-top:0">Verify it's you</div>
         <div class="field">
           <label class="field-label">Date of birth</label>
-          <input class="field-input" type="text" placeholder="MM / DD / YYYY">
+          <input class="field-input" type="text" placeholder="MM / DD / YYYY" aria-label="Date of birth">
         </div>
         <div class="field">
           <label class="field-label">Last 4 of your phone number</label>
-          <input class="field-input" type="text" placeholder="0119">
+          <input class="field-input" type="text" placeholder="0119" aria-label="Last 4 of your phone number">
         </div>
 
         <button class="btn btn-primary btn-lg ob-full" data-activate="a-14-checklist" style="margin-top:18px">Verify and continue</button>
@@ -171,7 +171,7 @@
         </div>
         <div class="field">
           <label class="field-label">What should we correct?</label>
-          <select class="field-select">
+          <select class="field-select" aria-label="What should we correct?">
             <option>Legal name</option>
             <option>Date of birth</option>
             <option selected>Mobile number</option>
@@ -181,7 +181,7 @@
         </div>
         <div class="field">
           <label class="field-label">What it should say</label>
-          <input class="field-input" type="text" placeholder="Type the correct value">
+          <input class="field-input" type="text" placeholder="Type the correct value" aria-label="What it should say">
         </div>
         <button class="btn ob-full" style="margin-bottom:6px" onclick="HCOS.toast('Correction sent. Your record changes once the front desk confirms it.', 'ok')">Send a correction</button>
         <div class="field-help" style="margin-bottom:14px">Your old value is kept either way — nothing is overwritten.</div>
@@ -189,11 +189,11 @@
         <div class="seg-divider">What you tell us</div>
         <div class="field">
           <label class="field-label">Preferred name (optional)</label>
-          <input class="field-input" type="text" placeholder="What we should call you">
+          <input class="field-input" type="text" placeholder="What we should call you" aria-label="Preferred name (optional)">
         </div>
         <div class="field">
           <label class="field-label">Pronouns (optional)</label>
-          <select class="field-select">
+          <select class="field-select" aria-label="Pronouns (optional)">
             <option>Prefer not to say</option>
             <option>She / her</option>
             <option>He / him</option>
@@ -203,7 +203,7 @@
         </div>
         <div class="field">
           <label class="field-label">Gender identity (optional)</label>
-          <input class="field-input" type="text" placeholder="Same as above, or different">
+          <input class="field-input" type="text" placeholder="Same as above, or different" aria-label="Gender identity (optional)">
         </div>
         <div class="prov">
           <span><strong>Saved to</strong> the same record <code>P-004901</code> — these three are yours to set</span>
@@ -212,11 +212,11 @@
         <div class="seg-divider">Emergency contact</div>
         <div class="field">
           <label class="field-label">Full name</label>
-          <input class="field-input" type="text" placeholder="First Last">
+          <input class="field-input" type="text" placeholder="First Last" aria-label="Full name">
         </div>
         <div class="field">
           <label class="field-label">Relationship</label>
-          <select class="field-select">
+          <select class="field-select" aria-label="Relationship">
             <option>Select</option>
             <option>Spouse / partner</option>
             <option>Parent</option>
@@ -228,7 +228,7 @@
         </div>
         <div class="field">
           <label class="field-label">Best phone number</label>
-          <input class="field-input" type="tel" placeholder="(___) ___-____">
+          <input class="field-input" type="tel" placeholder="(___) ___-____" aria-label="Best phone number">
           <div class="field-help">Just one number is fine — we only call this person if we can't reach you in an emergency.</div>
         </div>
         <div class="prov">
@@ -287,11 +287,11 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Onset</label>
-              <input class="field-input" type="text" value="Aug 2024">
+              <input class="field-input" type="text" value="Aug 2024" aria-label="Onset">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">How it is now</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="How it is now">
                 <option selected>Bothering me</option>
                 <option>Comes and goes</option>
                 <option>Getting better</option>
@@ -301,7 +301,7 @@
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Notes (optional)</label>
-            <input class="field-input" type="text" placeholder="Working dx; multiple specialists tried">
+            <input class="field-input" type="text" placeholder="Working dx; multiple specialists tried" aria-label="Notes (optional)">
           </div>
           <div class="ob-card-note">No provider has confirmed this one yet.</div>
         </div>
@@ -315,11 +315,11 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Diagnosed</label>
-              <input class="field-input" type="text" value="2020">
+              <input class="field-input" type="text" value="2020" aria-label="Diagnosed">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">How it is now</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="How it is now">
                 <option selected>Treated and steady</option>
                 <option>Bothering me</option>
                 <option>Comes and goes</option>
@@ -329,7 +329,7 @@
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Notes (optional)</label>
-            <input class="field-input" type="text" placeholder="On levothyroxine 50 mcg">
+            <input class="field-input" type="text" placeholder="On levothyroxine 50 mcg" aria-label="Notes (optional)">
           </div>
           <div class="ob-card-note">Records requested from your endocrinologist to confirm it.</div>
         </div>
@@ -429,7 +429,7 @@
 
         <div class="field">
           <label class="field-label">Anything else worth noting</label>
-          <textarea class="field-textarea" rows="3" placeholder="Describe it in your own words"></textarea>
+          <textarea class="field-textarea" rows="3" placeholder="Describe it in your own words" aria-label="Anything else worth noting"></textarea>
         </div>
 
         <div class="seg-divider">What your care team will read</div>
@@ -478,7 +478,7 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Type</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Type">
                 <option selected>Drug</option>
                 <option>Food</option>
                 <option>Environmental</option>
@@ -489,7 +489,7 @@
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Severity</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Severity">
                 <option>Mild</option>
                 <option selected>Moderate</option>
                 <option>Severe</option>
@@ -499,7 +499,7 @@
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Reaction</label>
-            <input class="field-input" type="text" value="Rash, hives">
+            <input class="field-input" type="text" value="Rash, hives" aria-label="Reaction">
           </div>
           <div class="ob-card-note">Blocking sulfa in ordering already — it stays blocked while a provider verifies it.</div>
         </div>
@@ -513,7 +513,7 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Type</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Type">
                 <option>Drug</option>
                 <option selected>Food</option>
                 <option>Environmental</option>
@@ -524,7 +524,7 @@
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Severity</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Severity">
                 <option>Mild</option>
                 <option selected>Moderate</option>
                 <option>Severe</option>
@@ -534,7 +534,7 @@
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Reaction</label>
-            <input class="field-input" type="text" value="GI bloating, brain fog within 1–2 hours">
+            <input class="field-input" type="text" value="GI bloating, brain fog within 1–2 hours" aria-label="Reaction">
           </div>
           <div class="ob-card-note">Warns during ordering — you have told us it is a sensitivity, not confirmed celiac.</div>
         </div>
@@ -587,16 +587,16 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Synthroid">
+              <input class="field-input" type="text" value="Synthroid" aria-label="Brand">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Taken for</label>
-              <input class="field-input" type="text" value="Hashimoto's">
+              <input class="field-input" type="text" value="Hashimoto's" aria-label="Taken for">
             </div>
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Prescribed by</label>
-            <input class="field-input" type="text" value="Outside PCP">
+            <input class="field-input" type="text" value="Outside PCP" aria-label="Prescribed by">
           </div>
         </div>
 
@@ -612,16 +612,16 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Zoloft (generic)">
+              <input class="field-input" type="text" value="Zoloft (generic)" aria-label="Brand">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Taken for</label>
-              <input class="field-input" type="text" value="Anxiety">
+              <input class="field-input" type="text" value="Anxiety" aria-label="Taken for">
             </div>
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Prescribed by</label>
-            <input class="field-input" type="text" value="Outside PCP">
+            <input class="field-input" type="text" value="Outside PCP" aria-label="Prescribed by">
           </div>
         </div>
 
@@ -637,16 +637,16 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Vivelle-Dot">
+              <input class="field-input" type="text" value="Vivelle-Dot" aria-label="Brand">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Taken for</label>
-              <input class="field-input" type="text" value="Perimenopause">
+              <input class="field-input" type="text" value="Perimenopause" aria-label="Taken for">
             </div>
           </div>
           <div class="field" style="margin:8px 0 0">
             <label class="field-label">Prescribed by</label>
-            <input class="field-input" type="text" value="Outside gynecology">
+            <input class="field-input" type="text" value="Outside gynecology" aria-label="Prescribed by">
           </div>
         </div>
 
@@ -685,21 +685,21 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Pure Encapsulations">
+              <input class="field-input" type="text" value="Pure Encapsulations" aria-label="Brand">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Started</label>
-              <input class="field-input" type="text" value="Jan 2025">
+              <input class="field-input" type="text" value="Jan 2025" aria-label="Started">
             </div>
           </div>
           <div class="field-row" style="gap:8px;margin-top:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Recommended by</label>
-              <input class="field-input" type="text" value="Self-purchased">
+              <input class="field-input" type="text" value="Self-purchased" aria-label="Recommended by">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Source</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Source">
                 <option>Amazon</option>
                 <option selected>Fullscript</option>
                 <option>Health food store</option>
@@ -722,21 +722,21 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Thorne">
+              <input class="field-input" type="text" value="Thorne" aria-label="Brand">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Started</label>
-              <input class="field-input" type="text" value="Mar 2026">
+              <input class="field-input" type="text" value="Mar 2026" aria-label="Started">
             </div>
           </div>
           <div class="field-row" style="gap:8px;margin-top:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Recommended by</label>
-              <input class="field-input" type="text" value="Friend">
+              <input class="field-input" type="text" value="Friend" aria-label="Recommended by">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Source</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Source">
                 <option selected>Amazon</option>
                 <option>Fullscript</option>
                 <option>Health food store</option>
@@ -759,11 +759,11 @@
           <div class="field-row" style="gap:8px">
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Brand</label>
-              <input class="field-input" type="text" value="Seeking Health">
+              <input class="field-input" type="text" value="Seeking Health" aria-label="Brand">
             </div>
             <div class="field" style="margin-bottom:0">
               <label class="field-label">Started</label>
-              <input class="field-input" type="text" value="Sep 2025">
+              <input class="field-input" type="text" value="Sep 2025" aria-label="Started">
             </div>
           </div>
         </div>
@@ -804,11 +804,11 @@
 
         <div class="field">
           <label class="field-label">Main concern (in your own words)</label>
-          <textarea class="field-textarea" rows="4">I've had chronic fatigue and brain fog for about 18 months. Standard labs come back normal. I want a functional approach.</textarea>
+          <textarea class="field-textarea" rows="4" aria-label="Main concern (in your own words)">I've had chronic fatigue and brain fog for about 18 months. Standard labs come back normal. I want a functional approach.</textarea>
         </div>
 <div class="seg-divider">When did it start?</div>
         <div class="field">
-          <select class="field-select">
+          <select class="field-select" aria-label="Field">
             <option>Within the last month</option>
             <option>1–6 months ago</option>
             <option>6–12 months ago</option>
@@ -833,7 +833,7 @@
 
         <div class="seg-divider">What you've already tried</div>
         <div class="field">
-          <textarea class="field-textarea" rows="3" placeholder="Other doctors, supplements, lifestyle changes…"></textarea>
+          <textarea class="field-textarea" rows="3" placeholder="Other doctors, supplements, lifestyle changes…" aria-label="Other doctors, supplements, lifestyle changes…"></textarea>
         </div>
 
         <button class="btn btn-primary btn-lg ob-full" data-activate="a-22-consents" style="margin-top:12px">Continue</button>
@@ -882,7 +882,7 @@
         <div id="ob-consent-sign">
           <div class="field">
             <label class="field-label">Type your full legal name to sign</label>
-            <input class="field-input" type="text" id="ob-consent-name" placeholder="Sarah Anderson">
+            <input class="field-input" type="text" id="ob-consent-name" placeholder="Sarah Anderson" aria-label="Type your full legal name to sign">
           </div>
 
           <button class="btn btn-primary btn-lg ob-full" id="ob-consent-submit">Sign and continue</button>
@@ -898,16 +898,16 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 (function () {
   'use strict';
 
-  var TYPE_SELECT = '<select class="field-select"><option>Drug</option><option>Food</option>' +
+  var TYPE_SELECT = '<select class="field-select" aria-label="Field"><option>Drug</option><option>Food</option>' +
     '<option>Environmental</option><option>Latex</option><option>Contrast</option><option>Other</option></select>';
-  var SEV_SELECT = '<select class="field-select"><option>Mild</option><option>Moderate</option>' +
+  var SEV_SELECT = '<select class="field-select" aria-label="Field"><option>Mild</option><option>Moderate</option>' +
     '<option>Severe</option><option>Life-threatening</option></select>';
-  var SOURCE_SELECT = '<select class="field-select"><option>Amazon</option><option>Fullscript</option>' +
+  var SOURCE_SELECT = '<select class="field-select" aria-label="Field"><option>Amazon</option><option>Fullscript</option>' +
     '<option>Health food store</option><option>Practitioner office</option><option>Other</option></select>';
 
   var TEMPLATES = {
@@ -919,13 +919,13 @@
         '</div>' +
         '<div class="clin-src" style="margin-bottom:8px">You are telling us now · Jul 21, 2026 · pending review by Nick, RN</div>' +
         '<div class="field" style="margin-bottom:8px"><label class="field-label">What you react to</label>' +
-          '<input class="field-input" type="text" placeholder="Drug, food, material or exposure"></div>' +
+          '<input class="field-input" type="text" placeholder="Drug, food, material or exposure" aria-label="What you react to"></div>' +
         '<div class="field-row" style="gap:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Type</label>' + TYPE_SELECT + '</div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Severity</label>' + SEV_SELECT + '</div>' +
         '</div>' +
         '<div class="field" style="margin:8px 0 0"><label class="field-label">Reaction</label>' +
-          '<input class="field-input" type="text" placeholder="What happened, and how soon"></div>' +
+          '<input class="field-input" type="text" placeholder="What happened, and how soon" aria-label="Reaction"></div>' +
       '</div>',
     medication:
       '<div class="card ob-card" data-ob-new>' +
@@ -936,18 +936,18 @@
         '<div class="clin-src" style="margin-bottom:8px">You are telling us now · Jul 21, 2026</div>' +
         '<div class="field-row" style="gap:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Medication</label>' +
-            '<input class="field-input" type="text" placeholder="Name on the bottle"></div>' +
+            '<input class="field-input" type="text" placeholder="Name on the bottle" aria-label="Medication"></div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Dose and schedule</label>' +
-            '<input class="field-input" type="text" placeholder="50 mcg once daily"></div>' +
+            '<input class="field-input" type="text" placeholder="50 mcg once daily" aria-label="Dose and schedule"></div>' +
         '</div>' +
         '<div class="field-row" style="gap:8px;margin-top:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Brand</label>' +
-            '<input class="field-input" type="text" placeholder="Brand or generic"></div>' +
+            '<input class="field-input" type="text" placeholder="Brand or generic" aria-label="Brand"></div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Taken for</label>' +
-            '<input class="field-input" type="text" placeholder="What it treats"></div>' +
+            '<input class="field-input" type="text" placeholder="What it treats" aria-label="Taken for"></div>' +
         '</div>' +
         '<div class="field" style="margin:8px 0 0"><label class="field-label">Prescribed by</label>' +
-          '<input class="field-input" type="text" placeholder="Who prescribes it"></div>' +
+          '<input class="field-input" type="text" placeholder="Who prescribes it" aria-label="Prescribed by"></div>' +
       '</div>',
     supplement:
       '<div class="card ob-card" data-ob-new>' +
@@ -958,19 +958,19 @@
         '<div class="clin-src" style="margin-bottom:8px">You are telling us now · Jul 21, 2026</div>' +
         '<div class="field-row" style="gap:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Supplement</label>' +
-            '<input class="field-input" type="text" placeholder="Name on the bottle"></div>' +
+            '<input class="field-input" type="text" placeholder="Name on the bottle" aria-label="Supplement"></div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Dose and schedule</label>' +
-            '<input class="field-input" type="text" placeholder="400 mg at night"></div>' +
+            '<input class="field-input" type="text" placeholder="400 mg at night" aria-label="Dose and schedule"></div>' +
         '</div>' +
         '<div class="field-row" style="gap:8px;margin-top:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Brand</label>' +
-            '<input class="field-input" type="text" placeholder="Who makes it"></div>' +
+            '<input class="field-input" type="text" placeholder="Who makes it" aria-label="Brand"></div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Started</label>' +
-            '<input class="field-input" type="text" placeholder="Month and year"></div>' +
+            '<input class="field-input" type="text" placeholder="Month and year" aria-label="Started"></div>' +
         '</div>' +
         '<div class="field-row" style="gap:8px;margin-top:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Recommended by</label>' +
-            '<input class="field-input" type="text" placeholder="Who suggested it"></div>' +
+            '<input class="field-input" type="text" placeholder="Who suggested it" aria-label="Recommended by"></div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Source</label>' + SOURCE_SELECT + '</div>' +
         '</div>' +
       '</div>',
@@ -983,13 +983,13 @@
         '<div class="clin-src" style="margin-bottom:8px">You told us · Jul 21, 2026</div>' +
         '<div class="field-row" style="gap:8px">' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">Onset</label>' +
-            '<input class="field-input" type="text" placeholder="Month and year"></div>' +
+            '<input class="field-input" type="text" placeholder="Month and year" aria-label="Onset"></div>' +
           '<div class="field" style="margin-bottom:0"><label class="field-label">How it is now</label>' +
-            '<select class="field-select"><option selected>Bothering me</option><option>Comes and goes</option>' +
+            '<select class="field-select" aria-label="How it is now"><option selected>Bothering me</option><option>Comes and goes</option>' +
             '<option>Getting better</option><option>Over with</option></select></div>' +
         '</div>' +
         '<div class="field" style="margin:8px 0 0"><label class="field-label">Notes (optional)</label>' +
-          '<input class="field-input" type="text" placeholder="Anything your care team should know"></div>' +
+          '<input class="field-input" type="text" placeholder="Anything your care team should know" aria-label="Notes (optional)"></div>' +
         '<div class="ob-card-note">No provider has confirmed this one yet.</div>' +
       '</div>'
   };

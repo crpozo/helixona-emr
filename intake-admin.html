@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .a-time { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); white-space: nowrap; }
   .a-tmpl-card { cursor: pointer; margin-bottom: 6px; padding: 10px 12px; }
@@ -49,7 +49,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Filter by user, person, action, or source">
+          <input class="search-input" type="search" placeholder="Filter by user, person, action, or source" aria-label="Filter by user, person, action, or source">
           <button class="filter-chip active">All intake events</button>
           <button class="filter-chip">PHI access</button>
           <button class="filter-chip">People</button>
@@ -64,7 +64,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Timestamp</th><th>User</th><th>Action</th><th>Record</th><th>Source</th><th></th></tr>
+              <tr><th scope="col">Timestamp</th><th scope="col">User</th><th scope="col">Action</th><th scope="col">Record</th><th scope="col">Source</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr class="row-click a-ev" data-open-drawer="#a-audit-drawer"
@@ -287,7 +287,7 @@
             <div class="tbl-wrap">
               <table class="tbl">
                 <thead>
-                  <tr><th>Step</th><th>Item</th><th>Required</th><th>Channel</th><th></th></tr>
+                  <tr><th scope="col">Step</th><th scope="col">Item</th><th scope="col">Required</th><th scope="col">Channel</th><th scope="col"></th></tr>
                 </thead>
                 <tbody id="a-tmpl-items">
                   <tr>
@@ -378,7 +378,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>Trigger</th><th>Audience</th><th>Channel</th><th>Template</th><th>Active</th><th></th></tr>
+              <tr><th scope="col">Trigger</th><th scope="col">Audience</th><th scope="col">Channel</th><th scope="col">Template</th><th scope="col">Active</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr>
@@ -470,7 +470,7 @@
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
             <thead>
-              <tr><th>Domain</th><th>States</th><th>Who may move it</th><th>When a step fails</th><th>What the person sees</th></tr>
+              <tr><th scope="col">Domain</th><th scope="col">States</th><th scope="col">Who may move it</th><th scope="col">When a step fails</th><th scope="col">What the person sees</th></tr>
             </thead>
             <tbody>
               <tr>
@@ -669,11 +669,11 @@
             <div class="seg-divider" style="margin-top:0">Question settings</div>
             <div class="field">
               <label class="field-label">Label</label>
-              <input class="field-input" value="Full name" id="a-insp-label">
+              <input class="field-input" value="Full name" id="a-insp-label" aria-label="Label">
             </div>
             <div class="field">
               <label class="field-label">Type</label>
-              <select class="field-select" id="a-insp-type">
+              <select class="field-select" id="a-insp-type" aria-label="Type">
                 <option selected>Short answer</option>
                 <option>Multiple choice</option>
                 <option>Scale 1–10</option>
@@ -684,11 +684,11 @@
             </div>
             <div class="field">
               <label class="field-label">Help text</label>
-              <input class="field-input" placeholder="Shown under the question">
+              <input class="field-input" placeholder="Shown under the question" aria-label="Help text">
             </div>
             <div class="field">
               <label class="field-label">Where the answer goes</label>
-              <select class="field-select" id="a-insp-dest">
+              <select class="field-select" id="a-insp-dest" aria-label="Where the answer goes">
                 <option selected>Person master · legal name</option>
                 <option>Person master · contact details</option>
                 <option>Person master · source</option>
@@ -704,7 +704,7 @@
             </div>
             <div class="field">
               <label class="field-label">Answer stays valid for</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Answer stays valid for">
                 <option>30 days</option>
                 <option>6 months</option>
                 <option selected>12 months</option>
@@ -733,7 +733,7 @@
             <div class="card-title">Where the answers land</div>
             <div class="tbl-wrap">
               <table class="tbl">
-                <thead><tr><th>Answer</th><th>Destination</th><th>State on arrival</th></tr></thead>
+                <thead><tr><th scope="col">Answer</th><th scope="col">Destination</th><th scope="col">State on arrival</th></tr></thead>
                 <tbody>
                   <tr><td>Name, phone, email</td><td><a href="patients.html#/pt-04-find">Person master</a> — searched first, never a second identity</td><td>On file</td></tr>
                   <tr><td>What brings you here</td><td>Encounter reason for visit</td><td><span class="appr draft">Draft</span></td></tr>
@@ -799,7 +799,7 @@
 <div class="seg-divider">Published surveys</div>
         <div class="tbl-wrap" style="margin-bottom:20px">
           <table class="tbl">
-            <thead><tr><th>Survey</th><th>Version</th><th>Used by</th><th>Scoring</th><th>Answers land in</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Survey</th><th scope="col">Version</th><th scope="col">Used by</th><th scope="col">Scoring</th><th scope="col">Answers land in</th><th scope="col">Status</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Initial inquiry</strong></td><td><span class="ver-chip">v4</span></td>
@@ -852,7 +852,7 @@
             <div class="card-title">Reusable questions</div>
             <div class="tbl-wrap">
               <table class="tbl">
-                <thead><tr><th>Question</th><th>Type</th><th>Used in</th></tr></thead>
+                <thead><tr><th scope="col">Question</th><th scope="col">Type</th><th scope="col">Used in</th></tr></thead>
                 <tbody>
                   <tr><td>Current medications and supplements</td><td>Repeating list</td><td>3 surveys</td></tr>
                   <tr><td>Known allergies and reactions</td><td>Repeating list</td><td>3 surveys</td></tr>
@@ -911,7 +911,7 @@
     <div id="a-ev-changes">
       <div class="tbl-wrap">
         <table class="tbl">
-          <thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead>
+          <thead><tr><th scope="col">Field</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
           <tbody>
             <tr><td>Levothyroxine</td><td>50 mcg · verified Mar 16</td><td>75 mcg suggested — not active</td></tr>
             <tr><td>Sulfa</td><td>Not on the allergy list</td><td>Sulfa — hives, patient reported</td></tr>
@@ -944,7 +944,7 @@
   <div class="drawer-body">
     <div class="tbl-wrap">
       <table class="tbl">
-        <thead><tr><th>Version</th><th>State</th><th>Effective</th><th>Responses</th><th>Published by</th></tr></thead>
+        <thead><tr><th scope="col">Version</th><th scope="col">State</th><th scope="col">Effective</th><th scope="col">Responses</th><th scope="col">Published by</th></tr></thead>
         <tbody>
           <tr><td><span class="ver-chip">v5</span></td><td><span class="appr draft">Draft</span></td><td>—</td><td>0</td><td>— · drafted by Shibani</td></tr>
           <tr><td><span class="ver-chip">v4</span></td><td><span class="appr approved">Approved</span></td><td>Jun 2, 2026</td><td>812</td><td>Shibani · content Dr. Drannikov</td></tr>
@@ -976,7 +976,7 @@
       </dl>
       <div class="field">
         <label class="field-label">Why this access is expected</label>
-        <textarea class="field-textarea" rows="3">Charlene runs the remote pre-visit sweep every morning for the next day's patients. The new address is her replacement laptop, confirmed with her by phone at 11:30.</textarea>
+        <textarea class="field-textarea" rows="3" aria-label="Why this access is expected">Charlene runs the remote pre-visit sweep every morning for the next day's patients. The new address is her replacement laptop, confirmed with her by phone at 11:30.</textarea>
       </div>
       <div class="field-help">A disposition without a reason is not recorded — the alert stays open until one is given.</div>
     </div>
@@ -1000,7 +1000,7 @@
     <div class="modal-body">
       <div class="field">
         <label class="field-label">Domain</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="Domain">
           <option selected>Intake &amp; onboarding</option>
           <option>Documentation</option>
           <option>Orders</option>
@@ -1011,15 +1011,15 @@
       </div>
       <div class="field">
         <label class="field-label">Transition</label>
-        <input class="field-input" value="Onboarding → Patient">
+        <input class="field-input" value="Onboarding → Patient" aria-label="Transition">
       </div>
       <div class="field">
         <label class="field-label">Who may move it</label>
-        <input class="field-input" value="Front desk · PCC · Medical assistant">
+        <input class="field-input" value="Front desk · PCC · Medical assistant" aria-label="Who may move it">
       </div>
       <div class="field">
         <label class="field-label">Why</label>
-        <textarea class="field-textarea" rows="3">MAs finish the pre-visit sweep after hours and cannot promote the person until the morning.</textarea>
+        <textarea class="field-textarea" rows="3" aria-label="Why">MAs finish the pre-visit sweep after hours and cannot promote the person until the morning.</textarea>
       </div>
       <div class="field-help">A clinical transition needs clinical governance to approve it before it takes effect.</div>
     </div>
@@ -1030,7 +1030,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {
@@ -1173,7 +1173,7 @@
       if (!raw) {
         return '<div class="callout">Nothing changed — this line records a read. Opening a person record is recorded the same way an edit is.</div>';
       }
-      var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead><tbody>';
+      var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th scope="col">Field</th><th scope="col">Before</th><th scope="col">After</th></tr></thead><tbody>';
       raw.split('|').forEach(function (part) {
         var bits = part.split('~');
         html += '<tr><td>' + aEsc(bits[0] || '') + '</td><td>' + aEsc(bits[1] || '—') + '</td><td>' + aEsc(bits[2] || '—') + '</td></tr>';

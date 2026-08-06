@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -80,11 +80,11 @@
 
         <div class="filters pt-filters">
           <div class="pt-f-top">
-            <input class="search-input" type="search" id="pf-q" oninput="pfApply()" placeholder="Search by name, phone, or DOB">
+            <input class="search-input" type="search" id="pf-q" oninput="pfApply()" placeholder="Search by name, phone, or DOB" aria-label="Search by name, phone, or DOB">
             <span class="pf-count" id="pf-count"></span>
           </div>
           <div class="pt-f-grid">
-            <select class="field-select pf-sel" id="pf-life" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-life" onchange="pfApply()" aria-label="Field">
             <option value="Patient">Patient</option>
             <option value="Inquiry">Inquiry</option>
             <option value="Lead">Lead</option>
@@ -93,33 +93,33 @@
             <option value="Inactive">Inactive / closed</option>
             <option value="all">Any lifecycle stage</option>
           </select>
-            <select class="field-select pf-sel" id="pf-path" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-path" onchange="pfApply()" aria-label="Field">
             <option value="all">Any care pathway</option>
             <option>Complex Chronic Care</option>
             <option>Health Optimization</option>
             <option>Recovery</option>
             <option>Vitality</option>
           </select>
-            <select class="field-select pf-sel" id="pf-access" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-access" onchange="pfApply()" aria-label="Field">
             <option value="all">Any access level</option>
             <option>Comprehensive</option>
             <option>Collaborative</option>
             <option value="Self-directed">Self-directed / open access</option>
           </select>
-            <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-memb" onchange="pfApply()" aria-label="Field">
             <option value="all">Any membership</option>
             <option>Longevity</option>
             <option>Restore</option>
             <option>Wellness</option>
             <option>Pay as you go</option>
           </select>
-            <select class="field-select pf-sel" id="pf-net" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-net" onchange="pfApply()" aria-label="Field">
             <option value="all">Any coverage</option>
             <option value="inn">In-network</option>
             <option value="oon">Out-of-network</option>
             <option value="self">Self-pay</option>
           </select>
-            <select class="field-select pf-sel" id="pf-attn" onchange="pfApply()">
+            <select class="field-select pf-sel" id="pf-attn" onchange="pfApply()" aria-label="Field">
             <option value="all">Anything to watch</option>
             <option value="oop">Out-of-pocket max met</option>
             <option value="spd">SPD missing</option>
@@ -132,14 +132,14 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Patient</th>
-                <th>Care pathway</th>
-                <th>Access level</th>
-                <th>Coverage</th>
-                <th>Plan governance</th>
-                <th>Next appointment</th>
-                <th>Readiness</th>
-                <th>Flags</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Care pathway</th>
+                <th scope="col">Access level</th>
+                <th scope="col">Coverage</th>
+                <th scope="col">Plan governance</th>
+                <th scope="col">Next appointment</th>
+                <th scope="col">Readiness</th>
+                <th scope="col">Flags</th>
               </tr>
             </thead>
             <tbody>
@@ -330,7 +330,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>When</th><th>Appointment</th><th>Where</th><th>Status</th></tr>
+                    <tr><th scope="col">When</th><th scope="col">Appointment</th><th scope="col">Where</th><th scope="col">Status</th></tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -475,9 +475,9 @@
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">1 · Find the person</div>
               <div class="field-row">
-                <div class="field"><label class="field-label">Name</label><input class="field-input" value="Tom Alvarez"></div>
-                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
-                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
+                <div class="field"><label class="field-label">Name</label><input class="field-input" value="Tom Alvarez" aria-label="Name"></div>
+                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY" aria-label="Date of birth"></div>
+                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100" aria-label="Mobile phone"></div>
               </div>
               <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
                 <button class="btn btn-primary" onclick="HCOS.toast('Searched the person master by name, date of birth and phone.', 'ok')">Search people</button>
@@ -486,7 +486,7 @@
 
               <div class="tbl-wrap">
                 <table class="tbl">
-                  <thead><tr><th>Person</th><th>Lifecycle</th><th>Came from</th><th></th></tr></thead>
+                  <thead><tr><th scope="col">Person</th><th scope="col">Lifecycle</th><th scope="col">Came from</th><th scope="col"></th></tr></thead>
                   <tbody>
                     <tr>
                       <td><div class="pt-prow"><span class="avatar">TA</span><span class="pt-pname">Tom Alvarez</span><span class="pt-id">P-004990</span></div></td>
@@ -653,12 +653,12 @@
             <div class="card" style="margin-bottom:16px">
               <div class="card-title">Search before creating</div>
               <div class="field-row">
-                <div class="field"><label class="field-label">Name</label><input class="field-input" value="Maya Reyes"></div>
-                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
+                <div class="field"><label class="field-label">Name</label><input class="field-input" value="Maya Reyes" aria-label="Name"></div>
+                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY" aria-label="Date of birth"></div>
               </div>
               <div class="field-row">
-                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
-                <div class="field"><label class="field-label">Email</label><input class="field-input" placeholder="name@example.com"></div>
+                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100" aria-label="Mobile phone"></div>
+                <div class="field"><label class="field-label">Email</label><input class="field-input" placeholder="name@example.com" aria-label="Email"></div>
               </div>
               <button class="btn btn-primary" onclick="HCOS.toast('Searched name, date of birth, phone and email.', 'ok')">Search</button>
             </div>
@@ -719,16 +719,16 @@
             <div class="card">
               <div class="card-title" id="pt-create-card">No match — create the person</div>
               <div class="field-row">
-                <div class="field"><label class="field-label">First name</label><input class="field-input" placeholder="First name"></div>
-                <div class="field"><label class="field-label">Last name</label><input class="field-input" placeholder="Last name"></div>
+                <div class="field"><label class="field-label">First name</label><input class="field-input" placeholder="First name" aria-label="First name"></div>
+                <div class="field"><label class="field-label">Last name</label><input class="field-input" placeholder="Last name" aria-label="Last name"></div>
               </div>
               <div class="field-row">
-                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY"></div>
-                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100"></div>
+                <div class="field"><label class="field-label">Date of birth</label><input class="field-input" placeholder="MM/DD/YYYY" aria-label="Date of birth"></div>
+                <div class="field"><label class="field-label">Mobile phone</label><input class="field-input" placeholder="(949) 555-0100" aria-label="Mobile phone"></div>
               </div>
               <div class="field">
                 <label class="field-label">Starting lifecycle status</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Starting lifecycle status">
                   <option>Inquiry — they asked about us</option>
                   <option>Lead — triage has them</option>
                   <option>Scheduled — a visit is booked</option>
@@ -920,7 +920,7 @@
 
           <div class="field" style="margin-top:12px">
             <label class="field-label">Reason (required to merge)</label>
-            <input class="field-input" value="Same date of birth and phone; kiosk shortened the name.">
+            <input class="field-input" value="Same date of birth and phone; kiosk shortened the name." aria-label="Reason (required to merge)">
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap">
             <button class="btn btn-primary" onclick="HCOS.toast('Merged into P-004182. Both histories kept, the merge is in the audit store.', 'ok')">Merge into P-004182</button>
@@ -930,7 +930,7 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Candidate pair</th><th>Matched on</th><th>Score</th><th>Came from</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Candidate pair</th><th scope="col">Matched on</th><th scope="col">Score</th><th scope="col">Came from</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>T. Alvarez</strong> · P-005610 &nbsp;/&nbsp; Tom Alvarez · P-004990</td>
@@ -963,7 +963,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

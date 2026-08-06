@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .b-prow { display: flex; align-items: center; gap: 10px; }
   .b-pname { font-weight: 600; color: var(--hx-navy); }
@@ -79,7 +79,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search by patient, MRN, or chief complaint">
+          <input class="search-input" type="search" placeholder="Search by patient, MRN, or chief complaint" aria-label="Search by patient, MRN, or chief complaint">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">Not started</button>
           <button class="filter-chip">In progress</button>
@@ -92,13 +92,13 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Time</th>
-                <th>Patient</th>
-                <th>Visit type</th>
-                <th>Chief complaint</th>
-                <th>Visit</th>
-                <th>Documentation</th>
-                <th></th>
+                <th scope="col">Time</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Visit type</th>
+                <th scope="col">Chief complaint</th>
+                <th scope="col">Visit</th>
+                <th scope="col">Documentation</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -270,7 +270,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>Status</th><th>State</th></tr>
+                    <tr><th scope="col">Problem</th><th scope="col">ICD-10</th><th scope="col">Since</th><th scope="col">Status</th><th scope="col">State</th></tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -358,7 +358,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Test</th><th>Result</th><th>Flag</th><th>Drawn</th></tr>
+                    <tr><th scope="col">Test</th><th scope="col">Result</th><th scope="col">Flag</th><th scope="col">Drawn</th></tr>
                   </thead>
                   <tbody>
                     <tr><td>TSH</td><td><strong>3.8</strong> mIU/L</td><td><span class="pill pill-ok">Normal</span></td><td>Jul 14</td></tr>
@@ -498,10 +498,10 @@
         <div class="grid-sidebar">
           <div>
             <div class="seg-divider" style="margin-top:0" id="b-sec-subjective">Chief complaint</div>
-            <input class="field-input" value="Fatigue follow-up and thyroid lab review">
+            <input class="field-input" value="Fatigue follow-up and thyroid lab review" aria-label="Fatigue follow-up and thyroid lab review">
 
             <div class="seg-divider">History of present illness</div>
-            <textarea class="field-textarea" rows="7">44 y/o woman returns for follow-up of persistent fatigue and Hashimoto's thyroiditis, six weeks after levothyroxine was increased from 50 to 75 mcg. Reports fatigue improved from 7/10 to 5/10 but still worse after physical or cognitive exertion, with post-exertional malaise lasting into the next day. Morning brain fog and word-finding difficulty persist. Sleep remains unrefreshing despite 8+ hours. Repeat thyroid panel and vitamin D were drawn last week and are reviewed today: TSH 3.8, vitamin D 18 ng/mL (low), ferritin low-normal, hs-CRP mildly elevated. Patient is motivated to add IV nutrient support and a structured supplement plan.</textarea>
+            <textarea class="field-textarea" rows="7" aria-label="Field">44 y/o woman returns for follow-up of persistent fatigue and Hashimoto's thyroiditis, six weeks after levothyroxine was increased from 50 to 75 mcg. Reports fatigue improved from 7/10 to 5/10 but still worse after physical or cognitive exertion, with post-exertional malaise lasting into the next day. Morning brain fog and word-finding difficulty persist. Sleep remains unrefreshing despite 8+ hours. Repeat thyroid panel and vitamin D were drawn last week and are reviewed today: TSH 3.8, vitamin D 18 ng/mL (low), ferritin low-normal, hs-CRP mildly elevated. Patient is motivated to add IV nutrient support and a structured supplement plan.</textarea>
 
             <div class="prov">
               <span><strong>Drafted by</strong> the scribe from today's audio <span class="appr draft">Not accepted yet</span></span>
@@ -544,7 +544,7 @@
             </div>
 
             <div class="seg-divider" id="b-sec-objective">Objective · physical exam</div>
-            <textarea class="field-textarea" rows="6">General: well-appearing, no acute distress, speech fluent with occasional word-finding pauses. Vitals reviewed as recorded at rooming. Neck: thyroid mildly enlarged, symmetric, non-tender, no discrete nodule, no cervical lymphadenopathy. Cardiovascular: regular rate and rhythm, no murmur; orthostatics — HR 72 supine to 94 standing at 3 minutes, blood pressure stable, mild lightheadedness reported. Respiratory: clear to auscultation bilaterally. Abdomen: soft, non-tender, no organomegaly. Skin: dry, diffuse hair thinning, no rash. Neurological: alert and oriented, cranial nerves intact, strength 5/5 throughout, no focal deficit.</textarea>
+            <textarea class="field-textarea" rows="6" aria-label="Field">General: well-appearing, no acute distress, speech fluent with occasional word-finding pauses. Vitals reviewed as recorded at rooming. Neck: thyroid mildly enlarged, symmetric, non-tender, no discrete nodule, no cervical lymphadenopathy. Cardiovascular: regular rate and rhythm, no murmur; orthostatics — HR 72 supine to 94 standing at 3 minutes, blood pressure stable, mild lightheadedness reported. Respiratory: clear to auscultation bilaterally. Abdomen: soft, non-tender, no organomegaly. Skin: dry, diffuse hair thinning, no rash. Neurological: alert and oriented, cranial nerves intact, strength 5/5 throughout, no focal deficit.</textarea>
 
             <div class="prov">
               <span><strong>Vitals from</strong> today's rooming · Wesley · 11:19 AM — the note reads them from the encounter, it keeps no second copy</span>
@@ -629,7 +629,7 @@
         <div class="grid-sidebar">
           <div>
             <div class="seg-divider" style="margin-top:0">Clinical assessment · narrative</div>
-            <textarea class="field-textarea" rows="9">44 y/o woman with Hashimoto's thyroiditis on levothyroxine, now partially optimized at 75 mcg (TSH 3.8, trending toward target). Persistent fatigue with post-exertional malaise, cognitive complaints, and mild orthostatic symptoms. New confirmation of vitamin D deficiency (18 ng/mL) and low-grade inflammation (hs-CRP 4.6), with low-normal ferritin limiting energy and thyroid hormone conversion.
+            <textarea class="field-textarea" rows="9" aria-label="Field">44 y/o woman with Hashimoto's thyroiditis on levothyroxine, now partially optimized at 75 mcg (TSH 3.8, trending toward target). Persistent fatigue with post-exertional malaise, cognitive complaints, and mild orthostatic symptoms. New confirmation of vitamin D deficiency (18 ng/mL) and low-grade inflammation (hs-CRP 4.6), with low-normal ferritin limiting energy and thyroid hormone conversion.
 
 Functional medicine framing: chronic mediators (autoimmune thyroid disease, marginal iron and vitamin D status) sustaining fatigue and cognitive symptoms. Reasonable candidate for IV nutrient therapy as an adjunct to a structured oral supplement and lifestyle plan. Self-pay — plan built around cost-transparent options she can sustain.</textarea>
 
@@ -643,7 +643,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             <div class="seg-divider">Diagnoses on this encounter</div>
             <div class="tbl-wrap">
               <table class="tbl">
-                <thead><tr><th>#</th><th>Diagnosis</th><th>ICD-10</th><th>Type</th><th>On the problem list</th><th></th></tr></thead>
+                <thead><tr><th scope="col">#</th><th scope="col">Diagnosis</th><th scope="col">ICD-10</th><th scope="col">Type</th><th scope="col">On the problem list</th><th scope="col"></th></tr></thead>
                 <tbody>
                   <tr>
                     <td><strong>1</strong></td>
@@ -683,7 +683,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
             <button class="btn btn-sm" style="margin-top:8px" data-open-drawer="#b-drawer-problems">Open the problem list</button>
 
             <div style="display:flex;gap:8px;margin-top:12px">
-              <input class="search-input" type="search" placeholder="Search ICD-10 code or diagnosis name" style="flex:1">
+              <input class="search-input" type="search" placeholder="Search ICD-10 code or diagnosis name" style="flex:1" aria-label="Search ICD-10 code or diagnosis name">
               <button data-row-add class="btn btn-primary btn-sm" onclick="HCOS.toast('Diagnosis added to this encounter. Adding it to the problem list is a separate step.', 'ok')">Add diagnosis</button>
             </div>
           </div>
@@ -776,7 +776,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider" style="margin-top:0">Lab orders <a class="btn btn-ghost btn-sm" style="margin-left:8px" href="labs.html#/c-01-orders">Open orders and results</a></div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Order</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>Priority</th><th>State</th></tr></thead>
+            <thead><tr><th scope="col">Order</th><th scope="col">Details</th><th scope="col">Order ID</th><th scope="col">Placed</th><th scope="col">Expires</th><th scope="col">Priority</th><th scope="col">State</th></tr></thead>
             <tbody>
               <tr data-activate="b-order-lab" data-lab-order="O-4471" data-lab-name="Comprehensive metabolic panel + CBC with differential">
                 <td><strong>Comprehensive metabolic panel + CBC with differential</strong></td>
@@ -819,7 +819,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">IV protocols</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Protocol</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>State</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Protocol</th><th scope="col">Details</th><th scope="col">Order ID</th><th scope="col">Placed</th><th scope="col">Expires</th><th scope="col">State</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>IV Foundational Flow 10 · series of 6 over 6 weeks</strong></td>
@@ -855,7 +855,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Therapies and procedures</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Therapy</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>State</th></tr></thead>
+            <thead><tr><th scope="col">Therapy</th><th scope="col">Details</th><th scope="col">Order ID</th><th scope="col">Placed</th><th scope="col">Expires</th><th scope="col">State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Erchonia laser &middot; violet &middot; course of 10</strong></td>
@@ -877,7 +877,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Prescriptions</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Prescription</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>Type</th><th>State</th></tr></thead>
+            <thead><tr><th scope="col">Prescription</th><th scope="col">Details</th><th scope="col">Order ID</th><th scope="col">Placed</th><th scope="col">Expires</th><th scope="col">Type</th><th scope="col">State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Levothyroxine 75 mcg PO daily</strong> · continue</td>
@@ -893,7 +893,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Supplements · Fullscript</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Supplement</th><th>Details</th><th>Order ID</th><th>Placed</th><th>Expires</th><th>Route</th><th>State</th></tr></thead>
+            <thead><tr><th scope="col">Supplement</th><th scope="col">Details</th><th scope="col">Order ID</th><th scope="col">Placed</th><th scope="col">Expires</th><th scope="col">Route</th><th scope="col">State</th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Vitamin D3 5,000 IU + K2 100 mcg daily</strong></td>
@@ -909,7 +909,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
         <div class="seg-divider">Suggested by the care team · not placed</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Suggestion</th><th>Reason given</th><th>Suggested by</th><th>State</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Suggestion</th><th scope="col">Reason given</th><th scope="col">Suggested by</th><th scope="col">State</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Iron infusion — ferric carboxymaltose 750 mg</strong></td>
@@ -1054,7 +1054,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">What to give</div>
               <div class="field">
                 <label class="field-label">Recipe</label>
-                <select class="field-input" id="b-ord-recipe">
+                <select class="field-input" id="b-ord-recipe" aria-label="Recipe">
                   <option>Mega C 50 &middot; 2 bags &middot; 120 min</option>
                   <option>Mega C 25 &middot; 2 bags &middot; 90 min</option>
                   <option>Foundational Flow 10 &middot; 1 bag &middot; 60 min</option>
@@ -1066,7 +1066,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="grid-2">
                 <div class="field">
                   <label class="field-label">Add-on</label>
-                  <select class="field-input">
+                  <select class="field-input" aria-label="Add-on">
                     <option>None</option>
                     <option>NAD add on &middot; +60 min</option>
                     <option>Glut add on &middot; +10 min</option>
@@ -1074,7 +1074,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 </div>
                 <div class="field">
                   <label class="field-label">Chair time for this patient</label>
-                  <select class="field-input">
+                  <select class="field-input" aria-label="Chair time for this patient">
                     <option>120 min &middot; catalogue default</option>
                     <option>150 min &middot; reduced rate</option>
                     <option>180 min &middot; reduced rate, first run</option>
@@ -1084,11 +1084,11 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="grid-2">
                 <div class="field">
                   <label class="field-label">How many</label>
-                  <input class="field-input" type="text" value="Series of 6">
+                  <input class="field-input" type="text" value="Series of 6" aria-label="How many">
                 </div>
                 <div class="field">
                   <label class="field-label">Minimum interval</label>
-                  <select class="field-input">
+                  <select class="field-input" aria-label="Minimum interval">
                     <option>5 days between runs</option>
                     <option>7 days between runs</option>
                     <option>No minimum</option>
@@ -1101,7 +1101,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">Why</div>
               <div class="field">
                 <label class="field-label">Linked lead actor</label>
-                <select class="field-input">
+                <select class="field-input" aria-label="Linked lead actor">
                   <option>Mould-driven inflammatory response &middot; T65.891A</option>
                   <option>Gut dysbiosis with permeability &middot; K58.9</option>
                   <option>HPA axis dysregulation &middot; E27.40</option>
@@ -1109,7 +1109,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               </div>
               <div class="field">
                 <label class="field-label">Instructions for the nurse or medic</label>
-                <textarea class="field-input" rows="3">Start at 200 mL/h. Slow if she reports burning at the site. Confirm G6PD on file before the first run.</textarea>
+                <textarea class="field-input" rows="3" aria-label="Instructions for the nurse or medic">Start at 200 mL/h. Slow if she reports burning at the site. Confirm G6PD on file before the first run.</textarea>
               </div>
               <div class="field">
                 <label class="field-label">Attach a document</label>
@@ -1178,7 +1178,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">What to test</div>
               <div class="field">
                 <label class="field-label">Type of lab</label>
-                <select class="field-input">
+                <select class="field-input" aria-label="Type of lab">
                   <option>Blood panel &middot; Vibrant Labs</option>
                   <option>Blood panel &middot; Quest</option>
                   <option>Urine &middot; Mosaic Diagnostics</option>
@@ -1189,7 +1189,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               </div>
               <div class="field">
                 <label class="field-label">Panel</label>
-                <select class="field-input">
+                <select class="field-input" aria-label="Panel">
                   <option>Thyroid panel &mdash; TSH, fT4, fT3, rT3, TPO, Tg Ab</option>
                   <option>CMP &mdash; pre-infusion</option>
                   <option>Micronutrient panel</option>
@@ -1201,7 +1201,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="grid-2">
                 <div class="field">
                   <label class="field-label">Priority</label>
-                  <select class="field-input">
+                  <select class="field-input" aria-label="Priority">
                     <option>Routine</option>
                     <option>Before her next infusion</option>
                     <option>Stat &middot; call with the result</option>
@@ -1209,7 +1209,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
                 </div>
                 <div class="field">
                   <label class="field-label">Collection</label>
-                  <select class="field-input">
+                  <select class="field-input" aria-label="Collection">
                     <option>Draw in clinic &middot; 15 min slot</option>
                     <option>Kit shipped to the patient</option>
                     <option>Reference lab walk-in</option>
@@ -1219,11 +1219,11 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="grid-2">
                 <div class="field">
                   <label class="field-label">Fasting</label>
-                  <select class="field-input"><option>Not required</option><option>8 hours</option><option>12 hours</option></select>
+                  <select class="field-input" aria-label="Fasting"><option>Not required</option><option>8 hours</option><option>12 hours</option></select>
                 </div>
                 <div class="field">
                   <label class="field-label">Repeat</label>
-                  <select class="field-input"><option>Once</option><option>Every 12 weeks</option><option>With each plan review</option></select>
+                  <select class="field-input" aria-label="Repeat"><option>Once</option><option>Every 12 weeks</option><option>With each plan review</option></select>
                 </div>
               </div>
             </div>
@@ -1232,7 +1232,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">Why</div>
               <div class="field">
                 <label class="field-label">Linked lead actor</label>
-                <select class="field-input">
+                <select class="field-input" aria-label="Linked lead actor">
                   <option>Mould-driven inflammatory response &middot; T65.891A</option>
                   <option>Gut dysbiosis with permeability &middot; K58.9</option>
                   <option>HPA axis dysregulation &middot; E27.40</option>
@@ -1240,7 +1240,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               </div>
               <div class="field">
                 <label class="field-label">Note to the lab</label>
-                <textarea class="field-input" rows="2">Optimal-target reporting requested. Prior TSH 3.8 on Jun 2.</textarea>
+                <textarea class="field-input" rows="2" aria-label="Note to the lab">Optimal-target reporting requested. Prior TSH 3.8 on Jun 2.</textarea>
               </div>
               <div class="field">
                 <label class="field-label">Attach a document</label>
@@ -1314,30 +1314,30 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">The medication</div>
               <div class="field">
                 <label class="field-label">Drug</label>
-                <input class="field-input" type="text" value="Low-dose naltrexone">
+                <input class="field-input" type="text" value="Low-dose naltrexone" aria-label="Drug">
               </div>
               <div class="grid-2">
                 <div class="field">
                   <label class="field-label">Strength</label>
-                  <select class="field-input"><option>3 mg</option><option>1.5 mg</option><option>4.5 mg</option></select>
+                  <select class="field-input" aria-label="Strength"><option>3 mg</option><option>1.5 mg</option><option>4.5 mg</option></select>
                 </div>
                 <div class="field">
                   <label class="field-label">Form</label>
-                  <select class="field-input"><option>Capsule &middot; compounded</option><option>Tablet</option><option>Liquid</option></select>
+                  <select class="field-input" aria-label="Form"><option>Capsule &middot; compounded</option><option>Tablet</option><option>Liquid</option></select>
                 </div>
               </div>
               <div class="field">
                 <label class="field-label">Directions the patient reads</label>
-                <input class="field-input" type="text" value="Take one capsule by mouth at bedtime">
+                <input class="field-input" type="text" value="Take one capsule by mouth at bedtime" aria-label="Directions the patient reads">
               </div>
               <div class="grid-2">
                 <div class="field">
                   <label class="field-label">Quantity</label>
-                  <input class="field-input" type="text" value="30 capsules">
+                  <input class="field-input" type="text" value="30 capsules" aria-label="Quantity">
                 </div>
                 <div class="field">
                   <label class="field-label">Refills</label>
-                  <select class="field-input"><option>2</option><option>0</option><option>1</option><option>3</option><option>5</option></select>
+                  <select class="field-input" aria-label="Refills"><option>2</option><option>0</option><option>1</option><option>3</option><option>5</option></select>
                 </div>
               </div>
             </div>
@@ -1346,7 +1346,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">Where it goes</div>
               <div class="field">
                 <label class="field-label">Pharmacy</label>
-                <select class="field-input">
+                <select class="field-input" aria-label="Pharmacy">
                   <option>Ridgeway Compounding &middot; Irvine &middot; her usual</option>
                   <option>Empower Pharmacy &middot; mail order</option>
                   <option>CVS &middot; Jamboree Rd</option>
@@ -1354,11 +1354,11 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               </div>
               <div class="field">
                 <label class="field-label">Dispense as written</label>
-                <select class="field-input"><option>Substitution allowed</option><option>Dispense as written</option></select>
+                <select class="field-input" aria-label="Dispense as written"><option>Substitution allowed</option><option>Dispense as written</option></select>
               </div>
               <div class="field">
                 <label class="field-label">Note to the pharmacist</label>
-                <textarea class="field-input" rows="2">Compound in avicel, no lactose filler &mdash; patient reacts.</textarea>
+                <textarea class="field-input" rows="2" aria-label="Note to the pharmacist">Compound in avicel, no lactose filler &mdash; patient reacts.</textarea>
               </div>
             </div>
           </div>
@@ -1457,16 +1457,16 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card">
                 <div class="card-title">Approve now, or leave pending</div>
                 <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);margin-bottom:10px">
-                  <input type="checkbox" checked style="margin-top:3px">
+                  <input type="checkbox" checked style="margin-top:3px" aria-label="Field">
                   <span>Approve the 9 orders at the versions listed above <span class="appr approved">Approved on sign</span></span>
                 </label>
                 <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);margin-bottom:10px">
-                  <input type="checkbox" style="margin-top:3px">
+                  <input type="checkbox" style="margin-top:3px" aria-label="Field">
                   <span>Approve plan of care <span class="ver-chip">v7</span> — adds the Foundational Flow series and the vitamin D target
                     <div class="field-help">Leave it unchecked and v6 stays the effective plan; v7 waits for you in the plan builder.</div></span>
                 </label>
                 <label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink)">
-                  <input type="checkbox" style="margin-top:3px">
+                  <input type="checkbox" style="margin-top:3px" aria-label="Field">
                   <span>Move the readiness step from Standard to Advanced — suggested by ruleset v3.2
                     <div class="field-help">Unchecked, the suggestion stays pending with its reason. Nothing changes the step on its own.</div></span>
                 </label>
@@ -1555,7 +1555,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
               <div class="card-title">Open Notes release</div>
               <div class="field-help" style="margin-bottom:8px">The patient sees this note in the portal automatically under the 21st Century Cures Act. To delay release (rare), check below.</div>
               <label style="display:flex;gap:8px;align-items:center;font-size:12px;color:var(--muted)">
-                <input type="checkbox"> Hold from patient portal · requires a reason
+                <input type="checkbox" aria-label="Field"> Hold from patient portal · requires a reason
               </label>
             </div>
 
@@ -1595,12 +1595,12 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
           <button class="filter-chip">Documentation</button>
           <button class="filter-chip">Orders</button>
           <button class="filter-chip">Billing</button>
-          <input class="search-input" placeholder="Search a work item">
+          <input class="search-input" placeholder="Search a work item" aria-label="Search a work item">
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Work item</th><th>Owner</th><th>Due</th><th>Priority</th><th>Raised by</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Work item</th><th scope="col">Owner</th><th scope="col">Due</th><th scope="col">Priority</th><th scope="col">Raised by</th><th scope="col">Status</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Co-sign Brooke's note</strong> &mdash; Walter Hsu, Jul 20</td>
@@ -1704,7 +1704,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   <div class="drawer-body">
     <div class="tbl-wrap">
       <table class="tbl">
-        <thead><tr><th>Problem</th><th>ICD-10</th><th>Since</th><th>State</th><th></th></tr></thead>
+        <thead><tr><th scope="col">Problem</th><th scope="col">ICD-10</th><th scope="col">Since</th><th scope="col">State</th><th scope="col"></th></tr></thead>
         <tbody>
           <tr>
             <td>Hashimoto's thyroiditis</td>
@@ -1760,7 +1760,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     </div>
     <div class="tbl-wrap">
       <table class="tbl">
-        <thead><tr><th>Medication</th><th>Source</th><th>State</th><th></th></tr></thead>
+        <thead><tr><th scope="col">Medication</th><th scope="col">Source</th><th scope="col">State</th><th scope="col"></th></tr></thead>
         <tbody>
           <tr>
             <td><strong>Levothyroxine 75 mcg</strong> PO daily</td>
@@ -1801,7 +1801,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   <div class="drawer-body">
     <div class="tbl-wrap">
       <table class="tbl">
-        <thead><tr><th>Substance</th><th>Reaction</th><th>Severity</th><th>State</th></tr></thead>
+        <thead><tr><th scope="col">Substance</th><th scope="col">Reaction</th><th scope="col">Severity</th><th scope="col">State</th></tr></thead>
         <tbody>
           <tr>
             <td><strong>Sulfa drugs</strong></td>
@@ -1833,7 +1833,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     <div class="modal-body">
       <div class="field">
         <label class="field-label">What changes</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="What changes">
           <option>Number of runs in the series</option>
           <option>Ingredients or dose</option>
           <option>Minimum interval between runs</option>
@@ -1842,7 +1842,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       </div>
       <div class="field">
         <label class="field-label">Reason for the change</label>
-        <textarea class="field-textarea" rows="3">Fatigue only partially improved after the first runs; extending the series and rechecking vitamin D at 12 weeks.</textarea>
+        <textarea class="field-textarea" rows="3" aria-label="Reason for the change">Fatigue only partially improved after the first runs; extending the series and rechecking vitamin D at 12 weeks.</textarea>
         <div class="field-help">The reason travels with the version and shows wherever the order is read.</div>
       </div>
       <div class="prov">
@@ -1870,7 +1870,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
     <div class="modal-body">
       <div class="field">
         <label class="field-label">Reason for the addendum</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="Reason for the addendum">
           <option>Late result reviewed</option>
           <option>Correction to the documentation</option>
           <option>Clarification requested by billing</option>
@@ -1879,7 +1879,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
       </div>
       <div class="field">
         <label class="field-label">Addendum text</label>
-        <textarea class="field-textarea" rows="4" placeholder="What is being added, and why"></textarea>
+        <textarea class="field-textarea" rows="4" placeholder="What is being added, and why" aria-label="Addendum text"></textarea>
       </div>
       <div class="prov">
         <span><strong>Signs</strong> Dr. Drannikov · physician or extender only</span>
@@ -1893,7 +1893,7 @@ Functional medicine framing: chronic mediators (autoimmune thyroid disease, marg
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 /* Opening a lab order from the table shows THAT order, not the blank form. */
 (function () {

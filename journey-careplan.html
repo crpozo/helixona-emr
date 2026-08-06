@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .j-patientbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .j-patientbar .avatar { width: 42px; height: 42px; font-size: 14px; }
@@ -69,7 +69,7 @@
               <div class="tbl-wrap" style="margin-top:10px">
                 <table class="tbl">
                   <thead>
-                    <tr><th>What changes</th><th>Approved <span class="ver-chip">v4</span></th><th>Proposed <span class="ver-chip">v5</span></th><th>Source</th></tr>
+                    <tr><th scope="col">What changes</th><th scope="col">Approved <span class="ver-chip">v4</span></th><th scope="col">Proposed <span class="ver-chip">v5</span></th><th scope="col">Source</th></tr>
                   </thead>
                   <tbody>
                     <tr><td><strong>Pacing</strong></td><td>Standard</td><td>Gentle</td><td class="j-tag">Adherence 24% at midweek</td></tr>
@@ -278,14 +278,14 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Item</th>
-                <th>Source</th>
-                <th style="text-align:right">Ordered / wk</th>
-                <th>Start / stop</th>
-                <th>Owner</th>
-                <th style="text-align:right">Points</th>
-                <th>State</th>
-                <th></th>
+                <th scope="col">Item</th>
+                <th scope="col">Source</th>
+                <th scope="col" style="text-align:right">Ordered / wk</th>
+                <th scope="col">Start / stop</th>
+                <th scope="col">Owner</th>
+                <th scope="col" style="text-align:right">Points</th>
+                <th scope="col">State</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -567,11 +567,11 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Activity</th>
-                <th style="text-align:right">Ordered / wk</th>
-                <th style="text-align:right">Actual</th>
-                <th>Counted from</th>
-                <th style="text-align:right">%</th>
+                <th scope="col">Activity</th>
+                <th scope="col" style="text-align:right">Ordered / wk</th>
+                <th scope="col" style="text-align:right">Actual</th>
+                <th scope="col">Counted from</th>
+                <th scope="col" style="text-align:right">%</th>
               </tr>
             </thead>
             <tbody>
@@ -685,7 +685,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search by name or person ID">
+          <input class="search-input" type="search" placeholder="Search by name or person ID" aria-label="Search by name or person ID">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">On track</button>
           <button class="filter-chip">Behind</button>
@@ -697,13 +697,13 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Patient</th>
-                <th>Person</th>
-                <th>Care pathway</th>
-                <th>Stage</th>
-                <th>Plan</th>
-                <th style="text-align:right">This week</th>
-                <th></th>
+                <th scope="col">Patient</th>
+                <th scope="col">Person</th>
+                <th scope="col">Care pathway</th>
+                <th scope="col">Stage</th>
+                <th scope="col">Plan</th>
+                <th scope="col" style="text-align:right">This week</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -767,7 +767,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Segmented controls (pacing, week) — click to activate; a couple toast.
   document.addEventListener('click', function (ev) {

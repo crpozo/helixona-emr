@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .gov-prow { display: flex; align-items: center; gap: 10px; }
   .gov-pname { font-weight: 600; color: var(--hx-navy); }
@@ -78,12 +78,12 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Patient</th>
-                <th>What needs co-sign</th>
-                <th>Author</th>
-                <th>Submitted</th>
-                <th>Due</th>
-                <th></th>
+                <th scope="col">Patient</th>
+                <th scope="col">What needs co-sign</th>
+                <th scope="col">Author</th>
+                <th scope="col">Submitted</th>
+                <th scope="col">Due</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -166,7 +166,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search by action, person, or record">
+          <input class="search-input" type="search" placeholder="Search by action, person, or record" aria-label="Search by action, person, or record">
           <button class="filter-chip active">All (42)</button>
           <button class="filter-chip">Edits</button>
           <button class="filter-chip">Reads</button>
@@ -178,7 +178,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>When</th><th>Who</th><th>Action</th><th>Record</th><th>Before → after</th><th>Source</th></tr>
+              <tr><th scope="col">When</th><th scope="col">Who</th><th scope="col">Action</th><th scope="col">Record</th><th scope="col">Before → after</th><th scope="col">Source</th></tr>
             </thead>
             <tbody>
               <tr>
@@ -405,7 +405,7 @@
             <div class="card-title">By provider</div>
             <div class="tbl-wrap">
               <table class="tbl">
-                <thead><tr><th>Provider</th><th>Notes</th><th>Median time</th><th>Same-day</th></tr></thead>
+                <thead><tr><th scope="col">Provider</th><th scope="col">Notes</th><th scope="col">Median time</th><th scope="col">Same-day</th></tr></thead>
                 <tbody>
                   <tr><td>Dr. Drannikov</td><td>142</td><td>11 min</td><td><span class="pill pill-ok">88%</span></td></tr>
                   <tr><td>Dr. Bakman</td><td>63</td><td>14 min</td><td><span class="pill pill-ok">79%</span></td></tr>
@@ -419,7 +419,7 @@
             <div class="card-title">By visit type</div>
             <div class="tbl-wrap">
               <table class="tbl">
-                <thead><tr><th>Visit type</th><th>Count</th><th>Median note time</th></tr></thead>
+                <thead><tr><th scope="col">Visit type</th><th scope="col">Count</th><th scope="col">Median note time</th></tr></thead>
                 <tbody>
                   <tr><td>New patient consult</td><td>24</td><td>22 min</td></tr>
                   <tr><td>Follow-up</td><td>62</td><td>9 min</td></tr>
@@ -477,7 +477,7 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <thead>
-              <tr><th>State change</th><th>Who may make it<span class="gov-rec">from framework v6</span></th><th>What the engine does</th><th></th></tr>
+              <tr><th scope="col">State change</th><th scope="col">Who may make it<span class="gov-rec">from framework v6</span></th><th scope="col">What the engine does</th><th scope="col"></th></tr>
             </thead>
             <tbody>
               <tr>
@@ -716,7 +716,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

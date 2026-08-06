@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .pm-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: start; }
   .pm-tier { border: 2px solid var(--line-soft); border-radius: 12px; padding: 18px; background: #fff; }
@@ -105,7 +105,7 @@
         <div class="seg-divider">How the tiers compare</div>
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Benefit</th><th>Pay as you go</th><th>Wellness</th><th>Restore</th><th>Longevity</th></tr></thead>
+            <thead><tr><th scope="col">Benefit</th><th scope="col">Pay as you go</th><th scope="col">Wellness</th><th scope="col">Restore</th><th scope="col">Longevity</th></tr></thead>
             <tbody>
               <tr><td>Monthly price</td><td>—</td><td>$149</td><td>$349</td><td>$749</td></tr>
               <tr><td>Included sessions</td><td>0</td><td>2</td><td>5</td><td>10</td></tr>
@@ -158,12 +158,12 @@
           <button class="filter-chip">Longevity</button>
           <button class="filter-chip">Barely using it</button>
           <button class="filter-chip">Lapsing</button>
-          <input class="search-input" placeholder="Search a member">
+          <input class="search-input" placeholder="Search a member" aria-label="Search a member">
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Patient</th><th>Tier</th><th>Since</th><th>Sessions this month</th><th>Also billed to</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Patient</th><th scope="col">Tier</th><th scope="col">Since</th><th scope="col">Sessions this month</th><th scope="col">Also billed to</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr>
                 <td><strong>Maya Reyes</strong></td>
@@ -249,13 +249,13 @@
     </div>
     <div class="modal-body">
       <div class="field-row">
-        <div class="field"><label class="field-label">Tier name</label><input class="field-input" placeholder="Foundations"></div>
-        <div class="field"><label class="field-label">Monthly price</label><input class="field-input" placeholder="$0"></div>
+        <div class="field"><label class="field-label">Tier name</label><input class="field-input" placeholder="Foundations" aria-label="Tier name"></div>
+        <div class="field"><label class="field-label">Monthly price</label><input class="field-input" placeholder="$0" aria-label="Monthly price"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label class="field-label">Included sessions a month</label><input class="field-input" placeholder="0"></div>
+        <div class="field"><label class="field-label">Included sessions a month</label><input class="field-input" placeholder="0" aria-label="Included sessions a month"></div>
         <div class="field"><label class="field-label">Books ahead by</label>
-          <select class="field-select"><option>3 days</option><option>7 days</option><option>14 days</option><option>No early booking</option></select>
+          <select class="field-select" aria-label="Books ahead by"><option>3 days</option><option>7 days</option><option>14 days</option><option>No early booking</option></select>
         </div>
       </div>
       <div class="field">
@@ -278,6 +278,6 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 </body>
 </html>

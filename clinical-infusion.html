@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .bi-board { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .bi-chair { display: block; text-decoration: none; color: inherit; cursor: pointer; position: relative; }
@@ -206,15 +206,15 @@
           <div>
             <div class="seg-divider" style="margin-top:0">Right patient</div>
             <div class="callout">Confirmed <strong>Priya Natarajan</strong> · P-004377 · two-identifier match against wristband and person record.</div>
-            <label class="bi-check"><input type="checkbox" checked> Identity verified <span class="clin-src">Juan (Medic) · 11:36 AM</span></label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> Identity verified <span class="clin-src">Juan (Medic) · 11:36 AM</span></label>
 
             <div class="seg-divider">Right drug</div>
             <div class="callout">Order: <strong>IV Foundational Flow 10 · standard</strong><br>Components: B-complex 100, B12 (methylcobalamin), calcium gluconate, magnesium sulfate, ascorbic acid<br>Diluent: 0.9% sodium chloride 100 mL</div>
-            <label class="bi-check"><input type="checkbox" checked> Components match the signed order <span class="clin-src">Juan · 11:37 AM</span></label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> Components match the signed order <span class="clin-src">Juan · 11:37 AM</span></label>
 
             <div class="seg-divider">Right dose</div>
             <div class="callout">B-complex 100 · 1 mL · B12 1 mg · calcium gluconate 100 mg · magnesium sulfate 2 g · ascorbic acid 5 g<br>Total volume <strong>117 mL</strong> · rate <strong>234 mL/hr</strong> · infusion <strong>30 min</strong> · about 1 h in the chair</div>
-            <label class="bi-check"><input type="checkbox" checked> Doses match the signed order <span class="clin-src">Juan · 11:37 AM</span></label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> Doses match the signed order <span class="clin-src">Juan · 11:37 AM</span></label>
 
             <div class="card" style="margin-top:14px">
               <div class="card-title">The order being carried out</div>
@@ -231,11 +231,11 @@
           <div>
             <div class="seg-divider" style="margin-top:0">Right route</div>
             <div class="callout">Route: <strong>IV peripheral · 22 gauge</strong><br>Site: right antecubital · patent · no signs of infiltration</div>
-            <label class="bi-check"><input type="checkbox" checked> IV access established and verified <span class="clin-src">Juan · 11:38 AM</span></label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> IV access established and verified <span class="clin-src">Juan · 11:38 AM</span></label>
 
             <div class="seg-divider">Right time</div>
             <div class="callout">Booked 11:30 AM · last Foundational Flow Jul 14 — 7 days, within the order's weekly cadence</div>
-            <label class="bi-check"><input type="checkbox" checked> Interval confirmed against the order <span class="clin-src">Juan · 11:38 AM</span></label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> Interval confirmed against the order <span class="clin-src">Juan · 11:38 AM</span></label>
 
             <div class="seg-divider">Allergies and intolerances</div>
             <div class="bi-listrow">
@@ -280,7 +280,7 @@
             </dl>
 
             <div class="seg-divider">Second verifier</div>
-            <label class="bi-check"><input type="checkbox" checked> Independent double-check <span class="clin-src">Nick (Nurse) · 11:39 AM</span></label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> Independent double-check <span class="clin-src">Nick (Nurse) · 11:39 AM</span></label>
           </div>
         </div>
 
@@ -316,7 +316,7 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Time</th><th>BP</th><th>HR</th><th>SpO₂</th><th>Rate</th><th>Observation</th><th>Against the order</th><th>Signed</th>
+                <th scope="col">Time</th><th scope="col">BP</th><th scope="col">HR</th><th scope="col">SpO₂</th><th scope="col">Rate</th><th scope="col">Observation</th><th scope="col">Against the order</th><th scope="col">Signed</th>
               </tr>
             </thead>
             <tbody>
@@ -427,7 +427,7 @@
 
             <div class="field">
               <label class="field-label">Tolerance</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Tolerance">
                 <option>Tolerated well</option>
                 <option selected>Tolerated with minor event — resolved</option>
                 <option>Tolerated with intervention</option>
@@ -437,7 +437,7 @@
 
             <div class="field">
               <label class="field-label">Tolerance narrative</label>
-              <textarea class="field-textarea" rows="4">Tolerated NAD+ 500 mg well overall. One episode of transient flushing at 10:05 lasting ~5 min — resolved with rate reduction from 85 to 70 mL/hr; returned to standard rate without recurrence. Alert and oriented throughout. No nausea, headache, palpitations, or chest pain. Discharge vitals within normal limits.</textarea>
+              <textarea class="field-textarea" rows="4" aria-label="Tolerance narrative">Tolerated NAD+ 500 mg well overall. One episode of transient flushing at 10:05 lasting ~5 min — resolved with rate reduction from 85 to 70 mL/hr; returned to standard rate without recurrence. Alert and oriented throughout. No nausea, headache, palpitations, or chest pain. Discharge vitals within normal limits.</textarea>
             </div>
 
             <div class="seg-divider">IV access removed</div>
@@ -445,11 +445,11 @@
 
             <div class="seg-divider">Discharge instructions given</div>
             <div class="bi-checklist">
-              <label><input type="checkbox" checked> Hydrate well over the next 24 hours</label>
-              <label><input type="checkbox" checked> Mild fatigue is normal for 2–4 hours</label>
-              <label><input type="checkbox" checked> Call the clinic if redness, swelling, or fever develops at the IV site</label>
-              <label><input type="checkbox" checked> Next session scheduled Fri Jul 24 · patient confirmed</label>
-              <label><input type="checkbox"> Printed instruction sheet provided</label>
+              <label><input type="checkbox" checked aria-label="Field"> Hydrate well over the next 24 hours</label>
+              <label><input type="checkbox" checked aria-label="Hydrate well over the next 24 hours"> Mild fatigue is normal for 2–4 hours</label>
+              <label><input type="checkbox" checked aria-label="Mild fatigue is normal for 2–4 hours"> Call the clinic if redness, swelling, or fever develops at the IV site</label>
+              <label><input type="checkbox" checked aria-label="Field"> Next session scheduled Fri Jul 24 · patient confirmed</label>
+              <label><input type="checkbox" aria-label="Next session scheduled Fri Jul 24 · patient confirmed"> Printed instruction sheet provided</label>
             </div>
           </div>
 
@@ -505,21 +505,21 @@
           <div>
             <div class="seg-divider" style="margin-top:0">Event timing</div>
             <div class="field-row">
-              <div class="field"><label class="field-label">Date</label><input class="field-input" value="2026-07-21"></div>
-              <div class="field"><label class="field-label">Time of onset</label><input class="field-input" value="11:28 AM"></div>
-              <div class="field"><label class="field-label">Noticed by staff</label><input class="field-input" value="11:29 AM"></div>
+              <div class="field"><label class="field-label">Date</label><input class="field-input" value="2026-07-21" aria-label="Date"></div>
+              <div class="field"><label class="field-label">Time of onset</label><input class="field-input" value="11:28 AM" aria-label="Time of onset"></div>
+              <div class="field"><label class="field-label">Noticed by staff</label><input class="field-input" value="11:29 AM" aria-label="Noticed by staff"></div>
             </div>
 
             <div class="seg-divider">Symptoms reported</div>
             <div class="bi-checklist">
-              <label><input type="checkbox" checked> Nausea (moderate)</label>
-              <label><input type="checkbox" checked> Sweating / diaphoresis</label>
-              <label><input type="checkbox" checked> Patient reports "feeling off"</label>
-              <label><input type="checkbox"> Vomiting</label>
-              <label><input type="checkbox"> Chest pain</label>
-              <label><input type="checkbox"> Shortness of breath</label>
-              <label><input type="checkbox"> Allergic reaction — rash / hives</label>
-              <label><input type="checkbox"> Loss of consciousness</label>
+              <label><input type="checkbox" checked aria-label="Noticed by staff"> Nausea (moderate)</label>
+              <label><input type="checkbox" checked aria-label="Nausea (moderate)"> Sweating / diaphoresis</label>
+              <label><input type="checkbox" checked aria-label="Sweating / diaphoresis"> Patient reports "feeling off"</label>
+              <label><input type="checkbox" aria-label="Patient reports feeling off"> Vomiting</label>
+              <label><input type="checkbox" aria-label="Vomiting"> Chest pain</label>
+              <label><input type="checkbox" aria-label="Chest pain"> Shortness of breath</label>
+              <label><input type="checkbox" aria-label="Shortness of breath"> Allergic reaction — rash / hives</label>
+              <label><input type="checkbox" aria-label="Allergic reaction — rash / hives"> Loss of consciousness</label>
             </div>
 
             <div class="seg-divider">Vitals at event</div>
@@ -532,13 +532,13 @@
 
             <div class="seg-divider">Action taken</div>
             <div class="bi-checklist">
-              <label><input type="checkbox" checked> Infusion paused, line maintained with saline</label>
-              <label><input type="checkbox" checked> Provider notified — Dr. Drannikov · 11:29 AM</label>
-              <label><input type="checkbox" checked> Patient repositioned semi-recumbent</label>
-              <label><input type="checkbox" checked> Cold compress and water offered</label>
-              <label><input type="checkbox"> Ondansetron 4 mg IV — waiting on a signed order from Dr. Drannikov</label>
-              <label><input type="checkbox"> Diphenhydramine given</label>
-              <label><input type="checkbox"> 911 / emergency services activated</label>
+              <label><input type="checkbox" checked aria-label="Field"> Infusion paused, line maintained with saline</label>
+              <label><input type="checkbox" checked aria-label="Infusion paused, line maintained with saline"> Provider notified — Dr. Drannikov · 11:29 AM</label>
+              <label><input type="checkbox" checked aria-label="Provider notified — Dr. Drannikov · 11:29 AM"> Patient repositioned semi-recumbent</label>
+              <label><input type="checkbox" checked aria-label="Patient repositioned semi-recumbent"> Cold compress and water offered</label>
+              <label><input type="checkbox" aria-label="Cold compress and water offered"> Ondansetron 4 mg IV — waiting on a signed order from Dr. Drannikov</label>
+              <label><input type="checkbox" aria-label="Field"> Diphenhydramine given</label>
+              <label><input type="checkbox" aria-label="Diphenhydramine given"> 911 / emergency services activated</label>
             </div>
 
             <div class="ai-block">
@@ -564,7 +564,7 @@
           <div>
             <div class="field">
               <label class="field-label">Severity</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Severity">
                 <option>Mild — symptom only, no intervention</option>
                 <option selected>Moderate — intervention required, infusion paused</option>
                 <option>Severe — infusion discontinued, additional medications given</option>
@@ -574,12 +574,12 @@
 
             <div class="field">
               <label class="field-label">Narrative</label>
-              <textarea class="field-textarea" rows="6">Patient reported nausea 1 h 3 min into the IV vitamin C 25 g infusion — started 10:25 AM, 105 mL of 250 mL given at 100 mL/hr (~42%). Onset gradual. Mild diaphoresis observed. Repositioned semi-recumbent. Infusion paused immediately, line maintained with normal saline at TKO. Vitals: BP dropped from 118/72 baseline to 102/64, HR rose from 72 to 88. Dr. Drannikov notified at 11:29 AM and arriving at the bay. Plan pending provider assessment — likely ondansetron, observation, then decide on continuing or discontinuing.</textarea>
+              <textarea class="field-textarea" rows="6" aria-label="Narrative">Patient reported nausea 1 h 3 min into the IV vitamin C 25 g infusion — started 10:25 AM, 105 mL of 250 mL given at 100 mL/hr (~42%). Onset gradual. Mild diaphoresis observed. Repositioned semi-recumbent. Infusion paused immediately, line maintained with normal saline at TKO. Vitals: BP dropped from 118/72 baseline to 102/64, HR rose from 72 to 88. Dr. Drannikov notified at 11:29 AM and arriving at the bay. Plan pending provider assessment — likely ondansetron, observation, then decide on continuing or discontinuing.</textarea>
             </div>
 
             <div class="field">
               <label class="field-label">Outcome</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Outcome">
                 <option selected>Pending — under observation</option>
                 <option>Resolved — infusion resumed at lower rate</option>
                 <option>Resolved — infusion discontinued, patient discharged</option>
@@ -589,14 +589,14 @@
 
             <div class="seg-divider">Who was told</div>
             <div class="bi-checklist">
-              <label><input type="checkbox" checked> Supervising provider — Dr. Drannikov</label>
-              <label><input type="checkbox" checked> Charge nurse — Nick</label>
-              <label><input type="checkbox" checked> Office manager — Shibani</label>
+              <label><input type="checkbox" checked aria-label="Field"> Supervising provider — Dr. Drannikov</label>
+              <label><input type="checkbox" checked aria-label="Supervising provider — Dr. Drannikov"> Charge nurse — Nick</label>
+              <label><input type="checkbox" checked aria-label="Charge nurse — Nick"> Office manager — Shibani</label>
             </div>
 
             <div class="seg-divider">Reportable?</div>
-            <label class="bi-check"><input type="checkbox"> CDPH / state reporting required — severe or life-threatening</label>
-            <label class="bi-check"><input type="checkbox" checked> Internal QA review</label>
+            <label class="bi-check"><input type="checkbox" aria-label="Office manager — Shibani"> CDPH / state reporting required — severe or life-threatening</label>
+            <label class="bi-check"><input type="checkbox" checked aria-label="Field"> Internal QA review</label>
 
             <div class="seg-divider">Only Dr. Drannikov may</div>
             <dl class="kv">
@@ -643,17 +643,17 @@
     </div>
     <div class="modal-body">
       <div class="field-row">
-        <div class="field"><label class="field-label">Time</label><input class="field-input" value="11:40 AM"></div>
-        <div class="field"><label class="field-label">Rate</label><input class="field-input" value="85 mL/hr"></div>
+        <div class="field"><label class="field-label">Time</label><input class="field-input" value="11:40 AM" aria-label="Time"></div>
+        <div class="field"><label class="field-label">Rate</label><input class="field-input" value="85 mL/hr" aria-label="Rate"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label class="field-label">BP</label><input class="field-input" placeholder="118/74"></div>
-        <div class="field"><label class="field-label">HR</label><input class="field-input" placeholder="72"></div>
-        <div class="field"><label class="field-label">SpO₂</label><input class="field-input" placeholder="99%"></div>
+        <div class="field"><label class="field-label">BP</label><input class="field-input" placeholder="118/74" aria-label="BP"></div>
+        <div class="field"><label class="field-label">HR</label><input class="field-input" placeholder="72" aria-label="HR"></div>
+        <div class="field"><label class="field-label">SpO₂</label><input class="field-input" placeholder="99%" aria-label="SpO₂"></div>
       </div>
       <div class="field">
         <label class="field-label">Observation</label>
-        <textarea class="field-textarea" rows="3" placeholder="What you see — tolerance, comfort, IV site, any symptom…"></textarea>
+        <textarea class="field-textarea" rows="3" placeholder="What you see — tolerance, comfort, IV site, any symptom…" aria-label="Observation"></textarea>
       </div>
     </div>
     <div class="modal-foot">
@@ -676,17 +676,17 @@
     <div class="modal-body">
       <div class="callout">Pausing and keeping the line open is Nick's to do, and it takes effect now. Rate, dose and stopping belong to the physician — ask for them here and they stay pending until he signs.</div>
       <div class="field-row">
-        <div class="field"><label class="field-label">Time paused</label><input class="field-input" value="11:40 AM"></div>
-        <div class="field"><label class="field-label">Line</label><input class="field-input" value="Kept open with saline at TKO" disabled></div>
+        <div class="field"><label class="field-label">Time paused</label><input class="field-input" value="11:40 AM" aria-label="Time paused"></div>
+        <div class="field"><label class="field-label">Line</label><input class="field-input" value="Kept open with saline at TKO" disabled aria-label="Line"></div>
       </div>
       <div class="field">
         <label class="field-label">Reason</label>
-        <textarea class="field-textarea" rows="3" placeholder="What you saw and why you stopped the drip…"></textarea>
+        <textarea class="field-textarea" rows="3" placeholder="What you saw and why you stopped the drip…" aria-label="Reason"></textarea>
         <div class="field-help">A reason is required. It goes on the flowsheet with your initials and into the audit store.</div>
       </div>
       <div class="field">
         <label class="field-label">Ask Dr. Drannikov for</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="Ask Dr. Drannikov for">
           <option selected>Nothing yet — pause only, he assesses at the chair</option>
           <option>A rate below the ordered 85 mL/hr</option>
           <option>Stopping today's infusion</option>
@@ -696,7 +696,7 @@
       </div>
       <div class="field">
         <label class="field-label">Provider told</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="Provider told">
           <option selected>Dr. Drannikov — on site</option>
           <option>Dr. Bakman — on call</option>
           <option>Brooke, PA — on site</option>
@@ -711,7 +711,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 (function () {
   var cleared = false;

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .r-delta { font-size: 10.5px; color: var(--muted); margin-top: 6px; }
   .r-bars { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
@@ -58,13 +58,13 @@
               <div class="stat-lbl">Average utilisation</div><div class="stat-sub">Across the team</div></div>
           </div>
           <div class="filters">
-            <input class="search-input" placeholder="Search an employee">
+            <input class="search-input" placeholder="Search an employee" aria-label="Search an employee">
             <button class="filter-chip active">All</button><button class="filter-chip">Provider</button>
             <button class="filter-chip">Medic</button><button class="filter-chip">Nurse</button>
             <button class="filter-chip">Front Desk</button><button class="filter-chip">Billing</button>
           </div>
           <div class="tbl-wrap">
-            <table class="tbl"><thead><tr><th>Employee</th><th>Role</th><th>Attributed revenue</th><th>Utilisation</th></tr></thead><tbody>
+            <table class="tbl"><thead><tr><th scope="col">Employee</th><th scope="col">Role</th><th scope="col">Attributed revenue</th><th scope="col">Utilisation</th></tr></thead><tbody>
               <tr><td><strong>Dr. Eduard Drannikov</strong></td><td>Provider</td><td>$96,400</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:96%"></div></div><span class="meter-val">96%</span></div></td></tr>
               <tr><td><strong>Dr. Bakman</strong></td><td>Provider</td><td>$71,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:94%"></div></div><span class="meter-val">94%</span></div></td></tr>
               <tr><td><strong>Brooke</strong></td><td>Physician Associate</td><td>$58,200</td><td><div class="meter-row"><div class="meter"><div class="meter-fill" style="width:91%"></div></div><span class="meter-val">91%</span></div></td></tr>
@@ -96,6 +96,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 </body>
 </html>

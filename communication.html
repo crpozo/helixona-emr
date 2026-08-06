@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .e-msg-shell {
     display: grid;
@@ -91,7 +91,7 @@
             <!-- Thread list -->
             <div class="e-threads">
               <div class="e-threads-head">
-                <input class="search-input" type="text" placeholder="Search messages" style="width:100%">
+                <input class="search-input" type="text" placeholder="Search messages" style="width:100%" aria-label="Search messages">
               </div>
               <div class="e-thread selected unread" data-e-thread="t-maya">
                 <span class="e-unread"></span>
@@ -165,7 +165,7 @@
                 </div>
                 <div class="e-compose-row">
                   <div class="field">
-                    <textarea class="field-textarea" id="e-compose" rows="2" placeholder="Type a text to Maya…" style="min-height:52px"></textarea>
+                    <textarea class="field-textarea" id="e-compose" rows="2" placeholder="Type a text to Maya…" style="min-height:52px" aria-label="Type a text to Maya…"></textarea>
                   </div>
                   <button class="btn btn-primary" onclick="eSend()">Send text</button>
                 </div>
@@ -203,7 +203,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Quick-reply macros: insert into the composer for personalizing before send.
   document.querySelectorAll('[data-e-macro]').forEach(function (chip) {

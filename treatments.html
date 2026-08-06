@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -63,8 +63,8 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Recipe</th><th>Kind</th><th>Bags</th><th>Pushes</th><th>Chair time</th>
-              <th>Coverage</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Recipe</th><th scope="col">Kind</th><th scope="col">Bags</th><th scope="col">Pushes</th><th scope="col">Chair time</th>
+              <th scope="col">Coverage</th><th scope="col">Status</th><th scope="col"></th></tr></thead>
             <tbody id="t-cat-body">
               <tr data-kind="iv-recipe"><td><strong>Cellular Boost</strong><span class="t-code">IV-CBST</span></td><td>IV recipe</td><td class="t-num">1</td><td class="t-num">—</td><td class="t-num">60 min</td><td><span class="pill pill-muted">Cash only</span></td><td><span class="appr approved">Active</span></td><td><a href="#t-02-recipe" data-activate="t-02-recipe">Open</a></td></tr>
               <tr data-kind="iv-recipe"><td><strong>Cognitive Support</strong><span class="t-code">IV-COGS</span></td><td>IV recipe</td><td class="t-num">1</td><td class="t-num">1</td><td class="t-num">75 min</td><td><span class="pill pill-muted">Cash only</span></td><td><span class="appr approved">Active</span></td><td><a href="#t-02-recipe" data-activate="t-02-recipe">Open</a></td></tr>
@@ -125,7 +125,7 @@
               <div class="card-title">What goes in</div>
               <div class="tbl-wrap" style="border:none">
                 <table class="tbl">
-                  <thead><tr><th>Component</th><th>Amount</th><th>Presentation</th><th>Lot in use</th><th>Role</th></tr></thead>
+                  <thead><tr><th scope="col">Component</th><th scope="col">Amount</th><th scope="col">Presentation</th><th scope="col">Lot in use</th><th scope="col">Role</th></tr></thead>
                   <tbody>
               <tr><td><strong>Ascorbic acid</strong></td><td class="t-num">50 g</td><td>2 &times; 25 g/50 mL</td><td class="t-lot">LOT-4471</td><td>Base</td></tr>
               <tr><td><strong>Sterile water</strong></td><td class="t-num">500 mL</td><td>Diluent to volume</td><td class="t-lot">LOT-5560</td><td>Diluent</td></tr>
@@ -215,8 +215,8 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Therapy</th><th>Kind</th><th>Device or protocol</th><th>Duration</th>
-              <th>Course</th><th>Coverage</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Therapy</th><th scope="col">Kind</th><th scope="col">Device or protocol</th><th scope="col">Duration</th>
+              <th scope="col">Course</th><th scope="col">Coverage</th><th scope="col">Status</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr><td><strong>EBOO</strong><span class="t-code">PR-EBOO</span></td><td>Procedure</td><td>Extracorporeal blood oxygenation</td><td class="t-num">120 min</td><td class="t-num">6 sessions</td><td><span class="pill pill-ok">Billable</span></td><td><span class="appr approved">Active</span></td><td><button class="btn btn-sm" onclick="HCOS.toast('EBOO opens with its own variables — device, protocol, duration and staff role.', 'ok')">Variables</button></td></tr>
               <tr><td><strong>Erchonia laser · violet</strong><span class="t-code">TH-LASV</span></td><td>Therapy</td><td>Violet diode, protocol V-2</td><td class="t-num">20 min</td><td class="t-num">10 sessions</td><td><span class="pill pill-ok">Billable</span></td><td><span class="appr approved">Active</span></td><td><button class="btn btn-sm" onclick="HCOS.toast('Erchonia laser · violet opens with its own variables — device, protocol, duration and staff role.', 'ok')">Variables</button></td></tr>
@@ -260,8 +260,8 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Item</th><th>Role</th><th>Lot</th><th>Expires</th><th>On hand</th>
-              <th>Par</th><th>Used this month</th><th>Recipes that draw on it</th></tr></thead>
+            <thead><tr><th scope="col">Item</th><th scope="col">Role</th><th scope="col">Lot</th><th scope="col">Expires</th><th scope="col">On hand</th>
+              <th scope="col">Par</th><th scope="col">Used this month</th><th scope="col">Recipes that draw on it</th></tr></thead>
             <tbody>
               <tr><td><strong>Ascorbic acid 25 g/50 mL</strong></td><td>Base</td><td class="t-lot">LOT-4471</td><td>Nov 2026</td><td class="t-num">38 vials</td><td class="t-num">24</td><td class="t-num">96 vials</td><td class="t-uses">Mega C 15/25/50/75/100 · Foundational Flow</td></tr>
               <tr><td><strong>NAD+ 500 mg</strong></td><td>Base</td><td class="t-lot">LOT-2210</td><td>Sep 2026</td><td class="t-num">14 vials</td><td class="t-num">12</td><td class="t-num">41 vials</td><td class="t-uses">NAD add on</td></tr>
@@ -297,8 +297,8 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>When</th><th>Patient</th><th>What</th><th>Given</th><th>Lot</th>
-              <th>Staff</th><th>Where</th><th>Variance</th><th>Order</th><th>Billing</th></tr></thead>
+            <thead><tr><th scope="col">When</th><th scope="col">Patient</th><th scope="col">What</th><th scope="col">Given</th><th scope="col">Lot</th>
+              <th scope="col">Staff</th><th scope="col">Where</th><th scope="col">Variance</th><th scope="col">Order</th><th scope="col">Billing</th></tr></thead>
             <tbody>
               <tr><td class="t-when">Jul 21 · 09:00</td><td><strong>Maya Reyes</strong></td><td>NAD add on + Foundational Flow 10 <span class="ver-chip">v4</span></td><td class="t-num">1 bag · 0 pushes</td><td class="t-lot">LOT-2210</td><td>Nick · Nurse</td><td>Chair 1</td><td class="t-uses">Ran 3 h 20 against 3 h booked</td><td class="t-lot">O-2288</td><td>Cash · posted</td></tr>
               <tr><td class="t-when">Jul 21 · 10:00</td><td><strong>Daniel Okafor</strong></td><td>Mega C 50 <span class="ver-chip">v7</span></td><td class="t-num">2 bags · 0 pushes</td><td class="t-lot">LOT-4471</td><td>Bea · Medic</td><td>Chair 2</td><td class="t-uses">—</td><td class="t-lot">O-2301</td><td>Claim 88214 · sent</td></tr>
@@ -345,8 +345,8 @@
 
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
-            <thead><tr><th>Type</th><th>Subtype</th><th>Letters</th><th>Colour</th>
-              <th>Treatments that use it</th><th>Where it shows</th><th></th></tr></thead>
+            <thead><tr><th scope="col">Type</th><th scope="col">Subtype</th><th scope="col">Letters</th><th scope="col">Colour</th>
+              <th scope="col">Treatments that use it</th><th scope="col">Where it shows</th><th scope="col"></th></tr></thead>
             <tbody>
               <tr><td>Infusion</td><td><strong>NAD+ infusion</strong></td><td><span class="type-mark tm-nad">NAD</span></td><td><span class="t-swatch" style="background:var(--tx-nad)"></span>Purple</td><td class="t-uses">NAD add on · Foundational Flow with NAD</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
               <tr><td>Infusion</td><td><strong>IV vitamin C</strong></td><td><span class="type-mark tm-ivc">IVC</span></td><td><span class="t-swatch" style="background:var(--tx-ivc)"></span>Amber</td><td class="t-uses">Mega C 15 / 25 / 50 / 75 / 100</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
@@ -376,7 +376,7 @@
     <div class="modal-body">
       <div class="field">
         <label class="field-label">Kind</label>
-        <select class="field-input" id="t-new-kind">
+        <select class="field-input" id="t-new-kind" aria-label="Kind">
           <option>IV recipe &mdash; bags, pushes, components, run time</option>
           <option>Add-on &mdash; attaches to another recipe</option>
           <option>Therapy &mdash; device, protocol, course length</option>
@@ -385,15 +385,15 @@
       </div>
       <div class="field">
         <label class="field-label">Name</label>
-        <input class="field-input" type="text" placeholder="e.g. Mega C 50">
+        <input class="field-input" type="text" placeholder="e.g. Mega C 50" aria-label="Name">
       </div>
       <div class="field">
         <label class="field-label">Code</label>
-        <input class="field-input" type="text" placeholder="IV-MC50">
+        <input class="field-input" type="text" placeholder="IV-MC50" aria-label="Code">
       </div>
       <div class="field">
         <label class="field-label">Coverage</label>
-        <select class="field-input">
+        <select class="field-input" aria-label="Coverage">
           <option>Cash only</option>
           <option>Billable to insurance</option>
           <option>Depends on diagnosis &mdash; decided per order</option>
@@ -422,11 +422,11 @@
     <div class="modal-body">
       <div class="field">
         <label class="field-label">Patient</label>
-        <input class="field-input" type="text" value="Daniel Okafor">
+        <input class="field-input" type="text" value="Daniel Okafor" aria-label="Patient">
       </div>
       <div class="field">
         <label class="field-label">Treatment</label>
-        <select class="field-input">
+        <select class="field-input" aria-label="Treatment">
           <option>Mega C 50 &middot; v7</option>
           <option>Foundational Flow 10 &middot; v4</option>
           <option>NAD add on &middot; v2</option>
@@ -435,23 +435,23 @@
       <div class="grid-2">
         <div class="field">
           <label class="field-label">Bags given</label>
-          <input class="field-input" type="text" value="2">
+          <input class="field-input" type="text" value="2" aria-label="Bags given">
         </div>
         <div class="field">
           <label class="field-label">Pushes given</label>
-          <input class="field-input" type="text" value="0">
+          <input class="field-input" type="text" value="0" aria-label="Pushes given">
         </div>
       </div>
       <div class="field">
         <label class="field-label">Lot</label>
-        <select class="field-input">
+        <select class="field-input" aria-label="Lot">
           <option>LOT-4471 &middot; expires Nov 2026 &middot; 38 on hand</option>
           <option>LOT-4390 &middot; expires Aug 2026 &middot; 6 on hand</option>
         </select>
       </div>
       <div class="field">
         <label class="field-label">Variance</label>
-        <input class="field-input" type="text" placeholder="Only if something differed from the order">
+        <input class="field-input" type="text" placeholder="Only if something differed from the order" aria-label="Variance">
       </div>
       <div class="prov" style="margin-top:4px">
         <span>Saving decrements LOT-4471 by 2, stamps <strong>v7</strong> on the chart, and releases 2 units to billing.</span>
@@ -477,23 +477,23 @@
     <div class="modal-body">
       <div class="field">
         <label class="field-label">Type</label>
-        <select class="field-input">
+        <select class="field-input" aria-label="Type">
           <option>Infusion</option><option>Procedure</option><option>Visit</option>
           <option>Diagnostic</option><option>Therapy</option>
         </select>
       </div>
       <div class="field">
         <label class="field-label">Subtype</label>
-        <input class="field-input" type="text" value="IV vitamin C">
+        <input class="field-input" type="text" value="IV vitamin C" aria-label="Subtype">
       </div>
       <div class="grid-2">
         <div class="field">
           <label class="field-label">Letters on the block</label>
-          <input class="field-input" type="text" value="IVC" maxlength="4">
+          <input class="field-input" type="text" value="IVC" maxlength="4" aria-label="Letters on the block">
         </div>
         <div class="field">
           <label class="field-label">Colour</label>
-          <select class="field-input">
+          <select class="field-input" aria-label="Colour">
             <option>Amber</option><option>Purple</option><option>Teal</option>
             <option>Red</option><option>Blue</option><option>Green</option><option>Brown</option>
           </select>
@@ -501,7 +501,7 @@
       </div>
       <div class="field">
         <label class="field-label">Treatments in this subtype</label>
-        <input class="field-input" type="text" value="Mega C 15 / 25 / 50 / 75 / 100">
+        <input class="field-input" type="text" value="Mega C 15 / 25 / 50 / 75 / 100" aria-label="Treatments in this subtype">
       </div>
     </div>
     <div class="modal-foot">
@@ -511,7 +511,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .i-flow { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .i-lane { flex: 1 1 200px; min-width: 190px; }
@@ -123,12 +123,12 @@
             <table class="tbl">
               <thead>
                 <tr>
-                  <th>Patient</th>
-                  <th>Assessment</th>
-                  <th>Result</th>
-                  <th>Decision</th>
-                  <th>Why</th>
-                  <th></th>
+                  <th scope="col">Patient</th>
+                  <th scope="col">Assessment</th>
+                  <th scope="col">Result</th>
+                  <th scope="col">Decision</th>
+                  <th scope="col">Why</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -398,7 +398,7 @@
 
               <div class="field">
                 <label class="field-label">Result</label>
-                <select class="field-select" id="i-decide-result">
+                <select class="field-select" id="i-decide-result" aria-label="Result">
                   <option value="">Physician review required — leave as calculated</option>
                   <option>Pause</option>
                   <option>Gentle</option>
@@ -517,7 +517,7 @@
               <div class="callout" style="margin-top:10px">Bee's rationale: "Two of the four flares this quarter came back within ten days of restarting. Fourteen days matches what Dr. Drannikov has been doing by hand."</div>
               <div class="field">
                 <label class="field-label">Decision note</label>
-                <textarea class="field-textarea" placeholder="Say what you decided and why."></textarea>
+                <textarea class="field-textarea" placeholder="Say what you decided and why." aria-label="Decision note"></textarea>
               </div>
               <div style="display:flex;gap:10px;flex-wrap:wrap">
                 <button class="btn btn-primary" onclick="HCOS.toast('v3.3 approved by Dr. Drannikov. Tomorrow’s 7:00 AM run uses it; released assessments keep v3.2.', 'ok')">Approve v3.3</button>
@@ -756,7 +756,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   /* Jumping to a screen from inside a why drawer closes the drawer behind it. */
   document.addEventListener('click', function (ev) {

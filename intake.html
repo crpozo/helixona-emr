@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .a-prow { display: flex; align-items: center; gap: 10px; }
   .a-pname { font-weight: 600; color: var(--hx-navy); }
@@ -56,7 +56,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search by name, phone, member ID, or reason">
+          <input class="search-input" type="search" placeholder="Search by name, phone, member ID, or reason" aria-label="Search by name, phone, member ID, or reason">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">Inquiry</button>
           <button class="filter-chip">Lead</button>
@@ -71,13 +71,13 @@
           <table class="tbl">
             <thead>
               <tr>
-                <th>Person</th>
-                <th>First heard from</th>
-                <th>Reason</th>
-                <th>Coverage</th>
-                <th>Lifecycle</th>
-                <th>Last activity</th>
-                <th></th>
+                <th scope="col">Person</th>
+                <th scope="col">First heard from</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Coverage</th>
+                <th scope="col">Lifecycle</th>
+                <th scope="col">Last activity</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -167,21 +167,21 @@
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Full name</label>
-                  <input class="field-input" type="text" value="Marcus Webb">
+                  <input class="field-input" type="text" value="Marcus Webb" aria-label="Full name">
                 </div>
                 <div class="field">
                   <label class="field-label">Date of birth</label>
-                  <input class="field-input" type="text" placeholder="MM/DD/YYYY">
+                  <input class="field-input" type="text" placeholder="MM/DD/YYYY" aria-label="Date of birth">
                 </div>
               </div>
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Phone</label>
-                  <input class="field-input" type="tel" value="(949) 555-0173">
+                  <input class="field-input" type="tel" value="(949) 555-0173" aria-label="Phone">
                 </div>
                 <div class="field">
                   <label class="field-label">Email — optional</label>
-                  <input class="field-input" type="email" placeholder="name@example.com">
+                  <input class="field-input" type="email" placeholder="name@example.com" aria-label="Email — optional">
                 </div>
               </div>
               <button class="btn btn-primary" onclick="HCOS.toast('Searched name, date of birth, phone and email.', 'ok')">Search</button>
@@ -192,7 +192,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Person</th><th>Lifecycle</th><th>Came from</th><th>Matched on</th><th></th></tr>
+                    <tr><th scope="col">Person</th><th scope="col">Lifecycle</th><th scope="col">Came from</th><th scope="col">Matched on</th><th scope="col"></th></tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -249,7 +249,7 @@
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">How they reached us</label>
-                  <select class="field-select">
+                  <select class="field-select" aria-label="How they reached us">
                     <option>Web form</option>
                     <option selected>Phone call</option>
                     <option>Physician referral</option>
@@ -259,7 +259,7 @@
                 </div>
                 <div class="field">
                   <label class="field-label">Preferred contact method</label>
-                  <select class="field-select">
+                  <select class="field-select" aria-label="Preferred contact method">
                     <option selected>Text message</option>
                     <option>Phone call</option>
                     <option>Email</option>
@@ -268,11 +268,11 @@
               </div>
               <div class="field">
                 <label class="field-label">What they asked for</label>
-                <textarea class="field-textarea" rows="3">Caller mentioned fatigue after a long recovery, asked what a first visit looks like.</textarea>
+                <textarea class="field-textarea" rows="3" aria-label="What they asked for">Caller mentioned fatigue after a long recovery, asked what a first visit looks like.</textarea>
               </div>
               <div class="field">
                 <label class="field-label">Triage urgency</label>
-                <select class="field-select">
+                <select class="field-select" aria-label="Triage urgency">
                   <option selected>Routine</option>
                   <option>Expedite if possible</option>
                   <option>Urgent — same week</option>
@@ -511,7 +511,7 @@
             <div class="tbl-wrap">
               <table class="tbl" id="a-slot-grid">
                 <thead>
-                  <tr><th>Tue 7/21</th><th>Wed 7/22</th><th>Thu 7/23</th><th>Fri 7/24</th><th>Mon 7/27</th></tr>
+                  <tr><th scope="col">Tue 7/21</th><th scope="col">Wed 7/22</th><th scope="col">Thu 7/23</th><th scope="col">Fri 7/24</th><th scope="col">Mon 7/27</th></tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -576,7 +576,7 @@
 
               <div class="field" style="margin-top:12px">
                 <label class="field-label">Reason for going ahead without the card — saved with your name</label>
-                <input class="field-input" type="text" value="Card arrives at the visit; Sarah confirmed by text this morning.">
+                <input class="field-input" type="text" value="Card arrives at the visit; Sarah confirmed by text this morning." aria-label="Field">
               </div>
 
               <div class="ai-block">
@@ -677,11 +677,11 @@
             </div>
             <div class="field">
               <label class="field-label">Recipient</label>
-              <input class="field-input" type="tel" value="(949) 555-0119">
+              <input class="field-input" type="tel" value="(949) 555-0119" aria-label="Recipient">
             </div>
             <div class="field">
               <label class="field-label">Message preview</label>
-              <textarea class="field-textarea" rows="5">Hi Sarah — welcome to Helixona. Tap this link to complete your intake before your visit: helx.io/p/a8f2k9 — about 12 minutes. Save and resume anytime. Reply STOP to opt out.</textarea>
+              <textarea class="field-textarea" rows="5" aria-label="Message preview">Hi Sarah — welcome to Helixona. Tap this link to complete your intake before your visit: helx.io/p/a8f2k9 — about 12 minutes. Save and resume anytime. Reply STOP to opt out.</textarea>
               <div class="field-help">The magic link works for 7 days and resumes wherever Sarah left off.</div>
             </div>
 
@@ -742,7 +742,7 @@
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Service type</label>
-                  <select class="field-select">
+                  <select class="field-select" aria-label="Service type">
                     <option selected>Office visit — new patient</option>
                     <option>Infusion therapy</option>
                     <option>Laboratory</option>
@@ -750,7 +750,7 @@
                 </div>
                 <div class="field">
                   <label class="field-label">Date of service</label>
-                  <input class="field-input" type="text" value="07/23/2026">
+                  <input class="field-input" type="text" value="07/23/2026" aria-label="Date of service">
                 </div>
               </div>
               <button class="btn btn-primary" onclick="HCOS.toast('270 sent to Anthem Blue Cross. The response is kept as snapshot #5 — snapshot #4 stays exactly as it came back.', 'ok')">Run eligibility check</button>
@@ -761,7 +761,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Payer</th><th>Network</th><th>Docs path</th><th>Claim # first?</th></tr>
+                    <tr><th scope="col">Payer</th><th scope="col">Network</th><th scope="col">Docs path</th><th scope="col">Claim # first?</th></tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -839,7 +839,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Snapshot</th><th>Taken</th><th>By</th><th>Result</th><th></th></tr>
+                    <tr><th scope="col">Snapshot</th><th scope="col">Taken</th><th scope="col">By</th><th scope="col">Result</th><th scope="col"></th></tr>
                   </thead>
                   <tbody>
                     <tr>
@@ -916,7 +916,7 @@
             </dl>
             <div class="field">
               <label class="field-label">Primary reason</label>
-              <select class="field-select">
+              <select class="field-select" aria-label="Primary reason">
                 <option>Select a reason</option>
                 <option selected>Patient stopped responding</option>
                 <option>No insurance benefits / cannot afford</option>
@@ -930,11 +930,11 @@
             </div>
             <div class="field">
               <label class="field-label">Notes — optional</label>
-              <textarea class="field-textarea" rows="3" placeholder="Anything that would help us learn from this drop…"></textarea>
+              <textarea class="field-textarea" rows="3" placeholder="Anything that would help us learn from this drop…" aria-label="Notes — optional"></textarea>
             </div>
             <div class="field">
               <label class="field-label">Last touchpoint</label>
-              <input class="field-input" type="text" value="Text sent Jul 12 — no response after 3 follow-ups">
+              <input class="field-input" type="text" value="Text sent Jul 12 — no response after 3 follow-ups" aria-label="Last touchpoint">
             </div>
             <div class="callout">She stays searchable at Inactive. A new inquiry from the same phone or email reopens this record instead of starting another one.</div>
             <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
@@ -979,7 +979,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

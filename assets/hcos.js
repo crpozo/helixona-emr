@@ -179,6 +179,7 @@
     var right = el('div', 'top-right');
     var search = el('input', 'search-input top-search');
     search.placeholder = 'Search patients, claims, notes…';
+    search.setAttribute('aria-label', 'Search patients, claims and notes');
     search.addEventListener('keydown', function (ev) {
       if (ev.key === 'Enter') { HCOS.toast('Search arrives with the real build.', 'ok'); search.value = ''; }
     });
@@ -506,11 +507,11 @@
       '</div>' +
       '<div class="fbk-panel-body">' +
       '  <div class="field"><label class="field-label">Screen</label>' +
-      '    <input class="field-input" id="fbk-screen" disabled></div>' +
+      '    <input class="field-input" id="fbk-screen" aria-label="Screen this note belongs to" disabled></div>' +
       '  <div class="field"><label class="field-label">Type</label>' +
       '    <div class="fbk-types">' + typeChips + '</div></div>' +
       '  <div class="field"><label class="field-label">Note</label>' +
-      '    <textarea class="field-textarea" id="fbk-text" placeholder="What would make this screen better?"></textarea></div>' +
+      '    <textarea class="field-textarea" id="fbk-text" aria-label="Your note" placeholder="What would make this screen better?"></textarea></div>' +
       '  <div class="fbk-actions">' +
       '    <button class="btn btn-primary" id="fbk-save">Save note</button>' +
       '  </div>' +
@@ -695,6 +696,37 @@
   }
 
   /* ---------- generic helpers (modals, drawers, toasts, screen links) ---------- */
+  /* ---------- keyboard parity ----------
+     Anything clickable that is not a native control must also answer the
+     keyboard. Done once here, so no page has to remember it. */
+  var CLICKABLE = '[data-activate],[data-open-modal],[data-open-drawer],' +
+                  '[data-close-modal],[data-close-drawer],[data-row-add],[data-row-del],' +
+                  '.filter-chip,.chip,.status-step,.kiosk-key,.msel-opt,.o-kind-card,' +
+                  '.lay-widget,.j-face,.stat-card[data-kpi],.dash-chip,.cal-appt,.monthcal-day[data-day]';
+
+  function wireKeyboard(root) {
+    var list = (root || document).querySelectorAll(CLICKABLE);
+    Array.prototype.forEach.call(list, function (n) {
+      var tag = n.tagName;
+      if (tag === 'BUTTON' || tag === 'A' || tag === 'INPUT' ||
+          tag === 'SELECT' || tag === 'TEXTAREA' || tag === 'LABEL') return;
+      if (n.hasAttribute('tabindex')) return;
+      n.setAttribute('tabindex', '0');
+      if (!n.hasAttribute('role')) n.setAttribute('role', 'button');
+    });
+  }
+
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var t = ev.target;
+    if (!t || !t.matches || !t.matches(CLICKABLE)) return;
+    var tag = t.tagName;
+    if (tag === 'BUTTON' || tag === 'A' || tag === 'INPUT' ||
+        tag === 'SELECT' || tag === 'TEXTAREA') return;
+    ev.preventDefault();
+    t.click();
+  });
+
   function wireDelegation() {
     document.addEventListener('click', function (ev) {
       var t = ev.target.closest ? ev.target.closest('[data-open-modal],[data-close-modal],[data-open-drawer],[data-close-drawer],[data-activate]') : null;
@@ -769,6 +801,7 @@
       if (pill) { pill.className = 'appr draft'; pill.textContent = 'Draft'; }
       clone.setAttribute('data-row-new', '1');
       host.appendChild(clone);
+      wireKeyboard(clone);
       clone.scrollIntoView({ block: 'nearest' });
     });
 
@@ -873,6 +906,7 @@
     buildWidget();
     buildApprovalBar();
     wireDelegation();
+    wireKeyboard();
     paintDeltas();
     wireKpis();
     applyDash();

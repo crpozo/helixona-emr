@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .login-col {
     min-height: 100vh;
@@ -39,11 +39,11 @@
         <div class="auth-sub">HCOS · staff sign-in</div>
         <div class="field">
           <label class="field-label">Work email</label>
-          <input class="field-input" type="email" placeholder="you@helixona.com">
+          <input class="field-input" type="email" placeholder="you@helixona.com" aria-label="Work email">
         </div>
         <div class="field">
           <label class="field-label">Password</label>
-          <input class="field-input" type="password" placeholder="••••••••••">
+          <input class="field-input" type="password" placeholder="••••••••••" aria-label="Password">
         </div>
         <div class="field" style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)">
           <input type="checkbox" id="remember" checked style="margin:0">
@@ -91,7 +91,7 @@
         <div class="auth-sub">We'll email you a link that works for 30 minutes.</div>
         <div class="field">
           <label class="field-label">Work email</label>
-          <input class="field-input" type="email" value="marie@helixona.com">
+          <input class="field-input" type="email" value="marie@helixona.com" aria-label="Work email">
         </div>
         <button class="btn btn-primary btn-lg" style="width:100%" onclick="HCOS.toast('Reset link sent — check your inbox.', 'ok')">Email me a reset link</button>
         <div class="auth-foot"><a href="#auth-01-signin" data-activate="auth-01-signin">Back to sign in</a></div>
@@ -115,6 +115,6 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 </body>
 </html>

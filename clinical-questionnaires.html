@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .bq-header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
   .bq-header-info { flex: 1; min-width: 220px; }
@@ -92,7 +92,7 @@
         </div>
 
         <div class="filters">
-          <input class="search-input" type="search" placeholder="Search instruments by name or topic">
+          <input class="search-input" type="search" placeholder="Search instruments by name or topic" aria-label="Search instruments by name or topic">
           <button class="filter-chip active">All</button>
           <button class="filter-chip">Suggested</button>
           <button class="filter-chip">Patient self-report</button>
@@ -319,7 +319,7 @@
 
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">01</span>What year was your home built?</div>
-                  <input class="bq-phone-input" value="1982" style="max-width:160px">
+                  <input class="bq-phone-input" value="1982" style="max-width:160px" aria-label="1982">
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">02</span>Does your home smell musty?</div>
@@ -361,7 +361,7 @@
 
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">12</span>Roughly what share of your living space is carpeted?</div>
-                  <input class="bq-phone-input" value="40%" style="max-width:120px">
+                  <input class="bq-phone-input" value="40%" style="max-width:120px" aria-label="40%">
                 </div>
                 <div class="bq-q">
                   <div class="bq-qtext"><span class="bq-qnum">16</span>Are others in your household frequently sick?</div>
@@ -556,7 +556,7 @@
               <div class="tbl-wrap">
                 <table class="tbl">
                   <thead>
-                    <tr><th>Date</th><th>Response</th><th>Version</th><th>Total</th><th>By</th></tr>
+                    <tr><th scope="col">Date</th><th scope="col">Response</th><th scope="col">Version</th><th scope="col">Total</th><th scope="col">By</th></tr>
                   </thead>
                   <tbody>
                     <tr><td>Jul 21</td><td><code>R-4512</code></td><td><span class="ver-chip">v3</span></td><td>118</td><td>Portal · self-report</td></tr>
@@ -602,7 +602,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

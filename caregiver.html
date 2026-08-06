@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 </head>
 <body data-page="caregiver" data-page-title="Caregiver portal" data-shell="app">
 
@@ -29,11 +29,11 @@
               <div class="field-row">
                 <div class="field">
                   <label class="field-label">Caregiver name</label>
-                  <input class="field-input" type="text" value="Amy Hsu">
+                  <input class="field-input" type="text" value="Amy Hsu" aria-label="Caregiver name">
                 </div>
                 <div class="field">
                   <label class="field-label">Relationship</label>
-                  <input class="field-input" type="text" value="Daughter">
+                  <input class="field-input" type="text" value="Daughter" aria-label="Relationship">
                 </div>
               </div>
               <div class="field">
@@ -55,7 +55,7 @@
               </div>
               <div class="field" id="k-until" style="display:none;max-width:220px">
                 <label class="field-label">Access ends on</label>
-                <input class="field-input" type="text" value="08/15/2026">
+                <input class="field-input" type="text" value="08/15/2026" aria-label="Access ends on">
                 <div class="field-help">Access closes at midnight on this date — no one has to remember to revoke it.</div>
               </div>
               <div class="callout" style="margin-bottom:14px">Walter approves by text before access opens — nothing is shared until he replies yes.</div>
@@ -68,11 +68,11 @@
                 <table class="tbl">
                   <thead>
                     <tr>
-                      <th>Caregiver</th>
-                      <th>Patient</th>
-                      <th>Scope</th>
-                      <th>Duration</th>
-                      <th></th>
+                      <th scope="col">Caregiver</th>
+                      <th scope="col">Patient</th>
+                      <th scope="col">Scope</th>
+                      <th scope="col">Duration</th>
+                      <th scope="col"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -186,7 +186,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
   // Demo only: scope chips multi-toggle ("Everything" is exclusive), duration chips
   // single-select, and the "What Amy sees" preview follows the scope.

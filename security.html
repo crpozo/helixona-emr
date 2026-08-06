@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=48">
+<link rel="stylesheet" href="assets/hcos.css?v=50">
 <style>
   .g-perm-tbl th, .g-perm-tbl td { text-align: center; }
   .g-perm-tbl th:first-child, .g-perm-tbl td:first-child { text-align: left; }
@@ -62,7 +62,7 @@
               </div>
 
               <div class="g-audit-bar">
-                <input class="search-input" id="g-audit-search" type="text" placeholder="Search by person, patient, record, or action…">
+                <input class="search-input" id="g-audit-search" type="text" placeholder="Search by person, patient, record, or action…" aria-label="Search by person, patient, record, or action…">
                 <span class="filter-chip active" data-filter="all">Today</span>
                 <span class="filter-chip" data-filter="sign">Sign &amp; lock</span>
                 <span class="filter-chip" data-filter="chart">Chart access</span>
@@ -103,11 +103,11 @@
                 <table class="tbl">
                   <thead>
                     <tr>
-                      <th>When</th>
-                      <th>Who</th>
-                      <th>Action</th>
-                      <th>Record</th>
-                      <th>Source</th>
+                      <th scope="col">When</th>
+                      <th scope="col">Who</th>
+                      <th scope="col">Action</th>
+                      <th scope="col">Record</th>
+                      <th scope="col">Source</th>
                     </tr>
                   </thead>
                   <tbody id="g-audit-rows">
@@ -285,13 +285,13 @@
                 <table class="tbl g-perm-tbl">
                   <thead>
                     <tr>
-                      <th>Role</th>
-                      <th>Chart read</th>
-                      <th>Chart write</th>
-                      <th>Sign &amp; lock</th>
-                      <th>Schedule</th>
-                      <th>Billing</th>
-                      <th>Settings</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Chart read</th>
+                      <th scope="col">Chart write</th>
+                      <th scope="col">Sign &amp; lock</th>
+                      <th scope="col">Schedule</th>
+                      <th scope="col">Billing</th>
+                      <th scope="col">Settings</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -457,7 +457,7 @@
         </div>
         <div class="tbl-wrap">
             <table class="tbl g-roles">
-              <thead><tr><th>Action</th><th>Physician</th><th>Extender</th><th>MA</th><th>Nurse / Medic</th><th>Care Guide / PCC</th><th>Front Desk</th><th>Patient</th><th>AI / System</th><th>Governance note</th></tr></thead>
+              <thead><tr><th scope="col">Action</th><th scope="col">Physician</th><th scope="col">Extender</th><th scope="col">MA</th><th scope="col">Nurse / Medic</th><th scope="col">Care Guide / PCC</th><th scope="col">Front Desk</th><th scope="col">Patient</th><th scope="col">AI / System</th><th scope="col">Governance note</th></tr></thead>
               <tbody>
                 <tr><td><strong>Create inquiry/person</strong></td><td style="text-align:center;color:var(--muted);font-size:11px">view</td><td style="text-align:center;color:var(--muted);font-size:11px">view</td><td style="text-align:center;color:var(--muted);font-size:11px">view</td><td style="color:var(--line);text-align:center">—</td><td style="text-align:center"><span class="appr pending">E</span></td><td style="text-align:center"><span class="appr pending">E</span></td><td style="text-align:center"><span class="appr draft">O</span></td><td style="color:var(--line);text-align:center">—</td><td class="g-note">Front desk/PCC can create; system proposes duplicates.</td></tr>
                 <tr><td><strong>Promote lifecycle Inquiry → Lead → Patient</strong></td><td style="text-align:center;color:var(--muted);font-size:11px">view</td><td style="text-align:center;color:var(--muted);font-size:11px">view</td><td style="color:var(--line);text-align:center">—</td><td style="color:var(--line);text-align:center">—</td><td style="text-align:center"><span class="appr pending">E</span></td><td style="text-align:center"><span class="appr pending">E</span></td><td style="color:var(--line);text-align:center">—</td><td style="color:var(--line);text-align:center">—</td><td class="g-note">Identity remains the same record.</td></tr>
@@ -526,8 +526,8 @@
 
         <div class="tbl-wrap">
           <table class="tbl g-rec-tbl">
-            <thead><tr><th>Canonical record</th><th>Domain</th><th>What it holds</th><th>Written by</th>
-              <th>Governance rule</th><th>Lives in</th><th>Source of truth today</th></tr></thead>
+            <thead><tr><th scope="col">Canonical record</th><th scope="col">Domain</th><th scope="col">What it holds</th><th scope="col">Written by</th>
+              <th scope="col">Governance rule</th><th scope="col">Lives in</th><th scope="col">Source of truth today</th></tr></thead>
             <tbody id="g-rec-body">
               <tr data-domain="person"><td><strong>Person / Patient Master</strong></td><td class="r-dom">Person</td><td class="r-holds">Stable person ID, identifiers, demographics, contacts, preferred name, communication preferences</td><td class="r-holds">Inquiry form · eCW import · authorized correction</td><td class="r-rule">One person. Lifecycle changes; identity does not fork.</td><td><a href="patients.html#/pt-05-identity">Identity record</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
               <tr data-domain="person"><td><strong>Lifecycle</strong></td><td class="r-dom">Person</td><td class="r-holds">Inquiry, Lead, Scheduled, Onboarding, Patient, Inactive/Closed, with timestamps and reason</td><td class="r-holds">Workflow events</td><td class="r-rule">Append status events. Current status is derived, never typed.</td><td><a href="patients.html#/pt-01-list">Patient list</a></td><td><span class="pill pill-ok">HCOS</span></td></tr>
@@ -592,8 +592,8 @@
 
         <div class="tbl-wrap">
           <table class="tbl">
-            <thead><tr><th>Domain</th><th>Writer today</th><th>The rule on screen</th><th>Cutover</th>
-              <th>Gate before HCOS takes it</th><th>What happens to history</th></tr></thead>
+            <thead><tr><th scope="col">Domain</th><th scope="col">Writer today</th><th scope="col">The rule on screen</th><th scope="col">Cutover</th>
+              <th scope="col">Gate before HCOS takes it</th><th scope="col">What happens to history</th></tr></thead>
             <tbody>
               <tr data-state="hcos"><td><strong>Scheduling &amp; resources</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS books; eCW receives the appointment for billing continuity</td><td>Jul 1, 2026</td><td class="r-holds">Chair and provider capacity modelled, per-patient durations loaded</td><td class="r-holds">Full history migrated</td></tr>
               <tr data-state="hcos"><td><strong>Person, identity &amp; lifecycle</strong></td><td><span class="appr approved">HCOS writes</span></td><td class="r-holds">HCOS is the person master; eCW holds a mirrored ID on each chart</td><td>Jul 1, 2026</td><td class="r-holds">Duplicate queue cleared below 0.5% of active patients</td><td class="r-holds">Full history migrated</td></tr>
@@ -660,7 +660,7 @@
       <div class="field-row">
         <div class="field">
           <label class="field-label">Role</label>
-          <select class="field-select">
+          <select class="field-select" aria-label="Role">
             <option>PCC</option>
             <option>Front Desk</option>
             <option>Medical Assistant</option>
@@ -673,7 +673,7 @@
         </div>
         <div class="field">
           <label class="field-label">Permission</label>
-          <select class="field-select">
+          <select class="field-select" aria-label="Permission">
             <option>Chart read</option>
             <option>Chart write</option>
             <option>Schedule</option>
@@ -684,14 +684,14 @@
       </div>
       <div class="field">
         <label class="field-label">Change</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="Change">
           <option>Grant it</option>
           <option>Remove it</option>
         </select>
       </div>
       <div class="field">
         <label class="field-label">Reason (required)</label>
-        <textarea class="field-textarea" placeholder="e.g. Bee covers Dr. Bakman's Friday bookings and cannot see his day."></textarea>
+        <textarea class="field-textarea" placeholder="e.g. Bee covers Dr. Bakman's Friday bookings and cannot see his day." aria-label="Reason (required)"></textarea>
         <div class="field-help">The proposal, your reason and Shibani's decision each become their own line in the store.</div>
       </div>
       <div class="callout callout-warn">Sign and lock cannot be granted here. It belongs to providers, and that rule is not editable.</div>
@@ -716,7 +716,7 @@
     <div class="modal-body">
       <div class="field">
         <label class="field-label">Patient</label>
-        <select class="field-select">
+        <select class="field-select" aria-label="Patient">
           <option>Priya Natarajan — in Chair 3 now</option>
           <option>Maya Reyes — in Chair 1 now</option>
           <option>Walter Hsu</option>
@@ -725,7 +725,7 @@
       </div>
       <div class="field">
         <label class="field-label">Reason for emergency access (required)</label>
-        <textarea class="field-textarea" placeholder="e.g. Patient in chair reporting chest tightness — need allergy list and current medications now."></textarea>
+        <textarea class="field-textarea" placeholder="e.g. Patient in chair reporting chest tightness — need allergy list and current medications now." aria-label="Reason for emergency access (required)"></textarea>
         <div class="field-help">Your name, this reason, and every screen you open are appended to the store.</div>
       </div>
       <div class="callout callout-warn">Shibani is paged the moment you continue and reviews every break-the-glass event the same day.</div>
@@ -739,7 +739,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=48"></script>
+<script src="assets/hcos.js?v=50"></script>
 <script>
 /* Domain chips narrow the registry — the count is always the truth on screen. */
 (function () {
@@ -830,7 +830,7 @@
     if (!raw) {
       return '<div class="callout">Nothing changed — this line records a read. Opening a chart is recorded the same way an edit is.</div>';
     }
-    var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Before</th><th>After</th></tr></thead><tbody>';
+    var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th scope="col">Field</th><th scope="col">Before</th><th scope="col">After</th></tr></thead><tbody>';
     raw.split('|').forEach(function (part) {
       var bits = part.split('~');
       html += '<tr><td>' + esc(bits[0] || '') + '</td><td>' + esc(bits[1] || '—') + '</td><td>' + esc(bits[2] || '—') + '</td></tr>';

@@ -1170,7 +1170,7 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt[style*="height:46px"].st-noshow { padding-top: 2px; }
 .cal-appt.st-arrived::after, .cal-appt.st-checkout::after, .cal-appt.st-noshow::after {
   position: absolute; left: 0; right: 0; bottom: 0;
-  height: 13px; line-height: 13px; padding: 0 7px;
+  height: 13px; padding: 0 7px;
   background: #1A1A1A; color: #fff;
   font: 700 8px/13px var(--font-ui), sans-serif; letter-spacing: .6px; text-transform: uppercase;
   white-space: nowrap; overflow: hidden;
