@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=53">
+<link rel="stylesheet" href="assets/hcos.css?v=54">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -53,6 +53,7 @@
               <button class="active">Day</button>
               <button data-activate="l-02-week">Week</button>
               <button data-activate="l-05-month">Month</button>
+              <button data-activate="l-12-list">List</button>
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
@@ -110,24 +111,55 @@
                     <input class="msel-search" placeholder="Search subtypes&hellip;" aria-label="Search subtypes&hellip;">
                     <div class="msel-opts">
                       <div class="msel-group" data-ty-of="ty-visit">Office visit</div>
-                      <label class="msel-opt" data-sub="t-consult" data-ty-of="ty-visit"><input type="checkbox" aria-label="Field">Consults &amp; FU</label>
-                      <label class="msel-opt" data-sub="t-tele" data-ty-of="ty-visit"><input type="checkbox" aria-label="Consults &amp; FU">Telehealth</label>
-                      <div class="msel-group" data-ty-of="ty-proc">Procedure</div>
-                      <label class="msel-opt" data-sub="t-eboo" data-ty-of="ty-proc"><input type="checkbox" aria-label="Telehealth">EBOO</label>
-                      <label class="msel-opt" data-sub="t-lab" data-ty-of="ty-proc"><input type="checkbox" aria-label="EBOO">Lab draw</label>
-                      <label class="msel-opt" data-sub="pel" data-ty-of="ty-proc"><input type="checkbox" aria-label="Lab draw">Pellets</label>
+                      <label class="msel-opt" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient"><i class="rail-sw t-newpt ty-visit"></i>New patient</label>
+                      <label class="msel-opt" data-sub="t-fu" data-ty-of="ty-visit"><input type="checkbox" aria-label="Follow-up"><i class="rail-sw t-fu ty-visit"></i>Follow-up</label>
+                      <label class="msel-opt" data-sub="t-tele" data-ty-of="ty-visit"><input type="checkbox" aria-label="Telehealth"><i class="rail-sw t-tele ty-visit"></i>Telehealth</label>
                       <div class="msel-group" data-ty-of="ty-iv">IV</div>
-                      <label class="msel-opt" data-sub="t-nad" data-ty-of="ty-iv"><input type="checkbox" aria-label="Pellets">NAD+</label>
-                      <label class="msel-opt" data-sub="t-ivc" data-ty-of="ty-iv"><input type="checkbox" aria-label="NAD+">Mega C</label>
-                      <label class="msel-opt" data-sub="t-flow" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C">Foundational Flow</label>
+                      <label class="msel-opt" data-sub="t-nad" data-ty-of="ty-iv"><input type="checkbox" aria-label="NAD+"><i class="rail-sw t-nad ty-iv"></i>NAD+</label>
+                      <label class="msel-opt" data-sub="t-ivc" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C"><i class="rail-sw t-ivc ty-iv"></i>Mega C</label>
+                      <label class="msel-opt" data-sub="t-flow" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</label>
+                      <label class="msel-opt" data-sub="t-glut" data-ty-of="ty-iv"><input type="checkbox" aria-label="Glutathione"><i class="rail-sw t-glut ty-iv"></i>Glutathione</label>
+                      <div class="msel-group" data-ty-of="ty-proc">Procedure</div>
+                      <label class="msel-opt" data-sub="t-eboo" data-ty-of="ty-proc"><input type="checkbox" aria-label="EBOO"><i class="rail-sw t-eboo ty-proc"></i>EBOO</label>
+                      <label class="msel-opt" data-sub="t-prp" data-ty-of="ty-proc"><input type="checkbox" aria-label="PRP"><i class="rail-sw t-prp ty-proc"></i>PRP</label>
+                      <label class="msel-opt" data-sub="t-pel" data-ty-of="ty-proc"><input type="checkbox" aria-label="Pellet"><i class="rail-sw t-pel ty-proc"></i>Pellet</label>
+                      <label class="msel-opt" data-sub="t-lab" data-ty-of="ty-proc"><input type="checkbox" aria-label="Lab draw"><i class="rail-sw t-lab ty-proc"></i>Lab draw</label>
                       <div class="msel-group" data-ty-of="ty-energ">Energetics</div>
-                      <label class="msel-opt" data-sub="acu" data-ty-of="ty-energ"><input type="checkbox" aria-label="Foundational Flow">Acupuncture</label>
+                      <label class="msel-opt" data-sub="t-las" data-ty-of="ty-energ"><input type="checkbox" aria-label="Laser"><i class="rail-sw t-las ty-energ"></i>Laser &middot; Erchonia</label>
+                      <label class="msel-opt" data-sub="t-bem" data-ty-of="ty-energ"><input type="checkbox" aria-label="BEMER"><i class="rail-sw t-bem ty-energ"></i>BEMER</label>
+                      <label class="msel-opt" data-sub="t-lym" data-ty-of="ty-energ"><input type="checkbox" aria-label="LymphStar"><i class="rail-sw t-lym ty-energ"></i>LymphStar</label>
                       <div class="msel-group" data-ty-of="ty-treat">Treatment</div>
-                      <label class="msel-opt" data-sub="las" data-ty-of="ty-treat"><input type="checkbox" aria-label="Acupuncture">Erchonia laser</label>
+                      <label class="msel-opt" data-sub="t-acu" data-ty-of="ty-treat"><input type="checkbox" aria-label="Acupuncture"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</label>
+                      <label class="msel-opt" data-sub="t-chi" data-ty-of="ty-treat"><input type="checkbox" aria-label="Chiro"><i class="rail-sw t-chi ty-treat"></i>Chiro</label>
+                      <label class="msel-opt" data-sub="t-nmt" data-ty-of="ty-treat"><input type="checkbox" aria-label="Neuromuscular"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</label>
                     </div>
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
                   </div>
                 </div>
+                <div class="msel" id="l-msel-st">
+                  <button class="msel-field" data-hcos-handled="1" type="button">
+                    <span class="msel-field-lbl">All statuses</span><span class="msel-caret">&#9662;</span>
+                  </button>
+                  <div class="msel-panel">
+                    <input class="msel-search" placeholder="Search statuses&hellip;" aria-label="Search statuses&hellip;">
+                    <div class="msel-opts">
+                      <label class="msel-opt" data-st="st-scheduled"><input type="checkbox" aria-label="Scheduled"><i class="st-sw st-scheduled"></i>Scheduled</label>
+                      <label class="msel-opt" data-st="st-confirmed"><input type="checkbox" aria-label="Confirmed"><i class="st-sw st-confirmed"></i>Confirmed</label>
+                      <label class="msel-opt" data-st="st-arrived"><input type="checkbox" aria-label="Arrived"><i class="st-sw st-arrived"></i>Arrived</label>
+                      <label class="msel-opt" data-st="st-inchair"><input type="checkbox" aria-label="In progress"><i class="st-sw st-inchair"></i>In progress</label>
+                      <label class="msel-opt" data-st="st-checkout"><input type="checkbox" aria-label="Ready to check out"><i class="st-sw st-checkout"></i>Ready to check out</label>
+                      <label class="msel-opt" data-st="st-locked"><input type="checkbox" aria-label="Locked"><i class="st-sw st-locked"></i>Locked</label>
+                      <label class="msel-opt" data-st="st-done"><input type="checkbox" aria-label="Done"><i class="st-sw st-done"></i>Done</label>
+                      <label class="msel-opt" data-st="st-noshow"><input type="checkbox" aria-label="No-show"><i class="st-sw st-noshow"></i>No-show</label>
+                      <label class="msel-opt" data-st="st-cancelled"><input type="checkbox" aria-label="Cancelled"><i class="st-sw st-cancelled"></i>Cancelled</label>
+                    </div>
+                    <button class="msel-clear" data-hcos-handled="1" type="button">Clear statuses</button>
+                  </div>
+                </div>
+                <label class="cx-toggle" id="l-cx-toggle">
+                  <input type="checkbox" onchange="lShowCx(this.checked)" aria-label="Show cancelled appointments">
+                  Show cancelled
+                </label>
               </div>
               
           </div>
@@ -175,193 +207,668 @@
             <!-- Dr. Drannikov -->
             <div class="daycal-col" data-col="dr">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2" class="cal-appt st-done t-consult ty-visit" style="top:44px;height:128px" data-appt="A-88202" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-consult">
+              <div class="cal-appt st-done t-newpt ty-visit" style="top:44px;height:134px" data-appt="A-88301" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-newpt" data-days="1,2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="8:30 – 10:00" data-tx="New patient">
                 <div class="cal-appt-time">8:30 – 10:00</div>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <span class="cal-appt-sub">New patient</span>
                 <span class="cal-appt-type">consult · 90 min</span>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-inroom t-consult ty-visit" style="top:220px;height:46px" data-appt="A-88208" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-consult">
-                <div class="cal-appt-time">10:30</div>
+              <div class="cal-appt st-done t-fu ty-visit" style="top:176px;height:46px" data-appt="A-88302" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="10:00" data-tx="Follow-up">
+                <div class="cal-appt-time">10:00</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="2,4" class="cal-appt st-arrived t-tele ty-visit" style="top:308px;height:46px" data-appt="A-88221" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-tele">
-                <div class="cal-appt-time">11:30</div>
+              <div class="cal-appt st-done t-fu ty-visit" style="top:220px;height:46px" data-appt="A-88303" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:30" data-tx="Follow-up">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-checkout t-tele ty-visit" style="top:264px;height:46px" data-appt="A-88304" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-tele" data-days="2" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00" data-tx="Telehealth">
+                <div class="cal-appt-time">11:00</div>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <span class="cal-appt-sub">Telehealth</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-confirmed t-consult ty-visit" style="top:484px;height:46px" data-appt="A-88238" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-consult">
-                <div class="cal-appt-time">1:30 PM</div>
+              <div class="cal-appt st-inroom t-fu ty-visit" style="top:308px;height:46px" data-appt="A-88305" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-fu" data-days="2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:30" data-tx="Follow-up">
+                <div class="cal-appt-time">11:30</div>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,3" class="cal-appt st-cancelled t-consult ty-visit" style="top:528px;height:46px;right:50%" data-appt="A-88240" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-consult">
-                <div class="cal-appt-time">2:00 PM</div>
-                <div class="cal-appt-name">Grace Lindqvist</div>
+              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:396px;height:46px" data-appt="A-88306" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,5" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="12:30" data-tx="Follow-up" data-flags="forms">
+                <span class="fl-row"><span class="fl sev-low" title="Intake forms not returned · Admin">✦</span></span>
+                <div class="cal-appt-time">12:30</div>
+                <div class="cal-appt-name">Owen Delacroix</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div class="daycal-empty-hint l-hint-visible" style="top:554px;height:46px;left:52%" data-activate="l-03-book">＋ Book 2:00 PM</div>
-              <div data-days="2" class="cal-appt st-scheduled t-consult ty-visit" style="top:616px;height:128px" data-appt="A-88252" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-consult">
-                <div class="cal-appt-time">3:00 – 4:30 PM</div>
-                <div class="cal-appt-name">Tom Alvarez</div>
+              <div class="cal-appt st-confirmed t-newpt ty-visit" style="top:440px;height:134px" data-appt="A-88307" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="1,2,3,4,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:00 – 2:30 PM" data-tx="New patient" data-flags="interp">
+                <span class="fl-row"><span class="fl sev-low" title="Interpreter needed — Spanish · Admin">✦</span></span>
+                <div class="cal-appt-time">1:00 – 2:30 PM</div>
+                <div class="cal-appt-name">Yuki Tanaka</div>
                 <span class="cal-appt-sub">New patient</span>
                 <span class="cal-appt-type">consult · 90 min</span>
               </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:572px;height:46px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="2:30 PM" data-tx="Follow-up" data-flags="pregnant">
+                <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
+                <div class="cal-appt-time">2:30 PM</div>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:616px;height:46px" data-appt="A-88309" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2,4" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow-up">
+                <div class="cal-appt-time">3:00 PM</div>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-locked t-tele ty-visit" style="top:660px;height:46px" data-appt="A-88310" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-tele" data-days="1,2,4,5" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="3:30 PM" data-tx="Telehealth" data-note="held for same-day add">
+                <div class="cal-appt-time">3:30 PM</div>
+                <div class="cal-appt-name">Hana Sato</div>
+                <span class="cal-appt-sub"><span class="lockmark"></span>Telehealth</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:704px;height:46px" data-appt="A-88311" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="4:00 PM" data-tx="Follow-up">
+                <div class="cal-appt-time">4:00 PM</div>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
+              </div>
             </div>
-
             <!-- Dr. Bakman -->
             <div class="daycal-col" data-col="bak">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:88px;height:46px" data-appt="A-88205" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-consult">
+              <div class="cal-appt st-done t-fu ty-visit" style="top:88px;height:46px" data-appt="A-88312" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00" data-tx="Follow-up">
                 <div class="cal-appt-time">9:00</div>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,4,5" class="cal-appt st-confirmed t-consult ty-visit" style="top:440px;height:46px" data-appt="A-88235" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-consult">
-                <div class="cal-appt-time">1:00 PM</div>
+              <div class="cal-appt st-done t-fu ty-visit" style="top:132px;height:46px" data-appt="A-88313" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="9:30" data-tx="Follow-up">
+                <div class="cal-appt-time">9:30</div>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="1,2,5" class="cal-appt st-scheduled t-consult ty-visit" style="top:660px;height:46px" data-appt="A-88254" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-consult">
-                <div class="cal-appt-time">3:30 PM</div>
-                <div class="cal-appt-name">Priya Natarajan</div>
+              <div class="cal-appt st-done t-newpt ty-visit" style="top:176px;height:134px" data-appt="A-88314" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-newpt" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="10:00 – 11:30" data-tx="New patient">
+                <div class="cal-appt-time">10:00 – 11:30</div>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <span class="cal-appt-sub">New patient</span>
+                <span class="cal-appt-type">consult · 90 min</span>
+              </div>
+              <div class="cal-appt st-arrived t-fu ty-visit" style="top:308px;height:46px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="11:30" data-tx="Follow-up" data-flags="balance">
+                <span class="fl-row"><span class="fl sev-med" title="Outstanding balance $340 · Billing">$</span></span>
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Victor Reyes</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:396px;height:46px" data-appt="A-88316" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30" data-tx="Follow-up">
+                <div class="cal-appt-time">12:30</div>
+                <div class="cal-appt-name">Nina Kowalski</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-confirmed t-tele ty-visit" style="top:440px;height:46px" data-appt="A-88317" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-tele" data-days="1,2,5" data-pt="Samir Haddad" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Telehealth">
+                <div class="cal-appt-time">1:00 PM</div>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <span class="cal-appt-sub">Telehealth</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:528px;height:46px" data-appt="A-88318" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="2:00 PM" data-tx="Follow-up">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-scheduled t-newpt ty-visit" style="top:616px;height:134px" data-appt="A-88319" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-newpt" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="3:00 – 4:30 PM" data-tx="New patient">
+                <div class="cal-appt-time">3:00 – 4:30 PM</div>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <span class="cal-appt-sub">New patient</span>
+                <span class="cal-appt-type">consult · 90 min</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
+              </div>
             </div>
-
             <!-- Brooke -->
             <div class="daycal-col" data-col="bro">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,3" class="cal-appt st-done t-consult ty-visit" style="top:176px;height:46px" data-appt="A-88210" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-consult">
-                <div class="cal-appt-time">10:00</div>
+              <div class="cal-appt st-done t-fu ty-visit" style="top:44px;height:46px" data-appt="A-88320" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="8:30" data-tx="Follow-up">
+                <div class="cal-appt-time">8:30</div>
                 <div class="cal-appt-name">Walter Hsu</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
-              <div data-days="2,4" class="cal-appt st-scheduled t-consult ty-visit" style="top:528px;height:46px" data-appt="A-88243" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-consult">
-                <div class="cal-appt-time">2:00 PM</div>
+              <div class="cal-appt st-done t-lab ty-proc" style="top:88px;height:24px" data-appt="A-88321" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lab" data-days="2,4" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00" data-tx="Lab draw">
+                <div class="cal-appt-time">9:00</div>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <span class="cal-appt-sub">Lab draw</span>
+                <span class="cal-appt-type">15 min</span>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit" style="top:132px;height:46px" data-appt="A-88322" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="9:30" data-tx="Follow-up">
+                <div class="cal-appt-time">9:30</div>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:176px;height:46px" data-appt="A-88323" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00" data-tx="Follow-up" data-note="cancelled 7:12 AM by patient">
+                <div class="cal-appt-time">10:00</div>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <span class="cal-appt-sub">Follow-up</span>
                 <span class="cal-appt-type">30 min</span>
               </div>
+              <div class="cal-appt st-noshow t-fu ty-visit" style="top:220px;height:46px" data-appt="A-88324" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-fu" data-days="2,3" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="10:30" data-tx="Follow-up">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit" style="top:264px;height:46px" data-appt="A-88325" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,5" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00" data-tx="Follow-up">
+                <div class="cal-appt-time">11:00</div>
+                <div class="cal-appt-name">Grace Lindqvist</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-arrived t-lab ty-proc" style="top:308px;height:24px" data-appt="A-88326" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-lab" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:30" data-tx="Lab draw">
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <span class="cal-appt-sub">Lab draw</span>
+                <span class="cal-appt-type">15 min</span>
+              </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:440px;height:46px" data-appt="A-88327" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Follow-up">
+                <div class="cal-appt-time">1:00 PM</div>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:484px;height:46px" data-appt="A-88328" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 PM" data-tx="Follow-up">
+                <div class="cal-appt-time">1:30 PM</div>
+                <div class="cal-appt-name">Hana Sato</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:528px;height:46px" data-appt="A-88329" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="2:00 PM" data-tx="Follow-up">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-type">30 min</span>
+              </div>
+              <div class="cal-appt st-scheduled t-lab ty-proc" style="top:572px;height:24px" data-appt="A-88330" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lab" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="Lab draw">
+                <div class="cal-appt-time">2:30 PM</div>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <span class="cal-appt-sub">Lab draw</span>
+                <span class="cal-appt-type">15 min</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
+              </div>
             </div>
-
             <!-- IV 1 -->
             <div class="daycal-col" data-col="c1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2,4" class="cal-appt st-inchair t-nad ai-warn ty-iv" style="top:88px;height:260px" data-appt="A-88214" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-nad">
-                <span class="ai-flag" title="Running long">!</span>
-                <div class="cal-appt-time">9:00 – 12:00 · running to 12:20</div>
+              <div class="cal-appt st-done t-nad ty-iv ai-warn" style="top:44px;height:46px" data-appt="A-88331" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-nad" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="8:30" data-tx="NAD+" data-note="ran 20 min long" data-flags="deficit">
+                <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
+                <span class="ai-flag" title="Runs long — 20 min over on her last three">!</span>
+                <div class="cal-appt-time">8:30</div>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <span class="cal-appt-sub">NAD+</span>
-                <span class="cal-appt-type">books 3 h, she takes 3 h 20</span>
+                <span class="cal-appt-type">500 mg</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-nad ty-iv" style="top:440px;height:260px" data-appt="A-88247" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nad">
-                <div class="cal-appt-time">1:00 – 4:00 PM</div>
+              <div class="cal-appt st-done t-ivc ty-iv" style="top:88px;height:46px" data-appt="A-88332" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ivc" data-days="2,4" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="9:00" data-tx="Mega C">
+                <div class="cal-appt-time">9:00</div>
                 <div class="cal-appt-name">Walter Hsu</div>
-                <span class="cal-appt-sub">NAD+</span>
-                <span class="cal-appt-type">nfusion · 3 h typical</span>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
                 <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-done t-flow ty-iv" style="top:132px;height:46px" data-appt="A-88333" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-flow" data-days="1,2,4,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="9:30" data-tx="Foundational Flow">
+                <div class="cal-appt-time">9:30</div>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-done t-glut ty-iv" style="top:176px;height:46px" data-appt="A-88334" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-glut" data-days="2" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00" data-tx="Glutathione">
+                <div class="cal-appt-time">10:00</div>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-done t-nad ty-iv" style="top:220px;height:46px" data-appt="A-88335" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-nad" data-days="2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="10:30" data-tx="NAD+">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-checkout t-ivc ty-iv" style="top:264px;height:46px" data-appt="A-88336" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-ivc" data-days="1,2,5" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00" data-tx="Mega C">
+                <div class="cal-appt-time">11:00</div>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-inchair t-flow ty-iv" style="top:308px;height:46px" data-appt="A-88337" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-flow" data-days="1,2,3,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:30" data-tx="Foundational Flow">
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-confirmed t-nad ty-iv" style="top:396px;height:46px" data-appt="A-88338" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nad" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="12:30" data-tx="NAD+">
+                <div class="cal-appt-time">12:30</div>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-confirmed t-ivc ty-iv" style="top:440px;height:46px" data-appt="A-88339" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-ivc" data-days="2,4" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="1:00 PM" data-tx="Mega C">
+                <div class="cal-appt-time">1:00 PM</div>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-confirmed t-glut ty-iv" style="top:484px;height:46px" data-appt="A-88340" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-glut" data-days="1,2,4,5" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Glutathione">
+                <div class="cal-appt-time">1:30 PM</div>
+                <div class="cal-appt-name">Grace Lindqvist</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:528px;height:46px" data-appt="A-88341" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-flow" data-days="2" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="2:00 PM" data-tx="Foundational Flow">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-nad ty-iv" style="top:572px;height:46px" data-appt="A-88342" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-nad" data-days="2,3" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="2:30 PM" data-tx="NAD+">
+                <div class="cal-appt-time">2:30 PM</div>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-ivc ty-iv is-tentative" style="top:616px;height:46px" data-appt="A-88343" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ivc" data-days="1,2,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Mega C" data-note="no active order — booked tentative" data-flags="auth">
+                <span class="fl-row"><span class="fl sev-high" title="Prior authorisation expires today · Billing">$</span></span>
+                <div class="cal-appt-time">3:00 PM</div>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:660px;height:46px" data-appt="A-88344" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-flow" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="Foundational Flow">
+                <div class="cal-appt-time">3:30 PM</div>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-locked t-glut ty-iv" style="top:704px;height:46px" data-appt="A-88345" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-glut" data-days="1,2,3" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="4:00 PM" data-tx="Glutathione" data-note="held for the Thursday series">
+                <div class="cal-appt-time">4:00 PM</div>
+                <div class="cal-appt-name">Hana Sato</div>
+                <span class="cal-appt-sub"><span class="lockmark"></span>Glutathione</span>
+                <span class="cal-appt-type">push</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
               </div>
             </div>
-
             <!-- IV 2 -->
             <div class="daycal-col" data-col="c2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="1,2,4,5" class="cal-appt st-inchair t-ivc ty-iv" style="top:176px;height:216px" data-appt="A-88231" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-ivc">
-                <div class="cal-appt-time">10:00 – 12:30</div>
-                <div class="cal-appt-name">Daniel Okafor</div>
+              <div class="cal-appt st-done t-ivc ty-iv" style="top:44px;height:46px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ivc" data-days="1,2,3" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="8:30" data-tx="Mega C">
+                <div class="cal-appt-time">8:30</div>
+                <div class="cal-appt-name">Nina Kowalski</div>
                 <span class="cal-appt-sub">Mega C</span>
-                <span class="cal-appt-type">IV vitamin C 25 g · runs on time</span>
+                <span class="cal-appt-type">25 g</span>
                 <span class="actor-tag">Bea</span>
               </div>
+              <div class="cal-appt st-done t-nad ty-iv" style="top:88px;height:46px" data-appt="A-88347" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-nad" data-days="2,4" data-pt="Samir Haddad" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="9:00" data-tx="NAD+">
+                <div class="cal-appt-time">9:00</div>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-done t-flow ty-iv" style="top:132px;height:46px" data-appt="A-88348" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-flow" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="9:30" data-tx="Foundational Flow">
+                <div class="cal-appt-time">9:30</div>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-noshow t-ivc ty-iv" style="top:176px;height:46px" data-appt="A-88349" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-ivc" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="10:00" data-tx="Mega C">
+                <div class="cal-appt-time">10:00</div>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-done t-nad ty-iv" style="top:220px;height:46px" data-appt="A-88350" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-nad" data-days="2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="10:30" data-tx="NAD+">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-inchair t-glut ty-iv" style="top:264px;height:46px" data-appt="A-88351" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-glut" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="11:00" data-tx="Glutathione">
+                <div class="cal-appt-time">11:00</div>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-arrived t-ivc ty-iv" style="top:308px;height:46px" data-appt="A-88352" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-ivc" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:30" data-tx="Mega C" data-flags="allergy">
+                <span class="fl-row"><span class="fl sev-high" title="Allergy — sulfa, documented reaction · Medical">▲</span></span>
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-confirmed t-flow ty-iv" style="top:396px;height:46px" data-appt="A-88353" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-flow" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30" data-tx="Foundational Flow" data-flags="pregnant">
+                <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
+                <div class="cal-appt-time">12:30</div>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-confirmed t-nad ty-iv" style="top:440px;height:46px" data-appt="A-88354" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nad" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:00 PM" data-tx="NAD+">
+                <div class="cal-appt-time">1:00 PM</div>
+                <div class="cal-appt-name">Hana Sato</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-scheduled t-ivc ty-iv" style="top:484px;height:46px" data-appt="A-88355" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ivc" data-days="1,2,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="1:30 PM" data-tx="Mega C">
+                <div class="cal-appt-time">1:30 PM</div>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-scheduled t-nad ty-iv" style="top:528px;height:46px" data-appt="A-88356" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-nad" data-days="2" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="2:00 PM" data-tx="NAD+">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:616px;height:46px" data-appt="A-88357" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-flow" data-days="2,3" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="3:00 PM" data-tx="Foundational Flow">
+                <div class="cal-appt-time">3:00 PM</div>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
+              </div>
             </div>
-
             <!-- IV 3 -->
             <div class="daycal-col" data-col="c3">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2,5" class="cal-appt st-arrived t-flow ty-iv" style="top:308px;height:84px" data-appt="A-88226" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-flow">
-                <div class="cal-appt-time">11:30 – 12:30</div>
-                <div class="cal-appt-name">Priya Natarajan</div>
+              <div class="cal-appt st-done t-flow ty-iv" style="top:88px;height:46px" data-appt="A-88358" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-flow" data-days="1,2,3" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00" data-tx="Foundational Flow">
+                <div class="cal-appt-time">9:00</div>
+                <div class="cal-appt-name">Grace Lindqvist</div>
                 <span class="cal-appt-sub">Foundational Flow</span>
-                <span class="cal-appt-type">10 · 1 h</span>
+                <span class="cal-appt-type">base bag</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:660px;height:46px" data-appt="A-88256" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-flow">
-                <div class="cal-appt-time">3:30 PM</div>
-                <div class="cal-appt-name">Sofia Ramos</div>
-                <span class="cal-appt-sub">Glutathione</span>
-                <span class="cal-appt-type">push · 30 min</span>
+              <div class="cal-appt st-done t-ivc ty-iv" style="top:132px;height:46px" data-appt="A-88359" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ivc" data-days="2,4" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="9:30" data-tx="Mega C">
+                <div class="cal-appt-time">9:30</div>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
                 <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-done t-nad ty-iv" style="top:220px;height:46px" data-appt="A-88360" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-nad" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="10:30" data-tx="NAD+">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-checkout t-glut ty-iv" style="top:264px;height:46px" data-appt="A-88361" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-glut" data-days="2" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:00" data-tx="Glutathione">
+                <div class="cal-appt-time">11:00</div>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-inchair t-ivc ty-iv" style="top:308px;height:46px" data-appt="A-88362" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-ivc" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="11:30" data-tx="Mega C" data-flags="deficit">
+                <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-confirmed t-flow ty-iv" style="top:440px;height:46px" data-appt="A-88363" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-flow" data-days="1,2,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="1:00 PM" data-tx="Foundational Flow">
+                <div class="cal-appt-time">1:00 PM</div>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-scheduled t-nad ty-iv" style="top:528px;height:46px" data-appt="A-88364" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-nad" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="2:00 PM" data-tx="NAD+">
+                <div class="cal-appt-time">2:00 PM</div>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-scheduled t-ivc ty-iv" style="top:572px;height:46px" data-appt="A-88365" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ivc" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="2:30 PM" data-tx="Mega C">
+                <div class="cal-appt-time">2:30 PM</div>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-scheduled t-glut ty-iv" style="top:660px;height:46px" data-appt="A-88366" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-glut" data-days="2,4" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="3:30 PM" data-tx="Glutathione">
+                <div class="cal-appt-time">3:30 PM</div>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <span class="cal-appt-sub">Glutathione</span>
+                <span class="cal-appt-type">push</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
               </div>
             </div>
-
-                                        <!-- IV 4 --><!-- IV 4 -->
+            <!-- IV 4 -->
             <div class="daycal-col" data-col="c4">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div data-days="2" class="cal-appt st-arrived t-lab ty-proc mini" style="top:286px;height:18px;" data-appt="A-88219" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-lab">
-                <span class="cal-appt-sub">Lab draw</span>
-                <div class="cal-appt-name">Sofia Ramos</div>
-              </div>
-              <div data-days="2" class="cal-appt st-confirmed t-flow ty-iv" style="top:528px;height:84px" data-appt="A-88241" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-flow">
-                <div class="cal-appt-time">2:00 – 3:00 PM</div>
-                <div class="cal-appt-name">Nadia Boulos</div>
-                <span class="cal-appt-sub">Foundational Flow</span>
-                <span class="cal-appt-type">10 · 1 h</span>
+              <div class="cal-appt st-done t-nad ty-iv" style="top:132px;height:46px" data-appt="A-88367" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-nad" data-days="1,2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="9:30" data-tx="NAD+">
+                <div class="cal-appt-time">9:30</div>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-scheduled t-flow ty-iv" style="top:616px;height:46px" data-appt="A-88250" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-flow">
-                <div class="cal-appt-time">3:00 PM</div>
-                <div class="cal-appt-name">Marcus Webb</div>
+              <div class="cal-appt st-done t-glut ty-iv" style="top:176px;height:46px" data-appt="A-88368" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-glut" data-days="2,4" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00" data-tx="Glutathione">
+                <div class="cal-appt-time">10:00</div>
+                <div class="cal-appt-name">Nina Kowalski</div>
                 <span class="cal-appt-sub">Glutathione</span>
-                <span class="cal-appt-type">push · 30 min</span>
+                <span class="cal-appt-type">push</span>
                 <span class="actor-tag">Nate</span>
               </div>
+              <div class="cal-appt st-arrived t-flow ty-iv" style="top:264px;height:46px" data-appt="A-88369" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-flow" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="11:00" data-tx="Foundational Flow">
+                <div class="cal-appt-time">11:00</div>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-confirmed t-ivc ty-iv" style="top:396px;height:46px" data-appt="A-88370" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-ivc" data-days="2" data-pt="Samir Haddad" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="12:30" data-tx="Mega C">
+                <div class="cal-appt-time">12:30</div>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <span class="cal-appt-sub">Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-confirmed t-flow ty-iv" style="top:484px;height:46px" data-appt="A-88371" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-flow" data-days="2,3" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Foundational Flow">
+                <div class="cal-appt-time">1:30 PM</div>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <span class="cal-appt-sub">Foundational Flow</span>
+                <span class="cal-appt-type">base bag</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-scheduled t-nad ty-iv" style="top:572px;height:46px" data-appt="A-88372" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-nad" data-days="1,2,5" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="2:30 PM" data-tx="NAD+">
+                <div class="cal-appt-time">2:30 PM</div>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <span class="cal-appt-sub">NAD+</span>
+                <span class="cal-appt-type">500 mg</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-locked t-ivc ty-iv" style="top:704px;height:46px" data-appt="A-88373" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-ivc" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Mega C" data-note="held — order renewal pending">
+                <div class="cal-appt-time">4:00 PM</div>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <span class="cal-appt-sub"><span class="lockmark"></span>Mega C</span>
+                <span class="cal-appt-type">25 g</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
+              </div>
             </div>
-
             <div class="cal-now" style="top:323px"><span class="cal-now-label">11:40 AM</span></div>
-            <div class="daycal-col" data-col="room1" style="position:relative">
-              <div data-days="2" data-sub="acu" class="cal-appt st-checkout ty-energ" style="top:132px;height:46px" data-appt="A-88231" data-open-drawer="#l-appt-drawer" data-st="Checkout">
-                <span class="cal-appt-time">9:30 &ndash; 10:15</span>
-                <span class="cal-appt-name">Nadia Boulos</span>
+            <!-- Room 1 -->
+            <div class="daycal-col" data-col="room1">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-acu ty-treat" style="top:132px;height:68px" data-appt="A-88374" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-acu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="9:30 – 9:30" data-tx="Acupuncture">
+                <div class="cal-appt-time">9:30 – 9:30</div>
+                <div class="cal-appt-name">Nadia Boulos</div>
                 <span class="cal-appt-sub">Acupuncture</span>
-                <span class="cal-appt-type">45m</span>
+                <span class="cal-appt-type">needles</span>
+                <span class="actor-tag">Wesley</span>
               </div>
-              <div data-days="2,4" data-sub="pel" class="cal-appt st-confirmed ty-proc" style="top:396px;height:53px" data-appt="A-88232" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
-                <span class="cal-appt-time">12:30 &ndash; 1:10</span>
-                <span class="cal-appt-name">Marcus Webb</span>
-                <span class="cal-appt-sub">Pellets</span>
-                <span class="cal-appt-type">40m</span>
+              <div class="cal-appt st-done t-las ty-energ" style="top:220px;height:46px" data-appt="A-88375" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-las" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:30" data-tx="Laser">
+                <div class="cal-appt-time">10:30</div>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <span class="cal-appt-sub">Laser</span>
+                <span class="cal-appt-type">Erchonia</span>
+                <span class="actor-tag">Wesley</span>
               </div>
-              <div data-days="2,3" class="cal-appt st-arrived ty-treat" data-sub="las" style="top:264px;height:46px" data-appt="A-88233" data-open-drawer="#l-appt-drawer" data-st="Arrived">
-                <span class="cal-appt-time">11:00 &ndash; 11:20</span>
-                <span class="cal-appt-name">Sofia Ramos</span>
-                <span class="cal-appt-sub">Erchonia</span>
-                <span class="cal-appt-type">laser &middot; 20m</span>
+              <div class="cal-appt st-arrived t-chi ty-treat" style="top:308px;height:46px" data-appt="A-88376" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-chi" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:30" data-tx="Chiro">
+                <div class="cal-appt-time">11:30</div>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <span class="cal-appt-sub">Chiro</span>
+                <span class="cal-appt-type">adjustment</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-confirmed t-pel ty-proc" style="top:396px;height:46px" data-appt="A-88377" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pel" data-days="2" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30" data-tx="Pellet">
+                <div class="cal-appt-time">12:30</div>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <span class="cal-appt-sub">Pellet</span>
+                <span class="cal-appt-type">insertion</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-confirmed t-nmt ty-treat" style="top:484px;height:68px" data-appt="A-88378" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nmt" data-days="2,3" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 – 1:30 PM" data-tx="Neuromuscular">
+                <div class="cal-appt-time">1:30 – 1:30 PM</div>
+                <div class="cal-appt-name">Hana Sato</div>
+                <span class="cal-appt-sub">Neuromuscular</span>
+                <span class="cal-appt-type">soft tissue</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-scheduled t-bem ty-energ" style="top:572px;height:46px" data-appt="A-88379" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-bem" data-days="1,2,5" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="BEMER">
+                <div class="cal-appt-time">2:30 PM</div>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <span class="cal-appt-sub">BEMER</span>
+                <span class="cal-appt-type">mat</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-scheduled t-lym ty-energ" style="top:660px;height:46px" data-appt="A-88380" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lym" data-days="1,2,3,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="LymphStar">
+                <div class="cal-appt-time">3:30 PM</div>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <span class="cal-appt-sub">LymphStar</span>
+                <span class="cal-appt-type">LET</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
               </div>
             </div>
+            <!-- Room 2 -->
             <div class="daycal-col" data-col="room2">
-              <div data-days="2,4" class="cal-appt st-confirmed ty-proc" data-sub="t-eboo" style="top:44px;height:128px" data-appt="A-88240" data-open-drawer="#l-appt-drawer" data-st="Confirmed">
-                <span class="cal-appt-time">8:30 &ndash; 10:30</span>
-                <span class="cal-appt-name">Priya Natarajan</span>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-eboo ty-proc" style="top:44px;height:134px" data-appt="A-88381" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-eboo" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:30 – 10:00" data-tx="EBOO" data-flags="urgent">
+                <span class="fl-row"><span class="fl sev-high" title="Urgent medical alert — cardiology follow-up open · Medical">✚</span></span>
+                <div class="cal-appt-time">8:30 – 10:00</div>
+                <div class="cal-appt-name">Priya Natarajan</div>
                 <span class="cal-appt-sub">EBOO</span>
-                <span class="cal-appt-type">2 h</span>
+                <span class="cal-appt-type">circuit</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div data-days="2" class="cal-appt st-scheduled ty-proc" data-sub="prp" style="top:396px;height:80px" data-appt="A-88241" data-open-drawer="#l-appt-drawer" data-st="Scheduled">
-                <span class="cal-appt-time">12:30 &ndash; 2:00</span>
-                <span class="cal-appt-name">Walter Hsu</span>
+              <div class="cal-appt st-done t-prp ty-proc" style="top:220px;height:90px" data-appt="A-88382" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-prp" data-days="2,4" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="10:30 – 11:30" data-tx="PRP">
+                <div class="cal-appt-time">10:30 – 11:30</div>
+                <div class="cal-appt-name">Walter Hsu</div>
                 <span class="cal-appt-sub">PRP</span>
-                <span class="cal-appt-type">90m</span>
+                <span class="cal-appt-type">platelet-rich</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div class="cal-appt st-confirmed t-eboo ty-proc" style="top:396px;height:134px" data-appt="A-88383" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-eboo" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="12:30 – 2:00 PM" data-tx="EBOO">
+                <div class="cal-appt-time">12:30 – 2:00 PM</div>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <span class="cal-appt-sub">EBOO</span>
+                <span class="cal-appt-type">circuit</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div class="cal-appt st-scheduled t-prp ty-proc" style="top:572px;height:90px" data-appt="A-88384" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-prp" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="2:30 – 3:30 PM" data-tx="PRP">
+                <div class="cal-appt-time">2:30 – 3:30 PM</div>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <span class="cal-appt-sub">PRP</span>
+                <span class="cal-appt-type">platelet-rich</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div class="cal-appt st-scheduled t-pel ty-proc" style="top:704px;height:46px" data-appt="A-88385" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-pel" data-days="2,3" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Pellet">
+                <div class="cal-appt-time">4:00 PM</div>
+                <div class="cal-appt-name">Nina Kowalski</div>
+                <span class="cal-appt-sub">Pellet</span>
+                <span class="cal-appt-type">insertion</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
+                <div class="cal-appt-time">12:00 – 12:30</div>
+                <div class="cal-appt-name">Lunch</div>
+                <span class="cal-appt-sub">Blocked</span>
+                <span class="cal-appt-type">every weekday</span>
               </div>
             </div>
           </div>
@@ -369,60 +876,70 @@
 
           <div class="leg">
             <div class="leg-open">
-              <div class="cal-appt ty-iv st-arrived leg-spec">
+              <div class="cal-appt ty-iv t-nad st-inchair leg-spec">
                 <span class="cal-appt-sub">NAD+</span>
-                <span class="cal-appt-time">9:00</span>
-                <span class="cal-appt-name">Maya Reyes</span>
+                <span class="cal-appt-time">11:30</span>
+                <span class="cal-appt-name">Elena Petrova</span>
               </div>
               <div class="leg-rule">
-                Every block answers three questions:<br>
-                <b>the colour</b> says what kind of appointment it is &middot;
-                <b>the word</b> says which exact treatment &middot;
-                <b>how dark it is</b> says where the patient stands.
+                Read the stripe, then the fill:<br>
+                <b>the stripe&rsquo;s colour</b> is which treatment &middot;
+                <b>the stripe&rsquo;s shape</b> is what kind &middot;
+                <b>the background</b> is where the patient stands.
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
-                <span class="leg-key-txt"><b>The colour</b><span>what kind</span></span></div>
+                <span class="leg-key-txt"><b>Stripe colour</b><span>which treatment</span></span></div>
               <div class="leg-items">
-                <span class="leg-fam ty-visit"><i></i>Office visit</span>
-                <span class="leg-fam ty-proc"><i></i>Procedure</span>
-                <span class="leg-fam ty-iv"><i></i>IV</span>
-                <span class="leg-fam ty-energ"><i></i>Energetics</span>
-                <span class="leg-fam ty-treat"><i></i>Treatment</span>
+                <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+                <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+                <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+                <span class="leg-fam"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+                <span class="leg-fam"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+                <span class="leg-fam"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+                <span class="leg-fam"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+                <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+                <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+                <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+                <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
+                <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+                <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
+                <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
+                <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+                <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
+                <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">2</span>
-                <span class="leg-key-txt"><b>The word</b><span>which one</span></span></div>
+                <span class="leg-key-txt"><b>Stripe shape</b><span>what kind</span></span></div>
               <div class="leg-items">
-                <span class="ty-visit"><span class="leg-sub">New patient</span></span>
-                <span class="ty-visit"><span class="leg-sub">Follow-up</span></span>
-                <span class="ty-visit"><span class="leg-sub">Telehealth</span></span>
-                <span class="ty-proc"><span class="leg-sub">EBOO</span></span>
-                <span class="ty-proc"><span class="leg-sub">Pellets</span></span>
-                <span class="ty-proc"><span class="leg-sub">PRP</span></span>
-                <span class="ty-iv"><span class="leg-sub">NAD+</span></span>
-                <span class="ty-iv"><span class="leg-sub">Mega C</span></span>
-                <span class="ty-iv"><span class="leg-sub">Foundational Flow</span></span>
-                <span class="ty-energ"><span class="leg-sub">Acupuncture</span></span>
-                <span class="ty-treat"><span class="leg-sub">Erchonia laser</span></span>
-                <span class="leg-sub-more">&mdash; each written in the colour of its own kind</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-visit"></i>Office visit &mdash; solid</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-iv"></i>IV &mdash; dotted</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-proc"></i>Procedure &mdash; dashed</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-energ"></i>Energetics &mdash; twin line</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-treat"></i>Treatment &mdash; hatched</span>
+                <span class="leg-sub-more">&mdash; the shape survives a photocopier, so the code still reads in black and white</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">3</span>
-                <span class="leg-key-txt"><b>How dark</b><span>where they stand</span></span></div>
+                <span class="leg-key-txt"><b>Background</b><span>where they stand</span></span></div>
               <div class="leg-items">
-                <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
-                <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
+                <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
+                <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
+                <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
+                <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
+                <span class="leg-st"><i class="st-sw st-locked"></i><span class="lockmark"></span>Locked</span>
+                <span class="leg-sub-more">&mdash; and the three ways it ends, all striped:</span>
+                <span class="leg-st"><i class="st-sw st-done"></i>Done</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
               </div>
             </div>
 
@@ -457,33 +974,19 @@
             </div>
 
             <div class="card">
-              <div class="card-title">How long each patient really takes</div>
-              <div class="l-dur-row">
-                <span style="width:104px">Maya Reyes</span>
-                <span class="type-mark">NAD</span>
-                <div class="meter"><div class="meter-fill" style="width:100%"></div></div>
-                <span class="meter-val">3 h 20 · books 3 h</span>
+              <div class="card-title">A slot just freed</div>
+              <div class="callout callout-ok" style="margin:0 0 10px">
+                <strong>Maya Reyes cancelled her 10:00 with Brooke.</strong>
+                Owen Delacroix has been waiting three days for any weekday morning, and
+                Nina Kowalski wants Mon&ndash;Wed between 9 and 11. Both match.
               </div>
-              <div class="l-dur-row">
-                <span style="width:104px">Walter Hsu</span>
-                <span class="type-mark">NAD</span>
-                <div class="meter"><div class="meter-fill" style="width:90%"></div></div>
-                <span class="meter-val">3 h 00 · on time</span>
+              <div class="filters" style="margin:0;background:transparent;border:none;padding:0;gap:6px">
+                <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Text sent to Owen Delacroix. The slot is held for 30 minutes.', 'ok')">Offer it to Owen</button>
+                <button class="btn btn-sm" data-activate="l-10-waitlist">Open the waitlist</button>
+                <button class="btn btn-sm" data-activate="l-09-insights">See the patterns</button>
               </div>
-              <div class="l-dur-row">
-                <span style="width:104px">Daniel Okafor</span>
-                <span class="type-mark">IVC</span>
-                <div class="meter"><div class="meter-fill" style="width:74%"></div></div>
-                <span class="meter-val">2 h 30 · on time</span>
-              </div>
-              <div class="l-dur-row">
-                <span style="width:104px">Priya Natarajan</span>
-                <span class="type-mark">FLO</span>
-                <div class="meter"><div class="meter-fill" style="width:38%"></div></div>
-                <span class="meter-val">1 h 15 · books 1 h</span>
-              </div>
-              <div class="field-help" style="margin-top:8px">Booking uses each patient's own average, not the protocol default, so the chair board matches the real day.</div>
             </div>
+
           </div>
         </div>
       </div>
@@ -509,6 +1012,7 @@
               <button data-activate="l-01-day">Day</button>
               <button class="active">Week</button>
               <button data-activate="l-05-month">Month</button>
+              <button data-activate="l-12-list">List</button>
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
@@ -646,62 +1150,118 @@
             </div>
           </div>
 
+          <div class="card cap-card" style="margin:0 16px 14px">
+            <div class="card-title">Capacity this week &middot; 20&ndash;24 July
+              <span class="cap-total">115 of 164 slots booked &middot; 70&#37; full &middot; 49 left</span></div>
+            <div class="cap-head"><span class="cap-name">Treatment</span><span></span>
+              <span class="cap-num">Booked</span><span class="cap-pct">Full</span><span class="cap-left">Left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+              <div class="meter"><div class="meter-fill" style="width:71%"></div></div>
+              <span class="cap-num"><b>17 of 24</b> booked</span>
+              <span class="cap-pct">71%</span>
+              <span class="cap-left">7 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+              <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
+              <span class="cap-num"><b>21 of 25</b> booked</span>
+              <span class="cap-pct">84%</span>
+              <span class="cap-left">4 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+              <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
+              <span class="cap-num"><b>12 of 24</b> booked</span>
+              <span class="cap-pct">50%</span>
+              <span class="cap-left">12 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+              <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
+              <span class="cap-num"><b>9 of 20</b> booked</span>
+              <span class="cap-pct">45%</span>
+              <span class="cap-left">11 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+              <div class="meter"><div class="meter-fill" style="width:80%"></div></div>
+              <span class="cap-num"><b>8 of 10</b> booked</span>
+              <span class="cap-pct">80%</span>
+              <span class="cap-left">2 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+              <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
+              <span class="cap-num"><b>37 of 44</b> booked</span>
+              <span class="cap-pct">84%</span>
+              <span class="cap-left">7 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+              <div class="meter"><div class="meter-fill" style="width:83%"></div></div>
+              <span class="cap-num"><b>5 of 6</b> booked</span>
+              <span class="cap-pct">83%</span>
+              <span class="cap-left">1 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+              <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
+              <span class="cap-num"><b>6 of 11</b> booked</span>
+              <span class="cap-pct">55%</span>
+              <span class="cap-left">5 left</span></div>
+          </div>
           <div class="leg">
             <div class="leg-open">
-              <div class="cal-appt ty-iv st-arrived leg-spec">
+              <div class="cal-appt ty-iv t-nad st-inchair leg-spec">
                 <span class="cal-appt-sub">NAD+</span>
-                <span class="cal-appt-time">9:00</span>
-                <span class="cal-appt-name">Maya Reyes</span>
+                <span class="cal-appt-time">11:30</span>
+                <span class="cal-appt-name">Elena Petrova</span>
               </div>
               <div class="leg-rule">
-                Every block answers three questions:<br>
-                <b>the colour</b> says what kind of appointment it is &middot;
-                <b>the word</b> says which exact treatment &middot;
-                <b>how dark it is</b> says where the patient stands.
+                Read the stripe, then the fill:<br>
+                <b>the stripe&rsquo;s colour</b> is which treatment &middot;
+                <b>the stripe&rsquo;s shape</b> is what kind &middot;
+                <b>the background</b> is where the patient stands.
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
-                <span class="leg-key-txt"><b>The colour</b><span>what kind</span></span></div>
+                <span class="leg-key-txt"><b>Stripe colour</b><span>which treatment</span></span></div>
               <div class="leg-items">
-                <span class="leg-fam ty-visit"><i></i>Office visit</span>
-                <span class="leg-fam ty-proc"><i></i>Procedure</span>
-                <span class="leg-fam ty-iv"><i></i>IV</span>
-                <span class="leg-fam ty-energ"><i></i>Energetics</span>
-                <span class="leg-fam ty-treat"><i></i>Treatment</span>
+                <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+                <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+                <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+                <span class="leg-fam"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+                <span class="leg-fam"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+                <span class="leg-fam"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+                <span class="leg-fam"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+                <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+                <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+                <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+                <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
+                <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+                <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
+                <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
+                <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+                <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
+                <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">2</span>
-                <span class="leg-key-txt"><b>The word</b><span>which one</span></span></div>
+                <span class="leg-key-txt"><b>Stripe shape</b><span>what kind</span></span></div>
               <div class="leg-items">
-                <span class="ty-visit"><span class="leg-sub">New patient</span></span>
-                <span class="ty-visit"><span class="leg-sub">Follow-up</span></span>
-                <span class="ty-visit"><span class="leg-sub">Telehealth</span></span>
-                <span class="ty-proc"><span class="leg-sub">EBOO</span></span>
-                <span class="ty-proc"><span class="leg-sub">Pellets</span></span>
-                <span class="ty-proc"><span class="leg-sub">PRP</span></span>
-                <span class="ty-iv"><span class="leg-sub">NAD+</span></span>
-                <span class="ty-iv"><span class="leg-sub">Mega C</span></span>
-                <span class="ty-iv"><span class="leg-sub">Foundational Flow</span></span>
-                <span class="ty-energ"><span class="leg-sub">Acupuncture</span></span>
-                <span class="ty-treat"><span class="leg-sub">Erchonia laser</span></span>
-                <span class="leg-sub-more">&mdash; each written in the colour of its own kind</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-visit"></i>Office visit &mdash; solid</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-iv"></i>IV &mdash; dotted</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-proc"></i>Procedure &mdash; dashed</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-energ"></i>Energetics &mdash; twin line</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-treat"></i>Treatment &mdash; hatched</span>
+                <span class="leg-sub-more">&mdash; the shape survives a photocopier, so the code still reads in black and white</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">3</span>
-                <span class="leg-key-txt"><b>How dark</b><span>where they stand</span></span></div>
+                <span class="leg-key-txt"><b>Background</b><span>where they stand</span></span></div>
               <div class="leg-items">
-                <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
-                <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
+                <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
+                <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
+                <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
+                <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
+                <span class="leg-st"><i class="st-sw st-locked"></i><span class="lockmark"></span>Locked</span>
+                <span class="leg-sub-more">&mdash; and the three ways it ends, all striped:</span>
+                <span class="leg-st"><i class="st-sw st-done"></i>Done</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
               </div>
             </div>
 
@@ -745,6 +1305,7 @@
               <button data-activate="l-01-day">Day</button>
               <button data-activate="l-02-week">Week</button>
               <button class="active">Month</button>
+              <button data-activate="l-12-list">List</button>
             </div>
             <button class="btn btn-primary" data-activate="l-03-book">Book appointment</button>
           </div>
@@ -850,78 +1411,138 @@
             </div>
           </div>
 
-          <div class="card" style="margin:0 16px 14px">
-            <div class="card-title">Capacity this month &middot; July</div>
-            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">IV suite</span>
-              <div class="meter" style="flex:1"><div class="meter-fill" style="width:74%"></div></div>
-              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">74% full &middot; 31 slots left</span></div>
-            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">Office visits</span>
-              <div class="meter" style="flex:1"><div class="meter-fill" style="width:81%"></div></div>
-              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">81% full &middot; 22 slots left</span></div>
-            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">Procedures &middot; pellets, PRP, EBOO</span>
-              <div class="meter" style="flex:1"><div class="meter-fill" style="width:60%"></div></div>
-              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">60% full &middot; 20 slots left</span></div>
-            <div class="r-hbar" style="padding:4px 0"><span style="width:150px;flex-shrink:0">Energetics &middot; acupuncture</span>
-              <div class="meter" style="flex:1"><div class="meter-fill" style="width:35%"></div></div>
-              <span style="font-size:11.5px;color:var(--muted);white-space:nowrap">35% full &middot; 26 slots left</span></div>
-            <style>#l-05-month .r-hbar { display:flex; align-items:center; gap:10px; font-size:12px; }</style>
+          <div class="card cap-card" style="margin:0 16px 14px">
+            <div class="card-title">Capacity this month &middot; July
+              <span class="cap-total">1,022 of 1,340 slots booked &middot; 76&#37; full &middot; 318 left</span></div>
+            <div class="cap-head"><span class="cap-name">Treatment</span><span></span>
+              <span class="cap-num">Booked</span><span class="cap-pct">Full</span><span class="cap-left">Left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+              <div class="meter"><div class="meter-fill" style="width:77%"></div></div>
+              <span class="cap-num"><b>74 of 96</b> booked</span>
+              <span class="cap-pct">77%</span>
+              <span class="cap-left">22 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+              <div class="meter"><div class="meter-fill" style="width:81%"></div></div>
+              <span class="cap-num"><b>81 of 100</b> booked</span>
+              <span class="cap-pct">81%</span>
+              <span class="cap-left">19 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+              <div class="meter"><div class="meter-fill" style="width:54%"></div></div>
+              <span class="cap-num"><b>52 of 96</b> booked</span>
+              <span class="cap-pct">54%</span>
+              <span class="cap-left">44 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+              <div class="meter"><div class="meter-fill" style="width:48%"></div></div>
+              <span class="cap-num"><b>38 of 80</b> booked</span>
+              <span class="cap-pct">48%</span>
+              <span class="cap-left">42 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+              <div class="meter"><div class="meter-fill" style="width:85%"></div></div>
+              <span class="cap-num"><b>34 of 40</b> booked</span>
+              <span class="cap-pct">85%</span>
+              <span class="cap-left">6 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+              <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
+              <span class="cap-num"><b>148 of 176</b> booked</span>
+              <span class="cap-pct">84%</span>
+              <span class="cap-left">28 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+              <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
+              <span class="cap-num"><b>22 of 44</b> booked</span>
+              <span class="cap-pct">50%</span>
+              <span class="cap-left">22 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+              <div class="meter"><div class="meter-fill" style="width:75%"></div></div>
+              <span class="cap-num"><b>18 of 24</b> booked</span>
+              <span class="cap-pct">75%</span>
+              <span class="cap-left">6 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+              <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
+              <span class="cap-num"><b>11 of 20</b> booked</span>
+              <span class="cap-pct">55%</span>
+              <span class="cap-left">9 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+              <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
+              <span class="cap-num"><b>9 of 20</b> booked</span>
+              <span class="cap-pct">45%</span>
+              <span class="cap-left">11 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+              <div class="meter"><div class="meter-fill" style="width:35%"></div></div>
+              <span class="cap-num"><b>14 of 40</b> booked</span>
+              <span class="cap-pct">35%</span>
+              <span class="cap-left">26 left</span></div>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+              <div class="meter"><div class="meter-fill" style="width:59%"></div></div>
+              <span class="cap-num"><b>26 of 44</b> booked</span>
+              <span class="cap-pct">59%</span>
+              <span class="cap-left">18 left</span></div>
           </div>
           <div class="leg">
             <div class="leg-open">
-              <div class="cal-appt ty-iv st-arrived leg-spec">
+              <div class="cal-appt ty-iv t-nad st-inchair leg-spec">
                 <span class="cal-appt-sub">NAD+</span>
-                <span class="cal-appt-time">9:00</span>
-                <span class="cal-appt-name">Maya Reyes</span>
+                <span class="cal-appt-time">11:30</span>
+                <span class="cal-appt-name">Elena Petrova</span>
               </div>
               <div class="leg-rule">
-                Every block answers three questions:<br>
-                <b>the colour</b> says what kind of appointment it is &middot;
-                <b>the word</b> says which exact treatment &middot;
-                <b>how dark it is</b> says where the patient stands.
+                Read the stripe, then the fill:<br>
+                <b>the stripe&rsquo;s colour</b> is which treatment &middot;
+                <b>the stripe&rsquo;s shape</b> is what kind &middot;
+                <b>the background</b> is where the patient stands.
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
-                <span class="leg-key-txt"><b>The colour</b><span>what kind</span></span></div>
+                <span class="leg-key-txt"><b>Stripe colour</b><span>which treatment</span></span></div>
               <div class="leg-items">
-                <span class="leg-fam ty-visit"><i></i>Office visit</span>
-                <span class="leg-fam ty-proc"><i></i>Procedure</span>
-                <span class="leg-fam ty-iv"><i></i>IV</span>
-                <span class="leg-fam ty-energ"><i></i>Energetics</span>
-                <span class="leg-fam ty-treat"><i></i>Treatment</span>
+                <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+                <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+                <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+                <span class="leg-fam"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+                <span class="leg-fam"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+                <span class="leg-fam"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+                <span class="leg-fam"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+                <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+                <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+                <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+                <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
+                <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+                <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
+                <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
+                <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+                <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
+                <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">2</span>
-                <span class="leg-key-txt"><b>The word</b><span>which one</span></span></div>
+                <span class="leg-key-txt"><b>Stripe shape</b><span>what kind</span></span></div>
               <div class="leg-items">
-                <span class="ty-visit"><span class="leg-sub">New patient</span></span>
-                <span class="ty-visit"><span class="leg-sub">Follow-up</span></span>
-                <span class="ty-visit"><span class="leg-sub">Telehealth</span></span>
-                <span class="ty-proc"><span class="leg-sub">EBOO</span></span>
-                <span class="ty-proc"><span class="leg-sub">Pellets</span></span>
-                <span class="ty-proc"><span class="leg-sub">PRP</span></span>
-                <span class="ty-iv"><span class="leg-sub">NAD+</span></span>
-                <span class="ty-iv"><span class="leg-sub">Mega C</span></span>
-                <span class="ty-iv"><span class="leg-sub">Foundational Flow</span></span>
-                <span class="ty-energ"><span class="leg-sub">Acupuncture</span></span>
-                <span class="ty-treat"><span class="leg-sub">Erchonia laser</span></span>
-                <span class="leg-sub-more">&mdash; each written in the colour of its own kind</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-visit"></i>Office visit &mdash; solid</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-iv"></i>IV &mdash; dotted</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-proc"></i>Procedure &mdash; dashed</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-energ"></i>Energetics &mdash; twin line</span>
+                <span class="leg-fam"><i class="rail-sw t-block ty-treat"></i>Treatment &mdash; hatched</span>
+                <span class="leg-sub-more">&mdash; the shape survives a photocopier, so the code still reads in black and white</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">3</span>
-                <span class="leg-key-txt"><b>How dark</b><span>where they stand</span></span></div>
+                <span class="leg-key-txt"><b>Background</b><span>where they stand</span></span></div>
               <div class="leg-items">
-                <span class="leg-st"><i class="leg-sw" style="background:#fff;border:1px dashed #9AB0C6"></i>Booked</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-18)"></i>Confirmed</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-38);border:2px solid var(--ty-iv)"></i>Here</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv)"></i>In progress</span>
-                <span class="leg-st"><i class="leg-sw" style="background:var(--ty-iv-08)"></i>Done</span>
-                <span class="leg-st"><i class="leg-sw" style="background:repeating-linear-gradient(135deg,#fff 0 4px,#E8E8E8 4px 8px);border:1.5px dashed #1A1A1A"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
+                <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
+                <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
+                <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
+                <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
+                <span class="leg-st"><i class="st-sw st-locked"></i><span class="lockmark"></span>Locked</span>
+                <span class="leg-sub-more">&mdash; and the three ways it ends, all striped:</span>
+                <span class="leg-st"><i class="st-sw st-done"></i>Done</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
               </div>
             </div>
 
@@ -1121,6 +1742,601 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- ============================================================ -->
+  <section class="screen" id="l-08-flags" data-title="Flag setup">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/flags</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Flags</div>
+            <div class="page-sub">What a flag means, who it is for, and how loudly it says it</div>
+          </div>
+          <div class="app-user"><button class="btn btn-primary" data-row-add>Add a flag type</button></div>
+        </div>
+
+        <div class="callout">
+          A flag has <strong>a category</strong> &mdash; who cares about it &mdash; and
+          <strong>a severity</strong> &mdash; how loud it should be. They are separate on purpose:
+          an admin flag can be urgent, and a medical one can be a footnote. Only high severity
+          rings the block on the calendar.
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:14px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Flag</th><th scope="col">Category</th><th scope="col">Severity</th>
+              <th scope="col">Shows on</th><th scope="col">Who may set it</th><th scope="col"></th>
+            </tr></thead>
+            <tbody id="l-flags-body">
+              <tr>
+                <td><span class="fl sev-high">&#9650;</span> Allergy alert</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-high">&#9673;</span> Pregnant</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Calendar, chart, orders</td>
+                <td>Provider, MA</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-high">&#10010;</span> Urgent medical alert</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Everywhere the patient appears</td>
+                <td>Provider only</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-med">&#9660;</span> Deficiency</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Medium</td>
+                <td>Calendar, chart</td>
+                <td>Provider, MA, Nurse</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-high">$</span> Prior auth expiring</td>
+                <td><span class="fl-cat">Billing</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Calendar, booking, claim</td>
+                <td>Billing, Front desk</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-med">$</span> Outstanding balance</td>
+                <td><span class="fl-cat">Billing</span></td>
+                <td>Medium</td>
+                <td>Calendar, check-in</td>
+                <td>Billing, Front desk</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-low">&#10022;</span> Interpreter needed</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>Low</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, PCC</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-low">&#10022;</span> Intake forms missing</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>Low</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, PCC</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Categories</div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Medical</div>
+            <div class="field-help">Anything that changes what is safe to give. Read by the calendar,
+              the chart, the order screen and the infusion bay.</div>
+            <div class="prov"><span>4 flag types &middot; owned by Dr. Drannikov</span></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Billing</div>
+            <div class="field-help">Anything that changes what the visit costs or whether it will be
+              paid. Read by the calendar, check-in and the claim.</div>
+            <div class="prov"><span>2 flag types &middot; owned by Karina</span></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Admin</div>
+            <div class="field-help">Anything the front desk needs before the patient walks in.
+              Never a clinical signal.</div>
+            <div class="prov"><span>2 flag types &middot; owned by Shibani</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-08-flags-edit" data-title="Edit a flag">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/flags/allergy</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Allergy alert</div>
+            <div class="page-sub">Medical &middot; high severity &middot; used on 34 patients</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="l-08-flags">Back to flags</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved. Every screen that shows this flag picks up the change.', 'ok')">Save the flag</button>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div class="card">
+            <div class="card-title">What it says</div>
+            <div class="field"><label class="field-lbl" for="l-fe-name">Name</label>
+              <input class="field-input" id="l-fe-name" value="Allergy alert"></div>
+            <div class="field"><label class="field-lbl" for="l-fe-text">Wording on the appointment</label>
+              <input class="field-input" id="l-fe-text" value="Allergy — sulfa, documented reaction"></div>
+            <div class="field"><label class="field-lbl" for="l-fe-cat">Category</label>
+              <select class="field-select" id="l-fe-cat">
+                <option selected>Medical</option><option>Billing</option><option>Admin</option>
+                <option>Add a new category&hellip;</option>
+              </select>
+              <div class="field-help">The category decides which queues the flag appears in.</div>
+            </div>
+            <div class="field"><label class="field-lbl" for="l-fe-sev">Severity</label>
+              <select class="field-select" id="l-fe-sev">
+                <option selected>High &mdash; rings the block on the calendar</option>
+                <option>Medium &mdash; icon only</option>
+                <option>Low &mdash; icon only, greyed</option>
+              </select>
+            </div>
+            <div class="field"><label class="field-lbl" for="l-fe-icon">Icon</label>
+              <div class="chip-row">
+                <button class="filter-chip active" type="button">&#9650;</button>
+                <button class="filter-chip" type="button">&#9673;</button>
+                <button class="filter-chip" type="button">&#10010;</button>
+                <button class="filter-chip" type="button">&#9660;</button>
+                <button class="filter-chip" type="button">$</button>
+                <button class="filter-chip" type="button">&#10022;</button>
+              </div>
+              <input type="hidden" id="l-fe-icon" value="triangle">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">How it will look</div>
+            <div class="cal-appt ty-iv t-nad st-confirmed has-high leg-spec" style="margin-bottom:14px">
+              <span class="fl-row"><span class="fl sev-high">&#9650;</span></span>
+              <span class="cal-appt-sub">NAD+</span>
+              <span class="cal-appt-time">11:30</span>
+              <span class="cal-appt-name">Ben Okonkwo</span>
+            </div>
+            <div class="fl-line">
+              <span class="fl sev-high">&#9650;</span>
+              <span><b>Allergy &mdash; sulfa, documented reaction</b>
+                <span class="fl-cat">Medical</span> <span class="fl-cat">high severity</span></span>
+            </div>
+            <div class="seg-divider">Who may set it</div>
+            <div class="chip-row">
+              <button class="filter-chip multi active" type="button">Provider</button>
+              <button class="filter-chip multi active" type="button">Extender</button>
+              <button class="filter-chip multi active" type="button">MA</button>
+              <button class="filter-chip multi active" type="button">Nurse</button>
+              <button class="filter-chip multi" type="button">Front desk</button>
+              <button class="filter-chip multi" type="button">Billing</button>
+            </div>
+            <div class="prov"><span><strong>Last changed</strong> Dr. Drannikov &middot; 12 June 2026</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-09-insights" data-title="Patterns">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/patterns</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Patterns</div>
+            <div class="page-sub">What the schedule has learned about how patients actually turn up</div>
+          </div>
+          <div class="app-user">
+            <select class="field-select" id="l-ins-ty" onchange="lInsFilter(this.value)" aria-label="Filter by appointment type">
+              <option value="all">All appointment types</option>
+              <option value="ty-iv">IV</option>
+              <option value="ty-visit">Office visit</option>
+              <option value="ty-proc">Procedure</option>
+              <option value="ty-energ">Energetics</option>
+              <option value="ty-treat">Treatment</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-bottom:18px">
+          <div class="card stat-card"><div class="stat-num">18%</div>
+            <div class="stat-lbl">Run past their booked end</div><div class="stat-sub">IV, last 90 days</div></div>
+          <div class="card stat-card"><div class="stat-num">6.4%</div>
+            <div class="stat-lbl">No-show rate</div><div class="stat-sub">Worst before 10 AM</div></div>
+          <div class="card stat-card"><div class="stat-num">11</div>
+            <div class="stat-lbl">Patients with a pattern</div><div class="stat-sub">Reviewed by a human</div></div>
+          <div class="card stat-card"><div class="stat-num">2 h 41</div>
+            <div class="stat-lbl">Chair time recovered</div><div class="stat-sub">This month, from acting on these</div></div>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>These are suggestions, not decisions.</strong> Every pattern below names the runs
+          it was drawn from and the person who reviewed it. Nothing here reschedules anybody on its own.
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:14px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Patient</th><th scope="col">Appointment type</th><th scope="col">Pattern</th>
+              <th scope="col">Drawn from</th><th scope="col">Suggestion</th><th scope="col">State</th>
+            </tr></thead>
+            <tbody id="l-ins-body">
+              <tr data-ty="ty-iv"><td>Maya Reyes</td><td><span class="type-mark">NAD</span> IV &middot; NAD+</td>
+                <td>Runs 20 min long, every time</td><td>Last 4 runs &middot; avg 3 h 20 against 3 h</td>
+                <td>Book her last in the chair</td><td><span class="ai-state suggested">Suggested</span></td></tr>
+              <tr data-ty="ty-iv"><td>Walter Hsu</td><td><span class="type-mark">IVC</span> IV &middot; Mega C</td>
+                <td>Arrives 12&ndash;18 min late</td><td>6 of last 8 visits</td>
+                <td>Confirm the evening before</td><td><span class="ai-state accepted">Accepted by Yazmin</span></td></tr>
+              <tr data-ty="ty-visit"><td>Victor Reyes</td><td><span class="type-mark">FU</span> Office visit</td>
+                <td>No-shows before 10 AM</td><td>3 no-shows in 90 days, all 8&ndash;9:30</td>
+                <td>Offer afternoons only</td><td><span class="ai-state suggested">Suggested</span></td></tr>
+              <tr data-ty="ty-visit"><td>Rosa Iglesias</td><td><span class="type-mark">FU</span> Office visit</td>
+                <td>Cancels Monday bookings</td><td>4 of 5 Monday slots cancelled inside 24 h</td>
+                <td>Try mid-week</td><td><span class="ai-state suggested">Suggested</span></td></tr>
+              <tr data-ty="ty-proc"><td>Priya Natarajan</td><td><span class="type-mark">EBO</span> Procedure &middot; EBOO</td>
+                <td>Needs 15 min longer to settle</td><td>Last 3 circuits</td>
+                <td>Book 2 h 15, not 2 h</td><td><span class="ai-state accepted">Accepted by Nick</span></td></tr>
+              <tr data-ty="ty-iv"><td>Daniel Okafor</td><td><span class="type-mark">FLO</span> IV &middot; Foundational Flow</td>
+                <td>Always finishes early</td><td>Last 5 runs &middot; avg 24 min against 30</td>
+                <td>The slot after him is safe to tighten</td><td><span class="ai-state rejected">Rejected &mdash; Dr. Drannikov</span></td></tr>
+              <tr data-ty="ty-energ"><td>Liam Fitzgerald</td><td><span class="type-mark">BEM</span> Energetics &middot; BEMER</td>
+                <td>Reschedules within the same week</td><td>3 of last 4</td>
+                <td>Offer the standing Thursday slot</td><td><span class="ai-state suggested">Suggested</span></td></tr>
+              <tr data-ty="ty-treat"><td>Hana Sato</td><td><span class="type-mark">NMT</span> Treatment &middot; Neuromuscular</td>
+                <td>Books late, arrives early</td><td>Last 6 visits &middot; avg 11 min early</td>
+                <td>She can take an earlier slot when one frees</td><td><span class="ai-state suggested">Suggested</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">Patterns across the whole day, not one patient</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Tuesday 8&ndash;9:30 loses the most</div>
+            <div class="r-hbar"><span>Tue 8:00&ndash;9:30</span><div class="meter"><div class="meter-fill" style="width:92%"></div></div><span class="meter-val">11% no-show</span></div>
+            <div class="r-hbar"><span>Mon 8:00&ndash;9:30</span><div class="meter"><div class="meter-fill" style="width:71%"></div></div><span class="meter-val">8.4%</span></div>
+            <div class="r-hbar"><span>All other slots</span><div class="meter"><div class="meter-fill" style="width:34%"></div></div><span class="meter-val">4.1%</span></div>
+            <div class="field-help" style="margin-top:8px">Early Tuesday is the clinic's weakest slot.
+              A reminder call the night before closes about half of it.</div>
+            <button class="btn btn-sm btn-primary" style="margin-top:10px" onclick="HCOS.toast('Draft rule opened in the rules builder — nothing is live until you save it.', 'ok')" >Draft a booking rule from this</button>
+          </div>
+          <div class="card">
+            <div class="card-title">IV 3 is the chair that idles</div>
+            <div class="r-hbar"><span>IV 1</span><div class="meter"><div class="meter-fill" style="width:88%"></div></div><span class="meter-val">88% full</span></div>
+            <div class="r-hbar"><span>IV 2</span><div class="meter"><div class="meter-fill" style="width:81%"></div></div><span class="meter-val">81%</span></div>
+            <div class="r-hbar"><span>IV 3</span><div class="meter"><div class="meter-fill" style="width:54%"></div></div><span class="meter-val">54%</span></div>
+            <div class="r-hbar"><span>IV 4</span><div class="meter"><div class="meter-fill" style="width:47%"></div></div><span class="meter-val">47%</span></div>
+            <div class="field-help" style="margin-top:8px">Front desk fills 1 and 2 first out of habit.
+              The waitlist could take IV 3 and 4 without adding a single hour.</div>
+            <button class="btn btn-sm" style="margin-top:10px" data-activate="l-10-waitlist">Open the waitlist</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-10-waitlist" data-title="Waitlist">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/waitlist</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Waitlist</div>
+            <div class="page-sub">Who wants a sooner slot, and what would suit them</div>
+          </div>
+          <div class="app-user"><button class="btn btn-primary" data-open-modal="#l-wl-modal">Add to the waitlist</button></div>
+        </div>
+
+        <div class="callout callout-ok">
+          <strong>Grace Lindqvist cancelled her 10:00 with Brooke.</strong>
+          Two people on the waitlist want that window &mdash; the first is Owen Delacroix, who asked for
+          any weekday morning.
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Text sent to Owen Delacroix. The slot is held for 30 minutes.', 'ok')">Offer it to Owen</button>
+            <button class="btn btn-sm" onclick="HCOS.toast('All four matching patients were texted. First to accept takes it.', 'ok')">Offer to everyone who matches</button>
+          </div>
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:14px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Patient</th><th scope="col">Wants</th><th scope="col">Windows that suit them</th>
+              <th scope="col">Waiting since</th><th scope="col">Currently booked</th><th scope="col"></th>
+            </tr></thead>
+            <tbody id="l-wl-body">
+              <tr>
+                <td>Owen Delacroix<div class="field-help">(949) 555-0977</div></td>
+                <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Office visit &middot; Follow-up</td>
+                <td>Any weekday 8:00&ndash;12:00</td>
+                <td>3 days</td>
+                <td>Aug 4, 2:00 PM</td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Owen has 30 minutes to accept before it goes to the next match.', 'ok')">Offer a slot</button></td>
+              </tr>
+              <tr>
+                <td>Amara Diallo<div class="field-help">(310) 555-1543</div></td>
+                <td><span class="rail-sw t-nad ty-iv" style="vertical-align:-4px"></span> IV &middot; NAD+</td>
+                <td>Tue or Thu, afternoons</td>
+                <td>6 days</td>
+                <td>Aug 11, 1:00 PM</td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Amara has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              </tr>
+              <tr>
+                <td>Samir Haddad<div class="field-help">(949) 555-1876</div></td>
+                <td><span class="rail-sw t-eboo ty-proc" style="vertical-align:-4px"></span> Procedure &middot; EBOO</td>
+                <td>Any morning &mdash; he travels Fridays</td>
+                <td>11 days</td>
+                <td>Not booked</td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Samir has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              </tr>
+              <tr>
+                <td>Nina Kowalski<div class="field-help">(949) 555-1765</div></td>
+                <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Office visit &middot; Follow-up</td>
+                <td>Mon&ndash;Wed 9:00&ndash;11:00</td>
+                <td>2 days</td>
+                <td>Aug 6, 12:30 PM</td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Nina has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              </tr>
+              <tr>
+                <td>Yuki Tanaka<div class="field-help">(714) 555-1088</div></td>
+                <td><span class="rail-sw t-acu ty-treat" style="vertical-align:-4px"></span> Treatment &middot; Acupuncture</td>
+                <td>Any time &mdash; will take a same-day call</td>
+                <td>1 day</td>
+                <td>Aug 19, 3:30 PM</td>
+                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Yuki has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="seg-divider">How the alert works</div>
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">A slot frees</div>
+            <div class="field-help">Somebody cancels, no-shows, or a provider block is lifted.
+              The schedule notices the moment it happens &mdash; nobody has to remember.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">The list is matched</div>
+            <div class="field-help">Type and subtype must match. Then the desired windows are checked,
+              then how long they have waited. Only real matches are offered.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">The slot is held, briefly</div>
+            <div class="field-help">Whoever is offered gets 30 minutes before it passes to the next match.
+              The slot stays visibly held on the calendar meanwhile.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-11-blocks" data-title="Blocked time">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/blocks</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Blocked time</div>
+            <div class="page-sub">Lunch, meetings, and anything else the calendar must not book over</div>
+          </div>
+          <div class="app-user"><button class="btn btn-primary" data-open-modal="#l-blk-modal">Block a timeframe</button></div>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Only a manager may block a slot.</strong> You are signed in as Shibani (Office
+          Manager), so you can. Front desk and clinical staff see these blocks and can ask for one,
+          but cannot create or lift them.
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:14px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">What</th><th scope="col">When</th><th scope="col">Repeats</th>
+              <th scope="col">Applies to</th><th scope="col">Set by</th><th scope="col"></th>
+            </tr></thead>
+            <tbody id="l-blk-body">
+              <tr>
+                <td><strong>Lunch</strong></td>
+                <td>12:00 &ndash; 12:30</td>
+                <td>Every weekday</td>
+                <td>Every resource</td>
+                <td>Shibani &middot; 4 Mar 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Clinical huddle</strong></td>
+                <td>8:00 &ndash; 8:30</td>
+                <td>Every Monday</td>
+                <td>Providers only</td>
+                <td>Shibani &middot; 4 Mar 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Chair deep clean</strong></td>
+                <td>4:30 &ndash; 5:00</td>
+                <td>Every Friday</td>
+                <td>IV 1&ndash;4</td>
+                <td>Nick &middot; 19 May 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Dr. Drannikov &mdash; conference</strong></td>
+                <td>All day</td>
+                <td>Does not repeat &middot; 14&ndash;15 Sep 2026</td>
+                <td>Dr. Drannikov</td>
+                <td>Shibani &middot; 22 Jul 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Staff meeting</strong></td>
+                <td>4:00 &ndash; 5:00</td>
+                <td>First Wednesday of the month</td>
+                <td>Every resource</td>
+                <td>Shibani &middot; 4 Mar 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-11-blocks-edit" data-title="Edit a block">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/blocks/lunch</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Lunch</div>
+            <div class="page-sub">Repeats every weekday &middot; every resource &middot; 128 future occurrences</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="l-11-blocks">Back to blocks</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved. 128 future occurrences updated; the 47 in the past are left alone.', 'ok')">Save the block</button>
+          </div>
+        </div>
+
+        <div class="grid-sidebar">
+          <div class="card">
+            <div class="card-title">When</div>
+            <div class="field"><label class="field-lbl" for="l-be-name">What to call it</label>
+              <input class="field-input" id="l-be-name" value="Lunch"></div>
+            <div class="grid-2">
+              <div class="field"><label class="field-lbl" for="l-be-from">From</label>
+                <select class="field-select" id="l-be-from"><option>11:30 AM</option><option selected>12:00 PM</option><option>12:30 PM</option></select></div>
+              <div class="field"><label class="field-lbl" for="l-be-to">To</label>
+                <select class="field-select" id="l-be-to"><option>12:30 PM</option><option selected>12:30 PM</option><option>1:00 PM</option></select></div>
+            </div>
+
+            <div class="seg-divider">Repeat</div>
+            <div class="field"><label class="field-lbl" for="l-be-rep">How often</label>
+              <select class="field-select" id="l-be-rep" onchange="lBlkRepeat(this.value)">
+                <option value="none">Does not repeat</option>
+                <option value="daily">Every day</option>
+                <option value="weekday" selected>Every weekday (Mon&ndash;Fri)</option>
+                <option value="weekly">Weekly on&hellip;</option>
+                <option value="monthly">Monthly on the first Wednesday</option>
+                <option value="custom">Custom&hellip;</option>
+              </select>
+            </div>
+            <div class="field" id="l-be-days" style="display:none">
+              <span class="field-lbl">On these days</span>
+              <div class="chip-row">
+                <button class="filter-chip multi active" type="button">Mon</button>
+                <button class="filter-chip multi active" type="button">Tue</button>
+                <button class="filter-chip multi active" type="button">Wed</button>
+                <button class="filter-chip multi active" type="button">Thu</button>
+                <button class="filter-chip multi active" type="button">Fri</button>
+                <button class="filter-chip multi" type="button">Sat</button>
+                <button class="filter-chip multi" type="button">Sun</button>
+              </div>
+            </div>
+            <div class="field"><label class="field-lbl" for="l-be-end">Until</label>
+              <select class="field-select" id="l-be-end">
+                <option selected>Forever</option><option>A date&hellip;</option><option>After a number of times&hellip;</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Who it blocks</div>
+            <div class="chip-row" style="margin-bottom:12px">
+              <button class="filter-chip multi active" type="button">Every resource</button>
+              <button class="filter-chip multi" type="button">Dr. Drannikov</button>
+              <button class="filter-chip multi" type="button">Dr. Bakman</button>
+              <button class="filter-chip multi" type="button">Brooke</button>
+              <button class="filter-chip multi" type="button">IV 1&ndash;4</button>
+              <button class="filter-chip multi" type="button">Room 1&ndash;2</button>
+            </div>
+
+            <div class="seg-divider">Strength</div>
+            <div class="field"><label class="field-lbl" for="l-be-str">If somebody tries to book over it</label>
+              <select class="field-select" id="l-be-str">
+                <option selected>Block &mdash; refuse the booking</option>
+                <option>Warn &mdash; allow with a reason, logged</option>
+              </select>
+            </div>
+
+            <div class="seg-divider">Who may change this</div>
+            <div class="field-help">Manager level and above. Front desk sees the block and may request
+              a change; the request lands in Shibani's queue.</div>
+            <div class="prov"><span><strong>Created</strong> Shibani &middot; 4 March 2026 &middot;
+              <strong>last changed</strong> Shibani &middot; 12 June 2026</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-12-list" data-title="List view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule?view=list</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Tuesday, July 21</div>
+            <div class="page-sub">The same day, as a list &mdash; for printing, for calling round, for the morning huddle</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="l-01-day">Back to the day</button>
+            <button class="btn" onclick="HCOS.toast('Sent to the printer as one page per resource.')">Print</button>
+          </div>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Time</th><th scope="col">Patient</th><th scope="col">Treatment</th>
+              <th scope="col">Resource</th><th scope="col">Status</th><th scope="col">Stage</th>
+              <th scope="col">Insurance</th><th scope="col">Owes</th><th scope="col">Flags</th>
+            </tr></thead>
+            <tbody id="l-list-body">
+              <tr><td colspan="9" class="field-help">Building the list from the day board&hellip;</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <section class="screen" id="l-03-book" data-title="Book appointment">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
@@ -1311,6 +2527,12 @@
 
         <div class="card" style="margin-top:16px">
           <div class="card-title">Checks before this booking is taken</div>
+          <div class="callout callout-warn" id="l-bk-tentative" style="display:none">
+            <strong>This will book as TENTATIVE.</strong>
+            The block carries a dotted amber edge and the word tentative on the calendar,
+            and it becomes a normal appointment the moment the prescription is signed &mdash;
+            nobody has to remember to come back and change it.
+          </div>
           <div class="callout" id="l-bk-verdict"><span>&nbsp;</span></div>
           <ul class="check-list" id="l-bk-checks"></ul>
           <div class="prov">
@@ -1473,6 +2695,37 @@
 </div>
 
 <!-- Shared appointment drawer — every calendar block opens its own appointment -->
+<div class="drawer-overlay" data-close-drawer="#l-block-drawer"></div>
+<aside class="drawer" id="l-block-drawer">
+  <div class="drawer-head">
+    <div>
+      <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">Lunch</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:2px">Blocked time &middot; 12:00 &ndash; 12:30 &middot; every weekday</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#l-block-drawer">&times;</button>
+  </div>
+  <div class="drawer-body">
+    <div class="callout callout-warn">
+      <strong>This is a manager block.</strong> You are signed in as Dr. Drannikov (Provider),
+      so you can see it and ask for it to move, but you cannot lift it yourself.
+    </div>
+    <dl class="kv">
+      <dt>What</dt><dd>Lunch</dd>
+      <dt>When</dt><dd>12:00 &ndash; 12:30</dd>
+      <dt>Repeats</dt><dd>Every weekday, forever</dd>
+      <dt>Applies to</dt><dd>Every resource &mdash; providers, IV 1&ndash;4 and both rooms</dd>
+      <dt>Strength</dt><dd>Blocks &mdash; nothing can be booked into it</dd>
+      <dt>Set by</dt><dd>Shibani &middot; Office Manager &middot; 4 March 2026</dd>
+    </dl>
+    <div class="prov"><span><strong>From</strong> the recurring block <code>BLK-004</code>
+      &middot; 128 future occurrences</span></div>
+    <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="HCOS.toast('Request sent to Shibani. She decides whether this one occurrence moves.', 'ok')">Ask for this one to move</button>
+      <button class="btn" data-close-drawer="#l-block-drawer" onclick="HCOS.activate('l-11-blocks')">See all blocked time</button>
+    </div>
+  </div>
+</aside>
+
 <div class="drawer-overlay" data-close-drawer="#l-appt-drawer"></div>
 <aside class="drawer" id="l-appt-drawer">
   <div class="drawer-head">
@@ -1546,9 +2799,98 @@
       <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Booked. It is on the day view.', 'ok')">Book appointment</button>
     </div>
   </div>
+
+  <div class="modal-overlay" id="l-wl-modal" data-close-modal="#l-wl-modal"></div>
+  <div class="modal" data-modal="l-wl-modal">
+    <div class="modal-head">
+      <div class="modal-title">Add to the waitlist</div>
+      <button class="modal-x" data-close-modal="#l-wl-modal" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-lbl" for="l-wl-pt">Patient</label>
+        <input class="field-input" id="l-wl-pt" placeholder="Start typing a name&hellip;"></div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-wl-ty">Type</label>
+          <select class="field-select" id="l-wl-ty">
+            <option>Office visit</option><option selected>IV</option><option>Procedure</option>
+            <option>Energetics</option><option>Treatment</option></select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-sub">Subtype</label>
+          <select class="field-select" id="l-wl-sub">
+            <option selected>NAD+</option><option>Mega C</option><option>Foundational Flow</option>
+            <option>Glutathione</option></select></div>
+      </div>
+      <div class="field">
+        <span class="field-lbl">Days that suit them</span>
+        <div class="chip-row">
+          <button class="filter-chip multi active" type="button">Mon</button>
+          <button class="filter-chip multi active" type="button">Tue</button>
+          <button class="filter-chip multi" type="button">Wed</button>
+          <button class="filter-chip multi active" type="button">Thu</button>
+          <button class="filter-chip multi" type="button">Fri</button>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-wl-from">Earliest</label>
+          <select class="field-select" id="l-wl-from"><option>8:00 AM</option><option selected>12:00 PM</option></select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-to">Latest</label>
+          <select class="field-select" id="l-wl-to"><option selected>5:00 PM</option><option>3:00 PM</option></select></div>
+      </div>
+      <div class="field"><label class="field-lbl" for="l-wl-how">How to reach them when a slot frees</label>
+        <select class="field-select" id="l-wl-how">
+          <option selected>Text, then call if no answer in 15 minutes</option>
+          <option>Text only</option><option>Call only</option></select></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal="#l-wl-modal">Cancel</button>
+      <button class="btn btn-primary" data-close-modal="#l-wl-modal" onclick="lWlAdd()">Add to the waitlist</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="l-blk-modal" data-close-modal="#l-blk-modal"></div>
+  <div class="modal" data-modal="l-blk-modal">
+    <div class="modal-head">
+      <div class="modal-title">Block a timeframe</div>
+      <button class="modal-x" data-close-modal="#l-blk-modal" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-lbl" for="l-bm-what">What is it</label>
+        <input class="field-input" id="l-bm-what" placeholder="Lunch, staff meeting, deep clean&hellip;"></div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-bm-from">From</label>
+          <select class="field-select" id="l-bm-from"><option>12:00 PM</option><option>4:00 PM</option></select></div>
+        <div class="field"><label class="field-lbl" for="l-bm-to">To</label>
+          <select class="field-select" id="l-bm-to"><option>12:30 PM</option><option>5:00 PM</option></select></div>
+      </div>
+      <div class="field"><label class="field-lbl" for="l-bm-rep">Repeats</label>
+        <select class="field-select" id="l-bm-rep">
+          <option>Does not repeat</option><option selected>Every weekday (Mon&ndash;Fri)</option>
+          <option>Every day</option><option>Weekly on Tuesday</option>
+          <option>First Wednesday of the month</option></select>
+        <div class="field-help">Same vocabulary as a calendar app &mdash; nobody should have to learn ours.</div>
+      </div>
+      <div class="field">
+        <span class="field-lbl">Applies to</span>
+        <div class="chip-row">
+          <button class="filter-chip multi active" type="button">Every resource</button>
+          <button class="filter-chip multi" type="button">Providers only</button>
+          <button class="filter-chip multi" type="button">IV 1&ndash;4</button>
+          <button class="filter-chip multi" type="button">Rooms</button>
+        </div>
+      </div>
+      <div class="callout callout-warn" style="margin-bottom:0">
+        Blocking is a manager action. It is recorded with your name, and everyone
+        who had a booking inside the window is listed before it is applied.
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal="#l-blk-modal">Cancel</button>
+      <button class="btn btn-primary" data-close-modal="#l-blk-modal" onclick="HCOS.toast('Blocked. Nothing can be booked into that window until a manager lifts it.', 'ok')">Block the time</button>
+    </div>
+  </div>
+
 </div>
 
-<script src="assets/hcos.js?v=53"></script>
+<script src="assets/hcos.js?v=54"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -1571,7 +2913,7 @@
     if (step !== 0) HCOS.toast(d.label + (d.n === 2 ? ' — today' : ''), 'ok');
   }
 
-  var lSel = { types: [], subs: [] };   /* empty = everything */
+  var lSel = { types: [], subs: [], sts: [] };   /* empty = everything */
 
   function lMatchEl(el) {
     var tyOk = !lSel.types.length || lSel.types.some(function (t) { return el.classList.contains(t); });
@@ -1579,7 +2921,8 @@
       return el.classList.contains(k) || (el.getAttribute('data-sub') === k) ||
              !!el.querySelector('.tm-' + k.replace('t-', ''));
     });
-    return tyOk && subOk;
+    var stOk = !lSel.sts.length || lSel.sts.some(function (s) { return el.classList.contains(s); });
+    return tyOk && subOk && stOk;
   }
 
   function lChipsRefresh() {
@@ -1679,15 +3022,20 @@
     }
 
     var shown = 0, total = 0;
-    document.querySelectorAll('.cal-appt').forEach(function (a) {
-      total++;
+    var showCx = document.querySelector('.cal.show-cx');
+    document.querySelectorAll('.daycal-col .cal-appt').forEach(function (a) {
+      var blocked = a.hasAttribute('data-blocked');
       var days = (a.getAttribute('data-days') || '2').split(',');
-      var dayOk = days.indexOf(String(L_DAYS[lCur].n)) !== -1;
+      var dayOk = blocked || days.indexOf(String(L_DAYS[lCur].n)) !== -1;
       var colEl = a.closest('[data-col]');
       var colOk = !colEl || wantCols.indexOf(colEl.getAttribute('data-col')) !== -1;
-      var treatOk = lMatchEl(a);
-      a.style.display = (colOk && treatOk && dayOk) ? '' : 'none';
-      if (colOk && treatOk && dayOk) shown++;
+      var treatOk = blocked || lMatchEl(a);
+      /* cancelled leaves the board unless the toggle asks for it back */
+      var cxOk = !a.classList.contains('st-cancelled') || !!showCx;
+      var on = colOk && treatOk && dayOk && cxOk;
+      a.style.display = on ? '' : 'none';
+      /* blocked time is not an appointment and never counts as one */
+      if (!blocked) { total++; if (on) shown++; }
     });
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
       h.style.display = wantCols.indexOf('dr') !== -1 && !lSel.types.length && !lSel.subs.length ? '' : 'none';
@@ -1706,7 +3054,10 @@
     if (wc) wc.textContent = wShown === wTotal ? 'Showing all ' + wTotal + ' this week'
       : 'Showing ' + wShown + ' of ' + wTotal + ' this week';
 
-    var MAP = { NAD: 't-nad', IVC: 't-ivc', FLO: 't-flow', CON: 't-consult', EBO: 't-eboo', TEL: 't-tele', LAB: 't-lab', ACU: 'acu', PEL: 'pel', LAS: 'las' };
+    var MAP = { NAD: 't-nad', IVC: 't-ivc', FLO: 't-flow', GSH: 't-glut', CON: 't-newpt',
+                FU: 't-fu', EBO: 't-eboo', TEL: 't-tele', LAB: 't-lab', PRP: 't-prp',
+                ACU: 't-acu', PEL: 't-pel', LAS: 't-las', BEM: 't-bem', LYM: 't-lym',
+                CHI: 't-chi', NMT: 't-nmt' };
     var mDays = 0;
     document.querySelectorAll('.monthcal-day').forEach(function (d) {
       var pips = d.querySelectorAll('.monthcal-pip'), any = false;
@@ -1877,6 +3228,8 @@
       ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']}
   };
 
+  var L_CUR = null;
+
   function lNextStep(a) {
     if (a.st === 'cancelled' || a.st === 'done') return null;
     var map = { scheduled: 'Confirmed', confirmed: 'Arrived', arrived: a.room, inroom: 'Done', inchair: 'Done' };
@@ -1896,9 +3249,40 @@
     return h + '</div>';
   }
 
+  /* Every block on the board opens. The curated entries in L_APPT carry the
+     deep detail; everything else is built from the block's own attributes, so
+     a day with eighty-five appointments has no dead ones. */
+  function lFromBlock(id) {
+    var b = document.querySelector('.cal-appt[data-appt="' + id + '"]');
+    if (!b) return null;
+    var stCls = (b.className.match(/st-([a-z]+)/) || [])[1] || 'scheduled';
+    var col = b.closest('[data-col]');
+    var head = col ? document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') : null;
+    var tx = b.getAttribute('data-tx') || '';
+    var desc = (b.querySelector('.cal-appt-type') || {}).textContent || '';
+    return {
+      n: b.getAttribute('data-pt') || '', ag: '',
+      cv: b.getAttribute('data-ins') || 'Not on file',
+      mk: tx.slice(0, 3).toUpperCase(), mkc: '',
+      tx: tx + (desc ? ' · ' + desc : ''),
+      w: 'Today · ' + (b.getAttribute('data-when') || ''),
+      r: head ? head.textContent.trim().replace(/\s+/g, ' ') : '',
+      st: stCls === 'checkout' ? 'arrived' : stCls,
+      room: (col && /^c\d/.test(col.getAttribute('data-col') || '')) ? 'In chair' : 'In room',
+      a: '', rd: 'Standard · carried from the signed order',
+      pr: tx, prn: b.getAttribute('data-note') || 'Booked from the day view.',
+      p: 'appointment <code>' + id + '</code> · day view, ' + (b.getAttribute('data-when') || ''),
+      stage: b.getAttribute('data-stage') || '', pay: b.getAttribute('data-pay') || '',
+      phone: b.getAttribute('data-phone') || '',
+      flags: (b.getAttribute('data-flags') || '').split('|').filter(Boolean),
+      ch: ['Open patient record', 'patients.html#/pt-01-list']
+    };
+  }
+
   function lOpenAppt(id) {
-    var a = L_APPT[id];
+    var a = L_APPT[id] || lFromBlock(id);
     if (!a) return;
+    L_CUR = id;
     document.getElementById('l-dr-name').textContent = a.n;
     document.getElementById('l-dr-sub').innerHTML =
       '<span class="type-mark ' + a.mkc + '">' + a.mk + '</span>' + a.tx + ' · ' + a.r;
@@ -1922,6 +3306,34 @@
        + '<div class="field-help" style="margin-top:4px">' + a.prn + '</div>'
        + '<div class="prov"><span><strong>From</strong> ' + a.p + '</span></div>';
 
+    /* the flags, editable right here — this is the abstract the desk reads */
+    h += '<div class="seg-divider">Flags</div><div id="l-dr-flags">' + lFlagsHtml(a) + '</div>'
+       + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+       + '<button class="btn btn-sm" onclick="lAddFlag()">Add a flag</button>'
+       + '<a class="btn btn-sm" href="#/l-08-flags" onclick="lGo(\'l-08-flags\')">Manage flag types</a></div>';
+
+    /* what they owe, worked out from the coverage, not typed by the desk */
+    if (a.pay || a.stage) {
+      h += '<div class="seg-divider">At the desk</div><dl class="kv">'
+         + (a.stage ? '<dt>Care plan stage</dt><dd>' + a.stage + '</dd>' : '')
+         + (a.phone ? '<dt>Phone</dt><dd>' + a.phone + '</dd>' : '')
+         + (a.pay ? '<dt>Patient owes</dt><dd><strong>' + a.pay + '</strong></dd>' : '')
+         + '</dl>'
+         + '<div class="field-help">Worked out from the coverage on file at check-in. '
+         + 'Nobody types this number.</div>'
+         + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+         + '<button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Charged ' + (a.pay || '') + ' to the card on file. Posted to the claim.\', \'ok\')">Charge now</button>'
+         + '<button class="btn btn-sm" onclick="HCOS.toast(\'Opens the card capture form — no card details live in the wireframe.\')">New payment method</button></div>';
+    }
+
+    /* one place to write down what just happened, without opening the chart */
+    h += '<div class="seg-divider">General note</div>'
+       + '<textarea class="field-textarea" rows="3" id="l-dr-note" '
+       + 'placeholder="Anything the next person needs to know — it lands on the patient profile." '
+       + 'aria-label="General note"></textarea>'
+       + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+       + '<button class="btn btn-sm btn-primary" onclick="lSaveNote()">Save to the profile</button></div>';
+
     var acts = [], step = lNextStep(a);
     if (step) acts.push('<button class="btn btn-primary" onclick="lMark(\'' + id + '\')">Mark ' + step.toLowerCase() + '</button>');
     if (a.st === 'cancelled') acts.push('<button class="btn btn-primary" onclick="lGo(\'l-03-book\')">Book a new time</button>');
@@ -1932,9 +3344,79 @@
       h + '<div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">' + acts.join('') + '</div>';
   }
 
+  /* ---------- flags on the abstract, editable where they are read ---------- */
+  function lFlagsHtml(a) {
+    var ks = a.flags || [];
+    if (!ks.length) return '<div class="field-help">No flags on this appointment.</div>';
+    return ks.map(function (k) {
+      var f = L_FLAGS[k]; if (!f) return '';
+      return '<div class="fl-line" data-fl="' + k + '">' +
+        '<span class="fl sev-' + f.sev + '">' + f.icon + '</span>' +
+        '<span style="flex:1"><b>' + f.text + '</b>' +
+        '<span class="fl-cat">' + f.cat + '</span> ' +
+        '<span class="fl-cat">' + f.sev + ' severity</span></span>' +
+        '<button class="btn btn-sm" data-row-del aria-label="Remove this flag">Remove</button></div>';
+    }).join('');
+  }
+
+  function lAddFlag() {
+    var box = document.getElementById('l-dr-flags');
+    if (!box) return;
+    var keys = Object.keys(L_FLAGS);
+    var have = [].map.call(box.querySelectorAll('[data-fl]'), function (n) { return n.getAttribute('data-fl'); });
+    var k = keys.filter(function (x) { return have.indexOf(x) === -1; })[0];
+    if (!k) { HCOS.toast('Every flag type is already on this appointment.'); return; }
+    var f = L_FLAGS[k];
+    var help = box.querySelector('.field-help');
+    if (help) help.remove();
+    var d = document.createElement('div');
+    d.className = 'fl-line'; d.setAttribute('data-fl', k);
+    d.innerHTML = '<span class="fl sev-' + f.sev + '">' + f.icon + '</span>' +
+      '<span style="flex:1"><b>' + f.text + '</b><span class="fl-cat">' + f.cat + '</span> ' +
+      '<span class="fl-cat">' + f.sev + ' severity</span></span>' +
+      '<button class="btn btn-sm" data-row-del aria-label="Remove this flag">Remove</button>';
+    box.appendChild(d);
+    /* the board has to show it too, or the flag only exists in the drawer */
+    var b = document.querySelector('.cal-appt[data-appt="' + L_CUR + '"]');
+    if (b) {
+      var cur = (b.getAttribute('data-flags') || '').split('|').filter(Boolean);
+      cur.push(k); b.setAttribute('data-flags', cur.join('|'));
+      var row = b.querySelector('.fl-row');
+      if (!row) { row = document.createElement('span'); row.className = 'fl-row'; b.appendChild(row); }
+      row.insertAdjacentHTML('beforeend',
+        '<span class="fl sev-' + f.sev + '" title="' + f.text + ' · ' + f.cat + '">' + f.icon + '</span>');
+      if (f.sev === 'high') b.classList.add('has-high');
+    }
+    HCOS.toast('Flag added. It shows on the block and travels with the appointment.', 'ok');
+  }
+
+  function lSaveNote() {
+    var t = document.getElementById('l-dr-note');
+    if (!t || !t.value.trim()) { HCOS.toast('Nothing to save — the note is empty.', 'warn'); return; }
+    HCOS.toast('Saved to the patient profile, stamped with your name and the time.', 'ok');
+    t.value = '';
+  }
+  window.lFlagsHtml = lFlagsHtml; window.lAddFlag = lAddFlag; window.lSaveNote = lSaveNote;
+
+  /* ---------- marking a status actually moves the block ---------- */
+  var L_STEP_CLS = { Confirmed: 'st-confirmed', Arrived: 'st-arrived', 'In room': 'st-inroom',
+                     'In chair': 'st-inchair', Done: 'st-done' };
   function lMark(id) {
-    var a = L_APPT[id], step = a ? lNextStep(a) : null;
+    var a = L_APPT[id] || lFromBlock(id);
+    var step = a ? lNextStep(a) : null;
     if (!step) return;
+    var b = document.querySelector('.cal-appt[data-appt="' + id + '"]');
+    if (b) {
+      b.className = b.className.replace(/st-[a-z]+/, L_STEP_CLS[step] || 'st-confirmed');
+      b.setAttribute('data-st', step === 'In room' || step === 'In chair' ? 'In progress' : step);
+      var wk = document.querySelector('.week-appt[data-appt="' + id + '"]');
+      if (wk) wk.className = wk.className.replace(/st-[a-z]+/, L_STEP_CLS[step] || 'st-confirmed');
+    }
+    if (L_APPT[id]) {
+      L_APPT[id].st = step === 'In room' || step === 'In chair' ? (step === 'In room' ? 'inroom' : 'inchair')
+        : step.toLowerCase();
+    }
+    lOpenAppt(id);   /* redraw the drawer so the flow strip shows the new position */
     HCOS.toast(a.n + ' marked ' + step.toLowerCase() + ' — the day view, the chair board and billing read the same appointment.', 'ok');
   }
 
@@ -2367,7 +3849,57 @@
   }
 
   lBook();
-  lOpenAppt('A-88214');
+
+  /* ==========================================================================
+     THE FLAG DICTIONARY — one definition, read by the block, the hover card,
+     the appointment detail and the setup screen. A flag has a category (who
+     cares) and a severity (how loud), and those are separate on purpose:
+     an admin flag can be urgent, and a medical one can be a footnote.
+     ========================================================================== */
+  var L_FLAGS = {
+    allergy:  { icon: '\u25B2', sev: 'high', cat: 'Medical', text: 'Allergy — sulfa, documented reaction' },
+    pregnant: { icon: '\u25C9', sev: 'high', cat: 'Medical', text: 'Pregnant — second trimester' },
+    urgent:   { icon: '\u271A', sev: 'high', cat: 'Medical', text: 'Urgent medical alert — cardiology follow-up open' },
+    deficit:  { icon: '\u25BC', sev: 'med',  cat: 'Medical', text: 'Deficiency — ferritin 11 ng/mL' },
+    balance:  { icon: '$',       sev: 'med',  cat: 'Billing', text: 'Outstanding balance $340' },
+    auth:     { icon: '$',       sev: 'high', cat: 'Billing', text: 'Prior authorisation expires today' },
+    interp:   { icon: '\u2726', sev: 'low',  cat: 'Admin',   text: 'Interpreter needed — Spanish' },
+    forms:    { icon: '\u2726', sev: 'low',  cat: 'Admin',   text: 'Intake forms not returned' }
+  };
+  window.L_FLAGS = L_FLAGS;
+
+  /* a high-severity flag rings its block, so it is findable without hovering */
+  document.querySelectorAll('.cal-appt[data-flags]').forEach(function (b) {
+    var any = (b.getAttribute('data-flags') || '').split('|').some(function (k) {
+      return L_FLAGS[k] && L_FLAGS[k].sev === 'high';
+    });
+    if (any) b.classList.add('has-high');
+  });
+
+  /* Cancelled leaves the board and stays on the record. This is the only way back. */
+  function lShowCx(on) {
+    document.querySelectorAll('.cal, .weekcal').forEach(function (c) { c.classList.toggle('show-cx', !!on); });
+    lApply();
+    HCOS.toast(on ? 'Showing cancelled appointments. They never left the patient record.'
+                  : 'Cancelled appointments hidden. They stay on the patient record.');
+  }
+  window.lShowCx = lShowCx;
+
+  /* Double-click an empty stretch of a column to book into it. */
+  document.addEventListener('dblclick', function (ev) {
+    var col = ev.target.closest ? ev.target.closest('.daycal-col') : null;
+    if (!col || (ev.target.closest && ev.target.closest('.cal-appt'))) return;
+    var r = col.getBoundingClientRect();
+    var mins = Math.floor((ev.clientY - r.top) / 44) * 30;      /* 44px is half an hour */
+    var h = 8 + Math.floor(mins / 60), m = mins % 60;
+    var lbl = ((h > 12 ? h - 12 : h) + ':' + (m ? '30' : '00') + (h >= 12 ? ' PM' : ' AM'));
+    var head = document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]');
+    var where = head ? head.textContent.trim().split('\n')[0] : 'this resource';
+    var t = document.getElementById('l-bk-time');
+    if (t) { for (var i = 0; i < t.options.length; i++) if (t.options[i].text.indexOf(lbl) === 0) t.selectedIndex = i; }
+    HCOS.go('l-03-book');
+    HCOS.toast('Booking ' + lbl + ' on ' + where + ' — double-click is the quick way in.', 'ok');
+  });
 
 
   document.addEventListener('click', function (ev) {
@@ -2399,7 +3931,9 @@
                    'ty-energ': 'Energetics', 'ty-treat': 'Treatment' };
     var PATTERN = {
       'Maya Reyes': 'Runs long — last 3 NAD+ averaged 3 h 20 against 3 h booked. Book her late in the day.',
-      'Walter Hsu': 'Two late arrivals in the last month — confirm the evening before.'
+      'Walter Hsu': 'Two late arrivals in the last month — confirm the evening before.',
+      'Victor Reyes': 'Three no-shows in 90 days, all before 10 AM. Offer him afternoons.',
+      'Rosa Iglesias': 'Cancels within 24 h when booked on a Monday. Try mid-week.'
     };
     document.addEventListener('mouseover', function (ev) {
       var b = ev.target.closest ? ev.target.closest('.cal-appt, .week-appt') : null;
@@ -2411,13 +3945,38 @@
       var st = (b.className.match(/st-([a-z]+)/) || [])[1] || 'scheduled';
       var col = b.closest('[data-col]');
       var res = col ? (document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') || {}).textContent : '';
-      var pat = PATTERN[name] ? '<div class="az-row" style="color:var(--ink)"><strong>AI pattern:</strong>&nbsp;' + PATTERN[name] + '</div>' : '';
+      var pat = PATTERN[name] ? '<div class="az-row az-ai"><strong>AI pattern:</strong>&nbsp;' + PATTERN[name] + '</div>' : '';
+
+      /* the four things the desk asks for before it picks up the phone */
+      var ins = b.getAttribute('data-ins'), phone = b.getAttribute('data-phone');
+      var stage = b.getAttribute('data-stage'), pay = b.getAttribute('data-pay');
+      var facts = '';
+      if (ins || phone || stage || pay) {
+        facts = '<div class="az-facts">' +
+          (ins   ? '<div><span>Insurance</span><b>' + ins + '</b></div>' : '') +
+          (phone ? '<div><span>Phone</span><b>' + phone + '</b></div>' : '') +
+          (stage ? '<div><span>Care plan stage</span><b>' + stage + '</b></div>' : '') +
+          (pay   ? '<div><span>Owes at the desk</span><b>' + pay + '</b></div>' : '') +
+          '</div>';
+      }
+
+      /* flags, spelled out — the block only had room for the icon */
+      var flags = (b.getAttribute('data-flags') || '').split('|').filter(Boolean);
+      var fl = flags.length ? '<div class="az-flags">' + flags.map(function (k) {
+        var f = L_FLAGS[k]; if (!f) return '';
+        return '<div class="fl-line"><span class="fl sev-' + f.sev + '">' + f.icon + '</span>' +
+               '<span><b>' + f.text + '</b><span class="fl-cat">' + f.cat + '</span></span></div>';
+      }).join('') + '</div>' : '';
+
+      var note = b.getAttribute('data-note');
       zoom.innerHTML = '<div class="az-name">' + name + '</div>' +
         '<div class="az-meta">' + time + (res ? ' &middot; ' + res.replace(/(Nurse|Medic|Provider|Physician Associate)/, ' · $1') : '') + '</div>' +
         '<div class="az-row">' +
-        '<span class="pill pill-muted">' + st.charAt(0).toUpperCase() + st.slice(1) + '</span>' +
+        '<span class="pill pill-muted">' + (b.getAttribute('data-st') || st) + '</span>' +
         (ty ? '<span class="pill pill-navy">' + TY_LBL[ty] + '</span>' : '') +
-        '<span style="font-size:11px;color:var(--muted)">' + type.trim() + '</span></div>' + pat +
+        '<span style="font-size:11px;color:var(--muted)">' + type.trim() + '</span></div>' +
+        facts + fl + pat +
+        (note ? '<div class="az-row" style="font-size:11px;color:var(--ink)">' + note + '</div>' : '') +
         '<div class="az-row" style="color:var(--muted);font-size:10.5px">Click to open the full detail</div>';
       var r = b.getBoundingClientRect();
       var x = Math.min(r.right + 10, window.innerWidth - 296);
@@ -2452,6 +4011,96 @@
     if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   }
 
+
+
+  /* the waitlist button adds the row it promises — a toast that lies is worse
+     than a dead button, because the reviewer believes it */
+  function lWlAdd() {
+    var body = document.getElementById('l-wl-body');
+    var name = (document.getElementById('l-wl-pt') || {}).value || '';
+    if (!body) return;
+    if (!name.trim()) { HCOS.toast('Nothing added — the waitlist needs a patient.', 'warn'); return; }
+    var sub = (document.getElementById('l-wl-sub') || {}).value || '';
+    var ty  = (document.getElementById('l-wl-ty') || {}).value || '';
+    var from = (document.getElementById('l-wl-from') || {}).value || '';
+    var to   = (document.getElementById('l-wl-to') || {}).value || '';
+    var days = [].filter.call(document.querySelectorAll('#l-wl-modal .filter-chip.active'),
+                              function (c) { return true; })
+                 .map(function (c) { return c.textContent.trim(); }).join(', ');
+    var KEY = { 'NAD+': 't-nad ty-iv', 'Mega C': 't-ivc ty-iv',
+                'Foundational Flow': 't-flow ty-iv', 'Glutathione': 't-glut ty-iv' };
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td>' + name + '</td>' +
+      '<td><span class="rail-sw ' + (KEY[sub] || 't-block ty-visit') + '" style="vertical-align:-4px"></span> ' +
+        ty + ' &middot; ' + sub + '</td>' +
+      '<td>' + (days || 'Any day') + ' ' + from + '&ndash;' + to + '</td>' +
+      '<td>Just now</td><td>Not booked</td>' +
+      '<td><button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Offered. They have 30 minutes to accept.\', \'ok\')">Offer a slot</button></td>';
+    body.insertBefore(tr, body.firstChild);
+    document.getElementById('l-wl-pt').value = '';
+    HCOS.toast(name + ' added to the waitlist — first matching slot that frees is theirs.', 'ok');
+  }
+  window.lWlAdd = lWlAdd;
+
+  /* ---------- Patterns: one filter, over the appointment type ---------- */
+  function lInsFilter(ty) {
+    var n = 0;
+    document.querySelectorAll('#l-ins-body tr').forEach(function (r) {
+      var on = ty === 'all' || r.getAttribute('data-ty') === ty;
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    HCOS.toast(n + (n === 1 ? ' pattern' : ' patterns') + ' for that appointment type.');
+  }
+  window.lInsFilter = lInsFilter;
+
+  /* ---------- Blocked time: the repeat vocabulary people already know ---------- */
+  function lBlkRepeat(v) {
+    var days = document.getElementById('l-be-days');
+    if (days) days.style.display = (v === 'weekly' || v === 'custom') ? '' : 'none';
+  }
+  window.lBlkRepeat = lBlkRepeat;
+
+  /* ---------- List view: the same day, read as a list ----------
+     It is built FROM the board, not typed again, so the list can never drift
+     from the calendar it claims to describe. */
+  function lBuildList() {
+    var body = document.getElementById('l-list-body');
+    if (!body) return;
+    var rows = [];
+    document.querySelectorAll('.daycal-col .cal-appt').forEach(function (b) {
+      if (b.hasAttribute('data-blocked')) return;
+      var col = b.closest('[data-col]');
+      var head = col ? document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') : null;
+      var flags = (b.getAttribute('data-flags') || '').split('|').filter(Boolean);
+      rows.push({
+        top: parseInt((b.getAttribute('style').match(/top:(\d+)/) || [0, 0])[1], 10),
+        html: '<tr>' +
+          '<td>' + (b.getAttribute('data-when') || '') + '</td>' +
+          '<td>' + (b.getAttribute('data-pt') || '') + '</td>' +
+          '<td><span class="rail-sw ' + (b.getAttribute('data-sub') || '') + ' ' +
+              ((b.className.match(/ty-[a-z]+/) || [''])[0]) + '" style="vertical-align:-4px"></span> ' +
+              (b.getAttribute('data-tx') || '') + '</td>' +
+          '<td>' + (head ? head.textContent.trim().split('\n')[0] : '') + '</td>' +
+          '<td><span class="pill pill-st ' + ((b.className.match(/st-[a-z]+/) || [''])[0]) + '">' +
+              (b.getAttribute('data-st') || '') + '</span></td>' +
+          '<td>' + (b.getAttribute('data-stage') || '') + '</td>' +
+          '<td>' + (b.getAttribute('data-ins') || '') + '</td>' +
+          '<td>' + (b.getAttribute('data-pay') || '') + '</td>' +
+          '<td>' + (flags.map(function (k) {
+            var f = L_FLAGS[k]; return f ? '<span class="fl sev-' + f.sev + '" title="' + f.text + '">' + f.icon + '</span>' : '';
+          }).join(' ')) + '</td>' +
+        '</tr>'
+      });
+    });
+    rows.sort(function (a, b) { return a.top - b.top; });
+    body.innerHTML = rows.map(function (r) { return r.html; }).join('') ||
+      '<tr><td colspan="9" class="field-help">Nothing booked on this day.</td></tr>';
+  }
+  window.lBuildList = lBuildList;
+  lBuildList();
+
   /* ---------- searchable multi-selects drive the same lSel state ---------- */
   (function () {
     var TY_NAMES = { 'ty-visit': 'Office visit', 'ty-proc': 'Procedure', 'ty-iv': 'IV',
@@ -2459,6 +4108,11 @@
     function summarize() {
       var f1 = document.querySelector('#l-msel-ty .msel-field-lbl');
       var f2 = document.querySelector('#l-msel-sub .msel-field-lbl');
+      var f3 = document.querySelector('#l-msel-st .msel-field-lbl');
+      if (f3) f3.textContent = lSel.sts.length ? lSel.sts.length + ' selected' : 'All statuses';
+      document.querySelectorAll('.msel-opt[data-st]').forEach(function (o) {
+        o.querySelector('input').checked = lSel.sts.indexOf(o.getAttribute('data-st')) !== -1;
+      });
       if (f1) f1.textContent = lSel.types.length
         ? lSel.types.map(function (t) { return TY_NAMES[t]; }).join(' · ') : 'All types';
       if (f2) f2.textContent = lSel.subs.length ? lSel.subs.length + ' selected' : 'All subtypes';
@@ -2486,7 +4140,9 @@
       }
       var clr = ev.target.closest ? ev.target.closest('.msel-clear') : null;
       if (clr) {
-        if (clr.closest('#l-msel-ty')) { lSel.types = []; lSel.subs = []; } else lSel.subs = [];
+        if (clr.closest('#l-msel-ty')) { lSel.types = []; lSel.subs = []; }
+        else if (clr.closest('#l-msel-st')) { lSel.sts = []; }
+        else lSel.subs = [];
         summarize(); lApply(); return;
       }
       if (!ev.target.closest || !ev.target.closest('.msel'))
@@ -2503,6 +4159,9 @@
           var opt = document.querySelector('.msel-opt[data-sub="' + sk + '"]');
           return !opt || !lSel.types.length || lSel.types.indexOf(opt.getAttribute('data-ty-of')) !== -1;
         });
+      } else if (o.hasAttribute('data-st')) {
+        var stk = o.getAttribute('data-st'), s = lSel.sts.indexOf(stk);
+        if (s === -1) lSel.sts.push(stk); else lSel.sts.splice(s, 1);
       } else {
         var sk = o.getAttribute('data-sub'), j = lSel.subs.indexOf(sk);
         if (j === -1) lSel.subs.push(sk); else lSel.subs.splice(j, 1);

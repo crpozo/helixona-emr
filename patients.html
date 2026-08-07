@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=53">
+<link rel="stylesheet" href="assets/hcos.css?v=54">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -437,6 +437,36 @@
                   <div class="timeline-time">Jul 2</div>
                   <div class="timeline-body">SPD received · 118 pages · summary ready for billing</div>
                 </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Communication log
+                <a href="#/pt-07-comms" data-activate="pt-07-comms" style="float:right;font-size:11.5px">See all 47 &rsaquo;</a>
+              </div>
+              <div class="comm-row" data-activate="pt-07-comms">
+                <span class="comm-ch ch-phone">Phone</span>
+                <span class="comm-txt">Confirmed Tuesday&rsquo;s NAD+ &mdash; she asked to move it later</span>
+                <span class="comm-meta">Jul 20, 4:12 PM &middot; Yazmin</span>
+              </div>
+              <div class="comm-row" data-activate="pt-07-comms">
+                <span class="comm-ch ch-email">Email</span>
+                <span class="comm-txt">Pre-infusion instructions sent</span>
+                <span class="comm-meta">Jul 19, 9:02 AM &middot; System</span>
+              </div>
+              <div class="comm-row" data-activate="pt-07-comms">
+                <span class="comm-ch ch-web">Portal</span>
+                <span class="comm-txt">She uploaded her updated insurance card</span>
+                <span class="comm-meta">Jul 18, 7:44 PM &middot; Maya Reyes</span>
+              </div>
+              <div class="comm-row" data-activate="pt-07-comms">
+                <span class="comm-ch ch-text">Text</span>
+                <span class="comm-txt">Reminder &mdash; delivered, no reply</span>
+                <span class="comm-meta">Jul 17, 6:00 PM &middot; System</span>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+                <button class="btn btn-sm" data-open-modal="#pt-comm-modal">Log a contact</button>
+                <button class="btn btn-sm" data-activate="pt-07-comms">Open the full log</button>
               </div>
             </div>
 
@@ -961,9 +991,130 @@
     </div>
   </section>
 
+  <!-- ============================================================ -->
+  <section class="screen" id="pt-07-comms" data-title="Communication log">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients/maya-reyes/communications</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Communication log &mdash; Maya Reyes</div>
+            <div class="page-sub">Every contact, in one place, whoever made it and however it went out</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="pt-02-profile">Back to the profile</button>
+            <button class="btn btn-primary" data-open-modal="#pt-comm-modal">Log a contact</button>
+          </div>
+        </div>
+
+        <div class="filters">
+          <span class="filter-group-lbl">Channel</span>
+          <button class="filter-chip active" type="button" onclick="ptComms('all', this)">All</button>
+          <button class="filter-chip" type="button" onclick="ptComms('phone', this)">Phone</button>
+          <button class="filter-chip" type="button" onclick="ptComms('email', this)">Email</button>
+          <button class="filter-chip" type="button" onclick="ptComms('text', this)">Text</button>
+          <button class="filter-chip" type="button" onclick="ptComms('web', this)">Portal</button>
+          <button class="filter-chip" type="button" onclick="ptComms('inperson', this)">In person</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Date</th><th scope="col">Time</th><th scope="col">Channel</th>
+              <th scope="col">Direction</th><th scope="col">Who</th>
+              <th scope="col">What was said</th><th scope="col">Outcome</th>
+            </tr></thead>
+            <tbody id="pt-comm-body">
+              <tr data-ch="phone"><td>Jul 20, 2026</td><td>4:12 PM</td>
+                <td><span class="comm-ch ch-phone">Phone</span></td><td>Outbound</td><td>Yazmin</td>
+                <td>Confirmed Tuesday&rsquo;s NAD+. She asked whether a later slot exists &mdash; offered 1:00 PM, she will confirm.</td>
+                <td><span class="pill pill-muted">Awaiting reply</span></td></tr>
+              <tr data-ch="email"><td>Jul 19, 2026</td><td>9:02 AM</td>
+                <td><span class="comm-ch ch-email">Email</span></td><td>Outbound</td><td>System</td>
+                <td>Pre-infusion instructions, template <code>EM-014</code> v3.</td>
+                <td><span class="pill pill-muted">Opened 9:47 AM</span></td></tr>
+              <tr data-ch="web"><td>Jul 18, 2026</td><td>7:44 PM</td>
+                <td><span class="comm-ch ch-web">Portal</span></td><td>Inbound</td><td>Maya Reyes</td>
+                <td>Uploaded an updated insurance card. OCR proposed a new member ID; awaiting verification.</td>
+                <td><span class="pill pill-navy">Task raised for Karina</span></td></tr>
+              <tr data-ch="text"><td>Jul 17, 2026</td><td>6:00 PM</td>
+                <td><span class="comm-ch ch-text">Text</span></td><td>Outbound</td><td>System</td>
+                <td>Appointment reminder, 24 hours before.</td>
+                <td><span class="pill pill-muted">Delivered, no reply</span></td></tr>
+              <tr data-ch="phone"><td>Jul 14, 2026</td><td>11:20 AM</td>
+                <td><span class="comm-ch ch-phone">Phone</span></td><td>Inbound</td><td>Bee</td>
+                <td>She rang about tingling after session 3. Advised to keep the drip rate slower next time; noted on the chart.</td>
+                <td><span class="pill pill-navy">Noted on the chart</span></td></tr>
+              <tr data-ch="inperson"><td>Jul 14, 2026</td><td>10:05 AM</td>
+                <td><span class="comm-ch ch-person">In person</span></td><td>&mdash;</td><td>Nick</td>
+                <td>At the chair &mdash; explained why session 4 will run twenty minutes longer.</td>
+                <td><span class="pill pill-muted">Understood</span></td></tr>
+              <tr data-ch="email"><td>Jul 8, 2026</td><td>2:31 PM</td>
+                <td><span class="comm-ch ch-email">Email</span></td><td>Inbound</td><td>Maya Reyes</td>
+                <td>Asked what her out-of-pocket maximum is after the last EOB.</td>
+                <td><span class="pill pill-navy">Answered by Karina, Jul 9</span></td></tr>
+              <tr data-ch="phone"><td>Jul 2, 2026</td><td>3:55 PM</td>
+                <td><span class="comm-ch ch-phone">Phone</span></td><td>Outbound</td><td>Karina</td>
+                <td>Chased the SPD from the employer&rsquo;s benefits line. They will post it.</td>
+                <td><span class="pill pill-muted">SPD received Jul 2</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:14px"><span>Every row is stamped with the person and the
+          moment it happened, and none of them can be edited or deleted &mdash; corrections are added
+          as a new entry that links to the one it corrects.</span></div>
+      </div>
+    </div>
+  </section>
+
+
 </div>
 
-<script src="assets/hcos.js?v=53"></script>
+
+<div class="modal-overlay" id="pt-comm-modal" data-close-modal="#pt-comm-modal"></div>
+<div class="modal" data-modal="pt-comm-modal">
+  <div class="modal-head">
+    <div class="modal-title">Log a contact</div>
+    <button class="modal-x" data-close-modal="#pt-comm-modal" aria-label="Close">&times;</button>
+  </div>
+  <div class="modal-body">
+    <div class="grid-2">
+      <div class="field"><label class="field-lbl" for="pc-ch">Channel</label>
+        <select class="field-select" id="pc-ch"><option>Phone</option><option>Email</option>
+          <option>Text</option><option>Portal</option><option>In person</option></select></div>
+      <div class="field"><label class="field-lbl" for="pc-dir">Direction</label>
+        <select class="field-select" id="pc-dir"><option>Outbound</option><option>Inbound</option></select></div>
+    </div>
+    <div class="field"><label class="field-lbl" for="pc-txt">What was said</label>
+      <textarea class="field-textarea" rows="3" id="pc-txt" placeholder="Enough that the next person does not have to ring back and ask"></textarea></div>
+    <div class="field"><label class="field-lbl" for="pc-out">Outcome</label>
+      <select class="field-select" id="pc-out"><option>No action needed</option>
+        <option>Awaiting reply</option><option>Raise a task</option><option>Note it on the chart</option></select></div>
+    <div class="field-help">The date, the time and your name are stamped automatically. You cannot backdate an entry.</div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn" data-close-modal="#pt-comm-modal">Cancel</button>
+    <button class="btn btn-primary" data-close-modal="#pt-comm-modal" onclick="HCOS.toast('Logged, stamped with your name and the time. It shows on the profile straight away.', 'ok')">Log the contact</button>
+  </div>
+</div>
+
+<script>
+  function ptComms(ch, btn) {
+    document.querySelectorAll('#pt-07-comms .filter-chip').forEach(function (c) { c.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+    var n = 0;
+    document.querySelectorAll('#pt-comm-body tr').forEach(function (r) {
+      var on = ch === 'all' || r.getAttribute('data-ch') === ch;
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    HCOS.toast(n + (n === 1 ? ' contact' : ' contacts') + ' on that channel.');
+  }
+</script>
+
+<script src="assets/hcos.js?v=54"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

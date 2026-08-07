@@ -1024,70 +1024,90 @@ a.lead-chip:hover { border-color: var(--ink); }
   font-family: ui-monospace, monospace;
 }
 
-/* Appointment block — grayscale ramp = STATUS ONLY; type is text */
 /* ==========================================================================
-   DAY BOARD · one block, one hue, one weight
-   TYPE    owns ::before (rail hue + pattern) and --h-ink text
-   SUBTYPE owns the WORDS
-   STATUS  owns background, border and ::after
-   No property is shared by two levels.
+   THE CALENDAR CODE — fourth pass (Carlos, 2026-08-07)
+   One sentence a receptionist can repeat:
+   the STRIPE'S COLOUR is which treatment · the STRIPE'S SHAPE is what kind ·
+   the BACKGROUND is where it stands.
+
+     SUBTYPE owns the rail HUE       (--sb)
+     TYPE    owns the rail TEXTURE   (--rail)
+     STATUS  owns the BACKGROUND
+
+   No property is shared by two levels. Every status fill is pale or striped by
+   construction, so text stays near-black on all of them and no status needs a
+   white-text exception.
    ========================================================================== */
 :root {
-  /* TYPE — five kinds, one hue each. Near-iso-luminant on purpose: a luminance
-     ladder across types would collide with the within-hue status ramp. */
-  --ty-visit: #2E5C8A;   /* office visit */
-  --ty-proc:  #9B3A3A;   /* procedure */
-  --ty-iv:    #1F6F6B;   /* IV */
-  --ty-energ: #5B4B8A;   /* energetics */
-  --ty-treat: #9A5C0D;   /* treatment — darkened from #B26B12, which failed white text */
+  /* SUBTYPE — one hue per named treatment. It appears on the rail and nowhere
+     else, which is what lets the board carry seventeen of them without turning
+     into a rainbow: the eye reads a 6px stripe, not a field of colour. */
+  --sb-newpt:#1B4F9C;  --sb-fu:#4E8FD0;    --sb-tele:#17A2A2;  --sb-lab:#6A5140;
+  --sb-nad:#6E3FA8;    --sb-megac:#D07C10; --sb-flow:#16867A;  --sb-glut:#3F9E52;
+  --sb-eboo:#A62121;   --sb-prp:#D2447E;   --sb-pellet:#8C6A00;
+  --sb-laser:#B23AA0;  --sb-bemer:#3D5AA8; --sb-lymph:#2C7BA0;
+  --sb-acu:#157F5E;    --sb-chiro:#7A6A2E; --sb-nmt:#A05226;
+  --sb-none:#6A6A6A;   /* blocked time is not a treatment — it takes the neutral */
 
-  /* Checkout — after the treatment, before the door */
-  --st-checkout:    #7A6AA8;
-  --st-checkout-bg: #E4DFF0;
+  /* STATUS — owns the background. The three ways an appointment ENDS are the
+     three striped fills; everything still live is a flat fill. */
+  --bg-conf:#E7EEF7;  --bd-conf:#9FBBD8;
+  --bg-arr:#FBE7C7;   --bd-arr:#D69A2E;
+  --bg-prog:#BFE0CB;  --bd-prog:#4E9A6B;
+  --bg-lock:#E5E1F2;  --bd-lock:#7C68C4;
+  --bg-chk:#E4DFF0;   --bd-chk:#7A6AA8;
+  --bg-done-a:#DCEDE3; --bg-done-b:#F7FBF9; --bd-done:#A7CBB6;
+  --bg-ns-a:#F3C3BC;   --bg-ns-b:#FDF1EF;   --bd-noshow:#C0392B;
+  --bg-cx-a:#F7C9DF;   --bg-cx-b:#FDF3F8;   --bd-cancel:#C86A9B;
 
-  /* the subtype word, dark enough on the heaviest tint */
-  --ty-visit-ink:#1F4160; --ty-proc-ink:#6E2929; --ty-iv-ink:#154D4B;
-  --ty-energ-ink:#403562; --ty-treat-ink:#6E420B;
-  /* status = 38 / 18 / 8 percent of the type's own hue over white */
-  --ty-visit-38:#B0C1D3; --ty-visit-18:#D9E2EA; --ty-visit-08:#EEF2F6;
-  --ty-proc-38:#D9B4B4;  --ty-proc-18:#EDDCDC;  --ty-proc-08:#F7EFEF;
-  --ty-iv-38:#AAC8C7;    --ty-iv-18:#D7E5E4;    --ty-iv-08:#EDF4F3;
-  --ty-energ-38:#C1BBD3; --ty-energ-18:#E2DFEA; --ty-energ-08:#F2F1F6;
-  --ty-treat-38:#D9C1A3; --ty-treat-18:#EDE2D3; --ty-treat-08:#F7F2EC;
-  /* --muted fails on a tinted block; this passes on all five */
+  /* --muted fails contrast on a tinted block; this passes on all of them */
   --blk-muted:#4A4A4A;
 }
 
-/* TYPE — declared on the compound selector only, so filter chips never inherit a hue */
-.cal-appt.ty-visit, .week-appt.ty-visit, .leg-fam.ty-visit, .leg-items > .ty-visit {
-  --h:var(--ty-visit); --h-ink:var(--ty-visit-ink);
-  --h38:var(--ty-visit-38); --h18:var(--ty-visit-18); --h08:var(--ty-visit-08);
-  --rail:linear-gradient(var(--h),var(--h));
-  --rail-inv:linear-gradient(#fff,#fff);
+/* ---- SUBTYPE = the rail's hue. Compound selectors only, so a filter chip
+        carrying the same word never inherits a colour. ---- */
+.cal-appt.t-newpt,  .week-appt.t-newpt,  .rail-sw.t-newpt  { --sb:var(--sb-newpt); }
+.cal-appt.t-fu,     .week-appt.t-fu,     .rail-sw.t-fu     { --sb:var(--sb-fu); }
+.cal-appt.t-tele,   .week-appt.t-tele,   .rail-sw.t-tele   { --sb:var(--sb-tele); }
+.cal-appt.t-lab,    .week-appt.t-lab,    .rail-sw.t-lab    { --sb:var(--sb-lab); }
+.cal-appt.t-nad,    .week-appt.t-nad,    .rail-sw.t-nad    { --sb:var(--sb-nad); }
+.cal-appt.t-ivc,    .week-appt.t-ivc,    .rail-sw.t-ivc    { --sb:var(--sb-megac); }
+.cal-appt.t-flow,   .week-appt.t-flow,   .rail-sw.t-flow   { --sb:var(--sb-flow); }
+.cal-appt.t-glut,   .week-appt.t-glut,   .rail-sw.t-glut   { --sb:var(--sb-glut); }
+.cal-appt.t-eboo,   .week-appt.t-eboo,   .rail-sw.t-eboo   { --sb:var(--sb-eboo); }
+.cal-appt.t-prp,    .week-appt.t-prp,    .rail-sw.t-prp    { --sb:var(--sb-prp); }
+.cal-appt.t-pel,    .week-appt.t-pel,    .rail-sw.t-pel    { --sb:var(--sb-pellet); }
+.cal-appt.t-las,    .week-appt.t-las,    .rail-sw.t-las    { --sb:var(--sb-laser); }
+.cal-appt.t-bem,    .week-appt.t-bem,    .rail-sw.t-bem    { --sb:var(--sb-bemer); }
+.cal-appt.t-lym,    .week-appt.t-lym,    .rail-sw.t-lym    { --sb:var(--sb-lymph); }
+.cal-appt.t-acu,    .week-appt.t-acu,    .rail-sw.t-acu    { --sb:var(--sb-acu); }
+.cal-appt.t-chi,    .week-appt.t-chi,    .rail-sw.t-chi    { --sb:var(--sb-chiro); }
+.cal-appt.t-nmt,    .week-appt.t-nmt,    .rail-sw.t-nmt    { --sb:var(--sb-nmt); }
+.cal-appt.t-block,  .week-appt.t-block,  .rail-sw.t-block  { --sb:var(--sb-none); }
+
+/* ---- TYPE = the rail's texture. Five kinds, five shapes, and the shape is
+        what survives greyscale, a photocopier and colour blindness. ---- */
+.cal-appt.ty-visit, .week-appt.ty-visit, .rail-sw.ty-visit {
+  --rail:linear-gradient(var(--sb),var(--sb)); }                                    /* solid  */
+.cal-appt.ty-iv,    .week-appt.ty-iv,    .rail-sw.ty-iv {
+  --rail:repeating-linear-gradient(180deg,var(--sb) 0 3px,transparent 3px 6px); }   /* dots   */
+.cal-appt.ty-proc,  .week-appt.ty-proc,  .rail-sw.ty-proc {
+  --rail:repeating-linear-gradient(180deg,var(--sb) 0 9px,transparent 9px 14px); }  /* dashes */
+.cal-appt.ty-energ, .week-appt.ty-energ, .rail-sw.ty-energ {
+  --rail:linear-gradient(90deg,var(--sb) 0 2px,transparent 2px 4px,var(--sb) 4px 6px); } /* twin */
+.cal-appt.ty-treat, .week-appt.ty-treat, .rail-sw.ty-treat {
+  --rail:repeating-linear-gradient(135deg,var(--sb) 0 2.5px,transparent 2.5px 5.5px); } /* hatch */
+
+/* the padlock, drawn rather than typed — an emoji would break the palette */
+.lockmark {
+  display:inline-block; position:relative; box-sizing:border-box;
+  width:8px; height:6px; border-radius:1.5px; background:currentColor;
+  margin-right:5px; top:-1px; vertical-align:baseline;
 }
-.cal-appt.ty-proc, .week-appt.ty-proc, .leg-fam.ty-proc, .leg-items > .ty-proc {
-  --h:var(--ty-proc); --h-ink:var(--ty-proc-ink);
-  --h38:var(--ty-proc-38); --h18:var(--ty-proc-18); --h08:var(--ty-proc-08);
-  --rail:repeating-linear-gradient(180deg,var(--h) 0 7px,transparent 7px 12px);
-  --rail-inv:repeating-linear-gradient(180deg,#fff 0 7px,transparent 7px 12px);
-}
-.cal-appt.ty-iv, .week-appt.ty-iv, .leg-fam.ty-iv, .leg-items > .ty-iv {
-  --h:var(--ty-iv); --h-ink:var(--ty-iv-ink);
-  --h38:var(--ty-iv-38); --h18:var(--ty-iv-18); --h08:var(--ty-iv-08);
-  --rail:repeating-linear-gradient(180deg,var(--h) 0 3px,transparent 3px 7px);
-  --rail-inv:repeating-linear-gradient(180deg,#fff 0 3px,transparent 3px 7px);
-}
-.cal-appt.ty-energ, .week-appt.ty-energ, .leg-fam.ty-energ, .leg-items > .ty-energ {
-  --h:var(--ty-energ); --h-ink:var(--ty-energ-ink);
-  --h38:var(--ty-energ-38); --h18:var(--ty-energ-18); --h08:var(--ty-energ-08);
-  --rail:linear-gradient(90deg,var(--h) 0 2px,transparent 2px 3px,var(--h) 3px 5px);
-  --rail-inv:linear-gradient(90deg,#fff 0 2px,transparent 2px 3px,#fff 3px 5px);
-}
-.cal-appt.ty-treat, .week-appt.ty-treat, .leg-fam.ty-treat, .leg-items > .ty-treat {
-  --h:var(--ty-treat); --h-ink:var(--ty-treat-ink);
-  --h38:var(--ty-treat-38); --h18:var(--ty-treat-18); --h08:var(--ty-treat-08);
-  --rail:repeating-linear-gradient(135deg,var(--h) 0 2px,transparent 2px 5px);
-  --rail-inv:repeating-linear-gradient(135deg,#fff 0 2px,transparent 2px 5px);
+.lockmark::before {
+  content:''; position:absolute; left:1.5px; top:-4px; width:5px; height:4px;
+  border:1.5px solid currentColor; border-bottom:0; border-radius:3px 3px 0 0;
+  box-sizing:border-box;
 }
 
 /* ---- THE BLOCK ---- */
@@ -1095,14 +1115,16 @@ a.lead-chip:hover { border-color: var(--ink); }
   position: absolute; left: 5px; right: 5px;
   container-type: size; container-name: appt;
   display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 0 4px; align-content: start;
-  padding: 5px 9px 5px 14px;
-  border: 1px solid color-mix(in srgb, var(--h) 45%, #fff);
+  padding: 5px 9px 5px 15px;
+  --sb: var(--sb-none); --rail: linear-gradient(var(--sb),var(--sb));
+  border: 1px solid var(--line);
   border-radius: 4px; background: #fff;
   overflow: hidden; cursor: pointer; z-index: 1;
   font-size: 10.5px; line-height: 1.4; color: var(--ink);
+  min-height: 46px;
 }
 .cal-appt::before {                     /* the rail keeps full chroma at every status */
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
   background-color: transparent; background-image: var(--rail);
 }
 .cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,.25); z-index: 5; }
@@ -1110,7 +1132,7 @@ a.lead-chip:hover { border-color: var(--ink); }
 /* children live in permanent cells — nothing reflows between 18px and 260px */
 .cal-appt-sub {
   grid-row: 1; grid-column: 1; font-size: 10.5px; font-weight: 800; letter-spacing: .15px;
-  color: var(--h-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: #1A1A1A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .cal-appt .ai-flag { grid-row: 1; grid-column: 2; position: static; float: none;
   font-size: 9px; font-weight: 700; color: var(--ink); }
@@ -1126,35 +1148,51 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt .actor-tag { position: absolute; right: 6px; bottom: 2px;
   font-size: 8.5px; color: var(--blk-muted); background: none; padding: 0; }
 
-/* ---- STATUS = weight, on a dilution of the block's OWN hue. Written once. ---- */
-.cal-appt.st-scheduled { background: #fff; border-style: dashed;
-  border-color: color-mix(in srgb, var(--h) 50%, #fff); }
+/* ---- STATUS = the background. Written once, and it is the only thing here
+        that touches `background`. ---- */
+.cal-appt.st-scheduled { background: #fff; border-style: dashed; border-color: #C4C4C4; }
 .cal-appt.st-scheduled .cal-appt-name { color: #5A5A5A; }
 
-.cal-appt.st-confirmed { background: var(--h18); }
+.cal-appt.st-confirmed { background: var(--bg-conf); border-color: var(--bd-conf); }
 
-.cal-appt.st-arrived, .cal-appt.st-checkout { background: var(--h38); border: 2px solid var(--h); }
+.cal-appt.st-arrived   { background: var(--bg-arr); border: 2px solid var(--bd-arr); }
+.cal-appt.st-checkout  { background: var(--bg-chk); border: 2px solid var(--bd-chk); }
 
-.cal-appt.st-inroom, .cal-appt.st-inchair { background: var(--h); border: 2px solid var(--h); }
-.cal-appt.st-inroom::before, .cal-appt.st-inchair::before { background-image: var(--rail-inv); }
-.cal-appt.st-inroom .cal-appt-name, .cal-appt.st-inchair .cal-appt-name,
-.cal-appt.st-inroom .cal-appt-sub,  .cal-appt.st-inchair .cal-appt-sub { color: #fff; }
-.cal-appt.st-inroom .cal-appt-time, .cal-appt.st-inchair .cal-appt-time,
-.cal-appt.st-inroom .cal-appt-type, .cal-appt.st-inchair .cal-appt-type,
-.cal-appt.st-inroom .actor-tag,     .cal-appt.st-inchair .actor-tag,
-.cal-appt.st-inroom .ai-flag,       .cal-appt.st-inchair .ai-flag { color: rgba(255,255,255,.92); }
+.cal-appt.st-inroom, .cal-appt.st-inchair { background: var(--bg-prog); border: 2px solid var(--bd-prog); }
 
-/* done fades the block, never the rail — the hue is the one thing that must not change */
-.cal-appt.st-done { background: var(--h08); border-color: color-mix(in srgb, var(--h) 22%, #fff); }
-.cal-appt.st-done .cal-appt-name { color: #6B6B6B; font-weight: 500; }
-.cal-appt.st-done::before { opacity: .45; }
+/* locked — the slot is held and nobody may move it without the manager */
+.cal-appt.st-locked { background: var(--bg-lock); border: 1px solid var(--bd-lock); }
 
-/* the two exits leave the ramp and carry no hue at all */
-.cal-appt.st-noshow { border: 1.5px dashed #1A1A1A;
-  background: repeating-linear-gradient(135deg, #fff 0 5px, #E8E8E8 5px 10px); }
-.cal-appt.st-cancelled { background: #fff; border: 1px dashed #D5D5D5; opacity: .5; }
+/* the three ENDINGS, all striped, told apart by hue:
+   done wears the in-progress green · no-show red · cancelled pink */
+.cal-appt.st-done {
+  background: repeating-linear-gradient(135deg, var(--bg-done-a) 0 5px, var(--bg-done-b) 5px 10px);
+  border-color: var(--bd-done);
+}
+.cal-appt.st-done .cal-appt-name { color: #4A4A4A; font-weight: 500; }
+
+.cal-appt.st-noshow {
+  background: repeating-linear-gradient(135deg, var(--bg-ns-a) 0 5px, var(--bg-ns-b) 5px 10px);
+  border: 1.5px solid var(--bd-noshow);
+}
+.cal-appt.st-cancelled {
+  background: repeating-linear-gradient(135deg, var(--bg-cx-a) 0 5px, var(--bg-cx-b) 5px 10px);
+  border: 1px solid var(--bd-cancel);
+}
 .cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
-.cal-appt.st-cancelled::before { background-image: linear-gradient(#B4B4B4,#B4B4B4); }
+
+/* A cancelled appointment leaves the board and stays on the record. The toggle
+   in the filter bar is the only thing that brings it back. */
+.cal:not(.show-cx) .cal-appt.st-cancelled,
+.weekcal:not(.show-cx) .week-appt.st-cancelled { display: none; }
+
+/* blocked time — lunch, meetings. Not an appointment, so it opts out of the code */
+.cal-appt.is-block {
+  background: repeating-linear-gradient(135deg,#EDEDED 0 6px,#F7F7F7 6px 12px);
+  border: 1px dashed #B4B4B4; cursor: default;
+}
+.cal-appt.is-block .cal-appt-name { color: #4A4A4A; font-weight: 600; }
+.cal-appt.is-block .cal-appt-sub  { color: #6A6A6A; font-weight: 700; }
 
 /* ---- the black bar: printed only where a human is being waited on ---- */
 .cal-appt.st-arrived, .cal-appt.st-checkout, .cal-appt.st-noshow { padding-bottom: 16px; }
@@ -1179,9 +1217,75 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.st-checkout::after { content: 'Ready to check out'; }
 .cal-appt.st-noshow::after   { content: 'No-show'; }
 
+/* ==========================================================================
+   FLAGS — a fourth thing the block can say, and deliberately not a fourth
+   channel: flags live in their own corner cell, never on the rail or the fill.
+   Category says who cares (Medical / Billing / Admin); severity says how loud.
+   ========================================================================== */
+.fl-row { grid-row: 1; grid-column: 2; display: inline-flex; gap: 3px; align-items: center; }
+.fl {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0;
+  font-size: 9px; font-weight: 700; line-height: 1; border: 1px solid;
+}
+.fl.sev-high { background: #FBE3E0; border-color: #C0392B; color: #8E2118; }
+.fl.sev-med  { background: #FBEFD7; border-color: #C98A1E; color: #7A5510; }
+.fl.sev-low  { background: #EDEDED; border-color: #A8A8A8; color: #3D3D3D; }
+/* a high-severity flag also rings the block, so it is findable without hovering */
+.cal-appt.has-high { box-shadow: inset 0 0 0 2px #C0392B; }
+
+/* the same flag, at reading size, on the detail and the setup screens */
+.fl-line { display: flex; gap: 9px; align-items: flex-start; padding: 8px 0;
+  border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
+.fl-line:last-child { border-bottom: none; }
+.fl-line .fl { width: 20px; height: 20px; font-size: 12px; margin-top: 1px; }
+.fl-line b { display: block; font-size: 12.5px; }
+.fl-cat {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
+  color: var(--muted); border: 1px solid var(--line); border-radius: 9px; padding: 1px 7px;
+}
+
+/* a status specimen for the status filter and the legend */
+.st-sw {
+  width: 26px; height: 15px; border-radius: 3px; display: inline-block; flex-shrink: 0;
+  border: 1px solid var(--line); background: #fff;
+}
+.st-sw.st-scheduled { border-style: dashed; border-color: #C4C4C4; }
+.st-sw.st-confirmed { background: var(--bg-conf); border-color: var(--bd-conf); }
+.st-sw.st-arrived   { background: var(--bg-arr); border-color: var(--bd-arr); }
+.st-sw.st-checkout  { background: var(--bg-chk); border-color: var(--bd-chk); }
+.st-sw.st-inchair, .st-sw.st-inroom { background: var(--bg-prog); border-color: var(--bd-prog); }
+.st-sw.st-locked    { background: var(--bg-lock); border-color: var(--bd-lock); }
+.st-sw.st-done {
+  background: repeating-linear-gradient(135deg, var(--bg-done-a) 0 4px, var(--bg-done-b) 4px 8px);
+  border-color: var(--bd-done); }
+.st-sw.st-noshow {
+  background: repeating-linear-gradient(135deg, var(--bg-ns-a) 0 4px, var(--bg-ns-b) 4px 8px);
+  border-color: var(--bd-noshow); }
+.st-sw.st-cancelled {
+  background: repeating-linear-gradient(135deg, var(--bg-cx-a) 0 4px, var(--bg-cx-b) 4px 8px);
+  border-color: var(--bd-cancel); }
+
+/* the option rows carry their own specimen, so the filter teaches the code */
+.msel-opt .rail-sw { height: 15px; }
+.cx-toggle {
+  display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  font-size: 11.5px; color: var(--muted);
+  border: 1px dashed var(--line); border-radius: 8px; padding: 6px 11px; background: #fff;
+}
+.cx-toggle input { margin: 0; }
+.cx-toggle:hover { color: var(--ink); border-color: var(--ink); }
+
 /* alerts ride the outline — they are not a fourth level */
 .cal-appt.conflict { outline: 2px dashed #000; outline-offset: 2px; }
 .cal-appt.ai-warn { box-shadow: inset 0 0 0 2px var(--ink); }
+/* tentative — booked without an active prescription. An alert, never a stop.
+   The dotted edge is not enough on its own: the block says the word too. */
+.cal-appt.is-tentative { border-style: dotted; border-width: 2px; border-color: #B8860B; }
+.cal-appt.is-tentative .cal-appt-sub::after {
+  content: ' \00b7 tentative'; font-weight: 600; color: #8A6508; letter-spacing: 0;
+}
+.week-appt.is-tentative { border-style: dotted; border-width: 2px; border-color: #B8860B; }
 
 /* density: the queries style DESCENDANTS only — a container cannot match itself */
 @container appt (max-height: 78px) { .cal-appt-type { display: none; } }
@@ -1196,7 +1300,6 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 @container appt (max-height: 44px) { .cal-appt-name { line-height: 1.2; } }
 /* a 30-minute block still owns three legible lines — the hour row grew to allow it */
-.cal-appt { min-height: 46px; }
 .cal-appt.mini { min-height: 0; }
 
 /* the 15-minute block is too short for a query to save — it gets a real class */
@@ -1244,6 +1347,42 @@ a.lead-chip:hover { border-color: var(--ink); }
 .appt-zoom .az-name { font-size: 13.5px; font-weight: 700; color: var(--hx-navy); }
 .appt-zoom .az-meta { color: var(--muted); font-size: 11px; }
 .appt-zoom .az-row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; align-items: center; }
+/* capacity: the number and the percentage, because one without the other lies —
+   "81% full" hides that it is 81% of twenty-five, not of two hundred */
+.cap-card .card-title { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.cap-total { font-size: 11.5px; font-weight: 500; color: var(--muted); margin-left: auto; }
+.cap-head, .cap-row {
+  display: grid; grid-template-columns: 168px minmax(80px,1fr) 104px 46px 56px;
+  align-items: center; gap: 12px; padding: 5px 0; font-size: 12px;
+}
+.cap-head {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
+  color: var(--muted); border-bottom: 1px solid var(--line-soft); padding-bottom: 6px;
+}
+.cap-row { border-bottom: 1px solid var(--line-soft); }
+.cap-row:last-child { border-bottom: none; }
+.cap-name { display: inline-flex; align-items: center; gap: 9px; min-width: 0; }
+.cap-name .rail-sw { height: 15px; }
+.cap-num  { color: var(--muted); font-variant-numeric: tabular-nums; }
+.cap-num b { color: var(--ink); font-weight: 600; }
+.cap-pct  { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.cap-left { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 900px) {
+  .cap-head { display: none; }
+  .cap-row { grid-template-columns: 1fr; gap: 4px; }
+}
+
+/* the hover card carries what the desk asks for before it picks up the phone */
+.appt-zoom { width: 296px; }
+.az-facts { margin-top: 8px; border-top: 1px solid var(--line-soft); padding-top: 7px; }
+.az-facts > div { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; }
+.az-facts span { font-size: 10.5px; color: var(--muted); flex-shrink: 0; }
+.az-facts b { font-size: 11.5px; color: var(--ink); text-align: right; font-weight: 600; }
+.az-flags { margin-top: 7px; border-top: 1px solid var(--line-soft); }
+.az-flags .fl-line { padding: 6px 0; font-size: 11.5px; }
+.az-flags .fl-line b { font-size: 11.5px; margin-bottom: 2px; }
+.az-ai { color: var(--ink); font-size: 11px; border-top: 1px solid var(--line-soft); padding-top: 7px; }
+
 .msel { position: relative; }
 .msel-field {
   display: inline-flex; align-items: center; gap: 10px; justify-content: space-between;
@@ -1274,6 +1413,33 @@ a.lead-chip:hover { border-color: var(--ink); }
   background: none; padding: 8px; font-size: 11.5px; color: var(--muted); cursor: pointer; font-family: inherit;
 }
 .msel-clear:hover { color: var(--ink); }
+
+/* ==========================================================================
+   COMMUNICATION LOG — every contact, whoever made it and however it went out.
+   The channel is a word, never a colour: "we phoned her" is not a status.
+   ========================================================================== */
+.comm-row {
+  display: grid; grid-template-columns: 62px 1fr auto; gap: 10px; align-items: baseline;
+  padding: 7px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; cursor: pointer;
+}
+.comm-row:last-of-type { border-bottom: none; }
+.comm-row:hover { background: var(--hx-band); }
+.comm-ch {
+  display: inline-block; text-align: center; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .6px; padding: 2px 6px; border-radius: 3px;
+  border: 1px solid var(--line); color: var(--muted); background: #fff; white-space: nowrap;
+}
+.comm-ch.ch-phone  { border-style: solid; }
+.comm-ch.ch-email  { border-style: dashed; }
+.comm-ch.ch-text   { border-style: dotted; }
+.comm-ch.ch-web    { border-style: double; }
+.comm-ch.ch-person { border-style: solid; border-width: 2px; }
+.comm-txt { color: var(--ink); min-width: 0; }
+.comm-meta { font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+@media (max-width: 720px) {
+  .comm-row { grid-template-columns: 1fr; gap: 2px; }
+  .comm-meta { text-align: left; }
+}
 
 /* ==========================================================================
    REVIEW STATE — wireframe chrome only, never product UI.
@@ -1346,7 +1512,12 @@ a.lead-chip:hover { border-color: var(--ink); }
 .leg-items { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
 .leg-fam { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); }
-.leg-fam i { width: 5px; height: 19px; border-radius: 1px; display: inline-block; background-image: var(--rail); }
+.leg-fam i { width: 6px; height: 20px; border-radius: 1px; display: inline-block;
+  background-color: transparent; background-image: var(--rail); }
+/* a legend specimen carries the same two rail variables a real block does */
+.rail-sw { --sb: var(--sb-none); --rail: linear-gradient(var(--sb),var(--sb));
+  width: 6px; height: 20px; border-radius: 1px; display: inline-block; flex-shrink: 0;
+  background-color: transparent; background-image: var(--rail); }
 .leg-st { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
 .leg-sw { width: 30px; height: 19px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
 .leg-bar {
@@ -1355,21 +1526,35 @@ a.lead-chip:hover { border-color: var(--ink); }
   text-transform: uppercase; padding: 0 7px;
 }
 .leg-items > span[class^="ty-"], .leg-items > span[class*=" ty-"] { display: inline-flex; }
-.leg-sub { font-size: 12px; font-weight: 800; letter-spacing: .15px; color: var(--h-ink); }
+.leg-sub { font-size: 12px; font-weight: 800; letter-spacing: .15px; color: #1A1A1A; }
 .leg-sub-more { font-size: 11px; color: var(--muted); }
 .leg-foot { padding-top: 12px; font-size: 11px; }
 @media (max-width: 900px) { .leg-row { grid-template-columns: 1fr; gap: 8px; } }
 
-/* week view — same channels, half scale, no bar */
-.week-appt { position: relative; border: 1px solid color-mix(in srgb, var(--h) 45%, #fff);
+/* week view — same three channels, half scale, no black bar */
+.week-appt { position: relative; border: 1px solid var(--line);
+  --sb: var(--sb-none); --rail: linear-gradient(var(--sb),var(--sb));
   background: #fff; border-left: none; padding-left: 9px; }
-.week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-  background-image: var(--rail); }
-.week-appt.st-confirmed { background: var(--h18); }
-.week-appt.st-arrived, .week-appt.st-checkout { background: var(--h38); }
-.week-appt.st-inroom, .week-appt.st-inchair { background: var(--h); color: #fff; }
-.week-appt.st-done { background: var(--h08); }
-.week-appt.st-cancelled { opacity: .5; }
+.week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background-color: transparent; background-image: var(--rail); }
+.week-appt.st-scheduled { border-style: dashed; border-color: #C4C4C4; }
+.week-appt.st-confirmed { background: var(--bg-conf); border-color: var(--bd-conf); }
+.week-appt.st-arrived   { background: var(--bg-arr); border-color: var(--bd-arr); }
+.week-appt.st-checkout  { background: var(--bg-chk); border-color: var(--bd-chk); }
+.week-appt.st-inroom, .week-appt.st-inchair { background: var(--bg-prog); border-color: var(--bd-prog); }
+.week-appt.st-locked    { background: var(--bg-lock); border-color: var(--bd-lock); }
+.week-appt.st-done {
+  background: repeating-linear-gradient(135deg, var(--bg-done-a) 0 4px, var(--bg-done-b) 4px 8px);
+  border-color: var(--bd-done); }
+.week-appt.st-noshow {
+  background: repeating-linear-gradient(135deg, var(--bg-ns-a) 0 4px, var(--bg-ns-b) 4px 8px);
+  border-color: var(--bd-noshow); }
+.week-appt.st-cancelled {
+  background: repeating-linear-gradient(135deg, var(--bg-cx-a) 0 4px, var(--bg-cx-b) 4px 8px);
+  border-color: var(--bd-cancel); }
+.week-appt.is-block {
+  background: repeating-linear-gradient(135deg,#EDEDED 0 5px,#F7F7F7 5px 10px);
+  border: 1px dashed #B4B4B4; }
 
 /* Week view */
 .weekcal-head { display: grid; grid-template-columns: 64px repeat(5, 1fr); background: #F7F7F7; border-bottom: 1px solid var(--line-soft); }

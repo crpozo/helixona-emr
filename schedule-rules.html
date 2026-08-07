@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=53">
+<link rel="stylesheet" href="assets/hcos.css?v=54">
 <style>
   .lr-rule { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
   .lr-rule:last-child { border-bottom: none; }
@@ -427,25 +427,21 @@
                 </div>
               </div>
               <div class="seg-divider">When&hellip;</div>
-              <div class="lr-rule" style="display:flex;gap:8px;align-items:center;padding:6px 0;font-size:12.5px">
-                <select class="field-input" style="max-width:220px" aria-label="Field"><option>Last matching lab result</option><option>Order status</option><option>Days since last same subtype</option><option>Patient coverage</option><option>Resource</option></select>
-                <select class="field-input" style="max-width:130px" aria-label="Field"><option>is older than</option><option>is missing</option><option>equals</option><option>is less than</option></select>
-                <input class="field-input" style="max-width:110px" value="90 days" aria-label="90 days">
-                <button class="btn btn-sm" data-row-del>Remove</button>
+              <div id="sr-whens"></div>
+              <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;align-items:center">
+                <button class="btn btn-sm" type="button" onclick="srAddWhen()">+ Add a condition</button>
+                <select class="field-input" style="max-width:150px" id="sr-join" onchange="srSay()" aria-label="How the conditions combine">
+                  <option value="all">All must match</option>
+                  <option value="any">Any one may match</option>
+                </select>
               </div>
-              <div class="lr-rule" style="display:flex;gap:8px;align-items:center;padding:6px 0;font-size:12.5px">
-                <select class="field-input" style="max-width:220px" aria-label="Field"><option selected>Order status</option><option>Last matching lab result</option></select>
-                <select class="field-input" style="max-width:130px" aria-label="Field"><option selected>is missing</option><option>equals</option></select>
-                <input class="field-input" style="max-width:110px" value="signed" aria-label="signed">
-                <button class="btn btn-sm" data-row-del>Remove</button>
-              </div>
-              <button class="btn btn-sm" data-row-add onclick="HCOS.toast('Condition added — all conditions must match for the rule to fire.', 'ok')">+ Add a condition</button>
+              <div class="callout" id="sr-say" style="margin-top:12px"><span>&nbsp;</span></div>
 
               <div class="seg-divider">&hellip;then</div>
-              <div class="filters" style="border:none;padding:0">
-                <button class="filter-chip">Block &mdash; nobody overrides</button>
-                <button class="filter-chip active">Warn &mdash; designated authority may release</button>
-                <button class="filter-chip">Allow &mdash; note it, let it pass</button>
+              <div class="filters" style="border:none;padding:0" id="sr-then">
+                <button class="filter-chip" type="button" onclick="srThen(this,'block')">Block &mdash; nobody overrides</button>
+                <button class="filter-chip active" type="button" onclick="srThen(this,'warn')">Warn &mdash; designated authority may release</button>
+                <button class="filter-chip" type="button" onclick="srThen(this,'allow')">Allow &mdash; note it, let it pass</button>
               </div>
               <div class="field" style="margin-top:8px">
                 <label class="field-label">Who may release the warning</label>
@@ -464,6 +460,14 @@
               <div class="g-ev"><div class="g-ev-when">3</div><div class="g-ev-what"><strong>Approval</strong> &mdash; a clinical rule needs Dr. Drannikov</div>
                 <div class="g-ev-ver"><span class="appr pending">Pending</span></div></div>
             </div>
+
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Conflicts</div>
+              <div id="sr-conflicts"><div class="field-help">Checking against the 9 live rules&hellip;</div></div>
+              <button class="btn btn-primary" style="margin-top:12px;width:100%" type="button" onclick="srSave()">Save the rule</button>
+              <div class="field-help" style="margin-top:8px">A rule that contradicts a live one cannot be
+                saved. Change one of them, or retire the old rule first.</div>
+            </div>
           </div>
         </div>
 
@@ -473,8 +477,130 @@
 
 </div>
 
-<script src="assets/hcos.js?v=53"></script>
+<script src="assets/hcos.js?v=54"></script>
 <script>
+
+  /* ==========================================================================
+     THE RULE BUILDER — the "when" is composed, not chosen from a list, and a
+     rule that contradicts a live one is refused rather than quietly layered
+     on top of it. Two rules conflict when they match the same thing and end
+     in different verdicts; that is a decision nobody can act on.
+     ========================================================================== */
+  var SR_FIELDS = [
+    ['order',    'Order status',                  ['is missing', 'is expired', 'equals'],                 'signed'],
+    ['lab',      'Last matching lab result',      ['is older than', 'is missing', 'is outside range'],    '90 days'],
+    ['since',    'Days since last same subtype',  ['is less than', 'is more than'],                       '14 days'],
+    ['coverage', 'Patient coverage',              ['equals', 'is not'],                                   'Anthem Blue Cross'],
+    ['resource', 'Resource',                      ['equals', 'is not'],                                   'IV 1'],
+    ['readiness','Readiness result',              ['equals', 'is not'],                                   'Pause'],
+    ['time',     'Time of day',                   ['is before', 'is after'],                              '10:00 AM'],
+    ['weekday',  'Day of the week',               ['is', 'is not'],                                       'Monday'],
+    ['member',   'Membership tier',               ['equals', 'is not'],                                   'Longevity'],
+    ['balance',  'Outstanding balance',           ['is more than', 'is less than'],                       '$250']
+  ];
+
+  /* the rules already live — what a new one has to get past */
+  var SR_LIVE = [
+    { name: 'Signed order required for every infusion', field: 'order', op: 'is missing', verdict: 'block' },
+    { name: 'Chair overlap',                            field: 'resource', op: 'equals', verdict: 'warn' },
+    { name: 'Readiness Pause stops escalation',         field: 'readiness', op: 'equals', verdict: 'block' },
+    { name: 'Balance over $250 warns at booking',       field: 'balance', op: 'is more than', verdict: 'warn' }
+  ];
+
+  var srVerdict = 'warn';
+
+  function srRow(i, pick) {
+    var f = SR_FIELDS[pick || 0];
+    var opts = SR_FIELDS.map(function (x, k) {
+      return '<option value="' + x[0] + '"' + (k === (pick || 0) ? ' selected' : '') + '>' + x[1] + '</option>';
+    }).join('');
+    var ops = f[2].map(function (o) { return '<option>' + o + '</option>'; }).join('');
+    return '<div class="lr-rule" style="display:flex;gap:8px;align-items:center;padding:6px 0;font-size:12.5px">' +
+      '<select class="field-input sr-f" style="max-width:220px" onchange="srFieldChange(this);srSay()" aria-label="Condition field">' + opts + '</select>' +
+      '<select class="field-input sr-op" style="max-width:150px" onchange="srSay()" aria-label="Comparison">' + ops + '</select>' +
+      '<input class="field-input sr-v" style="max-width:130px" value="' + f[3] + '" oninput="srSay()" aria-label="Value">' +
+      '<button class="btn btn-sm" type="button" onclick="this.parentNode.remove();srSay()">Remove</button></div>';
+  }
+
+  function srAddWhen(pick) {
+    var box = document.getElementById('sr-whens');
+    if (!box) return;
+    box.insertAdjacentHTML('beforeend', srRow(box.children.length, pick));
+    srSay();
+  }
+  function srFieldChange(sel) {
+    var f = SR_FIELDS.filter(function (x) { return x[0] === sel.value; })[0];
+    if (!f) return;
+    var row = sel.parentNode;
+    row.querySelector('.sr-op').innerHTML = f[2].map(function (o) { return '<option>' + o + '</option>'; }).join('');
+    row.querySelector('.sr-v').value = f[3];
+  }
+  function srThen(btn, v) {
+    srVerdict = v;
+    document.querySelectorAll('#sr-then .filter-chip').forEach(function (c) { c.classList.remove('active'); });
+    btn.classList.add('active');
+    srSay();
+  }
+
+  function srRead() {
+    return [].map.call(document.querySelectorAll('#sr-whens .lr-rule'), function (r) {
+      return { field: r.querySelector('.sr-f').value,
+               fieldLbl: r.querySelector('.sr-f').selectedOptions[0].text,
+               op: r.querySelector('.sr-op').value, val: r.querySelector('.sr-v').value };
+    });
+  }
+
+  /* the sentence is the rule — if it does not read as English, it is wrong */
+  function srSay() {
+    var box = document.getElementById('sr-say');
+    if (!box) return;
+    var cs = srRead();
+    var join = (document.getElementById('sr-join') || {}).value === 'any' ? ' or ' : ' and ';
+    var verb = { block: 'refuse the booking', warn: 'warn, and let a designated authority release it',
+                 allow: 'let it through and write it down' }[srVerdict];
+    box.innerHTML = cs.length
+      ? '<strong>When</strong> ' + cs.map(function (c) {
+          return c.fieldLbl.toLowerCase() + ' ' + c.op + ' <strong>' + c.val + '</strong>'; }).join(join) +
+        ', <strong>then</strong> ' + verb + '.'
+      : '<span class="field-help">Add a condition and this line will say, in plain English, what the rule does.</span>';
+    srConflicts(cs);
+  }
+
+  function srConflicts(cs) {
+    var box = document.getElementById('sr-conflicts');
+    if (!box) return;
+    var hits = [];
+    cs.forEach(function (c) {
+      SR_LIVE.forEach(function (r) {
+        if (r.field === c.field && r.op === c.op && r.verdict !== srVerdict) hits.push({ c: c, r: r });
+      });
+    });
+    window.srBlocked = hits.length > 0;
+    box.innerHTML = hits.length
+      ? hits.map(function (h) {
+          return '<div class="callout callout-err" style="margin:0 0 8px"><strong>' + h.r.name + '</strong> already ' +
+            ({ block: 'blocks', warn: 'warns', allow: 'allows' })[h.r.verdict] +
+            ' on the same condition &mdash; ' + h.c.fieldLbl.toLowerCase() + ' ' + h.c.op +
+            '. Two rules cannot give the desk different answers to the same question.</div>'; }).join('')
+      : '<div class="callout callout-ok" style="margin:0">No conflict with the 9 live rules. This one can be saved.</div>';
+  }
+
+  function srSave() {
+    if (window.srBlocked) {
+      HCOS.toast('Not saved — this rule contradicts a live one. Resolve the conflict above first.', 'err');
+      return;
+    }
+    if (!srRead().length) {
+      HCOS.toast('Not saved — a rule with no conditions would fire on everything.', 'warn');
+      return;
+    }
+    HCOS.toast('Saved as a draft. It previews against this month before it can go live.', 'ok');
+  }
+
+  window.srAddWhen = srAddWhen; window.srFieldChange = srFieldChange;
+  window.srThen = srThen; window.srSay = srSay; window.srSave = srSave;
+  srAddWhen(0); srAddWhen(1);
+
   function lrPick(btn) {
     var row = btn.parentNode;
     Array.prototype.forEach.call(row.children, function (b) { b.classList.remove('on'); });
