@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=56">
+<link rel="stylesheet" href="assets/hcos.css?v=57">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -911,45 +911,50 @@
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
                 <span class="leg-key-txt"><b>Swatch colour</b><span>which treatment</span></span></div>
-              <div class="leg-items">
-                <span class="leg-sub-more" style="width:100%;margin-bottom:2px">The clinic&rsquo;s own colours, straight off the eCW menu &mdash; unchanged:</span>
-                <span class="leg-fam"><i class="rail-sw t-ff5 ty-iv"></i>Foundational Flow 5</span>
-                <span class="leg-fam"><i class="rail-sw t-ff10 ty-iv"></i>Foundational Flow 10</span>
-                <span class="leg-fam"><i class="rail-sw t-ff15 ty-iv"></i>Foundational Flow 15</span>
-                <span class="leg-fam"><i class="rail-sw t-ff20 ty-iv"></i>Foundational Flow 20</span>
-                <span class="leg-fam"><i class="rail-sw t-ff25 ty-iv"></i>Foundational Flow 25</span>
-                <span class="leg-fam"><i class="rail-sw t-ff50 ty-iv"></i>Foundational Flow 50</span>
-                <span class="leg-fam"><i class="rail-sw t-mc15 ty-iv"></i>Mega C 15</span>
-                <span class="leg-fam"><i class="rail-sw t-mc25 ty-iv"></i>Mega C 25</span>
-                <span class="leg-fam"><i class="rail-sw t-mc50 ty-iv"></i>Mega C 50</span>
-                <span class="leg-fam"><i class="rail-sw t-mc75 ty-iv"></i>Mega C 75</span>
-                <span class="leg-fam"><i class="rail-sw t-mc100 ty-iv"></i>Mega C 100</span>
-                <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
-                <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
-                <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
-                <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
-                <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
-                <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
-                <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
-                <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
-                <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
-                <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
-                <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
-                <span class="leg-sub-more" style="width:100%;margin:8px 0 2px">Everything the clinic has not given a colour for keeps ours:</span>
-                <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
-                <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
-                <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
-                <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
-                <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
-                <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
-                <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
-                <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
-                <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
-                <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
-                <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
-                <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
-                <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
+              <div class="leg-cols">
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Foundational Flow <em>&mdash; the bigger the bag, the deeper the teal</em></span>
+                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5 ty-iv"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10 ty-iv"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20 ty-iv"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50 ty-iv"></i>50</span></div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Mega C <em>&mdash; grams</em></span>
+                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50 ty-iv"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75 ty-iv"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100 ty-iv"></i>100</span></div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">The named bags</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
+                    <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
+                    <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
+                    <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
+                    <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
+                    <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
+                    <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
+                    <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
+                    <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
+                  </div>
+                </div>
+                <div class="leg-grp leg-grp-ours">
+                  <span class="leg-grp-t">Ours <em>&mdash; the clinic has not given these a colour yet</em></span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+                    <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+                    <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+                    <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+                    <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+                    <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+                    <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
+                    <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+                    <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
+                    <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+                    <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
+                    <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -962,7 +967,7 @@
                 <span class="leg-fam"><i class="rail-sw t-cog ty-proc"></i>Procedure &mdash; blocked</span>
                 <span class="leg-fam"><i class="rail-sw t-cog ty-energ"></i>Energetics &mdash; ribbed</span>
                 <span class="leg-fam"><i class="rail-sw t-cog ty-treat"></i>Treatment &mdash; hatched</span>
-                <span class="leg-sub-more">&mdash; printed in two tones, so it reads on Cellular Boost&rsquo;s black and Mega C 50&rsquo;s cream alike</span>
+                <span class="leg-sub-more">&mdash; the strokes cover about a third; the rest stays the pure colour, and the tone flips to white on the dark bags so the shape reads on Cellular Boost too</span>
               </div>
             </div>
 
@@ -1254,45 +1259,50 @@
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
                 <span class="leg-key-txt"><b>Swatch colour</b><span>which treatment</span></span></div>
-              <div class="leg-items">
-                <span class="leg-sub-more" style="width:100%;margin-bottom:2px">The clinic&rsquo;s own colours, straight off the eCW menu &mdash; unchanged:</span>
-                <span class="leg-fam"><i class="rail-sw t-ff5 ty-iv"></i>Foundational Flow 5</span>
-                <span class="leg-fam"><i class="rail-sw t-ff10 ty-iv"></i>Foundational Flow 10</span>
-                <span class="leg-fam"><i class="rail-sw t-ff15 ty-iv"></i>Foundational Flow 15</span>
-                <span class="leg-fam"><i class="rail-sw t-ff20 ty-iv"></i>Foundational Flow 20</span>
-                <span class="leg-fam"><i class="rail-sw t-ff25 ty-iv"></i>Foundational Flow 25</span>
-                <span class="leg-fam"><i class="rail-sw t-ff50 ty-iv"></i>Foundational Flow 50</span>
-                <span class="leg-fam"><i class="rail-sw t-mc15 ty-iv"></i>Mega C 15</span>
-                <span class="leg-fam"><i class="rail-sw t-mc25 ty-iv"></i>Mega C 25</span>
-                <span class="leg-fam"><i class="rail-sw t-mc50 ty-iv"></i>Mega C 50</span>
-                <span class="leg-fam"><i class="rail-sw t-mc75 ty-iv"></i>Mega C 75</span>
-                <span class="leg-fam"><i class="rail-sw t-mc100 ty-iv"></i>Mega C 100</span>
-                <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
-                <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
-                <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
-                <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
-                <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
-                <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
-                <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
-                <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
-                <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
-                <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
-                <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
-                <span class="leg-sub-more" style="width:100%;margin:8px 0 2px">Everything the clinic has not given a colour for keeps ours:</span>
-                <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
-                <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
-                <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
-                <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
-                <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
-                <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
-                <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
-                <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
-                <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
-                <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
-                <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
-                <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
-                <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
+              <div class="leg-cols">
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Foundational Flow <em>&mdash; the bigger the bag, the deeper the teal</em></span>
+                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5 ty-iv"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10 ty-iv"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20 ty-iv"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50 ty-iv"></i>50</span></div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Mega C <em>&mdash; grams</em></span>
+                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50 ty-iv"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75 ty-iv"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100 ty-iv"></i>100</span></div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">The named bags</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
+                    <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
+                    <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
+                    <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
+                    <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
+                    <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
+                    <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
+                    <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
+                    <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
+                  </div>
+                </div>
+                <div class="leg-grp leg-grp-ours">
+                  <span class="leg-grp-t">Ours <em>&mdash; the clinic has not given these a colour yet</em></span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+                    <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+                    <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+                    <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+                    <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+                    <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+                    <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
+                    <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+                    <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
+                    <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+                    <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
+                    <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1305,7 +1315,7 @@
                 <span class="leg-fam"><i class="rail-sw t-cog ty-proc"></i>Procedure &mdash; blocked</span>
                 <span class="leg-fam"><i class="rail-sw t-cog ty-energ"></i>Energetics &mdash; ribbed</span>
                 <span class="leg-fam"><i class="rail-sw t-cog ty-treat"></i>Treatment &mdash; hatched</span>
-                <span class="leg-sub-more">&mdash; printed in two tones, so it reads on Cellular Boost&rsquo;s black and Mega C 50&rsquo;s cream alike</span>
+                <span class="leg-sub-more">&mdash; the strokes cover about a third; the rest stays the pure colour, and the tone flips to white on the dark bags so the shape reads on Cellular Boost too</span>
               </div>
             </div>
 
@@ -1556,45 +1566,50 @@
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
                 <span class="leg-key-txt"><b>Swatch colour</b><span>which treatment</span></span></div>
-              <div class="leg-items">
-                <span class="leg-sub-more" style="width:100%;margin-bottom:2px">The clinic&rsquo;s own colours, straight off the eCW menu &mdash; unchanged:</span>
-                <span class="leg-fam"><i class="rail-sw t-ff5 ty-iv"></i>Foundational Flow 5</span>
-                <span class="leg-fam"><i class="rail-sw t-ff10 ty-iv"></i>Foundational Flow 10</span>
-                <span class="leg-fam"><i class="rail-sw t-ff15 ty-iv"></i>Foundational Flow 15</span>
-                <span class="leg-fam"><i class="rail-sw t-ff20 ty-iv"></i>Foundational Flow 20</span>
-                <span class="leg-fam"><i class="rail-sw t-ff25 ty-iv"></i>Foundational Flow 25</span>
-                <span class="leg-fam"><i class="rail-sw t-ff50 ty-iv"></i>Foundational Flow 50</span>
-                <span class="leg-fam"><i class="rail-sw t-mc15 ty-iv"></i>Mega C 15</span>
-                <span class="leg-fam"><i class="rail-sw t-mc25 ty-iv"></i>Mega C 25</span>
-                <span class="leg-fam"><i class="rail-sw t-mc50 ty-iv"></i>Mega C 50</span>
-                <span class="leg-fam"><i class="rail-sw t-mc75 ty-iv"></i>Mega C 75</span>
-                <span class="leg-fam"><i class="rail-sw t-mc100 ty-iv"></i>Mega C 100</span>
-                <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
-                <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
-                <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
-                <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
-                <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
-                <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
-                <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
-                <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
-                <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
-                <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
-                <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
-                <span class="leg-sub-more" style="width:100%;margin:8px 0 2px">Everything the clinic has not given a colour for keeps ours:</span>
-                <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
-                <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
-                <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
-                <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
-                <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
-                <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
-                <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
-                <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
-                <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
-                <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
-                <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
-                <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
-                <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
+              <div class="leg-cols">
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Foundational Flow <em>&mdash; the bigger the bag, the deeper the teal</em></span>
+                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5 ty-iv"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10 ty-iv"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20 ty-iv"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50 ty-iv"></i>50</span></div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Mega C <em>&mdash; grams</em></span>
+                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50 ty-iv"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75 ty-iv"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100 ty-iv"></i>100</span></div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">The named bags</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
+                    <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
+                    <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
+                    <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
+                    <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
+                    <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
+                    <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
+                    <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
+                    <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
+                  </div>
+                </div>
+                <div class="leg-grp leg-grp-ours">
+                  <span class="leg-grp-t">Ours <em>&mdash; the clinic has not given these a colour yet</em></span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+                    <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+                    <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+                    <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+                    <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+                    <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+                    <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
+                    <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+                    <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
+                    <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+                    <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
+                    <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1607,7 +1622,7 @@
                 <span class="leg-fam"><i class="rail-sw t-cog ty-proc"></i>Procedure &mdash; blocked</span>
                 <span class="leg-fam"><i class="rail-sw t-cog ty-energ"></i>Energetics &mdash; ribbed</span>
                 <span class="leg-fam"><i class="rail-sw t-cog ty-treat"></i>Treatment &mdash; hatched</span>
-                <span class="leg-sub-more">&mdash; printed in two tones, so it reads on Cellular Boost&rsquo;s black and Mega C 50&rsquo;s cream alike</span>
+                <span class="leg-sub-more">&mdash; the strokes cover about a third; the rest stays the pure colour, and the tone flips to white on the dark bags so the shape reads on Cellular Boost too</span>
               </div>
             </div>
 
@@ -2972,7 +2987,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=56"></script>
+<script src="assets/hcos.js?v=57"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3318,6 +3333,41 @@
     return map[a.st] || null;
   }
 
+  /* the three ways an appointment ends, and what the desk does next */
+  var L_END = {
+    done:      { lbl: 'Done',      note: 'Finished. The note, the infusion record and the claim all point at this appointment.' },
+    noshow:    { lbl: 'No-show',   note: 'They did not come and did not call. The slot was not released, so it stayed empty.' },
+    cancelled: { lbl: 'Cancelled', note: 'Cancelled before the visit. It leaves the calendar and stays on the patient record.' }
+  };
+
+  function lStatusHtml(a, id) {
+    var end = L_END[a.st];
+    if (end) {
+      var acts = '';
+      if (a.st !== 'done') {
+        acts = '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
+             + '<button class="btn btn-sm btn-primary" onclick="lGo(\'l-03-book\')">Book a new time</button>'
+             + '<button class="btn btn-sm" onclick="lGo(\'l-10-waitlist\')">Offer the slot to the waitlist</button>'
+             + '<button class="btn btn-sm" onclick="HCOS.toast(\'Logged on the patient profile with your name and the time.\', \'ok\')">Log that we called</button>'
+             + '</div>';
+      }
+      return '<div class="dr-status ' + 'st-' + a.st + '">'
+           + '<i class="st-sw st-' + a.st + '"></i>'
+           + '<div><b>' + end.lbl + '</b><span>' + end.note + '</span>' + acts + '</div></div>';
+    }
+    /* still live — name where it stands, then show the ladder */
+    var NAME = { scheduled: 'Scheduled', confirmed: 'Confirmed', arrived: 'Arrived · waiting',
+                 inroom: 'In progress · in room', inchair: 'In progress · in the chair',
+                 checkout: 'Ready to check out', locked: 'Locked' };
+    var h = '<div class="dr-status st-' + a.st + '"><i class="st-sw st-' + a.st + '"></i>'
+          + '<div><b>' + (NAME[a.st] || a.st) + '</b>'
+          + '<span>' + (a.st === 'locked'
+              ? 'The slot is held. Only a manager can move or release it.'
+              : 'Where this appointment stands right now.') + '</span></div></div>';
+    return h + (a.st === 'locked' ? '' : lFlowHtml(a));
+  }
+  window.lStatusHtml = lStatusHtml;
+
   function lFlowHtml(a) {
     var steps = [['st-scheduled', 'Scheduled'], ['st-confirmed', 'Confirmed'], ['st-arrived', 'Arrived'],
                  [a.room === 'In room' ? 'st-inroom' : 'st-inchair', a.room], ['st-done', 'Done']];
@@ -3342,13 +3392,22 @@
     var head = col ? document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') : null;
     var tx = b.getAttribute('data-tx') || '';
     var desc = (b.querySelector('.cal-appt-type') || {}).textContent || '';
+    /* the column head is two lines — "IV 1" and "Nick · Nurse". Joining them
+       raw produced "BrookePhysician Associate". */
+    var res = '';
+    if (head) {
+      res = [].map.call(head.childNodes, function (n) { return (n.textContent || '').trim(); })
+              .filter(Boolean).join(' · ').replace(/\s+/g, ' ');
+      if (!res) res = head.textContent.trim().replace(/\s+/g, ' ');
+    }
     return {
       n: b.getAttribute('data-pt') || '', ag: '',
       cv: b.getAttribute('data-ins') || 'Not on file',
-      mk: tx.slice(0, 3).toUpperCase(), mkc: '',
+      mk: '', mkc: '',
+      swatch: (b.getAttribute('data-sub') || '') + ' ' + ((b.className.match(/ty-[a-z]+/) || [''])[0]),
       tx: tx + (desc ? ' · ' + desc : ''),
       w: 'Today · ' + (b.getAttribute('data-when') || ''),
-      r: head ? head.textContent.trim().replace(/\s+/g, ' ') : '',
+      r: res,
       st: stCls === 'checkout' ? 'arrived' : stCls,
       room: (col && /^c\d/.test(col.getAttribute('data-col') || '')) ? 'In chair' : 'In room',
       a: '', rd: 'Standard · carried from the signed order',
@@ -3367,11 +3426,14 @@
     L_CUR = id;
     document.getElementById('l-dr-name').textContent = a.n;
     document.getElementById('l-dr-sub').innerHTML =
-      '<span class="type-mark ' + a.mkc + '">' + a.mk + '</span>' + a.tx + ' · ' + a.r;
+      (a.swatch ? '<span class="rail-sw ' + a.swatch + '" style="vertical-align:-4px;margin-right:7px"></span>'
+                : (a.mk ? '<span class="type-mark ' + a.mkc + '">' + a.mk + '</span>' : ''))
+      + a.tx + (a.r ? ' · ' + a.r : '');
 
-    var h = (a.st === 'cancelled')
-      ? '<div><span class="pill pill-st st-cancelled">Cancelled</span></div>'
-      : lFlowHtml(a);
+    /* The status is the first thing the drawer says, whatever it is. A ladder
+       with nothing marked on it — which is what a no-show used to get — reads
+       as "not started yet", the opposite of the truth. */
+    var h = lStatusHtml(a, id);
 
     h += '<div class="seg-divider">Appointment</div><dl class="kv">'
        + '<dt>Appointment</dt><dd><code>' + id + '</code></dd>'

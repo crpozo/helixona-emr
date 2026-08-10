@@ -113,10 +113,20 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
     — Inter lands after first paint and is wider than the fallback, so measuring before it
     arrives measures the wrong text.
   - **TYPE owns the TEXTURE PRINTED ON the swatch**: office visit plain · IV banded ·
-    procedure blocked · energetics ribbed · treatment hatched. It is drawn in **two tones** —
-    a dark pass and a light pass — so the shape reads on Cellular Boost's black and on Mega C
-    50's cream alike; a single-tone pattern vanishes at one end of the clinic's palette or the
-    other. The shape is what survives a photocopier and colour blindness.
+    procedure blocked · energetics ribbed · treatment hatched. Two rules, both learned by
+    measuring: **one tone, not two** — a dark pass plus a light pass covered the whole swatch
+    and collapsed twelve pairs of the clinic's palette into look-alikes — and **the strokes
+    cover about a third**, so the rest of the swatch stays the pure colour, which is the thing
+    that identifies the bag. The tone is picked from each colour's own luminance (`--tone`,
+    white on the 23 dark ones), so the shape reads on Cellular Boost's black and on Mega C 50's
+    cream alike. The shape is what survives a photocopier and colour blindness.
+  - **Ten pairs inside the clinic's own palette are near-identical** — Mega C 75 and Core
+    Restore are 11 apart in RGB, Mega C 15 and Essential Amino 21. That is eCW's palette, not
+    our rendering, and it is not ours to silently fix: raise it with the clinic. Ours were
+    moved out of the way (Follow-up to slate, Telehealth to violet, Acupuncture to forest) so
+    that no wireframe colour sits on top of a clinic one.
+  - **The legend groups by family, because Foundational Flow and Mega C are LADDERS.** Six
+    swatches plus "the bigger the bag, the deeper the teal" beats six swatches read one by one.
   - **STATUS owns the BACKGROUND**, and it is the only thing that touches `background`:
     scheduled white + dashed · confirmed pale blue · arrived pale amber + ink ring ·
     in progress solid green · **locked** pale violet + a drawn padlock (`.lockmark`) ·

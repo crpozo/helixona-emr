@@ -1057,10 +1057,10 @@ a.lead-chip:hover { border-color: var(--ink); }
 
   /* Everything the clinic has not given us a colour for keeps ours, and is
      marked as ours in the legend so nobody mistakes it for the eCW menu. */
-  --sb-newpt:#1B4F9C;  --sb-fu:#4E8FD0;    --sb-tele:#17A2A2;  --sb-lab:#6A5140;
+  --sb-newpt:#1B4F9C;  --sb-fu:#55708A;    --sb-tele:#5B3A8C;  --sb-lab:#6A5140;
   --sb-eboo:#A62121;   --sb-prp:#D2447E;   --sb-pel:#8C6A00;
   --sb-las:#B23AA0;    --sb-bem:#3D5AA8;   --sb-lym:#2C7BA0;
-  --sb-acu:#157F5E;    --sb-chi:#7A6A2E;   --sb-nmt:#A05226;
+  --sb-acu:#3E7A2E;    --sb-chi:#7A6A2E;   --sb-nmt:#A05226;
   --sb-none:#B4B4B4;   /* blocked time is not a treatment */
 
   /* STATUS — owns the background. The three ways an appointment ENDS are the
@@ -1118,20 +1118,50 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.t-nmt, .week-appt.t-nmt, .rail-sw.t-nmt          { --sb:var(--sb-nmt); }
 .cal-appt.t-block, .week-appt.t-block, .rail-sw.t-block    { --sb:var(--sb-none); }
 
-/* ---- TYPE = the texture PRINTED ON the swatch. Drawn in two tones — a dark
-        pass and a light pass — so the shape reads on Cellular Boost's black and
-        on Mega C 50's cream alike. A single-tone pattern would vanish on one
-        end of the clinic's palette or the other. ---- */
+/* ---- TYPE = the texture PRINTED ON the swatch.
+        Two rules learned the hard way:
+        1. ONE tone, not two. A dark pass plus a light pass covered the whole
+           swatch and turned every pale colour to grey — measured, it collapsed
+           twelve pairs of the clinic's palette into look-alikes.
+        2. The strokes cover about a third. The rest of the swatch stays the
+           pure colour, because the colour is the thing that identifies the bag.
+        The tone is picked from each colour's own luminance, so the shape reads
+        on Cellular Boost's black and on Mega C 50's cream alike. ---- */
+.cal-appt, .week-appt, .rail-sw { --tone: rgba(0,0,0,.36); }
+.cal-appt.t-acu, .week-appt.t-acu, .rail-sw.t-acu,
+.cal-appt.t-bem, .week-appt.t-bem, .rail-sw.t-bem,
+.cal-appt.t-cell, .week-appt.t-cell, .rail-sw.t-cell,
+.cal-appt.t-chi, .week-appt.t-chi, .rail-sw.t-chi,
+.cal-appt.t-eboo, .week-appt.t-eboo, .rail-sw.t-eboo,
+.cal-appt.t-ebooiv, .week-appt.t-ebooiv, .rail-sw.t-ebooiv,
+.cal-appt.t-ff25, .week-appt.t-ff25, .rail-sw.t-ff25,
+.cal-appt.t-ff50, .week-appt.t-ff50, .rail-sw.t-ff50,
+.cal-appt.t-fu, .week-appt.t-fu, .rail-sw.t-fu,
+.cal-appt.t-iron, .week-appt.t-iron, .rail-sw.t-iron,
+.cal-appt.t-lab, .week-appt.t-lab, .rail-sw.t-lab,
+.cal-appt.t-las, .week-appt.t-las, .rail-sw.t-las,
+.cal-appt.t-lym, .week-appt.t-lym, .rail-sw.t-lym,
+.cal-appt.t-mastb, .week-appt.t-mastb, .rail-sw.t-mastb,
+.cal-appt.t-mc100, .week-appt.t-mc100, .rail-sw.t-mc100,
+.cal-appt.t-minic, .week-appt.t-minic, .rail-sw.t-minic,
+.cal-appt.t-minimb, .week-appt.t-minimb, .rail-sw.t-minimb,
+.cal-appt.t-mito, .week-appt.t-mito, .rail-sw.t-mito,
+.cal-appt.t-newpt, .week-appt.t-newpt, .rail-sw.t-newpt,
+.cal-appt.t-nmt, .week-appt.t-nmt, .rail-sw.t-nmt,
+.cal-appt.t-pel, .week-appt.t-pel, .rail-sw.t-pel,
+.cal-appt.t-prp, .week-appt.t-prp, .rail-sw.t-prp,
+.cal-appt.t-tele, .week-appt.t-tele, .rail-sw.t-tele { --tone: rgba(255,255,255,.62); }
+
 .cal-appt.ty-visit, .week-appt.ty-visit, .rail-sw.ty-visit {
-  --tex: linear-gradient(transparent, transparent); }                     /* plain swatch */
+  --tex: linear-gradient(transparent, transparent); }                                    /* plain */
 .cal-appt.ty-iv, .week-appt.ty-iv, .rail-sw.ty-iv {
-  --tex: repeating-linear-gradient(180deg, rgba(0,0,0,.34) 0 3px, rgba(255,255,255,.50) 3px 6px); }
+  --tex: repeating-linear-gradient(180deg, var(--tone) 0 2px, transparent 2px 7px); }    /* banded */
 .cal-appt.ty-proc, .week-appt.ty-proc, .rail-sw.ty-proc {
-  --tex: repeating-linear-gradient(180deg, rgba(0,0,0,.34) 0 9px, rgba(255,255,255,.50) 9px 14px); }
+  --tex: repeating-linear-gradient(180deg, var(--tone) 0 3px, transparent 3px 12px); }   /* blocked */
 .cal-appt.ty-energ, .week-appt.ty-energ, .rail-sw.ty-energ {
-  --tex: repeating-linear-gradient(90deg, rgba(0,0,0,.34) 0 3px, rgba(255,255,255,.50) 3px 6px); }
+  --tex: repeating-linear-gradient(90deg, var(--tone) 0 2px, transparent 2px 6px); }     /* ribbed */
 .cal-appt.ty-treat, .week-appt.ty-treat, .rail-sw.ty-treat {
-  --tex: repeating-linear-gradient(135deg, rgba(0,0,0,.34) 0 3px, rgba(255,255,255,.50) 3px 6px); }
+  --tex: repeating-linear-gradient(135deg, var(--tone) 0 2px, transparent 2px 7px); }    /* hatched */
 
 /* the swatch itself: texture on top, the clinic's colour underneath */
 .cal-appt, .week-appt, .rail-sw {
@@ -1560,6 +1590,45 @@ a.lead-chip:hover { border-color: var(--ink); }
 .leg-key-txt b { display: block; font-size: 11.5px; font-weight: 700; color: var(--ink); }
 .leg-key-txt span { display: block; font-size: 10.5px; color: var(--muted); }
 .leg-items { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+/* the drawer says the status FIRST, whatever it is. A five-step ladder with
+   nothing marked on it — which is what a no-show used to get — reads as
+   "not started yet", the opposite of the truth. */
+.dr-status {
+  display: flex; gap: 11px; align-items: flex-start;
+  padding: 11px 13px; border-radius: var(--radius); margin-bottom: 14px;
+  border: 1px solid var(--line); background: var(--hx-band);
+}
+.dr-status > i { width: 30px; height: 20px; flex-shrink: 0; margin-top: 1px; }
+.dr-status b { display: block; font-size: 13.5px; color: var(--ink); }
+.dr-status span { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.dr-status.st-noshow    { border-color: var(--bd-noshow); background: var(--bg-ns-b); }
+.dr-status.st-cancelled { border-color: var(--bd-cancel); background: var(--bg-cx-b); }
+.dr-status.st-done      { border-color: var(--bd-done); background: var(--bg-done-b); }
+.dr-status.st-arrived   { border-color: var(--bd-arr); background: var(--bg-arr); }
+.dr-status.st-inroom, .dr-status.st-inchair { border-color: var(--bd-prog); background: var(--bg-prog); }
+.dr-status.st-locked    { border-color: var(--bd-lock); background: var(--bg-lock); }
+.dr-status.st-checkout  { border-color: var(--bd-chk); background: var(--bg-chk); }
+
+/* the legend groups by family, because Foundational Flow and Mega C are
+   LADDERS — six swatches plus one sentence beats six swatches read one by one */
+.leg-cols { display: flex; flex-direction: column; gap: 13px; min-width: 0; }
+.leg-grp { min-width: 0; }
+.leg-grp-t {
+  display: block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .7px; color: var(--ink); margin-bottom: 6px;
+}
+.leg-grp-t em { font-style: normal; font-weight: 500; text-transform: none;
+  letter-spacing: 0; color: var(--muted); font-size: 11px; }
+.leg-ladder { display: inline-flex; align-items: stretch; border: 1px solid var(--line);
+  border-radius: 4px; overflow: hidden; }
+.leg-step { display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 5px 9px 4px; font-size: 11px; font-variant-numeric: tabular-nums;
+  border-right: 1px solid var(--line); background: #fff; }
+.leg-step:last-child { border-right: none; }
+.leg-step .rail-sw { width: 34px; height: 14px; }
+.leg-grp-ours { padding-top: 11px; border-top: 1px dashed var(--line); }
+.leg-grp-ours .leg-grp-t { color: var(--muted); }
 
 .leg-fam { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); }
 .leg-fam i { width: 30px; height: 18px; border-radius: 2px; display: inline-block;
