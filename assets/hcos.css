@@ -1039,15 +1039,29 @@ a.lead-chip:hover { border-color: var(--ink); }
    white-text exception.
    ========================================================================== */
 :root {
-  /* SUBTYPE — one hue per named treatment. It appears on the rail and nowhere
-     else, which is what lets the board carry seventeen of them without turning
-     into a rainbow: the eye reads a 6px stripe, not a field of colour. */
+  /* SUBTYPE — the clinic's OWN colours, lifted from the eCW menu (Carlos,
+     2026-08-07). These are not design choices and must not be "improved": the
+     team already reads Mega C 50 as cream and Mito Boost as wine, and a
+     wireframe that renames their colours teaches them the wrong thing.
+     Ten of the twenty-three fall under 1.6:1 against white, so the rail is a
+     FILLED SWATCH with a defining edge, never a hairline. */
+  --sb-ff5:#C2ECEA;    --sb-ff10:#A5F0EF;  --sb-ff15:#66F2F2;
+  --sb-ff20:#5CC9C6;   --sb-ff25:#529CB4;  --sb-ff50:#2E5D6B;
+  --sb-mc15:#CCD9F0;   --sb-mc25:#F8E2A6;  --sb-mc50:#FBF1D8;
+  --sb-mc75:#F2DDC6;   --sb-mc100:#7C9DF2;
+  --sb-cell:#000000;   --sb-mast:#FAFA55;  --sb-mastb:#8FA9B0;
+  --sb-cog:#C9B69C;    --sb-iron:#F52BF5;  --sb-rest:#F6D9BC;
+  --sb-detox:#B9D3A2;  --sb-amino:#DCE5F6;
+  --sb-minic:#EF3423;  --sb-minimb:#DF8CAF; --sb-mito:#AF2A62;
+  --sb-ebooiv:#0000FF;
+
+  /* Everything the clinic has not given us a colour for keeps ours, and is
+     marked as ours in the legend so nobody mistakes it for the eCW menu. */
   --sb-newpt:#1B4F9C;  --sb-fu:#4E8FD0;    --sb-tele:#17A2A2;  --sb-lab:#6A5140;
-  --sb-nad:#6E3FA8;    --sb-megac:#D07C10; --sb-flow:#16867A;  --sb-glut:#3F9E52;
-  --sb-eboo:#A62121;   --sb-prp:#D2447E;   --sb-pellet:#8C6A00;
-  --sb-laser:#B23AA0;  --sb-bemer:#3D5AA8; --sb-lymph:#2C7BA0;
-  --sb-acu:#157F5E;    --sb-chiro:#7A6A2E; --sb-nmt:#A05226;
-  --sb-none:#6A6A6A;   /* blocked time is not a treatment — it takes the neutral */
+  --sb-eboo:#A62121;   --sb-prp:#D2447E;   --sb-pel:#8C6A00;
+  --sb-las:#B23AA0;    --sb-bem:#3D5AA8;   --sb-lym:#2C7BA0;
+  --sb-acu:#157F5E;    --sb-chi:#7A6A2E;   --sb-nmt:#A05226;
+  --sb-none:#B4B4B4;   /* blocked time is not a treatment */
 
   /* STATUS — owns the background. The three ways an appointment ENDS are the
      three striped fills; everything still live is a flat fill. */
@@ -1064,39 +1078,65 @@ a.lead-chip:hover { border-color: var(--ink); }
   --blk-muted:#4A4A4A;
 }
 
-/* ---- SUBTYPE = the rail's hue. Compound selectors only, so a filter chip
-        carrying the same word never inherits a colour. ---- */
-.cal-appt.t-newpt,  .week-appt.t-newpt,  .rail-sw.t-newpt  { --sb:var(--sb-newpt); }
-.cal-appt.t-fu,     .week-appt.t-fu,     .rail-sw.t-fu     { --sb:var(--sb-fu); }
-.cal-appt.t-tele,   .week-appt.t-tele,   .rail-sw.t-tele   { --sb:var(--sb-tele); }
-.cal-appt.t-lab,    .week-appt.t-lab,    .rail-sw.t-lab    { --sb:var(--sb-lab); }
-.cal-appt.t-nad,    .week-appt.t-nad,    .rail-sw.t-nad    { --sb:var(--sb-nad); }
-.cal-appt.t-ivc,    .week-appt.t-ivc,    .rail-sw.t-ivc    { --sb:var(--sb-megac); }
-.cal-appt.t-flow,   .week-appt.t-flow,   .rail-sw.t-flow   { --sb:var(--sb-flow); }
-.cal-appt.t-glut,   .week-appt.t-glut,   .rail-sw.t-glut   { --sb:var(--sb-glut); }
-.cal-appt.t-eboo,   .week-appt.t-eboo,   .rail-sw.t-eboo   { --sb:var(--sb-eboo); }
-.cal-appt.t-prp,    .week-appt.t-prp,    .rail-sw.t-prp    { --sb:var(--sb-prp); }
-.cal-appt.t-pel,    .week-appt.t-pel,    .rail-sw.t-pel    { --sb:var(--sb-pellet); }
-.cal-appt.t-las,    .week-appt.t-las,    .rail-sw.t-las    { --sb:var(--sb-laser); }
-.cal-appt.t-bem,    .week-appt.t-bem,    .rail-sw.t-bem    { --sb:var(--sb-bemer); }
-.cal-appt.t-lym,    .week-appt.t-lym,    .rail-sw.t-lym    { --sb:var(--sb-lymph); }
-.cal-appt.t-acu,    .week-appt.t-acu,    .rail-sw.t-acu    { --sb:var(--sb-acu); }
-.cal-appt.t-chi,    .week-appt.t-chi,    .rail-sw.t-chi    { --sb:var(--sb-chiro); }
-.cal-appt.t-nmt,    .week-appt.t-nmt,    .rail-sw.t-nmt    { --sb:var(--sb-nmt); }
-.cal-appt.t-block,  .week-appt.t-block,  .rail-sw.t-block  { --sb:var(--sb-none); }
+/* ---- SUBTYPE = the swatch's colour. Compound selectors only, so a filter
+        chip carrying the same word never inherits a treatment colour. ---- */
+.cal-appt.t-ff5, .week-appt.t-ff5, .rail-sw.t-ff5          { --sb:var(--sb-ff5); }
+.cal-appt.t-ff10, .week-appt.t-ff10, .rail-sw.t-ff10       { --sb:var(--sb-ff10); }
+.cal-appt.t-ff15, .week-appt.t-ff15, .rail-sw.t-ff15       { --sb:var(--sb-ff15); }
+.cal-appt.t-ff20, .week-appt.t-ff20, .rail-sw.t-ff20       { --sb:var(--sb-ff20); }
+.cal-appt.t-ff25, .week-appt.t-ff25, .rail-sw.t-ff25       { --sb:var(--sb-ff25); }
+.cal-appt.t-ff50, .week-appt.t-ff50, .rail-sw.t-ff50       { --sb:var(--sb-ff50); }
+.cal-appt.t-mc15, .week-appt.t-mc15, .rail-sw.t-mc15       { --sb:var(--sb-mc15); }
+.cal-appt.t-mc25, .week-appt.t-mc25, .rail-sw.t-mc25       { --sb:var(--sb-mc25); }
+.cal-appt.t-mc50, .week-appt.t-mc50, .rail-sw.t-mc50       { --sb:var(--sb-mc50); }
+.cal-appt.t-mc75, .week-appt.t-mc75, .rail-sw.t-mc75       { --sb:var(--sb-mc75); }
+.cal-appt.t-mc100, .week-appt.t-mc100, .rail-sw.t-mc100    { --sb:var(--sb-mc100); }
+.cal-appt.t-cell, .week-appt.t-cell, .rail-sw.t-cell       { --sb:var(--sb-cell); }
+.cal-appt.t-mast, .week-appt.t-mast, .rail-sw.t-mast       { --sb:var(--sb-mast); }
+.cal-appt.t-mastb, .week-appt.t-mastb, .rail-sw.t-mastb    { --sb:var(--sb-mastb); }
+.cal-appt.t-cog, .week-appt.t-cog, .rail-sw.t-cog          { --sb:var(--sb-cog); }
+.cal-appt.t-iron, .week-appt.t-iron, .rail-sw.t-iron       { --sb:var(--sb-iron); }
+.cal-appt.t-rest, .week-appt.t-rest, .rail-sw.t-rest       { --sb:var(--sb-rest); }
+.cal-appt.t-detox, .week-appt.t-detox, .rail-sw.t-detox    { --sb:var(--sb-detox); }
+.cal-appt.t-amino, .week-appt.t-amino, .rail-sw.t-amino    { --sb:var(--sb-amino); }
+.cal-appt.t-minic, .week-appt.t-minic, .rail-sw.t-minic    { --sb:var(--sb-minic); }
+.cal-appt.t-minimb, .week-appt.t-minimb, .rail-sw.t-minimb { --sb:var(--sb-minimb); }
+.cal-appt.t-mito, .week-appt.t-mito, .rail-sw.t-mito       { --sb:var(--sb-mito); }
+.cal-appt.t-ebooiv, .week-appt.t-ebooiv, .rail-sw.t-ebooiv { --sb:var(--sb-ebooiv); }
+.cal-appt.t-newpt, .week-appt.t-newpt, .rail-sw.t-newpt    { --sb:var(--sb-newpt); }
+.cal-appt.t-fu, .week-appt.t-fu, .rail-sw.t-fu             { --sb:var(--sb-fu); }
+.cal-appt.t-tele, .week-appt.t-tele, .rail-sw.t-tele       { --sb:var(--sb-tele); }
+.cal-appt.t-lab, .week-appt.t-lab, .rail-sw.t-lab          { --sb:var(--sb-lab); }
+.cal-appt.t-eboo, .week-appt.t-eboo, .rail-sw.t-eboo       { --sb:var(--sb-eboo); }
+.cal-appt.t-prp, .week-appt.t-prp, .rail-sw.t-prp          { --sb:var(--sb-prp); }
+.cal-appt.t-pel, .week-appt.t-pel, .rail-sw.t-pel          { --sb:var(--sb-pel); }
+.cal-appt.t-las, .week-appt.t-las, .rail-sw.t-las          { --sb:var(--sb-las); }
+.cal-appt.t-bem, .week-appt.t-bem, .rail-sw.t-bem          { --sb:var(--sb-bem); }
+.cal-appt.t-lym, .week-appt.t-lym, .rail-sw.t-lym          { --sb:var(--sb-lym); }
+.cal-appt.t-acu, .week-appt.t-acu, .rail-sw.t-acu          { --sb:var(--sb-acu); }
+.cal-appt.t-chi, .week-appt.t-chi, .rail-sw.t-chi          { --sb:var(--sb-chi); }
+.cal-appt.t-nmt, .week-appt.t-nmt, .rail-sw.t-nmt          { --sb:var(--sb-nmt); }
+.cal-appt.t-block, .week-appt.t-block, .rail-sw.t-block    { --sb:var(--sb-none); }
 
-/* ---- TYPE = the rail's texture. Five kinds, five shapes, and the shape is
-        what survives greyscale, a photocopier and colour blindness. ---- */
+/* ---- TYPE = the texture PRINTED ON the swatch. Drawn in two tones — a dark
+        pass and a light pass — so the shape reads on Cellular Boost's black and
+        on Mega C 50's cream alike. A single-tone pattern would vanish on one
+        end of the clinic's palette or the other. ---- */
 .cal-appt.ty-visit, .week-appt.ty-visit, .rail-sw.ty-visit {
-  --rail:linear-gradient(var(--sb),var(--sb)); }                                    /* solid  */
-.cal-appt.ty-iv,    .week-appt.ty-iv,    .rail-sw.ty-iv {
-  --rail:repeating-linear-gradient(180deg,var(--sb) 0 3px,transparent 3px 6px); }   /* dots   */
-.cal-appt.ty-proc,  .week-appt.ty-proc,  .rail-sw.ty-proc {
-  --rail:repeating-linear-gradient(180deg,var(--sb) 0 9px,transparent 9px 14px); }  /* dashes */
+  --tex: linear-gradient(transparent, transparent); }                     /* plain swatch */
+.cal-appt.ty-iv, .week-appt.ty-iv, .rail-sw.ty-iv {
+  --tex: repeating-linear-gradient(180deg, rgba(0,0,0,.34) 0 3px, rgba(255,255,255,.50) 3px 6px); }
+.cal-appt.ty-proc, .week-appt.ty-proc, .rail-sw.ty-proc {
+  --tex: repeating-linear-gradient(180deg, rgba(0,0,0,.34) 0 9px, rgba(255,255,255,.50) 9px 14px); }
 .cal-appt.ty-energ, .week-appt.ty-energ, .rail-sw.ty-energ {
-  --rail:linear-gradient(90deg,var(--sb) 0 2px,transparent 2px 4px,var(--sb) 4px 6px); } /* twin */
+  --tex: repeating-linear-gradient(90deg, rgba(0,0,0,.34) 0 3px, rgba(255,255,255,.50) 3px 6px); }
 .cal-appt.ty-treat, .week-appt.ty-treat, .rail-sw.ty-treat {
-  --rail:repeating-linear-gradient(135deg,var(--sb) 0 2.5px,transparent 2.5px 5.5px); } /* hatch */
+  --tex: repeating-linear-gradient(135deg, rgba(0,0,0,.34) 0 3px, rgba(255,255,255,.50) 3px 6px); }
+
+/* the swatch itself: texture on top, the clinic's colour underneath */
+.cal-appt, .week-appt, .rail-sw {
+  --rail: var(--tex), linear-gradient(var(--sb), var(--sb));
+}
 
 /* the padlock, drawn rather than typed — an emoji would break the palette */
 .lockmark {
@@ -1115,8 +1155,8 @@ a.lead-chip:hover { border-color: var(--ink); }
   position: absolute; left: 5px; right: 5px;
   container-type: size; container-name: appt;
   display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 0 4px; align-content: start;
-  padding: 5px 9px 5px 15px;
-  --sb: var(--sb-none); --rail: linear-gradient(var(--sb),var(--sb));
+  padding: 5px 9px 5px 21px;
+  --sb: var(--sb-none); --tex: linear-gradient(transparent,transparent);
   border: 1px solid var(--line);
   border-radius: 4px; background: #fff;
   overflow: hidden; cursor: pointer; z-index: 1;
@@ -1124,8 +1164,9 @@ a.lead-chip:hover { border-color: var(--ink); }
   min-height: 46px;
 }
 .cal-appt::before {                     /* the rail keeps full chroma at every status */
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 13px;
   background-color: transparent; background-image: var(--rail);
+  border-right: 1px solid rgba(0,0,0,.22);   /* defines the pale end of the palette */
 }
 .cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,.25); z-index: 5; }
 
@@ -1134,6 +1175,12 @@ a.lead-chip:hover { border-color: var(--ink); }
   grid-row: 1; grid-column: 1; font-size: 10.5px; font-weight: 800; letter-spacing: .15px;
   color: #1A1A1A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+/* "Foundational Flo…" is a failure: the number is the whole point of the name.
+   Long labels step down until they fit, because a truncated recipe tells you
+   nothing that the swatch has not already told you. */
+.cal-appt-sub.fit-1 { font-size: 9.5px; letter-spacing: 0; }
+.cal-appt-sub.fit-2 { font-size: 8.5px; letter-spacing: -.1px; }
+.cal-appt-sub.fit-3 { font-size: 7.8px; letter-spacing: -.2px; }
 .cal-appt .ai-flag { grid-row: 1; grid-column: 2; position: static; float: none;
   font-size: 9px; font-weight: 700; color: var(--ink); }
 .cal-appt-time { grid-row: 3; grid-column: 1; justify-self: start; min-width: 0;
@@ -1197,9 +1244,12 @@ a.lead-chip:hover { border-color: var(--ink); }
 /* ---- the black bar: printed only where a human is being waited on ---- */
 .cal-appt.st-arrived, .cal-appt.st-checkout, .cal-appt.st-noshow { padding-bottom: 16px; }
 /* a 30-minute block plus a bar has 25px of content room — the type fits into it */
-.cal-appt[style*="height:46px"].st-arrived .cal-appt-sub,
-.cal-appt[style*="height:46px"].st-checkout .cal-appt-sub,
-.cal-appt[style*="height:46px"].st-noshow .cal-appt-sub { font-size: 9px; line-height: 1.1; }
+/* the bar rules squeeze the label to make room; they must yield to a measured
+   fit class, or a long recipe name gets pushed back into an ellipsis */
+.cal-appt[style*="height:46px"].st-arrived .cal-appt-sub:not([class*="fit-"]),
+.cal-appt[style*="height:46px"].st-checkout .cal-appt-sub:not([class*="fit-"]),
+.cal-appt[style*="height:46px"].st-noshow .cal-appt-sub:not([class*="fit-"]) { font-size: 9px; line-height: 1.1; }
+.cal-appt[style*="height:46px"] .cal-appt-sub[class*="fit-"] { line-height: 1.1; }
 .cal-appt[style*="height:46px"].st-arrived .cal-appt-name,
 .cal-appt[style*="height:46px"].st-checkout .cal-appt-name,
 .cal-appt[style*="height:46px"].st-noshow .cal-appt-name { font-size: 10.5px; line-height: 1.15; margin-top: 0; }
@@ -1512,12 +1562,15 @@ a.lead-chip:hover { border-color: var(--ink); }
 .leg-items { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
 .leg-fam { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); }
-.leg-fam i { width: 6px; height: 20px; border-radius: 1px; display: inline-block;
-  background-color: transparent; background-image: var(--rail); }
+.leg-fam i { width: 30px; height: 18px; border-radius: 2px; display: inline-block;
+  background-color: transparent; background-image: var(--rail);
+  border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
 /* a legend specimen carries the same two rail variables a real block does */
-.rail-sw { --sb: var(--sb-none); --rail: linear-gradient(var(--sb),var(--sb));
-  width: 6px; height: 20px; border-radius: 1px; display: inline-block; flex-shrink: 0;
-  background-color: transparent; background-image: var(--rail); }
+/* the legend specimen is the clinic's filled cell, at reading size */
+.rail-sw { --sb: var(--sb-none); --tex: linear-gradient(transparent,transparent);
+  width: 30px; height: 18px; border-radius: 2px; display: inline-block; flex-shrink: 0;
+  background-color: transparent; background-image: var(--rail);
+  border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
 .leg-st { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
 .leg-sw { width: 30px; height: 19px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
 .leg-bar {
@@ -1533,8 +1586,8 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 /* week view — same three channels, half scale, no black bar */
 .week-appt { position: relative; border: 1px solid var(--line);
-  --sb: var(--sb-none); --rail: linear-gradient(var(--sb),var(--sb));
-  background: #fff; border-left: none; padding-left: 9px; }
+  --sb: var(--sb-none); --tex: linear-gradient(transparent,transparent);
+  background: #fff; border-left: none; padding-left: 14px; }
 .week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
   background-color: transparent; background-image: var(--rail); }
 .week-appt.st-scheduled { border-style: dashed; border-color: #C4C4C4; }

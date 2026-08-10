@@ -96,14 +96,27 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   INVERTED at his request).** One sentence a receptionist can repeat:
   **the stripe's colour is which treatment · the stripe's shape is what kind · the
   background is where they stand.**
-  - **SUBTYPE owns the rail's HUE** (`--sb-*`), one colour per named treatment — NAD+ violet,
-    Mega C amber, Foundational Flow teal, Glutathione green, EBOO red, PRP rose, and so on
-    through seventeen. It appears on the 6px `::before` rail and **nowhere else**, which is what
-    lets the board carry seventeen colours without becoming a rainbow: the eye reads a stripe,
-    not a field.
-  - **TYPE owns the rail's TEXTURE**: office visit solid · IV dotted · procedure dashed ·
-    energetics twin line · treatment hatched. The shape is what survives a photocopier and
-    colour blindness, so the family still reads in black and white.
+  - **SUBTYPE owns the swatch's COLOUR (`--sb-*`), and the colours are the CLINIC'S OWN,
+    lifted from the eCW menu unchanged (Carlos, 2026-08-07).** Foundational Flow 5→50 in
+    ascending teals, Mega C 15→100, Cellular Boost black, Mast Cell yellow, Core Iron Blend
+    magenta, Mito Boost wine, EBOO Boost IV pure blue — twenty-three in all. **These are not
+    design choices and must not be "improved":** the team already reads Mega C 50 as cream and
+    Mito Boost as wine, and a wireframe that renames their colours teaches them the wrong thing.
+    Anything the clinic has not given a colour for (visits, procedures, energetics, manual
+    therapies) keeps ours and is **labelled as ours** in the legend and on the codes screen.
+  - **Ten of the twenty-three fall below 1.6:1 against white** — Mast Cell is 1.11:1, Mega C 50
+    is 1.12:1. A thin stripe of those is invisible, so the rail is a **13px filled swatch with a
+    1px defining edge**, not a hairline: the clinic's own filled cell, shrunk.
+  - Long recipe names **step down in size until they fit** (`.fit-1/2/3`, applied by measurement
+    in `lFitSubs`). "Foundational Flo…" is a failure, because the number is the whole point of
+    the name. The measurement runs off a `ResizeObserver` on the grid **and** `document.fonts.ready`
+    — Inter lands after first paint and is wider than the fallback, so measuring before it
+    arrives measures the wrong text.
+  - **TYPE owns the TEXTURE PRINTED ON the swatch**: office visit plain · IV banded ·
+    procedure blocked · energetics ribbed · treatment hatched. It is drawn in **two tones** —
+    a dark pass and a light pass — so the shape reads on Cellular Boost's black and on Mega C
+    50's cream alike; a single-tone pattern vanishes at one end of the clinic's palette or the
+    other. The shape is what survives a photocopier and colour blindness.
   - **STATUS owns the BACKGROUND**, and it is the only thing that touches `background`:
     scheduled white + dashed · confirmed pale blue · arrived pale amber + ink ring ·
     in progress solid green · **locked** pale violet + a drawn padlock (`.lockmark`) ·

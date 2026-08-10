@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=54">
+<link rel="stylesheet" href="assets/hcos.css?v=56">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -343,18 +343,56 @@
           and the treatment filter. Change it here and it changes everywhere at once.
         </div>
 
-        <div class="tbl-wrap" style="margin-top:14px">
+                <div class="callout">
+          <strong>These are the clinic&rsquo;s colours, not ours.</strong> They are lifted from the eCW
+          menu unchanged, because the team already reads Mega C 50 as cream and Mito Boost as wine &mdash;
+          a wireframe that &ldquo;improves&rdquo; them would teach the wrong thing. Ten of the twenty-three
+          fall below 1.6:1 against white, which is why the calendar draws them as a filled swatch with a
+          defining edge rather than a thin stripe, and prints the type texture in two tones so the shape
+          reads on Cellular Boost&rsquo;s black and Mega C 50&rsquo;s cream alike.
+          Anything the clinic has not given a colour for is marked as ours and is still open to change.
+        </div>
+<div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
-            <thead><tr><th scope="col">Type</th><th scope="col">Subtype</th><th scope="col">Letters</th><th scope="col">Colour</th>
-              <th scope="col">Treatments that use it</th><th scope="col">Where it shows</th><th scope="col"></th></tr></thead>
+            <thead><tr><th scope="col">Type</th><th scope="col">Treatment</th><th scope="col">Swatch</th>
+              <th scope="col">Colour</th><th scope="col">Where it came from</th><th scope="col"></th></tr></thead>
             <tbody>
-              <tr><td>Infusion</td><td><strong>NAD+ infusion</strong></td><td><span class="type-mark tm-nad">NAD</span></td><td><span class="t-swatch" style="background:var(--tx-nad)"></span>Purple</td><td class="t-uses">NAD add on · Foundational Flow with NAD</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
-              <tr><td>Infusion</td><td><strong>IV vitamin C</strong></td><td><span class="type-mark tm-ivc">IVC</span></td><td><span class="t-swatch" style="background:var(--tx-ivc)"></span>Amber</td><td class="t-uses">Mega C 15 / 25 / 50 / 75 / 100</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
-              <tr><td>Infusion</td><td><strong>Foundational Flow &amp; pushes</strong></td><td><span class="type-mark tm-flo">FLO</span></td><td><span class="t-swatch" style="background:var(--tx-flow)"></span>Teal</td><td class="t-uses">Foundational Flow 5–50 · Glut add on · Hydration</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
-              <tr><td>Procedure</td><td><strong>EBOO</strong></td><td><span class="type-mark tm-ebo">EBO</span></td><td><span class="t-swatch" style="background:var(--tx-eboo)"></span>Red</td><td class="t-uses">EBOO</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
-              <tr><td>Visit</td><td><strong>Consults &amp; follow-ups</strong></td><td><span class="type-mark tm-con">CON</span></td><td><span class="t-swatch" style="background:var(--tx-consult)"></span>Blue</td><td class="t-uses">New patient · follow-up · transfer of care</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
-              <tr><td>Visit</td><td><strong>Telehealth</strong></td><td><span class="type-mark tm-tel">TEL</span></td><td><span class="t-swatch" style="background:var(--tx-tele)"></span>Green</td><td class="t-uses">Telehealth consult · remote follow-up</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
-              <tr><td>Diagnostic</td><td><strong>Lab draw</strong></td><td><span class="type-mark tm-lab">LAB</span></td><td><span class="t-swatch" style="background:var(--tx-lab)"></span>Brown</td><td class="t-uses">Quest draw · in-house panel</td><td><span class="pill pill-ok">On the calendar</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 5</strong></td><td><span class="rail-sw t-ff5 ty-iv"></span></td><td><code>#C2ECEA</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 10</strong></td><td><span class="rail-sw t-ff10 ty-iv"></span></td><td><code>#A5F0EF</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 15</strong></td><td><span class="rail-sw t-ff15 ty-iv"></span></td><td><code>#66F2F2</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 20</strong></td><td><span class="rail-sw t-ff20 ty-iv"></span></td><td><code>#5CC9C6</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 25</strong></td><td><span class="rail-sw t-ff25 ty-iv"></span></td><td><code>#529CB4</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 50</strong></td><td><span class="rail-sw t-ff50 ty-iv"></span></td><td><code>#2E5D6B</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 15</strong></td><td><span class="rail-sw t-mc15 ty-iv"></span></td><td><code>#CCD9F0</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 25</strong></td><td><span class="rail-sw t-mc25 ty-iv"></span></td><td><code>#F8E2A6</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 50</strong></td><td><span class="rail-sw t-mc50 ty-iv"></span></td><td><code>#FBF1D8</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 75</strong></td><td><span class="rail-sw t-mc75 ty-iv"></span></td><td><code>#F2DDC6</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 100</strong></td><td><span class="rail-sw t-mc100 ty-iv"></span></td><td><code>#7C9DF2</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Cellular Boost</strong></td><td><span class="rail-sw t-cell ty-iv"></span></td><td><code>#000000</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mast Cell</strong></td><td><span class="rail-sw t-mast ty-iv"></span></td><td><code>#FAFA55</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mast Cell &middot; Benadryl only</strong></td><td><span class="rail-sw t-mastb ty-iv"></span></td><td><code>#8FA9B0</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Cognitive Support</strong></td><td><span class="rail-sw t-cog ty-iv"></span></td><td><code>#C9B69C</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Core Iron Blend</strong></td><td><span class="rail-sw t-iron ty-iv"></span></td><td><code>#F52BF5</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Core Restore</strong></td><td><span class="rail-sw t-rest ty-iv"></span></td><td><code>#F6D9BC</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Detox Prime</strong></td><td><span class="rail-sw t-detox ty-iv"></span></td><td><code>#B9D3A2</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Essential Amino</strong></td><td><span class="rail-sw t-amino ty-iv"></span></td><td><code>#DCE5F6</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mini Cust</strong></td><td><span class="rail-sw t-minic ty-iv"></span></td><td><code>#EF3423</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mini MB</strong></td><td><span class="rail-sw t-minimb ty-iv"></span></td><td><code>#DF8CAF</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>Mito Boost</strong></td><td><span class="rail-sw t-mito ty-iv"></span></td><td><code>#AF2A62</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>IV</td><td><strong>EBOO Boost IV</strong></td><td><span class="rail-sw t-ebooiv ty-iv"></span></td><td><code>#0000FF</code></td><td><span class="pill pill-ok">From eCW</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Office visit</td><td><strong>New patient</strong></td><td><span class="rail-sw t-newpt ty-visit"></span></td><td><code>#1B4F9C</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Office visit</td><td><strong>Follow-up</strong></td><td><span class="rail-sw t-fu ty-visit"></span></td><td><code>#4E8FD0</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Office visit</td><td><strong>Telehealth</strong></td><td><span class="rail-sw t-tele ty-visit"></span></td><td><code>#17A2A2</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Procedure</td><td><strong>EBOO</strong></td><td><span class="rail-sw t-eboo ty-proc"></span></td><td><code>#A62121</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Procedure</td><td><strong>PRP</strong></td><td><span class="rail-sw t-prp ty-proc"></span></td><td><code>#D2447E</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Procedure</td><td><strong>Pellet</strong></td><td><span class="rail-sw t-pel ty-proc"></span></td><td><code>#8C6A00</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Procedure</td><td><strong>Lab draw</strong></td><td><span class="rail-sw t-lab ty-proc"></span></td><td><code>#6A5140</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Energetics</td><td><strong>Laser &middot; Erchonia</strong></td><td><span class="rail-sw t-las ty-energ"></span></td><td><code>#B23AA0</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Energetics</td><td><strong>BEMER</strong></td><td><span class="rail-sw t-bem ty-energ"></span></td><td><code>#3D5AA8</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Energetics</td><td><strong>LymphStar</strong></td><td><span class="rail-sw t-lym ty-energ"></span></td><td><code>#2C7BA0</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Treatment</td><td><strong>Acupuncture</strong></td><td><span class="rail-sw t-acu ty-treat"></span></td><td><code>#157F5E</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Treatment</td><td><strong>Chiro</strong></td><td><span class="rail-sw t-chi ty-treat"></span></td><td><code>#7A6A2E</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
+              <tr><td>Treatment</td><td><strong>Neuromuscular</strong></td><td><span class="rail-sw t-nmt ty-treat"></span></td><td><code>#A05226</code></td><td><span class="pill pill-muted">Ours &mdash; awaiting a clinic colour</span></td><td><button class="btn btn-sm" data-open-modal="#t-code-modal">Edit</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -511,7 +549,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=54"></script>
+<script src="assets/hcos.js?v=56"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {
