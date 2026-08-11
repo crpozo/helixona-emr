@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=60">
+<link rel="stylesheet" href="assets/hcos.css?v=61">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -182,7 +182,6 @@
                       <label class="msel-opt" data-st="st-confirmed"><input type="checkbox" aria-label="Confirmed"><i class="st-sw st-confirmed"></i>Confirmed</label>
                       <label class="msel-opt" data-st="st-arrived"><input type="checkbox" aria-label="Arrived"><i class="st-sw st-arrived"></i>Arrived</label>
                       <label class="msel-opt" data-st="st-inchair"><input type="checkbox" aria-label="In progress"><i class="st-sw st-inchair"></i>In progress</label>
-                      <label class="msel-opt" data-st="st-checkout"><input type="checkbox" aria-label="Ready to check out"><i class="st-sw st-checkout"></i>Ready to check out</label>
                       <label class="msel-opt" data-st="st-done"><input type="checkbox" aria-label="Complete"><i class="st-sw st-done"></i>Complete</label>
                       <label class="msel-opt" data-st="st-locked"><input type="checkbox" aria-label="Locked"><i class="st-sw st-locked"></i>Locked</label>
                       <label class="msel-opt" data-st="st-rescheduled"><input type="checkbox" aria-label="Rescheduled"><i class="st-sw st-rescheduled"></i>Rescheduled</label>
@@ -292,7 +291,7 @@
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-checkout t-fu ty-visit" style="top:440px;height:90px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-fu" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="11:00 AM" data-tx="Follow Up" data-note="8 of 8 · protocol complete, discuss graduation">
+              <div class="cal-appt st-done t-fu ty-visit" style="top:440px;height:90px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="11:00 AM" data-tx="Follow Up" data-note="8 of 8 · protocol complete, discuss graduation">
                 <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-note">8 of 8 · protocol complete, discuss graduation</div>
@@ -627,7 +626,7 @@
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-checkout t-ff50 ty-iv" style="top:396px;height:46px" data-appt="A-88356" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-ff50" data-days="1,2,5" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="10:30 AM" data-tx="Foundational Flow 50">
+              <div class="cal-appt st-done t-ff50 ty-iv" style="top:396px;height:46px" data-appt="A-88356" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff50" data-days="1,2,5" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="10:30 AM" data-tx="Foundational Flow 50">
                 <span class="cal-appt-sub">Foundational Flow 50</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-time">10:30 AM</div>
@@ -832,7 +831,7 @@
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-checkout t-cog ty-iv" style="top:396px;height:46px" data-appt="A-88384" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-cog" data-days="2" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="10:30 AM" data-tx="Cognitive Support">
+              <div class="cal-appt st-done t-cog ty-iv" style="top:396px;height:46px" data-appt="A-88384" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-cog" data-days="2" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="10:30 AM" data-tx="Cognitive Support">
                 <span class="cal-appt-sub">Cognitive Support</span>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-time">10:30 AM</div>
@@ -1168,7 +1167,6 @@
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
                 <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
-                <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
                 <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
                 <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
                 <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
@@ -1182,10 +1180,9 @@
                 <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
               <div class="leg-items">
                 <span class="leg-bar">Arrived &middot; waiting</span>
-                <span class="leg-bar">Ready to check out</span>
                 <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the watermark says the status on all ten; the bar
-                shouts it on the three where somebody is standing at the desk</span>
+                <span class="leg-sub-more">&mdash; the watermark says the status on all nine; the bar shouts it on the two
+                where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -1544,7 +1541,6 @@
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
                 <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
-                <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
                 <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
                 <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
                 <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
@@ -1558,10 +1554,9 @@
                 <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
               <div class="leg-items">
                 <span class="leg-bar">Arrived &middot; waiting</span>
-                <span class="leg-bar">Ready to check out</span>
                 <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the watermark says the status on all ten; the bar
-                shouts it on the three where somebody is standing at the desk</span>
+                <span class="leg-sub-more">&mdash; the watermark says the status on all nine; the bar shouts it on the two
+                where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -1879,7 +1874,6 @@
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
                 <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
-                <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
                 <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
                 <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
                 <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
@@ -1893,10 +1887,9 @@
                 <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
               <div class="leg-items">
                 <span class="leg-bar">Arrived &middot; waiting</span>
-                <span class="leg-bar">Ready to check out</span>
                 <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the watermark says the status on all ten; the bar
-                shouts it on the three where somebody is standing at the desk</span>
+                <span class="leg-sub-more">&mdash; the watermark says the status on all nine; the bar shouts it on the two
+                where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -3268,7 +3261,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=60"></script>
+<script src="assets/hcos.js?v=61"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3647,7 +3640,7 @@
     /* still live — name where it stands, then show the ladder */
     var NAME = { scheduled: 'Scheduled', confirmed: 'Confirmed', arrived: 'Arrived · waiting',
                  inroom: 'In progress · in room', inchair: 'In progress · in the chair',
-                 checkout: 'Ready to check out', locked: 'Locked' };
+                 locked: 'Locked' };
     var h = '<div class="dr-status st-' + a.st + '"><i class="st-sw st-' + a.st + '"></i>'
           + '<div><b>' + (NAME[a.st] || a.st) + '</b>'
           + '<span>' + (a.st === 'locked'
@@ -3692,7 +3685,7 @@
       tx: tx + (desc ? ' · ' + desc : ''),
       w: 'Today · ' + (b.getAttribute('data-when') || ''),
       r: res,
-      st: stCls === 'checkout' ? 'arrived' : stCls,
+      st: stCls,
       room: (col && /^c\d/.test(col.getAttribute('data-col') || '')) ? 'In chair' : 'In room',
       a: '', rd: 'Standard · carried from the signed order',
       pr: tx, prn: b.getAttribute('data-note') || 'Booked from the day view.',

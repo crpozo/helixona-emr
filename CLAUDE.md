@@ -103,9 +103,16 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   stays; the background moved from status to TYPE, and status became a faint symbol watermarked
   over the block.
   - **TYPE owns the background** (`--tybg-*`, class `ty-*`): Office visit `#B7CDB0`,
-    Procedure `#A9B9E2`, Energetics `#F9F0D4`, IV `#FBF4E2`. Labs, Diagnostics, FPE, 6 month
-    FPE, Chiro, EBOO and Laser are still **white — the clinic has not coloured them yet**, and
-    the legend says so rather than inventing one.
+    Procedure `#A9B9E2`, Energetics `#F9F0D4`, IV `#FBF4E2`. The clinic left seven blank and
+    **asked us to invent them (Carlos, 2026-08-11)**, so they are ours and marked as ours in the
+    token comments: Labs `#C3CEDE` pale slate — the vial, quiet and clinical · Diagnostics
+    `#EEC2DE` mauve — the catch-all, deliberately far from everything · FPE `#8FCDBB` deep
+    green-teal — it is a visit, the most thorough one · 6 month FPE `#CFF2E9`, the same hue
+    lighter, so the pair reads as a pair · Chiro `#ECD1B6` warm clay — hands-on · EBOO
+    `#E0B0B4` blood rose — it is THE blood circuit · Laser `#D3AEE4` violet — the Erchonia
+    diode's own colour. Chosen by search, not by eye: all eleven backgrounds are ≥34 apart in
+    RGB and every one clears 9:1 against the block's near-black text. (The clinic's own worst
+    pair, Energetics against IV, is 15 apart — that one is theirs to resolve.)
   - **SUBTYPE owns the side bar** (`--sb-*`, class `t-*`), a 13px solid band. The texture that
     used to live there was carrying TYPE, and TYPE is the background now, so a texture would
     say the same thing twice. Eight subtypes (BioMod Recharge, NMT, MEAD, MEAD ReAssessment,
@@ -114,7 +121,10 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   - **STATUS owns a watermark** (`--wm`), a faint symbol over the background at 17%: calendar
     (Scheduled) · check (Confirmed) · pin (Arrived) · play (In progress) · finish flag (Ready
     to check out / Complete) · padlock (Locked) · circular arrows (Rescheduled) · X (Cancelled)
-    · little ghost (No-show). **Drawn as inline SVG, never emoji** — an emoji renders in its own
+    · little ghost (No-show). **"Ready to check out" was retired (Carlos, 2026-08-11)** — the
+    finish flag belongs to Complete, and the clinic's own status list never had it. The
+    watermark sits at **34%**, not the 17% I first used: over these type backgrounds 17%
+    disappeared. **Drawn as inline SVG, never emoji** — an emoji renders in its own
     colours on top of a palette the clinic chose, and differently on every operating system.
     Each symbol exists **twice**: `.17` on the block, `.82` on the legend and the drawer banner.
     A 34px specimen of a 17% mark is invisible, and the legend is teaching the symbol, not
