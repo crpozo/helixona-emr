@@ -116,6 +116,13 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
     to check out / Complete) · padlock (Locked) · circular arrows (Rescheduled) · X (Cancelled)
     · little ghost (No-show). **Drawn as inline SVG, never emoji** — an emoji renders in its own
     colours on top of a palette the clinic chose, and differently on every operating system.
+    Each symbol exists **twice**: `.17` on the block, `.82` on the legend and the drawer banner.
+    A 34px specimen of a 17% mark is invisible, and the legend is teaching the symbol, not
+    imitating how faint it looks in place. (A `filter: contrast()` on the faint one does not
+    work — over a 95%-light background it pushes symbol and ground alike to white.)
+  - **Legend specimens own their own paint.** `.leg-fam i` sets layout only. It used to paint the
+    swatch as well, and at (0,1,1) it outranked `.ty-sw` and `.st-sw` at (0,1,0), so every type
+    and status specimen came out the subtype's grey.
   - **The black bar stays** on Arrived · waiting, Ready to check out and No-show. The watermark
     says the status on all ten; the bar shouts it on the three where somebody is standing at the
     desk, and a 17% watermark cannot carry that across a ninety-appointment board.
