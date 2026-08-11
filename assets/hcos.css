@@ -1309,42 +1309,11 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.half-l, .cal-appt.half-r { padding-left: 18px; padding-right: 6px; }
 .cal-appt.half-l::before, .cal-appt.half-r::before { width: 11px; }
 
-/* the black bar owns the bottom edge on these two, so the watermark lifts clear
-   of it rather than being sliced in half by it */
-.cal-appt.st-arrived, .cal-appt.st-noshow { background-position: right 9px bottom 19px; }
 /* a 30-minute block has no room for a 30px mark in the corner — it shrinks */
 @container appt (max-height: 62px) { .cal-appt { background-size: 22px 22px; } }
-@container appt (max-height: 62px) { .cal-appt.st-arrived, .cal-appt.st-noshow {
-  background-position: right 7px bottom 16px; } }
 
-/* ---- the black bar: printed only where a human is being waited on.
-        The watermark says the status on all eleven; the bar shouts it on the
-        three where somebody is standing at the desk. ---- */
-.cal-appt.st-arrived, .cal-appt.st-noshow { padding-bottom: 16px; }
-.cal-appt[style*="height:46px"].st-arrived .cal-appt-sub:not([class*="fit-"]),
-.cal-appt[style*="height:46px"].st-noshow .cal-appt-sub:not([class*="fit-"]) { font-size: 9px; line-height: 1.1; }
-.cal-appt[style*="height:46px"] .cal-appt-sub[class*="fit-"] { line-height: 1.1; }
-.cal-appt[style*="height:46px"].st-arrived .cal-appt-name,
-.cal-appt[style*="height:46px"].st-noshow .cal-appt-name { font-size: 10.5px; line-height: 1.15; margin-top: 0; }
-.cal-appt[style*="height:46px"].st-arrived,
-.cal-appt[style*="height:46px"].st-noshow { padding-top: 2px; }
-.cal-appt.st-arrived::after, .cal-appt.st-noshow::after {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  height: 13px; padding: 0 7px;
-  background: #1A1A1A; color: #fff;
-  font: 700 8px/13px var(--font-ui), sans-serif; letter-spacing: .6px; text-transform: uppercase;
-  white-space: nowrap; overflow: hidden;
-}
-.cal-appt.st-arrived::after  { content: 'Arrived \00b7 waiting'; }
-.cal-appt.st-noshow::after   { content: 'No-show'; }
-
-/* the legend specimens */
-.rail-sw { --sb: #9A9A9A;
-  width: 30px; height: 18px; border-radius: 2px; display: inline-block; flex-shrink: 0;
-  background: var(--sb); border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
-.ty-sw { --tybg: #FFFFFF;
-  width: 34px; height: 22px; border-radius: 2px; display: inline-block; flex-shrink: 0;
-  background: var(--tybg); border: 1px solid rgba(0,0,0,.30); box-sizing: border-box; }
+/* the watermark carries the status on its own now — the black bar is gone
+   (Carlos, 2026-08-11), and with it the padding it used to reserve. */
 
 /* ==========================================================================
    FLAGS — a fourth thing the block can say, and deliberately not a fourth
@@ -1353,10 +1322,36 @@ a.lead-chip:hover { border-color: var(--ink); }
    ========================================================================== */
 .fl-row { grid-row: 1; grid-column: 2; display: inline-flex; gap: 4px; align-items: center; }
 .fl {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0;
-  font-size: 12px; font-weight: 700; line-height: 1; border: 1.5px solid;
+  position: relative; display: inline-block; flex-shrink: 0;
+  width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid;
+  --fl-icon: none;
 }
+.fl::before {
+  content: ''; position: absolute; inset: 2px;
+  background-color: currentColor;
+  -webkit-mask: var(--fl-icon) no-repeat center / contain;
+  mask: var(--fl-icon) no-repeat center / contain;
+}
+
+/* ==========================================================================
+   FLAG ICONS — they were text glyphs (a triangle for an allergy, a cross for an
+   urgent alert, a four-pointed star for anything administrative) and none of
+   them said what they meant. Drawn now, with the stop sign Carlos asked for.
+
+   The shape is a CSS MASK, not a background image, so the severity colour tints
+   the icon: the mask takes the shape and background-color supplies the ink. A
+   data-URI SVG cannot inherit currentColor, which is why it has to be a mask.
+   ========================================================================== */
+.fl.fi-allergyfood  { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M7.6 1.2h8.8l6.4 6.4v8.8l-6.4 6.4H7.6l-6.4-6.4V7.6zM5 10.3h14v3.4H5z'/></svg>") }
+.fl.fi-allergydrug  { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g transform='rotate(-45 12 12)'><path fill-rule='evenodd' d='M7 7.6h10a4.4 4.4 0 010 8.8H7a4.4 4.4 0 010-8.8zM11.2 8.9h1.6v6.2h-1.6z'/></g></svg>") }
+.fl.fi-pregnant     { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='13.6' cy='4' r='2.7'/><path d='M12.7 7.5c-2.4 0-3.8 1.4-4.3 3.4-.2.9-.2 1.9 0 2.7l-2 .6.5 1.9 1.9-.6c.5.7 1.2 1.2 2 1.5l-.5 5h5l.4-4.6c2.3-.7 3.8-2.6 3.8-5 0-3-2.3-4.9-6.8-4.9z'/></svg>") }
+.fl.fi-urgent       { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M12 1.4l11.4 20.1a1.3 1.3 0 01-1.1 1.9H1.7a1.3 1.3 0 01-1.1-1.9zM10.7 7.8h2.6v7.8h-2.6zM12 16.8a1.6 1.6 0 100 3.2 1.6 1.6 0 000-3.2z'/></svg>") }
+.fl.fi-deficiency   { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill-rule='evenodd' d='M12 1.2C12 1.2 3.9 10 3.9 15.3a8.1 8.1 0 1016.2 0C20.1 10 12 1.2 12 1.2zM12 4.9c1.9 2.3 5.6 7.2 5.6 10.4a5.6 5.6 0 01-11.2 0C6.4 12.1 10.1 7.2 12 4.9z'/><path d='M6.7 15.8a5.4 5.4 0 0010.6 0z'/></svg>") }
+.fl.fi-authexpiry   { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='9.6' fill='none' stroke='%23000' stroke-width='2.4'/><path d='M12 6.2V12l4.2 2.6' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/></svg>") }
+.fl.fi-balance      { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='1.6' y='5.4' width='20.8' height='13.2' rx='2.2' fill='none' stroke='%23000' stroke-width='2.4'/><circle cx='12' cy='12' r='3.2'/></svg>") }
+.fl.fi-interpreter  { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 3.4h13.2a1.6 1.6 0 011.6 1.6v6.6a1.6 1.6 0 01-1.6 1.6H8.2L4 17v-3.8H2A1.6 1.6 0 01.4 11.6V5A1.6 1.6 0 012 3.4z' transform='translate(1.2 .6)'/><path d='M9.6 10.4h12.8a1.6 1.6 0 011.6 1.6v6.6a1.6 1.6 0 01-1.6 1.6H21V24l-4.2-3.8h-7.2A1.6 1.6 0 018 18.6V12a1.6 1.6 0 011.6-1.6z' fill='%23fff'/><path d='M9.6 10.4h12.8a1.6 1.6 0 011.6 1.6v6.6a1.6 1.6 0 01-1.6 1.6H21V24l-4.2-3.8h-7.2A1.6 1.6 0 018 18.6V12a1.6 1.6 0 011.6-1.6z' fill='none' stroke='%23000' stroke-width='2.2'/></svg>") }
+.fl.fi-forms        { --fl-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M5 1.6h9.2L20 7.4v15H5z' fill='none' stroke='%23000' stroke-width='2.4'/><path d='M14 1.6v6h6' fill='none' stroke='%23000' stroke-width='2.4'/><path d='M8.4 12.6h8M8.4 16.6h5' stroke='%23000' stroke-width='2.2' stroke-linecap='round'/></svg>") }
+
 .fl.sev-high { background: #FBE3E0; border-color: #C0392B; color: #8E2118; }
 .fl.sev-med  { background: #FBEFD7; border-color: #C98A1E; color: #7A5510; }
 .fl.sev-low  { background: #EDEDED; border-color: #A8A8A8; color: #3D3D3D; }
@@ -1367,12 +1362,22 @@ a.lead-chip:hover { border-color: var(--ink); }
 .fl-line { display: flex; gap: 9px; align-items: flex-start; padding: 8px 0;
   border-bottom: 1px solid var(--line-soft); font-size: 12.5px; }
 .fl-line:last-child { border-bottom: none; }
-.fl-line .fl { width: 20px; height: 20px; font-size: 12px; margin-top: 1px; }
+.fl-line .fl { width: 24px; height: 24px; margin-top: 1px; }
 .fl-line b { display: block; font-size: 12.5px; }
 .fl-cat {
   font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
   color: var(--muted); border: 1px solid var(--line); border-radius: 9px; padding: 1px 7px;
 }
+
+/* the legend specimens: a side bar, a type fill */
+.rail-sw { --sb: #9A9A9A;
+  width: 30px; height: 18px; border-radius: 2px; display: inline-block; flex-shrink: 0;
+  background: var(--sb); border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
+.ty-sw { --tybg: #FFFFFF;
+  width: 34px; height: 22px; border-radius: 2px; display: inline-block; flex-shrink: 0;
+  background: var(--tybg); border: 1px solid rgba(0,0,0,.30); box-sizing: border-box; }
+/* a measured fit class must outrank the density rules */
+.cal-appt[style*="height:46px"] .cal-appt-sub[class*="fit-"] { line-height: 1.1; }
 
 /* a status specimen shows the WATERMARK, because that is what status is now */
 /* the swatch is 30px, not a 90px block: at 17% the symbol disappears, so the
@@ -1434,17 +1439,9 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.mini .cal-appt-sub { grid-row: 1; grid-column: 1; font-size: 9.5px; }
 .cal-appt.mini .cal-appt-name { grid-row: 1; grid-column: 2; font-size: 10px; }
 .cal-appt.mini .cal-appt-time, .cal-appt.mini .cal-appt-type { display: none; }
-.cal-appt.mini.st-arrived, .cal-appt.mini.st-noshow {
-  padding-bottom: 0; padding-right: 11px; }
 .cal-appt.mini.st-arrived::after, .cal-appt.mini.st-noshow::after {
   content: ''; left: auto; top: 0; bottom: 0; right: 0; width: 4px; height: auto; padding: 0; }
 
-/* opt-in: print every status word, for a team that wants all eight */
-.cal.st-words .cal-appt:not(.st-arrived):not(.st-noshow)::after {
-  content: attr(data-st); position: absolute; left: 11px; bottom: 1px;
-  font: 700 8px/1 var(--font-ui), sans-serif; letter-spacing: .4px; text-transform: uppercase;
-  color: var(--blk-muted);
-}
 
 /* Restored: filter dropdowns, hover zoom and the saved-view lock */
 .filter-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -1696,11 +1693,6 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 .leg-st { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
 .leg-sw { width: 30px; height: 19px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
-.leg-bar {
-  display: inline-block; background: #1A1A1A; color: #fff; border-radius: 2px;
-  font: 700 8px/15px var(--font-ui), sans-serif; letter-spacing: .6px;
-  text-transform: uppercase; padding: 0 7px;
-}
 .leg-items > span[class^="ty-"], .leg-items > span[class*=" ty-"] { display: inline-flex; }
 .leg-sub { font-size: 12px; font-weight: 800; letter-spacing: .15px; color: #1A1A1A; }
 .leg-sub-more { font-size: 11px; color: var(--muted); }

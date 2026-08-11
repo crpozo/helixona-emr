@@ -135,9 +135,6 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   - **Legend specimens own their own paint.** `.leg-fam i` sets layout only. It used to paint the
     swatch as well, and at (0,1,1) it outranked `.ty-sw` and `.st-sw` at (0,1,0), so every type
     and status specimen came out the subtype's grey.
-  - **The black bar stays** on Arrived · waiting, Ready to check out and No-show. The watermark
-    says the status on all ten; the bar shouts it on the three where somebody is standing at the
-    desk, and a 17% watermark cannot carry that across a ninety-appointment board.
 - **The taxonomy is the clinic's: ELEVEN types, not five.** Office visit · Procedure ·
   Energetics · Labs · IV · Diagnostics · FPE · 6 month FPE · Chiro · EBOO · Laser. EBOO, Chiro
   and Laser were subtypes in my version and are TYPES here. "Treatment" is retired.
@@ -150,6 +147,19 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   in `lFitSubs`). "Foundational Flo…" is a failure: the number is the whole point of the name.
   The measurement runs off a `ResizeObserver` on the grid **and** `document.fonts.ready` — Inter
   lands after first paint and is wider than the fallback.
+- **Flag icons are drawn, not typed (Carlos, 2026-08-11).** They were text glyphs — a triangle
+  for an allergy, a cross for an urgent alert, a four-pointed star for anything administrative
+  — and none of them said what they meant. Nine icons now: **a stop sign for a food allergy**,
+  a capsule for a drug allergy, a silhouette for pregnancy, a warning triangle for an urgent
+  alert, a half-empty droplet for a deficiency, a clock for an expiring prior auth, a banknote
+  for a balance, speech bubbles for an interpreter, a document for missing forms.
+  - They are a **CSS mask**, not a background image, so the severity colour tints the icon: the
+    mask takes the shape and `background-color` supplies the ink. A data-URI SVG cannot inherit
+    `currentColor`, which is the whole reason it has to be a mask.
+  - **A white sub-shape does not cut a hole in a mask** — only alpha counts, so a white fill is
+    still opaque and gets drawn. The bar in the stop sign, the divider in the capsule and the
+    "!" in the triangle are cut with `fill-rule='evenodd'` on a single path.
+- **The black bar is gone (Carlos, 2026-08-11).** The watermark carries the status on its own.
 - **Flags are a fourth thing the block says, and deliberately not a fourth channel.** They live
   in their own corner cell, never on the rail or the fill. A flag has a **category** (Medical /
   Billing / Admin — who cares) and a **severity** (how loud); those are separate on purpose,

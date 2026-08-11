@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=62">
+<link rel="stylesheet" href="assets/hcos.css?v=64">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -309,8 +309,8 @@
                 <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
                 <div class="cal-appt-time">1:00 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-newpt ty-visit half-r" style="top:616px;height:90px" data-appt="A-88311" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="2" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="1:00 PM" data-tx="New patient" data-note="All consents signed · chart prepped" data-flags="interp">
-                <span class="fl-row"><span class="fl sev-low" title="Interpreter needed — Spanish · Admin">✦</span></span>
+              <div class="cal-appt st-confirmed t-newpt ty-visit half-r" style="top:616px;height:90px" data-appt="A-88311" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="2" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="1:00 PM" data-tx="New patient" data-note="All consents signed · chart prepped" data-flags="interpreter">
+                <span class="fl-row"><span class="fl sev-low fi-interpreter" title="Interpreter needed — Spanish · Admin"></span></span>
                 <span class="cal-appt-sub">New patient</span>
                 <div class="cal-appt-name">Walter Hsu</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
@@ -344,7 +344,7 @@
                 <span class="cal-appt-type">Cigna</span>
               </div>
               <div class="cal-appt st-scheduled t-nptoc ty-visit" style="top:968px;height:90px" data-appt="A-88316" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-nptoc" data-days="2,4" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="New patient TOC" data-note="Consents signed · no pending lab request" data-flags="pregnant">
-                <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
+                <span class="fl-row"><span class="fl sev-high fi-pregnant" title="Pregnant — second trimester · Medical"></span></span>
                 <span class="cal-appt-sub">New patient TOC</span>
                 <div class="cal-appt-name">Yuki Tanaka</div>
                 <div class="cal-appt-note">Consents signed · no pending lab request</div>
@@ -395,7 +395,7 @@
                 <div class="cal-appt-time">10:00 AM</div>
               </div>
               <div class="cal-appt st-noshow t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88323" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="10:00 AM" data-tx="Follow Up" data-note="Quest not yet done · chasing the draw" data-flags="balance">
-                <span class="fl-row"><span class="fl sev-med" title="Outstanding balance $340 · Billing">$</span></span>
+                <span class="fl-row"><span class="fl sev-med fi-balance" title="Outstanding balance $340 · Billing"></span></span>
                 <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Victor Reyes</div>
                 <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
@@ -422,7 +422,7 @@
                 <div class="cal-appt-time">12:00 PM</div>
               </div>
               <div class="cal-appt st-confirmed t-newpt ty-visit" style="top:616px;height:90px" data-appt="A-88327" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="2" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="1:00 PM" data-tx="New patient" data-note="Cash patient · charge at the desk before the visit" data-flags="forms">
-                <span class="fl-row"><span class="fl sev-low" title="Intake forms not returned · Admin">✦</span></span>
+                <span class="fl-row"><span class="fl sev-low fi-forms" title="Intake forms not returned · Admin"></span></span>
                 <span class="cal-appt-sub">New patient</span>
                 <div class="cal-appt-name">Owen Delacroix</div>
                 <div class="cal-appt-note">Cash patient · charge at the desk before the visit</div>
@@ -588,8 +588,8 @@
             <!-- IV 1 -->
             <div class="daycal-col" data-col="c1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-ff5 ty-iv ai-warn" style="top:176px;height:46px" data-appt="A-88351" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff5" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="8:00 AM" data-tx="Foundational Flow 5" data-note="Ran 20 min long on her last three" data-flags="deficit">
-                <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
+              <div class="cal-appt st-done t-ff5 ty-iv ai-warn" style="top:176px;height:46px" data-appt="A-88351" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff5" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="8:00 AM" data-tx="Foundational Flow 5" data-note="Ran 20 min long on her last three" data-flags="deficiency">
+                <span class="fl-row"><span class="fl sev-med fi-deficiency" title="Deficiency — ferritin 11 ng/mL · Medical"></span></span>
                 <span class="ai-flag" title="Runs long — 20 min over on her last three">!</span>
                 <span class="cal-appt-sub">Foundational Flow 5</span>
                 <div class="cal-appt-name">Maya Reyes</div>
@@ -680,8 +680,8 @@
                 <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-scheduled t-mast ty-iv is-tentative" style="top:748px;height:46px" data-appt="A-88364" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="2:30 PM" data-tx="Mast Cell" data-note="No active order — booked tentative" data-flags="auth">
-                <span class="fl-row"><span class="fl sev-high" title="Prior authorisation expires today · Billing">$</span></span>
+              <div class="cal-appt st-scheduled t-mast ty-iv is-tentative" style="top:748px;height:46px" data-appt="A-88364" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="2:30 PM" data-tx="Mast Cell" data-note="No active order — booked tentative" data-flags="authexpiry">
+                <span class="fl-row"><span class="fl sev-high fi-authexpiry" title="Prior authorisation expires today · Billing"></span></span>
                 <span class="cal-appt-sub">Mast Cell</span>
                 <div class="cal-appt-name">Rosa Iglesias</div>
                 <div class="cal-appt-note">No active order — booked tentative</div>
@@ -750,8 +750,8 @@
                 <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-inchair t-mito ty-iv" style="top:440px;height:46px" data-appt="A-88373" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mito" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Mito Boost" data-flags="allergy">
-                <span class="fl-row"><span class="fl sev-high" title="Allergy — sulfa, documented reaction · Medical">▲</span></span>
+              <div class="cal-appt st-inchair t-mito ty-iv" style="top:440px;height:46px" data-appt="A-88373" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mito" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Mito Boost" data-flags="allergydrug">
+                <span class="fl-row"><span class="fl sev-high fi-allergydrug" title="Drug allergy — sulfa, documented reaction · Medical"></span></span>
                 <span class="cal-appt-sub">Mito Boost</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-time">11:00 AM</div>
@@ -759,7 +759,7 @@
                 <span class="actor-tag">Bea</span>
               </div>
               <div class="cal-appt st-arrived t-ebooiv ty-iv" style="top:484px;height:46px" data-appt="A-88374" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-ebooiv" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:30 AM" data-tx="EBOO Boost IV" data-flags="pregnant">
-                <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
+                <span class="fl-row"><span class="fl sev-high fi-pregnant" title="Pregnant — second trimester · Medical"></span></span>
                 <span class="cal-appt-sub">EBOO Boost IV</span>
                 <div class="cal-appt-name">Rosa Iglesias</div>
                 <div class="cal-appt-time">11:30 AM</div>
@@ -838,8 +838,8 @@
                 <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-inchair t-iron ty-iv" style="top:440px;height:46px" data-appt="A-88385" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-iron" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="11:00 AM" data-tx="Core Iron Blend" data-flags="deficit">
-                <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
+              <div class="cal-appt st-inchair t-iron ty-iv" style="top:440px;height:46px" data-appt="A-88385" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-iron" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="11:00 AM" data-tx="Core Iron Blend" data-flags="deficiency">
+                <span class="fl-row"><span class="fl sev-med fi-deficiency" title="Deficiency — ferritin 11 ng/mL · Medical"></span></span>
                 <span class="cal-appt-sub">Core Iron Blend</span>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-time">11:00 AM</div>
@@ -1002,7 +1002,7 @@
             <div class="daycal-col" data-col="room2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
               <div class="cal-appt st-done t-block ty-eboo" style="top:0px;height:134px" data-appt="A-88407" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-block" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="EBOO" data-note="Early circuit — she travels at noon" data-flags="urgent">
-                <span class="fl-row"><span class="fl sev-high" title="Urgent medical alert — cardiology follow-up open · Medical">✚</span></span>
+                <span class="fl-row"><span class="fl sev-high fi-urgent" title="Urgent medical alert — cardiology follow-up open · Medical"></span></span>
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-note">Early circuit — she travels at noon</div>
@@ -1084,7 +1084,6 @@
                 <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
                 <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
                 <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
-                <span class="leg-sub-more" style="width:100%">&mdash; the clinic has coloured Office visit, Procedure, Energetics and IV; the rest are still white</span>
               </div>
             </div>
 
@@ -1176,13 +1175,8 @@
             </div>
 
             <div class="leg-row leg-foot">
-              <div class="leg-key"><span class="leg-n">&#9679;</span>
-                <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
+              <div class="leg-key"></div>
               <div class="leg-items">
-                <span class="leg-bar">Arrived &middot; waiting</span>
-                <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the watermark says the status on all nine; the bar shouts it on the two
-                where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -1458,7 +1452,6 @@
                 <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
                 <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
                 <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
-                <span class="leg-sub-more" style="width:100%">&mdash; the clinic has coloured Office visit, Procedure, Energetics and IV; the rest are still white</span>
               </div>
             </div>
 
@@ -1550,13 +1543,8 @@
             </div>
 
             <div class="leg-row leg-foot">
-              <div class="leg-key"><span class="leg-n">&#9679;</span>
-                <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
+              <div class="leg-key"></div>
               <div class="leg-items">
-                <span class="leg-bar">Arrived &middot; waiting</span>
-                <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the watermark says the status on all nine; the bar shouts it on the two
-                where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -1791,7 +1779,6 @@
                 <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
                 <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
                 <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
-                <span class="leg-sub-more" style="width:100%">&mdash; the clinic has coloured Office visit, Procedure, Energetics and IV; the rest are still white</span>
               </div>
             </div>
 
@@ -1883,13 +1870,8 @@
             </div>
 
             <div class="leg-row leg-foot">
-              <div class="leg-key"><span class="leg-n">&#9679;</span>
-                <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
+              <div class="leg-key"></div>
               <div class="leg-items">
-                <span class="leg-bar">Arrived &middot; waiting</span>
-                <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the watermark says the status on all nine; the bar shouts it on the two
-                where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -2107,7 +2089,7 @@
             </tr></thead>
             <tbody id="l-flags-body">
               <tr>
-                <td><span class="fl sev-high">&#9650;</span> Allergy alert</td>
+                <td><span class="fl sev-high fi-allergyfood"></span> Food allergy</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
                 <td>Calendar, chart, infusion bay</td>
@@ -2115,7 +2097,15 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-high">&#9673;</span> Pregnant</td>
+                <td><span class="fl sev-high fi-allergydrug"></span> Drug allergy</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Calendar, chart, orders, pharmacy</td>
+                <td>Provider, MA, Nurse</td>
+                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+              </tr>
+              <tr>
+                <td><span class="fl sev-high fi-pregnant"></span> Pregnant</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
                 <td>Calendar, chart, orders</td>
@@ -2123,7 +2113,7 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-high">&#10010;</span> Urgent medical alert</td>
+                <td><span class="fl sev-high fi-urgent"></span> Urgent medical alert</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
                 <td>Everywhere the patient appears</td>
@@ -2131,7 +2121,7 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-med">&#9660;</span> Deficiency</td>
+                <td><span class="fl sev-med fi-deficiency"></span> Deficiency</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>Medium</td>
                 <td>Calendar, chart</td>
@@ -2139,7 +2129,7 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-high">$</span> Prior auth expiring</td>
+                <td><span class="fl sev-high fi-authexpiry"></span> Prior auth expiring</td>
                 <td><span class="fl-cat">Billing</span></td>
                 <td>High &mdash; rings the block</td>
                 <td>Calendar, booking, claim</td>
@@ -2147,7 +2137,7 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-med">$</span> Outstanding balance</td>
+                <td><span class="fl sev-med fi-balance"></span> Outstanding balance</td>
                 <td><span class="fl-cat">Billing</span></td>
                 <td>Medium</td>
                 <td>Calendar, check-in</td>
@@ -2155,7 +2145,7 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-low">&#10022;</span> Interpreter needed</td>
+                <td><span class="fl sev-low fi-interpreter"></span> Interpreter needed</td>
                 <td><span class="fl-cat">Admin</span></td>
                 <td>Low</td>
                 <td>Calendar, check-in</td>
@@ -2163,7 +2153,7 @@
                 <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
               </tr>
               <tr>
-                <td><span class="fl sev-low">&#10022;</span> Intake forms missing</td>
+                <td><span class="fl sev-low fi-forms"></span> Intake forms missing</td>
                 <td><span class="fl-cat">Admin</span></td>
                 <td>Low</td>
                 <td>Calendar, check-in</td>
@@ -2180,7 +2170,7 @@
             <div class="card-title">Medical</div>
             <div class="field-help">Anything that changes what is safe to give. Read by the calendar,
               the chart, the order screen and the infusion bay.</div>
-            <div class="prov"><span>4 flag types &middot; owned by Dr. Drannikov</span></div>
+            <div class="prov"><span>5 flag types &middot; owned by Dr. Drannikov</span></div>
           </div>
           <div class="card">
             <div class="card-title">Billing</div>
@@ -2207,7 +2197,7 @@
       <div class="frame-body">
         <div class="app-header">
           <div>
-            <div class="page-title">Allergy alert</div>
+            <div class="page-title">Food allergy</div>
             <div class="page-sub">Medical &middot; high severity &middot; used on 34 patients</div>
           </div>
           <div class="app-user">
@@ -2220,9 +2210,9 @@
           <div class="card">
             <div class="card-title">What it says</div>
             <div class="field"><label class="field-lbl" for="l-fe-name">Name</label>
-              <input class="field-input" id="l-fe-name" value="Allergy alert"></div>
+              <input class="field-input" id="l-fe-name" value="Food allergy"></div>
             <div class="field"><label class="field-lbl" for="l-fe-text">Wording on the appointment</label>
-              <input class="field-input" id="l-fe-text" value="Allergy — sulfa, documented reaction"></div>
+              <input class="field-input" id="l-fe-text" value="Food allergy — tree nuts, documented reaction"></div>
             <div class="field"><label class="field-lbl" for="l-fe-cat">Category</label>
               <select class="field-select" id="l-fe-cat">
                 <option selected>Medical</option><option>Billing</option><option>Admin</option>
@@ -2239,12 +2229,15 @@
             </div>
             <div class="field"><label class="field-lbl" for="l-fe-icon">Icon</label>
               <div class="chip-row">
-                <button class="filter-chip active" type="button">&#9650;</button>
-                <button class="filter-chip" type="button">&#9673;</button>
-                <button class="filter-chip" type="button">&#10010;</button>
-                <button class="filter-chip" type="button">&#9660;</button>
-                <button class="filter-chip" type="button">$</button>
-                <button class="filter-chip" type="button">&#10022;</button>
+                <button class="filter-chip active" type="button" title="Food allergy"><span class="fl sev-high fi-allergyfood"></span></button>
+                <button class="filter-chip" type="button" title="Drug allergy"><span class="fl sev-high fi-allergydrug"></span></button>
+                <button class="filter-chip" type="button" title="Pregnant"><span class="fl sev-high fi-pregnant"></span></button>
+                <button class="filter-chip" type="button" title="Urgent medical alert"><span class="fl sev-high fi-urgent"></span></button>
+                <button class="filter-chip" type="button" title="Deficiency"><span class="fl sev-med fi-deficiency"></span></button>
+                <button class="filter-chip" type="button" title="Prior auth expiring"><span class="fl sev-high fi-authexpiry"></span></button>
+                <button class="filter-chip" type="button" title="Outstanding balance"><span class="fl sev-med fi-balance"></span></button>
+                <button class="filter-chip" type="button" title="Interpreter needed"><span class="fl sev-low fi-interpreter"></span></button>
+                <button class="filter-chip" type="button" title="Intake forms missing"><span class="fl sev-low fi-forms"></span></button>
               </div>
               <input type="hidden" id="l-fe-icon" value="triangle">
             </div>
@@ -2253,14 +2246,14 @@
           <div class="card">
             <div class="card-title">How it will look</div>
             <div class="cal-appt ty-iv t-nad st-confirmed has-high leg-spec" style="margin-bottom:14px">
-              <span class="fl-row"><span class="fl sev-high">&#9650;</span></span>
+              <span class="fl-row"><span class="fl sev-high fi-allergyfood"></span></span>
               <span class="cal-appt-sub">NAD+</span>
               <span class="cal-appt-time">11:30</span>
               <span class="cal-appt-name">Ben Okonkwo</span>
             </div>
             <div class="fl-line">
-              <span class="fl sev-high">&#9650;</span>
-              <span><b>Allergy &mdash; sulfa, documented reaction</b>
+              <span class="fl sev-high fi-allergyfood"></span>
+              <span><b>Food allergy &mdash; tree nuts, documented reaction</b>
                 <span class="fl-cat">Medical</span> <span class="fl-cat">high severity</span></span>
             </div>
             <div class="seg-divider">Who may set it</div>
@@ -3261,7 +3254,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=62"></script>
+<script src="assets/hcos.js?v=64"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3772,7 +3765,7 @@
     return ks.map(function (k) {
       var f = L_FLAGS[k]; if (!f) return '';
       return '<div class="fl-line" data-fl="' + k + '">' +
-        '<span class="fl sev-' + f.sev + '">' + f.icon + '</span>' +
+        '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '"></span>' +
         '<span style="flex:1"><b>' + f.text + '</b>' +
         '<span class="fl-cat">' + f.cat + '</span> ' +
         '<span class="fl-cat">' + f.sev + ' severity</span></span>' +
@@ -3792,7 +3785,7 @@
     if (help) help.remove();
     var d = document.createElement('div');
     d.className = 'fl-line'; d.setAttribute('data-fl', k);
-    d.innerHTML = '<span class="fl sev-' + f.sev + '">' + f.icon + '</span>' +
+    d.innerHTML = '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '"></span>' +
       '<span style="flex:1"><b>' + f.text + '</b><span class="fl-cat">' + f.cat + '</span> ' +
       '<span class="fl-cat">' + f.sev + ' severity</span></span>' +
       '<button class="btn btn-sm" data-row-del aria-label="Remove this flag">Remove</button>';
@@ -3805,7 +3798,7 @@
       var row = b.querySelector('.fl-row');
       if (!row) { row = document.createElement('span'); row.className = 'fl-row'; b.appendChild(row); }
       row.insertAdjacentHTML('beforeend',
-        '<span class="fl sev-' + f.sev + '" title="' + f.text + ' · ' + f.cat + '">' + f.icon + '</span>');
+        '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '" title="' + f.text + ' · ' + f.cat + '"></span>');
       if (f.sev === 'high') b.classList.add('has-high');
     }
     HCOS.toast('Flag added. It shows on the block and travels with the appointment.', 'ok');
@@ -4278,14 +4271,15 @@
      an admin flag can be urgent, and a medical one can be a footnote.
      ========================================================================== */
   var L_FLAGS = {
-    allergy:  { icon: '\u25B2', sev: 'high', cat: 'Medical', text: 'Allergy — sulfa, documented reaction' },
-    pregnant: { icon: '\u25C9', sev: 'high', cat: 'Medical', text: 'Pregnant — second trimester' },
-    urgent:   { icon: '\u271A', sev: 'high', cat: 'Medical', text: 'Urgent medical alert — cardiology follow-up open' },
-    deficit:  { icon: '\u25BC', sev: 'med',  cat: 'Medical', text: 'Deficiency — ferritin 11 ng/mL' },
-    balance:  { icon: '$',       sev: 'med',  cat: 'Billing', text: 'Outstanding balance $340' },
-    auth:     { icon: '$',       sev: 'high', cat: 'Billing', text: 'Prior authorisation expires today' },
-    interp:   { icon: '\u2726', sev: 'low',  cat: 'Admin',   text: 'Interpreter needed — Spanish' },
-    forms:    { icon: '\u2726', sev: 'low',  cat: 'Admin',   text: 'Intake forms not returned' }
+    allergyfood:  { icon: 'allergyfood', sev: 'high', cat: 'Medical', name: 'Food allergy', text: 'Food allergy — tree nuts, documented reaction' },
+    allergydrug:  { icon: 'allergydrug', sev: 'high', cat: 'Medical', name: 'Drug allergy', text: 'Drug allergy — sulfa, documented reaction' },
+    pregnant:     { icon: 'pregnant', sev: 'high', cat: 'Medical', name: 'Pregnant', text: 'Pregnant — second trimester' },
+    urgent:       { icon: 'urgent', sev: 'high', cat: 'Medical', name: 'Urgent medical alert', text: 'Urgent medical alert — cardiology follow-up open' },
+    deficiency:   { icon: 'deficiency', sev: 'med', cat: 'Medical', name: 'Deficiency', text: 'Deficiency — ferritin 11 ng/mL' },
+    authexpiry:   { icon: 'authexpiry', sev: 'high', cat: 'Billing', name: 'Prior auth expiring', text: 'Prior authorisation expires today' },
+    balance:      { icon: 'balance', sev: 'med', cat: 'Billing', name: 'Outstanding balance', text: 'Outstanding balance $340' },
+    interpreter:  { icon: 'interpreter', sev: 'low', cat: 'Admin', name: 'Interpreter needed', text: 'Interpreter needed — Spanish' },
+    forms:        { icon: 'forms', sev: 'low', cat: 'Admin', name: 'Intake forms missing', text: 'Intake forms not returned' }
   };
   window.L_FLAGS = L_FLAGS;
 
@@ -4387,7 +4381,7 @@
       var flags = (b.getAttribute('data-flags') || '').split('|').filter(Boolean);
       var fl = flags.length ? '<div class="az-flags">' + flags.map(function (k) {
         var f = L_FLAGS[k]; if (!f) return '';
-        return '<div class="fl-line"><span class="fl sev-' + f.sev + '">' + f.icon + '</span>' +
+        return '<div class="fl-line"><span class="fl sev-' + f.sev + ' fi-' + f.icon + '"></span>' +
                '<span><b>' + f.text + '</b><span class="fl-cat">' + f.cat + '</span></span></div>';
       }).join('') + '</div>' : '';
 
@@ -4561,7 +4555,7 @@
           '<td>' + (b.getAttribute('data-ins') || '') + '</td>' +
           '<td>' + (b.getAttribute('data-pay') || '') + '</td>' +
           '<td>' + (flags.map(function (k) {
-            var f = L_FLAGS[k]; return f ? '<span class="fl sev-' + f.sev + '" title="' + f.text + '">' + f.icon + '</span>' : '';
+            var f = L_FLAGS[k]; return f ? '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '" title="' + f.text + '"></span>' : '';
           }).join(' ')) + '</td>' +
         '</tr>'
       });
