@@ -124,7 +124,9 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
     · little ghost (No-show). **"Ready to check out" was retired (Carlos, 2026-08-11)** — the
     finish flag belongs to Complete, and the clinic's own status list never had it. The
     watermark sits at **34%**, not the 17% I first used: over these type backgrounds 17%
-    disappeared. **Drawn as inline SVG, never emoji** — an emoji renders in its own
+    disappeared. It sits **bottom-right** (Carlos, 2026-08-11), lifting 12px on the two
+    statuses that carry the black bar so the bar cannot slice it in half; the medic's name
+    moved to bottom-LEFT, because that corner is the watermark's now. **Drawn as inline SVG, never emoji** — an emoji renders in its own
     colours on top of a palette the clinic chose, and differently on every operating system.
     Each symbol exists **twice**: `.17` on the block, `.82` on the legend and the drawer banner.
     A 34px specimen of a 17% mark is invisible, and the legend is teaching the symbol, not

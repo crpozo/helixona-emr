@@ -1226,7 +1226,7 @@ a.lead-chip:hover { border-color: var(--ink); }
   background-color: var(--tybg);
   background-image: var(--wm);
   background-repeat: no-repeat;
-  background-position: right 8px center;
+  background-position: right 9px bottom 7px;
   background-size: 30px 30px;
   border: 1px solid rgba(0,0,0,.18);
   border-radius: 4px;
@@ -1267,8 +1267,10 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt-type { grid-row: 4; grid-column: 2; justify-self: end;
   font-size: 9.5px; color: var(--blk-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-appt .actor-tag { position: absolute; right: 6px; bottom: 2px;
+/* the medic's name used to sit bottom-right, which is now the watermark's corner */
+.cal-appt .actor-tag { position: absolute; left: 21px; bottom: 2px;
   font-size: 8.5px; color: var(--blk-muted); background: none; padding: 0; }
+.cal-appt.half-l .actor-tag, .cal-appt.half-r .actor-tag { left: 18px; }
 
 /* STATUS adds nothing to the fill — the watermark is the whole signal. The two
    exceptions are the two that must not be mistaken for a live appointment. */
@@ -1306,6 +1308,14 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.half-r { left: calc(50% + 1px); }
 .cal-appt.half-l, .cal-appt.half-r { padding-left: 18px; padding-right: 6px; }
 .cal-appt.half-l::before, .cal-appt.half-r::before { width: 11px; }
+
+/* the black bar owns the bottom edge on these two, so the watermark lifts clear
+   of it rather than being sliced in half by it */
+.cal-appt.st-arrived, .cal-appt.st-noshow { background-position: right 9px bottom 19px; }
+/* a 30-minute block has no room for a 30px mark in the corner — it shrinks */
+@container appt (max-height: 62px) { .cal-appt { background-size: 22px 22px; } }
+@container appt (max-height: 62px) { .cal-appt.st-arrived, .cal-appt.st-noshow {
+  background-position: right 7px bottom 16px; } }
 
 /* ---- the black bar: printed only where a human is being waited on.
         The watermark says the status on all eleven; the bar shouts it on the
@@ -1702,7 +1712,7 @@ a.lead-chip:hover { border-color: var(--ink); }
   --tybg: #FFFFFF; --sb: var(--sb-none); --wm: none;
   background-color: var(--tybg);
   background-image: var(--wm); background-repeat: no-repeat;
-  background-position: right 4px center; background-size: 18px 18px;
+  background-position: right 4px bottom 3px; background-size: 18px 18px;
   border: 1px solid rgba(0,0,0,.18); border-left: none; padding-left: 14px; }
 .week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
   background: var(--sb); border-right: 1px solid rgba(0,0,0,.22); }
