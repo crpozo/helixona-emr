@@ -147,6 +147,20 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   in `lFitSubs`). "Foundational Flo…" is a failure: the number is the whole point of the name.
   The measurement runs off a `ResizeObserver` on the grid **and** `document.fonts.ready` — Inter
   lands after first paint and is wider than the fallback.
+- **The hour row is 96px — 48px per half hour** (Carlos, 2026-08-11: "feels constrained"). A
+  30-minute block at 46px collapsed once the watermark landed in it; at 50px it breathes, and
+  nine labels need to step down to fit instead of sixteen.
+- **A container query can NEVER style its own container.** The watermark lives on `.cal-appt`,
+  which IS the query container, so `@container appt { .cal-appt { … } }` silently never fired
+  and the mark stayed at 30px on a 46px block. It is sized off the inline height instead —
+  `[style*="height:50px"]` — the way the block's own layout already is. Written down because I
+  had this exact comment in the file already and still made the mistake.
+- **The legend's items sit in a GRID, not a flex-wrap flow.** A flow gives ragged rows and the
+  eye has nowhere to land; fixed tracks line every swatch up into a column. The two IV ladders
+  are wider than a track and get their own row.
+- **No editorial asides in the legend** (Carlos, 2026-08-11). No "the rest are still white", no
+  "the eCW recipe menu", no "no colour yet" tags. The legend shows the code; it does not
+  comment on it.
 - **Flag icons are drawn, not typed (Carlos, 2026-08-11).** They were text glyphs — a triangle
   for an allergy, a cross for an urgent alert, a four-pointed star for anything administrative
   — and none of them said what they meant. Nine icons now: **a stop sign for a food allergy**,
