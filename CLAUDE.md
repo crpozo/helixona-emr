@@ -92,54 +92,45 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
 - **Duration is per patient, not just per protocol.** The system tracks how long each patient actually takes for a given IV and books their own average once there are 3 past runs — Maya Reyes books 3 h 20 for NAD+, not 3 h. Blocks warn when a drip is running past its booked end.
 - **Conflicts: each rule sets its own strength (Carlos, 2026-07-28)** — Block / Warn / Allow, configured on `schedule-rules.html`. Provider double-book blocks; chair overlap warns (clinics overbook on purpose). Coverage rules layer on top and the stricter one wins.
 - Filters are multi-select across team, providers, actors and treatment, and a user can **lock a saved view** as their default.
-- **Three levels, one look each (Carlos, 2026-08-07, fourth pass — the channels were
-  INVERTED at his request).** One sentence a receptionist can repeat:
-  **the stripe's colour is which treatment · the stripe's shape is what kind · the
-  background is where they stand.**
-  - **SUBTYPE owns the swatch's COLOUR (`--sb-*`), and the colours are the CLINIC'S OWN,
-    lifted from the eCW menu unchanged (Carlos, 2026-08-07).** Foundational Flow 5→50 in
-    ascending teals, Mega C 15→100, Cellular Boost black, Mast Cell yellow, Core Iron Blend
-    magenta, Mito Boost wine, EBOO Boost IV pure blue — twenty-three in all. **These are not
-    design choices and must not be "improved":** the team already reads Mega C 50 as cream and
-    Mito Boost as wine, and a wireframe that renames their colours teaches them the wrong thing.
-    Anything the clinic has not given a colour for (visits, procedures, energetics, manual
-    therapies) keeps ours and is **labelled as ours** in the legend and on the codes screen.
-  - **Ten of the twenty-three fall below 1.6:1 against white** — Mast Cell is 1.11:1, Mega C 50
-    is 1.12:1. A thin stripe of those is invisible, so the rail is a **13px filled swatch with a
-    1px defining edge**, not a hairline: the clinic's own filled cell, shrunk.
-  - Long recipe names **step down in size until they fit** (`.fit-1/2/3`, applied by measurement
-    in `lFitSubs`). "Foundational Flo…" is a failure, because the number is the whole point of
-    the name. The measurement runs off a `ResizeObserver` on the grid **and** `document.fonts.ready`
-    — Inter lands after first paint and is wider than the fallback, so measuring before it
-    arrives measures the wrong text.
-  - **TYPE owns the TEXTURE PRINTED ON the swatch**: office visit plain · IV banded ·
-    procedure blocked · energetics ribbed · treatment hatched. Two rules, both learned by
-    measuring: **one tone, not two** — a dark pass plus a light pass covered the whole swatch
-    and collapsed twelve pairs of the clinic's palette into look-alikes — and **the strokes
-    cover about a third**, so the rest of the swatch stays the pure colour, which is the thing
-    that identifies the bag. The tone is picked from each colour's own luminance (`--tone`,
-    white on the 23 dark ones), so the shape reads on Cellular Boost's black and on Mega C 50's
-    cream alike. The shape is what survives a photocopier and colour blindness.
-  - **Ten pairs inside the clinic's own palette are near-identical** — Mega C 75 and Core
-    Restore are 11 apart in RGB, Mega C 15 and Essential Amino 21. That is eCW's palette, not
-    our rendering, and it is not ours to silently fix: raise it with the clinic. Ours were
-    moved out of the way (Follow-up to slate, Telehealth to violet, Acupuncture to forest) so
-    that no wireframe colour sits on top of a clinic one.
-  - **The legend groups by family, because Foundational Flow and Mega C are LADDERS.** Six
-    swatches plus "the bigger the bag, the deeper the teal" beats six swatches read one by one.
-  - **STATUS owns the BACKGROUND**, and it is the only thing that touches `background`:
-    scheduled white + dashed · confirmed pale blue · arrived pale amber + ink ring ·
-    in progress solid green · **locked** pale violet + a drawn padlock (`.lockmark`) ·
-    ready to check out pale purple. **The three ways an appointment ENDS are all striped**,
-    told apart by hue: **done** wears the in-progress green, **no-show** red, **cancelled** pink.
-  - Every status fill is pale or striped by construction, so text stays near-black on all of
-    them and no status needs a white-text exception. The subtype word is neutral ink now —
-    colour lives on the rail, once.
-  - **The status word is printed on only three of eight statuses** — arrived · waiting, ready to
-    check out, no-show — as a full-width black bar on the block's bottom edge, the only pure
-    black marks on the board.
-  - **Tentative** is a dotted amber edge *and* the word `· tentative` after the subtype: an
-    edge alone is not a message.
+- **The calendar code is the CLINIC'S OWN, from their colour spreadsheet (Carlos,
+  2026-08-11, fifth pass). It supersedes every earlier attempt, including mine.**
+
+      BACKGROUND COLOUR                     = appointment TYPE
+      SIDE BAR COLOUR                       = SUB appointment type
+      WATERMARK over the background         = STATUS
+
+  Two of my three channels were the wrong way round. The side bar was already the subtype and
+  stays; the background moved from status to TYPE, and status became a faint symbol watermarked
+  over the block.
+  - **TYPE owns the background** (`--tybg-*`, class `ty-*`): Office visit `#B7CDB0`,
+    Procedure `#A9B9E2`, Energetics `#F9F0D4`, IV `#FBF4E2`. Labs, Diagnostics, FPE, 6 month
+    FPE, Chiro, EBOO and Laser are still **white — the clinic has not coloured them yet**, and
+    the legend says so rather than inventing one.
+  - **SUBTYPE owns the side bar** (`--sb-*`, class `t-*`), a 13px solid band. The texture that
+    used to live there was carrying TYPE, and TYPE is the background now, so a texture would
+    say the same thing twice. Eight subtypes (BioMod Recharge, NMT, MEAD, MEAD ReAssessment,
+    MDL, Quest, G6PD, iGenix) have **no clinic colour yet** and render grey, marked in the
+    legend and on the codes screen.
+  - **STATUS owns a watermark** (`--wm`), a faint symbol over the background at 17%: calendar
+    (Scheduled) · check (Confirmed) · pin (Arrived) · play (In progress) · finish flag (Ready
+    to check out / Complete) · padlock (Locked) · circular arrows (Rescheduled) · X (Cancelled)
+    · little ghost (No-show). **Drawn as inline SVG, never emoji** — an emoji renders in its own
+    colours on top of a palette the clinic chose, and differently on every operating system.
+  - **The black bar stays** on Arrived · waiting, Ready to check out and No-show. The watermark
+    says the status on all ten; the bar shouts it on the three where somebody is standing at the
+    desk, and a 17% watermark cannot carry that across a ninety-appointment board.
+- **The taxonomy is the clinic's: ELEVEN types, not five.** Office visit · Procedure ·
+  Energetics · Labs · IV · Diagnostics · FPE · 6 month FPE · Chiro · EBOO · Laser. EBOO, Chiro
+  and Laser were subtypes in my version and are TYPES here. "Treatment" is retired.
+  Subtypes: Office visit (New patient · New patient FU · New patient TOC · Follow Up) ·
+  Procedure (PRP · TPI · Pellet Males · Pellet Females · Prolozone · Microcurrent) ·
+  Energetics (BioCharger · LymphStar · SCENAR · Mini-LymphStar · BioMod Pro · BioMod Recharge ·
+  NMT · MEAD · MEAD ReAssessment) · Labs (MDL · Quest · G6PD · iGenix) · IV (the 23 eCW recipes,
+  which keep their own colours on the same side-bar channel).
+- **Long recipe names step down in size until they fit** (`.fit-1/2/3`, applied by measurement
+  in `lFitSubs`). "Foundational Flo…" is a failure: the number is the whole point of the name.
+  The measurement runs off a `ResizeObserver` on the grid **and** `document.fonts.ready` — Inter
+  lands after first paint and is wider than the fallback.
 - **Flags are a fourth thing the block says, and deliberately not a fourth channel.** They live
   in their own corner cell, never on the rail or the fill. A flag has a **category** (Medical /
   Billing / Admin — who cares) and a **severity** (how loud); those are separate on purpose,

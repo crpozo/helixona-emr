@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=58">
+<link rel="stylesheet" href="assets/hcos.css?v=59">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -94,11 +94,17 @@
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search types&hellip;" aria-label="Search types&hellip;">
                     <div class="msel-opts">
-                      <label class="msel-opt" data-ty="ty-visit"><input type="checkbox" aria-label="Field">Office visit</label>
-                      <label class="msel-opt" data-ty="ty-proc"><input type="checkbox" aria-label="Office visit">Procedure</label>
-                      <label class="msel-opt" data-ty="ty-iv"><input type="checkbox" aria-label="Procedure">IV</label>
-                      <label class="msel-opt" data-ty="ty-energ"><input type="checkbox" aria-label="IV">Energetics</label>
-                      <label class="msel-opt" data-ty="ty-treat"><input type="checkbox" aria-label="Energetics">Treatment</label>
+                      <label class="msel-opt" data-ty="ty-visit"><input type="checkbox" aria-label="Office visit"><i class="ty-sw ty-visit"></i>Office visit</label>
+                      <label class="msel-opt" data-ty="ty-proc"><input type="checkbox" aria-label="Procedure"><i class="ty-sw ty-proc"></i>Procedure</label>
+                      <label class="msel-opt" data-ty="ty-energ"><input type="checkbox" aria-label="Energetics"><i class="ty-sw ty-energ"></i>Energetics</label>
+                      <label class="msel-opt" data-ty="ty-iv"><input type="checkbox" aria-label="IV"><i class="ty-sw ty-iv"></i>IV</label>
+                      <label class="msel-opt" data-ty="ty-lab"><input type="checkbox" aria-label="Labs"><i class="ty-sw ty-lab"></i>Labs</label>
+                      <label class="msel-opt" data-ty="ty-diag"><input type="checkbox" aria-label="Diagnostics"><i class="ty-sw ty-diag"></i>Diagnostics</label>
+                      <label class="msel-opt" data-ty="ty-fpe"><input type="checkbox" aria-label="FPE"><i class="ty-sw ty-fpe"></i>FPE</label>
+                      <label class="msel-opt" data-ty="ty-fpe6"><input type="checkbox" aria-label="6 month FPE"><i class="ty-sw ty-fpe6"></i>6 month FPE</label>
+                      <label class="msel-opt" data-ty="ty-chiro"><input type="checkbox" aria-label="Chiro"><i class="ty-sw ty-chiro"></i>Chiro</label>
+                      <label class="msel-opt" data-ty="ty-eboo"><input type="checkbox" aria-label="EBOO"><i class="ty-sw ty-eboo"></i>EBOO</label>
+                      <label class="msel-opt" data-ty="ty-laser"><input type="checkbox" aria-label="Laser"><i class="ty-sw ty-laser"></i>Laser</label>
                     </div>
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
                   </div>
@@ -111,46 +117,56 @@
                     <input class="msel-search" placeholder="Search subtypes&hellip;" aria-label="Search subtypes&hellip;">
                     <div class="msel-opts">
                       <div class="msel-group" data-ty-of="ty-visit">Office visit</div>
-                      <label class="msel-opt" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient"><i class="rail-sw t-newpt ty-visit"></i>New patient</label>
-                      <label class="msel-opt" data-sub="t-fu" data-ty-of="ty-visit"><input type="checkbox" aria-label="Follow-up"><i class="rail-sw t-fu ty-visit"></i>Follow-up</label>
-                      <label class="msel-opt" data-sub="t-tele" data-ty-of="ty-visit"><input type="checkbox" aria-label="Telehealth"><i class="rail-sw t-tele ty-visit"></i>Telehealth</label>
-                      <div class="msel-group" data-ty-of="ty-iv">IV &mdash; the clinic menu</div>
-                      <label class="msel-opt" data-sub="t-ff5" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 5"><i class="rail-sw t-ff5 ty-iv"></i>Foundational Flow 5</label>
-                      <label class="msel-opt" data-sub="t-ff10" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 10"><i class="rail-sw t-ff10 ty-iv"></i>Foundational Flow 10</label>
-                      <label class="msel-opt" data-sub="t-ff15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 15"><i class="rail-sw t-ff15 ty-iv"></i>Foundational Flow 15</label>
-                      <label class="msel-opt" data-sub="t-ff20" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 20"><i class="rail-sw t-ff20 ty-iv"></i>Foundational Flow 20</label>
-                      <label class="msel-opt" data-sub="t-ff25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 25"><i class="rail-sw t-ff25 ty-iv"></i>Foundational Flow 25</label>
-                      <label class="msel-opt" data-sub="t-ff50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 50"><i class="rail-sw t-ff50 ty-iv"></i>Foundational Flow 50</label>
-                      <label class="msel-opt" data-sub="t-mc15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 15"><i class="rail-sw t-mc15 ty-iv"></i>Mega C 15</label>
-                      <label class="msel-opt" data-sub="t-mc25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 25"><i class="rail-sw t-mc25 ty-iv"></i>Mega C 25</label>
-                      <label class="msel-opt" data-sub="t-mc50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 50"><i class="rail-sw t-mc50 ty-iv"></i>Mega C 50</label>
-                      <label class="msel-opt" data-sub="t-mc75" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 75"><i class="rail-sw t-mc75 ty-iv"></i>Mega C 75</label>
-                      <label class="msel-opt" data-sub="t-mc100" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 100"><i class="rail-sw t-mc100 ty-iv"></i>Mega C 100</label>
-                      <label class="msel-opt" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cellular Boost"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</label>
-                      <label class="msel-opt" data-sub="t-mast" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mast Cell"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</label>
-                      <label class="msel-opt" data-sub="t-mastb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mast Cell · Benadryl only"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl only</label>
-                      <label class="msel-opt" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cognitive Support"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</label>
-                      <label class="msel-opt" data-sub="t-iron" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Iron Blend"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</label>
-                      <label class="msel-opt" data-sub="t-rest" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Restore"><i class="rail-sw t-rest ty-iv"></i>Core Restore</label>
-                      <label class="msel-opt" data-sub="t-detox" data-ty-of="ty-iv"><input type="checkbox" aria-label="Detox Prime"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</label>
-                      <label class="msel-opt" data-sub="t-amino" data-ty-of="ty-iv"><input type="checkbox" aria-label="Essential Amino"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</label>
-                      <label class="msel-opt" data-sub="t-minic" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Cust"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</label>
-                      <label class="msel-opt" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini MB"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</label>
-                      <label class="msel-opt" data-sub="t-mito" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mito Boost"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</label>
-                      <label class="msel-opt" data-sub="t-ebooiv" data-ty-of="ty-iv"><input type="checkbox" aria-label="EBOO Boost IV"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</label>
+                      <label class="msel-opt" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient"><i class="rail-sw t-newpt"></i>New patient</label>
+                      <label class="msel-opt" data-sub="t-npfu" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient FU"><i class="rail-sw t-npfu"></i>New patient FU</label>
+                      <label class="msel-opt" data-sub="t-nptoc" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient TOC"><i class="rail-sw t-nptoc"></i>New patient TOC</label>
+                      <label class="msel-opt" data-sub="t-fu" data-ty-of="ty-visit"><input type="checkbox" aria-label="Follow Up"><i class="rail-sw t-fu"></i>Follow Up</label>
                       <div class="msel-group" data-ty-of="ty-proc">Procedure</div>
-                      <label class="msel-opt" data-sub="t-eboo" data-ty-of="ty-proc"><input type="checkbox" aria-label="EBOO"><i class="rail-sw t-eboo ty-proc"></i>EBOO</label>
-                      <label class="msel-opt" data-sub="t-prp" data-ty-of="ty-proc"><input type="checkbox" aria-label="PRP"><i class="rail-sw t-prp ty-proc"></i>PRP</label>
-                      <label class="msel-opt" data-sub="t-pel" data-ty-of="ty-proc"><input type="checkbox" aria-label="Pellet"><i class="rail-sw t-pel ty-proc"></i>Pellet</label>
-                      <label class="msel-opt" data-sub="t-lab" data-ty-of="ty-proc"><input type="checkbox" aria-label="Lab draw"><i class="rail-sw t-lab ty-proc"></i>Lab draw</label>
+                      <label class="msel-opt" data-sub="t-prp" data-ty-of="ty-proc"><input type="checkbox" aria-label="PRP"><i class="rail-sw t-prp"></i>PRP</label>
+                      <label class="msel-opt" data-sub="t-tpi" data-ty-of="ty-proc"><input type="checkbox" aria-label="TPI"><i class="rail-sw t-tpi"></i>TPI</label>
+                      <label class="msel-opt" data-sub="t-pelm" data-ty-of="ty-proc"><input type="checkbox" aria-label="Pellet Males"><i class="rail-sw t-pelm"></i>Pellet Males</label>
+                      <label class="msel-opt" data-sub="t-pelf" data-ty-of="ty-proc"><input type="checkbox" aria-label="Pellet Females"><i class="rail-sw t-pelf"></i>Pellet Females</label>
+                      <label class="msel-opt" data-sub="t-proloz" data-ty-of="ty-proc"><input type="checkbox" aria-label="Prolozone"><i class="rail-sw t-proloz"></i>Prolozone</label>
+                      <label class="msel-opt" data-sub="t-micro" data-ty-of="ty-proc"><input type="checkbox" aria-label="Microcurrent"><i class="rail-sw t-micro"></i>Microcurrent</label>
                       <div class="msel-group" data-ty-of="ty-energ">Energetics</div>
-                      <label class="msel-opt" data-sub="t-las" data-ty-of="ty-energ"><input type="checkbox" aria-label="Laser · Erchonia"><i class="rail-sw t-las ty-energ"></i>Laser &middot; Erchonia</label>
-                      <label class="msel-opt" data-sub="t-bem" data-ty-of="ty-energ"><input type="checkbox" aria-label="BEMER"><i class="rail-sw t-bem ty-energ"></i>BEMER</label>
-                      <label class="msel-opt" data-sub="t-lym" data-ty-of="ty-energ"><input type="checkbox" aria-label="LymphStar"><i class="rail-sw t-lym ty-energ"></i>LymphStar</label>
-                      <div class="msel-group" data-ty-of="ty-treat">Treatment</div>
-                      <label class="msel-opt" data-sub="t-acu" data-ty-of="ty-treat"><input type="checkbox" aria-label="Acupuncture"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</label>
-                      <label class="msel-opt" data-sub="t-chi" data-ty-of="ty-treat"><input type="checkbox" aria-label="Chiro"><i class="rail-sw t-chi ty-treat"></i>Chiro</label>
-                      <label class="msel-opt" data-sub="t-nmt" data-ty-of="ty-treat"><input type="checkbox" aria-label="Neuromuscular"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</label>
+                      <label class="msel-opt" data-sub="t-biochg" data-ty-of="ty-energ"><input type="checkbox" aria-label="BioCharger"><i class="rail-sw t-biochg"></i>BioCharger</label>
+                      <label class="msel-opt" data-sub="t-lymph" data-ty-of="ty-energ"><input type="checkbox" aria-label="LymphStar"><i class="rail-sw t-lymph"></i>LymphStar</label>
+                      <label class="msel-opt" data-sub="t-scenar" data-ty-of="ty-energ"><input type="checkbox" aria-label="SCENAR"><i class="rail-sw t-scenar"></i>SCENAR</label>
+                      <label class="msel-opt" data-sub="t-minilym" data-ty-of="ty-energ"><input type="checkbox" aria-label="Mini-LymphStar"><i class="rail-sw t-minilym"></i>Mini-LymphStar</label>
+                      <label class="msel-opt" data-sub="t-biomodp" data-ty-of="ty-energ"><input type="checkbox" aria-label="BioMod Pro"><i class="rail-sw t-biomodp"></i>BioMod Pro</label>
+                      <label class="msel-opt" data-sub="t-biomodr" data-ty-of="ty-energ"><input type="checkbox" aria-label="BioMod Recharge"><i class="rail-sw t-biomodr"></i>BioMod Recharge</label>
+                      <label class="msel-opt" data-sub="t-nmt" data-ty-of="ty-energ"><input type="checkbox" aria-label="NMT"><i class="rail-sw t-nmt"></i>NMT</label>
+                      <label class="msel-opt" data-sub="t-mead" data-ty-of="ty-energ"><input type="checkbox" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
+                      <label class="msel-opt" data-sub="t-meadre" data-ty-of="ty-energ"><input type="checkbox" aria-label="MEAD ReAssessment"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</label>
+                      <div class="msel-group" data-ty-of="ty-lab">Labs</div>
+                      <label class="msel-opt" data-sub="t-mdl" data-ty-of="ty-lab"><input type="checkbox" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
+                      <label class="msel-opt" data-sub="t-quest" data-ty-of="ty-lab"><input type="checkbox" aria-label="Quest"><i class="rail-sw t-quest"></i>Quest</label>
+                      <label class="msel-opt" data-sub="t-g6pd" data-ty-of="ty-lab"><input type="checkbox" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
+                      <label class="msel-opt" data-sub="t-igenix" data-ty-of="ty-lab"><input type="checkbox" aria-label="iGenix"><i class="rail-sw t-igenix"></i>iGenix</label>
+                      <div class="msel-group" data-ty-of="ty-iv">IV &mdash; the clinic menu</div>
+                      <label class="msel-opt" data-sub="t-ff5" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 5"><i class="rail-sw t-ff5"></i>Foundational Flow 5</label>
+                      <label class="msel-opt" data-sub="t-ff10" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 10"><i class="rail-sw t-ff10"></i>Foundational Flow 10</label>
+                      <label class="msel-opt" data-sub="t-ff15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 15"><i class="rail-sw t-ff15"></i>Foundational Flow 15</label>
+                      <label class="msel-opt" data-sub="t-ff20" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 20"><i class="rail-sw t-ff20"></i>Foundational Flow 20</label>
+                      <label class="msel-opt" data-sub="t-ff25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 25"><i class="rail-sw t-ff25"></i>Foundational Flow 25</label>
+                      <label class="msel-opt" data-sub="t-ff50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 50"><i class="rail-sw t-ff50"></i>Foundational Flow 50</label>
+                      <label class="msel-opt" data-sub="t-mc15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 15"><i class="rail-sw t-mc15"></i>Mega C 15</label>
+                      <label class="msel-opt" data-sub="t-mc25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 25"><i class="rail-sw t-mc25"></i>Mega C 25</label>
+                      <label class="msel-opt" data-sub="t-mc50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 50"><i class="rail-sw t-mc50"></i>Mega C 50</label>
+                      <label class="msel-opt" data-sub="t-mc75" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 75"><i class="rail-sw t-mc75"></i>Mega C 75</label>
+                      <label class="msel-opt" data-sub="t-mc100" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 100"><i class="rail-sw t-mc100"></i>Mega C 100</label>
+                      <label class="msel-opt" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cellular Boost"><i class="rail-sw t-cell"></i>Cellular Boost</label>
+                      <label class="msel-opt" data-sub="t-mast" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mast Cell"><i class="rail-sw t-mast"></i>Mast Cell</label>
+                      <label class="msel-opt" data-sub="t-mastb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mast Cell - Benadryl"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</label>
+                      <label class="msel-opt" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cognitive Support"><i class="rail-sw t-cog"></i>Cognitive Support</label>
+                      <label class="msel-opt" data-sub="t-iron" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Iron Blend"><i class="rail-sw t-iron"></i>Core Iron Blend</label>
+                      <label class="msel-opt" data-sub="t-rest" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Restore"><i class="rail-sw t-rest"></i>Core Restore</label>
+                      <label class="msel-opt" data-sub="t-detox" data-ty-of="ty-iv"><input type="checkbox" aria-label="Detox Prime"><i class="rail-sw t-detox"></i>Detox Prime</label>
+                      <label class="msel-opt" data-sub="t-amino" data-ty-of="ty-iv"><input type="checkbox" aria-label="Essential Amino"><i class="rail-sw t-amino"></i>Essential Amino</label>
+                      <label class="msel-opt" data-sub="t-minic" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Cust"><i class="rail-sw t-minic"></i>Mini Cust</label>
+                      <label class="msel-opt" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini MB"><i class="rail-sw t-minimb"></i>Mini MB</label>
+                      <label class="msel-opt" data-sub="t-mito" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mito Boost"><i class="rail-sw t-mito"></i>Mito Boost</label>
+                      <label class="msel-opt" data-sub="t-ebooiv" data-ty-of="ty-iv"><input type="checkbox" aria-label="EBOO Boost IV"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</label>
                     </div>
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
                   </div>
@@ -167,10 +183,11 @@
                       <label class="msel-opt" data-st="st-arrived"><input type="checkbox" aria-label="Arrived"><i class="st-sw st-arrived"></i>Arrived</label>
                       <label class="msel-opt" data-st="st-inchair"><input type="checkbox" aria-label="In progress"><i class="st-sw st-inchair"></i>In progress</label>
                       <label class="msel-opt" data-st="st-checkout"><input type="checkbox" aria-label="Ready to check out"><i class="st-sw st-checkout"></i>Ready to check out</label>
+                      <label class="msel-opt" data-st="st-done"><input type="checkbox" aria-label="Complete"><i class="st-sw st-done"></i>Complete</label>
                       <label class="msel-opt" data-st="st-locked"><input type="checkbox" aria-label="Locked"><i class="st-sw st-locked"></i>Locked</label>
-                      <label class="msel-opt" data-st="st-done"><input type="checkbox" aria-label="Done"><i class="st-sw st-done"></i>Done</label>
-                      <label class="msel-opt" data-st="st-noshow"><input type="checkbox" aria-label="No-show"><i class="st-sw st-noshow"></i>No-show</label>
+                      <label class="msel-opt" data-st="st-rescheduled"><input type="checkbox" aria-label="Rescheduled"><i class="st-sw st-rescheduled"></i>Rescheduled</label>
                       <label class="msel-opt" data-st="st-cancelled"><input type="checkbox" aria-label="Cancelled"><i class="st-sw st-cancelled"></i>Cancelled</label>
+                      <label class="msel-opt" data-st="st-noshow"><input type="checkbox" aria-label="No-show"><i class="st-sw st-noshow"></i>No-show</label>
                     </div>
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear statuses</button>
                   </div>
@@ -242,22 +259,22 @@
                 <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
                 <div class="cal-appt-time">8:00 AM</div>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:176px;height:90px" data-appt="A-88303" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="8:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:176px;height:90px" data-appt="A-88303" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="8:00 AM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">8:00 AM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88304" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Follow-up" data-note="All consents signed · callback pending">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88304" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Follow Up" data-note="All consents signed · callback pending">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-note">All consents signed · callback pending</div>
                 <div class="cal-appt-time">9:00 AM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:264px;height:90px" data-appt="A-88305" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:264px;height:90px" data-appt="A-88305" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00 AM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">9:00 AM</div>
@@ -268,15 +285,15 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">10:00 AM</div>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88307" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="10:00 AM" data-tx="Follow-up" data-note="Labs done · results in the chart">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88307" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="10:00 AM" data-tx="Follow Up" data-note="Labs done · results in the chart">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <div class="cal-appt-note">Labs done · results in the chart</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-checkout t-fu ty-visit" style="top:440px;height:90px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-fu" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="11:00 AM" data-tx="Follow-up" data-note="8 of 8 · protocol complete, discuss graduation">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-checkout t-fu ty-visit" style="top:440px;height:90px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-fu" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="11:00 AM" data-tx="Follow Up" data-note="8 of 8 · protocol complete, discuss graduation">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-note">8 of 8 · protocol complete, discuss graduation</div>
                 <div class="cal-appt-time">11:00 AM</div>
@@ -301,8 +318,8 @@
                 <div class="cal-appt-time">1:00 PM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88312" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="2:00 PM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88312" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="2:00 PM" data-tx="Follow Up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
                 <div class="cal-appt-time">2:00 PM</div>
@@ -313,23 +330,23 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">2:00 PM</div>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:792px;height:90px" data-appt="A-88314" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow-up" data-note="Diagnostic consent re-sent · awaiting signature">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:792px;height:90px" data-appt="A-88314" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow Up" data-note="Diagnostic consent re-sent · awaiting signature">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Tom Alvarez</div>
                 <div class="cal-appt-note">Diagnostic consent re-sent · awaiting signature</div>
                 <div class="cal-appt-time">3:00 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:880px;height:90px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="4:00 PM" data-tx="Follow-up" data-note="Cancelled 8/7 — patient travelling">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:880px;height:90px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="4:00 PM" data-tx="Follow Up" data-note="Cancelled 8/7 — patient travelling">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-note">Cancelled 8/7 — patient travelling</div>
                 <div class="cal-appt-time">4:00 PM</div>
                 <span class="cal-appt-type">Cigna</span>
               </div>
-              <div class="cal-appt st-scheduled t-tele ty-visit" style="top:968px;height:90px" data-appt="A-88316" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-tele" data-days="2,4" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="Telehealth" data-note="Consents signed · no pending lab request" data-flags="pregnant">
+              <div class="cal-appt st-scheduled t-nptoc ty-visit" style="top:968px;height:90px" data-appt="A-88316" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-nptoc" data-days="2,4" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="New patient TOC" data-note="Consents signed · no pending lab request" data-flags="pregnant">
                 <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
-                <span class="cal-appt-sub">Telehealth</span>
+                <span class="cal-appt-sub">New patient TOC</span>
                 <div class="cal-appt-name">Yuki Tanaka</div>
                 <div class="cal-appt-note">Consents signed · no pending lab request</div>
                 <div class="cal-appt-time">5:00 PM</div>
@@ -339,15 +356,15 @@
             <!-- Dr. Bakman -->
             <div class="daycal-col" data-col="bak">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:0px;height:134px" data-appt="A-88317" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="Follow-up" data-note="Cancelled 7/8 — not establishing care, cash status">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:0px;height:134px" data-appt="A-88317" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="Follow Up" data-note="Cancelled 7/8 — not establishing care, cash status">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-note">Cancelled 7/8 — not establishing care, cash status</div>
                 <div class="cal-appt-time">6:00 AM – 7:30 AM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:176px;height:90px" data-appt="A-88318" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="8:00 AM" data-tx="Follow-up" data-note="Rescheduled from August · patient asked for the morning">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:176px;height:90px" data-appt="A-88318" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="8:00 AM" data-tx="Follow Up" data-note="Rescheduled from August · patient asked for the morning">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Hana Sato</div>
                 <div class="cal-appt-note">Rescheduled from August · patient asked for the morning</div>
                 <div class="cal-appt-time">8:00 AM</div>
@@ -359,15 +376,15 @@
                 <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
                 <div class="cal-appt-time">8:00 AM</div>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88320" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="9:00 AM" data-tx="Follow-up" data-note="Labs done · results in the chart">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88320" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="9:00 AM" data-tx="Follow Up" data-note="Labs done · results in the chart">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Liam Fitzgerald</div>
                 <div class="cal-appt-note">Labs done · results in the chart</div>
                 <div class="cal-appt-time">9:00 AM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:264px;height:90px" data-appt="A-88321" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:264px;height:90px" data-appt="A-88321" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Amara Diallo</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">9:00 AM</div>
@@ -378,23 +395,23 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">10:00 AM</div>
               </div>
-              <div class="cal-appt st-noshow t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88323" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="10:00 AM" data-tx="Follow-up" data-note="Quest not yet done · chasing the draw" data-flags="balance">
+              <div class="cal-appt st-noshow t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88323" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="10:00 AM" data-tx="Follow Up" data-note="Quest not yet done · chasing the draw" data-flags="balance">
                 <span class="fl-row"><span class="fl sev-med" title="Outstanding balance $340 · Billing">$</span></span>
-                <span class="cal-appt-sub">Follow-up</span>
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Victor Reyes</div>
                 <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Self-pay</span>
               </div>
-              <div class="cal-appt st-inroom t-fu ty-visit half-l" style="top:440px;height:90px" data-appt="A-88324" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-fu" data-days="1,2,3" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-inroom t-fu ty-visit half-l" style="top:440px;height:90px" data-appt="A-88324" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-fu" data-days="1,2,3" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Follow Up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Nina Kowalski</div>
                 <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
                 <div class="cal-appt-time">11:00 AM</div>
                 <span class="cal-appt-type">AETNA</span>
               </div>
-              <div class="cal-appt st-arrived t-fu ty-visit half-r" style="top:440px;height:90px" data-appt="A-88325" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2,4" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-arrived t-fu ty-visit half-r" style="top:440px;height:90px" data-appt="A-88325" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2,4" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Samir Haddad</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">11:00 AM</div>
@@ -413,8 +430,8 @@
                 <div class="cal-appt-time">1:00 PM</div>
                 <span class="cal-appt-type">Self-pay</span>
               </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88328" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="2:00 PM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88328" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="2:00 PM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">2:00 PM</div>
@@ -425,22 +442,22 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">2:00 PM</div>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:792px;height:90px" data-appt="A-88330" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow-up" data-note="Diagnostic consent re-sent · awaiting signature">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:792px;height:90px" data-appt="A-88330" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow Up" data-note="Diagnostic consent re-sent · awaiting signature">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Rosa Iglesias</div>
                 <div class="cal-appt-note">Diagnostic consent re-sent · awaiting signature</div>
                 <div class="cal-appt-time">3:00 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit half-r" style="top:792px;height:90px" data-appt="A-88331" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow-up" data-note="All consents signed · callback pending">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-r" style="top:792px;height:90px" data-appt="A-88331" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow Up" data-note="All consents signed · callback pending">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-note">All consents signed · callback pending</div>
                 <div class="cal-appt-time">3:00 PM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:880px;height:90px" data-appt="A-88332" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="4:00 PM" data-tx="Follow-up" data-note="Cancelled 8/10 — rebooking to next week">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:880px;height:90px" data-appt="A-88332" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="4:00 PM" data-tx="Follow Up" data-note="Cancelled 8/10 — rebooking to next week">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Hana Sato</div>
                 <div class="cal-appt-note">Cancelled 8/10 — rebooking to next week</div>
                 <div class="cal-appt-time">4:00 PM</div>
@@ -450,15 +467,15 @@
             <!-- Brooke -->
             <div class="daycal-col" data-col="bro">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-lab ty-proc half-l" style="top:0px;height:90px" data-appt="A-88333" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lab" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM" data-tx="Lab draw" data-note="Early draw before the 8 AM infusion">
-                <span class="cal-appt-sub">Lab draw</span>
+              <div class="cal-appt st-done t-quest ty-lab half-l" style="top:0px;height:90px" data-appt="A-88333" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-quest" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM" data-tx="Quest" data-note="Early draw before the 8 AM infusion">
+                <span class="cal-appt-sub">Quest</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
                 <div class="cal-appt-note">Early draw before the 8 AM infusion</div>
                 <div class="cal-appt-time">6:00 AM</div>
                 <span class="cal-appt-type">Medicare Part B</span>
               </div>
-              <div class="cal-appt st-cancelled t-fu ty-visit half-r" style="top:0px;height:90px" data-appt="A-88334" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2,4" data-pt="Katherine Olsen" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-0000" data-stage="Identification" data-pay="30% coinsurance" data-when="6:00 AM" data-tx="Follow-up" data-note="Cancelled 8/3 — charges disputed">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-cancelled t-fu ty-visit half-r" style="top:0px;height:90px" data-appt="A-88334" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2,4" data-pt="Katherine Olsen" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-0000" data-stage="Identification" data-pay="30% coinsurance" data-when="6:00 AM" data-tx="Follow Up" data-note="Cancelled 8/3 — charges disputed">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Katherine Olsen</div>
                 <div class="cal-appt-note">Cancelled 8/3 — charges disputed</div>
                 <div class="cal-appt-time">6:00 AM</div>
@@ -470,22 +487,22 @@
                 <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
                 <div class="cal-appt-time">8:00 AM</div>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:176px;height:90px" data-appt="A-88336" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:176px;height:90px" data-appt="A-88336" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:00 AM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">8:00 AM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88337" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="9:00 AM" data-tx="Follow-up" data-note="Consents signed · no pending lab request">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88337" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="9:00 AM" data-tx="Follow Up" data-note="Consents signed · no pending lab request">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Tom Alvarez</div>
                 <div class="cal-appt-note">Consents signed · no pending lab request</div>
                 <div class="cal-appt-time">9:00 AM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-done t-lab ty-proc half-r" style="top:264px;height:90px" data-appt="A-88338" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lab" data-days="1,2,5" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00 AM" data-tx="Lab draw" data-note="Labs done · results in the chart">
-                <span class="cal-appt-sub">Lab draw</span>
+              <div class="cal-appt st-done t-quest ty-lab half-r" style="top:264px;height:90px" data-appt="A-88338" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-quest" data-days="1,2,5" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00 AM" data-tx="Quest" data-note="Labs done · results in the chart">
+                <span class="cal-appt-sub">Quest</span>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-note">Labs done · results in the chart</div>
                 <div class="cal-appt-time">9:00 AM</div>
@@ -496,22 +513,22 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">10:00 AM</div>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88340" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00 AM" data-tx="Follow-up" data-note="PRP prep at 9 AM · consents signed">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88340" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00 AM" data-tx="Follow Up" data-note="PRP prep at 9 AM · consents signed">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-note">PRP prep at 9 AM · consents signed</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-arrived t-fu ty-visit half-l" style="top:440px;height:90px" data-appt="A-88341" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2,4" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00 AM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-arrived t-fu ty-visit half-l" style="top:440px;height:90px" data-appt="A-88341" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2,4" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00 AM" data-tx="Follow Up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
                 <div class="cal-appt-time">11:00 AM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
-              <div class="cal-appt st-arrived t-lab ty-proc half-r" style="top:440px;height:90px" data-appt="A-88342" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-lab" data-days="1,2,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:00 AM" data-tx="Lab draw" data-note="Allergy panel not yet drawn">
-                <span class="cal-appt-sub">Lab draw</span>
+              <div class="cal-appt st-arrived t-quest ty-lab half-r" style="top:440px;height:90px" data-appt="A-88342" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-quest" data-days="1,2,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:00 AM" data-tx="Quest" data-note="Allergy panel not yet drawn">
+                <span class="cal-appt-sub">Quest</span>
                 <div class="cal-appt-name">Rosa Iglesias</div>
                 <div class="cal-appt-note">Allergy panel not yet drawn</div>
                 <div class="cal-appt-time">11:00 AM</div>
@@ -522,22 +539,22 @@
                 <div class="cal-appt-name">Lunch</div>
                 <div class="cal-appt-time">12:00 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:616px;height:90px" data-appt="A-88344" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="1:00 PM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:616px;height:90px" data-appt="A-88344" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="1:00 PM" data-tx="Follow Up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Daniel Okafor</div>
                 <div class="cal-appt-note">All consents signed · chart prepped</div>
                 <div class="cal-appt-time">1:00 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit half-r" style="top:616px;height:90px" data-appt="A-88345" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Follow-up" data-note="All consents signed · callback pending">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-r" style="top:616px;height:90px" data-appt="A-88345" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Follow Up" data-note="All consents signed · callback pending">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-note">All consents signed · callback pending</div>
                 <div class="cal-appt-time">1:00 PM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="2:00 PM" data-tx="Follow-up" data-note="Quest not yet done · chasing the draw">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="2:00 PM" data-tx="Follow Up" data-note="Quest not yet done · chasing the draw">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Walter Hsu</div>
                 <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
                 <div class="cal-appt-time">2:00 PM</div>
@@ -548,8 +565,8 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">2:00 PM</div>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:792px;height:90px" data-appt="A-88348" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2,4" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
-                <span class="cal-appt-sub">Follow-up</span>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:792px;height:90px" data-appt="A-88348" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2,4" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow Up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
                 <div class="cal-appt-time">3:00 PM</div>
@@ -561,8 +578,8 @@
                 <div class="cal-appt-note">Held pending her order renewal</div>
                 <div class="cal-appt-time">3:00 PM</div>
               </div>
-              <div class="cal-appt st-scheduled t-lab ty-proc" style="top:880px;height:90px" data-appt="A-88350" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lab" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="4:00 PM" data-tx="Lab draw" data-note="Fasting draw · confirm she has not eaten">
-                <span class="cal-appt-sub">Lab draw</span>
+              <div class="cal-appt st-scheduled t-quest ty-lab" style="top:880px;height:90px" data-appt="A-88350" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-quest" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="4:00 PM" data-tx="Quest" data-note="Fasting draw · confirm she has not eaten">
+                <span class="cal-appt-sub">Quest</span>
                 <div class="cal-appt-name">Liam Fitzgerald</div>
                 <div class="cal-appt-note">Fasting draw · confirm she has not eaten</div>
                 <div class="cal-appt-time">4:00 PM</div>
@@ -927,21 +944,21 @@
             <!-- Room 1 -->
             <div class="daycal-col" data-col="room1">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-acu ty-treat" style="top:264px;height:68px" data-appt="A-88399" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-acu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Acupuncture">
-                <span class="cal-appt-sub">Acupuncture</span>
+              <div class="cal-appt st-done t-micro ty-proc" style="top:264px;height:68px" data-appt="A-88399" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-micro" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Microcurrent">
+                <span class="cal-appt-sub">Microcurrent</span>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-time">9:00 AM</div>
                 <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-done t-las ty-energ" style="top:352px;height:46px" data-appt="A-88400" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-las" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00 AM" data-tx="Laser">
+              <div class="cal-appt st-done t-block ty-laser" style="top:352px;height:46px" data-appt="A-88400" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-block" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00 AM" data-tx="Laser">
                 <span class="cal-appt-sub">Laser</span>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-arrived t-chi ty-treat" style="top:440px;height:46px" data-appt="A-88401" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-chi" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Chiro">
+              <div class="cal-appt st-arrived t-block ty-chiro" style="top:440px;height:46px" data-appt="A-88401" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-block" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Chiro">
                 <span class="cal-appt-sub">Chiro</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-time">11:00 AM</div>
@@ -953,28 +970,28 @@
                 <div class="cal-appt-name">Lunch</div>
                 <div class="cal-appt-time">12:00 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-pel ty-proc" style="top:572px;height:46px" data-appt="A-88403" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pel" data-days="2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30 PM" data-tx="Pellet">
-                <span class="cal-appt-sub">Pellet</span>
+              <div class="cal-appt st-confirmed t-pelm ty-proc" style="top:572px;height:46px" data-appt="A-88403" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pelm" data-days="2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30 PM" data-tx="Pellet Males">
+                <span class="cal-appt-sub">Pellet Males</span>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-time">12:30 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-confirmed t-nmt ty-treat" style="top:660px;height:68px" data-appt="A-88404" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nmt" data-days="1,2,5" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 PM" data-tx="Neuromuscular">
-                <span class="cal-appt-sub">Neuromuscular</span>
+              <div class="cal-appt st-confirmed t-nmt ty-energ" style="top:660px;height:68px" data-appt="A-88404" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nmt" data-days="1,2,5" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 PM" data-tx="NMT">
+                <span class="cal-appt-sub">NMT</span>
                 <div class="cal-appt-name">Hana Sato</div>
                 <div class="cal-appt-time">1:30 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-scheduled t-bem ty-energ" style="top:748px;height:46px" data-appt="A-88405" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-bem" data-days="1,2,3,4,5" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="BEMER">
-                <span class="cal-appt-sub">BEMER</span>
+              <div class="cal-appt st-scheduled t-biochg ty-energ" style="top:748px;height:46px" data-appt="A-88405" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-biochg" data-days="1,2,3,4,5" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="BioCharger">
+                <span class="cal-appt-sub">BioCharger</span>
                 <div class="cal-appt-name">Liam Fitzgerald</div>
                 <div class="cal-appt-time">2:30 PM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-scheduled t-lym ty-energ" style="top:836px;height:46px" data-appt="A-88406" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lym" data-days="1,2,3" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="LymphStar">
+              <div class="cal-appt st-scheduled t-lymph ty-energ" style="top:836px;height:46px" data-appt="A-88406" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lymph" data-days="1,2,3" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="LymphStar">
                 <span class="cal-appt-sub">LymphStar</span>
                 <div class="cal-appt-name">Amara Diallo</div>
                 <div class="cal-appt-time">3:30 PM</div>
@@ -985,7 +1002,7 @@
             <!-- Room 2 -->
             <div class="daycal-col" data-col="room2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-eboo ty-proc" style="top:0px;height:134px" data-appt="A-88407" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-eboo" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="EBOO" data-note="Early circuit — she travels at noon" data-flags="urgent">
+              <div class="cal-appt st-done t-block ty-eboo" style="top:0px;height:134px" data-appt="A-88407" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-block" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="EBOO" data-note="Early circuit — she travels at noon" data-flags="urgent">
                 <span class="fl-row"><span class="fl sev-high" title="Urgent medical alert — cardiology follow-up open · Medical">✚</span></span>
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
@@ -1001,7 +1018,7 @@
                 <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-inroom t-eboo ty-proc" style="top:352px;height:134px" data-appt="A-88409" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-eboo" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00 AM – 11:30 AM" data-tx="EBOO">
+              <div class="cal-appt st-inroom t-block ty-eboo" style="top:352px;height:134px" data-appt="A-88409" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-block" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00 AM – 11:30 AM" data-tx="EBOO">
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <div class="cal-appt-time">10:00 AM – 11:30 AM</div>
@@ -1020,15 +1037,15 @@
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-scheduled t-eboo ty-proc" style="top:792px;height:134px" data-appt="A-88412" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-eboo" data-days="1,2,5" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="3:00 PM – 4:30 PM" data-tx="EBOO">
+              <div class="cal-appt st-scheduled t-block ty-eboo" style="top:792px;height:134px" data-appt="A-88412" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-block" data-days="1,2,5" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="3:00 PM – 4:30 PM" data-tx="EBOO">
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Nina Kowalski</div>
                 <div class="cal-appt-time">3:00 PM – 4:30 PM</div>
                 <span class="cal-appt-type">AETNA</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-scheduled t-pel ty-proc" style="top:968px;height:46px" data-appt="A-88413" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-pel" data-days="1,2,3,4,5" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="Pellet">
-                <span class="cal-appt-sub">Pellet</span>
+              <div class="cal-appt st-scheduled t-pelm ty-proc" style="top:968px;height:46px" data-appt="A-88413" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-pelm" data-days="1,2,3,4,5" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="Pellet Males">
+                <span class="cal-appt-sub">Pellet Males</span>
                 <div class="cal-appt-name">Samir Haddad</div>
                 <div class="cal-appt-time">5:00 PM</div>
                 <span class="cal-appt-type">GEHA</span>
@@ -1040,107 +1057,135 @@
 
           <div class="leg">
             <div class="leg-open">
-              <div class="cal-appt ty-iv t-mito st-inchair leg-spec">
-                <span class="cal-appt-sub">Mito Boost</span>
-                <span class="cal-appt-time">11:30</span>
+              <div class="cal-appt ty-visit t-fu st-arrived leg-spec">
+                <span class="cal-appt-sub">Follow Up</span>
+                <span class="cal-appt-time">11:00 AM</span>
                 <span class="cal-appt-name">Elena Petrova</span>
               </div>
               <div class="leg-rule">
-                Read the swatch, then the fill:<br>
-                <b>the swatch&rsquo;s colour</b> is which treatment &middot;
-                <b>the texture on it</b> is what kind &middot;
-                <b>the background</b> is where the patient stands.
+                The clinic&rsquo;s own code, three channels:<br>
+                <b>the background</b> is the appointment type &middot;
+                <b>the side bar</b> is which treatment &middot;
+                <b>the watermark</b> is where the patient stands.
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
-                <span class="leg-key-txt"><b>Swatch colour</b><span>which treatment</span></span></div>
-              <div class="leg-cols">
-                <div class="leg-grp">
-                  <span class="leg-grp-t">Foundational Flow <em>&mdash; the bigger the bag, the deeper the teal</em></span>
-                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5 ty-iv"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10 ty-iv"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20 ty-iv"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50 ty-iv"></i>50</span></div>
-                </div>
-                <div class="leg-grp">
-                  <span class="leg-grp-t">Mega C <em>&mdash; grams</em></span>
-                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50 ty-iv"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75 ty-iv"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100 ty-iv"></i>100</span></div>
-                </div>
-                <div class="leg-grp">
-                  <span class="leg-grp-t">The named bags</span>
-                  <div class="leg-items">
-                    <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
-                    <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
-                    <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
-                    <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
-                    <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
-                    <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
-                    <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
-                    <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
-                    <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
-                    <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
-                    <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
-                    <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
-                  </div>
-                </div>
-                <div class="leg-grp leg-grp-ours">
-                  <span class="leg-grp-t">Ours <em>&mdash; the clinic has not given these a colour yet</em></span>
-                  <div class="leg-items">
-                    <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
-                    <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
-                    <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
-                    <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
-                    <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
-                    <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
-                    <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
-                    <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
-                    <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
-                    <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
-                    <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
-                    <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
-                    <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
-                  </div>
-                </div>
+                <span class="leg-key-txt"><b>Background</b><span>appointment type</span></span></div>
+              <div class="leg-items">
+                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office visit</span>
+                <span class="leg-fam"><i class="ty-sw ty-proc"></i>Procedure</span>
+                <span class="leg-fam"><i class="ty-sw ty-energ"></i>Energetics</span>
+                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
+                <span class="leg-fam"><i class="ty-sw ty-lab"></i>Labs</span>
+                <span class="leg-fam"><i class="ty-sw ty-diag"></i>Diagnostics</span>
+                <span class="leg-fam"><i class="ty-sw ty-fpe"></i>FPE</span>
+                <span class="leg-fam"><i class="ty-sw ty-fpe6"></i>6 month FPE</span>
+                <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
+                <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
+                <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
+                <span class="leg-sub-more" style="width:100%">&mdash; the clinic has coloured Office visit, Procedure, Energetics and IV; the rest are still white</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">2</span>
-                <span class="leg-key-txt"><b>Texture on it</b><span>what kind</span></span></div>
-              <div class="leg-items">
-                <span class="leg-fam"><i class="rail-sw t-cog ty-visit"></i>Office visit &mdash; plain</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>IV &mdash; banded</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-proc"></i>Procedure &mdash; blocked</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-energ"></i>Energetics &mdash; ribbed</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-treat"></i>Treatment &mdash; hatched</span>
-                <span class="leg-sub-more">&mdash; the strokes cover about a third; the rest stays the pure colour, and the tone flips to white on the dark bags so the shape reads on Cellular Boost too</span>
+                <span class="leg-key-txt"><b>Side bar</b><span>which treatment</span></span></div>
+              <div class="leg-cols">
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Office visit</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
+                  <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
+                  <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+                  <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Procedure</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
+                  <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
+                  <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+                  <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+                  <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
+                  <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Energetics</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
+                  <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
+                  <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
+                  <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+                  <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+                  <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment <span class="leg-todo">no colour yet</span></span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Labs</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-igenix"></i>iGenix <span class="leg-todo">no colour yet</span></span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">IV <em>&mdash; the eCW recipe menu</em></span>
+                  <div class="leg-items" style="margin-bottom:8px">
+                    <span class="leg-fam" style="gap:12px">Foundational Flow<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50"></i>50</span></span></span>
+                    <span class="leg-fam" style="gap:12px">Mega C<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100"></i>100</span></span></span>
+                  </div>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+                  <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
+                  <span class="leg-fam"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</span>
+                  <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+                  <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+                  <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
+                  <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
+                  <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Amino</span>
+                  <span class="leg-fam"><i class="rail-sw t-minic"></i>Mini Cust</span>
+                  <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini MB</span>
+                  <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
+                  <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">3</span>
-                <span class="leg-key-txt"><b>Background</b><span>where they stand</span></span></div>
+                <span class="leg-key-txt"><b>Watermark</b><span>where they stand</span></span></div>
               <div class="leg-items">
                 <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
                 <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
                 <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
-                <span class="leg-st"><i class="st-sw st-locked"></i><span class="lockmark"></span>Locked</span>
-                <span class="leg-sub-more">&mdash; and the three ways it ends, all striped:</span>
-                <span class="leg-st"><i class="st-sw st-done"></i>Done</span>
-                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
+                <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
+                <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
                 <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
               </div>
             </div>
 
             <div class="leg-row leg-foot">
               <div class="leg-key"><span class="leg-n">&#9679;</span>
-                <span class="leg-key-txt"><b>The black bar</b><span>needs you</span></span></div>
+                <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
               <div class="leg-items">
                 <span class="leg-bar">Arrived &middot; waiting</span>
                 <span class="leg-bar">Ready to check out</span>
                 <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the only black marks on the board, so they find you first</span>
+                <span class="leg-sub-more">&mdash; the watermark says the status on all ten; the bar
+                shouts it on the three where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -1380,7 +1425,7 @@
               <span class="cap-num"><b>5 of 6</b> booked</span>
               <span class="cap-pct">83%</span>
               <span class="cap-left">1 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-micro ty-proc"></i>Microcurrent</span>
               <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
               <span class="cap-num"><b>6 of 11</b> booked</span>
               <span class="cap-pct">55%</span>
@@ -1388,107 +1433,135 @@
           </div>
           <div class="leg">
             <div class="leg-open">
-              <div class="cal-appt ty-iv t-mito st-inchair leg-spec">
-                <span class="cal-appt-sub">Mito Boost</span>
-                <span class="cal-appt-time">11:30</span>
+              <div class="cal-appt ty-visit t-fu st-arrived leg-spec">
+                <span class="cal-appt-sub">Follow Up</span>
+                <span class="cal-appt-time">11:00 AM</span>
                 <span class="cal-appt-name">Elena Petrova</span>
               </div>
               <div class="leg-rule">
-                Read the swatch, then the fill:<br>
-                <b>the swatch&rsquo;s colour</b> is which treatment &middot;
-                <b>the texture on it</b> is what kind &middot;
-                <b>the background</b> is where the patient stands.
+                The clinic&rsquo;s own code, three channels:<br>
+                <b>the background</b> is the appointment type &middot;
+                <b>the side bar</b> is which treatment &middot;
+                <b>the watermark</b> is where the patient stands.
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
-                <span class="leg-key-txt"><b>Swatch colour</b><span>which treatment</span></span></div>
-              <div class="leg-cols">
-                <div class="leg-grp">
-                  <span class="leg-grp-t">Foundational Flow <em>&mdash; the bigger the bag, the deeper the teal</em></span>
-                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5 ty-iv"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10 ty-iv"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20 ty-iv"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50 ty-iv"></i>50</span></div>
-                </div>
-                <div class="leg-grp">
-                  <span class="leg-grp-t">Mega C <em>&mdash; grams</em></span>
-                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50 ty-iv"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75 ty-iv"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100 ty-iv"></i>100</span></div>
-                </div>
-                <div class="leg-grp">
-                  <span class="leg-grp-t">The named bags</span>
-                  <div class="leg-items">
-                    <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
-                    <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
-                    <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
-                    <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
-                    <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
-                    <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
-                    <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
-                    <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
-                    <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
-                    <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
-                    <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
-                    <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
-                  </div>
-                </div>
-                <div class="leg-grp leg-grp-ours">
-                  <span class="leg-grp-t">Ours <em>&mdash; the clinic has not given these a colour yet</em></span>
-                  <div class="leg-items">
-                    <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
-                    <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
-                    <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
-                    <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
-                    <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
-                    <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
-                    <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
-                    <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
-                    <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
-                    <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
-                    <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
-                    <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
-                    <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
-                  </div>
-                </div>
+                <span class="leg-key-txt"><b>Background</b><span>appointment type</span></span></div>
+              <div class="leg-items">
+                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office visit</span>
+                <span class="leg-fam"><i class="ty-sw ty-proc"></i>Procedure</span>
+                <span class="leg-fam"><i class="ty-sw ty-energ"></i>Energetics</span>
+                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
+                <span class="leg-fam"><i class="ty-sw ty-lab"></i>Labs</span>
+                <span class="leg-fam"><i class="ty-sw ty-diag"></i>Diagnostics</span>
+                <span class="leg-fam"><i class="ty-sw ty-fpe"></i>FPE</span>
+                <span class="leg-fam"><i class="ty-sw ty-fpe6"></i>6 month FPE</span>
+                <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
+                <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
+                <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
+                <span class="leg-sub-more" style="width:100%">&mdash; the clinic has coloured Office visit, Procedure, Energetics and IV; the rest are still white</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">2</span>
-                <span class="leg-key-txt"><b>Texture on it</b><span>what kind</span></span></div>
-              <div class="leg-items">
-                <span class="leg-fam"><i class="rail-sw t-cog ty-visit"></i>Office visit &mdash; plain</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>IV &mdash; banded</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-proc"></i>Procedure &mdash; blocked</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-energ"></i>Energetics &mdash; ribbed</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-treat"></i>Treatment &mdash; hatched</span>
-                <span class="leg-sub-more">&mdash; the strokes cover about a third; the rest stays the pure colour, and the tone flips to white on the dark bags so the shape reads on Cellular Boost too</span>
+                <span class="leg-key-txt"><b>Side bar</b><span>which treatment</span></span></div>
+              <div class="leg-cols">
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Office visit</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
+                  <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
+                  <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+                  <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Procedure</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
+                  <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
+                  <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+                  <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+                  <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
+                  <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Energetics</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
+                  <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
+                  <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
+                  <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+                  <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+                  <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment <span class="leg-todo">no colour yet</span></span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Labs</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-igenix"></i>iGenix <span class="leg-todo">no colour yet</span></span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">IV <em>&mdash; the eCW recipe menu</em></span>
+                  <div class="leg-items" style="margin-bottom:8px">
+                    <span class="leg-fam" style="gap:12px">Foundational Flow<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50"></i>50</span></span></span>
+                    <span class="leg-fam" style="gap:12px">Mega C<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100"></i>100</span></span></span>
+                  </div>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+                  <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
+                  <span class="leg-fam"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</span>
+                  <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+                  <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+                  <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
+                  <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
+                  <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Amino</span>
+                  <span class="leg-fam"><i class="rail-sw t-minic"></i>Mini Cust</span>
+                  <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini MB</span>
+                  <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
+                  <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">3</span>
-                <span class="leg-key-txt"><b>Background</b><span>where they stand</span></span></div>
+                <span class="leg-key-txt"><b>Watermark</b><span>where they stand</span></span></div>
               <div class="leg-items">
                 <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
                 <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
                 <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
-                <span class="leg-st"><i class="st-sw st-locked"></i><span class="lockmark"></span>Locked</span>
-                <span class="leg-sub-more">&mdash; and the three ways it ends, all striped:</span>
-                <span class="leg-st"><i class="st-sw st-done"></i>Done</span>
-                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
+                <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
+                <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
                 <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
               </div>
             </div>
 
             <div class="leg-row leg-foot">
               <div class="leg-key"><span class="leg-n">&#9679;</span>
-                <span class="leg-key-txt"><b>The black bar</b><span>needs you</span></span></div>
+                <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
               <div class="leg-items">
                 <span class="leg-bar">Arrived &middot; waiting</span>
                 <span class="leg-bar">Ready to check out</span>
                 <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the only black marks on the board, so they find you first</span>
+                <span class="leg-sub-more">&mdash; the watermark says the status on all ten; the bar
+                shouts it on the three where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -1687,7 +1760,7 @@
               <span class="cap-num"><b>14 of 40</b> booked</span>
               <span class="cap-pct">35%</span>
               <span class="cap-left">26 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
+            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-micro ty-proc"></i>Microcurrent</span>
               <div class="meter"><div class="meter-fill" style="width:59%"></div></div>
               <span class="cap-num"><b>26 of 44</b> booked</span>
               <span class="cap-pct">59%</span>
@@ -1695,107 +1768,135 @@
           </div>
           <div class="leg">
             <div class="leg-open">
-              <div class="cal-appt ty-iv t-mito st-inchair leg-spec">
-                <span class="cal-appt-sub">Mito Boost</span>
-                <span class="cal-appt-time">11:30</span>
+              <div class="cal-appt ty-visit t-fu st-arrived leg-spec">
+                <span class="cal-appt-sub">Follow Up</span>
+                <span class="cal-appt-time">11:00 AM</span>
                 <span class="cal-appt-name">Elena Petrova</span>
               </div>
               <div class="leg-rule">
-                Read the swatch, then the fill:<br>
-                <b>the swatch&rsquo;s colour</b> is which treatment &middot;
-                <b>the texture on it</b> is what kind &middot;
-                <b>the background</b> is where the patient stands.
+                The clinic&rsquo;s own code, three channels:<br>
+                <b>the background</b> is the appointment type &middot;
+                <b>the side bar</b> is which treatment &middot;
+                <b>the watermark</b> is where the patient stands.
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">1</span>
-                <span class="leg-key-txt"><b>Swatch colour</b><span>which treatment</span></span></div>
-              <div class="leg-cols">
-                <div class="leg-grp">
-                  <span class="leg-grp-t">Foundational Flow <em>&mdash; the bigger the bag, the deeper the teal</em></span>
-                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5 ty-iv"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10 ty-iv"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20 ty-iv"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50 ty-iv"></i>50</span></div>
-                </div>
-                <div class="leg-grp">
-                  <span class="leg-grp-t">Mega C <em>&mdash; grams</em></span>
-                  <div class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15 ty-iv"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25 ty-iv"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50 ty-iv"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75 ty-iv"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100 ty-iv"></i>100</span></div>
-                </div>
-                <div class="leg-grp">
-                  <span class="leg-grp-t">The named bags</span>
-                  <div class="leg-items">
-                    <span class="leg-fam"><i class="rail-sw t-cell ty-iv"></i>Cellular Boost</span>
-                    <span class="leg-fam"><i class="rail-sw t-mast ty-iv"></i>Mast Cell</span>
-                    <span class="leg-fam"><i class="rail-sw t-mastb ty-iv"></i>Mast Cell &middot; Benadryl</span>
-                    <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>Cognitive Support</span>
-                    <span class="leg-fam"><i class="rail-sw t-iron ty-iv"></i>Core Iron Blend</span>
-                    <span class="leg-fam"><i class="rail-sw t-rest ty-iv"></i>Core Restore</span>
-                    <span class="leg-fam"><i class="rail-sw t-detox ty-iv"></i>Detox Prime</span>
-                    <span class="leg-fam"><i class="rail-sw t-amino ty-iv"></i>Essential Amino</span>
-                    <span class="leg-fam"><i class="rail-sw t-minic ty-iv"></i>Mini Cust</span>
-                    <span class="leg-fam"><i class="rail-sw t-minimb ty-iv"></i>Mini MB</span>
-                    <span class="leg-fam"><i class="rail-sw t-mito ty-iv"></i>Mito Boost</span>
-                    <span class="leg-fam"><i class="rail-sw t-ebooiv ty-iv"></i>EBOO Boost IV</span>
-                  </div>
-                </div>
-                <div class="leg-grp leg-grp-ours">
-                  <span class="leg-grp-t">Ours <em>&mdash; the clinic has not given these a colour yet</em></span>
-                  <div class="leg-items">
-                    <span class="leg-fam"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
-                    <span class="leg-fam"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
-                    <span class="leg-fam"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
-                    <span class="leg-fam"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
-                    <span class="leg-fam"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
-                    <span class="leg-fam"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
-                    <span class="leg-fam"><i class="rail-sw t-lab ty-proc"></i>Lab draw</span>
-                    <span class="leg-fam"><i class="rail-sw t-las ty-energ"></i>Laser</span>
-                    <span class="leg-fam"><i class="rail-sw t-bem ty-energ"></i>BEMER</span>
-                    <span class="leg-fam"><i class="rail-sw t-lym ty-energ"></i>LymphStar</span>
-                    <span class="leg-fam"><i class="rail-sw t-acu ty-treat"></i>Acupuncture</span>
-                    <span class="leg-fam"><i class="rail-sw t-chi ty-treat"></i>Chiro</span>
-                    <span class="leg-fam"><i class="rail-sw t-nmt ty-treat"></i>Neuromuscular</span>
-                  </div>
-                </div>
+                <span class="leg-key-txt"><b>Background</b><span>appointment type</span></span></div>
+              <div class="leg-items">
+                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office visit</span>
+                <span class="leg-fam"><i class="ty-sw ty-proc"></i>Procedure</span>
+                <span class="leg-fam"><i class="ty-sw ty-energ"></i>Energetics</span>
+                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
+                <span class="leg-fam"><i class="ty-sw ty-lab"></i>Labs</span>
+                <span class="leg-fam"><i class="ty-sw ty-diag"></i>Diagnostics</span>
+                <span class="leg-fam"><i class="ty-sw ty-fpe"></i>FPE</span>
+                <span class="leg-fam"><i class="ty-sw ty-fpe6"></i>6 month FPE</span>
+                <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
+                <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
+                <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
+                <span class="leg-sub-more" style="width:100%">&mdash; the clinic has coloured Office visit, Procedure, Energetics and IV; the rest are still white</span>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">2</span>
-                <span class="leg-key-txt"><b>Texture on it</b><span>what kind</span></span></div>
-              <div class="leg-items">
-                <span class="leg-fam"><i class="rail-sw t-cog ty-visit"></i>Office visit &mdash; plain</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-iv"></i>IV &mdash; banded</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-proc"></i>Procedure &mdash; blocked</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-energ"></i>Energetics &mdash; ribbed</span>
-                <span class="leg-fam"><i class="rail-sw t-cog ty-treat"></i>Treatment &mdash; hatched</span>
-                <span class="leg-sub-more">&mdash; the strokes cover about a third; the rest stays the pure colour, and the tone flips to white on the dark bags so the shape reads on Cellular Boost too</span>
+                <span class="leg-key-txt"><b>Side bar</b><span>which treatment</span></span></div>
+              <div class="leg-cols">
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Office visit</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
+                  <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
+                  <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+                  <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Procedure</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
+                  <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
+                  <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+                  <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+                  <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
+                  <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Energetics</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
+                  <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
+                  <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
+                  <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+                  <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+                  <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment <span class="leg-todo">no colour yet</span></span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Labs</span>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD <span class="leg-todo">no colour yet</span></span>
+                  <span class="leg-fam"><i class="rail-sw t-igenix"></i>iGenix <span class="leg-todo">no colour yet</span></span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">IV <em>&mdash; the eCW recipe menu</em></span>
+                  <div class="leg-items" style="margin-bottom:8px">
+                    <span class="leg-fam" style="gap:12px">Foundational Flow<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50"></i>50</span></span></span>
+                    <span class="leg-fam" style="gap:12px">Mega C<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100"></i>100</span></span></span>
+                  </div>
+                  <div class="leg-items">
+                  <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+                  <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
+                  <span class="leg-fam"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</span>
+                  <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+                  <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+                  <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
+                  <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
+                  <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Amino</span>
+                  <span class="leg-fam"><i class="rail-sw t-minic"></i>Mini Cust</span>
+                  <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini MB</span>
+                  <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
+                  <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</span>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="leg-row">
               <div class="leg-key"><span class="leg-n">3</span>
-                <span class="leg-key-txt"><b>Background</b><span>where they stand</span></span></div>
+                <span class="leg-key-txt"><b>Watermark</b><span>where they stand</span></span></div>
               <div class="leg-items">
                 <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
                 <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
                 <span class="leg-st"><i class="st-sw st-checkout"></i>Ready to check out</span>
-                <span class="leg-st"><i class="st-sw st-locked"></i><span class="lockmark"></span>Locked</span>
-                <span class="leg-sub-more">&mdash; and the three ways it ends, all striped:</span>
-                <span class="leg-st"><i class="st-sw st-done"></i>Done</span>
-                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
+                <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
+                <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
                 <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
               </div>
             </div>
 
             <div class="leg-row leg-foot">
               <div class="leg-key"><span class="leg-n">&#9679;</span>
-                <span class="leg-key-txt"><b>The black bar</b><span>needs you</span></span></div>
+                <span class="leg-key-txt"><b>The black bar</b><span>needs you now</span></span></div>
               <div class="leg-items">
                 <span class="leg-bar">Arrived &middot; waiting</span>
                 <span class="leg-bar">Ready to check out</span>
                 <span class="leg-bar">No-show</span>
-                <span class="leg-sub-more">&mdash; the only black marks on the board, so they find you first</span>
+                <span class="leg-sub-more">&mdash; the watermark says the status on all ten; the bar
+                shouts it on the three where somebody is standing at the desk</span>
                 <a href="treatments.html#/t-06-codes" style="margin-left:auto">Edit the codes &rsaquo;</a>
               </div>
             </div>
@@ -2203,7 +2304,7 @@
               <option value="ty-visit">Office visit</option>
               <option value="ty-proc">Procedure</option>
               <option value="ty-energ">Energetics</option>
-              <option value="ty-treat">Treatment</option>
+              <option value="ty-lab">Labs</option>
             </select>
           </div>
         </div>
@@ -2252,7 +2353,7 @@
               <tr data-ty="ty-energ"><td>Liam Fitzgerald</td><td><span class="type-mark">BEM</span> Energetics &middot; BEMER</td>
                 <td>Reschedules within the same week</td><td>3 of last 4</td>
                 <td>Offer the standing Thursday slot</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr data-ty="ty-treat"><td>Hana Sato</td><td><span class="type-mark">NMT</span> Treatment &middot; Neuromuscular</td>
+              <tr data-ty="ty-energ"><td>Hana Sato</td><td><span class="type-mark">NMT</span> Energetics &middot; NMT</td>
                 <td>Books late, arrives early</td><td>Last 6 visits &middot; avg 11 min early</td>
                 <td>She can take an earlier slot when one frees</td><td><span class="ai-state suggested">Suggested</span></td></tr>
             </tbody>
@@ -2350,7 +2451,7 @@
               </tr>
               <tr>
                 <td>Yuki Tanaka<div class="field-help">(714) 555-1088</div></td>
-                <td><span class="rail-sw t-acu ty-treat" style="vertical-align:-4px"></span> Treatment &middot; Acupuncture</td>
+                <td><span class="rail-sw t-micro ty-proc" style="vertical-align:-4px"></span> Procedure &middot; Microcurrent</td>
                 <td>Any time &mdash; will take a same-day call</td>
                 <td>1 day</td>
                 <td>Aug 19, 3:30 PM</td>
@@ -3167,7 +3268,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=58"></script>
+<script src="assets/hcos.js?v=59"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -4255,7 +4356,9 @@
     zoom.className = 'appt-zoom';
     document.body.appendChild(zoom);
     var TY_LBL = { 'ty-visit': 'Office visit', 'ty-proc': 'Procedure', 'ty-iv': 'IV',
-                   'ty-energ': 'Energetics', 'ty-treat': 'Treatment' };
+                   'ty-energ': 'Energetics', 'ty-lab': 'Labs', 'ty-diag': 'Diagnostics',
+                   'ty-fpe': 'FPE', 'ty-fpe6': '6 month FPE', 'ty-chiro': 'Chiro',
+                   'ty-eboo': 'EBOO', 'ty-laser': 'Laser' };
     var PATTERN = {
       'Maya Reyes': 'Runs long — last 3 NAD+ averaged 3 h 20 against 3 h booked. Book her late in the day.',
       'Walter Hsu': 'Two late arrivals in the last month — confirm the evening before.',
@@ -4502,7 +4605,9 @@
   /* ---------- searchable multi-selects drive the same lSel state ---------- */
   (function () {
     var TY_NAMES = { 'ty-visit': 'Office visit', 'ty-proc': 'Procedure', 'ty-iv': 'IV',
-                     'ty-energ': 'Energetics', 'ty-treat': 'Treatment' };
+                     'ty-energ': 'Energetics', 'ty-lab': 'Labs', 'ty-diag': 'Diagnostics',
+                   'ty-fpe': 'FPE', 'ty-fpe6': '6 month FPE', 'ty-chiro': 'Chiro',
+                   'ty-eboo': 'EBOO', 'ty-laser': 'Laser' };
     function summarize() {
       var f1 = document.querySelector('#l-msel-ty .msel-field-lbl');
       var f2 = document.querySelector('#l-msel-sub .msel-field-lbl');

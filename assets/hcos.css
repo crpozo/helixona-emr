@@ -1025,150 +1025,167 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 
 /* ==========================================================================
-   THE CALENDAR CODE — fourth pass (Carlos, 2026-08-07)
-   One sentence a receptionist can repeat:
-   the STRIPE'S COLOUR is which treatment · the STRIPE'S SHAPE is what kind ·
-   the BACKGROUND is where it stands.
+   THE CALENDAR CODE — the CLINIC'S OWN three channels (Carlos, 2026-08-11,
+   from the practice's colour spreadsheet). It supersedes everything before it:
 
-     SUBTYPE owns the rail HUE       (--sb)
-     TYPE    owns the rail TEXTURE   (--rail)
-     STATUS  owns the BACKGROUND
+       BACKGROUND COLOUR                        = appointment TYPE
+       SIDE BAR COLOUR                          = SUB appointment type
+       WATERMARK over the background            = STATUS
 
-   No property is shared by two levels. Every status fill is pale or striped by
-   construction, so text stays near-black on all of them and no status needs a
-   white-text exception.
+   Two of my three channels were the wrong way round. The side bar was already
+   the subtype and stays; the background moves from status to TYPE, and status
+   becomes a faint symbol watermarked over the block. The symbols are inline
+   SVG, never emoji: an emoji renders in its own colours on top of a palette
+   the clinic chose, and differently on every operating system.
    ========================================================================== */
 :root {
-  /* SUBTYPE — the clinic's OWN colours, lifted from the eCW menu (Carlos,
-     2026-08-07). These are not design choices and must not be "improved": the
-     team already reads Mega C 50 as cream and Mito Boost as wine, and a
-     wireframe that renames their colours teaches them the wrong thing.
-     Ten of the twenty-three fall under 1.6:1 against white, so the rail is a
-     FILLED SWATCH with a defining edge, never a hairline. */
-  --sb-ff5:#C2ECEA;    --sb-ff10:#A5F0EF;  --sb-ff15:#66F2F2;
-  --sb-ff20:#5CC9C6;   --sb-ff25:#529CB4;  --sb-ff50:#2E5D6B;
-  --sb-mc15:#CCD9F0;   --sb-mc25:#F8E2A6;  --sb-mc50:#FBF1D8;
-  --sb-mc75:#F2DDC6;   --sb-mc100:#7C9DF2;
-  --sb-cell:#000000;   --sb-mast:#FAFA55;  --sb-mastb:#8FA9B0;
-  --sb-cog:#C9B69C;    --sb-iron:#F52BF5;  --sb-rest:#F6D9BC;
-  --sb-detox:#B9D3A2;  --sb-amino:#DCE5F6;
-  --sb-minic:#EF3423;  --sb-minimb:#DF8CAF; --sb-mito:#AF2A62;
-  --sb-ebooiv:#0000FF;
+  /* TYPE — the background. From the clinic's left-hand column. */
+  --tybg-visit: #B7CDB0;  /* Office visit */
+  --tybg-proc:  #A9B9E2;  /* Procedure */
+  --tybg-energ: #F9F0D4;  /* Energetics */
+  --tybg-iv:    #FBF4E2;  /* IV */
+  --tybg-lab:   #FFFFFF;  /* Labs */
+  --tybg-diag:  #FFFFFF;  /* Diagnostics */
+  --tybg-fpe:   #FFFFFF;  /* FPE */
+  --tybg-fpe6:  #FFFFFF;  /* 6 month FPE */
+  --tybg-chiro: #FFFFFF;  /* Chiro */
+  --tybg-eboo:  #FFFFFF;  /* EBOO */
+  --tybg-laser: #FFFFFF;  /* Laser */
 
-  /* Everything the clinic has not given us a colour for keeps ours, and is
-     marked as ours in the legend so nobody mistakes it for the eCW menu. */
-  --sb-newpt:#1B4F9C;  --sb-fu:#55708A;    --sb-tele:#5B3A8C;  --sb-lab:#6A5140;
-  --sb-eboo:#A62121;   --sb-prp:#D2447E;   --sb-pel:#8C6A00;
-  --sb-las:#B23AA0;    --sb-bem:#3D5AA8;   --sb-lym:#2C7BA0;
-  --sb-acu:#3E7A2E;    --sb-chi:#7A6A2E;   --sb-nmt:#A05226;
-  --sb-none:#B4B4B4;   /* blocked time is not a treatment */
+  /* SUBTYPE — the side bar. From the clinic's second column. */
+  --sb-newpt:   #EE41EE;  /* New patient */
+  --sb-npfu:    #E6BFE6;  /* New patient FU */
+  --sb-nptoc:   #9E4C79;  /* New patient TOC */
+  --sb-fu:      #FAFA1E;  /* Follow Up */
+  --sb-prp:     #EE9A3B;  /* PRP */
+  --sb-tpi:     #F5D0A4;  /* TPI */
+  --sb-pelm:    #6F91DA;  /* Pellet Males */
+  --sb-pelf:    #D2836F;  /* Pellet Females */
+  --sb-proloz:  #4EF0F0;  /* Prolozone */
+  --sb-micro:   #A9C59D;  /* Microcurrent */
+  --sb-biochg:  #5B82D6;  /* BioCharger */
+  --sb-lymph:   #2C6B2C;  /* LymphStar */
+  --sb-scenar:  #CC2020;  /* SCENAR */
+  --sb-minilym: #8AC98A;  /* Mini-LymphStar */
+  --sb-biomodp: #EE9A9A;  /* BioMod Pro */
 
-  /* STATUS — owns the background. The three ways an appointment ENDS are the
-     three striped fills; everything still live is a flat fill. */
-  --bg-conf:#E7EEF7;  --bd-conf:#9FBBD8;
-  --bg-arr:#FBE7C7;   --bd-arr:#D69A2E;
-  --bg-prog:#BFE0CB;  --bd-prog:#4E9A6B;
-  --bg-lock:#E5E1F2;  --bd-lock:#7C68C4;
-  --bg-chk:#E4DFF0;   --bd-chk:#7A6AA8;
-  --bg-done-a:#DCEDE3; --bg-done-b:#F7FBF9; --bd-done:#A7CBB6;
-  --bg-ns-a:#F3C3BC;   --bg-ns-b:#FDF1EF;   --bd-noshow:#C0392B;
-  --bg-cx-a:#F7C9DF;   --bg-cx-b:#FDF3F8;   --bd-cancel:#C86A9B;
+  /* the IV recipe menu keeps its own eCW colours — same channel, same rule */
+  --sb-ff5:     #C2ECEA;  /* Foundational Flow 5 */
+  --sb-ff10:    #A5F0EF;  /* Foundational Flow 10 */
+  --sb-ff15:    #66F2F2;  /* Foundational Flow 15 */
+  --sb-ff20:    #5CC9C6;  /* Foundational Flow 20 */
+  --sb-ff25:    #529CB4;  /* Foundational Flow 25 */
+  --sb-ff50:    #2E5D6B;  /* Foundational Flow 50 */
+  --sb-mc15:    #CCD9F0;  /* Mega C 15 */
+  --sb-mc25:    #F8E2A6;  /* Mega C 25 */
+  --sb-mc50:    #FBF1D8;  /* Mega C 50 */
+  --sb-mc75:    #F2DDC6;  /* Mega C 75 */
+  --sb-mc100:   #7C9DF2;  /* Mega C 100 */
+  --sb-cell:    #000000;  /* Cellular Boost */
+  --sb-mast:    #FAFA55;  /* Mast Cell */
+  --sb-mastb:   #8FA9B0;  /* Mast Cell · Benadryl only */
+  --sb-cog:     #C9B69C;  /* Cognitive Support */
+  --sb-iron:    #F52BF5;  /* Core Iron Blend */
+  --sb-rest:    #F6D9BC;  /* Core Restore */
+  --sb-detox:   #B9D3A2;  /* Detox Prime */
+  --sb-amino:   #DCE5F6;  /* Essential Amino */
+  --sb-minic:   #EF3423;  /* Mini Cust */
+  --sb-minimb:  #DF8CAF;  /* Mini MB */
+  --sb-mito:    #AF2A62;  /* Mito Boost */
+  --sb-ebooiv:  #0000FF;  /* EBOO Boost IV */
+  --sb-none:    #9A9A9A;
+  --blk-muted:  #4A4A4A;   /* --muted fails contrast on a tinted block */
 
-  /* --muted fails contrast on a tinted block; this passes on all of them */
-  --blk-muted:#4A4A4A;
+  /* the clinic has not named a colour for these yet */
+  --sb-biomodr: #9A9A9A;  /* BioMod Recharge — awaiting a clinic colour */
+  --sb-nmt:     #9A9A9A;  /* NMT — awaiting a clinic colour */
+  --sb-mead:    #9A9A9A;  /* MEAD — awaiting a clinic colour */
+  --sb-meadre:  #9A9A9A;  /* MEAD ReAssessment — awaiting a clinic colour */
+  --sb-mdl:     #9A9A9A;  /* MDL — awaiting a clinic colour */
+  --sb-quest:   #9A9A9A;  /* Quest — awaiting a clinic colour */
+  --sb-g6pd:    #9A9A9A;  /* G6PD — awaiting a clinic colour */
+  --sb-igenix:  #9A9A9A;  /* iGenix — awaiting a clinic colour */
 }
 
-/* ---- SUBTYPE = the swatch's colour. Compound selectors only, so a filter
-        chip carrying the same word never inherits a treatment colour. ---- */
-.cal-appt.t-ff5, .week-appt.t-ff5, .rail-sw.t-ff5          { --sb:var(--sb-ff5); }
-.cal-appt.t-ff10, .week-appt.t-ff10, .rail-sw.t-ff10       { --sb:var(--sb-ff10); }
-.cal-appt.t-ff15, .week-appt.t-ff15, .rail-sw.t-ff15       { --sb:var(--sb-ff15); }
-.cal-appt.t-ff20, .week-appt.t-ff20, .rail-sw.t-ff20       { --sb:var(--sb-ff20); }
-.cal-appt.t-ff25, .week-appt.t-ff25, .rail-sw.t-ff25       { --sb:var(--sb-ff25); }
-.cal-appt.t-ff50, .week-appt.t-ff50, .rail-sw.t-ff50       { --sb:var(--sb-ff50); }
-.cal-appt.t-mc15, .week-appt.t-mc15, .rail-sw.t-mc15       { --sb:var(--sb-mc15); }
-.cal-appt.t-mc25, .week-appt.t-mc25, .rail-sw.t-mc25       { --sb:var(--sb-mc25); }
-.cal-appt.t-mc50, .week-appt.t-mc50, .rail-sw.t-mc50       { --sb:var(--sb-mc50); }
-.cal-appt.t-mc75, .week-appt.t-mc75, .rail-sw.t-mc75       { --sb:var(--sb-mc75); }
-.cal-appt.t-mc100, .week-appt.t-mc100, .rail-sw.t-mc100    { --sb:var(--sb-mc100); }
-.cal-appt.t-cell, .week-appt.t-cell, .rail-sw.t-cell       { --sb:var(--sb-cell); }
-.cal-appt.t-mast, .week-appt.t-mast, .rail-sw.t-mast       { --sb:var(--sb-mast); }
-.cal-appt.t-mastb, .week-appt.t-mastb, .rail-sw.t-mastb    { --sb:var(--sb-mastb); }
-.cal-appt.t-cog, .week-appt.t-cog, .rail-sw.t-cog          { --sb:var(--sb-cog); }
-.cal-appt.t-iron, .week-appt.t-iron, .rail-sw.t-iron       { --sb:var(--sb-iron); }
-.cal-appt.t-rest, .week-appt.t-rest, .rail-sw.t-rest       { --sb:var(--sb-rest); }
-.cal-appt.t-detox, .week-appt.t-detox, .rail-sw.t-detox    { --sb:var(--sb-detox); }
-.cal-appt.t-amino, .week-appt.t-amino, .rail-sw.t-amino    { --sb:var(--sb-amino); }
-.cal-appt.t-minic, .week-appt.t-minic, .rail-sw.t-minic    { --sb:var(--sb-minic); }
-.cal-appt.t-minimb, .week-appt.t-minimb, .rail-sw.t-minimb { --sb:var(--sb-minimb); }
-.cal-appt.t-mito, .week-appt.t-mito, .rail-sw.t-mito       { --sb:var(--sb-mito); }
-.cal-appt.t-ebooiv, .week-appt.t-ebooiv, .rail-sw.t-ebooiv { --sb:var(--sb-ebooiv); }
-.cal-appt.t-newpt, .week-appt.t-newpt, .rail-sw.t-newpt    { --sb:var(--sb-newpt); }
-.cal-appt.t-fu, .week-appt.t-fu, .rail-sw.t-fu             { --sb:var(--sb-fu); }
-.cal-appt.t-tele, .week-appt.t-tele, .rail-sw.t-tele       { --sb:var(--sb-tele); }
-.cal-appt.t-lab, .week-appt.t-lab, .rail-sw.t-lab          { --sb:var(--sb-lab); }
-.cal-appt.t-eboo, .week-appt.t-eboo, .rail-sw.t-eboo       { --sb:var(--sb-eboo); }
-.cal-appt.t-prp, .week-appt.t-prp, .rail-sw.t-prp          { --sb:var(--sb-prp); }
-.cal-appt.t-pel, .week-appt.t-pel, .rail-sw.t-pel          { --sb:var(--sb-pel); }
-.cal-appt.t-las, .week-appt.t-las, .rail-sw.t-las          { --sb:var(--sb-las); }
-.cal-appt.t-bem, .week-appt.t-bem, .rail-sw.t-bem          { --sb:var(--sb-bem); }
-.cal-appt.t-lym, .week-appt.t-lym, .rail-sw.t-lym          { --sb:var(--sb-lym); }
-.cal-appt.t-acu, .week-appt.t-acu, .rail-sw.t-acu          { --sb:var(--sb-acu); }
-.cal-appt.t-chi, .week-appt.t-chi, .rail-sw.t-chi          { --sb:var(--sb-chi); }
-.cal-appt.t-nmt, .week-appt.t-nmt, .rail-sw.t-nmt          { --sb:var(--sb-nmt); }
-.cal-appt.t-block, .week-appt.t-block, .rail-sw.t-block    { --sb:var(--sb-none); }
+/* ---- TYPE = the background ---- */
+.cal-appt.ty-visit, .week-appt.ty-visit, .ty-sw.ty-visit  { --tybg: var(--tybg-visit); }
+.cal-appt.ty-proc,  .week-appt.ty-proc,  .ty-sw.ty-proc   { --tybg: var(--tybg-proc); }
+.cal-appt.ty-energ, .week-appt.ty-energ, .ty-sw.ty-energ  { --tybg: var(--tybg-energ); }
+.cal-appt.ty-iv,    .week-appt.ty-iv,    .ty-sw.ty-iv     { --tybg: var(--tybg-iv); }
+.cal-appt.ty-lab,   .week-appt.ty-lab,   .ty-sw.ty-lab    { --tybg: var(--tybg-lab); }
+.cal-appt.ty-diag,  .week-appt.ty-diag,  .ty-sw.ty-diag   { --tybg: var(--tybg-diag); }
+.cal-appt.ty-fpe,   .week-appt.ty-fpe,   .ty-sw.ty-fpe    { --tybg: var(--tybg-fpe); }
+.cal-appt.ty-fpe6,  .week-appt.ty-fpe6,  .ty-sw.ty-fpe6   { --tybg: var(--tybg-fpe6); }
+.cal-appt.ty-chiro, .week-appt.ty-chiro, .ty-sw.ty-chiro  { --tybg: var(--tybg-chiro); }
+.cal-appt.ty-eboo,  .week-appt.ty-eboo,  .ty-sw.ty-eboo   { --tybg: var(--tybg-eboo); }
+.cal-appt.ty-laser, .week-appt.ty-laser, .ty-sw.ty-laser  { --tybg: var(--tybg-laser); }
 
-/* ---- TYPE = the texture PRINTED ON the swatch.
-        Two rules learned the hard way:
-        1. ONE tone, not two. A dark pass plus a light pass covered the whole
-           swatch and turned every pale colour to grey — measured, it collapsed
-           twelve pairs of the clinic's palette into look-alikes.
-        2. The strokes cover about a third. The rest of the swatch stays the
-           pure colour, because the colour is the thing that identifies the bag.
-        The tone is picked from each colour's own luminance, so the shape reads
-        on Cellular Boost's black and on Mega C 50's cream alike. ---- */
-.cal-appt, .week-appt, .rail-sw { --tone: rgba(0,0,0,.36); }
-.cal-appt.t-acu, .week-appt.t-acu, .rail-sw.t-acu,
-.cal-appt.t-bem, .week-appt.t-bem, .rail-sw.t-bem,
-.cal-appt.t-cell, .week-appt.t-cell, .rail-sw.t-cell,
-.cal-appt.t-chi, .week-appt.t-chi, .rail-sw.t-chi,
-.cal-appt.t-eboo, .week-appt.t-eboo, .rail-sw.t-eboo,
-.cal-appt.t-ebooiv, .week-appt.t-ebooiv, .rail-sw.t-ebooiv,
-.cal-appt.t-ff25, .week-appt.t-ff25, .rail-sw.t-ff25,
-.cal-appt.t-ff50, .week-appt.t-ff50, .rail-sw.t-ff50,
-.cal-appt.t-fu, .week-appt.t-fu, .rail-sw.t-fu,
-.cal-appt.t-iron, .week-appt.t-iron, .rail-sw.t-iron,
-.cal-appt.t-lab, .week-appt.t-lab, .rail-sw.t-lab,
-.cal-appt.t-las, .week-appt.t-las, .rail-sw.t-las,
-.cal-appt.t-lym, .week-appt.t-lym, .rail-sw.t-lym,
-.cal-appt.t-mastb, .week-appt.t-mastb, .rail-sw.t-mastb,
-.cal-appt.t-mc100, .week-appt.t-mc100, .rail-sw.t-mc100,
-.cal-appt.t-minic, .week-appt.t-minic, .rail-sw.t-minic,
-.cal-appt.t-minimb, .week-appt.t-minimb, .rail-sw.t-minimb,
-.cal-appt.t-mito, .week-appt.t-mito, .rail-sw.t-mito,
-.cal-appt.t-newpt, .week-appt.t-newpt, .rail-sw.t-newpt,
-.cal-appt.t-nmt, .week-appt.t-nmt, .rail-sw.t-nmt,
-.cal-appt.t-pel, .week-appt.t-pel, .rail-sw.t-pel,
-.cal-appt.t-prp, .week-appt.t-prp, .rail-sw.t-prp,
-.cal-appt.t-tele, .week-appt.t-tele, .rail-sw.t-tele { --tone: rgba(255,255,255,.62); }
+/* ---- SUBTYPE = the side bar ---- */
+.cal-appt.t-newpt,   .week-appt.t-newpt,   .rail-sw.t-newpt    { --sb: var(--sb-newpt); }
+.cal-appt.t-npfu,    .week-appt.t-npfu,    .rail-sw.t-npfu     { --sb: var(--sb-npfu); }
+.cal-appt.t-nptoc,   .week-appt.t-nptoc,   .rail-sw.t-nptoc    { --sb: var(--sb-nptoc); }
+.cal-appt.t-fu,      .week-appt.t-fu,      .rail-sw.t-fu       { --sb: var(--sb-fu); }
+.cal-appt.t-prp,     .week-appt.t-prp,     .rail-sw.t-prp      { --sb: var(--sb-prp); }
+.cal-appt.t-tpi,     .week-appt.t-tpi,     .rail-sw.t-tpi      { --sb: var(--sb-tpi); }
+.cal-appt.t-pelm,    .week-appt.t-pelm,    .rail-sw.t-pelm     { --sb: var(--sb-pelm); }
+.cal-appt.t-pelf,    .week-appt.t-pelf,    .rail-sw.t-pelf     { --sb: var(--sb-pelf); }
+.cal-appt.t-proloz,  .week-appt.t-proloz,  .rail-sw.t-proloz   { --sb: var(--sb-proloz); }
+.cal-appt.t-micro,   .week-appt.t-micro,   .rail-sw.t-micro    { --sb: var(--sb-micro); }
+.cal-appt.t-biochg,  .week-appt.t-biochg,  .rail-sw.t-biochg   { --sb: var(--sb-biochg); }
+.cal-appt.t-lymph,   .week-appt.t-lymph,   .rail-sw.t-lymph    { --sb: var(--sb-lymph); }
+.cal-appt.t-scenar,  .week-appt.t-scenar,  .rail-sw.t-scenar   { --sb: var(--sb-scenar); }
+.cal-appt.t-minilym, .week-appt.t-minilym, .rail-sw.t-minilym  { --sb: var(--sb-minilym); }
+.cal-appt.t-biomodp, .week-appt.t-biomodp, .rail-sw.t-biomodp  { --sb: var(--sb-biomodp); }
+.cal-appt.t-biomodr, .week-appt.t-biomodr, .rail-sw.t-biomodr  { --sb: var(--sb-biomodr); }
+.cal-appt.t-nmt,     .week-appt.t-nmt,     .rail-sw.t-nmt      { --sb: var(--sb-nmt); }
+.cal-appt.t-mead,    .week-appt.t-mead,    .rail-sw.t-mead     { --sb: var(--sb-mead); }
+.cal-appt.t-meadre,  .week-appt.t-meadre,  .rail-sw.t-meadre   { --sb: var(--sb-meadre); }
+.cal-appt.t-mdl,     .week-appt.t-mdl,     .rail-sw.t-mdl      { --sb: var(--sb-mdl); }
+.cal-appt.t-quest,   .week-appt.t-quest,   .rail-sw.t-quest    { --sb: var(--sb-quest); }
+.cal-appt.t-g6pd,    .week-appt.t-g6pd,    .rail-sw.t-g6pd     { --sb: var(--sb-g6pd); }
+.cal-appt.t-igenix,  .week-appt.t-igenix,  .rail-sw.t-igenix   { --sb: var(--sb-igenix); }
 
-.cal-appt.ty-visit, .week-appt.ty-visit, .rail-sw.ty-visit {
-  --tex: linear-gradient(transparent, transparent); }                                    /* plain */
-.cal-appt.ty-iv, .week-appt.ty-iv, .rail-sw.ty-iv {
-  --tex: repeating-linear-gradient(180deg, var(--tone) 0 2px, transparent 2px 7px); }    /* banded */
-.cal-appt.ty-proc, .week-appt.ty-proc, .rail-sw.ty-proc {
-  --tex: repeating-linear-gradient(180deg, var(--tone) 0 3px, transparent 3px 12px); }   /* blocked */
-.cal-appt.ty-energ, .week-appt.ty-energ, .rail-sw.ty-energ {
-  --tex: repeating-linear-gradient(90deg, var(--tone) 0 2px, transparent 2px 6px); }     /* ribbed */
-.cal-appt.ty-treat, .week-appt.ty-treat, .rail-sw.ty-treat {
-  --tex: repeating-linear-gradient(135deg, var(--tone) 0 2px, transparent 2px 7px); }    /* hatched */
 
-/* the swatch itself: texture on top, the clinic's colour underneath */
-.cal-appt, .week-appt, .rail-sw {
-  --rail: var(--tex), linear-gradient(var(--sb), var(--sb));
-}
+/* ---- the IV recipes, same side-bar channel ---- */
+.cal-appt.t-ff5,     .week-appt.t-ff5,     .rail-sw.t-ff5      { --sb: var(--sb-ff5); }
+.cal-appt.t-ff10,    .week-appt.t-ff10,    .rail-sw.t-ff10     { --sb: var(--sb-ff10); }
+.cal-appt.t-ff15,    .week-appt.t-ff15,    .rail-sw.t-ff15     { --sb: var(--sb-ff15); }
+.cal-appt.t-ff20,    .week-appt.t-ff20,    .rail-sw.t-ff20     { --sb: var(--sb-ff20); }
+.cal-appt.t-ff25,    .week-appt.t-ff25,    .rail-sw.t-ff25     { --sb: var(--sb-ff25); }
+.cal-appt.t-ff50,    .week-appt.t-ff50,    .rail-sw.t-ff50     { --sb: var(--sb-ff50); }
+.cal-appt.t-mc15,    .week-appt.t-mc15,    .rail-sw.t-mc15     { --sb: var(--sb-mc15); }
+.cal-appt.t-mc25,    .week-appt.t-mc25,    .rail-sw.t-mc25     { --sb: var(--sb-mc25); }
+.cal-appt.t-mc50,    .week-appt.t-mc50,    .rail-sw.t-mc50     { --sb: var(--sb-mc50); }
+.cal-appt.t-mc75,    .week-appt.t-mc75,    .rail-sw.t-mc75     { --sb: var(--sb-mc75); }
+.cal-appt.t-mc100,   .week-appt.t-mc100,   .rail-sw.t-mc100    { --sb: var(--sb-mc100); }
+.cal-appt.t-cell,    .week-appt.t-cell,    .rail-sw.t-cell     { --sb: var(--sb-cell); }
+.cal-appt.t-mast,    .week-appt.t-mast,    .rail-sw.t-mast     { --sb: var(--sb-mast); }
+.cal-appt.t-mastb,   .week-appt.t-mastb,   .rail-sw.t-mastb    { --sb: var(--sb-mastb); }
+.cal-appt.t-cog,     .week-appt.t-cog,     .rail-sw.t-cog      { --sb: var(--sb-cog); }
+.cal-appt.t-iron,    .week-appt.t-iron,    .rail-sw.t-iron     { --sb: var(--sb-iron); }
+.cal-appt.t-rest,    .week-appt.t-rest,    .rail-sw.t-rest     { --sb: var(--sb-rest); }
+.cal-appt.t-detox,   .week-appt.t-detox,   .rail-sw.t-detox    { --sb: var(--sb-detox); }
+.cal-appt.t-amino,   .week-appt.t-amino,   .rail-sw.t-amino    { --sb: var(--sb-amino); }
+.cal-appt.t-minic,   .week-appt.t-minic,   .rail-sw.t-minic    { --sb: var(--sb-minic); }
+.cal-appt.t-minimb,  .week-appt.t-minimb,  .rail-sw.t-minimb   { --sb: var(--sb-minimb); }
+.cal-appt.t-mito,    .week-appt.t-mito,    .rail-sw.t-mito     { --sb: var(--sb-mito); }
+.cal-appt.t-ebooiv,  .week-appt.t-ebooiv,  .rail-sw.t-ebooiv   { --sb: var(--sb-ebooiv); }
+.cal-appt.t-block, .week-appt.t-block, .rail-sw.t-block { --sb: var(--sb-none); }
 
-/* the padlock, drawn rather than typed — an emoji would break the palette */
+/* ---- STATUS = a watermark over the background ---- */
+.cal-appt.st-scheduled    { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M7 2v3M17 2v3M3 8.5h18' stroke='%23000' stroke-width='2' fill='none'/><rect x='3' y='4.5' width='18' height='16.5' rx='2' stroke='%23000' stroke-width='2' fill='none'/></g></svg>") }
+.cal-appt.st-confirmed    { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M4 13l5.5 5.5L20.5 5.5' stroke='%23000' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
+.cal-appt.st-arrived      { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M12 1.5a7.5 7.5 0 00-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0012 1.5z' fill='%23000'/><circle cx='12' cy='9' r='2.8' fill='%23fff'/></g></svg>") }
+.cal-appt.st-inroom       { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
+.cal-appt.st-inchair      { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
+.cal-appt.st-checkout     { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M4.5 2v20' stroke='%23000' stroke-width='2.2'/><path d='M7 3.5h4.2v4.2H7zM11.2 7.7h4.2v4.2h-4.2zM15.4 3.5h4.2v4.2h-4.2zM7 11.9h4.2v4.2H7zM15.4 11.9h4.2v4.2h-4.2z' fill='%23000'/></g></svg>") }
+.cal-appt.st-locked       { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><rect x='4.5' y='10' width='15' height='11.5' rx='2.2' fill='%23000'/><path d='M8 10V6.8a4 4 0 018 0V10' stroke='%23000' stroke-width='2.4' fill='none'/></g></svg>") }
+.cal-appt.st-done         { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M4.5 2v20' stroke='%23000' stroke-width='2.2'/><path d='M7 3.5h4.2v4.2H7zM11.2 7.7h4.2v4.2h-4.2zM15.4 3.5h4.2v4.2h-4.2zM7 11.9h4.2v4.2H7zM15.4 11.9h4.2v4.2h-4.2z' fill='%23000'/></g></svg>") }
+.cal-appt.st-rescheduled  { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M3.2 12a8.8 8.8 0 0114.6-6.6M20.8 12a8.8 8.8 0 01-14.6 6.6' stroke='%23000' stroke-width='2.2' fill='none'/><path d='M18.4 1.6v4.6h-4.6M5.6 22.4v-4.6h4.6' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
+.cal-appt.st-cancelled    { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M4.5 4.5l15 15M19.5 4.5l-15 15' stroke='%23000' stroke-width='3.2' stroke-linecap='round'/></g></svg>") }
+.cal-appt.st-noshow       { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.17'><path d='M12 1.6A7.6 7.6 0 004.4 9.2v13.2l2.7-2.2 2.5 2 2.4-2 2.4 2 2.5-2 2.7 2.2V9.2A7.6 7.6 0 0012 1.6z' fill='%23000'/><circle cx='9.3' cy='9.4' r='1.5' fill='%23fff'/><circle cx='14.7' cy='9.4' r='1.5' fill='%23fff'/></g></svg>") }
+
+/* the padlock, drawn rather than typed — kept for the pill and the legend */
 .lockmark {
   display:inline-block; position:relative; box-sizing:border-box;
   width:8px; height:6px; border-radius:1.5px; background:currentColor;
@@ -1180,23 +1197,29 @@ a.lead-chip:hover { border-color: var(--ink); }
   box-sizing:border-box;
 }
 
-/* ---- THE BLOCK ---- */
+/* ---- THE BLOCK: type paints it, subtype edges it, status watermarks it ---- */
 .cal-appt {
   position: absolute; left: 5px; right: 5px;
   container-type: size; container-name: appt;
   display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 0 4px; align-content: start;
   padding: 5px 9px 5px 21px;
-  --sb: var(--sb-none); --tex: linear-gradient(transparent,transparent);
-  border: 1px solid var(--line);
-  border-radius: 4px; background: #fff;
+  --tybg: #FFFFFF; --sb: #9A9A9A; --wm: none;
+  background-color: var(--tybg);
+  background-image: var(--wm);
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 30px 30px;
+  border: 1px solid rgba(0,0,0,.18);
+  border-radius: 4px;
   overflow: hidden; cursor: pointer; z-index: 1;
   font-size: 10.5px; line-height: 1.4; color: var(--ink);
   min-height: 46px;
 }
-.cal-appt::before {                     /* the rail keeps full chroma at every status */
+/* the side bar. Solid — the texture that used to live here was carrying TYPE,
+   and TYPE is the background now, so a texture would say the same thing twice. */
+.cal-appt::before {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 13px;
-  background-color: transparent; background-image: var(--rail);
-  border-right: 1px solid rgba(0,0,0,.22);   /* defines the pale end of the palette */
+  background: var(--sb); border-right: 1px solid rgba(0,0,0,.22);
 }
 .cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,.25); z-index: 5; }
 
@@ -1205,65 +1228,35 @@ a.lead-chip:hover { border-color: var(--ink); }
   grid-row: 1; grid-column: 1; font-size: 10.5px; font-weight: 800; letter-spacing: .15px;
   color: #1A1A1A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-/* "Foundational Flo…" is a failure: the number is the whole point of the name.
-   Long labels step down until they fit, because a truncated recipe tells you
-   nothing that the swatch has not already told you. */
 .cal-appt-sub.fit-1 { font-size: 9.5px; letter-spacing: 0; }
 .cal-appt-sub.fit-2 { font-size: 8.5px; letter-spacing: -.1px; }
 .cal-appt-sub.fit-3 { font-size: 7.8px; letter-spacing: -.2px; }
 .cal-appt .ai-flag { grid-row: 1; grid-column: 2; position: static; float: none;
   font-size: 9px; font-weight: 700; color: var(--ink); }
-.cal-appt-time { grid-row: 4; grid-column: 1; justify-self: start; min-width: 0;
-  font: 500 9px/1.35 ui-monospace, monospace; color: var(--blk-muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt-name { grid-row: 2; grid-column: 1 / -1; margin: 1px 0 0;
   font-size: 12px; font-weight: 600; color: #1A1A1A;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* the operational note. eCW crams consents, labs, callbacks, staff initials and
-   the payer into the appointment TITLE, in one unreadable run-on string. It is
-   the single loudest complaint about that board. Here it gets its own line. */
+   the payer into the appointment TITLE, in one unreadable run-on string. */
 .cal-appt-note { grid-row: 3; grid-column: 1 / -1; margin-top: 1px;
   font-size: 9.5px; line-height: 1.3; color: var(--blk-muted);
   overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; }
+.cal-appt-time { grid-row: 4; grid-column: 1; justify-self: start; min-width: 0;
+  font: 500 9px/1.35 ui-monospace, monospace; color: var(--blk-muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt-type { grid-row: 4; grid-column: 2; justify-self: end;
   font-size: 9.5px; color: var(--blk-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt .actor-tag { position: absolute; right: 6px; bottom: 2px;
   font-size: 8.5px; color: var(--blk-muted); background: none; padding: 0; }
 
-/* ---- STATUS = the background. Written once, and it is the only thing here
-        that touches `background`. ---- */
-.cal-appt.st-scheduled { background: #fff; border-style: dashed; border-color: #C4C4C4; }
-.cal-appt.st-scheduled .cal-appt-name { color: #5A5A5A; }
-
-.cal-appt.st-confirmed { background: var(--bg-conf); border-color: var(--bd-conf); }
-
-.cal-appt.st-arrived   { background: var(--bg-arr); border: 2px solid var(--bd-arr); }
-.cal-appt.st-checkout  { background: var(--bg-chk); border: 2px solid var(--bd-chk); }
-
-.cal-appt.st-inroom, .cal-appt.st-inchair { background: var(--bg-prog); border: 2px solid var(--bd-prog); }
-
-/* locked — the slot is held and nobody may move it without the manager */
-.cal-appt.st-locked { background: var(--bg-lock); border: 1px solid var(--bd-lock); }
-
-/* the three ENDINGS, all striped, told apart by hue:
-   done wears the in-progress green · no-show red · cancelled pink */
-.cal-appt.st-done {
-  background: repeating-linear-gradient(135deg, var(--bg-done-a) 0 5px, var(--bg-done-b) 5px 10px);
-  border-color: var(--bd-done);
-}
-.cal-appt.st-done .cal-appt-name { color: #4A4A4A; font-weight: 500; }
-
-.cal-appt.st-noshow {
-  background: repeating-linear-gradient(135deg, var(--bg-ns-a) 0 5px, var(--bg-ns-b) 5px 10px);
-  border: 1.5px solid var(--bd-noshow);
-}
-.cal-appt.st-cancelled {
-  background: repeating-linear-gradient(135deg, var(--bg-cx-a) 0 5px, var(--bg-cx-b) 5px 10px);
-  border: 1px solid var(--bd-cancel);
-}
+/* STATUS adds nothing to the fill — the watermark is the whole signal. The two
+   exceptions are the two that must not be mistaken for a live appointment. */
+.cal-appt.st-scheduled { border-style: dashed; }
+.cal-appt.st-cancelled { opacity: .62; }
 .cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
+.cal-appt.st-noshow .cal-appt-name { text-decoration: line-through; }
 
 /* A cancelled appointment leaves the board and stays on the record. The toggle
    in the filter bar is the only thing that brings it back. */
@@ -1275,14 +1268,30 @@ a.lead-chip:hover { border-color: var(--ink); }
   background: repeating-linear-gradient(135deg,#EDEDED 0 6px,#F7F7F7 6px 12px);
   border: 1px dashed #B4B4B4; cursor: default;
 }
+.cal-appt.is-block::before { background: #B4B4B4; }
 .cal-appt.is-block .cal-appt-name { color: #4A4A4A; font-weight: 600; }
 .cal-appt.is-block .cal-appt-sub  { color: #6A6A6A; font-weight: 700; }
 
-/* ---- the black bar: printed only where a human is being waited on ---- */
+/* a held slot is reserved capacity with nobody in it yet — not blocked time:
+   blocked time is unbookable, a hold is waiting for the right patient */
+.cal-appt.is-hold {
+  background-color: #fff; border: 1.5px dashed var(--sb-nptoc);
+}
+.cal-appt.is-hold .cal-appt-sub {
+  color: var(--sb-nptoc); font-size: 9px; letter-spacing: .5px; text-transform: uppercase;
+}
+.cal-appt.is-hold .cal-appt-name { color: #3D3D3D; }
+
+/* DOUBLE BOOKING — the real board double-books the provider almost every hour */
+.cal-appt.half-l { right: calc(50% + 1px); }
+.cal-appt.half-r { left: calc(50% + 1px); }
+.cal-appt.half-l, .cal-appt.half-r { padding-left: 18px; padding-right: 6px; }
+.cal-appt.half-l::before, .cal-appt.half-r::before { width: 11px; }
+
+/* ---- the black bar: printed only where a human is being waited on.
+        The watermark says the status on all eleven; the bar shouts it on the
+        three where somebody is standing at the desk. ---- */
 .cal-appt.st-arrived, .cal-appt.st-checkout, .cal-appt.st-noshow { padding-bottom: 16px; }
-/* a 30-minute block plus a bar has 25px of content room — the type fits into it */
-/* the bar rules squeeze the label to make room; they must yield to a measured
-   fit class, or a long recipe name gets pushed back into an ellipsis */
 .cal-appt[style*="height:46px"].st-arrived .cal-appt-sub:not([class*="fit-"]),
 .cal-appt[style*="height:46px"].st-checkout .cal-appt-sub:not([class*="fit-"]),
 .cal-appt[style*="height:46px"].st-noshow .cal-appt-sub:not([class*="fit-"]) { font-size: 9px; line-height: 1.1; }
@@ -1303,6 +1312,14 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.st-arrived::after  { content: 'Arrived \00b7 waiting'; }
 .cal-appt.st-checkout::after { content: 'Ready to check out'; }
 .cal-appt.st-noshow::after   { content: 'No-show'; }
+
+/* the legend specimens */
+.rail-sw { --sb: #9A9A9A;
+  width: 30px; height: 18px; border-radius: 2px; display: inline-block; flex-shrink: 0;
+  background: var(--sb); border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
+.ty-sw { --tybg: #fff;
+  width: 30px; height: 18px; border-radius: 2px; display: inline-block; flex-shrink: 0;
+  background: var(--tybg); border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
 
 /* ==========================================================================
    FLAGS — a fourth thing the block can say, and deliberately not a fourth
@@ -1332,26 +1349,13 @@ a.lead-chip:hover { border-color: var(--ink); }
   color: var(--muted); border: 1px solid var(--line); border-radius: 9px; padding: 1px 7px;
 }
 
-/* a status specimen for the status filter and the legend */
+/* a status specimen shows the WATERMARK, because that is what status is now */
 .st-sw {
-  width: 26px; height: 15px; border-radius: 3px; display: inline-block; flex-shrink: 0;
-  border: 1px solid var(--line); background: #fff;
+  --wm: none;
+  width: 30px; height: 22px; border-radius: 3px; display: inline-block; flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,.22); box-sizing: border-box;
+  background: #ECECEC var(--wm) no-repeat center / 18px 18px;
 }
-.st-sw.st-scheduled { border-style: dashed; border-color: #C4C4C4; }
-.st-sw.st-confirmed { background: var(--bg-conf); border-color: var(--bd-conf); }
-.st-sw.st-arrived   { background: var(--bg-arr); border-color: var(--bd-arr); }
-.st-sw.st-checkout  { background: var(--bg-chk); border-color: var(--bd-chk); }
-.st-sw.st-inchair, .st-sw.st-inroom { background: var(--bg-prog); border-color: var(--bd-prog); }
-.st-sw.st-locked    { background: var(--bg-lock); border-color: var(--bd-lock); }
-.st-sw.st-done {
-  background: repeating-linear-gradient(135deg, var(--bg-done-a) 0 4px, var(--bg-done-b) 4px 8px);
-  border-color: var(--bd-done); }
-.st-sw.st-noshow {
-  background: repeating-linear-gradient(135deg, var(--bg-ns-a) 0 4px, var(--bg-ns-b) 4px 8px);
-  border-color: var(--bd-noshow); }
-.st-sw.st-cancelled {
-  background: repeating-linear-gradient(135deg, var(--bg-cx-a) 0 4px, var(--bg-cx-b) 4px 8px);
-  border-color: var(--bd-cancel); }
 
 /* the option rows carry their own specimen, so the filter teaches the code */
 .msel-opt .rail-sw { height: 15px; }
@@ -1362,27 +1366,6 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 .cx-toggle input { margin: 0; }
 .cx-toggle:hover { color: var(--ink); border-color: var(--ink); }
-
-/* ==========================================================================
-   DOUBLE BOOKING — the real board double-books the provider almost every hour.
-   My first version assumed one patient per slot, which is not how this clinic
-   runs and hid half the day's load.
-   ========================================================================== */
-.cal-appt.half-l { right: calc(50% + 1px); }
-.cal-appt.half-r { left: calc(50% + 1px); }
-
-/* A HELD slot is reserved capacity with nobody in it yet — the "NP (New
-   Patient)" rows the desk protects for tomorrow's intake, and the named holds.
-   It is not blocked time: blocked time is unbookable, a hold is waiting for the
-   right patient. */
-.cal-appt.is-hold {
-  background: #fff; border: 1.5px dashed var(--bd-lock);
-  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4px var(--bg-lock);
-}
-.cal-appt.is-hold .cal-appt-sub {
-  color: var(--bd-lock); font-size: 9px; letter-spacing: .5px; text-transform: uppercase;
-}
-.cal-appt.is-hold .cal-appt-name { color: #3D3D3D; }
 
 /* alerts ride the outline — they are not a fourth level */
 .cal-appt.conflict { outline: 2px dashed #000; outline-offset: 2px; }
@@ -1643,13 +1626,12 @@ a.lead-chip:hover { border-color: var(--ink); }
 .dr-status > i { width: 30px; height: 20px; flex-shrink: 0; margin-top: 1px; }
 .dr-status b { display: block; font-size: 13.5px; color: var(--ink); }
 .dr-status span { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
-.dr-status.st-noshow    { border-color: var(--bd-noshow); background: var(--bg-ns-b); }
-.dr-status.st-cancelled { border-color: var(--bd-cancel); background: var(--bg-cx-b); }
-.dr-status.st-done      { border-color: var(--bd-done); background: var(--bg-done-b); }
-.dr-status.st-arrived   { border-color: var(--bd-arr); background: var(--bg-arr); }
-.dr-status.st-inroom, .dr-status.st-inchair { border-color: var(--bd-prog); background: var(--bg-prog); }
-.dr-status.st-locked    { border-color: var(--bd-lock); background: var(--bg-lock); }
-.dr-status.st-checkout  { border-color: var(--bd-chk); background: var(--bg-chk); }
+/* the banner wears the status watermark, at full strength so it reads as a statement */
+.dr-status > i.st-sw { width: 34px; height: 26px; background-size: 22px 22px; }
+.dr-status.st-noshow, .dr-status.st-cancelled { border-color: #B4B4B4; background: #F4F4F4; }
+.dr-status.st-done { border-color: #B4B4B4; background: #F4F4F4; }
+.dr-status.st-arrived, .dr-status.st-inroom, .dr-status.st-inchair,
+.dr-status.st-locked, .dr-status.st-checkout { border-color: var(--ink); background: #fff; }
 
 /* the legend groups by family, because Foundational Flow and Mega C are
    LADDERS — six swatches plus one sentence beats six swatches read one by one */
@@ -1668,18 +1650,16 @@ a.lead-chip:hover { border-color: var(--ink); }
   border-right: 1px solid var(--line); background: #fff; }
 .leg-step:last-child { border-right: none; }
 .leg-step .rail-sw { width: 34px; height: 14px; }
+.leg-todo {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+  color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; padding: 0 5px;
+}
 .leg-grp-ours { padding-top: 11px; border-top: 1px dashed var(--line); }
 .leg-grp-ours .leg-grp-t { color: var(--muted); }
 
 .leg-fam { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink); }
 .leg-fam i { width: 30px; height: 18px; border-radius: 2px; display: inline-block;
-  background-color: transparent; background-image: var(--rail);
-  border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
-/* a legend specimen carries the same two rail variables a real block does */
-/* the legend specimen is the clinic's filled cell, at reading size */
-.rail-sw { --sb: var(--sb-none); --tex: linear-gradient(transparent,transparent);
-  width: 30px; height: 18px; border-radius: 2px; display: inline-block; flex-shrink: 0;
-  background-color: transparent; background-image: var(--rail);
+  background: var(--sb, #9A9A9A);
   border: 1px solid rgba(0,0,0,.22); box-sizing: border-box; }
 .leg-st { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
 .leg-sw { width: 30px; height: 19px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
@@ -1695,26 +1675,16 @@ a.lead-chip:hover { border-color: var(--ink); }
 @media (max-width: 900px) { .leg-row { grid-template-columns: 1fr; gap: 8px; } }
 
 /* week view — same three channels, half scale, no black bar */
-.week-appt { position: relative; border: 1px solid var(--line);
-  --sb: var(--sb-none); --tex: linear-gradient(transparent,transparent);
-  background: #fff; border-left: none; padding-left: 14px; }
-.week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
-  background-color: transparent; background-image: var(--rail); }
-.week-appt.st-scheduled { border-style: dashed; border-color: #C4C4C4; }
-.week-appt.st-confirmed { background: var(--bg-conf); border-color: var(--bd-conf); }
-.week-appt.st-arrived   { background: var(--bg-arr); border-color: var(--bd-arr); }
-.week-appt.st-checkout  { background: var(--bg-chk); border-color: var(--bd-chk); }
-.week-appt.st-inroom, .week-appt.st-inchair { background: var(--bg-prog); border-color: var(--bd-prog); }
-.week-appt.st-locked    { background: var(--bg-lock); border-color: var(--bd-lock); }
-.week-appt.st-done {
-  background: repeating-linear-gradient(135deg, var(--bg-done-a) 0 4px, var(--bg-done-b) 4px 8px);
-  border-color: var(--bd-done); }
-.week-appt.st-noshow {
-  background: repeating-linear-gradient(135deg, var(--bg-ns-a) 0 4px, var(--bg-ns-b) 4px 8px);
-  border-color: var(--bd-noshow); }
-.week-appt.st-cancelled {
-  background: repeating-linear-gradient(135deg, var(--bg-cx-a) 0 4px, var(--bg-cx-b) 4px 8px);
-  border-color: var(--bd-cancel); }
+.week-appt { position: relative;
+  --tybg: #FFFFFF; --sb: var(--sb-none); --wm: none;
+  background-color: var(--tybg);
+  background-image: var(--wm); background-repeat: no-repeat;
+  background-position: right 4px center; background-size: 18px 18px;
+  border: 1px solid rgba(0,0,0,.18); border-left: none; padding-left: 14px; }
+.week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
+  background: var(--sb); border-right: 1px solid rgba(0,0,0,.22); }
+.week-appt.st-scheduled { border-style: dashed; }
+.week-appt.st-cancelled { opacity: .62; }
 .week-appt.is-block {
   background: repeating-linear-gradient(135deg,#EDEDED 0 5px,#F7F7F7 5px 10px);
   border: 1px dashed #B4B4B4; }
