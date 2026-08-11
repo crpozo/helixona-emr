@@ -1213,13 +1213,20 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt-sub.fit-3 { font-size: 7.8px; letter-spacing: -.2px; }
 .cal-appt .ai-flag { grid-row: 1; grid-column: 2; position: static; float: none;
   font-size: 9px; font-weight: 700; color: var(--ink); }
-.cal-appt-time { grid-row: 3; grid-column: 1; justify-self: start; min-width: 0;
+.cal-appt-time { grid-row: 4; grid-column: 1; justify-self: start; min-width: 0;
   font: 500 9px/1.35 ui-monospace, monospace; color: var(--blk-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt-name { grid-row: 2; grid-column: 1 / -1; margin: 1px 0 0;
   font-size: 12px; font-weight: 600; color: #1A1A1A;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.cal-appt-type { grid-row: 3; grid-column: 2; justify-self: end;
+/* the operational note. eCW crams consents, labs, callbacks, staff initials and
+   the payer into the appointment TITLE, in one unreadable run-on string. It is
+   the single loudest complaint about that board. Here it gets its own line. */
+.cal-appt-note { grid-row: 3; grid-column: 1 / -1; margin-top: 1px;
+  font-size: 9.5px; line-height: 1.3; color: var(--blk-muted);
+  overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; }
+.cal-appt-type { grid-row: 4; grid-column: 2; justify-self: end;
   font-size: 9.5px; color: var(--blk-muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cal-appt .actor-tag { position: absolute; right: 6px; bottom: 2px;
@@ -1356,6 +1363,27 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cx-toggle input { margin: 0; }
 .cx-toggle:hover { color: var(--ink); border-color: var(--ink); }
 
+/* ==========================================================================
+   DOUBLE BOOKING — the real board double-books the provider almost every hour.
+   My first version assumed one patient per slot, which is not how this clinic
+   runs and hid half the day's load.
+   ========================================================================== */
+.cal-appt.half-l { right: calc(50% + 1px); }
+.cal-appt.half-r { left: calc(50% + 1px); }
+
+/* A HELD slot is reserved capacity with nobody in it yet — the "NP (New
+   Patient)" rows the desk protects for tomorrow's intake, and the named holds.
+   It is not blocked time: blocked time is unbookable, a hold is waiting for the
+   right patient. */
+.cal-appt.is-hold {
+  background: #fff; border: 1.5px dashed var(--bd-lock);
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4px var(--bg-lock);
+}
+.cal-appt.is-hold .cal-appt-sub {
+  color: var(--bd-lock); font-size: 9px; letter-spacing: .5px; text-transform: uppercase;
+}
+.cal-appt.is-hold .cal-appt-name { color: #3D3D3D; }
+
 /* alerts ride the outline — they are not a fourth level */
 .cal-appt.conflict { outline: 2px dashed #000; outline-offset: 2px; }
 .cal-appt.ai-warn { box-shadow: inset 0 0 0 2px var(--ink); }
@@ -1369,6 +1397,14 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 /* density: the queries style DESCENDANTS only — a container cannot match itself */
 @container appt (max-height: 78px) { .cal-appt-type { display: none; } }
+/* a 30-minute infusion block has no room for a note; an hour-long visit does */
+@container appt (max-height: 66px) { .cal-appt-note { display: none; } }
+@container appt (max-width: 150px) { .cal-appt-note { -webkit-line-clamp: 1; } }
+/* a half-width block has room for the name or for the note, not both */
+@container appt (max-width: 128px) { .cal-appt-note { display: none; } }
+/* the halves need every pixel — trim the padding the full-width block can afford */
+.cal-appt.half-l, .cal-appt.half-r { padding-left: 18px; padding-right: 6px; }
+.cal-appt.half-l::before, .cal-appt.half-r::before { width: 11px; }
 /* a real column is ~120px — the descriptor never fits beside the time there */
 @container appt (max-width: 210px) { .cal-appt-type { display: none; } }
 @container appt (max-height: 58px) { .cal-appt-time { display: none; } }
@@ -1498,6 +1534,11 @@ a.lead-chip:hover { border-color: var(--ink); }
    COMMUNICATION LOG — every contact, whoever made it and however it went out.
    The channel is a word, never a colour: "we phoned her" is not a status.
    ========================================================================== */
+/* a list row opens the same appointment the block does */
+.l-list-row { cursor: pointer; }
+.l-list-row:hover { background: var(--hx-band); }
+.l-list-row:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+
 .comm-row {
   display: grid; grid-template-columns: 62px 1fr auto; gap: 10px; align-items: baseline;
   padding: 7px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px; cursor: pointer;

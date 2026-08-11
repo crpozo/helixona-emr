@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=57">
+<link rel="stylesheet" href="assets/hcos.css?v=58">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -1073,30 +1073,31 @@
 </div>
 
 
-<div class="modal-overlay" id="pt-comm-modal" data-close-modal="#pt-comm-modal"></div>
-<div class="modal" data-modal="pt-comm-modal">
-  <div class="modal-head">
-    <div class="modal-title">Log a contact</div>
-    <button class="modal-x" data-close-modal="#pt-comm-modal" aria-label="Close">&times;</button>
-  </div>
-  <div class="modal-body">
-    <div class="grid-2">
-      <div class="field"><label class="field-lbl" for="pc-ch">Channel</label>
-        <select class="field-select" id="pc-ch"><option>Phone</option><option>Email</option>
-          <option>Text</option><option>Portal</option><option>In person</option></select></div>
-      <div class="field"><label class="field-lbl" for="pc-dir">Direction</label>
-        <select class="field-select" id="pc-dir"><option>Outbound</option><option>Inbound</option></select></div>
+<div class="modal-overlay" id="pt-comm-modal" data-close-modal>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Log a contact</div>
+      <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
-    <div class="field"><label class="field-lbl" for="pc-txt">What was said</label>
-      <textarea class="field-textarea" rows="3" id="pc-txt" placeholder="Enough that the next person does not have to ring back and ask"></textarea></div>
-    <div class="field"><label class="field-lbl" for="pc-out">Outcome</label>
-      <select class="field-select" id="pc-out"><option>No action needed</option>
-        <option>Awaiting reply</option><option>Raise a task</option><option>Note it on the chart</option></select></div>
-    <div class="field-help">The date, the time and your name are stamped automatically. You cannot backdate an entry.</div>
-  </div>
-  <div class="modal-foot">
-    <button class="btn" data-close-modal="#pt-comm-modal">Cancel</button>
-    <button class="btn btn-primary" data-close-modal="#pt-comm-modal" onclick="HCOS.toast('Logged, stamped with your name and the time. It shows on the profile straight away.', 'ok')">Log the contact</button>
+    <div class="modal-body">
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="pc-ch">Channel</label>
+          <select class="field-select" id="pc-ch"><option>Phone</option><option>Email</option>
+            <option>Text</option><option>Portal</option><option>In person</option></select></div>
+        <div class="field"><label class="field-lbl" for="pc-dir">Direction</label>
+          <select class="field-select" id="pc-dir"><option>Outbound</option><option>Inbound</option></select></div>
+      </div>
+      <div class="field"><label class="field-lbl" for="pc-txt">What was said</label>
+        <textarea class="field-textarea" rows="3" id="pc-txt" placeholder="Enough that the next person does not have to ring back and ask"></textarea></div>
+      <div class="field"><label class="field-lbl" for="pc-out">Outcome</label>
+        <select class="field-select" id="pc-out"><option>No action needed</option>
+          <option>Awaiting reply</option><option>Raise a task</option><option>Note it on the chart</option></select></div>
+      <div class="field-help">The date, the time and your name are stamped automatically. You cannot backdate an entry.</div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Logged, stamped with your name and the time. It shows on the profile straight away.', 'ok')">Log the contact</button>
+    </div>
   </div>
 </div>
 
@@ -1114,7 +1115,7 @@
   }
 </script>
 
-<script src="assets/hcos.js?v=57"></script>
+<script src="assets/hcos.js?v=58"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

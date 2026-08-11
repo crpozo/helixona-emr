@@ -147,9 +147,27 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   rings the block. Definitions live on `schedule.html#/l-08-flags` and are edited there; the
   dictionary is `L_FLAGS` in schedule.html, read by the block, the hover card, the appointment
   detail and the list view.
-- **IV appointments are booked in 30-minute slots, the way eCW books them (Carlos, 2026-08-07).**
-  The slot is the booking granularity, not a claim about how long the bag runs. A drip that runs
-  long is an AI signal in the hover card and the Patterns screen, never a taller block.
+- **The day board follows a REAL Helixona day (Carlos, 2026-08-11, from three of Dr.
+  Drannikov's actual eCW days).** Patients are always synthetic — the real names never enter
+  this repo — but the SHAPE is copied, and my earlier board had it badly wrong:
+  - **06:00 to 19:00**, not 8 to 5. Real appointments start at 6 AM and run past 5 PM.
+  - **Provider appointments are ONE HOUR.** Only the infusion suite books in 30-minute slots.
+  - **The provider is DOUBLE-BOOKED almost every hour** — two patients side by side
+    (`.half-l` / `.half-r`). Assuming one patient per slot hid half the day's load.
+  - **Break at 10, Lunch at 12, Break at 2**, every day, on every provider.
+  - **"NP" slots are HELD at 8 and at 1** with nobody in them: reserved intake capacity.
+    A hold is not blocked time — blocked time is unbookable, a hold is waiting for the right
+    patient (`.is-hold`, its own drawer, releasable).
+  - **The operational note gets its own line** (`.cal-appt-note`). eCW crams consents, labs,
+    callbacks, staff initials and the payer into the appointment TITLE as one unreadable
+    run-on string; that is the single loudest complaint about that board.
+  - Because a provider column carries two names, providers get a **wider grid track**
+    (`minmax(250px, 1.7fr)` against `minmax(140px, 1fr)`) and the board scrolls. Equal tracks
+    made each half 68px and every name collapsed to "Gra…".
+- **A `.modal` MUST be a child of its `.modal-overlay`.** The overlay is the fixed, full-screen
+  flex container that centres it, and `data-close-modal` walks up to `.modal-overlay`. Writing
+  the modal as a SIBLING renders it in normal flow in the corner with no backdrop and no way to
+  close — it happened to three modals at once.
 - **Cancelled leaves the board and stays on the record.** `.cal:not(.show-cx)` hides it; the
   "Show cancelled" toggle in the filter bar is the only way back.
 - **Blocked time** (lunch, meetings) is not an appointment: it opts out of the colour code

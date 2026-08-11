@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=57">
+<link rel="stylesheet" href="assets/hcos.css?v=58">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -211,6 +211,8 @@
 
           <div class="daycal-grid">
             <div class="daycal-hours">
+              <div class="daycal-hour">6 AM</div>
+              <div class="daycal-hour">7 AM</div>
               <div class="daycal-hour">8 AM</div>
               <div class="daycal-hour">9 AM</div>
               <div class="daycal-hour">10 AM</div>
@@ -221,673 +223,816 @@
               <div class="daycal-hour">3 PM</div>
               <div class="daycal-hour">4 PM</div>
               <div class="daycal-hour">5 PM</div>
+              <div class="daycal-hour">6 PM</div>
+              <div class="daycal-hour">7 PM</div>
             </div>
 
             <!-- Dr. Drannikov -->
             <div class="daycal-col" data-col="dr">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-newpt ty-visit" style="top:44px;height:134px" data-appt="A-88301" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-newpt" data-days="1,2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="8:30 – 10:00" data-tx="New patient">
-                <div class="cal-appt-time">8:30 – 10:00</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt is-hold t-block ty-visit" style="top:88px;height:90px" data-open-drawer="#l-hold-drawer" data-held="1" data-st="Held" data-when="7:00 AM" data-tx="Hold">
+                <span class="cal-appt-sub">Held slot</span>
+                <div class="cal-appt-name">Hold</div>
+                <div class="cal-appt-note">Held slot released — she cancelled 6/4</div>
+                <div class="cal-appt-time">7:00 AM</div>
+              </div>
+              <div class="cal-appt is-hold t-newpt ty-visit half-l" style="top:176px;height:90px" data-open-drawer="#l-hold-drawer" data-held="1" data-st="Held" data-when="8:00 AM" data-tx="NP — held">
+                <span class="cal-appt-sub">Held slot</span>
+                <div class="cal-appt-name">NP — held</div>
+                <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
+                <div class="cal-appt-time">8:00 AM</div>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:176px;height:90px" data-appt="A-88303" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="8:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow-up</span>
                 <div class="cal-appt-name">Marcus Webb</div>
-                <span class="cal-appt-sub">New patient</span>
-                <span class="cal-appt-type">consult · 90 min</span>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">8:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:176px;height:46px" data-appt="A-88302" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="10:00" data-tx="Follow-up">
-                <div class="cal-appt-time">10:00</div>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88304" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Follow-up" data-note="All consents signed · callback pending">
+                <span class="cal-appt-sub">Follow-up</span>
                 <div class="cal-appt-name">Grace Lindqvist</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
+                <div class="cal-appt-note">All consents signed · callback pending</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:220px;height:46px" data-appt="A-88303" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:30" data-tx="Follow-up">
-                <div class="cal-appt-time">10:30</div>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:264px;height:90px" data-appt="A-88305" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow-up</span>
                 <div class="cal-appt-name">Sofia Ramos</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
               </div>
-              <div class="cal-appt st-checkout t-tele ty-visit" style="top:264px;height:46px" data-appt="A-88304" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-tele" data-days="2" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00" data-tx="Telehealth">
-                <div class="cal-appt-time">11:00</div>
-                <div class="cal-appt-name">Elena Petrova</div>
-                <span class="cal-appt-sub">Telehealth</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-inroom t-fu ty-visit" style="top:308px;height:46px" data-appt="A-88305" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-fu" data-days="2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:30" data-tx="Follow-up">
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Nadia Boulos</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:396px;height:46px" data-appt="A-88306" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,5" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="12:30" data-tx="Follow-up" data-flags="forms">
-                <span class="fl-row"><span class="fl sev-low" title="Intake forms not returned · Admin">✦</span></span>
-                <div class="cal-appt-time">12:30</div>
-                <div class="cal-appt-name">Owen Delacroix</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-confirmed t-newpt ty-visit" style="top:440px;height:134px" data-appt="A-88307" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="1,2,3,4,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:00 – 2:30 PM" data-tx="New patient" data-flags="interp">
-                <span class="fl-row"><span class="fl sev-low" title="Interpreter needed — Spanish · Admin">✦</span></span>
-                <div class="cal-appt-time">1:00 – 2:30 PM</div>
-                <div class="cal-appt-name">Yuki Tanaka</div>
-                <span class="cal-appt-sub">New patient</span>
-                <span class="cal-appt-type">consult · 90 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:572px;height:46px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="2:30 PM" data-tx="Follow-up" data-flags="pregnant">
-                <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
-                <div class="cal-appt-time">2:30 PM</div>
-                <div class="cal-appt-name">Rosa Iglesias</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:616px;height:46px" data-appt="A-88309" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2,4" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow-up">
-                <div class="cal-appt-time">3:00 PM</div>
-                <div class="cal-appt-name">Ben Okonkwo</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-locked t-tele ty-visit" style="top:660px;height:46px" data-appt="A-88310" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-tele" data-days="1,2,4,5" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="3:30 PM" data-tx="Telehealth" data-note="held for same-day add">
-                <div class="cal-appt-time">3:30 PM</div>
-                <div class="cal-appt-name">Hana Sato</div>
-                <span class="cal-appt-sub"><span class="lockmark"></span>Telehealth</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:704px;height:46px" data-appt="A-88311" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="4:00 PM" data-tx="Follow-up">
-                <div class="cal-appt-time">4:00 PM</div>
-                <div class="cal-appt-name">Liam Fitzgerald</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit half-l" style="top:352px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="10:00 AM" data-tx="Break">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Break</div>
+                <div class="cal-appt-time">10:00 AM</div>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88307" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="10:00 AM" data-tx="Follow-up" data-note="Labs done · results in the chart">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <div class="cal-appt-note">Labs done · results in the chart</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt st-checkout t-fu ty-visit" style="top:440px;height:90px" data-appt="A-88308" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-fu" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="11:00 AM" data-tx="Follow-up" data-note="8 of 8 · protocol complete, discuss graduation">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <div class="cal-appt-note">8 of 8 · protocol complete, discuss graduation</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">Medicare Part B</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
+                <span class="cal-appt-sub">Blocked</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt is-hold t-newpt ty-visit half-l" style="top:616px;height:90px" data-open-drawer="#l-hold-drawer" data-held="1" data-st="Held" data-when="1:00 PM" data-tx="NP — held">
+                <span class="cal-appt-sub">Held slot</span>
+                <div class="cal-appt-name">NP — held</div>
+                <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
+                <div class="cal-appt-time">1:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-newpt ty-visit half-r" style="top:616px;height:90px" data-appt="A-88311" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="2" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="1:00 PM" data-tx="New patient" data-note="All consents signed · chart prepped" data-flags="interp">
+                <span class="fl-row"><span class="fl sev-low" title="Interpreter needed — Spanish · Admin">✦</span></span>
+                <span class="cal-appt-sub">New patient</span>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+              </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88312" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="2:00 PM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
+                <div class="cal-appt-time">2:00 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit half-r" style="top:704px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="2:00 PM" data-tx="Break">
+                <span class="cal-appt-sub">Blocked</span>
+                <div class="cal-appt-name">Break</div>
+                <div class="cal-appt-time">2:00 PM</div>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:792px;height:90px" data-appt="A-88314" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow-up" data-note="Diagnostic consent re-sent · awaiting signature">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <div class="cal-appt-note">Diagnostic consent re-sent · awaiting signature</div>
+                <div class="cal-appt-time">3:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:880px;height:90px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="4:00 PM" data-tx="Follow-up" data-note="Cancelled 8/7 — patient travelling">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-note">Cancelled 8/7 — patient travelling</div>
+                <div class="cal-appt-time">4:00 PM</div>
+                <span class="cal-appt-type">Cigna</span>
+              </div>
+              <div class="cal-appt st-scheduled t-tele ty-visit" style="top:968px;height:90px" data-appt="A-88316" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-tele" data-days="2,4" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="Telehealth" data-note="Consents signed · no pending lab request" data-flags="pregnant">
+                <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
+                <span class="cal-appt-sub">Telehealth</span>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <div class="cal-appt-note">Consents signed · no pending lab request</div>
+                <div class="cal-appt-time">5:00 PM</div>
+                <span class="cal-appt-type">Cigna</span>
               </div>
             </div>
             <!-- Dr. Bakman -->
             <div class="daycal-col" data-col="bak">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:88px;height:46px" data-appt="A-88312" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00" data-tx="Follow-up">
-                <div class="cal-appt-time">9:00</div>
-                <div class="cal-appt-name">Sofia Ramos</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:0px;height:134px" data-appt="A-88317" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="Follow-up" data-note="Cancelled 7/8 — not establishing care, cash status">
                 <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <div class="cal-appt-note">Cancelled 7/8 — not establishing care, cash status</div>
+                <div class="cal-appt-time">6:00 AM – 7:30 AM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:132px;height:46px" data-appt="A-88313" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="9:30" data-tx="Follow-up">
-                <div class="cal-appt-time">9:30</div>
-                <div class="cal-appt-name">Daniel Okafor</div>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:176px;height:90px" data-appt="A-88318" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="8:00 AM" data-tx="Follow-up" data-note="Rescheduled from August · patient asked for the morning">
                 <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
+                <div class="cal-appt-name">Hana Sato</div>
+                <div class="cal-appt-note">Rescheduled from August · patient asked for the morning</div>
+                <div class="cal-appt-time">8:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-done t-newpt ty-visit" style="top:176px;height:134px" data-appt="A-88314" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-newpt" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="10:00 – 11:30" data-tx="New patient">
-                <div class="cal-appt-time">10:00 – 11:30</div>
+              <div class="cal-appt is-hold t-newpt ty-visit half-r" style="top:176px;height:90px" data-open-drawer="#l-hold-drawer" data-held="1" data-st="Held" data-when="8:00 AM" data-tx="NP — held">
+                <span class="cal-appt-sub">Held slot</span>
+                <div class="cal-appt-name">NP — held</div>
+                <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
+                <div class="cal-appt-time">8:00 AM</div>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88320" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="9:00 AM" data-tx="Follow-up" data-note="Labs done · results in the chart">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <div class="cal-appt-note">Labs done · results in the chart</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:264px;height:90px" data-appt="A-88321" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow-up</span>
                 <div class="cal-appt-name">Amara Diallo</div>
-                <span class="cal-appt-sub">New patient</span>
-                <span class="cal-appt-type">consult · 90 min</span>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Cigna</span>
               </div>
-              <div class="cal-appt st-arrived t-fu ty-visit" style="top:308px;height:46px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="11:30" data-tx="Follow-up" data-flags="balance">
-                <span class="fl-row"><span class="fl sev-med" title="Outstanding balance $340 · Billing">$</span></span>
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Victor Reyes</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:396px;height:46px" data-appt="A-88316" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30" data-tx="Follow-up">
-                <div class="cal-appt-time">12:30</div>
-                <div class="cal-appt-name">Nina Kowalski</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-confirmed t-tele ty-visit" style="top:440px;height:46px" data-appt="A-88317" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-tele" data-days="1,2,5" data-pt="Samir Haddad" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Telehealth">
-                <div class="cal-appt-time">1:00 PM</div>
-                <div class="cal-appt-name">Samir Haddad</div>
-                <span class="cal-appt-sub">Telehealth</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:528px;height:46px" data-appt="A-88318" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="2:00 PM" data-tx="Follow-up">
-                <div class="cal-appt-time">2:00 PM</div>
-                <div class="cal-appt-name">Tom Alvarez</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-newpt ty-visit" style="top:616px;height:134px" data-appt="A-88319" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-newpt" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="3:00 – 4:30 PM" data-tx="New patient">
-                <div class="cal-appt-time">3:00 – 4:30 PM</div>
-                <div class="cal-appt-name">Maya Reyes</div>
-                <span class="cal-appt-sub">New patient</span>
-                <span class="cal-appt-type">consult · 90 min</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit half-l" style="top:352px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="10:00 AM" data-tx="Break">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Break</div>
+                <div class="cal-appt-time">10:00 AM</div>
+              </div>
+              <div class="cal-appt st-noshow t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88323" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="10:00 AM" data-tx="Follow-up" data-note="Quest not yet done · chasing the draw" data-flags="balance">
+                <span class="fl-row"><span class="fl sev-med" title="Outstanding balance $340 · Billing">$</span></span>
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
+              </div>
+              <div class="cal-appt st-inroom t-fu ty-visit half-l" style="top:440px;height:90px" data-appt="A-88324" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-fu" data-days="1,2,3" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Nina Kowalski</div>
+                <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">AETNA</span>
+              </div>
+              <div class="cal-appt st-arrived t-fu ty-visit half-r" style="top:440px;height:90px" data-appt="A-88325" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2,4" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">GEHA</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
+                <span class="cal-appt-sub">Blocked</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-newpt ty-visit" style="top:616px;height:90px" data-appt="A-88327" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-newpt" data-days="2" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="1:00 PM" data-tx="New patient" data-note="Cash patient · charge at the desk before the visit" data-flags="forms">
+                <span class="fl-row"><span class="fl sev-low" title="Intake forms not returned · Admin">✦</span></span>
+                <span class="cal-appt-sub">New patient</span>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <div class="cal-appt-note">Cash patient · charge at the desk before the visit</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">Self-pay</span>
+              </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88328" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="2:00 PM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">2:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit half-r" style="top:704px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="2:00 PM" data-tx="Break">
+                <span class="cal-appt-sub">Blocked</span>
+                <div class="cal-appt-name">Break</div>
+                <div class="cal-appt-time">2:00 PM</div>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:792px;height:90px" data-appt="A-88330" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow-up" data-note="Diagnostic consent re-sent · awaiting signature">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <div class="cal-appt-note">Diagnostic consent re-sent · awaiting signature</div>
+                <div class="cal-appt-time">3:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-r" style="top:792px;height:90px" data-appt="A-88331" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow-up" data-note="All consents signed · callback pending">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <div class="cal-appt-note">All consents signed · callback pending</div>
+                <div class="cal-appt-time">3:00 PM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
+              </div>
+              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:880px;height:90px" data-appt="A-88332" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="4:00 PM" data-tx="Follow-up" data-note="Cancelled 8/10 — rebooking to next week">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Hana Sato</div>
+                <div class="cal-appt-note">Cancelled 8/10 — rebooking to next week</div>
+                <div class="cal-appt-time">4:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
             </div>
             <!-- Brooke -->
             <div class="daycal-col" data-col="bro">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:44px;height:46px" data-appt="A-88320" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="8:30" data-tx="Follow-up">
-                <div class="cal-appt-time">8:30</div>
-                <div class="cal-appt-name">Walter Hsu</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-done t-lab ty-proc" style="top:88px;height:24px" data-appt="A-88321" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lab" data-days="2,4" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00" data-tx="Lab draw">
-                <div class="cal-appt-time">9:00</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-lab ty-proc half-l" style="top:0px;height:90px" data-appt="A-88333" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lab" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM" data-tx="Lab draw" data-note="Early draw before the 8 AM infusion">
+                <span class="cal-appt-sub">Lab draw</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
-                <span class="cal-appt-sub">Lab draw</span>
-                <span class="cal-appt-type">15 min</span>
+                <div class="cal-appt-note">Early draw before the 8 AM infusion</div>
+                <div class="cal-appt-time">6:00 AM</div>
+                <span class="cal-appt-type">Medicare Part B</span>
               </div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:132px;height:46px" data-appt="A-88322" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="9:30" data-tx="Follow-up">
-                <div class="cal-appt-time">9:30</div>
-                <div class="cal-appt-name">Tom Alvarez</div>
+              <div class="cal-appt st-cancelled t-fu ty-visit half-r" style="top:0px;height:90px" data-appt="A-88334" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2,4" data-pt="Katherine Olsen" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-0000" data-stage="Identification" data-pay="30% coinsurance" data-when="6:00 AM" data-tx="Follow-up" data-note="Cancelled 8/3 — charges disputed">
                 <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
+                <div class="cal-appt-name">Katherine Olsen</div>
+                <div class="cal-appt-note">Cancelled 8/3 — charges disputed</div>
+                <div class="cal-appt-time">6:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
-              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:176px;height:46px" data-appt="A-88323" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="2" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00" data-tx="Follow-up" data-note="cancelled 7:12 AM by patient">
-                <div class="cal-appt-time">10:00</div>
-                <div class="cal-appt-name">Maya Reyes</div>
+              <div class="cal-appt is-hold t-newpt ty-visit half-l" style="top:176px;height:90px" data-open-drawer="#l-hold-drawer" data-held="1" data-st="Held" data-when="8:00 AM" data-tx="NP — held">
+                <span class="cal-appt-sub">Held slot</span>
+                <div class="cal-appt-name">NP — held</div>
+                <div class="cal-appt-note">Held for a new patient · nobody booked yet</div>
+                <div class="cal-appt-time">8:00 AM</div>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:176px;height:90px" data-appt="A-88336" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:00 AM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
                 <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-noshow t-fu ty-visit" style="top:220px;height:46px" data-appt="A-88324" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-fu" data-days="2,3" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="10:30" data-tx="Follow-up">
-                <div class="cal-appt-time">10:30</div>
-                <div class="cal-appt-name">Walter Hsu</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-done t-fu ty-visit" style="top:264px;height:46px" data-appt="A-88325" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,5" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00" data-tx="Follow-up">
-                <div class="cal-appt-time">11:00</div>
                 <div class="cal-appt-name">Grace Lindqvist</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">8:00 AM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-arrived t-lab ty-proc" style="top:308px;height:24px" data-appt="A-88326" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-lab" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:30" data-tx="Lab draw">
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Rosa Iglesias</div>
+              <div class="cal-appt st-done t-fu ty-visit half-l" style="top:264px;height:90px" data-appt="A-88337" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="9:00 AM" data-tx="Follow-up" data-note="Consents signed · no pending lab request">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <div class="cal-appt-note">Consents signed · no pending lab request</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt st-done t-lab ty-proc half-r" style="top:264px;height:90px" data-appt="A-88338" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lab" data-days="1,2,5" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:00 AM" data-tx="Lab draw" data-note="Labs done · results in the chart">
                 <span class="cal-appt-sub">Lab draw</span>
-                <span class="cal-appt-type">15 min</span>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <div class="cal-appt-note">Labs done · results in the chart</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
               </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:440px;height:46px" data-appt="A-88327" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Follow-up">
-                <div class="cal-appt-time">1:00 PM</div>
-                <div class="cal-appt-name">Ben Okonkwo</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-confirmed t-fu ty-visit" style="top:484px;height:46px" data-appt="A-88328" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 PM" data-tx="Follow-up">
-                <div class="cal-appt-time">1:30 PM</div>
-                <div class="cal-appt-name">Hana Sato</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:528px;height:46px" data-appt="A-88329" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="2:00 PM" data-tx="Follow-up">
-                <div class="cal-appt-time">2:00 PM</div>
-                <div class="cal-appt-name">Elena Petrova</div>
-                <span class="cal-appt-sub">Follow-up</span>
-                <span class="cal-appt-type">30 min</span>
-              </div>
-              <div class="cal-appt st-scheduled t-lab ty-proc" style="top:572px;height:24px" data-appt="A-88330" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lab" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="Lab draw">
-                <div class="cal-appt-time">2:30 PM</div>
-                <div class="cal-appt-name">Liam Fitzgerald</div>
-                <span class="cal-appt-sub">Lab draw</span>
-                <span class="cal-appt-type">15 min</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit half-l" style="top:352px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="10:00 AM" data-tx="Break">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Break</div>
+                <div class="cal-appt-time">10:00 AM</div>
+              </div>
+              <div class="cal-appt st-done t-fu ty-visit half-r" style="top:352px;height:90px" data-appt="A-88340" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fu" data-days="1,2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00 AM" data-tx="Follow-up" data-note="PRP prep at 9 AM · consents signed">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <div class="cal-appt-note">PRP prep at 9 AM · consents signed</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt st-arrived t-fu ty-visit half-l" style="top:440px;height:90px" data-appt="A-88341" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fu" data-days="2,4" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00 AM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+              </div>
+              <div class="cal-appt st-arrived t-lab ty-proc half-r" style="top:440px;height:90px" data-appt="A-88342" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-lab" data-days="1,2,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:00 AM" data-tx="Lab draw" data-note="Allergy panel not yet drawn">
+                <span class="cal-appt-sub">Lab draw</span>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <div class="cal-appt-note">Allergy panel not yet drawn</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
+                <span class="cal-appt-sub">Blocked</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-l" style="top:616px;height:90px" data-appt="A-88344" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="2,3" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="1:00 PM" data-tx="Follow-up" data-note="All consents signed · chart prepped">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <div class="cal-appt-note">All consents signed · chart prepped</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+              </div>
+              <div class="cal-appt st-confirmed t-fu ty-visit half-r" style="top:616px;height:90px" data-appt="A-88345" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fu" data-days="1,2,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Follow-up" data-note="All consents signed · callback pending">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <div class="cal-appt-note">All consents signed · callback pending</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:704px;height:90px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="2:00 PM" data-tx="Follow-up" data-note="Quest not yet done · chasing the draw">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
+                <div class="cal-appt-time">2:00 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit half-r" style="top:704px;height:90px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="2:00 PM" data-tx="Break">
+                <span class="cal-appt-sub">Blocked</span>
+                <div class="cal-appt-name">Break</div>
+                <div class="cal-appt-time">2:00 PM</div>
+              </div>
+              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:792px;height:90px" data-appt="A-88348" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="2,4" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Follow-up" data-note="Diagnostic consent sent · no pending lab">
+                <span class="cal-appt-sub">Follow-up</span>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-note">Diagnostic consent sent · no pending lab</div>
+                <div class="cal-appt-time">3:00 PM</div>
+                <span class="cal-appt-type">Cigna</span>
+              </div>
+              <div class="cal-appt is-hold t-block ty-visit half-r" style="top:792px;height:90px" data-open-drawer="#l-hold-drawer" data-held="1" data-st="Held" data-when="3:00 PM" data-tx="Hold">
+                <span class="cal-appt-sub">Held slot</span>
+                <div class="cal-appt-name">Hold</div>
+                <div class="cal-appt-note">Held pending her order renewal</div>
+                <div class="cal-appt-time">3:00 PM</div>
+              </div>
+              <div class="cal-appt st-scheduled t-lab ty-proc" style="top:880px;height:90px" data-appt="A-88350" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lab" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="4:00 PM" data-tx="Lab draw" data-note="Fasting draw · confirm she has not eaten">
+                <span class="cal-appt-sub">Lab draw</span>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <div class="cal-appt-note">Fasting draw · confirm she has not eaten</div>
+                <div class="cal-appt-time">4:00 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
             </div>
             <!-- IV 1 -->
             <div class="daycal-col" data-col="c1">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-ff5 ty-iv ai-warn" style="top:44px;height:46px" data-appt="A-88331" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff5" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="8:30" data-tx="Foundational Flow 5" data-note="ran 20 min long" data-flags="deficit">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-ff5 ty-iv ai-warn" style="top:176px;height:46px" data-appt="A-88351" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff5" data-days="1,2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="8:00 AM" data-tx="Foundational Flow 5" data-note="Ran 20 min long on her last three" data-flags="deficit">
                 <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
                 <span class="ai-flag" title="Runs long — 20 min over on her last three">!</span>
-                <div class="cal-appt-time">8:30</div>
-                <div class="cal-appt-name">Maya Reyes</div>
                 <span class="cal-appt-sub">Foundational Flow 5</span>
-                <span class="cal-appt-type">base bag</span>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <div class="cal-appt-note">Ran 20 min long on her last three</div>
+                <div class="cal-appt-time">8:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-done t-ff10 ty-iv" style="top:88px;height:46px" data-appt="A-88332" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff10" data-days="2,4" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="9:00" data-tx="Foundational Flow 10">
-                <div class="cal-appt-time">9:00</div>
-                <div class="cal-appt-name">Walter Hsu</div>
+              <div class="cal-appt st-done t-ff10 ty-iv" style="top:220px;height:46px" data-appt="A-88352" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff10" data-days="2,4" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="8:30 AM" data-tx="Foundational Flow 10">
                 <span class="cal-appt-sub">Foundational Flow 10</span>
-                <span class="cal-appt-type">base bag</span>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-time">8:30 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-done t-ff15 ty-iv" style="top:132px;height:46px" data-appt="A-88333" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff15" data-days="1,2,4,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="9:30" data-tx="Foundational Flow 15">
-                <div class="cal-appt-time">9:30</div>
-                <div class="cal-appt-name">Daniel Okafor</div>
+              <div class="cal-appt st-done t-ff15 ty-iv" style="top:264px;height:46px" data-appt="A-88353" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff15" data-days="1,2,4,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="9:00 AM" data-tx="Foundational Flow 15">
                 <span class="cal-appt-sub">Foundational Flow 15</span>
-                <span class="cal-appt-type">base bag</span>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-done t-ff20 ty-iv" style="top:176px;height:46px" data-appt="A-88334" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff20" data-days="2" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00" data-tx="Foundational Flow 20">
-                <div class="cal-appt-time">10:00</div>
-                <div class="cal-appt-name">Sofia Ramos</div>
+              <div class="cal-appt st-done t-ff20 ty-iv" style="top:308px;height:46px" data-appt="A-88354" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff20" data-days="2" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="9:30 AM" data-tx="Foundational Flow 20">
                 <span class="cal-appt-sub">Foundational Flow 20</span>
-                <span class="cal-appt-type">base bag</span>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <div class="cal-appt-time">9:30 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-done t-ff25 ty-iv" style="top:220px;height:46px" data-appt="A-88335" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff25" data-days="2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="10:30" data-tx="Foundational Flow 25">
-                <div class="cal-appt-time">10:30</div>
-                <div class="cal-appt-name">Tom Alvarez</div>
+              <div class="cal-appt st-done t-ff25 ty-iv" style="top:352px;height:46px" data-appt="A-88355" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff25" data-days="2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00 AM" data-tx="Foundational Flow 25">
                 <span class="cal-appt-sub">Foundational Flow 25</span>
-                <span class="cal-appt-type">base bag</span>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-checkout t-ff50 ty-iv" style="top:264px;height:46px" data-appt="A-88336" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-ff50" data-days="1,2,5" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00" data-tx="Foundational Flow 50">
-                <div class="cal-appt-time">11:00</div>
-                <div class="cal-appt-name">Priya Natarajan</div>
+              <div class="cal-appt st-checkout t-ff50 ty-iv" style="top:396px;height:46px" data-appt="A-88356" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-ff50" data-days="1,2,5" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="10:30 AM" data-tx="Foundational Flow 50">
                 <span class="cal-appt-sub">Foundational Flow 50</span>
-                <span class="cal-appt-type">base bag</span>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <div class="cal-appt-time">10:30 AM</div>
+                <span class="cal-appt-type">Medicare Part B</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-inchair t-mc15 ty-iv" style="top:308px;height:46px" data-appt="A-88337" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mc15" data-days="1,2,3,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:30" data-tx="Mega C 15">
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Elena Petrova</div>
+              <div class="cal-appt st-inchair t-mc15 ty-iv" style="top:440px;height:46px" data-appt="A-88357" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mc15" data-days="1,2,3,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00 AM" data-tx="Mega C 15">
                 <span class="cal-appt-sub">Mega C 15</span>
-                <span class="cal-appt-type">15 g</span>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-mc25 ty-iv" style="top:396px;height:46px" data-appt="A-88338" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc25" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="12:30" data-tx="Mega C 25">
-                <div class="cal-appt-time">12:30</div>
-                <div class="cal-appt-name">Nadia Boulos</div>
+              <div class="cal-appt st-arrived t-mc25 ty-iv" style="top:484px;height:46px" data-appt="A-88358" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-mc25" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:30 AM" data-tx="Mega C 25">
                 <span class="cal-appt-sub">Mega C 25</span>
-                <span class="cal-appt-type">25 g</span>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-time">11:30 AM</div>
+                <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-mc50 ty-iv" style="top:440px;height:46px" data-appt="A-88339" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc50" data-days="2,4" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="1:00 PM" data-tx="Mega C 50">
-                <div class="cal-appt-time">1:00 PM</div>
-                <div class="cal-appt-name">Marcus Webb</div>
-                <span class="cal-appt-sub">Mega C 50</span>
-                <span class="cal-appt-type">50 g</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt st-confirmed t-mc75 ty-iv" style="top:484px;height:46px" data-appt="A-88340" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc75" data-days="1,2,4,5" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Mega C 75">
-                <div class="cal-appt-time">1:30 PM</div>
-                <div class="cal-appt-name">Grace Lindqvist</div>
-                <span class="cal-appt-sub">Mega C 75</span>
-                <span class="cal-appt-type">75 g</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt st-scheduled t-mc100 ty-iv" style="top:528px;height:46px" data-appt="A-88341" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mc100" data-days="2" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="2:00 PM" data-tx="Mega C 100">
-                <div class="cal-appt-time">2:00 PM</div>
-                <div class="cal-appt-name">Owen Delacroix</div>
-                <span class="cal-appt-sub">Mega C 100</span>
-                <span class="cal-appt-type">100 g</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt st-scheduled t-cell ty-iv" style="top:572px;height:46px" data-appt="A-88342" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-cell" data-days="2,3" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="2:30 PM" data-tx="Cellular Boost">
-                <div class="cal-appt-time">2:30 PM</div>
-                <div class="cal-appt-name">Yuki Tanaka</div>
-                <span class="cal-appt-sub">Cellular Boost</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt st-scheduled t-mast ty-iv is-tentative" style="top:616px;height:46px" data-appt="A-88343" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="1,2,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Mast Cell" data-note="no active order — booked tentative" data-flags="auth">
-                <span class="fl-row"><span class="fl sev-high" title="Prior authorisation expires today · Billing">$</span></span>
-                <div class="cal-appt-time">3:00 PM</div>
-                <div class="cal-appt-name">Rosa Iglesias</div>
-                <span class="cal-appt-sub">Mast Cell</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt st-scheduled t-mastb ty-iv" style="top:660px;height:46px" data-appt="A-88344" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mastb" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="Mast Cell · Benadryl only">
-                <div class="cal-appt-time">3:30 PM</div>
-                <div class="cal-appt-name">Ben Okonkwo</div>
-                <span class="cal-appt-sub">Mast Cell · Benadryl only</span>
-                <span class="cal-appt-type">push</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt st-locked t-cog ty-iv" style="top:704px;height:46px" data-appt="A-88345" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-cog" data-days="1,2,3" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="4:00 PM" data-tx="Cognitive Support" data-note="held for the Thursday series">
-                <div class="cal-appt-time">4:00 PM</div>
-                <div class="cal-appt-name">Hana Sato</div>
-                <span class="cal-appt-sub"><span class="lockmark"></span>Cognitive Support</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nick</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:46px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-mc50 ty-iv" style="top:572px;height:46px" data-appt="A-88360" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc50" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30 PM" data-tx="Mega C 50">
+                <span class="cal-appt-sub">Mega C 50</span>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <div class="cal-appt-time">12:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-confirmed t-mc75 ty-iv" style="top:616px;height:46px" data-appt="A-88361" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc75" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Mega C 75">
+                <span class="cal-appt-sub">Mega C 75</span>
+                <div class="cal-appt-name">Grace Lindqvist</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-confirmed t-mc100 ty-iv" style="top:660px;height:46px" data-appt="A-88362" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc100" data-days="2,3" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="1:30 PM" data-tx="Mega C 100">
+                <span class="cal-appt-sub">Mega C 100</span>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <div class="cal-appt-time">1:30 PM</div>
+                <span class="cal-appt-type">Self-pay</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-cell ty-iv" style="top:704px;height:46px" data-appt="A-88363" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-cell" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="2:00 PM" data-tx="Cellular Boost">
+                <span class="cal-appt-sub">Cellular Boost</span>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <div class="cal-appt-time">2:00 PM</div>
+                <span class="cal-appt-type">Cigna</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-mast ty-iv is-tentative" style="top:748px;height:46px" data-appt="A-88364" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="2:30 PM" data-tx="Mast Cell" data-note="No active order — booked tentative" data-flags="auth">
+                <span class="fl-row"><span class="fl sev-high" title="Prior authorisation expires today · Billing">$</span></span>
+                <span class="cal-appt-sub">Mast Cell</span>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <div class="cal-appt-note">No active order — booked tentative</div>
+                <div class="cal-appt-time">2:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-scheduled t-mastb ty-iv" style="top:792px;height:46px" data-appt="A-88365" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mastb" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Mast Cell · Benadryl only">
+                <span class="cal-appt-sub">Mast Cell · Benadryl only</span>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <div class="cal-appt-time">3:00 PM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
+                <span class="actor-tag">Nick</span>
+              </div>
+              <div class="cal-appt st-locked t-cog ty-iv" style="top:836px;height:46px" data-appt="A-88366" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-cog" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="3:30 PM" data-tx="Cognitive Support" data-note="Held for the Thursday series">
+                <span class="cal-appt-sub">Cognitive Support</span>
+                <div class="cal-appt-name">Hana Sato</div>
+                <div class="cal-appt-note">Held for the Thursday series</div>
+                <div class="cal-appt-time">3:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Nick</span>
               </div>
             </div>
             <!-- IV 2 -->
             <div class="daycal-col" data-col="c2">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-iron ty-iv" style="top:44px;height:46px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-iron" data-days="1,2,3" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="8:30" data-tx="Core Iron Blend">
-                <div class="cal-appt-time">8:30</div>
-                <div class="cal-appt-name">Nina Kowalski</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-iron ty-iv" style="top:176px;height:46px" data-appt="A-88367" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-iron" data-days="1,2,3" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="8:00 AM" data-tx="Core Iron Blend">
                 <span class="cal-appt-sub">Core Iron Blend</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Nina Kowalski</div>
+                <div class="cal-appt-time">8:00 AM</div>
+                <span class="cal-appt-type">AETNA</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-done t-rest ty-iv" style="top:88px;height:46px" data-appt="A-88347" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-rest" data-days="2,4" data-pt="Samir Haddad" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="9:00" data-tx="Core Restore">
-                <div class="cal-appt-time">9:00</div>
-                <div class="cal-appt-name">Samir Haddad</div>
+              <div class="cal-appt st-done t-rest ty-iv" style="top:220px;height:46px" data-appt="A-88368" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-rest" data-days="2,4" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="8:30 AM" data-tx="Core Restore">
                 <span class="cal-appt-sub">Core Restore</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <div class="cal-appt-time">8:30 AM</div>
+                <span class="cal-appt-type">GEHA</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-done t-detox ty-iv" style="top:132px;height:46px" data-appt="A-88348" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-detox" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="9:30" data-tx="Detox Prime">
-                <div class="cal-appt-time">9:30</div>
-                <div class="cal-appt-name">Amara Diallo</div>
+              <div class="cal-appt st-done t-detox ty-iv" style="top:264px;height:46px" data-appt="A-88369" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-detox" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Detox Prime">
                 <span class="cal-appt-sub">Detox Prime</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-noshow t-amino ty-iv" style="top:176px;height:46px" data-appt="A-88349" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-amino" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="10:00" data-tx="Essential Amino">
-                <div class="cal-appt-time">10:00</div>
-                <div class="cal-appt-name">Victor Reyes</div>
+              <div class="cal-appt st-noshow t-amino ty-iv" style="top:308px;height:46px" data-appt="A-88370" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-amino" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="9:30 AM" data-tx="Essential Amino">
                 <span class="cal-appt-sub">Essential Amino</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <div class="cal-appt-time">9:30 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-done t-minic ty-iv" style="top:220px;height:46px" data-appt="A-88350" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minic" data-days="2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="10:30" data-tx="Mini Cust">
-                <div class="cal-appt-time">10:30</div>
-                <div class="cal-appt-name">Liam Fitzgerald</div>
+              <div class="cal-appt st-done t-minic ty-iv" style="top:352px;height:46px" data-appt="A-88371" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minic" data-days="2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="10:00 AM" data-tx="Mini Cust">
                 <span class="cal-appt-sub">Mini Cust</span>
-                <span class="cal-appt-type">mini bag</span>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-inchair t-minimb ty-iv" style="top:264px;height:46px" data-appt="A-88351" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-minimb" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="11:00" data-tx="Mini MB">
-                <div class="cal-appt-time">11:00</div>
-                <div class="cal-appt-name">Yuki Tanaka</div>
+              <div class="cal-appt st-done t-minimb ty-iv" style="top:396px;height:46px" data-appt="A-88372" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minimb" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="10:30 AM" data-tx="Mini MB">
                 <span class="cal-appt-sub">Mini MB</span>
-                <span class="cal-appt-type">mini Mito Boost</span>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <div class="cal-appt-time">10:30 AM</div>
+                <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-arrived t-mito ty-iv" style="top:308px;height:46px" data-appt="A-88352" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-mito" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:30" data-tx="Mito Boost" data-flags="allergy">
+              <div class="cal-appt st-inchair t-mito ty-iv" style="top:440px;height:46px" data-appt="A-88373" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mito" data-days="1,2,3,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Mito Boost" data-flags="allergy">
                 <span class="fl-row"><span class="fl sev-high" title="Allergy — sulfa, documented reaction · Medical">▲</span></span>
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Ben Okonkwo</div>
                 <span class="cal-appt-sub">Mito Boost</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-confirmed t-ebooiv ty-iv" style="top:396px;height:46px" data-appt="A-88353" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-ebooiv" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30" data-tx="EBOO Boost IV" data-flags="pregnant">
+              <div class="cal-appt st-arrived t-ebooiv ty-iv" style="top:484px;height:46px" data-appt="A-88374" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-ebooiv" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:30 AM" data-tx="EBOO Boost IV" data-flags="pregnant">
                 <span class="fl-row"><span class="fl sev-high" title="Pregnant — second trimester · Medical">◉</span></span>
-                <div class="cal-appt-time">12:30</div>
-                <div class="cal-appt-name">Rosa Iglesias</div>
                 <span class="cal-appt-sub">EBOO Boost IV</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <div class="cal-appt-time">11:30 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-confirmed t-ff5 ty-iv" style="top:440px;height:46px" data-appt="A-88354" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-ff5" data-days="2,4" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:00 PM" data-tx="Foundational Flow 5">
-                <div class="cal-appt-time">1:00 PM</div>
-                <div class="cal-appt-name">Hana Sato</div>
-                <span class="cal-appt-sub">Foundational Flow 5</span>
-                <span class="cal-appt-type">base bag</span>
-                <span class="actor-tag">Bea</span>
-              </div>
-              <div class="cal-appt st-scheduled t-ff10 ty-iv" style="top:484px;height:46px" data-appt="A-88355" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ff10" data-days="1,2,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="1:30 PM" data-tx="Foundational Flow 10">
-                <div class="cal-appt-time">1:30 PM</div>
-                <div class="cal-appt-name">Walter Hsu</div>
-                <span class="cal-appt-sub">Foundational Flow 10</span>
-                <span class="cal-appt-type">base bag</span>
-                <span class="actor-tag">Bea</span>
-              </div>
-              <div class="cal-appt st-scheduled t-ff15 ty-iv" style="top:528px;height:46px" data-appt="A-88356" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ff15" data-days="2" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="2:00 PM" data-tx="Foundational Flow 15">
-                <div class="cal-appt-time">2:00 PM</div>
-                <div class="cal-appt-name">Maya Reyes</div>
-                <span class="cal-appt-sub">Foundational Flow 15</span>
-                <span class="cal-appt-type">base bag</span>
-                <span class="actor-tag">Bea</span>
-              </div>
-              <div class="cal-appt st-scheduled t-ff20 ty-iv" style="top:616px;height:46px" data-appt="A-88357" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ff20" data-days="2,3" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="3:00 PM" data-tx="Foundational Flow 20">
-                <div class="cal-appt-time">3:00 PM</div>
-                <div class="cal-appt-name">Daniel Okafor</div>
-                <span class="cal-appt-sub">Foundational Flow 20</span>
-                <span class="cal-appt-type">base bag</span>
-                <span class="actor-tag">Bea</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:46px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-ff5 ty-iv" style="top:572px;height:46px" data-appt="A-88376" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-ff5" data-days="1,2,4,5" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="12:30 PM" data-tx="Foundational Flow 5">
+                <span class="cal-appt-sub">Foundational Flow 5</span>
+                <div class="cal-appt-name">Hana Sato</div>
+                <div class="cal-appt-time">12:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-confirmed t-ff10 ty-iv" style="top:616px;height:46px" data-appt="A-88377" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-ff10" data-days="2" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="1:00 PM" data-tx="Foundational Flow 10">
+                <span class="cal-appt-sub">Foundational Flow 10</span>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-scheduled t-ff15 ty-iv" style="top:660px;height:46px" data-appt="A-88378" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ff15" data-days="2,3" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="1:30 PM" data-tx="Foundational Flow 15">
+                <span class="cal-appt-sub">Foundational Flow 15</span>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <div class="cal-appt-time">1:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-scheduled t-ff20 ty-iv" style="top:704px;height:46px" data-appt="A-88379" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ff20" data-days="1,2,5" data-pt="Daniel Okafor" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0523" data-stage="Lead actor 2" data-pay="$40 copay" data-when="2:00 PM" data-tx="Foundational Flow 20">
+                <span class="cal-appt-sub">Foundational Flow 20</span>
+                <div class="cal-appt-name">Daniel Okafor</div>
+                <div class="cal-appt-time">2:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Bea</span>
+              </div>
+              <div class="cal-appt st-scheduled t-mc25 ty-iv" style="top:792px;height:46px" data-appt="A-88380" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mc25" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Mega C 25">
+                <span class="cal-appt-sub">Mega C 25</span>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <div class="cal-appt-time">3:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Bea</span>
               </div>
             </div>
             <!-- IV 3 -->
             <div class="daycal-col" data-col="c3">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-ff25 ty-iv" style="top:88px;height:46px" data-appt="A-88358" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff25" data-days="1,2,3" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="9:00" data-tx="Foundational Flow 25">
-                <div class="cal-appt-time">9:00</div>
-                <div class="cal-appt-name">Grace Lindqvist</div>
-                <span class="cal-appt-sub">Foundational Flow 25</span>
-                <span class="cal-appt-type">base bag</span>
-                <span class="actor-tag">Juan</span>
-              </div>
-              <div class="cal-appt st-done t-ff50 ty-iv" style="top:132px;height:46px" data-appt="A-88359" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff50" data-days="2,4" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="9:30" data-tx="Foundational Flow 50">
-                <div class="cal-appt-time">9:30</div>
-                <div class="cal-appt-name">Owen Delacroix</div>
-                <span class="cal-appt-sub">Foundational Flow 50</span>
-                <span class="cal-appt-type">base bag</span>
-                <span class="actor-tag">Juan</span>
-              </div>
-              <div class="cal-appt st-done t-mc15 ty-iv" style="top:220px;height:46px" data-appt="A-88360" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc15" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="10:30" data-tx="Mega C 15">
-                <div class="cal-appt-time">10:30</div>
-                <div class="cal-appt-name">Marcus Webb</div>
-                <span class="cal-appt-sub">Mega C 15</span>
-                <span class="cal-appt-type">15 g</span>
-                <span class="actor-tag">Juan</span>
-              </div>
-              <div class="cal-appt st-checkout t-mc25 ty-iv" style="top:264px;height:46px" data-appt="A-88361" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-mc25" data-days="2" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:00" data-tx="Mega C 25">
-                <div class="cal-appt-time">11:00</div>
-                <div class="cal-appt-name">Nadia Boulos</div>
-                <span class="cal-appt-sub">Mega C 25</span>
-                <span class="cal-appt-type">25 g</span>
-                <span class="actor-tag">Juan</span>
-              </div>
-              <div class="cal-appt st-inchair t-mc50 ty-iv" style="top:308px;height:46px" data-appt="A-88362" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mc50" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="11:30" data-tx="Mega C 50" data-flags="deficit">
-                <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Sofia Ramos</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-mc50 ty-iv" style="top:220px;height:46px" data-appt="A-88381" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc50" data-days="1,2,3" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:30 AM" data-tx="Mega C 50">
                 <span class="cal-appt-sub">Mega C 50</span>
-                <span class="cal-appt-type">50 g</span>
+                <div class="cal-appt-name">Grace Lindqvist</div>
+                <div class="cal-appt-time">8:30 AM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-confirmed t-mc75 ty-iv" style="top:440px;height:46px" data-appt="A-88363" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc75" data-days="1,2,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="1:00 PM" data-tx="Mega C 75">
-                <div class="cal-appt-time">1:00 PM</div>
-                <div class="cal-appt-name">Elena Petrova</div>
+              <div class="cal-appt st-done t-mc75 ty-iv" style="top:264px;height:46px" data-appt="A-88382" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc75" data-days="2,4" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="9:00 AM" data-tx="Mega C 75">
                 <span class="cal-appt-sub">Mega C 75</span>
-                <span class="cal-appt-type">75 g</span>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-scheduled t-mc100 ty-iv" style="top:528px;height:46px" data-appt="A-88364" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mc100" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="2:00 PM" data-tx="Mega C 100">
-                <div class="cal-appt-time">2:00 PM</div>
-                <div class="cal-appt-name">Tom Alvarez</div>
-                <span class="cal-appt-sub">Mega C 100</span>
-                <span class="cal-appt-type">100 g</span>
-                <span class="actor-tag">Juan</span>
-              </div>
-              <div class="cal-appt st-scheduled t-cell ty-iv" style="top:572px;height:46px" data-appt="A-88365" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-cell" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="2:30 PM" data-tx="Cellular Boost">
-                <div class="cal-appt-time">2:30 PM</div>
-                <div class="cal-appt-name">Priya Natarajan</div>
+              <div class="cal-appt st-done t-cell ty-iv" style="top:352px;height:46px" data-appt="A-88383" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-cell" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00 AM" data-tx="Cellular Boost">
                 <span class="cal-appt-sub">Cellular Boost</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-scheduled t-mast ty-iv" style="top:660px;height:46px" data-appt="A-88366" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="2,4" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="3:30 PM" data-tx="Mast Cell">
-                <div class="cal-appt-time">3:30 PM</div>
-                <div class="cal-appt-name">Victor Reyes</div>
-                <span class="cal-appt-sub">Mast Cell</span>
-                <span class="cal-appt-type">bag</span>
+              <div class="cal-appt st-checkout t-cog ty-iv" style="top:396px;height:46px" data-appt="A-88384" data-open-drawer="#l-appt-drawer" data-st="Ready to check out" data-sub="t-cog" data-days="2" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="10:30 AM" data-tx="Cognitive Support">
+                <span class="cal-appt-sub">Cognitive Support</span>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-time">10:30 AM</div>
+                <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt st-inchair t-iron ty-iv" style="top:440px;height:46px" data-appt="A-88385" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-iron" data-days="2,3" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="11:00 AM" data-tx="Core Iron Blend" data-flags="deficit">
+                <span class="fl-row"><span class="fl sev-med" title="Deficiency — ferritin 11 ng/mL · Medical">▼</span></span>
+                <span class="cal-appt-sub">Core Iron Blend</span>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:46px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-rest ty-iv" style="top:616px;height:46px" data-appt="A-88387" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-rest" data-days="1,2,3,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="1:00 PM" data-tx="Core Restore">
+                <span class="cal-appt-sub">Core Restore</span>
+                <div class="cal-appt-name">Elena Petrova</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-scheduled t-detox ty-iv" style="top:704px;height:46px" data-appt="A-88388" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-detox" data-days="1,2,3" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="2:00 PM" data-tx="Detox Prime">
+                <span class="cal-appt-sub">Detox Prime</span>
+                <div class="cal-appt-name">Tom Alvarez</div>
+                <div class="cal-appt-time">2:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-scheduled t-mito ty-iv" style="top:748px;height:46px" data-appt="A-88389" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mito" data-days="2,4" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="2:30 PM" data-tx="Mito Boost">
+                <span class="cal-appt-sub">Mito Boost</span>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <div class="cal-appt-time">2:30 PM</div>
+                <span class="cal-appt-type">Medicare Part B</span>
+                <span class="actor-tag">Juan</span>
+              </div>
+              <div class="cal-appt st-scheduled t-minimb ty-iv" style="top:836px;height:46px" data-appt="A-88390" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-minimb" data-days="1,2,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="3:30 PM" data-tx="Mini MB">
+                <span class="cal-appt-sub">Mini MB</span>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <div class="cal-appt-time">3:30 PM</div>
+                <span class="cal-appt-type">Self-pay</span>
+                <span class="actor-tag">Juan</span>
               </div>
             </div>
             <!-- IV 4 -->
             <div class="daycal-col" data-col="c4">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-mastb ty-iv" style="top:132px;height:46px" data-appt="A-88367" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mastb" data-days="1,2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="9:30" data-tx="Mast Cell · Benadryl only">
-                <div class="cal-appt-time">9:30</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-ff25 ty-iv" style="top:264px;height:46px" data-appt="A-88391" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ff25" data-days="1,2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="9:00 AM" data-tx="Foundational Flow 25">
+                <span class="cal-appt-sub">Foundational Flow 25</span>
                 <div class="cal-appt-name">Liam Fitzgerald</div>
-                <span class="cal-appt-sub">Mast Cell · Benadryl only</span>
-                <span class="cal-appt-type">push</span>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-done t-cog ty-iv" style="top:176px;height:46px" data-appt="A-88368" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-cog" data-days="2,4" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="10:00" data-tx="Cognitive Support">
-                <div class="cal-appt-time">10:00</div>
-                <div class="cal-appt-name">Nina Kowalski</div>
-                <span class="cal-appt-sub">Cognitive Support</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nate</span>
-              </div>
-              <div class="cal-appt st-arrived t-iron ty-iv" style="top:264px;height:46px" data-appt="A-88369" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-iron" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="11:00" data-tx="Core Iron Blend">
-                <div class="cal-appt-time">11:00</div>
-                <div class="cal-appt-name">Amara Diallo</div>
-                <span class="cal-appt-sub">Core Iron Blend</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nate</span>
-              </div>
-              <div class="cal-appt st-confirmed t-rest ty-iv" style="top:396px;height:46px" data-appt="A-88370" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-rest" data-days="2" data-pt="Samir Haddad" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="12:30" data-tx="Core Restore">
-                <div class="cal-appt-time">12:30</div>
-                <div class="cal-appt-name">Samir Haddad</div>
-                <span class="cal-appt-sub">Core Restore</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nate</span>
-              </div>
-              <div class="cal-appt st-confirmed t-detox ty-iv" style="top:484px;height:46px" data-appt="A-88371" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-detox" data-days="2,3" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Detox Prime">
-                <div class="cal-appt-time">1:30 PM</div>
-                <div class="cal-appt-name">Yuki Tanaka</div>
-                <span class="cal-appt-sub">Detox Prime</span>
-                <span class="cal-appt-type">bag</span>
-                <span class="actor-tag">Nate</span>
-              </div>
-              <div class="cal-appt st-scheduled t-amino ty-iv" style="top:572px;height:46px" data-appt="A-88372" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-amino" data-days="1,2,5" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $180" data-when="2:30 PM" data-tx="Essential Amino">
-                <div class="cal-appt-time">2:30 PM</div>
-                <div class="cal-appt-name">Owen Delacroix</div>
+              <div class="cal-appt st-done t-amino ty-iv" style="top:308px;height:46px" data-appt="A-88392" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-amino" data-days="2,4" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="9:30 AM" data-tx="Essential Amino">
                 <span class="cal-appt-sub">Essential Amino</span>
-                <span class="cal-appt-type">bag</span>
+                <div class="cal-appt-name">Nina Kowalski</div>
+                <div class="cal-appt-time">9:30 AM</div>
+                <span class="cal-appt-type">AETNA</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-locked t-minic ty-iv" style="top:704px;height:46px" data-appt="A-88373" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-minic" data-days="1,2,3,4,5" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Mini Cust" data-note="held — order renewal pending">
-                <div class="cal-appt-time">4:00 PM</div>
-                <div class="cal-appt-name">Rosa Iglesias</div>
-                <span class="cal-appt-sub"><span class="lockmark"></span>Mini Cust</span>
-                <span class="cal-appt-type">mini bag</span>
+              <div class="cal-appt st-arrived t-ff50 ty-iv" style="top:440px;height:46px" data-appt="A-88393" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-ff50" data-days="1,2,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Foundational Flow 50">
+                <span class="cal-appt-sub">Foundational Flow 50</span>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:46px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-mc15 ty-iv" style="top:572px;height:46px" data-appt="A-88395" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc15" data-days="2,3" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="12:30 PM" data-tx="Mega C 15">
+                <span class="cal-appt-sub">Mega C 15</span>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <div class="cal-appt-time">12:30 PM</div>
+                <span class="cal-appt-type">GEHA</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-confirmed t-mc100 ty-iv" style="top:660px;height:46px" data-appt="A-88396" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc100" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Mega C 100">
+                <span class="cal-appt-sub">Mega C 100</span>
+                <div class="cal-appt-name">Yuki Tanaka</div>
+                <div class="cal-appt-time">1:30 PM</div>
+                <span class="cal-appt-type">Cigna</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-scheduled t-mast ty-iv" style="top:748px;height:46px" data-appt="A-88397" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="1,2,3,4,5" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="2:30 PM" data-tx="Mast Cell">
+                <span class="cal-appt-sub">Mast Cell</span>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <div class="cal-appt-time">2:30 PM</div>
+                <span class="cal-appt-type">Self-pay</span>
+                <span class="actor-tag">Nate</span>
+              </div>
+              <div class="cal-appt st-locked t-minic ty-iv" style="top:880px;height:46px" data-appt="A-88398" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-minic" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Mini Cust" data-note="Held — order renewal pending">
+                <span class="cal-appt-sub">Mini Cust</span>
+                <div class="cal-appt-name">Rosa Iglesias</div>
+                <div class="cal-appt-note">Held — order renewal pending</div>
+                <div class="cal-appt-time">4:00 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Nate</span>
               </div>
             </div>
-            <div class="cal-now" style="top:323px"><span class="cal-now-label">11:40 AM</span></div>
+            <div class="cal-now" style="top:499px"><span class="cal-now-label">11:40 AM</span></div>
             <!-- Room 1 -->
             <div class="daycal-col" data-col="room1">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-acu ty-treat" style="top:132px;height:68px" data-appt="A-88374" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-acu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="9:30 – 9:30" data-tx="Acupuncture">
-                <div class="cal-appt-time">9:30 – 9:30</div>
-                <div class="cal-appt-name">Nadia Boulos</div>
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-acu ty-treat" style="top:264px;height:68px" data-appt="A-88399" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-acu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="9:00 AM" data-tx="Acupuncture">
                 <span class="cal-appt-sub">Acupuncture</span>
-                <span class="cal-appt-type">needles</span>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-time">9:00 AM</div>
+                <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-done t-las ty-energ" style="top:220px;height:46px" data-appt="A-88375" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-las" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:30" data-tx="Laser">
-                <div class="cal-appt-time">10:30</div>
-                <div class="cal-appt-name">Sofia Ramos</div>
+              <div class="cal-appt st-done t-las ty-energ" style="top:352px;height:46px" data-appt="A-88400" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-las" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00 AM" data-tx="Laser">
                 <span class="cal-appt-sub">Laser</span>
-                <span class="cal-appt-type">Erchonia</span>
+                <div class="cal-appt-name">Sofia Ramos</div>
+                <div class="cal-appt-time">10:00 AM</div>
+                <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-arrived t-chi ty-treat" style="top:308px;height:46px" data-appt="A-88376" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-chi" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:30" data-tx="Chiro">
-                <div class="cal-appt-time">11:30</div>
-                <div class="cal-appt-name">Ben Okonkwo</div>
+              <div class="cal-appt st-arrived t-chi ty-treat" style="top:440px;height:46px" data-appt="A-88401" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-chi" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Chiro">
                 <span class="cal-appt-sub">Chiro</span>
-                <span class="cal-appt-type">adjustment</span>
+                <div class="cal-appt-name">Ben Okonkwo</div>
+                <div class="cal-appt-time">11:00 AM</div>
+                <span class="cal-appt-type">UnitedHealthcare</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-confirmed t-pel ty-proc" style="top:396px;height:46px" data-appt="A-88377" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pel" data-days="2" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30" data-tx="Pellet">
-                <div class="cal-appt-time">12:30</div>
-                <div class="cal-appt-name">Marcus Webb</div>
-                <span class="cal-appt-sub">Pellet</span>
-                <span class="cal-appt-type">insertion</span>
-                <span class="actor-tag">Wesley</span>
-              </div>
-              <div class="cal-appt st-confirmed t-nmt ty-treat" style="top:484px;height:68px" data-appt="A-88378" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nmt" data-days="2,3" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 – 1:30 PM" data-tx="Neuromuscular">
-                <div class="cal-appt-time">1:30 – 1:30 PM</div>
-                <div class="cal-appt-name">Hana Sato</div>
-                <span class="cal-appt-sub">Neuromuscular</span>
-                <span class="cal-appt-type">soft tissue</span>
-                <span class="actor-tag">Wesley</span>
-              </div>
-              <div class="cal-appt st-scheduled t-bem ty-energ" style="top:572px;height:46px" data-appt="A-88379" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-bem" data-days="1,2,5" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="BEMER">
-                <div class="cal-appt-time">2:30 PM</div>
-                <div class="cal-appt-name">Liam Fitzgerald</div>
-                <span class="cal-appt-sub">BEMER</span>
-                <span class="cal-appt-type">mat</span>
-                <span class="actor-tag">Wesley</span>
-              </div>
-              <div class="cal-appt st-scheduled t-lym ty-energ" style="top:660px;height:46px" data-appt="A-88380" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lym" data-days="1,2,3,4,5" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="LymphStar">
-                <div class="cal-appt-time">3:30 PM</div>
-                <div class="cal-appt-name">Amara Diallo</div>
-                <span class="cal-appt-sub">LymphStar</span>
-                <span class="cal-appt-type">LET</span>
-                <span class="actor-tag">Wesley</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:46px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-pel ty-proc" style="top:572px;height:46px" data-appt="A-88403" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pel" data-days="2,3" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30 PM" data-tx="Pellet">
+                <span class="cal-appt-sub">Pellet</span>
+                <div class="cal-appt-name">Marcus Webb</div>
+                <div class="cal-appt-time">12:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-confirmed t-nmt ty-treat" style="top:660px;height:68px" data-appt="A-88404" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-nmt" data-days="1,2,5" data-pt="Hana Sato" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1321" data-stage="Maintenance" data-pay="$40 copay" data-when="1:30 PM" data-tx="Neuromuscular">
+                <span class="cal-appt-sub">Neuromuscular</span>
+                <div class="cal-appt-name">Hana Sato</div>
+                <div class="cal-appt-time">1:30 PM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-scheduled t-bem ty-energ" style="top:748px;height:46px" data-appt="A-88405" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-bem" data-days="1,2,3,4,5" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="2:30 PM" data-tx="BEMER">
+                <span class="cal-appt-sub">BEMER</span>
+                <div class="cal-appt-name">Liam Fitzgerald</div>
+                <div class="cal-appt-time">2:30 PM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
+                <span class="actor-tag">Wesley</span>
+              </div>
+              <div class="cal-appt st-scheduled t-lym ty-energ" style="top:836px;height:46px" data-appt="A-88406" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-lym" data-days="1,2,3" data-pt="Amara Diallo" data-ins="Cigna · OON" data-phone="(310) 555-1543" data-stage="Repair" data-pay="30% coinsurance" data-when="3:30 PM" data-tx="LymphStar">
+                <span class="cal-appt-sub">LymphStar</span>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <div class="cal-appt-time">3:30 PM</div>
+                <span class="cal-appt-type">Cigna</span>
+                <span class="actor-tag">Wesley</span>
               </div>
             </div>
             <!-- Room 2 -->
             <div class="daycal-col" data-col="room2">
-              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-eboo ty-proc" style="top:44px;height:134px" data-appt="A-88381" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-eboo" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:30 – 10:00" data-tx="EBOO" data-flags="urgent">
+              <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
+              <div class="cal-appt st-done t-eboo ty-proc" style="top:0px;height:134px" data-appt="A-88407" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-eboo" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="EBOO" data-note="Early circuit — she travels at noon" data-flags="urgent">
                 <span class="fl-row"><span class="fl sev-high" title="Urgent medical alert — cardiology follow-up open · Medical">✚</span></span>
-                <div class="cal-appt-time">8:30 – 10:00</div>
+                <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
-                <span class="cal-appt-sub">EBOO</span>
-                <span class="cal-appt-type">circuit</span>
+                <div class="cal-appt-note">Early circuit — she travels at noon</div>
+                <div class="cal-appt-time">6:00 AM – 7:30 AM</div>
+                <span class="cal-appt-type">Medicare Part B</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-done t-prp ty-proc" style="top:220px;height:90px" data-appt="A-88382" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-prp" data-days="2,4" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="10:30 – 11:30" data-tx="PRP">
-                <div class="cal-appt-time">10:30 – 11:30</div>
+              <div class="cal-appt st-done t-prp ty-proc" style="top:176px;height:90px" data-appt="A-88408" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-prp" data-days="2,4" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="8:00 AM" data-tx="PRP">
+                <span class="cal-appt-sub">PRP</span>
                 <div class="cal-appt-name">Walter Hsu</div>
-                <span class="cal-appt-sub">PRP</span>
-                <span class="cal-appt-type">platelet-rich</span>
+                <div class="cal-appt-time">8:00 AM</div>
+                <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-confirmed t-eboo ty-proc" style="top:396px;height:134px" data-appt="A-88383" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-eboo" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="12:30 – 2:00 PM" data-tx="EBOO">
-                <div class="cal-appt-time">12:30 – 2:00 PM</div>
-                <div class="cal-appt-name">Maya Reyes</div>
+              <div class="cal-appt st-inroom t-eboo ty-proc" style="top:352px;height:134px" data-appt="A-88409" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-eboo" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00 AM – 11:30 AM" data-tx="EBOO">
                 <span class="cal-appt-sub">EBOO</span>
-                <span class="cal-appt-type">circuit</span>
+                <div class="cal-appt-name">Maya Reyes</div>
+                <div class="cal-appt-time">10:00 AM – 11:30 AM</div>
+                <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-scheduled t-prp ty-proc" style="top:572px;height:90px" data-appt="A-88384" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-prp" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="2:30 – 3:30 PM" data-tx="PRP">
-                <div class="cal-appt-time">2:30 – 3:30 PM</div>
-                <div class="cal-appt-name">Victor Reyes</div>
-                <span class="cal-appt-sub">PRP</span>
-                <span class="cal-appt-type">platelet-rich</span>
-                <span class="actor-tag">Kyle</span>
-              </div>
-              <div class="cal-appt st-scheduled t-pel ty-proc" style="top:704px;height:46px" data-appt="A-88385" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-pel" data-days="2,3" data-pt="Nina Kowalski" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Pellet">
-                <div class="cal-appt-time">4:00 PM</div>
-                <div class="cal-appt-name">Nina Kowalski</div>
-                <span class="cal-appt-sub">Pellet</span>
-                <span class="cal-appt-type">insertion</span>
-                <span class="actor-tag">Kyle</span>
-              </div>
-              <div class="cal-appt is-block t-block ty-visit" style="top:352px;height:46px" data-blocked="1" data-open-drawer="#l-block-drawer" data-st="Blocked" data-when="12:00 – 12:30" data-tx="Lunch">
-                <div class="cal-appt-time">12:00 – 12:30</div>
-                <div class="cal-appt-name">Lunch</div>
+              <div class="cal-appt is-block t-block ty-visit" style="top:528px;height:46px" data-open-drawer="#l-block-drawer" data-blocked="1" data-st="Blocked" data-when="12:00 PM" data-tx="Lunch">
                 <span class="cal-appt-sub">Blocked</span>
-                <span class="cal-appt-type">every weekday</span>
+                <div class="cal-appt-name">Lunch</div>
+                <div class="cal-appt-time">12:00 PM</div>
+              </div>
+              <div class="cal-appt st-confirmed t-prp ty-proc" style="top:616px;height:90px" data-appt="A-88411" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-prp" data-days="2,3" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="1:00 PM" data-tx="PRP">
+                <span class="cal-appt-sub">PRP</span>
+                <div class="cal-appt-name">Victor Reyes</div>
+                <div class="cal-appt-time">1:00 PM</div>
+                <span class="cal-appt-type">Self-pay</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div class="cal-appt st-scheduled t-eboo ty-proc" style="top:792px;height:134px" data-appt="A-88412" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-eboo" data-days="1,2,5" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="3:00 PM – 4:30 PM" data-tx="EBOO">
+                <span class="cal-appt-sub">EBOO</span>
+                <div class="cal-appt-name">Nina Kowalski</div>
+                <div class="cal-appt-time">3:00 PM – 4:30 PM</div>
+                <span class="cal-appt-type">AETNA</span>
+                <span class="actor-tag">Kyle</span>
+              </div>
+              <div class="cal-appt st-scheduled t-pel ty-proc" style="top:968px;height:46px" data-appt="A-88413" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-pel" data-days="1,2,3,4,5" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="5:00 PM" data-tx="Pellet">
+                <span class="cal-appt-sub">Pellet</span>
+                <div class="cal-appt-name">Samir Haddad</div>
+                <div class="cal-appt-time">5:00 PM</div>
+                <span class="cal-appt-type">GEHA</span>
+                <span class="actor-tag">Kyle</span>
               </div>
             </div>
           </div>
@@ -2823,6 +2968,39 @@
   </div>
 </aside>
 
+<div class="drawer-overlay" data-close-drawer="#l-hold-drawer"></div>
+<aside class="drawer" id="l-hold-drawer">
+  <div class="drawer-head">
+    <div>
+      <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">Held slot</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:2px">Reserved capacity &middot; nobody booked into it yet</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#l-hold-drawer">&times;</button>
+  </div>
+  <div class="drawer-body">
+    <div class="callout">
+      <strong>A hold is not blocked time.</strong> Blocked time cannot be booked at all.
+      A hold is capacity the desk is protecting for a particular kind of patient &mdash;
+      here, a new patient. It stays empty until the right booking comes along, and it
+      shows on the board so nobody fills it by accident.
+    </div>
+    <dl class="kv">
+      <dt>Held for</dt><dd>A new patient</dd>
+      <dt>When</dt><dd>Today &middot; 8:00 &ndash; 9:00 AM</dd>
+      <dt>Resource</dt><dd>Dr. Drannikov</dd>
+      <dt>Held by</dt><dd>Marie &middot; New Patient Advisor</dd>
+      <dt>Releases</dt><dd>At 5 PM the day before, if still empty</dd>
+    </dl>
+    <div class="prov"><span>Two of these are held every day, at 8 and at 1 &mdash;
+      the clinic's standing rule for intake capacity.</span></div>
+    <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
+      <button class="btn btn-primary" data-close-drawer="#l-hold-drawer" onclick="HCOS.activate('l-03-book')">Book a new patient into it</button>
+      <button class="btn" data-close-drawer="#l-hold-drawer" onclick="HCOS.activate('l-10-waitlist')">Offer it to the waitlist</button>
+      <button class="btn" onclick="HCOS.toast('Released. The slot is now bookable by anyone.', 'ok')">Release the hold</button>
+    </div>
+  </div>
+</aside>
+
 <div class="drawer-overlay" data-close-drawer="#l-appt-drawer"></div>
 <aside class="drawer" id="l-appt-drawer">
   <div class="drawer-head">
@@ -2897,11 +3075,13 @@
     </div>
   </div>
 
-  <div class="modal-overlay" id="l-wl-modal" data-close-modal="#l-wl-modal"></div>
-  <div class="modal" data-modal="l-wl-modal">
+</div>
+
+<div class="modal-overlay" id="l-wl-modal" data-close-modal>
+  <div class="modal">
     <div class="modal-head">
       <div class="modal-title">Add to the waitlist</div>
-      <button class="modal-x" data-close-modal="#l-wl-modal" aria-label="Close">&times;</button>
+      <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
       <div class="field"><label class="field-lbl" for="l-wl-pt">Patient</label>
@@ -2938,16 +3118,17 @@
           <option>Text only</option><option>Call only</option></select></div>
     </div>
     <div class="modal-foot">
-      <button class="btn" data-close-modal="#l-wl-modal">Cancel</button>
-      <button class="btn btn-primary" data-close-modal="#l-wl-modal" onclick="lWlAdd()">Add to the waitlist</button>
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="lWlAdd()">Add to the waitlist</button>
     </div>
   </div>
+</div>
 
-  <div class="modal-overlay" id="l-blk-modal" data-close-modal="#l-blk-modal"></div>
-  <div class="modal" data-modal="l-blk-modal">
+<div class="modal-overlay" id="l-blk-modal" data-close-modal>
+  <div class="modal">
     <div class="modal-head">
       <div class="modal-title">Block a timeframe</div>
-      <button class="modal-x" data-close-modal="#l-blk-modal" aria-label="Close">&times;</button>
+      <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
       <div class="field"><label class="field-lbl" for="l-bm-what">What is it</label>
@@ -2980,14 +3161,13 @@
       </div>
     </div>
     <div class="modal-foot">
-      <button class="btn" data-close-modal="#l-blk-modal">Cancel</button>
-      <button class="btn btn-primary" data-close-modal="#l-blk-modal" onclick="HCOS.toast('Blocked. Nothing can be booked into that window until a manager lifts it.', 'ok')">Block the time</button>
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Blocked. Nothing can be booked into that window until a manager lifts it.', 'ok')">Block the time</button>
     </div>
   </div>
-
 </div>
 
-<script src="assets/hcos.js?v=57"></script>
+<script src="assets/hcos.js?v=58"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3095,9 +3275,17 @@
 
     var pv = wantCols.filter(function (c) { return PROVS.indexOf(c) !== -1; }).length;
     var nc = wantCols.filter(function (c) { return CHAIRS.indexOf(c) !== -1; }).length;
-    var tmpl = '64px repeat(' + wantCols.length + ', minmax(140px, 1fr))';
+    /* A provider column is double-booked, so it has to carry two names side by
+       side; an IV column never does. Equal tracks made the halves 68px wide and
+       every name collapsed to "Gra…". Providers get a wider track and the board
+       scrolls, which is the honest trade. */
+    var tmpl = '64px ' + wantCols.map(function (c) {
+      return PROVS.indexOf(c) !== -1 ? 'minmax(250px, 1.7fr)' : 'minmax(140px, 1fr)';
+    }).join(' ');
     document.querySelector('.daycal-head').style.gridTemplateColumns = tmpl;
     document.querySelector('.daycal-grid').style.gridTemplateColumns = tmpl;
+    /* the track widths just changed, so the labels have to be re-measured */
+    if (typeof lFitSubs === 'function') requestAnimationFrame(function () { lFitSubs(); });
     /* the band row must cover every track, or row two slides one to the left */
     var nr = wantCols.filter(function (c) { return ROOMS.indexOf(c) !== -1; }).length;
     var spacer = document.querySelector('.daycal-band-spacer');
@@ -3121,7 +3309,7 @@
     var shown = 0, total = 0;
     var showCx = document.querySelector('.cal.show-cx');
     document.querySelectorAll('.daycal-col .cal-appt').forEach(function (a) {
-      var blocked = a.hasAttribute('data-blocked');
+      var blocked = a.hasAttribute('data-blocked') || a.hasAttribute('data-held');
       var days = (a.getAttribute('data-days') || '2').split(',');
       var dayOk = blocked || days.indexOf(String(L_DAYS[lCur].n)) !== -1;
       var colEl = a.closest('[data-col]');
@@ -3394,12 +3582,7 @@
     var desc = (b.querySelector('.cal-appt-type') || {}).textContent || '';
     /* the column head is two lines — "IV 1" and "Nick · Nurse". Joining them
        raw produced "BrookePhysician Associate". */
-    var res = '';
-    if (head) {
-      res = [].map.call(head.childNodes, function (n) { return (n.textContent || '').trim(); })
-              .filter(Boolean).join(' · ').replace(/\s+/g, ' ');
-      if (!res) res = head.textContent.trim().replace(/\s+/g, ' ');
-    }
+    var res = lResourceName(col ? col.getAttribute('data-col') : '');
     return {
       n: b.getAttribute('data-pt') || '', ag: '',
       cv: b.getAttribute('data-ins') || 'Not on file',
@@ -4088,7 +4271,7 @@
       var ty = Object.keys(TY_LBL).filter(function (k) { return b.classList.contains(k); })[0];
       var st = (b.className.match(/st-([a-z]+)/) || [])[1] || 'scheduled';
       var col = b.closest('[data-col]');
-      var res = col ? (document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') || {}).textContent : '';
+      var res = lResourceName(col ? col.getAttribute('data-col') : '');
       var pat = PATTERN[name] ? '<div class="az-row az-ai"><strong>AI pattern:</strong>&nbsp;' + PATTERN[name] + '</div>' : '';
 
       /* the four things the desk asks for before it picks up the phone */
@@ -4114,7 +4297,7 @@
 
       var note = b.getAttribute('data-note');
       zoom.innerHTML = '<div class="az-name">' + name + '</div>' +
-        '<div class="az-meta">' + time + (res ? ' &middot; ' + res.replace(/(Nurse|Medic|Provider|Physician Associate)/, ' · $1') : '') + '</div>' +
+        '<div class="az-meta">' + time + (res ? ' &middot; ' + res : '') + '</div>' +
         '<div class="az-row">' +
         '<span class="pill pill-muted">' + (b.getAttribute('data-st') || st) + '</span>' +
         (ty ? '<span class="pill pill-navy">' + TY_LBL[ty] + '</span>' : '') +
@@ -4244,24 +4427,38 @@
   /* ---------- List view: the same day, read as a list ----------
      It is built FROM the board, not typed again, so the list can never drift
      from the calendar it claims to describe. */
+  /* the column head is two lines — "IV 1" and "Nick · Nurse". Joining them raw
+     produced "BrookePhysician Associate" in three different places, so it lives
+     in one function now. */
+  function lResourceName(col) {
+    if (!col) return '';
+    var head = document.querySelector('.daycal-col-head[data-col="' + col + '"]');
+    if (!head) return '';
+    var parts = [].map.call(head.childNodes, function (n) { return (n.textContent || '').trim(); })
+                  .filter(Boolean);
+    return (parts.length ? parts.join(' · ') : head.textContent.trim()).replace(/\s+/g, ' ');
+  }
+  window.lResourceName = lResourceName;
+
   function lBuildList() {
     var body = document.getElementById('l-list-body');
     if (!body) return;
     var rows = [];
     document.querySelectorAll('.daycal-col .cal-appt').forEach(function (b) {
-      if (b.hasAttribute('data-blocked')) return;
+      if (b.hasAttribute('data-blocked') || b.hasAttribute('data-held')) return;
       var col = b.closest('[data-col]');
-      var head = col ? document.querySelector('.daycal-col-head[data-col="' + col.getAttribute('data-col') + '"]') : null;
       var flags = (b.getAttribute('data-flags') || '').split('|').filter(Boolean);
+      var id = b.getAttribute('data-appt') || '';
       rows.push({
-        top: parseInt((b.getAttribute('style').match(/top:(\d+)/) || [0, 0])[1], 10),
-        html: '<tr>' +
+        top: parseInt((b.getAttribute('style').match(/top:\s*(\d+)/) || [0, 0])[1], 10) || 0,
+        html: '<tr class="l-list-row" data-appt="' + id + '" tabindex="0" role="button" ' +
+              'title="Open the appointment">' +
           '<td>' + (b.getAttribute('data-when') || '') + '</td>' +
-          '<td>' + (b.getAttribute('data-pt') || '') + '</td>' +
+          '<td><strong>' + (b.getAttribute('data-pt') || '') + '</strong></td>' +
           '<td><span class="rail-sw ' + (b.getAttribute('data-sub') || '') + ' ' +
               ((b.className.match(/ty-[a-z]+/) || [''])[0]) + '" style="vertical-align:-4px"></span> ' +
               (b.getAttribute('data-tx') || '') + '</td>' +
-          '<td>' + (head ? head.textContent.trim().split('\n')[0] : '') + '</td>' +
+          '<td>' + lResourceName(col ? col.getAttribute('data-col') : '') + '</td>' +
           '<td><span class="pill pill-st ' + ((b.className.match(/st-[a-z]+/) || [''])[0]) + '">' +
               (b.getAttribute('data-st') || '') + '</span></td>' +
           '<td>' + (b.getAttribute('data-stage') || '') + '</td>' +
@@ -4273,10 +4470,32 @@
         '</tr>'
       });
     });
+    /* by start time, then by resource, so the list reads down the day */
     rows.sort(function (a, b) { return a.top - b.top; });
     body.innerHTML = rows.map(function (r) { return r.html; }).join('') ||
       '<tr><td colspan="9" class="field-help">Nothing booked on this day.</td></tr>';
   }
+
+  /* a row in the list opens the same appointment the block does */
+  document.addEventListener('click', function (ev) {
+    var r = ev.target.closest ? ev.target.closest('.l-list-row') : null;
+    if (!r) return;
+    var id = r.getAttribute('data-appt');
+    if (!id) return;
+    lOpenAppt(id);
+    var d = document.getElementById('l-appt-drawer');
+    var o = document.querySelector('.drawer-overlay[data-close-drawer="#l-appt-drawer"]');
+    if (d) d.classList.add('open');
+    if (o) o.classList.add('open');
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var r = document.activeElement && document.activeElement.closest
+          ? document.activeElement.closest('.l-list-row') : null;
+    if (!r) return;
+    ev.preventDefault();
+    r.click();
+  });
   window.lBuildList = lBuildList;
   lBuildList();
 
