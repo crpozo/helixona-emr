@@ -1053,69 +1053,69 @@ a.lead-chip:hover { border-color: var(--ink); }
   --tybg-iv:     #FFFFFF;   /* IV */
 
   /* SUBTYPE — the side bar */
-  --sb-newpt:     #F23FB8;   /* New patient */
-  --sb-npfu:      #E8C8E8;   /* New patient FU */
-  --sb-nptoc:     #E8A33C;   /* New patient TOC */
-  --sb-fu:        #FFF200;   /* Follow Up */
-  --sb-prp:       #ED9B3D;   /* PRP */
-  --sb-tpi:       #F5D5AA;   /* TPI */
-  --sb-pelm:      #7B95D6;   /* Pellet Males */
-  --sb-pelf:      #D98878;   /* Pellet Females */
-  --sb-proloz:    #4FE8E8;   /* Prolozone */
-  --sb-micro:     #A9C69C;   /* Microcurrent */
-  --sb-biochg:    #E8B93C;   /* BioCharger */
-  --sb-lymph:     #1F5C2E;   /* LymphStar */
-  --sb-scenar:    #B03A2E;   /* SCENAR */
-  --sb-minilym:   #9DD49D;   /* Mini-LymphStar */
-  --sb-biomodp:   #FFFFFF;   /* BioMod Pro */
-  --sb-biomodr:   #A8D4A0;   /* BioMod Recharge */
-  --sb-nmt:       #8FA8DC;   /* NMT */
-  --sb-mead:      #8FA8DC;   /* MEAD */
-  --sb-meadre:    #8FA8DC;   /* MEAD ReAssessment */
-  --sb-rr:        #8FA8DC;   /* R&R */
-  --sb-mdl:       #8FA8DC;   /* MDL */
-  --sb-quest:     #FFFFFF;   /* Quest */
-  --sb-g6pd:      #0000FF;   /* G6PD */
-  --sb-igenex:    #FFFFFF;   /* iGenex */
-  --sb-diag:      #4CAF50;   /* Diagnostics */
-  --sb-fpeie:     #F0A83C;   /* FPE - IE */
-  --sb-fpefu:     #F0A83C;   /* FPE F/U */
-  --sb-dcintx:    #BDD7EE;   /* DC IN - TX */
-  --sb-dctx:      #BDD7EE;   /* DC - TX */
-  --sb-lasereval: #8FA8DC;   /* Laser Eval. */
-  --sb-medifne:   #4FE8E8;   /* MediFNE */
-  --sb-pocrev:    #D98878;   /* POC Review */
-  --sb-eboosafe:  #D98878;   /* EBOO Safe */
-  --sb-ebootx:    #D98878;   /* EBOO */
-  --sb-erchlas:   #C040D0;   /* Erch Laser */
-  --sb-erccemp:   #F0C8C8;   /* ErcCompEmp */
-  --sb-erccpt:    #F0C8C8;   /* ErcCompPt */
-  --sb-erccvip:   #F5E0C8;   /* ErcCompVIP */
-  --sb-erccref:   #F5E0C8;   /* ErcCompRef */
-  --sb-cell:      #2E3B4E;   /* Cellular Boost */
-  --sb-chel:      #F0983C;   /* Chelation */
-  --sb-cog:       #E8A83C;   /* Cognitive Support */
-  --sb-iron:      #F040D0;   /* Core Iron Blend */
-  --sb-rest:      #A8D4A0;   /* Core Restore */
-  --sb-detox:     #A8D4A0;   /* Detox Prime */
-  --sb-ebooiv:    #0000FF;   /* EBOO Boost */
-  --sb-amino:     #FFFFFF;   /* Essential Aminos */
-  --sb-ff5:       #FFFFFF;   /* Foundational Flow 5 */
-  --sb-ff10:      #C8F0F0;   /* Foundational Flow 10 */
-  --sb-ff15:      #7FE8E8;   /* Foundational Flow 15 */
-  --sb-ff20:      #5CC9C6;   /* Foundational Flow 20 */
-  --sb-ff25:      #4DB3B3;   /* Foundational Flow 25 */
-  --sb-ff50:      #3A9999;   /* Foundational Flow 50 */
-  --sb-mast:      #FFF200;   /* Mast Cell */
-  --sb-mc15:      #F5E0C0;   /* Mega C 15g */
-  --sb-mc25:      #E8CFA8;   /* Mega C 25g */
-  --sb-mc50:      #D9BC94;   /* Mega C 50g */
-  --sb-mc75:      #C9A47C;   /* Mega C 75g */
-  --sb-mc100:     #B08D64;   /* Mega C 100g */
-  --sb-migraine:  #9B7BC9;   /* Migraine */
-  --sb-mito:      #6B3FA0;   /* Mito Boost */
-  --sb-minimb:    #FFFFFF;   /* Mini Mito Boost */
-  --sb-minimbc:   #FFFFFF;   /* Mini Mito Boost - Custom */
+  --sb-newpt:     #F02CE0;   /* New patient */
+  --sb-npfu:      #E4D2DE;   /* New patient FU */
+  --sb-nptoc:     #9E5C78;   /* New patient TOC */
+  --sb-fu:        #FCFC50;   /* Follow Up */
+  --sb-prp:       #F0982E;   /* PRP */
+  --sb-tpi:       #F5D5AE;   /* TPI */
+  --sb-pelm:      #7392DA;   /* Pellet Males */
+  --sb-pelf:      #D2836E;   /* Pellet Females */
+  --sb-proloz:    #66FFFF;   /* Prolozone */
+  --sb-micro:     #C0D2A8;   /* Microcurrent */
+  --sb-biochg:    #E8C24A;   /* BioCharger */
+  --sb-lymph:     #3E7A2E;   /* LymphStar */
+  --sb-scenar:    #C4472E;   /* SCENAR */
+  --sb-minilym:   #8ABA76;   /* Mini-LymphStar */
+  --sb-biomodp:   #DEE6D2;   /* BioMod Pro */
+  --sb-biomodr:   #C0A028;   /* BioMod Recharge */
+  --sb-nmt:       #4A86DC;   /* NMT */
+  --sb-mead:      #4E8290;   /* MEAD */
+  --sb-meadre:    #A8C4CC;   /* MEAD ReAssessment */
+  --sb-rr:        #B0A4D8;   /* R&R */
+  --sb-mdl:       #2E1A6E;   /* MDL */
+  --sb-quest:     #4E8290;   /* Quest */
+  --sb-g6pd:      #0000F0;   /* G6PD */
+  --sb-igenex:    #66FFFF;   /* iGenex */
+  --sb-diag:      #3E7A2E;   /* Diagnostics */
+  --sb-fpeie:     #F5E4D2;   /* FPE - IE */
+  --sb-fpefu:     #F0982E;   /* FPE F/U */
+  --sb-dcintx:    #DCB4AC;   /* DC IN - TX */
+  --sb-dctx:      #B0AED8;   /* DC - TX */
+  --sb-lasereval: #5A4A9E;   /* Laser Eval */
+  --sb-medifne:   #66FFFF;   /* MediFNE */
+  --sb-pocrev:    #9E5C78;   /* POC Review */
+  --sb-eboosafe:  #BA8098;   /* EBOO Safe */
+  --sb-ebootx:    #D2836E;   /* EBOO */
+  --sb-erchlas:   #8A2CE0;   /* Erch Laser */
+  --sb-erccemp:   #D8B0A8;   /* ErcCompEmp */
+  --sb-erccpt:    #EED8D2;   /* ErcCompPt */
+  --sb-erccvip:   #F5EAD2;   /* ErcCompVIP */
+  --sb-erccref:   #FAF0DC;   /* ErcCompRef */
+  --sb-cell:      #2E4450;   /* Cellular Boost */
+  --sb-chel:      #F0982E;   /* Chelation */
+  --sb-cog:       #C0A028;   /* Cognitive Support */
+  --sb-iron:      #F02CE0;   /* Core Iron Blend */
+  --sb-rest:      #DCC0BA;   /* Core Restore */
+  --sb-detox:     #B4CCA0;   /* Detox Prime */
+  --sb-ebooiv:    #0000F0;   /* Eboo Boost */
+  --sb-amino:     #D8DCE8;   /* Essential Aminos */
+  --sb-ff5:       #C4E8E8;   /* Foundational Flow 5 */
+  --sb-ff10:      #A8E4E8;   /* Foundational Flow 10 */
+  --sb-ff15:      #66F0F0;   /* Foundational Flow 15 */
+  --sb-ff20:      #68C4C4;   /* Foundational Flow 20 */
+  --sb-ff25:      #5AAAAA;   /* Foundational Flow 25 */
+  --sb-ff50:      #4E8290;   /* Foundational Flow 50 */
+  --sb-mast:      #FCFC50;   /* Mast Cell */
+  --sb-mc15:      #FAEADC;   /* Mega C 15g */
+  --sb-mc25:      #F5D8B4;   /* Mega C 25g */
+  --sb-mc50:      #EEC088;   /* Mega C 50g */
+  --sb-mc75:      #E8A84E;   /* Mega C 75g */
+  --sb-mc100:     #C87824;   /* Mega C 100g */
+  --sb-migraine:  #5A4A9E;   /* Migraine */
+  --sb-mito:      #6E2A4E;   /* Mito Boost */
+  --sb-minimb:    #B07A96;   /* Mini Mito Boost */
+  --sb-minimbc:   #C49AAE;   /* Mini Mito Boost - Custom */
   --sb-none:     #B4B4B4;
   --blk-muted:   #4A4A4A;
 }

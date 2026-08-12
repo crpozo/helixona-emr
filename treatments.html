@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=72">
+<link rel="stylesheet" href="assets/hcos.css?v=73">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -410,10 +410,11 @@
           <strong>Three channels, and they are the clinic&rsquo;s, not ours.</strong>
           The <strong>background</strong> is the appointment type, the <strong>side bar</strong> is
           which treatment, and a faint <strong>watermark</strong> over the background is where the
-          patient stands. The status symbols are drawn as inline SVG rather than emoji: an emoji
-          renders in its own colours on top of a palette the clinic chose, and differently on every
-          operating system. Anything marked <em>no colour yet</em> is waiting on the clinic and is
-          drawn grey until then.
+          patient stands. Every colour on this page comes from the clinic&rsquo;s own sheet. The status symbols
+          are drawn as inline SVG rather than emoji: an emoji renders in its own colours on top of a
+          palette the clinic chose, and differently on every operating system. Where a colour is used
+          more than once, the other treatments that share it are named &mdash; they always sit on a
+          different background, so the pair still reads apart on the board.
         </div>
 <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
@@ -432,69 +433,69 @@
               <tr><td>Type</td><td><strong>Laser</strong></td><td><span class="ty-sw ty-laser"></span></td><td><code>#8B1A1A</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">needs white text</span></td></tr>
               <tr><td>Type</td><td><strong>IV</strong></td><td><span class="ty-sw ty-iv"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
               <tr><th colspan="5" style="text-align:left;background:var(--hx-band)">2 &middot; Side bar &mdash; which treatment</th></tr>
-              <tr><td>Office Visit</td><td><strong>New patient</strong></td><td><span class="rail-sw t-newpt"></span></td><td><code>#F23FB8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Office Visit</td><td><strong>New patient FU</strong></td><td><span class="rail-sw t-npfu"></span></td><td><code>#E8C8E8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Office Visit</td><td><strong>New patient TOC</strong></td><td><span class="rail-sw t-nptoc"></span></td><td><code>#E8A33C</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Office Visit</td><td><strong>Follow Up</strong></td><td><span class="rail-sw t-fu"></span></td><td><code>#FFF200</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Procedure</td><td><strong>PRP</strong></td><td><span class="rail-sw t-prp"></span></td><td><code>#ED9B3D</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Procedure</td><td><strong>TPI</strong></td><td><span class="rail-sw t-tpi"></span></td><td><code>#F5D5AA</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Procedure</td><td><strong>Pellet Males</strong></td><td><span class="rail-sw t-pelm"></span></td><td><code>#7B95D6</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Procedure</td><td><strong>Pellet Females</strong></td><td><span class="rail-sw t-pelf"></span></td><td><code>#D98878</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 3 others</span></td></tr>
-              <tr><td>Procedure</td><td><strong>Prolozone</strong></td><td><span class="rail-sw t-proloz"></span></td><td><code>#4FE8E8</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Procedure</td><td><strong>Microcurrent</strong></td><td><span class="rail-sw t-micro"></span></td><td><code>#A9C69C</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Energetics</td><td><strong>BioCharger</strong></td><td><span class="rail-sw t-biochg"></span></td><td><code>#E8B93C</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Energetics</td><td><strong>LymphStar</strong></td><td><span class="rail-sw t-lymph"></span></td><td><code>#1F5C2E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Energetics</td><td><strong>SCENAR</strong></td><td><span class="rail-sw t-scenar"></span></td><td><code>#B03A2E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Energetics</td><td><strong>Mini-LymphStar</strong></td><td><span class="rail-sw t-minilym"></span></td><td><code>#9DD49D</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Energetics</td><td><strong>BioMod Pro</strong></td><td><span class="rail-sw t-biomodp"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
-              <tr><td>Energetics</td><td><strong>BioMod Recharge</strong></td><td><span class="rail-sw t-biomodr"></span></td><td><code>#A8D4A0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 2 others</span></td></tr>
-              <tr><td>Energetics</td><td><strong>NMT</strong></td><td><span class="rail-sw t-nmt"></span></td><td><code>#8FA8DC</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 5 others</span></td></tr>
-              <tr><td>Energetics</td><td><strong>MEAD</strong></td><td><span class="rail-sw t-mead"></span></td><td><code>#8FA8DC</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 5 others</span></td></tr>
-              <tr><td>Energetics</td><td><strong>MEAD ReAssessment</strong></td><td><span class="rail-sw t-meadre"></span></td><td><code>#8FA8DC</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 5 others</span></td></tr>
-              <tr><td>Energetics</td><td><strong>R&amp;R</strong></td><td><span class="rail-sw t-rr"></span></td><td><code>#8FA8DC</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 5 others</span></td></tr>
-              <tr><td>Labs</td><td><strong>MDL</strong></td><td><span class="rail-sw t-mdl"></span></td><td><code>#8FA8DC</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 5 others</span></td></tr>
-              <tr><td>Labs</td><td><strong>Quest</strong></td><td><span class="rail-sw t-quest"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
-              <tr><td>Labs</td><td><strong>G6PD</strong></td><td><span class="rail-sw t-g6pd"></span></td><td><code>#0000FF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Labs</td><td><strong>iGenex</strong></td><td><span class="rail-sw t-igenex"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
-              <tr><td>Diagnostics</td><td><strong>Diagnostics</strong></td><td><span class="rail-sw t-diag"></span></td><td><code>#4CAF50</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>FPE</td><td><strong>FPE - IE</strong></td><td><span class="rail-sw t-fpeie"></span></td><td><code>#F0A83C</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>FPE</td><td><strong>FPE F/U</strong></td><td><span class="rail-sw t-fpefu"></span></td><td><code>#F0A83C</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Chiro</td><td><strong>DC IN - TX</strong></td><td><span class="rail-sw t-dcintx"></span></td><td><code>#BDD7EE</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Chiro</td><td><strong>DC - TX</strong></td><td><span class="rail-sw t-dctx"></span></td><td><code>#BDD7EE</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Chiro</td><td><strong>Laser Eval.</strong></td><td><span class="rail-sw t-lasereval"></span></td><td><code>#8FA8DC</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 5 others</span></td></tr>
-              <tr><td>Chiro</td><td><strong>MediFNE</strong></td><td><span class="rail-sw t-medifne"></span></td><td><code>#4FE8E8</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Chiro</td><td><strong>POC Review</strong></td><td><span class="rail-sw t-pocrev"></span></td><td><code>#D98878</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 3 others</span></td></tr>
-              <tr><td>EBOO</td><td><strong>EBOO Safe</strong></td><td><span class="rail-sw t-eboosafe"></span></td><td><code>#D98878</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 3 others</span></td></tr>
-              <tr><td>EBOO</td><td><strong>EBOO</strong></td><td><span class="rail-sw t-ebootx"></span></td><td><code>#D98878</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 3 others</span></td></tr>
-              <tr><td>Laser</td><td><strong>Erch Laser</strong></td><td><span class="rail-sw t-erchlas"></span></td><td><code>#C040D0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>Laser</td><td><strong>ErcCompEmp</strong></td><td><span class="rail-sw t-erccemp"></span></td><td><code>#F0C8C8</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Laser</td><td><strong>ErcCompPt</strong></td><td><span class="rail-sw t-erccpt"></span></td><td><code>#F0C8C8</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Laser</td><td><strong>ErcCompVIP</strong></td><td><span class="rail-sw t-erccvip"></span></td><td><code>#F5E0C8</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>Laser</td><td><strong>ErcCompRef</strong></td><td><span class="rail-sw t-erccref"></span></td><td><code>#F5E0C8</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>IV</td><td><strong>Cellular Boost</strong></td><td><span class="rail-sw t-cell"></span></td><td><code>#2E3B4E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Chelation</strong></td><td><span class="rail-sw t-chel"></span></td><td><code>#F0983C</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Cognitive Support</strong></td><td><span class="rail-sw t-cog"></span></td><td><code>#E8A83C</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Core Iron Blend</strong></td><td><span class="rail-sw t-iron"></span></td><td><code>#F040D0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Core Restore</strong></td><td><span class="rail-sw t-rest"></span></td><td><code>#A8D4A0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 2 others</span></td></tr>
-              <tr><td>IV</td><td><strong>Detox Prime</strong></td><td><span class="rail-sw t-detox"></span></td><td><code>#A8D4A0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 2 others</span></td></tr>
-              <tr><td>IV</td><td><strong>EBOO Boost</strong></td><td><span class="rail-sw t-ebooiv"></span></td><td><code>#0000FF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>IV</td><td><strong>Essential Aminos</strong></td><td><span class="rail-sw t-amino"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
-              <tr><td>IV</td><td><strong>Foundational Flow 5</strong></td><td><span class="rail-sw t-ff5"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
-              <tr><td>IV</td><td><strong>Foundational Flow 10</strong></td><td><span class="rail-sw t-ff10"></span></td><td><code>#C8F0F0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Foundational Flow 15</strong></td><td><span class="rail-sw t-ff15"></span></td><td><code>#7FE8E8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Foundational Flow 20</strong></td><td><span class="rail-sw t-ff20"></span></td><td><code>#5CC9C6</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Foundational Flow 25</strong></td><td><span class="rail-sw t-ff25"></span></td><td><code>#4DB3B3</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Foundational Flow 50</strong></td><td><span class="rail-sw t-ff50"></span></td><td><code>#3A9999</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mast Cell</strong></td><td><span class="rail-sw t-mast"></span></td><td><code>#FFF200</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">shared with 1 others</span></td></tr>
-              <tr><td>IV</td><td><strong>Mega C 15g</strong></td><td><span class="rail-sw t-mc15"></span></td><td><code>#F5E0C0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mega C 25g</strong></td><td><span class="rail-sw t-mc25"></span></td><td><code>#E8CFA8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mega C 50g</strong></td><td><span class="rail-sw t-mc50"></span></td><td><code>#D9BC94</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mega C 75g</strong></td><td><span class="rail-sw t-mc75"></span></td><td><code>#C9A47C</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mega C 100g</strong></td><td><span class="rail-sw t-mc100"></span></td><td><code>#B08D64</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Migraine</strong></td><td><span class="rail-sw t-migraine"></span></td><td><code>#9B7BC9</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mito Boost</strong></td><td><span class="rail-sw t-mito"></span></td><td><code>#6B3FA0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
-              <tr><td>IV</td><td><strong>Mini Mito Boost</strong></td><td><span class="rail-sw t-minimb"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
-              <tr><td>IV</td><td><strong>Mini Mito Boost - Custom</strong></td><td><span class="rail-sw t-minimbc"></span></td><td><code>#FFFFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-warn">white &mdash; reads by its hairline</span></td></tr>
+              <tr><td>Office Visit</td><td><strong>New patient</strong></td><td><span class="rail-sw t-newpt"></span></td><td><code>#F02CE0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Core Iron Blend</span></td></tr>
+              <tr><td>Office Visit</td><td><strong>New patient FU</strong></td><td><span class="rail-sw t-npfu"></span></td><td><code>#E4D2DE</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Office Visit</td><td><strong>New patient TOC</strong></td><td><span class="rail-sw t-nptoc"></span></td><td><code>#9E5C78</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also POC Review</span></td></tr>
+              <tr><td>Office Visit</td><td><strong>Follow Up</strong></td><td><span class="rail-sw t-fu"></span></td><td><code>#FCFC50</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Mast Cell</span></td></tr>
+              <tr><td>Procedure</td><td><strong>PRP</strong></td><td><span class="rail-sw t-prp"></span></td><td><code>#F0982E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also FPE F/U &middot; Chelation</span></td></tr>
+              <tr><td>Procedure</td><td><strong>TPI</strong></td><td><span class="rail-sw t-tpi"></span></td><td><code>#F5D5AE</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Procedure</td><td><strong>Pellet Males</strong></td><td><span class="rail-sw t-pelm"></span></td><td><code>#7392DA</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Procedure</td><td><strong>Pellet Females</strong></td><td><span class="rail-sw t-pelf"></span></td><td><code>#D2836E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also EBOO</span></td></tr>
+              <tr><td>Procedure</td><td><strong>Prolozone</strong></td><td><span class="rail-sw t-proloz"></span></td><td><code>#66FFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also iGenex &middot; MediFNE</span></td></tr>
+              <tr><td>Procedure</td><td><strong>Microcurrent</strong></td><td><span class="rail-sw t-micro"></span></td><td><code>#C0D2A8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>BioCharger</strong></td><td><span class="rail-sw t-biochg"></span></td><td><code>#E8C24A</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>LymphStar</strong></td><td><span class="rail-sw t-lymph"></span></td><td><code>#3E7A2E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Diagnostics</span></td></tr>
+              <tr><td>Energetics</td><td><strong>SCENAR</strong></td><td><span class="rail-sw t-scenar"></span></td><td><code>#C4472E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>Mini-LymphStar</strong></td><td><span class="rail-sw t-minilym"></span></td><td><code>#8ABA76</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>BioMod Pro</strong></td><td><span class="rail-sw t-biomodp"></span></td><td><code>#DEE6D2</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>BioMod Recharge</strong></td><td><span class="rail-sw t-biomodr"></span></td><td><code>#C0A028</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Cognitive Support</span></td></tr>
+              <tr><td>Energetics</td><td><strong>NMT</strong></td><td><span class="rail-sw t-nmt"></span></td><td><code>#4A86DC</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>MEAD</strong></td><td><span class="rail-sw t-mead"></span></td><td><code>#4E8290</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Quest &middot; Foundational Flow 50</span></td></tr>
+              <tr><td>Energetics</td><td><strong>MEAD ReAssessment</strong></td><td><span class="rail-sw t-meadre"></span></td><td><code>#A8C4CC</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Energetics</td><td><strong>R&amp;R</strong></td><td><span class="rail-sw t-rr"></span></td><td><code>#B0A4D8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Labs</td><td><strong>MDL</strong></td><td><span class="rail-sw t-mdl"></span></td><td><code>#2E1A6E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Labs</td><td><strong>Quest</strong></td><td><span class="rail-sw t-quest"></span></td><td><code>#4E8290</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also MEAD &middot; Foundational Flow 50</span></td></tr>
+              <tr><td>Labs</td><td><strong>G6PD</strong></td><td><span class="rail-sw t-g6pd"></span></td><td><code>#0000F0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Eboo Boost</span></td></tr>
+              <tr><td>Labs</td><td><strong>iGenex</strong></td><td><span class="rail-sw t-igenex"></span></td><td><code>#66FFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Prolozone &middot; MediFNE</span></td></tr>
+              <tr><td>Diagnostics</td><td><strong>Diagnostics</strong></td><td><span class="rail-sw t-diag"></span></td><td><code>#3E7A2E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also LymphStar</span></td></tr>
+              <tr><td>FPE</td><td><strong>FPE - IE</strong></td><td><span class="rail-sw t-fpeie"></span></td><td><code>#F5E4D2</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>FPE</td><td><strong>FPE F/U</strong></td><td><span class="rail-sw t-fpefu"></span></td><td><code>#F0982E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also PRP &middot; Chelation</span></td></tr>
+              <tr><td>Chiro</td><td><strong>DC IN - TX</strong></td><td><span class="rail-sw t-dcintx"></span></td><td><code>#DCB4AC</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Chiro</td><td><strong>DC - TX</strong></td><td><span class="rail-sw t-dctx"></span></td><td><code>#B0AED8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Chiro</td><td><strong>Laser Eval</strong></td><td><span class="rail-sw t-lasereval"></span></td><td><code>#5A4A9E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Migraine</span></td></tr>
+              <tr><td>Chiro</td><td><strong>MediFNE</strong></td><td><span class="rail-sw t-medifne"></span></td><td><code>#66FFFF</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Prolozone &middot; iGenex</span></td></tr>
+              <tr><td>Chiro</td><td><strong>POC Review</strong></td><td><span class="rail-sw t-pocrev"></span></td><td><code>#9E5C78</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also New patient TOC</span></td></tr>
+              <tr><td>EBOO</td><td><strong>EBOO Safe</strong></td><td><span class="rail-sw t-eboosafe"></span></td><td><code>#BA8098</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>EBOO</td><td><strong>EBOO</strong></td><td><span class="rail-sw t-ebootx"></span></td><td><code>#D2836E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Pellet Females</span></td></tr>
+              <tr><td>Laser</td><td><strong>Erch Laser</strong></td><td><span class="rail-sw t-erchlas"></span></td><td><code>#8A2CE0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Laser</td><td><strong>ErcCompEmp</strong></td><td><span class="rail-sw t-erccemp"></span></td><td><code>#D8B0A8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Laser</td><td><strong>ErcCompPt</strong></td><td><span class="rail-sw t-erccpt"></span></td><td><code>#EED8D2</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Laser</td><td><strong>ErcCompVIP</strong></td><td><span class="rail-sw t-erccvip"></span></td><td><code>#F5EAD2</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>Laser</td><td><strong>ErcCompRef</strong></td><td><span class="rail-sw t-erccref"></span></td><td><code>#FAF0DC</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Cellular Boost</strong></td><td><span class="rail-sw t-cell"></span></td><td><code>#2E4450</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Chelation</strong></td><td><span class="rail-sw t-chel"></span></td><td><code>#F0982E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also PRP &middot; FPE F/U</span></td></tr>
+              <tr><td>IV</td><td><strong>Cognitive Support</strong></td><td><span class="rail-sw t-cog"></span></td><td><code>#C0A028</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also BioMod Recharge</span></td></tr>
+              <tr><td>IV</td><td><strong>Core Iron Blend</strong></td><td><span class="rail-sw t-iron"></span></td><td><code>#F02CE0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also New patient</span></td></tr>
+              <tr><td>IV</td><td><strong>Core Restore</strong></td><td><span class="rail-sw t-rest"></span></td><td><code>#DCC0BA</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Detox Prime</strong></td><td><span class="rail-sw t-detox"></span></td><td><code>#B4CCA0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Eboo Boost</strong></td><td><span class="rail-sw t-ebooiv"></span></td><td><code>#0000F0</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also G6PD</span></td></tr>
+              <tr><td>IV</td><td><strong>Essential Aminos</strong></td><td><span class="rail-sw t-amino"></span></td><td><code>#D8DCE8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 5</strong></td><td><span class="rail-sw t-ff5"></span></td><td><code>#C4E8E8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 10</strong></td><td><span class="rail-sw t-ff10"></span></td><td><code>#A8E4E8</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 15</strong></td><td><span class="rail-sw t-ff15"></span></td><td><code>#66F0F0</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 20</strong></td><td><span class="rail-sw t-ff20"></span></td><td><code>#68C4C4</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 25</strong></td><td><span class="rail-sw t-ff25"></span></td><td><code>#5AAAAA</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Foundational Flow 50</strong></td><td><span class="rail-sw t-ff50"></span></td><td><code>#4E8290</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also MEAD &middot; Quest</span></td></tr>
+              <tr><td>IV</td><td><strong>Mast Cell</strong></td><td><span class="rail-sw t-mast"></span></td><td><code>#FCFC50</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Follow Up</span></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 15g</strong></td><td><span class="rail-sw t-mc15"></span></td><td><code>#FAEADC</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 25g</strong></td><td><span class="rail-sw t-mc25"></span></td><td><code>#F5D8B4</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 50g</strong></td><td><span class="rail-sw t-mc50"></span></td><td><code>#EEC088</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 75g</strong></td><td><span class="rail-sw t-mc75"></span></td><td><code>#E8A84E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Mega C 100g</strong></td><td><span class="rail-sw t-mc100"></span></td><td><code>#C87824</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Migraine</strong></td><td><span class="rail-sw t-migraine"></span></td><td><code>#5A4A9E</code></td><td><span class="pill pill-ok">From the clinic</span> <span class="pill pill-muted">also Laser Eval</span></td></tr>
+              <tr><td>IV</td><td><strong>Mito Boost</strong></td><td><span class="rail-sw t-mito"></span></td><td><code>#6E2A4E</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Mini Mito Boost</strong></td><td><span class="rail-sw t-minimb"></span></td><td><code>#B07A96</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
+              <tr><td>IV</td><td><strong>Mini Mito Boost - Custom</strong></td><td><span class="rail-sw t-minimbc"></span></td><td><code>#C49AAE</code></td><td><span class="pill pill-ok">From the clinic</span></td></tr>
               <tr><th colspan="5" style="text-align:left;background:var(--hx-band)">3 &middot; Watermark &mdash; where the patient stands</th></tr>
               <tr><td>Status</td><td><strong>Scheduled</strong></td><td><span class="st-sw st-scheduled"></span></td><td>Calendar</td><td><span class="pill pill-ok">From the clinic</span></td></tr>
               <tr><td>Status</td><td><strong>Confirmed</strong></td><td><span class="st-sw st-confirmed"></span></td><td>Check mark</td><td><span class="pill pill-ok">From the clinic</span></td></tr>
@@ -661,7 +662,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=72"></script>
+<script src="assets/hcos.js?v=73"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {
@@ -693,13 +694,38 @@
   var TC = {
     ty: [['ty-visit','Office Visit','#B7CDB0'],['ty-proc','Procedure','#A9B9E2'],
          ['ty-energ','Energetics','#F9F0D4'],['ty-lab','Labs','#C5C9E8'],
-         ['ty-diag','Diagnostics','#B8CCE4'],['ty-fpe','FPE','#F0C9A0'],
-         ['ty-chiro','Chiro','#BDD7EE'],['ty-eboo','EBOO','#E8B4A8'],
-         ['ty-laser','Laser','#8B1A1A'],['ty-iv','IV','#FFFFFF']],
-    sb: [['t-newpt','New patient','#F23FB8'],['t-fu','Follow Up','#FFF200'],
-         ['t-prp','PRP','#ED9B3D'],['t-mito','Mito Boost','#6B3FA0'],
-         ['t-cell','Cellular Boost','#2E3B4E'],['t-mast','Mast Cell','#FFF200'],
-         ['t-ff25','Foundational Flow 25','#4DB3B3'],['t-mc50','Mega C 50g','#D9BC94']],
+         ['ty-diag','Diagnostics','#B8CCE4'],['ty-fpe','FPE','#F0C9A0'],['ty-chiro','Chiro','#BDD7EE'],
+         ['ty-eboo','EBOO','#E8B4A8'],['ty-laser','Laser','#8B1A1A'],['ty-iv','IV','#FFFFFF']],
+    sb: [['t-newpt','New patient','#F02CE0'],['t-npfu','New patient FU','#E4D2DE'],
+         ['t-nptoc','New patient TOC','#9E5C78'],['t-fu','Follow Up','#FCFC50'],['t-prp','PRP','#F0982E'],
+         ['t-tpi','TPI','#F5D5AE'],['t-pelm','Pellet Males','#7392DA'],
+         ['t-pelf','Pellet Females','#D2836E'],['t-proloz','Prolozone','#66FFFF'],
+         ['t-micro','Microcurrent','#C0D2A8'],['t-biochg','BioCharger','#E8C24A'],
+         ['t-lymph','LymphStar','#3E7A2E'],['t-scenar','SCENAR','#C4472E'],
+         ['t-minilym','Mini-LymphStar','#8ABA76'],['t-biomodp','BioMod Pro','#DEE6D2'],
+         ['t-biomodr','BioMod Recharge','#C0A028'],['t-nmt','NMT','#4A86DC'],['t-mead','MEAD','#4E8290'],
+         ['t-meadre','MEAD ReAssessment','#A8C4CC'],['t-rr','R&amp;R','#B0A4D8'],
+         ['t-mdl','MDL','#2E1A6E'],['t-quest','Quest','#4E8290'],['t-g6pd','G6PD','#0000F0'],
+         ['t-igenex','iGenex','#66FFFF'],['t-diag','Diagnostics','#3E7A2E'],
+         ['t-fpeie','FPE - IE','#F5E4D2'],['t-fpefu','FPE F/U','#F0982E'],
+         ['t-dcintx','DC IN - TX','#DCB4AC'],['t-dctx','DC - TX','#B0AED8'],
+         ['t-lasereval','Laser Eval','#5A4A9E'],['t-medifne','MediFNE','#66FFFF'],
+         ['t-pocrev','POC Review','#9E5C78'],['t-eboosafe','EBOO Safe','#BA8098'],
+         ['t-ebootx','EBOO','#D2836E'],['t-erchlas','Erch Laser','#8A2CE0'],
+         ['t-erccemp','ErcCompEmp','#D8B0A8'],['t-erccpt','ErcCompPt','#EED8D2'],
+         ['t-erccvip','ErcCompVIP','#F5EAD2'],['t-erccref','ErcCompRef','#FAF0DC'],
+         ['t-cell','Cellular Boost','#2E4450'],['t-chel','Chelation','#F0982E'],
+         ['t-cog','Cognitive Support','#C0A028'],['t-iron','Core Iron Blend','#F02CE0'],
+         ['t-rest','Core Restore','#DCC0BA'],['t-detox','Detox Prime','#B4CCA0'],
+         ['t-ebooiv','Eboo Boost','#0000F0'],['t-amino','Essential Aminos','#D8DCE8'],
+         ['t-ff5','Foundational Flow 5','#C4E8E8'],['t-ff10','Foundational Flow 10','#A8E4E8'],
+         ['t-ff15','Foundational Flow 15','#66F0F0'],['t-ff20','Foundational Flow 20','#68C4C4'],
+         ['t-ff25','Foundational Flow 25','#5AAAAA'],['t-ff50','Foundational Flow 50','#4E8290'],
+         ['t-mast','Mast Cell','#FCFC50'],['t-mc15','Mega C 15g','#FAEADC'],
+         ['t-mc25','Mega C 25g','#F5D8B4'],['t-mc50','Mega C 50g','#EEC088'],
+         ['t-mc75','Mega C 75g','#E8A84E'],['t-mc100','Mega C 100g','#C87824'],
+         ['t-migraine','Migraine','#5A4A9E'],['t-mito','Mito Boost','#6E2A4E'],
+         ['t-minimb','Mini Mito Boost','#B07A96'],['t-minimbc','Mini Mito Boost - Custom','#C49AAE']],
     st: [['st-scheduled','Scheduled',''],['st-confirmed','Confirmed',''],
          ['st-arrived','Arrived',''],['st-inchair','In Progress',''],
          ['st-done','Complete',''],['st-locked','Locked',''],
