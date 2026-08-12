@@ -1206,6 +1206,30 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.t-minimbc,   .week-appt.t-minimbc,   .rail-sw.t-minimbc    { --sb: var(--sb-minimbc); }
 .cal-appt.t-block, .week-appt.t-block, .rail-sw.t-block { --sb: var(--sb-none); }
 
+/* ---- STATUS = a watermark over the background. Each symbol
+        exists twice: .34 on the block, .82 on the legend and the
+        drawer banner. ---- */
+.cal-appt.st-scheduled, .week-appt.st-scheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M7 2v3M17 2v3M3 8.5h18' stroke='%23000' stroke-width='2' fill='none'/><rect x='3' y='4.5' width='18' height='16.5' rx='2' stroke='%23000' stroke-width='2' fill='none'/></g></svg>") }
+.st-sw.st-scheduled, .dr-status.st-scheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M7 2v3M17 2v3M3 8.5h18' stroke='%23000' stroke-width='2' fill='none'/><rect x='3' y='4.5' width='18' height='16.5' rx='2' stroke='%23000' stroke-width='2' fill='none'/></g></svg>") }
+.cal-appt.st-confirmed, .week-appt.st-confirmed { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M4 13l5.5 5.5L20.5 5.5' stroke='%23000' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
+.st-sw.st-confirmed, .dr-status.st-confirmed { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M4 13l5.5 5.5L20.5 5.5' stroke='%23000' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
+.cal-appt.st-arrived, .week-appt.st-arrived { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M12 1.5a7.5 7.5 0 00-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0012 1.5z' fill='%23000'/><circle cx='12' cy='9' r='2.8' fill='%23fff'/></g></svg>") }
+.st-sw.st-arrived, .dr-status.st-arrived { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M12 1.5a7.5 7.5 0 00-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0012 1.5z' fill='%23000'/><circle cx='12' cy='9' r='2.8' fill='%23fff'/></g></svg>") }
+.cal-appt.st-inroom, .week-appt.st-inroom { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
+.st-sw.st-inroom, .dr-status.st-inroom { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
+.cal-appt.st-inchair, .week-appt.st-inchair { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
+.st-sw.st-inchair, .dr-status.st-inchair { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
+.cal-appt.st-locked, .week-appt.st-locked { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><rect x='4.5' y='10' width='15' height='11.5' rx='2.2' fill='%23000'/><path d='M8 10V6.8a4 4 0 018 0V10' stroke='%23000' stroke-width='2.4' fill='none'/></g></svg>") }
+.st-sw.st-locked, .dr-status.st-locked { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><rect x='4.5' y='10' width='15' height='11.5' rx='2.2' fill='%23000'/><path d='M8 10V6.8a4 4 0 018 0V10' stroke='%23000' stroke-width='2.4' fill='none'/></g></svg>") }
+.cal-appt.st-done, .week-appt.st-done { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M4.5 2v20' stroke='%23000' stroke-width='2.2'/><path d='M7 3.5h4.2v4.2H7zM11.2 7.7h4.2v4.2h-4.2zM15.4 3.5h4.2v4.2h-4.2zM7 11.9h4.2v4.2H7zM15.4 11.9h4.2v4.2h-4.2z' fill='%23000'/></g></svg>") }
+.st-sw.st-done, .dr-status.st-done { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M4.5 2v20' stroke='%23000' stroke-width='2.2'/><path d='M7 3.5h4.2v4.2H7zM11.2 7.7h4.2v4.2h-4.2zM15.4 3.5h4.2v4.2h-4.2zM7 11.9h4.2v4.2H7zM15.4 11.9h4.2v4.2h-4.2z' fill='%23000'/></g></svg>") }
+.cal-appt.st-rescheduled, .week-appt.st-rescheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M3.2 12a8.8 8.8 0 0114.6-6.6M20.8 12a8.8 8.8 0 01-14.6 6.6' stroke='%23000' stroke-width='2.2' fill='none'/><path d='M18.4 1.6v4.6h-4.6M5.6 22.4v-4.6h4.6' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
+.st-sw.st-rescheduled, .dr-status.st-rescheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M3.2 12a8.8 8.8 0 0114.6-6.6M20.8 12a8.8 8.8 0 01-14.6 6.6' stroke='%23000' stroke-width='2.2' fill='none'/><path d='M18.4 1.6v4.6h-4.6M5.6 22.4v-4.6h4.6' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
+.cal-appt.st-cancelled, .week-appt.st-cancelled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M4.5 4.5l15 15M19.5 4.5l-15 15' stroke='%23000' stroke-width='3.2' stroke-linecap='round'/></g></svg>") }
+.st-sw.st-cancelled, .dr-status.st-cancelled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M4.5 4.5l15 15M19.5 4.5l-15 15' stroke='%23000' stroke-width='3.2' stroke-linecap='round'/></g></svg>") }
+.cal-appt.st-noshow, .week-appt.st-noshow { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M12 1.6A7.6 7.6 0 004.4 9.2v13.2l2.7-2.2 2.5 2 2.4-2 2.4 2 2.5-2 2.7 2.2V9.2A7.6 7.6 0 0012 1.6z' fill='%23000'/><circle cx='9.3' cy='9.4' r='1.5' fill='%23fff'/><circle cx='14.7' cy='9.4' r='1.5' fill='%23fff'/></g></svg>") }
+.st-sw.st-noshow, .dr-status.st-noshow { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M12 1.6A7.6 7.6 0 004.4 9.2v13.2l2.7-2.2 2.5 2 2.4-2 2.4 2 2.5-2 2.7 2.2V9.2A7.6 7.6 0 0012 1.6z' fill='%23000'/><circle cx='9.3' cy='9.4' r='1.5' fill='%23fff'/><circle cx='14.7' cy='9.4' r='1.5' fill='%23fff'/></g></svg>") }
+
 /* the padlock, drawn rather than typed — kept for the pill and the legend */
 .lockmark {
   display:inline-block; position:relative; box-sizing:border-box;
@@ -1714,7 +1738,13 @@ a.lead-chip:hover { border-color: var(--ink); }
 .leg-items > span[class^="ty-"], .leg-items > span[class*=" ty-"] { display: inline-flex; }
 .leg-sub { font-size: 12px; font-weight: 800; letter-spacing: .15px; color: #1A1A1A; }
 .leg-sub-more { font-size: 11px; color: var(--muted); }
-.leg-foot { padding-top: 12px; font-size: 11px; }
+/* the footer was a bare link floating in the middle of a grid track —
+   margin-left:auto does nothing in a grid. It is its own flex row now. */
+.leg-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line-soft);
+  font-size: 11.5px; color: var(--muted);
+}
 @media (max-width: 900px) { .leg-row { grid-template-columns: 1fr; gap: 8px; } }
 
 /* week view — same three channels, half scale, no black bar */
