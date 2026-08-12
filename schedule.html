@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=71">
+<link rel="stylesheet" href="assets/hcos.css?v=72">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -2280,7 +2280,7 @@
             <div class="page-title">Flags</div>
             <div class="page-sub">What a flag means, who it is for, and how loudly it says it</div>
           </div>
-          <div class="app-user"><button class="btn btn-primary" data-row-add>Add a flag type</button></div>
+          <div class="app-user"><button class="btn btn-primary" data-activate="l-08-flags-new">Add a flag type</button></div>
         </div>
 
         <div class="callout">
@@ -2392,6 +2392,153 @@
             <div class="field-help">Anything the front desk needs before the patient walks in.
               Never a clinical signal.</div>
             <div class="prov"><span>2 flag types &middot; owned by Shibani</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-08-flags-new" data-title="Add a flag type">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/flags/new</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Add a flag type</div>
+            <div class="page-sub">A flag is a standing alert on a patient &mdash; define it once, use it everywhere</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="l-08-flags">Cancel</button>
+            <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>A category and a severity are separate things.</strong> The category says who
+          cares about it &mdash; medical, billing, admin. The severity says how loudly it should
+          say so. An admin flag can be urgent and a medical one can be a footnote, so neither is
+          allowed to imply the other.
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div class="card">
+            <div class="card-title">What it means</div>
+
+            <div class="field"><label class="field-lbl" for="fn-name">Name</label>
+              <input class="field-input" id="fn-name" placeholder="Latex sensitivity"
+                     oninput="lFlagPreview()"></div>
+
+            <div class="field"><label class="field-lbl" for="fn-text">Wording on the appointment</label>
+              <input class="field-input" id="fn-text" placeholder="Latex sensitivity — use nitrile gloves"
+                     oninput="lFlagPreview()">
+              <div class="field-help">This is the sentence the desk and the nurse actually read.
+                Write it so it says what to DO, not just what is true.</div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field"><label class="field-lbl" for="fn-cat">Category</label>
+                <select class="field-select" id="fn-cat" onchange="lFlagPreview()">
+                  <option>Medical</option><option>Billing</option><option>Admin</option>
+                  <option value="new">Add a new category&hellip;</option>
+                </select>
+                <div class="field-help">Decides which queues it appears in.</div>
+              </div>
+              <div class="field"><label class="field-lbl" for="fn-sev">Severity</label>
+                <select class="field-select" id="fn-sev" onchange="lFlagPreview()">
+                  <option value="high">High &mdash; rings the block on the calendar</option>
+                  <option value="med" selected>Medium &mdash; icon only</option>
+                  <option value="low">Low &mdash; icon only, greyed</option>
+                </select>
+                <div class="field-help">Only high severity frames the appointment.</div>
+              </div>
+            </div>
+
+            <div class="field">
+              <span class="field-lbl">Symbol</span>
+              <div class="chip-row" id="fn-icons">
+                <button class="filter-chip" type="button" onclick="lFlagIcon('allergyfood',this)" title="Stop sign"><span class="fl sev-med fi-allergyfood"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('allergydrug',this)" title="Capsule"><span class="fl sev-med fi-allergydrug"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('pregnant',this)" title="Pregnancy"><span class="fl sev-med fi-pregnant"></span></button>
+                <button class="filter-chip active" type="button" onclick="lFlagIcon('urgent',this)" title="Warning triangle"><span class="fl sev-med fi-urgent"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('deficiency',this)" title="Droplet"><span class="fl sev-med fi-deficiency"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('authexpiry',this)" title="Clock"><span class="fl sev-med fi-authexpiry"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('balance',this)" title="Banknote"><span class="fl sev-med fi-balance"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('interpreter',this)" title="Speech bubbles"><span class="fl sev-med fi-interpreter"></span></button>
+                <button class="filter-chip" type="button" onclick="lFlagIcon('forms',this)" title="Document"><span class="fl sev-med fi-forms"></span></button>
+              </div>
+              <div class="field-help">Nine drawn symbols, no emoji &mdash; an emoji brings its own
+                colours and looks different on every operating system.</div>
+            </div>
+
+            <div class="seg-divider">Who may set it</div>
+            <div class="chip-row">
+              <button class="filter-chip multi active" type="button">Provider</button>
+              <button class="filter-chip multi active" type="button">Extender</button>
+              <button class="filter-chip multi" type="button">MA</button>
+              <button class="filter-chip multi" type="button">Nurse</button>
+              <button class="filter-chip multi" type="button">Front desk</button>
+              <button class="filter-chip multi" type="button">Billing</button>
+              <button class="filter-chip multi" type="button">PCC</button>
+            </div>
+
+            <div class="seg-divider">Where it shows</div>
+            <div class="chip-row">
+              <button class="filter-chip multi active" type="button">Calendar</button>
+              <button class="filter-chip multi active" type="button">Appointment detail</button>
+              <button class="filter-chip multi active" type="button">Check-in</button>
+              <button class="filter-chip multi" type="button">Chart</button>
+              <button class="filter-chip multi" type="button">Infusion bay</button>
+              <button class="filter-chip multi" type="button">Orders</button>
+              <button class="filter-chip multi" type="button">The claim</button>
+            </div>
+
+            <div class="seg-divider">When it stops applying</div>
+            <div class="field"><label class="field-lbl" for="fn-life">Lifetime</label>
+              <select class="field-select" id="fn-life">
+                <option>Stays until somebody removes it</option>
+                <option>Expires on a date &mdash; set per patient</option>
+                <option>Expires after one visit</option>
+                <option>Follows a condition &mdash; clears when the condition resolves</option>
+              </select>
+              <div class="field-help">A pregnancy flag should expire; a documented allergy should not.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">How it will look</div>
+            <div class="cal-appt ty-visit t-fu st-confirmed leg-spec" id="fn-block" style="margin-bottom:18px">
+              <span class="fl-row"><span class="fl sev-med fi-urgent" id="fn-chip"></span></span>
+              <span class="cal-appt-sub">Follow Up</span>
+              <span class="cal-appt-time">11:00 AM</span>
+              <span class="cal-appt-name">Elena Petrova</span>
+            </div>
+
+            <div class="dr-flags" id="fn-drawer">
+              <div class="dr-flags-t" id="fn-drawer-t">Flags on this patient</div>
+              <div class="fl-line">
+                <span class="fl sev-med fi-urgent" id="fn-chip2"></span>
+                <span style="flex:1"><b id="fn-line">Your wording appears here</b>
+                  <span class="fl-cat" id="fn-cat-chip">Medical</span>
+                  <span class="fl-cat" id="fn-sev-chip">medium severity</span></span>
+              </div>
+            </div>
+
+            <div class="seg-divider">Before it goes live</div>
+            <div class="g-ev"><div class="g-ev-when">1</div>
+              <div class="g-ev-what"><strong>Draft</strong> &mdash; you are here</div>
+              <div class="g-ev-ver"><span class="appr draft">Draft</span></div></div>
+            <div class="g-ev"><div class="g-ev-when">2</div>
+              <div class="g-ev-what"><strong>Clinical sign-off</strong> &mdash; a Medical flag needs Dr. Drannikov</div>
+              <div class="g-ev-ver"><span class="appr pending">Pending</span></div></div>
+            <div class="g-ev"><div class="g-ev-when">3</div>
+              <div class="g-ev-what"><strong>Live</strong> &mdash; available on every patient</div>
+              <div class="g-ev-ver"><span class="appr pending">Pending</span></div></div>
+
+            <div class="prov"><span>A flag type is defined once and read by the calendar, the
+              appointment detail, the hover card, the list view and check-in. There is no
+              per-screen copy to keep in step.</span></div>
           </div>
         </div>
       </div>
@@ -3767,7 +3914,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=71"></script>
+<script src="assets/hcos.js?v=72"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -5020,6 +5167,48 @@
 
 
 
+
+
+  /* ---------- defining a new flag type ---------- */
+  var FN_ICON = 'urgent';
+  function lFlagIcon(k, btn) {
+    FN_ICON = k;
+    document.querySelectorAll('#fn-icons .filter-chip').forEach(function (c) { c.classList.remove('active'); });
+    btn.classList.add('active');
+    lFlagPreview();
+  }
+  function lFlagPreview() {
+    var name = (document.getElementById('fn-name') || {}).value || '';
+    var text = (document.getElementById('fn-text') || {}).value || '';
+    var cat = (document.getElementById('fn-cat') || {}).value || 'Medical';
+    var sev = (document.getElementById('fn-sev') || {}).value || 'med';
+    ['fn-chip', 'fn-chip2'].forEach(function (id) {
+      var n = document.getElementById(id);
+      if (n) n.className = 'fl sev-' + sev + ' fi-' + FN_ICON;
+    });
+    var line = document.getElementById('fn-line');
+    if (line) line.textContent = text || name || 'Your wording appears here';
+    var cc = document.getElementById('fn-cat-chip'); if (cc) cc.textContent = cat === 'new' ? 'New category' : cat;
+    var sc = document.getElementById('fn-sev-chip'); if (sc) sc.textContent = sev + ' severity';
+    /* only high severity frames the block, and the drawer says so */
+    var blk = document.getElementById('fn-block');
+    if (blk) blk.classList.toggle('has-high', sev === 'high');
+    var dw = document.getElementById('fn-drawer');
+    if (dw) dw.classList.toggle('is-loud', sev === 'high');
+    var dt = document.getElementById('fn-drawer-t');
+    if (dt) dt.textContent = sev === 'high' ? 'Alerts on this patient' : 'Flags on this patient';
+  }
+  function lFlagNew() {
+    var name = (document.getElementById('fn-name') || {}).value.trim();
+    var text = (document.getElementById('fn-text') || {}).value.trim();
+    if (!name) { HCOS.toast('The flag needs a name before it can be created.', 'warn'); return; }
+    if (!text) { HCOS.toast('Write the wording the desk will read — a flag with no sentence says nothing.', 'warn'); return; }
+    var cat = (document.getElementById('fn-cat') || {}).value;
+    HCOS.toast('"' + name + '" created as a draft.' +
+      (cat === 'Medical' ? ' A medical flag waits on Dr. Drannikov before it goes live.' : ''), 'ok');
+    HCOS.activate('l-08-flags');
+  }
+  window.lFlagIcon = lFlagIcon; window.lFlagPreview = lFlagPreview; window.lFlagNew = lFlagNew;
 
   /* ---------- capacity, filtered by type and by treatment ---------- */
   function lCapFilter(el) {

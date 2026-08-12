@@ -174,7 +174,10 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   because an admin flag can be urgent and a medical one can be a footnote. Only high severity
   rings the block. Definitions live on `schedule.html#/l-08-flags` and are edited there; the
   dictionary is `L_FLAGS` in schedule.html, read by the block, the hover card, the appointment
-  detail and the list view.
+  detail and the list view. **Adding a flag type has its own screen** (`l-08-flags-new`), with a
+  live preview of the block and the drawer as you type — the severity is visibly what decides
+  whether the appointment gets framed, so the choice is not abstract. A flag also gets a
+  **lifetime**: a pregnancy flag should expire, a documented allergy should not.
 - **The day board follows a REAL Helixona day (Carlos, 2026-08-11, from three of Dr.
   Drannikov's actual eCW days).** Patients are always synthetic — the real names never enter
   this repo — but the SHAPE is copied, and my earlier board had it badly wrong:
