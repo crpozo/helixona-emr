@@ -102,47 +102,30 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   Two of my three channels were the wrong way round. The side bar was already the subtype and
   stays; the background moved from status to TYPE, and status became a faint symbol watermarked
   over the block.
-  - **TYPE owns the background** (`--tybg-*`, class `ty-*`): Office visit `#B7CDB0`,
-    Procedure `#A9B9E2`, Energetics `#F9F0D4`, IV `#FBF4E2`. The clinic left seven blank and
-    **asked us to invent them (Carlos, 2026-08-11)**, so they are ours and marked as ours in the
-    token comments: Labs `#C3CEDE` pale slate — the vial, quiet and clinical · Diagnostics
-    `#EEC2DE` mauve — the catch-all, deliberately far from everything · FPE `#8FCDBB` deep
-    green-teal — it is a visit, the most thorough one · 6 month FPE `#CFF2E9`, the same hue
-    lighter, so the pair reads as a pair · Chiro `#ECD1B6` warm clay — hands-on · EBOO
-    `#E0B0B4` blood rose — it is THE blood circuit · Laser `#D3AEE4` violet — the Erchonia
-    diode's own colour. Chosen by search, not by eye: all eleven backgrounds are ≥34 apart in
-    RGB and every one clears 9:1 against the block's near-black text. (The clinic's own worst
-    pair, Energetics against IV, is 15 apart — that one is theirs to resolve.)
-  - **SUBTYPE owns the side bar** (`--sb-*`, class `t-*`), a 13px solid band. The texture that
-    used to live there was carrying TYPE, and TYPE is the background now, so a texture would
-    say the same thing twice. Eight subtypes (BioMod Recharge, NMT, MEAD, MEAD ReAssessment,
-    MDL, Quest, G6PD, iGenix) have **no clinic colour yet** and render grey, marked in the
-    legend and on the codes screen.
-  - **STATUS owns a watermark** (`--wm`), a faint symbol over the background at 17%: calendar
-    (Scheduled) · check (Confirmed) · pin (Arrived) · play (In progress) · finish flag (Ready
-    to check out / Complete) · padlock (Locked) · circular arrows (Rescheduled) · X (Cancelled)
-    · little ghost (No-show). **"Ready to check out" was retired (Carlos, 2026-08-11)** — the
-    finish flag belongs to Complete, and the clinic's own status list never had it. The
-    watermark sits at **34%**, not the 17% I first used: over these type backgrounds 17%
-    disappeared. It sits **bottom-right** (Carlos, 2026-08-11), lifting 12px on the two
-    statuses that carry the black bar so the bar cannot slice it in half; the medic's name
-    moved to bottom-LEFT, because that corner is the watermark's now. **Drawn as inline SVG, never emoji** — an emoji renders in its own
-    colours on top of a palette the clinic chose, and differently on every operating system.
-    Each symbol exists **twice**: `.17` on the block, `.82` on the legend and the drawer banner.
-    A 34px specimen of a 17% mark is invisible, and the legend is teaching the symbol, not
-    imitating how faint it looks in place. (A `filter: contrast()` on the faint one does not
-    work — over a 95%-light background it pushes symbol and ground alike to white.)
-  - **Legend specimens own their own paint.** `.leg-fam i` sets layout only. It used to paint the
-    swatch as well, and at (0,1,1) it outranked `.ty-sw` and `.st-sw` at (0,1,0), so every type
-    and status specimen came out the subtype's grey.
-- **The taxonomy is the clinic's: ELEVEN types, not five.** Office visit · Procedure ·
-  Energetics · Labs · IV · Diagnostics · FPE · 6 month FPE · Chiro · EBOO · Laser. EBOO, Chiro
-  and Laser were subtypes in my version and are TYPES here. "Treatment" is retired.
-  Subtypes: Office visit (New patient · New patient FU · New patient TOC · Follow Up) ·
-  Procedure (PRP · TPI · Pellet Males · Pellet Females · Prolozone · Microcurrent) ·
-  Energetics (BioCharger · LymphStar · SCENAR · Mini-LymphStar · BioMod Pro · BioMod Recharge ·
-  NMT · MEAD · MEAD ReAssessment) · Labs (MDL · Quest · G6PD · iGenix) · IV (the 23 eCW recipes,
-  which keep their own colours on the same side-bar channel).
+  - **TYPE owns the background** (`--tybg-*`, class `ty-*`): Office Visit `#B7CDB0` · Procedure
+    `#A9B9E2` · Energetics `#F9F0D4` · Labs `#C5C9E8` · Diagnostics `#B8CCE4` · FPE `#F0C9A0` ·
+    Chiro `#BDD7EE` · EBOO `#E8B4A8` · **Laser `#8B1A1A`** · IV white. All ten come from the
+    clinic; the seven I once invented are gone.
+  - **Laser's background is dark maroon at 1.9:1**, so every piece of text on a Laser block
+    switches to white. It is the only type that needs it, and the rule is generated, not typed.
+  - **SUBTYPE owns the side bar** (`--sb-*`, class `t-*`), 63 of them. **Seven are WHITE** —
+    BioMod Pro, Quest, iGenex, Essential Aminos, Foundational Flow 5, Mini Mito Boost and its
+    Custom — which on a white or cream block would be invisible, so every side bar carries a
+    hairline and a white one still reads as a bar.
+  - **Eleven groups of subtypes share a colour in the sheet itself** — NMT, MEAD, MEAD
+    ReAssessment, R&R, MDL and Laser Eval. are all `#8FA8DC`; Pellet Females, POC Review, EBOO
+    Safe and EBOO are all `#D98878`. That is recorded as-is. It is the clinic's decision, not
+    ours to quietly fix, and the codes screen marks each one "shared with N others" so it is
+    visible rather than hidden.
+  - **The whole code is generated from one source** (`code2.py` in the session scratchpad):
+    tokens, class rules, the three legends, both filter lists and the codes screen. After five
+    revisions of this palette, hand-editing five places was the thing that kept going wrong.
+- **The taxonomy is the clinic's: TEN types and 63 subtypes.** Office Visit · Procedure ·
+  Energetics · Labs · Diagnostics · FPE · Chiro · EBOO · Laser · IV. EBOO, Chiro and Laser are
+  TYPES, not subtypes. Names follow the sheet exactly, including **iGenex** (not iGenix) and
+  **Essential Aminos** (not Essential Amino), and the sheet's own additions: R&R, FPE - IE,
+  FPE F/U, DC IN - TX, DC - TX, Laser Eval., MediFNE, POC Review, EBOO Safe, Erch Laser and the
+  four ErcComp variants, Chelation, Migraine, Mini Mito Boost and Mini Mito Boost - Custom.
 - **Long recipe names step down in size until they fit** (`.fit-1/2/3`, applied by measurement
   in `lFitSubs`). "Foundational Flo…" is a failure: the number is the whole point of the name.
   The measurement runs off a `ResizeObserver` on the grid **and** `document.fonts.ready` — Inter

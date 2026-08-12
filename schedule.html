@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=66">
+<link rel="stylesheet" href="assets/hcos.css?v=67">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -94,17 +94,16 @@
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search types&hellip;" aria-label="Search types&hellip;">
                     <div class="msel-opts">
-                      <label class="msel-opt" data-ty="ty-visit"><input type="checkbox" aria-label="Office visit"><i class="ty-sw ty-visit"></i>Office visit</label>
+                      <label class="msel-opt" data-ty="ty-visit"><input type="checkbox" aria-label="Office Visit"><i class="ty-sw ty-visit"></i>Office Visit</label>
                       <label class="msel-opt" data-ty="ty-proc"><input type="checkbox" aria-label="Procedure"><i class="ty-sw ty-proc"></i>Procedure</label>
                       <label class="msel-opt" data-ty="ty-energ"><input type="checkbox" aria-label="Energetics"><i class="ty-sw ty-energ"></i>Energetics</label>
-                      <label class="msel-opt" data-ty="ty-iv"><input type="checkbox" aria-label="IV"><i class="ty-sw ty-iv"></i>IV</label>
                       <label class="msel-opt" data-ty="ty-lab"><input type="checkbox" aria-label="Labs"><i class="ty-sw ty-lab"></i>Labs</label>
                       <label class="msel-opt" data-ty="ty-diag"><input type="checkbox" aria-label="Diagnostics"><i class="ty-sw ty-diag"></i>Diagnostics</label>
                       <label class="msel-opt" data-ty="ty-fpe"><input type="checkbox" aria-label="FPE"><i class="ty-sw ty-fpe"></i>FPE</label>
-                      <label class="msel-opt" data-ty="ty-fpe6"><input type="checkbox" aria-label="6 month FPE"><i class="ty-sw ty-fpe6"></i>6 month FPE</label>
                       <label class="msel-opt" data-ty="ty-chiro"><input type="checkbox" aria-label="Chiro"><i class="ty-sw ty-chiro"></i>Chiro</label>
                       <label class="msel-opt" data-ty="ty-eboo"><input type="checkbox" aria-label="EBOO"><i class="ty-sw ty-eboo"></i>EBOO</label>
                       <label class="msel-opt" data-ty="ty-laser"><input type="checkbox" aria-label="Laser"><i class="ty-sw ty-laser"></i>Laser</label>
+                      <label class="msel-opt" data-ty="ty-iv"><input type="checkbox" aria-label="IV"><i class="ty-sw ty-iv"></i>IV</label>
                     </div>
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
                   </div>
@@ -116,7 +115,7 @@
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search subtypes&hellip;" aria-label="Search subtypes&hellip;">
                     <div class="msel-opts">
-                      <div class="msel-group" data-ty-of="ty-visit">Office visit</div>
+                      <div class="msel-group" data-ty-of="ty-visit">Office Visit</div>
                       <label class="msel-opt" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient"><i class="rail-sw t-newpt"></i>New patient</label>
                       <label class="msel-opt" data-sub="t-npfu" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient FU"><i class="rail-sw t-npfu"></i>New patient FU</label>
                       <label class="msel-opt" data-sub="t-nptoc" data-ty-of="ty-visit"><input type="checkbox" aria-label="New patient TOC"><i class="rail-sw t-nptoc"></i>New patient TOC</label>
@@ -138,35 +137,57 @@
                       <label class="msel-opt" data-sub="t-nmt" data-ty-of="ty-energ"><input type="checkbox" aria-label="NMT"><i class="rail-sw t-nmt"></i>NMT</label>
                       <label class="msel-opt" data-sub="t-mead" data-ty-of="ty-energ"><input type="checkbox" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
                       <label class="msel-opt" data-sub="t-meadre" data-ty-of="ty-energ"><input type="checkbox" aria-label="MEAD ReAssessment"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</label>
+                      <label class="msel-opt" data-sub="t-rr" data-ty-of="ty-energ"><input type="checkbox" aria-label="RandR"><i class="rail-sw t-rr"></i>R&amp;R</label>
                       <div class="msel-group" data-ty-of="ty-lab">Labs</div>
                       <label class="msel-opt" data-sub="t-mdl" data-ty-of="ty-lab"><input type="checkbox" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
                       <label class="msel-opt" data-sub="t-quest" data-ty-of="ty-lab"><input type="checkbox" aria-label="Quest"><i class="rail-sw t-quest"></i>Quest</label>
                       <label class="msel-opt" data-sub="t-g6pd" data-ty-of="ty-lab"><input type="checkbox" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
-                      <label class="msel-opt" data-sub="t-igenix" data-ty-of="ty-lab"><input type="checkbox" aria-label="iGenix"><i class="rail-sw t-igenix"></i>iGenix</label>
-                      <div class="msel-group" data-ty-of="ty-iv">IV &mdash; the clinic menu</div>
+                      <label class="msel-opt" data-sub="t-igenex" data-ty-of="ty-lab"><input type="checkbox" aria-label="iGenex"><i class="rail-sw t-igenex"></i>iGenex</label>
+                      <div class="msel-group" data-ty-of="ty-diag">Diagnostics</div>
+                      <label class="msel-opt" data-sub="t-diag" data-ty-of="ty-diag"><input type="checkbox" aria-label="Diagnostics"><i class="rail-sw t-diag"></i>Diagnostics</label>
+                      <div class="msel-group" data-ty-of="ty-fpe">FPE</div>
+                      <label class="msel-opt" data-sub="t-fpeie" data-ty-of="ty-fpe"><input type="checkbox" aria-label="FPE - IE"><i class="rail-sw t-fpeie"></i>FPE - IE</label>
+                      <label class="msel-opt" data-sub="t-fpefu" data-ty-of="ty-fpe"><input type="checkbox" aria-label="FPE F/U"><i class="rail-sw t-fpefu"></i>FPE F/U</label>
+                      <div class="msel-group" data-ty-of="ty-chiro">Chiro</div>
+                      <label class="msel-opt" data-sub="t-dcintx" data-ty-of="ty-chiro"><input type="checkbox" aria-label="DC IN - TX"><i class="rail-sw t-dcintx"></i>DC IN - TX</label>
+                      <label class="msel-opt" data-sub="t-dctx" data-ty-of="ty-chiro"><input type="checkbox" aria-label="DC - TX"><i class="rail-sw t-dctx"></i>DC - TX</label>
+                      <label class="msel-opt" data-sub="t-lasereval" data-ty-of="ty-chiro"><input type="checkbox" aria-label="Laser Eval."><i class="rail-sw t-lasereval"></i>Laser Eval.</label>
+                      <label class="msel-opt" data-sub="t-medifne" data-ty-of="ty-chiro"><input type="checkbox" aria-label="MediFNE"><i class="rail-sw t-medifne"></i>MediFNE</label>
+                      <label class="msel-opt" data-sub="t-pocrev" data-ty-of="ty-chiro"><input type="checkbox" aria-label="POC Review"><i class="rail-sw t-pocrev"></i>POC Review</label>
+                      <div class="msel-group" data-ty-of="ty-eboo">EBOO</div>
+                      <label class="msel-opt" data-sub="t-eboosafe" data-ty-of="ty-eboo"><input type="checkbox" aria-label="EBOO Safe"><i class="rail-sw t-eboosafe"></i>EBOO Safe</label>
+                      <label class="msel-opt" data-sub="t-ebootx" data-ty-of="ty-eboo"><input type="checkbox" aria-label="EBOO"><i class="rail-sw t-ebootx"></i>EBOO</label>
+                      <div class="msel-group" data-ty-of="ty-laser">Laser</div>
+                      <label class="msel-opt" data-sub="t-erchlas" data-ty-of="ty-laser"><input type="checkbox" aria-label="Erch Laser"><i class="rail-sw t-erchlas"></i>Erch Laser</label>
+                      <label class="msel-opt" data-sub="t-erccemp" data-ty-of="ty-laser"><input type="checkbox" aria-label="ErcCompEmp"><i class="rail-sw t-erccemp"></i>ErcCompEmp</label>
+                      <label class="msel-opt" data-sub="t-erccpt" data-ty-of="ty-laser"><input type="checkbox" aria-label="ErcCompPt"><i class="rail-sw t-erccpt"></i>ErcCompPt</label>
+                      <label class="msel-opt" data-sub="t-erccvip" data-ty-of="ty-laser"><input type="checkbox" aria-label="ErcCompVIP"><i class="rail-sw t-erccvip"></i>ErcCompVIP</label>
+                      <label class="msel-opt" data-sub="t-erccref" data-ty-of="ty-laser"><input type="checkbox" aria-label="ErcCompRef"><i class="rail-sw t-erccref"></i>ErcCompRef</label>
+                      <div class="msel-group" data-ty-of="ty-iv">IV</div>
+                      <label class="msel-opt" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cellular Boost"><i class="rail-sw t-cell"></i>Cellular Boost</label>
+                      <label class="msel-opt" data-sub="t-chel" data-ty-of="ty-iv"><input type="checkbox" aria-label="Chelation"><i class="rail-sw t-chel"></i>Chelation</label>
+                      <label class="msel-opt" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cognitive Support"><i class="rail-sw t-cog"></i>Cognitive Support</label>
+                      <label class="msel-opt" data-sub="t-iron" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Iron Blend"><i class="rail-sw t-iron"></i>Core Iron Blend</label>
+                      <label class="msel-opt" data-sub="t-rest" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Restore"><i class="rail-sw t-rest"></i>Core Restore</label>
+                      <label class="msel-opt" data-sub="t-detox" data-ty-of="ty-iv"><input type="checkbox" aria-label="Detox Prime"><i class="rail-sw t-detox"></i>Detox Prime</label>
+                      <label class="msel-opt" data-sub="t-ebooiv" data-ty-of="ty-iv"><input type="checkbox" aria-label="EBOO Boost"><i class="rail-sw t-ebooiv"></i>EBOO Boost</label>
+                      <label class="msel-opt" data-sub="t-amino" data-ty-of="ty-iv"><input type="checkbox" aria-label="Essential Aminos"><i class="rail-sw t-amino"></i>Essential Aminos</label>
                       <label class="msel-opt" data-sub="t-ff5" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 5"><i class="rail-sw t-ff5"></i>Foundational Flow 5</label>
                       <label class="msel-opt" data-sub="t-ff10" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 10"><i class="rail-sw t-ff10"></i>Foundational Flow 10</label>
                       <label class="msel-opt" data-sub="t-ff15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 15"><i class="rail-sw t-ff15"></i>Foundational Flow 15</label>
                       <label class="msel-opt" data-sub="t-ff20" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 20"><i class="rail-sw t-ff20"></i>Foundational Flow 20</label>
                       <label class="msel-opt" data-sub="t-ff25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 25"><i class="rail-sw t-ff25"></i>Foundational Flow 25</label>
                       <label class="msel-opt" data-sub="t-ff50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Foundational Flow 50"><i class="rail-sw t-ff50"></i>Foundational Flow 50</label>
-                      <label class="msel-opt" data-sub="t-mc15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 15"><i class="rail-sw t-mc15"></i>Mega C 15</label>
-                      <label class="msel-opt" data-sub="t-mc25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 25"><i class="rail-sw t-mc25"></i>Mega C 25</label>
-                      <label class="msel-opt" data-sub="t-mc50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 50"><i class="rail-sw t-mc50"></i>Mega C 50</label>
-                      <label class="msel-opt" data-sub="t-mc75" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 75"><i class="rail-sw t-mc75"></i>Mega C 75</label>
-                      <label class="msel-opt" data-sub="t-mc100" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 100"><i class="rail-sw t-mc100"></i>Mega C 100</label>
-                      <label class="msel-opt" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cellular Boost"><i class="rail-sw t-cell"></i>Cellular Boost</label>
                       <label class="msel-opt" data-sub="t-mast" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mast Cell"><i class="rail-sw t-mast"></i>Mast Cell</label>
-                      <label class="msel-opt" data-sub="t-mastb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mast Cell - Benadryl"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</label>
-                      <label class="msel-opt" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" aria-label="Cognitive Support"><i class="rail-sw t-cog"></i>Cognitive Support</label>
-                      <label class="msel-opt" data-sub="t-iron" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Iron Blend"><i class="rail-sw t-iron"></i>Core Iron Blend</label>
-                      <label class="msel-opt" data-sub="t-rest" data-ty-of="ty-iv"><input type="checkbox" aria-label="Core Restore"><i class="rail-sw t-rest"></i>Core Restore</label>
-                      <label class="msel-opt" data-sub="t-detox" data-ty-of="ty-iv"><input type="checkbox" aria-label="Detox Prime"><i class="rail-sw t-detox"></i>Detox Prime</label>
-                      <label class="msel-opt" data-sub="t-amino" data-ty-of="ty-iv"><input type="checkbox" aria-label="Essential Amino"><i class="rail-sw t-amino"></i>Essential Amino</label>
-                      <label class="msel-opt" data-sub="t-minic" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Cust"><i class="rail-sw t-minic"></i>Mini Cust</label>
-                      <label class="msel-opt" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini MB"><i class="rail-sw t-minimb"></i>Mini MB</label>
+                      <label class="msel-opt" data-sub="t-mc15" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 15g"><i class="rail-sw t-mc15"></i>Mega C 15g</label>
+                      <label class="msel-opt" data-sub="t-mc25" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 25g"><i class="rail-sw t-mc25"></i>Mega C 25g</label>
+                      <label class="msel-opt" data-sub="t-mc50" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 50g"><i class="rail-sw t-mc50"></i>Mega C 50g</label>
+                      <label class="msel-opt" data-sub="t-mc75" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 75g"><i class="rail-sw t-mc75"></i>Mega C 75g</label>
+                      <label class="msel-opt" data-sub="t-mc100" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mega C 100g"><i class="rail-sw t-mc100"></i>Mega C 100g</label>
+                      <label class="msel-opt" data-sub="t-migraine" data-ty-of="ty-iv"><input type="checkbox" aria-label="Migraine"><i class="rail-sw t-migraine"></i>Migraine</label>
                       <label class="msel-opt" data-sub="t-mito" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mito Boost"><i class="rail-sw t-mito"></i>Mito Boost</label>
-                      <label class="msel-opt" data-sub="t-ebooiv" data-ty-of="ty-iv"><input type="checkbox" aria-label="EBOO Boost IV"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</label>
+                      <label class="msel-opt" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Mito Boost"><i class="rail-sw t-minimb"></i>Mini Mito Boost</label>
+                      <label class="msel-opt" data-sub="t-minimbc" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Mito Boost - Custom"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</label>
                     </div>
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
                   </div>
@@ -633,15 +654,15 @@
                 <span class="cal-appt-type">Medicare Part B</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-inchair t-mc15 ty-iv" style="top:480px;height:50px" data-appt="A-88357" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mc15" data-days="1,2,3,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00 AM" data-tx="Mega C 15">
-                <span class="cal-appt-sub">Mega C 15</span>
+              <div class="cal-appt st-inchair t-mc15 ty-iv" style="top:480px;height:50px" data-appt="A-88357" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-mc15" data-days="1,2,3,4,5" data-pt="Elena Petrova" data-ins="Blue Shield of CA · OON" data-phone="(714) 555-0231" data-stage="Lead actor 1" data-pay="$1,240 deductible left" data-when="11:00 AM" data-tx="Mega C 15g">
+                <span class="cal-appt-sub">Mega C 15g</span>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <div class="cal-appt-time">11:00 AM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-arrived t-mc25 ty-iv" style="top:528px;height:50px" data-appt="A-88358" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-mc25" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:30 AM" data-tx="Mega C 25">
-                <span class="cal-appt-sub">Mega C 25</span>
+              <div class="cal-appt st-arrived t-mc25 ty-iv" style="top:528px;height:50px" data-appt="A-88358" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-mc25" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="11:30 AM" data-tx="Mega C 25g">
+                <span class="cal-appt-sub">Mega C 25g</span>
                 <div class="cal-appt-name">Nadia Boulos</div>
                 <div class="cal-appt-time">11:30 AM</div>
                 <span class="cal-appt-type">Cigna</span>
@@ -652,22 +673,22 @@
                 <div class="cal-appt-name">Lunch</div>
                 <div class="cal-appt-time">12:00 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-mc50 ty-iv" style="top:624px;height:50px" data-appt="A-88360" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc50" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30 PM" data-tx="Mega C 50">
-                <span class="cal-appt-sub">Mega C 50</span>
+              <div class="cal-appt st-confirmed t-mc50 ty-iv" style="top:624px;height:50px" data-appt="A-88360" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc50" data-days="1,2,4,5" data-pt="Marcus Webb" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0142" data-stage="Stabilization" data-pay="$40 copay" data-when="12:30 PM" data-tx="Mega C 50g">
+                <span class="cal-appt-sub">Mega C 50g</span>
                 <div class="cal-appt-name">Marcus Webb</div>
                 <div class="cal-appt-time">12:30 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-mc75 ty-iv" style="top:672px;height:50px" data-appt="A-88361" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc75" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Mega C 75">
-                <span class="cal-appt-sub">Mega C 75</span>
+              <div class="cal-appt st-confirmed t-mc75 ty-iv" style="top:672px;height:50px" data-appt="A-88361" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc75" data-days="2" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="1:00 PM" data-tx="Mega C 75g">
+                <span class="cal-appt-sub">Mega C 75g</span>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-time">1:00 PM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-confirmed t-mc100 ty-iv" style="top:720px;height:50px" data-appt="A-88362" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc100" data-days="2,3" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="1:30 PM" data-tx="Mega C 100">
-                <span class="cal-appt-sub">Mega C 100</span>
+              <div class="cal-appt st-confirmed t-mc100 ty-iv" style="top:720px;height:50px" data-appt="A-88362" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc100" data-days="2,3" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="1:30 PM" data-tx="Mega C 100g">
+                <span class="cal-appt-sub">Mega C 100g</span>
                 <div class="cal-appt-name">Owen Delacroix</div>
                 <div class="cal-appt-time">1:30 PM</div>
                 <span class="cal-appt-type">Self-pay</span>
@@ -689,8 +710,8 @@
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-scheduled t-mastb ty-iv" style="top:864px;height:50px" data-appt="A-88365" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mastb" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Mast Cell · Benadryl only">
-                <span class="cal-appt-sub">Mast Cell · Benadryl only</span>
+              <div class="cal-appt st-scheduled t-mast ty-iv" style="top:864px;height:50px" data-appt="A-88365" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mast" data-days="1,2,3" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="3:00 PM" data-tx="Mast Cell">
+                <span class="cal-appt-sub">Mast Cell</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-time">3:00 PM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
@@ -729,22 +750,22 @@
                 <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-noshow t-amino ty-iv" style="top:336px;height:50px" data-appt="A-88370" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-amino" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="9:30 AM" data-tx="Essential Amino">
-                <span class="cal-appt-sub">Essential Amino</span>
+              <div class="cal-appt st-noshow t-amino ty-iv" style="top:336px;height:50px" data-appt="A-88370" data-open-drawer="#l-appt-drawer" data-st="No-show" data-sub="t-amino" data-days="2" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="9:30 AM" data-tx="Essential Aminos">
+                <span class="cal-appt-sub">Essential Aminos</span>
                 <div class="cal-appt-name">Victor Reyes</div>
                 <div class="cal-appt-time">9:30 AM</div>
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-done t-minic ty-iv" style="top:384px;height:50px" data-appt="A-88371" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minic" data-days="2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="10:00 AM" data-tx="Mini Cust">
-                <span class="cal-appt-sub">Mini Cust</span>
+              <div class="cal-appt st-done t-minimb ty-iv" style="top:384px;height:50px" data-appt="A-88371" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minimb" data-days="2,3" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="10:00 AM" data-tx="Mini Mito Boost">
+                <span class="cal-appt-sub">Mini Mito Boost</span>
                 <div class="cal-appt-name">Liam Fitzgerald</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-done t-minimb ty-iv" style="top:432px;height:50px" data-appt="A-88372" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minimb" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="10:30 AM" data-tx="Mini MB">
-                <span class="cal-appt-sub">Mini MB</span>
+              <div class="cal-appt st-done t-minimb ty-iv" style="top:432px;height:50px" data-appt="A-88372" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-minimb" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="10:30 AM" data-tx="Mini Mito Boost">
+                <span class="cal-appt-sub">Mini Mito Boost</span>
                 <div class="cal-appt-name">Yuki Tanaka</div>
                 <div class="cal-appt-time">10:30 AM</div>
                 <span class="cal-appt-type">Cigna</span>
@@ -758,9 +779,9 @@
                 <span class="cal-appt-type">UnitedHealthcare</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-arrived t-ebooiv ty-iv" style="top:528px;height:50px" data-appt="A-88374" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-ebooiv" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:30 AM" data-tx="EBOO Boost IV" data-flags="pregnant">
+              <div class="cal-appt st-arrived t-ebooiv ty-iv" style="top:528px;height:50px" data-appt="A-88374" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-ebooiv" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="11:30 AM" data-tx="EBOO Boost" data-flags="pregnant">
                 <span class="fl-row"><span class="fl sev-high fi-pregnant" title="Pregnant — second trimester · Medical"></span></span>
-                <span class="cal-appt-sub">EBOO Boost IV</span>
+                <span class="cal-appt-sub">EBOO Boost</span>
                 <div class="cal-appt-name">Rosa Iglesias</div>
                 <div class="cal-appt-time">11:30 AM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
@@ -799,8 +820,8 @@
                 <span class="cal-appt-type">Anthem Blue Cross</span>
                 <span class="actor-tag">Bea</span>
               </div>
-              <div class="cal-appt st-scheduled t-mc25 ty-iv" style="top:864px;height:50px" data-appt="A-88380" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mc25" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Mega C 25">
-                <span class="cal-appt-sub">Mega C 25</span>
+              <div class="cal-appt st-scheduled t-mc25 ty-iv" style="top:864px;height:50px" data-appt="A-88380" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-mc25" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Mega C 25g">
+                <span class="cal-appt-sub">Mega C 25g</span>
                 <div class="cal-appt-name">Tom Alvarez</div>
                 <div class="cal-appt-time">3:00 PM</div>
                 <span class="cal-appt-type">Anthem Blue Cross</span>
@@ -810,15 +831,15 @@
             <!-- IV 3 -->
             <div class="daycal-col" data-col="c3">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-mc50 ty-iv" style="top:240px;height:50px" data-appt="A-88381" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc50" data-days="1,2,3" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:30 AM" data-tx="Mega C 50">
-                <span class="cal-appt-sub">Mega C 50</span>
+              <div class="cal-appt st-done t-mc50 ty-iv" style="top:240px;height:50px" data-appt="A-88381" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc50" data-days="1,2,3" data-pt="Grace Lindqvist" data-ins="UnitedHealthcare · OON" data-phone="(949) 555-0188" data-stage="Root cause" data-pay="30% coinsurance" data-when="8:30 AM" data-tx="Mega C 50g">
+                <span class="cal-appt-sub">Mega C 50g</span>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-time">8:30 AM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-done t-mc75 ty-iv" style="top:288px;height:50px" data-appt="A-88382" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc75" data-days="2,4" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="9:00 AM" data-tx="Mega C 75">
-                <span class="cal-appt-sub">Mega C 75</span>
+              <div class="cal-appt st-done t-mc75 ty-iv" style="top:288px;height:50px" data-appt="A-88382" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-mc75" data-days="2,4" data-pt="Owen Delacroix" data-ins="Self-pay" data-phone="(949) 555-0977" data-stage="Identification" data-pay="Cash $600" data-when="9:00 AM" data-tx="Mega C 75g">
+                <span class="cal-appt-sub">Mega C 75g</span>
                 <div class="cal-appt-name">Owen Delacroix</div>
                 <div class="cal-appt-time">9:00 AM</div>
                 <span class="cal-appt-type">Self-pay</span>
@@ -872,8 +893,8 @@
                 <span class="cal-appt-type">Medicare Part B</span>
                 <span class="actor-tag">Juan</span>
               </div>
-              <div class="cal-appt st-scheduled t-minimb ty-iv" style="top:912px;height:50px" data-appt="A-88390" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-minimb" data-days="1,2,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="3:30 PM" data-tx="Mini MB">
-                <span class="cal-appt-sub">Mini MB</span>
+              <div class="cal-appt st-scheduled t-minimb ty-iv" style="top:912px;height:50px" data-appt="A-88390" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-minimb" data-days="1,2,4,5" data-pt="Victor Reyes" data-ins="Self-pay" data-phone="(949) 555-1654" data-stage="Graduation" data-pay="Cash $240" data-when="3:30 PM" data-tx="Mini Mito Boost">
+                <span class="cal-appt-sub">Mini Mito Boost</span>
                 <div class="cal-appt-name">Victor Reyes</div>
                 <div class="cal-appt-time">3:30 PM</div>
                 <span class="cal-appt-type">Self-pay</span>
@@ -890,8 +911,8 @@
                 <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-done t-amino ty-iv" style="top:336px;height:50px" data-appt="A-88392" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-amino" data-days="2,4" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="9:30 AM" data-tx="Essential Amino">
-                <span class="cal-appt-sub">Essential Amino</span>
+              <div class="cal-appt st-done t-amino ty-iv" style="top:336px;height:50px" data-appt="A-88392" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-amino" data-days="2,4" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="9:30 AM" data-tx="Essential Aminos">
+                <span class="cal-appt-sub">Essential Aminos</span>
                 <div class="cal-appt-name">Nina Kowalski</div>
                 <div class="cal-appt-time">9:30 AM</div>
                 <span class="cal-appt-type">AETNA</span>
@@ -909,15 +930,15 @@
                 <div class="cal-appt-name">Lunch</div>
                 <div class="cal-appt-time">12:00 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-mc15 ty-iv" style="top:624px;height:50px" data-appt="A-88395" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc15" data-days="2,3" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="12:30 PM" data-tx="Mega C 15">
-                <span class="cal-appt-sub">Mega C 15</span>
+              <div class="cal-appt st-confirmed t-mc15 ty-iv" style="top:624px;height:50px" data-appt="A-88395" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc15" data-days="2,3" data-pt="Samir Haddad" data-ins="GEHA · OON" data-phone="(949) 555-1876" data-stage="Lead actor 2" data-pay="30% coinsurance" data-when="12:30 PM" data-tx="Mega C 15g">
+                <span class="cal-appt-sub">Mega C 15g</span>
                 <div class="cal-appt-name">Samir Haddad</div>
                 <div class="cal-appt-time">12:30 PM</div>
                 <span class="cal-appt-type">GEHA</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-confirmed t-mc100 ty-iv" style="top:720px;height:50px" data-appt="A-88396" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc100" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Mega C 100">
-                <span class="cal-appt-sub">Mega C 100</span>
+              <div class="cal-appt st-confirmed t-mc100 ty-iv" style="top:720px;height:50px" data-appt="A-88396" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-mc100" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="1:30 PM" data-tx="Mega C 100g">
+                <span class="cal-appt-sub">Mega C 100g</span>
                 <div class="cal-appt-name">Yuki Tanaka</div>
                 <div class="cal-appt-time">1:30 PM</div>
                 <span class="cal-appt-type">Cigna</span>
@@ -930,8 +951,8 @@
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Nate</span>
               </div>
-              <div class="cal-appt st-locked t-minic ty-iv" style="top:960px;height:50px" data-appt="A-88398" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-minic" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Mini Cust" data-note="Held — order renewal pending">
-                <span class="cal-appt-sub">Mini Cust</span>
+              <div class="cal-appt st-locked t-minimb ty-iv" style="top:960px;height:50px" data-appt="A-88398" data-open-drawer="#l-appt-drawer" data-st="Locked" data-sub="t-minimb" data-days="1,2,3" data-pt="Rosa Iglesias" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-1199" data-stage="Stabilization" data-pay="$40 copay" data-when="4:00 PM" data-tx="Mini Mito Boost" data-note="Held — order renewal pending">
+                <span class="cal-appt-sub">Mini Mito Boost</span>
                 <div class="cal-appt-name">Rosa Iglesias</div>
                 <div class="cal-appt-note">Held — order renewal pending</div>
                 <div class="cal-appt-time">4:00 PM</div>
@@ -950,15 +971,15 @@
                 <span class="cal-appt-type">Cigna</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-done t-block ty-laser" style="top:384px;height:50px" data-appt="A-88400" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-block" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00 AM" data-tx="Laser">
-                <span class="cal-appt-sub">Laser</span>
+              <div class="cal-appt st-done t-erchlas ty-laser" style="top:384px;height:50px" data-appt="A-88400" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-erchlas" data-days="2,4" data-pt="Sofia Ramos" data-ins="Self-pay" data-phone="(657) 555-0119" data-stage="Maintenance" data-pay="Cash $285" data-when="10:00 AM" data-tx="Erch Laser">
+                <span class="cal-appt-sub">Erch Laser</span>
                 <div class="cal-appt-name">Sofia Ramos</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Wesley</span>
               </div>
-              <div class="cal-appt st-arrived t-block ty-chiro" style="top:480px;height:50px" data-appt="A-88401" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-block" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="Chiro">
-                <span class="cal-appt-sub">Chiro</span>
+              <div class="cal-appt st-arrived t-dctx ty-chiro" style="top:480px;height:50px" data-appt="A-88401" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-dctx" data-days="1,2,4,5" data-pt="Ben Okonkwo" data-ins="UnitedHealthcare · OON" data-phone="(562) 555-1210" data-stage="Root cause" data-pay="30% coinsurance" data-when="11:00 AM" data-tx="DC - TX">
+                <span class="cal-appt-sub">DC - TX</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-time">11:00 AM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
@@ -1001,7 +1022,7 @@
             <!-- Room 2 -->
             <div class="daycal-col" data-col="room2">
               <div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div><div class="daycal-slot"></div>
-              <div class="cal-appt st-done t-block ty-eboo" style="top:0px;height:146px" data-appt="A-88407" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-block" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="EBOO" data-note="Early circuit — she travels at noon" data-flags="urgent">
+              <div class="cal-appt st-done t-ebootx ty-eboo" style="top:0px;height:146px" data-appt="A-88407" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-ebootx" data-days="1,2,3" data-pt="Priya Natarajan" data-ins="Medicare Part B · J1" data-phone="(949) 555-0644" data-stage="Root cause" data-pay="20% coinsurance" data-when="6:00 AM – 7:30 AM" data-tx="EBOO" data-note="Early circuit — she travels at noon" data-flags="urgent">
                 <span class="fl-row"><span class="fl sev-high fi-urgent" title="Urgent medical alert — cardiology follow-up open · Medical"></span></span>
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Priya Natarajan</div>
@@ -1017,7 +1038,7 @@
                 <span class="cal-appt-type">Blue Shield of CA</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-inroom t-block ty-eboo" style="top:384px;height:146px" data-appt="A-88409" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-block" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00 AM – 11:30 AM" data-tx="EBOO">
+              <div class="cal-appt st-inroom t-ebootx ty-eboo" style="top:384px;height:146px" data-appt="A-88409" data-open-drawer="#l-appt-drawer" data-st="In progress" data-sub="t-ebootx" data-days="1,2,4,5" data-pt="Maya Reyes" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0866" data-stage="Lead actor 1" data-pay="$40 copay" data-when="10:00 AM – 11:30 AM" data-tx="EBOO">
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Maya Reyes</div>
                 <div class="cal-appt-time">10:00 AM – 11:30 AM</div>
@@ -1036,7 +1057,7 @@
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Kyle</span>
               </div>
-              <div class="cal-appt st-scheduled t-block ty-eboo" style="top:864px;height:146px" data-appt="A-88412" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-block" data-days="1,2,5" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="3:00 PM – 4:30 PM" data-tx="EBOO">
+              <div class="cal-appt st-scheduled t-ebootx ty-eboo" style="top:864px;height:146px" data-appt="A-88412" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-ebootx" data-days="1,2,5" data-pt="Nina Kowalski" data-ins="AETNA · OON" data-phone="(949) 555-1765" data-stage="Stabilization" data-pay="30% coinsurance" data-when="3:00 PM – 4:30 PM" data-tx="EBOO">
                 <span class="cal-appt-sub">EBOO</span>
                 <div class="cal-appt-name">Nina Kowalski</div>
                 <div class="cal-appt-time">3:00 PM – 4:30 PM</div>
@@ -1073,17 +1094,16 @@
               <div class="leg-key"><span class="leg-n">1</span>
                 <span class="leg-key-txt"><b>Background</b><span>appointment type</span></span></div>
               <div class="leg-items">
-                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office visit</span>
+                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office Visit</span>
                 <span class="leg-fam"><i class="ty-sw ty-proc"></i>Procedure</span>
                 <span class="leg-fam"><i class="ty-sw ty-energ"></i>Energetics</span>
-                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
                 <span class="leg-fam"><i class="ty-sw ty-lab"></i>Labs</span>
                 <span class="leg-fam"><i class="ty-sw ty-diag"></i>Diagnostics</span>
                 <span class="leg-fam"><i class="ty-sw ty-fpe"></i>FPE</span>
-                <span class="leg-fam"><i class="ty-sw ty-fpe6"></i>6 month FPE</span>
                 <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
                 <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
                 <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
+                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
               </div>
             </div>
 
@@ -1092,67 +1112,116 @@
                 <span class="leg-key-txt"><b>Side bar</b><span>which treatment</span></span></div>
               <div class="leg-cols">
                 <div class="leg-grp">
-                  <span class="leg-grp-t">Office visit</span>
+                  <span class="leg-grp-t">Office Visit</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
-                  <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
-                  <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
-                  <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
+                    <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
+                    <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
+                    <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+                    <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Procedure</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
-                  <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
-                  <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
-                  <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
-                  <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
-                  <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
+                    <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
+                    <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
+                    <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+                    <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+                    <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
+                    <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Energetics</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
-                  <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
-                  <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
-                  <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
-                  <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
-                  <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
-                  <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT</span>
-                  <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD</span>
-                  <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+                    <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
+                    <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
+                    <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+                    <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
+                    <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT</span>
+                    <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD</span>
+                    <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+                    <span class="leg-fam"><i class="rail-sw t-rr"></i>R&amp;R</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Labs</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL</span>
-                  <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest</span>
-                  <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD</span>
-                  <span class="leg-fam"><i class="rail-sw t-igenix"></i>iGenix</span>
+                    <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL</span>
+                    <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest</span>
+                    <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD</span>
+                    <span class="leg-fam"><i class="rail-sw t-igenex"></i>iGenex</span>
                   </div>
                 </div>
                 <div class="leg-grp">
-                  <span class="leg-grp-t">IV </span>
-                  <div class="leg-ladders">
-                    <span class="leg-fam">Foundational Flow<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50"></i>50</span></span></span>
-                    <span class="leg-fam" style="gap:12px">Mega C<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100"></i>100</span></span></span>
-                  </div>
+                  <span class="leg-grp-t">Diagnostics</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
-                  <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
-                  <span class="leg-fam"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</span>
-                  <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
-                  <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
-                  <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
-                  <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
-                  <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Amino</span>
-                  <span class="leg-fam"><i class="rail-sw t-minic"></i>Mini Cust</span>
-                  <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini MB</span>
-                  <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
-                  <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</span>
+                    <span class="leg-fam"><i class="rail-sw t-diag"></i>Diagnostics</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">FPE</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-fpeie"></i>FPE - IE</span>
+                    <span class="leg-fam"><i class="rail-sw t-fpefu"></i>FPE F/U</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Chiro</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-dcintx"></i>DC IN - TX</span>
+                    <span class="leg-fam"><i class="rail-sw t-dctx"></i>DC - TX</span>
+                    <span class="leg-fam"><i class="rail-sw t-lasereval"></i>Laser Eval.</span>
+                    <span class="leg-fam"><i class="rail-sw t-medifne"></i>MediFNE</span>
+                    <span class="leg-fam"><i class="rail-sw t-pocrev"></i>POC Review</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">EBOO</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-eboosafe"></i>EBOO Safe</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebootx"></i>EBOO</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Laser</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-erchlas"></i>Erch Laser</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccemp"></i>ErcCompEmp</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccpt"></i>ErcCompPt</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccvip"></i>ErcCompVIP</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccref"></i>ErcCompRef</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">IV</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-chel"></i>Chelation</span>
+                    <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+                    <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+                    <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
+                    <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Aminos</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff5"></i>Foundational Flow 5</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff15"></i>Foundational Flow 15</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff20"></i>Foundational Flow 20</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff25"></i>Foundational Flow 25</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff50"></i>Foundational Flow 50</span>
+                    <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc15"></i>Mega C 15g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc25"></i>Mega C 25g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc50"></i>Mega C 50g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc75"></i>Mega C 75g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc100"></i>Mega C 100g</span>
+                    <span class="leg-fam"><i class="rail-sw t-migraine"></i>Migraine</span>
+                    <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</span>
                   </div>
                 </div>
               </div>
@@ -1165,15 +1234,14 @@
                 <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
-                <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
+                <span class="leg-st"><i class="st-sw st-inroom"></i>In Progress</span>
                 <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
                 <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
                 <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
                 <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
-                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No show</span>
               </div>
             </div>
-
             <div class="leg-row leg-foot">
               <div class="leg-key"></div>
               <div class="leg-items">
@@ -1441,17 +1509,16 @@
               <div class="leg-key"><span class="leg-n">1</span>
                 <span class="leg-key-txt"><b>Background</b><span>appointment type</span></span></div>
               <div class="leg-items">
-                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office visit</span>
+                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office Visit</span>
                 <span class="leg-fam"><i class="ty-sw ty-proc"></i>Procedure</span>
                 <span class="leg-fam"><i class="ty-sw ty-energ"></i>Energetics</span>
-                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
                 <span class="leg-fam"><i class="ty-sw ty-lab"></i>Labs</span>
                 <span class="leg-fam"><i class="ty-sw ty-diag"></i>Diagnostics</span>
                 <span class="leg-fam"><i class="ty-sw ty-fpe"></i>FPE</span>
-                <span class="leg-fam"><i class="ty-sw ty-fpe6"></i>6 month FPE</span>
                 <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
                 <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
                 <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
+                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
               </div>
             </div>
 
@@ -1460,67 +1527,116 @@
                 <span class="leg-key-txt"><b>Side bar</b><span>which treatment</span></span></div>
               <div class="leg-cols">
                 <div class="leg-grp">
-                  <span class="leg-grp-t">Office visit</span>
+                  <span class="leg-grp-t">Office Visit</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
-                  <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
-                  <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
-                  <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
+                    <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
+                    <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
+                    <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+                    <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Procedure</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
-                  <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
-                  <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
-                  <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
-                  <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
-                  <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
+                    <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
+                    <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
+                    <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+                    <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+                    <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
+                    <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Energetics</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
-                  <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
-                  <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
-                  <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
-                  <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
-                  <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
-                  <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT</span>
-                  <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD</span>
-                  <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+                    <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
+                    <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
+                    <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+                    <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
+                    <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT</span>
+                    <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD</span>
+                    <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+                    <span class="leg-fam"><i class="rail-sw t-rr"></i>R&amp;R</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Labs</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL</span>
-                  <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest</span>
-                  <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD</span>
-                  <span class="leg-fam"><i class="rail-sw t-igenix"></i>iGenix</span>
+                    <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL</span>
+                    <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest</span>
+                    <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD</span>
+                    <span class="leg-fam"><i class="rail-sw t-igenex"></i>iGenex</span>
                   </div>
                 </div>
                 <div class="leg-grp">
-                  <span class="leg-grp-t">IV </span>
-                  <div class="leg-ladders">
-                    <span class="leg-fam">Foundational Flow<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50"></i>50</span></span></span>
-                    <span class="leg-fam" style="gap:12px">Mega C<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100"></i>100</span></span></span>
-                  </div>
+                  <span class="leg-grp-t">Diagnostics</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
-                  <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
-                  <span class="leg-fam"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</span>
-                  <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
-                  <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
-                  <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
-                  <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
-                  <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Amino</span>
-                  <span class="leg-fam"><i class="rail-sw t-minic"></i>Mini Cust</span>
-                  <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini MB</span>
-                  <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
-                  <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</span>
+                    <span class="leg-fam"><i class="rail-sw t-diag"></i>Diagnostics</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">FPE</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-fpeie"></i>FPE - IE</span>
+                    <span class="leg-fam"><i class="rail-sw t-fpefu"></i>FPE F/U</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Chiro</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-dcintx"></i>DC IN - TX</span>
+                    <span class="leg-fam"><i class="rail-sw t-dctx"></i>DC - TX</span>
+                    <span class="leg-fam"><i class="rail-sw t-lasereval"></i>Laser Eval.</span>
+                    <span class="leg-fam"><i class="rail-sw t-medifne"></i>MediFNE</span>
+                    <span class="leg-fam"><i class="rail-sw t-pocrev"></i>POC Review</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">EBOO</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-eboosafe"></i>EBOO Safe</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebootx"></i>EBOO</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Laser</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-erchlas"></i>Erch Laser</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccemp"></i>ErcCompEmp</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccpt"></i>ErcCompPt</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccvip"></i>ErcCompVIP</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccref"></i>ErcCompRef</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">IV</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-chel"></i>Chelation</span>
+                    <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+                    <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+                    <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
+                    <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Aminos</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff5"></i>Foundational Flow 5</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff15"></i>Foundational Flow 15</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff20"></i>Foundational Flow 20</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff25"></i>Foundational Flow 25</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff50"></i>Foundational Flow 50</span>
+                    <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc15"></i>Mega C 15g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc25"></i>Mega C 25g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc50"></i>Mega C 50g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc75"></i>Mega C 75g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc100"></i>Mega C 100g</span>
+                    <span class="leg-fam"><i class="rail-sw t-migraine"></i>Migraine</span>
+                    <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</span>
                   </div>
                 </div>
               </div>
@@ -1533,15 +1649,14 @@
                 <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
-                <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
+                <span class="leg-st"><i class="st-sw st-inroom"></i>In Progress</span>
                 <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
                 <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
                 <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
                 <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
-                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No show</span>
               </div>
             </div>
-
             <div class="leg-row leg-foot">
               <div class="leg-key"></div>
               <div class="leg-items">
@@ -1768,17 +1883,16 @@
               <div class="leg-key"><span class="leg-n">1</span>
                 <span class="leg-key-txt"><b>Background</b><span>appointment type</span></span></div>
               <div class="leg-items">
-                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office visit</span>
+                <span class="leg-fam"><i class="ty-sw ty-visit"></i>Office Visit</span>
                 <span class="leg-fam"><i class="ty-sw ty-proc"></i>Procedure</span>
                 <span class="leg-fam"><i class="ty-sw ty-energ"></i>Energetics</span>
-                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
                 <span class="leg-fam"><i class="ty-sw ty-lab"></i>Labs</span>
                 <span class="leg-fam"><i class="ty-sw ty-diag"></i>Diagnostics</span>
                 <span class="leg-fam"><i class="ty-sw ty-fpe"></i>FPE</span>
-                <span class="leg-fam"><i class="ty-sw ty-fpe6"></i>6 month FPE</span>
                 <span class="leg-fam"><i class="ty-sw ty-chiro"></i>Chiro</span>
                 <span class="leg-fam"><i class="ty-sw ty-eboo"></i>EBOO</span>
                 <span class="leg-fam"><i class="ty-sw ty-laser"></i>Laser</span>
+                <span class="leg-fam"><i class="ty-sw ty-iv"></i>IV</span>
               </div>
             </div>
 
@@ -1787,67 +1901,116 @@
                 <span class="leg-key-txt"><b>Side bar</b><span>which treatment</span></span></div>
               <div class="leg-cols">
                 <div class="leg-grp">
-                  <span class="leg-grp-t">Office visit</span>
+                  <span class="leg-grp-t">Office Visit</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
-                  <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
-                  <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
-                  <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
+                    <span class="leg-fam"><i class="rail-sw t-newpt"></i>New patient</span>
+                    <span class="leg-fam"><i class="rail-sw t-npfu"></i>New patient FU</span>
+                    <span class="leg-fam"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+                    <span class="leg-fam"><i class="rail-sw t-fu"></i>Follow Up</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Procedure</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
-                  <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
-                  <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
-                  <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
-                  <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
-                  <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
+                    <span class="leg-fam"><i class="rail-sw t-prp"></i>PRP</span>
+                    <span class="leg-fam"><i class="rail-sw t-tpi"></i>TPI</span>
+                    <span class="leg-fam"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+                    <span class="leg-fam"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+                    <span class="leg-fam"><i class="rail-sw t-proloz"></i>Prolozone</span>
+                    <span class="leg-fam"><i class="rail-sw t-micro"></i>Microcurrent</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Energetics</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
-                  <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
-                  <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
-                  <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
-                  <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
-                  <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
-                  <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT</span>
-                  <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD</span>
-                  <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+                    <span class="leg-fam"><i class="rail-sw t-biochg"></i>BioCharger</span>
+                    <span class="leg-fam"><i class="rail-sw t-lymph"></i>LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-scenar"></i>SCENAR</span>
+                    <span class="leg-fam"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+                    <span class="leg-fam"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+                    <span class="leg-fam"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
+                    <span class="leg-fam"><i class="rail-sw t-nmt"></i>NMT</span>
+                    <span class="leg-fam"><i class="rail-sw t-mead"></i>MEAD</span>
+                    <span class="leg-fam"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+                    <span class="leg-fam"><i class="rail-sw t-rr"></i>R&amp;R</span>
                   </div>
                 </div>
                 <div class="leg-grp">
                   <span class="leg-grp-t">Labs</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL</span>
-                  <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest</span>
-                  <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD</span>
-                  <span class="leg-fam"><i class="rail-sw t-igenix"></i>iGenix</span>
+                    <span class="leg-fam"><i class="rail-sw t-mdl"></i>MDL</span>
+                    <span class="leg-fam"><i class="rail-sw t-quest"></i>Quest</span>
+                    <span class="leg-fam"><i class="rail-sw t-g6pd"></i>G6PD</span>
+                    <span class="leg-fam"><i class="rail-sw t-igenex"></i>iGenex</span>
                   </div>
                 </div>
                 <div class="leg-grp">
-                  <span class="leg-grp-t">IV </span>
-                  <div class="leg-ladders">
-                    <span class="leg-fam">Foundational Flow<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-ff5"></i>5</span><span class="leg-step"><i class="rail-sw t-ff10"></i>10</span><span class="leg-step"><i class="rail-sw t-ff15"></i>15</span><span class="leg-step"><i class="rail-sw t-ff20"></i>20</span><span class="leg-step"><i class="rail-sw t-ff25"></i>25</span><span class="leg-step"><i class="rail-sw t-ff50"></i>50</span></span></span>
-                    <span class="leg-fam" style="gap:12px">Mega C<span class="leg-ladder"><span class="leg-step"><i class="rail-sw t-mc15"></i>15</span><span class="leg-step"><i class="rail-sw t-mc25"></i>25</span><span class="leg-step"><i class="rail-sw t-mc50"></i>50</span><span class="leg-step"><i class="rail-sw t-mc75"></i>75</span><span class="leg-step"><i class="rail-sw t-mc100"></i>100</span></span></span>
-                  </div>
+                  <span class="leg-grp-t">Diagnostics</span>
                   <div class="leg-items">
-                  <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
-                  <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
-                  <span class="leg-fam"><i class="rail-sw t-mastb"></i>Mast Cell · Benadryl</span>
-                  <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
-                  <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
-                  <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
-                  <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
-                  <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Amino</span>
-                  <span class="leg-fam"><i class="rail-sw t-minic"></i>Mini Cust</span>
-                  <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini MB</span>
-                  <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
-                  <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost IV</span>
+                    <span class="leg-fam"><i class="rail-sw t-diag"></i>Diagnostics</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">FPE</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-fpeie"></i>FPE - IE</span>
+                    <span class="leg-fam"><i class="rail-sw t-fpefu"></i>FPE F/U</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Chiro</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-dcintx"></i>DC IN - TX</span>
+                    <span class="leg-fam"><i class="rail-sw t-dctx"></i>DC - TX</span>
+                    <span class="leg-fam"><i class="rail-sw t-lasereval"></i>Laser Eval.</span>
+                    <span class="leg-fam"><i class="rail-sw t-medifne"></i>MediFNE</span>
+                    <span class="leg-fam"><i class="rail-sw t-pocrev"></i>POC Review</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">EBOO</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-eboosafe"></i>EBOO Safe</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebootx"></i>EBOO</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">Laser</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-erchlas"></i>Erch Laser</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccemp"></i>ErcCompEmp</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccpt"></i>ErcCompPt</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccvip"></i>ErcCompVIP</span>
+                    <span class="leg-fam"><i class="rail-sw t-erccref"></i>ErcCompRef</span>
+                  </div>
+                </div>
+                <div class="leg-grp">
+                  <span class="leg-grp-t">IV</span>
+                  <div class="leg-items">
+                    <span class="leg-fam"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-chel"></i>Chelation</span>
+                    <span class="leg-fam"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+                    <span class="leg-fam"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+                    <span class="leg-fam"><i class="rail-sw t-rest"></i>Core Restore</span>
+                    <span class="leg-fam"><i class="rail-sw t-detox"></i>Detox Prime</span>
+                    <span class="leg-fam"><i class="rail-sw t-ebooiv"></i>EBOO Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-amino"></i>Essential Aminos</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff5"></i>Foundational Flow 5</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff15"></i>Foundational Flow 15</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff20"></i>Foundational Flow 20</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff25"></i>Foundational Flow 25</span>
+                    <span class="leg-fam"><i class="rail-sw t-ff50"></i>Foundational Flow 50</span>
+                    <span class="leg-fam"><i class="rail-sw t-mast"></i>Mast Cell</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc15"></i>Mega C 15g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc25"></i>Mega C 25g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc50"></i>Mega C 50g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc75"></i>Mega C 75g</span>
+                    <span class="leg-fam"><i class="rail-sw t-mc100"></i>Mega C 100g</span>
+                    <span class="leg-fam"><i class="rail-sw t-migraine"></i>Migraine</span>
+                    <span class="leg-fam"><i class="rail-sw t-mito"></i>Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
+                    <span class="leg-fam"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</span>
                   </div>
                 </div>
               </div>
@@ -1860,15 +2023,14 @@
                 <span class="leg-st"><i class="st-sw st-scheduled"></i>Scheduled</span>
                 <span class="leg-st"><i class="st-sw st-confirmed"></i>Confirmed</span>
                 <span class="leg-st"><i class="st-sw st-arrived"></i>Arrived</span>
-                <span class="leg-st"><i class="st-sw st-inchair"></i>In progress</span>
+                <span class="leg-st"><i class="st-sw st-inroom"></i>In Progress</span>
                 <span class="leg-st"><i class="st-sw st-done"></i>Complete</span>
                 <span class="leg-st"><i class="st-sw st-locked"></i>Locked</span>
                 <span class="leg-st"><i class="st-sw st-rescheduled"></i>Rescheduled</span>
                 <span class="leg-st"><i class="st-sw st-cancelled"></i>Cancelled</span>
-                <span class="leg-st"><i class="st-sw st-noshow"></i>No-show</span>
+                <span class="leg-st"><i class="st-sw st-noshow"></i>No show</span>
               </div>
             </div>
-
             <div class="leg-row leg-foot">
               <div class="leg-key"></div>
               <div class="leg-items">
@@ -3254,7 +3416,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=66"></script>
+<script src="assets/hcos.js?v=67"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.

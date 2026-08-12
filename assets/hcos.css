@@ -1025,184 +1025,186 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 
 /* ==========================================================================
-   THE CALENDAR CODE — the CLINIC'S OWN three channels (Carlos, 2026-08-11,
-   from the practice's colour spreadsheet). It supersedes everything before it:
+   THE CALENDAR CODE — the clinic's own, from the practice's full colour sheet
+   (Carlos, 2026-08-11). Generated; do not hand-edit the tokens.
 
-       BACKGROUND COLOUR                        = appointment TYPE
-       SIDE BAR COLOUR                          = SUB appointment type
-       WATERMARK over the background            = STATUS
+       BACKGROUND COLOUR   = appointment TYPE
+       SIDE BAR COLOUR     = SUB appointment type
+       WATERMARK           = STATUS
 
-   Two of my three channels were the wrong way round. The side bar was already
-   the subtype and stays; the background moves from status to TYPE, and status
-   becomes a faint symbol watermarked over the block. The symbols are inline
-   SVG, never emoji: an emoji renders in its own colours on top of a palette
-   the clinic chose, and differently on every operating system.
+   Two facts the sheet forces and this file has to handle:
+   * Laser's background is dark maroon at 1.9:1 — its text goes white.
+   * Seven side bars are WHITE, which on a white or cream block would be
+     invisible. Every side bar carries a hairline so a white one still reads.
+   Where the sheet paints two rows the same colour they are recorded the same;
+   that is the clinic's call, not ours to quietly fix.
    ========================================================================== */
 :root {
-  /* TYPE — the background. From the clinic's left-hand column. */
-  --tybg-visit: #B7CDB0;  /* Office visit */
-  --tybg-proc:  #A9B9E2;  /* Procedure */
-  --tybg-energ: #F9F0D4;  /* Energetics */
-  --tybg-iv:    #FBF4E2;  /* IV */
-  --tybg-lab:   #C3CEDE;  /* Labs — ours; the clinic left it blank */
-  --tybg-diag:  #EEC2DE;  /* Diagnostics — ours; the clinic left it blank */
-  --tybg-fpe:   #8FCDBB;  /* FPE — ours; the clinic left it blank */
-  --tybg-fpe6:  #CFF2E9;  /* 6 month FPE — ours; the clinic left it blank */
-  --tybg-chiro: #ECD1B6;  /* Chiro — ours; the clinic left it blank */
-  --tybg-eboo:  #E0B0B4;  /* EBOO — ours; the clinic left it blank */
-  --tybg-laser: #D3AEE4;  /* Laser — ours; the clinic left it blank */
+  /* TYPE — the background */
+  --tybg-visit:  #B7CDB0;   /* Office Visit */
+  --tybg-proc:   #A9B9E2;   /* Procedure */
+  --tybg-energ:  #F9F0D4;   /* Energetics */
+  --tybg-lab:    #C5C9E8;   /* Labs */
+  --tybg-diag:   #B8CCE4;   /* Diagnostics */
+  --tybg-fpe:    #F0C9A0;   /* FPE */
+  --tybg-chiro:  #BDD7EE;   /* Chiro */
+  --tybg-eboo:   #E8B4A8;   /* EBOO */
+  --tybg-laser:  #8B1A1A;   /* Laser */
+  --tybg-iv:     #FFFFFF;   /* IV */
 
-  /* SUBTYPE — the side bar. From the clinic's second column. */
-  --sb-newpt:   #EE41EE;  /* New patient */
-  --sb-npfu:    #E6BFE6;  /* New patient FU */
-  --sb-nptoc:   #9E4C79;  /* New patient TOC */
-  --sb-fu:      #FAFA1E;  /* Follow Up */
-  --sb-prp:     #EE9A3B;  /* PRP */
-  --sb-tpi:     #F5D0A4;  /* TPI */
-  --sb-pelm:    #6F91DA;  /* Pellet Males */
-  --sb-pelf:    #D2836F;  /* Pellet Females */
-  --sb-proloz:  #4EF0F0;  /* Prolozone */
-  --sb-micro:   #A9C59D;  /* Microcurrent */
-  --sb-biochg:  #5B82D6;  /* BioCharger */
-  --sb-lymph:   #2C6B2C;  /* LymphStar */
-  --sb-scenar:  #CC2020;  /* SCENAR */
-  --sb-minilym: #8AC98A;  /* Mini-LymphStar */
-  --sb-biomodp: #EE9A9A;  /* BioMod Pro */
-
-  /* the IV recipe menu keeps its own eCW colours — same channel, same rule */
-  --sb-ff5:     #C2ECEA;  /* Foundational Flow 5 */
-  --sb-ff10:    #A5F0EF;  /* Foundational Flow 10 */
-  --sb-ff15:    #66F2F2;  /* Foundational Flow 15 */
-  --sb-ff20:    #5CC9C6;  /* Foundational Flow 20 */
-  --sb-ff25:    #529CB4;  /* Foundational Flow 25 */
-  --sb-ff50:    #2E5D6B;  /* Foundational Flow 50 */
-  --sb-mc15:    #CCD9F0;  /* Mega C 15 */
-  --sb-mc25:    #F8E2A6;  /* Mega C 25 */
-  --sb-mc50:    #FBF1D8;  /* Mega C 50 */
-  --sb-mc75:    #F2DDC6;  /* Mega C 75 */
-  --sb-mc100:   #7C9DF2;  /* Mega C 100 */
-  --sb-cell:    #000000;  /* Cellular Boost */
-  --sb-mast:    #FAFA55;  /* Mast Cell */
-  --sb-mastb:   #8FA9B0;  /* Mast Cell · Benadryl only */
-  --sb-cog:     #C9B69C;  /* Cognitive Support */
-  --sb-iron:    #F52BF5;  /* Core Iron Blend */
-  --sb-rest:    #F6D9BC;  /* Core Restore */
-  --sb-detox:   #B9D3A2;  /* Detox Prime */
-  --sb-amino:   #DCE5F6;  /* Essential Amino */
-  --sb-minic:   #EF3423;  /* Mini Cust */
-  --sb-minimb:  #DF8CAF;  /* Mini MB */
-  --sb-mito:    #AF2A62;  /* Mito Boost */
-  --sb-ebooiv:  #0000FF;  /* EBOO Boost IV */
-  --sb-none:    #9A9A9A;
-  --blk-muted:  #4A4A4A;   /* --muted fails contrast on a tinted block */
-
-  /* the clinic has not named a colour for these yet */
-  --sb-biomodr: #9A9A9A;  /* BioMod Recharge — awaiting a clinic colour */
-  --sb-nmt:     #9A9A9A;  /* NMT — awaiting a clinic colour */
-  --sb-mead:    #9A9A9A;  /* MEAD — awaiting a clinic colour */
-  --sb-meadre:  #9A9A9A;  /* MEAD ReAssessment — awaiting a clinic colour */
-  --sb-mdl:     #9A9A9A;  /* MDL — awaiting a clinic colour */
-  --sb-quest:   #9A9A9A;  /* Quest — awaiting a clinic colour */
-  --sb-g6pd:    #9A9A9A;  /* G6PD — awaiting a clinic colour */
-  --sb-igenix:  #9A9A9A;  /* iGenix — awaiting a clinic colour */
+  /* SUBTYPE — the side bar */
+  --sb-newpt:     #F23FB8;   /* New patient */
+  --sb-npfu:      #E8C8E8;   /* New patient FU */
+  --sb-nptoc:     #E8A33C;   /* New patient TOC */
+  --sb-fu:        #FFF200;   /* Follow Up */
+  --sb-prp:       #ED9B3D;   /* PRP */
+  --sb-tpi:       #F5D5AA;   /* TPI */
+  --sb-pelm:      #7B95D6;   /* Pellet Males */
+  --sb-pelf:      #D98878;   /* Pellet Females */
+  --sb-proloz:    #4FE8E8;   /* Prolozone */
+  --sb-micro:     #A9C69C;   /* Microcurrent */
+  --sb-biochg:    #E8B93C;   /* BioCharger */
+  --sb-lymph:     #1F5C2E;   /* LymphStar */
+  --sb-scenar:    #B03A2E;   /* SCENAR */
+  --sb-minilym:   #9DD49D;   /* Mini-LymphStar */
+  --sb-biomodp:   #FFFFFF;   /* BioMod Pro */
+  --sb-biomodr:   #A8D4A0;   /* BioMod Recharge */
+  --sb-nmt:       #8FA8DC;   /* NMT */
+  --sb-mead:      #8FA8DC;   /* MEAD */
+  --sb-meadre:    #8FA8DC;   /* MEAD ReAssessment */
+  --sb-rr:        #8FA8DC;   /* R&R */
+  --sb-mdl:       #8FA8DC;   /* MDL */
+  --sb-quest:     #FFFFFF;   /* Quest */
+  --sb-g6pd:      #0000FF;   /* G6PD */
+  --sb-igenex:    #FFFFFF;   /* iGenex */
+  --sb-diag:      #4CAF50;   /* Diagnostics */
+  --sb-fpeie:     #F0A83C;   /* FPE - IE */
+  --sb-fpefu:     #F0A83C;   /* FPE F/U */
+  --sb-dcintx:    #BDD7EE;   /* DC IN - TX */
+  --sb-dctx:      #BDD7EE;   /* DC - TX */
+  --sb-lasereval: #8FA8DC;   /* Laser Eval. */
+  --sb-medifne:   #4FE8E8;   /* MediFNE */
+  --sb-pocrev:    #D98878;   /* POC Review */
+  --sb-eboosafe:  #D98878;   /* EBOO Safe */
+  --sb-ebootx:    #D98878;   /* EBOO */
+  --sb-erchlas:   #C040D0;   /* Erch Laser */
+  --sb-erccemp:   #F0C8C8;   /* ErcCompEmp */
+  --sb-erccpt:    #F0C8C8;   /* ErcCompPt */
+  --sb-erccvip:   #F5E0C8;   /* ErcCompVIP */
+  --sb-erccref:   #F5E0C8;   /* ErcCompRef */
+  --sb-cell:      #2E3B4E;   /* Cellular Boost */
+  --sb-chel:      #F0983C;   /* Chelation */
+  --sb-cog:       #E8A83C;   /* Cognitive Support */
+  --sb-iron:      #F040D0;   /* Core Iron Blend */
+  --sb-rest:      #A8D4A0;   /* Core Restore */
+  --sb-detox:     #A8D4A0;   /* Detox Prime */
+  --sb-ebooiv:    #0000FF;   /* EBOO Boost */
+  --sb-amino:     #FFFFFF;   /* Essential Aminos */
+  --sb-ff5:       #FFFFFF;   /* Foundational Flow 5 */
+  --sb-ff10:      #C8F0F0;   /* Foundational Flow 10 */
+  --sb-ff15:      #7FE8E8;   /* Foundational Flow 15 */
+  --sb-ff20:      #5CC9C6;   /* Foundational Flow 20 */
+  --sb-ff25:      #4DB3B3;   /* Foundational Flow 25 */
+  --sb-ff50:      #3A9999;   /* Foundational Flow 50 */
+  --sb-mast:      #FFF200;   /* Mast Cell */
+  --sb-mc15:      #F5E0C0;   /* Mega C 15g */
+  --sb-mc25:      #E8CFA8;   /* Mega C 25g */
+  --sb-mc50:      #D9BC94;   /* Mega C 50g */
+  --sb-mc75:      #C9A47C;   /* Mega C 75g */
+  --sb-mc100:     #B08D64;   /* Mega C 100g */
+  --sb-migraine:  #9B7BC9;   /* Migraine */
+  --sb-mito:      #6B3FA0;   /* Mito Boost */
+  --sb-minimb:    #FFFFFF;   /* Mini Mito Boost */
+  --sb-minimbc:   #FFFFFF;   /* Mini Mito Boost - Custom */
+  --sb-none:     #B4B4B4;
+  --blk-muted:   #4A4A4A;
 }
 
 /* ---- TYPE = the background ---- */
-.cal-appt.ty-visit, .week-appt.ty-visit, .ty-sw.ty-visit  { --tybg: var(--tybg-visit); }
-.cal-appt.ty-proc,  .week-appt.ty-proc,  .ty-sw.ty-proc   { --tybg: var(--tybg-proc); }
-.cal-appt.ty-energ, .week-appt.ty-energ, .ty-sw.ty-energ  { --tybg: var(--tybg-energ); }
-.cal-appt.ty-iv,    .week-appt.ty-iv,    .ty-sw.ty-iv     { --tybg: var(--tybg-iv); }
-.cal-appt.ty-lab,   .week-appt.ty-lab,   .ty-sw.ty-lab    { --tybg: var(--tybg-lab); }
-.cal-appt.ty-diag,  .week-appt.ty-diag,  .ty-sw.ty-diag   { --tybg: var(--tybg-diag); }
-.cal-appt.ty-fpe,   .week-appt.ty-fpe,   .ty-sw.ty-fpe    { --tybg: var(--tybg-fpe); }
-.cal-appt.ty-fpe6,  .week-appt.ty-fpe6,  .ty-sw.ty-fpe6   { --tybg: var(--tybg-fpe6); }
-.cal-appt.ty-chiro, .week-appt.ty-chiro, .ty-sw.ty-chiro  { --tybg: var(--tybg-chiro); }
-.cal-appt.ty-eboo,  .week-appt.ty-eboo,  .ty-sw.ty-eboo   { --tybg: var(--tybg-eboo); }
-.cal-appt.ty-laser, .week-appt.ty-laser, .ty-sw.ty-laser  { --tybg: var(--tybg-laser); }
+.cal-appt.ty-visit,  .week-appt.ty-visit,  .ty-sw.ty-visit   { --tybg: var(--tybg-visit); }
+.cal-appt.ty-proc,   .week-appt.ty-proc,   .ty-sw.ty-proc    { --tybg: var(--tybg-proc); }
+.cal-appt.ty-energ,  .week-appt.ty-energ,  .ty-sw.ty-energ   { --tybg: var(--tybg-energ); }
+.cal-appt.ty-lab,    .week-appt.ty-lab,    .ty-sw.ty-lab     { --tybg: var(--tybg-lab); }
+.cal-appt.ty-diag,   .week-appt.ty-diag,   .ty-sw.ty-diag    { --tybg: var(--tybg-diag); }
+.cal-appt.ty-fpe,    .week-appt.ty-fpe,    .ty-sw.ty-fpe     { --tybg: var(--tybg-fpe); }
+.cal-appt.ty-chiro,  .week-appt.ty-chiro,  .ty-sw.ty-chiro   { --tybg: var(--tybg-chiro); }
+.cal-appt.ty-eboo,   .week-appt.ty-eboo,   .ty-sw.ty-eboo    { --tybg: var(--tybg-eboo); }
+.cal-appt.ty-laser,  .week-appt.ty-laser,  .ty-sw.ty-laser   { --tybg: var(--tybg-laser); }
+.cal-appt.ty-iv,     .week-appt.ty-iv,     .ty-sw.ty-iv      { --tybg: var(--tybg-iv); }
+
+/* a dark type background cannot carry near-black text */
+.cal-appt.ty-laser { color: #fff; }
+.cal-appt.ty-laser .cal-appt-sub { color: #fff; }
+.cal-appt.ty-laser .cal-appt-name { color: #fff; }
+.cal-appt.ty-laser .cal-appt-time { color: #fff; }
+.cal-appt.ty-laser .cal-appt-note { color: #fff; }
+.cal-appt.ty-laser .cal-appt-type { color: #fff; }
 
 /* ---- SUBTYPE = the side bar ---- */
-.cal-appt.t-newpt,   .week-appt.t-newpt,   .rail-sw.t-newpt    { --sb: var(--sb-newpt); }
-.cal-appt.t-npfu,    .week-appt.t-npfu,    .rail-sw.t-npfu     { --sb: var(--sb-npfu); }
-.cal-appt.t-nptoc,   .week-appt.t-nptoc,   .rail-sw.t-nptoc    { --sb: var(--sb-nptoc); }
-.cal-appt.t-fu,      .week-appt.t-fu,      .rail-sw.t-fu       { --sb: var(--sb-fu); }
-.cal-appt.t-prp,     .week-appt.t-prp,     .rail-sw.t-prp      { --sb: var(--sb-prp); }
-.cal-appt.t-tpi,     .week-appt.t-tpi,     .rail-sw.t-tpi      { --sb: var(--sb-tpi); }
-.cal-appt.t-pelm,    .week-appt.t-pelm,    .rail-sw.t-pelm     { --sb: var(--sb-pelm); }
-.cal-appt.t-pelf,    .week-appt.t-pelf,    .rail-sw.t-pelf     { --sb: var(--sb-pelf); }
-.cal-appt.t-proloz,  .week-appt.t-proloz,  .rail-sw.t-proloz   { --sb: var(--sb-proloz); }
-.cal-appt.t-micro,   .week-appt.t-micro,   .rail-sw.t-micro    { --sb: var(--sb-micro); }
-.cal-appt.t-biochg,  .week-appt.t-biochg,  .rail-sw.t-biochg   { --sb: var(--sb-biochg); }
-.cal-appt.t-lymph,   .week-appt.t-lymph,   .rail-sw.t-lymph    { --sb: var(--sb-lymph); }
-.cal-appt.t-scenar,  .week-appt.t-scenar,  .rail-sw.t-scenar   { --sb: var(--sb-scenar); }
-.cal-appt.t-minilym, .week-appt.t-minilym, .rail-sw.t-minilym  { --sb: var(--sb-minilym); }
-.cal-appt.t-biomodp, .week-appt.t-biomodp, .rail-sw.t-biomodp  { --sb: var(--sb-biomodp); }
-.cal-appt.t-biomodr, .week-appt.t-biomodr, .rail-sw.t-biomodr  { --sb: var(--sb-biomodr); }
-.cal-appt.t-nmt,     .week-appt.t-nmt,     .rail-sw.t-nmt      { --sb: var(--sb-nmt); }
-.cal-appt.t-mead,    .week-appt.t-mead,    .rail-sw.t-mead     { --sb: var(--sb-mead); }
-.cal-appt.t-meadre,  .week-appt.t-meadre,  .rail-sw.t-meadre   { --sb: var(--sb-meadre); }
-.cal-appt.t-mdl,     .week-appt.t-mdl,     .rail-sw.t-mdl      { --sb: var(--sb-mdl); }
-.cal-appt.t-quest,   .week-appt.t-quest,   .rail-sw.t-quest    { --sb: var(--sb-quest); }
-.cal-appt.t-g6pd,    .week-appt.t-g6pd,    .rail-sw.t-g6pd     { --sb: var(--sb-g6pd); }
-.cal-appt.t-igenix,  .week-appt.t-igenix,  .rail-sw.t-igenix   { --sb: var(--sb-igenix); }
-
-
-/* ---- the IV recipes, same side-bar channel ---- */
-.cal-appt.t-ff5,     .week-appt.t-ff5,     .rail-sw.t-ff5      { --sb: var(--sb-ff5); }
-.cal-appt.t-ff10,    .week-appt.t-ff10,    .rail-sw.t-ff10     { --sb: var(--sb-ff10); }
-.cal-appt.t-ff15,    .week-appt.t-ff15,    .rail-sw.t-ff15     { --sb: var(--sb-ff15); }
-.cal-appt.t-ff20,    .week-appt.t-ff20,    .rail-sw.t-ff20     { --sb: var(--sb-ff20); }
-.cal-appt.t-ff25,    .week-appt.t-ff25,    .rail-sw.t-ff25     { --sb: var(--sb-ff25); }
-.cal-appt.t-ff50,    .week-appt.t-ff50,    .rail-sw.t-ff50     { --sb: var(--sb-ff50); }
-.cal-appt.t-mc15,    .week-appt.t-mc15,    .rail-sw.t-mc15     { --sb: var(--sb-mc15); }
-.cal-appt.t-mc25,    .week-appt.t-mc25,    .rail-sw.t-mc25     { --sb: var(--sb-mc25); }
-.cal-appt.t-mc50,    .week-appt.t-mc50,    .rail-sw.t-mc50     { --sb: var(--sb-mc50); }
-.cal-appt.t-mc75,    .week-appt.t-mc75,    .rail-sw.t-mc75     { --sb: var(--sb-mc75); }
-.cal-appt.t-mc100,   .week-appt.t-mc100,   .rail-sw.t-mc100    { --sb: var(--sb-mc100); }
-.cal-appt.t-cell,    .week-appt.t-cell,    .rail-sw.t-cell     { --sb: var(--sb-cell); }
-.cal-appt.t-mast,    .week-appt.t-mast,    .rail-sw.t-mast     { --sb: var(--sb-mast); }
-.cal-appt.t-mastb,   .week-appt.t-mastb,   .rail-sw.t-mastb    { --sb: var(--sb-mastb); }
-.cal-appt.t-cog,     .week-appt.t-cog,     .rail-sw.t-cog      { --sb: var(--sb-cog); }
-.cal-appt.t-iron,    .week-appt.t-iron,    .rail-sw.t-iron     { --sb: var(--sb-iron); }
-.cal-appt.t-rest,    .week-appt.t-rest,    .rail-sw.t-rest     { --sb: var(--sb-rest); }
-.cal-appt.t-detox,   .week-appt.t-detox,   .rail-sw.t-detox    { --sb: var(--sb-detox); }
-.cal-appt.t-amino,   .week-appt.t-amino,   .rail-sw.t-amino    { --sb: var(--sb-amino); }
-.cal-appt.t-minic,   .week-appt.t-minic,   .rail-sw.t-minic    { --sb: var(--sb-minic); }
-.cal-appt.t-minimb,  .week-appt.t-minimb,  .rail-sw.t-minimb   { --sb: var(--sb-minimb); }
-.cal-appt.t-mito,    .week-appt.t-mito,    .rail-sw.t-mito     { --sb: var(--sb-mito); }
-.cal-appt.t-ebooiv,  .week-appt.t-ebooiv,  .rail-sw.t-ebooiv   { --sb: var(--sb-ebooiv); }
+.cal-appt.t-newpt,     .week-appt.t-newpt,     .rail-sw.t-newpt      { --sb: var(--sb-newpt); }
+.cal-appt.t-npfu,      .week-appt.t-npfu,      .rail-sw.t-npfu       { --sb: var(--sb-npfu); }
+.cal-appt.t-nptoc,     .week-appt.t-nptoc,     .rail-sw.t-nptoc      { --sb: var(--sb-nptoc); }
+.cal-appt.t-fu,        .week-appt.t-fu,        .rail-sw.t-fu         { --sb: var(--sb-fu); }
+.cal-appt.t-prp,       .week-appt.t-prp,       .rail-sw.t-prp        { --sb: var(--sb-prp); }
+.cal-appt.t-tpi,       .week-appt.t-tpi,       .rail-sw.t-tpi        { --sb: var(--sb-tpi); }
+.cal-appt.t-pelm,      .week-appt.t-pelm,      .rail-sw.t-pelm       { --sb: var(--sb-pelm); }
+.cal-appt.t-pelf,      .week-appt.t-pelf,      .rail-sw.t-pelf       { --sb: var(--sb-pelf); }
+.cal-appt.t-proloz,    .week-appt.t-proloz,    .rail-sw.t-proloz     { --sb: var(--sb-proloz); }
+.cal-appt.t-micro,     .week-appt.t-micro,     .rail-sw.t-micro      { --sb: var(--sb-micro); }
+.cal-appt.t-biochg,    .week-appt.t-biochg,    .rail-sw.t-biochg     { --sb: var(--sb-biochg); }
+.cal-appt.t-lymph,     .week-appt.t-lymph,     .rail-sw.t-lymph      { --sb: var(--sb-lymph); }
+.cal-appt.t-scenar,    .week-appt.t-scenar,    .rail-sw.t-scenar     { --sb: var(--sb-scenar); }
+.cal-appt.t-minilym,   .week-appt.t-minilym,   .rail-sw.t-minilym    { --sb: var(--sb-minilym); }
+.cal-appt.t-biomodp,   .week-appt.t-biomodp,   .rail-sw.t-biomodp    { --sb: var(--sb-biomodp); }
+.cal-appt.t-biomodr,   .week-appt.t-biomodr,   .rail-sw.t-biomodr    { --sb: var(--sb-biomodr); }
+.cal-appt.t-nmt,       .week-appt.t-nmt,       .rail-sw.t-nmt        { --sb: var(--sb-nmt); }
+.cal-appt.t-mead,      .week-appt.t-mead,      .rail-sw.t-mead       { --sb: var(--sb-mead); }
+.cal-appt.t-meadre,    .week-appt.t-meadre,    .rail-sw.t-meadre     { --sb: var(--sb-meadre); }
+.cal-appt.t-rr,        .week-appt.t-rr,        .rail-sw.t-rr         { --sb: var(--sb-rr); }
+.cal-appt.t-mdl,       .week-appt.t-mdl,       .rail-sw.t-mdl        { --sb: var(--sb-mdl); }
+.cal-appt.t-quest,     .week-appt.t-quest,     .rail-sw.t-quest      { --sb: var(--sb-quest); }
+.cal-appt.t-g6pd,      .week-appt.t-g6pd,      .rail-sw.t-g6pd       { --sb: var(--sb-g6pd); }
+.cal-appt.t-igenex,    .week-appt.t-igenex,    .rail-sw.t-igenex     { --sb: var(--sb-igenex); }
+.cal-appt.t-diag,      .week-appt.t-diag,      .rail-sw.t-diag       { --sb: var(--sb-diag); }
+.cal-appt.t-fpeie,     .week-appt.t-fpeie,     .rail-sw.t-fpeie      { --sb: var(--sb-fpeie); }
+.cal-appt.t-fpefu,     .week-appt.t-fpefu,     .rail-sw.t-fpefu      { --sb: var(--sb-fpefu); }
+.cal-appt.t-dcintx,    .week-appt.t-dcintx,    .rail-sw.t-dcintx     { --sb: var(--sb-dcintx); }
+.cal-appt.t-dctx,      .week-appt.t-dctx,      .rail-sw.t-dctx       { --sb: var(--sb-dctx); }
+.cal-appt.t-lasereval, .week-appt.t-lasereval, .rail-sw.t-lasereval  { --sb: var(--sb-lasereval); }
+.cal-appt.t-medifne,   .week-appt.t-medifne,   .rail-sw.t-medifne    { --sb: var(--sb-medifne); }
+.cal-appt.t-pocrev,    .week-appt.t-pocrev,    .rail-sw.t-pocrev     { --sb: var(--sb-pocrev); }
+.cal-appt.t-eboosafe,  .week-appt.t-eboosafe,  .rail-sw.t-eboosafe   { --sb: var(--sb-eboosafe); }
+.cal-appt.t-ebootx,    .week-appt.t-ebootx,    .rail-sw.t-ebootx     { --sb: var(--sb-ebootx); }
+.cal-appt.t-erchlas,   .week-appt.t-erchlas,   .rail-sw.t-erchlas    { --sb: var(--sb-erchlas); }
+.cal-appt.t-erccemp,   .week-appt.t-erccemp,   .rail-sw.t-erccemp    { --sb: var(--sb-erccemp); }
+.cal-appt.t-erccpt,    .week-appt.t-erccpt,    .rail-sw.t-erccpt     { --sb: var(--sb-erccpt); }
+.cal-appt.t-erccvip,   .week-appt.t-erccvip,   .rail-sw.t-erccvip    { --sb: var(--sb-erccvip); }
+.cal-appt.t-erccref,   .week-appt.t-erccref,   .rail-sw.t-erccref    { --sb: var(--sb-erccref); }
+.cal-appt.t-cell,      .week-appt.t-cell,      .rail-sw.t-cell       { --sb: var(--sb-cell); }
+.cal-appt.t-chel,      .week-appt.t-chel,      .rail-sw.t-chel       { --sb: var(--sb-chel); }
+.cal-appt.t-cog,       .week-appt.t-cog,       .rail-sw.t-cog        { --sb: var(--sb-cog); }
+.cal-appt.t-iron,      .week-appt.t-iron,      .rail-sw.t-iron       { --sb: var(--sb-iron); }
+.cal-appt.t-rest,      .week-appt.t-rest,      .rail-sw.t-rest       { --sb: var(--sb-rest); }
+.cal-appt.t-detox,     .week-appt.t-detox,     .rail-sw.t-detox      { --sb: var(--sb-detox); }
+.cal-appt.t-ebooiv,    .week-appt.t-ebooiv,    .rail-sw.t-ebooiv     { --sb: var(--sb-ebooiv); }
+.cal-appt.t-amino,     .week-appt.t-amino,     .rail-sw.t-amino      { --sb: var(--sb-amino); }
+.cal-appt.t-ff5,       .week-appt.t-ff5,       .rail-sw.t-ff5        { --sb: var(--sb-ff5); }
+.cal-appt.t-ff10,      .week-appt.t-ff10,      .rail-sw.t-ff10       { --sb: var(--sb-ff10); }
+.cal-appt.t-ff15,      .week-appt.t-ff15,      .rail-sw.t-ff15       { --sb: var(--sb-ff15); }
+.cal-appt.t-ff20,      .week-appt.t-ff20,      .rail-sw.t-ff20       { --sb: var(--sb-ff20); }
+.cal-appt.t-ff25,      .week-appt.t-ff25,      .rail-sw.t-ff25       { --sb: var(--sb-ff25); }
+.cal-appt.t-ff50,      .week-appt.t-ff50,      .rail-sw.t-ff50       { --sb: var(--sb-ff50); }
+.cal-appt.t-mast,      .week-appt.t-mast,      .rail-sw.t-mast       { --sb: var(--sb-mast); }
+.cal-appt.t-mc15,      .week-appt.t-mc15,      .rail-sw.t-mc15       { --sb: var(--sb-mc15); }
+.cal-appt.t-mc25,      .week-appt.t-mc25,      .rail-sw.t-mc25       { --sb: var(--sb-mc25); }
+.cal-appt.t-mc50,      .week-appt.t-mc50,      .rail-sw.t-mc50       { --sb: var(--sb-mc50); }
+.cal-appt.t-mc75,      .week-appt.t-mc75,      .rail-sw.t-mc75       { --sb: var(--sb-mc75); }
+.cal-appt.t-mc100,     .week-appt.t-mc100,     .rail-sw.t-mc100      { --sb: var(--sb-mc100); }
+.cal-appt.t-migraine,  .week-appt.t-migraine,  .rail-sw.t-migraine   { --sb: var(--sb-migraine); }
+.cal-appt.t-mito,      .week-appt.t-mito,      .rail-sw.t-mito       { --sb: var(--sb-mito); }
+.cal-appt.t-minimb,    .week-appt.t-minimb,    .rail-sw.t-minimb     { --sb: var(--sb-minimb); }
+.cal-appt.t-minimbc,   .week-appt.t-minimbc,   .rail-sw.t-minimbc    { --sb: var(--sb-minimbc); }
 .cal-appt.t-block, .week-appt.t-block, .rail-sw.t-block { --sb: var(--sb-none); }
-
-/* ---- STATUS = a watermark over the background ---- */
-/* scheduled */
-.cal-appt.st-scheduled, .week-appt.st-scheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M7 2v3M17 2v3M3 8.5h18' stroke='%23000' stroke-width='2' fill='none'/><rect x='3' y='4.5' width='18' height='16.5' rx='2' stroke='%23000' stroke-width='2' fill='none'/></g></svg>") }
-.st-sw.st-scheduled, .dr-status.st-scheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M7 2v3M17 2v3M3 8.5h18' stroke='%23000' stroke-width='2' fill='none'/><rect x='3' y='4.5' width='18' height='16.5' rx='2' stroke='%23000' stroke-width='2' fill='none'/></g></svg>") }
-/* confirmed */
-.cal-appt.st-confirmed, .week-appt.st-confirmed { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M4 13l5.5 5.5L20.5 5.5' stroke='%23000' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
-.st-sw.st-confirmed, .dr-status.st-confirmed { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M4 13l5.5 5.5L20.5 5.5' stroke='%23000' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
-/* arrived */
-.cal-appt.st-arrived, .week-appt.st-arrived { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M12 1.5a7.5 7.5 0 00-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0012 1.5z' fill='%23000'/><circle cx='12' cy='9' r='2.8' fill='%23fff'/></g></svg>") }
-.st-sw.st-arrived, .dr-status.st-arrived { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M12 1.5a7.5 7.5 0 00-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0012 1.5z' fill='%23000'/><circle cx='12' cy='9' r='2.8' fill='%23fff'/></g></svg>") }
-/* inroom */
-.cal-appt.st-inroom, .week-appt.st-inroom { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
-.st-sw.st-inroom, .dr-status.st-inroom { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
-/* inchair */
-.cal-appt.st-inchair, .week-appt.st-inchair { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
-.st-sw.st-inchair, .dr-status.st-inchair { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M5 3.5l15 8.5-15 8.5z' fill='%23000'/></g></svg>") }
-/* locked */
-.cal-appt.st-locked, .week-appt.st-locked { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><rect x='4.5' y='10' width='15' height='11.5' rx='2.2' fill='%23000'/><path d='M8 10V6.8a4 4 0 018 0V10' stroke='%23000' stroke-width='2.4' fill='none'/></g></svg>") }
-.st-sw.st-locked, .dr-status.st-locked { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><rect x='4.5' y='10' width='15' height='11.5' rx='2.2' fill='%23000'/><path d='M8 10V6.8a4 4 0 018 0V10' stroke='%23000' stroke-width='2.4' fill='none'/></g></svg>") }
-/* done */
-.cal-appt.st-done, .week-appt.st-done { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M4.5 2v20' stroke='%23000' stroke-width='2.2'/><path d='M7 3.5h4.2v4.2H7zM11.2 7.7h4.2v4.2h-4.2zM15.4 3.5h4.2v4.2h-4.2zM7 11.9h4.2v4.2H7zM15.4 11.9h4.2v4.2h-4.2z' fill='%23000'/></g></svg>") }
-.st-sw.st-done, .dr-status.st-done { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M4.5 2v20' stroke='%23000' stroke-width='2.2'/><path d='M7 3.5h4.2v4.2H7zM11.2 7.7h4.2v4.2h-4.2zM15.4 3.5h4.2v4.2h-4.2zM7 11.9h4.2v4.2H7zM15.4 11.9h4.2v4.2h-4.2z' fill='%23000'/></g></svg>") }
-/* rescheduled */
-.cal-appt.st-rescheduled, .week-appt.st-rescheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M3.2 12a8.8 8.8 0 0114.6-6.6M20.8 12a8.8 8.8 0 01-14.6 6.6' stroke='%23000' stroke-width='2.2' fill='none'/><path d='M18.4 1.6v4.6h-4.6M5.6 22.4v-4.6h4.6' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
-.st-sw.st-rescheduled, .dr-status.st-rescheduled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M3.2 12a8.8 8.8 0 0114.6-6.6M20.8 12a8.8 8.8 0 01-14.6 6.6' stroke='%23000' stroke-width='2.2' fill='none'/><path d='M18.4 1.6v4.6h-4.6M5.6 22.4v-4.6h4.6' stroke='%23000' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></g></svg>") }
-/* cancelled */
-.cal-appt.st-cancelled, .week-appt.st-cancelled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M4.5 4.5l15 15M19.5 4.5l-15 15' stroke='%23000' stroke-width='3.2' stroke-linecap='round'/></g></svg>") }
-.st-sw.st-cancelled, .dr-status.st-cancelled { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M4.5 4.5l15 15M19.5 4.5l-15 15' stroke='%23000' stroke-width='3.2' stroke-linecap='round'/></g></svg>") }
-/* noshow */
-.cal-appt.st-noshow, .week-appt.st-noshow { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.34'><path d='M12 1.6A7.6 7.6 0 004.4 9.2v13.2l2.7-2.2 2.5 2 2.4-2 2.4 2 2.5-2 2.7 2.2V9.2A7.6 7.6 0 0012 1.6z' fill='%23000'/><circle cx='9.3' cy='9.4' r='1.5' fill='%23fff'/><circle cx='14.7' cy='9.4' r='1.5' fill='%23fff'/></g></svg>") }
-.st-sw.st-noshow, .dr-status.st-noshow { --wm: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><g opacity='.82'><path d='M12 1.6A7.6 7.6 0 004.4 9.2v13.2l2.7-2.2 2.5 2 2.4-2 2.4 2 2.5-2 2.7 2.2V9.2A7.6 7.6 0 0012 1.6z' fill='%23000'/><circle cx='9.3' cy='9.4' r='1.5' fill='%23fff'/><circle cx='14.7' cy='9.4' r='1.5' fill='%23fff'/></g></svg>") }
 
 /* the padlock, drawn rather than typed — kept for the pill and the legend */
 .lockmark {
@@ -1238,7 +1240,7 @@ a.lead-chip:hover { border-color: var(--ink); }
    and TYPE is the background now, so a texture would say the same thing twice. */
 .cal-appt::before {
   content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 13px;
-  background: var(--sb); border-right: 1px solid rgba(0,0,0,.22);
+  background: var(--sb); border-right: 1px solid rgba(0,0,0,.32);
 }
 .cal-appt:hover { box-shadow: 0 4px 14px rgba(0,0,0,.25); z-index: 5; }
 
@@ -1723,7 +1725,7 @@ a.lead-chip:hover { border-color: var(--ink); }
   background-position: right 4px bottom 3px; background-size: 18px 18px;
   border: 1px solid rgba(0,0,0,.18); border-left: none; padding-left: 14px; }
 .week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
-  background: var(--sb); border-right: 1px solid rgba(0,0,0,.22); }
+  background: var(--sb); border-right: 1px solid rgba(0,0,0,.32); }
 .week-appt.st-scheduled { border-style: dashed; }
 .week-appt.st-cancelled { opacity: .62; }
 .week-appt.is-block {
