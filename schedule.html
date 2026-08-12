@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=69">
+<link rel="stylesheet" href="assets/hcos.css?v=71">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -61,7 +61,7 @@
           <div class="l-filters">
             <label class="l-fl">
               <span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select" id="l-view" onchange="lSync(this)" aria-label="Field">
+              <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="Field">
                 <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
                   <option value="providers">All providers</option>
@@ -87,7 +87,7 @@
             <div class="l-fl">
               <span class="filter-group-lbl">Type &amp; subtype</span>
               <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-                <div class="msel" id="l-msel-ty">
+                <div class="msel" data-msel="ty">
                   <button class="msel-field" data-hcos-handled="1" type="button">
                     <span class="msel-field-lbl">All types</span><span class="msel-caret">&#9662;</span>
                   </button>
@@ -108,7 +108,7 @@
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
                   </div>
                 </div>
-                <div class="msel" id="l-msel-sub">
+                <div class="msel" data-msel="sub">
                   <button class="msel-field" data-hcos-handled="1" type="button">
                     <span class="msel-field-lbl">All subtypes</span><span class="msel-caret">&#9662;</span>
                   </button>
@@ -192,7 +192,7 @@
                     <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
                   </div>
                 </div>
-                <div class="msel" id="l-msel-st">
+                <div class="msel" data-msel="st">
                   <button class="msel-field" data-hcos-handled="1" type="button">
                     <span class="msel-field-lbl">All statuses</span><span class="msel-caret">&#9662;</span>
                   </button>
@@ -219,6 +219,26 @@
               </div>
               
           </div>
+            <label class="l-fl">
+              <span class="filter-group-lbl">Dates</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+                <select class="field-select l-select l-range" onchange="lRange(this.value)" aria-label="Date range">
+                  <option value="today">Today</option>
+                  <option value="tomorrow">Tomorrow</option>
+                  <option value="week">This week</option>
+                  <option value="next7">Next 7 days</option>
+                  <option value="month">This month</option>
+                  <option value="custom">Custom range&hellip;</option>
+                </select>
+                <span class="l-range-custom" style="display:none;gap:6px;align-items:center">
+                  <input type="date" class="field-input l-range-from" value="2026-07-21" aria-label="From" style="width:148px">
+                  <span style="color:var(--muted);font-size:11.5px">to</span>
+                  <input type="date" class="field-input l-range-to" value="2026-07-25" aria-label="To" style="width:148px">
+                  <button class="btn btn-sm" type="button" onclick="lRangeApply()">Apply</button>
+                </span>
+              </div>
+            </label>
+
           <div class="l-view-group" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
               <span class="l-count" id="l-count">Showing all 19 appointments</span>
               <button class="view-lock locked" id="l-lockbtn"
@@ -350,17 +370,16 @@
                 <div class="cal-appt-name">Break</div>
                 <div class="cal-appt-time">2:00 PM</div>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit" style="top:864px;height:98px" data-appt="A-88314" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Tom Alvarez" data-ins="Anthem Blue Cross · INN" data-phone="(949) 555-0412" data-stage="Stabilization" data-pay="$40 copay" data-when="3:00 PM" data-tx="Follow Up" data-note="Diagnostic consent re-sent · awaiting signature">
-                <span class="cal-appt-sub">Follow Up</span>
-                <div class="cal-appt-name">Tom Alvarez</div>
-                <div class="cal-appt-note">Diagnostic consent re-sent · awaiting signature</div>
+              <div class="cal-appt is-space t-newpt ty-visit" style="top:864px;height:98px" data-open-drawer="#l-space-drawer" data-space="1" data-st="Held" data-when="3:00 PM" data-tx="New patient space">
+                <span class="cal-appt-sub">Reserved</span>
+                <div class="cal-appt-name">New patient space</div>
+                <div class="cal-appt-note">Only a new patient can be booked here</div>
                 <div class="cal-appt-time">3:00 PM</div>
-                <span class="cal-appt-type">Anthem Blue Cross</span>
               </div>
-              <div class="cal-appt st-cancelled t-fu ty-visit" style="top:960px;height:98px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Cancelled" data-sub="t-fu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="4:00 PM" data-tx="Follow Up" data-note="Cancelled 8/7 — patient travelling">
+              <div class="cal-appt st-rescheduled t-fu ty-visit" style="top:960px;height:98px" data-appt="A-88315" data-open-drawer="#l-appt-drawer" data-st="Rescheduled" data-sub="t-fu" data-days="1,2,3" data-pt="Nadia Boulos" data-ins="Cigna · OON" data-phone="(949) 555-0307" data-stage="Repair" data-pay="30% coinsurance" data-when="4:00 PM" data-tx="Follow Up" data-note="Moved to Thursday 9 AM at her request">
                 <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Nadia Boulos</div>
-                <div class="cal-appt-note">Cancelled 8/7 — patient travelling</div>
+                <div class="cal-appt-note">Moved to Thursday 9 AM at her request</div>
                 <div class="cal-appt-time">4:00 PM</div>
                 <span class="cal-appt-type">Cigna</span>
               </div>
@@ -598,12 +617,11 @@
                 <div class="cal-appt-note">Held pending her order renewal</div>
                 <div class="cal-appt-time">3:00 PM</div>
               </div>
-              <div class="cal-appt st-scheduled t-quest ty-lab" style="top:960px;height:98px" data-appt="A-88350" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-quest" data-days="2" data-pt="Liam Fitzgerald" data-ins="Blue Shield of CA · OON" data-phone="(949) 555-1432" data-stage="Lead actor 3" data-pay="$310 deductible left" data-when="4:00 PM" data-tx="Quest" data-note="Fasting draw · confirm she has not eaten">
-                <span class="cal-appt-sub">Quest</span>
-                <div class="cal-appt-name">Liam Fitzgerald</div>
-                <div class="cal-appt-note">Fasting draw · confirm she has not eaten</div>
+              <div class="cal-appt is-space t-newpt ty-visit" style="top:960px;height:98px" data-open-drawer="#l-space-drawer" data-space="1" data-st="Held" data-when="4:00 PM" data-tx="New patient space">
+                <span class="cal-appt-sub">Reserved</span>
+                <div class="cal-appt-name">New patient space</div>
+                <div class="cal-appt-note">Only a new patient can be booked here</div>
                 <div class="cal-appt-time">4:00 PM</div>
-                <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
             </div>
             <!-- IV 1 -->
@@ -1355,7 +1373,6 @@
 
 
           <div class="l-filters">
-            <span class="l-count">Week columns show Dr. Drannikov and IV 1 to 4 &middot; Tuesday's other five appointments are with Dr. Bakman and Brooke</span>
             <div class="l-view-group">
               <button class="btn btn-sm" data-activate="l-01-day">Open Tuesday with every provider</button>
             </div>
@@ -1445,44 +1462,62 @@
           <div class="card cap-card" style="margin:0 16px 14px">
             <div class="card-title">Capacity this week &middot; 20&ndash;24 July
               <span class="cap-total">115 of 164 slots booked &middot; 70&#37; full &middot; 49 left</span></div>
+            <div class="cap-filters">
+              <select class="field-select cap-ty" onchange="lCapFilter(this)" aria-label="Appointment type">
+                <option value="">Every type</option>
+                <option value="ty-visit">Office Visit</option>
+                <option value="ty-proc">Procedure</option>
+                <option value="ty-energ">Energetics</option>
+                <option value="ty-lab">Labs</option>
+                <option value="ty-diag">Diagnostics</option>
+                <option value="ty-fpe">FPE</option>
+                <option value="ty-chiro">Chiro</option>
+                <option value="ty-eboo">EBOO</option>
+                <option value="ty-laser">Laser</option>
+                <option value="ty-iv">IV</option>
+              </select>
+              <input class="field-input cap-q" placeholder="Search a treatment&hellip;"
+                     oninput="lCapFilter(this)" aria-label="Search a treatment">
+              <label class="cx-toggle"><input type="checkbox" onchange="lCapFilter(this)" class="cap-low"> Only what is nearly full</label>
+            </div>
             <div class="cap-head"><span class="cap-name">Treatment</span><span></span>
               <span class="cap-num">Booked</span><span class="cap-pct">Full</span><span class="cap-left">Left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-nad"><span class="cap-name"><i class="rail-sw t-nad"></i>NAD+</span>
               <div class="meter"><div class="meter-fill" style="width:71%"></div></div>
               <span class="cap-num"><b>17 of 24</b> booked</span>
               <span class="cap-pct">71%</span>
               <span class="cap-left">7 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-ivc"><span class="cap-name"><i class="rail-sw t-ivc"></i>Mega C</span>
               <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
               <span class="cap-num"><b>21 of 25</b> booked</span>
               <span class="cap-pct">84%</span>
               <span class="cap-left">4 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-flow"><span class="cap-name"><i class="rail-sw t-flow"></i>Foundational Flow</span>
               <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
               <span class="cap-num"><b>12 of 24</b> booked</span>
               <span class="cap-pct">50%</span>
               <span class="cap-left">12 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-glut"><span class="cap-name"><i class="rail-sw t-glut"></i>Glutathione</span>
               <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
               <span class="cap-num"><b>9 of 20</b> booked</span>
               <span class="cap-pct">45%</span>
               <span class="cap-left">11 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+            <div class="cap-row" data-ty="ty-visit" data-sub="t-newpt"><span class="cap-name"><i class="rail-sw t-newpt"></i>New patient</span>
               <div class="meter"><div class="meter-fill" style="width:80%"></div></div>
               <span class="cap-num"><b>8 of 10</b> booked</span>
               <span class="cap-pct">80%</span>
               <span class="cap-left">2 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+            <div class="cap-row" data-ty="ty-visit" data-sub="t-fu"><span class="cap-name"><i class="rail-sw t-fu"></i>Follow-up</span>
               <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
               <span class="cap-num"><b>37 of 44</b> booked</span>
               <span class="cap-pct">84%</span>
               <span class="cap-left">7 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+            <div class="cap-row" data-ty="ty-eboo" data-sub="t-eboo"><span class="cap-name"><i class="rail-sw t-eboo"></i>EBOO</span>
               <div class="meter"><div class="meter-fill" style="width:83%"></div></div>
               <span class="cap-num"><b>5 of 6</b> booked</span>
               <span class="cap-pct">83%</span>
               <span class="cap-left">1 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-micro ty-proc"></i>Microcurrent</span>
+            <div class="cap-row" data-ty="ty-proc" data-sub="t-micro"><span class="cap-name"><i class="rail-sw t-micro"></i>Microcurrent</span>
               <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
               <span class="cap-num"><b>6 of 11</b> booked</span>
               <span class="cap-pct">55%</span>
@@ -1797,64 +1832,82 @@
           <div class="card cap-card" style="margin:0 16px 14px">
             <div class="card-title">Capacity this month &middot; July
               <span class="cap-total">1,022 of 1,340 slots booked &middot; 76&#37; full &middot; 318 left</span></div>
+            <div class="cap-filters">
+              <select class="field-select cap-ty" onchange="lCapFilter(this)" aria-label="Appointment type">
+                <option value="">Every type</option>
+                <option value="ty-visit">Office Visit</option>
+                <option value="ty-proc">Procedure</option>
+                <option value="ty-energ">Energetics</option>
+                <option value="ty-lab">Labs</option>
+                <option value="ty-diag">Diagnostics</option>
+                <option value="ty-fpe">FPE</option>
+                <option value="ty-chiro">Chiro</option>
+                <option value="ty-eboo">EBOO</option>
+                <option value="ty-laser">Laser</option>
+                <option value="ty-iv">IV</option>
+              </select>
+              <input class="field-input cap-q" placeholder="Search a treatment&hellip;"
+                     oninput="lCapFilter(this)" aria-label="Search a treatment">
+              <label class="cx-toggle"><input type="checkbox" onchange="lCapFilter(this)" class="cap-low"> Only what is nearly full</label>
+            </div>
             <div class="cap-head"><span class="cap-name">Treatment</span><span></span>
               <span class="cap-num">Booked</span><span class="cap-pct">Full</span><span class="cap-left">Left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-nad ty-iv"></i>NAD+</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-nad"><span class="cap-name"><i class="rail-sw t-nad"></i>NAD+</span>
               <div class="meter"><div class="meter-fill" style="width:77%"></div></div>
               <span class="cap-num"><b>74 of 96</b> booked</span>
               <span class="cap-pct">77%</span>
               <span class="cap-left">22 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-ivc ty-iv"></i>Mega C</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-ivc"><span class="cap-name"><i class="rail-sw t-ivc"></i>Mega C</span>
               <div class="meter"><div class="meter-fill" style="width:81%"></div></div>
               <span class="cap-num"><b>81 of 100</b> booked</span>
               <span class="cap-pct">81%</span>
               <span class="cap-left">19 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-flow ty-iv"></i>Foundational Flow</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-flow"><span class="cap-name"><i class="rail-sw t-flow"></i>Foundational Flow</span>
               <div class="meter"><div class="meter-fill" style="width:54%"></div></div>
               <span class="cap-num"><b>52 of 96</b> booked</span>
               <span class="cap-pct">54%</span>
               <span class="cap-left">44 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-glut ty-iv"></i>Glutathione</span>
+            <div class="cap-row" data-ty="ty-iv" data-sub="t-glut"><span class="cap-name"><i class="rail-sw t-glut"></i>Glutathione</span>
               <div class="meter"><div class="meter-fill" style="width:48%"></div></div>
               <span class="cap-num"><b>38 of 80</b> booked</span>
               <span class="cap-pct">48%</span>
               <span class="cap-left">42 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-newpt ty-visit"></i>New patient</span>
+            <div class="cap-row" data-ty="ty-visit" data-sub="t-newpt"><span class="cap-name"><i class="rail-sw t-newpt"></i>New patient</span>
               <div class="meter"><div class="meter-fill" style="width:85%"></div></div>
               <span class="cap-num"><b>34 of 40</b> booked</span>
               <span class="cap-pct">85%</span>
               <span class="cap-left">6 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-fu ty-visit"></i>Follow-up</span>
+            <div class="cap-row" data-ty="ty-visit" data-sub="t-fu"><span class="cap-name"><i class="rail-sw t-fu"></i>Follow-up</span>
               <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
               <span class="cap-num"><b>148 of 176</b> booked</span>
               <span class="cap-pct">84%</span>
               <span class="cap-left">28 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-tele ty-visit"></i>Telehealth</span>
+            <div class="cap-row" data-ty="ty-visit" data-sub="t-tele"><span class="cap-name"><i class="rail-sw t-tele"></i>Telehealth</span>
               <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
               <span class="cap-num"><b>22 of 44</b> booked</span>
               <span class="cap-pct">50%</span>
               <span class="cap-left">22 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-eboo ty-proc"></i>EBOO</span>
+            <div class="cap-row" data-ty="ty-eboo" data-sub="t-eboo"><span class="cap-name"><i class="rail-sw t-eboo"></i>EBOO</span>
               <div class="meter"><div class="meter-fill" style="width:75%"></div></div>
               <span class="cap-num"><b>18 of 24</b> booked</span>
               <span class="cap-pct">75%</span>
               <span class="cap-left">6 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-prp ty-proc"></i>PRP</span>
+            <div class="cap-row" data-ty="ty-proc" data-sub="t-prp"><span class="cap-name"><i class="rail-sw t-prp"></i>PRP</span>
               <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
               <span class="cap-num"><b>11 of 20</b> booked</span>
               <span class="cap-pct">55%</span>
               <span class="cap-left">9 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-pel ty-proc"></i>Pellet</span>
+            <div class="cap-row" data-ty="ty-proc" data-sub="t-pel"><span class="cap-name"><i class="rail-sw t-pel"></i>Pellet</span>
               <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
               <span class="cap-num"><b>9 of 20</b> booked</span>
               <span class="cap-pct">45%</span>
               <span class="cap-left">11 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-las ty-energ"></i>Laser</span>
+            <div class="cap-row" data-ty="ty-laser" data-sub="t-las"><span class="cap-name"><i class="rail-sw t-las"></i>Laser</span>
               <div class="meter"><div class="meter-fill" style="width:35%"></div></div>
               <span class="cap-num"><b>14 of 40</b> booked</span>
               <span class="cap-pct">35%</span>
               <span class="cap-left">26 left</span></div>
-            <div class="cap-row"><span class="cap-name"><i class="rail-sw t-micro ty-proc"></i>Microcurrent</span>
+            <div class="cap-row" data-ty="ty-proc" data-sub="t-micro"><span class="cap-name"><i class="rail-sw t-micro"></i>Microcurrent</span>
               <div class="meter"><div class="meter-fill" style="width:59%"></div></div>
               <span class="cap-num"><b>26 of 44</b> booked</span>
               <span class="cap-pct">59%</span>
@@ -2544,60 +2597,79 @@
 
         <div class="callout callout-ok">
           <strong>Grace Lindqvist cancelled her 10:00 with Brooke.</strong>
-          Two people on the waitlist want that window &mdash; the first is Owen Delacroix, who asked for
-          any weekday morning.
+          Four people on the waitlist match that window. Tick the ones to offer it to &mdash;
+          the slot is held for 30 minutes and the first to accept takes it.
           <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-            <button class="btn btn-sm btn-primary" onclick="HCOS.toast('Text sent to Owen Delacroix. The slot is held for 30 minutes.', 'ok')">Offer it to Owen</button>
-            <button class="btn btn-sm" onclick="HCOS.toast('All four matching patients were texted. First to accept takes it.', 'ok')">Offer to everyone who matches</button>
+            <button class="btn btn-sm btn-primary" data-open-modal="#l-offer-modal">Offer this slot</button>
+            <button class="btn btn-sm" onclick="lWlPickAll()">Tick everyone who matches</button>
+          </div>
+        </div>
+
+        <div id="l-offer-live" class="l-offer-live" style="display:none">
+          <div class="l-offer-hd">
+            <span class="l-offer-dot"></span>
+            <b>Offer out to 3 people</b>
+            <span class="l-offer-clock" id="l-offer-clock">29:41 left</span>
+          </div>
+          <div class="l-offer-rows" id="l-offer-rows"></div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn btn-sm" onclick="lOfferAccept()">Simulate: someone accepts</button>
+            <button class="btn btn-sm" onclick="lOfferStop()">Withdraw the offer</button>
           </div>
         </div>
 
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
             <thead><tr>
+              <th scope="col" style="width:34px"><input type="checkbox" onchange="lWlPickAll(this.checked)" aria-label="Select every patient"></th>
               <th scope="col">Patient</th><th scope="col">Wants</th><th scope="col">Windows that suit them</th>
               <th scope="col">Waiting since</th><th scope="col">Currently booked</th><th scope="col"></th>
             </tr></thead>
             <tbody id="l-wl-body">
               <tr>
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
                 <td>Owen Delacroix<div class="field-help">(949) 555-0977</div></td>
                 <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Office visit &middot; Follow-up</td>
                 <td>Any weekday 8:00&ndash;12:00</td>
                 <td>3 days</td>
                 <td>Aug 4, 2:00 PM</td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Owen has 30 minutes to accept before it goes to the next match.', 'ok')">Offer a slot</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Owen has 30 minutes to accept before it goes to the next match.', 'ok')">Offer a slot</button></td>
               </tr>
               <tr>
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
                 <td>Amara Diallo<div class="field-help">(310) 555-1543</div></td>
                 <td><span class="rail-sw t-nad ty-iv" style="vertical-align:-4px"></span> IV &middot; NAD+</td>
                 <td>Tue or Thu, afternoons</td>
                 <td>6 days</td>
                 <td>Aug 11, 1:00 PM</td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Amara has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Amara has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
               </tr>
               <tr>
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
                 <td>Samir Haddad<div class="field-help">(949) 555-1876</div></td>
                 <td><span class="rail-sw t-eboo ty-proc" style="vertical-align:-4px"></span> Procedure &middot; EBOO</td>
                 <td>Any morning &mdash; he travels Fridays</td>
                 <td>11 days</td>
                 <td>Not booked</td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Samir has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Samir has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
               </tr>
               <tr>
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
                 <td>Nina Kowalski<div class="field-help">(949) 555-1765</div></td>
                 <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Office visit &middot; Follow-up</td>
                 <td>Mon&ndash;Wed 9:00&ndash;11:00</td>
                 <td>2 days</td>
                 <td>Aug 6, 12:30 PM</td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Nina has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Nina has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
               </tr>
               <tr>
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
                 <td>Yuki Tanaka<div class="field-help">(714) 555-1088</div></td>
                 <td><span class="rail-sw t-micro ty-proc" style="vertical-align:-4px"></span> Procedure &middot; Microcurrent</td>
                 <td>Any time &mdash; will take a same-day call</td>
                 <td>1 day</td>
                 <td>Aug 19, 3:30 PM</td>
-                <td><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Offered. Yuki has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Yuki has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
               </tr>
             </tbody>
           </table>
@@ -2634,7 +2706,7 @@
         <div class="app-header">
           <div>
             <div class="page-title">Blocked time</div>
-            <div class="page-sub">Lunch, meetings, and anything else the calendar must not book over</div>
+            <div class="page-sub">What the calendar must not book over, and what it must keep free for something</div>
           </div>
           <div class="app-user"><button class="btn btn-primary" data-open-modal="#l-blk-modal">Block a timeframe</button></div>
         </div>
@@ -2645,51 +2717,118 @@
           but cannot create or lift them.
         </div>
 
-        <div class="tbl-wrap" style="margin-top:14px">
+        <div class="filters" style="margin-top:14px">
+          <span class="filter-group-lbl">Show</span>
+          <button class="filter-chip active" type="button" onclick="lBlkFilter('all', this)">All blocks</button>
+          <button class="filter-chip" type="button" onclick="lBlkFilter('closed', this)">Closed &mdash; nothing books</button>
+          <button class="filter-chip" type="button" onclick="lBlkFilter('open', this)">Reserved &mdash; open to one kind</button>
+          <span class="filter-group-lbl" style="margin-left:16px">Reserved for</span>
+          <button class="filter-chip" type="button" onclick="lBlkFor('t-newpt', this)">New patient</button>
+          <button class="filter-chip" type="button" onclick="lBlkFor('ty-iv', this)">IV</button>
+          <button class="filter-chip" type="button" onclick="lBlkFor('ty-eboo', this)">EBOO</button>
+          <button class="filter-chip" type="button" onclick="lBlkFor('t-fpeie', this)">FPE</button>
+        </div>
+
+        <div class="grid-4" style="margin:16px 0">
+          <div class="card stat-card"><div class="stat-num">34</div>
+            <div class="stat-lbl">New-patient slots open</div><div class="stat-sub">Next 4 weeks</div></div>
+          <div class="card stat-card"><div class="stat-num">11</div>
+            <div class="stat-lbl">Open this week</div><div class="stat-sub">6 of them before Thursday</div></div>
+          <div class="card stat-card"><div class="stat-num">62%</div>
+            <div class="stat-lbl">Reserved space used</div><div class="stat-sub">Against 88% of ordinary slots</div></div>
+          <div class="card stat-card"><div class="stat-num">Mar 2027</div>
+            <div class="stat-lbl">The new-patient space runs to</div><div class="stat-sub">6 months from 4 Sep 2026</div></div>
+        </div>
+
+        <div class="seg-divider">Find an open slot</div>
+        <div class="l-slotfind">
+          <select class="field-select" id="l-sf-what" aria-label="What kind of appointment">
+            <option>New patient &mdash; 60 min</option>
+            <option>New patient TOC &mdash; 60 min</option>
+            <option>EBOO &mdash; 90 min</option>
+            <option>FPE - IE &mdash; 90 min</option>
+            <option>Any IV &mdash; 30 min</option>
+          </select>
+          <select class="field-select" id="l-sf-when" aria-label="When">
+            <option>Next 2 weeks</option><option>Next 4 weeks</option><option>Next 3 months</option>
+          </select>
+          <select class="field-select" id="l-sf-who" aria-label="With whom">
+            <option>Any provider</option><option>Dr. Drannikov</option><option>Dr. Bakman</option><option>Brooke</option>
+          </select>
+          <button class="btn btn-primary" type="button" onclick="lFindSlots()">Find open slots</button>
+        </div>
+        <div id="l-sf-out" class="l-slotout"></div>
+
+        <div class="seg-divider">The blocks</div>
+        <div class="tbl-wrap">
           <table class="tbl">
             <thead><tr>
-              <th scope="col">What</th><th scope="col">When</th><th scope="col">Repeats</th>
+              <th scope="col">What</th><th scope="col">Kind</th><th scope="col">When</th>
+              <th scope="col">Repeats</th><th scope="col">Runs until</th>
               <th scope="col">Applies to</th><th scope="col">Set by</th><th scope="col"></th>
             </tr></thead>
             <tbody id="l-blk-body">
-              <tr>
+              <tr data-kind="closed">
                 <td><strong>Lunch</strong></td>
-                <td>12:00 &ndash; 12:30</td>
-                <td>Every weekday</td>
-                <td>Every resource</td>
-                <td>Shibani &middot; 4 Mar 2026</td>
+                <td><span class="blk-kind blk-closed">Closed</span></td>
+                <td>12:00 &ndash; 12:30</td><td>Every weekday</td><td>Forever</td>
+                <td>Every resource</td><td>Shibani &middot; 4 Mar 2026</td>
                 <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
               </tr>
-              <tr>
+              <tr data-kind="closed">
                 <td><strong>Clinical huddle</strong></td>
-                <td>8:00 &ndash; 8:30</td>
-                <td>Every Monday</td>
-                <td>Providers only</td>
-                <td>Shibani &middot; 4 Mar 2026</td>
+                <td><span class="blk-kind blk-closed">Closed</span></td>
+                <td>8:00 &ndash; 8:30</td><td>Every Monday</td><td>Forever</td>
+                <td>Providers only</td><td>Shibani &middot; 4 Mar 2026</td>
                 <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
               </tr>
-              <tr>
+              <tr data-kind="open" data-for="t-newpt">
+                <td><strong>New patient space</strong>
+                  <div class="field-help">Nothing but a new patient can be booked into it</div></td>
+                <td><span class="blk-kind blk-open"><i class="rail-sw t-newpt"></i>Reserved</span></td>
+                <td>8:00 &ndash; 9:00 and 1:00 &ndash; 2:00</td><td>Every weekday</td>
+                <td><strong>4 Mar &ndash; 4 Sep 2027</strong><div class="field-help">6 months</div></td>
+                <td>Dr. Drannikov, Dr. Bakman, Brooke</td><td>Marie &middot; 4 Mar 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr data-kind="open" data-for="ty-eboo">
+                <td><strong>EBOO circuit space</strong>
+                  <div class="field-help">The circuit takes 90 minutes and cannot be squeezed</div></td>
+                <td><span class="blk-kind blk-open"><i class="ty-sw ty-eboo"></i>Reserved</span></td>
+                <td>6:00 &ndash; 7:30 and 12:30 &ndash; 2:00</td><td>Tue and Thu</td>
+                <td>Forever</td><td>Room 2</td><td>Nick &middot; 19 May 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr data-kind="open" data-for="ty-iv">
+                <td><strong>Same-day IV space</strong>
+                  <div class="field-help">Held back so a flare can be seen the same day</div></td>
+                <td><span class="blk-kind blk-open"><i class="ty-sw ty-iv"></i>Reserved</span></td>
+                <td>3:00 &ndash; 4:00</td><td>Every weekday</td>
+                <td><strong>Until 31 Dec 2026</strong></td>
+                <td>IV 3, IV 4</td><td>Shibani &middot; 2 Jun 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr data-kind="open" data-for="t-fpeie">
+                <td><strong>Annual exam space</strong>
+                  <div class="field-help">FPE only, so the annuals do not get crowded out</div></td>
+                <td><span class="blk-kind blk-open"><i class="rail-sw t-fpeie"></i>Reserved</span></td>
+                <td>9:00 &ndash; 10:30</td><td>Every Wednesday</td>
+                <td><strong>Until 30 Jun 2027</strong></td>
+                <td>Dr. Drannikov</td><td>Shibani &middot; 14 Jul 2026</td>
+                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+              </tr>
+              <tr data-kind="closed">
                 <td><strong>Chair deep clean</strong></td>
-                <td>4:30 &ndash; 5:00</td>
-                <td>Every Friday</td>
-                <td>IV 1&ndash;4</td>
-                <td>Nick &middot; 19 May 2026</td>
+                <td><span class="blk-kind blk-closed">Closed</span></td>
+                <td>4:30 &ndash; 5:00</td><td>Every Friday</td><td>Forever</td>
+                <td>IV 1&ndash;4</td><td>Nick &middot; 19 May 2026</td>
                 <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
               </tr>
-              <tr>
+              <tr data-kind="closed">
                 <td><strong>Dr. Drannikov &mdash; conference</strong></td>
-                <td>All day</td>
-                <td>Does not repeat &middot; 14&ndash;15 Sep 2026</td>
-                <td>Dr. Drannikov</td>
-                <td>Shibani &middot; 22 Jul 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
-              </tr>
-              <tr>
-                <td><strong>Staff meeting</strong></td>
-                <td>4:00 &ndash; 5:00</td>
-                <td>First Wednesday of the month</td>
-                <td>Every resource</td>
-                <td>Shibani &middot; 4 Mar 2026</td>
+                <td><span class="blk-kind blk-closed">Closed</span></td>
+                <td>All day</td><td>Does not repeat</td><td>14&ndash;15 Sep 2026</td>
+                <td>Dr. Drannikov</td><td>Shibani &middot; 22 Jul 2026</td>
                 <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
               </tr>
             </tbody>
@@ -2801,21 +2940,48 @@
           </div>
           <div class="app-user">
             <button class="btn" data-activate="l-01-day">Back to the day</button>
-            <button class="btn" onclick="HCOS.toast('Sent to the printer as one page per resource.')">Print</button>
+            <button class="btn" onclick="lSaveView()">Save this view</button>
+            <button class="btn" data-open-modal="#l-export-modal">Export</button>
           </div>
+        </div>
+
+        <div class="l-list-bar">
+          <input class="field-input l-list-q" placeholder="Search a name, a phone, a treatment&hellip;"
+                 oninput="lListFilter()" aria-label="Search the list">
+          <span class="l-list-n" id="l-list-n">&nbsp;</span>
         </div>
 
         <div class="tbl-wrap">
           <table class="tbl">
             <thead><tr>
-              <th scope="col">Time</th><th scope="col">Patient</th><th scope="col">Treatment</th>
-              <th scope="col">Resource</th><th scope="col">Status</th><th scope="col">Stage</th>
-              <th scope="col">Insurance</th><th scope="col">Owes</th><th scope="col">Flags</th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(0)">Time <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(1)">Patient <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(2)">Phone <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(3)">Type <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(4)">Subtype <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(5)">Resource <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(6)">Status <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(7)">Stage <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(8)">Insurance <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(9)">Owes <i></i></button></th>
+              <th scope="col">Flags</th>
             </tr></thead>
             <tbody id="l-list-body">
-              <tr><td colspan="9" class="field-help">Building the list from the day board&hellip;</td></tr>
+              <tr><td colspan="11" class="field-help">Building the list from the day board&hellip;</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="l-pager">
+          <button class="btn btn-sm" type="button" onclick="lPage(-1)">&lsaquo; Previous</button>
+          <span id="l-page-lbl">Page 1</span>
+          <button class="btn btn-sm" type="button" onclick="lPage(1)">Next &rsaquo;</button>
+          <select class="field-select" id="l-per" onchange="lPerPage(this.value)" aria-label="Rows per page" style="width:auto;margin-left:12px">
+            <option value="25">25 per page</option>
+            <option value="50" selected>50 per page</option>
+            <option value="100">100 per page</option>
+            <option value="0">Show all</option>
+          </select>
         </div>
       </div>
     </div>
@@ -3211,6 +3377,51 @@
   </div>
 </aside>
 
+<div class="drawer-overlay" data-close-drawer="#l-space-drawer"></div>
+<aside class="drawer" id="l-space-drawer">
+  <div class="drawer-head">
+    <div>
+      <div style="font-size:15px;font-weight:600;color:var(--hx-navy)">New patient space</div>
+      <div style="font-size:11.5px;color:var(--muted);margin-top:2px">Reserved &middot; open, but only to a new patient</div>
+    </div>
+    <button class="modal-close" data-close-drawer="#l-space-drawer">&times;</button>
+  </div>
+  <div class="drawer-body">
+    <div class="callout callout-ok">
+      <strong>This slot is open &mdash; to one kind of appointment.</strong>
+      It is not blocked time and it is not a hold. Blocked time cannot be booked at all; a hold
+      waits for one named patient. A reserved space is bookable by anyone who needs
+      <strong>a new patient appointment</strong>, and refuses everything else, so the space is
+      still there in three weeks when the intake queue needs it.
+    </div>
+    <dl class="kv">
+      <dt>Open to</dt><dd><span class="rail-sw t-newpt" style="vertical-align:-4px"></span> New patient &middot; 60 min</dd>
+      <dt>Refuses</dt><dd>Every other type and subtype</dd>
+      <dt>When</dt><dd>Today &middot; 3:00 &ndash; 4:00 PM</dd>
+      <dt>Repeats</dt><dd>Every weekday, 8:00 and 1:00</dd>
+      <dt>Runs until</dt><dd>4 September 2027 &middot; six months from the start</dd>
+      <dt>Set by</dt><dd>Marie &middot; New Patient Advisor</dd>
+    </dl>
+    <div class="seg-divider">How full the space is</div>
+    <div class="r-hbar"><span style="width:132px">This week</span>
+      <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
+      <span class="meter-val">9 of 20 &middot; 11 open</span></div>
+    <div class="r-hbar"><span style="width:132px">Next week</span>
+      <div class="meter"><div class="meter-fill" style="width:30%"></div></div>
+      <span class="meter-val">6 of 20 &middot; 14 open</span></div>
+    <div class="r-hbar"><span style="width:132px">Next 4 weeks</span>
+      <div class="meter"><div class="meter-fill" style="width:58%"></div></div>
+      <span class="meter-val">46 of 80 &middot; 34 open</span></div>
+    <div class="prov"><span>Reserved space runs at 62% while ordinary slots run at 88% &mdash;
+      that gap is the point of it.</span></div>
+    <div style="display:flex;gap:8px;margin-top:18px;flex-wrap:wrap">
+      <button class="btn btn-primary" data-close-drawer="#l-space-drawer" onclick="HCOS.activate('l-03-book')">Book a new patient</button>
+      <button class="btn" data-close-drawer="#l-space-drawer" onclick="HCOS.activate('l-11-blocks')">See every space</button>
+      <button class="btn" onclick="HCOS.toast('Released for this day only. The recurring space is untouched.', 'ok')">Release just today</button>
+    </div>
+  </div>
+</aside>
+
 <div class="drawer-overlay" data-close-drawer="#l-hold-drawer"></div>
 <aside class="drawer" id="l-hold-drawer">
   <div class="drawer-head">
@@ -3320,6 +3531,127 @@
 
 </div>
 
+<div class="modal-overlay" id="l-export-modal" data-close-modal>
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Export the day</div>
+        <div class="modal-sub">Tuesday, July 21 &middot; 92 appointments</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="callout">
+        <strong>This is the outage plan.</strong> A PDF of tomorrow's list is generated and
+        stored every night, so if the system is down in the morning the desk still knows who is
+        coming, when, with whom, and what they owe.
+      </div>
+      <div class="field">
+        <span class="field-lbl">What to include</span>
+        <div class="chip-row">
+          <button class="filter-chip multi active" type="button">Every column</button>
+          <button class="filter-chip multi active" type="button">Flags</button>
+          <button class="filter-chip multi active" type="button">Phone numbers</button>
+          <button class="filter-chip multi" type="button">What they owe</button>
+          <button class="filter-chip multi" type="button">Cancelled appointments</button>
+        </div>
+        <div class="field-help">Only the columns you are filtered to are exported, so the PDF
+          matches what you are looking at.</div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-ex-fmt">Format</label>
+          <select class="field-select" id="l-ex-fmt">
+            <option>PDF &mdash; one page per resource</option>
+            <option>PDF &mdash; one continuous list</option>
+            <option>CSV</option>
+          </select></div>
+        <div class="field"><label class="field-lbl" for="l-ex-to">Email it to</label>
+          <select class="field-select" id="l-ex-to">
+            <option>Just download it</option>
+            <option>Front desk &mdash; Yazmin, Haylee</option>
+            <option>Everyone on tomorrow's rota</option>
+            <option>A different address&hellip;</option>
+          </select></div>
+      </div>
+      <div class="seg-divider">The nightly backup</div>
+      <dl class="kv">
+        <dt>Runs at</dt><dd>9:00 PM, every night</dd>
+        <dt>Covers</dt><dd>The next working day, every resource</dd>
+        <dt>Kept for</dt><dd>30 days</dd>
+        <dt>Stored in</dt><dd>The practice's own AWS bucket, encrypted, versioned</dd>
+        <dt>Last run</dt><dd>Yesterday 9:00 PM &middot; 88 appointments &middot; 6 pages</dd>
+      </dl>
+      <div class="prov"><span>The backup is deliberately a PDF and not a database export:
+        it has to be readable on a phone with no system at all.</span></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn" data-close-modal onclick="HCOS.toast('Emailed to the front desk. A copy is in the nightly bucket.', 'ok')">Email it</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('PDF generated — 6 pages, one per resource.', 'ok')">Download the PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="l-offer-modal" data-close-modal>
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title">Offer the 10:00 with Brooke</div>
+        <div class="modal-sub">Follow Up &middot; 60 min &middot; today</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="callout">
+        <strong>Everyone you pick gets it at the same time.</strong> They accept from a link in
+        the message, the slot is held for 30 minutes, and the <strong>first to accept takes
+        it</strong>. The rest get an automatic reply saying it has gone, so nobody turns up
+        expecting an appointment that was given away.
+      </div>
+      <div class="field">
+        <span class="field-lbl">Offering to</span>
+        <div id="l-offer-who" class="l-offer-who">
+          <div class="l-offer-p"><b>Owen Delacroix</b><span>(949) 555-0977 &middot; waiting 3 days</span></div>
+          <div class="l-offer-p"><b>Nina Kowalski</b><span>(949) 555-1765 &middot; waiting 2 days</span></div>
+          <div class="l-offer-p"><b>Yuki Tanaka</b><span>(714) 555-1088 &middot; waiting 1 day</span></div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-lbl" for="l-of-how">How to reach them</label>
+        <select class="field-select" id="l-of-how" onchange="lOfferHow(this.value)">
+          <option value="text">Text, then call if no answer in 15 minutes</option>
+          <option value="textonly">Text only</option>
+          <option value="call">Call only &mdash; the desk reads the script</option>
+        </select>
+      </div>
+      <div class="field" id="l-of-smswrap">
+        <label class="field-lbl" for="l-of-sms">The message</label>
+        <textarea class="field-textarea" rows="4" id="l-of-sms">Hi {first_name} — a 10:00 appointment with Brooke opened up today at Helixona. Tap to take it: {accept_link}. First to accept gets it; the link works for 30 minutes.</textarea>
+        <div class="field-help">{first_name} and {accept_link} are filled in per person. Nothing
+          else is personalised, so the same offer reaches everyone at the same second.</div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-of-win">Hold the slot for</label>
+          <select class="field-select" id="l-of-win">
+            <option>15 minutes</option><option selected>30 minutes</option><option>60 minutes</option>
+          </select></div>
+        <div class="field"><label class="field-lbl" for="l-of-fail">If nobody accepts</label>
+          <select class="field-select" id="l-of-fail">
+            <option>Release it back to the calendar</option>
+            <option>Offer it to the next three on the list</option>
+            <option>Leave it held and tell me</option>
+          </select></div>
+      </div>
+      <div class="prov"><span>Every message, every accept and every auto-reply lands on the
+        patient's communication log with the time and your name.</span></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="lOfferSend()">Send the offer</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="l-wl-modal" data-close-modal>
   <div class="modal">
     <div class="modal-head">
@@ -3390,6 +3722,22 @@
         <div class="field-help">Same vocabulary as a calendar app &mdash; nobody should have to learn ours.</div>
       </div>
       <div class="field">
+        <label class="field-lbl" for="l-bm-kind">What kind of block</label>
+        <select class="field-select" id="l-bm-kind" onchange="lBlkKind(this.value)">
+          <option value="closed">Closed &mdash; nothing can be booked into it</option>
+          <option value="open">Reserved &mdash; open, but only to one kind of appointment</option>
+        </select>
+      </div>
+      <div class="field" id="l-bm-forwrap" style="display:none">
+        <label class="field-lbl" for="l-bm-for">Reserved for</label>
+        <select class="field-select" id="l-bm-for">
+          <option>New patient</option><option>New patient TOC</option><option>FPE - IE</option>
+          <option>EBOO</option><option>Any IV</option><option>Any Procedure</option>
+        </select>
+        <div class="field-help">Only that kind can be booked into the space. Everything else is
+          refused, so the space is still there when you need it.</div>
+      </div>
+      <div class="field">
         <span class="field-lbl">Applies to</span>
         <div class="chip-row">
           <button class="filter-chip multi active" type="button">Every resource</button>
@@ -3397,6 +3745,15 @@
           <button class="filter-chip multi" type="button">IV 1&ndash;4</button>
           <button class="filter-chip multi" type="button">Rooms</button>
         </div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-bm-until">Runs until</label>
+          <select class="field-select" id="l-bm-until">
+            <option>Forever</option><option>3 months</option>
+            <option selected>6 months</option><option>12 months</option><option>A date&hellip;</option>
+          </select></div>
+        <div class="field"><label class="field-lbl" for="l-bm-from">Starting</label>
+          <input class="field-input" type="date" id="l-bm-from" value="2026-09-04"></div>
       </div>
       <div class="callout callout-warn" style="margin-bottom:0">
         Blocking is a manager action. It is recorded with your name, and everyone
@@ -3410,7 +3767,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=69"></script>
+<script src="assets/hcos.js?v=71"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3552,7 +3909,8 @@
     var shown = 0, total = 0;
     var showCx = document.querySelector('.cal.show-cx');
     document.querySelectorAll('.daycal-col .cal-appt').forEach(function (a) {
-      var blocked = a.hasAttribute('data-blocked') || a.hasAttribute('data-held');
+      var blocked = a.hasAttribute('data-blocked') || a.hasAttribute('data-held') ||
+                    a.hasAttribute('data-space');
       var days = (a.getAttribute('data-days') || '2').split(',');
       var dayOk = blocked || days.indexOf(String(L_DAYS[lCur].n)) !== -1;
       var colEl = a.closest('[data-col]');
@@ -4660,6 +5018,175 @@
     window.addEventListener('load', function () { setTimeout(lFitSubs, 80); });
   })();
 
+
+
+
+  /* ---------- capacity, filtered by type and by treatment ---------- */
+  function lCapFilter(el) {
+    var card = el.closest('.cap-card');
+    if (!card) return;
+    var ty = (card.querySelector('.cap-ty') || {}).value || '';
+    var q = ((card.querySelector('.cap-q') || {}).value || '').toLowerCase();
+    var low = (card.querySelector('.cap-low') || {}).checked;
+    var shown = 0, booked = 0, cap = 0;
+    card.querySelectorAll('.cap-row').forEach(function (r) {
+      var pct = parseInt((r.querySelector('.cap-pct') || {}).textContent || '0', 10);
+      var name = (r.querySelector('.cap-name') || {}).textContent.toLowerCase();
+      var on = (!ty || r.getAttribute('data-ty') === ty)
+            && (!q || name.indexOf(q) !== -1)
+            && (!low || pct >= 80);
+      r.style.display = on ? '' : 'none';
+      if (on) {
+        shown++;
+        var m = ((r.querySelector('.cap-num') || {}).textContent || '').match(/(\d+) of (\d+)/);
+        if (m) { booked += +m[1]; cap += +m[2]; }
+      }
+    });
+    var t = card.querySelector('.cap-total');
+    if (t) t.textContent = cap
+      ? booked.toLocaleString() + ' of ' + cap.toLocaleString() + ' slots booked · '
+        + Math.round(booked * 100 / cap) + '% full · ' + (cap - booked).toLocaleString() + ' left'
+      : 'Nothing matches';
+    var head = card.querySelector('.cap-head');
+    if (head) head.style.display = shown ? '' : 'none';
+  }
+  window.lCapFilter = lCapFilter;
+
+  /* ---------- waitlist offers: one slot, several people, first wins ----------
+     The offer goes out to everyone at the same second. Each gets an accept link
+     good for 30 minutes; the first to tap it takes the slot and everyone else
+     gets an automatic reply, so nobody arrives expecting an appointment that
+     was given away. */
+  var L_OFFER = { on: false, left: 30 * 60, t: null,
+                  who: [['Owen Delacroix', '(949) 555-0977'],
+                        ['Nina Kowalski', '(949) 555-1765'],
+                        ['Yuki Tanaka', '(714) 555-1088']] };
+
+  function lWlPickAll(on) {
+    var v = on === undefined ? true : on;
+    document.querySelectorAll('.l-wl-pick').forEach(function (c) { c.checked = v; });
+    HCOS.toast(v ? 'Everyone who matches is ticked.' : 'Selection cleared.');
+  }
+  function lOfferHow(v) {
+    var w = document.getElementById('l-of-smswrap');
+    if (w) w.style.display = v === 'call' ? 'none' : '';
+  }
+  function lOfferRows(state) {
+    return L_OFFER.who.map(function (p, i) {
+      var s = state && state[i] ? state[i] : 'Sent · delivered';
+      var cls = s.indexOf('Accepted') === 0 ? 'ok' : (s.indexOf('Gone') === 0 ? 'off' : '');
+      return '<div class="l-offer-row ' + cls + '"><b>' + p[0] + '</b>'
+           + '<span class="l-num">' + p[1] + '</span><span class="l-offer-st">' + s + '</span></div>';
+    }).join('');
+  }
+  function lOfferSend() {
+    var live = document.getElementById('l-offer-live');
+    if (!live) return;
+    L_OFFER.on = true; L_OFFER.left = 30 * 60;
+    document.getElementById('l-offer-rows').innerHTML = lOfferRows();
+    live.style.display = '';
+    clearInterval(L_OFFER.t);
+    L_OFFER.t = setInterval(function () {
+      if (!L_OFFER.on) return;
+      L_OFFER.left--;
+      var m = Math.floor(L_OFFER.left / 60), s = L_OFFER.left % 60;
+      var c = document.getElementById('l-offer-clock');
+      if (c) c.textContent = m + ':' + (s < 10 ? '0' : '') + s + ' left';
+      if (L_OFFER.left <= 0) { lOfferStop(true); }
+    }, 1000);
+    HCOS.toast('Offer sent to 3 people. First to accept takes it — 30 minutes on the clock.', 'ok');
+  }
+  function lOfferAccept() {
+    if (!L_OFFER.on) { HCOS.toast('No offer is out right now.'); return; }
+    L_OFFER.on = false; clearInterval(L_OFFER.t);
+    document.getElementById('l-offer-rows').innerHTML =
+      lOfferRows(['Accepted · 10:00 is theirs', 'Gone · auto-reply sent', 'Gone · auto-reply sent']);
+    var c = document.getElementById('l-offer-clock');
+    if (c) c.textContent = 'Filled';
+    HCOS.toast('Owen Delacroix accepted. The other two were told automatically and stay on the list.', 'ok');
+  }
+  function lOfferStop(expired) {
+    L_OFFER.on = false; clearInterval(L_OFFER.t);
+    var live = document.getElementById('l-offer-live');
+    if (live) live.style.display = 'none';
+    HCOS.toast(expired
+      ? 'Nobody accepted in 30 minutes. The slot is back on the calendar and everyone was told.'
+      : 'Offer withdrawn. Everyone was told the slot is no longer available.', expired ? 'warn' : 'ok');
+  }
+  window.lWlPickAll = lWlPickAll; window.lOfferHow = lOfferHow;
+  window.lOfferSend = lOfferSend; window.lOfferAccept = lOfferAccept; window.lOfferStop = lOfferStop;
+
+  /* ---------- blocked time: closed against reserved ----------
+     A CLOSED block is unbookable — lunch, a huddle, a deep clean. A RESERVED
+     block is bookable, but only by one kind of appointment: it exists so that
+     kind has somewhere to go and ordinary bookings cannot crowd it out. Reserved
+     spaces are white on the board; closed ones stay hatched grey. */
+  var L_BLK = { kind: 'all', forWhat: '' };
+  function lBlkPaint() {
+    var n = 0;
+    document.querySelectorAll('#l-blk-body tr').forEach(function (r) {
+      var okKind = L_BLK.kind === 'all' || r.getAttribute('data-kind') === L_BLK.kind;
+      var okFor = !L_BLK.forWhat || r.getAttribute('data-for') === L_BLK.forWhat;
+      var on = okKind && okFor;
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    HCOS.toast(n + (n === 1 ? ' block' : ' blocks') + ' match.');
+  }
+  function lBlkFilter(k, btn) {
+    L_BLK.kind = k;
+    var row = btn.parentNode;
+    [].forEach.call(row.querySelectorAll('.filter-chip'), function (c) {
+      if (c.getAttribute('onclick') && c.getAttribute('onclick').indexOf('lBlkFilter') === 0)
+        c.classList.remove('active');
+    });
+    btn.classList.add('active');
+    lBlkPaint();
+  }
+  function lBlkFor(k, btn) {
+    var on = !btn.classList.contains('active');
+    [].forEach.call(document.querySelectorAll('[onclick^="lBlkFor"]'), function (c) { c.classList.remove('active'); });
+    if (on) btn.classList.add('active');
+    L_BLK.forWhat = on ? k : '';
+    lBlkPaint();
+  }
+
+  /* ---------- find an open slot inside a reserved space ---------- */
+  var L_SLOTS = [
+    ['Wed 22 Jul', '8:00 AM', 'Dr. Drannikov', 'New patient space'],
+    ['Wed 22 Jul', '1:00 PM', 'Brooke', 'New patient space'],
+    ['Thu 23 Jul', '8:00 AM', 'Dr. Bakman', 'New patient space'],
+    ['Thu 23 Jul', '1:00 PM', 'Dr. Drannikov', 'New patient space'],
+    ['Mon 27 Jul', '8:00 AM', 'Dr. Drannikov', 'New patient space'],
+    ['Mon 27 Jul', '1:00 PM', 'Dr. Bakman', 'New patient space'],
+    ['Tue 28 Jul', '1:00 PM', 'Brooke', 'New patient space'],
+    ['Wed 29 Jul', '8:00 AM', 'Dr. Bakman', 'New patient space']
+  ];
+  function lFindSlots() {
+    var what = (document.getElementById('l-sf-what') || {}).value || '';
+    var who = (document.getElementById('l-sf-who') || {}).value || 'Any provider';
+    var out = document.getElementById('l-sf-out');
+    if (!out) return;
+    var rows = L_SLOTS.filter(function (s) { return who === 'Any provider' || s[2] === who; });
+    out.innerHTML = rows.length
+      ? '<div class="l-slot-n">' + rows.length + ' open ' + (rows.length === 1 ? 'slot' : 'slots')
+        + ' for ' + what.split(' &mdash;')[0].split(' —')[0] + '</div>'
+        + rows.map(function (s) {
+            return '<div class="l-slot"><span class="l-slot-when"><b>' + s[0] + '</b> ' + s[1] + '</span>'
+              + '<span class="l-slot-who">' + s[2] + '</span>'
+              + '<span class="l-slot-src">' + s[3] + '</span>'
+              + '<button class="btn btn-sm btn-primary" onclick="HCOS.activate(\'l-03-book\')">Book it</button></div>';
+          }).join('')
+      : '<div class="field-help">No open slots in that window. Widen the range, or ask a manager to add space.</div>';
+    HCOS.toast(rows.length + ' open slots found.', rows.length ? 'ok' : 'warn');
+  }
+  function lBlkKind(v) {
+    var w = document.getElementById('l-bm-forwrap');
+    if (w) w.style.display = v === 'open' ? '' : 'none';
+  }
+  window.lBlkFilter = lBlkFilter; window.lBlkFor = lBlkFor; window.lFindSlots = lFindSlots;
+  window.lBlkKind = lBlkKind;
+
   /* ---------- Patterns: one filter, over the appointment type ---------- */
   function lInsFilter(ty) {
     var n = 0;
@@ -4695,41 +5222,137 @@
   }
   window.lResourceName = lResourceName;
 
+  /* ---------- the list: the same day, sortable, searchable, paged ---------- */
+  var L_LIST = [], L_SORT = { col: 0, dir: 1 }, L_PAGE = 0, L_PER = 50, L_Q = '';
+  var TY_LBL_LIST = { 'ty-visit':'Office Visit','ty-proc':'Procedure','ty-energ':'Energetics',
+    'ty-lab':'Labs','ty-diag':'Diagnostics','ty-fpe':'FPE','ty-chiro':'Chiro',
+    'ty-eboo':'EBOO','ty-laser':'Laser','ty-iv':'IV' };
+
   function lBuildList() {
     var body = document.getElementById('l-list-body');
     if (!body) return;
-    var rows = [];
+    L_LIST = [];
     document.querySelectorAll('.daycal-col .cal-appt').forEach(function (b) {
-      if (b.hasAttribute('data-blocked') || b.hasAttribute('data-held')) return;
+      /* blocked time, a hold and a reserved space are not appointments — they
+         were showing up in the list as rows with no patient */
+      if (b.hasAttribute('data-blocked') || b.hasAttribute('data-held') ||
+          b.hasAttribute('data-space')) return;
       var col = b.closest('[data-col]');
-      var flags = (b.getAttribute('data-flags') || '').split('|').filter(Boolean);
-      var id = b.getAttribute('data-appt') || '';
-      rows.push({
+      var ty = (b.className.match(/ty-[a-z0-9]+/) || [''])[0];
+      L_LIST.push({
         top: parseInt((b.getAttribute('style').match(/top:\s*(\d+)/) || [0, 0])[1], 10) || 0,
-        html: '<tr class="l-list-row" data-appt="' + id + '" tabindex="0" role="button" ' +
-              'title="Open the appointment">' +
-          '<td>' + (b.getAttribute('data-when') || '') + '</td>' +
-          '<td><strong>' + (b.getAttribute('data-pt') || '') + '</strong></td>' +
-          '<td><span class="rail-sw ' + (b.getAttribute('data-sub') || '') + ' ' +
-              ((b.className.match(/ty-[a-z]+/) || [''])[0]) + '" style="vertical-align:-4px"></span> ' +
-              (b.getAttribute('data-tx') || '') + '</td>' +
-          '<td>' + lResourceName(col ? col.getAttribute('data-col') : '') + '</td>' +
-          '<td><span class="pill pill-st ' + ((b.className.match(/st-[a-z]+/) || [''])[0]) + '">' +
-              (b.getAttribute('data-st') || '') + '</span></td>' +
-          '<td>' + (b.getAttribute('data-stage') || '') + '</td>' +
-          '<td>' + (b.getAttribute('data-ins') || '') + '</td>' +
-          '<td>' + (b.getAttribute('data-pay') || '') + '</td>' +
-          '<td>' + (flags.map(function (k) {
-            var f = L_FLAGS[k]; return f ? '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '" title="' + f.text + '"></span>' : '';
-          }).join(' ')) + '</td>' +
-        '</tr>'
+        id: b.getAttribute('data-appt') || '',
+        when: b.getAttribute('data-when') || '',
+        pt: b.getAttribute('data-pt') || '',
+        phone: b.getAttribute('data-phone') || '',
+        ty: TY_LBL_LIST[ty] || ty,
+        tyCls: ty,
+        sub: b.getAttribute('data-tx') || '',
+        subCls: b.getAttribute('data-sub') || '',
+        res: lResourceName(col ? col.getAttribute('data-col') : ''),
+        st: b.getAttribute('data-st') || '',
+        stCls: (b.className.match(/st-[a-z]+/) || [''])[0],
+        stage: b.getAttribute('data-stage') || '',
+        ins: b.getAttribute('data-ins') || '',
+        pay: b.getAttribute('data-pay') || '',
+        flags: (b.getAttribute('data-flags') || '').split('|').filter(Boolean)
       });
     });
-    /* by start time, then by resource, so the list reads down the day */
-    rows.sort(function (a, b) { return a.top - b.top; });
-    body.innerHTML = rows.map(function (r) { return r.html; }).join('') ||
-      '<tr><td colspan="9" class="field-help">Nothing booked on this day.</td></tr>';
+    lRenderList();
   }
+
+  function lListRows() {
+    var q = L_Q.toLowerCase();
+    var rows = L_LIST.filter(function (r) {
+      if (!q) return true;
+      return (r.pt + ' ' + r.phone + ' ' + r.ty + ' ' + r.sub + ' ' + r.res + ' ' +
+              r.st + ' ' + r.ins).toLowerCase().indexOf(q) !== -1;
+    });
+    var KEY = ['top', 'pt', 'phone', 'ty', 'sub', 'res', 'st', 'stage', 'ins', 'pay'];
+    var k = KEY[L_SORT.col] || 'top';
+    rows.sort(function (a, b) {
+      var x = a[k], y = b[k];
+      if (typeof x === 'number') return (x - y) * L_SORT.dir;
+      return String(x).localeCompare(String(y)) * L_SORT.dir;
+    });
+    return rows;
+  }
+
+  function lRenderList() {
+    var body = document.getElementById('l-list-body');
+    if (!body) return;
+    var rows = lListRows();
+    var per = L_PER || rows.length || 1;
+    var pages = Math.max(1, Math.ceil(rows.length / per));
+    if (L_PAGE >= pages) L_PAGE = pages - 1;
+    var page = rows.slice(L_PAGE * per, L_PAGE * per + per);
+    body.innerHTML = page.map(function (r) {
+      return '<tr class="l-list-row" data-appt="' + r.id + '" tabindex="0" role="button" title="Open the appointment">' +
+        '<td>' + r.when + '</td>' +
+        '<td><strong>' + r.pt + '</strong></td>' +
+        '<td class="l-num">' + r.phone + '</td>' +
+        '<td><span class="ty-sw ' + r.tyCls + '" style="vertical-align:-4px"></span> ' + r.ty + '</td>' +
+        '<td><span class="rail-sw ' + r.subCls + '" style="vertical-align:-4px"></span> ' + r.sub + '</td>' +
+        '<td>' + r.res + '</td>' +
+        '<td><span class="pill pill-st ' + r.stCls + '">' + r.st + '</span></td>' +
+        '<td>' + r.stage + '</td>' +
+        '<td>' + r.ins + '</td>' +
+        '<td>' + r.pay + '</td>' +
+        '<td>' + r.flags.map(function (k) {
+          var f = L_FLAGS[k];
+          return f ? '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '" title="' + f.text + '"></span>' : '';
+        }).join(' ') + '</td></tr>';
+    }).join('') || '<tr><td colspan="11" class="field-help">Nothing matches.</td></tr>';
+
+    var n = document.getElementById('l-list-n');
+    if (n) n.textContent = rows.length === L_LIST.length
+      ? L_LIST.length + ' appointments'
+      : rows.length + ' of ' + L_LIST.length + ' appointments';
+    var pl = document.getElementById('l-page-lbl');
+    if (pl) pl.textContent = 'Page ' + (L_PAGE + 1) + ' of ' + pages;
+    document.querySelectorAll('.l-sort').forEach(function (b, i) {
+      b.classList.toggle('asc', i === L_SORT.col && L_SORT.dir === 1);
+      b.classList.toggle('desc', i === L_SORT.col && L_SORT.dir === -1);
+    });
+  }
+
+  function lSort(i) {
+    if (L_SORT.col === i) L_SORT.dir = -L_SORT.dir; else { L_SORT.col = i; L_SORT.dir = 1; }
+    L_PAGE = 0; lRenderList();
+  }
+  function lListFilter() {
+    var q = document.querySelector('.l-list-q');
+    L_Q = q ? q.value : ''; L_PAGE = 0; lRenderList();
+  }
+  function lPage(d) {
+    var pages = Math.max(1, Math.ceil(lListRows().length / (L_PER || 1)));
+    L_PAGE = Math.min(Math.max(0, L_PAGE + d), pages - 1);
+    lRenderList();
+  }
+  function lPerPage(v) { L_PER = parseInt(v, 10) || 0; L_PAGE = 0; lRenderList(); }
+
+  /* the filtered view survives the session, so a morning setup is not re-done */
+  function lSaveView() {
+    try {
+      localStorage.setItem('hcos-list-view', JSON.stringify(
+        { sel: lSel, sort: L_SORT, per: L_PER, q: L_Q, range: L_RANGE.key }));
+      HCOS.toast('View saved. It opens this way for you next time.', 'ok');
+    } catch (e) { HCOS.toast('Could not save the view in this browser.', 'warn'); }
+  }
+  function lRestoreView() {
+    try {
+      var v = JSON.parse(localStorage.getItem('hcos-list-view') || 'null');
+      if (!v) return;
+      if (v.sel) { lSel.types = v.sel.types || []; lSel.subs = v.sel.subs || []; lSel.sts = v.sel.sts || []; }
+      if (v.sort) L_SORT = v.sort;
+      if (typeof v.per === 'number') L_PER = v.per;
+      L_Q = v.q || '';
+      var q = document.querySelector('.l-list-q'); if (q) q.value = L_Q;
+      var per = document.getElementById('l-per'); if (per) per.value = String(L_PER);
+    } catch (e) { /* a corrupt saved view must not break the page */ }
+  }
+  window.lSort = lSort; window.lListFilter = lListFilter; window.lPage = lPage;
+  window.lPerPage = lPerPage; window.lSaveView = lSaveView;
 
   /* a row in the list opens the same appointment the block does */
   document.addEventListener('click', function (ev) {
@@ -4752,7 +5375,69 @@
     r.click();
   });
   window.lBuildList = lBuildList;
+  lRestoreView();
   lBuildList();
+
+
+  /* ---------- one filter bar, every view ----------
+     The day had the whole bar; week and month had two loose selects, so a filter
+     set on one view was invisible on the next. The bar is cloned into every view
+     and every copy writes to the same lSel. */
+  function lCloneFilters() {
+    var bar = document.querySelector('#l-01-day .l-filters');
+    if (!bar) return;
+    ['l-02-week', 'l-05-month', 'l-12-list'].forEach(function (id) {
+      var host = document.getElementById(id);
+      if (!host) return;
+      var copy = bar.cloneNode(true);
+      /* ids must never repeat — the state lives in lSel, not in the DOM */
+      copy.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
+      copy.querySelectorAll('.view-lock, .l-count').forEach(function (n) { n.remove(); });
+      /* week and month already had a cut-down bar of their own; it is REPLACED,
+         not skipped — that guard was why they kept their two loose selects */
+      var mine = host.querySelector('.l-filters') || host.querySelector('.filters');
+      if (mine) mine.parentNode.replaceChild(copy, mine);
+      else {
+        var body = host.querySelector('.frame-body');
+        if (body) body.insertBefore(copy, body.children[1] || null);
+      }
+    });
+    document.querySelectorAll('.l-show').forEach(function (s) {
+      s.addEventListener('change', function () {
+        document.querySelectorAll('.l-show').forEach(function (o) { if (o !== s) o.value = s.value; });
+      });
+    });
+  }
+
+  /* ---------- the date range, shared by every view ---------- */
+  var L_RANGE = { key: 'today', from: '2026-07-21', to: '2026-07-21' };
+  var RANGE_LBL = { today: 'Tuesday, July 21', tomorrow: 'Wednesday, July 22',
+                    week: '20 – 24 July', next7: '21 – 27 July', month: 'July 2026' };
+  function lRange(v) {
+    L_RANGE.key = v;
+    document.querySelectorAll('.l-range').forEach(function (s) { s.value = v; });
+    document.querySelectorAll('.l-range-custom').forEach(function (n) {
+      n.style.display = v === 'custom' ? 'inline-flex' : 'none';
+    });
+    if (v === 'custom') return;
+    document.querySelectorAll('.cal-date').forEach(function (n) {
+      if (RANGE_LBL[v]) n.textContent = RANGE_LBL[v];
+    });
+    HCOS.toast('Showing ' + (RANGE_LBL[v] || v) + ' — the same range on day, week, month and list.');
+    if (typeof lApply === 'function') lApply();
+  }
+  function lRangeApply() {
+    var f = document.querySelector('.l-range-custom .l-range-from');
+    var t = document.querySelector('.l-range-custom .l-range-to');
+    if (!f || !t) return;
+    if (f.value > t.value) { HCOS.toast('The start date is after the end date.', 'warn'); return; }
+    L_RANGE.from = f.value; L_RANGE.to = t.value;
+    var say = f.value + ' to ' + t.value;
+    document.querySelectorAll('.cal-date').forEach(function (n) { n.textContent = say; });
+    HCOS.toast('Showing ' + say + ' across every view.', 'ok');
+    if (typeof lApply === 'function') lApply();
+  }
+  window.lRange = lRange; window.lRangeApply = lRangeApply; window.lCloneFilters = lCloneFilters;
 
   /* ---------- searchable multi-selects drive the same lSel state ---------- */
   (function () {
@@ -4761,16 +5446,19 @@
                    'ty-fpe': 'FPE', 'ty-fpe6': '6 month FPE', 'ty-chiro': 'Chiro',
                    'ty-eboo': 'EBOO', 'ty-laser': 'Laser' };
     function summarize() {
-      var f1 = document.querySelector('#l-msel-ty .msel-field-lbl');
-      var f2 = document.querySelector('#l-msel-sub .msel-field-lbl');
-      var f3 = document.querySelector('#l-msel-st .msel-field-lbl');
-      if (f3) f3.textContent = lSel.sts.length ? lSel.sts.length + ' selected' : 'All statuses';
+      /* the bar exists three times — day, week and month — so every label is a
+         querySelectorAll. One lSel, three copies of the controls. */
+      function setLbl(k, txt) {
+        document.querySelectorAll('[data-msel="' + k + '"] .msel-field-lbl')
+          .forEach(function (n) { n.textContent = txt; });
+      }
+      setLbl('st', lSel.sts.length ? lSel.sts.length + ' selected' : 'All statuses');
       document.querySelectorAll('.msel-opt[data-st]').forEach(function (o) {
         o.querySelector('input').checked = lSel.sts.indexOf(o.getAttribute('data-st')) !== -1;
       });
-      if (f1) f1.textContent = lSel.types.length
-        ? lSel.types.map(function (t) { return TY_NAMES[t]; }).join(' · ') : 'All types';
-      if (f2) f2.textContent = lSel.subs.length ? lSel.subs.length + ' selected' : 'All subtypes';
+      setLbl('ty', lSel.types.length
+        ? lSel.types.map(function (t) { return TY_NAMES[t]; }).join(' · ') : 'All types');
+      setLbl('sub', lSel.subs.length ? lSel.subs.length + ' selected' : 'All subtypes');
       document.querySelectorAll('.msel-opt[data-ty]').forEach(function (o) {
         o.querySelector('input').checked = lSel.types.indexOf(o.getAttribute('data-ty')) !== -1;
       });
@@ -4795,8 +5483,10 @@
       }
       var clr = ev.target.closest ? ev.target.closest('.msel-clear') : null;
       if (clr) {
-        if (clr.closest('#l-msel-ty')) { lSel.types = []; lSel.subs = []; }
-        else if (clr.closest('#l-msel-st')) { lSel.sts = []; }
+        var which = (clr.closest('.msel') || {}).getAttribute
+                  ? clr.closest('.msel').getAttribute('data-msel') : '';
+        if (which === 'ty') { lSel.types = []; lSel.subs = []; }
+        else if (which === 'st') { lSel.sts = []; }
         else lSel.subs = [];
         summarize(); lApply(); return;
       }
@@ -4831,6 +5521,7 @@
         o.classList.toggle('hidden', !!q && o.textContent.toLowerCase().indexOf(q) === -1);
       });
     });
+    lCloneFilters();
     summarize();
   })();
 

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=69">
+<link rel="stylesheet" href="assets/hcos.css?v=71">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -59,6 +59,69 @@
           <button class="filter-chip" data-tkind="iv-recipe">IV recipes</button>
           <button class="filter-chip" data-tkind="add-on">Add-ons</button>
           <span class="t-count" id="t-cat-count" style="font-size:11.5px;color:var(--muted);margin-left:auto"></span>
+        </div>
+
+        <div class="seg-divider">Edit a code</div>
+        <div class="grid-sidebar">
+          <div class="card">
+            <div class="card-title">What you are editing</div>
+            <div class="field"><label class="field-lbl" for="tc-level">Level</label>
+              <select class="field-select" id="tc-level" onchange="tcLevel(this.value)">
+                <option value="ty">1 &middot; Background &mdash; appointment type</option>
+                <option value="sb">2 &middot; Side bar &mdash; which treatment</option>
+                <option value="st">3 &middot; Watermark &mdash; status</option>
+                <option value="fl">Flag icon</option>
+              </select>
+            </div>
+            <div class="field"><label class="field-lbl" for="tc-what">Which one</label>
+              <select class="field-select" id="tc-what" onchange="tcPreview()"></select>
+            </div>
+            <div class="field" id="tc-colwrap"><label class="field-lbl" for="tc-col">Colour</label>
+              <div style="display:flex;gap:10px;align-items:center">
+                <input type="color" id="tc-col" value="#B7CDB0" oninput="tcPreview()"
+                       style="width:56px;height:38px;padding:2px;border:1px solid var(--line);border-radius:8px">
+                <input class="field-input" id="tc-hex" value="#B7CDB0" oninput="tcHex(this.value)"
+                       style="width:132px;font-family:ui-monospace,monospace" aria-label="Hex value">
+                <span id="tc-contrast" class="pill pill-muted">&nbsp;</span>
+              </div>
+              <div class="field-help">The contrast pill is against the block's near-black text.
+                Below 4.5:1 the text on that type switches to white automatically.</div>
+            </div>
+            <div class="field" id="tc-iconwrap" style="display:none">
+              <span class="field-lbl">Symbol</span>
+              <div class="chip-row" id="tc-icons"></div>
+            </div>
+            <div class="field"><label class="field-lbl" for="tc-name">Name on screen</label>
+              <input class="field-input" id="tc-name" value="Office Visit"></div>
+            <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="HCOS.toast('Saved. Every calendar, legend and filter picks it up.', 'ok')">Save the code</button>
+              <button class="btn" onclick="HCOS.toast('Reverted to the clinic sheet value.')">Revert to the clinic value</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">How it will look</div>
+            <div class="cal-appt ty-visit t-fu st-confirmed leg-spec" id="tc-block" style="margin-bottom:16px">
+              <span class="cal-appt-sub">Follow Up</span>
+              <span class="cal-appt-time">11:00 AM</span>
+              <span class="cal-appt-name">Elena Petrova</span>
+            </div>
+            <dl class="kv">
+              <dt>Background</dt><dd id="tc-p-ty">Office Visit</dd>
+              <dt>Side bar</dt><dd id="tc-p-sb">Follow Up</dd>
+              <dt>Watermark</dt><dd id="tc-p-st">Confirmed</dd>
+            </dl>
+            <div class="seg-divider">Where this code appears</div>
+            <ul class="check-list">
+              <li>The day, week, month and list views</li>
+              <li>The three legends under each calendar</li>
+              <li>Both filter dropdowns, with a swatch on every row</li>
+              <li>The appointment drawer and the hover card</li>
+              <li>Capacity, per treatment</li>
+            </ul>
+            <div class="prov"><span>Changing a code here changes it everywhere at once &mdash;
+              there is one source, not a copy per screen.</span></div>
+          </div>
         </div>
 
         <div class="tbl-wrap">
@@ -598,7 +661,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=69"></script>
+<script src="assets/hcos.js?v=71"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {
@@ -624,6 +687,84 @@
   });
   apply('all');
 })();
+</script>
+
+<script>
+  var TC = {
+    ty: [['ty-visit','Office Visit','#B7CDB0'],['ty-proc','Procedure','#A9B9E2'],
+         ['ty-energ','Energetics','#F9F0D4'],['ty-lab','Labs','#C5C9E8'],
+         ['ty-diag','Diagnostics','#B8CCE4'],['ty-fpe','FPE','#F0C9A0'],
+         ['ty-chiro','Chiro','#BDD7EE'],['ty-eboo','EBOO','#E8B4A8'],
+         ['ty-laser','Laser','#8B1A1A'],['ty-iv','IV','#FFFFFF']],
+    sb: [['t-newpt','New patient','#F23FB8'],['t-fu','Follow Up','#FFF200'],
+         ['t-prp','PRP','#ED9B3D'],['t-mito','Mito Boost','#6B3FA0'],
+         ['t-cell','Cellular Boost','#2E3B4E'],['t-mast','Mast Cell','#FFF200'],
+         ['t-ff25','Foundational Flow 25','#4DB3B3'],['t-mc50','Mega C 50g','#D9BC94']],
+    st: [['st-scheduled','Scheduled',''],['st-confirmed','Confirmed',''],
+         ['st-arrived','Arrived',''],['st-inchair','In Progress',''],
+         ['st-done','Complete',''],['st-locked','Locked',''],
+         ['st-rescheduled','Rescheduled',''],['st-cancelled','Cancelled',''],
+         ['st-noshow','No show','']],
+    fl: [['allergyfood','Food allergy',''],['allergydrug','Drug allergy',''],
+         ['pregnant','Pregnant',''],['urgent','Urgent medical alert',''],
+         ['deficiency','Deficiency',''],['authexpiry','Prior auth expiring',''],
+         ['balance','Outstanding balance',''],['interpreter','Interpreter needed',''],
+         ['forms','Intake forms missing','']]
+  };
+  var TC_LEVEL = 'ty';
+  function tcLum(h){var f=function(c){return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)};
+    var r=parseInt(h.substr(1,2),16)/255,g=parseInt(h.substr(3,2),16)/255,b=parseInt(h.substr(5,2),16)/255;
+    return .2126*f(r)+.7152*f(g)+.0722*f(b);}
+  function tcContrast(h){var a=tcLum(h),b=tcLum('#1A1A1A');
+    var x=Math.max(a,b),y=Math.min(a,b);return (x+.05)/(y+.05);}
+  function tcLevel(v){
+    TC_LEVEL = v;
+    var sel = document.getElementById('tc-what');
+    sel.innerHTML = TC[v].map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>';}).join('');
+    document.getElementById('tc-colwrap').style.display = (v==='ty'||v==='sb') ? '' : 'none';
+    document.getElementById('tc-iconwrap').style.display = (v==='st'||v==='fl') ? '' : 'none';
+    if (v==='st'||v==='fl') {
+      document.getElementById('tc-icons').innerHTML = TC[v].map(function(o,i){
+        var cls = v==='st' ? 'st-sw '+o[0] : 'fl sev-high fi-'+o[0];
+        return '<button class="filter-chip'+(i===0?' active':'')+'" type="button" title="'+o[1]+'"><span class="'+cls+'"></span></button>';
+      }).join('');
+    }
+    tcPreview();
+  }
+  function tcHex(v){ if(/^#[0-9A-Fa-f]{6}$/.test(v)){ document.getElementById('tc-col').value=v; tcPreview(true); } }
+  function tcPreview(fromHex){
+    var sel = document.getElementById('tc-what');
+    var row = (TC[TC_LEVEL]||[]).filter(function(o){return o[0]===sel.value;})[0];
+    if (!row) return;
+    document.getElementById('tc-name').value = row[1];
+    var blk = document.getElementById('tc-block');
+    if (TC_LEVEL === 'ty') {
+      blk.className = blk.className.replace(/ty-[a-z0-9]+/, row[0]);
+      document.getElementById('tc-p-ty').textContent = row[1];
+    } else if (TC_LEVEL === 'sb') {
+      blk.className = blk.className.replace(/\bt-[a-z0-9]+/, row[0]);
+      document.getElementById('tc-p-sb').textContent = row[1];
+    } else if (TC_LEVEL === 'st') {
+      blk.className = blk.className.replace(/st-[a-z]+/, row[0]);
+      document.getElementById('tc-p-st').textContent = row[1];
+    }
+    if (row[2] && !fromHex) {
+      document.getElementById('tc-col').value = row[2];
+      document.getElementById('tc-hex').value = row[2];
+    }
+    var hex = document.getElementById('tc-col').value;
+    var c = tcContrast(hex);
+    var pill = document.getElementById('tc-contrast');
+    pill.textContent = c.toFixed(1) + ':1';
+    pill.className = 'pill ' + (c < 4.5 ? 'pill-warn' : 'pill-ok');
+    pill.title = c < 4.5 ? 'Too dark for near-black text — this type gets white text'
+                         : 'Fine with the block\'s near-black text';
+    if (TC_LEVEL === 'ty' || TC_LEVEL === 'sb') {
+      blk.style.setProperty(TC_LEVEL === 'ty' ? '--tybg' : '--sb', hex);
+    }
+  }
+  window.tcLevel = tcLevel; window.tcHex = tcHex; window.tcPreview = tcPreview;
+  tcLevel('ty');
 </script>
 </body>
 </html>

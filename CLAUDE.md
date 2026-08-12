@@ -214,6 +214,34 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
 - **A booking rule's "when" is composed, not chosen** (`sr-whens`), and reads back as an English
   sentence. **A rule that contradicts a live one cannot be saved** — two rules that match the
   same thing and end in different verdicts give the desk an answer nobody can act on.
+- **ONE filter bar, cloned into every view (Carlos, 2026-08-11).** The day had the whole bar;
+  week and month had two loose selects, so a filter set on one view was invisible on the next.
+  `lCloneFilters()` clones the day's bar into week, month and list, strips the ids (state lives
+  in `lSel`, never in the DOM) and every copy writes to the same state. The multi-selects are
+  addressed by `[data-msel]`, not by id, precisely so they can exist more than once.
+- **A date range sits in that bar** — today, tomorrow, this week, next 7 days, this month, or a
+  range you pick — and applies to day, week, month and list at once.
+- **A RESERVED SPACE is a block that is bookable, but only by one kind of appointment
+  (Carlos, 2026-08-11).** Three different things, and the wireframe keeps them apart:
+  - **Blocked** — lunch, a huddle, a deep clean. Nothing books. Hatched grey.
+  - **Held** — one named patient is expected. Dashed, releasable.
+  - **Reserved space** — open, but refuses everything except its kind, so a new-patient space is
+    still there in three weeks when intake needs it. **White**, because it is open.
+  Spaces carry a duration (the new-patient space runs six months), are filterable by what they
+  protect, and feed a **find-an-open-slot** search. Management reads "34 new-patient slots open
+  over the next four weeks" off the same data.
+- **A waitlist offer is a race.** It goes to everyone chosen at the same second with an accept
+  link good for 30 minutes; the first to accept takes the slot and everyone else gets an
+  automatic reply, so nobody arrives expecting an appointment that was given away. The SMS body
+  is editable with `{first_name}` and `{accept_link}`; a call-only option drops the SMS field.
+  Every message, accept and auto-reply lands on the patient's communication log.
+- **The list view is the outage plan.** Sortable on every column, searchable, paged, with the
+  patient's phone and Type and Subtype as separate columns. A PDF of tomorrow's list is
+  generated and stored nightly in the practice's own AWS bucket — deliberately a PDF and not a
+  database export, because it has to be readable on a phone with no system at all. The filtered
+  view can be saved per browser (`hcos-list-view`).
+- **Blocked time, holds and reserved spaces are not appointments** and are excluded from the
+  list and from the day's count. They were showing up as rows with no patient.
 - **Filters are hierarchical**: picking Types narrows which Subtype chips are offered; both are multi-select; the same state drives day, week and month. Saved custom filters are built on the Filter setup screen (`l-06-filters`) and lockable as a personal default.
 - **Chairs are gone — resources are general**: columns are IV 1–4 under the Infusion suite band, plus Rooms; the booking form's location field is "Resource".
 - **An appointment type is linked to the provider's order** (order = prescription): the booking screen shows the patient's active orders with validity dates and their expired ones; an expired order can proceed only with an acknowledged note, booking as TENTATIVE until Dr. Drannikov approves the renewal. Orders show duration and expiration everywhere (`b-09-orders` has an Expires column) and click through to the orders page.
