@@ -162,6 +162,12 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
     still opaque and gets drawn. The bar in the stop sign, the divider in the capsule and the
     "!" in the triangle are cut with `fill-rule='evenodd'` on a single path.
 - **The black bar is gone (Carlos, 2026-08-11).** The watermark carries the status on its own.
+- **Flags open the appointment drawer, above the status and everything else (Carlos,
+  2026-08-11).** A food allergy or a pregnancy is not context — it is the thing you must know
+  before you touch the patient, and it cannot sit four sections down. A high-severity flag
+  frames the whole block in red and the heading changes from "Flags" to **"Alerts on this
+  patient"**. With none, the block stays as a quiet dashed placeholder so the section is always
+  in the same place.
 - **Flags are a fourth thing the block says, and deliberately not a fourth channel.** They live
   in their own corner cell, never on the rail or the fill. A flag has a **category** (Medical /
   Billing / Admin — who cares) and a **severity** (how loud); those are separate on purpose,

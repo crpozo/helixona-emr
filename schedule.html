@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=68">
+<link rel="stylesheet" href="assets/hcos.css?v=69">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -3410,7 +3410,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=68"></script>
+<script src="assets/hcos.js?v=69"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3859,11 +3859,26 @@
     /* The status is the first thing the drawer says, whatever it is. A ladder
        with nothing marked on it — which is what a no-show used to get — reads
        as "not started yet", the opposite of the truth. */
-    var h = lStatusHtml(a, id);
+    /* Flags first — before the status, before anything. A food allergy or a
+       pregnancy is not context, it is the thing you must know before you touch
+       the patient, and it cannot be four sections down. */
+    var fk = a.flags || [];
+    var loud = fk.some(function (k) { return L_FLAGS[k] && L_FLAGS[k].sev === 'high'; });
+    var h = '<div class="dr-flags' + (loud ? ' is-loud' : '') + (fk.length ? '' : ' is-empty') + '">'
+          + '<div class="dr-flags-t">' + (fk.length
+              ? (loud ? 'Alerts on this patient' : 'Flags on this patient')
+              : 'Flags') + '</div>'
+          + '<div id="l-dr-flags">' + lFlagsHtml(a) + '</div>'
+          + '<div class="dr-flags-a">'
+          + '<button class="btn btn-sm" onclick="lAddFlag()">Add a flag</button>'
+          + '<a class="btn btn-sm" href="#/l-08-flags" onclick="lGo(\'l-08-flags\')">Manage flag types</a>'
+          + '</div></div>';
+
+    h += lStatusHtml(a, id);
 
     h += '<div class="seg-divider">Appointment</div><dl class="kv">'
        + '<dt>Appointment</dt><dd><code>' + id + '</code></dd>'
-       + '<dt>Patient</dt><dd>' + a.n + ' · ' + a.ag + '</dd>'
+       + '<dt>Patient</dt><dd>' + a.n + (a.ag ? ' · ' + a.ag : '') + '</dd>'
        + '<dt>Coverage</dt><dd>' + a.cv + '</dd>'
        + '<dt>When</dt><dd>' + a.w + '</dd>'
        + '<dt>Where</dt><dd>' + a.r + '</dd>'
@@ -3875,12 +3890,6 @@
        + '<div style="font-size:13px;font-weight:600;color:var(--hx-navy)">' + a.pr + '</div>'
        + '<div class="field-help" style="margin-top:4px">' + a.prn + '</div>'
        + '<div class="prov"><span><strong>From</strong> ' + a.p + '</span></div>';
-
-    /* the flags, editable right here — this is the abstract the desk reads */
-    h += '<div class="seg-divider">Flags</div><div id="l-dr-flags">' + lFlagsHtml(a) + '</div>'
-       + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
-       + '<button class="btn btn-sm" onclick="lAddFlag()">Add a flag</button>'
-       + '<a class="btn btn-sm" href="#/l-08-flags" onclick="lGo(\'l-08-flags\')">Manage flag types</a></div>';
 
     /* what they owe, worked out from the coverage, not typed by the desk */
     if (a.pay || a.stage) {
