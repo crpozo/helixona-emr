@@ -1121,16 +1121,16 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 
 /* ---- TYPE = the background ---- */
-.cal-appt.ty-visit,  .week-appt.ty-visit,  .ty-sw.ty-visit   { --tybg: var(--tybg-visit); }
-.cal-appt.ty-proc,   .week-appt.ty-proc,   .ty-sw.ty-proc    { --tybg: var(--tybg-proc); }
-.cal-appt.ty-energ,  .week-appt.ty-energ,  .ty-sw.ty-energ   { --tybg: var(--tybg-energ); }
-.cal-appt.ty-lab,    .week-appt.ty-lab,    .ty-sw.ty-lab     { --tybg: var(--tybg-lab); }
-.cal-appt.ty-diag,   .week-appt.ty-diag,   .ty-sw.ty-diag    { --tybg: var(--tybg-diag); }
-.cal-appt.ty-fpe,    .week-appt.ty-fpe,    .ty-sw.ty-fpe     { --tybg: var(--tybg-fpe); }
-.cal-appt.ty-chiro,  .week-appt.ty-chiro,  .ty-sw.ty-chiro   { --tybg: var(--tybg-chiro); }
-.cal-appt.ty-eboo,   .week-appt.ty-eboo,   .ty-sw.ty-eboo    { --tybg: var(--tybg-eboo); }
-.cal-appt.ty-laser,  .week-appt.ty-laser,  .ty-sw.ty-laser   { --tybg: var(--tybg-laser); }
-.cal-appt.ty-iv,     .week-appt.ty-iv,     .ty-sw.ty-iv      { --tybg: var(--tybg-iv); }
+.cal-appt.ty-visit,  .week-appt.ty-visit,  .ty-sw.ty-visit,  .monthcal-pip.ty-visit   { --tybg: var(--tybg-visit); }
+.cal-appt.ty-proc,   .week-appt.ty-proc,   .ty-sw.ty-proc,   .monthcal-pip.ty-proc    { --tybg: var(--tybg-proc); }
+.cal-appt.ty-energ,  .week-appt.ty-energ,  .ty-sw.ty-energ,  .monthcal-pip.ty-energ   { --tybg: var(--tybg-energ); }
+.cal-appt.ty-lab,    .week-appt.ty-lab,    .ty-sw.ty-lab,    .monthcal-pip.ty-lab     { --tybg: var(--tybg-lab); }
+.cal-appt.ty-diag,   .week-appt.ty-diag,   .ty-sw.ty-diag,   .monthcal-pip.ty-diag    { --tybg: var(--tybg-diag); }
+.cal-appt.ty-fpe,    .week-appt.ty-fpe,    .ty-sw.ty-fpe,    .monthcal-pip.ty-fpe     { --tybg: var(--tybg-fpe); }
+.cal-appt.ty-chiro,  .week-appt.ty-chiro,  .ty-sw.ty-chiro,  .monthcal-pip.ty-chiro   { --tybg: var(--tybg-chiro); }
+.cal-appt.ty-eboo,   .week-appt.ty-eboo,   .ty-sw.ty-eboo,   .monthcal-pip.ty-eboo    { --tybg: var(--tybg-eboo); }
+.cal-appt.ty-laser,  .week-appt.ty-laser,  .ty-sw.ty-laser,  .monthcal-pip.ty-laser   { --tybg: var(--tybg-laser); }
+.cal-appt.ty-iv,     .week-appt.ty-iv,     .ty-sw.ty-iv,     .monthcal-pip.ty-iv      { --tybg: var(--tybg-iv); }
 
 /* a dark type background cannot carry near-black text */
 .cal-appt.ty-laser { color: #fff; }
@@ -1592,11 +1592,15 @@ a.lead-chip:hover { border-color: var(--ink); }
 .msel-opt:hover { background: var(--hx-band); }
 .msel-opt.hidden { display: none; }
 .msel-opt input { margin: 0; }
-.msel-clear {
-  display: block; width: 100%; border: none; border-top: 1px solid var(--line-soft);
-  background: none; padding: 8px; font-size: 11.5px; color: var(--muted); cursor: pointer; font-family: inherit;
+/* Clear had no opposite. Once you had ticked one box there was no way back to
+   everything but unticking each one by hand (Carlos, 2026-08-12). */
+.msel-foot { display: flex; border-top: 1px solid var(--line-soft); }
+.msel-all, .msel-clear {
+  flex: 1; border: none; background: none; padding: 8px;
+  font-size: 11.5px; color: var(--muted); cursor: pointer; font-family: inherit;
 }
-.msel-clear:hover { color: var(--ink); }
+.msel-all { border-right: 1px solid var(--line-soft); }
+.msel-all:hover, .msel-clear:hover { color: var(--ink); background: var(--hx-band); }
 
 /* ==========================================================================
    COMMUNICATION LOG — every contact, whoever made it and however it went out.
@@ -1983,11 +1987,18 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 .monthcal-count { font-size: 10.5px; color: var(--muted); margin-top: 3px; }
 .monthcal-closed-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; }
-.monthcal-pips { display: flex; gap: 2px; flex-wrap: wrap; margin-top: 5px; }
+/* One square per TYPE that ran that day, painted the type's own colour from the
+   clinic's code, carrying the number booked. It used to be a three-letter
+   subtype code in grey monospace — MCH, MCF, FF1 — which nobody could read and
+   nobody could decode (Carlos, 2026-08-12). The tooltip names the type. */
+.monthcal-pips { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 5px; }
 .monthcal-pip {
-  font-family: ui-monospace, monospace; font-size: 8px; font-weight: 700;
-  border: 1px solid var(--line); border-radius: 3px; padding: 0 2px; color: var(--muted);
+  min-width: 17px; text-align: center; font-size: 9px; font-weight: 700;
+  font-variant-numeric: tabular-nums; line-height: 15px;
+  background: var(--tybg, #fff); color: var(--ink);
+  border: 1px solid rgba(0,0,0,.22); border-radius: 3px; padding: 0 3px; cursor: default;
 }
+.monthcal-pip.ty-laser { color: #fff; }
 .monthcal-load { position: absolute; left: 8px; right: 8px; bottom: 6px; }
 @media (max-width: 760px) {
   .monthcal-day { min-height: 64px; padding: 4px 5px 6px; }

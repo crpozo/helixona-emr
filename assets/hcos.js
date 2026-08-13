@@ -736,6 +736,12 @@
         sel = document.querySelector(t.getAttribute('data-open-modal'));
         if (sel) sel.classList.add('open');
       } else if (t.hasAttribute('data-close-modal')) {
+        /* When data-close-modal sits on the OVERLAY it means "click the
+           backdrop to dismiss" — but every click inside the modal bubbles up to
+           it, so closest() found the overlay and the modal shut the moment you
+           touched a select. Only a click on the backdrop ITSELF closes it.
+           (Carlos, 2026-08-12: "it would close whenever I clicked on anything".) */
+        if (t.classList.contains('modal-overlay') && ev.target !== t) return;
         var ov = t.closest('.modal-overlay');
         if (ov) ov.classList.remove('open');
       } else if (t.hasAttribute('data-open-drawer')) {

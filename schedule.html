@@ -7,20 +7,47 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=74">
+<link rel="stylesheet" href="assets/hcos.css?v=75">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
   .l-chip-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  /* ONE line of controls, not three labelled rows. Every control already says
+     what it is — "All types", "All statuses", "Today" — so a label beside it
+     only repeated the word, and because "Show", "Type & subtype" and "Dates"
+     are three different widths the selects came out with a ragged left edge and
+     two-thirds of the bar empty. The labels are gone; hairlines group the
+     controls instead: WHO you are looking at | WHAT you are filtering to |
+     WHEN. The count and the saved view are not filters, so they ride the far
+     right of whichever line they land on. */
+  /* The controls wrap on the LEFT; what you are looking at is pinned RIGHT.
+     Reading order is how the desk actually thinks: WHEN | WHO | WHAT — so the
+     control that drops to a second line is the status toggle, never the date.
+     The count and the saved view are not filters and never wrap into them. */
   .l-filters {
     position: relative; z-index: 30;
-    display: flex; flex-wrap: wrap; gap: 8px 22px;
-    padding: 10px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
+    display: flex; align-items: center; gap: 8px 16px;
+    padding: 9px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
   }
-  .l-fl { display: flex; align-items: center; gap: 8px; }
-  .l-select { width: auto; min-width: 210px; font-size: 12.5px; padding: 6px 10px; }
-  .l-count { font-size: 12px; color: var(--muted); align-self: center; }
-  .l-view-group { margin-left: auto; align-items: flex-end; }
+  .l-fl-wrap {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    flex: 1 1 auto; min-width: 0;
+  }
+  .l-fl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .l-sep { width: 1px; align-self: stretch; margin: 1px 5px; background: var(--line); }
+  .l-select { width: auto; min-width: 200px; font-size: 12.5px; padding: 6px 10px; }
+  .l-select.l-range { min-width: 126px; }
+  .l-count { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .l-view-group {
+    flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
+  }
+  /* narrow enough that the bar is several rows anyway, and a vertical rule
+     between wrapped rows reads as a column divider — a lie about the layout */
+  @media (max-width: 1080px) {
+    .l-sep { display: none; }
+    .l-filters { flex-wrap: wrap; }
+    .l-view-group { flex-direction: row; align-items: center; gap: 12px; margin-left: auto; }
+  }
   .l-dur-row { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; font-size: 12px; }
   .l-dur-row .meter { flex: 1; max-width: 120px; }
   .l-cal-foot { padding: 12px 16px 16px; }
@@ -59,9 +86,28 @@
           </div>
 
           <div class="l-filters">
-            <label class="l-fl">
-              <span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="Field">
+            <div class="l-fl-wrap">
+            <div class="l-fl">
+                <select class="field-select l-select l-range" onchange="lRange(this.value)" aria-label="Date range">
+                  <option value="today">Today</option>
+                  <option value="tomorrow">Tomorrow</option>
+                  <option value="week">This week</option>
+                  <option value="next7">Next 7 days</option>
+                  <option value="month">This month</option>
+                  <option value="custom">Custom range&hellip;</option>
+                </select>
+                <span class="l-range-custom" style="display:none;gap:6px;align-items:center">
+                  <input type="date" class="field-input l-range-from" value="2026-07-21" aria-label="From" style="width:148px">
+                  <span style="color:var(--muted);font-size:11.5px">to</span>
+                  <input type="date" class="field-input l-range-to" value="2026-07-25" aria-label="To" style="width:148px">
+                  <button class="btn btn-sm" type="button" onclick="lRangeApply()">Apply</button>
+                </span>
+            </div>
+
+            <span class="l-sep" aria-hidden="true"></span>
+
+            <div class="l-fl">
+              <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="Resources shown">
                 <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
                   <option value="providers">All providers</option>
@@ -82,11 +128,11 @@
                   <option value="room2">Room 2 &middot; procedures</option>
                 </optgroup>
               </select>
-            </label>
+            </div>
+
+            <span class="l-sep" aria-hidden="true"></span>
 
             <div class="l-fl">
-              <span class="filter-group-lbl">Type &amp; subtype</span>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
                 <div class="msel" data-msel="ty">
                   <button class="msel-field" data-hcos-handled="1" type="button">
                     <span class="msel-field-lbl">All types</span><span class="msel-caret">&#9662;</span>
@@ -105,7 +151,10 @@
                       <label class="msel-opt" data-ty="ty-laser"><input type="checkbox" aria-label="Laser"><i class="ty-sw ty-laser"></i>Laser</label>
                       <label class="msel-opt" data-ty="ty-iv"><input type="checkbox" aria-label="IV"><i class="ty-sw ty-iv"></i>IV</label>
                     </div>
-                    <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
+                    <div class="msel-foot">
+                      <button class="msel-all" data-hcos-handled="1" type="button">Select all</button>
+                      <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
+                    </div>
                   </div>
                 </div>
                 <div class="msel" data-msel="sub">
@@ -189,7 +238,10 @@
                       <label class="msel-opt" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Mito Boost"><i class="rail-sw t-minimb"></i>Mini Mito Boost</label>
                       <label class="msel-opt" data-sub="t-minimbc" data-ty-of="ty-iv"><input type="checkbox" aria-label="Mini Mito Boost - Custom"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</label>
                     </div>
-                    <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
+                    <div class="msel-foot">
+                      <button class="msel-all" data-hcos-handled="1" type="button">Select all</button>
+                      <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
+                    </div>
                   </div>
                 </div>
                 <div class="msel" data-msel="st">
@@ -209,37 +261,20 @@
                       <label class="msel-opt" data-st="st-cancelled"><input type="checkbox" aria-label="Cancelled"><i class="st-sw st-cancelled"></i>Cancelled</label>
                       <label class="msel-opt" data-st="st-noshow"><input type="checkbox" aria-label="No-show"><i class="st-sw st-noshow"></i>No-show</label>
                     </div>
-                    <button class="msel-clear" data-hcos-handled="1" type="button">Clear statuses</button>
+                    <div class="msel-foot">
+                      <button class="msel-all" data-hcos-handled="1" type="button">Select all</button>
+                      <button class="msel-clear" data-hcos-handled="1" type="button">Clear statuses</button>
+                    </div>
                   </div>
                 </div>
                 <label class="cx-toggle" id="l-cx-toggle">
                   <input type="checkbox" onchange="lShowCx(this.checked)" aria-label="Show cancelled and rescheduled appointments">
                   Show cancelled &amp; rescheduled
                 </label>
-              </div>
-              
-          </div>
-            <label class="l-fl">
-              <span class="filter-group-lbl">Dates</span>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-                <select class="field-select l-select l-range" onchange="lRange(this.value)" aria-label="Date range">
-                  <option value="today">Today</option>
-                  <option value="tomorrow">Tomorrow</option>
-                  <option value="week">This week</option>
-                  <option value="next7">Next 7 days</option>
-                  <option value="month">This month</option>
-                  <option value="custom">Custom range&hellip;</option>
-                </select>
-                <span class="l-range-custom" style="display:none;gap:6px;align-items:center">
-                  <input type="date" class="field-input l-range-from" value="2026-07-21" aria-label="From" style="width:148px">
-                  <span style="color:var(--muted);font-size:11.5px">to</span>
-                  <input type="date" class="field-input l-range-to" value="2026-07-25" aria-label="To" style="width:148px">
-                  <button class="btn btn-sm" type="button" onclick="lRangeApply()">Apply</button>
-                </span>
-              </div>
-            </label>
+            </div>
+            </div>
 
-          <div class="l-view-group" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+            <div class="l-view-group">
               <span class="l-count" id="l-count">Showing all 19 appointments</span>
               <button class="view-lock locked" id="l-lockbtn"
                 onclick="var b=this;b.classList.toggle('locked');b.querySelector('span:last-child').textContent=b.classList.contains('locked')?'Saved as Yazmin\'s view':'Not saved';HCOS.toast(b.classList.contains('locked')?'Saved. Yazmin opens here every morning.':'Unlocked — changes will not be kept.', 'ok')">
@@ -248,7 +283,6 @@
             </div>
           </div>
 
-            
           <div class="daycal-scroll">
             <div class="daycal-head">
             <div class="daycal-band-spacer"></div>
@@ -1328,7 +1362,7 @@
           </div>
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select" id="l-view-w" onchange="lSync(this)" aria-label="Field">
+              <select class="field-select l-select l-show" id="l-view-w" onchange="lSync(this)" aria-label="Resources shown">
                 <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
                   <option value="providers">All providers</option>
@@ -1350,7 +1384,7 @@
                 </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
-              <select class="field-select l-select" id="l-treat-w" onchange="lSync(this)" aria-label="Field">
+              <select class="field-select l-select l-treat" id="l-treat-w" onchange="lSync(this)" aria-label="Treatment">
                 <optgroup label="Type">
                   <option value="all">All types</option>
                   <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
@@ -1461,10 +1495,11 @@
 
           <div class="card cap-card" style="margin:0 16px 14px">
             <div class="card-title">Capacity this week &middot; 20&ndash;24 July
-              <span class="cap-total">115 of 164 slots booked &middot; 70&#37; full &middot; 49 left</span></div>
+              <span class="cap-total">1,067 of 1,398 slots booked &middot; 76&#37; full &middot; 331 left</span></div>
+            <div class="field-help" style="margin:-2px 0 8px">Capacity belongs to the type &mdash; an IV chair takes any IV. Pick a type to see which treatments filled it.</div>
             <div class="cap-filters">
               <select class="field-select cap-ty" onchange="lCapFilter(this)" aria-label="Appointment type">
-                <option value="">Every type</option>
+                <option value="">Every type &mdash; capacity</option>
                 <option value="ty-visit">Office Visit</option>
                 <option value="ty-proc">Procedure</option>
                 <option value="ty-energ">Energetics</option>
@@ -1482,46 +1517,426 @@
             </div>
             <div class="cap-head"><span class="cap-name">Treatment</span><span></span>
               <span class="cap-num">Booked</span><span class="cap-pct">Full</span><span class="cap-left">Left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-mc100"><span class="cap-name"><i class="rail-sw t-mc100"></i>NAD+</span>
+            <div class="cap-row cap-ty-row" data-ty="ty-visit">
+              <span class="cap-name"><i class="ty-sw ty-visit"></i><b>Office Visit</b></span>
+              <div class="meter"><div class="meter-fill" style="width:86%"></div></div>
+              <span class="cap-num"><b>88 of 102</b> booked</span>
+              <span class="cap-pct">86&#37;</span>
+              <span class="cap-left">14 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-newpt" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-newpt"></i>New patient</span>
+              <div class="meter"><div class="meter-fill" style="width:34%"></div></div>
+              <span class="cap-num"><b>30</b> booked</span>
+              <span class="cap-pct">34&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-nptoc" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+              <div class="meter"><div class="meter-fill" style="width:27%"></div></div>
+              <span class="cap-num"><b>24</b> booked</span>
+              <span class="cap-pct">27&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-fu" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-fu"></i>Follow Up</span>
+              <div class="meter"><div class="meter-fill" style="width:25%"></div></div>
+              <span class="cap-num"><b>22</b> booked</span>
+              <span class="cap-pct">25&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-npfu" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-npfu"></i>New patient FU</span>
+              <div class="meter"><div class="meter-fill" style="width:14%"></div></div>
+              <span class="cap-num"><b>12</b> booked</span>
+              <span class="cap-pct">14&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-iv">
+              <span class="cap-name"><i class="ty-sw ty-iv"></i><b>IV</b></span>
+              <div class="meter"><div class="meter-fill" style="width:81%"></div></div>
+              <span class="cap-num"><b>101 of 124</b> booked</span>
+              <span class="cap-pct">81&#37;</span>
+              <span class="cap-left">23 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-cog" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-rest" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-rest"></i>Core Restore</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff15" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff15"></i>Foundational Flow 15</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff20" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff20"></i>Foundational Flow 20</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc50" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc50"></i>Mega C 50g</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-chel" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-chel"></i>Chelation</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-iron" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ebooiv" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ebooiv"></i>Eboo Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-amino" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-amino"></i>Essential Aminos</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff5" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff5"></i>Foundational Flow 5</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc15" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc15"></i>Mega C 15g</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff10" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff25" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff25"></i>Foundational Flow 25</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff50" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff50"></i>Foundational Flow 50</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc25" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc25"></i>Mega C 25g</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc75" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc75"></i>Mega C 75g</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mito" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mito"></i>Mito Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-minimbc" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-detox" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-detox"></i>Detox Prime</span>
+              <div class="meter"><div class="meter-fill" style="width:3%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">3&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-migraine" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-migraine"></i>Migraine</span>
+              <div class="meter"><div class="meter-fill" style="width:3%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">3&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-cell" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mast" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mast"></i>Mast Cell</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc100" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc100"></i>Mega C 100g</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-minimb" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:1%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">1&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-proc">
+              <span class="cap-name"><i class="ty-sw ty-proc"></i><b>Procedure</b></span>
               <div class="meter"><div class="meter-fill" style="width:71%"></div></div>
               <span class="cap-num"><b>17 of 24</b> booked</span>
-              <span class="cap-pct">71%</span>
+              <span class="cap-pct">71&#37;</span>
               <span class="cap-left">7 left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-mc50"><span class="cap-name"><i class="rail-sw t-mc50"></i>Mega C</span>
-              <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
-              <span class="cap-num"><b>21 of 25</b> booked</span>
-              <span class="cap-pct">84%</span>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-proloz" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-proloz"></i>Prolozone</span>
+              <div class="meter"><div class="meter-fill" style="width:35%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">35&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-prp" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-prp"></i>PRP</span>
+              <div class="meter"><div class="meter-fill" style="width:18%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">18&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-tpi" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-tpi"></i>TPI</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-pelm" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-pelf" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-micro" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-micro"></i>Microcurrent</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-energ">
+              <span class="cap-name"><i class="ty-sw ty-energ"></i><b>Energetics</b></span>
+              <div class="meter"><div class="meter-fill" style="width:59%"></div></div>
+              <span class="cap-num"><b>13 of 22</b> booked</span>
+              <span class="cap-pct">59&#37;</span>
+              <span class="cap-left">9 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-minilym" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+              <div class="meter"><div class="meter-fill" style="width:15%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">15&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-nmt" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-nmt"></i>NMT</span>
+              <div class="meter"><div class="meter-fill" style="width:15%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">15&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-mead" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mead"></i>MEAD</span>
+              <div class="meter"><div class="meter-fill" style="width:15%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">15&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-biochg" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-biochg"></i>BioCharger</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-lymph" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-lymph"></i>LymphStar</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-scenar" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-scenar"></i>SCENAR</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-biomodp" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-biomodr" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-meadre" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-rr" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-rr"></i>R&amp;R</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-lab">
+              <span class="cap-name"><i class="ty-sw ty-lab"></i><b>Labs</b></span>
+              <div class="meter"><div class="meter-fill" style="width:75%"></div></div>
+              <span class="cap-num"><b>12 of 16</b> booked</span>
+              <span class="cap-pct">75&#37;</span>
               <span class="cap-left">4 left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-ff10"><span class="cap-name"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
-              <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
-              <span class="cap-num"><b>12 of 24</b> booked</span>
-              <span class="cap-pct">50%</span>
-              <span class="cap-left">12 left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-minimb"><span class="cap-name"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
-              <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
-              <span class="cap-num"><b>9 of 20</b> booked</span>
-              <span class="cap-pct">45%</span>
-              <span class="cap-left">11 left</span></div>
-            <div class="cap-row" data-ty="ty-visit" data-sub="t-newpt"><span class="cap-name"><i class="rail-sw t-newpt"></i>New patient</span>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-mdl" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mdl"></i>MDL</span>
+              <div class="meter"><div class="meter-fill" style="width:42%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">42&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-igenex" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-igenex"></i>iGenex</span>
+              <div class="meter"><div class="meter-fill" style="width:25%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">25&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-quest" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-quest"></i>Quest</span>
+              <div class="meter"><div class="meter-fill" style="width:17%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">17&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-g6pd" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-g6pd"></i>G6PD</span>
+              <div class="meter"><div class="meter-fill" style="width:17%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">17&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-chiro">
+              <span class="cap-name"><i class="ty-sw ty-chiro"></i><b>Chiro</b></span>
+              <div class="meter"><div class="meter-fill" style="width:62%"></div></div>
+              <span class="cap-num"><b>10 of 16</b> booked</span>
+              <span class="cap-pct">62&#37;</span>
+              <span class="cap-left">6 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-dctx" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-dctx"></i>DC - TX</span>
+              <div class="meter"><div class="meter-fill" style="width:30%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">30&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-lasereval" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-lasereval"></i>Laser Eval</span>
+              <div class="meter"><div class="meter-fill" style="width:30%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">30&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-dcintx" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-dcintx"></i>DC IN - TX</span>
+              <div class="meter"><div class="meter-fill" style="width:20%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">20&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-medifne" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-medifne"></i>MediFNE</span>
+              <div class="meter"><div class="meter-fill" style="width:10%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">10&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-pocrev" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-pocrev"></i>POC Review</span>
+              <div class="meter"><div class="meter-fill" style="width:10%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">10&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-fpe">
+              <span class="cap-name"><i class="ty-sw ty-fpe"></i><b>FPE</b></span>
               <div class="meter"><div class="meter-fill" style="width:80%"></div></div>
               <span class="cap-num"><b>8 of 10</b> booked</span>
-              <span class="cap-pct">80%</span>
+              <span class="cap-pct">80&#37;</span>
               <span class="cap-left">2 left</span></div>
-            <div class="cap-row" data-ty="ty-visit" data-sub="t-fu"><span class="cap-name"><i class="rail-sw t-fu"></i>Follow-up</span>
-              <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
-              <span class="cap-num"><b>37 of 44</b> booked</span>
-              <span class="cap-pct">84%</span>
-              <span class="cap-left">7 left</span></div>
-            <div class="cap-row" data-ty="ty-eboo" data-sub="t-ebootx"><span class="cap-name"><i class="rail-sw t-ebootx"></i>EBOO</span>
+            <div class="cap-row cap-sub-row" data-ty="ty-fpe" data-sub="t-fpefu" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-fpefu"></i>FPE F/U</span>
+              <div class="meter"><div class="meter-fill" style="width:62%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">62&#37;</span>
+              <span class="cap-left">of all FPE</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-fpe" data-sub="t-fpeie" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-fpeie"></i>FPE - IE</span>
+              <div class="meter"><div class="meter-fill" style="width:38%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">38&#37;</span>
+              <span class="cap-left">of all FPE</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-diag">
+              <span class="cap-name"><i class="ty-sw ty-diag"></i><b>Diagnostics</b></span>
+              <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
+              <span class="cap-num"><b>5 of 10</b> booked</span>
+              <span class="cap-pct">50&#37;</span>
+              <span class="cap-left">5 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-diag" data-sub="t-diag" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-diag"></i>Diagnostics</span>
+              <div class="meter"><div class="meter-fill" style="width:100%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">100&#37;</span>
+              <span class="cap-left">of all Diagnostics</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-eboo">
+              <span class="cap-name"><i class="ty-sw ty-eboo"></i><b>EBOO</b></span>
               <div class="meter"><div class="meter-fill" style="width:83%"></div></div>
               <span class="cap-num"><b>5 of 6</b> booked</span>
-              <span class="cap-pct">83%</span>
+              <span class="cap-pct">83&#37;</span>
               <span class="cap-left">1 left</span></div>
-            <div class="cap-row" data-ty="ty-proc" data-sub="t-micro"><span class="cap-name"><i class="rail-sw t-micro"></i>Microcurrent</span>
-              <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
-              <span class="cap-num"><b>6 of 11</b> booked</span>
-              <span class="cap-pct">55%</span>
-              <span class="cap-left">5 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-eboo" data-sub="t-ebootx" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ebootx"></i>EBOO</span>
+              <div class="meter"><div class="meter-fill" style="width:60%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">60&#37;</span>
+              <span class="cap-left">of all EBOO</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-eboo" data-sub="t-eboosafe" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-eboosafe"></i>EBOO Safe</span>
+              <div class="meter"><div class="meter-fill" style="width:40%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">40&#37;</span>
+              <span class="cap-left">of all EBOO</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-laser">
+              <span class="cap-name"><i class="ty-sw ty-laser"></i><b>Laser</b></span>
+              <div class="meter"><div class="meter-fill" style="width:33%"></div></div>
+              <span class="cap-num"><b>2 of 6</b> booked</span>
+              <span class="cap-pct">33&#37;</span>
+              <span class="cap-left">4 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erccemp" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erccemp"></i>ErcCompEmp</span>
+              <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">50&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erccref" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erccref"></i>ErcCompRef</span>
+              <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">50&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
           </div>
           <div class="leg">
             <div class="leg-open">
@@ -1729,7 +2144,7 @@
           </div>
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select" id="l-view-m" onchange="lSync(this)" aria-label="Field">
+              <select class="field-select l-select l-show" id="l-view-m" onchange="lSync(this)" aria-label="Resources shown">
                 <option value="all">Everyone &mdash; all resources</option>
                 <optgroup label="Providers">
                   <option value="providers">All providers</option>
@@ -1751,7 +2166,7 @@
                 </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
-              <select class="field-select l-select" id="l-treat-m" onchange="lSync(this)" aria-label="Field">
+              <select class="field-select l-select l-treat" id="l-treat-m" onchange="lSync(this)" aria-label="Treatment">
                 <optgroup label="Type">
                   <option value="all">All types</option>
                   <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
@@ -1774,7 +2189,7 @@
 
 
           <div class="l-filters">
-            <span class="l-count">342 appointments this month &middot; busiest day Tuesday the 14th &middot; chairs 78% full</span>
+            <span class="l-count">342 appointments this month &middot; busiest day Tuesday the 14th &middot; IV chairs 79&#37; full</span>
             <div class="l-view-group">
               <button class="btn btn-sm" onclick="HCOS.toast('Month exported for the staffing meeting.', 'ok')">Export month</button>
             </div>
@@ -1793,37 +2208,37 @@
             <div class="monthcal-grid">
               <div class="monthcal-day outside"><div class="monthcal-daynum">29</div></div>
               <div class="monthcal-day outside"><div class="monthcal-daynum">30</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="1"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="2"><div class="monthcal-daynum">2</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">FF1</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="3"><div class="monthcal-daynum">3</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="4"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="1"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="2"><div class="monthcal-daynum">2</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 8 booked">8</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="3"><div class="monthcal-daynum">3</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="4"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-iv" title="IV &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">5</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="6"><div class="monthcal-daynum">6</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="7"><div class="monthcal-daynum">7</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">FF1</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="8"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="9"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="10"><div class="monthcal-daynum">10</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span><span class="monthcal-pip">MCF</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="11"><div class="monthcal-daynum">11</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="6"><div class="monthcal-daynum">6</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="7"><div class="monthcal-daynum">7</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 1 booked">1</span><span class="monthcal-pip ty-laser" title="Laser &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="8"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="9"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 8 booked">8</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="10"><div class="monthcal-daynum">10</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="11"><div class="monthcal-daynum">11</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">12</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="13"><div class="monthcal-daynum">13</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="14"><div class="monthcal-daynum">14</div><div class="monthcal-count">16 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">FF1</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="15"><div class="monthcal-daynum">15</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="16"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="17"><div class="monthcal-daynum">17</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span><span class="monthcal-pip">MCF</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="18"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="13"><div class="monthcal-daynum">13</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="14"><div class="monthcal-daynum">14</div><div class="monthcal-count">16 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="15"><div class="monthcal-daynum">15</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="16"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 9 booked">9</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-lab" title="Labs &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="17"><div class="monthcal-daynum">17</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 2 booked">2</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="18"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">19</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="20"><div class="monthcal-daynum">20</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day today" data-open-modal="#l-book-modal" data-day="21"><div class="monthcal-daynum">21</div><div class="monthcal-count">19 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">MCF</span><span class="monthcal-pip">FF1</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="22"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="23"><div class="monthcal-daynum">23</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="24"><div class="monthcal-daynum">24</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span><span class="monthcal-pip">MCF</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="25"><div class="monthcal-daynum">25</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="20"><div class="monthcal-daynum">20</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day today" data-open-modal="#l-book-modal" data-day="21"><div class="monthcal-daynum">21</div><div class="monthcal-count">19 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="22"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 9 booked">9</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-lab" title="Labs &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="23"><div class="monthcal-daynum">23</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="24"><div class="monthcal-daynum">24</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="25"><div class="monthcal-daynum">25</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">26</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="27"><div class="monthcal-daynum">27</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="28"><div class="monthcal-daynum">28</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">FF1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="29"><div class="monthcal-daynum">29</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCF</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="30"><div class="monthcal-daynum">30</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">MCH</span><span class="monthcal-pip">NEW</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="31"><div class="monthcal-daynum">31</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip">FF1</span><span class="monthcal-pip">MCF</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="27"><div class="monthcal-daynum">27</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="28"><div class="monthcal-daynum">28</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="29"><div class="monthcal-daynum">29</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="30"><div class="monthcal-daynum">30</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-lab" title="Labs &middot; 3 booked">3</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="31"><div class="monthcal-daynum">31</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
               <div class="monthcal-day outside"><div class="monthcal-daynum">1</div></div>
               <div class="monthcal-day outside closed"><div class="monthcal-daynum">2</div><div class="monthcal-closed-lbl">Closed</div></div>
             </div>
@@ -1832,9 +2247,10 @@
           <div class="card cap-card" style="margin:0 16px 14px">
             <div class="card-title">Capacity this month &middot; July
               <span class="cap-total">1,022 of 1,340 slots booked &middot; 76&#37; full &middot; 318 left</span></div>
+            <div class="field-help" style="margin:-2px 0 8px">Capacity belongs to the type &mdash; an IV chair takes any IV. Pick a type to see which treatments filled it.</div>
             <div class="cap-filters">
               <select class="field-select cap-ty" onchange="lCapFilter(this)" aria-label="Appointment type">
-                <option value="">Every type</option>
+                <option value="">Every type &mdash; capacity</option>
                 <option value="ty-visit">Office Visit</option>
                 <option value="ty-proc">Procedure</option>
                 <option value="ty-energ">Energetics</option>
@@ -1852,66 +2268,444 @@
             </div>
             <div class="cap-head"><span class="cap-name">Treatment</span><span></span>
               <span class="cap-num">Booked</span><span class="cap-pct">Full</span><span class="cap-left">Left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-mc100"><span class="cap-name"><i class="rail-sw t-mc100"></i>NAD+</span>
-              <div class="meter"><div class="meter-fill" style="width:77%"></div></div>
-              <span class="cap-num"><b>74 of 96</b> booked</span>
-              <span class="cap-pct">77%</span>
-              <span class="cap-left">22 left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-mc50"><span class="cap-name"><i class="rail-sw t-mc50"></i>Mega C</span>
-              <div class="meter"><div class="meter-fill" style="width:81%"></div></div>
-              <span class="cap-num"><b>81 of 100</b> booked</span>
-              <span class="cap-pct">81%</span>
-              <span class="cap-left">19 left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-ff10"><span class="cap-name"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
-              <div class="meter"><div class="meter-fill" style="width:54%"></div></div>
-              <span class="cap-num"><b>52 of 96</b> booked</span>
-              <span class="cap-pct">54%</span>
-              <span class="cap-left">44 left</span></div>
-            <div class="cap-row" data-ty="ty-iv" data-sub="t-minimb"><span class="cap-name"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
-              <div class="meter"><div class="meter-fill" style="width:48%"></div></div>
-              <span class="cap-num"><b>38 of 80</b> booked</span>
-              <span class="cap-pct">48%</span>
-              <span class="cap-left">42 left</span></div>
-            <div class="cap-row" data-ty="ty-visit" data-sub="t-newpt"><span class="cap-name"><i class="rail-sw t-newpt"></i>New patient</span>
-              <div class="meter"><div class="meter-fill" style="width:85%"></div></div>
-              <span class="cap-num"><b>34 of 40</b> booked</span>
-              <span class="cap-pct">85%</span>
-              <span class="cap-left">6 left</span></div>
-            <div class="cap-row" data-ty="ty-visit" data-sub="t-fu"><span class="cap-name"><i class="rail-sw t-fu"></i>Follow-up</span>
+            <div class="cap-row cap-ty-row" data-ty="ty-visit">
+              <span class="cap-name"><i class="ty-sw ty-visit"></i><b>Office Visit</b></span>
               <div class="meter"><div class="meter-fill" style="width:84%"></div></div>
-              <span class="cap-num"><b>148 of 176</b> booked</span>
-              <span class="cap-pct">84%</span>
-              <span class="cap-left">28 left</span></div>
-            <div class="cap-row" data-ty="ty-visit" data-sub="t-npfu"><span class="cap-name"><i class="rail-sw t-npfu"></i>Telehealth</span>
+              <span class="cap-num"><b>361 of 430</b> booked</span>
+              <span class="cap-pct">84&#37;</span>
+              <span class="cap-left">69 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-nptoc" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-nptoc"></i>New patient TOC</span>
+              <div class="meter"><div class="meter-fill" style="width:40%"></div></div>
+              <span class="cap-num"><b>143</b> booked</span>
+              <span class="cap-pct">40&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-fu" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-fu"></i>Follow Up</span>
+              <div class="meter"><div class="meter-fill" style="width:24%"></div></div>
+              <span class="cap-num"><b>87</b> booked</span>
+              <span class="cap-pct">24&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-newpt" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-newpt"></i>New patient</span>
+              <div class="meter"><div class="meter-fill" style="width:20%"></div></div>
+              <span class="cap-num"><b>74</b> booked</span>
+              <span class="cap-pct">20&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-visit" data-sub="t-npfu" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-npfu"></i>New patient FU</span>
+              <div class="meter"><div class="meter-fill" style="width:16%"></div></div>
+              <span class="cap-num"><b>57</b> booked</span>
+              <span class="cap-pct">16&#37;</span>
+              <span class="cap-left">of all Office Visit</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-iv">
+              <span class="cap-name"><i class="ty-sw ty-iv"></i><b>IV</b></span>
+              <div class="meter"><div class="meter-fill" style="width:79%"></div></div>
+              <span class="cap-num"><b>412 of 520</b> booked</span>
+              <span class="cap-pct">79&#37;</span>
+              <span class="cap-left">108 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mast" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mast"></i>Mast Cell</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>33</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc50" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc50"></i>Mega C 50g</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>31</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-minimbc" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</span>
+              <div class="meter"><div class="meter-fill" style="width:7%"></div></div>
+              <span class="cap-num"><b>30</b> booked</span>
+              <span class="cap-pct">7&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff15" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff15"></i>Foundational Flow 15</span>
+              <div class="meter"><div class="meter-fill" style="width:7%"></div></div>
+              <span class="cap-num"><b>29</b> booked</span>
+              <span class="cap-pct">7&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc100" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc100"></i>Mega C 100g</span>
+              <div class="meter"><div class="meter-fill" style="width:7%"></div></div>
+              <span class="cap-num"><b>27</b> booked</span>
+              <span class="cap-pct">7&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff50" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff50"></i>Foundational Flow 50</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>25</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc15" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc15"></i>Mega C 15g</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>21</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-chel" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-chel"></i>Chelation</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>19</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-rest" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-rest"></i>Core Restore</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>19</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff10" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff10"></i>Foundational Flow 10</span>
+              <div class="meter"><div class="meter-fill" style="width:5%"></div></div>
+              <span class="cap-num"><b>19</b> booked</span>
+              <span class="cap-pct">5&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ebooiv" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ebooiv"></i>Eboo Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>18</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc25" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc25"></i>Mega C 25g</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>17</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-cog" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-cog"></i>Cognitive Support</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>15</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff25" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff25"></i>Foundational Flow 25</span>
+              <div class="meter"><div class="meter-fill" style="width:3%"></div></div>
+              <span class="cap-num"><b>14</b> booked</span>
+              <span class="cap-pct">3&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-migraine" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-migraine"></i>Migraine</span>
+              <div class="meter"><div class="meter-fill" style="width:3%"></div></div>
+              <span class="cap-num"><b>12</b> booked</span>
+              <span class="cap-pct">3&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff20" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff20"></i>Foundational Flow 20</span>
+              <div class="meter"><div class="meter-fill" style="width:3%"></div></div>
+              <span class="cap-num"><b>11</b> booked</span>
+              <span class="cap-pct">3&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-minimb" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-minimb"></i>Mini Mito Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:3%"></div></div>
+              <span class="cap-num"><b>11</b> booked</span>
+              <span class="cap-pct">3&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-ff5" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ff5"></i>Foundational Flow 5</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>10</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mito" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mito"></i>Mito Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>10</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-amino" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-amino"></i>Essential Aminos</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>9</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-cell" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-cell"></i>Cellular Boost</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-iron" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-iron"></i>Core Iron Blend</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-detox" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-detox"></i>Detox Prime</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-iv" data-sub="t-mc75" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mc75"></i>Mega C 75g</span>
+              <div class="meter"><div class="meter-fill" style="width:2%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">2&#37;</span>
+              <span class="cap-left">of all IV</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-proc">
+              <span class="cap-name"><i class="ty-sw ty-proc"></i><b>Procedure</b></span>
+              <div class="meter"><div class="meter-fill" style="width:74%"></div></div>
+              <span class="cap-num"><b>71 of 96</b> booked</span>
+              <span class="cap-pct">74&#37;</span>
+              <span class="cap-left">25 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-tpi" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-tpi"></i>TPI</span>
+              <div class="meter"><div class="meter-fill" style="width:25%"></div></div>
+              <span class="cap-num"><b>18</b> booked</span>
+              <span class="cap-pct">25&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-pelf" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-pelf"></i>Pellet Females</span>
+              <div class="meter"><div class="meter-fill" style="width:20%"></div></div>
+              <span class="cap-num"><b>14</b> booked</span>
+              <span class="cap-pct">20&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-proloz" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-proloz"></i>Prolozone</span>
+              <div class="meter"><div class="meter-fill" style="width:20%"></div></div>
+              <span class="cap-num"><b>14</b> booked</span>
+              <span class="cap-pct">20&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-prp" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-prp"></i>PRP</span>
+              <div class="meter"><div class="meter-fill" style="width:13%"></div></div>
+              <span class="cap-num"><b>9</b> booked</span>
+              <span class="cap-pct">13&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-micro" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-micro"></i>Microcurrent</span>
+              <div class="meter"><div class="meter-fill" style="width:13%"></div></div>
+              <span class="cap-num"><b>9</b> booked</span>
+              <span class="cap-pct">13&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-proc" data-sub="t-pelm" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-pelm"></i>Pellet Males</span>
+              <div class="meter"><div class="meter-fill" style="width:10%"></div></div>
+              <span class="cap-num"><b>7</b> booked</span>
+              <span class="cap-pct">10&#37;</span>
+              <span class="cap-left">of all Procedure</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-energ">
+              <span class="cap-name"><i class="ty-sw ty-energ"></i><b>Energetics</b></span>
+              <div class="meter"><div class="meter-fill" style="width:59%"></div></div>
+              <span class="cap-num"><b>52 of 88</b> booked</span>
+              <span class="cap-pct">59&#37;</span>
+              <span class="cap-left">36 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-biomodr" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-biomodr"></i>BioMod Recharge</span>
+              <div class="meter"><div class="meter-fill" style="width:15%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">15&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-meadre" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</span>
+              <div class="meter"><div class="meter-fill" style="width:15%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">15&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-lymph" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-lymph"></i>LymphStar</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-nmt" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-nmt"></i>NMT</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-biochg" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-biochg"></i>BioCharger</span>
+              <div class="meter"><div class="meter-fill" style="width:10%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">10&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-mead" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mead"></i>MEAD</span>
+              <div class="meter"><div class="meter-fill" style="width:10%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">10&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-rr" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-rr"></i>R&amp;R</span>
+              <div class="meter"><div class="meter-fill" style="width:10%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">10&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-biomodp" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-biomodp"></i>BioMod Pro</span>
+              <div class="meter"><div class="meter-fill" style="width:8%"></div></div>
+              <span class="cap-num"><b>4</b> booked</span>
+              <span class="cap-pct">8&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-minilym" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-minilym"></i>Mini-LymphStar</span>
+              <div class="meter"><div class="meter-fill" style="width:6%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">6&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-energ" data-sub="t-scenar" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-scenar"></i>SCENAR</span>
+              <div class="meter"><div class="meter-fill" style="width:4%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">4&#37;</span>
+              <span class="cap-left">of all Energetics</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-lab">
+              <span class="cap-name"><i class="ty-sw ty-lab"></i><b>Labs</b></span>
+              <div class="meter"><div class="meter-fill" style="width:73%"></div></div>
+              <span class="cap-num"><b>48 of 66</b> booked</span>
+              <span class="cap-pct">73&#37;</span>
+              <span class="cap-left">18 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-g6pd" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-g6pd"></i>G6PD</span>
+              <div class="meter"><div class="meter-fill" style="width:40%"></div></div>
+              <span class="cap-num"><b>19</b> booked</span>
+              <span class="cap-pct">40&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-mdl" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-mdl"></i>MDL</span>
+              <div class="meter"><div class="meter-fill" style="width:25%"></div></div>
+              <span class="cap-num"><b>12</b> booked</span>
+              <span class="cap-pct">25&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-quest" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-quest"></i>Quest</span>
+              <div class="meter"><div class="meter-fill" style="width:19%"></div></div>
+              <span class="cap-num"><b>9</b> booked</span>
+              <span class="cap-pct">19&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-lab" data-sub="t-igenex" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-igenex"></i>iGenex</span>
+              <div class="meter"><div class="meter-fill" style="width:17%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">17&#37;</span>
+              <span class="cap-left">of all Labs</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-chiro">
+              <span class="cap-name"><i class="ty-sw ty-chiro"></i><b>Chiro</b></span>
+              <div class="meter"><div class="meter-fill" style="width:62%"></div></div>
+              <span class="cap-num"><b>41 of 66</b> booked</span>
+              <span class="cap-pct">62&#37;</span>
+              <span class="cap-left">25 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-dcintx" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-dcintx"></i>DC IN - TX</span>
+              <div class="meter"><div class="meter-fill" style="width:27%"></div></div>
+              <span class="cap-num"><b>11</b> booked</span>
+              <span class="cap-pct">27&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-lasereval" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-lasereval"></i>Laser Eval</span>
+              <div class="meter"><div class="meter-fill" style="width:24%"></div></div>
+              <span class="cap-num"><b>10</b> booked</span>
+              <span class="cap-pct">24&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-medifne" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-medifne"></i>MediFNE</span>
+              <div class="meter"><div class="meter-fill" style="width:20%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">20&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-pocrev" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-pocrev"></i>POC Review</span>
+              <div class="meter"><div class="meter-fill" style="width:17%"></div></div>
+              <span class="cap-num"><b>7</b> booked</span>
+              <span class="cap-pct">17&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-chiro" data-sub="t-dctx" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-dctx"></i>DC - TX</span>
+              <div class="meter"><div class="meter-fill" style="width:12%"></div></div>
+              <span class="cap-num"><b>5</b> booked</span>
+              <span class="cap-pct">12&#37;</span>
+              <span class="cap-left">of all Chiro</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-fpe">
+              <span class="cap-name"><i class="ty-sw ty-fpe"></i><b>FPE</b></span>
+              <div class="meter"><div class="meter-fill" style="width:75%"></div></div>
+              <span class="cap-num"><b>33 of 44</b> booked</span>
+              <span class="cap-pct">75&#37;</span>
+              <span class="cap-left">11 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-fpe" data-sub="t-fpeie" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-fpeie"></i>FPE - IE</span>
+              <div class="meter"><div class="meter-fill" style="width:76%"></div></div>
+              <span class="cap-num"><b>25</b> booked</span>
+              <span class="cap-pct">76&#37;</span>
+              <span class="cap-left">of all FPE</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-fpe" data-sub="t-fpefu" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-fpefu"></i>FPE F/U</span>
+              <div class="meter"><div class="meter-fill" style="width:24%"></div></div>
+              <span class="cap-num"><b>8</b> booked</span>
+              <span class="cap-pct">24&#37;</span>
+              <span class="cap-left">of all FPE</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-diag">
+              <span class="cap-name"><i class="ty-sw ty-diag"></i><b>Diagnostics</b></span>
               <div class="meter"><div class="meter-fill" style="width:50%"></div></div>
               <span class="cap-num"><b>22 of 44</b> booked</span>
-              <span class="cap-pct">50%</span>
+              <span class="cap-pct">50&#37;</span>
               <span class="cap-left">22 left</span></div>
-            <div class="cap-row" data-ty="ty-eboo" data-sub="t-ebootx"><span class="cap-name"><i class="rail-sw t-ebootx"></i>EBOO</span>
-              <div class="meter"><div class="meter-fill" style="width:75%"></div></div>
-              <span class="cap-num"><b>18 of 24</b> booked</span>
-              <span class="cap-pct">75%</span>
-              <span class="cap-left">6 left</span></div>
-            <div class="cap-row" data-ty="ty-proc" data-sub="t-prp"><span class="cap-name"><i class="rail-sw t-prp"></i>PRP</span>
-              <div class="meter"><div class="meter-fill" style="width:55%"></div></div>
-              <span class="cap-num"><b>11 of 20</b> booked</span>
-              <span class="cap-pct">55%</span>
-              <span class="cap-left">9 left</span></div>
-            <div class="cap-row" data-ty="ty-proc" data-sub="t-pelf"><span class="cap-name"><i class="rail-sw t-pelf"></i>Pellet</span>
-              <div class="meter"><div class="meter-fill" style="width:45%"></div></div>
-              <span class="cap-num"><b>9 of 20</b> booked</span>
-              <span class="cap-pct">45%</span>
-              <span class="cap-left">11 left</span></div>
-            <div class="cap-row" data-ty="ty-laser" data-sub="t-erchlas"><span class="cap-name"><i class="rail-sw t-erchlas"></i>Laser</span>
-              <div class="meter"><div class="meter-fill" style="width:35%"></div></div>
-              <span class="cap-num"><b>14 of 40</b> booked</span>
-              <span class="cap-pct">35%</span>
-              <span class="cap-left">26 left</span></div>
-            <div class="cap-row" data-ty="ty-proc" data-sub="t-micro"><span class="cap-name"><i class="rail-sw t-micro"></i>Microcurrent</span>
-              <div class="meter"><div class="meter-fill" style="width:59%"></div></div>
-              <span class="cap-num"><b>26 of 44</b> booked</span>
-              <span class="cap-pct">59%</span>
-              <span class="cap-left">18 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-diag" data-sub="t-diag" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-diag"></i>Diagnostics</span>
+              <div class="meter"><div class="meter-fill" style="width:100%"></div></div>
+              <span class="cap-num"><b>22</b> booked</span>
+              <span class="cap-pct">100&#37;</span>
+              <span class="cap-left">of all Diagnostics</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-eboo">
+              <span class="cap-name"><i class="ty-sw ty-eboo"></i><b>EBOO</b></span>
+              <div class="meter"><div class="meter-fill" style="width:82%"></div></div>
+              <span class="cap-num"><b>18 of 22</b> booked</span>
+              <span class="cap-pct">82&#37;</span>
+              <span class="cap-left">4 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-eboo" data-sub="t-eboosafe" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-eboosafe"></i>EBOO Safe</span>
+              <div class="meter"><div class="meter-fill" style="width:67%"></div></div>
+              <span class="cap-num"><b>12</b> booked</span>
+              <span class="cap-pct">67&#37;</span>
+              <span class="cap-left">of all EBOO</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-eboo" data-sub="t-ebootx" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-ebootx"></i>EBOO</span>
+              <div class="meter"><div class="meter-fill" style="width:33%"></div></div>
+              <span class="cap-num"><b>6</b> booked</span>
+              <span class="cap-pct">33&#37;</span>
+              <span class="cap-left">of all EBOO</span></div>
+            <div class="cap-row cap-ty-row" data-ty="ty-laser">
+              <span class="cap-name"><i class="ty-sw ty-laser"></i><b>Laser</b></span>
+              <div class="meter"><div class="meter-fill" style="width:41%"></div></div>
+              <span class="cap-num"><b>9 of 22</b> booked</span>
+              <span class="cap-pct">41&#37;</span>
+              <span class="cap-left">13 left</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erccemp" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erccemp"></i>ErcCompEmp</span>
+              <div class="meter"><div class="meter-fill" style="width:33%"></div></div>
+              <span class="cap-num"><b>3</b> booked</span>
+              <span class="cap-pct">33&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erccvip" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erccvip"></i>ErcCompVIP</span>
+              <div class="meter"><div class="meter-fill" style="width:22%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">22&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erccref" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erccref"></i>ErcCompRef</span>
+              <div class="meter"><div class="meter-fill" style="width:22%"></div></div>
+              <span class="cap-num"><b>2</b> booked</span>
+              <span class="cap-pct">22&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erchlas" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erchlas"></i>Erch Laser</span>
+              <div class="meter"><div class="meter-fill" style="width:11%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">11&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
+            <div class="cap-row cap-sub-row" data-ty="ty-laser" data-sub="t-erccpt" style="display:none">
+              <span class="cap-name"><i class="rail-sw t-erccpt"></i>ErcCompPt</span>
+              <div class="meter"><div class="meter-fill" style="width:11%"></div></div>
+              <span class="cap-num"><b>1</b> booked</span>
+              <span class="cap-pct">11&#37;</span>
+              <span class="cap-left">of all Laser</span></div>
           </div>
           <div class="leg">
             <div class="leg-open">
@@ -3171,27 +3965,52 @@
               <div class="field">
                 <label class="field-label">Type</label>
                 <select class="field-select" id="l-bk-ty" onchange="lBkTy()" aria-label="Type">
-                  <option value="iv" selected>IV</option>
-                  <option value="visit">Office visit</option>
+                  <option value="visit">Office Visit</option>
                   <option value="proc">Procedure</option>
                   <option value="energ">Energetics</option>
-                  <option value="treat">Treatment</option>
+                  <option value="lab">Labs</option>
+                  <option value="diag">Diagnostics</option>
+                  <option value="fpe">FPE</option>
+                  <option value="chiro">Chiro</option>
+                  <option value="eboo">EBOO</option>
+                  <option value="laser">Laser</option>
+                  <option value="iv" selected>IV</option>
                 </select>
               </div>
               <div class="field">
                 <label class="field-label">Subtype &mdash; follows the type</label>
                 <select class="field-select" id="l-bk-type" onchange="lTypeChange()" aria-label="Subtype &mdash; follows the type">
-                  <option value="flow" selected>Foundational Flow 10 &middot; 1 h</option>
-                  <option value="nad">NAD+ infusion &middot; 3 h</option>
-                  <option value="mega" value="ivc">Mega C 25 &middot; 2.5 h</option>
-                  <option value="gsh">Glutathione push &middot; 30 min</option>
+                  <option value="cell" selected>Cellular Boost</option>
+                  <option value="chel">Chelation</option>
+                  <option value="cog">Cognitive Support</option>
+                  <option value="iron">Core Iron Blend</option>
+                  <option value="rest">Core Restore</option>
+                  <option value="detox">Detox Prime</option>
+                  <option value="ebooiv">Eboo Boost</option>
+                  <option value="amino">Essential Aminos</option>
+                  <option value="ff5">Foundational Flow 5</option>
+                  <option value="ff10">Foundational Flow 10 &middot; 1 h</option>
+                  <option value="ff15">Foundational Flow 15</option>
+                  <option value="ff20">Foundational Flow 20</option>
+                  <option value="ff25">Foundational Flow 25</option>
+                  <option value="ff50">Foundational Flow 50</option>
+                  <option value="mast">Mast Cell</option>
+                  <option value="mc15">Mega C 15g</option>
+                  <option value="mc25">Mega C 25g &middot; 2.5 h</option>
+                  <option value="mc50">Mega C 50g &middot; 2 h</option>
+                  <option value="mc75">Mega C 75g</option>
+                  <option value="mc100">Mega C 100g &middot; 3 h</option>
+                  <option value="migraine">Migraine</option>
+                  <option value="mito">Mito Boost</option>
+                  <option value="minimb">Mini Mito Boost &middot; 30 min</option>
+                  <option value="minimbc">Mini Mito Boost - Custom</option>
                 </select>
               </div>
             </div>
             <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
             <div class="card" style="margin-top:12px">
               <div class="card-title">Orders for this patient &middot; order = prescription</div>
-              <div class="g-ev" data-order-for="flow">
+              <div class="g-ev" data-order-for="ff10">
                 <div class="g-ev-when">&#10003;</div>
                 <div class="g-ev-what"><strong>Foundational Flow 10 &middot; O-3402</strong> <span class="ver-chip">v2</span>
                   &mdash; active &middot; 2 of 6 given &middot; <strong>valid to Sep 14, 2026</strong> &middot; 55 days left
@@ -3199,7 +4018,7 @@
                   <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
                 <div class="g-ev-ver"><span class="appr approved">Active</span></div>
               </div>
-              <div class="g-ev" data-order-for="ivc">
+              <div class="g-ev" data-order-for="mc25">
                 <div class="g-ev-when">&#10003;</div>
                 <div class="g-ev-what"><strong>Mega C 25 &middot; O-3511</strong> <span class="ver-chip">v1</span>
                   &mdash; active &middot; 1 of 4 given &middot; <strong>valid to Nov 2, 2026</strong> &middot; 104 days left
@@ -3218,7 +4037,7 @@
                   </div></div>
                 <div class="g-ev-ver"><span class="appr draft">Needed</span></div>
               </div>
-              <div class="g-ev" data-order-for="gsh">
+              <div class="g-ev" data-order-for="minimb">
                 <div class="g-ev-when">&mdash;</div>
                 <div class="g-ev-what"><strong>Glutathione push</strong> &mdash; <strong>no order on file</strong>
                   <span class="prov" style="display:block;margin-top:2px"><span>Nothing signed for this treatment.
@@ -3229,7 +4048,7 @@
                   </div></div>
                 <div class="g-ev-ver"><span class="appr draft">Needed</span></div>
               </div>
-              <div class="g-ev" id="l-bk-expired" data-order-for="nad">
+              <div class="g-ev" id="l-bk-expired" data-order-for="mc100">
                 <div class="g-ev-when">!</div>
                 <div class="g-ev-what"><strong>NAD+ infusion &middot; O-2288</strong> <span class="ver-chip">v1</span>
                   &mdash; <strong>expired Jul 1, 2026</strong> &middot; 8 of 8 given
@@ -3715,12 +4534,21 @@
             <option>CSV</option>
           </select></div>
         <div class="field"><label class="field-lbl" for="l-ex-to">Email it to</label>
-          <select class="field-select" id="l-ex-to">
-            <option>Just download it</option>
-            <option>Front desk &mdash; Yazmin, Haylee</option>
-            <option>Everyone on tomorrow's rota</option>
-            <option>A different address&hellip;</option>
+          <select class="field-select" id="l-ex-to" onchange="lExTo(this.value)">
+            <option value="none">Just download it &mdash; do not email</option>
+            <option value="desk" selected>Front desk &mdash; Yazmin, Haylee</option>
+            <option value="rota">Everyone on tomorrow&rsquo;s rota &mdash; 9 people</option>
+            <option value="mgmt">Karina &middot; Operations Manager</option>
+            <option value="me">Me &mdash; Yazmin</option>
+            <option value="other">Someone else&hellip;</option>
           </select></div>
+      </div>
+      <div class="field" id="l-ex-other" style="display:none">
+        <label class="field-lbl" for="l-ex-addr">Send it to</label>
+        <input class="field-input" id="l-ex-addr" type="email" placeholder="name@helixona.com"
+               aria-label="Send it to">
+        <div class="field-help">Outside addresses are logged with your name and the time, and the
+          PDF carries no patient identifiers beyond the name and the appointment.</div>
       </div>
       <div class="seg-divider">The nightly backup</div>
       <dl class="kv">
@@ -3735,7 +4563,7 @@
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn" data-close-modal onclick="HCOS.toast('Emailed to the front desk. A copy is in the nightly bucket.', 'ok')">Email it</button>
+      <button class="btn" onclick="lExSend()">Email it</button>
       <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('PDF generated — 6 pages, one per resource.', 'ok')">Download the PDF</button>
     </div>
   </div>
@@ -3812,13 +4640,45 @@
         <input class="field-input" id="l-wl-pt" placeholder="Start typing a name&hellip;"></div>
       <div class="grid-2">
         <div class="field"><label class="field-lbl" for="l-wl-ty">Type</label>
-          <select class="field-select" id="l-wl-ty">
-            <option>Office visit</option><option selected>IV</option><option>Procedure</option>
-            <option>Energetics</option><option>Treatment</option></select></div>
-        <div class="field"><label class="field-lbl" for="l-wl-sub">Subtype</label>
+          <select class="field-select" id="l-wl-ty" onchange="lWlTy()">
+            <option value="visit">Office Visit</option>
+            <option value="proc">Procedure</option>
+            <option value="energ">Energetics</option>
+            <option value="lab">Labs</option>
+            <option value="diag">Diagnostics</option>
+            <option value="fpe">FPE</option>
+            <option value="chiro">Chiro</option>
+            <option value="eboo">EBOO</option>
+            <option value="laser">Laser</option>
+            <option value="iv" selected>IV</option>
+          </select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-sub">Subtype &mdash; follows the type</label>
           <select class="field-select" id="l-wl-sub">
-            <option selected>NAD+</option><option>Mega C</option><option>Foundational Flow 10</option>
-            <option>Mini Mito Boost</option></select></div>
+            <option selected>Cellular Boost</option>
+            <option>Chelation</option>
+            <option>Cognitive Support</option>
+            <option>Core Iron Blend</option>
+            <option>Core Restore</option>
+            <option>Detox Prime</option>
+            <option>Eboo Boost</option>
+            <option>Essential Aminos</option>
+            <option>Foundational Flow 5</option>
+            <option>Foundational Flow 10</option>
+            <option>Foundational Flow 15</option>
+            <option>Foundational Flow 20</option>
+            <option>Foundational Flow 25</option>
+            <option>Foundational Flow 50</option>
+            <option>Mast Cell</option>
+            <option>Mega C 15g</option>
+            <option>Mega C 25g</option>
+            <option>Mega C 50g</option>
+            <option>Mega C 75g</option>
+            <option>Mega C 100g</option>
+            <option>Migraine</option>
+            <option>Mito Boost</option>
+            <option>Mini Mito Boost</option>
+            <option>Mini Mito Boost - Custom</option>
+          </select></div>
       </div>
       <div class="field">
         <span class="field-lbl">Days that suit them</span>
@@ -3916,7 +4776,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=74"></script>
+<script src="assets/hcos.js?v=75"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3951,6 +4811,23 @@
   }
   function lShowingCx() {
     return !!document.querySelector('.cal.show-cx');
+  }
+
+  /* Blocked time is the clinic being unavailable — lunch, a break, a huddle. It
+     belongs to no type and no filter touches it. A HOLD or a RESERVED SPACE is
+     a different animal: it is capacity set aside for a KIND of appointment, so
+     it belongs to a type and must obey the type and subtype filters. Filtering
+     to IV and still seeing the open new-patient slots was the bug — those slots
+     cannot take an IV, so they are not part of the IV picture. (Carlos,
+     2026-08-12.) Status is deliberately not tested: a held slot has no status
+     in the ten-status vocabulary, and filtering by one must not erase it. */
+  function lSlotOk(el) {
+    if (el.classList.contains('is-block') || el.classList.contains('t-block')) return true;
+    var tyOk  = !lSel.types.length || lSel.types.some(function (t) { return el.classList.contains(t); });
+    var subOk = !lSel.subs.length  || lSel.subs.some(function (k) {
+      return el.classList.contains(k) || el.getAttribute('data-sub') === k;
+    });
+    return tyOk && subOk;
   }
 
   function lMatchEl(el) {
@@ -4000,21 +4877,26 @@
     lApply();
   });
 
+  /* The bar is CLONED into week, month and list, and the clones have their ids
+     stripped — state lives in lSel, never in the DOM. So a control has to be
+     recognised by its CLASS. Testing `src.id.indexOf('l-view')` meant a cloned
+     resource select had an empty id, fell through to the treatment branch, and
+     filtered the board to nothing; going back to "Everyone" then left the old
+     columns hidden because lApply read the ORIGINAL select, which the copy-back
+     listener had not updated yet. Every copy is written first, then applied
+     once. (Carlos, 2026-08-12.) */
   function lSync(src) {
-    var isView = src.id.indexOf('l-view') === 0;
-    if (isView) {
-      ['', '-w', '-m'].forEach(function (sfx) {
-        var el = document.getElementById('l-view' + sfx);
-        if (el && el !== src) el.value = src.value;
+    if (src.classList.contains('l-show')) {
+      document.querySelectorAll('.l-show').forEach(function (o) {
+        if (o !== src) o.value = src.value;
       });
     } else {
       var v = src.value;
       if (v === 'all') { lSel.types = []; lSel.subs = []; }
       else if (v.indexOf('ty:') === 0) { lSel.types = [v.slice(3)]; lSel.subs = []; }
       else { lSel.types = []; lSel.subs = [v]; }
-      ['l-treat-w', 'l-treat-m'].forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el && el !== src) el.value = v;
+      document.querySelectorAll('.l-treat').forEach(function (o) {
+        if (o !== src) o.value = v;
       });
       lChipsRefresh();
     }
@@ -4076,7 +4958,7 @@
       var dayOk = blocked || days.indexOf(String(L_DAYS[lCur].n)) !== -1;
       var colEl = a.closest('[data-col]');
       var colOk = !colEl || wantCols.indexOf(colEl.getAttribute('data-col')) !== -1;
-      var treatOk = blocked || lMatchEl(a);
+      var treatOk = blocked ? lSlotOk(a) : lMatchEl(a);
       /* cancelled and rescheduled leave the board unless the toggle asks for
          them back — neither one is a patient who is coming at this time */
       var cxOk = !lIsOff(a) || !!showCx;
@@ -4107,19 +4989,25 @@
     if (wc) wc.textContent = wShown === wTotal ? 'Showing all ' + wTotal + ' this week'
       : 'Showing ' + wShown + ' of ' + wTotal + ' this week';
 
-    var MAP = { MCH: 't-mc100', MCF: 't-mc50', FF1: 't-ff10', MMB: 't-minimb', NEW: 't-newpt',
-                FU: 't-fu', EBO: 't-ebootx', NFU: 't-npfu', LAB: 't-mdl', PRP: 't-prp',
-                ACU: 't-micro', PEL: 't-pelf', LAS: 't-erchlas', BEM: 't-biomodp', LYM: 't-lymph',
-                CHI: 't-dctx', NMT: 't-nmt' };
+    /* A month square used to carry three-letter subtype codes — MCH, MCF, FF1 —
+       in 8px monospace grey. Nobody could read them and nobody knew what they
+       meant (Carlos, 2026-08-12: "what are the initials on the screen?"). They
+       are TYPE now: the type's own background colour from the clinic's code,
+       with the number booked inside it, and the type named in the tooltip. A
+       square is too small for a subtype breakdown, and at month scale the
+       question is "how much IV is this week", not which bag. */
     var mDays = 0;
     document.querySelectorAll('.monthcal-day').forEach(function (d) {
       var pips = d.querySelectorAll('.monthcal-pip'), any = false;
       pips.forEach(function (pip) {
-        var key = MAP[pip.textContent.trim()];
-        var chip = key ? document.querySelector('[data-sub="' + key + '"]') : null;
-        var tyOf = chip ? chip.getAttribute('data-ty-of') : null;
-        var tyOk = !lSel.types.length || (tyOf && lSel.types.indexOf(tyOf) !== -1);
-        var subOk = !lSel.subs.length || (key && lSel.subs.indexOf(key) !== -1);
+        var ty = (pip.className.match(/ty-[a-z0-9]+/) || [''])[0];
+        var tyOk = !lSel.types.length || lSel.types.indexOf(ty) !== -1;
+        /* a subtype selection narrows to the type that owns it — the square
+           cannot say which bag, so it says whether that type ran at all */
+        var subOk = !lSel.subs.length || lSel.subs.some(function (k) {
+          var o = document.querySelector('.msel-opt[data-sub="' + k + '"]');
+          return o && o.getAttribute('data-ty-of') === ty;
+        });
         var ok = tyOk && subOk;
         pip.style.display = ok ? '' : 'none';
         if (ok) any = true;
@@ -4578,29 +5466,77 @@
 
   var L_DATE = { jul21: 'Tue, Jul 21', jul22: 'Wed, Jul 22', jul28: 'Tue, Jul 28' };
 
+  /* The booking engine's dictionary — one entry per SUBTYPE, generated from
+     the clinic's sheet. It used to hold sixteen entries keyed to the retired
+     taxonomy (flow, nad, ivc, gsh), so the moment the subtype select spoke
+     real keys every lookup came back undefined (Carlos, 2026-08-12). */
   var L_TX = {
-    flow: { name: "Foundational Flow 10",    low: "Foundational Flow 10",   art: 'a',  mins: 60,  patient: 75, iv: true,
+    newpt:  { name: 'New patient', low: 'new patient', art: 'a', mins: 90, iv: false, order: null },
+    npfu:   { name: 'New patient FU', low: 'new patient fu', art: 'a', mins: 45, iv: false, order: null },
+    nptoc:  { name: 'New patient TOC', low: 'new patient toc', art: 'a', mins: 90, iv: false, order: null },
+    fu:     { name: 'Follow Up', low: 'follow up', art: 'a', mins: 30, iv: false, order: null },
+    prp:    { name: 'PRP', low: 'prp', art: 'a', mins: 90, iv: false, order: null },
+    tpi:    { name: 'TPI', low: 'tpi', art: 'a', mins: 30, iv: false, order: null },
+    pelm:   { name: 'Pellet Males', low: 'pellet males', art: 'a', mins: 40, iv: false, order: null, needsLab: true },
+    pelf:   { name: 'Pellet Females', low: 'pellet females', art: 'a', mins: 40, iv: false, order: null, needsLab: true },
+    proloz: { name: 'Prolozone', low: 'prolozone', art: 'a', mins: 45, iv: false, order: null },
+    micro:  { name: 'Microcurrent', low: 'microcurrent', art: 'a', mins: 45, iv: false, order: null },
+    biochg: { name: 'BioCharger', low: 'biocharger', art: 'a', mins: 30, iv: false, order: null },
+    lymph:  { name: 'LymphStar', low: 'lymphstar', art: 'a', mins: 45, iv: false, order: null },
+    scenar: { name: 'SCENAR', low: 'scenar', art: 'a', mins: 30, iv: false, order: null },
+    minilym: { name: 'Mini-LymphStar', low: 'mini-lymphstar', art: 'a', mins: 25, iv: false, order: null },
+    biomodp: { name: 'BioMod Pro', low: 'biomod pro', art: 'a', mins: 45, iv: false, order: null },
+    biomodr: { name: 'BioMod Recharge', low: 'biomod recharge', art: 'a', mins: 30, iv: false, order: null },
+    nmt:    { name: 'NMT', low: 'nmt', art: 'a', mins: 60, iv: false, order: null },
+    mead:   { name: 'MEAD', low: 'mead', art: 'a', mins: 60, iv: false, order: null },
+    meadre: { name: 'MEAD ReAssessment', low: 'mead reassessment', art: 'a', mins: 45, iv: false, order: null },
+    rr:     { name: 'R&amp;R', low: 'r&amp;r', art: 'a', mins: 45, iv: false, order: null },
+    mdl:    { name: 'MDL', low: 'mdl', art: 'a', mins: 15, iv: false, order: null, chairOk: true },
+    quest:  { name: 'Quest', low: 'quest', art: 'a', mins: 15, iv: false, order: null, chairOk: true },
+    g6pd:   { name: 'G6PD', low: 'g6pd', art: 'a', mins: 15, iv: false, order: null, chairOk: true },
+    igenex: { name: 'iGenex', low: 'igenex', art: 'an', mins: 15, iv: false, order: null, chairOk: true },
+    diag:   { name: 'Diagnostics', low: 'diagnostics', art: 'a', mins: 30, iv: false, order: null },
+    fpeie:  { name: 'FPE - IE', low: 'fpe - ie', art: 'a', mins: 60, iv: false, order: null },
+    fpefu:  { name: 'FPE F/U', low: 'fpe f/u', art: 'a', mins: 60, iv: false, order: null },
+    dcintx: { name: 'DC IN - TX', low: 'dc in - tx', art: 'a', mins: 30, iv: false, order: null },
+    dctx:   { name: 'DC - TX', low: 'dc - tx', art: 'a', mins: 30, iv: false, order: null },
+    lasereval: { name: 'Laser Eval', low: 'laser eval', art: 'a', mins: 30, iv: false, order: null },
+    medifne: { name: 'MediFNE', low: 'medifne', art: 'a', mins: 30, iv: false, order: null },
+    pocrev: { name: 'POC Review', low: 'poc review', art: 'a', mins: 30, iv: false, order: null },
+    eboosafe: { name: 'EBOO Safe', low: 'eboo safe', art: 'an', mins: 120, iv: true , order: null, needsLab: true },
+    ebootx: { name: 'EBOO', low: 'eboo', art: 'an', mins: 120, iv: true , order: null, needsLab: true },
+    erchlas: { name: 'Erch Laser', low: 'erch laser', art: 'an', mins: 30, iv: false, order: null },
+    erccemp: { name: 'ErcCompEmp', low: 'erccompemp', art: 'an', mins: 30, iv: false, order: null },
+    erccpt: { name: 'ErcCompPt', low: 'erccomppt', art: 'an', mins: 30, iv: false, order: null },
+    erccvip: { name: 'ErcCompVIP', low: 'erccompvip', art: 'an', mins: 30, iv: false, order: null },
+    erccref: { name: 'ErcCompRef', low: 'erccompref', art: 'an', mins: 30, iv: false, order: null },
+    cell:   { name: 'Cellular Boost', low: 'cellular boost', art: 'a', mins: 60, iv: true , order: null },
+    chel:   { name: 'Chelation', low: 'chelation', art: 'a', mins: 90, iv: true , order: null, needsLab: true },
+    cog:    { name: 'Cognitive Support', low: 'cognitive support', art: 'a', mins: 60, iv: true , order: null },
+    iron:   { name: 'Core Iron Blend', low: 'core iron blend', art: 'a', mins: 90, iv: true , order: null },
+    rest:   { name: 'Core Restore', low: 'core restore', art: 'a', mins: 60, iv: true , order: null },
+    detox:  { name: 'Detox Prime', low: 'detox prime', art: 'a', mins: 75, iv: true , order: null },
+    ebooiv: { name: 'Eboo Boost', low: 'eboo boost', art: 'an', mins: 120, iv: true , order: null, needsLab: true },
+    amino:  { name: 'Essential Aminos', low: 'essential aminos', art: 'an', mins: 60, iv: true , order: null },
+    ff5:    { name: 'Foundational Flow 5', low: 'foundational flow 5', art: 'a', mins: 45, iv: true , order: null },
+    ff10:  { name: 'Foundational Flow 10', low: 'Foundational Flow 10', art: 'a', mins: 60, patient: 75, iv: true,
              order: 'O-2291', ver: 'v1',
-             ordMeta: 'Dr. Drannikov, May 22 2026 · 2 of 6 given · v2 is a draft and does not authorize a booking',
+             ordMeta: 'Dr. Drannikov, May 22 2026 &middot; 2 of 6 given &middot; v2 is a draft and does not authorize a booking',
              every: 7, okDate: 'jul28' },
-    np:    { name: 'New patient visit',      low: 'new patient visit',      art: 'a', mins: 90,  iv: false, order: null },
-    npfu:  { name: 'New patient FU',          low: 'new patient follow-up',  art: 'a', mins: 45,  iv: false, order: null },
-    xnp:   { name: 'Ext new patient visit',   low: 'extended new patient',   art: 'an', mins: 120, iv: false, order: null },
-    xnpfu: { name: 'Ext new patient FU',      low: 'extended NP follow-up',  art: 'an', mins: 60,  iv: false, order: null },
-    xfu:   { name: 'Ext follow-up',           low: 'extended follow-up',     art: 'an', mins: 45,  iv: false, order: null },
-    pel:   { name: 'Pellets',                 low: 'pellet insertion',       art: 'a', mins: 40,  iv: false, order: null, needsLab: true },
-    xpel:  { name: 'Ext pellets',             low: 'extended pellets',       art: 'an', mins: 60,  iv: false, order: null, needsLab: true },
-    prp:   { name: 'PRP',                     low: 'PRP procedure',          art: 'a', mins: 90,  iv: false, order: null },
-    eboo:  { name: 'EBOO',                    low: 'EBOO procedure',         art: 'an', mins: 120, iv: true,  order: null },
-    acu:   { name: 'Acupuncture',             low: 'acupuncture session',    art: 'an', mins: 45,  iv: false, order: null },
-    mito:  { name: 'Mito Boost',              low: 'Mito Boost',             art: 'a', mins: 75,  iv: true,  order: null },
-    mcas:  { name: 'MCAS',                    low: 'MCAS protocol',          art: 'an', mins: 75,  iv: true,  order: null },
-    ebb:   { name: 'Eboo Boost',              low: 'Eboo Boost',             art: 'an', mins: 120, iv: true,  order: null },
-    nad:   { name: 'NAD+ infusion',      low: 'NAD+ infusion',     art: 'a',  mins: 180, iv: true,  order: null },
-    ivc:   { name: 'IV vitamin C 25 g',  low: 'IV vitamin C 25 g', art: 'an', mins: 150, iv: true,  order: null, needsLab: true },
-    gsh:   { name: 'Glutathione push',   low: 'glutathione push',  art: 'a',  mins: 30,  iv: true,  order: null },
-    fu:    { name: 'Follow-up',          low: 'follow-up',         art: 'a',  mins: 30,  iv: false },
-    lab:   { name: 'Lab draw',           low: 'lab draw',          art: 'a',  mins: 15,  iv: false, chairOk: true }
+    ff15:   { name: 'Foundational Flow 15', low: 'foundational flow 15', art: 'a', mins: 75, iv: true , order: null },
+    ff20:   { name: 'Foundational Flow 20', low: 'foundational flow 20', art: 'a', mins: 90, iv: true , order: null },
+    ff25:   { name: 'Foundational Flow 25', low: 'foundational flow 25', art: 'a', mins: 105, iv: true , order: null },
+    ff50:   { name: 'Foundational Flow 50', low: 'foundational flow 50', art: 'a', mins: 150, iv: true , order: null },
+    mast:   { name: 'Mast Cell', low: 'mast cell', art: 'a', mins: 75, iv: true , order: null },
+    mc15:   { name: 'Mega C 15g', low: 'mega c 15g', art: 'a', mins: 60, iv: true , order: null },
+    mc25:   { name: 'Mega C 25g', low: 'mega c 25g', art: 'a', mins: 90, iv: true , order: null, needsLab: true },
+    mc50:   { name: 'Mega C 50g', low: 'mega c 50g', art: 'a', mins: 120, iv: true , order: null, needsLab: true },
+    mc75:   { name: 'Mega C 75g', low: 'mega c 75g', art: 'a', mins: 150, iv: true , order: null, needsLab: true },
+    mc100:  { name: 'Mega C 100g', low: 'mega c 100g', art: 'a', mins: 180, iv: true , order: null, needsLab: true },
+    migraine: { name: 'Migraine', low: 'migraine', art: 'a', mins: 60, iv: true , order: null },
+    mito:   { name: 'Mito Boost', low: 'mito boost', art: 'a', mins: 75, iv: true , order: null },
+    minimb: { name: 'Mini Mito Boost', low: 'mini mito boost', art: 'a', mins: 30, iv: true , order: null },
+    minimbc: { name: 'Mini Mito Boost - Custom', low: 'mini mito boost - custom', art: 'a', mins: 30, iv: true , order: null }
   };
 
   // "a Foundational Flow 10" / "an IV vitamin C 25 g" — the treatment keeps its own name in a sentence.
@@ -5114,13 +6050,34 @@
   })();
 
 
+  /* Subtype follows type, from the clinic's own sheet. It used to be five
+     invented types and four hard-coded IV recipes that never changed when
+     the type did, though the label promised they would (Carlos, 2026-08-12). */
   var L_SUBS = {
-    iv:    [['flow', 'Foundational Flow 10 · 1 h', 1], ['nad', 'NAD+ infusion · 3 h', 0], ['ivc', 'Mega C 25 · 2.5 h', 0], ['gsh', 'Glutathione push · 30 min', 0]],
-    visit: [['np', 'New patient · 90 min', 1], ['npfu', 'New patient FU · 45 min', 0], ['fu', 'FU · 30 min', 0],
-            ['xnp', 'Ext · New patient · 2 h', 0], ['xnpfu', 'Ext · New patient FU · 1 h', 0], ['xfu', 'Ext · FU · 45 min', 0]],
-    proc:  [['pel', 'Pellets · 40 min', 1], ['xpel', 'Ext · Pellets · 1 h', 0], ['prp', 'PRP · 90 min', 0], ['eboo', 'EBOO · 2 h', 0]],
-    energ: [['acu', 'Acupuncture · 45 min', 1]],
-    treat: [['mito', 'Mito Boost · 75 min', 1], ['mcas', 'MCAS · 75 min', 0], ['ebb', 'Eboo Boost · 2 h', 0]]
+    visit:   [['newpt', 'New patient &middot; 90 min', 1], ['npfu', 'New patient FU &middot; 45 min', 0],
+              ['nptoc', 'New patient TOC &middot; 90 min', 0], ['fu', 'Follow Up &middot; 30 min', 0]],
+    proc:    [['prp', 'PRP &middot; 90 min', 1], ['tpi', 'TPI', 0], ['pelm', 'Pellet Males &middot; 40 min', 0],
+              ['pelf', 'Pellet Females &middot; 40 min', 0], ['proloz', 'Prolozone', 0], ['micro', 'Microcurrent', 0]],
+    energ:   [['biochg', 'BioCharger', 1], ['lymph', 'LymphStar', 0], ['scenar', 'SCENAR', 0],
+              ['minilym', 'Mini-LymphStar', 0], ['biomodp', 'BioMod Pro', 0], ['biomodr', 'BioMod Recharge', 0],
+              ['nmt', 'NMT', 0], ['mead', 'MEAD', 0], ['meadre', 'MEAD ReAssessment', 0], ['rr', 'R&amp;R', 0]],
+    lab:     [['mdl', 'MDL', 1], ['quest', 'Quest', 0], ['g6pd', 'G6PD', 0], ['igenex', 'iGenex', 0]],
+    diag:    [['diag', 'Diagnostics', 1]],
+    fpe:     [['fpeie', 'FPE - IE', 1], ['fpefu', 'FPE F/U', 0]],
+    chiro:   [['dcintx', 'DC IN - TX', 1], ['dctx', 'DC - TX', 0], ['lasereval', 'Laser Eval', 0],
+              ['medifne', 'MediFNE', 0], ['pocrev', 'POC Review', 0]],
+    eboo:    [['eboosafe', 'EBOO Safe &middot; 2 h', 1], ['ebootx', 'EBOO &middot; 2 h', 0]],
+    laser:   [['erchlas', 'Erch Laser', 1], ['erccemp', 'ErcCompEmp', 0], ['erccpt', 'ErcCompPt', 0],
+              ['erccvip', 'ErcCompVIP', 0], ['erccref', 'ErcCompRef', 0]],
+    iv:      [['cell', 'Cellular Boost', 1], ['chel', 'Chelation', 0], ['cog', 'Cognitive Support', 0],
+              ['iron', 'Core Iron Blend', 0], ['rest', 'Core Restore', 0], ['detox', 'Detox Prime', 0],
+              ['ebooiv', 'Eboo Boost', 0], ['amino', 'Essential Aminos', 0], ['ff5', 'Foundational Flow 5', 0],
+              ['ff10', 'Foundational Flow 10 &middot; 1 h', 0], ['ff15', 'Foundational Flow 15', 0],
+              ['ff20', 'Foundational Flow 20', 0], ['ff25', 'Foundational Flow 25', 0],
+              ['ff50', 'Foundational Flow 50', 0], ['mast', 'Mast Cell', 0], ['mc15', 'Mega C 15g', 0],
+              ['mc25', 'Mega C 25g &middot; 2.5 h', 0], ['mc50', 'Mega C 50g &middot; 2 h', 0], ['mc75', 'Mega C 75g', 0],
+              ['mc100', 'Mega C 100g &middot; 3 h', 0], ['migraine', 'Migraine', 0], ['mito', 'Mito Boost', 0],
+              ['minimb', 'Mini Mito Boost &middot; 30 min', 0], ['minimbc', 'Mini Mito Boost - Custom', 0]]
   };
   function lBkTy() {
     var ty = document.getElementById('l-bk-ty').value;
@@ -5134,6 +6091,21 @@
     if (typeof lTypeChange === 'function') lTypeChange();
     if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   }
+  window.lBkTy = lBkTy;
+
+  /* The waitlist asked for a type and a subtype from two frozen lists that knew
+     nothing about each other, so you could sit somebody on the list for an IV
+     called "Pellet Males". Same cascade as the booking screen, same source. */
+  function lWlTy() {
+    var ty = (document.getElementById('l-wl-ty') || {}).value;
+    var sel = document.getElementById('l-wl-sub');
+    if (!sel || !L_SUBS[ty]) return;
+    sel.innerHTML = L_SUBS[ty].map(function (o, i) {
+      return '<option' + (i === 0 ? ' selected' : '') + '>' +
+             o[1].split(' &middot; ')[0] + '</option>';
+    }).join('');
+  }
+  window.lWlTy = lWlTy;
 
 
 
@@ -5192,7 +6164,10 @@
     if (window.ResizeObserver && grid) {
       new ResizeObserver(function () { lFitSubs(); }).observe(grid);
     }
-    window.addEventListener('resize', lFitSubs);
+    /* the listener hands the callback an Event; lFitSubs takes a ROOT element,
+       so passing it straight through made (root||document).querySelectorAll blow
+       up on every window resize */
+      window.addEventListener('resize', function () { lFitSubs(); });
     /* Inter arrives after first paint and is wider than the fallback, so a
        label that fit during layout stops fitting a moment later. Measuring
        before the real font lands is measuring the wrong text. */
@@ -5248,6 +6223,12 @@
   window.lFlagIcon = lFlagIcon; window.lFlagPreview = lFlagPreview; window.lFlagNew = lFlagNew;
 
   /* ---------- capacity, filtered by type and by treatment ---------- */
+  /* CAPACITY IS A PROPERTY OF THE TYPE, not the subtype (Carlos, 2026-08-12).
+     An IV chair takes any IV, so "77% full of NAD" answers a question nobody
+     asked — what the desk needs is how much of the IV capacity is left. The
+     rows are types. Picking one type opens ITS subtypes underneath, and those
+     are deliberately worded as a share of what was booked ("96 of the 412
+     booked"), never as a capacity of their own, because they do not have one. */
   function lCapFilter(el) {
     var card = el.closest('.cap-card');
     if (!card) return;
@@ -5258,14 +6239,23 @@
     card.querySelectorAll('.cap-row').forEach(function (r) {
       var pct = parseInt((r.querySelector('.cap-pct') || {}).textContent || '0', 10);
       var name = (r.querySelector('.cap-name') || {}).textContent.toLowerCase();
-      var on = (!ty || r.getAttribute('data-ty') === ty)
+      var isSub = r.classList.contains('cap-sub-row');
+      /* a subtype row only appears once you have drilled into its type, or when
+         you are searching for a treatment by name */
+      var drilled = isSub ? (ty === r.getAttribute('data-ty') || !!q) : true;
+      var on = drilled
+            && (!ty || r.getAttribute('data-ty') === ty)
             && (!q || name.indexOf(q) !== -1)
-            && (!low || pct >= 80);
+            && (!low || isSub || pct >= 80);
       r.style.display = on ? '' : 'none';
       if (on) {
         shown++;
-        var m = ((r.querySelector('.cap-num') || {}).textContent || '').match(/(\d+) of (\d+)/);
-        if (m) { booked += +m[1]; cap += +m[2]; }
+        /* only type rows carry capacity; adding the subtype mix on top would
+           count the same booking twice */
+        if (!isSub) {
+          var m = ((r.querySelector('.cap-num') || {}).textContent || '').match(/(\d+) of (\d+)/);
+          if (m) { booked += +m[1]; cap += +m[2]; }
+        }
       }
     });
     var t = card.querySelector('.cap-total');
@@ -5277,6 +6267,40 @@
     if (head) head.style.display = shown ? '' : 'none';
   }
   window.lCapFilter = lCapFilter;
+
+  /* ---------- who the list gets emailed to ---------- */
+  var L_EX_TO = { none: '', desk: 'the front desk — Yazmin and Haylee',
+                  rota: "everyone on tomorrow's rota — 9 people",
+                  mgmt: 'Karina', me: 'you' };
+  function lExTo(v) {
+    var box = document.getElementById('l-ex-other');
+    if (box) box.style.display = v === 'other' ? '' : 'none';
+  }
+  window.lExTo = lExTo;
+
+  function lExSend() {
+    var v = (document.getElementById('l-ex-to') || {}).value || 'desk';
+    if (v === 'none') {
+      HCOS.toast('Nothing emailed — the recipient is set to download only.', 'warn');
+      return;
+    }
+    var who = L_EX_TO[v];
+    if (v === 'other') {
+      var a = ((document.getElementById('l-ex-addr') || {}).value || '').trim();
+      /* a toast that claims it sent to nobody is worse than a dead button */
+      if (!a || a.indexOf('@') === -1) {
+        HCOS.toast('Nothing sent — that address is not an email address.', 'warn');
+        return;
+      }
+      who = a;
+    }
+    HCOS.toast('Emailed to ' + who + '. A copy is in tonight’s bucket, and the send is on the audit trail.', 'ok');
+    /* only close once it really went — a modal that shuts on a failed validation
+       leaves the reviewer believing it sent */
+    var ov = document.getElementById('l-export-modal');
+    if (ov) ov.classList.remove('open');
+  }
+  window.lExSend = lExSend;
 
   /* ---------- waitlist offers: one slot, several people, first wins ----------
      The offer goes out to everyone at the same second. Each gets an accept link
@@ -5640,11 +6664,9 @@
         if (body) body.insertBefore(copy, body.children[1] || null);
       }
     });
-    document.querySelectorAll('.l-show').forEach(function (s) {
-      s.addEventListener('change', function () {
-        document.querySelectorAll('.l-show').forEach(function (o) { if (o !== s) o.value = s.value; });
-      });
-    });
+    /* no copy-back listener here: it fired AFTER the inline onchange, so lApply
+       had already read a stale value and the board lagged one change behind.
+       lSync writes every copy first, then applies once. */
   }
 
   /* ---------- the date range, shared by every view ---------- */
@@ -5728,6 +6750,25 @@
         else lSel.subs = [];
         summarize(); lApply(); return;
       }
+      /* Select all — Clear had no opposite, so once you had ticked one box the
+         only way back was to untick every other one by hand. It ticks what is
+         OFFERED, not what exists: with Type = IV the subtype panel shows IV
+         subtypes only, and Select all there means "every IV", not "everything".
+         (Carlos, 2026-08-12.) */
+      var all = ev.target.closest ? ev.target.closest('.msel-all') : null;
+      if (all) {
+        var m = all.closest('.msel'), w = m ? m.getAttribute('data-msel') : '';
+        var offered = [].filter.call(m.querySelectorAll('.msel-opt'), function (o) {
+          return o.style.display !== 'none' && !o.classList.contains('hidden');
+        });
+        var keys = offered.map(function (o) {
+          return o.getAttribute('data-ty') || o.getAttribute('data-sub') || o.getAttribute('data-st');
+        }).filter(Boolean);
+        if (w === 'ty') { lSel.types = keys; }
+        else if (w === 'st') { lSel.sts = keys; }
+        else { lSel.subs = keys; }
+        summarize(); lApply(); return;
+      }
       if (!ev.target.closest || !ev.target.closest('.msel'))
         document.querySelectorAll('.msel.open').forEach(function (x) { x.classList.remove('open'); });
     });
@@ -5769,7 +6810,7 @@
     var sel = document.getElementById('l-bk-type');
     if (!sel) return;
     function focusOrder() {
-      var k = sel.value || 'flow';
+      var k = sel.value || 'ff10';
       var any = false;
       document.querySelectorAll('[data-order-for]').forEach(function (row) {
         var mine = row.getAttribute('data-order-for') === k;

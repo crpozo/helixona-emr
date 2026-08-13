@@ -275,6 +275,51 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   view can be saved per browser (`hcos-list-view`).
 - **Blocked time, holds and reserved spaces are not appointments** and are excluded from the
   list and from the day's count. They were showing up as rows with no patient.
+- **THE FILTER BAR CARRIES NO LABEL COLUMN (Carlos, 2026-08-12: "organize this better").**
+  It had three labelled rows — Show / Type & subtype / Dates — whose labels were three different
+  widths, so the selects came out with a ragged left edge and two-thirds of the bar empty, and
+  "Type & subtype" was a lie: that row also held statuses and the cancelled toggle. Every control
+  already says what it is ("All types", "All statuses", "Today"), so the labels are gone and
+  hairlines group them instead, in the order the desk thinks: **WHEN | WHO | WHAT**. The count and
+  the saved view are not filters — they are pinned to the right of whichever line they land on, so
+  the control that ever drops to a second line is the status toggle, never the date.
+- **A cloned control is identified by CLASS, never by id.** `lSync` tested `src.id` to tell a
+  resource select from a treatment select; the clones have their ids stripped, so a cloned
+  resource select fell through to the treatment branch and filtered the board to nothing, and
+  going back to "Everyone" left the columns hidden until a refresh. Worse, the copy-back listener
+  ran AFTER the inline `onchange`, so `lApply` had already read a stale value and the board sat one
+  change behind. `lSync` writes every copy first, then applies once. (Carlos, 2026-08-12.)
+- **A HOLD or a RESERVED SPACE obeys the type filter; BLOCKED TIME does not.** Filtering to IV
+  still showed the open new-patient slots, which cannot take an IV (Carlos, 2026-08-12). Blocked
+  time is the clinic being unavailable and belongs to no type; a hold and a space are capacity set
+  aside for a KIND of appointment and belong to one. `lSlotOk` is that test, and it deliberately
+  ignores STATUS — a held slot has no status in the ten-status vocabulary, and filtering by one
+  must not erase it.
+- **Every multi-select has Select all as well as Clear.** Clear had no opposite, so once you had
+  ticked one box the only way back was to untick the rest by hand. It ticks what is OFFERED, not
+  what exists: with Type = IV the subtype panel shows IV subtypes only, and Select all there means
+  "every IV".
+- **CAPACITY IS A PROPERTY OF THE TYPE (Carlos, 2026-08-12).** An IV chair takes any IV, so
+  "77% full of NAD" answers a question nobody asked. The month and week rows are the ten types;
+  picking one in the type select opens ITS subtypes underneath, and those are worded as a share of
+  what was booked ("33 booked · 8% · of all IV"), never as a capacity of their own, because they do
+  not have one. Only type rows feed the total, or the same booking is counted twice.
+- **A month square shows TYPE, painted and counted.** It used to carry three-letter subtype codes
+  in 8px grey monospace — MCH, MCF, FF1 — which nobody could read and nobody could decode (Carlos,
+  2026-08-12: "what are the initials on the screen?"). Each square now carries the type's own
+  colour from the clinic's code with the number booked inside it and the type named in the
+  tooltip. A square is too small for a subtype breakdown, and at month scale the question is how
+  much IV a week holds, not which bag.
+- **`data-close-modal` on the OVERLAY means "click the backdrop", not "click anything".** Every
+  click inside a modal bubbles to its overlay, so `closest()` found it and the modal shut the
+  moment you touched a select — Carlos could not test the export at all. The handler now ignores
+  the event unless it landed on the backdrop itself. Five overlays were affected.
+- **The booking engine's dictionaries are generated from the clinic's sheet.** `L_SUBS` (subtype
+  follows type) and `L_TX` (the durations and order links behind it) both held the retired
+  taxonomy — five invented types and sixteen entries keyed `flow`, `nad`, `ivc`, `gsh` — so the
+  subtype select promised "follows the type" and never changed, and the moment it spoke real keys
+  every `L_TX` lookup came back undefined. The waitlist had no cascade at all: you could put
+  somebody on the list for an IV called "Pellet Males". One source, three screens.
 - **Filters are hierarchical**: picking Types narrows which Subtype chips are offered; both are multi-select; the same state drives day, week and month. Saved custom filters are built on the Filter setup screen (`l-06-filters`) and lockable as a personal default.
 - **Chairs are gone — resources are general**: columns are IV 1–4 under the Infusion suite band, plus Rooms; the booking form's location field is "Resource".
 - **An appointment type is linked to the provider's order** (order = prescription): the booking screen shows the patient's active orders with validity dates and their expired ones; an expired order can proceed only with an acknowledged note, booking as TENTATIVE until Dr. Drannikov approves the renewal. Orders show duration and expiration everywhere (`b-09-orders` has an Expires column) and click through to the orders page.
