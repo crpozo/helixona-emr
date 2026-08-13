@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=73">
+<link rel="stylesheet" href="assets/hcos.css?v=74">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -213,8 +213,8 @@
                   </div>
                 </div>
                 <label class="cx-toggle" id="l-cx-toggle">
-                  <input type="checkbox" onchange="lShowCx(this.checked)" aria-label="Show cancelled appointments">
-                  Show cancelled
+                  <input type="checkbox" onchange="lShowCx(this.checked)" aria-label="Show cancelled and rescheduled appointments">
+                  Show cancelled &amp; rescheduled
                 </label>
               </div>
               
@@ -438,7 +438,7 @@
                 <span class="fl-row"><span class="fl sev-med fi-balance" title="Outstanding balance $340 · Billing"></span></span>
                 <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Victor Reyes</div>
-                <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
+                <div class="cal-appt-note">Moved to Thursday 11 AM — waiting on the Quest draw</div>
                 <div class="cal-appt-time">10:00 AM</div>
                 <span class="cal-appt-type">Self-pay</span>
               </div>
@@ -592,10 +592,10 @@
                 <div class="cal-appt-time">1:00 PM</div>
                 <span class="cal-appt-type">UnitedHealthcare</span>
               </div>
-              <div class="cal-appt st-scheduled t-fu ty-visit half-l" style="top:768px;height:98px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="2:00 PM" data-tx="Follow Up" data-note="Quest not yet done · chasing the draw">
+              <div class="cal-appt st-rescheduled t-fu ty-visit half-l" style="top:768px;height:98px" data-appt="A-88346" data-open-drawer="#l-appt-drawer" data-st="Rescheduled" data-sub="t-fu" data-days="1,2,3,4,5" data-pt="Walter Hsu" data-ins="Blue Shield of CA · OON" data-phone="(626) 555-0755" data-stage="Repair" data-pay="$680 deductible left" data-when="2:00 PM" data-tx="Follow Up" data-note="Moved to Thursday 11 AM — waiting on the Quest draw">
                 <span class="cal-appt-sub">Follow Up</span>
                 <div class="cal-appt-name">Walter Hsu</div>
-                <div class="cal-appt-note">Quest not yet done · chasing the draw</div>
+                <div class="cal-appt-note">Moved to Thursday 11 AM — waiting on the Quest draw</div>
                 <div class="cal-appt-time">2:00 PM</div>
                 <span class="cal-appt-type">Blue Shield of CA</span>
               </div>
@@ -712,7 +712,7 @@
                 <span class="cal-appt-type">Self-pay</span>
                 <span class="actor-tag">Nick</span>
               </div>
-              <div class="cal-appt st-scheduled t-cell ty-iv" style="top:768px;height:50px" data-appt="A-88363" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-cell" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="2:00 PM" data-tx="Cellular Boost">
+              <div class="cal-appt st-rescheduled t-cell ty-iv" style="top:768px;height:50px" data-appt="A-88363" data-open-drawer="#l-appt-drawer" data-st="Rescheduled" data-sub="t-cell" data-days="1,2,5" data-pt="Yuki Tanaka" data-ins="Cigna · OON" data-phone="(714) 555-1088" data-stage="Stabilization" data-pay="30% coinsurance" data-when="2:00 PM" data-tx="Cellular Boost" data-note="Moved to Friday 2 PM at her request">
                 <span class="cal-appt-sub">Cellular Boost</span>
                 <div class="cal-appt-name">Yuki Tanaka</div>
                 <div class="cal-appt-time">2:00 PM</div>
@@ -1452,7 +1452,7 @@
             <!-- Fri Jul 24 -->
             <div class="weekcal-col">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div>
-              <div data-col="dr" class="week-appt t-npfu st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-npfu"><span class="n">Elena Petrova</span></div>
+              <div data-col="dr" class="week-appt t-npfu st-rescheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Rescheduled" data-sub="t-npfu"><span class="n">Elena Petrova</span></div>
               <div data-col="dr" class="week-appt t-newpt st-confirmed ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-newpt"><span class="n">Grace Lindqvist</span></div>
               <div data-col="c1" class="week-appt t-mc100 st-scheduled ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-mc100"><span class="n">Maya Reyes</span>Mega C 100g · 3 h</div>
               <div data-col="c4" class="week-appt t-ff10 st-scheduled ty-iv" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day" data-st="Scheduled" data-sub="t-ff10"><span class="n">Sofia Ramos</span></div>
@@ -3411,10 +3411,12 @@
           </div>
           <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
             <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Marked no-show — the 1:00 PM chair hold is released.', 'warn')">Mark no-show</button>
-            <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Appointment cancelled — Walter Hsu gets a courtesy text.', 'warn')">Cancel appointment</button>
-            <button class="btn btn-sm" data-activate="l-01-day" onclick="HCOS.toast('Pick the new time on the day view — the old slot frees when you do.')">Reschedule</button>
+            <button class="btn btn-sm btn-danger" onclick="HCOS.toast('Appointment cancelled — Walter Hsu gets a courtesy text. It leaves the calendar and stays on his record.', 'warn')">Cancel appointment</button>
+            <button class="btn btn-sm" data-activate="l-01-day" onclick="HCOS.toast('Pick the new time on the day view. This slot leaves the calendar and the new one takes its place.')">Reschedule</button>
           </div>
-          <div class="field-help" style="margin-top:8px">Status changes show instantly on the calendar, the chair board, and billing.</div>
+          <div class="field-help" style="margin-top:8px">Status changes show instantly on the calendar, the chair board, and billing.
+            Cancelling or rescheduling takes the appointment off the calendar &mdash; both stay on the patient
+            record, and the <b>Show cancelled &amp; rescheduled</b> toggle on the day view brings them back, dimmed.</div>
         </div>
 
         <div class="grid-sidebar">
@@ -3700,7 +3702,7 @@
           <button class="filter-chip multi active" type="button">Flags</button>
           <button class="filter-chip multi active" type="button">Phone numbers</button>
           <button class="filter-chip multi" type="button">What they owe</button>
-          <button class="filter-chip multi" type="button">Cancelled appointments</button>
+          <button class="filter-chip multi" type="button">Cancelled &amp; rescheduled appointments</button>
         </div>
         <div class="field-help">Only the columns you are filtered to are exported, so the PDF
           matches what you are looking at.</div>
@@ -3914,7 +3916,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=73"></script>
+<script src="assets/hcos.js?v=74"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -3938,6 +3940,18 @@
   }
 
   var lSel = { types: [], subs: [], sts: [] };   /* empty = everything */
+
+  /* "Off the board": cancelled and rescheduled. One test, used by the day, the
+     week, the list and the counts, so a status can never be hidden in one view
+     and counted in another. A no-show is deliberately NOT here — nobody came,
+     but the slot was really booked and really wasted, and the desk needs to see
+     that it was. */
+  function lIsOff(el) {
+    return el.classList.contains('st-cancelled') || el.classList.contains('st-rescheduled');
+  }
+  function lShowingCx() {
+    return !!document.querySelector('.cal.show-cx');
+  }
 
   function lMatchEl(el) {
     var tyOk = !lSel.types.length || lSel.types.some(function (t) { return el.classList.contains(t); });
@@ -4054,7 +4068,7 @@
     }
 
     var shown = 0, total = 0;
-    var showCx = document.querySelector('.cal.show-cx');
+    var showCx = lShowingCx();
     document.querySelectorAll('.daycal-col .cal-appt').forEach(function (a) {
       var blocked = a.hasAttribute('data-blocked') || a.hasAttribute('data-held') ||
                     a.hasAttribute('data-space');
@@ -4063,12 +4077,14 @@
       var colEl = a.closest('[data-col]');
       var colOk = !colEl || wantCols.indexOf(colEl.getAttribute('data-col')) !== -1;
       var treatOk = blocked || lMatchEl(a);
-      /* cancelled leaves the board unless the toggle asks for it back */
-      var cxOk = !a.classList.contains('st-cancelled') || !!showCx;
+      /* cancelled and rescheduled leave the board unless the toggle asks for
+         them back — neither one is a patient who is coming at this time */
+      var cxOk = !lIsOff(a) || !!showCx;
       var on = colOk && treatOk && dayOk && cxOk;
       a.style.display = on ? '' : 'none';
-      /* blocked time is not an appointment and never counts as one */
-      if (!blocked) { total++; if (on) shown++; }
+      /* blocked time is not an appointment and never counts as one; neither
+         does a cancelled or rescheduled one while it is off the board */
+      if (!blocked && (!lIsOff(a) || showCx)) { total++; if (on) shown++; }
     });
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
       h.style.display = wantCols.indexOf('dr') !== -1 && !lSel.types.length && !lSel.subs.length ? '' : 'none';
@@ -4076,12 +4092,16 @@
 
     var wShown = 0, wTotal = 0;
     document.querySelectorAll('.week-appt').forEach(function (a) {
-      wTotal++;
       var c = a.getAttribute('data-col');
       var colOk = !c || wantCols.indexOf(c) !== -1;
       var tOk = lMatchEl(a);
-      a.style.display = (colOk && tOk) ? '' : 'none';
-      if (colOk && tOk) wShown++;
+      /* the week was counting a cancelled block as shown while the CSS was
+         hiding it — "showing all 32" with 31 on screen */
+      var cxOk = !lIsOff(a) || !!showCx;
+      var on = colOk && tOk && cxOk;
+      a.style.display = on ? '' : 'none';
+      if (!lIsOff(a) || showCx) wTotal++;
+      if (on) wShown++;
     });
     var wc = document.getElementById('l-count-w');
     if (wc) wc.textContent = wShown === wTotal ? 'Showing all ' + wTotal + ' this week'
@@ -4264,23 +4284,31 @@
   var L_CUR = null;
 
   function lNextStep(a) {
-    if (a.st === 'cancelled' || a.st === 'done') return null;
+    if (a.st === 'cancelled' || a.st === 'rescheduled' || a.st === 'done') return null;
     var map = { scheduled: 'Confirmed', confirmed: 'Arrived', arrived: a.room, inroom: 'Done', inchair: 'Done' };
     return map[a.st] || null;
   }
 
-  /* the three ways an appointment ends, and what the desk does next */
+  /* the four ways an appointment ends, and what the desk does next */
   var L_END = {
-    done:      { lbl: 'Done',      note: 'Finished. The note, the infusion record and the claim all point at this appointment.' },
-    noshow:    { lbl: 'No-show',   note: 'They did not come and did not call. The slot was not released, so it stayed empty.' },
-    cancelled: { lbl: 'Cancelled', note: 'Cancelled before the visit. It leaves the calendar and stays on the patient record.' }
+    done:        { lbl: 'Done',        note: 'Finished. The note, the infusion record and the claim all point at this appointment.' },
+    noshow:      { lbl: 'No-show',     note: 'They did not come and did not call. The slot was not released, so it stayed empty.' },
+    cancelled:   { lbl: 'Cancelled',   note: 'Cancelled before the visit. It leaves the calendar and stays on the patient record.' },
+    rescheduled: { lbl: 'Rescheduled', note: 'Moved to another time. The appointment at the new time is its own block — this one leaves the calendar and stays on the patient record.' }
   };
 
   function lStatusHtml(a, id) {
     var end = L_END[a.st];
     if (end) {
       var acts = '';
-      if (a.st !== 'done') {
+      if (a.st === 'rescheduled') {
+        /* it is already booked somewhere else — offering to "book a new time"
+           is how you end up with the same patient on the board twice */
+        acts = '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
+             + '<button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Opening the appointment at the new time.\')">Go to the new appointment</button>'
+             + '<button class="btn btn-sm" onclick="lGo(\'l-10-waitlist\')">Offer this slot to the waitlist</button>'
+             + '</div>';
+      } else if (a.st !== 'done') {
         acts = '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
              + '<button class="btn btn-sm btn-primary" onclick="lGo(\'l-03-book\')">Book a new time</button>'
              + '<button class="btn btn-sm" onclick="lGo(\'l-10-waitlist\')">Offer the slot to the waitlist</button>'
@@ -4961,12 +4989,21 @@
     if (any) b.classList.add('has-high');
   });
 
-  /* Cancelled leaves the board and stays on the record. This is the only way back. */
+  /* Cancelled and rescheduled leave the board and stay on the record. This is
+     the only way back. They travel together because they are the same problem
+     for the desk: a block sitting at a time when nobody is coming. Cancelled
+     means it is not happening; rescheduled means it is happening SOMEWHERE
+     ELSE, and the appointment at the new time is its own block. */
   function lShowCx(on) {
-    document.querySelectorAll('.cal, .weekcal').forEach(function (c) { c.classList.toggle('show-cx', !!on); });
+    on = !!on;
+    document.querySelectorAll('.cal, .weekcal').forEach(function (c) { c.classList.toggle('show-cx', on); });
+    /* the filter bar is cloned into week, month and list — every copy of the
+       checkbox has to agree, or the board and the tick contradict each other */
+    document.querySelectorAll('.cx-toggle input').forEach(function (b) { b.checked = on; });
     lApply();
-    HCOS.toast(on ? 'Showing cancelled appointments. They never left the patient record.'
-                  : 'Cancelled appointments hidden. They stay on the patient record.');
+    if (typeof lRenderList === 'function') lRenderList();
+    HCOS.toast(on ? 'Showing cancelled and rescheduled appointments, dimmed. They never left the patient record.'
+                  : 'Cancelled and rescheduled appointments hidden. They stay on the patient record.');
   }
   window.lShowCx = lShowCx;
 
@@ -5441,6 +5478,7 @@
         res: lResourceName(col ? col.getAttribute('data-col') : ''),
         st: b.getAttribute('data-st') || '',
         stCls: (b.className.match(/st-[a-z]+/) || [''])[0],
+        off: lIsOff(b),
         stage: b.getAttribute('data-stage') || '',
         ins: b.getAttribute('data-ins') || '',
         pay: b.getAttribute('data-pay') || '',
@@ -5452,7 +5490,13 @@
 
   function lListRows() {
     var q = L_Q.toLowerCase();
+    var showCx = lShowingCx();
     var rows = L_LIST.filter(function (r) {
+      /* the list obeys the same toggle as the board. It was showing every
+         cancelled appointment while the calendar hid them, so the two views
+         disagreed about what tomorrow looks like — and the list is the one
+         that gets printed. */
+      if (r.off && !showCx) return false;
       if (!q) return true;
       return (r.pt + ' ' + r.phone + ' ' + r.ty + ' ' + r.sub + ' ' + r.res + ' ' +
               r.st + ' ' + r.ins).toLowerCase().indexOf(q) !== -1;
@@ -5476,7 +5520,8 @@
     if (L_PAGE >= pages) L_PAGE = pages - 1;
     var page = rows.slice(L_PAGE * per, L_PAGE * per + per);
     body.innerHTML = page.map(function (r) {
-      return '<tr class="l-list-row" data-appt="' + r.id + '" tabindex="0" role="button" title="Open the appointment">' +
+      return '<tr class="l-list-row' + (r.off ? ' row-off' : '') + '" data-appt="' + r.id +
+        '" tabindex="0" role="button" title="Open the appointment">' +
         '<td>' + r.when + '</td>' +
         '<td><strong>' + r.pt + '</strong></td>' +
         '<td class="l-num">' + r.phone + '</td>' +
@@ -5493,10 +5538,14 @@
         }).join(' ') + '</td></tr>';
     }).join('') || '<tr><td colspan="11" class="field-help">Nothing matches.</td></tr>';
 
+    /* the denominator is what the toggle admits, not everything ever booked —
+       "78 of 82" when four of those 82 are cancelled reads as four missing */
+    var showCx = lShowingCx();
+    var base = L_LIST.filter(function (r) { return showCx || !r.off; }).length;
     var n = document.getElementById('l-list-n');
-    if (n) n.textContent = rows.length === L_LIST.length
-      ? L_LIST.length + ' appointments'
-      : rows.length + ' of ' + L_LIST.length + ' appointments';
+    if (n) n.textContent = rows.length === base
+      ? base + ' appointments'
+      : rows.length + ' of ' + base + ' appointments';
     var pl = document.getElementById('l-page-lbl');
     if (pl) pl.textContent = 'Page ' + (L_PAGE + 1) + ' of ' + pages;
     document.querySelectorAll('.l-sort').forEach(function (b, i) {

@@ -1298,17 +1298,37 @@ a.lead-chip:hover { border-color: var(--ink); }
   font-size: 8.5px; color: var(--blk-muted); background: none; padding: 0; }
 .cal-appt.half-l .actor-tag, .cal-appt.half-r .actor-tag { left: 18px; }
 
-/* STATUS adds nothing to the fill — the watermark is the whole signal. The two
-   exceptions are the two that must not be mistaken for a live appointment. */
+/* STATUS adds nothing to the fill — the watermark is the whole signal. The
+   exceptions are the ones that must not be mistaken for a live appointment. */
 .cal-appt.st-scheduled { border-style: dashed; }
-.cal-appt.st-cancelled { opacity: .62; }
-.cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
 .cal-appt.st-noshow .cal-appt-name { text-decoration: line-through; }
 
-/* A cancelled appointment leaves the board and stays on the record. The toggle
-   in the filter bar is the only thing that brings it back. */
+/* CANCELLED and RESCHEDULED are not appointments any more — nobody is coming to
+   either one — so when they are on the board they are visibly PAST TENSE: half
+   lit, and struck through. The strike distinguishes them: a solid line for
+   cancelled (it is gone) and a dashed one for rescheduled (it moved). Hovering
+   restores them to full strength so a dim block is still readable. */
+.cal-appt.st-cancelled, .cal-appt.st-rescheduled,
+.week-appt.st-cancelled, .week-appt.st-rescheduled { opacity: .45; }
+.cal-appt.st-cancelled:hover, .cal-appt.st-rescheduled:hover,
+.week-appt.st-cancelled:hover, .week-appt.st-rescheduled:hover { opacity: 1; }
+.cal-appt.st-cancelled .cal-appt-name { text-decoration: line-through; }
+.cal-appt.st-rescheduled .cal-appt-name {
+  text-decoration: line-through; text-decoration-style: dashed;
+}
+
+/* Neither one is on the board by default. A cancelled visit is not happening
+   and a rescheduled one is happening at its NEW time — leaving either in place
+   reads as a patient who is coming, which is the confusion the toggle removes.
+   Both stay on the patient record; the toggle is the only way back. */
 .cal:not(.show-cx) .cal-appt.st-cancelled,
-.weekcal:not(.show-cx) .week-appt.st-cancelled { display: none; }
+.cal:not(.show-cx) .cal-appt.st-rescheduled,
+.weekcal:not(.show-cx) .week-appt.st-cancelled,
+.weekcal:not(.show-cx) .week-appt.st-rescheduled { display: none; }
+
+/* the same appointment, dimmed, in the list view */
+.tbl tbody tr.row-off > td { opacity: .5; }
+.tbl tbody tr.row-off:hover > td { opacity: 1; }
 
 /* blocked time — lunch, meetings. Not an appointment, so it opts out of the code */
 .cal-appt.is-block {
@@ -1879,7 +1899,11 @@ a.lead-chip:hover { border-color: var(--ink); }
 .week-appt::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
   background: var(--sb); border-right: 1px solid rgba(0,0,0,.32); }
 .week-appt.st-scheduled { border-style: dashed; }
-.week-appt.st-cancelled { opacity: .62; }
+/* the dimming and the strike live with the day rules, so the two views cannot
+   drift — a second opacity here is what made the week block lighter than the
+   day block for the same appointment */
+.week-appt.st-cancelled .n { text-decoration: line-through; }
+.week-appt.st-rescheduled .n { text-decoration: line-through; text-decoration-style: dashed; }
 .week-appt.is-block {
   background: repeating-linear-gradient(135deg,#EDEDED 0 5px,#F7F7F7 5px 10px);
   border: 1px dashed #B4B4B4; }

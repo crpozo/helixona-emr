@@ -209,8 +209,28 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   flex container that centres it, and `data-close-modal` walks up to `.modal-overlay`. Writing
   the modal as a SIBLING renders it in normal flow in the corner with no backdrop and no way to
   close — it happened to three modals at once.
-- **Cancelled leaves the board and stays on the record.** `.cal:not(.show-cx)` hides it; the
-  "Show cancelled" toggle in the filter bar is the only way back.
+- **Cancelled AND rescheduled leave the board and stay on the record (Carlos, 2026-08-12).**
+  They travel together under one toggle, **Show cancelled & rescheduled**, because they are the
+  same problem for the desk: a block sitting at a time when nobody is coming. Cancelled means it
+  is not happening; rescheduled means it is happening *somewhere else*, and the appointment at
+  the new time is its own block — leaving the old one in place reads as a patient who is coming.
+  - One test, `lIsOff(el)`, is used by the day, the week, the list and every count, so a status
+    can never be hidden in one view and counted in another. **A no-show is deliberately NOT in
+    it**: nobody came, but the slot was really booked and really wasted, and the desk needs to
+    see that it was.
+  - **When they are shown they are visibly past tense**: half lit (`opacity: .45`, restored to 1
+    on hover so a dim block is still readable) and struck through — a **solid** line for
+    cancelled, a **dashed** one for rescheduled. The strike style is the only thing separating
+    them at a glance, and it survives printing and colour blindness.
+  - **The counts follow the toggle.** A hidden appointment is not in the denominator either:
+    "78 of 82" when four of those 82 are cancelled reads as four missing. The day says 84 with
+    the toggle off and 90 with it on.
+  - **The list view obeys the same toggle**, and it did not before — it printed every cancelled
+    appointment while the calendar hid them, so the two views disagreed about what tomorrow
+    looks like, and the list is the one that gets printed and taken off-system.
+  - A rescheduled appointment's drawer offers **Go to the new appointment**, never "Book a new
+    time" — it is already booked, and offering to book it again is how the same patient ends up
+    on the board twice.
 - **Blocked time** (lunch, meetings) is not an appointment: it opts out of the colour code
   entirely (`.is-block`, grey hatch) and never counts in the appointment total. Recurrence uses
   the Google-Calendar vocabulary, and **only manager level may create or lift a block**.
