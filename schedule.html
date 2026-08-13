@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=75">
+<link rel="stylesheet" href="assets/hcos.css?v=76">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -38,6 +38,18 @@
   .l-select { width: auto; min-width: 200px; font-size: 12.5px; padding: 6px 10px; }
   .l-select.l-range { min-width: 126px; }
   .l-count { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  /* The summary strip is NOT a filter bar. It was wearing .l-filters, which put
+     a second z-index:30 stacking context AFTER the real bar — and a later
+     sibling at the same z-index wins, so an open dropdown was painted over by
+     it and its first option could not be clicked (Carlos, 2026-08-12). It has
+     no stacking context of its own now, and cannot outrank an open panel. */
+  .l-summary {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 9px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
+  }
+  .l-summary .btn { margin-left: auto; }
+  /* while a panel is open its bar has to beat everything after it */
+  .l-filters.has-open { z-index: 80; }
   .l-view-group {
     flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
   }
@@ -2188,11 +2200,9 @@
           </div>
 
 
-          <div class="l-filters">
+          <div class="l-summary">
             <span class="l-count">342 appointments this month &middot; busiest day Tuesday the 14th &middot; IV chairs 79&#37; full</span>
-            <div class="l-view-group">
-              <button class="btn btn-sm" onclick="HCOS.toast('Month exported for the staffing meeting.', 'ok')">Export month</button>
-            </div>
+            <button class="btn btn-sm" onclick="HCOS.toast('Month exported for the staffing meeting.', 'ok')">Export month</button>
           </div>
 
           <div class="monthcal">
@@ -2246,7 +2256,7 @@
 
           <div class="card cap-card" style="margin:0 16px 14px">
             <div class="card-title">Capacity this month &middot; July
-              <span class="cap-total">1,022 of 1,340 slots booked &middot; 76&#37; full &middot; 318 left</span></div>
+              <span class="cap-total">261 of 336 slots booked &middot; 78&#37; full &middot; 75 left</span></div>
             <div class="field-help" style="margin:-2px 0 8px">Capacity belongs to the type &mdash; an IV chair takes any IV. Pick a type to see which treatments filled it.</div>
             <div class="cap-filters">
               <select class="field-select cap-ty" onchange="lCapFilter(this)" aria-label="Appointment type">
@@ -4776,7 +4786,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=75"></script>
+<script src="assets/hcos.js?v=76"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -6267,6 +6277,9 @@
     if (head) head.style.display = shown ? '' : 'none';
   }
   window.lCapFilter = lCapFilter;
+  /* the totals were typed into the HTML and only became true once somebody
+     touched a filter; they are computed from the rows on load now */
+  document.querySelectorAll('.cap-card .cap-ty').forEach(function (s) { lCapFilter(s); });
 
   /* ---------- who the list gets emailed to ---------- */
   var L_EX_TO = { none: '', desk: 'the front desk — Yazmin and Haylee',
@@ -6737,6 +6750,8 @@
         var m = f.closest('.msel');
         document.querySelectorAll('.msel.open').forEach(function (x) { if (x !== m) x.classList.remove('open'); });
         m.classList.toggle('open');
+        lMselStack();
+        if (m.classList.contains('open')) lMselFit(m);
         var srch = m.querySelector('.msel-search');
         if (m.classList.contains('open') && srch) srch.focus();
         return;
@@ -6769,9 +6784,20 @@
         else { lSel.subs = keys; }
         summarize(); lApply(); return;
       }
-      if (!ev.target.closest || !ev.target.closest('.msel'))
+      if (!ev.target.closest || !ev.target.closest('.msel')) {
         document.querySelectorAll('.msel.open').forEach(function (x) { x.classList.remove('open'); });
+        lMselStack();
+      }
     });
+
+    /* A bar only outranks what comes after it while one of its panels is open.
+       Raising it permanently would put the whole bar over the summary strip and
+       the calendar head for no reason. */
+    function lMselStack() {
+      document.querySelectorAll('.l-filters').forEach(function (b) {
+        b.classList.toggle('has-open', !!b.querySelector('.msel.open'));
+      });
+    }
 
     document.addEventListener('change', function (ev) {
       var o = ev.target.closest ? ev.target.closest('.msel-opt') : null;
@@ -6800,8 +6826,38 @@
         o.classList.toggle('hidden', !!q && o.textContent.toLowerCase().indexOf(q) === -1);
       });
     });
+    /* .cal and .frame both clip their overflow, so a panel taller than the room
+       below the bar is simply cut off. It measures the gap and sizes its own
+       scroller to fit, which also means it never runs off a laptop screen. */
+    function lMselFit(only) {
+      var list = only ? [only.querySelector('.msel-opts')]
+                      : [].slice.call(document.querySelectorAll('.msel-opts'));
+      list.forEach(function (o) {
+        if (!o) return;
+        var m = o.closest('.msel');
+        var cal = m.closest('.cal') || m.closest('.frame-body');
+        if (!cal) return;
+        var mr = m.getBoundingClientRect();
+        /* a screen that is not the active one has no box at all, and measuring
+           it pinned every panel on that screen to the 140px floor */
+        if (!mr.width) return;
+        /* bounded by BOTH the clipping ancestor and the window: on the list
+           view the frame body is enormous, so measuring only against it pushed
+           the panel's Select all / Clear footer just past the bottom of the
+           screen — there but unclickable without scrolling */
+        var room = Math.min(cal.getBoundingClientRect().bottom, window.innerHeight)
+                 - mr.bottom - 96;
+        /* 380 so the ten types fit without a scroll at all; the 63 subtypes
+           still scroll, which is what a list that long should do */
+        o.style.maxHeight = Math.max(140, Math.min(380, room)) + 'px';
+      });
+    }
+    window.lMselFit = lMselFit;
+    window.addEventListener('resize', function () { lMselFit(); });
+
     lCloneFilters();
     summarize();
+    lMselFit();
   })();
 
   /* Picking a subtype points at ITS order — every offered subtype has one, and

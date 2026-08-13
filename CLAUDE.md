@@ -283,6 +283,21 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   hairlines group them instead, in the order the desk thinks: **WHEN | WHO | WHAT**. The count and
   the saved view are not filters — they are pinned to the right of whichever line they land on, so
   the control that ever drops to a second line is the status toggle, never the date.
+- **A DROPDOWN PANEL HAS TO OUTRANK EVERYTHING BELOW IT, AND FIT ON THE SCREEN.**
+  The month's summary strip was wearing `.l-filters` — a class that carries `position: relative;
+  z-index: 30`. Two siblings at the same z-index means the LATER one paints on top, so the strip
+  covered the open panel's search box and its first option, and Carlos could not click them. Three
+  rules came out of it:
+  - **The summary strip is not a filter bar.** It holds a count and an export button and no
+    filters at all; it is `.l-summary` now, with no stacking context of its own.
+  - **A bar is only raised while one of its panels is open** (`.l-filters.has-open { z-index: 80 }`).
+    Raising it permanently would park the whole bar over the calendar head for no reason.
+  - **The panel measures its own room and sizes its scroller to fit**, bounded by BOTH the
+    clipping ancestor (`.cal` and `.frame` both hide their overflow) and the window. Measuring
+    only against the container pushed the Select all / Clear footer just past the bottom of the
+    screen on the list view — present, but unclickable without scrolling. It skips panels on
+    inactive screens: those have no box, and measuring them pinned every panel on that screen to
+    the 140px floor.
 - **A cloned control is identified by CLASS, never by id.** `lSync` tested `src.id` to tell a
   resource select from a treatment select; the clones have their ids stripped, so a cloned
   resource select fell through to the treatment branch and filtered the board to nothing, and
