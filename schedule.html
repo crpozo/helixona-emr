@@ -3794,58 +3794,275 @@
           </div>
         </div>
 
+        <div class="l-filters" style="margin-top:14px">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-pri"
+                      aria-label="Priority" style="min-width:170px">
+                <option value="">Every priority</option>
+                <option value="urgent">Urgent only</option>
+                <option value="urgent,high">Urgent and high</option>
+                <option value="routine">Routine</option>
+                <option value="flexible">Flexible</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-ty"
+                      aria-label="Appointment type" style="min-width:150px">
+                <option value="">Every type</option>
+                <option value="ty-visit">Office Visit</option>
+                <option value="ty-proc">Procedure</option>
+                <option value="ty-energ">Energetics</option>
+                <option value="ty-lab">Labs</option>
+                <option value="ty-diag">Diagnostics</option>
+                <option value="ty-fpe">FPE</option>
+                <option value="ty-chiro">Chiro</option>
+                <option value="ty-eboo">EBOO</option>
+                <option value="ty-laser">Laser</option>
+                <option value="ty-iv">IV</option>
+              </select>
+              <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-sub"
+                      aria-label="Subtype" style="min-width:170px">
+                <option value="">Every subtype</option>
+                <option value="t-newpt">New patient</option>
+                <option value="t-npfu">New patient FU</option>
+                <option value="t-nptoc">New patient TOC</option>
+                <option value="t-fu">Follow Up</option>
+                <option value="t-prp">PRP</option>
+                <option value="t-tpi">TPI</option>
+                <option value="t-pelm">Pellet Males</option>
+                <option value="t-pelf">Pellet Females</option>
+                <option value="t-proloz">Prolozone</option>
+                <option value="t-micro">Microcurrent</option>
+                <option value="t-biochg">BioCharger</option>
+                <option value="t-lymph">LymphStar</option>
+                <option value="t-scenar">SCENAR</option>
+                <option value="t-minilym">Mini-LymphStar</option>
+                <option value="t-biomodp">BioMod Pro</option>
+                <option value="t-biomodr">BioMod Recharge</option>
+                <option value="t-nmt">NMT</option>
+                <option value="t-mead">MEAD</option>
+                <option value="t-meadre">MEAD ReAssessment</option>
+                <option value="t-rr">R&amp;R</option>
+                <option value="t-mdl">MDL</option>
+                <option value="t-quest">Quest</option>
+                <option value="t-g6pd">G6PD</option>
+                <option value="t-igenex">iGenex</option>
+                <option value="t-diag">Diagnostics</option>
+                <option value="t-fpeie">FPE - IE</option>
+                <option value="t-fpefu">FPE F/U</option>
+                <option value="t-dcintx">DC IN - TX</option>
+                <option value="t-dctx">DC - TX</option>
+                <option value="t-lasereval">Laser Eval</option>
+                <option value="t-medifne">MediFNE</option>
+                <option value="t-pocrev">POC Review</option>
+                <option value="t-eboosafe">EBOO Safe</option>
+                <option value="t-ebootx">EBOO</option>
+                <option value="t-erchlas">Erch Laser</option>
+                <option value="t-erccemp">ErcCompEmp</option>
+                <option value="t-erccpt">ErcCompPt</option>
+                <option value="t-erccvip">ErcCompVIP</option>
+                <option value="t-erccref">ErcCompRef</option>
+                <option value="t-cell">Cellular Boost</option>
+                <option value="t-chel">Chelation</option>
+                <option value="t-cog">Cognitive Support</option>
+                <option value="t-iron">Core Iron Blend</option>
+                <option value="t-rest">Core Restore</option>
+                <option value="t-detox">Detox Prime</option>
+                <option value="t-ebooiv">Eboo Boost</option>
+                <option value="t-amino">Essential Aminos</option>
+                <option value="t-ff5">Foundational Flow 5</option>
+                <option value="t-ff10">Foundational Flow 10</option>
+                <option value="t-ff15">Foundational Flow 15</option>
+                <option value="t-ff20">Foundational Flow 20</option>
+                <option value="t-ff25">Foundational Flow 25</option>
+                <option value="t-ff50">Foundational Flow 50</option>
+                <option value="t-mast">Mast Cell</option>
+                <option value="t-mc15">Mega C 15g</option>
+                <option value="t-mc25">Mega C 25g</option>
+                <option value="t-mc50">Mega C 50g</option>
+                <option value="t-mc75">Mega C 75g</option>
+                <option value="t-mc100">Mega C 100g</option>
+                <option value="t-migraine">Migraine</option>
+                <option value="t-mito">Mito Boost</option>
+                <option value="t-minimb">Mini Mito Boost</option>
+                <option value="t-minimbc">Mini Mito Boost - Custom</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-wait"
+                      aria-label="Waiting time" style="min-width:180px">
+                <option value="0">Any waiting time</option>
+                <option value="3">Waiting 3 days or more</option>
+                <option value="7">Waiting a week or more</option>
+                <option value="14">Waiting a fortnight or more</option>
+              </select>
+            </div>
+          </div>
+          <div class="l-view-group"><span class="l-count" id="l-wl-count">8 people waiting</span></div>
+        </div>
+
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
             <thead><tr>
               <th scope="col" style="width:34px"><input type="checkbox" onchange="lWlPickAll(this.checked)" aria-label="Select every patient"></th>
-              <th scope="col">Patient</th><th scope="col">Wants</th><th scope="col">Windows that suit them</th>
-              <th scope="col">Waiting since</th><th scope="col">Currently booked</th><th scope="col"></th>
+              <th scope="col">Patient</th>
+              <th scope="col">Priority</th>
+              <th scope="col">Why</th>
+              <th scope="col">Treatment</th>
+              <th scope="col">Resource</th>
+              <th scope="col">Windows that suit them</th>
+              <th scope="col">Waiting</th>
+              <th scope="col">Doctor wants them seen</th>
+              <th scope="col">Currently booked</th>
+              <th scope="col">Actions</th>
             </tr></thead>
             <tbody id="l-wl-body">
-              <tr>
-                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
-                <td>Owen Delacroix<div class="field-help">(949) 555-0977</div></td>
-                <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Office visit &middot; Follow-up</td>
-                <td>Any weekday 8:00&ndash;12:00</td>
-                <td>3 days</td>
-                <td>Aug 4, 2:00 PM</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Owen has 30 minutes to accept before it goes to the next match.', 'ok')">Offer a slot</button></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
-                <td>Amara Diallo<div class="field-help">(310) 555-1543</div></td>
-                <td><span class="rail-sw t-mc100 ty-iv" style="vertical-align:-4px"></span> IV &middot; Mega C 100g</td>
+              <tr class="l-wl-row" data-pri="urgent" data-ty="ty-iv" data-sub="t-iron" data-wait="6">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Amara Diallo"></td>
+                <td><strong>Amara Diallo</strong><div class="field-help">(310) 555-1543</div></td>
+                <td><span class="pri pri-urgent">Urgent</span></td>
+                <td class="wl-why">Ferritin 8 — Dr. Drannikov wants the iron in before the next cycle</td>
+                <td><span class="rail-sw t-iron ty-iv" style="vertical-align:-4px"></span> Core Iron Blend</td>
+                <td>IV chair</td>
                 <td>Tue or Thu, afternoons</td>
-                <td>6 days</td>
+                <td class="l-num">6 days</td>
+                <td><span class="due due-late">2 days past</span></td>
                 <td>Aug 11, 1:00 PM</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Amara has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Amara Diallo from the waitlist"
+                          aria-label="Remove Amara Diallo from the waitlist"
+                          onclick="lWlRemove(this,'Amara Diallo')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
-                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
-                <td>Samir Haddad<div class="field-help">(949) 555-1876</div></td>
-                <td><span class="rail-sw t-ebootx ty-eboo" style="vertical-align:-4px"></span> EBOO &middot; EBOO</td>
-                <td>Any morning &mdash; he travels Fridays</td>
-                <td>11 days</td>
-                <td>Not booked</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Samir has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              <tr class="l-wl-row" data-pri="urgent" data-ty="ty-eboo" data-sub="t-ebootx" data-wait="9">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Nina Kowalski"></td>
+                <td><strong>Nina Kowalski</strong><div class="field-help">(949) 555-1765</div></td>
+                <td><span class="pri pri-urgent">Urgent</span></td>
+                <td class="wl-why">Post-EBOO follow-up overdue — circuit access needs checking</td>
+                <td><span class="rail-sw t-ebootx ty-eboo" style="vertical-align:-4px"></span> EBOO</td>
+                <td>Room 2 · procedures</td>
+                <td>Any morning</td>
+                <td class="l-num">9 days</td>
+                <td><span class="due due-late">5 days past</span></td>
+                <td>Aug 19, 9:00 AM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Nina Kowalski from the waitlist"
+                          aria-label="Remove Nina Kowalski from the waitlist"
+                          onclick="lWlRemove(this,'Nina Kowalski')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
-                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
-                <td>Nina Kowalski<div class="field-help">(949) 555-1765</div></td>
-                <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Office visit &middot; Follow-up</td>
-                <td>Mon&ndash;Wed 9:00&ndash;11:00</td>
-                <td>2 days</td>
-                <td>Aug 6, 12:30 PM</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Nina has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              <tr class="l-wl-row" data-pri="high" data-ty="ty-visit" data-sub="t-fu" data-wait="3">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Owen Delacroix"></td>
+                <td><strong>Owen Delacroix</strong><div class="field-help">(949) 555-0977</div></td>
+                <td><span class="pri pri-high">High</span></td>
+                <td class="wl-why">Flare since the last infusion — wants to be seen before the weekend</td>
+                <td><span class="rail-sw t-fu ty-visit" style="vertical-align:-4px"></span> Follow Up</td>
+                <td>Any provider</td>
+                <td>Any weekday 8:00–12:00</td>
+                <td class="l-num">3 days</td>
+                <td><span class="due due-soon">in 2 days</span></td>
+                <td>Aug 4, 2:00 PM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Owen Delacroix from the waitlist"
+                          aria-label="Remove Owen Delacroix from the waitlist"
+                          onclick="lWlRemove(this,'Owen Delacroix')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
-                <td><input type="checkbox" class="l-wl-pick" aria-label="Select this patient"></td>
-                <td>Yuki Tanaka<div class="field-help">(714) 555-1088</div></td>
-                <td><span class="rail-sw t-micro ty-proc" style="vertical-align:-4px"></span> Procedure &middot; Microcurrent</td>
-                <td>Any time &mdash; will take a same-day call</td>
-                <td>1 day</td>
-                <td>Aug 19, 3:30 PM</td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Offered. Yuki has 30 minutes to accept.', 'ok')">Offer a slot</button></td>
+              <tr class="l-wl-row" data-pri="high" data-ty="ty-energ" data-sub="t-mead" data-wait="4">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Yuki Tanaka"></td>
+                <td><strong>Yuki Tanaka</strong><div class="field-help">(714) 555-1088</div></td>
+                <td><span class="pri pri-high">High</span></td>
+                <td class="wl-why">Detox readiness expires in 10 days — reassess or the plan pauses</td>
+                <td><span class="rail-sw t-mead ty-energ" style="vertical-align:-4px"></span> MEAD</td>
+                <td>Energetics room</td>
+                <td>Mon or Wed, any time</td>
+                <td class="l-num">4 days</td>
+                <td><span class="due due-soon">in 6 days</span></td>
+                <td>Aug 22, 11:00 AM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Yuki Tanaka from the waitlist"
+                          aria-label="Remove Yuki Tanaka from the waitlist"
+                          onclick="lWlRemove(this,'Yuki Tanaka')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="l-wl-row" data-pri="routine" data-ty="ty-iv" data-sub="t-ff10" data-wait="12">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Marcus Webb"></td>
+                <td><strong>Marcus Webb</strong><div class="field-help">(949) 555-0142</div></td>
+                <td><span class="pri pri-routine">Routine</span></td>
+                <td class="wl-why">Asked to move earlier — travelling in September</td>
+                <td><span class="rail-sw t-ff10 ty-iv" style="vertical-align:-4px"></span> Foundational Flow 10</td>
+                <td>IV chair</td>
+                <td>Fridays only</td>
+                <td class="l-num">12 days</td>
+                <td><span class="due due-none">No date set</span></td>
+                <td>Sep 2, 10:00 AM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Marcus Webb from the waitlist"
+                          aria-label="Remove Marcus Webb from the waitlist"
+                          onclick="lWlRemove(this,'Marcus Webb')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="l-wl-row" data-pri="routine" data-ty="ty-iv" data-sub="t-mc50" data-wait="8">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Hana Sato"></td>
+                <td><strong>Hana Sato</strong><div class="field-help">(949) 555-1321</div></td>
+                <td><span class="pri pri-routine">Routine</span></td>
+                <td class="wl-why">Series of six, wants them closer together</td>
+                <td><span class="rail-sw t-mc50 ty-iv" style="vertical-align:-4px"></span> Mega C 50g</td>
+                <td>IV chair</td>
+                <td>Any afternoon</td>
+                <td class="l-num">8 days</td>
+                <td><span class="due due-ok">in 14 days</span></td>
+                <td>Aug 28, 3:00 PM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Hana Sato from the waitlist"
+                          aria-label="Remove Hana Sato from the waitlist"
+                          onclick="lWlRemove(this,'Hana Sato')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="l-wl-row" data-pri="flexible" data-ty="ty-visit" data-sub="t-npfu" data-wait="21">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Tom Alvarez"></td>
+                <td><strong>Tom Alvarez</strong><div class="field-help">(626) 555-0431</div></td>
+                <td><span class="pri pri-flexible">Flexible</span></td>
+                <td class="wl-why">Happy to take a cancellation any time</td>
+                <td><span class="rail-sw t-npfu ty-visit" style="vertical-align:-4px"></span> New patient FU</td>
+                <td>Any provider</td>
+                <td>Anything at all</td>
+                <td class="l-num">21 days</td>
+                <td><span class="due due-none">No date set</span></td>
+                <td>Sep 9, 9:00 AM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Tom Alvarez from the waitlist"
+                          aria-label="Remove Tom Alvarez from the waitlist"
+                          onclick="lWlRemove(this,'Tom Alvarez')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="l-wl-row" data-pri="flexible" data-ty="ty-chiro" data-sub="t-dctx" data-wait="5">
+                <td><input type="checkbox" class="l-wl-pick" aria-label="Select Sofia Ramos"></td>
+                <td><strong>Sofia Ramos</strong><div class="field-help">(949) 555-0288</div></td>
+                <td><span class="pri pri-flexible">Flexible</span></td>
+                <td class="wl-why">Prefers mornings but not urgent</td>
+                <td><span class="rail-sw t-dctx ty-chiro" style="vertical-align:-4px"></span> DC - TX</td>
+                <td>Chiro room</td>
+                <td>Mon–Wed before 11</td>
+                <td class="l-num">5 days</td>
+                <td><span class="due due-none">No date set</span></td>
+                <td>Aug 25, 8:00 AM</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Remove Sofia Ramos from the waitlist"
+                          aria-label="Remove Sofia Ramos from the waitlist"
+                          onclick="lWlRemove(this,'Sofia Ramos')">&#128465;</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -3867,6 +4084,165 @@
             <div class="card-title">The slot is held, briefly</div>
             <div class="field-help">Whoever is offered gets 30 minutes before it passes to the next match.
               The slot stays visibly held on the calendar meanwhile.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-10-offer" data-title="Offer this slot">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/schedule/waitlist/offer</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Offer this slot</div>
+            <div class="page-sub">Tuesday 21 July, 10:00 AM &middot; Brooke &middot; 60 minutes &mdash; freed when Grace Lindqvist cancelled</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="l-10-waitlist">Back to the waitlist</button></div>
+        </div>
+
+        <div class="callout">
+          <strong>Everything here is a text message.</strong> HCOS does not place calls.
+          The patient gets an SMS with a link; tapping it takes the slot. Nobody at the desk
+          rings round, and nobody is told on the phone that they have an appointment that
+          somebody else has already accepted.
+        </div>
+
+        <div class="grid-sidebar">
+          <div class="card">
+            <div class="card-title">How it goes out</div>
+
+            <div class="field">
+              <span class="field-lbl">Offer style</span>
+              <div class="o-kinds">
+                <button class="o-kind-card is-on" type="button" onclick="lOfferKind('simul',this)">
+                  <b>Simul ring &mdash; everyone at once</b>
+                  <span>All chosen patients get the text in the same second. The first to tap the
+                    link takes it; everyone else gets an automatic reply. <b>The slot stays on the
+                    waitlist until somebody accepts</b> &mdash; it never quietly disappears.</span>
+                </button>
+                <button class="o-kind-card" type="button" onclick="lOfferKind('robin',this)">
+                  <b>Round robin &mdash; one at a time, in order</b>
+                  <span>Highest priority first. Each gets the response window to themselves before
+                    it moves on. <b>If nobody takes it, the slot is released back to the calendar</b>
+                    as an open slot anyone can book.</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field"><label class="field-lbl" for="o-win">They have</label>
+                <select class="field-select" id="o-win" onchange="lOfferSay()">
+                  <option value="30">30 minutes to respond</option>
+                  <option value="60">1 hour</option>
+                  <option value="180" selected>3 hours</option>
+                  <option value="360">6 hours</option>
+                  <option value="1440">Until this time tomorrow</option>
+                </select>
+                <div class="field-help" id="o-win-help">On round robin this is per person, so the
+                  whole round takes longer than one window.</div>
+              </div>
+              <div class="field"><label class="field-lbl" for="o-pri">Offer it to</label>
+                <select class="field-select" id="o-pri" onchange="lOfferSay()">
+                  <option value="urgent">Urgent only</option>
+                  <option value="urgent,high" selected>Urgent and high</option>
+                  <option value="urgent,high,routine">Urgent, high and routine</option>
+                  <option value="all">Everyone who matches, any priority</option>
+                </select>
+                <div class="field-help">Priority is clinical. A slot that a clinician said someone
+                  needs should not go to whoever happens to be first on the list.</div>
+              </div>
+            </div>
+
+            <div class="seg-divider">If nobody takes it</div>
+            <div class="grid-2">
+              <div class="field"><label class="field-lbl" for="o-hold">Hold the slot for</label>
+                <select class="field-select" id="o-hold" onchange="lOfferSay()">
+                  <option value="0">Do not hold &mdash; release as soon as the offer ends</option>
+                  <option value="1">The rest of today</option>
+                  <option value="2" selected>2 days</option>
+                  <option value="7">A week</option>
+                  <option value="14">A fortnight</option>
+                  <option value="forever">Until somebody releases it by hand</option>
+                </select>
+              </div>
+              <div class="field"><label class="field-lbl" for="o-then">Then</label>
+                <select class="field-select" id="o-then" onchange="lOfferSay()">
+                  <option value="open" selected>Open it to normal booking</option>
+                  <option value="space">Keep it as a reserved space for this treatment</option>
+                  <option value="tell">Tell the manager and leave it held</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-lbl" for="o-sms">The message</label>
+              <textarea class="field-textarea" rows="3" id="o-sms" aria-label="The message">Hi {first_name}, a 10:00 AM slot with Brooke opened up on Tuesday 21 July. Tap to take it: {accept_link} — first to accept keeps it.</textarea>
+              <div class="field-help"><code>{first_name}</code> and <code>{accept_link}</code> are
+                filled in per patient. The auto-reply to everyone else is fixed and cannot be
+                edited: it has to say the slot is gone.</div>
+            </div>
+
+            <div class="prov" id="o-say"><span>&nbsp;</span></div>
+
+            <div class="form-foot">
+              <button class="btn btn-primary" onclick="lOfferGo()">Send the offer</button>
+              <button class="btn" data-activate="l-10-waitlist">Cancel</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Who the system suggests</div>
+            <div class="field-help" style="margin-bottom:10px">Matched on treatment, resource and
+              the windows they said suit them, then ordered by priority and by how overdue the
+              doctor&rsquo;s date is. Sorted by date, soonest need first.</div>
+
+            <div class="o-sug" data-pri="urgent">
+              <label class="o-sug-pick"><input type="checkbox" checked aria-label="Offer to Nina Kowalski"></label>
+              <div>
+                <b>Nina Kowalski</b> <span class="pri pri-urgent">Urgent</span>
+                <div class="field-help">Post-EBOO follow-up overdue &middot; <span class="due due-late">5 days past</span>
+                  the date Dr. Drannikov set &middot; waiting 9 days</div>
+              </div>
+            </div>
+            <div class="o-sug" data-pri="urgent">
+              <label class="o-sug-pick"><input type="checkbox" checked aria-label="Offer to Amara Diallo"></label>
+              <div>
+                <b>Amara Diallo</b> <span class="pri pri-urgent">Urgent</span>
+                <div class="field-help">Ferritin 8 &middot; <span class="due due-late">2 days past</span>
+                  the date &middot; waiting 6 days</div>
+              </div>
+            </div>
+            <div class="o-sug" data-pri="high">
+              <label class="o-sug-pick"><input type="checkbox" checked aria-label="Offer to Owen Delacroix"></label>
+              <div>
+                <b>Owen Delacroix</b> <span class="pri pri-high">High</span>
+                <div class="field-help">Flare since the last infusion &middot; <span class="due due-soon">in 2 days</span>
+                  &middot; waiting 3 days &middot; this window suits him exactly</div>
+              </div>
+            </div>
+            <div class="o-sug" data-pri="high">
+              <label class="o-sug-pick"><input type="checkbox" aria-label="Offer to Yuki Tanaka"></label>
+              <div>
+                <b>Yuki Tanaka</b> <span class="pri pri-high">High</span>
+                <div class="field-help">Readiness expires in 10 days &middot; <span class="due due-ok">in 6 days</span>
+                  &middot; wants Mon or Wed &mdash; <b>this is a Tuesday</b></div>
+              </div>
+            </div>
+            <div class="o-sug" data-pri="routine">
+              <label class="o-sug-pick"><input type="checkbox" aria-label="Offer to Hana Sato"></label>
+              <div>
+                <b>Hana Sato</b> <span class="pri pri-routine">Routine</span>
+                <div class="field-help">Series of six &middot; <span class="due due-ok">in 14 days</span>
+                  &middot; wants afternoons &mdash; <b>this is 10:00 AM</b></div>
+              </div>
+            </div>
+
+            <div class="prov"><span>Every message, every accept and every auto-reply lands on the
+              patient&rsquo;s communication log with the time and who sent it.</span></div>
           </div>
         </div>
       </div>
@@ -6705,6 +7081,96 @@
       ? 'Nobody accepted in 30 minutes. The slot is back on the calendar and everyone was told.'
       : 'Offer withdrawn. Everyone was told the slot is no longer available.', expired ? 'warn' : 'ok');
   }
+
+  /* ---------- the waitlist ---------- */
+  function lWlFilter() {
+    var pri  = (document.getElementById('wl-f-pri')  || {}).value || '';
+    var ty   = (document.getElementById('wl-f-ty')   || {}).value || '';
+    var sub  = (document.getElementById('wl-f-sub')  || {}).value || '';
+    var wait = parseInt((document.getElementById('wl-f-wait') || {}).value || '0', 10);
+    var n = 0;
+    document.querySelectorAll('.l-wl-row').forEach(function (r) {
+      var on = (!pri || pri.split(',').indexOf(r.getAttribute('data-pri')) !== -1)
+            && (!ty  || r.getAttribute('data-ty') === ty)
+            && (!sub || r.getAttribute('data-sub') === sub)
+            && (+r.getAttribute('data-wait') >= wait);
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    var c = document.getElementById('l-wl-count');
+    if (c) c.textContent = n + (n === 1 ? ' person waiting' : ' people waiting');
+  }
+  window.lWlFilter = lWlFilter;
+
+  /* Taking somebody off the waitlist is a decision with a reason — they either
+     got seen, or they gave up, or a clinician stood them down. It asks which,
+     because "removed" with no reason is how a patient falls through. */
+  var L_WL_ARMED = null;
+  function lWlRemove(btn, who) {
+    if (L_WL_ARMED !== who) {
+      L_WL_ARMED = who;
+      HCOS.toast('Remove ' + who + ' from the waitlist? Press again to confirm — the reason goes on their record.', 'warn');
+      setTimeout(function () { if (L_WL_ARMED === who) L_WL_ARMED = null; }, 8000);
+      return;
+    }
+    L_WL_ARMED = null;
+    var row = btn.closest('tr');
+    if (row) row.remove();
+    lWlFilter();
+    HCOS.toast(who + ' removed. Logged on their communication log with your name and the time.', 'ok');
+  }
+  window.lWlRemove = lWlRemove;
+
+  /* ---------- the offer screen ---------- */
+  var L_OFFER_KIND = 'simul';
+  function lOfferKind(k, btn) {
+    L_OFFER_KIND = k;
+    document.querySelectorAll('.o-kind-card').forEach(function (c) { c.classList.remove('is-on'); });
+    if (btn) btn.classList.add('is-on');
+    var h = document.getElementById('o-win-help');
+    if (h) h.textContent = k === 'robin'
+      ? 'On round robin this is PER PERSON, so a round of four takes four times as long.'
+      : 'Everyone gets the same window, starting the second you send it.';
+    lOfferSay();
+  }
+  function lOfferSay() {
+    var say = document.getElementById('o-say');
+    if (!say) return;
+    var win  = (document.getElementById('o-win')  || {}).value || '180';
+    var pri  = (document.getElementById('o-pri')  || {}).value || 'urgent,high';
+    var hold = (document.getElementById('o-hold') || {}).value || '2';
+    var then = (document.getElementById('o-then') || {}).value || 'open';
+    var picked = document.querySelectorAll('.o-sug input:checked').length;
+    var W = { '30': '30 minutes', '60': '1 hour', '180': '3 hours', '360': '6 hours',
+              '1440': 'until this time tomorrow' };
+    var P = { urgent: 'urgent only', 'urgent,high': 'urgent and high',
+              'urgent,high,routine': 'urgent, high and routine', all: 'any priority' };
+    var H = { '0': 'not held at all', '1': 'held for the rest of today', '2': 'held for 2 days',
+              '7': 'held for a week', '14': 'held for a fortnight',
+              forever: 'held until somebody releases it by hand' };
+    var T = { open: 'it opens to normal booking', space: 'it becomes a reserved space for this treatment',
+              tell: 'the manager is told and it stays held' };
+    say.innerHTML = '<span>' + (L_OFFER_KIND === 'robin'
+        ? 'One at a time, highest priority first. Each of the ' + picked +
+          ' gets ' + W[win] + ' to themselves. If the round ends with nobody accepting, '
+        : 'All ' + picked + ' get the text at once and have ' + W[win] +
+          '. The first to tap it takes it; the slot stays on the waitlist until then. If it runs out, ')
+      + 'the slot is ' + H[hold] + ' and then ' + T[then] + '. Going to ' + P[pri] + '.</span>';
+  }
+  function lOfferGo() {
+    var n = document.querySelectorAll('.o-sug input:checked').length;
+    if (!n) { HCOS.toast('Nobody is ticked — the offer would go to no one.', 'warn'); return; }
+    HCOS.toast('Text sent to ' + n + (n === 1 ? ' patient' : ' patients') + '. '
+      + (L_OFFER_KIND === 'robin' ? 'Round robin — the next person is only asked when the first window runs out.'
+                                  : 'All at once — first to accept keeps it.'), 'ok');
+    lGo('l-10-waitlist');
+  }
+  window.lOfferKind = lOfferKind; window.lOfferSay = lOfferSay; window.lOfferGo = lOfferGo;
+  document.addEventListener('change', function (ev) {
+    if (ev.target.closest && ev.target.closest('.o-sug')) lOfferSay();
+  });
+  lOfferSay();
+
   window.lWlPickAll = lWlPickAll; window.lOfferHow = lOfferHow;
   window.lOfferSend = lOfferSend; window.lOfferAccept = lOfferAccept; window.lOfferStop = lOfferStop;
 

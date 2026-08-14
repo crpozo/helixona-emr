@@ -2621,3 +2621,41 @@ a.lead-chip:hover { border-color: var(--ink); }
 .bal-tot { background: var(--hx-band); font-weight: 600; color: var(--ink); }
 .bal-tot b { font-size: 15px; }
 .bal-tot em { display: block; font-style: normal; font-weight: 400; font-size: 10.5px; color: var(--muted); }
+
+/* PRIORITY is clinical, so it reads as a word first and a colour second — it
+   has to survive printing and colour blindness (Carlos, 2026-08-12: "patient
+   lives depend on the priority"). */
+.pri {
+  display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
+  padding: 2px 7px; border-radius: 999px; border: 1.5px solid; white-space: nowrap;
+}
+.pri-urgent   { border-color: #C0392B; color: #8E2118; background: #FBE3E0; }
+.pri-high     { border-color: #C98A1E; color: #7A5510; background: #FBEFD7; }
+.pri-routine  { border-color: var(--line); color: var(--ink); background: #fff; }
+.pri-flexible { border-style: dashed; border-color: var(--line); color: var(--muted); background: #fff; }
+.wl-why { font-size: 11.5px; color: var(--muted); max-width: 260px; line-height: 1.4; }
+
+/* the doctor's date. The NUMBER of days is always shown — "overdue" without a
+   number is a feeling, not a fact. */
+.due { font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.due-late { color: #8E2118; }
+.due-soon { color: #7A5510; }
+.due-ok   { color: var(--review-ok); }
+.due-none { color: var(--muted); font-weight: 400; }
+
+/* the two ways an offer goes out, side by side, because the difference between
+   them is what happens to the slot afterwards */
+.o-kinds { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.o-kind-card {
+  text-align: left; border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 13px;
+  background: #fff; cursor: pointer; font-family: inherit;
+}
+.o-kind-card b { display: block; font-size: 12.5px; color: var(--hx-navy); margin-bottom: 4px; }
+.o-kind-card span { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+.o-kind-card.is-on { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.o-sug {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 0; border-bottom: 1px solid var(--line-soft);
+}
+.o-sug:last-of-type { border-bottom: none; }
+.o-sug b { font-size: 12.5px; margin-right: 6px; }
