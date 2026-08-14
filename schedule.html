@@ -4269,47 +4269,116 @@
           but cannot create or lift them.
         </div>
 
-        <div class="filters" style="margin-top:14px">
-          <span class="filter-group-lbl">Show</span>
-          <button class="filter-chip active" type="button" onclick="lBlkFilter('all', this)">All blocks</button>
-          <button class="filter-chip" type="button" onclick="lBlkFilter('closed', this)">Closed &mdash; nothing books</button>
-          <button class="filter-chip" type="button" onclick="lBlkFilter('open', this)">Reserved &mdash; open to one kind</button>
-          <span class="filter-group-lbl" style="margin-left:16px">Reserved for</span>
-          <button class="filter-chip" type="button" onclick="lBlkFor('t-newpt', this)">New patient</button>
-          <button class="filter-chip" type="button" onclick="lBlkFor('ty-iv', this)">IV</button>
-          <button class="filter-chip" type="button" onclick="lBlkFor('ty-eboo', this)">EBOO</button>
-          <button class="filter-chip" type="button" onclick="lBlkFor('t-fpeie', this)">FPE</button>
+        <div class="l-filters" style="margin-top:14px">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <select class="field-select l-select blk-f" id="blk-f-res" onchange="lBlkFilter()"
+                      aria-label="Resource" style="min-width:180px">
+                <option value="">Every resource</option>
+                <option value="prov">Providers</option>
+                <option value="dr">Dr. Drannikov</option>
+                <option value="bak">Dr. Bakman</option>
+                <option value="bro">Brooke</option>
+                <option value="iv">IV 1&ndash;4</option>
+                <option value="room">Rooms</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select blk-f" id="blk-f-ty" onchange="lBlkFilter()"
+                      aria-label="Appointment type" style="min-width:150px">
+                <option value="">Every type</option>
+                <option value="ty-visit">Office Visit</option>
+                <option value="ty-proc">Procedure</option>
+                <option value="ty-energ">Energetics</option>
+                <option value="ty-lab">Labs</option>
+                <option value="ty-diag">Diagnostics</option>
+                <option value="ty-fpe">FPE</option>
+                <option value="ty-chiro">Chiro</option>
+                <option value="ty-eboo">EBOO</option>
+                <option value="ty-laser">Laser</option>
+                <option value="ty-iv">IV</option>
+              </select>
+              <select class="field-select l-select blk-f" id="blk-f-sub" onchange="lBlkFilter()"
+                      aria-label="Subtype" style="min-width:170px">
+                <option value="">Every subtype</option>
+                <option value="t-newpt">New patient</option>
+                <option value="t-npfu">New patient FU</option>
+                <option value="t-nptoc">New patient TOC</option>
+                <option value="t-fu">Follow Up</option>
+                <option value="t-prp">PRP</option>
+                <option value="t-tpi">TPI</option>
+                <option value="t-pelm">Pellet Males</option>
+                <option value="t-pelf">Pellet Females</option>
+                <option value="t-proloz">Prolozone</option>
+                <option value="t-micro">Microcurrent</option>
+                <option value="t-biochg">BioCharger</option>
+                <option value="t-lymph">LymphStar</option>
+                <option value="t-scenar">SCENAR</option>
+                <option value="t-minilym">Mini-LymphStar</option>
+                <option value="t-biomodp">BioMod Pro</option>
+                <option value="t-biomodr">BioMod Recharge</option>
+                <option value="t-nmt">NMT</option>
+                <option value="t-mead">MEAD</option>
+                <option value="t-meadre">MEAD ReAssessment</option>
+                <option value="t-rr">R&amp;R</option>
+                <option value="t-mdl">MDL</option>
+                <option value="t-quest">Quest</option>
+                <option value="t-g6pd">G6PD</option>
+                <option value="t-igenex">iGenex</option>
+                <option value="t-diag">Diagnostics</option>
+                <option value="t-fpeie">FPE - IE</option>
+                <option value="t-fpefu">FPE F/U</option>
+                <option value="t-dcintx">DC IN - TX</option>
+                <option value="t-dctx">DC - TX</option>
+                <option value="t-lasereval">Laser Eval</option>
+                <option value="t-medifne">MediFNE</option>
+                <option value="t-pocrev">POC Review</option>
+                <option value="t-eboosafe">EBOO Safe</option>
+                <option value="t-ebootx">EBOO</option>
+                <option value="t-erchlas">Erch Laser</option>
+                <option value="t-erccemp">ErcCompEmp</option>
+                <option value="t-erccpt">ErcCompPt</option>
+                <option value="t-erccvip">ErcCompVIP</option>
+                <option value="t-erccref">ErcCompRef</option>
+                <option value="t-cell">Cellular Boost</option>
+                <option value="t-chel">Chelation</option>
+                <option value="t-cog">Cognitive Support</option>
+                <option value="t-iron">Core Iron Blend</option>
+                <option value="t-rest">Core Restore</option>
+                <option value="t-detox">Detox Prime</option>
+                <option value="t-ebooiv">Eboo Boost</option>
+                <option value="t-amino">Essential Aminos</option>
+                <option value="t-ff5">Foundational Flow 5</option>
+                <option value="t-ff10">Foundational Flow 10</option>
+                <option value="t-ff15">Foundational Flow 15</option>
+                <option value="t-ff20">Foundational Flow 20</option>
+                <option value="t-ff25">Foundational Flow 25</option>
+                <option value="t-ff50">Foundational Flow 50</option>
+                <option value="t-mast">Mast Cell</option>
+                <option value="t-mc15">Mega C 15g</option>
+                <option value="t-mc25">Mega C 25g</option>
+                <option value="t-mc50">Mega C 50g</option>
+                <option value="t-mc75">Mega C 75g</option>
+                <option value="t-mc100">Mega C 100g</option>
+                <option value="t-migraine">Migraine</option>
+                <option value="t-mito">Mito Boost</option>
+                <option value="t-minimb">Mini Mito Boost</option>
+                <option value="t-minimbc">Mini Mito Boost - Custom</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select blk-f" id="blk-f-kind" onchange="lBlkFilter()"
+                      aria-label="Kind of block" style="min-width:210px">
+                <option value="">Closed and reserved</option>
+                <option value="closed">Closed &mdash; nothing books</option>
+                <option value="open">Reserved &mdash; open to one kind</option>
+              </select>
+            </div>
+          </div>
+          <div class="l-view-group"><span class="l-count" id="l-blk-count">Every block</span></div>
         </div>
-
-        <div class="grid-4" style="margin:16px 0">
-          <div class="card stat-card"><div class="stat-num">34</div>
-            <div class="stat-lbl">New-patient slots open</div><div class="stat-sub">Next 4 weeks</div></div>
-          <div class="card stat-card"><div class="stat-num">11</div>
-            <div class="stat-lbl">Open this week</div><div class="stat-sub">6 of them before Thursday</div></div>
-          <div class="card stat-card"><div class="stat-num">62%</div>
-            <div class="stat-lbl">Reserved space used</div><div class="stat-sub">Against 88% of ordinary slots</div></div>
-          <div class="card stat-card"><div class="stat-num">Mar 2027</div>
-            <div class="stat-lbl">The new-patient space runs to</div><div class="stat-sub">6 months from 4 Sep 2026</div></div>
-        </div>
-
-        <div class="seg-divider">Find an open slot</div>
-        <div class="l-slotfind">
-          <select class="field-select" id="l-sf-what" aria-label="What kind of appointment">
-            <option>New patient &mdash; 60 min</option>
-            <option>New patient TOC &mdash; 60 min</option>
-            <option>EBOO &mdash; 90 min</option>
-            <option>FPE - IE &mdash; 90 min</option>
-            <option>Any IV &mdash; 30 min</option>
-          </select>
-          <select class="field-select" id="l-sf-when" aria-label="When">
-            <option>Next 2 weeks</option><option>Next 4 weeks</option><option>Next 3 months</option>
-          </select>
-          <select class="field-select" id="l-sf-who" aria-label="With whom">
-            <option>Any provider</option><option>Dr. Drannikov</option><option>Dr. Bakman</option><option>Brooke</option>
-          </select>
-          <button class="btn btn-primary" type="button" onclick="lFindSlots()">Find open slots</button>
-        </div>
-        <div id="l-sf-out" class="l-slotout"></div>
 
         <div class="seg-divider">The blocks</div>
         <div class="tbl-wrap">
@@ -4317,71 +4386,71 @@
             <thead><tr>
               <th scope="col">What</th><th scope="col">Kind</th><th scope="col">When</th>
               <th scope="col">Repeats</th><th scope="col">Runs until</th>
-              <th scope="col">Applies to</th><th scope="col">Set by</th><th scope="col"></th>
+              <th scope="col">Applies to</th><th scope="col">Set by</th><th scope="col">Actions</th>
             </tr></thead>
             <tbody id="l-blk-body">
-              <tr data-kind="closed">
+              <tr data-res="" data-kind="closed">
                 <td><strong>Lunch</strong></td>
                 <td><span class="blk-kind blk-closed">Closed</span></td>
                 <td>12:00 &ndash; 12:30</td><td>Every weekday</td><td>Forever</td>
                 <td>Every resource</td><td>Shibani &middot; 4 Mar 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete Lunch" aria-label="Delete Lunch" onclick="lBlkDelete(this,'Lunch')">&#128465;</button></td>
               </tr>
-              <tr data-kind="closed">
+              <tr data-res="prov" data-kind="closed">
                 <td><strong>Clinical huddle</strong></td>
                 <td><span class="blk-kind blk-closed">Closed</span></td>
                 <td>8:00 &ndash; 8:30</td><td>Every Monday</td><td>Forever</td>
                 <td>Providers only</td><td>Shibani &middot; 4 Mar 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete Clinical huddle" aria-label="Delete Clinical huddle" onclick="lBlkDelete(this,'Clinical huddle')">&#128465;</button></td>
               </tr>
-              <tr data-kind="open" data-for="t-newpt">
+              <tr data-res="prov" data-kind="open" data-for="t-newpt">
                 <td><strong>New patient space</strong>
                   <div class="field-help">Nothing but a new patient can be booked into it</div></td>
                 <td><span class="blk-kind blk-open"><i class="rail-sw t-newpt"></i>Reserved</span></td>
                 <td>8:00 &ndash; 9:00 and 1:00 &ndash; 2:00</td><td>Every weekday</td>
                 <td><strong>4 Mar &ndash; 4 Sep 2027</strong><div class="field-help">6 months</div></td>
                 <td>Dr. Drannikov, Dr. Bakman, Brooke</td><td>Marie &middot; 4 Mar 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete New patient space" aria-label="Delete New patient space" onclick="lBlkDelete(this,'New patient space')">&#128465;</button></td>
               </tr>
-              <tr data-kind="open" data-for="ty-eboo">
+              <tr data-res="room" data-kind="open" data-for="ty-eboo">
                 <td><strong>EBOO circuit space</strong>
                   <div class="field-help">The circuit takes 90 minutes and cannot be squeezed</div></td>
                 <td><span class="blk-kind blk-open"><i class="ty-sw ty-eboo"></i>Reserved</span></td>
                 <td>6:00 &ndash; 7:30 and 12:30 &ndash; 2:00</td><td>Tue and Thu</td>
                 <td>Forever</td><td>Room 2</td><td>Nick &middot; 19 May 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete EBOO circuit space" aria-label="Delete EBOO circuit space" onclick="lBlkDelete(this,'EBOO circuit space')">&#128465;</button></td>
               </tr>
-              <tr data-kind="open" data-for="ty-iv">
+              <tr data-res="iv" data-kind="open" data-for="ty-iv">
                 <td><strong>Same-day IV space</strong>
                   <div class="field-help">Held back so a flare can be seen the same day</div></td>
                 <td><span class="blk-kind blk-open"><i class="ty-sw ty-iv"></i>Reserved</span></td>
                 <td>3:00 &ndash; 4:00</td><td>Every weekday</td>
                 <td><strong>Until 31 Dec 2026</strong></td>
                 <td>IV 3, IV 4</td><td>Shibani &middot; 2 Jun 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete Same-day IV space" aria-label="Delete Same-day IV space" onclick="lBlkDelete(this,'Same-day IV space')">&#128465;</button></td>
               </tr>
-              <tr data-kind="open" data-for="t-fpeie">
+              <tr data-res="dr" data-kind="open" data-for="t-fpeie">
                 <td><strong>Annual exam space</strong>
                   <div class="field-help">FPE only, so the annuals do not get crowded out</div></td>
                 <td><span class="blk-kind blk-open"><i class="rail-sw t-fpeie"></i>Reserved</span></td>
                 <td>9:00 &ndash; 10:30</td><td>Every Wednesday</td>
                 <td><strong>Until 30 Jun 2027</strong></td>
                 <td>Dr. Drannikov</td><td>Shibani &middot; 14 Jul 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete Annual exam space" aria-label="Delete Annual exam space" onclick="lBlkDelete(this,'Annual exam space')">&#128465;</button></td>
               </tr>
-              <tr data-kind="closed">
+              <tr data-res="" data-kind="closed">
                 <td><strong>Chair deep clean</strong></td>
                 <td><span class="blk-kind blk-closed">Closed</span></td>
                 <td>4:30 &ndash; 5:00</td><td>Every Friday</td><td>Forever</td>
                 <td>IV 1&ndash;4</td><td>Nick &middot; 19 May 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete Chair deep clean" aria-label="Delete Chair deep clean" onclick="lBlkDelete(this,'Chair deep clean')">&#128465;</button></td>
               </tr>
-              <tr data-kind="closed">
+              <tr data-res="dr" data-kind="closed">
                 <td><strong>Dr. Drannikov &mdash; conference</strong></td>
                 <td><span class="blk-kind blk-closed">Closed</span></td>
                 <td>All day</td><td>Does not repeat</td><td>14&ndash;15 Sep 2026</td>
                 <td>Dr. Drannikov</td><td>Shibani &middot; 22 Jul 2026</td>
-                <td><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button></td>
+                <td class="row-acts"><button class="btn btn-sm" data-activate="l-11-blocks-edit">Edit</button><button class="btn btn-sm btn-icon btn-danger" title="Delete Dr. Drannikov &mdash; conference" aria-label="Delete Dr. Drannikov &mdash; conference" onclick="lBlkDelete(this,'Dr. Drannikov &mdash; conference')">&#128465;</button></td>
               </tr>
             </tbody>
           </table>
@@ -5325,69 +5394,238 @@
 </div>
 
 <div class="modal-overlay" id="l-blk-modal" data-close-modal>
-  <div class="modal">
+  <div class="modal modal-wide">
     <div class="modal-head">
       <div class="modal-title">Block a timeframe</div>
       <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="field"><label class="field-lbl" for="l-bm-what">What is it</label>
-        <input class="field-input" id="l-bm-what" placeholder="Lunch, staff meeting, deep clean&hellip;"></div>
-      <div class="grid-2">
-        <div class="field"><label class="field-lbl" for="l-bm-from">From</label>
-          <select class="field-select" id="l-bm-from"><option>12:00 PM</option><option>4:00 PM</option></select></div>
-        <div class="field"><label class="field-lbl" for="l-bm-to">To</label>
-          <select class="field-select" id="l-bm-to"><option>12:30 PM</option><option>5:00 PM</option></select></div>
-      </div>
-      <div class="field"><label class="field-lbl" for="l-bm-rep">Repeats</label>
-        <select class="field-select" id="l-bm-rep">
-          <option>Does not repeat</option><option selected>Every weekday (Mon&ndash;Fri)</option>
-          <option>Every day</option><option>Weekly on Tuesday</option>
-          <option>First Wednesday of the month</option></select>
-        <div class="field-help">Same vocabulary as a calendar app &mdash; nobody should have to learn ours.</div>
-      </div>
+
+      <div class="step-lbl"><span>1</span> What is it</div>
       <div class="field">
-        <label class="field-lbl" for="l-bm-kind">What kind of block</label>
+        <label class="field-lbl" for="l-bm-kind">Kind of block</label>
         <select class="field-select" id="l-bm-kind" onchange="lBlkKind(this.value)">
           <option value="closed">Closed &mdash; nothing can be booked into it</option>
-          <option value="open">Reserved &mdash; open, but only to one kind of appointment</option>
+          <option value="open">Reserved &mdash; open, but only to specific appointments</option>
         </select>
       </div>
-      <div class="field" id="l-bm-forwrap" style="display:none">
-        <label class="field-lbl" for="l-bm-for">Reserved for</label>
-        <select class="field-select" id="l-bm-for">
-          <option>New patient</option><option>New patient TOC</option><option>FPE - IE</option>
-          <option>EBOO</option><option>Any IV</option><option>Any Procedure</option>
-        </select>
-        <div class="field-help">Only that kind can be booked into the space. Everything else is
-          refused, so the space is still there when you need it.</div>
-      </div>
-      <div class="field">
-        <span class="field-lbl">Applies to</span>
-        <div class="chip-row">
-          <button class="filter-chip multi active" type="button">Every resource</button>
-          <button class="filter-chip multi" type="button">Providers only</button>
-          <button class="filter-chip multi" type="button">IV 1&ndash;4</button>
-          <button class="filter-chip multi" type="button">Rooms</button>
+      <div class="field"><label class="field-lbl" for="l-bm-what">Call it</label>
+        <input class="field-input" id="l-bm-what" placeholder="Lunch, staff meeting, deep clean, new-patient space&hellip;"></div>
+
+      <div id="l-bm-forwrap" style="display:none">
+        <div class="field">
+          <span class="field-lbl">Which appointments may book into it</span>
+          <div class="msel-inline">
+            <div class="msel-inline-hd">
+              <button class="btn btn-sm" type="button" onclick="lBmPick(1)">Select all</button>
+              <button class="btn btn-sm" type="button" onclick="lBmPick(0)">Clear</button>
+              <span class="field-help" id="l-bm-picked">Nothing picked &mdash; it would refuse everything</span>
+            </div>
+            <div class="msel-inline-opts">
+                <div class="msel-group" data-ty-of="ty-visit">Office Visit</div>
+                <label class="msel-opt bm-sub" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient"><i class="rail-sw t-newpt"></i>New patient</label>
+                <label class="msel-opt bm-sub" data-sub="t-npfu" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient FU"><i class="rail-sw t-npfu"></i>New patient FU</label>
+                <label class="msel-opt bm-sub" data-sub="t-nptoc" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient TOC"><i class="rail-sw t-nptoc"></i>New patient TOC</label>
+                <label class="msel-opt bm-sub" data-sub="t-fu" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="Follow Up"><i class="rail-sw t-fu"></i>Follow Up</label>
+                <div class="msel-group" data-ty-of="ty-proc">Procedure</div>
+                <label class="msel-opt bm-sub" data-sub="t-prp" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="PRP"><i class="rail-sw t-prp"></i>PRP</label>
+                <label class="msel-opt bm-sub" data-sub="t-tpi" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="TPI"><i class="rail-sw t-tpi"></i>TPI</label>
+                <label class="msel-opt bm-sub" data-sub="t-pelm" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Pellet Males"><i class="rail-sw t-pelm"></i>Pellet Males</label>
+                <label class="msel-opt bm-sub" data-sub="t-pelf" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Pellet Females"><i class="rail-sw t-pelf"></i>Pellet Females</label>
+                <label class="msel-opt bm-sub" data-sub="t-proloz" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Prolozone"><i class="rail-sw t-proloz"></i>Prolozone</label>
+                <label class="msel-opt bm-sub" data-sub="t-micro" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Microcurrent"><i class="rail-sw t-micro"></i>Microcurrent</label>
+                <div class="msel-group" data-ty-of="ty-energ">Energetics</div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger"><i class="rail-sw t-biochg"></i>BioCharger</label>
+                <label class="msel-opt bm-sub" data-sub="t-lymph" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="LymphStar"><i class="rail-sw t-lymph"></i>LymphStar</label>
+                <label class="msel-opt bm-sub" data-sub="t-scenar" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="SCENAR"><i class="rail-sw t-scenar"></i>SCENAR</label>
+                <label class="msel-opt bm-sub" data-sub="t-minilym" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="Mini-LymphStar"><i class="rail-sw t-minilym"></i>Mini-LymphStar</label>
+                <label class="msel-opt bm-sub" data-sub="t-biomodp" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioMod Pro"><i class="rail-sw t-biomodp"></i>BioMod Pro</label>
+                <label class="msel-opt bm-sub" data-sub="t-biomodr" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioMod Recharge"><i class="rail-sw t-biomodr"></i>BioMod Recharge</label>
+                <label class="msel-opt bm-sub" data-sub="t-nmt" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="NMT"><i class="rail-sw t-nmt"></i>NMT</label>
+                <label class="msel-opt bm-sub" data-sub="t-mead" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
+                <label class="msel-opt bm-sub" data-sub="t-meadre" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD ReAssessment"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</label>
+                <label class="msel-opt bm-sub" data-sub="t-rr" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="Randamp;R"><i class="rail-sw t-rr"></i>R&amp;R</label>
+                <div class="msel-group" data-ty-of="ty-lab">Labs</div>
+                <label class="msel-opt bm-sub" data-sub="t-mdl" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
+                <label class="msel-opt bm-sub" data-sub="t-quest" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="Quest"><i class="rail-sw t-quest"></i>Quest</label>
+                <label class="msel-opt bm-sub" data-sub="t-g6pd" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
+                <label class="msel-opt bm-sub" data-sub="t-igenex" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="iGenex"><i class="rail-sw t-igenex"></i>iGenex</label>
+                <div class="msel-group" data-ty-of="ty-diag">Diagnostics</div>
+                <label class="msel-opt bm-sub" data-sub="t-diag" data-ty-of="ty-diag"><input type="checkbox" onchange="lBmCount()" aria-label="Diagnostics"><i class="rail-sw t-diag"></i>Diagnostics</label>
+                <div class="msel-group" data-ty-of="ty-fpe">FPE</div>
+                <label class="msel-opt bm-sub" data-sub="t-fpeie" data-ty-of="ty-fpe"><input type="checkbox" onchange="lBmCount()" aria-label="FPE - IE"><i class="rail-sw t-fpeie"></i>FPE - IE</label>
+                <label class="msel-opt bm-sub" data-sub="t-fpefu" data-ty-of="ty-fpe"><input type="checkbox" onchange="lBmCount()" aria-label="FPE F/U"><i class="rail-sw t-fpefu"></i>FPE F/U</label>
+                <div class="msel-group" data-ty-of="ty-chiro">Chiro</div>
+                <label class="msel-opt bm-sub" data-sub="t-dcintx" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="DC IN - TX"><i class="rail-sw t-dcintx"></i>DC IN - TX</label>
+                <label class="msel-opt bm-sub" data-sub="t-dctx" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="DC - TX"><i class="rail-sw t-dctx"></i>DC - TX</label>
+                <label class="msel-opt bm-sub" data-sub="t-lasereval" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="Laser Eval"><i class="rail-sw t-lasereval"></i>Laser Eval</label>
+                <label class="msel-opt bm-sub" data-sub="t-medifne" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="MediFNE"><i class="rail-sw t-medifne"></i>MediFNE</label>
+                <label class="msel-opt bm-sub" data-sub="t-pocrev" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="POC Review"><i class="rail-sw t-pocrev"></i>POC Review</label>
+                <div class="msel-group" data-ty-of="ty-eboo">EBOO</div>
+                <label class="msel-opt bm-sub" data-sub="t-eboosafe" data-ty-of="ty-eboo"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO Safe"><i class="rail-sw t-eboosafe"></i>EBOO Safe</label>
+                <label class="msel-opt bm-sub" data-sub="t-ebootx" data-ty-of="ty-eboo"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO"><i class="rail-sw t-ebootx"></i>EBOO</label>
+                <div class="msel-group" data-ty-of="ty-laser">Laser</div>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="Erch Laser"><i class="rail-sw t-erchlas"></i>Erch Laser</label>
+                <label class="msel-opt bm-sub" data-sub="t-erccemp" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompEmp"><i class="rail-sw t-erccemp"></i>ErcCompEmp</label>
+                <label class="msel-opt bm-sub" data-sub="t-erccpt" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompPt"><i class="rail-sw t-erccpt"></i>ErcCompPt</label>
+                <label class="msel-opt bm-sub" data-sub="t-erccvip" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompVIP"><i class="rail-sw t-erccvip"></i>ErcCompVIP</label>
+                <label class="msel-opt bm-sub" data-sub="t-erccref" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompRef"><i class="rail-sw t-erccref"></i>ErcCompRef</label>
+                <div class="msel-group" data-ty-of="ty-iv">IV</div>
+                <label class="msel-opt bm-sub" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Cellular Boost"><i class="rail-sw t-cell"></i>Cellular Boost</label>
+                <label class="msel-opt bm-sub" data-sub="t-chel" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Chelation"><i class="rail-sw t-chel"></i>Chelation</label>
+                <label class="msel-opt bm-sub" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Cognitive Support"><i class="rail-sw t-cog"></i>Cognitive Support</label>
+                <label class="msel-opt bm-sub" data-sub="t-iron" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Core Iron Blend"><i class="rail-sw t-iron"></i>Core Iron Blend</label>
+                <label class="msel-opt bm-sub" data-sub="t-rest" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Core Restore"><i class="rail-sw t-rest"></i>Core Restore</label>
+                <label class="msel-opt bm-sub" data-sub="t-detox" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Detox Prime"><i class="rail-sw t-detox"></i>Detox Prime</label>
+                <label class="msel-opt bm-sub" data-sub="t-ebooiv" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Eboo Boost"><i class="rail-sw t-ebooiv"></i>Eboo Boost</label>
+                <label class="msel-opt bm-sub" data-sub="t-amino" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Essential Aminos"><i class="rail-sw t-amino"></i>Essential Aminos</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff5" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 5"><i class="rail-sw t-ff5"></i>Foundational Flow 5</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff10" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 10"><i class="rail-sw t-ff10"></i>Foundational Flow 10</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff15" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 15"><i class="rail-sw t-ff15"></i>Foundational Flow 15</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff20" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 20"><i class="rail-sw t-ff20"></i>Foundational Flow 20</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff25" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 25"><i class="rail-sw t-ff25"></i>Foundational Flow 25</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff50" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 50"><i class="rail-sw t-ff50"></i>Foundational Flow 50</label>
+                <label class="msel-opt bm-sub" data-sub="t-mast" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mast Cell"><i class="rail-sw t-mast"></i>Mast Cell</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc15" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 15g"><i class="rail-sw t-mc15"></i>Mega C 15g</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc25" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 25g"><i class="rail-sw t-mc25"></i>Mega C 25g</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc50" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 50g"><i class="rail-sw t-mc50"></i>Mega C 50g</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc75" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 75g"><i class="rail-sw t-mc75"></i>Mega C 75g</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc100" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 100g"><i class="rail-sw t-mc100"></i>Mega C 100g</label>
+                <label class="msel-opt bm-sub" data-sub="t-migraine" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Migraine"><i class="rail-sw t-migraine"></i>Migraine</label>
+                <label class="msel-opt bm-sub" data-sub="t-mito" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mito Boost"><i class="rail-sw t-mito"></i>Mito Boost</label>
+                <label class="msel-opt bm-sub" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mini Mito Boost"><i class="rail-sw t-minimb"></i>Mini Mito Boost</label>
+                <label class="msel-opt bm-sub" data-sub="t-minimbc" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mini Mito Boost - Custom"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</label>
+            </div>
+          </div>
+          <div class="field-help">Only these can be booked into the space. Everything else is
+            refused, so the space is still there when you need it.</div>
         </div>
       </div>
-      <div class="grid-2">
-        <div class="field"><label class="field-lbl" for="l-bm-until">Runs until</label>
-          <select class="field-select" id="l-bm-until">
-            <option>Forever</option><option>3 months</option>
-            <option selected>6 months</option><option>12 months</option><option>A date&hellip;</option>
+
+      <div class="step-lbl"><span>2</span> When it runs</div>
+      <div class="field">
+        <span class="field-lbl">Days</span>
+        <div class="chip-row" id="l-bm-days">
+          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Mon</button>
+          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Tue</button>
+          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Wed</button>
+          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Thu</button>
+          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Fri</button>
+          <button class="filter-chip multi" type="button" onclick="lBlkSay()">Sat</button>
+          <button class="filter-chip multi" type="button" onclick="lBlkSay()">Sun</button>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label class="field-lbl" for="l-bm-start">Starting</label>
+          <input class="field-input" type="date" id="l-bm-start" value="2026-09-04" onchange="lBlkSay()"></div>
+        <div class="field"><label class="field-lbl" for="l-bm-rep">Frequency</label>
+          <select class="field-select" id="l-bm-rep" onchange="lBlkSay()">
+            <option value="once">Just once</option>
+            <option value="weekly" selected>Weekly</option>
+            <option value="monthly">Monthly &mdash; same weekday of the month</option>
+            <option value="forever">Forever &mdash; every week, no end</option>
           </select></div>
-        <div class="field"><label class="field-lbl" for="l-bm-from">Starting</label>
-          <input class="field-input" type="date" id="l-bm-from" value="2026-09-04"></div>
+        <div class="field"><label class="field-lbl" for="l-bm-until">Runs until</label>
+          <select class="field-select" id="l-bm-until" onchange="lBlkUntil(this.value)">
+            <option value="forever" selected>Forever</option>
+            <option value="3">3 months</option>
+            <option value="6">6 months</option>
+            <option value="12">12 months</option>
+            <option value="date">A date&hellip;</option>
+          </select>
+          <input class="field-input" type="date" id="l-bm-untildate" value="2027-03-04"
+                 style="display:none;margin-top:6px" aria-label="Runs until this date" onchange="lBlkSay()"></div>
       </div>
-      <div class="callout callout-warn" style="margin-bottom:0">
-        Blocking is a manager action. It is recorded with your name, and everyone
-        who had a booking inside the window is listed before it is applied.
+
+      <div class="step-lbl"><span>3</span> Hours and resources</div>
+      <div class="grid-2">
+        <div class="field"><label class="field-lbl" for="l-bm-from">From</label>
+          <select class="field-select" id="l-bm-from" onchange="lBlkSay()">
+              <option>6:00 AM</option>
+              <option>6:30 AM</option>
+              <option>7:00 AM</option>
+              <option>7:30 AM</option>
+              <option>8:00 AM</option>
+              <option>8:30 AM</option>
+              <option>9:00 AM</option>
+              <option>9:30 AM</option>
+              <option>10:00 AM</option>
+              <option>10:30 AM</option>
+              <option>11:00 AM</option>
+              <option>11:30 AM</option>
+              <option selected>12:00 PM</option>
+              <option>12:30 PM</option>
+              <option>1:00 PM</option>
+              <option>1:30 PM</option>
+              <option>2:00 PM</option>
+              <option>2:30 PM</option>
+              <option>3:00 PM</option>
+              <option>3:30 PM</option>
+              <option>4:00 PM</option>
+              <option>4:30 PM</option>
+              <option>5:00 PM</option>
+              <option>5:30 PM</option>
+              <option>6:00 PM</option>
+              <option>6:30 PM</option>
+              <option>7:00 PM</option>
+              <option>7:30 PM</option>
+          </select></div>
+        <div class="field"><label class="field-lbl" for="l-bm-to">To</label>
+          <select class="field-select" id="l-bm-to" onchange="lBlkSay()">
+              <option>6:00 AM</option>
+              <option>6:30 AM</option>
+              <option>7:00 AM</option>
+              <option>7:30 AM</option>
+              <option>8:00 AM</option>
+              <option>8:30 AM</option>
+              <option>9:00 AM</option>
+              <option>9:30 AM</option>
+              <option>10:00 AM</option>
+              <option>10:30 AM</option>
+              <option>11:00 AM</option>
+              <option>11:30 AM</option>
+              <option>12:00 PM</option>
+              <option selected>12:30 PM</option>
+              <option>1:00 PM</option>
+              <option>1:30 PM</option>
+              <option>2:00 PM</option>
+              <option>2:30 PM</option>
+              <option>3:00 PM</option>
+              <option>3:30 PM</option>
+              <option>4:00 PM</option>
+              <option>4:30 PM</option>
+              <option>5:00 PM</option>
+              <option>5:30 PM</option>
+              <option>6:00 PM</option>
+              <option>6:30 PM</option>
+              <option>7:00 PM</option>
+              <option>7:30 PM</option>
+          </select></div>
       </div>
+      <div class="field">
+        <label class="field-lbl" for="l-bm-res">Applies to</label>
+        <select class="field-select" id="l-bm-res" onchange="lBlkSay()">
+          <option value="all">Every resource</option>
+          <option value="prov">Every provider</option>
+          <option value="dr">Dr. Drannikov</option>
+          <option value="bak">Dr. Bakman</option>
+          <option value="bro">Brooke &middot; Physician Associate</option>
+          <option value="iv">IV 1&ndash;4</option>
+          <option value="iv1">IV 1 &middot; Nick</option>
+          <option value="iv2">IV 2 &middot; Bea</option>
+          <option value="iv3">IV 3 &middot; Juan</option>
+          <option value="iv4">IV 4 &middot; Nate</option>
+          <option value="rooms">Rooms 1 and 2</option>
+          <option value="room1">Room 1 &middot; exam</option>
+          <option value="room2">Room 2 &middot; procedures</option>
+        </select>
+      </div>
+
+      <div class="prov" id="l-bm-say"><span>&nbsp;</span></div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Blocked. Nothing can be booked into that window until a manager lifts it.', 'ok')">Block the time</button>
+      <button class="btn btn-primary" data-close-modal onclick="lBlkSave()">Create the block</button>
     </div>
   </div>
 </div>
@@ -7171,6 +7409,111 @@
   });
   lOfferSay();
 
+
+  /* ---------- blocked time ---------- */
+  function lBlkFilter() {
+    var res  = (document.getElementById('blk-f-res')  || {}).value || '';
+    var ty   = (document.getElementById('blk-f-ty')   || {}).value || '';
+    var sub  = (document.getElementById('blk-f-sub')  || {}).value || '';
+    var kind = (document.getElementById('blk-f-kind') || {}).value || '';
+    var n = 0, total = 0;
+    document.querySelectorAll('#l-blk-body tr').forEach(function (r) {
+      total++;
+      var f = r.getAttribute('data-for') || '';
+      var on = (!res  || (r.getAttribute('data-res') || '') === res)
+            && (!kind || r.getAttribute('data-kind') === kind)
+            && (!ty   || f === ty || (f.indexOf('t-') === 0 && lTyOfSub(f) === ty))
+            && (!sub  || f === sub);
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    var c = document.getElementById('l-blk-count');
+    if (c) c.textContent = n === total ? 'Every block' : n + ' of ' + total + ' blocks';
+  }
+  function lTyOfSub(k) {
+    var o = document.querySelector('.msel-opt[data-sub="' + k + '"]');
+    return o ? o.getAttribute('data-ty-of') : '';
+  }
+  window.lBlkFilter = lBlkFilter;
+
+  /* Lifting a block is how a lunch break quietly disappears and the provider
+     finds out at noon. It asks twice and says what it protects. */
+  var L_BLK_ARMED = null;
+  function lBlkDelete(btn, name) {
+    if (L_BLK_ARMED !== name) {
+      L_BLK_ARMED = name;
+      HCOS.toast('Delete "' + name + '"? Every slot it protects opens to booking immediately. Press again to confirm.', 'warn');
+      setTimeout(function () { if (L_BLK_ARMED === name) L_BLK_ARMED = null; }, 8000);
+      return;
+    }
+    L_BLK_ARMED = null;
+    var row = btn.closest('tr');
+    if (row) row.remove();
+    lBlkFilter();
+    HCOS.toast('"' + name + '" lifted. Logged against your name — only a manager can do this.', 'ok');
+  }
+  window.lBlkDelete = lBlkDelete;
+
+  function lBmPick(on) {
+    document.querySelectorAll('.bm-sub input').forEach(function (b) { b.checked = !!on; });
+    lBmCount();
+  }
+  function lBmCount() {
+    var n = document.querySelectorAll('.bm-sub input:checked').length;
+    var el = document.getElementById('l-bm-picked');
+    if (el) el.textContent = n
+      ? n + (n === 1 ? ' appointment type may book into it' : ' appointment types may book into it')
+      : 'Nothing picked — it would refuse everything';
+    lBlkSay();
+  }
+  function lBlkUntil(v) {
+    var d = document.getElementById('l-bm-untildate');
+    if (d) d.style.display = v === 'date' ? '' : 'none';
+    lBlkSay();
+  }
+  /* The form reads itself back as one English sentence. A recurring block is
+     the easiest thing on this screen to get wrong by one field. */
+  function lBlkSay() {
+    var say = document.getElementById('l-bm-say');
+    if (!say) return;
+    var kind = (document.getElementById('l-bm-kind') || {}).value || 'closed';
+    var days = [].filter.call(document.querySelectorAll('#l-bm-days .filter-chip'),
+                              function (c) { return c.classList.contains('active'); })
+                 .map(function (c) { return c.textContent.trim(); });
+    var rep  = (document.getElementById('l-bm-rep')   || {}).value || 'weekly';
+    var from = (document.getElementById('l-bm-from')  || {}).value || '';
+    var to   = (document.getElementById('l-bm-to')    || {}).value || '';
+    var res  = document.getElementById('l-bm-res');
+    var resT = res ? res.options[res.selectedIndex].textContent : '';
+    var start = (document.getElementById('l-bm-start') || {}).value || '';
+    var until = (document.getElementById('l-bm-until') || {}).value || 'forever';
+    var n = document.querySelectorAll('.bm-sub input:checked').length;
+    var R = { once: 'once', weekly: 'every week', monthly: 'every month on that weekday',
+              forever: 'every week, with no end date' };
+    var U = { forever: 'and never ends', '3': 'and stops after 3 months',
+              '6': 'and stops after 6 months', '12': 'and stops after 12 months',
+              date: 'and stops on ' + ((document.getElementById('l-bm-untildate') || {}).value || '') };
+    if (!days.length) { say.innerHTML = '<span>No days are ticked, so this block would never run.</span>'; return; }
+    say.innerHTML = '<span>'
+      + (kind === 'closed'
+          ? 'Nothing can be booked '
+          : (n ? 'Only the ' + n + ' ticked appointment type' + (n === 1 ? '' : 's') + ' can be booked '
+               : 'NOTHING could be booked — no appointment type is ticked, so this reserved space would refuse everything '))
+      + 'on <b>' + days.join(', ') + '</b> from <b>' + from + '</b> to <b>' + to + '</b>, on '
+      + resT.toLowerCase() + '. It runs ' + R[rep] + ' from ' + start + ' ' + U[until] + '.</span>';
+  }
+  function lBlkSave() {
+    var kind = (document.getElementById('l-bm-kind') || {}).value;
+    var n = document.querySelectorAll('.bm-sub input:checked').length;
+    if (kind === 'open' && !n) {
+      HCOS.toast('Not created — a reserved space with nothing ticked would refuse every appointment.', 'warn');
+      return;
+    }
+    HCOS.toast('Block created. It shows on the day board straight away and only a manager can lift it.', 'ok');
+  }
+  window.lBmPick = lBmPick; window.lBmCount = lBmCount;
+  window.lBlkUntil = lBlkUntil; window.lBlkSay = lBlkSay; window.lBlkSave = lBlkSave;
+
   window.lWlPickAll = lWlPickAll; window.lOfferHow = lOfferHow;
   window.lOfferSend = lOfferSend; window.lOfferAccept = lOfferAccept; window.lOfferStop = lOfferStop;
 
@@ -7191,23 +7534,8 @@
     });
     HCOS.toast(n + (n === 1 ? ' block' : ' blocks') + ' match.');
   }
-  function lBlkFilter(k, btn) {
-    L_BLK.kind = k;
-    var row = btn.parentNode;
-    [].forEach.call(row.querySelectorAll('.filter-chip'), function (c) {
-      if (c.getAttribute('onclick') && c.getAttribute('onclick').indexOf('lBlkFilter') === 0)
-        c.classList.remove('active');
-    });
-    btn.classList.add('active');
-    lBlkPaint();
-  }
-  function lBlkFor(k, btn) {
-    var on = !btn.classList.contains('active');
-    [].forEach.call(document.querySelectorAll('[onclick^="lBlkFor"]'), function (c) { c.classList.remove('active'); });
-    if (on) btn.classList.add('active');
-    L_BLK.forWhat = on ? k : '';
-    lBlkPaint();
-  }
+  /* the chip filters are gone: Resource, Type and Subtype are what the desk
+     thinks in, and lBlkFilter above reads those three selects. */
 
   /* ---------- find an open slot inside a reserved space ---------- */
   var L_SLOTS = [
@@ -7242,7 +7570,7 @@
     var w = document.getElementById('l-bm-forwrap');
     if (w) w.style.display = v === 'open' ? '' : 'none';
   }
-  window.lBlkFilter = lBlkFilter; window.lBlkFor = lBlkFor; window.lFindSlots = lFindSlots;
+  window.lFindSlots = lFindSlots;
   window.lBlkKind = lBlkKind;
 
   /* ---------- Patterns: one filter, over the appointment type ---------- */

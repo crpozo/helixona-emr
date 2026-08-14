@@ -2659,3 +2659,26 @@ a.lead-chip:hover { border-color: var(--ink); }
 }
 .o-sug:last-of-type { border-bottom: none; }
 .o-sug b { font-size: 12.5px; margin-right: 6px; }
+
+/* a form that goes what → when → hours needs the steps to be visible, or it is
+   just a long column of fields (Carlos, 2026-08-12) */
+.step-lbl {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  color: var(--muted); margin: 18px 0 10px; padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+.step-lbl:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+.step-lbl span {
+  display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%;
+  background: var(--ink); color: #fff; font-size: 11px; letter-spacing: 0;
+}
+.msel-inline { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.msel-inline-hd {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 7px 9px; background: var(--hx-band); border-bottom: 1px solid var(--line-soft);
+}
+.msel-inline-hd .field-help { margin: 0 0 0 auto; }
+.msel-inline-opts { max-height: 210px; overflow-y: auto; padding: 5px; }
+.modal-wide { max-width: 760px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
