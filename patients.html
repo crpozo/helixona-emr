@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=78">
+<link rel="stylesheet" href="assets/hcos.css?v=79">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -283,6 +283,41 @@
             </div>
             <a class="btn btn-primary" href="schedule.html#/l-03-book">Book appointment</a>
             <a class="btn" href="clinical.html">Open chart</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:14px">
+          <div class="card-title">What the schedule has learned about her</div>
+          <div class="field-help" style="margin-bottom:10px">The same patterns the scheduling
+            screen shows, in her own context. They are suggestions with their working shown &mdash;
+            nothing here changes a booking on its own.</div>
+          <div class="grid-2">
+            <div class="ai-line ai-high">
+              <b>She runs about 20 minutes long, every time</b>
+              <span>Her last four NAD+ runs averaged 3 h 20 against a booked 3 h. Booking her own
+                average rather than the protocol&rsquo;s.
+                <a href="schedule.html#/l-09-insights">See the pattern</a></span>
+            </div>
+            <div class="ai-line ai-med">
+              <b>Late by habit, not by accident</b>
+              <span>Arrives 12 minutes after the booked start in 6 of the last 8 visits. A 10:30
+                start really begins at 10:42 &mdash; the chair is idle either way.</span>
+            </div>
+            <div class="ai-line ai-med">
+              <b>Her deductible resets in 41 days</b>
+              <span>Four of the six runs in her order fall after the reset, and she would owe the
+                full allowed on those. Worth telling her before she books them.</span>
+            </div>
+            <div class="ai-line ai-low">
+              <b>She asks for IV 2</b>
+              <span>Bea has run nine of her last ten. Not a clinical constraint, but she settles
+                faster and it costs nothing to honour.</span>
+            </div>
+          </div>
+          <div class="ai-meta" style="margin-top:10px">
+            <span>Ruleset <code>sched-patterns v4</code> &middot; recalculated nightly &middot;
+              from her own appointment history, no other patient&rsquo;s
+              &middot; <a href="schedule.html#/l-09-insights">every pattern the schedule holds</a></span>
           </div>
         </div>
 
@@ -1115,7 +1150,7 @@
   }
 </script>
 
-<script src="assets/hcos.js?v=78"></script>
+<script src="assets/hcos.js?v=79"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {

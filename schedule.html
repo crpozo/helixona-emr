@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=78">
+<link rel="stylesheet" href="assets/hcos.css?v=79">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -3687,28 +3687,28 @@
               <th scope="col">Drawn from</th><th scope="col">Suggestion</th><th scope="col">State</th>
             </tr></thead>
             <tbody id="l-ins-body">
-              <tr data-ty="ty-iv"><td>Maya Reyes</td><td><span class="type-mark">MCH</span> IV &middot; Mega C 100g</td>
+              <tr class="row-click" onclick="lInsOpen('Maya Reyes')" tabindex="0" role="button" title="Open Maya Reyes’s snapshot" data-ty="ty-iv"><td>Maya Reyes</td><td>IV &middot; Mega C 100g</td>
                 <td>Runs 20 min long, every time</td><td>Last 4 runs &middot; avg 3 h 20 against 3 h</td>
                 <td>Book her last in the chair</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr data-ty="ty-iv"><td>Walter Hsu</td><td><span class="type-mark">MCF</span> IV &middot; Mega C 50g</td>
+              <tr class="row-click" onclick="lInsOpen('Walter Hsu')" tabindex="0" role="button" title="Open Walter Hsu’s snapshot" data-ty="ty-iv"><td>Walter Hsu</td><td>IV &middot; Mega C 50g</td>
                 <td>Arrives 12&ndash;18 min late</td><td>6 of last 8 visits</td>
                 <td>Confirm the evening before</td><td><span class="ai-state accepted">Accepted by Yazmin</span></td></tr>
-              <tr data-ty="ty-visit"><td>Victor Reyes</td><td><span class="type-mark">FU</span> Office visit</td>
+              <tr class="row-click" onclick="lInsOpen('Victor Reyes')" tabindex="0" role="button" title="Open Victor Reyes’s snapshot" data-ty="ty-visit"><td>Victor Reyes</td><td>Office visit</td>
                 <td>No-shows before 10 AM</td><td>3 no-shows in 90 days, all 8&ndash;9:30</td>
                 <td>Offer afternoons only</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr data-ty="ty-visit"><td>Rosa Iglesias</td><td><span class="type-mark">FU</span> Office visit</td>
+              <tr class="row-click" onclick="lInsOpen('Rosa Iglesias')" tabindex="0" role="button" title="Open Rosa Iglesias’s snapshot" data-ty="ty-visit"><td>Rosa Iglesias</td><td>Office visit</td>
                 <td>Cancels Monday bookings</td><td>4 of 5 Monday slots cancelled inside 24 h</td>
                 <td>Try mid-week</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr data-ty="ty-proc"><td>Priya Natarajan</td><td><span class="type-mark">EBO</span> EBOO &middot; EBOO</td>
+              <tr class="row-click" onclick="lInsOpen('Priya Natarajan')" tabindex="0" role="button" title="Open Priya Natarajan’s snapshot" data-ty="ty-proc"><td>Priya Natarajan</td><td>EBOO &middot; EBOO</td>
                 <td>Needs 15 min longer to settle</td><td>Last 3 circuits</td>
                 <td>Book 2 h 15, not 2 h</td><td><span class="ai-state accepted">Accepted by Nick</span></td></tr>
-              <tr data-ty="ty-iv"><td>Daniel Okafor</td><td><span class="type-mark">FF1</span> IV &middot; Foundational Flow 10</td>
+              <tr class="row-click" onclick="lInsOpen('Daniel Okafor')" tabindex="0" role="button" title="Open Daniel Okafor’s snapshot" data-ty="ty-iv"><td>Daniel Okafor</td><td>IV &middot; Foundational Flow 10</td>
                 <td>Always finishes early</td><td>Last 5 runs &middot; avg 24 min against 30</td>
                 <td>The slot after him is safe to tighten</td><td><span class="ai-state rejected">Rejected &mdash; Dr. Drannikov</span></td></tr>
-              <tr data-ty="ty-energ"><td>Liam Fitzgerald</td><td><span class="type-mark">BEM</span> Energetics &middot; BEMER</td>
+              <tr class="row-click" onclick="lInsOpen('Liam Fitzgerald')" tabindex="0" role="button" title="Open Liam Fitzgerald’s snapshot" data-ty="ty-energ"><td>Liam Fitzgerald</td><td>Energetics &middot; BEMER</td>
                 <td>Reschedules within the same week</td><td>3 of last 4</td>
                 <td>Offer the standing Thursday slot</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr data-ty="ty-energ"><td>Hana Sato</td><td><span class="type-mark">NMT</span> Energetics &middot; NMT</td>
+              <tr class="row-click" onclick="lInsOpen('Hana Sato')" tabindex="0" role="button" title="Open Hana Sato’s snapshot" data-ty="ty-energ"><td>Hana Sato</td><td>Energetics &middot; NMT</td>
                 <td>Books late, arrives early</td><td>Last 6 visits &middot; avg 11 min early</td>
                 <td>She can take an earlier slot when one frees</td><td><span class="ai-state suggested">Suggested</span></td></tr>
             </tbody>
@@ -4628,7 +4628,8 @@
               <span><strong>From</strong> person master <code>P-004377</code> · <a href="patients.html#/pt-05-identity">open the record</a> — booking never creates a second identity</span>
             </div>
 
-            <div class="seg-divider">Treatment</div>
+            <div class="seg-divider">Treatment <a href="treatments.html#/t-07-types"
+              style="float:right;font-weight:400;font-size:11px">Set up types &amp; subtypes &rsaquo;</a></div>
             <div class="grid-2">
               <div class="field">
                 <label class="field-label">Type</label>
@@ -4646,7 +4647,7 @@
                 </select>
               </div>
               <div class="field">
-                <label class="field-label">Subtype &mdash; follows the type</label>
+                <label class="field-label" for="l-bk-type">Subtype &mdash; follows the type</label>
                 <select class="field-select" id="l-bk-type" onchange="lTypeChange()" aria-label="Subtype &mdash; follows the type">
                   <option value="cell" selected>Cellular Boost</option>
                   <option value="chel">Chelation</option>
@@ -5464,14 +5465,33 @@
         <div class="field-help">Outside addresses are logged with your name and the time, and the
           PDF carries no patient identifiers beyond the name and the appointment.</div>
       </div>
-      <div class="seg-divider">The nightly backup</div>
+      <div class="seg-divider">The nightly safety copy</div>
       <dl class="kv">
-        <dt>Runs at</dt><dd>9:00 PM, every night</dd>
-        <dt>Covers</dt><dd>The next working day, every resource</dd>
-        <dt>Kept for</dt><dd>30 days</dd>
-        <dt>Stored in</dt><dd>The practice's own AWS bucket, encrypted, versioned</dd>
+        <dt>Runs at</dt><dd>9:00 PM, every night, whether anybody asks for it or not</dd>
+        <dt>Covers</dt><dd>The next working day, every resource, every column</dd>
+        <dt>Kept for</dt><dd>30 days, then deleted</dd>
+        <dt>Stored in</dt><dd>The practice&rsquo;s own AWS bucket &mdash; encrypted, versioned, and
+          the only copy with any authority</dd>
+        <dt>Also copied to</dt><dd>The clinic&rsquo;s shared drive, so it opens on any phone with no
+          system at all</dd>
         <dt>Last run</dt><dd>Yesterday 9:00 PM &middot; 88 appointments &middot; 6 pages</dd>
       </dl>
+      <div class="field"><label class="field-lbl" for="l-ex-mirror">Copy it to</label>
+        <select class="field-select" id="l-ex-mirror">
+          <option selected>The AWS bucket only</option>
+          <option>AWS and a shared Google Drive folder</option>
+          <option>AWS and a SharePoint library</option>
+        </select>
+        <div class="field-help"><strong>The bucket is always written first and is the record.</strong>
+          A mirror is a convenience for the morning, not a second source of truth &mdash; if the two
+          ever disagree, the bucket is right. The PDF carries names and appointments and no clinical
+          detail, and every copy is on the audit trail with where it went.</div>
+      </div>
+      <div class="callout callout-warn" style="margin-top:10px">
+        <strong>Sending it outside AWS is a decision, not a setting.</strong> A shared drive sits
+        outside the practice&rsquo;s own control and needs a signed agreement covering it before
+        this is switched on. Ask Carlos before enabling a mirror.
+      </div>
       <div class="prov"><span>The backup is deliberately a PDF and not a database export:
         it has to be readable on a phone with no system at all.</span></div>
     </div>
@@ -5858,7 +5878,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=78"></script>
+<script src="assets/hcos.js?v=79"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -7431,6 +7451,15 @@
   }
   function lBkAiMore() { L_BK_AI_ALL = !L_BK_AI_ALL; lBkAi(); }
   window.lBkAi = lBkAi; window.lBkAiMore = lBkAiMore;
+
+  /* A pattern is about a PERSON. Reading "Maya Reyes runs 20 minutes long" and
+     having nowhere to go from it is a dead end (Carlos, 2026-08-12). */
+  function lInsOpen(name) {
+    HCOS.toast('Opening ' + name + '\u2019s snapshot — the same patterns are on it, in her own context.');
+    setTimeout(function () { location.href = 'patients.html#/pt-02-profile'; }, 350);
+  }
+  window.lInsOpen = lInsOpen;
+
 
 
   document.addEventListener('click', function (ev) {

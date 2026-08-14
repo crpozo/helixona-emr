@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=78">
+<link rel="stylesheet" href="assets/hcos.css?v=79">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -511,6 +511,845 @@
       </div>
     </div>
   </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="t-07-types" data-title="Types &amp; subtypes">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/treatments/types</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Appointment types and subtypes</div>
+            <div class="page-sub">The taxonomy itself &mdash; add one here and it appears in booking,
+              the filters, the legend, the capacity rows and the waitlist at the same moment</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" onclick="HCOS.toast('A new TYPE needs a colour and the resources that can do it.', 'ok')">Add a type</button>
+            <button class="btn btn-primary" onclick="tsAdd('','')">Add a subtype</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>A type is a kind of visit; a subtype is the treatment itself.</strong>
+          The type owns the background colour on the calendar and, with it, the CAPACITY &mdash; an
+          IV chair takes any IV. The subtype owns the side bar and the duration. That is why a
+          subtype colour only has to be unique within its type: the two always sit on different
+          backgrounds. <a href="#/t-06-codes">The colours are edited on the codes screen</a>.
+        </div>
+
+        <div class="l-filters" style="margin-top:14px">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <input class="field-input ts-q" placeholder="Search a type or a treatment&hellip;"
+                     oninput="tsFilter()" aria-label="Search" style="min-width:260px">
+              <label class="cx-toggle"><input type="checkbox" onchange="tsFilter()" id="ts-only-ty">
+                Types only</label>
+            </div>
+          </div>
+          <div class="l-view-group"><span class="l-count" id="ts-count">10 types &middot; 62 subtypes</span></div>
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:12px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Name</th><th scope="col">Colour</th>
+              <th scope="col">Belongs to</th><th scope="col">Default duration</th>
+              <th scope="col">Actions</th>
+            </tr></thead>
+            <tbody id="ts-body">
+              <tr class="ts-ty" data-ty="ty-visit">
+                <td><span class="ty-sw ty-visit"></span> <strong>Office Visit</strong></td>
+                <td><code>#B7CDB0</code></td>
+                <td>4 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('visit','Office Visit')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-visit" data-sub="t-newpt">
+                <td class="ts-indent"><span class="rail-sw t-newpt"></span> New patient</td>
+                <td><code>#F02CE0</code></td>
+                <td>Office Visit</td>
+                <td>90 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing New patient.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete New patient" aria-label="Delete New patient"
+                          onclick="tsDelete(this,'New patient')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-visit" data-sub="t-npfu">
+                <td class="ts-indent"><span class="rail-sw t-npfu"></span> New patient FU</td>
+                <td><code>#E4D2DE</code></td>
+                <td>Office Visit</td>
+                <td>45 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing New patient FU.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete New patient FU" aria-label="Delete New patient FU"
+                          onclick="tsDelete(this,'New patient FU')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-visit" data-sub="t-nptoc">
+                <td class="ts-indent"><span class="rail-sw t-nptoc"></span> New patient TOC</td>
+                <td><code>#9E5C78</code></td>
+                <td>Office Visit</td>
+                <td>90 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing New patient TOC.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete New patient TOC" aria-label="Delete New patient TOC"
+                          onclick="tsDelete(this,'New patient TOC')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-visit" data-sub="t-fu">
+                <td class="ts-indent"><span class="rail-sw t-fu"></span> Follow Up</td>
+                <td><code>#FCFC50</code></td>
+                <td>Office Visit</td>
+                <td>30 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Follow Up.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Follow Up" aria-label="Delete Follow Up"
+                          onclick="tsDelete(this,'Follow Up')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-proc">
+                <td><span class="ty-sw ty-proc"></span> <strong>Procedure</strong></td>
+                <td><code>#A9B9E2</code></td>
+                <td>6 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('proc','Procedure')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-proc" data-sub="t-prp">
+                <td class="ts-indent"><span class="rail-sw t-prp"></span> PRP</td>
+                <td><code>#F0982E</code></td>
+                <td>Procedure</td>
+                <td>90 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing PRP.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete PRP" aria-label="Delete PRP"
+                          onclick="tsDelete(this,'PRP')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-proc" data-sub="t-tpi">
+                <td class="ts-indent"><span class="rail-sw t-tpi"></span> TPI</td>
+                <td><code>#F5D5AE</code></td>
+                <td>Procedure</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing TPI.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete TPI" aria-label="Delete TPI"
+                          onclick="tsDelete(this,'TPI')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-proc" data-sub="t-pelm">
+                <td class="ts-indent"><span class="rail-sw t-pelm"></span> Pellet Males</td>
+                <td><code>#7392DA</code></td>
+                <td>Procedure</td>
+                <td>40 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Pellet Males.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Pellet Males" aria-label="Delete Pellet Males"
+                          onclick="tsDelete(this,'Pellet Males')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-proc" data-sub="t-pelf">
+                <td class="ts-indent"><span class="rail-sw t-pelf"></span> Pellet Females</td>
+                <td><code>#D2836E</code></td>
+                <td>Procedure</td>
+                <td>40 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Pellet Females.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Pellet Females" aria-label="Delete Pellet Females"
+                          onclick="tsDelete(this,'Pellet Females')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-proc" data-sub="t-proloz">
+                <td class="ts-indent"><span class="rail-sw t-proloz"></span> Prolozone</td>
+                <td><code>#66FFFF</code></td>
+                <td>Procedure</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Prolozone.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Prolozone" aria-label="Delete Prolozone"
+                          onclick="tsDelete(this,'Prolozone')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-proc" data-sub="t-micro">
+                <td class="ts-indent"><span class="rail-sw t-micro"></span> Microcurrent</td>
+                <td><code>#C0D2A8</code></td>
+                <td>Procedure</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Microcurrent.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Microcurrent" aria-label="Delete Microcurrent"
+                          onclick="tsDelete(this,'Microcurrent')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-energ">
+                <td><span class="ty-sw ty-energ"></span> <strong>Energetics</strong></td>
+                <td><code>#F9F0D4</code></td>
+                <td>9 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('energ','Energetics')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-biochg">
+                <td class="ts-indent"><span class="rail-sw t-biochg"></span> BioCharger</td>
+                <td><code>#E8C24A</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing BioCharger.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete BioCharger" aria-label="Delete BioCharger"
+                          onclick="tsDelete(this,'BioCharger')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-lymph">
+                <td class="ts-indent"><span class="rail-sw t-lymph"></span> LymphStar</td>
+                <td><code>#3E7A2E</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing LymphStar.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete LymphStar" aria-label="Delete LymphStar"
+                          onclick="tsDelete(this,'LymphStar')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-scenar">
+                <td class="ts-indent"><span class="rail-sw t-scenar"></span> SCENAR</td>
+                <td><code>#C4472E</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing SCENAR.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete SCENAR" aria-label="Delete SCENAR"
+                          onclick="tsDelete(this,'SCENAR')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-minilym">
+                <td class="ts-indent"><span class="rail-sw t-minilym"></span> Mini-LymphStar</td>
+                <td><code>#8ABA76</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mini-LymphStar.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mini-LymphStar" aria-label="Delete Mini-LymphStar"
+                          onclick="tsDelete(this,'Mini-LymphStar')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-biomodp">
+                <td class="ts-indent"><span class="rail-sw t-biomodp"></span> BioMod Pro</td>
+                <td><code>#DEE6D2</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing BioMod Pro.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete BioMod Pro" aria-label="Delete BioMod Pro"
+                          onclick="tsDelete(this,'BioMod Pro')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-biomodr">
+                <td class="ts-indent"><span class="rail-sw t-biomodr"></span> BioMod Recharge</td>
+                <td><code>#C0A028</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing BioMod Recharge.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete BioMod Recharge" aria-label="Delete BioMod Recharge"
+                          onclick="tsDelete(this,'BioMod Recharge')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-nmt">
+                <td class="ts-indent"><span class="rail-sw t-nmt"></span> NMT</td>
+                <td><code>#4A86DC</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing NMT.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete NMT" aria-label="Delete NMT"
+                          onclick="tsDelete(this,'NMT')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-mead">
+                <td class="ts-indent"><span class="rail-sw t-mead"></span> MEAD</td>
+                <td><code>#4E8290</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing MEAD.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete MEAD" aria-label="Delete MEAD"
+                          onclick="tsDelete(this,'MEAD')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-energ" data-sub="t-meadre">
+                <td class="ts-indent"><span class="rail-sw t-meadre"></span> MEAD ReAssessment</td>
+                <td><code>#A8C4CC</code></td>
+                <td>Energetics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing MEAD ReAssessment.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete MEAD ReAssessment" aria-label="Delete MEAD ReAssessment"
+                          onclick="tsDelete(this,'MEAD ReAssessment')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-lab">
+                <td><span class="ty-sw ty-lab"></span> <strong>Labs</strong></td>
+                <td><code>#C5C9E8</code></td>
+                <td>4 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('lab','Labs')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-lab" data-sub="t-mdl">
+                <td class="ts-indent"><span class="rail-sw t-mdl"></span> MDL</td>
+                <td><code>#2E1A6E</code></td>
+                <td>Labs</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing MDL.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete MDL" aria-label="Delete MDL"
+                          onclick="tsDelete(this,'MDL')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-lab" data-sub="t-quest">
+                <td class="ts-indent"><span class="rail-sw t-quest"></span> Quest</td>
+                <td><code>#4E8290</code></td>
+                <td>Labs</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Quest.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Quest" aria-label="Delete Quest"
+                          onclick="tsDelete(this,'Quest')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-lab" data-sub="t-g6pd">
+                <td class="ts-indent"><span class="rail-sw t-g6pd"></span> G6PD</td>
+                <td><code>#0000F0</code></td>
+                <td>Labs</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing G6PD.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete G6PD" aria-label="Delete G6PD"
+                          onclick="tsDelete(this,'G6PD')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-lab" data-sub="t-igenex">
+                <td class="ts-indent"><span class="rail-sw t-igenex"></span> iGenex</td>
+                <td><code>#66FFFF</code></td>
+                <td>Labs</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing iGenex.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete iGenex" aria-label="Delete iGenex"
+                          onclick="tsDelete(this,'iGenex')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-diag">
+                <td><span class="ty-sw ty-diag"></span> <strong>Diagnostics</strong></td>
+                <td><code>#B8CCE4</code></td>
+                <td>1 subtype</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('diag','Diagnostics')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-diag" data-sub="t-diag">
+                <td class="ts-indent"><span class="rail-sw t-diag"></span> Diagnostics</td>
+                <td><code>#3E7A2E</code></td>
+                <td>Diagnostics</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Diagnostics.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Diagnostics" aria-label="Delete Diagnostics"
+                          onclick="tsDelete(this,'Diagnostics')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-fpe">
+                <td><span class="ty-sw ty-fpe"></span> <strong>FPE</strong></td>
+                <td><code>#F0C9A0</code></td>
+                <td>2 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('fpe','FPE')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-fpe" data-sub="t-fpeie">
+                <td class="ts-indent"><span class="rail-sw t-fpeie"></span> FPE - IE</td>
+                <td><code>#F5E4D2</code></td>
+                <td>FPE</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing FPE - IE.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete FPE - IE" aria-label="Delete FPE - IE"
+                          onclick="tsDelete(this,'FPE - IE')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-fpe" data-sub="t-fpefu">
+                <td class="ts-indent"><span class="rail-sw t-fpefu"></span> FPE F/U</td>
+                <td><code>#F0982E</code></td>
+                <td>FPE</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing FPE F/U.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete FPE F/U" aria-label="Delete FPE F/U"
+                          onclick="tsDelete(this,'FPE F/U')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-chiro">
+                <td><span class="ty-sw ty-chiro"></span> <strong>Chiro</strong></td>
+                <td><code>#BDD7EE</code></td>
+                <td>5 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('chiro','Chiro')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-chiro" data-sub="t-dcintx">
+                <td class="ts-indent"><span class="rail-sw t-dcintx"></span> DC IN - TX</td>
+                <td><code>#DCB4AC</code></td>
+                <td>Chiro</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing DC IN - TX.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete DC IN - TX" aria-label="Delete DC IN - TX"
+                          onclick="tsDelete(this,'DC IN - TX')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-chiro" data-sub="t-dctx">
+                <td class="ts-indent"><span class="rail-sw t-dctx"></span> DC - TX</td>
+                <td><code>#B0AED8</code></td>
+                <td>Chiro</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing DC - TX.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete DC - TX" aria-label="Delete DC - TX"
+                          onclick="tsDelete(this,'DC - TX')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-chiro" data-sub="t-lasereval">
+                <td class="ts-indent"><span class="rail-sw t-lasereval"></span> Laser Eval</td>
+                <td><code>#5A4A9E</code></td>
+                <td>Chiro</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Laser Eval.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Laser Eval" aria-label="Delete Laser Eval"
+                          onclick="tsDelete(this,'Laser Eval')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-chiro" data-sub="t-medifne">
+                <td class="ts-indent"><span class="rail-sw t-medifne"></span> MediFNE</td>
+                <td><code>#66FFFF</code></td>
+                <td>Chiro</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing MediFNE.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete MediFNE" aria-label="Delete MediFNE"
+                          onclick="tsDelete(this,'MediFNE')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-chiro" data-sub="t-pocrev">
+                <td class="ts-indent"><span class="rail-sw t-pocrev"></span> POC Review</td>
+                <td><code>#9E5C78</code></td>
+                <td>Chiro</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing POC Review.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete POC Review" aria-label="Delete POC Review"
+                          onclick="tsDelete(this,'POC Review')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-eboo">
+                <td><span class="ty-sw ty-eboo"></span> <strong>EBOO</strong></td>
+                <td><code>#E8B4A8</code></td>
+                <td>2 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('eboo','EBOO')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-eboo" data-sub="t-eboosafe">
+                <td class="ts-indent"><span class="rail-sw t-eboosafe"></span> EBOO Safe</td>
+                <td><code>#BA8098</code></td>
+                <td>EBOO</td>
+                <td>2 h</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing EBOO Safe.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete EBOO Safe" aria-label="Delete EBOO Safe"
+                          onclick="tsDelete(this,'EBOO Safe')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-eboo" data-sub="t-ebootx">
+                <td class="ts-indent"><span class="rail-sw t-ebootx"></span> EBOO</td>
+                <td><code>#D2836E</code></td>
+                <td>EBOO</td>
+                <td>2 h</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing EBOO.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete EBOO" aria-label="Delete EBOO"
+                          onclick="tsDelete(this,'EBOO')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-laser">
+                <td><span class="ty-sw ty-laser"></span> <strong>Laser</strong></td>
+                <td><code>#8B1A1A</code></td>
+                <td>5 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('laser','Laser')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-laser" data-sub="t-erchlas">
+                <td class="ts-indent"><span class="rail-sw t-erchlas"></span> Erch Laser</td>
+                <td><code>#8A2CE0</code></td>
+                <td>Laser</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Erch Laser.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Erch Laser" aria-label="Delete Erch Laser"
+                          onclick="tsDelete(this,'Erch Laser')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-laser" data-sub="t-erccemp">
+                <td class="ts-indent"><span class="rail-sw t-erccemp"></span> ErcCompEmp</td>
+                <td><code>#D8B0A8</code></td>
+                <td>Laser</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing ErcCompEmp.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete ErcCompEmp" aria-label="Delete ErcCompEmp"
+                          onclick="tsDelete(this,'ErcCompEmp')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-laser" data-sub="t-erccpt">
+                <td class="ts-indent"><span class="rail-sw t-erccpt"></span> ErcCompPt</td>
+                <td><code>#EED8D2</code></td>
+                <td>Laser</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing ErcCompPt.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete ErcCompPt" aria-label="Delete ErcCompPt"
+                          onclick="tsDelete(this,'ErcCompPt')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-laser" data-sub="t-erccvip">
+                <td class="ts-indent"><span class="rail-sw t-erccvip"></span> ErcCompVIP</td>
+                <td><code>#F5EAD2</code></td>
+                <td>Laser</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing ErcCompVIP.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete ErcCompVIP" aria-label="Delete ErcCompVIP"
+                          onclick="tsDelete(this,'ErcCompVIP')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-laser" data-sub="t-erccref">
+                <td class="ts-indent"><span class="rail-sw t-erccref"></span> ErcCompRef</td>
+                <td><code>#FAF0DC</code></td>
+                <td>Laser</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing ErcCompRef.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete ErcCompRef" aria-label="Delete ErcCompRef"
+                          onclick="tsDelete(this,'ErcCompRef')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-ty" data-ty="ty-iv">
+                <td><span class="ty-sw ty-iv"></span> <strong>IV</strong></td>
+                <td><code>#FFFFFF</code></td>
+                <td>24 subtypes</td>
+                <td>&mdash;</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the type — the colour, the name and which resources can do it.', 'ok')">Edit</button>
+                  <button class="btn btn-sm" onclick="tsAdd('iv','IV')">Add a subtype</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-cell">
+                <td class="ts-indent"><span class="rail-sw t-cell"></span> Cellular Boost</td>
+                <td><code>#2E4450</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Cellular Boost.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Cellular Boost" aria-label="Delete Cellular Boost"
+                          onclick="tsDelete(this,'Cellular Boost')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-chel">
+                <td class="ts-indent"><span class="rail-sw t-chel"></span> Chelation</td>
+                <td><code>#F0982E</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Chelation.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Chelation" aria-label="Delete Chelation"
+                          onclick="tsDelete(this,'Chelation')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-cog">
+                <td class="ts-indent"><span class="rail-sw t-cog"></span> Cognitive Support</td>
+                <td><code>#C0A028</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Cognitive Support.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Cognitive Support" aria-label="Delete Cognitive Support"
+                          onclick="tsDelete(this,'Cognitive Support')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-iron">
+                <td class="ts-indent"><span class="rail-sw t-iron"></span> Core Iron Blend</td>
+                <td><code>#F02CE0</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Core Iron Blend.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Core Iron Blend" aria-label="Delete Core Iron Blend"
+                          onclick="tsDelete(this,'Core Iron Blend')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-rest">
+                <td class="ts-indent"><span class="rail-sw t-rest"></span> Core Restore</td>
+                <td><code>#DCC0BA</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Core Restore.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Core Restore" aria-label="Delete Core Restore"
+                          onclick="tsDelete(this,'Core Restore')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-detox">
+                <td class="ts-indent"><span class="rail-sw t-detox"></span> Detox Prime</td>
+                <td><code>#B4CCA0</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Detox Prime.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Detox Prime" aria-label="Delete Detox Prime"
+                          onclick="tsDelete(this,'Detox Prime')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ebooiv">
+                <td class="ts-indent"><span class="rail-sw t-ebooiv"></span> Eboo Boost</td>
+                <td><code>#0000F0</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Eboo Boost.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Eboo Boost" aria-label="Delete Eboo Boost"
+                          onclick="tsDelete(this,'Eboo Boost')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-amino">
+                <td class="ts-indent"><span class="rail-sw t-amino"></span> Essential Aminos</td>
+                <td><code>#D8DCE8</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Essential Aminos.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Essential Aminos" aria-label="Delete Essential Aminos"
+                          onclick="tsDelete(this,'Essential Aminos')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ff5">
+                <td class="ts-indent"><span class="rail-sw t-ff5"></span> Foundational Flow 5</td>
+                <td><code>#C4E8E8</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Foundational Flow 5.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Foundational Flow 5" aria-label="Delete Foundational Flow 5"
+                          onclick="tsDelete(this,'Foundational Flow 5')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ff10">
+                <td class="ts-indent"><span class="rail-sw t-ff10"></span> Foundational Flow 10</td>
+                <td><code>#A8E4E8</code></td>
+                <td>IV</td>
+                <td>1 h</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Foundational Flow 10.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Foundational Flow 10" aria-label="Delete Foundational Flow 10"
+                          onclick="tsDelete(this,'Foundational Flow 10')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ff15">
+                <td class="ts-indent"><span class="rail-sw t-ff15"></span> Foundational Flow 15</td>
+                <td><code>#66F0F0</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Foundational Flow 15.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Foundational Flow 15" aria-label="Delete Foundational Flow 15"
+                          onclick="tsDelete(this,'Foundational Flow 15')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ff20">
+                <td class="ts-indent"><span class="rail-sw t-ff20"></span> Foundational Flow 20</td>
+                <td><code>#68C4C4</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Foundational Flow 20.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Foundational Flow 20" aria-label="Delete Foundational Flow 20"
+                          onclick="tsDelete(this,'Foundational Flow 20')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ff25">
+                <td class="ts-indent"><span class="rail-sw t-ff25"></span> Foundational Flow 25</td>
+                <td><code>#5AAAAA</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Foundational Flow 25.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Foundational Flow 25" aria-label="Delete Foundational Flow 25"
+                          onclick="tsDelete(this,'Foundational Flow 25')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-ff50">
+                <td class="ts-indent"><span class="rail-sw t-ff50"></span> Foundational Flow 50</td>
+                <td><code>#4E8290</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Foundational Flow 50.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Foundational Flow 50" aria-label="Delete Foundational Flow 50"
+                          onclick="tsDelete(this,'Foundational Flow 50')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mast">
+                <td class="ts-indent"><span class="rail-sw t-mast"></span> Mast Cell</td>
+                <td><code>#FCFC50</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mast Cell.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mast Cell" aria-label="Delete Mast Cell"
+                          onclick="tsDelete(this,'Mast Cell')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mc15">
+                <td class="ts-indent"><span class="rail-sw t-mc15"></span> Mega C 15g</td>
+                <td><code>#FAEADC</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mega C 15g.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mega C 15g" aria-label="Delete Mega C 15g"
+                          onclick="tsDelete(this,'Mega C 15g')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mc25">
+                <td class="ts-indent"><span class="rail-sw t-mc25"></span> Mega C 25g</td>
+                <td><code>#F5D8B4</code></td>
+                <td>IV</td>
+                <td>2.5 h</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mega C 25g.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mega C 25g" aria-label="Delete Mega C 25g"
+                          onclick="tsDelete(this,'Mega C 25g')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mc50">
+                <td class="ts-indent"><span class="rail-sw t-mc50"></span> Mega C 50g</td>
+                <td><code>#EEC088</code></td>
+                <td>IV</td>
+                <td>2 h</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mega C 50g.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mega C 50g" aria-label="Delete Mega C 50g"
+                          onclick="tsDelete(this,'Mega C 50g')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mc75">
+                <td class="ts-indent"><span class="rail-sw t-mc75"></span> Mega C 75g</td>
+                <td><code>#E8A84E</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mega C 75g.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mega C 75g" aria-label="Delete Mega C 75g"
+                          onclick="tsDelete(this,'Mega C 75g')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mc100">
+                <td class="ts-indent"><span class="rail-sw t-mc100"></span> Mega C 100g</td>
+                <td><code>#C87824</code></td>
+                <td>IV</td>
+                <td>3 h</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mega C 100g.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mega C 100g" aria-label="Delete Mega C 100g"
+                          onclick="tsDelete(this,'Mega C 100g')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-migraine">
+                <td class="ts-indent"><span class="rail-sw t-migraine"></span> Migraine</td>
+                <td><code>#5A4A9E</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Migraine.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Migraine" aria-label="Delete Migraine"
+                          onclick="tsDelete(this,'Migraine')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-mito">
+                <td class="ts-indent"><span class="rail-sw t-mito"></span> Mito Boost</td>
+                <td><code>#6E2A4E</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mito Boost.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mito Boost" aria-label="Delete Mito Boost"
+                          onclick="tsDelete(this,'Mito Boost')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-minimb">
+                <td class="ts-indent"><span class="rail-sw t-minimb"></span> Mini Mito Boost</td>
+                <td><code>#B07A96</code></td>
+                <td>IV</td>
+                <td>30 min</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mini Mito Boost.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mini Mito Boost" aria-label="Delete Mini Mito Boost"
+                          onclick="tsDelete(this,'Mini Mito Boost')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="ts-sub" data-ty="ty-iv" data-sub="t-minimbc">
+                <td class="ts-indent"><span class="rail-sw t-minimbc"></span> Mini Mito Boost - Custom</td>
+                <td><code>#C49AAE</code></td>
+                <td>IV</td>
+                <td>Not set</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing Mini Mito Boost - Custom.', 'ok')">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mini Mito Boost - Custom" aria-label="Delete Mini Mito Boost - Custom"
+                          onclick="tsDelete(this,'Mini Mito Boost - Custom')">&#128465;</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov" style="margin-top:12px"><span>This is the one place the taxonomy is
+          defined. Booking, the filters, the three legends, the capacity rows, the waitlist and the
+          block form all read it &mdash; there is no second list to keep in step.</span></div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ============================================================ -->
@@ -661,7 +1500,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=78"></script>
+<script src="assets/hcos.js?v=79"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {
@@ -789,6 +1628,41 @@
   }
   window.tcLevel = tcLevel; window.tcHex = tcHex; window.tcPreview = tcPreview;
   tcLevel('ty');
+
+  /* ---------- the taxonomy screen ---------- */
+  function tsFilter() {
+    var q = ((document.querySelector('.ts-q') || {}).value || '').toLowerCase();
+    var tyOnly = (document.getElementById('ts-only-ty') || {}).checked;
+    var t = 0, s = 0;
+    document.querySelectorAll('#ts-body tr').forEach(function (r) {
+      var isTy = r.classList.contains('ts-ty');
+      var on = (!tyOnly || isTy) && (!q || r.textContent.toLowerCase().indexOf(q) !== -1);
+      r.style.display = on ? '' : 'none';
+      if (on) { if (isTy) t++; else s++; }
+    });
+    var c = document.getElementById('ts-count');
+    if (c) c.textContent = t + (t === 1 ? ' type' : ' types') + ' \u00b7 ' +
+                           s + (s === 1 ? ' subtype' : ' subtypes');
+  }
+  function tsAdd(tk, tl) {
+    HCOS.toast(tl ? 'Adding a subtype under ' + tl + ' — it needs a name, a colour and a default duration.'
+                  : 'Adding a subtype — pick the type it belongs to first.', 'ok');
+  }
+  var TS_ARMED = null;
+  function tsDelete(btn, name) {
+    if (TS_ARMED !== name) {
+      TS_ARMED = name;
+      HCOS.toast('Delete "' + name + '"? Appointments already booked as it keep it on the record, but nobody can book it again. Press delete again to confirm.', 'warn');
+      setTimeout(function () { if (TS_ARMED === name) TS_ARMED = null; }, 8000);
+      return;
+    }
+    TS_ARMED = null;
+    var row = btn.closest('tr');
+    if (row) row.remove();
+    tsFilter();
+    HCOS.toast('"' + name + '" retired. It is gone from booking and the filters; past appointments keep it.', 'ok');
+  }
+  window.tsFilter = tsFilter; window.tsAdd = tsAdd; window.tsDelete = tsDelete;
 </script>
 </body>
 </html>

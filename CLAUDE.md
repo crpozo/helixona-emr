@@ -275,6 +275,52 @@ One architectural fact to respect in labels and structure: the Form Builder (A),
   view can be saved per browser (`hcos-list-view`).
 - **Blocked time, holds and reserved spaces are not appointments** and are excluded from the
   list and from the day's count. They were showing up as rows with no patient.
+- **A screen can be APPROVED BY THE TEAM, not just per browser (Carlos, 2026-08-12).**
+  `data-approved="2026-08-12"` on the section is committed to the repo and everyone sees the green
+  tick; the localStorage approval stays the individual reviewer's. A reviewer who disagrees with a
+  settled screen leaves a note — one person does not quietly reopen a team decision in their own
+  browser. Day, week and month are settled.
+- **A FLAG HAS A LIFETIME.** A pregnancy ends after nine months, a missing consent stops shouting
+  once it is signed, a documented food allergy never expires. Fourteen of the thirty carry one.
+  **An expired flag is not deleted** — it leaves the calendar and stays on the record, because the
+  fact that it was once true is itself clinical history. Deleting a flag TYPE asks twice and names
+  how many appointments would lose the warning.
+- **The note on an appointment belongs to the APPOINTMENT.** It was called a general note and saved
+  to the profile, which is a different record with a different lifetime. It sits above the
+  appointment facts as the first thing the next person reads, carries who wrote it and when, and is
+  **RESOLVED rather than collapsed** — struck through and stamped, still on screen. "Somebody dealt
+  with this" has to be readable, not inferred from an absence.
+- **PATIENT BALANCE is calculated, never typed**: allowed amount for the treatment, less what the
+  plan pays. The drawer shows the WORKING, not just the total — "$102" with no explanation is a
+  number nobody can defend to a patient standing at the counter. It goes in the nightly export as
+  the amount to key into the card machine, which is the whole reason that export exists.
+- **An alert says WHICH problem, in words beside the symbol.** A bare icon made the desk hover
+  every row to find out what was wrong.
+- **PRIORITY on the waitlist is clinical and carries a REASON** (Carlos: "patient lives depend on
+  the priority"). Urgent / High / Routine / Flexible, read as a word first and a colour second so
+  it survives printing. A clinician can set a date the patient should be seen BY, and **the number
+  of days is always shown** — "overdue" without a number is a feeling, not a fact.
+- **An offer is defined by what happens to the SLOT.** Simul ring goes to everyone at once and the
+  slot stays on the waitlist until somebody accepts; round robin goes one at a time by priority and
+  **releases the slot back to the calendar** if the round ends empty. Everything is SMS — HCOS
+  places no calls, so nobody is told on the phone that they have an appointment somebody else
+  already took.
+- **Capacity lives with blocking; open slots live with booking.** You go to Blocked time to MAKE
+  capacity and to Book appointment to spend it, so the slot finder and the metrics moved.
+- **The block form goes what → when → hours**, numbered, and reads itself back as one English
+  sentence — a recurring block is the easiest thing on the screen to get wrong by one field. It
+  refuses to create a reserved space with nothing ticked, which would silently refuse everything.
+- **`.textContent` renders `&middot;` literally.** `L_SUBS` is DATA read into a select's
+  textContent, and every subtype on the booking screen printed "New patient &middot; 90 min" —
+  the "AI slop" Carlos saw. Entities belong in markup; data holds real characters.
+- **`treatments.html#/t-07-types` is where the taxonomy is defined**, and `code2.py` is where it is
+  generated from. Add or retire a subtype there and the CSS, the three legends, every filter, the
+  capacity rows, the codes screen, both booking dictionaries and the block form change together.
+  R&R was retired this way.
+- **The nightly PDF is written to the practice's own AWS bucket first, and that copy is the
+  record.** A Drive or SharePoint mirror is a convenience for the morning, not a second source of
+  truth, and it needs a signed agreement before it is switched on — the screen says so rather than
+  offering it as an ordinary setting.
 - **THE FILTER BAR CARRIES NO LABEL COLUMN (Carlos, 2026-08-12: "organize this better").**
   It had three labelled rows — Show / Type & subtype / Dates — whose labels were three different
   widths, so the selects came out with a ragged left edge and two-thirds of the bar empty, and
