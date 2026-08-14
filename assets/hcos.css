@@ -1072,7 +1072,6 @@ a.lead-chip:hover { border-color: var(--ink); }
   --sb-nmt:       #4A86DC;   /* NMT */
   --sb-mead:      #4E8290;   /* MEAD */
   --sb-meadre:    #A8C4CC;   /* MEAD ReAssessment */
-  --sb-rr:        #B0A4D8;   /* R&R */
   --sb-mdl:       #2E1A6E;   /* MDL */
   --sb-quest:     #4E8290;   /* Quest */
   --sb-g6pd:      #0000F0;   /* G6PD */
@@ -1160,7 +1159,6 @@ a.lead-chip:hover { border-color: var(--ink); }
 .cal-appt.t-nmt,       .week-appt.t-nmt,       .rail-sw.t-nmt        { --sb: var(--sb-nmt); }
 .cal-appt.t-mead,      .week-appt.t-mead,      .rail-sw.t-mead       { --sb: var(--sb-mead); }
 .cal-appt.t-meadre,    .week-appt.t-meadre,    .rail-sw.t-meadre     { --sb: var(--sb-meadre); }
-.cal-appt.t-rr,        .week-appt.t-rr,        .rail-sw.t-rr         { --sb: var(--sb-rr); }
 .cal-appt.t-mdl,       .week-appt.t-mdl,       .rail-sw.t-mdl        { --sb: var(--sb-mdl); }
 .cal-appt.t-quest,     .week-appt.t-quest,     .rail-sw.t-quest      { --sb: var(--sb-quest); }
 .cal-appt.t-g6pd,      .week-appt.t-g6pd,      .rail-sw.t-g6pd       { --sb: var(--sb-g6pd); }
@@ -2682,3 +2680,56 @@ a.lead-chip:hover { border-color: var(--ink); }
 .msel-inline-opts { max-height: 210px; overflow-y: auto; padding: 5px; }
 .modal-wide { max-width: 760px; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+
+/* the patient lookup — it matches anywhere in the name, the phone, the date of
+   birth or the record number, because the desk has whichever of those the
+   patient said on the phone (Carlos, 2026-08-12) */
+.pt-find { position: relative; }
+.pt-hits {
+  position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 60;
+  background: #fff; border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.13); max-height: 260px; overflow-y: auto; padding: 4px;
+}
+.pt-hit {
+  display: grid; grid-template-columns: 1fr auto; gap: 0 10px; width: 100%;
+  text-align: left; border: none; background: none; cursor: pointer; font-family: inherit;
+  padding: 7px 9px; border-radius: 7px;
+}
+.pt-hit:hover, .pt-hit:focus { background: var(--hx-band); }
+.pt-hit b { font-size: 12.5px; color: var(--ink); }
+.pt-hit span { grid-column: 1; font-size: 11px; color: var(--muted); }
+.pt-hit em {
+  grid-row: 1 / span 2; align-self: center; font-style: normal;
+  font-size: 11px; color: var(--muted); font-family: ui-monospace, monospace;
+}
+.pt-hit-none { padding: 9px; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+/* open slots read two ways: a list to pick down, a calendar to see that Tuesday
+   is full and Thursday is empty — which a list cannot show */
+.seg-tabs { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.seg-tab {
+  border: 1px solid var(--line); background: #fff; border-radius: 999px;
+  padding: 4px 12px; font-size: 11.5px; cursor: pointer; font-family: inherit; color: var(--muted);
+}
+.seg-tab.is-on { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+.slot-cal { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 8px; margin-bottom: 10px; }
+.slot-day {
+  border: 1px solid var(--line-soft); border-radius: 9px; padding: 9px; background: #fff;
+  cursor: pointer; min-height: 92px;
+}
+.slot-day:hover { border-color: var(--ink); }
+.slot-day b { display: block; font-size: 11.5px; color: var(--hx-navy); }
+.slot-n { display: block; font-size: 10.5px; color: var(--muted); margin: 2px 0 5px; }
+.slot-day em { display: block; font-style: normal; font-size: 11px; color: var(--ink); line-height: 1.5; }
+.slot-more { color: var(--muted) !important; }
+.slot-day.is-full { background: repeating-linear-gradient(135deg,#F2F2F2 0 5px,#F9F9F9 5px 10px); cursor: default; }
+.slot-day.is-full b, .slot-day.is-full .slot-n { color: var(--muted); }
+
+/* one pattern, one line. All of them at once is a wall nobody reads. */
+.ai-line {
+  border-left: 3px solid var(--line); padding: 6px 0 6px 10px; margin-bottom: 7px;
+}
+.ai-line b { display: block; font-size: 12.5px; color: var(--hx-navy); }
+.ai-line span { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.45; margin-top: 2px; }
+.ai-line.ai-high { border-left-color: #C0392B; }
+.ai-line.ai-med  { border-left-color: #C98A1E; }
