@@ -2589,3 +2589,35 @@ a.lead-chip:hover { border-color: var(--ink); }
   color: var(--muted); margin: 10px 0 4px;
 }
 .chip-group-lbl:first-child { margin-top: 0; }
+
+/* An alert cell says WHICH problem, in words next to the symbol. A bare icon
+   makes the desk hover every row to find out what is wrong (Carlos, 2026-08-12). */
+.alert-cell {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; line-height: 1.35; margin: 1px 0;
+}
+.alert-cell + .alert-cell { display: flex; }
+.alert-cell .fl { width: 15px; height: 15px; border-width: 1.2px; flex-shrink: 0; }
+.alert-cell .fl::before { inset: 1.5px; }
+.alert-bad  { color: #8E2118; font-weight: 600; }
+.alert-high { color: #8E2118; font-weight: 600; }
+.alert-med  { color: #7A5510; }
+.alert-low, .alert-none, .alert-ok { color: var(--muted); }
+.cell-sub { display: block; font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 1px; }
+
+/* the balance, shown as its working — "$102" with no explanation is a number
+   the desk cannot defend to a patient standing at the counter */
+.bal-card {
+  border: 1px solid var(--line-soft); border-radius: 8px; overflow: hidden;
+  margin: 8px 0; background: #fff;
+}
+.bal-row {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding: 7px 11px; font-size: 12px; color: var(--muted);
+  border-bottom: 1px solid var(--line-soft);
+}
+.bal-row b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.bal-row:last-child { border-bottom: none; }
+.bal-tot { background: var(--hx-band); font-weight: 600; color: var(--ink); }
+.bal-tot b { font-size: 15px; }
+.bal-tot em { display: block; font-style: normal; font-weight: 400; font-size: 10.5px; color: var(--muted); }

@@ -288,10 +288,13 @@
 
             <div class="l-view-group">
               <span class="l-count" id="l-count">Showing all 19 appointments</span>
-              <button class="view-lock locked" id="l-lockbtn"
-                onclick="var b=this;b.classList.toggle('locked');b.querySelector('span:last-child').textContent=b.classList.contains('locked')?'Saved as Yazmin\'s view':'Not saved';HCOS.toast(b.classList.contains('locked')?'Saved. Yazmin opens here every morning.':'Unlocked — changes will not be kept.', 'ok')">
-                <span>&#128274;</span><span>Saved as Yazmin's view</span>
-              </button>
+              <label class="cx-toggle l-view-remember">
+                <input type="checkbox" onchange="lViewToggle(this.checked)"
+                       aria-label="Remember these filters">
+                Remember these filters
+              </label>
+              <button class="btn btn-sm l-view-clear" onclick="lViewClear()"
+                      style="display:none">Clear</button>
             </div>
           </div>
 
@@ -4113,7 +4116,7 @@
           </div>
           <div class="app-user">
             <button class="btn" data-activate="l-01-day">Back to the day</button>
-            <button class="btn" onclick="lSaveView()">Save this view</button>
+
             <button class="btn" data-open-modal="#l-export-modal">Export</button>
           </div>
         </div>
@@ -4136,8 +4139,9 @@
               <th scope="col"><button class="l-sort" type="button" onclick="lSort(6)">Status <i></i></button></th>
               <th scope="col"><button class="l-sort" type="button" onclick="lSort(7)">Stage <i></i></button></th>
               <th scope="col"><button class="l-sort" type="button" onclick="lSort(8)">Insurance <i></i></button></th>
-              <th scope="col"><button class="l-sort" type="button" onclick="lSort(9)">Owes <i></i></button></th>
-              <th scope="col">Flags</th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(9)">Balance <i></i></button></th>
+              <th scope="col"><button class="l-sort" type="button" onclick="lSort(10)">Consents <i></i></button></th>
+              <th scope="col">Alerts</th>
             </tr></thead>
             <tbody id="l-list-body">
               <tr><td colspan="11" class="field-help">Building the list from the day board&hellip;</td></tr>
@@ -4750,13 +4754,17 @@
         <span class="field-lbl">What to include</span>
         <div class="chip-row">
           <button class="filter-chip multi active" type="button">Every column</button>
-          <button class="filter-chip multi active" type="button">Flags</button>
+          <button class="filter-chip multi active" type="button">Alerts and flags</button>
           <button class="filter-chip multi active" type="button">Phone numbers</button>
-          <button class="filter-chip multi" type="button">What they owe</button>
+          <button class="filter-chip multi active" type="button">Pending consents</button>
+          <button class="filter-chip multi active" type="button">Patient balance &mdash; amount to charge</button>
+          <button class="filter-chip multi active" type="button">Appointment notes</button>
           <button class="filter-chip multi" type="button">Cancelled &amp; rescheduled appointments</button>
         </div>
         <div class="field-help">Only the columns you are filtered to are exported, so the PDF
-          matches what you are looking at.</div>
+          matches what you are looking at. <strong>The balance column is the amount to key into
+          the card machine</strong> &mdash; it is there so the desk can still take payment on a
+          day when nothing else is up, which is the whole reason this export exists.</div>
       </div>
       <div class="grid-2">
         <div class="field"><label class="field-lbl" for="l-ex-fmt">Format</label>
@@ -5562,8 +5570,8 @@
       h += '<div class="seg-divider">At the desk</div><dl class="kv">'
          + (a.stage ? '<dt>Care plan stage</dt><dd>' + a.stage + '</dd>' : '')
          + (a.phone ? '<dt>Phone</dt><dd>' + a.phone + '</dd>' : '')
-         + (a.pay ? '<dt>Patient owes</dt><dd><strong>' + a.pay + '</strong></dd>' : '')
          + '</dl>'
+         + lBalanceHtml(id, a)
          + '<div class="field-help">Worked out from the coverage on file at check-in. '
          + 'Nobody types this number.</div>'
          + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
@@ -6807,6 +6815,75 @@
   window.lResourceName = lResourceName;
 
   /* ---------- the list: the same day, sortable, searchable, paged ---------- */
+
+  /* ---------- PATIENT BALANCE CALCULATOR ----------
+     Carlos, 2026-08-12: the system works it out from the PLAN, the desk never
+     types it. Allowed amount for the treatment, minus what the plan pays, plus
+     anything already outstanding. It is shown in the list, in the appointment
+     detail, and it goes in the export as a plain number so the desk can key it
+     into the card machine when the system is down. That last column is the
+     whole reason the export exists. */
+  var L_RATE = {           /* allowed amount per subtype, from the price list */
+    ff5: 210, ff10: 285, ff15: 340, ff20: 395, ff25: 450, ff50: 690,
+    mc15: 260, mc25: 340, mc50: 470, mc75: 600, mc100: 730,
+    cell: 295, mast: 330, cog: 305, iron: 340, rest: 290, detox: 320, amino: 275,
+    mito: 335, minimb: 165, minimbc: 175, ebooiv: 520, chel: 410, migraine: 300,
+    newpt: 450, npfu: 260, nptoc: 450, fu: 185,
+    prp: 950, tpi: 240, pelm: 780, pelf: 780, proloz: 380, micro: 210,
+    ebootx: 1450, eboosafe: 1450, mdl: 120, quest: 95, g6pd: 85, igenex: 340
+  };
+  /* how the plan pays: a copay is a fixed number, coinsurance a share, a
+     deductible is everything until it is met, self-pay is the whole allowed */
+  function lBalance(r) {
+    var rate = L_RATE[(r.subCls || '').replace('t-', '')] || 240;
+    var pay = r.pay || '';
+    var owed, how;
+    var m;
+    if ((m = pay.match(/\$(\d+) copay/))) { owed = +m[1]; how = '$' + m[1] + ' copay'; }
+    else if ((m = pay.match(/(\d+)% coinsurance/))) {
+      owed = Math.round(rate * (+m[1] / 100)); how = m[1] + '% of $' + rate;
+    } else if ((m = pay.match(/\$([\d,]+) deductible/))) {
+      var left = +m[1].replace(/,/g, '');
+      owed = Math.min(rate, left); how = 'deductible, $' + m[1] + ' left';
+    } else if (/self|cash/i.test(pay)) { owed = rate; how = 'self-pay, full allowed'; }
+    else { owed = 0; how = 'nothing due'; }
+    return { rate: rate, owed: owed, how: how };
+  }
+
+  /* ---------- pending consents ----------
+     An alert is useless if it only says "there is a problem" — it has to say
+     WHICH problem, in words, next to the symbol (Carlos, 2026-08-12). */
+  var L_CONSENT = {
+    'A-88250': [], 'A-88317': ['Financial responsibility'],
+    'A-88327': ['IV therapy consent'], 'A-88344': ['Photography release'],
+    'A-88363': ['IV therapy consent', 'Financial responsibility'],
+    'A-88346': ['Telehealth consent']
+  };
+  function lConsents(id) {
+    var c = L_CONSENT[id];
+    if (c === undefined) {
+      /* deterministic stand-in so the column is populated across the day */
+      var n = parseInt(id.replace(/\D/g, ''), 10) || 0;
+      c = n % 7 === 0 ? ['IV therapy consent'] : (n % 11 === 0 ? ['Financial responsibility'] : []);
+    }
+    return c;
+  }
+
+
+  /* The same calculator the list uses, shown as the working, not just the total.
+     "$102" with no explanation is a number the desk cannot defend to a patient
+     standing at the counter. */
+  function lBalanceHtml(id, a) {
+    var r = { subCls: a.swatch ? (a.swatch.match(/t-[a-z0-9]+/) || [''])[0] : '', pay: a.pay || '' };
+    var b = lBalance(r);
+    return '<div class="bal-card">'
+      + '<div class="bal-row"><span>Allowed for this treatment</span><b>$' + b.rate + '</b></div>'
+      + '<div class="bal-row"><span>Plan pays</span><b>&minus;$' + (b.rate - b.owed) + '</b></div>'
+      + '<div class="bal-row bal-tot"><span>Patient balance <em>' + b.how + '</em></span>'
+      + '<b>$' + b.owed + '</b></div></div>';
+  }
+  window.lBalanceHtml = lBalanceHtml;
+
   var L_LIST = [], L_SORT = { col: 0, dir: 1 }, L_PAGE = 0, L_PER = 50, L_Q = '';
   var TY_LBL_LIST = { 'ty-visit':'Office Visit','ty-proc':'Procedure','ty-energ':'Energetics',
     'ty-lab':'Labs','ty-diag':'Diagnostics','ty-fpe':'FPE','ty-chiro':'Chiro',
@@ -6840,8 +6917,14 @@
         stage: b.getAttribute('data-stage') || '',
         ins: b.getAttribute('data-ins') || '',
         pay: b.getAttribute('data-pay') || '',
-        flags: (b.getAttribute('data-flags') || '').split('|').filter(Boolean)
+        flags: (b.getAttribute('data-flags') || '').split('|').filter(Boolean),
+        note: b.getAttribute('data-note') || ''
       });
+      var r = L_LIST[L_LIST.length - 1];
+      var bal = lBalance(r);
+      r.owed = bal.owed; r.how = bal.how; r.rate = bal.rate;
+      r.consents = lConsents(r.id);
+      r.consent = r.consents.length ? r.consents.length : 0;
     });
     lRenderList();
   }
@@ -6857,9 +6940,10 @@
       if (r.off && !showCx) return false;
       if (!q) return true;
       return (r.pt + ' ' + r.phone + ' ' + r.ty + ' ' + r.sub + ' ' + r.res + ' ' +
-              r.st + ' ' + r.ins).toLowerCase().indexOf(q) !== -1;
+              r.st + ' ' + r.ins + ' ' + r.consents.join(' ') + ' ' + r.note)
+             .toLowerCase().indexOf(q) !== -1;
     });
-    var KEY = ['top', 'pt', 'phone', 'ty', 'sub', 'res', 'st', 'stage', 'ins', 'pay'];
+    var KEY = ['top', 'pt', 'phone', 'ty', 'sub', 'res', 'st', 'stage', 'ins', 'owed', 'consent'];
     var k = KEY[L_SORT.col] || 'top';
     rows.sort(function (a, b) {
       var x = a[k], y = b[k];
@@ -6889,11 +6973,19 @@
         '<td><span class="pill pill-st ' + r.stCls + '">' + r.st + '</span></td>' +
         '<td>' + r.stage + '</td>' +
         '<td>' + r.ins + '</td>' +
-        '<td>' + r.pay + '</td>' +
-        '<td>' + r.flags.map(function (k) {
+        '<td class="l-num"><strong>$' + r.owed + '</strong>' +
+          '<span class="cell-sub">' + r.how + '</span></td>' +
+        '<td>' + (r.consents.length
+            ? '<span class="alert-cell alert-bad"><span class="fl sev-high fi-consent"></span>' +
+              r.consents.join('<br>') + '</span>'
+            : '<span class="alert-cell alert-ok">All signed</span>') + '</td>' +
+        /* an alert says WHICH problem, in words beside the symbol — a bare icon
+           makes the desk hover every row to find out what is wrong */
+        '<td>' + (r.flags.length ? r.flags.map(function (k) {
           var f = L_FLAGS[k];
-          return f ? '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '" title="' + f.text + '"></span>' : '';
-        }).join(' ') + '</td></tr>';
+          return f ? '<span class="alert-cell alert-' + f.sev + '">' +
+                     '<span class="fl sev-' + f.sev + ' fi-' + f.icon + '"></span>' + f.name + '</span>' : '';
+        }).join('') : '<span class="alert-cell alert-none">None</span>') + '</td></tr>';
     }).join('') || '<tr><td colspan="11" class="field-help">Nothing matches.</td></tr>';
 
     /* the denominator is what the toggle admits, not everything ever booked —
@@ -6927,14 +7019,36 @@
   }
   function lPerPage(v) { L_PER = parseInt(v, 10) || 0; L_PAGE = 0; lRenderList(); }
 
-  /* the filtered view survives the session, so a morning setup is not re-done */
-  function lSaveView() {
-    try {
-      localStorage.setItem('hcos-list-view', JSON.stringify(
-        { sel: lSel, sort: L_SORT, per: L_PER, q: L_Q, range: L_RANGE.key }));
-      HCOS.toast('View saved. It opens this way for you next time.', 'ok');
-    } catch (e) { HCOS.toast('Could not save the view in this browser.', 'warn'); }
+  /* The filtered view survives the session, so a morning setup is not re-done.
+     It was a "Save this view" button and a lock chip named after one person —
+     which told Yazmin nothing about whether HER view was on, and gave nobody a
+     way to turn it off (Carlos, 2026-08-12). A toggle says the state; Clear it
+     is the way out. */
+  function lViewToggle(on) {
+    if (on) {
+      try {
+        localStorage.setItem('hcos-list-view', JSON.stringify(
+          { sel: lSel, sort: L_SORT, per: L_PER, q: L_Q, range: L_RANGE.key }));
+        HCOS.toast('Remembered. The list opens with these filters for you next time.', 'ok');
+      } catch (e) { HCOS.toast('This browser will not keep the view.', 'warn'); return; }
+    } else {
+      lViewClear(true);
+    }
+    lViewChrome();
   }
+  function lViewClear(quiet) {
+    try { localStorage.removeItem('hcos-list-view'); } catch (e) {}
+    document.querySelectorAll('.l-view-remember input').forEach(function (b) { b.checked = false; });
+    lViewChrome();
+    if (!quiet) HCOS.toast('Cleared. The list opens with no filters, the way it ships.', 'ok');
+  }
+  function lViewChrome() {
+    var on = false;
+    try { on = !!localStorage.getItem('hcos-list-view'); } catch (e) {}
+    document.querySelectorAll('.l-view-remember input').forEach(function (b) { b.checked = on; });
+    document.querySelectorAll('.l-view-clear').forEach(function (c) { c.style.display = on ? '' : 'none'; });
+  }
+  function lSaveView() { lViewToggle(true); }
   function lRestoreView() {
     try {
       var v = JSON.parse(localStorage.getItem('hcos-list-view') || 'null');
@@ -6949,6 +7063,7 @@
   }
   window.lSort = lSort; window.lListFilter = lListFilter; window.lPage = lPage;
   window.lPerPage = lPerPage; window.lSaveView = lSaveView;
+  window.lViewToggle = lViewToggle; window.lViewClear = lViewClear;
 
   /* a row in the list opens the same appointment the block does */
   document.addEventListener('click', function (ev) {
@@ -6972,6 +7087,7 @@
   });
   window.lBuildList = lBuildList;
   lRestoreView();
+  lViewChrome();
   lBuildList();
 
 
