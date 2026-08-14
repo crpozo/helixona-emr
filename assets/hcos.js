@@ -394,7 +394,15 @@
     try { localStorage.setItem(APPR_KEY, JSON.stringify(a)); } catch (e) {}
   }
   function apprKey(id) { return PAGE + '/' + id; }
-  function isApproved(id) { return !!approvals()[apprKey(id)]; }
+  /* A PUBLISHED approval is the team's, committed to the repo as
+     data-approved="2026-08-12" on the section, and everyone sees it. The
+     localStorage one is the individual reviewer's and stays in their browser.
+     Carlos settles a screen for everybody; a reviewer settles it for himself. */
+  function publishedAppr(id) {
+    var s = document.getElementById(id);
+    return s ? s.getAttribute('data-approved') : null;
+  }
+  function isApproved(id) { return !!approvals()[apprKey(id)] || !!publishedAppr(id); }
 
   function buildApprovalBar() {
     if (!screens.length) return;
@@ -408,7 +416,15 @@
     var canvas = document.querySelector('.canvas-inner');
     if (canvas) canvas.insertBefore(bar, canvas.firstChild);
     bar.querySelector('#hcos-appr-btn').addEventListener('click', function () {
-      var a = approvals(), k = apprKey(currentScreen ? currentScreen.id : '');
+      var id = currentScreen ? currentScreen.id : '';
+      /* a published approval is the team's; a reviewer answers it with a note,
+         not by quietly clearing it in their own browser */
+      if (publishedAppr(id)) {
+        if (fbkPanel) fbkPanel.classList.add('open');
+        toast('This screen is settled. Tell us what you found and Carlos will reopen it.');
+        return;
+      }
+      var a = approvals(), k = apprKey(id);
       if (a[k]) { delete a[k]; } else { a[k] = { at: new Date().toISOString().slice(0, 10) }; }
       saveApprovals(a);
       refreshApproval();
@@ -422,19 +438,24 @@
     var bar = document.getElementById('hcos-appr-bar');
     if (!bar || !currentScreen) return;
     var a = approvals(), rec = a[apprKey(currentScreen.id)];
-    bar.classList.toggle('is-ok', !!rec);
-    document.getElementById('hcos-appr-word').textContent = rec ? 'Approved' : 'Not reviewed yet';
-    document.getElementById('hcos-appr-note').textContent = rec
-      ? 'Approved ' + rec.at + ' — no more changes needed on this screen.'
-      : 'Mark it approved when this screen needs no more changes.';
-    document.getElementById('hcos-appr-btn').textContent = rec ? 'Remove approval' : 'Mark approved';
+    var pub = publishedAppr(currentScreen.id);
+    bar.classList.toggle('is-ok', !!rec || !!pub);
+    document.getElementById('hcos-appr-word').textContent =
+      pub ? 'Approved by the team' : (rec ? 'Approved' : 'Not reviewed yet');
+    document.getElementById('hcos-appr-note').textContent = pub
+      ? 'Settled ' + pub + '. If you still see a problem, leave a note — one reviewer does not reopen a team decision on their own.'
+      : (rec ? 'Approved ' + rec.at + ' — no more changes needed on this screen.'
+             : 'Mark it approved when this screen needs no more changes.');
+    document.getElementById('hcos-appr-btn').textContent =
+      pub ? 'Leave a note' : (rec ? 'Remove approval' : 'Mark approved');
     var done = 0;
-    screens.forEach(function (sc) { if (a[apprKey(sc.id)]) done++; });
+    screens.forEach(function (sc) { if (a[apprKey(sc.id)] || publishedAppr(sc.id)) done++; });
     document.getElementById('hcos-appr-count').textContent =
       done + ' of ' + screens.length + ' screens on this page approved';
     if (chipsNav) {
       Array.prototype.forEach.call(chipsNav.querySelectorAll('.chip'), function (c) {
-        c.classList.toggle('is-ok', !!a[apprKey(c.getAttribute('data-screen'))]);
+        var sid = c.getAttribute('data-screen');
+        c.classList.toggle('is-ok', !!a[apprKey(sid)] || !!publishedAppr(sid));
       });
     }
   }

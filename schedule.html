@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=76">
+<link rel="stylesheet" href="assets/hcos.css?v=77">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -74,7 +74,7 @@
 <div class="screens">
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-01-day" data-title="Day view">
+  <section class="screen" id="l-01-day" data-approved="2026-08-12" data-title="Day view">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule</span></div>
@@ -1315,6 +1315,7 @@
         </div>
 
         <div class="l-cal-foot">
+          <div class="seg-divider">Patient schedule &middot; AI insights</div>
           <div class="grid-2">
             <div class="card">
               <div class="card-title">Running long today</div>
@@ -1350,7 +1351,7 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-02-week" data-title="Week view">
+  <section class="screen" id="l-02-week" data-approved="2026-08-12" data-title="Week view">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/week</span></div>
@@ -2132,7 +2133,7 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-05-month" data-title="Month view">
+  <section class="screen" id="l-05-month" data-approved="2026-08-12" data-title="Month view">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/month</span></div>
@@ -2896,184 +2897,6 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-06-filters" data-title="Filter setup">
-    <div class="frame">
-      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/schedule/filters</span></div>
-      <div class="frame-body">
-
-        <div class="app-header">
-          <div>
-            <div class="page-title">Filter setup</div>
-            <div class="page-sub">Build the views your team actually uses &mdash; then lock one as your default</div>
-          </div>
-          <button class="btn btn-primary" data-row-add data-row-add-target="#l-fs-body" onclick="HCOS.toast('Filter added below — name it and pick its pieces.', 'ok')" data-activate="l-07-filter-edit">New filter</button>
-        </div>
-
-        <div class="callout">
-          <strong>A filter is three linked levels.</strong> Pick the types and the subtypes narrow to match;
-          pick resources and the board shows only those columns. Saved filters appear in everyone&rsquo;s
-          Show menu; a <em>locked</em> filter is that person&rsquo;s default every morning.
-        </div>
-
-        <div class="tbl-wrap" style="margin-top:14px">
-          <table class="tbl">
-            <thead><tr><th scope="col">Filter</th><th scope="col">Show</th><th scope="col">Types</th><th scope="col">Subtypes</th><th scope="col">Owner</th><th scope="col">Default</th><th scope="col"></th></tr></thead>
-            <tbody id="l-fs-body">
-              <tr>
-                <td><strong>Yazmin&rsquo;s desk</strong></td>
-                <td>Providers + IV 1&ndash;4</td>
-                <td>All</td><td>All</td>
-                <td>Yazmin &middot; Front desk</td>
-                <td><span class="pill pill-ok">Locked</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing — same three levels, same hierarchy.', 'ok')" data-activate="l-07-filter-edit">Edit</button></td>
-              </tr>
-              <tr>
-                <td><strong>Infusion day</strong></td>
-                <td>IV 1&ndash;4 only</td>
-                <td>IV</td><td>NAD+ &middot; Mega C &middot; Foundational Flow</td>
-                <td>Nick &middot; Nurse</td>
-                <td><span class="pill pill-muted">&mdash;</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing — same three levels, same hierarchy.', 'ok')" data-activate="l-07-filter-edit">Edit</button></td>
-              </tr>
-              <tr>
-                <td><strong>Procedures &amp; energetics</strong></td>
-                <td>Rooms 1&ndash;2 + Brooke</td>
-                <td>Procedure &middot; Energetics</td><td>Pellets &middot; PRP &middot; Acupuncture</td>
-                <td>Shibani &middot; Admin</td>
-                <td><span class="pill pill-muted">&mdash;</span></td>
-                <td><button class="btn btn-sm" onclick="HCOS.toast('Editing — same three levels, same hierarchy.', 'ok')" data-activate="l-07-filter-edit">Edit</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================ -->
-  <section class="screen" id="l-07-filter-edit" data-title="Edit a filter">
-    <div class="frame">
-      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/schedule/filters/infusion-day</span></div>
-      <div class="frame-body">
-
-        <div class="app-header">
-          <div>
-            <div class="page-title">Infusion day</div>
-            <div class="page-sub">Owned by Nick &middot; Nurse &middot; used 41 times this month</div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn" data-activate="l-06-filters">Cancel</button>
-            <button class="btn btn-primary" onclick="HCOS.toast('Saved. It appears in everyone&rsquo;s Show menu straight away.', 'ok')" data-activate="l-06-filters">Save filter</button>
-          </div>
-        </div>
-
-        <div class="callout">
-          <strong>A filter is the same three levels the board uses.</strong> Pick the resources you want
-          to see, then the types, and the subtypes narrow to match &mdash; a filter can never pair a
-          subtype with a type that does not own it.
-        </div>
-
-        <div class="grid-sidebar" style="margin-top:16px">
-          <div>
-            <div class="card">
-              <div class="card-title">Name it</div>
-              <div class="field">
-                <label class="field-label">Filter name</label>
-                <input class="field-input" type="text" value="Infusion day" aria-label="Filter name">
-              </div>
-              <div class="field">
-                <label class="field-label">Who can use it</label>
-                <select class="field-input" aria-label="Who can use it">
-                  <option>Everyone &mdash; appears in every Show menu</option>
-                  <option>Just me</option>
-                  <option>Front desk only</option>
-                  <option>Medics and nurses only</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:16px">
-              <div class="card-title">1 &middot; Which resources</div>
-              <div class="filters" style="border:none;padding:0;background:none">
-                <button class="filter-chip multi">Dr. Drannikov</button>
-                <button class="filter-chip multi">Dr. Bakman</button>
-                <button class="filter-chip multi">Brooke</button>
-                <button class="filter-chip multi active">IV 1</button>
-                <button class="filter-chip multi active">IV 2</button>
-                <button class="filter-chip multi active">IV 3</button>
-                <button class="filter-chip multi active">IV 4</button>
-                <button class="filter-chip multi">Room 1</button>
-                <button class="filter-chip multi">Room 2</button>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:16px">
-              <div class="card-title">2 &middot; Which types</div>
-              <div class="filters" style="border:none;padding:0;background:none">
-                <button class="filter-chip multi">Office visit</button>
-                <button class="filter-chip multi">Procedure</button>
-                <button class="filter-chip multi active">IV</button>
-                <button class="filter-chip multi">Energetics</button>
-                <button class="filter-chip multi">Treatment</button>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:16px">
-              <div class="card-title">3 &middot; Which subtypes
-                <span class="pill pill-muted">only the ones IV owns</span></div>
-              <div class="filters" style="border:none;padding:0;background:none">
-                <button class="filter-chip multi active">NAD+</button>
-                <button class="filter-chip multi active">Mega C</button>
-                <button class="filter-chip multi active">Foundational Flow 10</button>
-              </div>
-              <div class="field-help" style="margin-top:8px">Consults, EBOO, pellets and acupuncture are
-                hidden because their types are not selected above. Tick a type to offer its subtypes.</div>
-            </div>
-          </div>
-
-          <div>
-            <div class="card">
-              <div class="card-title">What it will show</div>
-              <dl class="kv" style="grid-template-columns:96px 1fr">
-                <dt>Columns</dt><dd>IV 1 &middot; IV 2 &middot; IV 3 &middot; IV 4</dd>
-                <dt>Types</dt><dd>IV only</dd>
-                <dt>Subtypes</dt><dd>NAD+ &middot; Mega C &middot; Foundational Flow</dd>
-                <dt>Today</dt><dd>7 of 27 appointments</dd>
-              </dl>
-              <a class="btn btn-sm" href="#/l-01-day" data-activate="l-01-day" style="margin-top:10px">Preview on the board</a>
-            </div>
-
-            <div class="card" style="margin-top:16px">
-              <div class="card-title">Make it a default</div>
-              <div class="field">
-                <label class="field-label">Lock as the default for</label>
-                <select class="field-input" aria-label="Lock as the default for">
-                  <option>Nobody &mdash; just offer it in the menu</option>
-                  <option>Me &middot; Nick</option>
-                  <option>Everyone with the Nurse role</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:16px">
-              <div class="card-title">History</div>
-              <div class="g-ev"><div class="g-ev-when">Jul 20</div><div class="g-ev-what">
-                Mega C added to the subtypes &middot; Nick</div></div>
-              <div class="g-ev"><div class="g-ev-when">Jun 02</div><div class="g-ev-what">
-                Created from &ldquo;Everyone&rdquo; &middot; Nick</div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- ============================================================ -->
   <section class="screen" id="l-08-flags" data-title="Flag setup">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
@@ -3092,86 +2915,410 @@
           <strong>a severity</strong> &mdash; how loud it should be. They are separate on purpose:
           an admin flag can be urgent, and a medical one can be a footnote. Only high severity
           rings the block on the calendar.
+          <br><br>
+          <strong>A flag also has a lifetime.</strong> A pregnancy ends after nine months and a
+          missing consent should stop shouting once it is signed; a documented food allergy never
+          expires. An expired flag is not deleted &mdash; it stops showing on the calendar and
+          stays on the record, because the fact that it was once true is itself clinical history.
         </div>
 
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
             <thead><tr>
               <th scope="col">Flag</th><th scope="col">Category</th><th scope="col">Severity</th>
-              <th scope="col">Shows on</th><th scope="col">Who may set it</th><th scope="col"></th>
+              <th scope="col">Expires after</th>
+              <th scope="col">Shows on</th><th scope="col">Who may set it</th><th scope="col">Actions</th>
             </tr></thead>
             <tbody id="l-flags-body">
-              <tr>
+              <tr data-flag="allergyfood">
                 <td><span class="fl sev-high fi-allergyfood"></span> Food allergy</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
+                <td>Never &mdash; it is permanent</td>
                 <td>Calendar, chart, infusion bay</td>
                 <td>Provider, MA, Nurse</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Food allergy"
+                          aria-label="Delete Food allergy" onclick="lFlagDelete('allergyfood')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="allergydrug">
                 <td><span class="fl sev-high fi-allergydrug"></span> Drug allergy</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
-                <td>Calendar, chart, orders, pharmacy</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
                 <td>Provider, MA, Nurse</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Drug allergy"
+                          aria-label="Delete Drug allergy" onclick="lFlagDelete('allergydrug')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="allergyenv">
+                <td><span class="fl sev-med fi-allergyenv"></span> Environmental allergy</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Environmental allergy"
+                          aria-label="Delete Environmental allergy" onclick="lFlagDelete('allergyenv')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="latex">
+                <td><span class="fl sev-high fi-latex"></span> Latex sensitivity</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Latex sensitivity"
+                          aria-label="Delete Latex sensitivity" onclick="lFlagDelete('latex')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="pregnant">
                 <td><span class="fl sev-high fi-pregnant"></span> Pregnant</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
-                <td>Calendar, chart, orders</td>
-                <td>Provider, MA</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td>9 months &mdash; a pregnancy</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Pregnant"
+                          aria-label="Delete Pregnant" onclick="lFlagDelete('pregnant')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="urgent">
                 <td><span class="fl sev-high fi-urgent"></span> Urgent medical alert</td>
                 <td><span class="fl-cat">Medical</span></td>
                 <td>High &mdash; rings the block</td>
-                <td>Everywhere the patient appears</td>
-                <td>Provider only</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td>1 months</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Urgent medical alert"
+                          aria-label="Delete Urgent medical alert" onclick="lFlagDelete('urgent')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="cardiac">
+                <td><span class="fl sev-high fi-cardiac"></span> Cardiac history</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Cardiac history"
+                          aria-label="Delete Cardiac history" onclick="lFlagDelete('cardiac')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="seizure">
+                <td><span class="fl sev-high fi-seizure"></span> Seizure history</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Seizure history"
+                          aria-label="Delete Seizure history" onclick="lFlagDelete('seizure')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="diabetes">
+                <td><span class="fl sev-med fi-diabetes"></span> Diabetes</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Diabetes"
+                          aria-label="Delete Diabetes" onclick="lFlagDelete('diabetes')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="bloodthin">
+                <td><span class="fl sev-high fi-bloodthin"></span> On a blood thinner</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>6 months</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete On a blood thinner"
+                          aria-label="Delete On a blood thinner" onclick="lFlagDelete('bloodthin')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="deficiency">
                 <td><span class="fl sev-med fi-deficiency"></span> Deficiency</td>
                 <td><span class="fl-cat">Medical</span></td>
-                <td>Medium</td>
-                <td>Calendar, chart</td>
+                <td>Medium &mdash; icon only</td>
+                <td>4 months</td>
+                <td>Calendar, chart, infusion bay</td>
                 <td>Provider, MA, Nurse</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Deficiency"
+                          aria-label="Delete Deficiency" onclick="lFlagDelete('deficiency')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="fallrisk">
+                <td><span class="fl sev-high fi-fallrisk"></span> Fall risk</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>3 months</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Fall risk"
+                          aria-label="Delete Fall risk" onclick="lFlagDelete('fallrisk')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="mobility">
+                <td><span class="fl sev-med fi-mobility"></span> Mobility support</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Mobility support"
+                          aria-label="Delete Mobility support" onclick="lFlagDelete('mobility')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="infection">
+                <td><span class="fl sev-high fi-infection"></span> Infection control</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>14 days</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Infection control"
+                          aria-label="Delete Infection control" onclick="lFlagDelete('infection')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="isolation">
+                <td><span class="fl sev-high fi-isolation"></span> Isolation precautions</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>14 days</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Isolation precautions"
+                          aria-label="Delete Isolation precautions" onclick="lFlagDelete('isolation')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="port">
+                <td><span class="fl sev-med fi-port"></span> Port or PICC line</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Port or PICC line"
+                          aria-label="Delete Port or PICC line" onclick="lFlagDelete('port')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="needle">
+                <td><span class="fl sev-low fi-needle"></span> Needle anxiety</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Low &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Needle anxiety"
+                          aria-label="Delete Needle anxiety" onclick="lFlagDelete('needle')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="nothing">
+                <td><span class="fl sev-high fi-nothing"></span> Nil by mouth</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>7 days</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Nil by mouth"
+                          aria-label="Delete Nil by mouth" onclick="lFlagDelete('nothing')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="authexpiry">
                 <td><span class="fl sev-high fi-authexpiry"></span> Prior auth expiring</td>
                 <td><span class="fl-cat">Billing</span></td>
                 <td>High &mdash; rings the block</td>
-                <td>Calendar, booking, claim</td>
-                <td>Billing, Front desk</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td>1 months</td>
+                <td>Calendar, check-in, billing</td>
+                <td>Billing, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Prior auth expiring"
+                          aria-label="Delete Prior auth expiring" onclick="lFlagDelete('authexpiry')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="balance">
                 <td><span class="fl sev-med fi-balance"></span> Outstanding balance</td>
                 <td><span class="fl-cat">Billing</span></td>
-                <td>Medium</td>
-                <td>Calendar, check-in</td>
-                <td>Billing, Front desk</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td>Medium &mdash; icon only</td>
+                <td>2 months</td>
+                <td>Calendar, check-in, billing</td>
+                <td>Billing, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Outstanding balance"
+                          aria-label="Delete Outstanding balance" onclick="lFlagDelete('balance')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="selfpay">
+                <td><span class="fl sev-low fi-selfpay"></span> Self-pay</td>
+                <td><span class="fl-cat">Billing</span></td>
+                <td>Low &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, check-in, billing</td>
+                <td>Billing, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Self-pay"
+                          aria-label="Delete Self-pay" onclick="lFlagDelete('selfpay')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="interpreter">
                 <td><span class="fl sev-low fi-interpreter"></span> Interpreter needed</td>
                 <td><span class="fl-cat">Admin</span></td>
-                <td>Low</td>
+                <td>Low &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
                 <td>Calendar, check-in</td>
-                <td>Front desk, PCC</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Interpreter needed"
+                          aria-label="Delete Interpreter needed" onclick="lFlagDelete('interpreter')">&#128465;</button>
+                </td>
               </tr>
-              <tr>
+              <tr data-flag="deaf">
+                <td><span class="fl sev-med fi-deaf"></span> Hard of hearing</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Hard of hearing"
+                          aria-label="Delete Hard of hearing" onclick="lFlagDelete('deaf')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="forms">
                 <td><span class="fl sev-low fi-forms"></span> Intake forms missing</td>
                 <td><span class="fl-cat">Admin</span></td>
-                <td>Low</td>
+                <td>Low &mdash; icon only</td>
+                <td>14 days</td>
                 <td>Calendar, check-in</td>
-                <td>Front desk, PCC</td>
-                <td><button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button></td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Intake forms missing"
+                          aria-label="Delete Intake forms missing" onclick="lFlagDelete('forms')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="consent">
+                <td><span class="fl sev-high fi-consent"></span> Consent missing</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>7 days</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Consent missing"
+                          aria-label="Delete Consent missing" onclick="lFlagDelete('consent')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="guardian">
+                <td><span class="fl sev-high fi-guardian"></span> Guardian required</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>High &mdash; rings the block</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Guardian required"
+                          aria-label="Delete Guardian required" onclick="lFlagDelete('guardian')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="transport">
+                <td><span class="fl sev-low fi-transport"></span> Needs transport</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>Low &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Needs transport"
+                          aria-label="Delete Needs transport" onclick="lFlagDelete('transport')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="noshow">
+                <td><span class="fl sev-med fi-noshow"></span> No-show history</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>6 months</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete No-show history"
+                          aria-label="Delete No-show history" onclick="lFlagDelete('noshow')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="vip">
+                <td><span class="fl sev-low fi-vip"></span> Priority patient</td>
+                <td><span class="fl-cat">Admin</span></td>
+                <td>Low &mdash; icon only</td>
+                <td>Never &mdash; it is permanent</td>
+                <td>Calendar, check-in</td>
+                <td>Front desk, Manager</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Priority patient"
+                          aria-label="Delete Priority patient" onclick="lFlagDelete('vip')">&#128465;</button>
+                </td>
+              </tr>
+              <tr data-flag="weight">
+                <td><span class="fl sev-med fi-weight"></span> Weight-based dosing</td>
+                <td><span class="fl-cat">Medical</span></td>
+                <td>Medium &mdash; icon only</td>
+                <td>3 months</td>
+                <td>Calendar, chart, infusion bay</td>
+                <td>Provider, MA, Nurse</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" data-activate="l-08-flags-edit">Edit</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete Weight-based dosing"
+                          aria-label="Delete Weight-based dosing" onclick="lFlagDelete('weight')">&#128465;</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -3259,21 +3406,83 @@
               </div>
             </div>
 
+            <div class="grid-2">
+              <div class="field"><label class="field-lbl" for="fn-life">Expires after</label>
+                <select class="field-select" id="fn-life" onchange="lFlagLife(this.value)">
+                  <option value="0">Never &mdash; it is permanent</option>
+                  <option value="7">7 days</option>
+                  <option value="14">14 days</option>
+                  <option value="30" selected>30 days</option>
+                  <option value="90">90 days</option>
+                  <option value="180">6 months</option>
+                  <option value="274">9 months &mdash; a pregnancy</option>
+                  <option value="365">1 year</option>
+                  <option value="custom">A number of days&hellip;</option>
+                </select>
+                <div class="field-help">A pregnancy ends; a documented food allergy does not.
+                  An expired flag stops showing on the calendar and stays on the record &mdash;
+                  that it was once true is itself clinical history.</div>
+              </div>
+              <div class="field" id="fn-life-custom" style="display:none">
+                <label class="field-lbl" for="fn-life-days">Days</label>
+                <input class="field-input" id="fn-life-days" type="number" min="1" value="45"
+                       aria-label="Days">
+                <div class="field-help">Counted from the day somebody sets the flag.</div>
+              </div>
+            </div>
+
             <div class="field">
               <span class="field-lbl">Symbol</span>
-              <div class="chip-row" id="fn-icons">
-                <button class="filter-chip" type="button" onclick="lFlagIcon('allergyfood',this)" title="Stop sign"><span class="fl sev-med fi-allergyfood"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('allergydrug',this)" title="Capsule"><span class="fl sev-med fi-allergydrug"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('pregnant',this)" title="Pregnancy"><span class="fl sev-med fi-pregnant"></span></button>
-                <button class="filter-chip active" type="button" onclick="lFlagIcon('urgent',this)" title="Warning triangle"><span class="fl sev-med fi-urgent"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('deficiency',this)" title="Droplet"><span class="fl sev-med fi-deficiency"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('authexpiry',this)" title="Clock"><span class="fl sev-med fi-authexpiry"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('balance',this)" title="Banknote"><span class="fl sev-med fi-balance"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('interpreter',this)" title="Speech bubbles"><span class="fl sev-med fi-interpreter"></span></button>
-                <button class="filter-chip" type="button" onclick="lFlagIcon('forms',this)" title="Document"><span class="fl sev-med fi-forms"></span></button>
+              <div id="fn-icons">
+                <div class="chip-group-lbl">Allergy and sensitivity</div>
+                <div class="chip-row">
+                  <button class="filter-chip active" type="button" onclick="lFlagIcon('allergyfood',this)" title="Food allergy"><span class="fl sev-med fi-allergyfood"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('allergydrug',this)" title="Drug allergy"><span class="fl sev-med fi-allergydrug"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('allergyenv',this)" title="Environmental allergy"><span class="fl sev-med fi-allergyenv"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('latex',this)" title="Latex sensitivity"><span class="fl sev-med fi-latex"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('needle',this)" title="Needle anxiety"><span class="fl sev-med fi-needle"></span></button>
+                </div>
+                <div class="chip-group-lbl">Clinical risk</div>
+                <div class="chip-row">
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('urgent',this)" title="Urgent medical alert"><span class="fl sev-med fi-urgent"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('cardiac',this)" title="Cardiac history"><span class="fl sev-med fi-cardiac"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('seizure',this)" title="Seizure history"><span class="fl sev-med fi-seizure"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('diabetes',this)" title="Diabetes"><span class="fl sev-med fi-diabetes"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('bloodthin',this)" title="On a blood thinner"><span class="fl sev-med fi-bloodthin"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('deficiency',this)" title="Deficiency"><span class="fl sev-med fi-deficiency"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('weight',this)" title="Weight-based dosing"><span class="fl sev-med fi-weight"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('nothing',this)" title="Nil by mouth"><span class="fl sev-med fi-nothing"></span></button>
+                </div>
+                <div class="chip-group-lbl">Safety and access</div>
+                <div class="chip-row">
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('fallrisk',this)" title="Fall risk"><span class="fl sev-med fi-fallrisk"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('mobility',this)" title="Mobility support"><span class="fl sev-med fi-mobility"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('infection',this)" title="Infection control"><span class="fl sev-med fi-infection"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('isolation',this)" title="Isolation precautions"><span class="fl sev-med fi-isolation"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('port',this)" title="Port or PICC line"><span class="fl sev-med fi-port"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('deaf',this)" title="Hard of hearing"><span class="fl sev-med fi-deaf"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('guardian',this)" title="Guardian required"><span class="fl sev-med fi-guardian"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('transport',this)" title="Needs transport"><span class="fl sev-med fi-transport"></span></button>
+                </div>
+                <div class="chip-group-lbl">Money</div>
+                <div class="chip-row">
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('authexpiry',this)" title="Prior auth expiring"><span class="fl sev-med fi-authexpiry"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('balance',this)" title="Outstanding balance"><span class="fl sev-med fi-balance"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('selfpay',this)" title="Self-pay"><span class="fl sev-med fi-selfpay"></span></button>
+                </div>
+                <div class="chip-group-lbl">Admin</div>
+                <div class="chip-row">
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('pregnant',this)" title="Pregnant"><span class="fl sev-med fi-pregnant"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('interpreter',this)" title="Interpreter needed"><span class="fl sev-med fi-interpreter"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('forms',this)" title="Intake forms missing"><span class="fl sev-med fi-forms"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('consent',this)" title="Consent missing"><span class="fl sev-med fi-consent"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('noshow',this)" title="No-show history"><span class="fl sev-med fi-noshow"></span></button>
+                  <button class="filter-chip" type="button" onclick="lFlagIcon('vip',this)" title="Priority patient"><span class="fl sev-med fi-vip"></span></button>
+                </div>
               </div>
-              <div class="field-help">Nine drawn symbols, no emoji &mdash; an emoji brings its own
-                colours and looks different on every operating system.</div>
+              <div class="field-help">Thirty drawn symbols, no emoji &mdash; an emoji brings its
+                own colours and looks different on every operating system. If none of them fits,
+                say so in a note rather than reaching for the nearest one.</div>
             </div>
 
             <div class="seg-divider">Who may set it</div>
@@ -3343,6 +3552,11 @@
             <div class="prov"><span>A flag type is defined once and read by the calendar, the
               appointment detail, the hover card, the list view and check-in. There is no
               per-screen copy to keep in step.</span></div>
+
+            <div class="form-foot">
+              <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
+              <button class="btn" data-activate="l-08-flags">Cancel</button>
+            </div>
           </div>
         </div>
       </div>
@@ -3362,7 +3576,6 @@
           </div>
           <div class="app-user">
             <button class="btn" data-activate="l-08-flags">Back to flags</button>
-            <button class="btn btn-primary" onclick="HCOS.toast('Saved. Every screen that shows this flag picks up the change.', 'ok')">Save the flag</button>
           </div>
         </div>
 
@@ -3426,6 +3639,15 @@
               <button class="filter-chip multi" type="button">Billing</button>
             </div>
             <div class="prov"><span><strong>Last changed</strong> Dr. Drannikov &middot; 12 June 2026</span></div>
+
+            <div class="form-foot">
+              <button class="btn btn-primary" onclick="HCOS.toast('Saved. Every screen that shows this flag picks up the change.', 'ok')">Save the flag</button>
+              <button class="btn" data-activate="l-08-flags">Cancel</button>
+              <button class="btn btn-danger form-foot-danger" onclick="lFlagDelete('allergyfood')">
+                &#128465; Delete this flag type</button>
+            </div>
+            <div class="field-help">Deleting asks twice and tells you how many appointments carry
+              it right now &mdash; they lose the warning the moment it goes.</div>
           </div>
         </div>
       </div>
@@ -3433,14 +3655,14 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-09-insights" data-title="Patterns">
+  <section class="screen" id="l-09-insights" data-title="Appointment patterns">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/patterns</span></div>
       <div class="frame-body">
         <div class="app-header">
           <div>
-            <div class="page-title">Patterns</div>
+            <div class="page-title">Appointment patterns &amp; insights</div>
             <div class="page-sub">What the schedule has learned about how patients actually turn up</div>
           </div>
           <div class="app-user">
@@ -4305,7 +4527,7 @@
               <div style="margin:6px 0 10px"><span class="pill pill-navy">Self-funded / ERISA</span></div>
               <div class="field-help">Caregiver access granted · appointments and plan · permanent</div>
               <div style="margin-top:12px">
-                <a class="btn" href="patients.html#/pt-01-list">Open patient record</a>
+                <a class="btn" href="patients.html#/pt-02-profile">Open patient record</a>
               </div>
             </div>
 
@@ -4786,7 +5008,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=76"></script>
+<script src="assets/hcos.js?v=77"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -5050,7 +5272,7 @@
       st:'done', room:'In room', a:'8:21 AM · in room 8:29 AM', rd:'First assessment taken at this visit',
       pr:'New patient consult · 90 min', prn:'History, exam and plan · glutathione push ordered at the end of the visit',
       p:'appointment <code>A-88202</code> — a consult needs no order',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88208': {n:'Grace Lindqvist', ag:'44', cv:'Self-pay', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 10:30 – 11:00 AM', r:'Dr. Drannikov · Provider',
@@ -5064,14 +5286,14 @@
       st:'arrived', room:'In room', a:'Joined the video room 11:26 AM', rd:'Does not gate a telehealth visit',
       pr:'Telehealth follow-up · 30 min', prn:'Video link sent by text · telehealth consent on file since Feb 2026',
       p:'appointment <code>A-88221</code> — a telehealth follow-up needs no order',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88238': {n:'Nadia Boulos', ag:'41', cv:'Anthem · INN', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 1:30 – 2:00 PM', r:'Dr. Drannikov · Provider',
       st:'confirmed', room:'In room', a:'', rd:'Physician review · Dr. Drannikov decides at this visit',
       pr:'Follow-up · 30 min', prn:'Questionnaire still open — her answers land in the chart when she finishes it',
       p:'appointment <code>A-88238</code> · readiness <code>RA-1211</code> <span class="ver-chip">v1</span> <span class="appr pending">Physician review</span>',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88240': {n:'Grace Lindqvist', ag:'44', cv:'Self-pay', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 2:00 – 2:30 PM', r:'Dr. Drannikov · Provider',
@@ -5085,21 +5307,21 @@
       st:'scheduled', room:'In room', a:'', rd:'First assessment taken at this visit',
       pr:'New patient consult · 90 min', prn:'Plan document (SPD) requested before the visit · glutathione push discussed, not yet ordered',
       p:'appointment <code>A-88252</code> — a consult needs no order',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88205': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 9:00 – 9:30 AM', r:'Dr. Bakman · Provider',
       st:'done', room:'In room', a:'8:54 AM · in room 9:02 AM', rd:'Does not gate a follow-up',
       pr:'Follow-up · 30 min', prn:'Lab draw ordered from this visit at 11:15 · glutathione push booked for 3:30 PM',
       p:'appointment <code>A-88205</code> — a follow-up needs no order',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88235': {n:'Daniel Okafor', ag:'47', cv:'Anthem Blue Cross · INN', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 1:00 – 1:30 PM', r:'Dr. Bakman · Provider',
       st:'confirmed', room:'In room', a:'', rd:'Standard · reviewed Jul 6',
       pr:'Follow-up · 30 min', prn:'Reviews the IV vitamin C series running in IV 2 this morning',
       p:'appointment <code>A-88235</code> — a follow-up needs no order',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88254': {n:'Priya Natarajan', ag:'38', cv:'Blue Shield of CA PPO · OON', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 3:30 – 4:00 PM', r:'Dr. Bakman · Provider',
@@ -5113,7 +5335,7 @@
       st:'done', room:'In room', a:'9:48 AM · in room 10:01 AM', rd:'Standard · reviewed Jul 20',
       pr:'Follow-up · 30 min', prn:'Pre-infusion check before the 1:00 PM NAD+ session in IV 1',
       p:'appointment <code>A-88210</code> — a follow-up needs no order',
-      ch:['Open patient record','patients.html#/pt-01-list']},
+      ch:['Open patient record','patients.html#/pt-02-profile']},
 
     'A-88243': {n:'Maya Reyes', ag:'52', cv:'UnitedHealthcare PPO · OON', mk:'F/U', mkc:'tm-consult',
       tx:'Follow-up · 30 min', w:'Today · 2:00 – 2:30 PM', r:'Brooke · Physician associate',
@@ -5134,14 +5356,14 @@
       st:'confirmed', room:'In chair', a:'', rd:'Standard · reviewed Jul 20',
       pr:'NAD+ 500 mg · ~3 h drip', prn:'Session 5 of 8 · last session completed in 2 h 55 m with no reactions',
       p:'appointment <code>A-88247</code> · signed order <code>O-2418</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · readiness <code>RA-1178</code> <span class="ver-chip">v2</span>',
-      full:true, ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+      full:true, ch:['Open patient record','patients.html#/pt-02-profile'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88231': {n:'Daniel Okafor', ag:'47', cv:'Anthem Blue Cross · INN', mk:'IVC', mkc:'tm-ivc',
       tx:'IV vitamin C 25 g · 2.5 h', w:'Today · 10:00 AM – 12:30 PM', r:'IV 2 · Bea (Medic)',
       st:'inchair', room:'In chair', a:'9:51 AM · in chair since 10:04 AM', rd:'Standard · reviewed Jul 6',
       pr:'IV vitamin C 25 g · ~2.5 h drip', prn:'Session 4 of 6 · G6PD on file · 50 billing units at $5.53',
       p:'appointment <code>A-88231</code> · signed order <code>O-2402</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span>',
-      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+      ch:['Open patient record','patients.html#/pt-02-profile'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88226': {n:'Priya Natarajan', ag:'38', cv:'Blue Shield of CA PPO · OON', mk:'FLO', mkc:'tm-flow',
       tx:'Foundational Flow 10 · 1 h', w:'Today · 11:30 AM – 12:30 PM', r:'IV 3 · Juan (Medic)',
@@ -5155,28 +5377,28 @@
       st:'scheduled', room:'In chair', a:'', rd:'Standard · reviewed Jun 30',
       pr:'Glutathione 1,000 mg push · 30 min', prn:'Session 2 of 4 · booked after this morning’s lab draw',
       p:'appointment <code>A-88256</code> · signed order <code>O-2431</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Bakman',
-      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+      ch:['Open patient record','patients.html#/pt-02-profile'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88219': {n:'Sofia Ramos', ag:'29', cv:'Blue Shield of CA · OON', mk:'LAB', mkc:'tm-lab',
       tx:'Lab draw · 15 min', w:'Today · 11:15 – 11:30 AM', r:'IV 4 · Nate (Medic)',
       st:'arrived', room:'In chair', a:'11:09 AM · drawn 11:18 AM', rd:'Does not gate a lab draw',
       pr:'Lab draw · 15 min', prn:'CBC and ferritin · ordered at this morning’s follow-up',
       p:'appointment <code>A-88219</code> · lab order <code>O-2422</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Bakman',
-      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Orders and results','labs.html#/c-01-orders']},
+      ch:['Open patient record','patients.html#/pt-02-profile'], ex:['Orders and results','labs.html#/c-01-orders']},
 
     'A-88241': {n:'Nadia Boulos', ag:'41', cv:'Anthem · INN', mk:'FLO', mkc:'tm-flow',
       tx:'Foundational Flow 10 · 1 h', w:'Today · 2:00 – 3:00 PM', r:'IV 4 · Nate (Medic)',
       st:'confirmed', room:'In chair', a:'', rd:'Physician review · today’s session runs at the current level, escalation waits on Dr. Drannikov',
       pr:'Foundational Flow 10 · 1 h', prn:'Session 2 of 6 · runs after her 1:30 PM follow-up',
       p:'appointment <code>A-88241</code> · signed order <code>O-2409</code> <span class="ver-chip">v2</span> <span class="appr approved">Approved</span> · readiness <code>RA-1211</code> <span class="ver-chip">v1</span> <span class="appr pending">Physician review</span>',
-      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
+      ch:['Open patient record','patients.html#/pt-02-profile'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']},
 
     'A-88250': {n:'Marcus Webb', ag:'55', cv:'Anthem Blue Cross · INN', mk:'GSH', mkc:'tm-gsh',
       tx:'Glutathione push · 30 min', w:'Today · 3:00 – 3:30 PM', r:'IV 4 · Nate (Medic)',
       st:'scheduled', room:'In chair', a:'', rd:'Standard · assessed at this morning’s consult',
       pr:'Glutathione 1,000 mg push · 30 min', prn:'First push · IV 4 is clear from 3:00 PM, after Nadia Boulos',
       p:'appointment <code>A-88250</code> · signed order <code>O-2436</code> <span class="ver-chip">v1</span> <span class="appr approved">Approved</span> · Dr. Drannikov, today 9:52 AM',
-      ch:['Open patient record','patients.html#/pt-01-list'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']}
+      ch:['Open patient record','patients.html#/pt-02-profile'], ex:['Chair board','clinical-infusion.html#/b-13-bay-board']}
   };
 
   var L_CUR = null;
@@ -5273,7 +5495,7 @@
       stage: b.getAttribute('data-stage') || '', pay: b.getAttribute('data-pay') || '',
       phone: b.getAttribute('data-phone') || '',
       flags: (b.getAttribute('data-flags') || '').split('|').filter(Boolean),
-      ch: ['Open patient record', 'patients.html#/pt-01-list']
+      ch: ['Open patient record', 'patients.html#/pt-02-profile']
     };
   }
 
@@ -5307,6 +5529,19 @@
 
     h += lStatusHtml(a, id);
 
+    /* An APPOINTMENT note, not a profile note (Carlos, 2026-08-12). It belongs to
+       this visit, it is the first thing the next person reads, and it can be
+       RESOLVED — struck through and stamped — rather than quietly folded away.
+       A resolved note stays visible: the desk needs to see that it was dealt
+       with, not that it vanished. */
+    h += '<div class="seg-divider">Appointment note</div>'
+       + '<div id="l-dr-notes">' + lNotesHtml(id) + '</div>'
+       + '<textarea class="field-textarea" rows="2" id="l-dr-note" '
+       + 'placeholder="What the next person needs to know about THIS appointment." '
+       + 'aria-label="Appointment note"></textarea>'
+       + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
+       + '<button class="btn btn-sm btn-primary" onclick="lSaveNote(\'' + id + '\')">Save note</button></div>';
+
     h += '<div class="seg-divider">Appointment</div><dl class="kv">'
        + '<dt>Appointment</dt><dd><code>' + id + '</code></dd>'
        + '<dt>Patient</dt><dd>' + a.n + (a.ag ? ' · ' + a.ag : '') + '</dd>'
@@ -5335,14 +5570,6 @@
          + '<button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Charged ' + (a.pay || '') + ' to the card on file. Posted to the claim.\', \'ok\')">Charge now</button>'
          + '<button class="btn btn-sm" onclick="HCOS.toast(\'Opens the card capture form — no card details live in the wireframe.\')">New payment method</button></div>';
     }
-
-    /* one place to write down what just happened, without opening the chart */
-    h += '<div class="seg-divider">General note</div>'
-       + '<textarea class="field-textarea" rows="3" id="l-dr-note" '
-       + 'placeholder="Anything the next person needs to know — it lands on the patient profile." '
-       + 'aria-label="General note"></textarea>'
-       + '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">'
-       + '<button class="btn btn-sm btn-primary" onclick="lSaveNote()">Save to the profile</button></div>';
 
     var acts = [], step = lNextStep(a);
     if (step) acts.push('<button class="btn btn-primary" onclick="lMark(\'' + id + '\')">Mark ' + step.toLowerCase() + '</button>');
@@ -5400,13 +5627,86 @@
     HCOS.toast('Flag added. It shows on the block and travels with the appointment.', 'ok');
   }
 
-  function lSaveNote() {
+  /* Notes belong to the APPOINTMENT, keyed by its id. A note is never deleted
+     and never collapsed out of sight — it is resolved, and the resolution is
+     stamped with who did it, so "somebody dealt with this" is a fact on the
+     screen rather than an absence. */
+  var L_NOTES = {
+    'A-88250': [{ t: 'Port flushed before the run — no resistance.', by: 'Nick · Nurse',
+                  at: 'Today 9:58 AM', done: false }],
+    'A-88317': [{ t: 'Called twice, no answer. Left a voicemail about the balance.',
+                  by: 'Yazmin · Front desk', at: 'Yesterday 4:12 PM',
+                  done: true, doneBy: 'Karina', doneAt: 'Today 8:05 AM' }]
+  };
+  function lNotesHtml(id) {
+    var list = L_NOTES[id] || [];
+    if (!list.length) {
+      return '<div class="dr-flags-none" style="margin-bottom:8px">No note on this appointment yet.</div>';
+    }
+    return list.map(function (n, i) {
+      return '<div class="appt-note' + (n.done ? ' is-done' : '') + '">'
+        + '<div class="appt-note-t">' + n.t + '</div>'
+        + '<div class="appt-note-m">' + n.by + ' &middot; ' + n.at
+        + (n.done ? ' &middot; <b>resolved</b> by ' + n.doneBy + ' ' + n.doneAt : '') + '</div>'
+        + (n.done ? ''
+            : '<button class="btn btn-sm appt-note-btn" onclick="lResolveNote(\'' + id + '\',' + i + ')">Resolve</button>')
+        + '</div>';
+    }).join('');
+  }
+  function lRedrawNotes(id) {
+    var box = document.getElementById('l-dr-notes');
+    if (box) box.innerHTML = lNotesHtml(id);
+  }
+  function lSaveNote(id) {
     var t = document.getElementById('l-dr-note');
     if (!t || !t.value.trim()) { HCOS.toast('Nothing to save — the note is empty.', 'warn'); return; }
-    HCOS.toast('Saved to the patient profile, stamped with your name and the time.', 'ok');
+    (L_NOTES[id] = L_NOTES[id] || []).push({ t: t.value.trim(), by: 'Yazmin · Front desk',
+                                             at: 'Today, just now', done: false });
     t.value = '';
+    lRedrawNotes(id);
+    HCOS.toast('Saved on this appointment, stamped with your name and the time.', 'ok');
   }
-  window.lFlagsHtml = lFlagsHtml; window.lAddFlag = lAddFlag; window.lSaveNote = lSaveNote;
+  function lResolveNote(id, i) {
+    var n = (L_NOTES[id] || [])[i];
+    if (!n) return;
+    n.done = true; n.doneBy = 'Yazmin'; n.doneAt = 'just now';
+    lRedrawNotes(id);
+    HCOS.toast('Resolved. It stays on the appointment, struck through, so the next person sees it was handled.', 'ok');
+  }
+
+  /* Removing a flag TYPE is not an undo-able mistake: every appointment that
+     carries it loses the warning, and nobody finds out until somebody is hurt.
+     So it asks twice and names what it is about to break (Carlos, 2026-08-12). */
+  var L_DEL_ARMED = null;
+  function lFlagDelete(k) {
+    var f = L_FLAGS[k];
+    if (!f) return;
+    var used = document.querySelectorAll('.cal-appt[data-flags*="' + k + '"]').length;
+    if (L_DEL_ARMED !== k) {
+      L_DEL_ARMED = k;
+      HCOS.toast('Delete "' + f.name + '"? It is on ' + used + ' appointment' +
+                 (used === 1 ? '' : 's') + ' right now and they would lose the warning. ' +
+                 'Press delete again to confirm.', 'warn');
+      setTimeout(function () { if (L_DEL_ARMED === k) L_DEL_ARMED = null; }, 8000);
+      return;
+    }
+    L_DEL_ARMED = null;
+    var row = document.querySelector('[data-flag="' + k + '"]');
+    if (row) row.remove();
+    HCOS.toast('"' + f.name + '" deleted. The ' + used + ' appointment' +
+               (used === 1 ? '' : 's') + ' that carried it keep it on the record as history.', 'ok');
+  }
+  window.lFlagDelete = lFlagDelete;
+
+  function lFlagLife(v) {
+    var box = document.getElementById('fn-life-custom');
+    if (box) box.style.display = v === 'custom' ? '' : 'none';
+  }
+  window.lFlagLife = lFlagLife;
+
+
+  window.lFlagsHtml = lFlagsHtml; window.lAddFlag = lAddFlag;
+  window.lSaveNote = lSaveNote; window.lResolveNote = lResolveNote; window.lNotesHtml = lNotesHtml;
 
   /* ---------- marking a status actually moves the block ---------- */
   var L_STEP_CLS = { Confirmed: 'st-confirmed', Arrived: 'st-arrived', 'In room': 'st-inroom',
@@ -5915,15 +6215,36 @@
      an admin flag can be urgent, and a medical one can be a footnote.
      ========================================================================== */
   var L_FLAGS = {
-    allergyfood:  { icon: 'allergyfood', sev: 'high', cat: 'Medical', name: 'Food allergy', text: 'Food allergy — tree nuts, documented reaction' },
-    allergydrug:  { icon: 'allergydrug', sev: 'high', cat: 'Medical', name: 'Drug allergy', text: 'Drug allergy — sulfa, documented reaction' },
-    pregnant:     { icon: 'pregnant', sev: 'high', cat: 'Medical', name: 'Pregnant', text: 'Pregnant — second trimester' },
-    urgent:       { icon: 'urgent', sev: 'high', cat: 'Medical', name: 'Urgent medical alert', text: 'Urgent medical alert — cardiology follow-up open' },
-    deficiency:   { icon: 'deficiency', sev: 'med', cat: 'Medical', name: 'Deficiency', text: 'Deficiency — ferritin 11 ng/mL' },
-    authexpiry:   { icon: 'authexpiry', sev: 'high', cat: 'Billing', name: 'Prior auth expiring', text: 'Prior authorisation expires today' },
-    balance:      { icon: 'balance', sev: 'med', cat: 'Billing', name: 'Outstanding balance', text: 'Outstanding balance $340' },
-    interpreter:  { icon: 'interpreter', sev: 'low', cat: 'Admin', name: 'Interpreter needed', text: 'Interpreter needed — Spanish' },
-    forms:        { icon: 'forms', sev: 'low', cat: 'Admin', name: 'Intake forms missing', text: 'Intake forms not returned' }
+    allergyfood:  { icon: 'allergyfood', sev: 'high', cat: 'Medical', name: 'Food allergy', text: 'Food allergy — tree nuts, documented reaction', life: 0 },
+    allergydrug:  { icon: 'allergydrug', sev: 'high', cat: 'Medical', name: 'Drug allergy', text: 'Drug allergy — sulfa, documented reaction', life: 0 },
+    allergyenv:   { icon: 'allergyenv', sev: 'med', cat: 'Medical', name: 'Environmental allergy', text: 'Environmental allergy — severe seasonal', life: 0 },
+    latex:        { icon: 'latex', sev: 'high', cat: 'Medical', name: 'Latex sensitivity', text: 'Latex sensitivity — use nitrile gloves', life: 0 },
+    pregnant:     { icon: 'pregnant', sev: 'high', cat: 'Medical', name: 'Pregnant', text: 'Pregnant — second trimester', life: 274 },
+    urgent:       { icon: 'urgent', sev: 'high', cat: 'Medical', name: 'Urgent medical alert', text: 'Urgent medical alert — cardiology follow-up open', life: 30 },
+    cardiac:      { icon: 'cardiac', sev: 'high', cat: 'Medical', name: 'Cardiac history', text: 'Cardiac history — rate-limited infusions only', life: 0 },
+    seizure:      { icon: 'seizure', sev: 'high', cat: 'Medical', name: 'Seizure history', text: 'Seizure history — do not leave unattended', life: 0 },
+    diabetes:     { icon: 'diabetes', sev: 'med', cat: 'Medical', name: 'Diabetes', text: 'Diabetes — check glucose before and after', life: 0 },
+    bloodthin:    { icon: 'bloodthin', sev: 'high', cat: 'Medical', name: 'On a blood thinner', text: 'On a blood thinner — pressure after every stick', life: 180 },
+    deficiency:   { icon: 'deficiency', sev: 'med', cat: 'Medical', name: 'Deficiency', text: 'Deficiency — ferritin 11 ng/mL', life: 120 },
+    fallrisk:     { icon: 'fallrisk', sev: 'high', cat: 'Medical', name: 'Fall risk', text: 'Fall risk — walk them to the chair', life: 90 },
+    mobility:     { icon: 'mobility', sev: 'med', cat: 'Medical', name: 'Mobility support', text: 'Uses a wheelchair — book an accessible room', life: 0 },
+    infection:    { icon: 'infection', sev: 'high', cat: 'Medical', name: 'Infection control', text: 'Active infection — last appointment of the day', life: 14 },
+    isolation:    { icon: 'isolation', sev: 'high', cat: 'Medical', name: 'Isolation precautions', text: 'Isolation precautions in force', life: 14 },
+    port:         { icon: 'port', sev: 'med', cat: 'Medical', name: 'Port or PICC line', text: 'Port in place — trained staff only', life: 0 },
+    needle:       { icon: 'needle', sev: 'low', cat: 'Medical', name: 'Needle anxiety', text: 'Needle anxiety — allow extra time', life: 0 },
+    nothing:      { icon: 'nothing', sev: 'high', cat: 'Medical', name: 'Nil by mouth', text: 'Nil by mouth before this appointment', life: 7 },
+    authexpiry:   { icon: 'authexpiry', sev: 'high', cat: 'Billing', name: 'Prior auth expiring', text: 'Prior authorisation expires today', life: 30 },
+    balance:      { icon: 'balance', sev: 'med', cat: 'Billing', name: 'Outstanding balance', text: 'Outstanding balance $340', life: 60 },
+    selfpay:      { icon: 'selfpay', sev: 'low', cat: 'Billing', name: 'Self-pay', text: 'Self-pay — collect in full at check-in', life: 0 },
+    interpreter:  { icon: 'interpreter', sev: 'low', cat: 'Admin', name: 'Interpreter needed', text: 'Interpreter needed — Spanish', life: 0 },
+    deaf:         { icon: 'deaf', sev: 'med', cat: 'Admin', name: 'Hard of hearing', text: 'Hard of hearing — face them when you speak', life: 0 },
+    forms:        { icon: 'forms', sev: 'low', cat: 'Admin', name: 'Intake forms missing', text: 'Intake forms not returned', life: 14 },
+    consent:      { icon: 'consent', sev: 'high', cat: 'Admin', name: 'Consent missing', text: 'Consent not signed for this treatment', life: 7 },
+    guardian:     { icon: 'guardian', sev: 'high', cat: 'Admin', name: 'Guardian required', text: 'Minor — a guardian must be present', life: 0 },
+    transport:    { icon: 'transport', sev: 'low', cat: 'Admin', name: 'Needs transport', text: 'Cannot drive after this treatment', life: 0 },
+    noshow:       { icon: 'noshow', sev: 'med', cat: 'Admin', name: 'No-show history', text: 'Missed the last two — confirm the day before', life: 180 },
+    vip:          { icon: 'vip', sev: 'low', cat: 'Admin', name: 'Priority patient', text: 'Priority patient — Longevity membership', life: 0 },
+    weight:       { icon: 'weight', sev: 'med', cat: 'Medical', name: 'Weight-based dosing', text: 'Weight-based dosing — reweigh each visit', life: 90 }
   };
   window.L_FLAGS = L_FLAGS;
 
