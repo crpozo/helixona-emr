@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=79">
+<link rel="stylesheet" href="assets/hcos.css?v=81">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -287,13 +287,15 @@
 
             <div class="l-view-group">
               <span class="l-count" id="l-count">Showing all 19 appointments</span>
-              <label class="cx-toggle l-view-remember">
-                <input type="checkbox" onchange="lViewToggle(this.checked)"
-                       aria-label="Remember these filters">
-                Remember these filters
-              </label>
-              <button class="btn btn-sm l-view-clear" onclick="lViewClear()"
-                      style="display:none">Clear</button>
+              <div class="l-view-row">
+                <label class="cx-toggle l-view-remember">
+                  <input type="checkbox" onchange="lViewToggle(this.checked)"
+                         aria-label="Remember these filters">
+                  Remember these filters
+                </label>
+                <button class="btn btn-sm l-view-clear" onclick="lViewClear()"
+                        style="display:none">Clear</button>
+              </div>
             </div>
           </div>
 
@@ -3349,7 +3351,6 @@
           </div>
           <div class="app-user">
             <button class="btn" data-activate="l-08-flags">Cancel</button>
-            <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
           </div>
         </div>
 
@@ -3393,30 +3394,7 @@
               </div>
             </div>
 
-            <div class="grid-2">
-              <div class="field"><label class="field-lbl" for="fn-life">Expires after</label>
-                <select class="field-select" id="fn-life" onchange="lFlagLife(this.value)">
-                  <option value="0">Never &mdash; it is permanent</option>
-                  <option value="7">7 days</option>
-                  <option value="14">14 days</option>
-                  <option value="30" selected>30 days</option>
-                  <option value="90">90 days</option>
-                  <option value="180">6 months</option>
-                  <option value="274">9 months &mdash; a pregnancy</option>
-                  <option value="365">1 year</option>
-                  <option value="custom">A number of days&hellip;</option>
-                </select>
-                <div class="field-help">A pregnancy ends; a documented food allergy does not.
-                  An expired flag stops showing on the calendar and stays on the record &mdash;
-                  that it was once true is itself clinical history.</div>
-              </div>
-              <div class="field" id="fn-life-custom" style="display:none">
-                <label class="field-lbl" for="fn-life-days">Days</label>
-                <input class="field-input" id="fn-life-days" type="number" min="1" value="45"
-                       aria-label="Days">
-                <div class="field-help">Counted from the day somebody sets the flag.</div>
-              </div>
-            </div>
+
 
             <div class="field">
               <span class="field-lbl">Symbol</span>
@@ -3496,13 +3474,92 @@
 
             <div class="seg-divider">When it stops applying</div>
             <div class="field"><label class="field-lbl" for="fn-life">Lifetime</label>
-              <select class="field-select" id="fn-life">
-                <option>Stays until somebody removes it</option>
-                <option>Expires on a date &mdash; set per patient</option>
-                <option>Expires after one visit</option>
-                <option>Follows a condition &mdash; clears when the condition resolves</option>
+              <select class="field-select" id="fn-life" onchange="lFlagLife(this.value)">
+                <option value="never">Stays until somebody removes it</option>
+                <option value="fixed">Expires after a fixed time</option>
+                <option value="date">Expires on a date &mdash; set per patient</option>
+                <option value="visit">Expires after one visit</option>
+                <option value="cond" selected>Follows a condition &mdash; clears when the condition resolves</option>
               </select>
               <div class="field-help">A pregnancy flag should expire; a documented allergy should not.</div>
+            </div>
+
+            <div class="field" id="fn-life-fixed" style="display:none">
+              <label class="field-lbl" for="fn-life-days">How long</label>
+              <select class="field-select" id="fn-life-days" onchange="lCondSay()">
+                <option value="7">7 days</option>
+                <option value="14">14 days</option>
+                <option value="30" selected>30 days</option>
+                <option value="90">90 days</option>
+                <option value="180">6 months</option>
+                <option value="274">9 months &mdash; a pregnancy</option>
+                <option value="365">1 year</option>
+              </select>
+              <div class="field-help">Counted from the day somebody sets the flag on a patient.</div>
+            </div>
+
+            <div id="fn-life-cond">
+              <div class="cond-box">
+                <div class="cond-hd">
+                  <span>Clear this flag when</span>
+                  <select class="field-select cond-mode" id="fn-cond-mode" onchange="lCondSay()"
+                          aria-label="All or any">
+                    <option value="all">every one of these is true</option>
+                    <option value="any">any one of these is true</option>
+                  </select>
+                </div>
+
+                <div id="fn-cond-rows"></div>
+
+                <div class="cond-add">
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('lab')">Lab result</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('problem')">Problem resolved</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('order')">Order</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('course')">Course finished</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('doc')">Document or consent</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('balance')">Balance</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('date')">A date passes</button>
+                  <button class="btn btn-sm" type="button" onclick="lCondAdd('med')">Medication stopped</button>
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:20px">
+                <label class="field-lbl" for="fn-cond-act">When the condition is met</label>
+                <select class="field-select" id="fn-cond-act" onchange="lCondSay()">
+                  <option value="propose" selected>Propose it for clearing &mdash; a person confirms</option>
+                  <option value="auto">Clear it automatically</option>
+                </select>
+                <div class="field-help"><strong>A flag that clears itself is a flag nobody
+                  checked.</strong> Proposing puts it in a queue with the evidence attached, and
+                  somebody who can read that evidence says yes. Automatic is for the flags where
+                  the data IS the answer &mdash; a balance reaching zero, a consent being signed.
+                  It is deliberately not the default.</div>
+              </div>
+
+              <div class="field" id="fn-cond-whowrap">
+                <label class="field-lbl" for="fn-cond-who">Who confirms it</label>
+                <select class="field-select" id="fn-cond-who" onchange="lCondSay()">
+                  <option>The provider who set it</option>
+                  <option selected>Any provider or extender</option>
+                  <option>Any clinical staff</option>
+                  <option>Billing</option>
+                  <option>Front desk</option>
+                </select>
+              </div>
+
+              <div class="prov" id="fn-cond-say"><span>&nbsp;</span></div>
+
+              <div class="callout callout-warn">
+                <strong>Clearing is not deleting.</strong> The flag comes off the calendar and
+                stays on the record with the reason it cleared, the evidence that met the
+                condition, and who confirmed it. A flag that was once true is clinical history,
+                and it has to be readable a year later.
+              </div>
+            </div>
+
+            <div class="form-foot">
+              <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
+              <button class="btn" data-activate="l-08-flags">Cancel</button>
             </div>
           </div>
 
@@ -3540,10 +3597,6 @@
               appointment detail, the hover card, the list view and check-in. There is no
               per-screen copy to keep in step.</span></div>
 
-            <div class="form-foot">
-              <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
-              <button class="btn" data-activate="l-08-flags">Cancel</button>
-            </div>
           </div>
         </div>
       </div>
@@ -5878,7 +5931,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=79"></script>
+<script src="assets/hcos.js?v=81"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -6568,11 +6621,202 @@
   }
   window.lFlagDelete = lFlagDelete;
 
-  function lFlagLife(v) {
-    var box = document.getElementById('fn-life-custom');
-    if (box) box.style.display = v === 'custom' ? '' : 'none';
+  /* ==========================================================================
+     "FOLLOWS A CONDITION" — the condition is BUILT, not typed (Carlos,
+     2026-08-12). A flag that expires on a timer is guessing: a pregnancy really
+     does end in about nine months, but a deficiency clears when the ferritin
+     comes back up, and a missing consent clears when somebody signs it. The
+     honest lifetime for those is the fact itself, so the clinic composes the
+     fact out of things HCOS already holds — a lab value, a problem going
+     inactive, a course finishing, a document arriving, a balance reaching zero.
+
+     Each row is signal → test → value, and the whole thing reads back as one
+     English sentence, the same way the booking rules do. Anything that cannot
+     be expressed as a row is not a condition the system can watch, and saying
+     so is better than accepting words nobody will act on.
+     ========================================================================== */
+  var L_COND_KINDS = {
+    lab: {
+      lbl: 'Lab result',
+      fields: [
+        ['sel', 'analyte', ['Ferritin', 'Iron saturation', 'Vitamin D 25-OH', 'Vitamin B12',
+                            'Magnesium RBC', 'Zinc', 'hs-CRP', 'HbA1c', 'TSH', 'Haemoglobin',
+                            'Platelets', 'eGFR', 'ALT', 'G6PD']],
+        ['sel', 'test', ['is at or above', 'is at or below', 'is back in range', 'has been repeated']],
+        ['num', 'value', '30'],
+        ['sel', 'unit', ['ng/mL', '%', 'mg/dL', 'mmol/L', 'IU/L', 'g/dL', 'pg/mL']]
+      ],
+      say: function (v) {
+        return v.test === 'is back in range' || v.test === 'has been repeated'
+          ? v.analyte + ' ' + v.test
+          : v.analyte + ' ' + v.test + ' ' + v.value + ' ' + v.unit;
+      }
+    },
+    problem: {
+      lbl: 'Problem resolved',
+      fields: [
+        ['sel', 'problem', ['The problem this flag was set for', 'Iron deficiency anaemia',
+                            'Pregnancy', 'Active infection', 'Mast cell activation',
+                            'Post-exertional fatigue', 'Any problem on the list']],
+        ['sel', 'test', ['is marked resolved', 'is marked inactive', 'is no longer on the list']]
+      ],
+      say: function (v) { return v.problem.toLowerCase() + ' ' + v.test; }
+    },
+    order: {
+      lbl: 'Order',
+      fields: [
+        ['sel', 'order', ['The order this flag blocks', 'Any IV order', 'Any procedure order',
+                          'The renewal that was requested']],
+        ['sel', 'test', ['is signed', 'is completed', 'is cancelled', 'expires']]
+      ],
+      say: function (v) { return v.order.toLowerCase() + ' ' + v.test; }
+    },
+    course: {
+      fields: [
+        ['sel', 'course', ['The course on the active order', 'Any IV course', 'The EBOO series']],
+        ['sel', 'test', ['is fully given', 'reaches its halfway point', 'is stopped early']]
+      ],
+      lbl: 'Course finished',
+      say: function (v) { return v.course.toLowerCase() + ' ' + v.test; }
+    },
+    doc: {
+      lbl: 'Document or consent',
+      fields: [
+        ['sel', 'doc', ['IV therapy consent', 'Financial responsibility', 'Telehealth consent',
+                        'Photography release', 'Intake forms', 'Insurance card',
+                        'Plan document (SPD or EOC)', 'Guardian authorisation']],
+        ['sel', 'test', ['is signed', 'is on file', 'is verified by staff']]
+      ],
+      say: function (v) { return v.doc + ' ' + v.test; }
+    },
+    balance: {
+      lbl: 'Balance',
+      fields: [
+        ['sel', 'test', ['reaches zero', 'falls below', 'is on a payment plan']],
+        ['num', 'value', '100']
+      ],
+      say: function (v) {
+        return v.test === 'falls below'
+          ? 'the patient balance falls below $' + v.value
+          : 'the patient balance ' + v.test;
+      }
+    },
+    date: {
+      lbl: 'A date passes',
+      fields: [
+        ['num', 'value', '30'],
+        ['sel', 'unit', ['days', 'weeks', 'months']],
+        ['sel', 'after', ['after the flag was set', 'after the due date on the record',
+                          'after the last appointment', 'after the order was signed']]
+      ],
+      say: function (v) { return v.value + ' ' + v.unit + ' have passed ' + v.after; }
+    },
+    med: {
+      lbl: 'Medication stopped',
+      fields: [
+        ['sel', 'med', ['The medication this flag is about', 'Any anticoagulant',
+                        'Any immunosuppressant', 'Any chelating agent']],
+        ['sel', 'test', ['is discontinued', 'is held', 'is off the list for 30 days']]
+      ],
+      say: function (v) { return v.med.toLowerCase() + ' ' + v.test; }
+    }
+  };
+
+  var L_COND = [];
+  var L_COND_N = 0;
+
+  function lCondAdd(kind) {
+    var k = L_COND_KINDS[kind];
+    if (!k) return;
+    var id = 'c' + (++L_COND_N);
+    var v = {};
+    k.fields.forEach(function (f) { v[f[1]] = f[0] === 'sel' ? f[2][0] : f[2]; });
+    L_COND.push({ id: id, kind: kind, v: v });
+    lCondPaint();
   }
-  window.lFlagLife = lFlagLife;
+  function lCondDel(id) {
+    L_COND = L_COND.filter(function (c) { return c.id !== id; });
+    lCondPaint();
+  }
+  function lCondSet(id, name, val) {
+    L_COND.forEach(function (c) { if (c.id === id) c.v[name] = val; });
+    lCondSay();
+  }
+  function lCondPaint() {
+    var box = document.getElementById('fn-cond-rows');
+    if (!box) return;
+    if (!L_COND.length) {
+      box.innerHTML = '<div class="cond-empty">No condition yet. Pick a signal below &mdash; '
+        + 'the flag would otherwise never clear on its own.</div>';
+      lCondSay();
+      return;
+    }
+    var mode = (document.getElementById('fn-cond-mode') || {}).value || 'all';
+    box.innerHTML = L_COND.map(function (c, i) {
+      var k = L_COND_KINDS[c.kind];
+      var parts = k.fields.map(function (f) {
+        var name = f[1];
+        if (f[0] === 'sel') {
+          return '<select class="field-select cond-f" aria-label="' + name + '" onchange="lCondSet(\''
+            + c.id + '\',\'' + name + '\',this.value)">'
+            + f[2].map(function (o) {
+                return '<option' + (o === c.v[name] ? ' selected' : '') + '>' + o + '</option>';
+              }).join('') + '</select>';
+        }
+        return '<input class="field-input cond-f cond-num" type="number" value="' + c.v[name]
+          + '" aria-label="' + name + '" oninput="lCondSet(\'' + c.id + '\',\'' + name + '\',this.value)">';
+      }).join('');
+      return '<div class="cond-row">'
+        + '<span class="cond-join">' + (i === 0 ? 'when' : (mode === 'all' ? 'and' : 'or')) + '</span>'
+        + '<span class="cond-kind">' + k.lbl + '</span>'
+        + '<div class="cond-fields">' + parts + '</div>'
+        + '<button class="btn btn-sm btn-icon btn-danger cond-x" type="button" title="Remove this line" '
+        + 'aria-label="Remove this line" onclick="lCondDel(\'' + c.id + '\')">&times;</button>'
+        + '</div>';
+    }).join('');
+    lCondSay();
+  }
+  /* The sentence is the point. A condition you cannot read out loud is one
+     nobody can check against what the clinic actually meant. */
+  function lCondSay() {
+    var say = document.getElementById('fn-cond-say');
+    if (!say) return;
+    var life = (document.getElementById('fn-life') || {}).value || 'cond';
+    var name = ((document.getElementById('fn-name') || {}).value || '').trim() || 'This flag';
+    if (life !== 'cond') { say.innerHTML = '<span>&nbsp;</span>'; return; }
+    if (!L_COND.length) {
+      say.innerHTML = '<span><b>' + name + '</b> would never clear on its own &mdash; '
+        + 'no condition is set, so somebody has to remove it by hand.</span>';
+      return;
+    }
+    var mode = (document.getElementById('fn-cond-mode') || {}).value || 'all';
+    var act  = (document.getElementById('fn-cond-act')  || {}).value || 'propose';
+    var who  = (document.getElementById('fn-cond-who')  || {}).value || '';
+    var bits = L_COND.map(function (c) { return L_COND_KINDS[c.kind].say(c.v); });
+    var joined = bits.length === 1 ? bits[0]
+      : bits.slice(0, -1).join(', ') + (mode === 'all' ? ' AND ' : ' OR ') + bits[bits.length - 1];
+    say.innerHTML = '<span><b>' + name + '</b> clears when ' + joined + '. '
+      + (act === 'auto'
+          ? 'It comes off the calendar the moment that is true, with the evidence recorded.'
+          : 'It goes to <b>' + who.toLowerCase() + '</b> with the evidence attached, and stays on '
+            + 'the calendar until somebody confirms.')
+      + '</span>';
+  }
+  function lFlagLife(v) {
+    var fixed = document.getElementById('fn-life-fixed');
+    var cond  = document.getElementById('fn-life-cond');
+    if (fixed) fixed.style.display = v === 'fixed' ? '' : 'none';
+    if (cond)  cond.style.display  = v === 'cond'  ? '' : 'none';
+    lCondSay();
+  }
+  window.lCondAdd = lCondAdd; window.lCondDel = lCondDel; window.lCondSet = lCondSet;
+  window.lCondSay = lCondSay; window.lCondPaint = lCondPaint; window.lFlagLife = lFlagLife;
+
+  /* a deficiency flag is the example worth shipping: it is exactly the case a
+     timer gets wrong */
+  lCondAdd('lab');
+  document.addEventListener('DOMContentLoaded', lCondPaint);
+  lCondPaint();
 
 
   window.lFlagsHtml = lFlagsHtml; window.lAddFlag = lAddFlag;

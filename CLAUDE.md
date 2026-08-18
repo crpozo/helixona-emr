@@ -730,3 +730,37 @@ approved".
 - One page per commit when possible; imperative messages.
 - Before finishing any task: pages load from `file://` with zero console errors; div balance checked (`grep -o '<div' page.html | wc -l` vs `</div>`); every screen id unique; every screen has the feedback widget; all hub links resolve; JS syntax checked (`node -e "new Function(require('fs').readFileSync('assets/hcos.js','utf8'))"`).
 - When in doubt about domain content, this file wins. When in doubt about look, `design/hcos-v1-design.html` wins. Open questions go to Carlos.
+
+## The condition builder (added 2026-08-12)
+
+**A flag on a timer is guessing.** A pregnancy really does end in about nine months, but a
+deficiency clears when the ferritin comes back up, and a missing consent clears when somebody
+signs it. For those the honest lifetime is the FACT, so **"Follows a condition" composes that fact
+out of things HCOS already holds** — a lab value crossing a threshold, a problem going resolved, an
+order signed, a course fully given, a document arriving, a balance reaching zero, a date passing, a
+medication discontinued. Eight signal kinds, each a row of signal → test → value, joined with
+all/any, on `schedule.html#/l-08-flags-new`.
+
+- **It reads back as one English sentence.** A condition you cannot read out loud is one nobody can
+  check against what the clinic actually meant — the same reason the booking rules do it.
+- **The default is PROPOSE, not clear.** A flag that clears itself is a flag nobody checked, so the
+  condition being met puts it in a queue with the evidence attached and a named role confirms.
+  Automatic exists for the cases where the data IS the answer — a balance reaching zero, a consent
+  being signed — and is deliberately not the default.
+- **Clearing is not deleting.** It comes off the calendar and stays on the record with the reason,
+  the evidence, and who confirmed it.
+- Anything that cannot be expressed as a row is not a condition the system can watch, and saying so
+  is better than accepting words nobody will act on.
+
+## Spacing (Carlos, 2026-08-12: "esta todo muy apretado entre si")
+
+The vertical rhythm was tuned for the CALENDAR, where density is the point, and then reused on
+forms, where it reads as a wall. Raised at the **shared components** — `.card`, `.field`,
+`.field-help`, `.callout`, `.seg-divider`, `.kv`, `.modal-body`, `.tbl` cells — so it lands on all
+187 screens at once rather than the one being looked at. The rule underneath it: **the gap BETWEEN
+two groups has to be bigger than any gap inside one**, or nothing groups and the eye has nowhere to
+rest. The calendar keeps its own density: the 96px hour row and the 98px block are set in the
+day-board rules, not by these.
+
+**A control's escape hatch sits BESIDE it, not under it.** "Clear" stacked below "Remember these
+filters" read as a separate feature; they are one thing.
