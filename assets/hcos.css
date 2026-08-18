@@ -372,7 +372,7 @@ button { font-family: inherit; }
 .btn-primary:hover { background: #000; border-color: #000; }
 .btn-accent { background: var(--hx-blue); color: #fff; border-color: var(--hx-blue); }
 .btn-navy { background: var(--hx-navy); color: #fff; border-color: var(--hx-navy); }
-.btn-danger { background: #fff; color: var(--ink); border: 1px dashed var(--ink); }
+.btn-danger { background: #fff; color: #8E2118; border: 1px solid #C0392B; }
 .btn-ghost { background: transparent; }
 .btn-sm { padding: 4px 10px; font-size: 11px; }
 .btn-lg { padding: 11px 22px; font-size: 13.5px; }
@@ -2578,8 +2578,7 @@ a.lead-chip:hover { border-color: var(--ink); }
 .row-acts { white-space: nowrap; }
 .row-acts .btn + .btn { margin-left: 6px; }
 .btn-icon { padding: 4px 8px; line-height: 1.1; font-size: 13px; }
-.btn-danger { border-color: #C0392B; color: #8E2118; }
-.btn-danger:hover { background: #FBE3E0; border-color: #8E2118; }
+.btn-danger:hover { background: #FBE3E0; border-color: #8E2118; color: #6E1912; }
 /* a form's Save belongs at the END of the form, where the reading stops —
    not in the header above the fields it saves (Carlos, 2026-08-12) */
 .form-foot {
@@ -2711,12 +2710,22 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 /* open slots read two ways: a list to pick down, a calendar to see that Tuesday
    is full and Thursday is empty — which a list cannot show */
-.seg-tabs { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
-.seg-tab {
-  border: 1px solid var(--line); background: #fff; border-radius: 999px;
-  padding: 4px 12px; font-size: 11.5px; cursor: pointer; font-family: inherit; color: var(--muted);
+/* A segmented control, not two loose pills. In a narrow column the pills were
+   squeezing "As a calendar" onto two lines, which reads as broken rather than
+   tight (Carlos, 2026-08-12). The two views are one choice, so they are joined
+   and they never wrap; the range select drops to its own line instead. */
+.seg-tabs { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.seg-group {
+  display: inline-flex; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--hx-band); padding: 2px; flex-shrink: 0;
 }
-.seg-tab.is-on { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+.seg-tab {
+  border: none; background: none; border-radius: 999px; white-space: nowrap;
+  padding: 5px 14px; font-size: 11.5px; cursor: pointer; font-family: inherit; color: var(--muted);
+}
+.seg-tab:hover { color: var(--ink); }
+.seg-tab.is-on { background: #fff; color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+.seg-tabs > .field-select { flex: 1 1 170px; min-width: 0; }
 .slot-cal { display: grid; grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 8px; margin-bottom: 10px; }
 .slot-day {
   border: 1px solid var(--line-soft); border-radius: 9px; padding: 9px; background: #fff;
@@ -2816,3 +2825,93 @@ a.lead-chip:hover { border-color: var(--ink); }
   .cond-join, .cond-kind { grid-column: 1; padding-top: 0; }
   .cond-fields { grid-column: 1 / -1; }
 }
+
+/* The confirm dialog. It is deliberately NOT a toast: a destructive action has
+   to stop you, name the thing, and say what breaks (Carlos, 2026-08-12).
+   Cancel holds focus so Enter is always the safe key. */
+.confirm-overlay { z-index: 400; }
+.confirm-modal { max-width: 470px; }
+.confirm-modal .modal-head { border-bottom: none; padding-bottom: 8px; }
+.confirm-modal .modal-title { font-size: 16px; }
+.confirm-body { font-size: 13px; color: var(--ink); line-height: 1.6; }
+.confirm-what {
+  margin-top: 14px; padding: 12px 14px; border-radius: 8px;
+  background: #FBE3E0; border-left: 3px solid #C0392B;
+  font-size: 12.5px; color: #6E1912; line-height: 1.6;
+}
+.confirm-modal .modal-foot { justify-content: flex-end; gap: 8px; }
+.confirm-modal .modal-foot .btn { min-width: 96px; }
+
+/* ==========================================================================
+   RESIZABLE COLUMNS (Carlos, 2026-08-12: "make columns customizable in width
+   to read better"). The waitlist has eleven columns and the reason a patient
+   is urgent is the one that matters most — it should not be squeezed to two
+   words because a heading elsewhere is long.
+   The grip only appears on hover or focus: a permanent row of handles across
+   every header reads as chrome and competes with the headings themselves.
+   ========================================================================== */
+.tbl th.col-sizable { position: relative; }
+.col-grip {
+  position: absolute; top: 0; right: -4px; bottom: 0; width: 9px;
+  cursor: col-resize; touch-action: none; opacity: 0; z-index: 2;
+  background: none; border: none; padding: 0;
+}
+.col-grip::before {
+  content: ''; position: absolute; top: 5px; bottom: 5px; left: 4px; width: 2px;
+  background: var(--ink); border-radius: 1px;
+}
+.tbl thead:hover .col-grip { opacity: .28; }
+.col-grip:hover, .col-grip:focus { opacity: 1 !important; outline: none; }
+.col-grip:focus::before { background: var(--hx-navy); left: 3px; width: 3px; }
+/* while dragging, nothing else on the page should select or hint at a cursor */
+body.col-resizing { cursor: col-resize; user-select: none; }
+body.col-resizing * { cursor: col-resize !important; }
+/* a frozen table wraps rather than overflowing its new width */
+.tbl[style*="table-layout"] td, .tbl[style*="table-layout"] th {
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   THE FREED SLOT — the whole reason the waitlist screen exists. It was a line
+   of text in a callout with the primary action shrunk to a small button beside
+   a secondary one (Carlos, 2026-08-12: "no esta muy clara la UI para ofrecer el
+   slot, es de los botones principales"). It looks like the thing you act on
+   now: the slot itself, what it is worth, and one obvious action.
+   ========================================================================== */
+.slot-free {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
+  border: 1.5px solid var(--ink); border-radius: 12px; background: #fff;
+  padding: 18px 20px; margin-bottom: 22px;
+}
+.slot-free-mark {
+  display: grid; place-items: center; width: 62px; height: 62px;
+  border-radius: 12px; background: var(--hx-navy); color: #fff; line-height: 1;
+}
+.slot-free-day { font-size: 10px; letter-spacing: 1.4px; font-weight: 700; opacity: .75; }
+.slot-free-num { font-size: 24px; font-weight: 700; margin-top: 3px; }
+.slot-free-t { font-size: 17px; font-weight: 600; color: var(--hx-navy); }
+.slot-free-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+.slot-free-match {
+  display: flex; align-items: center; gap: 10px; margin-top: 12px;
+  font-size: 12.5px; color: var(--ink); line-height: 1.5;
+}
+.slot-free-n {
+  display: grid; place-items: center; flex-shrink: 0; width: 28px; height: 28px;
+  border-radius: 50%; background: var(--hx-band); border: 1.5px solid var(--ink);
+  font-weight: 700; font-size: 13px;
+}
+.slot-free-acts { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 190px; }
+.slot-free-acts .btn { justify-content: center; }
+@media (max-width: 900px) {
+  .slot-free { grid-template-columns: auto 1fr; }
+  .slot-free-acts { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+}
+
+/* eleven columns wrapped "Post-EBOO follow-up overdue" to one word per line.
+   The table gets the width it needs and the wrapper scrolls, rather than
+   every cell being crushed to fit a viewport it was never going to fit. */
+#l-10-waitlist .tbl { min-width: 1240px; }
+#l-10-waitlist .wl-why { min-width: 210px; max-width: 300px; }
+#l-10-waitlist th:nth-child(2), #l-10-waitlist td:nth-child(2) { min-width: 150px; }
+#l-10-waitlist th:nth-child(7), #l-10-waitlist td:nth-child(7) { min-width: 150px; }
+#l-12-list .tbl { min-width: 1380px; }

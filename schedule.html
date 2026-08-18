@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=81">
+<link rel="stylesheet" href="assets/hcos.css?v=82">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -3805,16 +3805,41 @@
             <div class="page-title">Waitlist</div>
             <div class="page-sub">Who wants a sooner slot, and what would suit them</div>
           </div>
-          <div class="app-user"><button class="btn btn-primary" data-open-modal="#l-wl-modal">Add to the waitlist</button></div>
+          <div class="app-user"><button class="btn" data-open-modal="#l-wl-modal">Add someone to the list</button></div>
         </div>
 
-        <div class="callout callout-ok">
-          <strong>Grace Lindqvist cancelled her 10:00 with Brooke.</strong>
-          Four people on the waitlist match that window. Tick the ones to offer it to &mdash;
-          the slot is held for 30 minutes and the first to accept takes it.
-          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-            <button class="btn btn-sm btn-primary" data-open-modal="#l-offer-modal">Offer this slot</button>
-            <button class="btn btn-sm" onclick="lWlPickAll()">Tick everyone who matches</button>
+        <!-- The whole point of this screen is a slot that just freed. It gets to
+             LOOK like the thing you act on: the slot itself, big, with the one
+             action that matters beside it (Carlos, 2026-08-12: "no esta muy
+             clara la UI para ofrecer el slot, es de los botones principales"). -->
+        <div class="slot-free">
+          <div class="slot-free-mark" aria-hidden="true">
+            <span class="slot-free-day">TUE</span>
+            <span class="slot-free-num">21</span>
+          </div>
+
+          <div class="slot-free-body">
+            <div class="slot-free-t">10:00 &ndash; 11:00 AM &middot; Brooke</div>
+            <div class="slot-free-sub">
+              Freed 8 minutes ago &mdash; Grace Lindqvist cancelled &middot;
+              Office visit &middot; 60 minutes
+            </div>
+            <div class="slot-free-match">
+              <span class="slot-free-n">4</span>
+              <span>people on the waitlist match this window.
+                <b>2 of them are urgent</b> and one is five days past the date the doctor set.</span>
+            </div>
+          </div>
+
+          <div class="slot-free-acts">
+            <button class="btn btn-lg btn-primary" data-activate="l-10-offer">Offer this slot</button>
+            <button class="btn btn-sm" onclick="lWlPickAll(true)">Tick the 4 who match</button>
+            <button class="btn btn-sm" onclick="HCOS.confirm({
+              title: 'Release the 10:00 back to the calendar?',
+              body: 'It becomes an ordinary open slot that anybody can book.',
+              consequence: '<b>4 people are waiting for exactly this window</b>, two of them urgent. Nobody is told it came free.',
+              confirm: 'Release it anyway',
+              onConfirm: function(){ HCOS.toast('Released. It is bookable on the day view.', 'ok'); }})">Release it instead</button>
           </div>
         </div>
 
@@ -3968,7 +3993,7 @@
                 <td><span class="due due-late">2 days past</span></td>
                 <td>Aug 11, 1:00 PM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Amara Diallo from the waitlist"
                           aria-label="Remove Amara Diallo from the waitlist"
                           onclick="lWlRemove(this,'Amara Diallo')">&#128465;</button>
@@ -3986,7 +4011,7 @@
                 <td><span class="due due-late">5 days past</span></td>
                 <td>Aug 19, 9:00 AM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Nina Kowalski from the waitlist"
                           aria-label="Remove Nina Kowalski from the waitlist"
                           onclick="lWlRemove(this,'Nina Kowalski')">&#128465;</button>
@@ -4004,7 +4029,7 @@
                 <td><span class="due due-soon">in 2 days</span></td>
                 <td>Aug 4, 2:00 PM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Owen Delacroix from the waitlist"
                           aria-label="Remove Owen Delacroix from the waitlist"
                           onclick="lWlRemove(this,'Owen Delacroix')">&#128465;</button>
@@ -4022,7 +4047,7 @@
                 <td><span class="due due-soon">in 6 days</span></td>
                 <td>Aug 22, 11:00 AM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Yuki Tanaka from the waitlist"
                           aria-label="Remove Yuki Tanaka from the waitlist"
                           onclick="lWlRemove(this,'Yuki Tanaka')">&#128465;</button>
@@ -4040,7 +4065,7 @@
                 <td><span class="due due-none">No date set</span></td>
                 <td>Sep 2, 10:00 AM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Marcus Webb from the waitlist"
                           aria-label="Remove Marcus Webb from the waitlist"
                           onclick="lWlRemove(this,'Marcus Webb')">&#128465;</button>
@@ -4058,7 +4083,7 @@
                 <td><span class="due due-ok">in 14 days</span></td>
                 <td>Aug 28, 3:00 PM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Hana Sato from the waitlist"
                           aria-label="Remove Hana Sato from the waitlist"
                           onclick="lWlRemove(this,'Hana Sato')">&#128465;</button>
@@ -4076,7 +4101,7 @@
                 <td><span class="due due-none">No date set</span></td>
                 <td>Sep 9, 9:00 AM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Tom Alvarez from the waitlist"
                           aria-label="Remove Tom Alvarez from the waitlist"
                           onclick="lWlRemove(this,'Tom Alvarez')">&#128465;</button>
@@ -4094,7 +4119,7 @@
                 <td><span class="due due-none">No date set</span></td>
                 <td>Aug 25, 8:00 AM</td>
                 <td class="row-acts">
-                  <button class="btn btn-sm" data-activate="l-10-offer">Offer</button>
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>
                   <button class="btn btn-sm btn-icon btn-danger" title="Remove Sofia Ramos from the waitlist"
                           aria-label="Remove Sofia Ramos from the waitlist"
                           onclick="lWlRemove(this,'Sofia Ramos')">&#128465;</button>
@@ -4732,6 +4757,50 @@
             <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
             <div class="card" style="margin-top:12px">
               <div class="card-title">Orders for this patient &middot; order = prescription</div>
+              <!-- Carlos, 2026-08-12: make the example orders ACTIVE so the flow can
+                   be walked. Priya carries all three outcomes: an active order that
+                   books normally, an expired one that books TENTATIVE, and subtypes
+                   with nothing on file that have to be requested first. -->
+              <div class="g-ev" data-order-for="cell">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>Cellular Boost &middot; O-3602</strong> <span class="ver-chip">v2</span>
+                  &mdash; active &middot; <strong>3 of 6 given</strong> &middot; valid to 14 Sep 2026 &middot; 55 days left
+                  <span class="prov" style="display:block;margin-top:2px"><span>Signed by Brooke, 22 May &middot;
+                  every 14 days &middot; <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
+              <div class="g-ev" data-order-for="iron">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>Core Iron Blend &middot; O-3711</strong> <span class="ver-chip">v1</span>
+                  &mdash; active &middot; <strong>1 of 4 given</strong> &middot; valid to 30 Nov 2026 &middot; 132 days left
+                  <span class="prov" style="display:block;margin-top:2px"><span>Signed by Dr. Drannikov, 14 Jul &middot;
+                  ferritin below 15 &middot; <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
+              <div class="g-ev" data-order-for="fu">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>Follow Up &middot; standing</strong>
+                  &mdash; active &middot; no course limit
+                  <span class="prov" style="display:block;margin-top:2px"><span>An office visit needs no
+                  signed order &mdash; the visit IS the clinical decision.</span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
+              <div class="g-ev" data-order-for="newpt">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>New patient &middot; standing</strong>
+                  &mdash; active &middot; no course limit
+                  <span class="prov" style="display:block;margin-top:2px"><span>An office visit needs no
+                  signed order.</span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
+              <div class="g-ev" data-order-for="mdl">
+                <div class="g-ev-when">&#10003;</div>
+                <div class="g-ev-what"><strong>MDL panel &middot; O-3688</strong> <span class="ver-chip">v1</span>
+                  &mdash; active &middot; <strong>0 of 1 given</strong> &middot; valid to 12 Oct 2026
+                  <span class="prov" style="display:block;margin-top:2px"><span>Signed by Dr. Drannikov, 12 Jul &middot;
+                  the draw before the next infusion &middot; <a href="clinical.html#/b-09-orders">open the order</a></span></span></div>
+                <div class="g-ev-ver"><span class="appr approved">Active</span></div>
+              </div>
               <div class="g-ev" data-order-for="ff10">
                 <div class="g-ev-when">&#10003;</div>
                 <div class="g-ev-what"><strong>Foundational Flow 10 &middot; O-3402</strong> <span class="ver-chip">v2</span>
@@ -4880,10 +4949,13 @@
               and the duration fits. A reserved space appears here only if this appointment is the
               kind it is held for.</div>
             <div class="seg-tabs">
-              <button class="seg-tab is-on" type="button" onclick="lSlotView('list',this)">As a list</button>
-              <button class="seg-tab" type="button" onclick="lSlotView('cal',this)">As a calendar</button>
-              <select class="field-select" id="l-bk-range" onchange="lSlots()" aria-label="How far ahead"
-                      style="margin-left:auto;min-width:150px">
+              <div class="seg-group" role="tablist" aria-label="How to show the open slots">
+                <button class="seg-tab is-on" type="button" role="tab" aria-selected="true"
+                        onclick="lSlotView('list',this)">List</button>
+                <button class="seg-tab" type="button" role="tab" aria-selected="false"
+                        onclick="lSlotView('cal',this)">Calendar</button>
+              </div>
+              <select class="field-select" id="l-bk-range" onchange="lSlots()" aria-label="How far ahead">
                 <option value="7">Next 7 days</option>
                 <option value="14" selected>Next 2 weeks</option>
                 <option value="28">Next 4 weeks</option>
@@ -5931,7 +6003,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=81"></script>
+<script src="assets/hcos.js?v=82"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -6600,24 +6672,29 @@
   /* Removing a flag TYPE is not an undo-able mistake: every appointment that
      carries it loses the warning, and nobody finds out until somebody is hurt.
      So it asks twice and names what it is about to break (Carlos, 2026-08-12). */
-  var L_DEL_ARMED = null;
   function lFlagDelete(k) {
     var f = L_FLAGS[k];
     if (!f) return;
     var used = document.querySelectorAll('.cal-appt[data-flags*="' + k + '"]').length;
-    if (L_DEL_ARMED !== k) {
-      L_DEL_ARMED = k;
-      HCOS.toast('Delete "' + f.name + '"? It is on ' + used + ' appointment' +
-                 (used === 1 ? '' : 's') + ' right now and they would lose the warning. ' +
-                 'Press delete again to confirm.', 'warn');
-      setTimeout(function () { if (L_DEL_ARMED === k) L_DEL_ARMED = null; }, 8000);
-      return;
-    }
-    L_DEL_ARMED = null;
-    var row = document.querySelector('[data-flag="' + k + '"]');
-    if (row) row.remove();
-    HCOS.toast('"' + f.name + '" deleted. The ' + used + ' appointment' +
-               (used === 1 ? '' : 's') + ' that carried it keep it on the record as history.', 'ok');
+    HCOS.confirm({
+      title: 'Delete the "' + f.name + '" flag type?',
+      body: 'This removes the flag from the whole clinic, not from one patient. '
+          + 'Nobody will be able to set it again.',
+      /* the number that makes this warning mean anything is how many PATIENTS
+         carry the flag, not how many appointments are on today's board — that
+         one is usually zero and makes the dialog look harmless */
+      consequence: '<b>' + f.pts + ' patient' + (f.pts === 1 ? '' : 's')
+          + ' carr' + (f.pts === 1 ? 'ies' : 'y') + ' this flag today</b>'
+          + (used ? ', ' + used + ' of them on this week&rsquo;s board' : '')
+          + '. They lose the warning on the calendar, the hover card and check-in the moment it '
+          + 'goes. It stays on their record as history.',
+      confirm: 'Delete the flag type',
+      onConfirm: function () {
+        var row = document.querySelector('[data-flag="' + k + '"]');
+        if (row) row.remove();
+        HCOS.toast('"' + f.name + '" deleted. Logged against your name.', 'ok');
+      }
+    });
   }
   window.lFlagDelete = lFlagDelete;
 
@@ -7188,8 +7265,8 @@
       HCOS.toast('Treatment changed, so the request to ' + lRequestTo + ' no longer applies. Ask again for the new booking.', 'warn');
     }
     lBook();
-  lSlots();
-  lBkAi();
+    lSlots();
+    lBkAi();
   }
 
   // The first slot that actually clears every hard check — searched with the
@@ -7330,36 +7407,36 @@
      an admin flag can be urgent, and a medical one can be a footnote.
      ========================================================================== */
   var L_FLAGS = {
-    allergyfood:  { icon: 'allergyfood', sev: 'high', cat: 'Medical', name: 'Food allergy', text: 'Food allergy — tree nuts, documented reaction', life: 0 },
-    allergydrug:  { icon: 'allergydrug', sev: 'high', cat: 'Medical', name: 'Drug allergy', text: 'Drug allergy — sulfa, documented reaction', life: 0 },
-    allergyenv:   { icon: 'allergyenv', sev: 'med', cat: 'Medical', name: 'Environmental allergy', text: 'Environmental allergy — severe seasonal', life: 0 },
-    latex:        { icon: 'latex', sev: 'high', cat: 'Medical', name: 'Latex sensitivity', text: 'Latex sensitivity — use nitrile gloves', life: 0 },
-    pregnant:     { icon: 'pregnant', sev: 'high', cat: 'Medical', name: 'Pregnant', text: 'Pregnant — second trimester', life: 274 },
-    urgent:       { icon: 'urgent', sev: 'high', cat: 'Medical', name: 'Urgent medical alert', text: 'Urgent medical alert — cardiology follow-up open', life: 30 },
-    cardiac:      { icon: 'cardiac', sev: 'high', cat: 'Medical', name: 'Cardiac history', text: 'Cardiac history — rate-limited infusions only', life: 0 },
-    seizure:      { icon: 'seizure', sev: 'high', cat: 'Medical', name: 'Seizure history', text: 'Seizure history — do not leave unattended', life: 0 },
-    diabetes:     { icon: 'diabetes', sev: 'med', cat: 'Medical', name: 'Diabetes', text: 'Diabetes — check glucose before and after', life: 0 },
-    bloodthin:    { icon: 'bloodthin', sev: 'high', cat: 'Medical', name: 'On a blood thinner', text: 'On a blood thinner — pressure after every stick', life: 180 },
-    deficiency:   { icon: 'deficiency', sev: 'med', cat: 'Medical', name: 'Deficiency', text: 'Deficiency — ferritin 11 ng/mL', life: 120 },
-    fallrisk:     { icon: 'fallrisk', sev: 'high', cat: 'Medical', name: 'Fall risk', text: 'Fall risk — walk them to the chair', life: 90 },
-    mobility:     { icon: 'mobility', sev: 'med', cat: 'Medical', name: 'Mobility support', text: 'Uses a wheelchair — book an accessible room', life: 0 },
-    infection:    { icon: 'infection', sev: 'high', cat: 'Medical', name: 'Infection control', text: 'Active infection — last appointment of the day', life: 14 },
-    isolation:    { icon: 'isolation', sev: 'high', cat: 'Medical', name: 'Isolation precautions', text: 'Isolation precautions in force', life: 14 },
-    port:         { icon: 'port', sev: 'med', cat: 'Medical', name: 'Port or PICC line', text: 'Port in place — trained staff only', life: 0 },
-    needle:       { icon: 'needle', sev: 'low', cat: 'Medical', name: 'Needle anxiety', text: 'Needle anxiety — allow extra time', life: 0 },
-    nothing:      { icon: 'nothing', sev: 'high', cat: 'Medical', name: 'Nil by mouth', text: 'Nil by mouth before this appointment', life: 7 },
-    authexpiry:   { icon: 'authexpiry', sev: 'high', cat: 'Billing', name: 'Prior auth expiring', text: 'Prior authorisation expires today', life: 30 },
-    balance:      { icon: 'balance', sev: 'med', cat: 'Billing', name: 'Outstanding balance', text: 'Outstanding balance $340', life: 60 },
-    selfpay:      { icon: 'selfpay', sev: 'low', cat: 'Billing', name: 'Self-pay', text: 'Self-pay — collect in full at check-in', life: 0 },
-    interpreter:  { icon: 'interpreter', sev: 'low', cat: 'Admin', name: 'Interpreter needed', text: 'Interpreter needed — Spanish', life: 0 },
-    deaf:         { icon: 'deaf', sev: 'med', cat: 'Admin', name: 'Hard of hearing', text: 'Hard of hearing — face them when you speak', life: 0 },
-    forms:        { icon: 'forms', sev: 'low', cat: 'Admin', name: 'Intake forms missing', text: 'Intake forms not returned', life: 14 },
-    consent:      { icon: 'consent', sev: 'high', cat: 'Admin', name: 'Consent missing', text: 'Consent not signed for this treatment', life: 7 },
-    guardian:     { icon: 'guardian', sev: 'high', cat: 'Admin', name: 'Guardian required', text: 'Minor — a guardian must be present', life: 0 },
-    transport:    { icon: 'transport', sev: 'low', cat: 'Admin', name: 'Needs transport', text: 'Cannot drive after this treatment', life: 0 },
-    noshow:       { icon: 'noshow', sev: 'med', cat: 'Admin', name: 'No-show history', text: 'Missed the last two — confirm the day before', life: 180 },
-    vip:          { icon: 'vip', sev: 'low', cat: 'Admin', name: 'Priority patient', text: 'Priority patient — Longevity membership', life: 0 },
-    weight:       { icon: 'weight', sev: 'med', cat: 'Medical', name: 'Weight-based dosing', text: 'Weight-based dosing — reweigh each visit', life: 90 }
+    allergyfood:  { icon: 'allergyfood', sev: 'high', cat: 'Medical', name: 'Food allergy', text: 'Food allergy — tree nuts, documented reaction', life: 0, pts: 34 },
+    allergydrug:  { icon: 'allergydrug', sev: 'high', cat: 'Medical', name: 'Drug allergy', text: 'Drug allergy — sulfa, documented reaction', life: 0, pts: 41 },
+    allergyenv:   { icon: 'allergyenv', sev: 'med', cat: 'Medical', name: 'Environmental allergy', text: 'Environmental allergy — severe seasonal', life: 0, pts: 22 },
+    latex:        { icon: 'latex', sev: 'high', cat: 'Medical', name: 'Latex sensitivity', text: 'Latex sensitivity — use nitrile gloves', life: 0, pts: 9 },
+    pregnant:     { icon: 'pregnant', sev: 'high', cat: 'Medical', name: 'Pregnant', text: 'Pregnant — second trimester', life: 274, pts: 3 },
+    urgent:       { icon: 'urgent', sev: 'high', cat: 'Medical', name: 'Urgent medical alert', text: 'Urgent medical alert — cardiology follow-up open', life: 30, pts: 6 },
+    cardiac:      { icon: 'cardiac', sev: 'high', cat: 'Medical', name: 'Cardiac history', text: 'Cardiac history — rate-limited infusions only', life: 0, pts: 17 },
+    seizure:      { icon: 'seizure', sev: 'high', cat: 'Medical', name: 'Seizure history', text: 'Seizure history — do not leave unattended', life: 0, pts: 4 },
+    diabetes:     { icon: 'diabetes', sev: 'med', cat: 'Medical', name: 'Diabetes', text: 'Diabetes — check glucose before and after', life: 0, pts: 28 },
+    bloodthin:    { icon: 'bloodthin', sev: 'high', cat: 'Medical', name: 'On a blood thinner', text: 'On a blood thinner — pressure after every stick', life: 180, pts: 12 },
+    deficiency:   { icon: 'deficiency', sev: 'med', cat: 'Medical', name: 'Deficiency', text: 'Deficiency — ferritin 11 ng/mL', life: 120, pts: 63 },
+    fallrisk:     { icon: 'fallrisk', sev: 'high', cat: 'Medical', name: 'Fall risk', text: 'Fall risk — walk them to the chair', life: 90, pts: 8 },
+    mobility:     { icon: 'mobility', sev: 'med', cat: 'Medical', name: 'Mobility support', text: 'Uses a wheelchair — book an accessible room', life: 0, pts: 11 },
+    infection:    { icon: 'infection', sev: 'high', cat: 'Medical', name: 'Infection control', text: 'Active infection — last appointment of the day', life: 14, pts: 2 },
+    isolation:    { icon: 'isolation', sev: 'high', cat: 'Medical', name: 'Isolation precautions', text: 'Isolation precautions in force', life: 14, pts: 1 },
+    port:         { icon: 'port', sev: 'med', cat: 'Medical', name: 'Port or PICC line', text: 'Port in place — trained staff only', life: 0, pts: 19 },
+    needle:       { icon: 'needle', sev: 'low', cat: 'Medical', name: 'Needle anxiety', text: 'Needle anxiety — allow extra time', life: 0, pts: 26 },
+    nothing:      { icon: 'nothing', sev: 'high', cat: 'Medical', name: 'Nil by mouth', text: 'Nil by mouth before this appointment', life: 7, pts: 5 },
+    authexpiry:   { icon: 'authexpiry', sev: 'high', cat: 'Billing', name: 'Prior auth expiring', text: 'Prior authorisation expires today', life: 30, pts: 14 },
+    balance:      { icon: 'balance', sev: 'med', cat: 'Billing', name: 'Outstanding balance', text: 'Outstanding balance $340', life: 60, pts: 37 },
+    selfpay:      { icon: 'selfpay', sev: 'low', cat: 'Billing', name: 'Self-pay', text: 'Self-pay — collect in full at check-in', life: 0, pts: 48 },
+    interpreter:  { icon: 'interpreter', sev: 'low', cat: 'Admin', name: 'Interpreter needed', text: 'Interpreter needed — Spanish', life: 0, pts: 21 },
+    deaf:         { icon: 'deaf', sev: 'med', cat: 'Admin', name: 'Hard of hearing', text: 'Hard of hearing — face them when you speak', life: 0, pts: 7 },
+    forms:        { icon: 'forms', sev: 'low', cat: 'Admin', name: 'Intake forms missing', text: 'Intake forms not returned', life: 14, pts: 31 },
+    consent:      { icon: 'consent', sev: 'high', cat: 'Admin', name: 'Consent missing', text: 'Consent not signed for this treatment', life: 7, pts: 16 },
+    guardian:     { icon: 'guardian', sev: 'high', cat: 'Admin', name: 'Guardian required', text: 'Minor — a guardian must be present', life: 0, pts: 5 },
+    transport:    { icon: 'transport', sev: 'low', cat: 'Admin', name: 'Needs transport', text: 'Cannot drive after this treatment', life: 0, pts: 13 },
+    noshow:       { icon: 'noshow', sev: 'med', cat: 'Admin', name: 'No-show history', text: 'Missed the last two — confirm the day before', life: 180, pts: 24 },
+    vip:          { icon: 'vip', sev: 'low', cat: 'Admin', name: 'Priority patient', text: 'Priority patient — Longevity membership', life: 0, pts: 52 },
+    weight:       { icon: 'weight', sev: 'med', cat: 'Medical', name: 'Weight-based dosing', text: 'Weight-based dosing — reweigh each visit', life: 90, pts: 29 }
   };
   window.L_FLAGS = L_FLAGS;
 
@@ -7609,8 +7686,10 @@
   ];
   function lSlotView(v, btn) {
     L_SLOTVIEW = v;
-    document.querySelectorAll('.seg-tab').forEach(function (t) { t.classList.remove('is-on'); });
-    if (btn) btn.classList.add('is-on');
+    document.querySelectorAll('.seg-tab').forEach(function (t) {
+      t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false');
+    });
+    if (btn) { btn.classList.add('is-on'); btn.setAttribute('aria-selected', 'true'); }
     lSlots();
   }
   function lSlots() {
@@ -8011,19 +8090,24 @@
   /* Taking somebody off the waitlist is a decision with a reason — they either
      got seen, or they gave up, or a clinician stood them down. It asks which,
      because "removed" with no reason is how a patient falls through. */
-  var L_WL_ARMED = null;
   function lWlRemove(btn, who) {
-    if (L_WL_ARMED !== who) {
-      L_WL_ARMED = who;
-      HCOS.toast('Remove ' + who + ' from the waitlist? Press again to confirm — the reason goes on their record.', 'warn');
-      setTimeout(function () { if (L_WL_ARMED === who) L_WL_ARMED = null; }, 8000);
-      return;
-    }
-    L_WL_ARMED = null;
     var row = btn.closest('tr');
-    if (row) row.remove();
-    lWlFilter();
-    HCOS.toast(who + ' removed. Logged on their communication log with your name and the time.', 'ok');
+    var pri = row ? (row.querySelector('.pri') || {}).textContent : '';
+    var why = row ? (row.querySelector('.wl-why') || {}).textContent : '';
+    HCOS.confirm({
+      title: 'Take ' + who + ' off the waitlist?',
+      body: 'They stop being offered cancellations. Their booked appointment, if they have one, '
+          + 'is not affected.',
+      consequence: (pri ? '<b>' + pri.trim() + ' priority</b> &mdash; ' : '') + why
+          + '<br><br>The removal goes on their communication log with your name and the time, '
+          + 'so there is a record of who decided they no longer needed a sooner slot.',
+      confirm: 'Take them off the list',
+      onConfirm: function () {
+        if (row) row.remove();
+        lWlFilter();
+        HCOS.toast(who + ' removed and logged.', 'ok');
+      }
+    });
   }
   window.lWlRemove = lWlRemove;
 
@@ -8106,19 +8190,25 @@
 
   /* Lifting a block is how a lunch break quietly disappears and the provider
      finds out at noon. It asks twice and says what it protects. */
-  var L_BLK_ARMED = null;
   function lBlkDelete(btn, name) {
-    if (L_BLK_ARMED !== name) {
-      L_BLK_ARMED = name;
-      HCOS.toast('Delete "' + name + '"? Every slot it protects opens to booking immediately. Press again to confirm.', 'warn');
-      setTimeout(function () { if (L_BLK_ARMED === name) L_BLK_ARMED = null; }, 8000);
-      return;
-    }
-    L_BLK_ARMED = null;
     var row = btn.closest('tr');
-    if (row) row.remove();
-    lBlkFilter();
-    HCOS.toast('"' + name + '" lifted. Logged against your name — only a manager can do this.', 'ok');
+    var cells = row ? row.children : [];
+    var when = cells[2] ? cells[2].textContent.trim() : '';
+    var rep  = cells[3] ? cells[3].textContent.trim() : '';
+    var who  = cells[5] ? cells[5].textContent.trim() : '';
+    HCOS.confirm({
+      title: 'Lift "' + name + '"?',
+      body: 'Every slot it protects opens to normal booking immediately, on every day it runs.',
+      consequence: '<b>' + when + '</b>, ' + rep.toLowerCase() + ', on ' + who.toLowerCase()
+          + '.<br><br>If this is a break or a lunch, the provider finds out when somebody books '
+          + 'into it. Only a manager can lift a block, and this one is logged against your name.',
+      confirm: 'Lift the block',
+      onConfirm: function () {
+        if (row) row.remove();
+        lBlkFilter();
+        HCOS.toast('"' + name + '" lifted and logged.', 'ok');
+      }
+    });
   }
   window.lBlkDelete = lBlkDelete;
 
@@ -8782,12 +8872,23 @@
       var exp = document.getElementById('l-bk-expired');
       var showsExpired = exp && exp.style.display !== 'none';
       var btn = document.getElementById('l-bk-btn-book');
-      if (btn) btn.textContent = showsExpired ? 'Book tentative \u2014 pending approval' : 'Book appointment';
+      /* Nothing on file is the same situation as expired: it books, visibly
+         tentative, until somebody signs. It said "Book appointment", which
+         promised an ordinary booking the order does not authorise. */
+      if (btn) btn.textContent = (showsExpired || !any)
+        ? 'Book tentative \u2014 pending approval' : 'Book appointment';
     }
     window.lFocusOrder = focusOrder;
     sel.addEventListener('change', function () { setTimeout(focusOrder, 0); });
     focusOrder();
   })();
+
+  /* The booking screen paints itself LAST, once every dictionary it reads has
+     been declared. Calling it earlier reached L_BK_AI while it was still the
+     hoisted `undefined` and the patterns card came up empty. */
+  if (typeof lSlots === 'function') lSlots();
+  if (typeof lBkAi === 'function') lBkAi();
+  if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
 </script>
 </body>
 </html>

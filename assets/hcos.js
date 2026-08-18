@@ -967,13 +967,196 @@
     }
 
     loadPublishedNotes();
+    /* after the shell exists, so the tables have their real widths to freeze */
+    requestAnimationFrame(function () { wireColumns(); });
   }
+
+
+  /* ---------- CONFIRM BEFORE SOMETHING IRREVERSIBLE ----------
+     Carlos, 2026-08-12: "if I click delete should a popup, are you sure?" — and
+     he is right. It was a two-press toast, which is easy to miss entirely and
+     easy to arm by accident. A destructive action gets a dialog that STOPS you,
+     names the thing, and says what breaks.
+
+     Three rules the dialog keeps:
+       · Cancel is the default and holds focus, so Enter is always the safe key.
+       · The body says the CONSEQUENCE, not "this cannot be undone" — the desk
+         needs to know that 34 appointments lose a warning, not that deletion
+         is permanent, which they already assume.
+       · The destructive button says what it does ("Delete the flag type"),
+         never "OK". A button labelled OK tells you nothing about what you are
+         agreeing to.  */
+
+  /* ---------- RESIZABLE COLUMNS ----------
+     Carlos, 2026-08-12: "make columns customizable in width to read better".
+     The waitlist has eleven columns and the reason a patient is urgent is the
+     one that matters most — it should not be the one squeezed to two words
+     because "Doctor wants them seen" is a long heading.
+
+     Two things this deliberately does NOT do:
+       · It does not switch the table to a fixed layout up front. The automatic
+         widths are a good default; the first drag FREEZES what is on screen and
+         goes from there, so nothing moves until somebody asks it to.
+       · It does not let a column go under 60px. A column dragged to nothing is
+         a column you cannot find again to drag back.
+     Widths are per browser, per table, and a double-click on any grip puts the
+     whole table back to automatic. */
+  var COL_KEY = 'hcos-cols-v1';
+  function colStore() {
+    try { return JSON.parse(localStorage.getItem(COL_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function colSave(id, widths) {
+    var all = colStore();
+    if (widths) all[id] = widths; else delete all[id];
+    try { localStorage.setItem(COL_KEY, JSON.stringify(all)); } catch (e) {}
+  }
+  function tableId(tbl, i) {
+    var sc = tbl.closest ? tbl.closest('.screen') : null;
+    return PAGE + '/' + (sc && sc.id ? sc.id : 'main') + '/' + i;
+  }
+  function colFreeze(tbl) {
+    if (tbl.dataset.colsFrozen) return;
+    var ths = tbl.querySelectorAll('thead th');
+    var w = [].map.call(ths, function (th) { return th.getBoundingClientRect().width; });
+    tbl.style.tableLayout = 'fixed';
+    tbl.style.width = tbl.getBoundingClientRect().width + 'px';
+    [].forEach.call(ths, function (th, i) { th.style.width = Math.round(w[i]) + 'px'; });
+    tbl.dataset.colsFrozen = '1';
+  }
+  function colApply(tbl, widths) {
+    if (!widths || !widths.length) return;
+    colFreeze(tbl);
+    var ths = tbl.querySelectorAll('thead th');
+    widths.forEach(function (v, i) { if (ths[i] && v) ths[i].style.width = v + 'px'; });
+    var total = widths.reduce(function (a, b) { return a + (b || 0); }, 0);
+    if (total) tbl.style.width = total + 'px';
+  }
+  function colWidths(tbl) {
+    return [].map.call(tbl.querySelectorAll('thead th'), function (th) {
+      return Math.round(th.getBoundingClientRect().width);
+    });
+  }
+  function colReset(tbl, id) {
+    [].forEach.call(tbl.querySelectorAll('thead th'), function (th) { th.style.width = ''; });
+    tbl.style.tableLayout = '';
+    tbl.style.width = '';
+    delete tbl.dataset.colsFrozen;
+    colSave(id, null);
+    toast('Column widths reset — back to automatic.', 'ok');
+  }
+  function wireColumns(root) {
+    var tables = (root || document).querySelectorAll('table.tbl');
+    [].forEach.call(tables, function (tbl, ti) {
+      if (tbl.dataset.colsWired) return;
+      tbl.dataset.colsWired = '1';
+      var id = tableId(tbl, ti);
+      var ths = tbl.querySelectorAll('thead th');
+      if (ths.length < 2) return;
+      var saved = colStore()[id];
+      if (saved) colApply(tbl, saved);
+
+      [].forEach.call(ths, function (th, i) {
+        if (i === ths.length - 1) return;      /* the last column takes the slack */
+        th.classList.add('col-sizable');
+        var g = el('span', 'col-grip');
+        g.setAttribute('role', 'separator');
+        g.setAttribute('tabindex', '0');
+        g.setAttribute('aria-orientation', 'vertical');
+        g.setAttribute('aria-label', 'Resize this column. Arrow keys adjust, double-click resets every column.');
+        g.title = 'Drag to resize · double-click to reset';
+        th.appendChild(g);
+
+        function nudge(dx) {
+          colFreeze(tbl);
+          var w = Math.max(60, th.getBoundingClientRect().width + dx);
+          th.style.width = Math.round(w) + 'px';
+          tbl.style.width = colWidths(tbl).reduce(function (a, b) { return a + b; }, 0) + 'px';
+        }
+        g.addEventListener('pointerdown', function (ev) {
+          ev.preventDefault();
+          colFreeze(tbl);
+          var x0 = ev.clientX, w0 = th.getBoundingClientRect().width;
+          document.body.classList.add('col-resizing');
+          g.setPointerCapture(ev.pointerId);
+          function move(e) {
+            var w = Math.max(60, w0 + (e.clientX - x0));
+            th.style.width = Math.round(w) + 'px';
+            tbl.style.width = colWidths(tbl).reduce(function (a, b) { return a + b; }, 0) + 'px';
+          }
+          function up() {
+            g.removeEventListener('pointermove', move);
+            g.removeEventListener('pointerup', up);
+            document.body.classList.remove('col-resizing');
+            colSave(id, colWidths(tbl));
+          }
+          g.addEventListener('pointermove', move);
+          g.addEventListener('pointerup', up);
+        });
+        g.addEventListener('dblclick', function (ev) { ev.preventDefault(); colReset(tbl, id); });
+        g.addEventListener('keydown', function (ev) {
+          var step = ev.shiftKey ? 40 : 12;
+          if (ev.key === 'ArrowRight') { ev.preventDefault(); nudge(step); colSave(id, colWidths(tbl)); }
+          else if (ev.key === 'ArrowLeft') { ev.preventDefault(); nudge(-step); colSave(id, colWidths(tbl)); }
+          else if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); colReset(tbl, id); }
+        });
+      });
+    });
+  }
+
+  var confirmEl = null;
+  function buildConfirm() {
+    confirmEl = el('div', 'modal-overlay confirm-overlay');
+    confirmEl.id = 'hcos-confirm';
+    confirmEl.innerHTML =
+      '<div class="modal confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="hcos-confirm-t">' +
+        '<div class="modal-head"><div class="modal-title" id="hcos-confirm-t"></div></div>' +
+        '<div class="modal-body"><div class="confirm-body" id="hcos-confirm-b"></div>' +
+          '<div class="confirm-what" id="hcos-confirm-w"></div></div>' +
+        '<div class="modal-foot">' +
+          '<button class="btn" id="hcos-confirm-no" data-hcos-handled="1">Cancel</button>' +
+          '<button class="btn btn-danger" id="hcos-confirm-yes" data-hcos-handled="1"></button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(confirmEl);
+    confirmEl.addEventListener('click', function (ev) {
+      if (ev.target === confirmEl) closeConfirm();
+    });
+    document.getElementById('hcos-confirm-no').addEventListener('click', closeConfirm);
+  }
+  function closeConfirm() {
+    if (confirmEl) confirmEl.classList.remove('open');
+  }
+  function confirmAction(o) {
+    if (!confirmEl) buildConfirm();
+    o = o || {};
+    document.getElementById('hcos-confirm-t').textContent = o.title || 'Are you sure?';
+    document.getElementById('hcos-confirm-b').innerHTML = o.body || '';
+    var w = document.getElementById('hcos-confirm-w');
+    w.innerHTML = o.consequence || '';
+    w.style.display = o.consequence ? '' : 'none';
+    var yes = document.getElementById('hcos-confirm-yes');
+    yes.textContent = o.confirm || 'Delete it';
+    var fresh = yes.cloneNode(true);          /* drop the previous handler */
+    yes.parentNode.replaceChild(fresh, yes);
+    fresh.addEventListener('click', function () {
+      closeConfirm();
+      if (typeof o.onConfirm === 'function') o.onConfirm();
+    });
+    confirmEl.classList.add('open');
+    /* Cancel holds focus: Enter is always the safe key */
+    setTimeout(function () { document.getElementById('hcos-confirm-no').focus(); }, 30);
+  }
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && confirmEl && confirmEl.classList.contains('open')) closeConfirm();
+  });
 
   window.HCOS = {
     toast: toast,
     activate: activate,
     modules: MODULES,
-    openNotes: function () { openNotesDrawer(); }
+    openNotes: function () { openNotesDrawer(); },
+    confirm: confirmAction,
+    wireColumns: wireColumns
   };
 
   if (document.readyState === 'loading') {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=81">
+<link rel="stylesheet" href="assets/hcos.css?v=82">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -1500,7 +1500,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=81"></script>
+<script src="assets/hcos.js?v=82"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {
@@ -1648,19 +1648,23 @@
     HCOS.toast(tl ? 'Adding a subtype under ' + tl + ' — it needs a name, a colour and a default duration.'
                   : 'Adding a subtype — pick the type it belongs to first.', 'ok');
   }
-  var TS_ARMED = null;
   function tsDelete(btn, name) {
-    if (TS_ARMED !== name) {
-      TS_ARMED = name;
-      HCOS.toast('Delete "' + name + '"? Appointments already booked as it keep it on the record, but nobody can book it again. Press delete again to confirm.', 'warn');
-      setTimeout(function () { if (TS_ARMED === name) TS_ARMED = null; }, 8000);
-      return;
-    }
-    TS_ARMED = null;
     var row = btn.closest('tr');
-    if (row) row.remove();
-    tsFilter();
-    HCOS.toast('"' + name + '" retired. It is gone from booking and the filters; past appointments keep it.', 'ok');
+    var ty = row ? (row.children[2] || {}).textContent : '';
+    HCOS.confirm({
+      title: 'Retire "' + name + '"?',
+      body: 'It disappears from booking, the filters, the legend and the capacity rows across the '
+          + 'whole platform. Nobody can book it again.',
+      consequence: 'Appointments already booked as <b>' + name + '</b> keep it on the record &mdash; '
+          + 'a past appointment does not change because the menu did. Reports over old periods '
+          + 'still show it under ' + (ty || 'its type') + '.',
+      confirm: 'Retire the subtype',
+      onConfirm: function () {
+        if (row) row.remove();
+        tsFilter();
+        HCOS.toast('"' + name + '" retired. Past appointments keep it.', 'ok');
+      }
+    });
   }
   window.tsFilter = tsFilter; window.tsAdd = tsAdd; window.tsDelete = tsDelete;
 </script>
