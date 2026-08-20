@@ -512,10 +512,16 @@
   function widgetScreenLabel() { return PAGE + '/' + widgetScreenId(); }
 
   function buildWidget() {
+    /* The floating Feedback button is gone (Carlos, 2026-08-12). It sat bottom
+       right, which is exactly where the page action bar's primary button now
+       lives, and a permanent chrome button competing with Save is worse than no
+       button. The WIDGET is still built and still works — the panel, the pins,
+       the notes drawer, the export — it is only the floating launcher that is
+       not rendered, so the collaboration loop is intact and can be given a new
+       home whenever we pick one. HCOS.openFeedback() opens it from anywhere. */
     fbkBtn = el('button', 'fbk-btn');
     fbkBtn.innerHTML = '✎ Feedback <span class="fbk-count" style="display:none">0</span>';
     fbkBtn.addEventListener('click', function () { fbkPanel.classList.toggle('open'); });
-    body.appendChild(fbkBtn);
 
     fbkPanel = el('div', 'fbk-panel');
     var typeChips = NOTE_TYPES.map(function (t) {
@@ -1156,7 +1162,8 @@
     modules: MODULES,
     openNotes: function () { openNotesDrawer(); },
     confirm: confirmAction,
-    wireColumns: wireColumns
+    wireColumns: wireColumns,
+    openFeedback: function () { if (fbkPanel) fbkPanel.classList.add('open'); }
   };
 
   if (document.readyState === 'loading') {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=82">
+<link rel="stylesheet" href="assets/hcos.css?v=83">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -3557,10 +3557,6 @@
               </div>
             </div>
 
-            <div class="form-foot">
-              <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
-              <button class="btn" data-activate="l-08-flags">Cancel</button>
-            </div>
           </div>
 
           <div class="card">
@@ -3597,6 +3593,13 @@
               appointment detail, the hover card, the list view and check-in. There is no
               per-screen copy to keep in step.</span></div>
 
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <div class="page-actions-main">
+            <button class="btn" data-activate="l-08-flags">Cancel</button>
+            <button class="btn btn-primary" onclick="lFlagNew()">Create the flag type</button>
           </div>
         </div>
       </div>
@@ -3680,14 +3683,15 @@
             </div>
             <div class="prov"><span><strong>Last changed</strong> Dr. Drannikov &middot; 12 June 2026</span></div>
 
-            <div class="form-foot">
-              <button class="btn btn-primary" onclick="HCOS.toast('Saved. Every screen that shows this flag picks up the change.', 'ok')">Save the flag</button>
-              <button class="btn" data-activate="l-08-flags">Cancel</button>
-              <button class="btn btn-danger form-foot-danger" onclick="lFlagDelete('allergyfood')">
-                &#128465; Delete this flag type</button>
-            </div>
-            <div class="field-help">Deleting asks twice and tells you how many appointments carry
-              it right now &mdash; they lose the warning the moment it goes.</div>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <button class="btn btn-danger" onclick="lFlagDelete('allergyfood')">&#128465; Delete this flag type</button>
+          <div class="page-actions-main">
+            <span class="page-actions-note">34 patients carry it &mdash; deleting asks first</span>
+            <button class="btn" data-activate="l-08-flags">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved. Every screen that shows this flag picks up the change.', 'ok')">Save the flag</button>
           </div>
         </div>
       </div>
@@ -4249,10 +4253,6 @@
 
             <div class="prov" id="o-say"><span>&nbsp;</span></div>
 
-            <div class="form-foot">
-              <button class="btn btn-primary" onclick="lOfferGo()">Send the offer</button>
-              <button class="btn" data-activate="l-10-waitlist">Cancel</button>
-            </div>
           </div>
 
           <div class="card">
@@ -4304,6 +4304,13 @@
 
             <div class="prov"><span>Every message, every accept and every auto-reply lands on the
               patient&rsquo;s communication log with the time and who sent it.</span></div>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <div class="page-actions-main">
+            <button class="btn" data-activate="l-10-waitlist">Cancel</button>
+            <button class="btn btn-primary" onclick="lOfferGo()">Send the offer</button>
           </div>
         </div>
       </div>
@@ -4532,7 +4539,6 @@
           </div>
           <div class="app-user">
             <button class="btn" data-activate="l-11-blocks">Back to blocks</button>
-            <button class="btn btn-primary" onclick="HCOS.toast('Saved. 128 future occurrences updated; the 47 in the past are left alone.', 'ok')">Save the block</button>
           </div>
         </div>
 
@@ -4602,6 +4608,20 @@
               a change; the request lands in Shibani's queue.</div>
             <div class="prov"><span><strong>Created</strong> Shibani &middot; 4 March 2026 &middot;
               <strong>last changed</strong> Shibani &middot; 12 June 2026</span></div>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <button class="btn btn-danger" onclick="HCOS.confirm({
+            title: 'Delete the Lunch block?',
+            body: 'Every slot it protects opens to normal booking, on all 128 future occurrences.',
+            consequence: 'The 47 that already happened are left alone. Only a manager can do this, and it is logged against your name.',
+            confirm: 'Delete the block',
+            onConfirm: function(){ lGo('l-11-blocks'); HCOS.toast('Lunch deleted. 128 future occurrences released.', 'ok'); }})">&#128465; Delete this block</button>
+          <div class="page-actions-main">
+            <span class="page-actions-note">128 future occurrences &middot; the 47 past ones are left alone</span>
+            <button class="btn" data-activate="l-11-blocks">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved. 128 future occurrences updated; the 47 in the past are left alone.', 'ok')">Save the block</button>
           </div>
         </div>
       </div>
@@ -5171,10 +5191,6 @@
                 the doctor signs.</div>
             </div>
 
-            <div class="form-foot">
-              <button class="btn btn-primary" onclick="HCOS.toast('Request sent to Dr. Drannikov. Thursday 8:00 AM is held as tentative and Priya has been told.', 'ok')">Send the request</button>
-              <button class="btn" data-activate="l-03-book">Cancel</button>
-            </div>
           </div>
 
           <div class="card">
@@ -5229,6 +5245,13 @@
 
             <div class="prov"><span>Every state is here on purpose: active, expired, drafted and
               declined all look different at the desk, and only one of them lets you book.</span></div>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <div class="page-actions-main">
+            <button class="btn" data-activate="l-03-book">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Request sent to Dr. Drannikov. Thursday 8:00 AM is held as tentative and Priya has been told.', 'ok')">Send the request</button>
           </div>
         </div>
       </div>
@@ -6003,7 +6026,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=82"></script>
+<script src="assets/hcos.js?v=83"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.

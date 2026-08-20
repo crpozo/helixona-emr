@@ -764,3 +764,35 @@ day-board rules, not by these.
 
 **A control's escape hatch sits BESIDE it, not under it.** "Clear" stacked below "Remember these
 filters" read as a separate feature; they are one thing.
+
+## The page action bar — one standard (Carlos, 2026-08-12)
+
+**Save is never inside a card, and it is always the rightmost thing on the page.**
+`<div class="page-actions">` sits outside every card, directly in the `.frame-body`, sticky to the
+bottom of the viewport so a long form never hides it. On a two-column screen a Save inside a card
+makes the reader work out which card it belongs to — and on the flag screen it had drifted into the
+PREVIEW card, saving something it was not part of.
+
+The order is deliberate:
+
+    [ 🗑 destructive ]  ……………  [ note ] [ Cancel ] [ PRIMARY ]
+
+Destructive far left, away from the hand. The consequence note beside the safe actions. Cancel,
+then the primary, so the last thing under the cursor is the one you meant. Five screens use it:
+add a flag, edit a flag, offer a slot, request an order, edit a block.
+
+**The floating Feedback button is gone (2026-08-12).** It lived bottom-right, which is exactly
+where the action bar's primary button now is, and permanent chrome competing with Save is worse
+than no launcher. **The widget itself is untouched** — the panel, the pins, the count, the notes
+drawer and the export all still work, and `HCOS.openFeedback()` opens it from anywhere. Only the
+launcher is unrendered, so the collaboration loop is intact and needs a new home rather than a
+rebuild.
+
+**`HCOS.confirm({title, body, consequence, confirm, onConfirm})`** is the only way to do something
+irreversible. Cancel holds focus so Enter is always the safe key; the body says the CONSEQUENCE,
+not "this cannot be undone"; and the destructive button says what it does, never "OK".
+
+**`HCOS.wireColumns()`** makes every `.tbl` resizable by dragging its header edges. It does not
+switch to a fixed layout up front — the automatic widths are a good default, and the first drag
+freezes what is on screen. Minimum 60px, because a column dragged to nothing cannot be found again
+to drag back. Arrow keys resize a focused grip, double-click resets, widths persist per browser.

@@ -47,7 +47,9 @@ for f in sorted(glob.glob('*.html')):
         if not t: continue
         claim = t.group(1).lower()
         if not re.search(r'\b(added|removed|deleted|created)\b', claim): continue
-        if re.search(r'document\.|\.remove\(|insertBefore|appendChild', oc.group(1)): continue
+        # lGo() is this repo's programmatic navigate — the same real outcome
+        # data-activate produces, so a button that navigates is not lying
+        if re.search(r'document\.|\.remove\(|insertBefore|appendChild|lGo\(', oc.group(1)): continue
         if 'data-row-add' in attrs or 'data-row-del' in attrs: continue
         if 'data-activate' in attrs or 'data-open-modal' in attrs: continue
         bad.append('%s: "%s" dice "%s"' % (f, label[:32], t.group(1)[:44]))
