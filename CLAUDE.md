@@ -796,3 +796,60 @@ not "this cannot be undone"; and the destructive button says what it does, never
 switch to a fixed layout up front — the automatic widths are a good default, and the first drag
 freezes what is on screen. Minimum 60px, because a column dragged to nothing cannot be found again
 to drag back. Arrow keys resize a focused grip, double-click resets, widths persist per browser.
+
+## Shared vocabulary (Carlos, 2026-08-12: "we cannot invent every nomenclature each time")
+
+`HCOS` owns one registry and every screen reads it. Resources, hours, days and frequency were
+written out by hand per screen, so the same chair was "IV 1 · Nick · Nurse" in one place and
+"IV 1 (Nick)" in another.
+
+- **A ROOM IS NOT A DOCTOR.** Every resource carries a **kind** — Provider, IV chair, Room,
+  Equipment — and the kind is always shown. `HCOS.resourceOptions()` groups by it,
+  `HCOS.resourceChecks()` is the multi-select, `HCOS.resourceLabel(id)` gives "Provider ·
+  Dr. Drannikov". Nobody should have to know from memory that Room 2 is a place.
+- **`HCOS.hourOptions({from, to, step})`** — every half hour, and 24 of them when a screen asks.
+  Four hand-typed options is how a deep clean at 11 PM becomes impossible to schedule.
+- **`HCOS.dayChips()` / `HCOS.freqOptions()`** — one day list including **Saturday and Sunday**
+  (the clinic opens at the weekend) and one frequency list: Just once, Daily, Weekly, Every two
+  weeks, Monthly, Forever.
+- Filters name what they filter: **Appointment types**, **Appointment subtypes**, **Appointment
+  statuses**. "All types" told you nothing about which types.
+
+## Tasks (Module L, added 2026-08-12)
+
+`schedule.html#/l-13-tasks`. **Tasks are raised, updated and closed BY THE SYSTEM**, not typed —
+a waitlist cancellation raises one for the front desk, a freed slot that matches somebody raises the
+offer here rather than in a person's memory. `lTkRaise({pri, bucket, owner, title, body, go})` is
+the hook; the waitlist's remove path already uses it.
+
+- **When the thing that caused a task stops being true, the task closes itself and says why.** A
+  list somebody has to tidy by hand stops being true within a week and then nobody reads it.
+- **Dismissing is not doing.** The dialog says so: the cause is still true, so the system will raise
+  it again. If it should never have been raised, that is a note, not a dismissal.
+- **Every task names what raised it.** A task with no source is the first thing people stop
+  trusting.
+
+## Patterns can be wrong (2026-08-12)
+
+Every row on `l-09-insights` can be accepted, rejected or deleted, and records **who** did it — a
+suggestion nobody has looked at and one a nurse rejected must not look the same. **Rejecting beats
+deleting** and the dialog says why: the recorded disagreement is what stops the same thing being
+offered next month. A **no-show pattern is marked apart and carries a phone-call action**, because
+"Victor no-shows before 10 AM" is only useful if somebody rings Victor.
+
+**The patient profile is one screen and many patients** (`ptOpen(name)`, or `patients.html?pt=Name`).
+Ten of them, chosen so every case is reachable — including one with no pattern at all, because
+"nothing to say" is a case the design has to handle and the one that gets forgotten.
+
+## Retiring a flag type is two decisions, and only a super admin makes them
+
+Nobody can assign it again — not optional. Then: what happens to the patients who already carry it?
+**Keeping is the default** (a documented allergy does not stop being true because the menu changed);
+stripping is offered second, for a flag created by mistake or one whose wording should never have
+been written.
+
+## Do not wire the DOM on requestAnimationFrame alone
+
+**rAF does not fire in a hidden tab.** Column resizing and the overflow hints were wired in one, so
+a page opened in a background tab had neither — and still had neither once you looked at it. They
+run immediately, again on `load`, and again on `visibilitychange`. `HCOS.wireTables()` is idempotent.

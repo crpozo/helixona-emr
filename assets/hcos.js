@@ -973,8 +973,16 @@
     }
 
     loadPublishedNotes();
-    /* after the shell exists, so the tables have their real widths to freeze */
-    requestAnimationFrame(function () { wireColumns(); wireScrollHints(); });
+    /* Tables get their grips and their scroll hints after the shell exists, so
+       there are real widths to freeze. NOT on requestAnimationFrame alone:
+       rAF does not fire in a hidden tab, so a page opened in the background had
+       no resizable columns and no overflow warning until somebody looked at it,
+       and then still did not. Run now, run again when the page is shown. */
+    wireTables();
+    window.addEventListener('load', wireTables);
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) wireTables();
+    });
   }
 
 
@@ -1226,6 +1234,14 @@
   /* A table that overflows silently is a table whose last three columns do not
      exist as far as the reader is concerned. Every .tbl-wrap says which way it
      has more, and how many columns are off-screen. */
+  /* one entry point, safe to call as often as you like — both wirers mark what
+     they have already done */
+  function wireTables() {
+    try { wireColumns(); } catch (e) {}
+    try { wireScrollHints(); } catch (e) {}
+    setTimeout(function () { try { wireScrollHints(); } catch (e) {} }, 300);
+  }
+
   function wireScrollHints(root) {
     var wraps = (root || document).querySelectorAll('.tbl-wrap');
     [].forEach.call(wraps, function (w) {
@@ -1310,7 +1326,7 @@
     modules: MODULES,
     openNotes: function () { openNotesDrawer(); },
     confirm: confirmAction,
-    wireColumns: wireColumns, wireScrollHints: wireScrollHints,
+    wireColumns: wireColumns, wireScrollHints: wireScrollHints, wireTables: wireTables,
     openFeedback: function () { if (fbkPanel) fbkPanel.classList.add('open'); },
     RESOURCES: RESOURCES, RESOURCE_KINDS: RESOURCE_KINDS, DAYS: DAYS, FREQ: FREQ,
     resourceById: resourceById, resourceLabel: resourceLabel,

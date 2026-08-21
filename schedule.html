@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=84">
+<link rel="stylesheet" href="assets/hcos.css?v=87">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -166,6 +166,7 @@
                     <div class="msel-foot">
                       <button class="msel-all" data-hcos-handled="1" type="button">Select all</button>
                       <button class="msel-clear" data-hcos-handled="1" type="button">Clear types</button>
+                      <button class="msel-apply btn-primary" data-hcos-handled="1" type="button">Apply</button>
                     </div>
                   </div>
                 </div>
@@ -252,6 +253,7 @@
                     <div class="msel-foot">
                       <button class="msel-all" data-hcos-handled="1" type="button">Select all</button>
                       <button class="msel-clear" data-hcos-handled="1" type="button">Clear subtypes</button>
+                      <button class="msel-apply btn-primary" data-hcos-handled="1" type="button">Apply</button>
                     </div>
                   </div>
                 </div>
@@ -275,6 +277,7 @@
                     <div class="msel-foot">
                       <button class="msel-all" data-hcos-handled="1" type="button">Select all</button>
                       <button class="msel-clear" data-hcos-handled="1" type="button">Clear statuses</button>
+                      <button class="msel-apply btn-primary" data-hcos-handled="1" type="button">Apply</button>
                     </div>
                   </div>
                 </div>
@@ -2886,7 +2889,7 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-08-flags" data-title="Flag setup">
+  <section class="screen" id="l-08-flags" data-approved="2026-08-13" data-title="Flag setup">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/flags</span></div>
@@ -3339,7 +3342,7 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-08-flags-new" data-title="Add a flag type">
+  <section class="screen" id="l-08-flags-new" data-approved="2026-08-13" data-title="Add a flag type">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/flags/new</span></div>
@@ -4407,7 +4410,7 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-10-offer" data-title="Offer this slot">
+  <section class="screen" id="l-10-offer" data-approved="2026-08-13" data-title="Offer this slot">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule/waitlist/offer</span></div>
@@ -4879,7 +4882,7 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-12-list" data-title="List view">
+  <section class="screen" id="l-12-list" data-approved="2026-08-13" data-title="List view">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
         <span class="frame-url">hcos.helixona.com/schedule?view=list</span></div>
@@ -4935,6 +4938,194 @@
             <option value="0">Show all</option>
           </select>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="l-13-tasks" data-title="Tasks">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Tasks</div>
+            <div class="page-sub">What the clinic owes somebody today &mdash; most of it raised by the system, not typed by a person</div>
+          </div>
+          <div class="app-user"><button class="btn" onclick="HCOS.toast('A task you raise by hand needs an owner and a due date, same as one the system raises.', 'ok')">Raise one by hand</button></div>
+        </div>
+
+        <div class="callout">
+          <strong>Tasks are created, updated and closed by the software.</strong>
+          A patient cancels off the waitlist and a task appears for the front desk. An appointment
+          frees and matches four people, and the offer lands here rather than in somebody&rsquo;s
+          memory. When the thing that caused a task stops being true &mdash; the slot gets filled,
+          the order gets signed &mdash; <strong>the task closes itself and says so</strong>. Nobody
+          maintains this list by hand, which is the only reason it can be trusted.
+        </div>
+
+        <div class="l-filters">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <select class="field-select l-select" id="tk-f-bucket" onchange="lTkFilter()"
+                      aria-label="Bucket" style="min-width:180px">
+                <option value="">Every bucket</option>
+                <option value="Scheduling">Scheduling</option>
+                <option value="Clinical">Clinical</option>
+                <option value="Billing">Billing</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select" id="tk-f-pri" onchange="lTkFilter()"
+                      aria-label="Priority" style="min-width:160px">
+                <option value="">Any priority</option>
+                <option value="urgent">Urgent only</option>
+                <option value="urgent,high">Urgent and soon</option>
+              </select>
+              <select class="field-select l-select" id="tk-f-state" onchange="lTkFilter()"
+                      aria-label="State" style="min-width:150px">
+                <option value="open" selected>Still open</option>
+                <option value="">Open and done</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="l-view-group"><span class="l-count" id="l-tk-count">6 open</span></div>
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:12px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Priority</th>
+              <th scope="col">What needs doing</th>
+              <th scope="col">Bucket</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Due</th>
+              <th scope="col">Raised by</th>
+              <th scope="col">Actions</th>
+            </tr></thead>
+            <tbody id="l-tk-body">
+              <tr class="tk-row" id="t1" data-state="open" data-pri="urgent" data-bucket="Scheduling">
+                <td><span class="pri pri-urgent">Urgent</span></td>
+                <td><strong>Grace Lindqvist cancelled her 10:00 with Brooke</strong><div class="field-help">4 people on the waitlist match that window, 2 of them urgent. Offer it or release it.</div></td>
+                <td>Scheduling</td>
+                <td>Yazmin · Front desk</td>
+                <td>Today</td>
+                <td><span class="prov" style="margin:0;font-size:11px">The system, 8 minutes ago</span></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Open the offer</button>
+                  <button class="btn btn-sm" onclick="lTkDone('t1')">Done</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Grace Lindqvist cancelled her 10:00 with Brooke')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row" id="t2" data-state="open" data-pri="urgent" data-bucket="Scheduling">
+                <td><span class="pri pri-urgent">Urgent</span></td>
+                <td><strong>Nina Kowalski is 5 days past the date Dr. Drannikov set</strong><div class="field-help">Post-EBOO follow-up. She is urgent on the waitlist and has waited 9 days.</div></td>
+                <td>Scheduling</td>
+                <td>Yazmin · Front desk</td>
+                <td>Today</td>
+                <td><span class="prov" style="margin:0;font-size:11px">The system, this morning</span></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-waitlist">Open the waitlist</button>
+                  <button class="btn btn-sm" onclick="lTkDone('t2')">Done</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Nina Kowalski is 5 days past the date Dr. Drannikov set')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row" id="t3" data-state="open" data-pri="urgent" data-bucket="Clinical">
+                <td><span class="pri pri-urgent">Urgent</span></td>
+                <td><strong>Victor Reyes no-shows before 10 AM — call him</strong><div class="field-help">Three no-shows in 90 days, all between 8:00 and 9:30. The pattern needs a person, not a rule.</div></td>
+                <td>Clinical</td>
+                <td>Bee · PCC</td>
+                <td>Today</td>
+                <td><span class="prov" style="margin:0;font-size:11px">Appointment patterns, yesterday</span></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm btn-primary" data-activate="l-09-insights">See the pattern</button>
+                  <button class="btn btn-sm" onclick="lTkDone('t3')">Done</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Victor Reyes no-shows before 10 AM — call him')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row" id="t4" data-state="open" data-pri="high" data-bucket="Scheduling">
+                <td><span class="pri pri-high">Soon</span></td>
+                <td><strong>Yuki Tanaka took herself off the waitlist</strong><div class="field-help">She cancelled her waitlist entry at 7:42 AM. Her Sep 2 appointment still stands — check she meant that.</div></td>
+                <td>Scheduling</td>
+                <td>Yazmin · Front desk</td>
+                <td>Today</td>
+                <td><span class="prov" style="margin:0;font-size:11px">The system, 2 hours ago</span></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm btn-primary" data-activate="l-10-waitlist">Open the waitlist</button>
+                  <button class="btn btn-sm" onclick="lTkDone('t4')">Done</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Yuki Tanaka took herself off the waitlist')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row" id="t5" data-state="open" data-pri="high" data-bucket="Billing">
+                <td><span class="pri pri-high">Soon</span></td>
+                <td><strong>Priya Natarajan has no signed order for Cellular Boost</strong><div class="field-help">Thursday 8:00 AM is held tentative. Dr. Drannikov has not signed the renewal.</div></td>
+                <td>Billing</td>
+                <td>Dr. Drannikov</td>
+                <td>Tomorrow</td>
+                <td><span class="prov" style="margin:0;font-size:11px">Booking, yesterday</span></td>
+                <td class="row-acts">
+                  <button class="btn btn-sm btn-primary" data-activate="l-03-order">Open the request</button>
+                  <button class="btn btn-sm" onclick="lTkDone('t5')">Done</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Priya Natarajan has no signed order for Cellular Boost')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row" id="t6" data-state="open" data-pri="routine" data-bucket="Admin">
+                <td><span class="pri pri-routine">When you can</span></td>
+                <td><strong>Ben Okonkwo owes $340 across two visits</strong><div class="field-help">Unpaid since May. It shows at check-in but nobody has called.</div></td>
+                <td>Admin</td>
+                <td>Karina · Operations</td>
+                <td>This week</td>
+                <td><span class="prov" style="margin:0;font-size:11px">Billing, 3 days ago</span></td>
+                <td class="row-acts">
+                  
+                  <button class="btn btn-sm" onclick="lTkDone('t6')">Done</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Ben Okonkwo owes $340 across two visits')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row is-done" id="t7" data-state="done" data-pri="high" data-bucket="Scheduling">
+                <td><span class="pri pri-high">Soon</span></td>
+                <td><strong>Maya Reyes booked at her own average, not the protocol</strong><div class="field-help">Her Mega C 100g is booked 3 h 20 instead of 3 h.</div></td>
+                <td>Scheduling</td>
+                <td>Yazmin · Front desk</td>
+                <td>Done 19 Jul</td>
+                <td><span class="prov" style="margin:0;font-size:11px">Appointment patterns, 19 Jul</span></td>
+                <td class="row-acts">
+                  
+                  
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Maya Reyes booked at her own average, not the protocol')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="tk-row is-done" id="t8" data-state="done" data-pri="routine" data-bucket="Admin">
+                <td><span class="pri pri-routine">When you can</span></td>
+                <td><strong>Nightly list PDF stored</strong><div class="field-help">Yesterday 9:00 PM · 88 appointments · 6 pages, in the practice bucket.</div></td>
+                <td>Admin</td>
+                <td>Nobody — automatic</td>
+                <td>Done</td>
+                <td><span class="prov" style="margin:0;font-size:11px">The system, last night</span></td>
+                <td class="row-acts">
+                  
+                  
+                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
+                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Nightly list PDF stored')">&#128465;</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov"><span>Every task names what raised it. A task with no source is a task
+          nobody can check, and it is the first thing people stop trusting.</span></div>
       </div>
     </div>
   </section>
@@ -5809,94 +6000,154 @@
 </div>
 
 <div class="modal-overlay" id="l-export-modal" data-close-modal>
-  <div class="modal">
+  <div class="modal modal-wide">
     <div class="modal-head">
-      <div>
-        <div class="modal-title">Export the day</div>
-        <div class="modal-sub">Tuesday, July 21 &middot; 92 appointments</div>
-      </div>
-      <button class="modal-close" data-close-modal>&times;</button>
+      <div class="modal-title">Export the day</div>
+      <div class="modal-sub">Tuesday, July 21 &middot; 92 appointments</div>
+      <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
+
+    <div class="tab-row" role="tablist">
+      <button class="tab-btn is-on" role="tab" aria-selected="true" type="button"
+              onclick="lExTab('go',this)">Download or send</button>
+      <button class="tab-btn" role="tab" aria-selected="false" type="button"
+              onclick="lExTab('cols',this)">Choose columns</button>
+      <button class="tab-btn" role="tab" aria-selected="false" type="button"
+              onclick="lExTab('set',this)">Settings</button>
+    </div>
+
     <div class="modal-body">
-      <div class="callout">
-        <strong>This is the outage plan.</strong> A PDF of tomorrow's list is generated and
-        stored every night, so if the system is down in the morning the desk still knows who is
-        coming, when, with whom, and what they owe.
-      </div>
-      <div class="field">
-        <span class="field-lbl">What to include</span>
-        <div class="chip-row">
-          <button class="filter-chip multi active" type="button">Every column</button>
-          <button class="filter-chip multi active" type="button">Alerts and flags</button>
-          <button class="filter-chip multi active" type="button">Phone numbers</button>
-          <button class="filter-chip multi active" type="button">Pending consents</button>
-          <button class="filter-chip multi active" type="button">Patient balance &mdash; amount to charge</button>
-          <button class="filter-chip multi active" type="button">Appointment notes</button>
-          <button class="filter-chip multi" type="button">Cancelled &amp; rescheduled appointments</button>
+
+      <!-- ---------- the thing most people came here to do ---------- -->
+      <div class="ex-tab" id="ex-go">
+        <div class="field">
+          <span class="field-lbl">What do you want?</span>
+          <div class="o-kinds">
+            <button class="o-kind-card is-on" type="button" onclick="lExWhat('pdf',this)">
+              <b>A PDF to print or read on a phone</b>
+              <span>One page per resource. This is the one to take home, and the one that still
+                works when nothing else does.</span>
+            </button>
+            <button class="o-kind-card" type="button" onclick="lExWhat('xls',this)">
+              <b>An Excel file</b>
+              <span>One row per appointment, every column you tick. For counting, sorting and
+                anything you want to paste somewhere else.</span>
+            </button>
+          </div>
         </div>
-        <div class="field-help">Only the columns you are filtered to are exported, so the PDF
-          matches what you are looking at. <strong>The balance column is the amount to key into
-          the card machine</strong> &mdash; it is there so the desk can still take payment on a
-          day when nothing else is up, which is the whole reason this export exists.</div>
+
+        <div class="field">
+          <span class="field-lbl">Then what?</span>
+          <div class="ex-do">
+            <button class="btn btn-lg btn-primary" onclick="lExDo('download')">
+              &#8681; Download it now</button>
+            <span class="ex-or">or</span>
+            <div class="ex-send">
+              <select class="field-select" id="l-ex-to" onchange="lExTo(this.value)" aria-label="Email it to">
+                <option value="desk" selected>Front desk &mdash; Yazmin, Haylee</option>
+                <option value="rota">Everyone on tomorrow&rsquo;s rota &mdash; 9 people</option>
+                <option value="mgmt">Karina &middot; Operations Manager</option>
+                <option value="me">Me &mdash; Yazmin</option>
+                <option value="other">Someone else&hellip;</option>
+              </select>
+              <button class="btn btn-lg" onclick="lExSend()">&#9993; Email it</button>
+            </div>
+          </div>
+          <div class="field" id="l-ex-other" style="display:none;margin-top:12px">
+            <label class="field-lbl" for="l-ex-addr">Send it to</label>
+            <input class="field-input" id="l-ex-addr" type="email" placeholder="name@helixona.com"
+                   aria-label="Send it to">
+            <div class="field-help">Outside addresses are logged with your name and the time.</div>
+          </div>
+        </div>
+
+        <div class="prov" id="l-ex-say"><span>&nbsp;</span></div>
       </div>
-      <div class="grid-2">
-        <div class="field"><label class="field-lbl" for="l-ex-fmt">Format</label>
-          <select class="field-select" id="l-ex-fmt">
-            <option>PDF &mdash; one page per resource</option>
-            <option>PDF &mdash; one continuous list</option>
-            <option>CSV</option>
-          </select></div>
-        <div class="field"><label class="field-lbl" for="l-ex-to">Email it to</label>
-          <select class="field-select" id="l-ex-to" onchange="lExTo(this.value)">
-            <option value="none">Just download it &mdash; do not email</option>
-            <option value="desk" selected>Front desk &mdash; Yazmin, Haylee</option>
-            <option value="rota">Everyone on tomorrow&rsquo;s rota &mdash; 9 people</option>
-            <option value="mgmt">Karina &middot; Operations Manager</option>
-            <option value="me">Me &mdash; Yazmin</option>
-            <option value="other">Someone else&hellip;</option>
-          </select></div>
+
+      <!-- ---------- columns, in words a person uses ---------- -->
+      <div class="ex-tab" id="ex-cols" style="display:none">
+        <div class="field-help" style="margin-bottom:14px">Everything is included unless you turn
+          it off. Whatever you are filtered to on the list is what comes out.</div>
+
+        <div class="ex-group">
+          <div class="ex-group-t">Always in</div>
+          <div class="ex-locked">Time &middot; Patient &middot; Appointment &middot; Who they are with</div>
+          <div class="field-help">Without these it is not a schedule.</div>
+        </div>
+
+        <div class="ex-group">
+          <div class="ex-group-t">Getting hold of them</div>
+          <label class="ex-check"><input type="checkbox" checked> <span><b>Phone number</b>
+            <em>So the desk can ring round without opening anything else.</em></span></label>
+        </div>
+
+        <div class="ex-group">
+          <div class="ex-group-t">What to watch for</div>
+          <label class="ex-check"><input type="checkbox" checked> <span><b>Alerts and flags</b>
+            <em>Allergies, pregnancy, fall risk &mdash; written out, not as symbols.</em></span></label>
+          <label class="ex-check"><input type="checkbox" checked> <span><b>Consents still missing</b>
+            <em>Which one is missing, so it can be signed at the desk.</em></span></label>
+          <label class="ex-check"><input type="checkbox" checked> <span><b>Notes on the appointment</b>
+            <em>What the last person wrote about this visit.</em></span></label>
+        </div>
+
+        <div class="ex-group">
+          <div class="ex-group-t">Money</div>
+          <label class="ex-check"><input type="checkbox" checked> <span><b>What to charge</b>
+            <em>The amount to key into the card machine. This is why the export exists &mdash;
+            it lets the desk take payment on a day when nothing else is up.</em></span></label>
+          <label class="ex-check"><input type="checkbox" checked> <span><b>Their insurance</b>
+            <em>Payer and whether they are in network.</em></span></label>
+        </div>
+
+        <div class="ex-group">
+          <div class="ex-group-t">Usually left out</div>
+          <label class="ex-check"><input type="checkbox"> <span><b>Cancelled and rescheduled</b>
+            <em>Off by default &mdash; nobody is coming to those.</em></span></label>
+          <label class="ex-check"><input type="checkbox"> <span><b>Care plan stage</b>
+            <em>Where each patient is in their plan.</em></span></label>
+        </div>
       </div>
-      <div class="field" id="l-ex-other" style="display:none">
-        <label class="field-lbl" for="l-ex-addr">Send it to</label>
-        <input class="field-input" id="l-ex-addr" type="email" placeholder="name@helixona.com"
-               aria-label="Send it to">
-        <div class="field-help">Outside addresses are logged with your name and the time, and the
-          PDF carries no patient identifiers beyond the name and the appointment.</div>
+
+      <!-- ---------- the part almost nobody needs to read ---------- -->
+      <div class="ex-tab" id="ex-set" style="display:none">
+        <div class="field-help" style="margin-bottom:14px">You do not need any of this to download
+          a list. It is here so somebody can check it once and not think about it again.</div>
+
+        <div class="seg-divider">The nightly safety copy</div>
+        <dl class="kv">
+          <dt>Runs at</dt><dd>9:00 PM, every night, whether anybody asks for it or not</dd>
+          <dt>Covers</dt><dd>The next working day, every resource, every column</dd>
+          <dt>Kept for</dt><dd>30 days, then deleted</dd>
+          <dt>Stored in</dt><dd>The practice&rsquo;s own AWS bucket &mdash; encrypted, versioned,
+            and the only copy with any authority</dd>
+          <dt>Last run</dt><dd>Yesterday 9:00 PM &middot; 88 appointments &middot; 6 pages</dd>
+        </dl>
+
+        <div class="field"><label class="field-lbl" for="l-ex-mirror">Also copy it to</label>
+          <select class="field-select" id="l-ex-mirror">
+            <option selected>Nowhere else &mdash; the bucket only</option>
+            <option>A shared Google Drive folder</option>
+            <option>A SharePoint library</option>
+          </select>
+          <div class="field-help"><strong>The bucket is written first and is the record.</strong>
+            A mirror is a convenience for the morning, not a second source of truth. It sits outside
+            the practice&rsquo;s control and needs a signed agreement before it is switched on.</div>
+        </div>
+
+        <div class="seg-divider">Remember my choices</div>
+        <label class="cx-toggle" id="l-ex-remember">
+          <input type="checkbox" onchange="lExRemember(this.checked)" aria-label="Remember these export settings">
+          Open this box with the columns and the format I picked last time
+        </label>
+        <div class="field-help">Kept in this browser only. Clearing it puts everything back to the
+          way it ships.</div>
+        <button class="btn btn-sm" id="l-ex-forget" onclick="lExForget()" style="display:none;margin-top:10px">Forget them</button>
       </div>
-      <div class="seg-divider">The nightly safety copy</div>
-      <dl class="kv">
-        <dt>Runs at</dt><dd>9:00 PM, every night, whether anybody asks for it or not</dd>
-        <dt>Covers</dt><dd>The next working day, every resource, every column</dd>
-        <dt>Kept for</dt><dd>30 days, then deleted</dd>
-        <dt>Stored in</dt><dd>The practice&rsquo;s own AWS bucket &mdash; encrypted, versioned, and
-          the only copy with any authority</dd>
-        <dt>Also copied to</dt><dd>The clinic&rsquo;s shared drive, so it opens on any phone with no
-          system at all</dd>
-        <dt>Last run</dt><dd>Yesterday 9:00 PM &middot; 88 appointments &middot; 6 pages</dd>
-      </dl>
-      <div class="field"><label class="field-lbl" for="l-ex-mirror">Copy it to</label>
-        <select class="field-select" id="l-ex-mirror">
-          <option selected>The AWS bucket only</option>
-          <option>AWS and a shared Google Drive folder</option>
-          <option>AWS and a SharePoint library</option>
-        </select>
-        <div class="field-help"><strong>The bucket is always written first and is the record.</strong>
-          A mirror is a convenience for the morning, not a second source of truth &mdash; if the two
-          ever disagree, the bucket is right. The PDF carries names and appointments and no clinical
-          detail, and every copy is on the audit trail with where it went.</div>
-      </div>
-      <div class="callout callout-warn" style="margin-top:10px">
-        <strong>Sending it outside AWS is a decision, not a setting.</strong> A shared drive sits
-        outside the practice&rsquo;s own control and needs a signed agreement covering it before
-        this is switched on. Ask Carlos before enabling a mirror.
-      </div>
-      <div class="prov"><span>The backup is deliberately a PDF and not a database export:
-        it has to be readable on a phone with no system at all.</span></div>
     </div>
+
     <div class="modal-foot">
-      <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn" onclick="lExSend()">Email it</button>
-      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('PDF generated — 6 pages, one per resource.', 'ok')">Download the PDF</button>
+      <button class="btn" data-close-modal>Close</button>
     </div>
   </div>
 </div>
@@ -5962,16 +6213,42 @@
 </div>
 
 <div class="modal-overlay" id="l-wl-modal" data-close-modal>
-  <div class="modal">
+  <div class="modal modal-wide">
     <div class="modal-head">
-      <div class="modal-title">Add to the waitlist</div>
+      <div class="modal-title">Add someone to the waitlist</div>
       <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
-      <div class="field"><label class="field-lbl" for="l-wl-pt">Patient</label>
-        <input class="field-input" id="l-wl-pt" placeholder="Start typing a name&hellip;"></div>
+
+      <div class="step-lbl"><span>1</span> Who, and how urgent</div>
+      <div class="field pt-find">
+        <label class="field-lbl" for="l-wl-pt">Patient</label>
+        <input class="field-input" id="l-wl-pt" autocomplete="off"
+               placeholder="Name, phone or date of birth&hellip;"
+               oninput="lWlFind(this.value)" onfocus="lWlFind(this.value)">
+        <div class="pt-hits" id="l-wl-hits" style="display:none"></div>
+      </div>
       <div class="grid-2">
-        <div class="field"><label class="field-lbl" for="l-wl-ty">Type</label>
+        <div class="field"><label class="field-lbl" for="l-wl-pri">Priority</label>
+          <select class="field-select" id="l-wl-pri" onchange="lWlPriHelp()">
+            <option value="urgent">Urgent &mdash; a clinician said this cannot wait</option>
+            <option value="high">High &mdash; symptomatic, wants seeing this week</option>
+            <option value="routine" selected>Routine &mdash; would like sooner, no clinical driver</option>
+            <option value="flexible">Flexible &mdash; takes anything that frees up</option>
+          </select>
+          <div class="field-help" id="l-wl-prihelp">Priority decides who gets offered a cancellation
+            first. It is a clinical judgement, not a queue position.</div>
+        </div>
+        <div class="field"><label class="field-lbl" for="l-wl-why">Why &mdash; required</label>
+          <textarea class="field-textarea" rows="2" id="l-wl-why"
+                    placeholder="What makes this urgent, in one line."></textarea>
+          <div class="field-help">Whoever picks up the cancellation reads this before they decide.</div>
+        </div>
+      </div>
+
+      <div class="step-lbl"><span>2</span> What they need</div>
+      <div class="grid-3">
+        <div class="field"><label class="field-lbl" for="l-wl-ty">Appointment type</label>
           <select class="field-select" id="l-wl-ty" onchange="lWlTy()">
             <option value="visit">Office Visit</option>
             <option value="proc">Procedure</option>
@@ -5984,58 +6261,39 @@
             <option value="laser">Laser</option>
             <option value="iv" selected>IV</option>
           </select></div>
-        <div class="field"><label class="field-lbl" for="l-wl-sub">Subtype &mdash; follows the type</label>
-          <select class="field-select" id="l-wl-sub">
-            <option selected>Cellular Boost</option>
-            <option>Chelation</option>
-            <option>Cognitive Support</option>
-            <option>Core Iron Blend</option>
-            <option>Core Restore</option>
-            <option>Detox Prime</option>
-            <option>Eboo Boost</option>
-            <option>Essential Aminos</option>
-            <option>Foundational Flow 5</option>
-            <option>Foundational Flow 10</option>
-            <option>Foundational Flow 15</option>
-            <option>Foundational Flow 20</option>
-            <option>Foundational Flow 25</option>
-            <option>Foundational Flow 50</option>
-            <option>Mast Cell</option>
-            <option>Mega C 15g</option>
-            <option>Mega C 25g</option>
-            <option>Mega C 50g</option>
-            <option>Mega C 75g</option>
-            <option>Mega C 100g</option>
-            <option>Migraine</option>
-            <option>Mito Boost</option>
-            <option>Mini Mito Boost</option>
-            <option>Mini Mito Boost - Custom</option>
-          </select></div>
-      </div>
-      <div class="field">
-        <span class="field-lbl">Days that suit them</span>
-        <div class="chip-row">
-          <button class="filter-chip multi active" type="button">Mon</button>
-          <button class="filter-chip multi active" type="button">Tue</button>
-          <button class="filter-chip multi" type="button">Wed</button>
-          <button class="filter-chip multi active" type="button">Thu</button>
-          <button class="filter-chip multi" type="button">Fri</button>
+        <div class="field"><label class="field-lbl" for="l-wl-sub">Appointment subtype</label>
+          <select class="field-select" id="l-wl-sub"></select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-res">Resource</label>
+          <select class="field-select" id="l-wl-res"></select>
+          <div class="field-help">A room is not a provider &mdash; the list says which is which.</div>
         </div>
       </div>
-      <div class="grid-2">
-        <div class="field"><label class="field-lbl" for="l-wl-from">Earliest</label>
-          <select class="field-select" id="l-wl-from"><option>8:00 AM</option><option selected>12:00 PM</option></select></div>
-        <div class="field"><label class="field-lbl" for="l-wl-to">Latest</label>
-          <select class="field-select" id="l-wl-to"><option selected>5:00 PM</option><option>3:00 PM</option></select></div>
+
+      <div class="step-lbl"><span>3</span> When would suit them</div>
+      <div class="field">
+        <span class="field-lbl">Days</span>
+        <div class="chip-row" id="l-wl-days"></div>
+        <div class="field-help">The clinic opens at the weekend, so Saturday and Sunday are here too.</div>
       </div>
-      <div class="field"><label class="field-lbl" for="l-wl-how">How to reach them when a slot frees</label>
-        <select class="field-select" id="l-wl-how">
-          <option selected>Text, then call if no answer in 15 minutes</option>
-          <option>Text only</option><option>Call only</option></select></div>
+      <div class="grid-3">
+        <div class="field"><label class="field-lbl" for="l-wl-from">Earliest</label>
+          <select class="field-select" id="l-wl-from"></select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-to">Latest</label>
+          <select class="field-select" id="l-wl-to"></select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-due">Doctor wants them seen by</label>
+          <input class="field-input" type="date" id="l-wl-due" aria-label="Doctor wants them seen by">
+          <div class="field-help">Leave it empty if no clinician set one.</div>
+        </div>
+      </div>
+      <div class="field"><label class="field-lbl" for="l-wl-booked">Currently booked</label>
+        <input class="field-input" id="l-wl-booked" placeholder="e.g. Sep 2, 10:00 AM &mdash; or leave empty if nothing is booked">
+      </div>
+
+      <div class="prov" id="l-wl-say"><span>&nbsp;</span></div>
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" data-close-modal onclick="lWlAdd()">Add to the waitlist</button>
+      <button class="btn btn-primary" onclick="lWlAdd()">Add to the waitlist</button>
     </div>
   </div>
 </div>
@@ -6209,7 +6467,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=84"></script>
+<script src="assets/hcos.js?v=87"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8050,33 +8308,212 @@
 
   /* the waitlist button adds the row it promises — a toast that lies is worse
      than a dead button, because the reviewer believes it */
+  /* ---------- adding somebody to the waitlist ----------
+     It built a six-cell row into an eleven-column table, so every entry landed
+     mangled (Carlos, 2026-08-12: "there is a bug adding into the table"). The
+     form now asks for every column the table shows, because a row you have to
+     go and fill in afterwards is a row nobody fills in. */
+  function lWlForm() {
+    var d = document.getElementById('l-wl-days');
+    if (!d) return;
+    d.innerHTML = HCOS.dayChips(['mon','tue','wed','thu','fri']);
+    var res = document.getElementById('l-wl-res');
+    if (res) res.innerHTML = HCOS.resourceOptions({ allLabel: 'Any resource that can do it' });
+    /* the whole 24 hours: the clinic starts at 6 and an IV can run past 7 */
+    var f = document.getElementById('l-wl-from'), t = document.getElementById('l-wl-to');
+    if (f) f.innerHTML = HCOS.hourOptions({ from: 0, to: 23.5, selected: 480 });
+    if (t) t.innerHTML = HCOS.hourOptions({ from: 0, to: 23.5, selected: 1080 });
+    lWlTy();
+  }
+  function lWlFind(q) {
+    var box = document.getElementById('l-wl-hits');
+    if (!box) return;
+    q = (q || '').trim().toLowerCase();
+    if (q.length < 2) { box.style.display = 'none'; return; }
+    var hits = L_PEOPLE.filter(function (p) {
+      return (p[0] + ' ' + p[1] + ' ' + p[2]).toLowerCase().indexOf(q) !== -1;
+    }).slice(0, 6);
+    box.innerHTML = hits.length ? hits.map(function (p) {
+      return '<button class="pt-hit" type="button" onclick="lWlPick(\'' + p[3] + '\')">'
+        + '<b>' + p[0] + '</b><span>' + p[1] + ' &middot; ' + p[2] + '</span></button>';
+    }).join('') : '<div class="pt-hit-none">Nobody matches. '
+      + '<a href="patients.html#/pt-04-find">Find or create a person</a> first.</div>';
+    box.style.display = '';
+  }
+  function lWlPick(pid) {
+    var p = L_PEOPLE.filter(function (x) { return x[3] === pid; })[0];
+    if (!p) return;
+    document.getElementById('l-wl-pt').value = p[0];
+    document.getElementById('l-wl-hits').style.display = 'none';
+  }
+  function lWlPriHelp() {
+    var v = (document.getElementById('l-wl-pri') || {}).value;
+    var h = document.getElementById('l-wl-prihelp');
+    if (h) h.textContent = v === 'urgent'
+      ? 'Urgent goes to the top of every offer, ahead of people who have waited longer. Say why below.'
+      : 'Priority decides who gets offered a cancellation first. It is a clinical judgement, not a queue position.';
+  }
+  var L_PRI_LBL = { urgent: 'Urgent', high: 'High', routine: 'Routine', flexible: 'Flexible' };
+
   function lWlAdd() {
     var body = document.getElementById('l-wl-body');
-    var name = (document.getElementById('l-wl-pt') || {}).value || '';
+    var V = function (id) { var e = document.getElementById(id); return e ? e.value : ''; };
+    var name = V('l-wl-pt').trim();
     if (!body) return;
-    if (!name.trim()) { HCOS.toast('Nothing added — the waitlist needs a patient.', 'warn'); return; }
-    var sub = (document.getElementById('l-wl-sub') || {}).value || '';
-    var ty  = (document.getElementById('l-wl-ty') || {}).value || '';
-    var from = (document.getElementById('l-wl-from') || {}).value || '';
-    var to   = (document.getElementById('l-wl-to') || {}).value || '';
-    var days = [].filter.call(document.querySelectorAll('#l-wl-modal .filter-chip.active'),
-                              function (c) { return true; })
-                 .map(function (c) { return c.textContent.trim(); }).join(', ');
-    var KEY = { 'Mega C 100g': 't-mc100 ty-iv', 'Mega C 50g': 't-mc50 ty-iv',
-                'Foundational Flow 10': 't-ff10 ty-iv', 'Mini Mito Boost': 't-minimb ty-iv' };
+    if (!name) { HCOS.toast('Nothing added — the waitlist needs a patient.', 'warn'); return; }
+    var why = V('l-wl-why').trim();
+    var pri = V('l-wl-pri');
+    if (!why) {
+      HCOS.toast('Nothing added — say why they are waiting. Whoever picks up the cancellation reads it.', 'warn');
+      return;
+    }
+    var subSel = document.getElementById('l-wl-sub');
+    var subLbl = subSel ? subSel.options[subSel.selectedIndex].textContent : '';
+    var subKey = subSel ? subSel.value : '';
+    var tyKey  = V('l-wl-ty');
+    var resId  = V('l-wl-res');
+    var resLbl = resId ? HCOS.resourceLabel(resId) : 'Any resource';
+    var days = [].filter.call(document.querySelectorAll('#l-wl-days .filter-chip.active'),
+                              function (c) { return true; }).map(function (c) { return c.textContent.trim(); });
+    var fromT = document.getElementById('l-wl-from');
+    var toT   = document.getElementById('l-wl-to');
+    var win = (days.length === 7 ? 'Any day' : days.join(', ')) + ' '
+            + (fromT ? fromT.options[fromT.selectedIndex].text : '') + '&ndash;'
+            + (toT ? toT.options[toT.selectedIndex].text : '');
+    var due = V('l-wl-due');
+    var dueCell = due
+      ? '<span class="due due-ok">' + due + '</span>'
+      : '<span class="due due-none">No date set</span>';
+    var booked = V('l-wl-booked').trim() || 'Not booked';
+
     var tr = document.createElement('tr');
+    tr.className = 'l-wl-row';
+    tr.setAttribute('data-pri', pri);
+    tr.setAttribute('data-ty', 'ty-' + tyKey);
+    tr.setAttribute('data-sub', 't-' + subKey);
+    tr.setAttribute('data-wait', '0');
     tr.innerHTML =
-      '<td>' + name + '</td>' +
-      '<td><span class="rail-sw ' + (KEY[sub] || 't-block ty-visit') + '" style="vertical-align:-4px"></span> ' +
-        ty + ' &middot; ' + sub + '</td>' +
-      '<td>' + (days || 'Any day') + ' ' + from + '&ndash;' + to + '</td>' +
-      '<td>Just now</td><td>Not booked</td>' +
-      '<td><button class="btn btn-sm btn-primary" onclick="HCOS.toast(\'Offered. They have 30 minutes to accept.\', \'ok\')">Offer a slot</button></td>';
+      '<td><input type="checkbox" class="l-wl-pick" aria-label="Select ' + name + '"></td>' +
+      '<td><strong>' + name + '</strong></td>' +
+      '<td><span class="pri pri-' + pri + '">' + L_PRI_LBL[pri] + '</span></td>' +
+      '<td class="wl-why">' + why + '</td>' +
+      '<td><span class="rail-sw t-' + subKey + ' ty-' + tyKey + '" style="vertical-align:-4px"></span> ' + subLbl + '</td>' +
+      '<td>' + resLbl + '</td>' +
+      '<td>' + win + '</td>' +
+      '<td class="l-num">0 days</td>' +
+      '<td>' + dueCell + '</td>' +
+      '<td>' + booked + '</td>' +
+      '<td class="row-acts">' +
+        '<button class="btn btn-sm btn-primary" data-activate="l-10-offer">Offer</button>' +
+        '<button class="btn btn-sm" onclick="lWlEdit(this)">Edit</button>' +
+        '<button class="btn btn-sm btn-icon btn-danger" title="Remove ' + name + ' from the waitlist" ' +
+        'aria-label="Remove ' + name + ' from the waitlist" onclick="lWlRemove(this,\'' + name + '\')">&#128465;</button>' +
+      '</td>';
     body.insertBefore(tr, body.firstChild);
+    document.getElementById('l-wl-modal').classList.remove('open');
     document.getElementById('l-wl-pt').value = '';
-    HCOS.toast(name + ' added to the waitlist — first matching slot that frees is theirs.', 'ok');
+    document.getElementById('l-wl-why').value = '';
+    lWlFilter();
+    HCOS.toast(name + ' added as ' + L_PRI_LBL[pri].toLowerCase()
+      + '. The first matching slot that frees is offered to them.', 'ok');
   }
-  window.lWlAdd = lWlAdd;
+  function lWlEdit(btn) {
+    var row = btn.closest('tr');
+    var who = row.querySelector('strong').textContent;
+    document.getElementById('l-wl-modal').classList.add('open');
+    document.getElementById('l-wl-pt').value = who;
+    document.getElementById('l-wl-why').value = row.querySelector('.wl-why').textContent.trim();
+    var pri = row.getAttribute('data-pri');
+    if (pri) document.getElementById('l-wl-pri').value = pri;
+    /* editing REPLACES rather than adding a second line for the same person */
+    row.setAttribute('data-editing', '1');
+    HCOS.toast('Editing ' + who + '. Saving replaces their line rather than adding a second one.');
+  }
+
+  /* ---------- TASKS ----------
+     Carlos, 2026-08-12: "lo poderoso de esto es que las tareas se van creando,
+     editando, eliminadas con el sistema". So the ones that matter are raised by
+     events, not typed: a waitlist cancellation raises one for the front desk, a
+     freed slot that matches somebody raises one for scheduling.
+
+     The rule that makes the list trustworthy: when the thing that caused a task
+     stops being true, the task closes ITSELF and says why. A list somebody has
+     to tidy by hand is a list that stops being true within a week, and then
+     nobody reads it. */
+  function lTkFilter() {
+    var b  = (document.getElementById('tk-f-bucket') || {}).value || '';
+    var p  = (document.getElementById('tk-f-pri')    || {}).value || '';
+    var st = (document.getElementById('tk-f-state')  || {}).value;
+    if (st === undefined) st = 'open';
+    var n = 0;
+    document.querySelectorAll('#l-tk-body tr').forEach(function (r) {
+      var on = (!b  || r.getAttribute('data-bucket') === b)
+            && (!p  || p.split(',').indexOf(r.getAttribute('data-pri')) !== -1)
+            && (!st || r.getAttribute('data-state') === st);
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    var c = document.getElementById('l-tk-count');
+    if (c) c.textContent = n + (st === 'open' ? ' open' : n === 1 ? ' task' : ' tasks');
+  }
+  function lTkDone(id) {
+    var r = document.getElementById(id);
+    if (!r) return;
+    r.setAttribute('data-state', 'done');
+    r.classList.add('is-done');
+    var acts = r.querySelector('.row-acts');
+    [].forEach.call(acts.querySelectorAll('.btn'), function (b) {
+      if (b.textContent.trim() === 'Done') b.remove();
+    });
+    r.children[4].textContent = 'Done just now';
+    lTkFilter();
+    HCOS.toast('Closed, with your name on it. If the thing that raised it happens again, a new task appears — this one is not reopened.', 'ok');
+  }
+  function lTkDismiss(btn, title) {
+    HCOS.confirm({
+      title: 'Dismiss this task?',
+      body: '&ldquo;' + title + '&rdquo;',
+      consequence: 'Dismissing is not the same as doing it. The thing that raised the task is '
+          + 'still true, so <b>the system will raise it again</b> the next time it looks. If it '
+          + 'should not have been raised at all, say so in a note instead — that is what stops it.',
+      confirm: 'Dismiss it anyway',
+      onConfirm: function () { btn.closest('tr').remove(); lTkFilter();
+        HCOS.toast('Dismissed. It may come back.', 'ok'); }
+    });
+  }
+  /* the events that raise a task, wired to the things that cause them */
+  function lTkRaise(o) {
+    var body = document.getElementById('l-tk-body');
+    if (!body) return;
+    var id = 'tk' + Date.now();
+    var tr = document.createElement('tr');
+    tr.className = 'tk-row'; tr.id = id;
+    tr.setAttribute('data-state', 'open');
+    tr.setAttribute('data-pri', o.pri || 'high');
+    tr.setAttribute('data-bucket', o.bucket || 'Scheduling');
+    var lbl = { urgent: 'Urgent', high: 'Soon', routine: 'When you can' }[o.pri || 'high'];
+    tr.innerHTML =
+      '<td><span class="pri pri-' + (o.pri || 'high') + '">' + lbl + '</span></td>' +
+      '<td><strong>' + o.title + '</strong><div class="field-help">' + (o.body || '') + '</div></td>' +
+      '<td>' + (o.bucket || 'Scheduling') + '</td>' +
+      '<td>' + (o.owner || 'Yazmin · Front desk') + '</td>' +
+      '<td>Today</td>' +
+      '<td><span class="prov" style="margin:0;font-size:11px">The system, just now</span></td>' +
+      '<td class="row-acts">' +
+        (o.go ? '<button class="btn btn-sm btn-primary" data-activate="' + o.go + '">' + o.goLbl + '</button>' : '') +
+        '<button class="btn btn-sm" onclick="lTkDone(\'' + id + '\')">Done</button>' +
+        '<button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss" ' +
+        'onclick="lTkDismiss(this,\'' + o.title.replace(/'/g, '') + '\')">&#128465;</button>' +
+      '</td>';
+    body.insertBefore(tr, body.firstChild);
+    lTkFilter();
+    HCOS.toast('Task raised for ' + (o.owner || 'the front desk') + '.', 'ok');
+  }
+  window.lTkFilter = lTkFilter; window.lTkDone = lTkDone;
+  window.lTkDismiss = lTkDismiss; window.lTkRaise = lTkRaise;
+
+  window.lWlAdd = lWlAdd; window.lWlForm = lWlForm; window.lWlFind = lWlFind;
+  window.lWlPick = lWlPick; window.lWlPriHelp = lWlPriHelp; window.lWlEdit = lWlEdit;
 
 
   /* Long recipe names step down until they fit. Measured, not guessed — the
@@ -8210,22 +8647,60 @@
      touched a filter; they are computed from the rows on load now */
   document.querySelectorAll('.cap-card .cap-ty').forEach(function (s) { lCapFilter(s); });
 
-  /* ---------- who the list gets emailed to ---------- */
-  var L_EX_TO = { none: '', desk: 'the front desk — Yazmin and Haylee',
+  /* ---------- EXPORTING THE DAY ----------
+     Carlos, 2026-08-12: "users get confused... sometimes they want to download
+     quickly, not read that they want a copy in AWS". Three tabs, in the order
+     people actually need them: do the thing, change what is in it, and — last —
+     the infrastructure almost nobody has to read.
+
+     The column names are what a person would say out loud. "Pending consents"
+     became "Consents still missing", and every one carries a line saying why
+     you might want it, because a checkbox called "Stage" tells you nothing. */
+  var L_EX = { what: 'pdf' };
+  function lExTab(which, btn) {
+    ['go', 'cols', 'set'].forEach(function (t) {
+      var el = document.getElementById('ex-' + t);
+      if (el) el.style.display = t === which ? '' : 'none';
+    });
+    document.querySelectorAll('#l-export-modal .tab-btn').forEach(function (b) {
+      b.classList.remove('is-on'); b.setAttribute('aria-selected', 'false');
+    });
+    if (btn) { btn.classList.add('is-on'); btn.setAttribute('aria-selected', 'true'); }
+  }
+  function lExWhat(w, btn) {
+    L_EX.what = w;
+    document.querySelectorAll('#ex-go .o-kind-card').forEach(function (c) { c.classList.remove('is-on'); });
+    if (btn) btn.classList.add('is-on');
+    lExSay();
+  }
+  function lExCols() {
+    return [].filter.call(document.querySelectorAll('#ex-cols .ex-check input'), function (b) { return b.checked; }).length;
+  }
+  function lExSay() {
+    var say = document.getElementById('l-ex-say');
+    if (!say) return;
+    var n = lExCols();
+    say.innerHTML = '<span>' + (L_EX.what === 'pdf'
+        ? 'A PDF, one page per resource, about 6 pages'
+        : 'An Excel file, 92 rows')
+      + ' &middot; the 4 columns that are always in, plus ' + n
+      + ' you have ticked. It matches whatever the list is filtered to right now.</span>';
+  }
+  var L_EX_TO = { desk: 'the front desk — Yazmin and Haylee',
                   rota: "everyone on tomorrow's rota — 9 people",
                   mgmt: 'Karina', me: 'you' };
   function lExTo(v) {
     var box = document.getElementById('l-ex-other');
     if (box) box.style.display = v === 'other' ? '' : 'none';
   }
-  window.lExTo = lExTo;
-
+  function lExDo(how) {
+    var what = L_EX.what === 'pdf' ? 'PDF' : 'Excel file';
+    HCOS.toast(what + ' generated with ' + (lExCols() + 4) + ' columns. It is in your downloads.', 'ok');
+    var ov = document.getElementById('l-export-modal');
+    if (ov) ov.classList.remove('open');
+  }
   function lExSend() {
     var v = (document.getElementById('l-ex-to') || {}).value || 'desk';
-    if (v === 'none') {
-      HCOS.toast('Nothing emailed — the recipient is set to download only.', 'warn');
-      return;
-    }
     var who = L_EX_TO[v];
     if (v === 'other') {
       var a = ((document.getElementById('l-ex-addr') || {}).value || '').trim();
@@ -8236,13 +8711,54 @@
       }
       who = a;
     }
-    HCOS.toast('Emailed to ' + who + '. A copy is in tonight’s bucket, and the send is on the audit trail.', 'ok');
-    /* only close once it really went — a modal that shuts on a failed validation
-       leaves the reviewer believing it sent */
+    HCOS.toast('Emailed to ' + who + ' as ' + (L_EX.what === 'pdf' ? 'a PDF' : 'an Excel file')
+      + '. The send is on the audit trail.', 'ok');
     var ov = document.getElementById('l-export-modal');
     if (ov) ov.classList.remove('open');
   }
-  window.lExSend = lExSend;
+  /* the settings are worth keeping precisely because nobody wants to read them twice */
+  function lExRemember(on) {
+    try {
+      if (on) {
+        localStorage.setItem('hcos-export', JSON.stringify({ what: L_EX.what,
+          cols: [].map.call(document.querySelectorAll('#ex-cols .ex-check input'),
+                            function (b) { return b.checked; }) }));
+        HCOS.toast('Kept. The box opens this way for you next time.', 'ok');
+      } else { lExForget(true); }
+    } catch (e) { HCOS.toast('This browser will not keep the settings.', 'warn'); }
+    lExChrome();
+  }
+  function lExForget(quiet) {
+    try { localStorage.removeItem('hcos-export'); } catch (e) {}
+    lExChrome();
+    if (!quiet) HCOS.toast('Forgotten. Back to the way it ships.', 'ok');
+  }
+  function lExChrome() {
+    var on = false;
+    try { on = !!localStorage.getItem('hcos-export'); } catch (e) {}
+    var t = document.querySelector('#l-ex-remember input');
+    if (t) t.checked = on;
+    var f = document.getElementById('l-ex-forget');
+    if (f) f.style.display = on ? '' : 'none';
+  }
+  function lExRestore() {
+    try {
+      var v = JSON.parse(localStorage.getItem('hcos-export') || 'null');
+      if (!v) return;
+      L_EX.what = v.what || 'pdf';
+      document.querySelectorAll('#ex-go .o-kind-card').forEach(function (c, i) {
+        c.classList.toggle('is-on', (i === 0) === (L_EX.what === 'pdf'));
+      });
+      var boxes = document.querySelectorAll('#ex-cols .ex-check input');
+      (v.cols || []).forEach(function (b, i) { if (boxes[i]) boxes[i].checked = b; });
+    } catch (e) { /* a corrupt saved setting must not break the box */ }
+  }
+  window.lExTab = lExTab; window.lExWhat = lExWhat; window.lExTo = lExTo;
+  window.lExDo = lExDo; window.lExSend = lExSend; window.lExSay = lExSay;
+  window.lExRemember = lExRemember; window.lExForget = lExForget;
+  document.addEventListener('change', function (ev) {
+    if (ev.target.closest && ev.target.closest('#ex-cols')) lExSay();
+  });
 
   /* ---------- waitlist offers: one slot, several people, first wins ----------
      The offer goes out to everyone at the same second. Each gets an accept link
@@ -8344,7 +8860,14 @@
       onConfirm: function () {
         if (row) row.remove();
         lWlFilter();
-        HCOS.toast(who + ' removed and logged.', 'ok');
+        /* the event raises the task — this is the whole idea of the tasks page */
+        if (typeof lTkRaise === 'function') lTkRaise({
+          pri: 'high', bucket: 'Scheduling', owner: 'Yazmin · Front desk',
+          title: who + ' came off the waitlist',
+          body: 'Taken off by ' + L_INS_WHO + '. Check whether their booked appointment still stands.',
+          go: 'l-10-waitlist', goLbl: 'Open the waitlist'
+        });
+        HCOS.toast(who + ' removed and logged. A task went to the front desk.', 'ok');
       }
     });
   }
@@ -9148,6 +9671,22 @@
          OFFERED, not what exists: with Type = IV the subtype panel shows IV
          subtypes only, and Select all there means "every IV", not "everything".
          (Carlos, 2026-08-12.) */
+      /* Apply closes the panel and says what the board is showing. The filters
+         already apply live, but a panel that never closes leaves people unsure
+         anything happened (Carlos, 2026-08-12: "we need a button to confirm"). */
+      var ap = ev.target.closest ? ev.target.closest('.msel-apply') : null;
+      if (ap) {
+        var m2 = ap.closest('.msel');
+        if (m2) m2.classList.remove('open');
+        lMselStack();
+        var t = lSel.types.length, s2 = lSel.subs.length, st2 = lSel.sts.length;
+        HCOS.toast(!t && !s2 && !st2 ? 'No filters — showing everything.'
+          : 'Filtered to ' + [t ? t + ' type' + (t === 1 ? '' : 's') : '',
+                              s2 ? s2 + ' subtype' + (s2 === 1 ? '' : 's') : '',
+                              st2 ? st2 + ' status' + (st2 === 1 ? '' : 'es') : '']
+             .filter(Boolean).join(', ') + '.', 'ok');
+        return;
+      }
       var all = ev.target.closest ? ev.target.closest('.msel-all') : null;
       if (all) {
         var m = all.closest('.msel'), w = m ? m.getAttribute('data-msel') : '';
@@ -9279,6 +9818,9 @@
   if (typeof lBkAi === 'function') lBkAi();
   if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   if (typeof lBlkForm === 'function') lBlkForm();
+  if (typeof lWlForm === 'function') lWlForm();
+  if (typeof lTkFilter === 'function') lTkFilter();
+  if (typeof lExRestore === 'function') { lExRestore(); lExChrome(); lExSay(); }
   (function () {
     var r = document.getElementById('ins-f-res');
     if (r) r.innerHTML = HCOS.resourceOptions({ allLabel: 'Every resource' });

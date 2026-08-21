@@ -18,6 +18,9 @@ for f in glob.glob('*.html'):
         if t not in ids: bad.append(f"{f}: página inexistente {t}")
         elif sid not in ids[t]: bad.append(f"{f}: deep-link roto {t}#/{sid}")
     for m in re.findall(r'data-activate="([^"]+)"', s):
+        # a value built at runtime ("' + o.go + '") is a JS expression, not a
+        # screen id — the check can only verify literals
+        if "'" in m or '+' in m: continue
         if m not in ids[f]: bad.append(f"{f}: data-activate roto → {m}")
     for m in re.findall(r'data-open-modal="#([^"]+)"|data-open-drawer="#([^"]+)"', s):
         tgt=m[0] or m[1]
