@@ -853,3 +853,32 @@ been written.
 **rAF does not fire in a hidden tab.** Column resizing and the overflow hints were wired in one, so
 a page opened in a background tab had neither — and still had neither once you looked at it. They
 run immediately, again on `load`, and again on `visibilitychange`. `HCOS.wireTables()` is idempotent.
+
+## Coverage rules (added 2026-08-13, after a run of 20553 denials)
+
+Tom, via Carlos: Medicare and the commercial payers that follow CMS are denying **CPT 20553** for
+two reasons — **maximum frequency exceeded** (3 in any rolling 12 months) and **not medically
+necessary** (only ten ICD-10 codes are covered, per **CMS Billing and Coding Article A57701**).
+
+**Both denials are decisions somebody made weeks before billing saw them.** By the time a
+remittance arrives the injection has been given and the money is gone. So the rule runs at the
+moment the clinician chooses the treatment, not at the claim:
+
+- `tools/coverage.py` holds the rules per CPT: the covered ICD-10 list, the frequency limit and
+  window, and **the article the rule came from with the date it was last checked**. A coverage rule
+  with no source is a rumour, and these articles get revised and retired — an unverified rule shows
+  as unverified on `billing.html#/d-04-coverage` rather than pretending.
+- The **coverage gate** on `schedule.html#/l-03-book` appears only for a treatment that has a rule.
+  It shows how many the patient has had in the window, with dates and who gave them, and asks the
+  clinician to pick the covered diagnosis **from the note**.
+- **It must never help somebody find a diagnosis that pays.** The list exists so a covered
+  diagnosis that IS documented gets coded. If none of them fits, the honest answer is that the
+  service is not covered — and the screen says that, then offers the legitimate route: an **ABN
+  (CMS-R-131) signed BEFORE the service** and the claim billed with **modifier GA**, so the patient
+  can be charged. Without a signed ABN the practice absorbs it; the patient cannot be billed
+  afterwards.
+- Declining raises a task for the ordering provider rather than silently booking.
+- **20552 is one or two muscles, 20553 is three or more.** If the note supports two, no diagnosis
+  rescues 20553 — it is the wrong code.
+- The frequency count is per patient across **all** providers, so it cannot see injections given
+  outside the practice. The screen says so and tells the desk to ask the patient.

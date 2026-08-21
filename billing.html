@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=87">
+<link rel="stylesheet" href="assets/hcos.css?v=89">
 <style>
   /* Billing-only bits the shared vocabulary lacks (prefix d-) */
   .d-route { font-size: 11.5px; line-height: 1.45; max-width: 330px; }
@@ -532,9 +532,104 @@
       <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Appeal sent to UnitedHealthcare — tracked in the appeals worklist with its deadline.', 'ok')">Send appeal</button>
     </div>
   </div>
+  <!-- ============================================================ -->
+  <section class="screen" id="d-04-coverage" data-title="Coverage rules">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/billing/coverage-rules</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Coverage rules</div>
+            <div class="page-sub">What each CPT code is covered for, and how often &mdash; read at the moment the order is placed, not discovered on a remittance</div>
+          </div>
+          <div class="app-user"><button class="btn" onclick="HCOS.toast('A new rule needs its CPT, its covered diagnoses, its frequency limit and the article it comes from.', 'ok')">Add a rule</button></div>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>A coverage rule with no source is a rumour.</strong> Every rule here cites the
+          article it came from and the date it was last checked. <strong>These articles get revised
+          and retired</strong>, and the covered list changes with them, so a rule that has not been
+          re-checked is shown as unverified &mdash; which is what the one below is until somebody
+          opens the CMS Medicare Coverage Database and confirms it.
+        </div>
+
+        <div class="card">
+          <div class="pt-header-row" style="align-items:flex-start">
+            <div class="pt-header-info">
+              <div class="pt-name"><code>20553</code> &middot; Trigger point injections — three or more muscles</div>
+              <div class="pt-demo">Medicare, and the commercial payers that follow CMS</div>
+              <div class="prov" style="margin-top:8px"><span>
+                <strong>Source</strong> CMS Billing and Coding Article A57701 — Trigger Point Injections (TPI) &middot;
+                <span class="appr pending">As given by Tom, 13 Aug 2026 — NOT yet verified against the live CMS database</span>
+              </span></div>
+            </div>
+            <button class="btn btn-sm" onclick="HCOS.toast('Opens the article on the CMS Medicare Coverage Database so somebody can confirm the list and the limit, and stamp the date.', 'ok')">Verify against CMS</button>
+          </div>
+
+          <div class="seg-divider">How often it may be billed</div>
+          <div class="cov-freq">
+            <div class="cov-freq-n">3</div>
+            <div>
+              <b>in any 12 months</b>
+              <span class="field-help">Rolling, per patient, all providers. The fourth in a rolling year is not covered,
+                whoever gave the first three &mdash; so the count has to include what the patient
+                had elsewhere, which only the patient can tell us.</span>
+            </div>
+          </div>
+
+          <div class="seg-divider">Diagnoses it is covered for</div>
+          <div class="field-help" style="margin-bottom:10px">Anything else is denied as not
+            medically necessary. The order carries one of these, chosen by the clinician from the
+            note &mdash; <strong>never chosen afterwards to make a claim pay</strong>.</div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <thead><tr><th scope="col">ICD-10</th><th scope="col">Description</th></tr></thead>
+              <tbody>
+              <tr><td><code>G44.201</code></td><td>Tension-type headache, unspecified, intractable</td></tr>
+              <tr><td><code>G44.209</code></td><td>Tension-type headache, unspecified, not intractable</td></tr>
+              <tr><td><code>G44.211</code></td><td>Episodic tension-type headache, intractable</td></tr>
+              <tr><td><code>G44.219</code></td><td>Episodic tension-type headache, not intractable</td></tr>
+              <tr><td><code>G44.221</code></td><td>Chronic tension-type headache, intractable</td></tr>
+              <tr><td><code>G44.229</code></td><td>Chronic tension-type headache, not intractable</td></tr>
+              <tr><td><code>M79.10</code></td><td>Myalgia, unspecified site</td></tr>
+              <tr><td><code>M79.11</code></td><td>Myalgia of mastication muscle</td></tr>
+              <tr><td><code>M79.12</code></td><td>Myalgia of auxiliary muscles, head and neck</td></tr>
+              <tr><td><code>M79.18</code></td><td>Myalgia, other site</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="seg-divider">Watch the code itself</div>
+          <div class="callout">
+            <strong><code>20552</code> is one or two muscles; <code>20553</code> is three or more.</strong>
+            If the note supports two, 20553 is the wrong code and no diagnosis will rescue it.
+            The two codes have separate rules.
+          </div>
+
+          <div class="seg-divider">When a rule is not met</div>
+          <dl class="kv">
+            <dt>Before the visit</dt>
+            <dd>The order will not sign without a covered diagnosis, and it says how many the
+              patient has had. That is where this gets fixed.</dd>
+            <dt>If it goes ahead anyway</dt>
+            <dd>An <strong>ABN (CMS-R-131)</strong> signed <em>before</em> the service, and the
+              claim billed with <strong>modifier GA</strong>, so the patient can be charged.
+              Without a signed ABN the practice absorbs it &mdash; the patient cannot be billed
+              after the fact.</dd>
+            <dt>Never</dt>
+            <dd>Add or change a diagnosis so a claim pays. If the documentation supports a covered
+              diagnosis that was simply not coded, that is a corrected claim. If it does not, the
+              answer is that the service was not covered.</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<script src="assets/hcos.js?v=87"></script>
+<script src="assets/hcos.js?v=89"></script>
 <script>
 /* D-01: worklist rows open the claim detail drawer, filled from the row's data attributes */
 (function () {

@@ -3049,3 +3049,59 @@ tr.tk-row.is-done strong { text-decoration: line-through; }
   border-left: 1px solid var(--line-soft);
 }
 .msel-apply:hover { background: #000; }
+
+/* a frequency limit, said as a number you cannot miss */
+.cov-freq { display: flex; align-items: center; gap: 16px; }
+.cov-freq-n {
+  display: grid; place-items: center; width: 58px; height: 58px; flex-shrink: 0;
+  border-radius: 12px; background: var(--hx-navy); color: #fff;
+  font-size: 26px; font-weight: 700;
+}
+.cov-freq b { font-size: 14px; color: var(--hx-navy); }
+
+/* ==========================================================================
+   THE COVERAGE GATE (Carlos / Tom, 2026-08-13). Both denial reasons are
+   decisions somebody made weeks before billing saw them, so the rule runs where
+   the decision is made. It is deliberately loud: this is the last moment the
+   answer is free.
+   ========================================================================== */
+.cov-gate {
+  border: 1.5px solid var(--ink); border-radius: 12px; background: #fff;
+  padding: 16px 18px; margin: 16px 0;
+}
+.cov-gate-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.cov-gate-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+  background: var(--hx-navy); color: #fff; border-radius: 999px; padding: 3px 9px;
+}
+.cov-gate-hd b { font-size: 13.5px; color: var(--hx-navy); }
+.cov-count-row {
+  display: flex; align-items: center; gap: 12px; font-size: 12.5px; line-height: 1.5;
+  background: var(--hx-band); border-radius: 9px; padding: 11px 13px;
+}
+.cov-count-row.is-over { background: #FBE3E0; color: #6E1912; }
+.cov-count-n { font-size: 17px; font-weight: 700; white-space: nowrap; }
+.cov-had { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; }
+.cov-had span {
+  font-size: 11px; color: var(--muted);
+  border: 1px solid var(--line-soft); border-radius: 999px; padding: 3px 9px;
+}
+.cov-dx-list { max-height: 260px; overflow-y: auto; border: 1px solid var(--line); border-radius: 9px; }
+.cov-dx {
+  display: flex; gap: 9px; align-items: flex-start; cursor: pointer;
+  padding: 9px 12px; border-bottom: 1px solid var(--line-soft); font-size: 12.5px;
+}
+.cov-dx:last-child { border-bottom: none; }
+.cov-dx:hover { background: var(--hx-band); }
+.cov-dx input { margin-top: 3px; flex-shrink: 0; }
+.cov-dx code { font-size: 11.5px; color: var(--muted); margin-right: 6px; }
+.cov-dx-none { background: #FAFAFA; }
+.cov-verdict {
+  margin-top: 14px; padding: 13px 15px; border-radius: 9px;
+  font-size: 12.5px; line-height: 1.6; border-left: 3px solid var(--line);
+  background: var(--hx-band);
+}
+.cov-ok   { border-left-color: var(--review-ok); background: #EAF5EE; }
+.cov-no   { border-left-color: #C0392B; background: #FBE3E0; color: #6E1912; }
+.cov-wait { color: var(--muted); }
+.cov-next p { margin: 10px 0 0; }

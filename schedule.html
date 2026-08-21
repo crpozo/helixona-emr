@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=87">
+<link rel="stylesheet" href="assets/hcos.css?v=89">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -5216,6 +5216,39 @@
               </div>
             </div>
             <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
+            <div id="l-bk-cov" class="cov-gate" style="display:none">
+              <div class="cov-gate-hd">
+                <span class="cov-gate-tag">Coverage</span>
+                <b id="l-cov-t">Trigger point injections</b>
+              </div>
+
+              <div class="cov-count" id="l-cov-count"></div>
+
+              <div class="field" style="margin-top:14px">
+                <span class="field-lbl">Which diagnosis is this for?</span>
+                <div class="field-help" style="margin-bottom:8px">Only these are covered for
+                  <code>20553</code>. Pick the one the note supports &mdash; if none of them fits,
+                  the injection is not covered and that is the answer, not a reason to pick the
+                  nearest.</div>
+                <div class="cov-dx-list">
+                  <label class="cov-dx"><input type="radio" name="covdx" value="G44.201" onchange="lCovPick()"><span><code>G44.201</code> Tension-type headache, unspecified, intractable</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="G44.209" onchange="lCovPick()"><span><code>G44.209</code> Tension-type headache, unspecified, not intractable</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="G44.211" onchange="lCovPick()"><span><code>G44.211</code> Episodic tension-type headache, intractable</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="G44.219" onchange="lCovPick()"><span><code>G44.219</code> Episodic tension-type headache, not intractable</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="G44.221" onchange="lCovPick()"><span><code>G44.221</code> Chronic tension-type headache, intractable</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="G44.229" onchange="lCovPick()"><span><code>G44.229</code> Chronic tension-type headache, not intractable</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="M79.10" onchange="lCovPick()"><span><code>M79.10</code> Myalgia, unspecified site</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="M79.11" onchange="lCovPick()"><span><code>M79.11</code> Myalgia of mastication muscle</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="M79.12" onchange="lCovPick()"><span><code>M79.12</code> Myalgia of auxiliary muscles, head and neck</span></label>
+                  <label class="cov-dx"><input type="radio" name="covdx" value="M79.18" onchange="lCovPick()"><span><code>M79.18</code> Myalgia, other site</span></label>
+                  <label class="cov-dx cov-dx-none"><input type="radio" name="covdx" value="none" onchange="lCovPick()">
+                    <span><b>None of these fits</b> &mdash; the note supports something else</span></label>
+                </div>
+              </div>
+
+              <div id="l-cov-out"></div>
+            </div>
+
             <div class="card" style="margin-top:12px">
               <div class="card-title">Orders for this patient &middot; order = prescription</div>
               <!-- Carlos, 2026-08-12: make the example orders ACTIVE so the flow can
@@ -6467,7 +6500,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=87"></script>
+<script src="assets/hcos.js?v=89"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8108,6 +8141,7 @@
     });
     if (typeof lTypeChange === 'function') lTypeChange();
     if (typeof lBkAi === 'function') { L_BK_AI_ALL = false; lBkAi(); }
+    if (typeof lCovGate === 'function') lCovGate();
     if (typeof lSlots === 'function') lSlots();
     if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   }
@@ -8269,6 +8303,115 @@
   }
   function lBkAiMore() { L_BK_AI_ALL = !L_BK_AI_ALL; lBkAi(); }
   window.lBkAi = lBkAi; window.lBkAiMore = lBkAiMore;
+
+  /* ==========================================================================
+     COVERAGE AT THE POINT OF ORDERING (Carlos / Tom, 2026-08-13, after a run of
+     20553 denials). Both denial reasons are decisions somebody made weeks
+     earlier: a diagnosis that was never on the covered list, and a fourth
+     injection in a rolling year. Neither is a billing problem — by the time
+     billing sees it the injection has been given and the money is gone.
+
+     So the rule runs HERE, when the clinician is choosing the treatment, and it
+     asks the only two questions that matter: which covered diagnosis, and how
+     many has this patient already had.
+
+     What it must never do is offer to "pick a diagnosis that pays". The list is
+     there so a covered diagnosis that IS in the note gets coded; if none of them
+     fits, the honest answer is that the service is not covered, and the screen
+     says so and offers the ABN route instead.
+     ========================================================================== */
+  var L_COV = {
+    tpi: {
+      cpt: '20553', name: 'Trigger point injections — three or more muscles',
+      max: 3, window: '12 months',
+      article: 'CMS Article A57701',
+      /* what this patient has already had, from their own claim history */
+      had: [['14 Nov 2025', 'Dr. Drannikov', 'M79.18'],
+            ['20 Feb 2026', 'Dr. Drannikov', 'M79.18'],
+            ['9 Jun 2026',  'Brooke',        'G44.229']]
+    }
+  };
+  function lCovGate() {
+    var box = document.getElementById('l-bk-cov');
+    if (!box) return;
+    var sub = lV('l-bk-type');
+    var rule = L_COV[sub];
+    box.style.display = rule ? '' : 'none';
+    if (!rule) return;
+    document.getElementById('l-cov-t').textContent = rule.name + '  ·  CPT ' + rule.cpt;
+    var n = rule.had.length;
+    var over = n >= rule.max;
+    document.getElementById('l-cov-count').innerHTML =
+      '<div class="cov-count-row ' + (over ? 'is-over' : '') + '">'
+      + '<span class="cov-count-n">' + n + ' of ' + rule.max + '</span>'
+      + '<span>billed in the last ' + rule.window + '. '
+      + (over
+          ? '<b>This one would be the ' + (n + 1) + 'th, and is not covered.</b>'
+          : (rule.max - n) + ' left before the limit.')
+      + '</span></div>'
+      + '<div class="cov-had">' + rule.had.map(function (h) {
+          return '<span>' + h[0] + ' &middot; ' + h[1] + ' &middot; <code>' + h[2] + '</code></span>';
+        }).join('') + '</div>'
+      + '<div class="field-help">Counted across every provider, per ' + rule.article + '. '
+      + 'It cannot see injections given outside this practice &mdash; ask the patient.</div>';
+    lCovPick();
+  }
+  function lCovPick() {
+    var out = document.getElementById('l-cov-out');
+    if (!out) return;
+    var rule = L_COV[lV('l-bk-type')];
+    if (!rule) { out.innerHTML = ''; return; }
+    var pick = document.querySelector('input[name="covdx"]:checked');
+    var over = rule.had.length >= rule.max;
+    var dxOk = pick && pick.value !== 'none';
+    if (!pick) {
+      out.innerHTML = '<div class="cov-verdict cov-wait">Pick a diagnosis to see whether this is covered.</div>';
+      return;
+    }
+    if (dxOk && !over) {
+      out.innerHTML = '<div class="cov-verdict cov-ok"><b>Covered.</b> '
+        + '<code>' + pick.value + '</code> is on the list and this is number '
+        + (rule.had.length + 1) + ' of ' + rule.max + '. The order carries the diagnosis through to '
+        + 'the claim, so nobody re-types it at billing.</div>';
+      return;
+    }
+    var why = [];
+    if (!dxOk) why.push('the note does not support a covered diagnosis');
+    if (over) why.push('this would be number ' + (rule.had.length + 1) + ' in ' + rule.window);
+    out.innerHTML = '<div class="cov-verdict cov-no">'
+      + '<b>Not covered</b> &mdash; ' + why.join(', and ') + '.'
+      + '<div class="cov-next">'
+      + '<p><b>The injection can still be given.</b> What it cannot do is go to Medicare as a '
+      + 'covered service. If the patient is to be charged, an <b>ABN (CMS-R-131)</b> has to be '
+      + 'signed <b>before</b> it, and the claim billed with <b>modifier GA</b>. Without a signed '
+      + 'ABN the practice absorbs it &mdash; the patient cannot be billed afterwards.</p>'
+      + '<p><b>Do not go looking for a diagnosis that pays.</b> If a covered one is genuinely in '
+      + 'the note and was simply missed, that is a corrected claim and it is legitimate. Choosing '
+      + 'one because it clears the edit is not.</p>'
+      + '</div>'
+      + '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">'
+      + '<button class="btn btn-sm btn-primary" onclick="lCovAbn()">Print an ABN and continue</button>'
+      + '<button class="btn btn-sm" onclick="lCovDefer()">Not today &mdash; put it back to the doctor</button>'
+      + '<a class="btn btn-sm" href="billing.html#/d-04-coverage">See the rule</a>'
+      + '</div></div>';
+  }
+  function lCovAbn() {
+    HCOS.toast('ABN generated for the patient to sign before the injection. The claim will carry '
+      + 'modifier GA, and the signed form is filed against this appointment.', 'ok');
+  }
+  function lCovDefer() {
+    if (typeof lTkRaise === 'function') lTkRaise({
+      pri: 'high', bucket: 'Clinical', owner: 'Dr. Drannikov',
+      title: 'TPI not covered for this patient — decide what to do',
+      body: 'Either the note supports a covered diagnosis that was not coded, or the injection is '
+          + 'over the 3-in-12-months limit. The booking is on hold until you say.',
+      go: 'l-03-book', goLbl: 'Open the booking'
+    });
+    HCOS.toast('Left with Dr. Drannikov. Nothing is booked and nothing is billed.', 'ok');
+  }
+  window.lCovGate = lCovGate; window.lCovPick = lCovPick;
+  window.lCovAbn = lCovAbn; window.lCovDefer = lCovDefer;
+
 
   /* A pattern is about a PERSON. Reading "Maya Reyes runs 20 minutes long" and
      having nowhere to go from it is a dead end (Carlos, 2026-08-12). */
@@ -9816,6 +9959,7 @@
      hoisted `undefined` and the patterns card came up empty. */
   if (typeof lSlots === 'function') lSlots();
   if (typeof lBkAi === 'function') lBkAi();
+  if (typeof lCovGate === 'function') lCovGate();
   if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   if (typeof lBlkForm === 'function') lBlkForm();
   if (typeof lWlForm === 'function') lWlForm();
