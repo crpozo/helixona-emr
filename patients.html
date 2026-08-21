@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=83">
+<link rel="stylesheet" href="assets/hcos.css?v=84">
 <style>
   .pt-prow { display: flex; align-items: center; gap: 10px; }
   .pt-pname { font-weight: 600; color: var(--hx-navy); white-space: nowrap; }
@@ -260,18 +260,18 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="pt-02-profile" data-title="Patient profile — Maya Reyes">
+  <section class="screen" id="pt-02-profile" data-title="Patient profile">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/patients/maya-reyes</span></div>
+        <span class="frame-url" id="pt-url">hcos.helixona.com/patients/maya-reyes</span></div>
       <div class="frame-body">
 
         <div class="card" style="margin-bottom:16px">
           <div class="pt-header-row">
-            <span class="avatar lg">MR</span>
+            <span class="avatar lg" id="pt-av">MR</span>
             <div class="pt-header-info">
-              <div class="pt-name">Maya Reyes</div>
-              <div class="pt-demo">52 · Female · DOB Mar 14, 1974 · (949) 555-0132 · maya.reyes@example.com</div>
+              <div class="pt-name" id="pt-name">Maya Reyes</div>
+              <div class="pt-demo" id="pt-demo">52 · Female · DOB Mar 14, 1974 · (949) 555-0132 · maya.reyes@example.com</div>
               <div class="lead-bar">
                 <span class="lead-lbl">Lead actors</span>
                 <a class="lead-chip lead-main" href="clinical-chart.html#/b-05-problem-list"><span class="lead-body" title="Neuroinflammation with cognitive impact — payer: G93.40 · Encephalopathy"><span class="lead-name">Neuroinflammation with cognitive impact</span><span class="lead-ins">G93.40 &middot; Encephalopathy</span></span></a>
@@ -287,33 +287,11 @@
         </div>
 
         <div class="card" style="margin-bottom:14px">
-          <div class="card-title">What the schedule has learned about her</div>
+          <div class="card-title" id="pt-ai-t">What the schedule has learned about her</div>
           <div class="field-help" style="margin-bottom:10px">The same patterns the scheduling
             screen shows, in her own context. They are suggestions with their working shown &mdash;
             nothing here changes a booking on its own.</div>
-          <div class="grid-2">
-            <div class="ai-line ai-high">
-              <b>She runs about 20 minutes long, every time</b>
-              <span>Her last four NAD+ runs averaged 3 h 20 against a booked 3 h. Booking her own
-                average rather than the protocol&rsquo;s.
-                <a href="schedule.html#/l-09-insights">See the pattern</a></span>
-            </div>
-            <div class="ai-line ai-med">
-              <b>Late by habit, not by accident</b>
-              <span>Arrives 12 minutes after the booked start in 6 of the last 8 visits. A 10:30
-                start really begins at 10:42 &mdash; the chair is idle either way.</span>
-            </div>
-            <div class="ai-line ai-med">
-              <b>Her deductible resets in 41 days</b>
-              <span>Four of the six runs in her order fall after the reset, and she would owe the
-                full allowed on those. Worth telling her before she books them.</span>
-            </div>
-            <div class="ai-line ai-low">
-              <b>She asks for IV 2</b>
-              <span>Bea has run nine of her last ten. Not a clinical constraint, but she settles
-                faster and it costs nothing to honour.</span>
-            </div>
-          </div>
+          <div class="grid-2" id="pt-ai"></div>
           <div class="ai-meta" style="margin-top:10px">
             <span>Ruleset <code>sched-patterns v4</code> &middot; recalculated nightly &middot;
               from her own appointment history, no other patient&rsquo;s
@@ -1150,7 +1128,7 @@
   }
 </script>
 
-<script src="assets/hcos.js?v=83"></script>
+<script src="assets/hcos.js?v=84"></script>
 <script>
   // Demo only: filter chips toggle their active state within a filter bar.
   document.addEventListener('click', function (ev) {
@@ -1208,6 +1186,105 @@
     pfApply();
   }
   document.addEventListener('DOMContentLoaded', pfApply);
+</script>
+
+<script>
+  /* ==========================================================================
+     THE PROFILE IS ONE SCREEN, MANY PATIENTS (Carlos, 2026-08-12: "not only
+     show Maya Reyes, try to make it a better prototype and see all cases").
+
+     Ten patients chosen so every case the schedule can produce is reachable:
+     runs long, no-shows, self-pay with a balance, a minor with a guardian,
+     Medicare, a deductible not yet met, a readiness hold, and a patient with no
+     pattern at all — because "nothing to say" is a case the design has to
+     handle too, and it is the one that gets forgotten.
+     ========================================================================== */
+  var PT_DATA = {
+    'Maya Reyes': { av: 'MR', age: 52, sex: 'Female', dob: 'Mar 14, 1974',
+      ph: '(949) 555-0132', em: 'maya.reyes@example.com', cov: 'Blue Shield of CA PPO · OON',
+      ai: [['high','She runs about 20 minutes long, every time',
+            'Her last four Mega C 100g runs averaged 3 h 20 against a booked 3 h. Booking her own average rather than the protocol’s.'],
+           ['med','Late by habit, not by accident',
+            'Arrives 12 minutes after the booked start in 6 of the last 8 visits. The chair is idle either way.'],
+           ['med','Her deductible resets in 41 days',
+            'Four of the six runs on her order fall after the reset and she would owe the full allowed. Worth telling her before she books them.'],
+           ['low','She asks for IV 2','Bea has run nine of her last ten. Not clinical, but she settles faster and it costs nothing.']] },
+    'Daniel Okafor': { av: 'DO', age: 44, sex: 'Male', dob: 'Aug 2, 1982',
+      ph: '(949) 555-0455', em: 'd.okafor@example.com', cov: 'Anthem Blue Cross · INN',
+      ai: [['low','Nothing worth flagging',
+            'Eleven appointments, all on time, all within their booked length. The system has nothing to suggest, which is its own kind of answer.']] },
+    'Priya Natarajan': { av: 'PN', age: 38, sex: 'Female', dob: 'Mar 12, 1988',
+      ph: '(949) 555-0644', em: 'priya.n@example.com', cov: 'Blue Shield of CA PPO · OON',
+      ai: [['high','Her EBOO needs 15 minutes longer to settle',
+            'The last three circuits ran 105 minutes against a booked 90. The reserved space is 90 for a reason — book the longer one.'],
+           ['med','Readiness expires in 10 days',
+            'Detox readiness was assessed on 22 April. After it lapses the plan pauses until somebody reassesses.']] },
+    'Victor Reyes': { av: 'VR', age: 61, sex: 'Male', dob: 'Jan 30, 1965',
+      ph: '(626) 555-0918', em: 'v.reyes@example.com', cov: 'Medicare Part B',
+      ai: [['high','He does not come to morning appointments',
+            'Three no-shows in 90 days, every one of them between 8:00 and 9:30. Nothing after lunch has been missed. <b>This one needs a phone call, not a scheduling rule.</b>'],
+           ['low','He answers texts, not calls','Two of two SMS confirmations answered; four of six voicemails not returned.']] },
+    'Ben Okonkwo': { av: 'BO', age: 51, sex: 'Male', dob: 'Dec 23, 1975',
+      ph: '(562) 555-1210', em: 'b.okonkwo@example.com', cov: 'UnitedHealthcare · OON',
+      ai: [['high','Two no-shows in a row, both Friday afternoons',
+            'He has not cancelled either — he simply has not come. <b>Somebody should ring him before the next one is booked.</b>'],
+           ['med','$340 outstanding','Two visits unpaid since May. The balance shows at check-in.']] },
+    'Nina Kowalski': { av: 'NK', age: 43, sex: 'Female', dob: 'Jan 7, 1983',
+      ph: '(949) 555-1765', em: 'nina.k@example.com', cov: 'Self-pay',
+      ai: [['high','Her post-EBOO follow-up is five days past the date Dr. Drannikov set',
+            'She is on the waitlist as urgent and has been waiting nine days. Any morning suits her.'],
+           ['low','Self-pay, always settles same day','Nine of nine paid in full at check-in.']] },
+    'Yuki Tanaka': { av: 'YT', age: 17, sex: 'Female', dob: 'Jun 15, 2009',
+      ph: '(714) 555-1088', em: 'guardian: k.tanaka@example.com', cov: 'Cigna · OON',
+      ai: [['high','A guardian must be present',
+            'She is 17. Two appointments have needed rebooking because a guardian was not there — the flag is on every booking now.'],
+           ['med','Prefers Monday or Wednesday','Every appointment she has kept has been on one of those two days.']] },
+    'Walter Hsu': { av: 'WH', age: 68, sex: 'Male', dob: 'Apr 30, 1958',
+      ph: '(626) 555-0755', em: 'w.hsu@example.com', cov: 'Blue Shield of CA · OON',
+      ai: [['med','Arrives 12 to 18 minutes late','Six of the last eight. Confirming the evening before has worked twice.'],
+           ['med','$680 of deductible left','Until it is met he owes the full allowed on every visit.']] },
+    'Grace Lindqvist': { av: 'GL', age: 40, sex: 'Female', dob: 'Aug 11, 1986',
+      ph: '(949) 555-0311', em: 'g.lindqvist@example.com', cov: 'Medicare Part B',
+      ai: [['low','Her lab draws run short','Last six averaged 9 minutes against a booked 15. Ten minutes would hold.']] },
+    'Amara Diallo': { av: 'AD', age: 47, sex: 'Female', dob: 'Feb 2, 1979',
+      ph: '(310) 555-1543', em: 'a.diallo@example.com', cov: 'UnitedHealthcare · OON',
+      ai: [['high','Ferritin 8 — the iron is overdue',
+            'Dr. Drannikov wants it in before the next cycle. She is urgent on the waitlist, two days past his date.'],
+           ['med','Late only in the morning','Four of five appointments before 10 AM started late; nothing after lunch has.']] }
+  };
+  var PT_PRON = { Female: ['her', 'she'], Male: ['his', 'he'] };
+
+  function ptOpen(name) {
+    var p = PT_DATA[name];
+    if (!p) { HCOS.toast('No profile on file for ' + name + '.', 'warn'); return; }
+    var set = function (id, v) { var e = document.getElementById(id); if (e) e.textContent = v; };
+    set('pt-av', p.av);
+    set('pt-name', name);
+    set('pt-demo', p.age + ' · ' + p.sex + ' · DOB ' + p.dob + ' · ' + p.ph + ' · ' + p.em);
+    set('pt-url', 'hcos.helixona.com/patients/' + name.toLowerCase().replace(/[^a-z]+/g, '-'));
+    var pron = PT_PRON[p.sex] || ['their', 'they'];
+    set('pt-ai-t', 'What the schedule has learned about ' + (p.sex === 'Female' ? 'her' : p.sex === 'Male' ? 'him' : 'them'));
+    var box = document.getElementById('pt-ai');
+    if (box) box.innerHTML = p.ai.map(function (a) {
+      return '<div class="ai-line ai-' + a[0] + '"><b>' + a[1] + '</b><span>' + a[2]
+        + ' <a href="schedule.html#/l-09-insights">See the pattern</a></span></div>';
+    }).join('');
+    HCOS.activate('pt-02-profile');
+  }
+  window.ptOpen = ptOpen;
+
+  /* a row in the patient list opens THAT patient */
+  document.addEventListener('click', function (ev) {
+    var r = ev.target.closest ? ev.target.closest('.row-click[data-name]') : null;
+    if (!r) return;
+    ptOpen(r.getAttribute('data-name'));
+  });
+
+  /* arriving with ?pt=Name, which is how the schedule links in */
+  (function () {
+    var m = /[?&]pt=([^&#]+)/.exec(location.search);
+    if (m) ptOpen(decodeURIComponent(m[1].replace(/\+/g, ' ')));
+  })();
 </script>
 </body>
 </html>

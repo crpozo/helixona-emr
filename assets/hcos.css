@@ -253,7 +253,10 @@ button { font-family: inherit; }
 .chip.active .fbk-badge { background: #fff; color: var(--ink); border-color: #fff; }
 
 .canvas { padding: 20px 28px 48px; display: flex; justify-content: center; flex: 1; }
-.canvas-inner { width: 100%; max-width: 1160px; }
+/* Full width (Carlos, 2026-08-12). 1160px was a reading measure borrowed
+   from prose; an eleven-column table is not prose, and capping it just
+   moved the problem into a horizontal scrollbar nobody could see. */
+.canvas-inner { width: 100%; max-width: 1760px; }
 .screen { display: none; width: 100%; }
 .screen.active { display: block; }
 
@@ -1445,7 +1448,10 @@ a.lead-chip:hover { border-color: var(--ink); }
 
 .fl.sev-high { background: #FBE3E0; border-color: #C0392B; color: #8E2118; }
 .fl.sev-med  { background: #FBEFD7; border-color: #C98A1E; color: #7A5510; }
-.fl.sev-low  { background: #EDEDED; border-color: #A8A8A8; color: #3D3D3D; }
+/* Low severity was grey, which on a page of grey chrome read as "disabled"
+   rather than "quietly true" (Carlos, 2026-08-12). Blue is a third voice:
+   not an alarm, not switched off. */
+.fl.sev-low  { background: #E3ECFB; border-color: #2E6DB4; color: #1B4A80; }
 /* a high-severity flag also rings the block, so it is findable without hovering */
 .cal-appt.has-high { box-shadow: inset 0 0 0 2px #C0392B; }
 
@@ -2942,3 +2948,58 @@ body.col-resizing * { cursor: col-resize !important; }
   .page-actions-main { margin-left: 0; }
   .page-actions .btn { justify-content: center; }
 }
+.msel-sub { color: var(--muted); font-size: 10.5px; }
+.msel-inline-hd .field-input, .msel-inline-hd .field-select { width: auto; font-size: 12px; padding: 5px 9px; }
+
+/* ==========================================================================
+   HORIZONTAL SCROLL, ANNOUNCED (Carlos, 2026-08-12: "if it's hidden in the
+   table we should have a scroll feedback for horizontal check"). A table that
+   overflows silently is a table whose last three columns do not exist as far
+   as the reader is concerned. A fade on the side that has more, and a line of
+   text saying so, both driven by the wrapper's own scroll position.
+   ========================================================================== */
+.tbl-wrap { position: relative; }
+.tbl-wrap.has-more-right::after,
+.tbl-wrap.has-more-left::before {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 46px; pointer-events: none; z-index: 3;
+}
+.tbl-wrap.has-more-right::after {
+  right: 0; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,.96));
+}
+.tbl-wrap.has-more-left::before {
+  left: 0; background: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,.96));
+}
+.scroll-hint {
+  display: none; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--muted); margin: 8px 0 0;
+}
+.tbl-wrap.has-more-right + .scroll-hint,
+.tbl-wrap.has-more-left + .scroll-hint { display: flex; }
+.scroll-hint b { color: var(--ink); font-weight: 600; }
+/* a choice inside a confirm dialog — retiring a flag type is two decisions and
+   the second one has a safe default that has to be readable, not assumed */
+.confirm-choice {
+  display: flex; gap: 10px; align-items: flex-start; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 9px; padding: 11px 13px; margin-top: 10px;
+  font-size: 12.5px; line-height: 1.55;
+}
+.confirm-choice:hover { border-color: var(--ink); }
+.confirm-choice input { margin-top: 3px; flex-shrink: 0; }
+.confirm-body p { margin: 0; }
+
+/* a pattern that is only useful if somebody phones the patient is marked as
+   such — the answer is a person, not a scheduling tweak */
+.ins-alarm { color: #C0392B; font-weight: 700; }
+tr.is-noshow > td { background: #FEF6F5; }
+tr.is-noshow:hover > td { background: #FBE3E0; }
+.ins-acts { white-space: nowrap; }
+.ins-acts .btn + .btn { margin-left: 5px; }
+.ai-state.rejected { border-style: dashed; color: var(--muted); }
+.link-btn {
+  border: none; background: none; padding: 0; font: inherit; color: var(--ink);
+  font-weight: 600; cursor: pointer; text-align: left; text-decoration: underline;
+  text-decoration-color: var(--line); text-underline-offset: 3px;
+}
+.link-btn:hover { text-decoration-color: var(--ink); }
+.ins-range { display: inline-flex; gap: 6px; align-items: center; }
+.ins-range .field-input { width: auto; }

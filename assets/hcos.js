@@ -974,7 +974,7 @@
 
     loadPublishedNotes();
     /* after the shell exists, so the tables have their real widths to freeze */
-    requestAnimationFrame(function () { wireColumns(); });
+    requestAnimationFrame(function () { wireColumns(); wireScrollHints(); });
   }
 
 
@@ -1109,6 +1109,154 @@
     });
   }
 
+
+  /* ==========================================================================
+     SHARED VOCABULARY (Carlos, 2026-08-12: "we cannot invent every nomenclature
+     each time"). Resources, hours, days and frequency were written out by hand
+     on every screen, so the same chair was "IV 1 · Nick · Nurse" in one place
+     and "IV 1 (Nick)" in another, and a room read exactly like a doctor.
+
+     A ROOM IS NOT A DOCTOR. Every resource carries a KIND, and the kind is
+     shown, so the desk never has to know from memory that "Room 2" is a place
+     and "Brooke" is a person.
+     ========================================================================== */
+  var RESOURCE_KINDS = ['Provider', 'IV chair', 'Room', 'Equipment'];
+  var RESOURCES = [
+    { id: 'dr',    kind: 'Provider',  name: 'Dr. Drannikov', sub: 'Physician' },
+    { id: 'bak',   kind: 'Provider',  name: 'Dr. Bakman',    sub: 'Physician' },
+    { id: 'bro',   kind: 'Provider',  name: 'Brooke',        sub: 'Physician Associate' },
+    { id: 'c1',    kind: 'IV chair',  name: 'IV 1',          sub: 'Nick · Nurse' },
+    { id: 'c2',    kind: 'IV chair',  name: 'IV 2',          sub: 'Bea · Medic' },
+    { id: 'c3',    kind: 'IV chair',  name: 'IV 3',          sub: 'Juan · Medic' },
+    { id: 'c4',    kind: 'IV chair',  name: 'IV 4',          sub: 'Nate · Medic' },
+    { id: 'room1', kind: 'Room',      name: 'Room 1',        sub: 'Exam' },
+    { id: 'room2', kind: 'Room',      name: 'Room 2',        sub: 'Procedures' },
+    { id: 'eboo',  kind: 'Equipment', name: 'EBOO circuit',  sub: 'One only' },
+    { id: 'laser', kind: 'Equipment', name: 'Laser',         sub: 'Erchonia' }
+  ];
+  function resourceById(id) {
+    for (var i = 0; i < RESOURCES.length; i++) if (RESOURCES[i].id === id) return RESOURCES[i];
+    return null;
+  }
+  /* "Provider · Dr. Drannikov", never a bare name */
+  function resourceLabel(id, withSub) {
+    var r = resourceById(id);
+    if (!r) return id || '';
+    return r.kind + ' · ' + r.name + (withSub && r.sub ? ' (' + r.sub + ')' : '');
+  }
+  /* options grouped BY KIND, so the list itself teaches the difference */
+  function resourceOptions(opt) {
+    opt = opt || {};
+    var out = opt.all === false ? '' :
+      '<option value="">' + (opt.allLabel || 'Every resource') + '</option>';
+    RESOURCE_KINDS.forEach(function (k) {
+      var list = RESOURCES.filter(function (r) { return r.kind === k; });
+      if (!list.length) return;
+      out += '<optgroup label="' + k + '">';
+      if (opt.groupAll !== false) {
+        out += '<option value="kind:' + k + '">Every ' + k.toLowerCase() + '</option>';
+      }
+      list.forEach(function (r) {
+        out += '<option value="' + r.id + '"' + (opt.selected === r.id ? ' selected' : '') + '>'
+             + r.name + (r.sub ? ' · ' + r.sub : '') + '</option>';
+      });
+      out += '</optgroup>';
+    });
+    return out;
+  }
+  /* a multi-select list of resources, grouped the same way */
+  function resourceChecks(name) {
+    var out = '';
+    RESOURCE_KINDS.forEach(function (k) {
+      var list = RESOURCES.filter(function (r) { return r.kind === k; });
+      if (!list.length) return;
+      out += '<div class="msel-group">' + k + '</div>';
+      list.forEach(function (r) {
+        out += '<label class="msel-opt" data-res="' + r.id + '">'
+             + '<input type="checkbox" name="' + (name || 'res') + '" value="' + r.id + '" '
+             + 'aria-label="' + r.name + '">' + r.name
+             + (r.sub ? ' <span class="msel-sub">' + r.sub + '</span>' : '') + '</label>';
+      });
+    });
+    return out;
+  }
+
+  /* Every half hour the clinic could conceivably run, not the four somebody
+     happened to type. The default range is the clinic day; a screen that needs
+     the whole 24 hours asks for it. */
+  function hourOptions(o) {
+    o = o || {};
+    var from = o.from === undefined ? 6 : o.from;
+    var to   = o.to   === undefined ? 20 : o.to;
+    var step = o.step || 30;
+    var out = '';
+    for (var m = from * 60; m <= to * 60; m += step) {
+      var h = Math.floor(m / 60) % 24, mm = m % 60;
+      var ampm = h < 12 ? 'AM' : 'PM';
+      var hh = h % 12 === 0 ? 12 : h % 12;
+      var label = hh + ':' + (mm < 10 ? '0' + mm : mm) + ' ' + ampm;
+      out += '<option value="' + m + '"' + (o.selected === m ? ' selected' : '') + '>'
+           + label + '</option>';
+    }
+    return out;
+  }
+
+  /* ONE vocabulary for days and for how often, everywhere. The clinic opens at
+     the weekend, so Saturday and Sunday are not an afterthought. */
+  var DAYS = [['mon','Mon','Monday'], ['tue','Tue','Tuesday'], ['wed','Wed','Wednesday'],
+              ['thu','Thu','Thursday'], ['fri','Fri','Friday'], ['sat','Sat','Saturday'],
+              ['sun','Sun','Sunday']];
+  var FREQ = [['once','Just once'], ['daily','Daily'], ['weekly','Weekly'],
+              ['fortnightly','Every two weeks'], ['monthly','Monthly — same weekday'],
+              ['forever','Every week, no end date']];
+  function dayChips(on) {
+    on = on || ['mon','tue','wed','thu','fri'];
+    return DAYS.map(function (d) {
+      return '<button class="filter-chip multi' + (on.indexOf(d[0]) !== -1 ? ' active' : '') + '" '
+           + 'type="button" data-day="' + d[0] + '" aria-label="' + d[2] + '">' + d[1] + '</button>';
+    }).join('');
+  }
+  function freqOptions(sel) {
+    return FREQ.map(function (f) {
+      return '<option value="' + f[0] + '"' + (f[0] === sel ? ' selected' : '') + '>' + f[1] + '</option>';
+    }).join('');
+  }
+
+
+  /* A table that overflows silently is a table whose last three columns do not
+     exist as far as the reader is concerned. Every .tbl-wrap says which way it
+     has more, and how many columns are off-screen. */
+  function wireScrollHints(root) {
+    var wraps = (root || document).querySelectorAll('.tbl-wrap');
+    [].forEach.call(wraps, function (w) {
+      if (w.dataset.hintWired) return;
+      w.dataset.hintWired = '1';
+      var hint = el('div', 'scroll-hint');
+      hint.innerHTML = '<span>&#8596;</span><span class="scroll-hint-t"></span>';
+      if (w.parentNode) w.parentNode.insertBefore(hint, w.nextSibling);
+      function paint() {
+        var more = w.scrollWidth - w.clientWidth;
+        var right = more - w.scrollLeft > 2, left = w.scrollLeft > 2;
+        w.classList.toggle('has-more-right', right);
+        w.classList.toggle('has-more-left', left);
+        var t = hint.querySelector('.scroll-hint-t');
+        if (!more) { t.textContent = ''; return; }
+        var hidden = [].filter.call(w.querySelectorAll('thead th'), function (th) {
+          var r = th.getBoundingClientRect(), b = w.getBoundingClientRect();
+          return r.right > b.right + 2 || r.left < b.left - 2;
+        }).length;
+        t.innerHTML = hidden
+          ? '<b>' + hidden + ' more column' + (hidden === 1 ? '' : 's') + '</b> off to the '
+            + (right ? 'right' : 'left') + ' — scroll sideways, or drag a header edge to make room'
+          : 'Scroll sideways for the rest';
+      }
+      w.addEventListener('scroll', paint);
+      window.addEventListener('resize', paint);
+      requestAnimationFrame(paint);
+      setTimeout(paint, 240);
+    });
+  }
+
   var confirmEl = null;
   function buildConfirm() {
     confirmEl = el('div', 'modal-overlay confirm-overlay');
@@ -1162,8 +1310,12 @@
     modules: MODULES,
     openNotes: function () { openNotesDrawer(); },
     confirm: confirmAction,
-    wireColumns: wireColumns,
-    openFeedback: function () { if (fbkPanel) fbkPanel.classList.add('open'); }
+    wireColumns: wireColumns, wireScrollHints: wireScrollHints,
+    openFeedback: function () { if (fbkPanel) fbkPanel.classList.add('open'); },
+    RESOURCES: RESOURCES, RESOURCE_KINDS: RESOURCE_KINDS, DAYS: DAYS, FREQ: FREQ,
+    resourceById: resourceById, resourceLabel: resourceLabel,
+    resourceOptions: resourceOptions, resourceChecks: resourceChecks,
+    hourOptions: hourOptions, dayChips: dayChips, freqOptions: freqOptions
   };
 
   if (document.readyState === 'loading') {

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=83">
+<link rel="stylesheet" href="assets/hcos.css?v=84">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -147,7 +147,7 @@
             <div class="l-fl">
                 <div class="msel" data-msel="ty">
                   <button class="msel-field" data-hcos-handled="1" type="button">
-                    <span class="msel-field-lbl">All types</span><span class="msel-caret">&#9662;</span>
+                    <span class="msel-field-lbl">Appointment types</span><span class="msel-caret">&#9662;</span>
                   </button>
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search types&hellip;" aria-label="Search types&hellip;">
@@ -171,7 +171,7 @@
                 </div>
                 <div class="msel" data-msel="sub">
                   <button class="msel-field" data-hcos-handled="1" type="button">
-                    <span class="msel-field-lbl">All subtypes</span><span class="msel-caret">&#9662;</span>
+                    <span class="msel-field-lbl">Appointment subtypes</span><span class="msel-caret">&#9662;</span>
                   </button>
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search subtypes&hellip;" aria-label="Search subtypes&hellip;">
@@ -257,7 +257,7 @@
                 </div>
                 <div class="msel" data-msel="st">
                   <button class="msel-field" data-hcos-handled="1" type="button">
-                    <span class="msel-field-lbl">All statuses</span><span class="msel-caret">&#9662;</span>
+                    <span class="msel-field-lbl">Appointment statuses</span><span class="msel-caret">&#9662;</span>
                   </button>
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search statuses&hellip;" aria-label="Search statuses&hellip;">
@@ -1402,7 +1402,7 @@
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select l-treat" id="l-treat-w" onchange="lSync(this)" aria-label="Treatment">
                 <optgroup label="Type">
-                  <option value="all">All types</option>
+                  <option value="all">Appointment types</option>
                   <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
                   <option value="ty:ty-proc">Procedure &mdash; all subtypes</option>
                   <option value="ty:ty-iv">IV &mdash; all subtypes</option>
@@ -2177,7 +2177,7 @@
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select l-treat" id="l-treat-m" onchange="lSync(this)" aria-label="Treatment">
                 <optgroup label="Type">
-                  <option value="all">All types</option>
+                  <option value="all">Appointment types</option>
                   <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
                   <option value="ty:ty-proc">Procedure &mdash; all subtypes</option>
                   <option value="ty:ty-iv">IV &mdash; all subtypes</option>
@@ -3709,16 +3709,126 @@
             <div class="page-title">Appointment patterns &amp; insights</div>
             <div class="page-sub">What the schedule has learned about how patients actually turn up</div>
           </div>
-          <div class="app-user">
-            <select class="field-select" id="l-ins-ty" onchange="lInsFilter(this.value)" aria-label="Filter by appointment type">
-              <option value="all">All appointment types</option>
-              <option value="ty-iv">IV</option>
-              <option value="ty-visit">Office visit</option>
-              <option value="ty-proc">Procedure</option>
-              <option value="ty-energ">Energetics</option>
-              <option value="ty-lab">Labs</option>
-            </select>
+          <div class="app-user"><button class="btn" data-activate="l-01-day">Back to the calendar</button></div>
+        </div>
+
+        <div class="l-filters">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <select class="field-select l-select ins-f" id="ins-f-when" onchange="lInsFilter()"
+                      aria-label="Period" style="min-width:170px">
+                <option value="30">Last 30 days</option>
+                <option value="90" selected>Last 90 days</option>
+                <option value="180">Last 6 months</option>
+                <option value="365">Last 12 months</option>
+                <option value="custom">A range&hellip;</option>
+              </select>
+              <span class="ins-range" id="ins-f-range" style="display:none">
+                <input type="date" class="field-input" id="ins-f-from" value="2026-04-22" aria-label="From">
+                <span style="color:var(--muted);font-size:11.5px">to</span>
+                <input type="date" class="field-input" id="ins-f-to" value="2026-07-21" aria-label="To">
+              </span>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select ins-f" id="ins-f-res" onchange="lInsFilter()"
+                      aria-label="Resource" style="min-width:190px"></select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select ins-f" id="ins-f-ty" onchange="lInsFilter()"
+                      aria-label="Appointment type" style="min-width:170px">
+                <option value="">Every appointment type</option>
+                <option value="ty-visit">Office Visit</option>
+                <option value="ty-proc">Procedure</option>
+                <option value="ty-energ">Energetics</option>
+                <option value="ty-lab">Labs</option>
+                <option value="ty-diag">Diagnostics</option>
+                <option value="ty-fpe">FPE</option>
+                <option value="ty-chiro">Chiro</option>
+                <option value="ty-eboo">EBOO</option>
+                <option value="ty-laser">Laser</option>
+                <option value="ty-iv">IV</option>
+              </select>
+              <select class="field-select l-select ins-f" id="ins-f-sub" onchange="lInsFilter()"
+                      aria-label="Appointment subtype" style="min-width:180px">
+                <option value="">Every appointment subtype</option>
+                <option value="t-newpt">New patient</option>
+                <option value="t-npfu">New patient FU</option>
+                <option value="t-nptoc">New patient TOC</option>
+                <option value="t-fu">Follow Up</option>
+                <option value="t-prp">PRP</option>
+                <option value="t-tpi">TPI</option>
+                <option value="t-pelm">Pellet Males</option>
+                <option value="t-pelf">Pellet Females</option>
+                <option value="t-proloz">Prolozone</option>
+                <option value="t-micro">Microcurrent</option>
+                <option value="t-biochg">BioCharger</option>
+                <option value="t-lymph">LymphStar</option>
+                <option value="t-scenar">SCENAR</option>
+                <option value="t-minilym">Mini-LymphStar</option>
+                <option value="t-biomodp">BioMod Pro</option>
+                <option value="t-biomodr">BioMod Recharge</option>
+                <option value="t-nmt">NMT</option>
+                <option value="t-mead">MEAD</option>
+                <option value="t-meadre">MEAD ReAssessment</option>
+                <option value="t-mdl">MDL</option>
+                <option value="t-quest">Quest</option>
+                <option value="t-g6pd">G6PD</option>
+                <option value="t-igenex">iGenex</option>
+                <option value="t-diag">Diagnostics</option>
+                <option value="t-fpeie">FPE - IE</option>
+                <option value="t-fpefu">FPE F/U</option>
+                <option value="t-dcintx">DC IN - TX</option>
+                <option value="t-dctx">DC - TX</option>
+                <option value="t-lasereval">Laser Eval</option>
+                <option value="t-medifne">MediFNE</option>
+                <option value="t-pocrev">POC Review</option>
+                <option value="t-eboosafe">EBOO Safe</option>
+                <option value="t-ebootx">EBOO</option>
+                <option value="t-erchlas">Erch Laser</option>
+                <option value="t-erccemp">ErcCompEmp</option>
+                <option value="t-erccpt">ErcCompPt</option>
+                <option value="t-erccvip">ErcCompVIP</option>
+                <option value="t-erccref">ErcCompRef</option>
+                <option value="t-cell">Cellular Boost</option>
+                <option value="t-chel">Chelation</option>
+                <option value="t-cog">Cognitive Support</option>
+                <option value="t-iron">Core Iron Blend</option>
+                <option value="t-rest">Core Restore</option>
+                <option value="t-detox">Detox Prime</option>
+                <option value="t-ebooiv">Eboo Boost</option>
+                <option value="t-amino">Essential Aminos</option>
+                <option value="t-ff5">Foundational Flow 5</option>
+                <option value="t-ff10">Foundational Flow 10</option>
+                <option value="t-ff15">Foundational Flow 15</option>
+                <option value="t-ff20">Foundational Flow 20</option>
+                <option value="t-ff25">Foundational Flow 25</option>
+                <option value="t-ff50">Foundational Flow 50</option>
+                <option value="t-mast">Mast Cell</option>
+                <option value="t-mc15">Mega C 15g</option>
+                <option value="t-mc25">Mega C 25g</option>
+                <option value="t-mc50">Mega C 50g</option>
+                <option value="t-mc75">Mega C 75g</option>
+                <option value="t-mc100">Mega C 100g</option>
+                <option value="t-migraine">Migraine</option>
+                <option value="t-mito">Mito Boost</option>
+                <option value="t-minimb">Mini Mito Boost</option>
+                <option value="t-minimbc">Mini Mito Boost - Custom</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select ins-f" id="ins-f-state" onchange="lInsFilter()"
+                      aria-label="Review state" style="min-width:170px">
+                <option value="">Any review state</option>
+                <option value="suggested">Waiting on a human</option>
+                <option value="accepted">Accepted</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
           </div>
+          <div class="l-view-group"><span class="l-count" id="l-ins-count">8 patterns</span></div>
         </div>
 
         <div class="grid-4" style="margin-bottom:18px">
@@ -3740,34 +3850,175 @@
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
             <thead><tr>
-              <th scope="col">Patient</th><th scope="col">Appointment type</th><th scope="col">Pattern</th>
-              <th scope="col">Drawn from</th><th scope="col">Suggestion</th><th scope="col">State</th>
+              <th scope="col">Patient</th>
+              <th scope="col">Appointment</th>
+              <th scope="col">What the system sees</th>
+              <th scope="col">Drawn from</th>
+              <th scope="col">What it suggests</th>
+              <th scope="col">Reviewed</th>
+              <th scope="col">Actions</th>
             </tr></thead>
             <tbody id="l-ins-body">
-              <tr class="row-click" onclick="lInsOpen('Maya Reyes')" tabindex="0" role="button" title="Open Maya Reyes’s snapshot" data-ty="ty-iv"><td>Maya Reyes</td><td>IV &middot; Mega C 100g</td>
-                <td>Runs 20 min long, every time</td><td>Last 4 runs &middot; avg 3 h 20 against 3 h</td>
-                <td>Book her last in the chair</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Walter Hsu')" tabindex="0" role="button" title="Open Walter Hsu’s snapshot" data-ty="ty-iv"><td>Walter Hsu</td><td>IV &middot; Mega C 50g</td>
-                <td>Arrives 12&ndash;18 min late</td><td>6 of last 8 visits</td>
-                <td>Confirm the evening before</td><td><span class="ai-state accepted">Accepted by Yazmin</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Victor Reyes')" tabindex="0" role="button" title="Open Victor Reyes’s snapshot" data-ty="ty-visit"><td>Victor Reyes</td><td>Office visit</td>
-                <td>No-shows before 10 AM</td><td>3 no-shows in 90 days, all 8&ndash;9:30</td>
-                <td>Offer afternoons only</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Rosa Iglesias')" tabindex="0" role="button" title="Open Rosa Iglesias’s snapshot" data-ty="ty-visit"><td>Rosa Iglesias</td><td>Office visit</td>
-                <td>Cancels Monday bookings</td><td>4 of 5 Monday slots cancelled inside 24 h</td>
-                <td>Try mid-week</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Priya Natarajan')" tabindex="0" role="button" title="Open Priya Natarajan’s snapshot" data-ty="ty-proc"><td>Priya Natarajan</td><td>EBOO &middot; EBOO</td>
-                <td>Needs 15 min longer to settle</td><td>Last 3 circuits</td>
-                <td>Book 2 h 15, not 2 h</td><td><span class="ai-state accepted">Accepted by Nick</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Daniel Okafor')" tabindex="0" role="button" title="Open Daniel Okafor’s snapshot" data-ty="ty-iv"><td>Daniel Okafor</td><td>IV &middot; Foundational Flow 10</td>
-                <td>Always finishes early</td><td>Last 5 runs &middot; avg 24 min against 30</td>
-                <td>The slot after him is safe to tighten</td><td><span class="ai-state rejected">Rejected &mdash; Dr. Drannikov</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Liam Fitzgerald')" tabindex="0" role="button" title="Open Liam Fitzgerald’s snapshot" data-ty="ty-energ"><td>Liam Fitzgerald</td><td>Energetics &middot; BEMER</td>
-                <td>Reschedules within the same week</td><td>3 of last 4</td>
-                <td>Offer the standing Thursday slot</td><td><span class="ai-state suggested">Suggested</span></td></tr>
-              <tr class="row-click" onclick="lInsOpen('Hana Sato')" tabindex="0" role="button" title="Open Hana Sato’s snapshot" data-ty="ty-energ"><td>Hana Sato</td><td>Energetics &middot; NMT</td>
-                <td>Books late, arrives early</td><td>Last 6 visits &middot; avg 11 min early</td>
-                <td>She can take an earlier slot when one frees</td><td><span class="ai-state suggested">Suggested</span></td></tr>
+              <tr class="row-click" id="ins0" data-ty="ty-iv" data-sub="t-mc100" data-res="c2"
+                  data-state="suggested" data-pt="Maya Reyes">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Maya Reyes')">Maya Reyes</button></td>
+                <td>IV &middot; Mega C 100g</td>
+                <td>Runs 20 min long, every time</td>
+                <td>Last 4 runs · avg 3 h 20 against 3 h</td>
+                <td>Book her last in the chair</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins0','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins0','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins0')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins1" data-ty="ty-iv" data-sub="t-mc50" data-res="c1"
+                  data-state="accepted" data-pt="Walter Hsu">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Walter Hsu')">Walter Hsu</button></td>
+                <td>IV &middot; Mega C 50g</td>
+                <td>Arrives 12–18 min late</td>
+                <td>6 of last 8 visits</td>
+                <td>Confirm the evening before</td>
+                <td class="ins-state"><span class="ai-state accepted">Accepted</span><div class="field-help">Yazmin &middot; 19 Jul</div></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins1','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins1','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins1')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click is-noshow" id="ins2" data-ty="ty-visit" data-sub="t-fu" data-res="dr"
+                  data-state="suggested" data-pt="Victor Reyes">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Victor Reyes')">Victor Reyes</button></td>
+                <td>Office Visit &middot; Follow Up</td>
+                <td><span class="ins-alarm">&#9888; </span>No-shows before 10 AM</td>
+                <td>3 no-shows in 90 days, all 8–9:30</td>
+                <td>Call him — offer afternoons only</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  <button class="btn btn-sm btn-primary" onclick="lInsCall('ins2','Victor Reyes')">&#9742; Call them</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins2','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins2','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins2')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins3" data-ty="ty-visit" data-sub="t-fu" data-res="bro"
+                  data-state="suggested" data-pt="Rosa Iglesias">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Rosa Iglesias')">Rosa Iglesias</button></td>
+                <td>Office Visit &middot; Follow Up</td>
+                <td>Cancels Monday bookings</td>
+                <td>4 of 5 Monday slots cancelled inside 24 h</td>
+                <td>Try mid-week</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins3','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins3','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins3')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins4" data-ty="ty-eboo" data-sub="t-ebootx" data-res="room2"
+                  data-state="accepted" data-pt="Priya Natarajan">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Priya Natarajan')">Priya Natarajan</button></td>
+                <td>EBOO &middot; EBOO</td>
+                <td>Needs 15 min longer to settle</td>
+                <td>Last 3 circuits</td>
+                <td>Book 105 min, not 90</td>
+                <td class="ins-state"><span class="ai-state accepted">Accepted</span><div class="field-help">Nick &middot; 12 Jul</div></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins4','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins4','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins4')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click is-noshow" id="ins5" data-ty="ty-visit" data-sub="t-npfu" data-res="bak"
+                  data-state="suggested" data-pt="Ben Okonkwo">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Ben Okonkwo')">Ben Okonkwo</button></td>
+                <td>Office Visit &middot; New patient FU</td>
+                <td><span class="ins-alarm">&#9888; </span>Two no-shows in a row</td>
+                <td>Both Friday afternoons</td>
+                <td>Call him before the next one</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  <button class="btn btn-sm btn-primary" onclick="lInsCall('ins5','Ben Okonkwo')">&#9742; Call them</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins5','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins5','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins5')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins6" data-ty="ty-iv" data-sub="t-ff10" data-res="c3"
+                  data-state="rejected" data-pt="Hana Sato">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Hana Sato')">Hana Sato</button></td>
+                <td>IV &middot; Foundational Flow 10</td>
+                <td>Always asks to move earlier</td>
+                <td>5 of 6 bookings moved forward</td>
+                <td>Offer the 8:00 first</td>
+                <td class="ins-state"><span class="ai-state rejected">Rejected</span><div class="field-help">Karina &middot; 2 Jul</div></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins6','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins6','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins6')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins7" data-ty="ty-lab" data-sub="t-quest" data-res="bro"
+                  data-state="suggested" data-pt="Grace Lindqvist">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Grace Lindqvist')">Grace Lindqvist</button></td>
+                <td>Labs &middot; Quest</td>
+                <td>Draws run short</td>
+                <td>Last 6 · avg 9 min against 15</td>
+                <td>Book 10 min</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins7','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins7','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins7')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins8" data-ty="ty-iv" data-sub="t-iron" data-res="c4"
+                  data-state="suggested" data-pt="Amara Diallo">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Amara Diallo')">Amara Diallo</button></td>
+                <td>IV &middot; Core Iron Blend</td>
+                <td>Late only in the morning</td>
+                <td>4 of 5 before 10 AM</td>
+                <td>Book her after lunch</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins8','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins8','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins8')">&#128465;</button>
+                </td>
+              </tr>
+              <tr class="row-click" id="ins9" data-ty="ty-chiro" data-sub="t-dctx" data-res="room1"
+                  data-state="suggested" data-pt="Owen Delacroix">
+                <td><button class="link-btn" type="button" onclick="lInsOpen('Owen Delacroix')">Owen Delacroix</button></td>
+                <td>Chiro &middot; DC - TX</td>
+                <td>Books and cancels in pairs</td>
+                <td>3 pairs in 90 days</td>
+                <td>Confirm 48 h ahead</td>
+                <td class="ins-state"><span class="ai-state suggested">Waiting on a human</span></td>
+                <td class="row-acts ins-acts">
+                  
+                  <button class="btn btn-sm" onclick="lInsMark('ins9','accepted')" title="Accept">&#10003;</button>
+                  <button class="btn btn-sm" onclick="lInsMark('ins9','rejected')" title="Reject">&times;</button>
+                  <button class="btn btn-sm btn-icon btn-danger" title="Delete this pattern"
+                          aria-label="Delete this pattern" onclick="lInsDelete(this,'ins9')">&#128465;</button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -3876,7 +4127,7 @@
             <div class="l-fl">
               <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-ty"
                       aria-label="Appointment type" style="min-width:150px">
-                <option value="">Every type</option>
+                <option value="">Every appointment type</option>
                 <option value="ty-visit">Office Visit</option>
                 <option value="ty-proc">Procedure</option>
                 <option value="ty-energ">Energetics</option>
@@ -3890,7 +4141,7 @@
               </select>
               <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-sub"
                       aria-label="Subtype" style="min-width:170px">
-                <option value="">Every subtype</option>
+                <option value="">Every appointment subtype</option>
                 <option value="t-newpt">New patient</option>
                 <option value="t-npfu">New patient FU</option>
                 <option value="t-nptoc">New patient TOC</option>
@@ -3962,7 +4213,7 @@
                 <option value="0">Any waiting time</option>
                 <option value="3">Waiting 3 days or more</option>
                 <option value="7">Waiting a week or more</option>
-                <option value="14">Waiting a fortnight or more</option>
+                <option value="14">Waiting two weeks or more</option>
               </select>
             </div>
           </div>
@@ -4164,7 +4415,7 @@
         <div class="app-header">
           <div>
             <div class="page-title">Offer this slot</div>
-            <div class="page-sub">Tuesday 21 July, 10:00 AM &middot; Brooke &middot; 60 minutes &mdash; freed when Grace Lindqvist cancelled</div>
+            <div class="page-sub">Tuesday, July 21, 10:00 AM &middot; Brooke &middot; 60 minutes &mdash; freed when Grace Lindqvist cancelled</div>
           </div>
           <div class="app-user"><button class="btn" data-activate="l-10-waitlist">Back to the waitlist</button></div>
         </div>
@@ -4230,7 +4481,6 @@
                   <option value="1">The rest of today</option>
                   <option value="2" selected>2 days</option>
                   <option value="7">A week</option>
-                  <option value="14">A fortnight</option>
                   <option value="forever">Until somebody releases it by hand</option>
                 </select>
               </div>
@@ -4245,7 +4495,7 @@
 
             <div class="field">
               <label class="field-lbl" for="o-sms">The message</label>
-              <textarea class="field-textarea" rows="3" id="o-sms" aria-label="The message">Hi {first_name}, a 10:00 AM slot with Brooke opened up on Tuesday 21 July. Tap to take it: {accept_link} — first to accept keeps it.</textarea>
+              <textarea class="field-textarea" rows="3" id="o-sms" aria-label="The message">Hi {first_name}, a 10:00 AM slot with Brooke opened up on Tuesday, July 21. Tap to take it: {accept_link} — first to accept keeps it.</textarea>
               <div class="field-help"><code>{first_name}</code> and <code>{accept_link}</code> are
                 filled in per patient. The auto-reply to everyone else is fixed and cannot be
                 edited: it has to say the slot is gone.</div>
@@ -4355,7 +4605,7 @@
             <div class="l-fl">
               <select class="field-select l-select blk-f" id="blk-f-ty" onchange="lBlkFilter()"
                       aria-label="Appointment type" style="min-width:150px">
-                <option value="">Every type</option>
+                <option value="">Every appointment type</option>
                 <option value="ty-visit">Office Visit</option>
                 <option value="ty-proc">Procedure</option>
                 <option value="ty-energ">Energetics</option>
@@ -4369,7 +4619,7 @@
               </select>
               <select class="field-select l-select blk-f" id="blk-f-sub" onchange="lBlkFilter()"
                       aria-label="Subtype" style="min-width:170px">
-                <option value="">Every subtype</option>
+                <option value="">Every appointment subtype</option>
                 <option value="t-newpt">New patient</option>
                 <option value="t-npfu">New patient FU</option>
                 <option value="t-nptoc">New patient TOC</option>
@@ -5814,9 +6064,18 @@
           <span class="field-lbl">Which appointments may book into it</span>
           <div class="msel-inline">
             <div class="msel-inline-hd">
-              <button class="btn btn-sm" type="button" onclick="lBmPick(1)">Select all</button>
+              <select class="field-select" id="l-bm-tyfilter" onchange="lBmTyFilter()"
+                      aria-label="Narrow by appointment type" style="width:auto;min-width:190px">
+                <option value="">Every appointment type</option>
+              </select>
+              <input class="field-input" id="l-bm-q" placeholder="Search a treatment&hellip;"
+                     oninput="lBmTyFilter()" aria-label="Search a treatment"
+                     style="width:auto;min-width:170px">
+              <button class="btn btn-sm" type="button" onclick="lBmPick(1)">Select all shown</button>
               <button class="btn btn-sm" type="button" onclick="lBmPick(0)">Clear</button>
-              <span class="field-help" id="l-bm-picked">Nothing picked &mdash; it would refuse everything</span>
+            </div>
+            <div class="msel-inline-hd" style="border-top:1px solid var(--line-soft);border-bottom:none">
+              <span class="field-help" id="l-bm-picked" style="margin:0">Nothing picked &mdash; it would refuse everything</span>
             </div>
             <div class="msel-inline-opts">
                 <div class="msel-group" data-ty-of="ty-visit">Office Visit</div>
@@ -5901,26 +6160,13 @@
       <div class="step-lbl"><span>2</span> When it runs</div>
       <div class="field">
         <span class="field-lbl">Days</span>
-        <div class="chip-row" id="l-bm-days">
-          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Mon</button>
-          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Tue</button>
-          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Wed</button>
-          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Thu</button>
-          <button class="filter-chip multi active" type="button" onclick="lBlkSay()">Fri</button>
-          <button class="filter-chip multi" type="button" onclick="lBlkSay()">Sat</button>
-          <button class="filter-chip multi" type="button" onclick="lBlkSay()">Sun</button>
-        </div>
+        <div class="chip-row" id="l-bm-days"></div>
       </div>
       <div class="grid-3">
         <div class="field"><label class="field-lbl" for="l-bm-start">Starting</label>
           <input class="field-input" type="date" id="l-bm-start" value="2026-09-04" onchange="lBlkSay()"></div>
         <div class="field"><label class="field-lbl" for="l-bm-rep">Frequency</label>
-          <select class="field-select" id="l-bm-rep" onchange="lBlkSay()">
-            <option value="once">Just once</option>
-            <option value="weekly" selected>Weekly</option>
-            <option value="monthly">Monthly &mdash; same weekday of the month</option>
-            <option value="forever">Forever &mdash; every week, no end</option>
-          </select></div>
+          <select class="field-select" id="l-bm-rep" onchange="lBlkSay()"></select></div>
         <div class="field"><label class="field-lbl" for="l-bm-until">Runs until</label>
           <select class="field-select" id="l-bm-until" onchange="lBlkUntil(this.value)">
             <option value="forever" selected>Forever</option>
@@ -5936,85 +6182,22 @@
       <div class="step-lbl"><span>3</span> Hours and resources</div>
       <div class="grid-2">
         <div class="field"><label class="field-lbl" for="l-bm-from">From</label>
-          <select class="field-select" id="l-bm-from" onchange="lBlkSay()">
-              <option>6:00 AM</option>
-              <option>6:30 AM</option>
-              <option>7:00 AM</option>
-              <option>7:30 AM</option>
-              <option>8:00 AM</option>
-              <option>8:30 AM</option>
-              <option>9:00 AM</option>
-              <option>9:30 AM</option>
-              <option>10:00 AM</option>
-              <option>10:30 AM</option>
-              <option>11:00 AM</option>
-              <option>11:30 AM</option>
-              <option selected>12:00 PM</option>
-              <option>12:30 PM</option>
-              <option>1:00 PM</option>
-              <option>1:30 PM</option>
-              <option>2:00 PM</option>
-              <option>2:30 PM</option>
-              <option>3:00 PM</option>
-              <option>3:30 PM</option>
-              <option>4:00 PM</option>
-              <option>4:30 PM</option>
-              <option>5:00 PM</option>
-              <option>5:30 PM</option>
-              <option>6:00 PM</option>
-              <option>6:30 PM</option>
-              <option>7:00 PM</option>
-              <option>7:30 PM</option>
+          <select class="field-select"  id="l-bm-from" onchange="lBlkSay()" data-sel="360">
           </select></div>
         <div class="field"><label class="field-lbl" for="l-bm-to">To</label>
-          <select class="field-select" id="l-bm-to" onchange="lBlkSay()">
-              <option>6:00 AM</option>
-              <option>6:30 AM</option>
-              <option>7:00 AM</option>
-              <option>7:30 AM</option>
-              <option>8:00 AM</option>
-              <option>8:30 AM</option>
-              <option>9:00 AM</option>
-              <option>9:30 AM</option>
-              <option>10:00 AM</option>
-              <option>10:30 AM</option>
-              <option>11:00 AM</option>
-              <option>11:30 AM</option>
-              <option>12:00 PM</option>
-              <option selected>12:30 PM</option>
-              <option>1:00 PM</option>
-              <option>1:30 PM</option>
-              <option>2:00 PM</option>
-              <option>2:30 PM</option>
-              <option>3:00 PM</option>
-              <option>3:30 PM</option>
-              <option>4:00 PM</option>
-              <option>4:30 PM</option>
-              <option>5:00 PM</option>
-              <option>5:30 PM</option>
-              <option>6:00 PM</option>
-              <option>6:30 PM</option>
-              <option>7:00 PM</option>
-              <option>7:30 PM</option>
+          <select class="field-select"  id="l-bm-to" onchange="lBlkSay()" data-sel="390">
           </select></div>
       </div>
       <div class="field">
         <label class="field-lbl" for="l-bm-res">Applies to</label>
-        <select class="field-select" id="l-bm-res" onchange="lBlkSay()">
-          <option value="all">Every resource</option>
-          <option value="prov">Every provider</option>
-          <option value="dr">Dr. Drannikov</option>
-          <option value="bak">Dr. Bakman</option>
-          <option value="bro">Brooke &middot; Physician Associate</option>
-          <option value="iv">IV 1&ndash;4</option>
-          <option value="iv1">IV 1 &middot; Nick</option>
-          <option value="iv2">IV 2 &middot; Bea</option>
-          <option value="iv3">IV 3 &middot; Juan</option>
-          <option value="iv4">IV 4 &middot; Nate</option>
-          <option value="rooms">Rooms 1 and 2</option>
-          <option value="room1">Room 1 &middot; exam</option>
-          <option value="room2">Room 2 &middot; procedures</option>
-        </select>
+        <div class="msel-inline">
+          <div class="msel-inline-hd">
+            <button class="btn btn-sm" type="button" onclick="lBmRes(1)">Select all</button>
+            <button class="btn btn-sm" type="button" onclick="lBmRes(0)">Clear</button>
+            <span class="field-help" id="l-bm-respicked" style="margin:0 0 0 auto">Every resource</span>
+          </div>
+          <div class="msel-inline-opts" id="l-bm-reslist"></div>
+        </div>
       </div>
 
       <div class="prov" id="l-bm-say"><span>&nbsp;</span></div>
@@ -6026,7 +6209,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=83"></script>
+<script src="assets/hcos.js?v=84"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -6513,7 +6696,7 @@
       stage: b.getAttribute('data-stage') || '', pay: b.getAttribute('data-pay') || '',
       phone: b.getAttribute('data-phone') || '',
       flags: (b.getAttribute('data-flags') || '').split('|').filter(Boolean),
-      ch: ['Open patient record', 'patients.html#/pt-02-profile']
+      ch: ['Open patient record', 'patients.html?pt=' + encodeURIComponent(b.getAttribute('data-pt') || '') + '#/pt-02-profile']
     };
   }
 
@@ -6695,27 +6878,58 @@
   /* Removing a flag TYPE is not an undo-able mistake: every appointment that
      carries it loses the warning, and nobody finds out until somebody is hurt.
      So it asks twice and names what it is about to break (Carlos, 2026-08-12). */
+  /* RETIRING A FLAG TYPE IS TWO DECISIONS, NOT ONE (Carlos, 2026-08-12).
+       1. Stop anyone assigning it from now on — always what happens.
+       2. What about the patients who already carry it? Keeping it is the safe
+          default: a documented allergy does not stop being true because the
+          menu changed, and a chart that silently loses a warning is dangerous.
+          Stripping it is sometimes right — a flag created by mistake, or one
+          that leaked PHI into its wording — so it is offered, second, and
+          named for what it is.
+     Only a SUPER ADMIN may do either. This is a clinic-wide change to what the
+     software can warn about, and it is not a scheduling decision. */
+  var L_ROLE = 'Super admin';        /* who is signed in, for the wireframe */
   function lFlagDelete(k) {
     var f = L_FLAGS[k];
     if (!f) return;
+    if (L_ROLE !== 'Super admin') {
+      HCOS.confirm({
+        title: 'Only a super admin can retire a flag type',
+        body: 'You are signed in as ' + L_ROLE + '. Retiring a flag changes what the software '
+            + 'is able to warn about, for every patient and every screen.',
+        consequence: 'Ask Shibani or Carlos. They can see who asked and why on the audit trail.',
+        confirm: 'I understand',
+        onConfirm: function () {}
+      });
+      return;
+    }
     var used = document.querySelectorAll('.cal-appt[data-flags*="' + k + '"]').length;
     HCOS.confirm({
-      title: 'Delete the "' + f.name + '" flag type?',
-      body: 'This removes the flag from the whole clinic, not from one patient. '
-          + 'Nobody will be able to set it again.',
-      /* the number that makes this warning mean anything is how many PATIENTS
-         carry the flag, not how many appointments are on today's board — that
-         one is usually zero and makes the dialog look harmless */
-      consequence: '<b>' + f.pts + ' patient' + (f.pts === 1 ? '' : 's')
-          + ' carr' + (f.pts === 1 ? 'ies' : 'y') + ' this flag today</b>'
-          + (used ? ', ' + used + ' of them on this week&rsquo;s board' : '')
-          + '. They lose the warning on the calendar, the hover card and check-in the moment it '
-          + 'goes. It stays on their record as history.',
-      confirm: 'Delete the flag type',
+      title: 'Retire the "' + f.name + '" flag type?',
+      body: '<p>Nobody will be able to assign it again, on any patient, from the moment you '
+          + 'confirm. That part is not optional.</p>'
+          + '<p style="margin-top:12px"><b>What should happen to the ' + f.pts + ' patient'
+          + (f.pts === 1 ? '' : 's') + ' who already carry it?</b></p>'
+          + '<label class="confirm-choice"><input type="radio" name="flagkeep" value="keep" checked>'
+          + '<span><b>Keep it on their records</b> &mdash; it stays visible on the calendar and at '
+          + 'check-in for those patients, and no new one can be set. This is the safe answer: a '
+          + 'documented allergy does not stop being true because the menu changed.</span></label>'
+          + '<label class="confirm-choice"><input type="radio" name="flagkeep" value="strip">'
+          + '<span><b>Remove it from their records too</b> &mdash; for a flag created by mistake, '
+          + 'or one whose wording should never have been written. '
+          + '<b>' + f.pts + ' chart' + (f.pts === 1 ? '' : 's') + ' lose the warning.</b></span></label>',
+      consequence: 'Either way the change is logged against your name with the reason, and the '
+          + 'flag stays in the audit trail. Removing it from charts cannot be undone from here.',
+      confirm: 'Retire the flag type',
       onConfirm: function () {
+        var pick = document.querySelector('input[name="flagkeep"]:checked');
+        var strip = pick && pick.value === 'strip';
         var row = document.querySelector('[data-flag="' + k + '"]');
         if (row) row.remove();
-        HCOS.toast('"' + f.name + '" deleted. Logged against your name.', 'ok');
+        HCOS.toast(strip
+          ? '"' + f.name + '" retired and removed from ' + f.pts + ' charts. Logged against your name.'
+          : '"' + f.name + '" retired. The ' + f.pts + ' patients who carry it keep it; nobody can set a new one.',
+          'ok');
       }
     });
   }
@@ -7801,8 +8015,10 @@
   /* A pattern is about a PERSON. Reading "Maya Reyes runs 20 minutes long" and
      having nowhere to go from it is a dead end (Carlos, 2026-08-12). */
   function lInsOpen(name) {
-    HCOS.toast('Opening ' + name + '\u2019s snapshot — the same patterns are on it, in her own context.');
-    setTimeout(function () { location.href = 'patients.html#/pt-02-profile'; }, 350);
+    HCOS.toast('Opening ' + name + '\u2019s profile — the same patterns, in their own context.');
+    setTimeout(function () {
+      location.href = 'patients.html?pt=' + encodeURIComponent(name) + '#/pt-02-profile';
+    }, 300);
   }
   window.lInsOpen = lInsOpen;
 
@@ -8159,7 +8375,7 @@
     var P = { urgent: 'urgent only', 'urgent,high': 'urgent and high',
               'urgent,high,routine': 'urgent, high and routine', all: 'any priority' };
     var H = { '0': 'not held at all', '1': 'held for the rest of today', '2': 'held for 2 days',
-              '7': 'held for a week', '14': 'held for a fortnight',
+              '7': 'held for a week', '14': 'held for two weeks',
               forever: 'held until somebody releases it by hand' };
     var T = { open: 'it opens to normal booking', space: 'it becomes a reserved space for this treatment',
               tell: 'the manager is told and it stays held' };
@@ -8261,15 +8477,19 @@
     var days = [].filter.call(document.querySelectorAll('#l-bm-days .filter-chip'),
                               function (c) { return c.classList.contains('active'); })
                  .map(function (c) { return c.textContent.trim(); });
+    var resPicked = [].map.call(document.querySelectorAll('#l-bm-reslist input:checked'),
+                                function (b) { return b.value; });
     var rep  = (document.getElementById('l-bm-rep')   || {}).value || 'weekly';
     var from = (document.getElementById('l-bm-from')  || {}).value || '';
     var to   = (document.getElementById('l-bm-to')    || {}).value || '';
-    var res  = document.getElementById('l-bm-res');
-    var resT = res ? res.options[res.selectedIndex].textContent : '';
+    var resT = !resPicked.length ? 'every resource'
+      : resPicked.length === 1 ? HCOS.resourceLabel(resPicked[0]).toLowerCase()
+      : resPicked.map(function (r) { return HCOS.resourceById(r).name; }).join(', ');
     var start = (document.getElementById('l-bm-start') || {}).value || '';
     var until = (document.getElementById('l-bm-until') || {}).value || 'forever';
     var n = document.querySelectorAll('.bm-sub input:checked').length;
-    var R = { once: 'once', weekly: 'every week', monthly: 'every month on that weekday',
+    var R = { once: 'once', daily: 'every day', weekly: 'every week',
+              fortnightly: 'every two weeks', monthly: 'every month on that weekday',
               forever: 'every week, with no end date' };
     var U = { forever: 'and never ends', '3': 'and stops after 3 months',
               '6': 'and stops after 6 months', '12': 'and stops after 12 months',
@@ -8281,7 +8501,7 @@
           : (n ? 'Only the ' + n + ' ticked appointment type' + (n === 1 ? '' : 's') + ' can be booked '
                : 'NOTHING could be booked — no appointment type is ticked, so this reserved space would refuse everything '))
       + 'on <b>' + days.join(', ') + '</b> from <b>' + from + '</b> to <b>' + to + '</b>, on '
-      + resT.toLowerCase() + '. It runs ' + R[rep] + ' from ' + start + ' ' + U[until] + '.</span>';
+      + resT + '. It runs ' + R[rep] + ' from ' + start + ' ' + U[until] + '.</span>';
   }
   function lBlkSave() {
     var kind = (document.getElementById('l-bm-kind') || {}).value;
@@ -8292,6 +8512,85 @@
     }
     HCOS.toast('Block created. It shows on the day board straight away and only a manager can lift it.', 'ok');
   }
+
+  /* ---------- the block form, built from the shared vocabulary ----------
+     Every hour, every day including the weekend, one frequency list, and the
+     resources as a grouped multi-select — because a block that applies to
+     "Room 2 and IV 3" was impossible to express with a single select, and the
+     days and the wording were being reinvented on each screen. */
+  function lBlkForm() {
+    var days = document.getElementById('l-bm-days');
+    if (!days) return;
+    days.innerHTML = HCOS.dayChips(['mon','tue','wed','thu','fri']);
+    days.querySelectorAll('.filter-chip').forEach(function (c) {
+      c.addEventListener('click', function () { setTimeout(lBlkSay, 0); });
+    });
+    var rep = document.getElementById('l-bm-rep');
+    if (rep) rep.innerHTML = HCOS.freqOptions('weekly');
+    ['l-bm-from', 'l-bm-to'].forEach(function (id) {
+      var s = document.getElementById(id);
+      if (!s) return;
+      /* the clinic day by default, with the whole 24 hours one click away —
+         a deep clean at 11 PM is a real block somebody has to be able to make */
+      s.innerHTML = HCOS.hourOptions({ from: 0, to: 23.5, step: 30,
+                                       selected: parseInt(s.getAttribute('data-sel'), 10) });
+    });
+    var res = document.getElementById('l-bm-reslist');
+    if (res) {
+      res.innerHTML = HCOS.resourceChecks('bmres');
+      res.querySelectorAll('input').forEach(function (b) {
+        b.addEventListener('change', lBmResCount);
+      });
+    }
+    var tyf = document.getElementById('l-bm-tyfilter');
+    if (tyf) {
+      var seen = {};
+      document.querySelectorAll('.bm-sub').forEach(function (o) {
+        var t = o.getAttribute('data-ty-of');
+        if (t && !seen[t]) {
+          seen[t] = 1;
+          var g = document.querySelector('.msel-group[data-ty-of="' + t + '"]');
+          tyf.innerHTML += '<option value="' + t + '">' + (g ? g.textContent : t) + '</option>';
+        }
+      });
+    }
+    lBmResCount();
+    lBmTyFilter();
+  }
+  /* the subtype list is 62 long; you narrow it before you pick from it */
+  function lBmTyFilter() {
+    var ty = (document.getElementById('l-bm-tyfilter') || {}).value || '';
+    var q  = ((document.getElementById('l-bm-q') || {}).value || '').toLowerCase();
+    document.querySelectorAll('.bm-sub').forEach(function (o) {
+      var on = (!ty || o.getAttribute('data-ty-of') === ty)
+            && (!q || o.textContent.toLowerCase().indexOf(q) !== -1);
+      o.style.display = on ? '' : 'none';
+    });
+    document.querySelectorAll('#l-bm-forwrap .msel-group[data-ty-of]').forEach(function (g) {
+      var t = g.getAttribute('data-ty-of');
+      var any = [].some.call(document.querySelectorAll('.bm-sub[data-ty-of="' + t + '"]'),
+                             function (o) { return o.style.display !== 'none'; });
+      g.style.display = any ? '' : 'none';
+    });
+  }
+  function lBmRes(on) {
+    document.querySelectorAll('#l-bm-reslist input').forEach(function (b) { b.checked = !!on; });
+    lBmResCount();
+  }
+  function lBmResCount() {
+    var picked = [].map.call(document.querySelectorAll('#l-bm-reslist input:checked'),
+                             function (b) { return b.value; });
+    var el = document.getElementById('l-bm-respicked');
+    if (el) {
+      el.textContent = !picked.length ? 'Every resource'
+        : picked.length === 1 ? HCOS.resourceLabel(picked[0])
+        : picked.length + ' resources';
+    }
+    lBlkSay();
+  }
+  window.lBlkForm = lBlkForm; window.lBmTyFilter = lBmTyFilter;
+  window.lBmRes = lBmRes; window.lBmResCount = lBmResCount;
+
   window.lBmPick = lBmPick; window.lBmCount = lBmCount;
   window.lBlkUntil = lBlkUntil; window.lBlkSay = lBlkSay; window.lBlkSave = lBlkSave;
 
@@ -8354,16 +8653,83 @@
   window.lFindSlots = lFindSlots;
   window.lBlkKind = lBlkKind;
 
-  /* ---------- Patterns: one filter, over the appointment type ---------- */
-  function lInsFilter(ty) {
-    var n = 0;
+  /* ---------- Appointment patterns ----------
+     Carlos, 2026-08-12: "sometimes AI can make mistakes about the insights".
+     So every row can be accepted, rejected or deleted, and the row records WHO
+     did it — a suggestion nobody has looked at and a suggestion a nurse has
+     rejected are different things and must not look the same.
+
+     A no-show pattern is different again: the answer is not a scheduling tweak,
+     it is a person picking up the phone. Those rows are marked and carry that
+     action, because "Victor no-shows before 10 AM" is only useful if somebody
+     rings Victor. */
+  function lInsFilter() {
+    var res  = (document.getElementById('ins-f-res')   || {}).value || '';
+    var ty   = (document.getElementById('ins-f-ty')    || {}).value || '';
+    var sub  = (document.getElementById('ins-f-sub')   || {}).value || '';
+    var st   = (document.getElementById('ins-f-state') || {}).value || '';
+    var when = (document.getElementById('ins-f-when')  || {}).value || '90';
+    var range = document.getElementById('ins-f-range');
+    if (range) range.style.display = when === 'custom' ? 'inline-flex' : 'none';
+    var n = 0, total = 0;
     document.querySelectorAll('#l-ins-body tr').forEach(function (r) {
-      var on = ty === 'all' || r.getAttribute('data-ty') === ty;
+      total++;
+      var rres = r.getAttribute('data-res') || '';
+      var resOk = !res || rres === res ||
+        (res.indexOf('kind:') === 0 &&
+         (HCOS.resourceById(rres) || {}).kind === res.slice(5));
+      var on = resOk
+            && (!ty  || r.getAttribute('data-ty') === ty)
+            && (!sub || r.getAttribute('data-sub') === sub)
+            && (!st  || r.getAttribute('data-state') === st);
       r.style.display = on ? '' : 'none';
       if (on) n++;
     });
-    HCOS.toast(n + (n === 1 ? ' pattern' : ' patterns') + ' for that appointment type.');
+    var c = document.getElementById('l-ins-count');
+    if (c) c.textContent = n === total ? total + ' patterns' : n + ' of ' + total + ' patterns';
   }
+
+  var L_INS_WHO = 'Yazmin';        /* whoever is signed in */
+  function lInsMark(id, state) {
+    var row = document.getElementById(id);
+    if (!row) return;
+    row.setAttribute('data-state', state);
+    var cell = row.querySelector('.ins-state');
+    var lbl = state === 'accepted' ? 'Accepted' : 'Rejected';
+    cell.innerHTML = '<span class="ai-state ' + state + '">' + lbl + '</span>'
+      + '<div class="field-help">' + L_INS_WHO + ' &middot; just now</div>';
+    lInsFilter();
+    HCOS.toast(state === 'accepted'
+      ? 'Accepted. It will be applied the next time ' + row.getAttribute('data-pt') + ' is booked, and your name is on it.'
+      : 'Rejected. The system stops offering it and records that you disagreed — that is what teaches it.',
+      'ok');
+  }
+  function lInsDelete(btn, id) {
+    var row = document.getElementById(id);
+    if (!row) return;
+    HCOS.confirm({
+      title: 'Delete this pattern?',
+      body: 'It disappears from the list entirely, rather than being marked rejected.',
+      consequence: 'Rejecting is usually better: it keeps the disagreement on the record, which is '
+          + 'what stops the system offering the same thing again next month. Deleting leaves no trace '
+          + 'that it was ever suggested.',
+      confirm: 'Delete it anyway',
+      onConfirm: function () { row.remove(); lInsFilter();
+        HCOS.toast('Pattern deleted.', 'ok'); }
+    });
+  }
+  function lInsCall(id, who) {
+    var row = document.getElementById(id);
+    HCOS.toast('Call logged for ' + who + ' and a task raised for the front desk. '
+      + 'The pattern stays open until somebody records what they said.', 'ok');
+    if (row) {
+      var cell = row.querySelector('.ins-state');
+      cell.innerHTML = '<span class="ai-state accepted">Call raised</span>'
+        + '<div class="field-help">' + L_INS_WHO + ' &middot; just now</div>';
+      row.setAttribute('data-state', 'accepted');
+    }
+  }
+  window.lInsMark = lInsMark; window.lInsDelete = lInsDelete; window.lInsCall = lInsCall;
   window.lInsFilter = lInsFilter;
 
   /* ---------- Blocked time: the repeat vocabulary people already know ---------- */
@@ -8737,13 +9103,13 @@
         document.querySelectorAll('[data-msel="' + k + '"] .msel-field-lbl')
           .forEach(function (n) { n.textContent = txt; });
       }
-      setLbl('st', lSel.sts.length ? lSel.sts.length + ' selected' : 'All statuses');
+      setLbl('st', lSel.sts.length ? lSel.sts.length + ' selected' : 'Appointment statuses');
       document.querySelectorAll('.msel-opt[data-st]').forEach(function (o) {
         o.querySelector('input').checked = lSel.sts.indexOf(o.getAttribute('data-st')) !== -1;
       });
       setLbl('ty', lSel.types.length
-        ? lSel.types.map(function (t) { return TY_NAMES[t]; }).join(' · ') : 'All types');
-      setLbl('sub', lSel.subs.length ? lSel.subs.length + ' selected' : 'All subtypes');
+        ? lSel.types.map(function (t) { return TY_NAMES[t]; }).join(' · ') : 'Appointment types');
+      setLbl('sub', lSel.subs.length ? lSel.subs.length + ' selected' : 'Appointment subtypes');
       document.querySelectorAll('.msel-opt[data-ty]').forEach(function (o) {
         o.querySelector('input').checked = lSel.types.indexOf(o.getAttribute('data-ty')) !== -1;
       });
@@ -8912,6 +9278,12 @@
   if (typeof lSlots === 'function') lSlots();
   if (typeof lBkAi === 'function') lBkAi();
   if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
+  if (typeof lBlkForm === 'function') lBlkForm();
+  (function () {
+    var r = document.getElementById('ins-f-res');
+    if (r) r.innerHTML = HCOS.resourceOptions({ allLabel: 'Every resource' });
+    if (typeof lInsFilter === 'function') lInsFilter();
+  })();
 </script>
 </body>
 </html>
