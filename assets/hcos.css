@@ -3161,3 +3161,126 @@ tr.tk-row.is-done strong { text-decoration: line-through; }
   padding: 9px 10px; border-top: 1px solid var(--line-soft); margin-top: 4px; text-align: left;
 }
 .time-more:hover { color: var(--ink); background: var(--hx-band); }
+
+/* ==========================================================================
+   TASKS — the clinic's work on a board (Carlos, 2026-08-13). Its own module,
+   not a screen inside Scheduling: most of what lands here was raised somewhere
+   else entirely, and a queue that lives inside one module is a queue the other
+   modules cannot reach.
+   ========================================================================== */
+.tk-board {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 14px; align-items: start; margin-top: 4px;
+}
+.tk-col { background: var(--hx-band); border-radius: 12px; padding: 12px; min-width: 0; }
+.tk-col-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.tk-col-t {
+  font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+  color: var(--muted);
+}
+.tk-col-n {
+  margin-left: auto; font-size: 11px; font-weight: 700; color: var(--ink);
+  background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px;
+}
+.tk-col-body { display: flex; flex-direction: column; gap: 10px; min-height: 40px; }
+.tk-card {
+  background: #fff; border: 1px solid var(--line-soft); border-radius: 10px;
+  padding: 12px 13px; cursor: default;
+}
+.tk-card:focus { outline: 2px solid var(--ink); outline-offset: 1px; }
+.tk-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.tk-src {
+  margin-left: auto; font-size: 10px; color: var(--muted);
+  border: 1px solid var(--line-soft); border-radius: 999px; padding: 1px 7px; white-space: nowrap;
+}
+/* the system raised most of these, and that is the point of the module */
+.tk-src-sys { border-color: var(--hx-blue); color: var(--hx-blue); }
+.tk-card-t { font-size: 12.5px; font-weight: 600; color: var(--hx-navy); line-height: 1.4; }
+.tk-card-b { font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-top: 5px; }
+.tk-card-foot {
+  display: flex; align-items: baseline; gap: 8px; margin-top: 9px;
+  font-size: 11px; color: var(--muted);
+}
+.tk-due { margin-left: auto; white-space: nowrap; }
+.tk-card-acts {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;
+  padding-top: 9px; border-top: 1px solid var(--line-soft);
+}
+.tk-card.is-done { opacity: .6; }
+.tk-card.is-done .tk-card-t { text-decoration: line-through; }
+tr.is-done > td { opacity: .6; }
+tr.is-done strong { text-decoration: line-through; }
+
+/* an automation rule reads as a sentence: when → raise → for whom */
+.tr-when, .tr-then {
+  font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  color: var(--muted); margin-right: 4px;
+}
+tr.tr-rule.is-off > td { opacity: .5; }
+.sw { display: inline-block; position: relative; width: 34px; height: 19px; cursor: pointer; }
+.sw input { position: absolute; opacity: 0; width: 0; height: 0; }
+.sw span {
+  position: absolute; inset: 0; background: var(--line); border-radius: 999px; transition: background .12s;
+}
+.sw span::after {
+  content: ''; position: absolute; top: 2px; left: 2px; width: 15px; height: 15px;
+  background: #fff; border-radius: 50%; transition: transform .12s;
+}
+.sw input:checked + span { background: var(--hx-navy); }
+.sw input:checked + span::after { transform: translateX(15px); }
+.sw input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* ==========================================================================
+   THE FILTER BAR — a shared component. It lived in schedule.html's own
+   <style>, so the Tasks board got the markup and none of the layout and
+   every select rendered full width, stacked (found 2026-08-13). A component
+   used by more than one page cannot live inside one of them.
+   ========================================================================== */
+/* ONE line of controls, not three labelled rows. Every control already says
+   what it is — "All types", "All statuses", "Today" — so a label beside it
+   only repeated the word, and because "Show", "Type & subtype" and "Dates"
+   are three different widths the selects came out with a ragged left edge and
+   two-thirds of the bar empty. The labels are gone; hairlines group the
+   controls instead: WHO you are looking at | WHAT you are filtering to |
+   WHEN. The count and the saved view are not filters, so they ride the far
+   right of whichever line they land on. */
+/* The controls wrap on the LEFT; what you are looking at is pinned RIGHT.
+   Reading order is how the desk actually thinks: WHEN | WHO | WHAT — so the
+   control that drops to a second line is the status toggle, never the date.
+   The count and the saved view are not filters and never wrap into them. */
+.l-filters {
+  position: relative; z-index: 30;
+  display: flex; align-items: center; gap: 8px 16px;
+  padding: 9px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
+}
+.l-fl-wrap {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  flex: 1 1 auto; min-width: 0;
+}
+.l-fl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.l-sep { width: 1px; align-self: stretch; margin: 1px 5px; background: var(--line); }
+.l-select { width: auto; min-width: 200px; font-size: 12.5px; padding: 6px 10px; }
+.l-select.l-range { min-width: 126px; }
+.l-count { font-size: 12px; color: var(--muted); white-space: nowrap; }
+/* The summary strip is NOT a filter bar. It was wearing .l-filters, which put
+   a second z-index:30 stacking context AFTER the real bar — and a later
+   sibling at the same z-index wins, so an open dropdown was painted over by
+   it and its first option could not be clicked (Carlos, 2026-08-12). It has
+   no stacking context of its own now, and cannot outrank an open panel. */
+.l-summary {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  padding: 9px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
+}
+.l-summary .btn { margin-left: auto; }
+/* while a panel is open its bar has to beat everything after it */
+.l-filters.has-open { z-index: 80; }
+.l-view-group {
+  flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
+}
+/* narrow enough that the bar is several rows anyway, and a vertical rule
+   between wrapped rows reads as a column divider — a lie about the layout */
+@media (max-width: 1080px) {
+  .l-sep { display: none; }
+  .l-filters { flex-wrap: wrap; }
+  .l-view-group { flex-direction: row; align-items: center; gap: 12px; margin-left: auto; }
+}

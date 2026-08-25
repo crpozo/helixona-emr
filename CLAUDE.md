@@ -846,19 +846,37 @@ builds the whole list, so a new period dropdown cannot invent a fifth.
 **A recurrence pattern is not a date and does not get this word.** "Custom…" on the repeat list was
 the same mistake wearing a different hat; that list is `HCOS.freqOptions()`.
 
-## Tasks (Module L, added 2026-08-12)
+## Tasks — its own module (Carlos, 2026-08-13)
 
-`schedule.html#/l-13-tasks`. **Tasks are raised, updated and closed BY THE SYSTEM**, not typed —
-a waitlist cancellation raises one for the front desk, a freed slot that matches somebody raises the
-offer here rather than in a person's memory. `lTkRaise({pri, bucket, owner, title, body, go})` is
-the hook; the waitlist's remove path already uses it.
+`tasks.html` + `tasks-rules.html`, in the **Clinic** group of the sidebar, right after Schedule.
+It was a screen inside Scheduling and that was wrong: **most of what lands here was raised
+somewhere else entirely**, and a queue that lives inside one module is a queue the other modules
+cannot reach. Carlos: "es donde vive la administracion de tareas de toda la clinica, es como
+Monday".
 
-- **When the thing that caused a task stops being true, the task closes itself and says why.** A
-  list somebody has to tidy by hand stops being true within a week and then nobody reads it.
-- **Dismissing is not doing.** The dialog says so: the cause is still true, so the system will raise
-  it again. If it should never have been raised, that is a note, not a dismissal.
-- **Every task names what raised it.** A task with no source is the first thing people stop
-  trusting.
+- **The board is the working view** — To do / Doing / Waiting on someone / Done — and the **list is
+  BUILT from the board**, so the two can never disagree. Moving a card is one click ("Move on"),
+  not a drag a trackpad fights you on.
+- **Most tasks are raised by the software, and the card says so.** An appointment is booked and a
+  task appears for whoever confirms it; a patient comes off the waitlist and one appears for the
+  front desk; an order goes unsigned and one appears for the provider. `tkRaise({pri, bucket,
+  owner, title, body, go, goLbl})` is the hook any module calls.
+- **`tasks-rules.html` is why the list can be trusted.** Every rule says what has to happen, whose
+  job it becomes, and **how it closes itself**. A rule with no closing condition creates work that
+  piles up until people stop reading the whole list — the builder offers "somebody has to close it
+  by hand" and calls that out as the option to argue about.
+- **Owners are roles, not names** — "Whoever is on the front desk", not "Yazmin". Names go on
+  holiday.
+- **Turning a rule off does not close the tasks it already raised.** Those were real when they were
+  made; it only stops new ones.
+- **Dismissing is not doing.** If the system raised it, the cause is still true and it will be
+  raised again; the way to stop it is to change the rule.
+
+### A shared component cannot live inside one page
+
+`.l-filters` and its layout lived in `schedule.html`'s own `<style>`. The Tasks board used the same
+markup and got none of the layout — every select rendered full width, stacked. It is in
+`assets/hcos.css` now. **If two pages use it, it is not that page's CSS.**
 
 ## Patterns can be wrong (2026-08-12)
 

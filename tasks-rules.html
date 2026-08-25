@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Task automations &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=95">
+</head>
+<body data-page="tasks" data-page-title="Tasks" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="tr-01-rules" data-title="Automations">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks/automations</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">What raises a task</div>
+            <div class="page-sub">The rules that turn something happening into somebody&rsquo;s job</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="tr-02-new">Write a rule</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>This page is the reason the task list can be trusted.</strong>
+          Nobody maintains it by hand, so it does not rot. Every rule says three things: what has to
+          happen, whose job it becomes, and <strong>how it closes itself</strong> &mdash; a rule with
+          no closing condition creates work that piles up until people start ignoring the whole list.
+        </div>
+
+        <div class="l-filters">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <select class="field-select l-select" id="tr-f-bucket" onchange="trFilter()"
+                      aria-label="Team" style="min-width:170px">
+                <option value="">Every team</option>
+                <option value="Scheduling">Scheduling</option>
+                <option value="Clinical">Clinical</option>
+                <option value="Billing">Billing</option>
+                <option value="Admin">Admin</option>
+              </select>
+              <select class="field-select l-select" id="tr-f-state" onchange="trFilter()"
+                      aria-label="On or off" style="min-width:150px">
+                <option value="">On and off</option>
+                <option value="on">Switched on</option>
+                <option value="off">Switched off</option>
+              </select>
+            </div>
+          </div>
+          <div class="l-view-group"><span class="l-count" id="tr-count">10 rules</span></div>
+        </div>
+
+        <div class="tbl-wrap" style="margin-top:12px">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col" style="width:56px">On</th>
+              <th scope="col">What happens</th>
+              <th scope="col">What it raises</th>
+              <th scope="col">Whose job</th>
+              <th scope="col">By when</th>
+              <th scope="col">Fired</th>
+              <th scope="col">Actions</th>
+            </tr></thead>
+            <tbody id="tr-body">
+              <tr class="tr-rule" data-rule="r1" data-bucket="Scheduling" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r1')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> An appointment is booked</td>
+                <td><span class="tr-then">raise</span> <strong>Confirm it with the patient</strong>
+                  <div class="field-help">Closes itself when the patient confirms, or when the appointment is cancelled.</div></td>
+                <td>Whoever is on the front desk</td>
+                <td>Same day</td>
+                <td class="l-num">412 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r2" data-bucket="Scheduling" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r2')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> An appointment is cancelled and somebody on the waitlist matches</td>
+                <td><span class="tr-then">raise</span> <strong>Offer the slot before it is released</strong>
+                  <div class="field-help">Closes when the slot is filled or released. This is the one that recovers chair time.</div></td>
+                <td>Whoever is on the front desk</td>
+                <td>Within the hour</td>
+                <td class="l-num">38 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r3" data-bucket="Scheduling" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r3')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A patient comes off the waitlist</td>
+                <td><span class="tr-then">raise</span> <strong>Check their booked appointment still stands</strong>
+                  <div class="field-help">Somebody leaving the waitlist often means something changed that nobody told us about.</div></td>
+                <td>Whoever is on the front desk</td>
+                <td>Same day</td>
+                <td class="l-num">11 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r4" data-bucket="Clinical" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r4')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A booking needs an order that is not signed</td>
+                <td><span class="tr-then">raise</span> <strong>Sign it, or say no</strong>
+                  <div class="field-help">Closes when signed. If it is still open 24 h before, the slot is released and the patient told.</div></td>
+                <td>The ordering provider</td>
+                <td>Before the appointment</td>
+                <td class="l-num">27 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r5" data-bucket="Clinical" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r5')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A pattern says a patient is a repeat no-show</td>
+                <td><span class="tr-then">raise</span> <strong>Ring them — this one is not a scheduling rule</strong>
+                  <div class="field-help">Closes when somebody records what was said. Nobody can close it by ticking it.</div></td>
+                <td>The PCC</td>
+                <td>Within two days</td>
+                <td class="l-num">9 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r6" data-bucket="Billing" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r6')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A claim is denied</td>
+                <td><span class="tr-then">raise</span> <strong>Appeal it</strong>
+                  <div class="field-help">Tom&rsquo;s standing rule: every recoupment is appealed, no passive write-offs.</div></td>
+                <td>Billing</td>
+                <td>Within 5 days</td>
+                <td class="l-num">63 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r7" data-bucket="Billing" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r7')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A coverage rule blocks a booking</td>
+                <td><span class="tr-then">raise</span> <strong>Decide: corrected claim, ABN, or do not do it</strong>
+                  <div class="field-help">Raised by the coverage gate. Closes when the clinician answers.</div></td>
+                <td>The ordering provider</td>
+                <td>Before the appointment</td>
+                <td class="l-num">4 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r8" data-bucket="Admin" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r8')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> An inquiry has gone 48 hours without a call back</td>
+                <td><span class="tr-then">raise</span> <strong>Call them</strong>
+                  <div class="field-help">Closes on the first outbound call logged against that person.</div></td>
+                <td>The New Patient Advisor</td>
+                <td>Same day</td>
+                <td class="l-num">22 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule" data-rule="r9" data-bucket="Admin" data-state="on">
+                <td><label class="sw"><input type="checkbox" checked onchange="trToggle(this,'r9')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A flag is about to expire</td>
+                <td><span class="tr-then">raise</span> <strong>Confirm whether it is still true</strong>
+                  <div class="field-help">A pregnancy flag reaching nine months, a consent about to go stale.</div></td>
+                <td>Whoever set it</td>
+                <td>Before it lapses</td>
+                <td class="l-num">6 this month</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+              <tr class="tr-rule is-off" data-rule="r10" data-bucket="Admin" data-state="off">
+                <td><label class="sw"><input type="checkbox" onchange="trToggle(this,'r10')"
+                    aria-label="Turn this rule on or off"><span></span></label></td>
+                <td><span class="tr-when">When</span> A patient has a balance over $250 for more than 30 days</td>
+                <td><span class="tr-then">raise</span> <strong>Call them about it</strong>
+                  <div class="field-help">Switched off while the clinic decides who should make that call.</div></td>
+                <td>Billing</td>
+                <td>This week</td>
+                <td class="l-num">—</td>
+                <td class="row-acts">
+                  <button class="btn btn-sm" onclick="HCOS.toast('Editing the rule — what raises it, who it goes to, and when it closes itself.', 'ok')">Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prov"><span>Turning a rule off does not close the tasks it already raised &mdash;
+          those were real when they were made. It only stops new ones.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="tr-02-new" data-title="Write a rule">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks/automations/new</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Write a rule</div>
+            <div class="page-sub">Something happens &rarr; it becomes somebody&rsquo;s job &rarr; it closes itself</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="tr-01-rules">Back to the rules</button></div>
+        </div>
+
+        <div class="card">
+          <div class="step-lbl"><span>1</span> What has to happen</div>
+          <div class="field">
+            <label class="field-lbl" for="tr-n-when">The event</label>
+            <select class="field-select" id="tr-n-when" onchange="trSay()">
+              <optgroup label="Scheduling">
+                <option>An appointment is booked</option>
+                <option>An appointment is cancelled</option>
+                <option>An appointment is rescheduled</option>
+                <option>Somebody joins the waitlist</option>
+                <option>Somebody comes off the waitlist</option>
+                <option>A slot offer runs out with nobody accepting</option>
+              </optgroup>
+              <optgroup label="Clinical">
+                <option>A booking needs an order that is not signed</option>
+                <option>An order is about to expire</option>
+                <option>A flag is about to expire</option>
+                <option>A pattern is raised about a patient</option>
+              </optgroup>
+              <optgroup label="Billing">
+                <option>A claim is denied</option>
+                <option>A coverage rule blocks a booking</option>
+                <option>A balance passes a threshold</option>
+              </optgroup>
+              <optgroup label="Admin">
+                <option>An inquiry goes unanswered</option>
+                <option>A consent is still unsigned</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-lbl" for="tr-n-only">Only when</label>
+            <select class="field-select" id="tr-n-only" onchange="trSay()">
+              <option value="">Every time &mdash; no condition</option>
+              <option>the patient is new</option>
+              <option>the appointment is an IV</option>
+              <option>the patient is urgent on the waitlist</option>
+              <option>the amount is over $250</option>
+              <option>it is inside 48 hours of the appointment</option>
+            </select>
+            <div class="field-help">A rule that fires on everything raises tasks nobody reads.</div>
+          </div>
+
+          <div class="step-lbl"><span>2</span> Whose job it becomes</div>
+          <div class="grid-3">
+            <div class="field"><label class="field-lbl" for="tr-n-who">Owner</label>
+              <select class="field-select" id="tr-n-who" onchange="trSay()">
+                <option>Whoever is on the front desk</option>
+                <option>The ordering provider</option>
+                <option>The PCC</option>
+                <option>The New Patient Advisor</option>
+                <option>Billing</option>
+                <option>The Operations Manager</option>
+              </select>
+              <div class="field-help">A role, not a name &mdash; names go on holiday.</div>
+            </div>
+            <div class="field"><label class="field-lbl" for="tr-n-pri">Priority</label>
+              <select class="field-select" id="tr-n-pri" onchange="trSay()">
+                <option value="urgent">Urgent</option>
+                <option value="high" selected>Soon</option>
+                <option value="routine">When you can</option>
+              </select></div>
+            <div class="field"><label class="field-lbl" for="tr-n-due">By when</label>
+              <select class="field-select" id="tr-n-due" onchange="trSay()">
+                <option>Within the hour</option>
+                <option selected>Same day</option>
+                <option>Within two days</option>
+                <option>This week</option>
+                <option>Before the appointment</option>
+              </select></div>
+          </div>
+          <div class="field"><label class="field-lbl" for="tr-n-title">What the task says</label>
+            <input class="field-input" id="tr-n-title" value="Confirm it with the patient"
+                   oninput="trSay()">
+            <div class="field-help">An instruction, not a topic. &ldquo;Call Victor about his
+              no-shows&rdquo;, not &ldquo;Victor Reyes&rdquo;.</div>
+          </div>
+
+          <div class="step-lbl"><span>3</span> How it closes itself</div>
+          <div class="field">
+            <label class="field-lbl" for="tr-n-close">Closes when</label>
+            <select class="field-select" id="tr-n-close" onchange="trSay()">
+              <option>the patient confirms</option>
+              <option>the order is signed</option>
+              <option>the slot is filled or released</option>
+              <option>a call is logged against the patient</option>
+              <option>the balance is settled</option>
+              <option value="manual">nothing &mdash; somebody has to close it by hand</option>
+            </select>
+            <div class="field-help"><strong>A rule with no closing condition creates work that piles
+              up</strong> until people stop reading the list. Choosing the last option is allowed,
+              and it is the one to argue about.</div>
+          </div>
+
+          <div class="prov" id="tr-say"><span>&nbsp;</span></div>
+        </div>
+
+        <div class="page-actions">
+          <div class="page-actions-main">
+            <button class="btn" data-activate="tr-01-rules">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Rule saved and switched on. It will fire the next time that happens.', 'ok')">Save the rule</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=95"></script>
+<script>
+  function trFilter() {
+    var b = (document.getElementById('tr-f-bucket') || {}).value || '';
+    var s = (document.getElementById('tr-f-state')  || {}).value || '';
+    var n = 0, total = 0;
+    document.querySelectorAll('#tr-body tr').forEach(function (r) {
+      total++;
+      var on = (!b || r.getAttribute('data-bucket') === b)
+            && (!s || r.getAttribute('data-state') === s);
+      r.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    var c = document.getElementById('tr-count');
+    if (c) c.textContent = n === total ? total + ' rules' : n + ' of ' + total + ' rules';
+  }
+  function trToggle(box, rid) {
+    var row = document.querySelector('[data-rule="' + rid + '"]');
+    if (!row) return;
+    var on = box.checked;
+    row.setAttribute('data-state', on ? 'on' : 'off');
+    row.classList.toggle('is-off', !on);
+    trFilter();
+    HCOS.toast(on
+      ? 'Switched on. It fires the next time that happens.'
+      : 'Switched off. The tasks it already raised stay open — those were real when they were made.',
+      'ok');
+  }
+  /* the rule reads back as a sentence, the same way the booking rules do */
+  function trSay() {
+    var V = function (id) { var e = document.getElementById(id); return e ? e.value : ''; };
+    var say = document.getElementById('tr-say');
+    if (!say) return;
+    var only = V('tr-n-only');
+    var close = V('tr-n-close');
+    say.innerHTML = '<span>When <b>' + V('tr-n-when').toLowerCase() + '</b>'
+      + (only ? ' and <b>' + only + '</b>' : '')
+      + ', raise <b>&ldquo;' + V('tr-n-title') + '&rdquo;</b> for <b>' + V('tr-n-who').toLowerCase()
+      + '</b>, due ' + V('tr-n-due').toLowerCase() + '. '
+      + (close === 'manual'
+          ? '<b>It will not close on its own</b> — somebody has to close every one of these by hand.'
+          : 'It closes when ' + close + '.')
+      + '</span>';
+  }
+  window.trFilter = trFilter; window.trToggle = trToggle; window.trSay = trSay;
+  trFilter(); trSay();
+</script>
+</body>
+</html>

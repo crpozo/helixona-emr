@@ -25,6 +25,11 @@
   var MODULES = [
     { group: 'Clinic' },
     { name: 'Schedule', href: 'schedule.html', page: 'schedule' },
+    /* Tasks is its own module, not a screen inside Scheduling (Carlos,
+       2026-08-13). It is where the whole clinic's work is administered, and
+       most of it is raised BY the system from things that happen elsewhere —
+       so it cannot live inside any one of those places. */
+    { name: 'Tasks', href: 'tasks.html', page: 'tasks' },
     { name: 'Patients', href: 'patients.html', page: 'patients' },
     { name: 'Documentation', href: 'clinical.html', page: 'clinical' },
     { name: 'Orders & results', href: 'labs.html', page: 'labs' },
@@ -45,6 +50,10 @@
 
   /* Second-level tabs inside the deep modules (rendered under the topbar) */
   var SUBNAV = {
+    tasks: [
+      ['Board', 'tasks.html'],
+      ['Automations', 'tasks-rules.html']
+    ],
     schedule: [
       ['Calendar', 'schedule.html'],
       ['Booking rules', 'schedule-rules.html']

@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tasks &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=95">
+</head>
+<body data-page="tasks" data-page-title="Tasks" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="tk-01-board" data-title="Board">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Tasks</div>
+            <div class="page-sub">Everything the clinic owes somebody &mdash; most of it raised by the software, from things that happened somewhere else</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="tk-02-list">As a list</button>
+            <button class="btn btn-primary" data-open-modal="#tk-new-modal">Raise one by hand</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Most of these were not typed by anybody.</strong> An appointment is booked and a
+          task appears for whoever confirms it. A patient comes off the waitlist and one appears for
+          the front desk. An order goes unsigned and one appears for the provider.
+          <strong>When the thing that caused a task stops being true, the task closes itself</strong>
+          &mdash; a list somebody has to tidy by hand stops being true within a week, and then
+          nobody reads it. <a href="tasks-rules.html">See what raises what &rsaquo;</a>
+        </div>
+
+        <div class="l-filters">
+          <div class="l-fl-wrap">
+            <div class="l-fl">
+              <select class="field-select l-select" id="tk-f-bucket" onchange="tkFilter()"
+                      aria-label="Team" style="min-width:170px">
+                <option value="">Every team</option>
+                <option value="Scheduling">Scheduling</option>
+                <option value="Clinical">Clinical</option>
+                <option value="Billing">Billing</option>
+                <option value="Admin">Admin</option>
+              </select>
+              <select class="field-select l-select" id="tk-f-owner" onchange="tkFilter()"
+                      aria-label="Owner" style="min-width:190px">
+                <option value="">Anybody</option>
+              </select>
+            </div>
+            <span class="l-sep" aria-hidden="true"></span>
+            <div class="l-fl">
+              <select class="field-select l-select" id="tk-f-pri" onchange="tkFilter()"
+                      aria-label="Priority" style="min-width:160px">
+                <option value="">Any priority</option>
+                <option value="urgent">Urgent only</option>
+                <option value="urgent,high">Urgent and soon</option>
+              </select>
+              <select class="field-select l-select" id="tk-f-src" onchange="tkFilter()"
+                      aria-label="Where it came from" style="min-width:180px">
+                <option value="">Raised any way</option>
+                <option value="system">Raised by the system</option>
+                <option value="person">Raised by a person</option>
+              </select>
+            </div>
+          </div>
+          <div class="l-view-group"><span class="l-count" id="tk-count">12 tasks</span></div>
+        </div>
+
+        <div class="tk-board">
+          <section class="tk-col" data-col="todo">
+            <header class="tk-col-hd">
+              <span class="tk-col-t">To do</span>
+              <span class="tk-col-n" data-count-for="todo">5</span>
+            </header>
+            <div class="tk-col-body" id="tk-col-todo">
+            <article class="tk-card" data-task="t1" data-state="todo" data-pri="urgent"
+                     data-bucket="Scheduling" data-owner="Yazmin" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-urgent">Urgent</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Grace Lindqvist cancelled her 10:00 with Brooke</div>
+              <div class="tk-card-b">4 people on the waitlist match that window, 2 of them urgent. Offer it or release it.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Yazmin · Front desk</span>
+                <span class="tk-due">Today</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="schedule.html#/l-10-offer">Open the offer</a>
+                <button class="btn btn-sm" onclick="tkNext('t1')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Grace Lindqvist cancelled her 10:00 with Brooke')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t2" data-state="todo" data-pri="urgent"
+                     data-bucket="Clinical" data-owner="Bee" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-urgent">Urgent</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Victor Reyes no-shows before 10 AM — call him</div>
+              <div class="tk-card-b">Three no-shows in 90 days, all between 8:00 and 9:30. The pattern needs a person, not a rule.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Bee · PCC</span>
+                <span class="tk-due">Today</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="schedule.html#/l-09-insights">See the pattern</a>
+                <button class="btn btn-sm" onclick="tkNext('t2')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Victor Reyes no-shows before 10 AM — call him')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t3" data-state="todo" data-pri="high"
+                     data-bucket="Scheduling" data-owner="Haylee" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-high">Soon</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">New appointment booked — confirm it with the patient</div>
+              <div class="tk-card-b">Amara Diallo, Thursday 9:30 AM, Core Iron Blend with Nick. Raised the moment it was booked.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Haylee · Front desk</span>
+                <span class="tk-due">Today</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day</a>
+                <button class="btn btn-sm" onclick="tkNext('t3')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'New appointment booked — confirm it with the patient')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t11" data-state="todo" data-pri="routine"
+                     data-bucket="Admin" data-owner="Marie" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-routine">When you can</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Three inquiries older than 48 hours</div>
+              <div class="tk-card-b">Nobody has called them back. Raised automatically when an inquiry passes two days.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Marie · New Patient Advisor</span>
+                <span class="tk-due">Today</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="intake.html">Open triage</a>
+                <button class="btn btn-sm" onclick="tkNext('t11')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Three inquiries older than 48 hours')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t12" data-state="todo" data-pri="high"
+                     data-bucket="Clinical" data-owner="Charlene" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-high">Soon</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Yuki Tanaka is 17 — confirm a guardian is coming</div>
+              <div class="tk-card-b">Two appointments have needed rebooking because nobody was with her.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Charlene · Medical Assistant</span>
+                <span class="tk-due">Tomorrow</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="patients.html?pt=Yuki+Tanaka">Open her profile</a>
+                <button class="btn btn-sm" onclick="tkNext('t12')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Yuki Tanaka is 17 — confirm a guardian is coming')">&#128465;</button>
+              </div>
+            </article>
+            </div>
+          </section>
+          <section class="tk-col" data-col="doing">
+            <header class="tk-col-hd">
+              <span class="tk-col-t">Doing</span>
+              <span class="tk-col-n" data-count-for="doing">2</span>
+            </header>
+            <div class="tk-col-body" id="tk-col-doing">
+            <article class="tk-card" data-task="t4" data-state="doing" data-pri="high"
+                     data-bucket="Billing" data-owner="Karina" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-high">Soon</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Appeal the 20553 denial for Walter Hsu</div>
+              <div class="tk-card-b">Denied as maximum frequency exceeded. Tom’s rule: every recoupment is appealed.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Karina · Operations</span>
+                <span class="tk-due">Tomorrow</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="billing.html#/d-03-era">Open the remittance</a>
+                <button class="btn btn-sm" onclick="tkNext('t4')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Appeal the 20553 denial for Walter Hsu')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t5" data-state="doing" data-pri="routine"
+                     data-bucket="Admin" data-owner="Shibani" data-src="person" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-routine">When you can</span>
+                <span class="tk-src">&#9998; By hand</span>
+              </div>
+              <div class="tk-card-t">Verify CMS article A57701 against the coverage database</div>
+              <div class="tk-card-b">The 20553 rule is in the software but shows as unverified until somebody confirms the list and the limit.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Shibani · Admin</span>
+                <span class="tk-due">This week</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="billing.html#/d-04-coverage">Open the rule</a>
+                <button class="btn btn-sm" onclick="tkNext('t5')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Verify CMS article A57701 against the coverage database')">&#128465;</button>
+              </div>
+            </article>
+            </div>
+          </section>
+          <section class="tk-col" data-col="waiting">
+            <header class="tk-col-hd">
+              <span class="tk-col-t">Waiting on someone</span>
+              <span class="tk-col-n" data-count-for="waiting">3</span>
+            </header>
+            <div class="tk-col-body" id="tk-col-waiting">
+            <article class="tk-card" data-task="t6" data-state="waiting" data-pri="urgent"
+                     data-bucket="Clinical" data-owner="Dr. Drannikov" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-urgent">Urgent</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Sign the Cellular Boost renewal for Priya Natarajan</div>
+              <div class="tk-card-b">Thursday 8:00 AM is held tentative and will be released if it is not signed by Wednesday.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Dr. Drannikov</span>
+                <span class="tk-due">Tomorrow</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="schedule.html#/l-03-order">Open the request</a>
+                <button class="btn btn-sm" onclick="tkNext('t6')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Sign the Cellular Boost renewal for Priya Natarajan')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t7" data-state="waiting" data-pri="high"
+                     data-bucket="Scheduling" data-owner="Yazmin" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-high">Soon</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Nina Kowalski — waiting on her reply to the slot offer</div>
+              <div class="tk-card-b">Offered Tuesday 10:00 by text at 8:12 AM. The window closes at 11:12.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Yazmin · Front desk</span>
+                <span class="tk-due">Today</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="schedule.html#/l-10-waitlist">Open the waitlist</a>
+                <button class="btn btn-sm" onclick="tkNext('t7')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Nina Kowalski — waiting on her reply to the slot offer')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t8" data-state="waiting" data-pri="routine"
+                     data-bucket="Billing" data-owner="Bea" data-src="person" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-routine">When you can</span>
+                <span class="tk-src">&#9998; By hand</span>
+              </div>
+              <div class="tk-card-t">Blue Shield packet sent — waiting on the claim number</div>
+              <div class="tk-card-b">Sent via SympliSend on 11 Aug. Chase if nothing by Friday.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Bea · Billing</span>
+                <span class="tk-due">Friday</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="billing.html#/d-02-packet">Open the packet</a>
+                <button class="btn btn-sm" onclick="tkNext('t8')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Blue Shield packet sent — waiting on the claim number')">&#128465;</button>
+              </div>
+            </article>
+            </div>
+          </section>
+          <section class="tk-col" data-col="done">
+            <header class="tk-col-hd">
+              <span class="tk-col-t">Done</span>
+              <span class="tk-col-n" data-count-for="done">2</span>
+            </header>
+            <div class="tk-col-body" id="tk-col-done">
+            <article class="tk-card is-done" data-task="t9" data-state="done" data-pri="high"
+                     data-bucket="Scheduling" data-owner="Yazmin" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-high">Soon</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Maya Reyes booked at her own average, not the protocol</div>
+              <div class="tk-card-b">Her Mega C 100g is booked 3 h 20 instead of 3 h.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Yazmin · Front desk</span>
+                <span class="tk-due">Done 19 Jul</span>
+              </div>
+              <div class="tk-card-acts">
+                
+                
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Maya Reyes booked at her own average, not the protocol')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card is-done" data-task="t10" data-state="done" data-pri="routine"
+                     data-bucket="Admin" data-owner="Nobody — automatic" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-routine">When you can</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Nightly list PDF stored</div>
+              <div class="tk-card-b">Yesterday 9:00 PM · 88 appointments · 6 pages, in the practice bucket.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Nobody — automatic</span>
+                <span class="tk-due">Done</span>
+              </div>
+              <div class="tk-card-acts">
+                
+                
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Nightly list PDF stored')">&#128465;</button>
+              </div>
+            </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="tk-02-list" data-title="List">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks?view=list</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Tasks</div>
+            <div class="page-sub">The same tasks, as a list &mdash; for sorting, printing and the morning huddle</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="tk-01-board">Back to the board</button></div>
+        </div>
+
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th scope="col">Priority</th>
+              <th scope="col">What needs doing</th>
+              <th scope="col">Team</th>
+              <th scope="col">Owner</th>
+              <th scope="col">State</th>
+              <th scope="col">Due</th>
+              <th scope="col">Raised</th>
+              <th scope="col">Actions</th>
+            </tr></thead>
+            <tbody id="tk-list-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="tk-new-modal" data-close-modal>
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Raise a task by hand</div>
+      <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="callout callout-warn">
+        <strong>If this is something that will happen again, automate it instead.</strong>
+        A task typed by a person is one somebody has to remember to type next time.
+        <a href="tasks-rules.html">Write a rule &rsaquo;</a>
+      </div>
+      <div class="field"><label class="field-lbl" for="tk-n-title">What needs doing</label>
+        <input class="field-input" id="tk-n-title" placeholder="Say it as an instruction, not a topic"></div>
+      <div class="field"><label class="field-lbl" for="tk-n-body">Why, and what &ldquo;done&rdquo; looks like</label>
+        <textarea class="field-textarea" rows="2" id="tk-n-body"
+                  placeholder="Whoever picks this up has not been in your head."></textarea></div>
+      <div class="grid-3">
+        <div class="field"><label class="field-lbl" for="tk-n-bucket">Team</label>
+          <select class="field-select" id="tk-n-bucket">
+            <option>Scheduling</option><option>Clinical</option><option>Billing</option><option>Admin</option>
+          </select></div>
+        <div class="field"><label class="field-lbl" for="tk-n-owner">Owner</label>
+          <select class="field-select" id="tk-n-owner"></select>
+          <div class="field-help">A task with no owner is a task nobody does.</div></div>
+        <div class="field"><label class="field-lbl" for="tk-n-pri">Priority</label>
+          <select class="field-select" id="tk-n-pri">
+            <option value="urgent">Urgent</option>
+            <option value="high" selected>Soon</option>
+            <option value="routine">When you can</option>
+          </select></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" onclick="tkNew()">Raise it</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=95"></script>
+<script>
+  /* ==========================================================================
+     TASKS — the clinic's work, administered in one place (Carlos, 2026-08-13).
+     Deliberately NOT a screen inside Scheduling: most of what lands here was
+     raised somewhere else entirely, and a queue that lives inside one module is
+     a queue the other modules cannot reach.
+
+     The board is the working view; the list is for sorting and printing. Both
+     read the same cards, so they cannot drift.
+     ========================================================================== */
+  var TK_STATES = ['todo', 'doing', 'waiting', 'done'];
+  var TK_NEXT = { todo: 'doing', doing: 'waiting', waiting: 'done' };
+  var TK_LBL = { todo: 'To do', doing: 'Doing', waiting: 'Waiting on someone', done: 'Done' };
+  var TK_PRI = { urgent: 'Urgent', high: 'Soon', routine: 'When you can' };
+
+  function tkCards() { return [].slice.call(document.querySelectorAll('.tk-card')); }
+
+  function tkFilter() {
+    var b = (document.getElementById('tk-f-bucket') || {}).value || '';
+    var o = (document.getElementById('tk-f-owner')  || {}).value || '';
+    var p = (document.getElementById('tk-f-pri')    || {}).value || '';
+    var s = (document.getElementById('tk-f-src')    || {}).value || '';
+    var n = 0;
+    tkCards().forEach(function (c) {
+      var on = (!b || c.getAttribute('data-bucket') === b)
+            && (!o || c.getAttribute('data-owner') === o)
+            && (!p || p.split(',').indexOf(c.getAttribute('data-pri')) !== -1)
+            && (!s || c.getAttribute('data-src') === s);
+      c.style.display = on ? '' : 'none';
+      if (on) n++;
+    });
+    TK_STATES.forEach(function (st) {
+      var live = tkCards().filter(function (c) {
+        return c.getAttribute('data-state') === st && c.style.display !== 'none'; }).length;
+      document.querySelectorAll('[data-count-for="' + st + '"]').forEach(function (e) {
+        e.textContent = live;
+      });
+    });
+    var c = document.getElementById('tk-count');
+    if (c) c.textContent = n + (n === 1 ? ' task' : ' tasks');
+    tkRenderList();
+  }
+
+  /* moving a card is the whole interaction — it has to be one click, not a drag
+     that a trackpad fights you on */
+  function tkNext(id) {
+    var card = document.querySelector('[data-task="' + id + '"]');
+    if (!card) return;
+    var st = card.getAttribute('data-state');
+    var nx = TK_NEXT[st];
+    if (!nx) return;
+    card.setAttribute('data-state', nx);
+    if (nx === 'done') card.classList.add('is-done');
+    var col = document.getElementById('tk-col-' + nx);
+    if (col) col.insertBefore(card, col.firstChild);
+    if (nx === 'done') {
+      var mv = card.querySelector('.tk-card-acts .btn:not(.btn-danger):not([href])');
+      if (mv && mv.textContent.trim() === 'Move on') mv.remove();
+    }
+    tkFilter();
+    HCOS.toast('Moved to ' + TK_LBL[nx].toLowerCase() + ', with your name on it.', 'ok');
+  }
+
+  function tkDismiss(btn, title) {
+    HCOS.confirm({
+      title: 'Dismiss this task?',
+      body: '&ldquo;' + title + '&rdquo;',
+      consequence: 'Dismissing is not the same as doing it. If the system raised it, the thing that '
+          + 'caused it is still true and <b>it will be raised again</b>. If it should never have '
+          + 'been raised, change the rule instead &mdash; that is what stops it.',
+      confirm: 'Dismiss it anyway',
+      onConfirm: function () { btn.closest('.tk-card, tr').remove(); tkFilter();
+        HCOS.toast('Dismissed. It may come back.', 'ok'); }
+    });
+  }
+
+  function tkNew() {
+    var t = (document.getElementById('tk-n-title') || {}).value || '';
+    if (!t.trim()) { HCOS.toast('Nothing raised — a task needs to say what to do.', 'warn'); return; }
+    var body = (document.getElementById('tk-n-body') || {}).value || '';
+    var pri = (document.getElementById('tk-n-pri') || {}).value || 'high';
+    var bucket = (document.getElementById('tk-n-bucket') || {}).value || 'Scheduling';
+    var owner = (document.getElementById('tk-n-owner') || {}).value || 'Yazmin · Front desk';
+    tkRaise({ pri: pri, bucket: bucket, owner: owner, title: t.trim(), body: body.trim(), src: 'person' });
+    document.getElementById('tk-new-modal').classList.remove('open');
+    document.getElementById('tk-n-title').value = '';
+    document.getElementById('tk-n-body').value = '';
+  }
+
+  /* the hook every other module calls */
+  function tkRaise(o) {
+    var col = document.getElementById('tk-col-todo');
+    if (!col) return;
+    var id = 'tk' + (Math.floor(performance.now() * 1000) % 1000000);
+    var card = document.createElement('article');
+    card.className = 'tk-card';
+    card.setAttribute('data-task', id);
+    card.setAttribute('data-state', 'todo');
+    card.setAttribute('data-pri', o.pri || 'high');
+    card.setAttribute('data-bucket', o.bucket || 'Scheduling');
+    card.setAttribute('data-owner', (o.owner || '').split(' ·')[0]);
+    card.setAttribute('data-src', o.src || 'system');
+    card.tabIndex = 0;
+    card.innerHTML =
+      '<div class="tk-card-top"><span class="pri pri-' + (o.pri || 'high') + '">'
+        + TK_PRI[o.pri || 'high'] + '</span>'
+        + (o.src === 'person'
+            ? '<span class="tk-src">&#9998; By hand</span>'
+            : '<span class="tk-src tk-src-sys">&#9881; System</span>') + '</div>'
+      + '<div class="tk-card-t">' + o.title + '</div>'
+      + '<div class="tk-card-b">' + (o.body || '') + '</div>'
+      + '<div class="tk-card-foot"><span class="tk-owner">' + (o.owner || 'Unassigned')
+        + '</span><span class="tk-due">Today</span></div>'
+      + '<div class="tk-card-acts">'
+        + (o.go ? '<a class="btn btn-sm" href="' + o.go + '">' + o.goLbl + '</a>' : '')
+        + '<button class="btn btn-sm" onclick="tkNext(\'' + id + '\')">Move on</button>'
+        + '<button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss" '
+        + 'onclick="tkDismiss(this,\'' + String(o.title).replace(/\x27/g, '') + '\')">&#128465;</button>'
+      + '</div>';
+    col.insertBefore(card, col.firstChild);
+    tkFilter();
+    HCOS.toast('Task raised for ' + (o.owner || 'the team') + '.', 'ok');
+  }
+
+  /* the list is BUILT from the board, so the two can never disagree */
+  function tkRenderList() {
+    var body = document.getElementById('tk-list-body');
+    if (!body) return;
+    var rows = tkCards().filter(function (c) { return c.style.display !== 'none'; });
+    body.innerHTML = rows.map(function (c) {
+      var st = c.getAttribute('data-state');
+      var pri = c.getAttribute('data-pri');
+      var acts = c.querySelector('.tk-card-acts');
+      var link = acts ? acts.querySelector('a') : null;
+      return '<tr' + (st === 'done' ? ' class="is-done"' : '') + '>'
+        + '<td><span class="pri pri-' + pri + '">' + TK_PRI[pri] + '</span></td>'
+        + '<td><strong>' + c.querySelector('.tk-card-t').textContent + '</strong>'
+          + '<div class="field-help">' + c.querySelector('.tk-card-b').textContent + '</div></td>'
+        + '<td>' + c.getAttribute('data-bucket') + '</td>'
+        + '<td>' + c.querySelector('.tk-owner').textContent + '</td>'
+        + '<td>' + TK_LBL[st] + '</td>'
+        + '<td>' + c.querySelector('.tk-due').textContent + '</td>'
+        + '<td>' + (c.getAttribute('data-src') === 'system' ? 'The system' : 'By hand') + '</td>'
+        + '<td class="row-acts">' + (link ? link.outerHTML : '')
+          + (st === 'done' ? '' : '<button class="btn btn-sm" onclick="tkNext(\''
+             + c.getAttribute('data-task') + '\')">Move on</button>') + '</td></tr>';
+    }).join('') || '<tr><td colspan="8" class="field-help">Nothing matches.</td></tr>';
+  }
+
+  window.tkFilter = tkFilter; window.tkNext = tkNext; window.tkDismiss = tkDismiss;
+  window.tkNew = tkNew; window.tkRaise = tkRaise;
+
+  /* the owner lists come from the roster, not from typing names twice */
+  (function () {
+    var OWNERS = ['Yazmin · Front desk', 'Haylee · Front desk', 'Bee · PCC',
+                  'Marie · New Patient Advisor', 'Charlene · Medical Assistant',
+                  'Dr. Drannikov', 'Dr. Bakman', 'Brooke · Physician Associate',
+                  'Karina · Operations', 'Bea · Billing', 'Shibani · Admin'];
+    var f = document.getElementById('tk-f-owner');
+    var n = document.getElementById('tk-n-owner');
+    OWNERS.forEach(function (o) {
+      var short = o.split(' ·')[0];
+      if (f) f.innerHTML += '<option value="' + short + '">' + o + '</option>';
+      if (n) n.innerHTML += '<option>' + o + '</option>';
+    });
+    tkFilter();
+  })();
+
+</script>
+</body>
+</html>

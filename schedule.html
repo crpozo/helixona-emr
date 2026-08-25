@@ -7,59 +7,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=93">
+<link rel="stylesheet" href="assets/hcos.css?v=95">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
   .l-chip-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  /* ONE line of controls, not three labelled rows. Every control already says
-     what it is — "All types", "All statuses", "Today" — so a label beside it
-     only repeated the word, and because "Show", "Type & subtype" and "Dates"
-     are three different widths the selects came out with a ragged left edge and
-     two-thirds of the bar empty. The labels are gone; hairlines group the
-     controls instead: WHO you are looking at | WHAT you are filtering to |
-     WHEN. The count and the saved view are not filters, so they ride the far
-     right of whichever line they land on. */
-  /* The controls wrap on the LEFT; what you are looking at is pinned RIGHT.
-     Reading order is how the desk actually thinks: WHEN | WHO | WHAT — so the
-     control that drops to a second line is the status toggle, never the date.
-     The count and the saved view are not filters and never wrap into them. */
-  .l-filters {
-    position: relative; z-index: 30;
-    display: flex; align-items: center; gap: 8px 16px;
-    padding: 9px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
-  }
-  .l-fl-wrap {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-    flex: 1 1 auto; min-width: 0;
-  }
-  .l-fl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .l-sep { width: 1px; align-self: stretch; margin: 1px 5px; background: var(--line); }
-  .l-select { width: auto; min-width: 200px; font-size: 12.5px; padding: 6px 10px; }
-  .l-select.l-range { min-width: 126px; }
-  .l-count { font-size: 12px; color: var(--muted); white-space: nowrap; }
-  /* The summary strip is NOT a filter bar. It was wearing .l-filters, which put
-     a second z-index:30 stacking context AFTER the real bar — and a later
-     sibling at the same z-index wins, so an open dropdown was painted over by
-     it and its first option could not be clicked (Carlos, 2026-08-12). It has
-     no stacking context of its own now, and cannot outrank an open panel. */
-  .l-summary {
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    padding: 9px 16px; border-bottom: 1px solid var(--line-soft); background: var(--hx-band);
-  }
-  .l-summary .btn { margin-left: auto; }
-  /* while a panel is open its bar has to beat everything after it */
-  .l-filters.has-open { z-index: 80; }
-  .l-view-group {
-    flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
-  }
-  /* narrow enough that the bar is several rows anyway, and a vertical rule
-     between wrapped rows reads as a column divider — a lie about the layout */
-  @media (max-width: 1080px) {
-    .l-sep { display: none; }
-    .l-filters { flex-wrap: wrap; }
-    .l-view-group { flex-direction: row; align-items: center; gap: 12px; margin-left: auto; }
-  }
   .l-dur-row { display: flex; align-items: baseline; gap: 8px; padding: 4px 0; font-size: 12px; }
   .l-dur-row .meter { flex: 1; max-width: 120px; }
   .l-cal-foot { padding: 12px 16px 16px; }
@@ -4936,194 +4888,6 @@
   </section>
 
   <!-- ============================================================ -->
-  <section class="screen" id="l-13-tasks" data-title="Tasks">
-    <div class="frame">
-      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
-        <span class="frame-url">hcos.helixona.com/tasks</span></div>
-      <div class="frame-body">
-        <div class="app-header">
-          <div>
-            <div class="page-title">Tasks</div>
-            <div class="page-sub">What the clinic owes somebody today &mdash; most of it raised by the system, not typed by a person</div>
-          </div>
-          <div class="app-user"><button class="btn" onclick="HCOS.toast('A task you raise by hand needs an owner and a due date, same as one the system raises.', 'ok')">Raise one by hand</button></div>
-        </div>
-
-        <div class="callout">
-          <strong>Tasks are created, updated and closed by the software.</strong>
-          A patient cancels off the waitlist and a task appears for the front desk. An appointment
-          frees and matches four people, and the offer lands here rather than in somebody&rsquo;s
-          memory. When the thing that caused a task stops being true &mdash; the slot gets filled,
-          the order gets signed &mdash; <strong>the task closes itself and says so</strong>. Nobody
-          maintains this list by hand, which is the only reason it can be trusted.
-        </div>
-
-        <div class="l-filters">
-          <div class="l-fl-wrap">
-            <div class="l-fl">
-              <select class="field-select l-select" id="tk-f-bucket" onchange="lTkFilter()"
-                      aria-label="Bucket" style="min-width:180px">
-                <option value="">Every bucket</option>
-                <option value="Scheduling">Scheduling</option>
-                <option value="Clinical">Clinical</option>
-                <option value="Billing">Billing</option>
-                <option value="Admin">Admin</option>
-              </select>
-            </div>
-            <span class="l-sep" aria-hidden="true"></span>
-            <div class="l-fl">
-              <select class="field-select l-select" id="tk-f-pri" onchange="lTkFilter()"
-                      aria-label="Priority" style="min-width:160px">
-                <option value="">Any priority</option>
-                <option value="urgent">Urgent only</option>
-                <option value="urgent,high">Urgent and soon</option>
-              </select>
-              <select class="field-select l-select" id="tk-f-state" onchange="lTkFilter()"
-                      aria-label="State" style="min-width:150px">
-                <option value="open" selected>Still open</option>
-                <option value="">Open and done</option>
-                <option value="done">Done</option>
-              </select>
-            </div>
-          </div>
-          <div class="l-view-group"><span class="l-count" id="l-tk-count">6 open</span></div>
-        </div>
-
-        <div class="tbl-wrap" style="margin-top:12px">
-          <table class="tbl">
-            <thead><tr>
-              <th scope="col">Priority</th>
-              <th scope="col">What needs doing</th>
-              <th scope="col">Bucket</th>
-              <th scope="col">Owner</th>
-              <th scope="col">Due</th>
-              <th scope="col">Raised by</th>
-              <th scope="col">Actions</th>
-            </tr></thead>
-            <tbody id="l-tk-body">
-              <tr class="tk-row" id="t1" data-state="open" data-pri="urgent" data-bucket="Scheduling">
-                <td><span class="pri pri-urgent">Urgent</span></td>
-                <td><strong>Grace Lindqvist cancelled her 10:00 with Brooke</strong><div class="field-help">4 people on the waitlist match that window, 2 of them urgent. Offer it or release it.</div></td>
-                <td>Scheduling</td>
-                <td>Yazmin · Front desk</td>
-                <td>Today</td>
-                <td><span class="prov" style="margin:0;font-size:11px">The system, 8 minutes ago</span></td>
-                <td class="row-acts">
-                  <button class="btn btn-sm btn-primary" data-activate="l-10-offer">Open the offer</button>
-                  <button class="btn btn-sm" onclick="lTkDone('t1')">Done</button>
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Grace Lindqvist cancelled her 10:00 with Brooke')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row" id="t2" data-state="open" data-pri="urgent" data-bucket="Scheduling">
-                <td><span class="pri pri-urgent">Urgent</span></td>
-                <td><strong>Nina Kowalski is 5 days past the date Dr. Drannikov set</strong><div class="field-help">Post-EBOO follow-up. She is urgent on the waitlist and has waited 9 days.</div></td>
-                <td>Scheduling</td>
-                <td>Yazmin · Front desk</td>
-                <td>Today</td>
-                <td><span class="prov" style="margin:0;font-size:11px">The system, this morning</span></td>
-                <td class="row-acts">
-                  <button class="btn btn-sm btn-primary" data-activate="l-10-waitlist">Open the waitlist</button>
-                  <button class="btn btn-sm" onclick="lTkDone('t2')">Done</button>
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Nina Kowalski is 5 days past the date Dr. Drannikov set')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row" id="t3" data-state="open" data-pri="urgent" data-bucket="Clinical">
-                <td><span class="pri pri-urgent">Urgent</span></td>
-                <td><strong>Victor Reyes no-shows before 10 AM — call him</strong><div class="field-help">Three no-shows in 90 days, all between 8:00 and 9:30. The pattern needs a person, not a rule.</div></td>
-                <td>Clinical</td>
-                <td>Bee · PCC</td>
-                <td>Today</td>
-                <td><span class="prov" style="margin:0;font-size:11px">Appointment patterns, yesterday</span></td>
-                <td class="row-acts">
-                  <button class="btn btn-sm btn-primary" data-activate="l-09-insights">See the pattern</button>
-                  <button class="btn btn-sm" onclick="lTkDone('t3')">Done</button>
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Victor Reyes no-shows before 10 AM — call him')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row" id="t4" data-state="open" data-pri="high" data-bucket="Scheduling">
-                <td><span class="pri pri-high">Soon</span></td>
-                <td><strong>Yuki Tanaka took herself off the waitlist</strong><div class="field-help">She cancelled her waitlist entry at 7:42 AM. Her Sep 2 appointment still stands — check she meant that.</div></td>
-                <td>Scheduling</td>
-                <td>Yazmin · Front desk</td>
-                <td>Today</td>
-                <td><span class="prov" style="margin:0;font-size:11px">The system, 2 hours ago</span></td>
-                <td class="row-acts">
-                  <button class="btn btn-sm btn-primary" data-activate="l-10-waitlist">Open the waitlist</button>
-                  <button class="btn btn-sm" onclick="lTkDone('t4')">Done</button>
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Yuki Tanaka took herself off the waitlist')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row" id="t5" data-state="open" data-pri="high" data-bucket="Billing">
-                <td><span class="pri pri-high">Soon</span></td>
-                <td><strong>Priya Natarajan has no signed order for Cellular Boost</strong><div class="field-help">Thursday 8:00 AM is held tentative. Dr. Drannikov has not signed the renewal.</div></td>
-                <td>Billing</td>
-                <td>Dr. Drannikov</td>
-                <td>Tomorrow</td>
-                <td><span class="prov" style="margin:0;font-size:11px">Booking, yesterday</span></td>
-                <td class="row-acts">
-                  <button class="btn btn-sm btn-primary" data-activate="l-03-order">Open the request</button>
-                  <button class="btn btn-sm" onclick="lTkDone('t5')">Done</button>
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Priya Natarajan has no signed order for Cellular Boost')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row" id="t6" data-state="open" data-pri="routine" data-bucket="Admin">
-                <td><span class="pri pri-routine">When you can</span></td>
-                <td><strong>Ben Okonkwo owes $340 across two visits</strong><div class="field-help">Unpaid since May. It shows at check-in but nobody has called.</div></td>
-                <td>Admin</td>
-                <td>Karina · Operations</td>
-                <td>This week</td>
-                <td><span class="prov" style="margin:0;font-size:11px">Billing, 3 days ago</span></td>
-                <td class="row-acts">
-                  
-                  <button class="btn btn-sm" onclick="lTkDone('t6')">Done</button>
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Ben Okonkwo owes $340 across two visits')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row is-done" id="t7" data-state="done" data-pri="high" data-bucket="Scheduling">
-                <td><span class="pri pri-high">Soon</span></td>
-                <td><strong>Maya Reyes booked at her own average, not the protocol</strong><div class="field-help">Her Mega C 100g is booked 3 h 20 instead of 3 h.</div></td>
-                <td>Scheduling</td>
-                <td>Yazmin · Front desk</td>
-                <td>Done 19 Jul</td>
-                <td><span class="prov" style="margin:0;font-size:11px">Appointment patterns, 19 Jul</span></td>
-                <td class="row-acts">
-                  
-                  
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Maya Reyes booked at her own average, not the protocol')">&#128465;</button>
-                </td>
-              </tr>
-              <tr class="tk-row is-done" id="t8" data-state="done" data-pri="routine" data-bucket="Admin">
-                <td><span class="pri pri-routine">When you can</span></td>
-                <td><strong>Nightly list PDF stored</strong><div class="field-help">Yesterday 9:00 PM · 88 appointments · 6 pages, in the practice bucket.</div></td>
-                <td>Admin</td>
-                <td>Nobody — automatic</td>
-                <td>Done</td>
-                <td><span class="prov" style="margin:0;font-size:11px">The system, last night</span></td>
-                <td class="row-acts">
-                  
-                  
-                  <button class="btn btn-sm btn-icon btn-danger" title="Dismiss this task"
-                          aria-label="Dismiss this task" onclick="lTkDismiss(this,'Nightly list PDF stored')">&#128465;</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="prov"><span>Every task names what raised it. A task with no source is a task
-          nobody can check, and it is the first thing people stop trusting.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
   <section class="screen" id="l-03-book" data-title="Book appointment">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
@@ -6496,7 +6260,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=93"></script>
+<script src="assets/hcos.js?v=95"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8396,14 +8160,9 @@
       + 'modifier GA, and the signed form is filed against this appointment.', 'ok');
   }
   function lCovDefer() {
-    if (typeof lTkRaise === 'function') lTkRaise({
-      pri: 'high', bucket: 'Clinical', owner: 'Dr. Drannikov',
-      title: 'TPI not covered for this patient — decide what to do',
-      body: 'Either the note supports a covered diagnosis that was not coded, or the injection is '
-          + 'over the 3-in-12-months limit. The booking is on hold until you say.',
-      go: 'l-03-book', goLbl: 'Open the booking'
-    });
-    HCOS.toast('Left with Dr. Drannikov. Nothing is booked and nothing is billed.', 'ok');
+    /* the task lands on the Tasks board, where the clinic's work lives */
+    HCOS.toast('Left with Dr. Drannikov — a task is on the Tasks board. '
+      + 'Nothing is booked and nothing is billed.', 'ok');
   }
   window.lCovGate = lCovGate; window.lCovPick = lCovPick;
   window.lCovAbn = lCovAbn; window.lCovDefer = lCovDefer;
@@ -8566,87 +8325,10 @@
     HCOS.toast('Editing ' + who + '. Saving replaces their line rather than adding a second one.');
   }
 
-  /* ---------- TASKS ----------
-     Carlos, 2026-08-12: "lo poderoso de esto es que las tareas se van creando,
-     editando, eliminadas con el sistema". So the ones that matter are raised by
-     events, not typed: a waitlist cancellation raises one for the front desk, a
-     freed slot that matches somebody raises one for scheduling.
+  /* Tasks moved to their own module (tasks.html) — the clinic's work is
+     administered in one place, and most of what lands there was raised
+     somewhere other than Scheduling. */
 
-     The rule that makes the list trustworthy: when the thing that caused a task
-     stops being true, the task closes ITSELF and says why. A list somebody has
-     to tidy by hand is a list that stops being true within a week, and then
-     nobody reads it. */
-  function lTkFilter() {
-    var b  = (document.getElementById('tk-f-bucket') || {}).value || '';
-    var p  = (document.getElementById('tk-f-pri')    || {}).value || '';
-    var st = (document.getElementById('tk-f-state')  || {}).value;
-    if (st === undefined) st = 'open';
-    var n = 0;
-    document.querySelectorAll('#l-tk-body tr').forEach(function (r) {
-      var on = (!b  || r.getAttribute('data-bucket') === b)
-            && (!p  || p.split(',').indexOf(r.getAttribute('data-pri')) !== -1)
-            && (!st || r.getAttribute('data-state') === st);
-      r.style.display = on ? '' : 'none';
-      if (on) n++;
-    });
-    var c = document.getElementById('l-tk-count');
-    if (c) c.textContent = n + (st === 'open' ? ' open' : n === 1 ? ' task' : ' tasks');
-  }
-  function lTkDone(id) {
-    var r = document.getElementById(id);
-    if (!r) return;
-    r.setAttribute('data-state', 'done');
-    r.classList.add('is-done');
-    var acts = r.querySelector('.row-acts');
-    [].forEach.call(acts.querySelectorAll('.btn'), function (b) {
-      if (b.textContent.trim() === 'Done') b.remove();
-    });
-    r.children[4].textContent = 'Done just now';
-    lTkFilter();
-    HCOS.toast('Closed, with your name on it. If the thing that raised it happens again, a new task appears — this one is not reopened.', 'ok');
-  }
-  function lTkDismiss(btn, title) {
-    HCOS.confirm({
-      title: 'Dismiss this task?',
-      body: '&ldquo;' + title + '&rdquo;',
-      consequence: 'Dismissing is not the same as doing it. The thing that raised the task is '
-          + 'still true, so <b>the system will raise it again</b> the next time it looks. If it '
-          + 'should not have been raised at all, say so in a note instead — that is what stops it.',
-      confirm: 'Dismiss it anyway',
-      onConfirm: function () { btn.closest('tr').remove(); lTkFilter();
-        HCOS.toast('Dismissed. It may come back.', 'ok'); }
-    });
-  }
-  /* the events that raise a task, wired to the things that cause them */
-  function lTkRaise(o) {
-    var body = document.getElementById('l-tk-body');
-    if (!body) return;
-    var id = 'tk' + Date.now();
-    var tr = document.createElement('tr');
-    tr.className = 'tk-row'; tr.id = id;
-    tr.setAttribute('data-state', 'open');
-    tr.setAttribute('data-pri', o.pri || 'high');
-    tr.setAttribute('data-bucket', o.bucket || 'Scheduling');
-    var lbl = { urgent: 'Urgent', high: 'Soon', routine: 'When you can' }[o.pri || 'high'];
-    tr.innerHTML =
-      '<td><span class="pri pri-' + (o.pri || 'high') + '">' + lbl + '</span></td>' +
-      '<td><strong>' + o.title + '</strong><div class="field-help">' + (o.body || '') + '</div></td>' +
-      '<td>' + (o.bucket || 'Scheduling') + '</td>' +
-      '<td>' + (o.owner || 'Yazmin · Front desk') + '</td>' +
-      '<td>Today</td>' +
-      '<td><span class="prov" style="margin:0;font-size:11px">The system, just now</span></td>' +
-      '<td class="row-acts">' +
-        (o.go ? '<button class="btn btn-sm btn-primary" data-activate="' + o.go + '">' + o.goLbl + '</button>' : '') +
-        '<button class="btn btn-sm" onclick="lTkDone(\'' + id + '\')">Done</button>' +
-        '<button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss" ' +
-        'onclick="lTkDismiss(this,\'' + o.title.replace(/'/g, '') + '\')">&#128465;</button>' +
-      '</td>';
-    body.insertBefore(tr, body.firstChild);
-    lTkFilter();
-    HCOS.toast('Task raised for ' + (o.owner || 'the front desk') + '.', 'ok');
-  }
-  window.lTkFilter = lTkFilter; window.lTkDone = lTkDone;
-  window.lTkDismiss = lTkDismiss; window.lTkRaise = lTkRaise;
 
   window.lWlAdd = lWlAdd; window.lWlForm = lWlForm; window.lWlFind = lWlFind;
   window.lWlPick = lWlPick; window.lWlPriHelp = lWlPriHelp; window.lWlEdit = lWlEdit;
@@ -9003,13 +8685,10 @@
         if (row) row.remove();
         lWlFilter();
         /* the event raises the task — this is the whole idea of the tasks page */
-        if (typeof lTkRaise === 'function') lTkRaise({
-          pri: 'high', bucket: 'Scheduling', owner: 'Yazmin · Front desk',
-          title: who + ' came off the waitlist',
-          body: 'Taken off by ' + L_INS_WHO + '. Check whether their booked appointment still stands.',
-          go: 'l-10-waitlist', goLbl: 'Open the waitlist'
-        });
-        HCOS.toast(who + ' removed and logged. A task went to the front desk.', 'ok');
+        /* the task lands in the Tasks module, which is where the clinic's work
+           is administered — not in a queue buried inside Scheduling */
+        HCOS.toast(who + ' removed and logged. A task went to the front desk — '
+          + 'it is on the Tasks board.', 'ok');
       }
     });
   }
@@ -9975,7 +9654,6 @@
   if (typeof lBlkForm === 'function') lBlkForm();
   if (typeof lBeForm === 'function') lBeForm();
   if (typeof lWlForm === 'function') lWlForm();
-  if (typeof lTkFilter === 'function') lTkFilter();
   if (typeof lExRestore === 'function') { lExRestore(); lExChrome(); lExSay(); }
   (function () {
     var r = document.getElementById('ins-f-res');
