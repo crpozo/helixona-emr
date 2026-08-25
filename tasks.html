@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tasks &middot; HCOS Wireframe</title>
-<link rel="stylesheet" href="assets/hcos.css?v=97">
+<link rel="stylesheet" href="assets/hcos.css?v=98">
 </head>
 <body data-page="tasks" data-page-title="Tasks" data-shell="app">
 
@@ -22,7 +22,7 @@
           </div>
           <div class="app-user">
             <button class="btn" data-activate="tk-02-list">As a list</button>
-            <button class="btn btn-primary" data-open-modal="#tk-new-modal">Raise one by hand</button>
+            <button class="btn btn-primary" data-open-modal="#tk-new-modal">Create task</button>
           </div>
         </div>
 
@@ -91,6 +91,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="schedule.html#/l-10-offer">Open the offer</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t1')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Grace Lindqvist cancelled her 10:00 with Brooke')">&#128465;</button>
@@ -110,6 +111,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="schedule.html#/l-09-insights">See the pattern</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t2')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Victor Reyes no-shows before 10 AM — call him')">&#128465;</button>
@@ -129,6 +131,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t3')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'New appointment booked — confirm it with the patient')">&#128465;</button>
@@ -148,6 +151,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="intake.html">Open triage</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t11')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Three inquiries older than 48 hours')">&#128465;</button>
@@ -167,6 +171,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="clinical-infusion.html#/b-13-bay-board">Open the record</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t13')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Maya Reyes infusion record is unfinished')">&#128465;</button>
@@ -186,6 +191,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="patients.html?pt=Yuki+Tanaka">Open her profile</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t12')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Yuki Tanaka is 17 — confirm a guardian is coming')">&#128465;</button>
@@ -213,6 +219,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="billing.html#/d-03-era">Open the remittance</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t4')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Appeal the 20553 denial for Walter Hsu')">&#128465;</button>
@@ -232,6 +239,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="billing.html#/d-04-coverage">Open the rule</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t5')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Verify CMS article A57701 against the coverage database')">&#128465;</button>
@@ -259,6 +267,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="schedule.html#/l-03-order">Open the request</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t6')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Sign the Cellular Boost renewal for Priya Natarajan')">&#128465;</button>
@@ -278,6 +287,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="schedule.html#/l-10-waitlist">Open the waitlist</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t7')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Nina Kowalski — waiting on her reply to the slot offer')">&#128465;</button>
@@ -297,6 +307,7 @@
               </div>
               <div class="tk-card-acts">
                 <a class="btn btn-sm" href="billing.html#/d-02-packet">Open the packet</a>
+                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
                 <button class="btn btn-sm" onclick="tkNext('t8')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Blue Shield packet sent — waiting on the claim number')">&#128465;</button>
@@ -390,10 +401,104 @@
 
 </div>
 
+
+<div class="modal-overlay" id="tk-detail" data-close-modal>
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="tkd-title">Task</div>
+        <div class="modal-sub" id="tkd-sub">&nbsp;</div>
+      </div>
+      <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
+    </div>
+
+    <div class="tab-row" role="tablist">
+      <button class="tab-btn is-on" role="tab" aria-selected="true" type="button"
+              onclick="tkdTab('what',this)">The task</button>
+      <button class="tab-btn" role="tab" aria-selected="false" type="button"
+              onclick="tkdTab('log',this)">Activity</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="tkd-tab" id="tkd-what">
+        <div class="callout" id="tkd-origin" style="display:none">
+          <strong>The system raised this.</strong>
+          <span id="tkd-origin-t"></span>
+          <br><br>
+          Editing the wording here changes <strong>this one task</strong>. If it is wrong every
+          time, the rule is what needs changing &mdash;
+          <a href="tasks-rules.html">open the automations</a>.
+        </div>
+
+        <div class="field"><label class="field-lbl" for="tkd-t">What needs doing</label>
+          <input class="field-input" id="tkd-t"></div>
+        <div class="field"><label class="field-lbl" for="tkd-b">Why, and what &ldquo;done&rdquo; looks like</label>
+          <textarea class="field-textarea" rows="3" id="tkd-b"></textarea></div>
+
+        <div class="grid-4">
+          <div class="field"><label class="field-lbl" for="tkd-state">Where it is</label>
+            <select class="field-select" id="tkd-state">
+              <option value="todo">To do</option>
+              <option value="doing">Doing</option>
+              <option value="waiting">Waiting on someone</option>
+              <option value="done">Done</option>
+            </select></div>
+          <div class="field"><label class="field-lbl" for="tkd-pri">Priority</label>
+            <select class="field-select" id="tkd-pri">
+              <option value="urgent">Urgent</option>
+              <option value="high">Soon</option>
+              <option value="routine">When you can</option>
+            </select></div>
+          <div class="field"><label class="field-lbl" for="tkd-bucket">Team</label>
+            <select class="field-select" id="tkd-bucket">
+              <option>Scheduling</option><option>Clinical</option>
+              <option>Billing</option><option>Admin</option>
+            </select></div>
+          <div class="field"><label class="field-lbl" for="tkd-owner">Owner</label>
+            <select class="field-select" id="tkd-owner"></select></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field"><label class="field-lbl" for="tkd-due">Due</label>
+            <select class="field-select" id="tkd-due">
+              <option>Today</option><option>Tomorrow</option><option>This week</option>
+              <option>Friday</option><option>No date</option>
+            </select></div>
+          <div class="field" id="tkd-linkwrap"><span class="field-lbl">The thing it is about</span>
+            <a class="btn" id="tkd-link" href="#">Open it</a></div>
+        </div>
+
+        <div class="seg-divider">Add an update</div>
+        <div class="field">
+          <textarea class="field-textarea" rows="2" id="tkd-note"
+                    placeholder="What you did, or what you are waiting on. Everyone on the task sees it."></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn btn-sm btn-primary" onclick="tkdNote()">Post it</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tkd-tab" id="tkd-log" style="display:none">
+        <div class="field-help" style="margin-bottom:12px">Everything that happened to this task,
+          including what the software did. A task nobody can audit is a task nobody trusts.</div>
+        <div class="tkd-log" id="tkd-log-list"></div>
+      </div>
+    </div>
+
+    <div class="modal-foot">
+      <button class="btn btn-danger" id="tkd-del">&#128465; Dismiss this task</button>
+      <div class="page-actions-main">
+        <button class="btn" data-close-modal>Cancel</button>
+        <button class="btn btn-primary" onclick="tkdSave()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="tk-new-modal" data-close-modal>
   <div class="modal">
     <div class="modal-head">
-      <div class="modal-title">Raise a task by hand</div>
+      <div class="modal-title">Create a task</div>
       <button class="modal-x" data-close-modal aria-label="Close">&times;</button>
     </div>
     <div class="modal-body">
@@ -425,12 +530,12 @@
     </div>
     <div class="modal-foot">
       <button class="btn" data-close-modal>Cancel</button>
-      <button class="btn btn-primary" onclick="tkNew()">Raise it</button>
+      <button class="btn btn-primary" onclick="tkNew()">Create it</button>
     </div>
   </div>
 </div>
 
-<script src="assets/hcos.js?v=97"></script>
+<script src="assets/hcos.js?v=98"></script>
 <script>
   /* ==========================================================================
      TASKS — the clinic's work, administered in one place (Carlos, 2026-08-13).
@@ -660,7 +765,7 @@
 
   function tkNew() {
     var t = (document.getElementById('tk-n-title') || {}).value || '';
-    if (!t.trim()) { HCOS.toast('Nothing raised — a task needs to say what to do.', 'warn'); return; }
+    if (!t.trim()) { HCOS.toast('Nothing created — a task needs to say what to do.', 'warn'); return; }
     var body = (document.getElementById('tk-n-body') || {}).value || '';
     var pri = (document.getElementById('tk-n-pri') || {}).value || 'high';
     var bucket = (document.getElementById('tk-n-bucket') || {}).value || 'Scheduling';
@@ -731,6 +836,174 @@
     }).join('') || '<tr><td colspan="8" class="field-help">Nothing matches.</td></tr>';
   }
 
+
+  /* ==========================================================================
+     THE TASK DETAIL (Carlos, 2026-08-13: "an edit button that opens a popup
+     and check the task itself, like Monday").
+
+     Everything about one task in one place, editable, with its history. Two
+     things it does that a generic editor would not:
+
+     · A task the SYSTEM raised says which rule raised it, and says out loud
+       that editing the wording here changes THIS ONE — if it is wrong every
+       time, the rule is what needs changing. Otherwise people quietly fix the
+       same sentence forty times and nobody ever fixes the cause.
+     · The activity log includes what the SOFTWARE did, not only what people
+       did. A task nobody can audit is a task nobody trusts.
+     ========================================================================== */
+  var TKD = null;
+  var TK_ORIGIN = {
+    t1: ['An appointment is cancelled and somebody on the waitlist matches', '8 minutes ago'],
+    t2: ['A pattern says a patient is a repeat no-show', 'yesterday, 4:02 PM'],
+    t3: ['An appointment is booked', '12 minutes ago'],
+    t4: ['A claim is denied', '2 days ago'],
+    t6: ['A booking needs an order that is not signed', 'yesterday, 9:15 AM'],
+    t7: ['A slot offer is sent', 'today, 8:12 AM'],
+    t9: ['A pattern is accepted', '19 Jul'],
+    t10: ['The nightly export runs', 'last night, 9:00 PM'],
+    t11: ['An inquiry goes unanswered', '3 hours ago'],
+    t12: ['A flag needs confirming before an appointment', 'yesterday'],
+    t13: ['An infusion record is left unfinished', 'this morning']
+  };
+  var TK_LOG = {};
+
+  function tkdLog(id, what, who) {
+    (TK_LOG[id] = TK_LOG[id] || []).push({ t: what, by: who || 'Yazmin', at: 'just now' });
+  }
+
+  function tkdOpen(btn) {
+    var card = btn.closest ? btn.closest('.tk-card') : btn;
+    if (!card) return;
+    TKD = card;
+    var id = card.getAttribute('data-task');
+    var V = function (s) { var e = card.querySelector(s); return e ? e.textContent.trim() : ''; };
+    document.getElementById('tkd-title').textContent = V('.tk-card-t');
+    document.getElementById('tkd-sub').textContent =
+      card.getAttribute('data-bucket') + ' · ' + V('.tk-owner') + ' · ' + TK_LBL[card.getAttribute('data-state')];
+    document.getElementById('tkd-t').value = V('.tk-card-t');
+    document.getElementById('tkd-b').value = V('.tk-card-b');
+    document.getElementById('tkd-state').value = card.getAttribute('data-state');
+    document.getElementById('tkd-pri').value = card.getAttribute('data-pri');
+    document.getElementById('tkd-bucket').value = card.getAttribute('data-bucket');
+    var own = document.getElementById('tkd-owner');
+    var full = V('.tk-owner');
+    [].forEach.call(own.options, function (o) { if (o.textContent === full) own.value = o.value; });
+    document.getElementById('tkd-due').value = V('.tk-due') || 'No date';
+
+    /* where it came from — the whole reason this module is trustworthy */
+    var sys = card.getAttribute('data-src') === 'system';
+    var box = document.getElementById('tkd-origin');
+    box.style.display = sys ? '' : 'none';
+    if (sys) {
+      var o = TK_ORIGIN[id];
+      document.getElementById('tkd-origin-t').innerHTML = o
+        ? 'The rule <b>&ldquo;When ' + o[0].toLowerCase() + '&rdquo;</b> fired ' + o[1] + '.'
+        : 'Raised automatically.';
+    }
+
+    var link = card.querySelector('.tk-card-acts a');
+    var wrap = document.getElementById('tkd-linkwrap');
+    if (link) {
+      wrap.style.display = '';
+      var a = document.getElementById('tkd-link');
+      a.setAttribute('href', link.getAttribute('href'));
+      a.textContent = link.textContent;
+    } else { wrap.style.display = 'none'; }
+
+    tkdPaintLog(id, sys);
+    document.getElementById('tkd-del').onclick = function () {
+      document.getElementById('tk-detail').classList.remove('open');
+      tkDismiss(card.querySelector('.btn-danger'), V('.tk-card-t'));
+    };
+    tkdTab('what', document.querySelector('#tk-detail .tab-btn'));
+    document.getElementById('tk-detail').classList.add('open');
+  }
+
+  function tkdPaintLog(id, sys) {
+    var o = TK_ORIGIN[id];
+    var base = [];
+    if (sys && o) base.push({ t: 'Raised automatically — the rule “When ' + o[0].toLowerCase()
+      + '” fired.', by: 'The system', at: o[1] });
+    else base.push({ t: 'Created by hand.', by: 'Yazmin', at: 'earlier' });
+    var all = base.concat(TK_LOG[id] || []);
+    document.getElementById('tkd-log-list').innerHTML = all.map(function (e) {
+      return '<div class="tkd-log-row"><div class="tkd-log-t">' + e.t + '</div>'
+        + '<div class="tkd-log-m">' + e.by + ' · ' + e.at + '</div></div>';
+    }).join('');
+  }
+
+  function tkdTab(which, btn) {
+    ['what', 'log'].forEach(function (t) {
+      var e = document.getElementById('tkd-' + t);
+      if (e) e.style.display = t === which ? '' : 'none';
+    });
+    document.querySelectorAll('#tk-detail .tab-btn').forEach(function (b) {
+      b.classList.remove('is-on'); b.setAttribute('aria-selected', 'false');
+    });
+    if (btn) { btn.classList.add('is-on'); btn.setAttribute('aria-selected', 'true'); }
+  }
+
+  function tkdNote() {
+    if (!TKD) return;
+    var n = document.getElementById('tkd-note');
+    if (!n.value.trim()) { HCOS.toast('Nothing posted — the update is empty.', 'warn'); return; }
+    tkdLog(TKD.getAttribute('data-task'), n.value.trim());
+    n.value = '';
+    tkdPaintLog(TKD.getAttribute('data-task'), TKD.getAttribute('data-src') === 'system');
+    tkdTab('log', document.querySelectorAll('#tk-detail .tab-btn')[1]);
+    HCOS.toast('Posted. Everyone on the task sees it.', 'ok');
+  }
+
+  function tkdSave() {
+    if (!TKD) return;
+    var id = TKD.getAttribute('data-task');
+    var V = function (i) { var e = document.getElementById(i); return e ? e.value : ''; };
+    var changed = [];
+    var t = V('tkd-t').trim();
+    if (!t) { HCOS.toast('Not saved — a task has to say what to do.', 'warn'); return; }
+    if (t !== TKD.querySelector('.tk-card-t').textContent.trim()) {
+      TKD.querySelector('.tk-card-t').textContent = t; changed.push('the wording');
+    }
+    TKD.querySelector('.tk-card-b').textContent = V('tkd-b').trim();
+    if (V('tkd-pri') !== TKD.getAttribute('data-pri')) {
+      TKD.setAttribute('data-pri', V('tkd-pri'));
+      var p = TKD.querySelector('.pri');
+      p.className = 'pri pri-' + V('tkd-pri');
+      p.textContent = TK_PRI[V('tkd-pri')];
+      changed.push('the priority');
+    }
+    if (V('tkd-bucket') !== TKD.getAttribute('data-bucket')) {
+      TKD.setAttribute('data-bucket', V('tkd-bucket')); changed.push('the team');
+    }
+    var own = document.getElementById('tkd-owner');
+    var ownerFull = own.options[own.selectedIndex].textContent;
+    if (ownerFull !== TKD.querySelector('.tk-owner').textContent) {
+      TKD.querySelector('.tk-owner').textContent = ownerFull;
+      TKD.setAttribute('data-owner', ownerFull.split(' ·')[0]);
+      changed.push('the owner, now ' + ownerFull);
+    }
+    TKD.querySelector('.tk-due').textContent = V('tkd-due');
+    if (V('tkd-state') !== TKD.getAttribute('data-state')) {
+      tkMoveTo(TKD, V('tkd-state'));
+      changed.push('moved to ' + TK_LBL[V('tkd-state')].toLowerCase());
+    }
+    if (changed.length) tkdLog(id, 'Changed ' + changed.join(', ') + '.');
+    tkFilter();
+    document.getElementById('tk-detail').classList.remove('open');
+    HCOS.toast(changed.length ? 'Saved. The change is on the task with your name.'
+                              : 'Nothing changed.', changed.length ? 'ok' : 'warn');
+  }
+
+  window.tkdOpen = tkdOpen; window.tkdTab = tkdTab; window.tkdNote = tkdNote; window.tkdSave = tkdSave;
+
+  /* clicking the title opens it too, the way a card does on a board — but only
+     a real click: a drag must never open the thing it was moving */
+  document.addEventListener('click', function (ev) {
+    var t = ev.target.closest ? ev.target.closest('.tk-card-t') : null;
+    if (!t || TK_DRAG) return;
+    tkdOpen(t);
+  });
+
   window.tkFilter = tkFilter; window.tkNext = tkNext; window.tkDismiss = tkDismiss;
   window.tkNew = tkNew; window.tkRaise = tkRaise;
 
@@ -746,6 +1019,8 @@
       var short = o.split(' ·')[0];
       if (f) f.innerHTML += '<option value="' + short + '">' + o + '</option>';
       if (n) n.innerHTML += '<option>' + o + '</option>';
+      var d = document.getElementById('tkd-owner');
+      if (d) d.innerHTML += '<option value="' + short + '">' + o + '</option>';
     });
     tkFilter();
     tkDragInit();

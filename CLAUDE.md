@@ -872,6 +872,21 @@ Monday".
 - **Dismissing is not doing.** If the system raised it, the cause is still true and it will be
   raised again; the way to stop it is to change the rule.
 
+### The task detail (2026-08-13)
+
+Open button on every card, and clicking the title, both open the same popup — everything about one
+task, editable, with its history. Two things it does that a generic editor would not:
+
+- **A system-raised task names the rule that raised it**, and says out loud that editing the wording
+  here changes THIS ONE. If it is wrong every time, the rule is what needs changing. Without that
+  sentence people quietly fix the same sentence forty times and nobody ever fixes the cause.
+- **The activity log includes what the SOFTWARE did**, not only what people did. A task nobody can
+  audit is a task nobody trusts, and "raised automatically by rule X at 8:12" is the entry that
+  makes the rest believable.
+
+Every edit writes to the log with the name of whoever made it. Saving with an empty title is
+refused — a task that does not say what to do is not a task.
+
 ### A shared component cannot live inside one page
 
 `.l-filters` and its layout lived in `schedule.html`'s own `<style>`. The Tasks board used the same
