@@ -3023,10 +3023,31 @@ tr.tk-row.is-done strong { text-decoration: line-through; }
 }
 .tab-btn:hover { color: var(--ink); }
 .tab-btn.is-on { color: var(--ink); font-weight: 600; border-bottom-color: var(--ink); }
-.ex-do { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.ex-or { font-size: 12px; color: var(--muted); }
-.ex-send { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.ex-send .field-select { width: auto; min-width: 230px; }
+/* Two competing buttons with a small "or" between them made the reader decide
+   which was the default, and the recipient select sat between them looking like
+   a third, unrelated control (Carlos, 2026-08-13). One dominant action; the
+   alternative grouped into a single quiet block that reads as one thing. */
+.ex-primary {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  border: none; border-radius: 12px; background: var(--hx-navy); color: #fff;
+  padding: 16px 20px; cursor: pointer; font-family: inherit; text-align: left;
+}
+.ex-primary:hover { background: #000; }
+.ex-primary-ico { font-size: 22px; line-height: 1; opacity: .8; }
+.ex-primary b { display: block; font-size: 15px; }
+.ex-primary em { display: block; font-style: normal; font-size: 11.5px; opacity: .72; margin-top: 3px; }
+.ex-alt {
+  margin-top: 14px; padding: 14px 16px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--hx-band);
+}
+.ex-alt-lbl {
+  display: block; font-size: 11.5px; color: var(--muted); margin-bottom: 9px;
+}
+.ex-alt-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.ex-alt-row .field-select { flex: 1 1 240px; min-width: 0; background: #fff; }
+.ex-alt-row .btn { flex: 0 0 auto; background: #fff; }
+.ex-alt #l-ex-other { margin-top: 10px; }
+.ex-alt #l-ex-other .field-input { background: #fff; }
 .ex-group { margin-bottom: 20px; }
 .ex-group-t {
   font-size: 10.5px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;

@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=92">
+<link rel="stylesheet" href="assets/hcos.css?v=93">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -6064,26 +6064,32 @@
 
         <div class="field">
           <span class="field-lbl">Then what?</span>
-          <div class="ex-do">
-            <button class="btn btn-lg btn-primary" onclick="lExDo('download')">
-              &#8681; Download it now</button>
-            <span class="ex-or">or</span>
-            <div class="ex-send">
-              <select class="field-select" id="l-ex-to" onchange="lExTo(this.value)" aria-label="Email it to">
+
+          <button class="ex-primary" onclick="lExDo('download')">
+            <span class="ex-primary-ico" aria-hidden="true">&#8681;</span>
+            <span>
+              <b>Download it now</b>
+              <em id="l-ex-dl-sub">A PDF, straight to this computer</em>
+            </span>
+          </button>
+
+          <div class="ex-alt">
+            <span class="ex-alt-lbl">Or send it to somebody</span>
+            <div class="ex-alt-row">
+              <select class="field-select" id="l-ex-to" onchange="lExTo(this.value)" aria-label="Send it to">
                 <option value="desk" selected>Front desk &mdash; Yazmin, Haylee</option>
                 <option value="rota">Everyone on tomorrow&rsquo;s rota &mdash; 9 people</option>
                 <option value="mgmt">Karina &middot; Operations Manager</option>
                 <option value="me">Me &mdash; Yazmin</option>
                 <option value="other">Someone else&hellip;</option>
               </select>
-              <button class="btn btn-lg" onclick="lExSend()">&#9993; Email it</button>
+              <button class="btn" onclick="lExSend()">&#9993; Send</button>
             </div>
-          </div>
-          <div class="field" id="l-ex-other" style="display:none;margin-top:12px">
-            <label class="field-lbl" for="l-ex-addr">Send it to</label>
-            <input class="field-input" id="l-ex-addr" type="email" placeholder="name@helixona.com"
-                   aria-label="Send it to">
-            <div class="field-help">Outside addresses are logged with your name and the time.</div>
+            <div id="l-ex-other" style="display:none">
+              <input class="field-input" id="l-ex-addr" type="email" placeholder="name@helixona.com"
+                     aria-label="Their email address">
+              <div class="field-help">Outside addresses are logged with your name and the time.</div>
+            </div>
           </div>
         </div>
 
@@ -6490,7 +6496,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=92"></script>
+<script src="assets/hcos.js?v=93"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8801,6 +8807,12 @@
     L_EX.what = w;
     document.querySelectorAll('#ex-go .o-kind-card').forEach(function (c) { c.classList.remove('is-on'); });
     if (btn) btn.classList.add('is-on');
+    /* the button names the file it is about to give you, so the format choice
+       above it is visibly connected to the action rather than floating */
+    var sub = document.getElementById('l-ex-dl-sub');
+    if (sub) sub.textContent = w === 'pdf'
+      ? 'A PDF, straight to this computer'
+      : 'An Excel file, straight to this computer';
     lExSay();
   }
   function lExCols() {
