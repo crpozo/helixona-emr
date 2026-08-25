@@ -39,7 +39,7 @@ These are the real users, the feedback-dropdown names, and the role labels on sc
 - **Charlenne** — Remote MA. Today she re-keys questionnaire answers into the chart by hand. In HCOS, questionnaire answers flow into the chart automatically.
 - **Shibani** — Office Manager / Admin. Settings, templates, users, day-to-day administration.
 - **Karina** and **Bea** — Billing / RCM. Need a claim worklist with the payer-specific routing rules (below) built in, not memorized.
-- **Bee** and **Heyli** — Medical Assistants. Infusion records: start/stop times, route, dosage, supplies — captured in the flow, not after it.
+- **Bee** and **Heyli** — infusion side. Infusion records: start/stop times, route, dosage, supplies — captured in the flow, not after it. **Bee does not make patient calls** (Carlos, 2026-08-13) — a call about a no-show, a cancellation or a reminder is FRONT DESK work (Yazmin, Haylee); a call to a new inquiry is Marie's; a call about money is Billing's. Getting this wrong in synthetic data is not cosmetic: the team reads the wireframe as a claim about how the clinic runs.
 - **Vignesh** — AnnexMed, external billing partner; technical and integrations contact.
 - **Carlos** — Technical lead, owner of this repo.
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Task automations &middot; HCOS Wireframe</title>
-<link rel="stylesheet" href="assets/hcos.css?v=95">
+<link rel="stylesheet" href="assets/hcos.css?v=97">
 </head>
 <body data-page="tasks" data-page-title="Tasks" data-shell="app">
 
@@ -124,7 +124,7 @@
                 <td><span class="tr-when">When</span> A pattern says a patient is a repeat no-show</td>
                 <td><span class="tr-then">raise</span> <strong>Ring them — this one is not a scheduling rule</strong>
                   <div class="field-help">Closes when somebody records what was said. Nobody can close it by ticking it.</div></td>
-                <td>The PCC</td>
+                <td>Whoever is on the front desk</td>
                 <td>Within two days</td>
                 <td class="l-num">9 this month</td>
                 <td class="row-acts">
@@ -268,8 +268,7 @@
               <select class="field-select" id="tr-n-who" onchange="trSay()">
                 <option>Whoever is on the front desk</option>
                 <option>The ordering provider</option>
-                <option>The PCC</option>
-                <option>The New Patient Advisor</option>
+                                <option>The New Patient Advisor</option>
                 <option>Billing</option>
                 <option>The Operations Manager</option>
               </select>
@@ -328,7 +327,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=95"></script>
+<script src="assets/hcos.js?v=97"></script>
 <script>
   function trFilter() {
     var b = (document.getElementById('tr-f-bucket') || {}).value || '';

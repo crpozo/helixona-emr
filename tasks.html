@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tasks &middot; HCOS Wireframe</title>
-<link rel="stylesheet" href="assets/hcos.css?v=95">
+<link rel="stylesheet" href="assets/hcos.css?v=97">
 </head>
 <body data-page="tasks" data-page-title="Tasks" data-shell="app">
 
@@ -19,7 +19,6 @@
         <div class="app-header">
           <div>
             <div class="page-title">Tasks</div>
-            <div class="page-sub">Everything the clinic owes somebody &mdash; most of it raised by the software, from things that happened somewhere else</div>
           </div>
           <div class="app-user">
             <button class="btn" data-activate="tk-02-list">As a list</button>
@@ -75,7 +74,7 @@
           <section class="tk-col" data-col="todo">
             <header class="tk-col-hd">
               <span class="tk-col-t">To do</span>
-              <span class="tk-col-n" data-count-for="todo">5</span>
+              <span class="tk-col-n" data-count-for="todo">6</span>
             </header>
             <div class="tk-col-body" id="tk-col-todo">
             <article class="tk-card" data-task="t1" data-state="todo" data-pri="urgent"
@@ -98,7 +97,7 @@
               </div>
             </article>
             <article class="tk-card" data-task="t2" data-state="todo" data-pri="urgent"
-                     data-bucket="Clinical" data-owner="Bee" data-src="system" tabindex="0">
+                     data-bucket="Scheduling" data-owner="Haylee" data-src="system" tabindex="0">
               <div class="tk-card-top">
                 <span class="pri pri-urgent">Urgent</span>
                 <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
@@ -106,7 +105,7 @@
               <div class="tk-card-t">Victor Reyes no-shows before 10 AM — call him</div>
               <div class="tk-card-b">Three no-shows in 90 days, all between 8:00 and 9:30. The pattern needs a person, not a rule.</div>
               <div class="tk-card-foot">
-                <span class="tk-owner">Bee · PCC</span>
+                <span class="tk-owner">Haylee · Front desk</span>
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
@@ -152,6 +151,25 @@
                 <button class="btn btn-sm" onclick="tkNext('t11')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Three inquiries older than 48 hours')">&#128465;</button>
+              </div>
+            </article>
+            <article class="tk-card" data-task="t13" data-state="todo" data-pri="high"
+                     data-bucket="Clinical" data-owner="Bee" data-src="system" tabindex="0">
+              <div class="tk-card-top">
+                <span class="pri pri-high">Soon</span>
+                <span class="tk-src tk-src-sys" title="Raised by the system">&#9881; System</span>
+              </div>
+              <div class="tk-card-t">Maya Reyes&rsquo; infusion record is unfinished</div>
+              <div class="tk-card-b">Stop time and volume were never entered for yesterday&rsquo;s Mega C 100g. The claim cannot go out without them.</div>
+              <div class="tk-card-foot">
+                <span class="tk-owner">Bee &middot; PCC</span>
+                <span class="tk-due">Today</span>
+              </div>
+              <div class="tk-card-acts">
+                <a class="btn btn-sm" href="clinical-infusion.html#/b-13-bay-board">Open the record</a>
+                <button class="btn btn-sm" onclick="tkNext('t13')">Move on</button>
+                <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
+                        onclick="tkDismiss(this,'Maya Reyes infusion record is unfinished')">&#128465;</button>
               </div>
             </article>
             <article class="tk-card" data-task="t12" data-state="todo" data-pri="high"
@@ -412,7 +430,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=95"></script>
+<script src="assets/hcos.js?v=97"></script>
 <script>
   /* ==========================================================================
      TASKS — the clinic's work, administered in one place (Carlos, 2026-08-13).
@@ -456,24 +474,175 @@
     tkRenderList();
   }
 
-  /* moving a card is the whole interaction — it has to be one click, not a drag
-     that a trackpad fights you on */
+
+  /* ==========================================================================
+     DRAG AND DROP (Carlos, 2026-08-13: "deben ser drag and drop").
+
+     Built on POINTER events rather than the HTML5 drag API, because HTML5 drag
+     does not fire on touch at all — an iPad reviewer would have had a board
+     they could look at and not use. Pointer events cover mouse, trackpad and
+     finger with one code path.
+
+     "Move on" stays. A board you can ONLY drag is a board that excludes anyone
+     using a keyboard, and the arrow keys work on a focused card for the same
+     reason. Dragging is the fast path, not the only one.
+     ========================================================================== */
+  var TK_DRAG = null;
+
+  function tkDragInit() {
+    document.addEventListener('pointerdown', function (ev) {
+      var card = ev.target.closest ? ev.target.closest('.tk-card') : null;
+      if (!card) return;
+      /* a click on something inside the card is that thing's click, not a drag */
+      if (ev.target.closest('button, a, input, select, textarea')) return;
+      if (ev.button !== undefined && ev.button !== 0) return;
+      TK_DRAG = { card: card, x0: ev.clientX, y0: ev.clientY, live: false, id: ev.pointerId };
+      card.setPointerCapture(ev.pointerId);
+    });
+
+    document.addEventListener('pointermove', function (ev) {
+      if (!TK_DRAG || ev.pointerId !== TK_DRAG.id) return;
+      var dx = ev.clientX - TK_DRAG.x0, dy = ev.clientY - TK_DRAG.y0;
+      if (!TK_DRAG.live) {
+        /* five pixels of slop, so a slightly shaky click is still a click */
+        if (Math.abs(dx) + Math.abs(dy) < 5) return;
+        tkDragStart(ev);
+      }
+      ev.preventDefault();
+      var g = TK_DRAG.ghost;
+      g.style.transform = 'translate(' + (ev.clientX - TK_DRAG.gx) + 'px,'
+                                       + (ev.clientY - TK_DRAG.gy) + 'px)';
+      tkDragOver(ev.clientX, ev.clientY);
+    });
+
+    document.addEventListener('pointerup', function (ev) {
+      if (!TK_DRAG || ev.pointerId !== TK_DRAG.id) return;
+      if (TK_DRAG.live) tkDragDrop();
+      else TK_DRAG = null;
+    });
+    document.addEventListener('pointercancel', function () { if (TK_DRAG) tkDragEnd(true); });
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && TK_DRAG && TK_DRAG.live) tkDragEnd(true);
+      /* the keyboard path: focus a card, then move it with the arrows */
+      var card = document.activeElement;
+      if (!card || !card.classList || !card.classList.contains('tk-card')) return;
+      if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight') return;
+      ev.preventDefault();
+      var st = card.getAttribute('data-state');
+      var i = TK_STATES.indexOf(st) + (ev.key === 'ArrowRight' ? 1 : -1);
+      if (i < 0 || i >= TK_STATES.length) return;
+      tkMoveTo(card, TK_STATES[i]);
+      card.focus();
+    });
+  }
+
+  function tkDragStart(ev) {
+    var card = TK_DRAG.card;
+    var r = card.getBoundingClientRect();
+    TK_DRAG.live = true;
+    TK_DRAG.gx = TK_DRAG.x0 - r.left;
+    TK_DRAG.gy = TK_DRAG.y0 - r.top;
+    TK_DRAG.from = card.getAttribute('data-state');
+
+    var ghost = card.cloneNode(true);
+    ghost.className = 'tk-card tk-ghost';
+    ghost.style.width = r.width + 'px';
+    ghost.style.left = r.left + 'px';
+    ghost.style.top = r.top + 'px';
+    document.body.appendChild(ghost);
+    TK_DRAG.ghost = ghost;
+
+    var hole = document.createElement('div');
+    hole.className = 'tk-hole';
+    hole.style.height = r.height + 'px';
+    card.parentNode.insertBefore(hole, card);
+    TK_DRAG.hole = hole;
+    card.style.display = 'none';
+    document.body.classList.add('tk-dragging');
+  }
+
+  /* the hole IS the preview: it moves to where the card would land, so there is
+     no separate insertion line to keep in step with reality */
+  function tkDragOver(x, y) {
+    var col = null;
+    document.querySelectorAll('.tk-col').forEach(function (c) {
+      var r = c.getBoundingClientRect();
+      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) col = c;
+    });
+    document.querySelectorAll('.tk-col').forEach(function (c) {
+      c.classList.toggle('is-over', c === col);
+    });
+    if (!col) return;
+    var body = col.querySelector('.tk-col-body');
+    var after = null;
+    [].forEach.call(body.querySelectorAll('.tk-card'), function (c) {
+      if (c.style.display === 'none') return;
+      var r = c.getBoundingClientRect();
+      if (y > r.top + r.height / 2) after = c;
+    });
+    body.insertBefore(TK_DRAG.hole, after ? after.nextSibling : body.firstChild);
+  }
+
+  function tkDragDrop() {
+    var hole = TK_DRAG.hole, card = TK_DRAG.card;
+    var col = hole.closest('.tk-col');
+    var to = col ? col.getAttribute('data-col') : TK_DRAG.from;
+    hole.parentNode.insertBefore(card, hole);
+    card.style.display = '';
+    tkSetState(card, to);
+    var moved = to !== TK_DRAG.from;
+    tkDragEnd(false);
+    tkFilter();
+    if (moved) {
+      HCOS.toast('Moved to ' + TK_LBL[to].toLowerCase() + ', with your name and the time on it.', 'ok');
+    }
+    card.focus();
+  }
+
+  function tkDragEnd(cancelled) {
+    if (!TK_DRAG) return;
+    if (TK_DRAG.ghost) TK_DRAG.ghost.remove();
+    if (TK_DRAG.hole) TK_DRAG.hole.remove();
+    if (cancelled && TK_DRAG.card) TK_DRAG.card.style.display = '';
+    document.querySelectorAll('.tk-col.is-over').forEach(function (c) { c.classList.remove('is-over'); });
+    document.body.classList.remove('tk-dragging');
+    TK_DRAG = null;
+  }
+
+  /* one place that changes a card's state, so dragging, the button and the
+     arrow keys cannot end up doing three slightly different things */
+  function tkSetState(card, to) {
+    card.setAttribute('data-state', to);
+    card.classList.toggle('is-done', to === 'done');
+    var acts = card.querySelector('.tk-card-acts');
+    if (!acts) return;
+    var mv = [].filter.call(acts.querySelectorAll('.btn'), function (b) {
+      return b.textContent.trim() === 'Move on'; })[0];
+    if (to === 'done') { if (mv) mv.remove(); }
+    else if (!mv) {
+      var b = document.createElement('button');
+      b.className = 'btn btn-sm';
+      b.textContent = 'Move on';
+      b.setAttribute('onclick', "tkNext('" + card.getAttribute('data-task') + "')");
+      acts.insertBefore(b, acts.querySelector('.btn-danger'));
+    }
+  }
+  function tkMoveTo(card, to) {
+    var col = document.getElementById('tk-col-' + to);
+    if (!col) return;
+    col.insertBefore(card, col.firstChild);
+    tkSetState(card, to);
+    tkFilter();
+    HCOS.toast('Moved to ' + TK_LBL[to].toLowerCase() + '.', 'ok');
+  }
+  window.tkMoveTo = tkMoveTo;
+
+  /* the button does exactly what a drag does, through the same function */
   function tkNext(id) {
     var card = document.querySelector('[data-task="' + id + '"]');
     if (!card) return;
-    var st = card.getAttribute('data-state');
-    var nx = TK_NEXT[st];
-    if (!nx) return;
-    card.setAttribute('data-state', nx);
-    if (nx === 'done') card.classList.add('is-done');
-    var col = document.getElementById('tk-col-' + nx);
-    if (col) col.insertBefore(card, col.firstChild);
-    if (nx === 'done') {
-      var mv = card.querySelector('.tk-card-acts .btn:not(.btn-danger):not([href])');
-      if (mv && mv.textContent.trim() === 'Move on') mv.remove();
-    }
-    tkFilter();
-    HCOS.toast('Moved to ' + TK_LBL[nx].toLowerCase() + ', with your name on it.', 'ok');
+    var nx = TK_NEXT[card.getAttribute('data-state')];
+    if (nx) tkMoveTo(card, nx);
   }
 
   function tkDismiss(btn, title) {
@@ -579,6 +748,7 @@
       if (n) n.innerHTML += '<option>' + o + '</option>';
     });
     tkFilter();
+    tkDragInit();
   })();
 
 </script>

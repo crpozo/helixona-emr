@@ -3284,3 +3284,29 @@ tr.tr-rule.is-off > td { opacity: .5; }
   .l-filters { flex-wrap: wrap; }
   .l-view-group { flex-direction: row; align-items: center; gap: 12px; margin-left: auto; }
 }
+
+/* ==========================================================================
+   DRAGGING A TASK (Carlos, 2026-08-13). Pointer events, not the HTML5 drag
+   API — that one does not fire on touch at all, so an iPad reviewer would have
+   had a board they could look at and not use.
+
+   The HOLE is the preview: it sits exactly where the card would land, so there
+   is no separate insertion line that can disagree with what actually happens.
+   ========================================================================== */
+.tk-card { touch-action: none; cursor: grab; }
+.tk-card:active { cursor: grabbing; }
+/* anything you can click inside a card keeps its own cursor and its own click */
+.tk-card button, .tk-card a, .tk-card input, .tk-card select { touch-action: auto; cursor: pointer; }
+.tk-ghost {
+  position: fixed; z-index: 500; pointer-events: none; margin: 0;
+  box-shadow: 0 14px 34px rgba(0,0,0,.22); opacity: .96;
+  transform-origin: top left; rotate: 1.4deg;
+}
+.tk-hole {
+  border: 1.5px dashed var(--ink); border-radius: 10px; background: rgba(0,0,0,.03);
+}
+.tk-col.is-over { background: #EDEFF2; box-shadow: inset 0 0 0 1.5px var(--ink); }
+body.tk-dragging { user-select: none; cursor: grabbing; }
+body.tk-dragging * { cursor: grabbing !important; }
+.tk-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (hover: none) { .tk-card { cursor: default; } }
