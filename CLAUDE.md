@@ -815,6 +815,26 @@ written out by hand per screen, so the same chair was "IV 1 · Nick · Nurse" in
 - Filters name what they filter: **Appointment types**, **Appointment subtypes**, **Appointment
   statuses**. "All types" told you nothing about which types.
 
+### Times are typed, not hunted (Carlos, 2026-08-13)
+
+**Forty-eight options to pick one time is a bad trade.** The list is long BECAUSE it has to reach
+3 AM, and 3 AM happens twice a year while 9 AM happens forty times a day — a dropdown makes
+everyone pay for the rare case on every single use.
+
+`<input class="time-field" data-mins="480">`, wired by `HCOS.wireTimeFields()`:
+
+- **You type it.** `9` → 9:00 AM · `915` → 9:15 AM · `7pm` → 7:00 PM · `1945` → 7:45 PM. Any
+  minute of any hour is reachable, which the 30-minute list could not do at all.
+- **A bare 1 to 5 is read as the afternoon**, because at a clinic desk it always is. `3am` still
+  gets you 3 AM.
+- **Clicking shows the clinic day** (6 AM–8 PM), with the rest of the 24 hours behind one line
+  rather than mixed in.
+- Read it with `HCOS.timeValue(el)` for minutes and `HCOS.timeText(el)` for the label. **Not
+  `.value` for a number** — the value is what the person sees.
+
+`HCOS.hourOptions()` still exists for a genuine `<select>`, but a time somebody chooses should be
+a time field.
+
 ### One wording for "I'll pick the dates myself" (Carlos, 2026-08-13)
 
 **`Custom range…`**, everywhere, in every dropdown that lets somebody choose their own dates —

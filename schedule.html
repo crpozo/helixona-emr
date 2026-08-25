@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=90">
+<link rel="stylesheet" href="assets/hcos.css?v=91">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -6303,9 +6303,9 @@
       </div>
       <div class="grid-3">
         <div class="field"><label class="field-lbl" for="l-wl-from">Earliest</label>
-          <select class="field-select" id="l-wl-from"></select></div>
+          <input class="field-input time-field" id="l-wl-from" data-mins="480" aria-label="Earliest" onchange=""></div>
         <div class="field"><label class="field-lbl" for="l-wl-to">Latest</label>
-          <select class="field-select" id="l-wl-to"></select></div>
+          <input class="field-input time-field" id="l-wl-to" data-mins="1080" aria-label="Latest" onchange=""></div>
         <div class="field"><label class="field-lbl" for="l-wl-due">Doctor wants them seen by</label>
           <input class="field-input" type="date" id="l-wl-due" aria-label="Doctor wants them seen by">
           <div class="field-help">Leave it empty if no clinician set one.</div>
@@ -6466,11 +6466,9 @@
       <div class="step-lbl"><span>3</span> Hours and resources</div>
       <div class="grid-2">
         <div class="field"><label class="field-lbl" for="l-bm-from">From</label>
-          <select class="field-select"  id="l-bm-from" onchange="lBlkSay()" data-sel="360">
-          </select></div>
+          <input class="field-input time-field" id="l-bm-from" data-mins="720" aria-label="From" onchange="lBlkSay()"></div>
         <div class="field"><label class="field-lbl" for="l-bm-to">To</label>
-          <select class="field-select"  id="l-bm-to" onchange="lBlkSay()" data-sel="390">
-          </select></div>
+          <input class="field-input time-field" id="l-bm-to" data-mins="750" aria-label="To" onchange="lBlkSay()"></div>
       </div>
       <div class="field">
         <label class="field-lbl" for="l-bm-res">Applies to</label>
@@ -6493,7 +6491,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=90"></script>
+<script src="assets/hcos.js?v=91"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8455,10 +8453,7 @@
     d.innerHTML = HCOS.dayChips(['mon','tue','wed','thu','fri']);
     var res = document.getElementById('l-wl-res');
     if (res) res.innerHTML = HCOS.resourceOptions({ allLabel: 'Any resource that can do it' });
-    /* the whole 24 hours: the clinic starts at 6 and an IV can run past 7 */
-    var f = document.getElementById('l-wl-from'), t = document.getElementById('l-wl-to');
-    if (f) f.innerHTML = HCOS.hourOptions({ from: 0, to: 23.5, selected: 480 });
-    if (t) t.innerHTML = HCOS.hourOptions({ from: 0, to: 23.5, selected: 1080 });
+    HCOS.wireTimeFields();
     lWlTy();
   }
   function lWlFind(q) {
@@ -8514,8 +8509,8 @@
     var fromT = document.getElementById('l-wl-from');
     var toT   = document.getElementById('l-wl-to');
     var win = (days.length === 7 ? 'Any day' : days.join(', ')) + ' '
-            + (fromT ? fromT.options[fromT.selectedIndex].text : '') + '&ndash;'
-            + (toT ? toT.options[toT.selectedIndex].text : '');
+            + (fromT ? HCOS.timeText(fromT) : '') + '&ndash;'
+            + (toT ? HCOS.timeText(toT) : '');
     var due = V('l-wl-due');
     var dueCell = due
       ? '<span class="due due-ok">' + due + '</span>'
@@ -9139,8 +9134,8 @@
     var resPicked = [].map.call(document.querySelectorAll('#l-bm-reslist input:checked'),
                                 function (b) { return b.value; });
     var rep  = (document.getElementById('l-bm-rep')   || {}).value || 'weekly';
-    var from = (document.getElementById('l-bm-from')  || {}).value || '';
-    var to   = (document.getElementById('l-bm-to')    || {}).value || '';
+    var from = HCOS.timeText(document.getElementById('l-bm-from') || {});
+    var to   = HCOS.timeText(document.getElementById('l-bm-to')   || {});
     var resT = !resPicked.length ? 'every resource'
       : resPicked.length === 1 ? HCOS.resourceLabel(resPicked[0]).toLowerCase()
       : resPicked.map(function (r) { return HCOS.resourceById(r).name; }).join(', ');
@@ -9186,14 +9181,8 @@
     });
     var rep = document.getElementById('l-bm-rep');
     if (rep) rep.innerHTML = HCOS.freqOptions('weekly');
-    ['l-bm-from', 'l-bm-to'].forEach(function (id) {
-      var s = document.getElementById(id);
-      if (!s) return;
-      /* the clinic day by default, with the whole 24 hours one click away —
-         a deep clean at 11 PM is a real block somebody has to be able to make */
-      s.innerHTML = HCOS.hourOptions({ from: 0, to: 23.5, step: 30,
-                                       selected: parseInt(s.getAttribute('data-sel'), 10) });
-    });
+    /* the hours are time FIELDS now — typed, not hunted through 48 options */
+    HCOS.wireTimeFields();
     var res = document.getElementById('l-bm-reslist');
     if (res) {
       res.innerHTML = HCOS.resourceChecks('bmres');

@@ -1237,6 +1237,7 @@
   /* one entry point, safe to call as often as you like — both wirers mark what
      they have already done */
   function wireTables() {
+    try { wireTimeFields(); } catch (e) {}
     try { wireColumns(); } catch (e) {}
     try { wireScrollHints(); } catch (e) {}
     setTimeout(function () { try { wireScrollHints(); } catch (e) {} }, 300);
@@ -1283,6 +1284,161 @@
      A recurrence pattern is NOT a date and does not get this word: that list is
      FREQ, above, and "Custom…" on it was the same mistake wearing a different
      hat. */
+
+  /* ==========================================================================
+     THE TIME FIELD (Carlos, 2026-08-13: "es una lista demasiado grande pero si
+     requiero poner cualquier hora de las 24h").
+
+     Forty-eight options to pick one time is a bad trade: the list is long
+     BECAUSE it has to reach 3 AM, and the 3 AM case happens twice a year while
+     the 9 AM case happens forty times a day. A dropdown makes everyone pay for
+     the rare case on every single use.
+
+     So: type it. "7" gives you 7:00 and 7:30 in the morning and the evening,
+     "715" gives 7:15, "19" gives 7:00 PM, "7p" gives 7:00 PM. Nothing is
+     rounded away — any minute of any hour is reachable by typing it, which the
+     30-minute list could not do at all.
+
+     Click it and you get the CLINIC DAY first, because that is what nine
+     answers out of ten look like, with the rest of the 24 hours one line
+     further down rather than mixed in.
+     ========================================================================== */
+  var CLINIC_OPEN = 6, CLINIC_CLOSE = 20;   /* the hours the clinic actually runs */
+
+  function fmtMins(m) {
+    m = ((m % 1440) + 1440) % 1440;
+    var h = Math.floor(m / 60), mm = m % 60;
+    var ampm = h < 12 ? 'AM' : 'PM';
+    var hh = h % 12 === 0 ? 12 : h % 12;
+    return hh + ':' + (mm < 10 ? '0' + mm : mm) + ' ' + ampm;
+  }
+  /* Anything a person would actually type. Deliberately forgiving: the cost of
+     rejecting "9" is that somebody goes back to hunting a list. */
+  function parseTime(txt) {
+    if (!txt) return null;
+    var t = String(txt).trim().toLowerCase().replace(/\s+/g, '');
+    var pm = /p/.test(t), am = /a/.test(t);
+    t = t.replace(/[ap]\.?m?\.?$/, '');
+    var h, m = 0, mt;
+    if ((mt = /^(\d{1,2})[:.](\d{2})$/.exec(t)))      { h = +mt[1]; m = +mt[2]; }
+    else if ((mt = /^(\d{1,2})$/.exec(t)))            { h = +mt[1]; }
+    else if ((mt = /^(\d{3})$/.exec(t)))              { h = +t[0]; m = +t.slice(1); }
+    else if ((mt = /^(\d{4})$/.exec(t)))              { h = +t.slice(0, 2); m = +t.slice(2); }
+    else return null;
+    if (m > 59) return null;
+    if (h > 23) return null;
+    if (pm && h < 12) h += 12;
+    if (am && h === 12) h = 0;
+    /* no am/pm and an hour the clinic could not mean: 1–5 typed bare is far
+       more likely to be the afternoon than the small hours */
+    if (!pm && !am && h >= 1 && h <= 5) h += 12;
+    return h * 60 + m;
+  }
+  function timeValue(el) {
+    var v = el.getAttribute('data-mins');
+    return v === null || v === '' ? null : +v;
+  }
+  function timeText(el) { return el.value || ''; }
+  function setTime(el, mins) {
+    if (mins === null) { el.value = ''; el.removeAttribute('data-mins'); return; }
+    el.setAttribute('data-mins', mins);
+    el.value = fmtMins(mins);
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  function wireTimeFields(root) {
+    var fields = (root || document).querySelectorAll('input.time-field');
+    [].forEach.call(fields, function (inp) {
+      if (inp.dataset.timeWired) return;
+      inp.dataset.timeWired = '1';
+      inp.setAttribute('autocomplete', 'off');
+      inp.setAttribute('inputmode', 'numeric');
+      if (!inp.placeholder) inp.placeholder = 'e.g. 9, 9:15, 7pm';
+      var wrap = el('span', 'time-wrap');
+      inp.parentNode.insertBefore(wrap, inp);
+      wrap.appendChild(inp);
+      var list = el('div', 'time-list');
+      list.style.display = 'none';
+      wrap.appendChild(list);
+      var all = false;      /* has the person asked for the whole 24 hours? */
+
+      function build(filterTxt) {
+        var typed = parseTime(filterTxt);
+        var rows = [];
+        if (typed !== null && filterTxt) {
+          /* what they typed, first and exact */
+          rows.push({ m: typed, note: 'exactly what you typed' });
+          /* and the nearby half hours, since most people mean one of those */
+          var base = Math.floor(typed / 30) * 30;
+          [base, base + 30].forEach(function (m) {
+            if (m !== typed && m < 1440) rows.push({ m: m });
+          });
+          var other = typed < 720 ? typed + 720 : typed - 720;
+          rows.push({ m: other, note: 'the other half of the day' });
+        } else {
+          for (var m = CLINIC_OPEN * 60; m <= CLINIC_CLOSE * 60; m += 30) rows.push({ m: m });
+          if (all) {
+            rows.unshift({ sep: 'Before the clinic opens' });
+            for (var b = 0; b < CLINIC_OPEN * 60; b += 30) rows.splice(1 + b / 30, 0, { m: b });
+            rows.push({ sep: 'After it closes' });
+            for (var a = (CLINIC_CLOSE + 0.5) * 60; a < 1440; a += 30) rows.push({ m: a });
+          }
+        }
+        var cur = timeValue(inp);
+        list.innerHTML = rows.map(function (r) {
+          if (r.sep) return '<div class="time-sep">' + r.sep + '</div>';
+          return '<button type="button" class="time-opt' + (r.m === cur ? ' is-on' : '') + '" '
+               + 'data-m="' + r.m + '">' + fmtMins(r.m)
+               + (r.note ? '<em>' + r.note + '</em>' : '') + '</button>';
+        }).join('')
+        + (!filterTxt && !all
+            ? '<button type="button" class="time-more">Show all 24 hours &mdash; or just type one</button>'
+            : '');
+        list.style.display = '';
+      }
+
+      inp.addEventListener('focus', function () { all = false; build(''); });
+      inp.addEventListener('input', function () { build(inp.value); });
+      inp.addEventListener('blur', function () {
+        setTimeout(function () {
+          list.style.display = 'none';
+          /* whatever they left in the box becomes a real time, or reverts */
+          var m = parseTime(inp.value);
+          if (m !== null) setTime(inp, m);
+          else if (timeValue(inp) !== null) inp.value = fmtMins(timeValue(inp));
+          else inp.value = '';
+        }, 140);
+      });
+      inp.addEventListener('keydown', function (ev) {
+        var opts = [].slice.call(list.querySelectorAll('.time-opt'));
+        var i = opts.indexOf(list.querySelector('.time-opt.is-key'));
+        if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+          ev.preventDefault();
+          if (!opts.length) return;
+          if (i >= 0) opts[i].classList.remove('is-key');
+          i = ev.key === 'ArrowDown' ? Math.min(opts.length - 1, i + 1) : Math.max(0, i - 1);
+          opts[i].classList.add('is-key');
+          opts[i].scrollIntoView({ block: 'nearest' });
+        } else if (ev.key === 'Enter') {
+          ev.preventDefault();
+          var pick = opts[i] || opts[0];
+          if (pick) { setTime(inp, +pick.getAttribute('data-m')); list.style.display = 'none'; inp.blur(); }
+        } else if (ev.key === 'Escape') { list.style.display = 'none'; }
+      });
+      list.addEventListener('mousedown', function (ev) {
+        var b = ev.target.closest ? ev.target.closest('.time-opt, .time-more') : null;
+        if (!b) return;
+        ev.preventDefault();
+        if (b.classList.contains('time-more')) { all = true; build(''); return; }
+        setTime(inp, +b.getAttribute('data-m'));
+        list.style.display = 'none';
+      });
+
+      var pre = inp.getAttribute('data-mins');
+      if (pre !== null && pre !== '') inp.value = fmtMins(+pre);
+    });
+  }
+
   var CUSTOM_RANGE = 'Custom range…';
   var PERIODS_BACK = [['30', 'Last 30 days'], ['90', 'Last 90 days'],
                       ['180', 'Last 6 months'], ['365', 'Last 12 months']];
@@ -1361,7 +1517,9 @@
     resourceById: resourceById, resourceLabel: resourceLabel,
     resourceOptions: resourceOptions, resourceChecks: resourceChecks,
     hourOptions: hourOptions, dayChips: dayChips, freqOptions: freqOptions,
-    CUSTOM_RANGE: CUSTOM_RANGE, periodOptions: periodOptions
+    CUSTOM_RANGE: CUSTOM_RANGE, periodOptions: periodOptions,
+    wireTimeFields: wireTimeFields, timeValue: timeValue, timeText: timeText,
+    setTime: setTime, fmtMins: fmtMins, parseTime: parseTime
   };
 
   if (document.readyState === 'loading') {
