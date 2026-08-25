@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=89">
+<link rel="stylesheet" href="assets/hcos.css?v=90">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -3724,7 +3724,7 @@
                 <option value="90" selected>Last 90 days</option>
                 <option value="180">Last 6 months</option>
                 <option value="365">Last 12 months</option>
-                <option value="custom">A range&hellip;</option>
+                <option value="custom">Custom range&hellip;</option>
               </select>
               <span class="ins-range" id="ins-f-range" style="display:none">
                 <input type="date" class="field-input" id="ins-f-from" value="2026-04-22" aria-label="From">
@@ -4810,30 +4810,23 @@
             <div class="seg-divider">Repeat</div>
             <div class="field"><label class="field-lbl" for="l-be-rep">How often</label>
               <select class="field-select" id="l-be-rep" onchange="lBlkRepeat(this.value)">
-                <option value="none">Does not repeat</option>
-                <option value="daily">Every day</option>
-                <option value="weekday" selected>Every weekday (Mon&ndash;Fri)</option>
-                <option value="weekly">Weekly on&hellip;</option>
-                <option value="monthly">Monthly on the first Wednesday</option>
-                <option value="custom">Custom&hellip;</option>
+
               </select>
             </div>
-            <div class="field" id="l-be-days" style="display:none">
+            <div class="field" id="l-be-days">
               <span class="field-lbl">On these days</span>
-              <div class="chip-row">
-                <button class="filter-chip multi active" type="button">Mon</button>
-                <button class="filter-chip multi active" type="button">Tue</button>
-                <button class="filter-chip multi active" type="button">Wed</button>
-                <button class="filter-chip multi active" type="button">Thu</button>
-                <button class="filter-chip multi active" type="button">Fri</button>
-                <button class="filter-chip multi" type="button">Sat</button>
-                <button class="filter-chip multi" type="button">Sun</button>
-              </div>
+              <div class="chip-row" id="l-be-daychips"></div>
             </div>
             <div class="field"><label class="field-lbl" for="l-be-end">Until</label>
-              <select class="field-select" id="l-be-end">
-                <option selected>Forever</option><option>A date&hellip;</option><option>After a number of times&hellip;</option>
+              <select class="field-select" id="l-be-end" onchange="lBeEnd(this.value)">
+                <option value="forever" selected>Forever</option>
+                <option value="date">Custom range&hellip;</option>
+                <option value="times">After a number of times&hellip;</option>
               </select>
+              <input class="field-input" type="date" id="l-be-enddate" value="2027-03-04"
+                     style="display:none;margin-top:6px" aria-label="Runs until this date">
+              <input class="field-input" type="number" id="l-be-endn" min="1" value="12"
+                     style="display:none;margin-top:6px" aria-label="Number of times">
             </div>
           </div>
 
@@ -6464,7 +6457,7 @@
             <option value="3">3 months</option>
             <option value="6">6 months</option>
             <option value="12">12 months</option>
-            <option value="date">A date&hellip;</option>
+            <option value="date">Custom range&hellip;</option>
           </select>
           <input class="field-input" type="date" id="l-bm-untildate" value="2027-03-04"
                  style="display:none;margin-top:6px" aria-label="Runs until this date" onchange="lBlkSay()"></div>
@@ -6500,7 +6493,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=89"></script>
+<script src="assets/hcos.js?v=90"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -9254,6 +9247,27 @@
     }
     lBlkSay();
   }
+
+  /* the shared frequency and day lists on the edit screen too — it had its own
+     wording, which is exactly how "Custom…" got there in the first place */
+  function lBeForm() {
+    var rep = document.getElementById('l-be-rep');
+    if (rep) rep.innerHTML = HCOS.freqOptions('weekly');
+    var d = document.getElementById('l-be-daychips');
+    if (d) d.innerHTML = HCOS.dayChips(['mon','tue','wed','thu','fri']);
+  }
+  function lBeEnd(v) {
+    var d = document.getElementById('l-be-enddate');
+    var n = document.getElementById('l-be-endn');
+    if (d) d.style.display = v === 'date' ? '' : 'none';
+    if (n) n.style.display = v === 'times' ? '' : 'none';
+  }
+  function lBlkRepeat(v) {
+    var d = document.getElementById('l-be-days');
+    if (d) d.style.display = (v === 'once' || v === 'daily') ? 'none' : '';
+  }
+  window.lBeForm = lBeForm; window.lBeEnd = lBeEnd; window.lBlkRepeat = lBlkRepeat;
+
   window.lBlkForm = lBlkForm; window.lBmTyFilter = lBmTyFilter;
   window.lBmRes = lBmRes; window.lBmResCount = lBmResCount;
 
@@ -9399,11 +9413,8 @@
   window.lInsFilter = lInsFilter;
 
   /* ---------- Blocked time: the repeat vocabulary people already know ---------- */
-  function lBlkRepeat(v) {
-    var days = document.getElementById('l-be-days');
-    if (days) days.style.display = (v === 'weekly' || v === 'custom') ? '' : 'none';
-  }
-  window.lBlkRepeat = lBlkRepeat;
+  /* the old lBlkRepeat lived here and, being declared later, silently won —
+     it still spoke the retired vocabulary ('custom'). One definition, above. */
 
   /* ---------- List view: the same day, read as a list ----------
      It is built FROM the board, not typed again, so the list can never drift
@@ -9962,6 +9973,7 @@
   if (typeof lCovGate === 'function') lCovGate();
   if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   if (typeof lBlkForm === 'function') lBlkForm();
+  if (typeof lBeForm === 'function') lBeForm();
   if (typeof lWlForm === 'function') lWlForm();
   if (typeof lTkFilter === 'function') lTkFilter();
   if (typeof lExRestore === 'function') { lExRestore(); lExChrome(); lExSay(); }

@@ -815,6 +815,17 @@ written out by hand per screen, so the same chair was "IV 1 · Nick · Nurse" in
 - Filters name what they filter: **Appointment types**, **Appointment subtypes**, **Appointment
   statuses**. "All types" told you nothing about which types.
 
+### One wording for "I'll pick the dates myself" (Carlos, 2026-08-13)
+
+**`Custom range…`**, everywhere, in every dropdown that lets somebody choose their own dates —
+whether they pick both ends or only the far one, because the other end is always on the screen
+beside it. It had drifted into four wordings: "Custom range…", "A range…", "A date…" and a bare
+"Custom…". `HCOS.CUSTOM_RANGE` is the constant and `HCOS.periodOptions({direction, selected})`
+builds the whole list, so a new period dropdown cannot invent a fifth.
+
+**A recurrence pattern is not a date and does not get this word.** "Custom…" on the repeat list was
+the same mistake wearing a different hat; that list is `HCOS.freqOptions()`.
+
 ## Tasks (Module L, added 2026-08-12)
 
 `schedule.html#/l-13-tasks`. **Tasks are raised, updated and closed BY THE SYSTEM**, not typed —

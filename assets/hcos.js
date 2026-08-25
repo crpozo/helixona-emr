@@ -1273,6 +1273,35 @@
     });
   }
 
+
+  /* ONE WORDING FOR "I'll pick the dates myself" (Carlos, 2026-08-13).
+     It had drifted into four: "Custom range…", "A range…", "A date…" and a bare
+     "Custom…". Every dropdown that lets somebody choose their own dates says
+     CUSTOM RANGE, whether they are picking both ends or just the far one — the
+     other end is always on the screen beside it, so it is still a range.
+
+     A recurrence pattern is NOT a date and does not get this word: that list is
+     FREQ, above, and "Custom…" on it was the same mistake wearing a different
+     hat. */
+  var CUSTOM_RANGE = 'Custom range…';
+  var PERIODS_BACK = [['30', 'Last 30 days'], ['90', 'Last 90 days'],
+                      ['180', 'Last 6 months'], ['365', 'Last 12 months']];
+  var PERIODS_FWD  = [['7', 'Next 7 days'], ['14', 'Next 2 weeks'],
+                      ['28', 'Next 4 weeks'], ['90', 'Next 3 months']];
+  function periodOptions(o) {
+    o = o || {};
+    var list = (o.direction === 'forward' ? PERIODS_FWD : PERIODS_BACK).slice();
+    var out = list.map(function (p) {
+      return '<option value="' + p[0] + '"' + (p[0] === String(o.selected) ? ' selected' : '') + '>'
+           + p[1] + '</option>';
+    }).join('');
+    if (o.custom !== false) {
+      out += '<option value="custom"' + (o.selected === 'custom' ? ' selected' : '') + '>'
+           + CUSTOM_RANGE + '</option>';
+    }
+    return out;
+  }
+
   var confirmEl = null;
   function buildConfirm() {
     confirmEl = el('div', 'modal-overlay confirm-overlay');
@@ -1331,7 +1360,8 @@
     RESOURCES: RESOURCES, RESOURCE_KINDS: RESOURCE_KINDS, DAYS: DAYS, FREQ: FREQ,
     resourceById: resourceById, resourceLabel: resourceLabel,
     resourceOptions: resourceOptions, resourceChecks: resourceChecks,
-    hourOptions: hourOptions, dayChips: dayChips, freqOptions: freqOptions
+    hourOptions: hourOptions, dayChips: dayChips, freqOptions: freqOptions,
+    CUSTOM_RANGE: CUSTOM_RANGE, periodOptions: periodOptions
   };
 
   if (document.readyState === 'loading') {
