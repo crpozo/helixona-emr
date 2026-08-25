@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tasks &middot; HCOS Wireframe</title>
-<link rel="stylesheet" href="assets/hcos.css?v=98">
+<link rel="stylesheet" href="assets/hcos.css?v=99">
 </head>
 <body data-page="tasks" data-page-title="Tasks" data-shell="app">
 
@@ -90,11 +90,11 @@
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="schedule.html#/l-10-offer">Open the offer</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="schedule.html#/l-10-offer">Open the offer</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t1')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Grace Lindqvist cancelled her 10:00 with Brooke')">&#128465;</button>
+                        onclick="tkDismiss(this,'Grace Lindqvist cancelled her 10:00 with Brooke')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t2" data-state="todo" data-pri="urgent"
@@ -110,11 +110,11 @@
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="schedule.html#/l-09-insights">See the pattern</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="schedule.html#/l-09-insights">See the pattern</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t2')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Victor Reyes no-shows before 10 AM — call him')">&#128465;</button>
+                        onclick="tkDismiss(this,'Victor Reyes no-shows before 10 AM — call him')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t3" data-state="todo" data-pri="high"
@@ -130,11 +130,11 @@
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="schedule.html#/l-01-day">Open the day</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t3')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'New appointment booked — confirm it with the patient')">&#128465;</button>
+                        onclick="tkDismiss(this,'New appointment booked — confirm it with the patient')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t11" data-state="todo" data-pri="routine"
@@ -150,11 +150,11 @@
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="intake.html">Open triage</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="intake.html">Open triage</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t11')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Three inquiries older than 48 hours')">&#128465;</button>
+                        onclick="tkDismiss(this,'Three inquiries older than 48 hours')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t13" data-state="todo" data-pri="high"
@@ -170,11 +170,11 @@
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="clinical-infusion.html#/b-13-bay-board">Open the record</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="clinical-infusion.html#/b-13-bay-board">Open the record</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t13')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Maya Reyes infusion record is unfinished')">&#128465;</button>
+                        onclick="tkDismiss(this,'Maya Reyes infusion record is unfinished')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t12" data-state="todo" data-pri="high"
@@ -190,11 +190,11 @@
                 <span class="tk-due">Tomorrow</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="patients.html?pt=Yuki+Tanaka">Open her profile</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="patients.html?pt=Yuki+Tanaka">Open her profile</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t12')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Yuki Tanaka is 17 — confirm a guardian is coming')">&#128465;</button>
+                        onclick="tkDismiss(this,'Yuki Tanaka is 17 — confirm a guardian is coming')">&#128465;</button></div>
               </div>
             </article>
             </div>
@@ -218,11 +218,11 @@
                 <span class="tk-due">Tomorrow</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="billing.html#/d-03-era">Open the remittance</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="billing.html#/d-03-era">Open the remittance</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t4')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Appeal the 20553 denial for Walter Hsu')">&#128465;</button>
+                        onclick="tkDismiss(this,'Appeal the 20553 denial for Walter Hsu')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t5" data-state="doing" data-pri="routine"
@@ -238,11 +238,11 @@
                 <span class="tk-due">This week</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="billing.html#/d-04-coverage">Open the rule</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="billing.html#/d-04-coverage">Open the rule</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t5')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Verify CMS article A57701 against the coverage database')">&#128465;</button>
+                        onclick="tkDismiss(this,'Verify CMS article A57701 against the coverage database')">&#128465;</button></div>
               </div>
             </article>
             </div>
@@ -266,11 +266,11 @@
                 <span class="tk-due">Tomorrow</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="schedule.html#/l-03-order">Open the request</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="schedule.html#/l-03-order">Open the request</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t6')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Sign the Cellular Boost renewal for Priya Natarajan')">&#128465;</button>
+                        onclick="tkDismiss(this,'Sign the Cellular Boost renewal for Priya Natarajan')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t7" data-state="waiting" data-pri="high"
@@ -286,11 +286,11 @@
                 <span class="tk-due">Today</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="schedule.html#/l-10-waitlist">Open the waitlist</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="schedule.html#/l-10-waitlist">Open the waitlist</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t7')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Nina Kowalski — waiting on her reply to the slot offer')">&#128465;</button>
+                        onclick="tkDismiss(this,'Nina Kowalski — waiting on her reply to the slot offer')">&#128465;</button></div>
               </div>
             </article>
             <article class="tk-card" data-task="t8" data-state="waiting" data-pri="routine"
@@ -306,11 +306,11 @@
                 <span class="tk-due">Friday</span>
               </div>
               <div class="tk-card-acts">
-                <a class="btn btn-sm" href="billing.html#/d-02-packet">Open the packet</a>
-                <button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Open</button>
+                <div class="tk-act-go"><a class="btn btn-sm" href="billing.html#/d-02-packet">Open the packet</a></div>
+                <div class="tk-act-row"><button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>
                 <button class="btn btn-sm" onclick="tkNext('t8')">Move on</button>
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
-                        onclick="tkDismiss(this,'Blue Shield packet sent — waiting on the claim number')">&#128465;</button>
+                        onclick="tkDismiss(this,'Blue Shield packet sent — waiting on the claim number')">&#128465;</button></div>
               </div>
             </article>
             </div>
@@ -340,6 +340,7 @@
                         onclick="tkDismiss(this,'Maya Reyes booked at her own average, not the protocol')">&#128465;</button>
               </div>
             </article>
+            </article>
             <article class="tk-card is-done" data-task="t10" data-state="done" data-pri="routine"
                      data-bucket="Admin" data-owner="Nobody — automatic" data-src="system" tabindex="0">
               <div class="tk-card-top">
@@ -358,6 +359,7 @@
                 <button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss"
                         onclick="tkDismiss(this,'Nightly list PDF stored')">&#128465;</button>
               </div>
+            </article>
             </article>
             </div>
           </section>
@@ -535,7 +537,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=98"></script>
+<script src="assets/hcos.js?v=99"></script>
 <script>
   /* ==========================================================================
      TASKS — the clinic's work, administered in one place (Carlos, 2026-08-13).
@@ -721,7 +723,8 @@
     card.classList.toggle('is-done', to === 'done');
     var acts = card.querySelector('.tk-card-acts');
     if (!acts) return;
-    var mv = [].filter.call(acts.querySelectorAll('.btn'), function (b) {
+    var row = acts.querySelector('.tk-act-row') || acts;
+    var mv = [].filter.call(row.querySelectorAll('.btn'), function (b) {
       return b.textContent.trim() === 'Move on'; })[0];
     if (to === 'done') { if (mv) mv.remove(); }
     else if (!mv) {
@@ -729,7 +732,7 @@
       b.className = 'btn btn-sm';
       b.textContent = 'Move on';
       b.setAttribute('onclick', "tkNext('" + card.getAttribute('data-task') + "')");
-      acts.insertBefore(b, acts.querySelector('.btn-danger'));
+      row.insertBefore(b, row.querySelector('.btn-danger'));
     }
   }
   function tkMoveTo(card, to) {
@@ -801,10 +804,14 @@
       + '<div class="tk-card-foot"><span class="tk-owner">' + (o.owner || 'Unassigned')
         + '</span><span class="tk-due">Today</span></div>'
       + '<div class="tk-card-acts">'
-        + (o.go ? '<a class="btn btn-sm" href="' + o.go + '">' + o.goLbl + '</a>' : '')
+        + (o.go ? '<div class="tk-act-go"><a class="btn btn-sm" href="' + o.go + '">'
+                  + o.goLbl + '</a></div>' : '')
+        + '<div class="tk-act-row">'
+        + '<button class="btn btn-sm tk-open" onclick="tkdOpen(this)">Edit</button>'
         + '<button class="btn btn-sm" onclick="tkNext(\'' + id + '\')">Move on</button>'
         + '<button class="btn btn-sm btn-icon btn-danger" title="Dismiss" aria-label="Dismiss" '
         + 'onclick="tkDismiss(this,\'' + String(o.title).replace(/\x27/g, '') + '\')">&#128465;</button>'
+        + '</div>'
       + '</div>';
     col.insertBefore(card, col.firstChild);
     tkFilter();
