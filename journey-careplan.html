@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=103">
+<link rel="stylesheet" href="assets/hcos.css?v=106">
 <style>
   .j-patientbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .j-patientbar .avatar { width: 42px; height: 42px; font-size: 14px; }
@@ -765,9 +765,350 @@
     </div>
   </section>
 
+  <!-- ============================================================ -->
+  <section class="screen" id="j-staff-protocols" data-title="Protocols on the plan">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/care-plan/protocols</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Protocols on the plan</div>
+            <div class="page-sub">Priya Natarajan &middot; what the provider has approved, and therefore what the desk can book</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="j-staff-poc">Back to the plan</button></div>
+        </div>
+
+        <div class="callout">
+          <strong>A protocol is not an appointment type &mdash; it sits beside one.</strong>
+          The desk books an <em>Erchonia Laser</em> appointment and then says <em>which</em> protocol
+          the provider ordered. Ticking one here is what makes it appear in that second list.
+          <br><br>
+          <strong>Nothing here books anything.</strong> This is the menu the desk is allowed to
+          choose from; an untitled protocol on this page is one nobody can schedule.
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">Erchonia Laser &middot; protocols</div>
+            <div class="field-help" style="margin-bottom:10px">
+              <b id="poc-n-erchonia">3</b> approved of 36. The protocol length is <strong>not</strong>
+              the appointment length &mdash; a 5-minute protocol still books a 30-minute slot.
+            </div>
+            <div class="proto-list">
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Head & Cerebellum">
+              <span class="proto-n">Head & Cerebellum</span>
+              <span class="proto-l">5 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Shoulder">
+              <span class="proto-n">Shoulder</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Wrist/hand">
+              <span class="proto-n">Wrist/hand</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Knee">
+              <span class="proto-n">Knee</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Heel">
+              <span class="proto-n">Heel</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Neck">
+              <span class="proto-n">Neck</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Elbow">
+              <span class="proto-n">Elbow</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Low Back">
+              <span class="proto-n">Low Back</span>
+              <span class="proto-l">20 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Ankle/Foot">
+              <span class="proto-n">Ankle/Foot</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Acute Pain">
+              <span class="proto-n">Acute Pain</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Level 1 Brain">
+              <span class="proto-n">Level 1 Brain</span>
+              <span class="proto-l">5 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Level 2 Brain">
+              <span class="proto-n">Level 2 Brain</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Emotional Stress">
+              <span class="proto-n">Emotional Stress</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Sympathetic Calm">
+              <span class="proto-n">Sympathetic Calm</span>
+              <span class="proto-l">7 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Parasympathetic Facilitation">
+              <span class="proto-n">Parasympathetic Facilitation</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Level 1 Gut">
+              <span class="proto-n">Level 1 Gut</span>
+              <span class="proto-l">5 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Level 2 Gut">
+              <span class="proto-n">Level 2 Gut</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Inflammation">
+              <span class="proto-n">Inflammation</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Parasites 1">
+              <span class="proto-n">Parasites 1</span>
+              <span class="proto-l">7 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Parasites 2">
+              <span class="proto-n">Parasites 2</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Lyme">
+              <span class="proto-n">Lyme</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="EBV">
+              <span class="proto-n">EBV</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Infection">
+              <span class="proto-n">Infection</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Digestion">
+              <span class="proto-n">Digestion</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Indigestion">
+              <span class="proto-n">Indigestion</span>
+              <span class="proto-l">8 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Allergy">
+              <span class="proto-n">Allergy</span>
+              <span class="proto-l">9 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Immune Enhance">
+              <span class="proto-n">Immune Enhance</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Hormone Balance">
+              <span class="proto-n">Hormone Balance</span>
+              <span class="proto-l">7 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Plantar Fasciitis">
+              <span class="proto-n">Plantar Fasciitis</span>
+              <span class="proto-l">7 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Chronic Pain">
+              <span class="proto-n">Chronic Pain</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Lymphatic">
+              <span class="proto-n">Lymphatic</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Weight Loss Trial">
+              <span class="proto-n">Weight Loss Trial</span>
+              <span class="proto-l">20 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Large Intestines">
+              <span class="proto-n">Large Intestines</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Small Intestines">
+              <span class="proto-n">Small Intestines</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="General Musculoskeletal">
+              <span class="proto-n">General Musculoskeletal</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Neuro Inflammation">
+              <span class="proto-n">Neuro Inflammation</span>
+              <span class="proto-l">10 min</span>
+            </label>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">BioCharger &middot; recipes</div>
+            <div class="field-help" style="margin-bottom:10px">
+              <b id="poc-n-biocharger">3</b> approved of 21. A <strong>stack</strong> is one per
+              patient per day; single recipes allow up to three in a session.
+            </div>
+            <div class="proto-list">
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Abundance">
+              <span class="proto-n">Abundance</span>
+              <span class="proto-l">15 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Autoimmune Support">
+              <span class="proto-n">Autoimmune Support</span>
+              <span class="proto-l">15 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Cryo Nervous System">
+              <span class="proto-n">Cryo Nervous System</span>
+              <span class="proto-l">17 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Epstein Support">
+              <span class="proto-n">Epstein Support</span>
+              <span class="proto-l">10.5 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Heavy">
+              <span class="proto-n">Heavy</span>
+              <span class="proto-l">9.1 min</span>
+            </label>
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Immune Strong">
+              <span class="proto-n">Immune Strong</span>
+              <span class="proto-l">30 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Integrative Circulatory Lymphatic">
+              <span class="proto-n">Integrative Circulatory Lymphatic</span>
+              <span class="proto-l">17 min</span>
+            </label>
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Lymph Liver Kidney Support">
+              <span class="proto-n">Lymph Liver Kidney Support</span>
+              <span class="proto-l">15 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Mitochondrial Support">
+              <span class="proto-n">Mitochondrial Support</span>
+              <span class="proto-l">16 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Afungusamongus">
+              <span class="proto-n">Afungusamongus</span>
+              <span class="proto-l">19.5 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Brain Support Stack">
+              <span class="proto-n">Brain Support Stack <em class="proto-stack">Stack</em></span>
+              <span class="proto-l">25 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Depressive Disorder Support">
+              <span class="proto-n">Depressive Disorder Support</span>
+              <span class="proto-l">11 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="General Wellness">
+              <span class="proto-n">General Wellness</span>
+              <span class="proto-l">12 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Hormonal Balance">
+              <span class="proto-n">Hormonal Balance</span>
+              <span class="proto-l">20 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Inflammation Support">
+              <span class="proto-n">Inflammation Support</span>
+              <span class="proto-l">22 min</span>
+            </label>
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Lyme Defense Stack">
+              <span class="proto-n">Lyme Defense Stack <em class="proto-stack">Stack</em></span>
+              <span class="proto-l">25 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Mindfulness Grounding">
+              <span class="proto-n">Mindfulness Grounding</span>
+              <span class="proto-l">17 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Mold Cleansing Stack">
+              <span class="proto-n">Mold Cleansing Stack <em class="proto-stack">Stack</em></span>
+              <span class="proto-l">25 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="PurifyRecover">
+              <span class="proto-n">PurifyRecover</span>
+              <span class="proto-l">22 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Wellness Mental Clarity">
+              <span class="proto-n">Wellness Mental Clarity</span>
+              <span class="proto-l">17 min</span>
+            </label>
+            <label class="proto">
+              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Rib Support">
+              <span class="proto-n">Rib Support</span>
+              <span class="proto-l">14 min</span>
+            </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <div class="page-actions-main">
+            <span class="page-actions-note">Changes take effect on the next booking</span>
+            <button class="btn" data-activate="j-staff-poc">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Saved to Priya&rsquo;s plan of care, signed by Dr. Drannikov. The desk sees the new list straight away.', 'ok')">Save to the plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<script src="assets/hcos.js?v=103"></script>
+<script src="assets/hcos.js?v=106"></script>
 <script>
   // Segmented controls (pacing, week) — click to activate; a couple toast.
   document.addEventListener('click', function (ev) {
@@ -782,6 +1123,21 @@
       HCOS.toast('Pacing set to ' + btn.textContent + ' in the version 6 draft. Approve it to publish.', 'ok');
     }
   });
+</script>
+
+<script>
+  /* The count is the point of this screen: a provider needs to see at a glance
+     how much of the catalogue they have opened up for this patient. */
+  function pocCount(kind) {
+    var n = document.querySelectorAll('[data-cat="' + kind + '"]:checked').length;
+    var el = document.getElementById('poc-n-' + kind);
+    if (el) el.textContent = n;
+    document.querySelectorAll('[data-cat="' + kind + '"]').forEach(function (b) {
+      b.closest('.proto').classList.toggle('is-on', b.checked);
+    });
+    if (!n) HCOS.toast('Nothing approved for that one — the desk will not be able to book it at all.', 'warn');
+  }
+  window.pocCount = pocCount;
 </script>
 </body>
 </html>

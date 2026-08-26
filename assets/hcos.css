@@ -1094,7 +1094,7 @@ a.lead-chip:hover { border-color: var(--ink); }
   --sb-pocrev:    #9E5C78;   /* POC Review */
   --sb-eboosafe:  #BA8098;   /* EBOO Safe */
   --sb-ebootx:    #D2836E;   /* EBOO */
-  --sb-erchlas:   #8A2CE0;   /* Erch Laser */
+  --sb-erchlas:   #8A2CE0;   /* Erchonia Laser */
   --sb-erccemp:   #D8B0A8;   /* ErcCompEmp */
   --sb-erccpt:    #EED8D2;   /* ErcCompPt */
   --sb-erccvip:   #F5EAD2;   /* ErcCompVIP */
@@ -3395,3 +3395,62 @@ body.tk-dragging * { cursor: grabbing !important; }
 }
 /* forty columns cannot be scanned; they have to be searched */
 .l-colfind { width: auto; min-width: 210px; font-size: 12.5px; padding: 6px 10px; }
+
+/* ==========================================================================
+   PROTOCOLS AND RECIPES (Carlos, 2026-08-25). A protocol is NOT a subtype and
+   not a rung on the type chain — it is a SECOND question asked beside the
+   appointment type: what is happening, and which one did the provider order.
+   The list offered is what that patient's plan of care approved; the catalogue
+   is what a provider chooses from when writing the plan, and the desk never
+   sees it.
+   ========================================================================== */
+.proto-gate {
+  border: 1.5px solid var(--hx-blue); border-radius: 12px; background: #fff;
+  padding: 16px 18px; margin: 16px 0;
+}
+.proto-gate-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.proto-gate-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+  background: var(--hx-blue); color: #fff; border-radius: 999px; padding: 3px 9px;
+}
+.proto-gate-hd b { font-size: 13.5px; color: var(--hx-navy); }
+.proto-pick { margin-top: 12px; }
+.proto-opt, .proto {
+  display: flex; align-items: center; gap: 10px; cursor: pointer;
+  padding: 9px 12px; border: 1px solid var(--line-soft); border-radius: 8px;
+  margin-bottom: 6px; font-size: 12.5px; background: #fff;
+}
+.proto-opt:hover, .proto:hover { border-color: var(--ink); }
+.proto.is-on { border-color: var(--ink); background: var(--hx-band); }
+.proto-n { flex: 1; }
+.proto-l { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.proto-stack {
+  font-style: normal; font-size: 9.5px; font-weight: 700; letter-spacing: .4px;
+  text-transform: uppercase; border: 1px solid #C98A1E; color: #7A5510;
+  border-radius: 999px; padding: 1px 6px; margin-left: 6px;
+}
+.proto-list { max-height: 340px; overflow-y: auto; padding-right: 4px; }
+.proto-none {
+  border: 1px dashed #C0392B; border-radius: 9px; padding: 13px 15px;
+  background: #FBE3E0; color: #6E1912; font-size: 12.5px; line-height: 1.6;
+}
+.proto-verdict {
+  margin-top: 12px; padding: 11px 14px; border-radius: 9px; font-size: 12.5px; line-height: 1.6;
+  border-left: 3px solid var(--line); background: var(--hx-band);
+}
+.proto-ok { border-left-color: var(--review-ok); background: #EAF5EE; }
+.proto-wait { color: var(--muted); }
+/* what actually ran, on the appointment itself */
+.proto-ordered {
+  margin-top: 10px; padding: 11px 13px; border-radius: 9px;
+  background: var(--hx-band); border-left: 3px solid var(--hx-blue);
+}
+.proto-ordered-k {
+  display: block; font-size: 10px; font-weight: 700; letter-spacing: .5px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 5px;
+}
+.proto-ordered-v {
+  display: inline-block; font-size: 12.5px; font-weight: 600; color: var(--hx-navy);
+  background: #fff; border: 1px solid var(--line); border-radius: 999px;
+  padding: 2px 10px; margin: 0 5px 5px 0;
+}

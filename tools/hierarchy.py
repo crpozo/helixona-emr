@@ -225,3 +225,67 @@ def board_columns():
                            .replace('/', '').replace('.', '')})
     out.sort(key=lambda c: (ORG_ORDER.index(c['org']), c['name']))
     return out
+
+
+# ---------------------------------------------------------------------------
+# PROTOCOLS AND RECIPES (Carlos, 2026-08-25).
+#
+# "The protocols would be the options within the Plan of Care that the provider
+#  can select for the patient... The protocols would be separate from the
+#  appointment type itself."
+#
+# So a protocol is NOT a subtype and not a fourth rung on the chain. It is a
+# SECOND AXIS: you pick the appointment type, and then — for the columns that
+# take one — you pick which protocol the provider ordered, from the ones on that
+# patient's plan of care. Two questions, not one narrowing into the other.
+#
+#   appointment type   WHAT is happening       Erchonia Laser
+#   protocol           WHICH ONE was ordered   Low Back · 20 min
+#
+# An appointment type that takes a protocol cannot be booked without one, and
+# the list offered is the approved list for that patient — never the catalogue.
+# ---------------------------------------------------------------------------
+TAKES_PROTOCOL = {
+ 'Erchonia Laser':    {'label': 'Protocol', 'catalogue': 'erchonia', 'required': True,
+                       'max': 1,
+                       'help': 'The protocol the provider ordered. Its length is not the '
+                               'appointment length — a 5-minute protocol still books 30 minutes.'},
+ 'Erchonia Handheld': {'label': 'Protocol', 'catalogue': 'erchonia', 'required': True,
+                       'max': 1,
+                       'help': 'Add-on only, and it still needs its own ordered protocol.'},
+ 'BioCharger':        {'label': 'Recipe', 'catalogue': 'biocharger', 'required': True,
+                       'max': 3,
+                       'help': 'A STACK is one per patient per day. Single recipes: up to three, '
+                               'and the session runs them in sequence.'},
+ 'Rife':              {'label': 'Recipe', 'catalogue': 'rife', 'required': True, 'max': 1,
+                       'help': 'From the plan of care.'},
+}
+
+# what a provider has approved on ONE patient's plan of care. This is the list
+# the booking screen offers — the catalogue above is what a provider chooses
+# FROM when writing the plan, and the desk never sees it.
+POC_PROTOCOLS = {
+ 'Priya Natarajan': {
+   'erchonia':  ['Low Back', 'Inflammation', 'Lymphatic'],
+   'biocharger': ['Lyme Defense Stack', 'Immune Strong', 'Lymph Liver Kidney Support'],
+ },
+ 'Amara Diallo': {
+   'erchonia':  ['Neck', 'Acute Pain'],
+   'biocharger': ['General Wellness'],
+ },
+ 'Maya Reyes': {
+   'erchonia':  ['Level 2 Brain', 'Neuro Inflammation', 'Emotional Stress', 'Sympathetic Calm'],
+   'biocharger': ['Brain Support Stack', 'Mindfulness Grounding', 'Wellness Mental Clarity'],
+ },
+ 'Walter Hsu':  {'erchonia': ['Knee', 'Chronic Pain'], 'biocharger': []},
+ 'Ben Okonkwo': {'erchonia': [], 'biocharger': ['Mold Cleansing Stack']},
+}
+
+
+def protocols(catalogue):
+    """The full catalogue a provider picks from when writing a plan of care."""
+    if catalogue == 'erchonia':
+        return [(n, '%d min' % m, False) for n, m in ERCHONIA]
+    if catalogue == 'biocharger':
+        return [(n, '%g min' % ln, st) for n, d, ln, st in BIOCHARGER]
+    return []

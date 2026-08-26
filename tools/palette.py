@@ -62,7 +62,7 @@ SUBS = [
     ('chiro', 'pocrev', 'POC Review', '#9E5C78'),
     ('eboo', 'eboosafe', 'EBOO Safe', '#BA8098'),
     ('eboo', 'ebootx', 'EBOO', '#D2836E'),
-    ('laser', 'erchlas', 'Erch Laser', '#8A2CE0'),
+    ('laser', 'erchlas', 'Erchonia Laser', '#8A2CE0'),
     ('laser', 'erccemp', 'ErcCompEmp', '#D8B0A8'),
     ('laser', 'erccpt', 'ErcCompPt', '#EED8D2'),
     ('laser', 'erccvip', 'ErcCompVIP', '#F5EAD2'),

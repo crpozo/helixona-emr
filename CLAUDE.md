@@ -965,8 +965,27 @@ schedule."* The old two-level type/subtype model cannot express what the clinic 
 - **A column is a bookable LINE, not a person or a chair.** Dr. Bakman is *two* columns because
   FPE and everything else book by different rules. The BioCharger is *six* because six people sit
   in it at once. This is why the old model could not express it.
-- **The subtype list is not static.** It comes from the patient's POC, so booking offers what that
-  patient is prescribed — the full IV bag list is never shown to anybody.
+- **A PROTOCOL IS NOT A SUBTYPE — it is a second axis** (Carlos, 2026-08-25: *"the protocols would
+  be separate from the appointment type itself"*). Two questions about one appointment:
+
+      appointment type   WHAT is happening      Erchonia Laser
+      protocol / recipe  WHICH ONE was ordered  Low Back · 20 min
+
+  `TAKES_PROTOCOL` in `tools/hierarchy.py` says which appointment types need one — Erchonia Laser,
+  Erchonia Handheld, BioCharger, Rife. They cannot be booked without one.
+- **The list offered is the patient's, never the catalogue.** A provider approves protocols on the
+  plan of care (`journey-careplan.html#/j-staff-protocols`); the desk is offered exactly those.
+  36 Erchonia protocols and 21 BioCharger recipes exist; Priya is offered three.
+  **A patient with nothing approved cannot be booked at all** — the screen says so and links to the
+  plan rather than falling back to the catalogue, which would let the desk order something nobody
+  prescribed.
+- **The protocol travels with the appointment** — chosen at booking, carried on the block
+  (`data-proto`), shown in the drawer, and asked for on the waitlist too, because a freed Erchonia
+  slot only matches somebody if it can run THEIR ordered protocol.
+- **A stack runs alone**: one per patient per day, and never alongside other recipes. Single
+  recipes allow up to three, run in sequence, and the booking screen refuses a set whose run time
+  exceeds the slot.
+- **The subtype list is not static.**
 - **Seat groups**: Salt Room (4 seats, everyone in a session gets the same meditation) and
   BioCharger (6 seats, same recipe for all). Booking one of these is booking a seat in a session
   that already has a recipe, not an independent slot.
