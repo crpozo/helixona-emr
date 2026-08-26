@@ -166,3 +166,62 @@ BIOCHARGER = [
  ('Wellness Mental Clarity', 'Supports mental clarity and cognition', 17, False),
  ('Rib Support', 'Support for the rib area', 14, False),
 ]
+
+
+# ---------------------------------------------------------------------------
+# THE PHYSICAL THING BEHIND A COLUMN (Carlos, 2026-08-25: see them separated).
+#
+# The clinic wants Office Visit - 30 and Office Visit - 60 as SEPARATE columns,
+# even when both are Dr. Drannikov. That is a display decision and it is fine —
+# but he is one person. Four columns for one man means the board can show him
+# booked four times at once unless something stops it.
+#
+# So every column names the RESOURCE underneath it. Two columns sharing a
+# resource share its time: booking one blocks the same minutes in the others,
+# and the others show why rather than looking free.
+# ---------------------------------------------------------------------------
+RESOURCE_OF = {
+ 'Dr. Drannikov': 'drannikov', 'Mira': 'mira',
+ 'Dr. Bakman - FPE': 'bakman', 'Dr. Bakman - Other': 'bakman',
+ 'Leigh Ann': 'leighann', 'MA Office Visit': 'ma',
+ 'Medic IV': 'iv-medic', 'Nurse IV 1': 'iv-n1', 'Nurse IV 2': 'iv-n2',
+ 'Lab Draw': 'lab', 'Diagnostic Testing': 'diag', 'InBody': 'inbody',
+ 'Red Light': 'redlight', 'Erchonia Laser': 'erch', 'Erchonia Handheld': 'erch-hand',
+ 'ADA Nano Tub Room': 'ada-tub', 'Nano Tub Room': 'nano-tub',
+ 'Eboo Chair 1': 'eboo1', 'Eboo Chair 2': 'eboo2',
+ 'NanoVi 1': 'nanovi1', 'NanoVi 2': 'nanovi2',
+ 'Hydrogen Inhalation': 'h2', 'BEMER': 'bemer', 'Rife': 'rife',
+ 'Energetics': 'energetics',
+}
+for _i in range(1, 5): RESOURCE_OF['Salt Room - Chair %d' % _i] = 'salt%d' % _i
+for _i in range(1, 7): RESOURCE_OF['BioCharger - Chair %d' % _i] = 'bio%d' % _i
+
+# who is behind a resource, for the column head
+RESOURCE_WHO = {
+ 'drannikov': 'Dr. Drannikov · Physician', 'mira': 'Mira · Provider',
+ 'bakman': 'Dr. Bakman · Physician', 'leighann': 'Leigh Ann · Depth Psychology',
+ 'ma': 'Charlene · Medical Assistant', 'iv-medic': 'Bea · Medic',
+ 'iv-n1': 'Nick · Nurse', 'iv-n2': 'Juan · Nurse', 'lab': 'Wesley · MA',
+}
+
+ORG_ORDER = ['Office Visit - 30 min', 'Office Visit - 60 min', 'Office Visit',
+             'Procedure - 30 min', 'Procedure - 60 min', 'Infusion', 'Lab',
+             'Diagnostics', 'Treatment', 'Treatment Infusion Suite',
+             'Energetics', 'Energetics/Diagnostic']
+
+
+def board_columns():
+    """One board column per (organizing type, column name), in the clinic's order."""
+    seen, out = set(), []
+    for org, col, kind, types, poc, mins, rules in COLUMNS:
+        k = (org, col)
+        if k in seen: continue
+        seen.add(k)
+        out.append({'org': org, 'name': col, 'kind': kind,
+                    'res': RESOURCE_OF.get(col, col.lower().replace(' ', '-')),
+                    'who': RESOURCE_WHO.get(RESOURCE_OF.get(col, ''), ''),
+                    'mins': mins, 'rules': rules,
+                    'id': (org + '-' + col).lower().replace(' ', '').replace('-', '')
+                           .replace('/', '').replace('.', '')})
+    out.sort(key=lambda c: (ORG_ORDER.index(c['org']), c['name']))
+    return out

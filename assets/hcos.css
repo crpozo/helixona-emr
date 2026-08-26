@@ -3359,3 +3359,27 @@ body.tk-dragging * { cursor: grabbing !important; }
   font-size: 11.5px; border: 1px solid var(--line); border-radius: 999px;
   padding: 3px 10px; background: #fff; color: var(--ink);
 }
+
+/* ==========================================================================
+   FORTY COLUMNS (the clinic's hierarchy, 2026-08-25). Grouped under organizing
+   type bands and scrolled sideways — they were never going to fit, which is
+   exactly why the organizing type is now the primary filter.
+   ========================================================================== */
+.daycal-band[data-org] {
+  font-size: 10px; letter-spacing: .5px; text-transform: uppercase; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border-left: 1px solid var(--line);
+}
+.daycal-col-head[data-org] { min-width: 0; }
+.daycal-col-head[data-org] .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* One person, several columns. A booking in one of them holds the others, and
+   they SAY so — an hour that is simply blank reads as available, which is how
+   Dr. Drannikov ends up double-booked with himself. */
+.cal-appt.is-elsewhere {
+  background: repeating-linear-gradient(135deg, #F4F4F4 0 5px, #FAFAFA 5px 10px);
+  border: 1px dashed var(--line); box-shadow: none; cursor: default;
+}
+.cal-appt.is-elsewhere::before { background: var(--line); }
+.cal-appt.is-elsewhere .cal-appt-name { color: var(--muted); font-weight: 500; }
+.cal-appt.is-elsewhere .cal-appt-note { color: var(--muted); font-style: italic; }

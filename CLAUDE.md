@@ -50,6 +50,8 @@ These are the real users, the feedback-dropdown names, and the role labels on sc
 | e1 | Dr. Drannikov | Provider |
 | e2 | Dr. Bakman | Provider |
 | e3 | Brooke | Physician Associate |
+| e20 | Mira | Provider — office visits, 30 and 60 min |
+| e21 | Leigh Ann | Depth Psychology — books through her own app today |
 | e4 | Marie | New Patient Advisor |
 | e5 | Bee | PCC |
 | e6 | Yazmin | Front Desk |
@@ -977,6 +979,15 @@ schedule."* The old two-level type/subtype model cannot express what the clinic 
   is recommended**.
 - Leigh Ann books through her own app today: HCOS shows it and does not own it.
 
-**Still to do**: the day board's columns are still the old dr/bak/bro/c1–c4/room1–2 set. Rebuilding
-them from `hierarchy.py` means regenerating every block on the board, and the Organizing Type
-filter becomes the primary control because 35 columns do not fit on a screen at once.
+**The day board is built from it** (`tools/genboard.py`). Carlos, asked how to show it: *"por
+organizing type, verlas separadas"*.
+
+- **Forty columns**, one per (organizing type, column name) pair, grouped under twelve
+  organizing-type bands, scrolled sideways. The **organizing type is the primary filter** — forty
+  columns do not fit on a screen and "show me Infusion" is what the desk actually asks for.
+- **Separate columns for the same person is a display choice with a real hazard.** Dr. Drannikov is
+  four columns and one man; four columns means the board can show him booked four times at once.
+  So every column names the RESOURCE underneath it, two columns sharing a resource share its time,
+  and the other columns render the hour as **"in another of their columns"** rather than leaving it
+  blank. A blank hour reads as available, and that is exactly how somebody gets double-booked with
+  themselves.

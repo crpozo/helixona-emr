@@ -1142,6 +1142,10 @@
     { id: 'dr',    kind: 'Provider',  name: 'Dr. Drannikov', sub: 'Physician' },
     { id: 'bak',   kind: 'Provider',  name: 'Dr. Bakman',    sub: 'Physician' },
     { id: 'bro',   kind: 'Provider',  name: 'Brooke',        sub: 'Physician Associate' },
+    { id: 'mira',  kind: 'Provider',  name: 'Mira',          sub: 'Provider' },
+    /* Leigh Ann books through her own app today — HCOS shows her line and does
+       not own it, which is a real state a resource can be in */
+    { id: 'leighann', kind: 'Provider', name: 'Leigh Ann',   sub: 'Depth Psychology · external booking' },
     { id: 'c1',    kind: 'IV chair',  name: 'IV 1',          sub: 'Nick · Nurse' },
     { id: 'c2',    kind: 'IV chair',  name: 'IV 2',          sub: 'Bea · Medic' },
     { id: 'c3',    kind: 'IV chair',  name: 'IV 3',          sub: 'Juan · Medic' },
