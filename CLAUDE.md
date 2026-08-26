@@ -946,3 +946,37 @@ moment the clinician chooses the treatment, not at the claim:
   rescues 20553 — it is the wrong code.
 - The frequency count is per patient across **all** providers, so it cannot see injections given
   outside the practice. The screen says so and tells the desk to ask the patient.
+
+## THE SCHEDULING HIERARCHY CHANGED (the clinic's sheet, 2026-08-25)
+
+Carlos: *"necesitamos cambiar la jerarquia en como hace el schedule. Column name significa en el
+schedule."* The old two-level type/subtype model cannot express what the clinic actually runs.
+**Four levels, and the middle one is the calendar column:**
+
+    ORGANIZING TYPE      what the filters group by — 12 of them
+      COLUMN NAME        >>> A COLUMN ON THE DAY BOARD <<< — 35 of them
+        APPOINTMENT TYPE what can be booked into that column
+          SUBTYPE        from the patient's PLAN OF CARE, not a catalogue
+
+`tools/hierarchy.py` is the source; `treatments.html#/t-08-hierarchy` renders it.
+
+- **A column is a bookable LINE, not a person or a chair.** Dr. Bakman is *two* columns because
+  FPE and everything else book by different rules. The BioCharger is *six* because six people sit
+  in it at once. This is why the old model could not express it.
+- **The subtype list is not static.** It comes from the patient's POC, so booking offers what that
+  patient is prescribed — the full IV bag list is never shown to anybody.
+- **Seat groups**: Salt Room (4 seats, everyone in a session gets the same meditation) and
+  BioCharger (6 seats, same recipe for all). Booking one of these is booking a seat in a session
+  that already has a recipe, not an independent slot.
+- **Protocol length is not appointment length.** An Erchonia protocol runs 5–20 minutes inside a
+  30-minute appointment; a BioCharger recipe 9–30 minutes inside a 30-minute one.
+- **A BioCharger STACK is one per day**; single recipes allow up to three.
+- Real booking rules now carried as data: add-on only (Erchonia Handheld), can be booked with an IV
+  after it starts (Erchonia Laser, NanoVi, Hydrogen), booked along with the IV start (Lab Draw),
+  and **Lymph Star must not be the same day as EBOO or within 3 days after — one day before is what
+  is recommended**.
+- Leigh Ann books through her own app today: HCOS shows it and does not own it.
+
+**Still to do**: the day board's columns are still the old dr/bak/bro/c1–c4/room1–2 set. Rebuilding
+them from `hierarchy.py` means regenerating every block on the board, and the Organizing Type
+filter becomes the primary control because 35 columns do not fit on a screen at once.
