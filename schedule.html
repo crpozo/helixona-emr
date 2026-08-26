@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=106">
+<link rel="stylesheet" href="assets/hcos.css?v=109">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -5940,14 +5940,72 @@
             <div class="field">
               <label class="field-label">Resource</label>
               <select class="field-select" id="l-bk-res" onchange="lBook()" aria-label="Resource">
-                <option value="dr">Dr. Drannikov · Provider</option>
-                <option value="bak">Dr. Bakman · Provider</option>
-                <option value="bro">Brooke · Physician associate</option>
-                <option value="c1">IV 1 · Nick (Nurse)</option>
-                <option value="c2" selected>IV 2 · Bea (Medic)</option>
-                <option value="c3">IV 3 · Juan (Medic)</option>
-                <option value="c4">IV 4 · Nate (Medic)</option>
+                <optgroup label="Office Visit - 30 min">
+                  <option value="officevisit30mindrbakmanfpe" data-takes="FPE|Medicare FPE|FPE FU">Dr. Bakman - FPE &middot; Dr. Bakman</option>
+                  <option value="officevisit30mindrbakmanother" data-takes="Chiropractic Visit|Laser Eval|POC Review">Dr. Bakman - Other &middot; Dr. Bakman</option>
+                  <option value="officevisit30mindrdrannikov" data-takes="Follow-Up|Transfer of Care|Telemedicine">Dr. Drannikov &middot; Dr. Drannikov</option>
+                  <option value="officevisit30minmira" data-takes="Follow-Up|Telemedicine|Transfer of Care">Mira &middot; Mira</option>
+                </optgroup>
+                <optgroup label="Office Visit - 60 min">
+                  <option value="officevisit60mindrdrannikov" data-takes="New Patient|New Patient F/U">Dr. Drannikov &middot; Dr. Drannikov</option>
+                  <option value="officevisit60minleighann" data-takes="Depth Psychology">Leigh Ann &middot; Leigh Ann</option>
+                  <option value="officevisit60minmira" data-takes="New Patient|New Patient F/U">Mira &middot; Mira</option>
+                </optgroup>
+                <optgroup label="Office Visit">
+                  <option value="officevisitmaofficevisit" data-takes="GLP Injection|Vitals|Nasal Swabs|EKG">MA Office Visit &middot; Charlene</option>
+                </optgroup>
+                <optgroup label="Procedure - 30 min">
+                  <option value="procedure30mindrdrannikov" data-takes="Trigger Point|Prolozone|PRP|Female Pellet|Male Pellet">Dr. Drannikov &middot; Dr. Drannikov</option>
+                </optgroup>
+                <optgroup label="Procedure - 60 min">
+                  <option value="procedure60mindrdrannikov" data-takes="Acupuncture|Microcurrent">Dr. Drannikov &middot; Dr. Drannikov</option>
+                </optgroup>
+                <optgroup label="Infusion">
+                  <option value="infusionmediciv" data-takes="IV">Medic IV &middot; Bea</option>
+                  <option value="infusionnurseiv1" data-takes="IV">Nurse IV 1 &middot; Nick</option>
+                  <option value="infusionnurseiv2" data-takes="IV">Nurse IV 2 &middot; Juan</option>
+                </optgroup>
+                <optgroup label="Lab">
+                  <option value="lablabdraw" data-takes="Quest Lab Draw|MDL|G6PD">Lab Draw &middot; Wesley</option>
+                </optgroup>
+                <optgroup label="Diagnostics">
+                  <option value="diagnosticsdiagnostictesting" data-takes="Diagnostic Testing">Diagnostic Testing</option>
+                  <option value="diagnosticsinbody" data-takes="InBody">InBody</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="treatmentadananotubroom" data-takes="Hydrogen|Oxygen">ADA Nano Tub Room</option>
+                  <option value="treatmentbiochargerchair1" data-takes="BioCharger">BioCharger - Chair 1</option>
+                  <option value="treatmentbiochargerchair2" data-takes="BioCharger">BioCharger - Chair 2</option>
+                  <option value="treatmentbiochargerchair3" data-takes="BioCharger">BioCharger - Chair 3</option>
+                  <option value="treatmentbiochargerchair4" data-takes="BioCharger">BioCharger - Chair 4</option>
+                  <option value="treatmentbiochargerchair5" data-takes="BioCharger">BioCharger - Chair 5</option>
+                  <option value="treatmentbiochargerchair6" data-takes="BioCharger">BioCharger - Chair 6</option>
+                  <option value="treatmenteboochair1" data-takes="EBOO|EBOO SAFE">Eboo Chair 1</option>
+                  <option value="treatmenteboochair2" data-takes="EBOO|EBOO SAFE">Eboo Chair 2</option>
+                  <option value="treatmenterchoniahandheld" data-takes="Erchonia Handheld">Erchonia Handheld</option>
+                  <option value="treatmenterchonialaser" data-takes="Erchonia Laser">Erchonia Laser</option>
+                  <option value="treatmentnanotubroom" data-takes="Hydrogen|Oxygen">Nano Tub Room</option>
+                  <option value="treatmentredlight" data-takes="Red Light Bed">Red Light</option>
+                  <option value="treatmentsaltroomchair1" data-takes="Halo Salt Therapy">Salt Room - Chair 1</option>
+                  <option value="treatmentsaltroomchair2" data-takes="Halo Salt Therapy">Salt Room - Chair 2</option>
+                  <option value="treatmentsaltroomchair3" data-takes="Halo Salt Therapy">Salt Room - Chair 3</option>
+                  <option value="treatmentsaltroomchair4" data-takes="Halo Salt Therapy">Salt Room - Chair 4</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="treatmentinfusionsuitebemer" data-takes="BEMER">BEMER</option>
+                  <option value="treatmentinfusionsuitehydrogeninhalation" data-takes="Hydrogen 15 min|Hydrogen 30 min|Hydrogen 45 min">Hydrogen Inhalation</option>
+                  <option value="treatmentinfusionsuitenanovi1" data-takes="NanoVi 30 min">NanoVi 1</option>
+                  <option value="treatmentinfusionsuitenanovi2" data-takes="NanoVi 30 min">NanoVi 2</option>
+                  <option value="treatmentinfusionsuiterife" data-takes="Rife">Rife</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="energeticsenergetics" data-takes="BioMod Pro|BioMod Recharge|Lymph Star|Mini-Lymph Star|Neuro Muscular Therapy (NMT)|SCENAR">Energetics</option>
+                </optgroup>
+                <optgroup label="Energetics/Diagnostic">
+                  <option value="energeticsdiagnosticenergetics" data-takes="MEAD Initial|MEAD Reassess">Energetics</option>
+                </optgroup>
               </select>
+              <div class="field-help" id="l-bk-res-help"></div>
             </div>
             <div class="field-row">
               <div class="field">
@@ -7044,7 +7102,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=106"></script>
+<script src="assets/hcos.js?v=109"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8065,10 +8123,15 @@
   // ---- The scheduling service -------------------------------------------
   // One engine. Hard checks refuse the booking; eligible warnings are released
   // by a named authority with a reason, and the release is logged.
-  var L_RES = {
-    dr: 'Dr. Drannikov', bak: 'Dr. Bakman', bro: 'Brooke',
-    c1: 'IV 1 · Nick', c2: 'IV 2 · Bea', c3: 'IV 3 · Juan', c4: 'IV 4 · Nate'
-  };
+  /* the resource label comes off the SELECT, which is built from the board — a
+     hand-written map went stale the moment the board became forty columns, and
+     printed "Holds undefined 10:30 AM" on the booking screen */
+  function lResName(id) {
+    var sel = document.getElementById('l-bk-res');
+    if (!sel) return id;
+    var op = sel.querySelector('option[value="' + id + '"]');
+    return op ? op.textContent.trim() : id;
+  }
 
   var L_BUSY = {
     jul21: {
@@ -8198,10 +8261,14 @@
   }
 
   // Which resources can hold this treatment at all.
+  /* the pool is whatever the resource select is currently offering — one list,
+     so "find me another resource" can never suggest a column that cannot take it */
   function lPool(key) {
-    var tx = L_TX[key];
-    return tx.iv ? ['c1', 'c2', 'c3', 'c4']
-      : (tx.chairOk ? ['dr', 'bak', 'bro', 'c1', 'c2', 'c3', 'c4'] : ['dr', 'bak', 'bro']);
+    var sel = document.getElementById('l-bk-res');
+    if (!sel) return [];
+    var live = [].filter.call(sel.options, function (o) { return !o.hidden; })
+                 .map(function (o) { return o.value; });
+    return live.length ? live : [].map.call(sel.options, function (o) { return o.value; });
   }
 
   // The latest listed start that still ends before close, keeps supervision and
@@ -8228,11 +8295,11 @@
 
     // Resource — occupied chair or provider is never an ordinary warning.
     if (tx.iv && !isChair) {
-      checks.push(['block', 'An infusion needs a chair. ' + L_RES[res] + ' is a provider column.',
+      checks.push(['block', 'An infusion needs a chair. ' + lResName(res) + ' is a provider column.',
         '<button class="btn btn-sm" onclick="lMoveRes()">Use a free chair</button>']);
       blocks++;
     } else if (!tx.iv && !tx.chairOk && isChair) {
-      checks.push(['block', lName(tx, true) + ' needs a provider. ' + L_RES[res] + ' is an infusion chair.',
+      checks.push(['block', lName(tx, true) + ' needs a provider. ' + lResName(res) + ' is an infusion chair.',
         '<button class="btn btn-sm" onclick="lMoveRes()">Use a free provider</button>']);
       blocks++;
     } else {
@@ -8241,11 +8308,11 @@
         if (start < busy[i][1] && end > busy[i][0]) { hit = busy[i]; break; }
       }
       if (hit) {
-        checks.push(['block', L_RES[res] + ' is taken ' + lClock(hit[0]) + ' – ' + lClock(hit[1]) + ' by ' + hit[2] + ' — the whole slot, not the tail of a drip.',
+        checks.push(['block', lResName(res) + ' is taken ' + lClock(hit[0]) + ' – ' + lClock(hit[1]) + ' by ' + hit[2] + ' — the whole slot, not the tail of a drip.',
           '<button class="btn btn-sm" onclick="lNextFree()">Next free start</button>']);
         blocks++;
       } else {
-        checks.push(['ok', L_RES[res] + ' is free ' + lClock(start) + ' – ' + lClock(end) + '.', '']);
+        checks.push(['ok', lResName(res) + ' is free ' + lClock(start) + ' – ' + lClock(end) + '.', '']);
       }
     }
 
@@ -8355,11 +8422,11 @@
         : '<strong>One warning is open.</strong> Only a physician or extender releases it, with a reason. Front desk asks for the release, and the request travels with the appointment.';
     } else {
       v.className = 'callout callout-ok';
-      v.innerHTML = '<strong>Every check passes.</strong> Booking reserves ' + L_RES[res] + ' from ' + lClock(start) + ' to ' + lClock(end) + ' and assigns one appointment identifier.';
+      v.innerHTML = '<strong>Every check passes.</strong> Booking reserves ' + lResName(res) + ' from ' + lClock(start) + ' to ' + lClock(end) + ' and assigns one appointment identifier.';
     }
 
     document.getElementById('l-bk-window').textContent =
-      'Holds ' + L_RES[res] + ' ' + lClock(start) + ' – ' + lClock(end) + ' · ' + lLen(dur) +
+      'Holds ' + lResName(res) + ' ' + lClock(start) + ' – ' + lClock(end) + ' · ' + lLen(dur) +
       ((lHoldLong && tx.patient) ? ' from her own past runs' : ' from the protocol') +
       ' · the identifier is assigned when you book.';
 
@@ -8412,7 +8479,7 @@
             lSet('l-bk-res', order[i]);
             lSet('l-bk-time', String(L_TIMES[t]));
             lBook();
-            HCOS.toast('Moved to ' + L_DATE[dates[d]] + ' · ' + lClock(L_TIMES[t]) + ' · ' + L_RES[order[i]]
+            HCOS.toast('Moved to ' + L_DATE[dates[d]] + ' · ' + lClock(L_TIMES[t]) + ' · ' + lResName(order[i])
               + ' — the first slot that clears every hard check.', 'ok');
             return;
           }
@@ -8431,7 +8498,7 @@
       if (lFree(pool[i], date, start, start + dur)) {
         lSet('l-bk-res', pool[i]);
         lBook();
-        HCOS.toast(L_RES[pool[i]] + ' is free at ' + lClock(start) + '. Moved there.', 'ok');
+        HCOS.toast(lResName(pool[i]) + ' is free at ' + lClock(start) + '. Moved there.', 'ok');
         return;
       }
     }
@@ -8455,10 +8522,10 @@
       if (!lFree(res, date, s, s + dur)) continue;
       lSet('l-bk-time', String(s));
       lBook();
-      HCOS.toast(L_RES[res] + ' is free at ' + lClock(s) + '. Moved there.', 'ok');
+      HCOS.toast(lResName(res) + ' is free at ' + lClock(s) + '. Moved there.', 'ok');
       return;
     }
-    HCOS.toast(L_RES[res] + ' has no free start left that day that also ends before close. Nothing was moved — pick another chair or another date.', 'warn');
+    HCOS.toast(lResName(res) + ' has no free start left that day that also ends before close. Nothing was moved — pick another chair or another date.', 'warn');
   }
 
   function lUseOkDate() {
@@ -8739,11 +8806,14 @@
       opt.value = o[0]; opt.textContent = o[1]; if (o[2]) opt.selected = true;
       sel.appendChild(opt);
     });
+    /* order matters: the type decides the protocol gate and the columns, the
+       columns decide the open slots. Running these the other way round offers
+       slots in chairs the treatment cannot use. */
     if (typeof lTypeChange === 'function') lTypeChange();
     if (typeof lBkAi === 'function') { L_BK_AI_ALL = false; lBkAi(); }
     if (typeof lCovGate === 'function') lCovGate();
-  if (typeof lProtoGate === 'function') lProtoGate();
     if (typeof lProtoGate === 'function') lProtoGate();
+    if (typeof lResFollow === 'function') lResFollow();
     if (typeof lSlots === 'function') lSlots();
     if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   }
@@ -8803,18 +8873,39 @@
      down and picking; the calendar is for seeing that Tuesday is full and
      Thursday is empty, which a list cannot show. */
   var L_SLOTVIEW = 'list';
+  /* A slot is a day, a time and A COLUMN THAT CAN TAKE THIS TREATMENT. The
+     column is never written down here — it is drawn from the same pool the
+     resource select is offering, so an Erchonia Laser is never offered a chair
+     in IV 3. What lives here is only the shape of the fortnight: which days
+     have room and at what times. */
   var L_SLOTDAYS = [
-    ['Tue 21 Jul', 2, [['10:00 AM','Brooke'],['3:00 PM','IV 3 · Juan']]],
-    ['Wed 22 Jul', 3, [['8:00 AM','Dr. Drannikov'],['11:30 AM','IV 2 · Bea'],['1:00 PM','Brooke']]],
-    ['Thu 23 Jul', 5, [['8:00 AM','Dr. Bakman'],['9:30 AM','IV 1 · Nick'],['10:30 AM','IV 4 · Nate'],
-                       ['1:00 PM','Dr. Drannikov'],['4:00 PM','IV 2 · Bea']]],
-    ['Fri 24 Jul', 1, [['2:30 PM','IV 3 · Juan']]],
-    ['Mon 27 Jul', 4, [['8:00 AM','Dr. Drannikov'],['10:00 AM','IV 1 · Nick'],
-                       ['1:00 PM','Dr. Bakman'],['3:30 PM','IV 4 · Nate']]],
-    ['Tue 28 Jul', 0, []],
-    ['Wed 29 Jul', 3, [['8:00 AM','Dr. Bakman'],['12:30 PM','IV 2 · Bea'],['4:00 PM','Brooke']]],
-    ['Thu 30 Jul', 2, [['9:00 AM','Brooke'],['2:00 PM','IV 1 · Nick']]]
+    ['Tue 21 Jul', ['10:00 AM', '3:00 PM']],
+    ['Wed 22 Jul', ['8:00 AM', '11:30 AM', '1:00 PM']],
+    ['Thu 23 Jul', ['8:00 AM', '9:30 AM', '10:30 AM', '1:00 PM', '4:00 PM']],
+    ['Fri 24 Jul', ['2:30 PM']],
+    ['Mon 27 Jul', ['8:00 AM', '10:00 AM', '1:00 PM', '3:30 PM']],
+    ['Tue 28 Jul', []],
+    ['Wed 29 Jul', ['8:00 AM', '12:30 PM', '4:00 PM']],
+    ['Thu 30 Jul', ['9:00 AM', '2:00 PM']]
   ];
+  /* The days, with a column attached to every open time. Fewer columns able to
+     take the treatment means fewer slots — one column cannot be in two places,
+     so a day with five times and one column offers one. That is the honest
+     answer, and it is why the count moves when you change the type. */
+  function lSlotDays() {
+    var sel = document.getElementById('l-bk-res');
+    var pool = sel
+      ? [].filter.call(sel.options, function (o) { return !o.hidden; })
+          .map(function (o) { return [o.value, o.textContent.trim()]; })
+      : [];
+    if (!pool.length) pool = [['', 'any open column']];
+    var n = 0;
+    return L_SLOTDAYS.map(function (d) {
+      var times = d[1].slice(0, Math.max(pool.length, 1) * 2);
+      var slots = times.map(function (t) { return [t, pool[(n++) % pool.length][1]]; });
+      return [d[0], slots.length, slots];
+    });
+  }
   function lSlotView(v, btn) {
     L_SLOTVIEW = v;
     document.querySelectorAll('.seg-tab').forEach(function (t) {
@@ -8827,7 +8918,7 @@
     var out = document.getElementById('l-bk-slots');
     if (!out) return;
     var tx = L_TX[lV('l-bk-type')] || { name: 'this appointment', mins: 60 };
-    var days = L_SLOTDAYS;
+    var days = lSlotDays();
     var total = days.reduce(function (a, d) { return a + d[1]; }, 0);
     if (L_SLOTVIEW === 'cal') {
       out.innerHTML = '<div class="slot-cal">' + days.map(function (d) {
@@ -9130,6 +9221,98 @@
           : 'It goes on the order and on the chart, so nobody has to remember which one ran.')
       + '</div>';
   }
+
+  /* ==========================================================================
+     THE RESOURCE FOLLOWS THE APPOINTMENT TYPE (Carlos, 2026-08-25: "creo que
+     esto no cambio en new booking").
+
+     Two things were wrong. The list was the old six resources — the board has
+     forty columns now and the booking screen was still offering dr/bak/bro and
+     four IV chairs. And it was a free choice, which it never really was: an
+     Erchonia Laser can only happen in the Erchonia Laser column, and offering
+     forty options to answer a question with one right answer is not a choice,
+     it is a trap.
+
+     So the list narrows to the columns that can actually take the chosen
+     appointment type. If exactly one can, it is picked and the screen says why
+     rather than making somebody find it among forty.
+     ========================================================================== */
+  function lResFollow() {
+    var sel = document.getElementById('l-bk-res');
+    var sub = document.getElementById('l-bk-type');
+    if (!sel || !sub) return;
+    var label = sub.options[sub.selectedIndex] ? sub.options[sub.selectedIndex].textContent : '';
+    var want = label.split(' · ')[0].trim();
+
+    /* TWO TAXONOMIES, ONE APPOINTMENT. The clinic's sheet names appointment
+       types ("Follow-Up", "New Patient F/U") and the colour palette names
+       subtypes ("Follow Up", "New patient FU"). They are the same things spelt
+       differently, so matching is done on a normalised name plus a small map of
+       the ones that genuinely differ. Twenty of sixty-two match on spelling
+       alone; the rest need this. It is a seam, and it is written down as one. */
+    var norm = function (x) { return String(x).toLowerCase().replace(/[^a-z0-9]/g, ''); };
+    var ALIAS = {
+      npfu: 'newpatientfu', newpatientfu: 'newpatientfu',
+      tpi: 'triggerpoint', triggerpoint: 'triggerpoint',
+      fpeie: 'fpe', fpefu: 'fpefu', medifne: 'chiropracticvisit',
+      dctx: 'chiropracticvisit', dcintx: 'chiropracticvisit',
+      pocreview: 'pocreview', lasereval: 'lasereval',
+      meadreassessment: 'meadreassess', mead: 'meadinitial',
+      eboosafe: 'eboosafe',
+      erccompemp: 'erchonialaser', erccomppt: 'erchonialaser',
+      erccompref: 'erchonialaser', erccompvip: 'erchonialaser',
+      erchlaser: 'erchonialaser', erchonialaser: 'erchonialaser',
+      diagnostics: 'diagnostictesting',
+      pelletmales: 'malepellet', pelletfemales: 'femalepellet',
+      microcurrent: 'microcurrent', prolozone: 'prolozone', prp: 'prp',
+      biocharger: 'biocharger', lymphstar: 'lymphstar', minilymphstar: 'minilymphstar',
+      biomodpro: 'biomodpro', biomodrecharge: 'biomodrecharge', scenar: 'scenar',
+      nmt: 'neuromusculartherapynmt', quest: 'questlabdraw', mdl: 'mdl', g6pd: 'g6pd',
+      igenex: 'questlabdraw'
+    };
+    /* an IV bag is any of the twenty-three the clinic stocks; an Infusion column
+       takes all of them and the sheet lists that column's type simply as "IV" */
+    var IV = /^(foundationalflow|megac|cellularboost|mastcell|cognitivesupport|coreironblend|corerestore|detoxprime|essentialaminos|minicust|minimb|minimitoboost|mitoboost|ebooboost|chelation|migraine)/;
+    var wn = ALIAS[norm(want)] || norm(want);
+
+    var fits = [];
+    [].forEach.call(sel.options, function (op) {
+      var takes = (op.getAttribute('data-takes') || '').split('|');
+      var ok = takes.some(function (t) {
+        var tn = norm(t);
+        if (tn === 'iv') return IV.test(wn);
+        return tn === wn || wn.indexOf(tn) === 0 || tn.indexOf(wn) === 0;
+      });
+      op.hidden = !ok;
+      op.disabled = !ok;
+      if (ok) fits.push(op);
+    });
+    [].forEach.call(sel.querySelectorAll('optgroup'), function (g) {
+      g.hidden = ![].some.call(g.querySelectorAll('option'), function (o) { return !o.hidden; });
+    });
+
+    var help = document.getElementById('l-bk-res-help');
+    if (!fits.length) {
+      /* honest rather than silently offering everything */
+      [].forEach.call(sel.options, function (op) { op.hidden = false; op.disabled = false; });
+      [].forEach.call(sel.querySelectorAll('optgroup'), function (g) { g.hidden = false; });
+      if (help) help.innerHTML = '<b>No column is set up for &ldquo;' + want + '&rdquo; yet.</b> '
+        + 'Showing every column so the booking is not blocked, but the scheduling structure needs it '
+        + 'adding &mdash; <a href="treatments.html#/t-08-hierarchy">see the structure</a>.';
+      if (typeof lSlots === 'function') lSlots();
+      return;
+    }
+    if (fits.indexOf(sel.options[sel.selectedIndex]) === -1) sel.value = fits[0].value;
+    if (help) {
+      help.innerHTML = fits.length === 1
+        ? 'Only one column runs ' + want + ', so it is chosen for you.'
+        : fits.length + ' columns can run ' + want + '.';
+    }
+    if (typeof lBook === 'function') lBook();
+    if (typeof lSlots === 'function') lSlots();
+  }
+  window.lResFollow = lResFollow;
+
   window.lProtoGate = lProtoGate; window.lProtoPick = lProtoPick;
 
   /* the waitlist needs it for the same reason booking does: a freed Erchonia
@@ -10641,6 +10824,7 @@
   if (typeof lBkAi === 'function') lBkAi();
   if (typeof lCovGate === 'function') lCovGate();
   if (typeof lProtoGate === 'function') lProtoGate();
+  if (typeof lResFollow === 'function') lResFollow();
   if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   if (typeof lBlkForm === 'function') lBlkForm();
   if (typeof lBeForm === 'function') lBeForm();
