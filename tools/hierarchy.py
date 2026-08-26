@@ -257,8 +257,14 @@ TAKES_PROTOCOL = {
                        'max': 3,
                        'help': 'A STACK is one per patient per day. Single recipes: up to three, '
                                'and the session runs them in sequence.'},
+ # La hoja de la clinica dice "Recipes from POC" para Rife, asi que la exigencia
+ # es real. El catalogo no lo es todavia: protocols('rife') devuelve [] porque
+ # nadie nos ha dado la lista, y no se inventa. Mientras siga vacio el board no
+ # puede mostrar citas de Rife y check.sh lo impide — la columna existe y esta
+ # vacia, que es la verdad, en vez de llena de recetas que nadie receto.
  'Rife':              {'label': 'Recipe', 'catalogue': 'rife', 'required': True, 'max': 1,
-                       'help': 'From the plan of care.'},
+                       'help': 'From the plan of care. The clinic has not supplied the recipe '
+                               'list yet, so nothing can be booked into this column.'},
 }
 
 # what a provider has approved on ONE patient's plan of care. Every patient who

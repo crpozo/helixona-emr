@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=110">
+<link rel="stylesheet" href="assets/hcos.css?v=111">
 <style>
   .j-patientbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .j-patientbar .avatar { width: 42px; height: 42px; font-size: 14px; }
@@ -792,7 +792,7 @@
           <div class="card">
             <div class="card-title">Erchonia Laser &middot; protocols</div>
             <div class="field-help" style="margin-bottom:10px">
-              <b id="poc-n-erchonia">3</b> approved of 36. The protocol length is <strong>not</strong>
+              <b id="poc-n-erchonia">4</b> approved of 36. The protocol length is <strong>not</strong>
               the appointment length &mdash; a 5-minute protocol still books a 30-minute slot.
             </div>
             <div class="proto-list">
@@ -841,8 +841,8 @@
               <span class="proto-n">Ankle/Foot</span>
               <span class="proto-l">10 min</span>
             </label>
-            <label class="proto">
-              <input type="checkbox" onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Acute Pain">
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('erchonia')" data-cat="erchonia" aria-label="Acute Pain">
               <span class="proto-n">Acute Pain</span>
               <span class="proto-l">10 min</span>
             </label>
@@ -982,7 +982,7 @@
           <div class="card">
             <div class="card-title">BioCharger &middot; recipes</div>
             <div class="field-help" style="margin-bottom:10px">
-              <b id="poc-n-biocharger">3</b> approved of 21. A <strong>stack</strong> is one per
+              <b id="poc-n-biocharger">4</b> approved of 21. A <strong>stack</strong> is one per
               patient per day; single recipes allow up to three in a session.
             </div>
             <div class="proto-list">
@@ -1036,8 +1036,8 @@
               <span class="proto-n">Afungusamongus</span>
               <span class="proto-l">19.5 min</span>
             </label>
-            <label class="proto">
-              <input type="checkbox" onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Brain Support Stack">
+            <label class="proto is-on">
+              <input type="checkbox" checked onchange="pocCount('biocharger')" data-cat="biocharger" aria-label="Brain Support Stack">
               <span class="proto-n">Brain Support Stack <em class="proto-stack">Stack</em></span>
               <span class="proto-l">25 min</span>
             </label>
@@ -1108,7 +1108,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=110"></script>
+<script src="assets/hcos.js?v=111"></script>
 <script>
   // Segmented controls (pacing, week) — click to activate; a couple toast.
   document.addEventListener('click', function (ev) {

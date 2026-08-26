@@ -123,6 +123,25 @@ for m in re.finditer(r'<div class="cal-appt (?!is-elsewhere)[^"]*"[^>]*>', sched
     if proto not in plan[cat]:
         bad.append('%s esta en el board con "%s", que su plan no aprueba' % (who, proto))
 
+# y al reves: una cita cuyo tipo EXIGE protocolo no puede estar sin el. El
+# comprobante anterior solo validaba los protocolos presentes, que es como
+# ocho citas de Rife se quedaron sin ninguno sin que nadie se enterara.
+NOCAT = {k for k, v in H.TAKES_PROTOCOL.items() if not H.protocols(v['catalogue'])}
+for m in re.finditer(r'<div class="cal-appt (?!is-elsewhere)[^"]*"[^>]*>', sched):
+    tag = m.group(0)
+    tx = re.search(r'data-tx="([^"]*)"', tag)
+    if not tx: continue
+    cfg = H.TAKES_PROTOCOL.get(tx.group(1))
+    if not cfg or not cfg.get('required'): continue
+    if 'data-proto=' in tag: continue
+    if tx.group(1) in NOCAT:
+        bad.append('%s exige %s y no hay catalogo: el board no puede mostrarlo'
+                   % (tx.group(1), cfg['label'].lower()))
+    else:
+        pt = re.search(r'data-pt="([^"]*)"', tag)
+        bad.append('cita de %s (%s) sin %s, y su tipo lo exige'
+                   % (tx.group(1), pt.group(1) if pt else '?', cfg['label'].lower()))
+
 # y el mismo plan tiene que estar en la pantalla de reserva
 for who in H.POC_PROTOCOLS:
     if ("'%s': { erchonia:" % who) not in sched:

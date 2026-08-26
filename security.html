@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=110">
+<link rel="stylesheet" href="assets/hcos.css?v=111">
 <style>
   .g-perm-tbl th, .g-perm-tbl td { text-align: center; }
   .g-perm-tbl th:first-child, .g-perm-tbl td:first-child { text-align: left; }
@@ -494,6 +494,94 @@
   </section>
 
   <!-- ============================================================ -->
+  <section class="screen" id="g-02-employee" data-title="Set up an employee">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/security/employees/new</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Set up an employee</div>
+            <div class="page-sub">A group, then a job title &mdash; the group is what the software reads</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="g-02-roles">Roles &amp; rights</button></div>
+        </div>
+
+        <div class="callout">
+          <strong>Everyone belongs to exactly one group.</strong>
+          Flags, queues and approval rights are all written against these three, never against a
+          job title. A clinic that hires a second nurse should not have to remember to grant her
+          anything &mdash; she is Medical/Clinical on her first day and the software already knows
+          what that means.
+        </div>
+
+        <div class="grid-sidebar" style="margin-top:16px">
+          <div class="card">
+            <div class="card-title">Who they are</div>
+            <div class="grid-2">
+              <div class="field"><label class="field-lbl" for="g-emp-first">First name</label>
+                <input class="field-input" id="g-emp-first" placeholder="Haylee"></div>
+              <div class="field"><label class="field-lbl" for="g-emp-last">Last name</label>
+                <input class="field-input" id="g-emp-last" placeholder="Bowen"></div>
+            </div>
+            <div class="field"><label class="field-lbl" for="g-emp-mail">Work email</label>
+              <input class="field-input" id="g-emp-mail" placeholder="name@helixona.com"></div>
+            <div class="field"><label class="field-lbl" for="g-emp-start">Start date</label>
+              <input class="field-input" id="g-emp-start" value="Mon, 31 Aug 2026"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Group <span class="req-mark">required</span></div>
+            <div class="grp-pick" id="g-emp-group" role="radiogroup" aria-label="Group">
+              <label class="grp">
+                <input type="radio" name="empgrp" value="Medical/Clinical" onchange="gEmpGroup()">
+                <span class="grp-b">
+                  <b>Medical/Clinical</b>
+                  <span>Providers, extenders, medics, nurses, MAs. Sets clinical flags, reconciles
+                    allergies and medications, and appears as a bookable column when they hold one.</span>
+                </span>
+              </label>
+              <label class="grp">
+                <input type="radio" name="empgrp" value="Admin" onchange="gEmpGroup()">
+                <span class="grp-b">
+                  <b>Admin</b>
+                  <span>Front desk, scheduling, management. Books, reschedules and sets
+                    administrative flags. Cannot reconcile a clinical list.</span>
+                </span>
+              </label>
+              <label class="grp">
+                <input type="radio" name="empgrp" value="Billing" onchange="gEmpGroup()">
+                <span class="grp-b">
+                  <b>Billing</b>
+                  <span>Claims, payments, prior authorisation. Sets balance and authorisation
+                    flags, and sees the money on a chart without the clinical detail.</span>
+                </span>
+              </label>
+            </div>
+            <div class="field" style="margin-top:14px">
+              <label class="field-lbl" for="g-emp-title">Job title</label>
+              <select class="field-select" id="g-emp-title" disabled>
+                <option>Choose a group first</option>
+              </select>
+              <div class="field-help" id="g-emp-help">The title is a label for the roster and the
+                column head. <b>The group is what the software reads</b>, which is why it comes
+                first and cannot be left empty.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-actions">
+          <div class="page-actions-main">
+            <span class="page-actions-note" id="g-emp-note">No group chosen &mdash; nothing can be saved yet</span>
+            <button class="btn" data-activate="g-02-roles">Cancel</button>
+            <button class="btn btn-primary" id="g-emp-save" disabled onclick="gEmpSave()">Create the employee</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <section class="screen" id="g-03-records" data-title="Canonical records">
     <div class="frame">
       <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
@@ -739,7 +827,7 @@
 
 </div>
 
-<script src="assets/hcos.js?v=110"></script>
+<script src="assets/hcos.js?v=111"></script>
 <script>
 /* Domain chips narrow the registry — the count is always the truth on screen. */
 (function () {
@@ -858,6 +946,57 @@
       if (overlay) overlay.classList.add('open');
     });
   });
+})();
+</script>
+<script>
+/* ---------- alta de empleado ----------
+   Carlos, 2026-08-26: "When we set up an employee, we must set with one of this
+   groups: Medical/Clinical, Admin, Billing."
+
+   El grupo va PRIMERO y el cargo despues, porque el cargo es una etiqueta para
+   la lista y el grupo es lo que el software lee. Al reves se llena el cargo, se
+   olvida el grupo, y alguien acaba sin permisos el lunes por la manana. El boton
+   nace desactivado: no es una validacion al guardar, es que no hay nada que
+   guardar hasta que haya grupo. */
+(function () {
+  var TITLES = {
+    'Medical/Clinical': ['Physician', 'Physician Associate', 'Nurse Practitioner', 'Registered Nurse',
+                         'Medic', 'Medical Assistant', 'Chiropractor', 'Depth Psychology'],
+    'Admin':            ['Front Desk', 'Scheduler', 'Patient Care Coordinator', 'Practice Manager',
+                         'Operations'],
+    'Billing':          ['Billing Specialist', 'Prior Authorisation', 'Revenue Cycle Manager']
+  };
+  function pickedGroup() {
+    var r = document.querySelector('input[name="empgrp"]:checked');
+    return r ? r.value : '';
+  }
+  window.gEmpGroup = function () {
+    var g = pickedGroup();
+    var sel = document.getElementById('g-emp-title');
+    var save = document.getElementById('g-emp-save');
+    var note = document.getElementById('g-emp-note');
+    document.querySelectorAll('#g-emp-group .grp').forEach(function (l) {
+      l.classList.toggle('is-on', l.querySelector('input').checked);
+    });
+    if (!g) return;
+    sel.innerHTML = TITLES[g].map(function (t) { return '<option>' + t + '</option>'; }).join('');
+    sel.disabled = false;
+    save.disabled = false;
+    note.textContent = g + ' \u2014 ' + TITLES[g].length + ' titles sit in this group';
+  };
+  window.gEmpSave = function () {
+    var g = pickedGroup();
+    if (!g) return;
+    var first = (document.getElementById('g-emp-first').value || '').trim();
+    var last = (document.getElementById('g-emp-last').value || '').trim();
+    var who = (first + ' ' + last).trim() || 'The employee';
+    if (!first && !last) {
+      HCOS.toast('A name as well \u2014 the group alone does not make a person.', 'warn');
+      return;
+    }
+    var title = document.getElementById('g-emp-title').value;
+    HCOS.toast(who + ' created in ' + g + ' as ' + title + '. Rights follow the group, not the title.', 'ok');
+  };
 })();
 </script>
 </body>

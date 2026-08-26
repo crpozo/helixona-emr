@@ -1138,23 +1138,34 @@
      and "Brooke" is a person.
      ========================================================================== */
   var RESOURCE_KINDS = ['Provider', 'IV chair', 'Room', 'Equipment'];
+  /* ---------- lo que se puede reservar ----------
+     Carlos, 2026-08-26: "We are not booking by chair, we are booking by nurse
+     who started them, and they last whatever they last."
+
+     Una silla no empieza una infusion ni la vigila: la empieza una persona, y
+     dura lo que dure. Llamar a la linea "IV 2" hacia que el escritorio pensara
+     en muebles y que los patrones se midieran por asiento, cuando lo que varia
+     entre una infusion de tres horas y una de tres y veinte es quien la pone.
+     Los nombres y los identificadores vienen del propio day board. */
   var RESOURCES = [
-    { id: 'dr',    kind: 'Provider',  name: 'Dr. Drannikov', sub: 'Physician' },
-    { id: 'bak',   kind: 'Provider',  name: 'Dr. Bakman',    sub: 'Physician' },
-    { id: 'bro',   kind: 'Provider',  name: 'Brooke',        sub: 'Physician Associate' },
-    { id: 'mira',  kind: 'Provider',  name: 'Mira',          sub: 'Provider' },
+    { id: 'drannikov', kind: 'Provider',  name: 'Dr. Drannikov', sub: 'Physician' },
+    { id: 'bakman',    kind: 'Provider',  name: 'Dr. Bakman',    sub: 'Physician' },
+    { id: 'mira',      kind: 'Provider',  name: 'Mira',          sub: 'Provider' },
     /* Leigh Ann books through her own app today — HCOS shows her line and does
        not own it, which is a real state a resource can be in */
-    { id: 'leighann', kind: 'Provider', name: 'Leigh Ann',   sub: 'Depth Psychology · external booking' },
-    { id: 'c1',    kind: 'IV chair',  name: 'IV 1',          sub: 'Nick · Nurse' },
-    { id: 'c2',    kind: 'IV chair',  name: 'IV 2',          sub: 'Bea · Medic' },
-    { id: 'c3',    kind: 'IV chair',  name: 'IV 3',          sub: 'Juan · Medic' },
-    { id: 'c4',    kind: 'IV chair',  name: 'IV 4',          sub: 'Nate · Medic' },
-    { id: 'room1', kind: 'Room',      name: 'Room 1',        sub: 'Exam' },
-    { id: 'room2', kind: 'Room',      name: 'Room 2',        sub: 'Procedures' },
-    { id: 'eboo',  kind: 'Equipment', name: 'EBOO circuit',  sub: 'One only' },
-    { id: 'laser', kind: 'Equipment', name: 'Laser',         sub: 'Erchonia' }
+    { id: 'leighann',  kind: 'Provider',  name: 'Leigh Ann',     sub: 'Depth Psychology · external booking' },
+    { id: 'ma',        kind: 'Staff',     name: 'MA Office Visit', sub: 'Charlene · Medical Assistant' },
+    { id: 'iv-medic',  kind: 'Infusion',  name: 'Medic IV',      sub: 'Bea · Medic' },
+    { id: 'iv-n1',     kind: 'Infusion',  name: 'Nurse IV 1',    sub: 'Nick · Nurse' },
+    { id: 'iv-n2',     kind: 'Infusion',  name: 'Nurse IV 2',    sub: 'Juan · Nurse' },
+    { id: 'lab',       kind: 'Room',      name: 'Lab Draw',      sub: 'Wesley · MA' },
+    { id: 'eboo1',     kind: 'Equipment', name: 'Eboo Chair 1',  sub: 'EBOO circuit' },
+    { id: 'eboo2',     kind: 'Equipment', name: 'Eboo Chair 2',  sub: 'EBOO circuit' },
+    { id: 'erch',      kind: 'Equipment', name: 'Erchonia Laser', sub: 'Erchonia' },
+    { id: 'diag',      kind: 'Equipment', name: 'Diagnostic Testing', sub: 'Functional neuro' },
+    { id: 'energetics', kind: 'Equipment', name: 'Energetics',   sub: 'BioMod, LymphStar, NMT, SCENAR, MEAD' }
   ];
+
   function resourceById(id) {
     for (var i = 0; i < RESOURCES.length; i++) if (RESOURCES[i].id === id) return RESOURCES[i];
     return null;
