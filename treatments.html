@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=109">
+<link rel="stylesheet" href="assets/hcos.css?v=110">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -1365,15 +1365,15 @@
         </div>
 
         <div class="callout">
-          <strong>Four levels, and the middle one is the calendar column.</strong>
+          <strong>Three levels narrow each other &mdash; and a fourth question is asked beside them.</strong>
           <div class="hier">
             <div class="hier-step"><b>Organizing type</b><span>What the filters group by. Twelve of them.</span></div>
             <div class="hier-arrow" aria-hidden="true">&rarr;</div>
-            <div class="hier-step is-key"><b>Column name</b><span>A column on the day board. Thirty-five.</span></div>
+            <div class="hier-step is-key"><b>Column name</b><span>A column on the day board. Forty.</span></div>
             <div class="hier-arrow" aria-hidden="true">&rarr;</div>
             <div class="hier-step"><b>Appointment type</b><span>What can be booked into that column.</span></div>
-            <div class="hier-arrow" aria-hidden="true">&rarr;</div>
-            <div class="hier-step"><b>Subtype</b><span>From the patient&rsquo;s plan of care, not a catalogue.</span></div>
+            <div class="hier-arrow" aria-hidden="true">+</div>
+            <div class="hier-step is-aside"><b>Protocol or recipe</b><span>Not a narrowing. A second question, answered from the patient&rsquo;s plan of care.</span></div>
           </div>
           <p style="margin-top:12px"><strong>A column is a bookable line, not a person.</strong>
           Dr. Bakman is two columns because FPE and everything else book by different rules; the
@@ -1983,7 +1983,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=109"></script>
+<script src="assets/hcos.js?v=110"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {

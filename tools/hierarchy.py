@@ -261,24 +261,95 @@ TAKES_PROTOCOL = {
                        'help': 'From the plan of care.'},
 }
 
+# what a provider has approved on ONE patient's plan of care. Every patient who
+# appears on the day board with a protocol MUST be here, or the board is showing
+# a booking the booking screen would have refused. Two empty lists are deliberate
+# and load-bearing: Walter Hsu has no BioCharger recipe and Ben Okonkwo no Erchonia
+# protocol, which is how the empty state can be seen at all.
 # what a provider has approved on ONE patient's plan of care. This is the list
 # the booking screen offers — the catalogue above is what a provider chooses
 # FROM when writing the plan, and the desk never sees it.
 POC_PROTOCOLS = {
- 'Priya Natarajan': {
-   'erchonia':  ['Low Back', 'Inflammation', 'Lymphatic'],
-   'biocharger': ['Lyme Defense Stack', 'Immune Strong', 'Lymph Liver Kidney Support'],
- },
  'Amara Diallo': {
    'erchonia':  ['Neck', 'Acute Pain'],
+   'biocharger': ['General Wellness', 'Brain Support Stack'],
+ },
+ 'Ben Okonkwo': {
+   'erchonia':  [],
+   'biocharger': ['Mold Cleansing Stack'],
+ },
+ 'Daniel Okafor': {
+   'erchonia':  ['Acute Pain', 'Inflammation'],
+   'biocharger': ['General Wellness', 'Mindfulness Grounding'],
+ },
+ 'Elena Petrova': {
+   'erchonia':  [],
+   'biocharger': ['Brain Support Stack', 'Lyme Defense Stack'],
+ },
+ 'Grace Lindqvist': {
+   'erchonia':  ['Lymphatic'],
+   'biocharger': ['Brain Support Stack', 'General Wellness', 'Immune Strong', 'Mindfulness Grounding'],
+ },
+ 'Hana Sato': {
+   'erchonia':  [],
+   'biocharger': ['Brain Support Stack', 'General Wellness', 'Immune Strong'],
+ },
+ 'Katherine Olsen': {
+   'erchonia':  [],
    'biocharger': ['General Wellness'],
  },
+ 'Marcus Webb': {
+   'erchonia':  ['Acute Pain'],
+   'biocharger': ['General Wellness', 'Immune Strong', 'Lyme Defense Stack', 'Mindfulness Grounding'],
+ },
  'Maya Reyes': {
-   'erchonia':  ['Level 2 Brain', 'Neuro Inflammation', 'Emotional Stress', 'Sympathetic Calm'],
+   'erchonia':  ['Level 2 Brain', 'Neuro Inflammation', 'Emotional Stress', 'Sympathetic Calm', 'Low Back'],
    'biocharger': ['Brain Support Stack', 'Mindfulness Grounding', 'Wellness Mental Clarity'],
  },
- 'Walter Hsu':  {'erchonia': ['Knee', 'Chronic Pain'], 'biocharger': []},
- 'Ben Okonkwo': {'erchonia': [], 'biocharger': ['Mold Cleansing Stack']},
+ 'Nadia Boulos': {
+   'erchonia':  ['Acute Pain'],
+   'biocharger': ['Immune Strong', 'Lyme Defense Stack'],
+ },
+ 'Nina Kowalski': {
+   'erchonia':  [],
+   'biocharger': ['Immune Strong'],
+ },
+ 'Owen Delacroix': {
+   'erchonia':  ['Knee'],
+   'biocharger': ['General Wellness'],
+ },
+ 'Priya Natarajan': {
+   'erchonia':  ['Low Back', 'Inflammation', 'Lymphatic', 'Acute Pain'],
+   'biocharger': ['Lyme Defense Stack', 'Immune Strong', 'Lymph Liver Kidney Support', 'Brain Support Stack'],
+ },
+ 'Rosa Iglesias': {
+   'erchonia':  [],
+   'biocharger': ['Immune Strong', 'Lyme Defense Stack'],
+ },
+ 'Samir Haddad': {
+   'erchonia':  ['Chronic Pain'],
+   'biocharger': ['General Wellness'],
+ },
+ 'Sofia Ramos': {
+   'erchonia':  ['Lymphatic'],
+   'biocharger': ['Immune Strong'],
+ },
+ 'Tom Alvarez': {
+   'erchonia':  [],
+   'biocharger': ['General Wellness', 'Immune Strong', 'Lyme Defense Stack'],
+ },
+ 'Victor Reyes': {
+   'erchonia':  ['Chronic Pain'],
+   'biocharger': [],
+ },
+ 'Walter Hsu': {
+   'erchonia':  ['Knee', 'Chronic Pain'],
+   'biocharger': [],
+ },
+ 'Yuki Tanaka': {
+   'erchonia':  [],
+   'biocharger': ['General Wellness', 'Immune Strong', 'Lyme Defense Stack'],
+ },
 }
 
 

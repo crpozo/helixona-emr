@@ -93,17 +93,62 @@ def build():
                 continue
             what, dur = random.choice(opts)
             dur = dur or 30
+            # Si el tipo de cita pide un protocolo, el paciente NO puede ser
+            # cualquiera: tiene que ser alguien a quien un proveedor se lo haya
+            # aprobado en su plan de cuidado. Elegir primero la persona y luego
+            # el protocolo es como el board acabo enseñando cuarenta y cuatro
+            # reservas que la pantalla de reserva habria rechazado.
+            proto = proto_label = None
+            cfg = h.TAKES_PROTOCOL.get(what)
+            if cfg:
+                pool = poc_pool(cfg['catalogue'])
+                if not pool:
+                    t += 30
+                    continue
+                who, proto = random.choice(pool)
+                proto_label = cfg['label']
+            else:
+                who = random.choice(PEOPLE)
             if any(t < e and t + dur > s2 for s2, e in taken):
                 t += 30
                 continue
             taken.append((t, t + dur))
-            blocks[c['id']].append((t, dur, random.choice(PEOPLE), what, random.choice(ST)))
-            # the SAME minutes are unavailable in this resource's other columns
+            blocks[c['id']].append((t, dur, who, what, random.choice(ST), proto, proto_label))
+            # the SAME minutes are unavailable in this resource's other columns.
+            # The held block has to say WHERE they are, and the column name only
+            # says that when the columns are named differently. Dr. Drannikov is
+            # four columns all called "Dr. Drannikov", so "Busy · Dr. Drannikov"
+            # printed inside his own column named the column you were already
+            # looking at. When the names collide, the organizing type is the only
+            # thing that distinguishes them, so it is what gets shown.
             for other in mine:
                 if other['id'] != c['id']:
-                    blocks[other['id']].append((t, dur, c['name'], 'elsewhere', 'busy'))
+                    # three steps, first one that actually distinguishes wins:
+                    #   the column name  -> Dr. Bakman - FPE vs Dr. Bakman - Other
+                    #   the band         -> Drannikov's four, all named the same
+                    #   the treatment    -> Energetics, where the band collides too
+                    where = c['name']
+                    if where == other['name']: where = elsewhere_label(c['org'])
+                    if where == other['name']: where = what
+                    blocks[other['id']].append((t, dur, where, 'elsewhere', 'busy', None, None))
             t += dur + random.choice([0, 0, 30, 60])
     return cols, blocks
+
+
+def poc_pool(catalogue):
+    """Los pares (paciente, protocolo) que un proveedor ha aprobado de verdad.
+    Vacio no es un fallo: significa que nadie tiene ese catalogo aprobado y que
+    esa cita no deberia existir en el board."""
+    out = []
+    for pt, plan in sorted(h.POC_PROTOCOLS.items()):
+        for pr in plan.get(catalogue, []):
+            out.append((pt, pr))
+    return out
+
+
+def elsewhere_label(org):
+    """The organizing type, trimmed for a narrow held block: 'Office Visit - 30'."""
+    return org.replace(' min', '').replace(' - ', ' ')
 
 
 def fmt(m):
@@ -129,7 +174,7 @@ def render():
                      % (c['id'], c['org'], c['res'], c['name'], c['who'] or c['kind']))
     for c in cols:
         inner = []
-        for t, dur, pt, what, st in sorted(blocks[c['id']]):
+        for t, dur, pt, what, st, proto, proto_label in sorted(blocks[c['id']], key=lambda b: b[:5]):
             ty = TY_OF_ORG[c['org']]
             if st == 'busy':
                 # `pt` here carries the COLUMN they are in, not a patient. Naming
@@ -140,13 +185,18 @@ def render():
               </div>''' % (top(t), height(dur), fmt(t), pt, pt))
                 continue
             sub = SUB_OF_TYPE.get(what, 't-fu')
-            inner.append('''              <div class="cal-appt %s %s %s" style="top:%dpx;height:%dpx" data-appt="A-9%04d" data-open-drawer="#l-appt-drawer" data-st="%s" data-sub="%s" data-days="2" data-pt="%s" data-when="%s" data-tx="%s" data-org="%s">
-                <span class="cal-appt-sub">%s</span>
-                <div class="cal-appt-name">%s</div>
-                <div class="cal-appt-time">%s</div>
-              </div>''' % (st, sub, ty, top(t), height(dur), random.randint(1000, 9999),
-                           st.replace('st-', '').title(), sub, pt, fmt(t), what, c['org'],
-                           what, pt, fmt(t)))
+            pattr = (' data-proto="%s" data-proto-label="%s"' % (proto, proto_label)) if proto else ''
+            tpl = ('              <div class="cal-appt %s %s %s" style="top:%dpx;height:%dpx"'
+                   ' data-appt="A-9%04d" data-open-drawer="#l-appt-drawer" data-st="%s"'
+                   ' data-sub="%s" data-days="2" data-pt="%s" data-when="%s" data-tx="%s"'
+                   ' data-org="%s"' + pattr + '>\n'
+                   '                <span class="cal-appt-sub">%s</span>\n'
+                   '                <div class="cal-appt-name">%s</div>\n'
+                   '                <div class="cal-appt-time">%s</div>\n'
+                   '              </div>')
+            inner.append(tpl % (st, sub, ty, top(t), height(dur), random.randint(1000, 9999),
+                                st.replace('st-', '').title(), sub, pt, fmt(t), what, c['org'],
+                                what, pt, fmt(t)))
         grid.append('            <div class="daycal-col" data-col="%s" data-org="%s" data-res="%s">\n%s\n            </div>'
                     % (c['id'], c['org'], c['res'], '\n'.join(inner)))
 
@@ -158,3 +208,33 @@ def render():
 
     tmpl = '64px ' + ' '.join('minmax(158px, 1fr)' for _ in cols)
     return cols, bands, heads, grid, hours, tmpl
+
+
+if __name__ == '__main__':
+    # No escribe schedule.html. El board se pega a mano y a proposito: el fichero
+    # tiene diez mil lineas y la ultima vez que un script empalmo a ciegas se
+    # llevo la leyenda por delante. Esto imprime el marcado para revisarlo.
+    #   python3 tools/genboard.py heads   -> las cabeceras
+    #   python3 tools/genboard.py grid    -> las columnas con sus citas
+    #   python3 tools/genboard.py check   -> cuenta y valida contra los planes
+    import sys as _s
+    cols, bands, heads, grid, hours, tmpl = render()
+    arg = _s.argv[1] if len(_s.argv) > 1 else 'check'
+    if arg == 'heads':  print('\n'.join(bands)); print('\n'.join(heads))
+    elif arg == 'grid': print('\n'.join(grid))
+    else:
+        import re as _re
+        html = '\n'.join(grid)
+        erch = {n for n, _ in h.ERCHONIA}
+        bad = []
+        for m in _re.finditer(r'data-pt="([^"]*)"[^>]*data-proto="([^"]*)"', html):
+            pt, pr = m.group(1), m.group(2)
+            cat = 'erchonia' if pr in erch else 'biocharger'
+            if pr not in h.POC_PROTOCOLS.get(pt, {}).get(cat, []):
+                bad.append('%s no tiene aprobado "%s"' % (pt, pr))
+        print('columnas   : %d (hierarchy.py dice %d)' % (len(grid), len(h.board_columns())))
+        print('citas      : %d' % len(_re.findall(r'data-appt=', html)))
+        print('protocolos : %d' % len(_re.findall(r'data-proto=', html)))
+        print('ocupados   : %d' % len(_re.findall(r'els-t', html)))
+        print('sin aprobar: %d' % len(bad))
+        for b in bad[:5]: print('   ' + b)

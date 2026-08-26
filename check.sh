@@ -63,4 +63,76 @@ if bad:
 PYCHK
 [ $? -ne 0 ] && fail=1
 
+# --- la jerarquia y lo publicado, en el mismo numero ---
+# tools/hierarchy.py es la fuente, pero nada la ejecuta al construir: el board
+# se pego a mano. Esto no impide la deriva, la DETECTA, que es lo unico que un
+# repo sin paso de build puede prometer honestamente.
+python3 - <<'PYHIER'
+import re, sys
+sys.path.insert(0, 'tools')
+try:
+    import hierarchy as H
+except Exception as e:
+    print('NO SE PUDO LEER tools/hierarchy.py:', e); sys.exit(1)
+
+want = len(H.board_columns())
+bad = []
+
+sched = open('schedule.html').read()
+got = len(re.findall(r'<div class="daycal-col" data-col=', sched))
+if got != want:
+    bad.append('schedule.html tiene %d columnas en el board, hierarchy.py dice %d' % (got, want))
+
+heads = len(re.findall(r'<div class="daycal-col-head" data-col=', sched))
+if heads != want:
+    bad.append('schedule.html tiene %d cabeceras, hierarchy.py dice %d' % (heads, want))
+
+# ninguna columna puede anunciar que esta ocupada en si misma
+meta = {c['id']: c for c in H.board_columns()}
+COL = re.compile(r'<div class="daycal-col" data-col="([^"]+)"[^>]*>(.*?)\n            </div>', re.S)
+for cid, body in COL.findall(sched):
+    for lbl in re.findall(r'class="els-t">Busy &middot; ([^<]+)<', body):
+        if cid in meta and lbl == meta[cid]['name']:
+            bad.append('%s dice "Busy · %s" dentro de su propia columna' % (cid, lbl))
+
+# la pantalla de estructura no puede citar otro numero
+tr = open('treatments.html').read()
+i = tr.find('t-08-hierarchy')
+if i > -1:
+    seg = tr[i:i+3000]
+    m = re.search(r'A column on the day board\.\s*([A-Za-z-]+)\.', seg)
+    WORDS = {35: 'Thirty-five', 40: 'Forty', 41: 'Forty-one', 39: 'Thirty-nine'}
+    if m and m.group(1) != WORDS.get(want, ''):
+        bad.append('treatments.html dice "%s" columnas, hierarchy.py dice %d' % (m.group(1), want))
+
+# ningun bloque del board puede llevar un protocolo que el paciente no tiene
+# aprobado: el board estaria enseñando una reserva que la pantalla de reserva
+# habria rechazado, y el wireframe se contradiria a si mismo
+ERCH = {n for n, _ in H.ERCHONIA}
+for m in re.finditer(r'<div class="cal-appt (?!is-elsewhere)[^"]*"[^>]*>', sched):
+    tag = m.group(0)
+    pt = re.search(r'data-pt="([^"]*)"', tag)
+    pr = re.search(r'data-proto="([^"]*)"', tag)
+    if not (pt and pr and pr.group(1)): continue
+    who, proto = pt.group(1), pr.group(1)
+    plan = H.POC_PROTOCOLS.get(who)
+    if plan is None:
+        bad.append('%s esta en el board con "%s" y no tiene plan de cuidado' % (who, proto))
+        continue
+    cat = 'erchonia' if proto in ERCH else 'biocharger'
+    if proto not in plan[cat]:
+        bad.append('%s esta en el board con "%s", que su plan no aprueba' % (who, proto))
+
+# y el mismo plan tiene que estar en la pantalla de reserva
+for who in H.POC_PROTOCOLS:
+    if ("'%s': { erchonia:" % who) not in sched:
+        bad.append('%s tiene plan en hierarchy.py y no en L_POC' % who)
+
+if bad:
+    print('LA JERARQUIA SE DESVIO (%d):' % len(bad))
+    for b in bad[:10]: print('  ' + b)
+    sys.exit(1)
+PYHIER
+[ $? -ne 0 ] && fail=1
+
 exit $fail
