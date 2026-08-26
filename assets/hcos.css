@@ -3373,13 +3373,25 @@ body.tk-dragging * { cursor: grabbing !important; }
 .daycal-col-head[data-org] { min-width: 0; }
 .daycal-col-head[data-org] .sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* One person, several columns. A booking in one of them holds the others, and
-   they SAY so — an hour that is simply blank reads as available, which is how
-   Dr. Drannikov ends up double-booked with himself. */
+/* One person, several columns. A booking in one holds the others, and they say
+   WHICH one — the first version led with the patient's name, so these read as
+   appointments in this column and the whole board became unfollowable. The
+   patient is not in this column and their name here is noise at best.
+
+   It is deliberately recessive: no card, no side bar, no shadow. It is the
+   absence of availability, not a thing on the schedule. But it cannot be blank
+   either — a blank hour reads as free, which is how one person gets booked in
+   two of their own columns at once. */
 .cal-appt.is-elsewhere {
-  background: repeating-linear-gradient(135deg, #F4F4F4 0 5px, #FAFAFA 5px 10px);
-  border: 1px dashed var(--line); box-shadow: none; cursor: default;
+  background: repeating-linear-gradient(135deg, #F1F1F1 0 4px, #F8F8F8 4px 8px);
+  border: none; border-top: 1px solid var(--line-soft); border-radius: 0;
+  box-shadow: none; cursor: default; padding: 4px 8px; min-height: 0;
+  display: flex; align-items: center;
 }
-.cal-appt.is-elsewhere::before { background: var(--line); }
-.cal-appt.is-elsewhere .cal-appt-name { color: var(--muted); font-weight: 500; }
-.cal-appt.is-elsewhere .cal-appt-note { color: var(--muted); font-style: italic; }
+.cal-appt.is-elsewhere::before { display: none; }
+.els-t {
+  font-size: 10px; color: #8A8A8A; font-weight: 500; letter-spacing: .1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* forty columns cannot be scanned; they have to be searched */
+.l-colfind { width: auto; min-width: 210px; font-size: 12.5px; padding: 6px 10px; }

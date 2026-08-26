@@ -985,6 +985,17 @@ organizing type, verlas separadas"*.
 - **Forty columns**, one per (organizing type, column name) pair, grouped under twelve
   organizing-type bands, scrolled sideways. The **organizing type is the primary filter** — forty
   columns do not fit on a screen and "show me Infusion" is what the desk actually asks for.
+- **Forty columns cannot be scanned, only searched.** Treatment alone has seventeen, and Carlos
+  could not find the Erchonia laser by looking. A **Find a column** box beside the view select
+  narrows the board by name or organizing type as you type.
+- **The "busy elsewhere" block must not lead with a patient name.** It did, so those blocks read as
+  appointments in that column and the board became unfollowable — Dr. Bakman - Other looked like
+  eight appointments when it had one. It says **"Busy · <the column they are in>"**, and it is
+  deliberately recessive: no card, no side bar, no shadow. It is the absence of availability, not a
+  thing on the schedule. The patient is not in this column and their name here is noise at best.
+- **Generate per RESOURCE, not per column.** The first pass filled every column independently at
+  its own load, so a person with two columns came out over-subscribed and one column was almost
+  entirely grey. A person has one day; the columns are views of it.
 - **Separate columns for the same person is a display choice with a real hazard.** Dr. Drannikov is
   four columns and one man; four columns means the board can show him booked four times at once.
   So every column names the RESOURCE underneath it, two columns sharing a resource share its time,

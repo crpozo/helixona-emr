@@ -58,38 +58,51 @@ def types_for(org, col):
 
 
 def build():
+    """Fill each RESOURCE's day once, then place each appointment in whichever of
+    that resource's columns can take it.
+
+    The first version filled every COLUMN independently and then marked the
+    clashes. With two columns per person at 72% each, the person came out
+    over-subscribed and one column ended up almost entirely "busy elsewhere" —
+    Dr. Bakman - Other had one real appointment and seven grey blocks, which is
+    unreadable and is not what the clinic's day looks like. A person has one
+    day; the columns are views of it.
+    """
     cols = h.board_columns()
-    busy = {}          # resource -> [(start, end, column id, patient, what)]
-    blocks = {c['id']: [] for c in cols}
-
-    def free(res, s, e):
-        return all(e <= b[0] or s >= b[1] for b in busy.get(res, []))
-
+    by_res = {}
     for c in cols:
-        opts = types_for(c['org'], c['name'])
-        if not opts: continue
-        # how full this line runs — a provider is busy, a Rife machine is not
-        load = {'Provider': .72, 'Staff': .55, 'IV chair': .8, 'Equipment': .4,
-                'Room': .35, 'Seat': .3}.get(c['kind'], .4)
-        if c['name'] == 'Leigh Ann': load = .25
+        by_res.setdefault(c['res'], []).append(c)
+
+    blocks = {c['id']: [] for c in cols}
+    for res, mine in by_res.items():
+        kind = mine[0]['kind']
+        load = {'Provider': .62, 'Staff': .5, 'IV chair': .78, 'Equipment': .38,
+                'Room': .3, 'Seat': .28}.get(kind, .35)
+        if mine[0]['name'] == 'Leigh Ann': load = .22
+        taken = []
         t = OPEN * 60
         while t < CLOSE * 60:
-            what, dur = random.choice(opts)
-            dur = dur or 30
-            if random.random() > load or not free(c['res'], t, t + dur):
+            if random.random() > load:
                 t += 30
                 continue
-            pt = random.choice(PEOPLE)
-            st = random.choice(ST)
-            busy.setdefault(c['res'], []).append((t, t + dur, c['id'], pt, what))
-            blocks[c['id']].append((t, dur, pt, what, st))
-            t += dur + random.choice([0, 0, 30])
-
-    # a person's OTHER columns show the time as taken, and say where
-    for c in cols:
-        for b in busy.get(c['res'], []):
-            if b[2] == c['id']: continue
-            blocks[c['id']].append((b[0], b[1] - b[0], b[3], 'elsewhere', 'busy'))
+            # pick a column of this resource, and something it can actually take
+            c = random.choice(mine)
+            opts = types_for(c['org'], c['name'])
+            if not opts:
+                t += 30
+                continue
+            what, dur = random.choice(opts)
+            dur = dur or 30
+            if any(t < e and t + dur > s2 for s2, e in taken):
+                t += 30
+                continue
+            taken.append((t, t + dur))
+            blocks[c['id']].append((t, dur, random.choice(PEOPLE), what, random.choice(ST)))
+            # the SAME minutes are unavailable in this resource's other columns
+            for other in mine:
+                if other['id'] != c['id']:
+                    blocks[other['id']].append((t, dur, c['name'], 'elsewhere', 'busy'))
+            t += dur + random.choice([0, 0, 30, 60])
     return cols, blocks
 
 
@@ -119,10 +132,12 @@ def render():
         for t, dur, pt, what, st in sorted(blocks[c['id']]):
             ty = TY_OF_ORG[c['org']]
             if st == 'busy':
-                inner.append('''              <div class="cal-appt is-elsewhere" style="top:%dpx;height:%dpx" data-blocked="1" data-st="Elsewhere" data-when="%s">
-                <div class="cal-appt-name">%s</div>
-                <div class="cal-appt-note">In another of their columns</div>
-              </div>''' % (top(t), height(dur), fmt(t), pt))
+                # `pt` here carries the COLUMN they are in, not a patient. Naming
+                # the patient made these read as appointments in this column,
+                # which is exactly what nobody could follow.
+                inner.append('''              <div class="cal-appt is-elsewhere" style="top:%dpx;height:%dpx" data-blocked="1" data-st="Elsewhere" data-when="%s" title="Busy in %s">
+                <span class="els-t">Busy &middot; %s</span>
+              </div>''' % (top(t), height(dur), fmt(t), pt, pt))
                 continue
             sub = SUB_OF_TYPE.get(what, 't-fu')
             inner.append('''              <div class="cal-appt %s %s %s" style="top:%dpx;height:%dpx" data-appt="A-9%04d" data-open-drawer="#l-appt-drawer" data-st="%s" data-sub="%s" data-days="2" data-pt="%s" data-when="%s" data-tx="%s" data-org="%s">
