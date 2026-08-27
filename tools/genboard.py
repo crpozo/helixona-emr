@@ -243,3 +243,66 @@ if __name__ == '__main__':
         print('ocupados   : %d' % len(_re.findall(r'els-t', html)))
         print('sin aprobar: %d' % len(bad))
         for b in bad[:5]: print('   ' + b)
+
+
+# ---------------------------------------------------------------------------
+# LA SEMANA (Carlos, 2026-08-27: "nothing is shown on the week view").
+#
+# Dos fallos, uno mio y otro mas viejo. El mio: las citas de la semana llevaban
+# los ids de recurso retirados (dr, c1..c4), asi que el filtro por columna las
+# escondia todas. El mas viejo: la rejilla tenia CUATRO columnas para CINCO dias
+# de cabecera — la de lunes no existia y la de martes cargaba veinte huecos.
+#
+# Se genera igual que el tablero del dia: columnas reales, tipos que esas
+# columnas aceptan de verdad, y la cuenta de la cabecera sale de las citas
+# generadas en vez de estar escrita a mano al lado.
+# ---------------------------------------------------------------------------
+WEEK_DAYS = [('Mon', 20), ('Tue', 21), ('Wed', 22), ('Thu', 23), ('Fri', 24)]
+WEEK_N    = [5, 19, 4, 5, 4]
+WROW, WOPEN, WHOURS = 56, 8, 10
+
+
+def week():
+    """Devuelve (cabeceras, columnas) de la vista de semana."""
+    random.seed(4021)
+    cols = h.board_columns()
+    pool = [c for c in cols if c['types']]
+    heads, body = ['            <div></div>'], []
+    for (dow, num), n in zip(WEEK_DAYS, WEEK_N):
+        appts, taken = [], []
+        for _ in range(n):
+            c = random.choice(pool)
+            what = random.choice(c['types'])
+            dur = min(c['mins'].get(c['orgs'][0], 30), 120)
+            for _try in range(40):
+                start = WOPEN * 60 + random.randrange(0, WHOURS * 60 - dur, 30)
+                if all(start >= e or start + dur <= s for s, e in taken): break
+            else:
+                continue
+            taken.append((start, start + dur))
+            appts.append((start, dur, c, what, random.choice(ST), random.choice(PEOPLE)))
+        appts.sort()
+        heads.append('            <div class="weekcal-day%s" data-day="%d" data-open-modal="#l-daysum" '
+                     'role="button" tabindex="0" title="See every appointment on %s %d">'
+                     '<div class="weekcal-day-name">%s</div>'
+                     '<div class="weekcal-day-num">%d</div>'
+                     '<div class="weekcal-day-count">%d appt%s</div></div>'
+                     % (' today' if num == 21 else '', num, dow, num, dow, num, len(appts),
+                        '' if len(appts) == 1 else 's'))
+        inner = ['              ' + ''.join(
+            '<div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="%d"></div>' % num
+            for _ in range(WHOURS))]
+        for start, dur, c, what, st, pt in appts:
+            top = round((start - WOPEN * 60) * WROW / 60)
+            hgt = max(22, round(dur * WROW / 60) - 3)
+            side = 'right:52%' if c['kind'] in ('Provider', 'Staff') else 'left:50%'
+            inner.append('              <div class="week-appt %s %s %s" data-col="%s" data-tx="%s" '
+                         'data-st="%s" data-sub="%s" data-when="%s" data-day="%d" '
+                         'data-activate="l-01-day" style="top:%dpx;height:%dpx;%s">'
+                         '<span class="n">%s</span></div>'
+                         % (SUB_OF_TYPE.get(what, 't-fu'), st, TY_OF_ORG.get(c['orgs'][0], 'ty-chiro'),
+                            c['id'], what, st.replace('st-', '').title(), SUB_OF_TYPE.get(what, 't-fu'),
+                            fmt(start), num, top, hgt, side, pt))
+        body.append('            <!-- %s Jul %d -->\n            <div class="weekcal-col" data-day="%d">\n%s\n            </div>'
+                    % (dow, num, num, '\n'.join(inner)))
+    return heads, body

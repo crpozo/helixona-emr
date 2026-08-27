@@ -3489,3 +3489,33 @@ body.tk-dragging * { cursor: grabbing !important; }
 .ins-undo { color: var(--muted); }
 .ins-undo:hover { color: var(--ink); }
 tr[data-state="suggested"] .ins-undo { opacity: .38; }
+
+/* ---------- el resumen de un dia (semana y mes) ----------
+   Una fila por cita, leida de arriba abajo por hora. La columna va al final
+   porque el escritorio busca primero la hora y el nombre; saber que silla es
+   la respuesta a la segunda pregunta, no a la primera. */
+.daysum { display: grid; gap: 0; }
+.daysum-row {
+  display: grid;
+  grid-template-columns: 74px 12px minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  gap: 12px; align-items: center;
+  padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 13px;
+}
+.daysum-row:last-child { border-bottom: none; }
+.daysum-row.is-count { grid-template-columns: 12px minmax(0, 1fr) auto; }
+.daysum-when { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 12px; }
+.daysum-pt { font-weight: 600; min-width: 0; }
+.daysum-tx { color: var(--ink); min-width: 0; }
+.daysum-col { color: var(--muted); font-size: 12px; min-width: 0; }
+.daysum-st { color: var(--muted); font-size: 11.5px; white-space: nowrap; }
+@media (max-width: 720px) {
+  .daysum-row { grid-template-columns: 74px 12px 1fr; row-gap: 2px; }
+  .daysum-tx, .daysum-col, .daysum-st { grid-column: 3; }
+}
+
+/* un dia sobre el que se puede preguntar se comporta como un boton */
+.weekcal-day[data-open-modal], .monthcal-day[data-open-modal] { cursor: pointer; }
+.weekcal-day[data-open-modal]:hover, .monthcal-day[data-open-modal]:hover { background: var(--hover, #F0F0F0); }
+.weekcal-day[data-open-modal]:focus-visible, .monthcal-day[data-open-modal]:focus-visible {
+  outline: 2px solid var(--ink); outline-offset: -2px;
+}

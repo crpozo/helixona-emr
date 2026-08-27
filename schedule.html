@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=115">
+<link rel="stylesheet" href="assets/hcos.css?v=116">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -1962,11 +1962,11 @@
 
           <div class="weekcal-head">
             <div></div>
-            <div class="weekcal-day"><div class="weekcal-day-name">Mon</div><div class="weekcal-day-num">20</div><div class="weekcal-day-count">5 appts</div></div>
-            <div class="weekcal-day today"><div class="weekcal-day-name">Tue</div><div class="weekcal-day-num">21</div><div class="weekcal-day-count">19 appts</div></div>
-            <div class="weekcal-day"><div class="weekcal-day-name">Wed</div><div class="weekcal-day-num">22</div><div class="weekcal-day-count">4 appts</div></div>
-            <div class="weekcal-day"><div class="weekcal-day-name">Thu</div><div class="weekcal-day-num">23</div><div class="weekcal-day-count">5 appts</div></div>
-            <div class="weekcal-day"><div class="weekcal-day-name">Fri</div><div class="weekcal-day-num">24</div><div class="weekcal-day-count">4 appts</div></div>
+            <div class="weekcal-day" data-day="20" data-open-modal="#l-daysum" role="button" tabindex="0" title="See every appointment on Mon 20"><div class="weekcal-day-name">Mon</div><div class="weekcal-day-num">20</div><div class="weekcal-day-count">5 appts</div></div>
+            <div class="weekcal-day today" data-day="21" data-open-modal="#l-daysum" role="button" tabindex="0" title="See every appointment on Tue 21"><div class="weekcal-day-name">Tue</div><div class="weekcal-day-num">21</div><div class="weekcal-day-count">16 appts</div></div>
+            <div class="weekcal-day" data-day="22" data-open-modal="#l-daysum" role="button" tabindex="0" title="See every appointment on Wed 22"><div class="weekcal-day-name">Wed</div><div class="weekcal-day-num">22</div><div class="weekcal-day-count">4 appts</div></div>
+            <div class="weekcal-day" data-day="23" data-open-modal="#l-daysum" role="button" tabindex="0" title="See every appointment on Thu 23"><div class="weekcal-day-name">Thu</div><div class="weekcal-day-num">23</div><div class="weekcal-day-count">5 appts</div></div>
+            <div class="weekcal-day" data-day="24" data-open-modal="#l-daysum" role="button" tabindex="0" title="See every appointment on Fri 24"><div class="weekcal-day-name">Fri</div><div class="weekcal-day-num">24</div><div class="weekcal-day-count">4 appts</div></div>
           </div>
 
           <div class="weekcal-grid">
@@ -1982,62 +1982,59 @@
               <div class="weekcal-hour">4 PM</div>
               <div class="weekcal-hour">5 PM</div>
             </div>
-
             <!-- Mon Jul 20 -->
-            <div class="weekcal-col">
+            <div class="weekcal-col" data-day="20">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div>
-              <div data-col="dr" class="week-appt t-newpt st-done ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Done" data-sub="t-newpt"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-newpt st-done ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day" data-st="Done" data-sub="t-newpt"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-npfu st-noshow ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day" data-st="No-show" data-sub="t-npfu"><span class="n">Elena Petrova</span></div>
-              <div data-col="c1" class="week-appt t-mc100 st-done ty-iv" style="top:56px;height:165px;left:50%" data-activate="l-01-day" data-st="Done" data-sub="t-mc100"><span class="n">Walter Hsu</span>Mega C 100g · 3 h</div>
-              <div data-col="c2" class="week-appt t-mc50 st-done ty-iv" style="top:280px;height:137px;left:50%" data-activate="l-01-day" data-st="Done" data-sub="t-mc50"><span class="n">Daniel Okafor</span>Mega C 50g · 2.5 h</div>
+              <div class="week-appt t-fu st-scheduled ty-visit" data-col="maofficevisit" data-tx="GLP Injection" data-st="Scheduled" data-sub="t-fu" data-when="8:30 AM" data-day="20" data-activate="l-01-day" style="top:28px;height:22px;right:52%"><span class="n">Amara Diallo</span></div>
+              <div class="week-appt t-biochg st-confirmed ty-chiro" data-col="biochargerchair1" data-tx="BioCharger 30 min" data-st="Confirmed" data-sub="t-biochg" data-when="9:00 AM" data-day="20" data-activate="l-01-day" style="top:56px;height:25px;left:50%"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt t-eboosafe st-scheduled ty-chiro" data-col="eboochair1" data-tx="EBOO SAFE" data-st="Scheduled" data-sub="t-eboosafe" data-when="9:30 AM" data-day="20" data-activate="l-01-day" style="top:84px;height:109px;left:50%"><span class="n">Yuki Tanaka</span></div>
+              <div class="week-appt t-nptoc st-done ty-visit" data-col="mira" data-tx="Transfer of Care" data-st="Done" data-sub="t-nptoc" data-when="12:00 PM" data-day="20" data-activate="l-01-day" style="top:224px;height:25px;right:52%"><span class="n">Maya Reyes</span></div>
+              <div class="week-appt t-erchlas st-scheduled ty-chiro" data-col="erchoniahandheld" data-tx="Erchonia Handheld" data-st="Scheduled" data-sub="t-erchlas" data-when="2:30 PM" data-day="20" data-activate="l-01-day" style="top:364px;height:25px;left:50%"><span class="n">Walter Hsu</span></div>
             </div>
-
-            <!-- Tue Jul 21 · today, mirrors the day view -->
-            <div class="weekcal-col today">
-              <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="20"></div>
-              <div data-col="dr" class="week-appt t-newpt st-done ty-visit" style="top:28px;height:81px;right:55%" data-activate="l-01-day" data-st="Done" data-sub="t-newpt"><span class="n">Marcus Webb</span>New patient</div>
-              <div data-col="dr" class="week-appt t-newpt st-inroom ty-visit" style="top:140px;height:25px;right:55%" data-activate="l-01-day" data-st="In progress" data-sub="t-newpt"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-npfu st-arrived ty-visit" style="top:196px;height:25px;right:55%" data-activate="l-01-day" data-st="Arrived" data-sub="t-npfu"><span class="n">Elena Petrova</span></div>
-              <div data-col="dr" class="week-appt t-newpt st-confirmed ty-visit" style="top:308px;height:25px;right:55%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-newpt"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-newpt st-cancelled ty-visit" style="top:336px;height:25px;right:55%" data-activate="l-01-day" data-st="Cancelled" data-sub="t-newpt"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-newpt st-scheduled ty-visit" style="top:392px;height:81px;right:55%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-newpt"><span class="n">Tom Alvarez</span>New patient</div>
-              <div data-col="c1" class="week-appt t-mc100 st-inchair ty-iv" style="top:56px;height:165px;left:47%" data-activate="l-01-day" data-st="In progress" data-sub="t-mc100"><span class="n">Maya Reyes</span>Mega C 100g · 3 h</div>
-              <div data-col="c2" class="week-appt t-mc50 st-inchair ty-iv" style="top:112px;height:137px;left:62%;z-index:2" data-activate="l-01-day" data-st="In progress" data-sub="t-mc50"><span class="n">Daniel Okafor</span>Mega C 50g</div>
-              <div data-col="c4" class="week-appt t-ff10 st-arrived ty-iv" style="top:182px;height:12px;left:77%;z-index:3;padding:0 6px" data-activate="l-01-day" data-st="Arrived" data-sub="t-ff10"><span class="n">Sofia Ramos</span></div>
-              <div data-col="c3" class="week-appt t-ff10 st-arrived ty-iv" style="top:196px;height:53px;left:77%;z-index:3" data-activate="l-01-day" data-st="Arrived" data-sub="t-ff10"><span class="n">Priya Natarajan</span></div>
-              <div data-col="c1" class="week-appt t-mc100 st-confirmed ty-iv" style="top:280px;height:165px;left:47%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-mc100"><span class="n">Walter Hsu</span>Mega C 100g · 3 h</div>
-              <div data-col="dr" class="week-appt t-newpt st-confirmed ty-visit" style="top:336px;height:53px;left:62%;z-index:2" data-activate="l-01-day" data-st="Confirmed" data-sub="t-newpt"><span class="n">Nadia Boulos</span>Foundational Flow 10</div>
-              <div data-col="dr" class="week-appt t-newpt st-scheduled ty-visit" style="top:390px;height:25px;left:77%;z-index:3" data-activate="l-01-day" data-st="Scheduled" data-sub="t-newpt"><span class="n">Marcus Webb</span></div>
-              <div data-col="c4" class="week-appt t-ff10 st-scheduled ty-iv" style="top:420px;height:25px;left:62%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-ff10"><span class="n">Sofia Ramos</span></div>
-            </div>
-
-            <!-- Wed Jul 22 -->
-            <div class="weekcal-col">
+            <!-- Tue Jul 21 -->
+            <div class="weekcal-col" data-day="21">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="21"></div>
-              <div data-col="dr" class="week-appt t-newpt st-scheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-newpt"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="dr" class="week-appt t-npfu st-confirmed ty-visit" style="top:168px;height:25px;right:52%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-npfu"><span class="n">Elena Petrova</span></div>
-              <div data-col="c3" class="week-appt t-ff10 st-scheduled ty-iv" style="top:112px;height:53px;left:50%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-ff10"><span class="n">Priya Natarajan</span>Foundational Flow 10</div>
-              <div data-col="dr" class="week-appt t-newpt st-scheduled ty-visit" style="top:336px;height:25px;left:50%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-newpt"><span class="n">Tom Alvarez</span></div>
+              <div class="week-appt t-scenar st-scheduled ty-chiro" data-col="saltroomchair2" data-tx="Halo Salt Therapy" data-st="Scheduled" data-sub="t-scenar" data-when="8:00 AM" data-day="21" data-activate="l-01-day" style="top:0px;height:53px;left:50%"><span class="n">Nadia Boulos</span></div>
+              <div class="week-appt t-erchlas st-done ty-chiro" data-col="erchoniahandheld" data-tx="Erchonia Handheld" data-st="Done" data-sub="t-erchlas" data-when="9:00 AM" data-day="21" data-activate="l-01-day" style="top:56px;height:25px;left:50%"><span class="n">Maya Reyes</span></div>
+              <div class="week-appt t-erchlas st-inchair ty-chiro" data-col="erchoniahandheld" data-tx="Erchonia Handheld" data-st="Inchair" data-sub="t-erchlas" data-when="9:30 AM" data-day="21" data-activate="l-01-day" style="top:84px;height:25px;left:50%"><span class="n">Nina Kowalski</span></div>
+              <div class="week-appt t-biochg st-scheduled ty-chiro" data-col="biochargerchair1" data-tx="BioCharger 30 min" data-st="Scheduled" data-sub="t-biochg" data-when="10:00 AM" data-day="21" data-activate="l-01-day" style="top:112px;height:25px;left:50%"><span class="n">Sofia Ramos</span></div>
+              <div class="week-appt t-ff10 st-scheduled ty-iv" data-col="nurseiv2" data-tx="IV" data-st="Scheduled" data-sub="t-ff10" data-when="10:30 AM" data-day="21" data-activate="l-01-day" style="top:140px;height:25px;left:50%"><span class="n">Grace Lindqvist</span></div>
+              <div class="week-appt t-biochg st-confirmed ty-chiro" data-col="biochargerchair3" data-tx="BioCharger Stack 60 min" data-st="Confirmed" data-sub="t-biochg" data-when="11:00 AM" data-day="21" data-activate="l-01-day" style="top:168px;height:25px;left:50%"><span class="n">Maya Reyes</span></div>
+              <div class="week-appt t-ff10 st-confirmed ty-iv" data-col="nurseiv1" data-tx="IV" data-st="Confirmed" data-sub="t-ff10" data-when="11:30 AM" data-day="21" data-activate="l-01-day" style="top:196px;height:25px;left:50%"><span class="n">Priya Natarajan</span></div>
+              <div class="week-appt t-ff10 st-arrived ty-iv" data-col="nurseiv2" data-tx="IV" data-st="Arrived" data-sub="t-ff10" data-when="12:00 PM" data-day="21" data-activate="l-01-day" style="top:224px;height:25px;left:50%"><span class="n">Maya Reyes</span></div>
+              <div class="week-appt t-minilym st-arrived ty-chiro" data-col="nanovi1" data-tx="NanoVi 30 min" data-st="Arrived" data-sub="t-minilym" data-when="12:30 PM" data-day="21" data-activate="l-01-day" style="top:252px;height:25px;left:50%"><span class="n">Hana Sato</span></div>
+              <div class="week-appt t-pocrev st-done ty-visit" data-col="drbakman" data-tx="POC Review" data-st="Done" data-sub="t-pocrev" data-when="1:00 PM" data-day="21" data-activate="l-01-day" style="top:280px;height:25px;right:52%"><span class="n">Priya Natarajan</span></div>
+              <div class="week-appt t-ff10 st-scheduled ty-iv" data-col="nurseiv2" data-tx="IV" data-st="Scheduled" data-sub="t-ff10" data-when="1:30 PM" data-day="21" data-activate="l-01-day" style="top:308px;height:25px;left:50%"><span class="n">Katherine Olsen</span></div>
+              <div class="week-appt t-nmt st-scheduled ty-diag" data-col="diagnostictesting" data-tx="Diagnostic Testing" data-st="Scheduled" data-sub="t-nmt" data-when="2:00 PM" data-day="21" data-activate="l-01-day" style="top:336px;height:53px;left:50%"><span class="n">Nina Kowalski</span></div>
+              <div class="week-appt t-biochg st-confirmed ty-chiro" data-col="biochargerchair1" data-tx="BioCharger 30 min" data-st="Confirmed" data-sub="t-biochg" data-when="3:00 PM" data-day="21" data-activate="l-01-day" style="top:392px;height:25px;left:50%"><span class="n">Victor Reyes</span></div>
+              <div class="week-appt t-nmt st-done ty-diag" data-col="inbody" data-tx="InBody" data-st="Done" data-sub="t-nmt" data-when="3:30 PM" data-day="21" data-activate="l-01-day" style="top:420px;height:22px;left:50%"><span class="n">Elena Petrova</span></div>
+              <div class="week-appt t-scenar st-arrived ty-chiro" data-col="adananotubroom" data-tx="Oxygen" data-st="Arrived" data-sub="t-scenar" data-when="4:00 PM" data-day="21" data-activate="l-01-day" style="top:448px;height:53px;left:50%"><span class="n">Marcus Webb</span></div>
+              <div class="week-appt t-fu st-done ty-visit" data-col="maofficevisit" data-tx="GLP Injection" data-st="Done" data-sub="t-fu" data-when="5:00 PM" data-day="21" data-activate="l-01-day" style="top:504px;height:22px;right:52%"><span class="n">Walter Hsu</span></div>
             </div>
-
-            <!-- Thu Jul 23 -->
-            <div class="weekcal-col">
+            <!-- Wed Jul 22 -->
+            <div class="weekcal-col" data-day="22">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="22"></div>
-              <div data-col="dr" class="week-appt t-newpt st-scheduled ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-newpt"><span class="n">Nadia Boulos</span></div>
-              <div data-col="dr" class="week-appt t-newpt st-scheduled ty-visit" style="top:392px;height:25px;right:52%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-newpt"><span class="n">Marcus Webb</span></div>
-              <div data-col="c2" class="week-appt t-mc50 st-confirmed ty-iv" style="top:84px;height:137px;left:50%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-mc50"><span class="n">Daniel Okafor</span>Mega C 50g · 2.5 h</div>
-              <div data-col="c3" class="week-appt t-ff10 st-scheduled ty-iv" style="top:168px;height:53px;left:65%;z-index:2" data-activate="l-01-day" data-st="Scheduled" data-sub="t-ff10"><span class="n">Priya Natarajan</span></div>
-              <div data-col="c1" class="week-appt t-mc100 st-confirmed ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-mc100"><span class="n">Walter Hsu</span>Mega C 100g · 3 h</div>
+              <div class="week-appt t-biochg st-confirmed ty-chiro" data-col="biochargerchair4" data-tx="BioCharger Stack 60 min" data-st="Confirmed" data-sub="t-biochg" data-when="8:00 AM" data-day="22" data-activate="l-01-day" style="top:0px;height:25px;left:50%"><span class="n">Hana Sato</span></div>
+              <div class="week-appt t-scenar st-inchair ty-chiro" data-col="saltroomchair2" data-tx="Halo Salt Therapy" data-st="Inchair" data-sub="t-scenar" data-when="9:00 AM" data-day="22" data-activate="l-01-day" style="top:56px;height:53px;left:50%"><span class="n">Hana Sato</span></div>
+              <div class="week-appt t-nmt st-arrived ty-diag" data-col="inbody" data-tx="InBody" data-st="Arrived" data-sub="t-nmt" data-when="3:30 PM" data-day="22" data-activate="l-01-day" style="top:420px;height:22px;left:50%"><span class="n">Nina Kowalski</span></div>
+              <div class="week-appt t-nmt st-scheduled ty-diag" data-col="diagnostictesting" data-tx="Diagnostic Testing" data-st="Scheduled" data-sub="t-nmt" data-when="4:00 PM" data-day="22" data-activate="l-01-day" style="top:448px;height:53px;left:50%"><span class="n">Grace Lindqvist</span></div>
             </div>
-
-            <!-- Fri Jul 24 -->
-            <div class="weekcal-col">
+            <!-- Thu Jul 23 -->
+            <div class="weekcal-col" data-day="23">
               <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="23"></div>
-              <div data-col="dr" class="week-appt t-npfu st-rescheduled ty-visit" style="top:56px;height:25px;right:52%" data-activate="l-01-day" data-st="Rescheduled" data-sub="t-npfu"><span class="n">Elena Petrova</span></div>
-              <div data-col="dr" class="week-appt t-newpt st-confirmed ty-visit" style="top:112px;height:25px;right:52%" data-activate="l-01-day" data-st="Confirmed" data-sub="t-newpt"><span class="n">Grace Lindqvist</span></div>
-              <div data-col="c1" class="week-appt t-mc100 st-scheduled ty-iv" style="top:280px;height:165px;left:50%" data-activate="l-01-day" data-st="Scheduled" data-sub="t-mc100"><span class="n">Maya Reyes</span>Mega C 100g · 3 h</div>
-              <div data-col="c4" class="week-appt t-ff10 st-scheduled ty-iv" style="top:364px;height:25px;left:65%;z-index:2" data-activate="l-01-day" data-st="Scheduled" data-sub="t-ff10"><span class="n">Sofia Ramos</span></div>
+              <div class="week-appt t-ff10 st-confirmed ty-iv" data-col="nurseiv2" data-tx="IV" data-st="Confirmed" data-sub="t-ff10" data-when="8:00 AM" data-day="23" data-activate="l-01-day" style="top:0px;height:25px;left:50%"><span class="n">Elena Petrova</span></div>
+              <div class="week-appt t-nmt st-confirmed ty-diag" data-col="inbody" data-tx="InBody" data-st="Confirmed" data-sub="t-nmt" data-when="10:00 AM" data-day="23" data-activate="l-01-day" style="top:112px;height:22px;left:50%"><span class="n">Nadia Boulos</span></div>
+              <div class="week-appt t-fu st-scheduled ty-visit" data-col="maofficevisit" data-tx="GLP Injection" data-st="Scheduled" data-sub="t-fu" data-when="12:00 PM" data-day="23" data-activate="l-01-day" style="top:224px;height:22px;right:52%"><span class="n">Rosa Iglesias</span></div>
+              <div class="week-appt t-meadre st-confirmed ty-energ" data-col="energetics" data-tx="MEAD Reassess" data-st="Confirmed" data-sub="t-meadre" data-when="2:30 PM" data-day="23" data-activate="l-01-day" style="top:364px;height:53px;left:50%"><span class="n">Ben Okonkwo</span></div>
+              <div class="week-appt t-newpt st-confirmed ty-visit" data-col="mira" data-tx="New Patient" data-st="Confirmed" data-sub="t-newpt" data-when="5:00 PM" data-day="23" data-activate="l-01-day" style="top:504px;height:25px;right:52%"><span class="n">Walter Hsu</span></div>
+            </div>
+            <!-- Fri Jul 24 -->
+            <div class="weekcal-col" data-day="24">
+              <div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div><div class="weekcal-slot" data-open-modal="#l-book-modal" data-day="24"></div>
+              <div class="week-appt t-scenar st-confirmed ty-chiro" data-col="nanotubroom" data-tx="Oxygen" data-st="Confirmed" data-sub="t-scenar" data-when="11:30 AM" data-day="24" data-activate="l-01-day" style="top:196px;height:53px;left:50%"><span class="n">Ben Okonkwo</span></div>
+              <div class="week-appt t-scenar st-confirmed ty-chiro" data-col="nanotubroom" data-tx="Hydrogen" data-st="Confirmed" data-sub="t-scenar" data-when="12:30 PM" data-day="24" data-activate="l-01-day" style="top:252px;height:53px;left:50%"><span class="n">Maya Reyes</span></div>
+              <div class="week-appt t-fu st-scheduled ty-visit" data-col="maofficevisit" data-tx="EKG" data-st="Scheduled" data-sub="t-fu" data-when="3:30 PM" data-day="24" data-activate="l-01-day" style="top:420px;height:22px;right:52%"><span class="n">Daniel Okafor</span></div>
+              <div class="week-appt t-biochg st-scheduled ty-chiro" data-col="biochargerchair2" data-tx="BioCharger Stack 60 min" data-st="Scheduled" data-sub="t-biochg" data-when="5:00 PM" data-day="24" data-activate="l-01-day" style="top:504px;height:25px;left:50%"><span class="n">Liam Fitzgerald</span></div>
             </div>
           </div>
 
@@ -2741,37 +2738,37 @@
             <div class="monthcal-grid">
               <div class="monthcal-day outside"><div class="monthcal-daynum">29</div></div>
               <div class="monthcal-day outside"><div class="monthcal-daynum">30</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="1"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="2"><div class="monthcal-daynum">2</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 8 booked">8</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="3"><div class="monthcal-daynum">3</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="4"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-iv" title="IV &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="1"><div class="monthcal-daynum">1</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="2"><div class="monthcal-daynum">2</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 8 booked">8</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="3"><div class="monthcal-daynum">3</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:56%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="4"><div class="monthcal-daynum">4</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-iv" title="IV &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:31%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">5</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="6"><div class="monthcal-daynum">6</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="7"><div class="monthcal-daynum">7</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 1 booked">1</span><span class="monthcal-pip ty-laser" title="Laser &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="8"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="9"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 8 booked">8</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="10"><div class="monthcal-daynum">10</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="11"><div class="monthcal-daynum">11</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="6"><div class="monthcal-daynum">6</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="7"><div class="monthcal-daynum">7</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 1 booked">1</span><span class="monthcal-pip ty-laser" title="Laser &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="8"><div class="monthcal-daynum">8</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="9"><div class="monthcal-daynum">9</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 8 booked">8</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="10"><div class="monthcal-daynum">10</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="11"><div class="monthcal-daynum">11</div><div class="monthcal-count">5 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">12</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="13"><div class="monthcal-daynum">13</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="14"><div class="monthcal-daynum">14</div><div class="monthcal-count">16 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="15"><div class="monthcal-daynum">15</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="16"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 9 booked">9</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-lab" title="Labs &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="17"><div class="monthcal-daynum">17</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 2 booked">2</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="18"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="13"><div class="monthcal-daynum">13</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="14"><div class="monthcal-daynum">14</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:100%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="15"><div class="monthcal-daynum">15</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="16"><div class="monthcal-daynum">16</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 9 booked">9</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-lab" title="Labs &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="17"><div class="monthcal-daynum">17</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 3 booked">3</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 2 booked">2</span><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="18"><div class="monthcal-daynum">18</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:37%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">19</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="20"><div class="monthcal-daynum">20</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day today" data-open-modal="#l-book-modal" data-day="21"><div class="monthcal-daynum">21</div><div class="monthcal-count">19 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="22"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 9 booked">9</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-lab" title="Labs &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="23"><div class="monthcal-daynum">23</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="24"><div class="monthcal-daynum">24</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="25"><div class="monthcal-daynum">25</div><div class="monthcal-count">7 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="20"><div class="monthcal-daynum">20</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day today" data-open-modal="#l-book-modal" data-day="21"><div class="monthcal-daynum">21</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="22"><div class="monthcal-daynum">22</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 9 booked">9</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-lab" title="Labs &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="23"><div class="monthcal-daynum">23</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 7 booked">7</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="24"><div class="monthcal-daynum">24</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-diag" title="Diagnostics &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 3 booked">3</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:75%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="25"><div class="monthcal-daynum">25</div><div class="monthcal-count">6 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:43%"></div></div></div></div>
               <div class="monthcal-day closed"><div class="monthcal-daynum">26</div><div class="monthcal-closed-lbl">Closed</div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="27"><div class="monthcal-daynum">27</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="28"><div class="monthcal-daynum">28</div><div class="monthcal-count">13 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="29"><div class="monthcal-daynum">29</div><div class="monthcal-count">11 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="30"><div class="monthcal-daynum">30</div><div class="monthcal-count">15 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-lab" title="Labs &middot; 3 booked">3</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
-              <div class="monthcal-day" data-open-modal="#l-book-modal" data-day="31"><div class="monthcal-daynum">31</div><div class="monthcal-count">10 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="27"><div class="monthcal-daynum">27</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 6 booked">6</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 4 booked">4</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:87%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="28"><div class="monthcal-daynum">28</div><div class="monthcal-count">12 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-proc" title="Procedure &middot; 3 booked">3</span><span class="monthcal-pip ty-iv" title="IV &middot; 2 booked">2</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:81%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="29"><div class="monthcal-daynum">29</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-iv" title="IV &middot; 4 booked">4</span><span class="monthcal-pip ty-energ" title="Energetics &middot; 2 booked">2</span><span class="monthcal-pip ty-visit" title="Office Visit &middot; 2 booked">2</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:68%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="30"><div class="monthcal-daynum">30</div><div class="monthcal-count">14 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 5 booked">5</span><span class="monthcal-pip ty-iv" title="IV &middot; 5 booked">5</span><span class="monthcal-pip ty-lab" title="Labs &middot; 3 booked">3</span><span class="monthcal-pip ty-eboo" title="EBOO &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:93%"></div></div></div></div>
+              <div class="monthcal-day" data-open-modal="#l-daysum" role="button" tabindex="0" data-day="31"><div class="monthcal-daynum">31</div><div class="monthcal-count">9 appointments</div><div class="monthcal-pips"><span class="monthcal-pip ty-visit" title="Office Visit &middot; 6 booked">6</span><span class="monthcal-pip ty-chiro" title="Chiro &middot; 1 booked">1</span><span class="monthcal-pip ty-lab" title="Labs &middot; 1 booked">1</span><span class="monthcal-pip ty-fpe" title="FPE &middot; 1 booked">1</span></div><div class="monthcal-load"><div class="meter"><div class="meter-fill" style="width:62%"></div></div></div></div>
               <div class="monthcal-day outside"><div class="monthcal-daynum">1</div></div>
               <div class="monthcal-day outside closed"><div class="monthcal-daynum">2</div><div class="monthcal-closed-lbl">Closed</div></div>
             </div>
@@ -6375,6 +6372,29 @@
 </aside>
 
 
+<!-- El resumen de un dia, para semana y mes. La rejilla de la semana pinta las
+     citas como bloques de color sin hora ni columna, y el mes solo lleva
+     cuentas: para saber que pasa un dia habia que abrir el dia entero. Esto lo
+     responde donde se hace la pregunta. (Carlos, 2026-08-27.) -->
+<div class="modal-overlay" id="l-daysum">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="l-daysum-t">Monday, July 20</div>
+        <div class="modal-sub" id="l-daysum-sub">5 appointments</div>
+      </div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="l-daysum-body"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Close</button>
+      <button class="btn btn-primary" data-activate="l-01-day" data-close-modal>Open this day</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="l-book-modal">
   <div class="modal">
     <div class="modal-head">
@@ -6915,7 +6935,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=115"></script>
+<script src="assets/hcos.js?v=116"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -7182,7 +7202,10 @@
       if (!blocked && (!lIsOff(a) || showCx)) { total++; if (on) shown++; }
     });
     document.querySelectorAll('.daycal-empty-hint').forEach(function (h) {
-      h.style.display = wantCols.indexOf('dr') !== -1 && !lSel.types.length && !lSel.subs.length ? '' : 'none';
+      /* 'dr' era el recurso retirado del Dr. Drannikov. La pista sale cuando no
+         hay filtro y su columna esta a la vista. */
+      h.style.display = wantCols.indexOf('drdrannikov') !== -1
+        && !lSel.types.length && !lSel.subs.length ? '' : 'none';
     });
 
     var wShown = 0, wTotal = 0;
@@ -9709,6 +9732,107 @@
     });
   }
   window.lFeSev = lFeSev;
+
+
+  /* ---------- el resumen de un dia ----------
+     Se llena de lo que la propia pantalla ya sabe, nunca de una lista aparte:
+     en la semana, de las citas de esa columna; en el mes, de los pips de esa
+     celda, que es todo lo que el mes conoce. Si el mes fingiera nombres de
+     paciente estaria inventando, asi que dice lo que sabe y ofrece abrir el
+     dia para lo demas. */
+  var L_DOW = { 20: 'Monday', 21: 'Tuesday', 22: 'Wednesday', 23: 'Thursday', 24: 'Friday' };
+
+  /* el mes sabe el dia de la semana por su propia posicion en la rejilla: la
+     fila de cabeceras dice Mon..Sun y las celdas van en ese orden. Preguntarselo
+     al DOM es mas fiable que un segundo calendario escrito a mano aqui. */
+  function lDowOfMonthCell(cell) {
+    var grid = cell && cell.parentElement;
+    if (!grid) return '';
+    var cells = [].slice.call(grid.children);
+    var names = [].map.call(document.querySelectorAll('.monthcal-dow'),
+                            function (d) { return d.textContent.trim(); });
+    if (!names.length) return '';
+    var FULL = { Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday',
+                 Fri: 'Friday', Sat: 'Saturday', Sun: 'Sunday' };
+    var n = names[cells.indexOf(cell) % names.length];
+    return FULL[n] || n;
+  }
+
+  function lDaySum(day, from) {
+    var t = document.getElementById('l-daysum-t');
+    var sub = document.getElementById('l-daysum-sub');
+    var body = document.getElementById('l-daysum-body');
+    if (!body) return;
+    var dow = from === 'week' ? L_DOW[+day]
+            : lDowOfMonthCell(document.querySelector('.monthcal-day[data-day="' + day + '"]'));
+    if (t) t.textContent = (dow ? dow + ', July ' : 'July ') + day;
+
+    if (from === 'week') {
+      var col = document.querySelector('.weekcal-col[data-day="' + day + '"]');
+      var appts = col ? [].slice.call(col.querySelectorAll('.week-appt')) : [];
+      var shown = appts.filter(function (a) { return a.style.display !== 'none'; });
+      var rows = shown.map(function (a) {
+        var nm = a.querySelector('.n');
+        var c = document.querySelector('.msel[data-msel="ty"] .msel-opt[data-ty="'
+                                       + a.getAttribute('data-col') + '"]');
+        return { when: a.getAttribute('data-when') || '',
+                 pt: nm ? nm.textContent : 'Someone',
+                 tx: a.getAttribute('data-tx') || '',
+                 col: c ? c.textContent.trim() : a.getAttribute('data-col'),
+                 st: a.getAttribute('data-st') || '',
+                 cls: (a.className.match(/t-[a-z0-9]+/) || ['t-fu'])[0] };
+      });
+      if (sub) sub.textContent = rows.length === appts.length
+        ? rows.length + (rows.length === 1 ? ' appointment' : ' appointments')
+        : rows.length + ' of ' + appts.length + ' shown &mdash; the filters hide the rest';
+      if (sub) sub.innerHTML = sub.textContent;
+      body.innerHTML = rows.length
+        ? '<div class="daysum">' + rows.map(function (r) {
+            return '<div class="daysum-row">'
+              + '<span class="daysum-when">' + r.when + '</span>'
+              + '<span class="rail-sw ' + r.cls + '"></span>'
+              + '<span class="daysum-pt">' + r.pt + '</span>'
+              + '<span class="daysum-tx">' + r.tx + '</span>'
+              + '<span class="daysum-col">' + r.col + '</span>'
+              + '<span class="daysum-st">' + r.st + '</span></div>';
+          }).join('') + '</div>'
+        : '<div class="field-help">Nothing booked on this day &mdash; or the filters are hiding '
+          + 'all of it. Clear them to be sure.</div>';
+      return;
+    }
+
+    /* el mes */
+    var cell = document.querySelector('.monthcal-day[data-day="' + day + '"]');
+    var pips = cell ? [].slice.call(cell.querySelectorAll('.monthcal-pip')) : [];
+    var cnt = cell ? cell.querySelector('.monthcal-count') : null;
+    if (sub) sub.textContent = cnt ? cnt.textContent : (pips.length + ' kinds booked');
+    body.innerHTML = pips.length
+      ? '<div class="daysum">' + pips.map(function (p) {
+          var title = (p.getAttribute('title') || '').split(' &middot; ')[0].split(' · ')[0];
+          return '<div class="daysum-row is-count">'
+            + '<span class="ty-sw ' + (p.className.match(/ty-[a-z]+/) || [''])[0] + '"></span>'
+            + '<span class="daysum-pt">' + title + '</span>'
+            + '<span class="daysum-tx">' + p.textContent.trim() + ' booked</span></div>';
+        }).join('') + '</div>'
+        + '<div class="field-help" style="margin-top:12px">The month knows how many of each kind, '
+        + 'not who. <b>Open this day</b> for the names, the times and the columns.</div>'
+      : '<div class="field-help">Nothing booked on this day.</div>';
+  }
+  window.lDaySum = lDaySum;
+
+  /* la cabecera de la semana y la celda del mes abren el mismo resumen */
+  document.addEventListener('click', function (ev) {
+    var el = ev.target.closest ? ev.target.closest('[data-day][data-open-modal="#l-daysum"]') : null;
+    if (!el) return;
+    lDaySum(el.getAttribute('data-day'),
+            el.classList.contains('weekcal-day') ? 'week' : 'month');
+  }, true);
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var el = ev.target.closest ? ev.target.closest('[data-day][data-open-modal="#l-daysum"]') : null;
+    if (!el) return;
+    ev.preventDefault(); el.click();
+  });
 
   function lFlagNew() {
     var name = (document.getElementById('fn-name') || {}).value.trim();
