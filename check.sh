@@ -101,7 +101,7 @@ i = tr.find('t-08-hierarchy')
 if i > -1:
     seg = tr[i:i+3000]
     m = re.search(r'A column on the day board\.\s*([A-Za-z-]+)\.', seg)
-    WORDS = {33: 'Thirty-three', 34: 'Thirty-four', 35: 'Thirty-five', 36: 'Thirty-six', 40: 'Forty'}
+    WORDS = {32: 'Thirty-two', 33: 'Thirty-three', 34: 'Thirty-four', 35: 'Thirty-five', 36: 'Thirty-six'}
     if m and m.group(1) != WORDS.get(want, ''):
         bad.append('treatments.html dice "%s" columnas, hierarchy.py dice %d' % (m.group(1), want))
 

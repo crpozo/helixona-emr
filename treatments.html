@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=110">
+<link rel="stylesheet" href="assets/hcos.css?v=111">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -1367,7 +1367,7 @@
         <div class="callout">
           <strong>A column is a line. The organizing type is a filter over what goes into it.</strong>
           <div class="hier">
-            <div class="hier-step is-key"><b>Column name</b><span>A line on the day board. Thirty-five.</span></div>
+            <div class="hier-step is-key"><b>Column name</b><span>A line on the day board. Thirty-four.</span></div>
             <div class="hier-arrow" aria-hidden="true">&rarr;</div>
             <div class="hier-step"><b>Appointment type</b><span>What can be booked into that line.</span></div>
             <div class="hier-arrow" aria-hidden="true">+</div>
@@ -1378,11 +1378,15 @@
           </div>
           <p style="margin-top:12px"><strong>A column is a bookable line, and a person is one line.</strong>
           Dr. Drannikov appears <em>once</em>: he does 30-minute office visits, 60-minute ones and
-          both lengths of procedure, but he has one day and one line. Dr. Bakman is the exception
-          at two lines, because FPE and everything else book by different rules. The BioCharger is
-          six because six people can sit in it at once.</p>
+          both lengths of procedure, but he has one day and one line. So does Dr. Bakman: his FPE
+          and everything else book by different rules, and that difference lives in the plan-of-care
+          note on each row, not in two columns of the board. The BioCharger is still six, because
+          six people can sit in it at once &mdash; that is a room, not a person.</p>
           <p style="margin-top:10px">Splitting a column per organizing type is what put him on the
-          board four times over, which is not what the clinic sees when it walks in.</p>
+          board four times over, which is not what the clinic sees when it walks in. With that
+          undone, every column is now its own resource &mdash; <strong>thirty-four columns,
+          thirty-four resources</strong> &mdash; and no line has to tell another that its owner
+          is somewhere else.</p>
         </div>
 
         <div class="tbl-wrap" style="margin-top:14px">
@@ -1405,30 +1409,6 @@
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr>
-                <td><strong>Mira</strong></td>
-                <td><span class="res-kind">Provider</span></td>
-                <td>Follow-Up, Telemedicine, Transfer of Care</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-                <td>30 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Dr. Bakman - FPE</strong></td>
-                <td><span class="res-kind">Provider</span></td>
-                <td>FPE, Medicare FPE, FPE FU</td>
-                <td class="field-help" style="margin:0">Program determines timing of booking this</td>
-                <td>30 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Dr. Bakman - Other</strong></td>
-                <td><span class="res-kind">Provider</span></td>
-                <td>Chiropractic Visit, Laser Eval, POC Review</td>
-                <td class="field-help" style="margin:0">POC determines if this can book</td>
-                <td>30 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 60 min</th></tr>
               <tr>
                 <td><strong>Dr. Drannikov</strong></td>
@@ -1436,31 +1416,6 @@
                 <td>New Patient, New Patient F/U</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Mira</strong></td>
-                <td><span class="res-kind">Provider</span></td>
-                <td>New Patient, New Patient F/U</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-                <td>60 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Leigh Ann</strong></td>
-                <td><span class="res-kind">Provider</span></td>
-                <td>Depth Psychology</td>
-                <td class="field-help" style="margin:0">Books through her own app today</td>
-                <td>60 min</td>
-                <td class="field-help" style="margin:0">Books through her own app today — HCOS shows it but does not own it.</td>
-              </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit</th></tr>
-              <tr>
-                <td><strong>MA Office Visit</strong></td>
-                <td><span class="res-kind">Staff</span></td>
-                <td>GLP Injection, Vitals, Nasal Swabs, EKG</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-                <td>15 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Procedure - 30 min</th></tr>
@@ -1479,6 +1434,59 @@
                 <td>Acupuncture, Microcurrent</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 30 min</th></tr>
+              <tr>
+                <td><strong>Mira</strong></td>
+                <td><span class="res-kind">Provider</span></td>
+                <td>Follow-Up, Telemedicine, Transfer of Care</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 60 min</th></tr>
+              <tr>
+                <td><strong>Mira</strong></td>
+                <td><span class="res-kind">Provider</span></td>
+                <td>New Patient, New Patient F/U</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>60 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 30 min</th></tr>
+              <tr>
+                <td><strong>Dr. Bakman</strong></td>
+                <td><span class="res-kind">Provider</span></td>
+                <td>FPE, Medicare FPE, FPE FU</td>
+                <td class="field-help" style="margin:0">Program determines timing of booking this</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Dr. Bakman</strong></td>
+                <td><span class="res-kind">Provider</span></td>
+                <td>Chiropractic Visit, Laser Eval, POC Review</td>
+                <td class="field-help" style="margin:0">POC determines if this can book</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 60 min</th></tr>
+              <tr>
+                <td><strong>Leigh Ann</strong></td>
+                <td><span class="res-kind">Provider</span></td>
+                <td>Depth Psychology</td>
+                <td class="field-help" style="margin:0">Books through her own app today</td>
+                <td>60 min</td>
+                <td class="field-help" style="margin:0">Books through her own app today — HCOS shows it but does not own it.</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit</th></tr>
+              <tr>
+                <td><strong>MA Office Visit</strong></td>
+                <td><span class="res-kind">Staff</span></td>
+                <td>GLP Injection, Vitals, Nasal Swabs, EKG</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>15 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Infusion</th></tr>
@@ -1507,6 +1515,15 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Lab</th></tr>
+              <tr>
+                <td><strong>Lab Draw</strong></td>
+                <td><span class="res-kind">Room</span></td>
+                <td>Quest Lab Draw, MDL, G6PD</td>
+                <td class="field-help" style="margin:0">Lab orders from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Booked along with the IV start.</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Infusion</th></tr>
               <tr>
                 <td><strong>Lab Draw</strong></td>
                 <td><span class="res-kind">Room</span></td>
@@ -1555,7 +1572,7 @@
                 <td>Erchonia Handheld</td>
                 <td class="field-help" style="margin:0">Protocol from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">Add-on only — it cannot be the reason for the visit.<br>Can be booked alongside the Erchonia Laser, or an IV.</td>
+                <td class="field-help" style="margin:0">Add-on only — it cannot be the reason for the visit. Can be booked alongside the Erchonia Laser, or an IV.</td>
               </tr>
               <tr>
                 <td><strong>ADA Nano Tub Room</strong></td>
@@ -1595,7 +1612,7 @@
                 <td>Halo Salt Therapy</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
-                <td class="field-help" style="margin:0">4 seats in one session. Everyone in a session has the same meditation.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>Salt Room - Chair 2</strong></td>
@@ -1603,7 +1620,7 @@
                 <td>Halo Salt Therapy</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
-                <td class="field-help" style="margin:0">4 seats in one session. Everyone in a session has the same meditation.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>Salt Room - Chair 3</strong></td>
@@ -1611,7 +1628,7 @@
                 <td>Halo Salt Therapy</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
-                <td class="field-help" style="margin:0">4 seats in one session. Everyone in a session has the same meditation.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>Salt Room - Chair 4</strong></td>
@@ -1619,55 +1636,55 @@
                 <td>Halo Salt Therapy</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
-                <td class="field-help" style="margin:0">4 seats in one session. Everyone in a session has the same meditation.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>BioCharger - Chair 1</strong></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger</td>
+                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">6 seats in one session. Everyone in a session has the same recipe.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>BioCharger - Chair 2</strong></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger</td>
+                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">6 seats in one session. Everyone in a session has the same recipe.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>BioCharger - Chair 3</strong></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger</td>
+                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">6 seats in one session. Everyone in a session has the same recipe.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>BioCharger - Chair 4</strong></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger</td>
+                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">6 seats in one session. Everyone in a session has the same recipe.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>BioCharger - Chair 5</strong></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger</td>
+                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">6 seats in one session. Everyone in a session has the same recipe.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
                 <td><strong>BioCharger - Chair 6</strong></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger</td>
+                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">6 seats in one session. Everyone in a session has the same recipe.</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Treatment Infusion Suite</th></tr>
               <tr>
@@ -1714,18 +1731,66 @@
               <tr>
                 <td><strong>Energetics</strong></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>BioMod Pro, BioMod Recharge, Lymph Star, Mini-Lymph Star, Neuro Muscular Therapy (NMT), SCENAR</td>
+                <td>BioMod Pro</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
-                <td>30 min, 60 min</td>
+                <td>60 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Energetics</strong></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>BioMod Recharge</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Energetics</strong></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Lymph Star</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>60 min</td>
                 <td class="field-help" style="margin:0">Not the same day as EBOO, and not for 3 days after. One day BEFORE is what is recommended.</td>
+              </tr>
+              <tr>
+                <td><strong>Energetics</strong></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Mini-Lymph Star</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Not the same day as EBOO, and not for 3 days after. One day BEFORE is what is recommended.</td>
+              </tr>
+              <tr>
+                <td><strong>Energetics</strong></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Neuro Muscular Therapy (NMT)</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>60 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Energetics</strong></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>SCENAR</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>60 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Energetics/Diagnostic</th></tr>
               <tr>
                 <td><strong>Energetics</strong></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>MEAD Initial, MEAD Reassess</td>
+                <td>MEAD Initial</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
-                <td>30 min, 60 min</td>
+                <td>60 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Energetics</strong></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>MEAD Reassess</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
             </tbody>
@@ -1987,7 +2052,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=110"></script>
+<script src="assets/hcos.js?v=111"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {

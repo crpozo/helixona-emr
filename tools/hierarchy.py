@@ -33,9 +33,13 @@ COLUMNS = [
   ['Follow-Up', 'Telemedicine', 'Transfer of Care'], '', 30, []),
  ('Office Visit - 60 min', 'Mira', 'Provider',
   ['New Patient', 'New Patient F/U'], '', 60, []),
- ('Office Visit - 30 min', 'Dr. Bakman - FPE', 'Provider',
+ # Dr. Bakman es UNA linea (Carlos, 2026-08-27: "Dr. Bakman no se repite").
+ # Su FPE y el resto se reservan por reglas distintas, y esa diferencia vive en
+ # la nota de POC de cada fila — no en dos columnas del tablero. El era el ultimo
+ # caso de una persona partida en varias lineas; ya no queda ninguno.
+ ('Office Visit - 30 min', 'Dr. Bakman', 'Provider',
   ['FPE', 'Medicare FPE', 'FPE FU'], 'Program determines timing of booking this', 30, []),
- ('Office Visit - 30 min', 'Dr. Bakman - Other', 'Provider',
+ ('Office Visit - 30 min', 'Dr. Bakman', 'Provider',
   ['Chiropractic Visit', 'Laser Eval', 'POC Review'], 'POC determines if this can book', 30, []),
  ('Office Visit - 60 min', 'Leigh Ann', 'Provider',
   ['Depth Psychology'], 'Books through her own app today', 60, ['external']),
@@ -186,7 +190,7 @@ BIOCHARGER = [
 # ---------------------------------------------------------------------------
 RESOURCE_OF = {
  'Dr. Drannikov': 'drannikov', 'Mira': 'mira',
- 'Dr. Bakman - FPE': 'bakman', 'Dr. Bakman - Other': 'bakman',
+ 'Dr. Bakman': 'bakman',
  'Leigh Ann': 'leighann', 'MA Office Visit': 'ma',
  'Medic IV': 'iv-medic', 'Nurse IV 1': 'iv-n1', 'Nurse IV 2': 'iv-n2',
  'Lab Draw': 'lab', 'Diagnostic Testing': 'diag', 'InBody': 'inbody',
@@ -238,7 +242,7 @@ AREA_ORDER = ['Providers & staff', 'Infusion', 'Lab', 'Diagnostics',
 
 AREA_OF = {
  'Dr. Drannikov': 'Providers & staff', 'Mira': 'Providers & staff',
- 'Dr. Bakman - FPE': 'Providers & staff', 'Dr. Bakman - Other': 'Providers & staff',
+ 'Dr. Bakman': 'Providers & staff',
  'Leigh Ann': 'Providers & staff', 'MA Office Visit': 'Providers & staff',
  'Medic IV': 'Infusion', 'Nurse IV 1': 'Infusion', 'Nurse IV 2': 'Infusion',
  'Lab Draw': 'Lab',

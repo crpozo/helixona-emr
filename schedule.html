@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=110">
+<link rel="stylesheet" href="assets/hcos.css?v=111">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -72,9 +72,9 @@
 
             <div class="l-fl">
               <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="What to show">
-                <option value="all">Everything &mdash; all 35 columns</option>
+                <option value="all">Everything &mdash; all 34 columns</option>
                 <optgroup label="By organizing type">
-                  <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 4 columns</option>
+                  <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 columns</option>
                   <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 columns</option>
                   <option value="org:Office Visit">Office Visit &mdash; 1 column</option>
                   <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 column</option>
@@ -90,8 +90,7 @@
                 <optgroup label="One line only">
                   <option value="drdrannikov">Dr. Drannikov</option>
                   <option value="mira">Mira</option>
-                  <option value="drbakmanfpe">Dr. Bakman - FPE &middot; Dr. Bakman</option>
-                  <option value="drbakmanother">Dr. Bakman - Other &middot; Dr. Bakman</option>
+                  <option value="drbakman">Dr. Bakman</option>
                   <option value="leighann">Leigh Ann</option>
                   <option value="maofficevisit">MA Office Visit &middot; Charlene</option>
                   <option value="mediciv">Medic IV &middot; Bea</option>
@@ -291,20 +290,19 @@
           </div>
 
           <div class="daycal-scroll">
-            <div class="daycal-head" style="grid-template-columns:64px minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr)">
+            <div class="daycal-head" style="grid-template-columns:64px minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr)">
             <div class="daycal-band-spacer"></div>
-            <div class="daycal-band" data-area="Providers & staff" style="grid-column:2 / span 6">Providers & staff</div>
-            <div class="daycal-band" data-area="Infusion" style="grid-column:8 / span 3">Infusion</div>
-            <div class="daycal-band" data-area="Lab" style="grid-column:11 / span 1">Lab</div>
-            <div class="daycal-band" data-area="Diagnostics" style="grid-column:12 / span 2">Diagnostics</div>
-            <div class="daycal-band" data-area="Treatment" style="grid-column:14 / span 17">Treatment</div>
-            <div class="daycal-band" data-area="Treatment Infusion Suite" style="grid-column:31 / span 5">Treatment Infusion Suite</div>
-            <div class="daycal-band" data-area="Energetics" style="grid-column:36 / span 1">Energetics</div>
+            <div class="daycal-band" data-area="Providers & staff" style="grid-column:2 / span 5">Providers & staff</div>
+            <div class="daycal-band" data-area="Infusion" style="grid-column:7 / span 3">Infusion</div>
+            <div class="daycal-band" data-area="Lab" style="grid-column:10 / span 1">Lab</div>
+            <div class="daycal-band" data-area="Diagnostics" style="grid-column:11 / span 2">Diagnostics</div>
+            <div class="daycal-band" data-area="Treatment" style="grid-column:13 / span 17">Treatment</div>
+            <div class="daycal-band" data-area="Treatment Infusion Suite" style="grid-column:30 / span 5">Treatment Infusion Suite</div>
+            <div class="daycal-band" data-area="Energetics" style="grid-column:35 / span 1">Energetics</div>
             <div class="daycal-col-head hours-head"></div>
             <div class="daycal-col-head" data-col="drdrannikov" data-area="Providers & staff" data-orgs="Office Visit - 30 min|Office Visit - 60 min|Procedure - 30 min|Procedure - 60 min" data-res="drannikov">Dr. Drannikov<span class="sub">Dr. Drannikov · Physician</span></div>
             <div class="daycal-col-head" data-col="mira" data-area="Providers & staff" data-orgs="Office Visit - 30 min|Office Visit - 60 min" data-res="mira">Mira<span class="sub">Mira · Provider</span></div>
-            <div class="daycal-col-head" data-col="drbakmanfpe" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-res="bakman">Dr. Bakman - FPE<span class="sub">Dr. Bakman · Physician</span></div>
-            <div class="daycal-col-head" data-col="drbakmanother" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-res="bakman">Dr. Bakman - Other<span class="sub">Dr. Bakman · Physician</span></div>
+            <div class="daycal-col-head" data-col="drbakman" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-res="bakman">Dr. Bakman<span class="sub">Dr. Bakman · Physician</span></div>
             <div class="daycal-col-head" data-col="leighann" data-area="Providers & staff" data-orgs="Office Visit - 60 min" data-res="leighann">Leigh Ann<span class="sub">Leigh Ann · Depth Psychology</span></div>
             <div class="daycal-col-head" data-col="maofficevisit" data-area="Providers & staff" data-orgs="Office Visit" data-res="ma">MA Office Visit<span class="sub">Charlene · Medical Assistant</span></div>
             <div class="daycal-col-head" data-col="mediciv" data-area="Infusion" data-orgs="Infusion" data-res="iv-medic">Medic IV<span class="sub">Bea · Medic</span></div>
@@ -338,7 +336,7 @@
             <div class="daycal-col-head" data-col="energetics" data-area="Energetics" data-orgs="Energetics|Energetics/Diagnostic" data-res="energetics">Energetics<span class="sub">Equipment</span></div>
             </div>
 
-            <div class="daycal-grid" style="grid-template-columns:64px minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr)">
+            <div class="daycal-grid" style="grid-template-columns:64px minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr) minmax(158px, 1fr)">
               <div class="daycal-times">
               <div class="daycal-hour">6 AM</div>
               <div class="daycal-hour">7 AM</div>
@@ -449,104 +447,66 @@
                 <div class="cal-appt-time">6:00 PM</div>
               </div>
             </div>
-            <div class="daycal-col" data-col="drbakmanfpe" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-res="bakman">
-              <div class="cal-appt st-done t-fpeie ty-visit" style="top:48px;height:46px" data-appt="A-94316" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fpeie" data-days="2" data-pt="Elena Petrova" data-when="6:30 AM" data-tx="FPE" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">FPE</span>
+            <div class="daycal-col" data-col="drbakman" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-res="bakman">
+              <div class="cal-appt st-done t-fpeie ty-visit" style="top:48px;height:46px" data-appt="A-94316" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fpeie" data-days="2" data-pt="Elena Petrova" data-when="6:30 AM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Medicare FPE</span>
                 <div class="cal-appt-name">Elena Petrova</div>
                 <div class="cal-appt-time">6:30 AM</div>
               </div>
-              <div class="cal-appt is-elsewhere" style="top:144px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="7:30 AM" title="Busy in Dr. Bakman - Other">
-                <span class="els-t">Busy &middot; Dr. Bakman - Other</span>
-              </div>
-              <div class="cal-appt st-confirmed t-fpeie ty-visit" style="top:192px;height:46px" data-appt="A-95009" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fpeie" data-days="2" data-pt="Nadia Boulos" data-when="8:00 AM" data-tx="FPE" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">FPE</span>
-                <div class="cal-appt-name">Nadia Boulos</div>
-                <div class="cal-appt-time">8:00 AM</div>
-              </div>
-              <div class="cal-appt is-elsewhere" style="top:336px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="9:30 AM" title="Busy in Dr. Bakman - Other">
-                <span class="els-t">Busy &middot; Dr. Bakman - Other</span>
-              </div>
-              <div class="cal-appt st-inchair t-fpefu ty-visit" style="top:432px;height:46px" data-appt="A-93879" data-open-drawer="#l-appt-drawer" data-st="Inchair" data-sub="t-fpefu" data-days="2" data-pt="Walter Hsu" data-when="10:30 AM" data-tx="FPE FU" data-org="Office Visit - 30 min">
+              <div class="cal-appt st-done t-fpefu ty-visit" style="top:144px;height:46px" data-appt="A-95009" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-fpefu" data-days="2" data-pt="Grace Lindqvist" data-when="7:30 AM" data-tx="FPE FU" data-org="Office Visit - 30 min">
                 <span class="cal-appt-sub">FPE FU</span>
-                <div class="cal-appt-name">Walter Hsu</div>
-                <div class="cal-appt-time">10:30 AM</div>
-              </div>
-              <div class="cal-appt is-elsewhere" style="top:576px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="12:00 PM" title="Busy in Dr. Bakman - Other">
-                <span class="els-t">Busy &middot; Dr. Bakman - Other</span>
-              </div>
-              <div class="cal-appt is-elsewhere" style="top:624px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="12:30 PM" title="Busy in Dr. Bakman - Other">
-                <span class="els-t">Busy &middot; Dr. Bakman - Other</span>
-              </div>
-              <div class="cal-appt st-scheduled t-fpeie ty-visit" style="top:720px;height:46px" data-appt="A-95410" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fpeie" data-days="2" data-pt="Amara Diallo" data-when="1:30 PM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Medicare FPE</span>
-                <div class="cal-appt-name">Amara Diallo</div>
-                <div class="cal-appt-time">1:30 PM</div>
-              </div>
-              <div class="cal-appt st-scheduled t-fpeie ty-visit" style="top:864px;height:46px" data-appt="A-96905" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fpeie" data-days="2" data-pt="Priya Natarajan" data-when="3:00 PM" data-tx="FPE" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">FPE</span>
-                <div class="cal-appt-name">Priya Natarajan</div>
-                <div class="cal-appt-time">3:00 PM</div>
-              </div>
-              <div class="cal-appt is-elsewhere" style="top:912px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="3:30 PM" title="Busy in Dr. Bakman - Other">
-                <span class="els-t">Busy &middot; Dr. Bakman - Other</span>
-              </div>
-              <div class="cal-appt is-elsewhere" style="top:1056px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="5:00 PM" title="Busy in Dr. Bakman - Other">
-                <span class="els-t">Busy &middot; Dr. Bakman - Other</span>
-              </div>
-              <div class="cal-appt st-confirmed t-fpeie ty-visit" style="top:1152px;height:46px" data-appt="A-91411" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fpeie" data-days="2" data-pt="Owen Delacroix" data-when="6:00 PM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Medicare FPE</span>
-                <div class="cal-appt-name">Owen Delacroix</div>
-                <div class="cal-appt-time">6:00 PM</div>
-              </div>
-            </div>
-            <div class="daycal-col" data-col="drbakmanother" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-res="bakman">
-              <div class="cal-appt is-elsewhere" style="top:48px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="6:30 AM" title="Busy in Dr. Bakman - FPE">
-                <span class="els-t">Busy &middot; Dr. Bakman - FPE</span>
-              </div>
-              <div class="cal-appt st-done t-lasereval ty-visit" style="top:144px;height:46px" data-appt="A-94458" data-open-drawer="#l-appt-drawer" data-st="Done" data-sub="t-lasereval" data-days="2" data-pt="Grace Lindqvist" data-when="7:30 AM" data-tx="Laser Eval" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Laser Eval</span>
                 <div class="cal-appt-name">Grace Lindqvist</div>
                 <div class="cal-appt-time">7:30 AM</div>
               </div>
-              <div class="cal-appt is-elsewhere" style="top:192px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="8:00 AM" title="Busy in Dr. Bakman - FPE">
-                <span class="els-t">Busy &middot; Dr. Bakman - FPE</span>
+              <div class="cal-appt st-confirmed t-fpeie ty-visit" style="top:192px;height:46px" data-appt="A-93879" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fpeie" data-days="2" data-pt="Nadia Boulos" data-when="8:00 AM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Medicare FPE</span>
+                <div class="cal-appt-name">Nadia Boulos</div>
+                <div class="cal-appt-time">8:00 AM</div>
               </div>
-              <div class="cal-appt st-inchair t-lasereval ty-visit" style="top:336px;height:46px" data-appt="A-97248" data-open-drawer="#l-appt-drawer" data-st="Inchair" data-sub="t-lasereval" data-days="2" data-pt="Samir Haddad" data-when="9:30 AM" data-tx="Laser Eval" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Laser Eval</span>
+              <div class="cal-appt st-inchair t-dctx ty-visit" style="top:336px;height:46px" data-appt="A-95410" data-open-drawer="#l-appt-drawer" data-st="Inchair" data-sub="t-dctx" data-days="2" data-pt="Samir Haddad" data-when="9:30 AM" data-tx="Chiropractic Visit" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Chiropractic Visit</span>
                 <div class="cal-appt-name">Samir Haddad</div>
                 <div class="cal-appt-time">9:30 AM</div>
               </div>
-              <div class="cal-appt is-elsewhere" style="top:432px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="10:30 AM" title="Busy in Dr. Bakman - FPE">
-                <span class="els-t">Busy &middot; Dr. Bakman - FPE</span>
+              <div class="cal-appt st-inchair t-lasereval ty-visit" style="top:432px;height:46px" data-appt="A-96905" data-open-drawer="#l-appt-drawer" data-st="Inchair" data-sub="t-lasereval" data-days="2" data-pt="Walter Hsu" data-when="10:30 AM" data-tx="Laser Eval" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Laser Eval</span>
+                <div class="cal-appt-name">Walter Hsu</div>
+                <div class="cal-appt-time">10:30 AM</div>
               </div>
-              <div class="cal-appt st-confirmed t-dctx ty-visit" style="top:576px;height:46px" data-appt="A-95458" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-dctx" data-days="2" data-pt="Hana Sato" data-when="12:00 PM" data-tx="Chiropractic Visit" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Chiropractic Visit</span>
+              <div class="cal-appt st-confirmed t-fpeie ty-visit" style="top:576px;height:46px" data-appt="A-91411" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fpeie" data-days="2" data-pt="Hana Sato" data-when="12:00 PM" data-tx="FPE" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">FPE</span>
                 <div class="cal-appt-name">Hana Sato</div>
                 <div class="cal-appt-time">12:00 PM</div>
               </div>
-              <div class="cal-appt st-arrived t-dctx ty-visit" style="top:624px;height:46px" data-appt="A-96794" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-dctx" data-days="2" data-pt="Ben Okonkwo" data-when="12:30 PM" data-tx="Chiropractic Visit" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Chiropractic Visit</span>
+              <div class="cal-appt st-arrived t-fpeie ty-visit" style="top:624px;height:46px" data-appt="A-94458" data-open-drawer="#l-appt-drawer" data-st="Arrived" data-sub="t-fpeie" data-days="2" data-pt="Ben Okonkwo" data-when="12:30 PM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Medicare FPE</span>
                 <div class="cal-appt-name">Ben Okonkwo</div>
                 <div class="cal-appt-time">12:30 PM</div>
               </div>
-              <div class="cal-appt is-elsewhere" style="top:720px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="1:30 PM" title="Busy in Dr. Bakman - FPE">
-                <span class="els-t">Busy &middot; Dr. Bakman - FPE</span>
+              <div class="cal-appt st-scheduled t-fpefu ty-visit" style="top:720px;height:46px" data-appt="A-97248" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fpefu" data-days="2" data-pt="Amara Diallo" data-when="1:30 PM" data-tx="FPE FU" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">FPE FU</span>
+                <div class="cal-appt-name">Amara Diallo</div>
+                <div class="cal-appt-time">1:30 PM</div>
               </div>
-              <div class="cal-appt is-elsewhere" style="top:864px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="3:00 PM" title="Busy in Dr. Bakman - FPE">
-                <span class="els-t">Busy &middot; Dr. Bakman - FPE</span>
+              <div class="cal-appt st-scheduled t-fpeie ty-visit" style="top:864px;height:46px" data-appt="A-95458" data-open-drawer="#l-appt-drawer" data-st="Scheduled" data-sub="t-fpeie" data-days="2" data-pt="Priya Natarajan" data-when="3:00 PM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Medicare FPE</span>
+                <div class="cal-appt-name">Priya Natarajan</div>
+                <div class="cal-appt-time">3:00 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-dctx ty-visit" style="top:912px;height:46px" data-appt="A-96455" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-dctx" data-days="2" data-pt="Liam Fitzgerald" data-when="3:30 PM" data-tx="Chiropractic Visit" data-org="Office Visit - 30 min">
-                <span class="cal-appt-sub">Chiropractic Visit</span>
+              <div class="cal-appt st-confirmed t-fpeie ty-visit" style="top:912px;height:46px" data-appt="A-96794" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-fpeie" data-days="2" data-pt="Liam Fitzgerald" data-when="3:30 PM" data-tx="Medicare FPE" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Medicare FPE</span>
                 <div class="cal-appt-name">Liam Fitzgerald</div>
                 <div class="cal-appt-time">3:30 PM</div>
               </div>
-              <div class="cal-appt st-confirmed t-pocrev ty-visit" style="top:1056px;height:46px" data-appt="A-92045" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pocrev" data-days="2" data-pt="Nina Kowalski" data-when="5:00 PM" data-tx="POC Review" data-org="Office Visit - 30 min">
+              <div class="cal-appt st-confirmed t-pocrev ty-visit" style="top:1056px;height:46px" data-appt="A-96455" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-pocrev" data-days="2" data-pt="Nina Kowalski" data-when="5:00 PM" data-tx="POC Review" data-org="Office Visit - 30 min">
                 <span class="cal-appt-sub">POC Review</span>
                 <div class="cal-appt-name">Nina Kowalski</div>
                 <div class="cal-appt-time">5:00 PM</div>
               </div>
-              <div class="cal-appt is-elsewhere" style="top:1152px;height:46px" data-blocked="1" data-st="Elsewhere" data-when="6:00 PM" title="Busy in Dr. Bakman - FPE">
-                <span class="els-t">Busy &middot; Dr. Bakman - FPE</span>
+              <div class="cal-appt st-confirmed t-dctx ty-visit" style="top:1152px;height:46px" data-appt="A-92045" data-open-drawer="#l-appt-drawer" data-st="Confirmed" data-sub="t-dctx" data-days="2" data-pt="Owen Delacroix" data-when="6:00 PM" data-tx="Chiropractic Visit" data-org="Office Visit - 30 min">
+                <span class="cal-appt-sub">Chiropractic Visit</span>
+                <div class="cal-appt-name">Owen Delacroix</div>
+                <div class="cal-appt-time">6:00 PM</div>
               </div>
             </div>
             <div class="daycal-col" data-col="leighann" data-area="Providers & staff" data-orgs="Office Visit - 60 min" data-res="leighann">
@@ -5838,8 +5798,7 @@
                 <optgroup label="Providers & staff">
                   <option value="drdrannikov" data-kind="Provider" data-area="Providers & staff" data-orgs="Office Visit - 30 min|Office Visit - 60 min|Procedure - 30 min|Procedure - 60 min" data-takes="Follow-Up|Transfer of Care|Telemedicine|New Patient|New Patient F/U|Trigger Point|Prolozone|PRP|Female Pellet|Male Pellet|Acupuncture|Microcurrent">Dr. Drannikov</option>
                   <option value="mira" data-kind="Provider" data-area="Providers & staff" data-orgs="Office Visit - 30 min|Office Visit - 60 min" data-takes="Follow-Up|Telemedicine|Transfer of Care|New Patient|New Patient F/U">Mira</option>
-                  <option value="drbakmanfpe" data-kind="Provider" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-takes="FPE|Medicare FPE|FPE FU">Dr. Bakman - FPE &middot; Dr. Bakman</option>
-                  <option value="drbakmanother" data-kind="Provider" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-takes="Chiropractic Visit|Laser Eval|POC Review">Dr. Bakman - Other &middot; Dr. Bakman</option>
+                  <option value="drbakman" data-kind="Provider" data-area="Providers & staff" data-orgs="Office Visit - 30 min" data-takes="FPE|Medicare FPE|FPE FU|Chiropractic Visit|Laser Eval|POC Review">Dr. Bakman</option>
                   <option value="leighann" data-kind="Provider" data-area="Providers & staff" data-orgs="Office Visit - 60 min" data-takes="Depth Psychology">Leigh Ann</option>
                   <option value="maofficevisit" data-kind="Staff" data-area="Providers & staff" data-orgs="Office Visit" data-takes="GLP Injection|Vitals|Nasal Swabs|EKG">MA Office Visit &middot; Charlene</option>
                 </optgroup>
@@ -6982,7 +6941,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=110"></script>
+<script src="assets/hcos.js?v=111"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8100,6 +8059,8 @@
   /* Lo que ya esta ocupado. jul21 se DERIVA del propio day board, para que
      no puedan discrepar: si el board cambia de treinta y cinco columnas a
      otra cosa, esto se regenera con el. */
+  /* Lo que ya esta ocupado. jul21 se DERIVA del propio day board, para que
+     no puedan discrepar. */
   var L_BUSY = {
     jul21: {
       adananotubroom: [[360,420,'Grace Lindqvist &middot; Hydrogen'], [510,570,'Daniel Okafor &middot; Hydrogen'], [600,660,'Katherine Olsen &middot; Oxygen'], [780,840,'Hana Sato &middot; Hydrogen'], [840,900,'Rosa Iglesias &middot; Hydrogen'], [930,990,'Samir Haddad &middot; Hydrogen'], [1050,1110,'Sofia Ramos &middot; Oxygen']],
@@ -8111,8 +8072,7 @@
       biochargerchair5: [[390,420,'Maya Reyes &middot; BioCharger 30 min'], [450,480,'Grace Lindqvist &middot; BioCharger 30 min'], [570,600,'Tom Alvarez &middot; BioCharger 30 min'], [600,630,'Sofia Ramos &middot; BioCharger 30 min'], [1020,1050,'Hana Sato &middot; BioCharger Stack 60 min'], [1110,1140,'Marcus Webb &middot; BioCharger 30 min']],
       biochargerchair6: [[390,420,'Maya Reyes &middot; BioCharger 30 min'], [630,660,'Tom Alvarez &middot; BioCharger 30 min'], [750,780,'Rosa Iglesias &middot; BioCharger 30 min'], [780,810,'Yuki Tanaka &middot; BioCharger 30 min'], [810,840,'Daniel Okafor &middot; BioCharger Stack 60 min'], [870,900,'Elena Petrova &middot; BioCharger Stack 60 min'], [990,1020,'Elena Petrova &middot; BioCharger Stack 60 min'], [1110,1140,'Marcus Webb &middot; BioCharger 30 min']],
       diagnostictesting: [[390,450,'Tom Alvarez &middot; Diagnostic Testing'], [510,570,'Katherine Olsen &middot; Diagnostic Testing'], [660,720,'Priya Natarajan &middot; Diagnostic Testing'], [750,810,'Hana Sato &middot; Diagnostic Testing'], [810,870,'Nadia Boulos &middot; Diagnostic Testing'], [990,1050,'Grace Lindqvist &middot; Diagnostic Testing']],
-      drbakmanfpe: [[390,420,'Elena Petrova &middot; FPE'], [480,510,'Nadia Boulos &middot; FPE'], [630,660,'Walter Hsu &middot; FPE FU'], [810,840,'Amara Diallo &middot; Medicare FPE'], [900,930,'Priya Natarajan &middot; FPE'], [1080,1110,'Owen Delacroix &middot; Medicare FPE']],
-      drbakmanother: [[450,480,'Grace Lindqvist &middot; Laser Eval'], [570,600,'Samir Haddad &middot; Laser Eval'], [720,750,'Hana Sato &middot; Chiropractic Visit'], [750,780,'Ben Okonkwo &middot; Chiropractic Visit'], [930,960,'Liam Fitzgerald &middot; Chiropractic Visit'], [1020,1050,'Nina Kowalski &middot; POC Review']],
+      drbakman: [[390,420,'Elena Petrova &middot; Medicare FPE'], [450,480,'Grace Lindqvist &middot; FPE FU'], [480,510,'Nadia Boulos &middot; Medicare FPE'], [570,600,'Samir Haddad &middot; Chiropractic Visit'], [630,660,'Walter Hsu &middot; Laser Eval'], [720,750,'Hana Sato &middot; FPE'], [750,780,'Ben Okonkwo &middot; Medicare FPE'], [810,840,'Amara Diallo &middot; FPE FU'], [900,930,'Priya Natarajan &middot; Medicare FPE'], [930,960,'Liam Fitzgerald &middot; Medicare FPE'], [1020,1050,'Nina Kowalski &middot; POC Review'], [1080,1110,'Owen Delacroix &middot; Chiropractic Visit']],
       drdrannikov: [[360,390,'Hana Sato &middot; Male Pellet'], [420,450,'Sofia Ramos &middot; Male Pellet'], [480,510,'Amara Diallo &middot; Follow-Up'], [570,600,'Ben Okonkwo &middot; Transfer of Care'], [630,660,'Tom Alvarez &middot; PRP'], [690,750,'Marcus Webb &middot; New Patient'], [780,840,'Nadia Boulos &middot; New Patient'], [900,930,'Rosa Iglesias &middot; Female Pellet']],
       eboochair1: [[420,540,'Marcus Webb &middot; EBOO'], [630,750,'Yuki Tanaka &middot; EBOO'], [780,900,'Tom Alvarez &middot; EBOO SAFE'], [1020,1140,'Priya Natarajan &middot; EBOO']],
       eboochair2: [[360,480,'Priya Natarajan &middot; EBOO SAFE'], [570,690,'Liam Fitzgerald &middot; EBOO'], [840,960,'Grace Lindqvist &middot; EBOO SAFE'], [990,1110,'Hana Sato &middot; EBOO']],
@@ -8265,8 +8225,7 @@
     biochargerchair5: 'bio5',
     biochargerchair6: 'bio6',
     diagnostictesting: 'diag',
-    drbakmanfpe: 'bakman',
-    drbakmanother: 'bakman',
+    drbakman: 'bakman',
     drdrannikov: 'drannikov',
     eboochair1: 'eboo1',
     eboochair2: 'eboo2',
