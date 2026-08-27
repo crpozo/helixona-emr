@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=113">
+<link rel="stylesheet" href="assets/hcos.css?v=114">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -72,19 +72,19 @@
 
             <div class="l-fl">
               <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="Which columns to show">
-                <option value="all">Everything &mdash; all 34 columns</option>
-                <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 of 34 columns</option>
-                <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 of 34 columns</option>
-                <option value="org:Office Visit">Office Visit &mdash; 1 of 34 columns</option>
-                <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 of 34 columns</option>
-                <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 of 34 columns</option>
-                <option value="org:Infusion">Infusion &mdash; 4 of 34 columns</option>
-                <option value="org:Lab">Lab &mdash; 1 of 34 columns</option>
-                <option value="org:Diagnostics">Diagnostics &mdash; 2 of 34 columns</option>
-                <option value="org:Treatment">Treatment &mdash; 17 of 34 columns</option>
-                <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 of 34 columns</option>
-                <option value="org:Energetics">Energetics &mdash; 1 of 34 columns</option>
-                <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 of 34 columns</option>
+                <option value="all">Everything</option>
+                <option value="org:Office Visit - 30 min">Office Visit - 30 min</option>
+                <option value="org:Office Visit - 60 min">Office Visit - 60 min</option>
+                <option value="org:Office Visit">Office Visit</option>
+                <option value="org:Procedure - 30 min">Procedure - 30 min</option>
+                <option value="org:Procedure - 60 min">Procedure - 60 min</option>
+                <option value="org:Infusion">Infusion</option>
+                <option value="org:Lab">Lab</option>
+                <option value="org:Diagnostics">Diagnostics</option>
+                <option value="org:Treatment">Treatment</option>
+                <option value="org:Treatment Infusion Suite">Treatment Infusion Suite</option>
+                <option value="org:Energetics">Energetics</option>
+                <option value="org:Energetics/Diagnostic">Energetics/Diagnostic</option>
               </select>
               <input class="field-input l-colfind" id="l-colfind" type="search"
                      placeholder="Find a column&hellip; e.g. erchonia"
@@ -1917,19 +1917,19 @@
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
               <select class="field-select l-select l-show" id="l-view-w" onchange="lSync(this)" aria-label="Which columns to show">
-                <option value="all">Everything &mdash; all 34 columns</option>
-                <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 of 34 columns</option>
-                <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 of 34 columns</option>
-                <option value="org:Office Visit">Office Visit &mdash; 1 of 34 columns</option>
-                <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 of 34 columns</option>
-                <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 of 34 columns</option>
-                <option value="org:Infusion">Infusion &mdash; 4 of 34 columns</option>
-                <option value="org:Lab">Lab &mdash; 1 of 34 columns</option>
-                <option value="org:Diagnostics">Diagnostics &mdash; 2 of 34 columns</option>
-                <option value="org:Treatment">Treatment &mdash; 17 of 34 columns</option>
-                <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 of 34 columns</option>
-                <option value="org:Energetics">Energetics &mdash; 1 of 34 columns</option>
-                <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 of 34 columns</option>
+                <option value="all">Everything</option>
+                <option value="org:Office Visit - 30 min">Office Visit - 30 min</option>
+                <option value="org:Office Visit - 60 min">Office Visit - 60 min</option>
+                <option value="org:Office Visit">Office Visit</option>
+                <option value="org:Procedure - 30 min">Procedure - 30 min</option>
+                <option value="org:Procedure - 60 min">Procedure - 60 min</option>
+                <option value="org:Infusion">Infusion</option>
+                <option value="org:Lab">Lab</option>
+                <option value="org:Diagnostics">Diagnostics</option>
+                <option value="org:Treatment">Treatment</option>
+                <option value="org:Treatment Infusion Suite">Treatment Infusion Suite</option>
+                <option value="org:Energetics">Energetics</option>
+                <option value="org:Energetics/Diagnostic">Energetics/Diagnostic</option>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select l-treat" id="l-treat-w" onchange="lSync(this)" aria-label="Treatment">
@@ -2686,19 +2686,19 @@
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
               <select class="field-select l-select l-show" id="l-view-m" onchange="lSync(this)" aria-label="Which columns to show">
-                <option value="all">Everything &mdash; all 34 columns</option>
-                <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 of 34 columns</option>
-                <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 of 34 columns</option>
-                <option value="org:Office Visit">Office Visit &mdash; 1 of 34 columns</option>
-                <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 of 34 columns</option>
-                <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 of 34 columns</option>
-                <option value="org:Infusion">Infusion &mdash; 4 of 34 columns</option>
-                <option value="org:Lab">Lab &mdash; 1 of 34 columns</option>
-                <option value="org:Diagnostics">Diagnostics &mdash; 2 of 34 columns</option>
-                <option value="org:Treatment">Treatment &mdash; 17 of 34 columns</option>
-                <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 of 34 columns</option>
-                <option value="org:Energetics">Energetics &mdash; 1 of 34 columns</option>
-                <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 of 34 columns</option>
+                <option value="all">Everything</option>
+                <option value="org:Office Visit - 30 min">Office Visit - 30 min</option>
+                <option value="org:Office Visit - 60 min">Office Visit - 60 min</option>
+                <option value="org:Office Visit">Office Visit</option>
+                <option value="org:Procedure - 30 min">Procedure - 30 min</option>
+                <option value="org:Procedure - 60 min">Procedure - 60 min</option>
+                <option value="org:Infusion">Infusion</option>
+                <option value="org:Lab">Lab</option>
+                <option value="org:Diagnostics">Diagnostics</option>
+                <option value="org:Treatment">Treatment</option>
+                <option value="org:Treatment Infusion Suite">Treatment Infusion Suite</option>
+                <option value="org:Energetics">Energetics</option>
+                <option value="org:Energetics/Diagnostic">Energetics/Diagnostic</option>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select l-treat" id="l-treat-m" onchange="lSync(this)" aria-label="Treatment">
@@ -6915,7 +6915,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=113"></script>
+<script src="assets/hcos.js?v=114"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
