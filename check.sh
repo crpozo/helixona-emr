@@ -125,13 +125,25 @@ for m in re.finditer(r'<div class="cal-appt (?!is-elsewhere)[^"]*"[^>]*>', sched
 
 # el filtro de organizing type no puede repetir una entrada (Carlos: "no hagas
 # que se repita"), y tiene que ofrecer los doce
-opts = re.findall(r'<option value="org:([^"]+)"', sched)
-if len(opts) != len(set(opts)):
-    from collections import Counter
-    dup = [k for k, v in Counter(opts).items() if v > 1]
-    bad.append('el filtro repite organizing types: %s' % ', '.join(dup))
-if len(opts) != len(H.org_types()):
-    bad.append('el filtro ofrece %d organizing types, hierarchy.py dice %d' % (len(opts), len(H.org_types())))
+# se cuenta POR SELECT: dia, semana y mes llevan el mismo filtro, y contar sobre
+# el archivo entero daba doce por tres y parecia una repeticion que no lo era
+for sid in ('l-view', 'l-view-w', 'l-view-m'):
+    k = sched.find('id="%s"' % sid)
+    if k < 0:
+        bad.append('falta el filtro %s' % sid); continue
+    blk = sched[k:sched.index('</select>', k)]
+    opts = re.findall(r'<option value="org:([^"]+)"', blk)
+    if len(opts) != len(set(opts)):
+        from collections import Counter
+        dup = [x for x, v in Counter(opts).items() if v > 1]
+        bad.append('%s repite organizing types: %s' % (sid, ', '.join(dup)))
+    if len(opts) != len(H.org_types()):
+        bad.append('%s ofrece %d organizing types, hierarchy.py dice %d'
+                   % (sid, len(opts), len(H.org_types())))
+    cols = re.findall(r'<option value="([a-z0-9]+)">Only ', blk)
+    if len(cols) != len(H.board_columns()):
+        bad.append('%s ofrece %d columnas por nombre, el tablero tiene %d'
+                   % (sid, len(cols), len(H.board_columns())))
 
 # ninguna columna puede salir dos veces en el tablero
 heads_ids = re.findall(r'<div class="daycal-col-head" data-col="([^"]+)"', sched)

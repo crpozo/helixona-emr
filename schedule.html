@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=111">
+<link rel="stylesheet" href="assets/hcos.css?v=112">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -71,57 +71,57 @@
             <span class="l-sep" aria-hidden="true"></span>
 
             <div class="l-fl">
-              <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="What to show">
+              <select class="field-select l-select l-show" id="l-view" onchange="lSync(this)" aria-label="Which columns to show">
                 <option value="all">Everything &mdash; all 34 columns</option>
-                <optgroup label="By organizing type">
-                  <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 columns</option>
-                  <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 columns</option>
-                  <option value="org:Office Visit">Office Visit &mdash; 1 column</option>
-                  <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 column</option>
-                  <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 column</option>
-                  <option value="org:Infusion">Infusion &mdash; 4 columns</option>
-                  <option value="org:Lab">Lab &mdash; 1 column</option>
-                  <option value="org:Diagnostics">Diagnostics &mdash; 2 columns</option>
-                  <option value="org:Treatment">Treatment &mdash; 17 columns</option>
-                  <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 columns</option>
-                  <option value="org:Energetics">Energetics &mdash; 1 column</option>
-                  <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 column</option>
+                <optgroup label="Narrow by organizing type &mdash; what is being booked">
+                  <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 of 34 columns</option>
+                  <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 of 34 columns</option>
+                  <option value="org:Office Visit">Office Visit &mdash; 1 of 34 columns</option>
+                  <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 of 34 columns</option>
+                  <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 of 34 columns</option>
+                  <option value="org:Infusion">Infusion &mdash; 4 of 34 columns</option>
+                  <option value="org:Lab">Lab &mdash; 1 of 34 columns</option>
+                  <option value="org:Diagnostics">Diagnostics &mdash; 2 of 34 columns</option>
+                  <option value="org:Treatment">Treatment &mdash; 17 of 34 columns</option>
+                  <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 of 34 columns</option>
+                  <option value="org:Energetics">Energetics &mdash; 1 of 34 columns</option>
+                  <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 of 34 columns</option>
                 </optgroup>
-                <optgroup label="One line only">
-                  <option value="drdrannikov">Dr. Drannikov</option>
-                  <option value="mira">Mira</option>
-                  <option value="drbakman">Dr. Bakman</option>
-                  <option value="leighann">Leigh Ann</option>
-                  <option value="maofficevisit">MA Office Visit &middot; Charlene</option>
-                  <option value="mediciv">Medic IV &middot; Bea</option>
-                  <option value="nurseiv1">Nurse IV 1 &middot; Nick</option>
-                  <option value="nurseiv2">Nurse IV 2 &middot; Juan</option>
-                  <option value="labdraw">Lab Draw &middot; Wesley</option>
-                  <option value="diagnostictesting">Diagnostic Testing &middot; Equipment</option>
-                  <option value="inbody">InBody &middot; Equipment</option>
-                  <option value="redlight">Red Light &middot; Equipment</option>
-                  <option value="erchonialaser">Erchonia Laser &middot; Equipment</option>
-                  <option value="erchoniahandheld">Erchonia Handheld &middot; Equipment</option>
-                  <option value="adananotubroom">ADA Nano Tub Room &middot; Room</option>
-                  <option value="nanotubroom">Nano Tub Room &middot; Room</option>
-                  <option value="eboochair1">Eboo Chair 1 &middot; Equipment</option>
-                  <option value="eboochair2">Eboo Chair 2 &middot; Equipment</option>
-                  <option value="saltroomchair1">Salt Room - Chair 1 &middot; Seat</option>
-                  <option value="saltroomchair2">Salt Room - Chair 2 &middot; Seat</option>
-                  <option value="saltroomchair3">Salt Room - Chair 3 &middot; Seat</option>
-                  <option value="saltroomchair4">Salt Room - Chair 4 &middot; Seat</option>
-                  <option value="biochargerchair1">BioCharger - Chair 1 &middot; Seat</option>
-                  <option value="biochargerchair2">BioCharger - Chair 2 &middot; Seat</option>
-                  <option value="biochargerchair3">BioCharger - Chair 3 &middot; Seat</option>
-                  <option value="biochargerchair4">BioCharger - Chair 4 &middot; Seat</option>
-                  <option value="biochargerchair5">BioCharger - Chair 5 &middot; Seat</option>
-                  <option value="biochargerchair6">BioCharger - Chair 6 &middot; Seat</option>
-                  <option value="nanovi1">NanoVi 1 &middot; Equipment</option>
-                  <option value="nanovi2">NanoVi 2 &middot; Equipment</option>
-                  <option value="hydrogeninhalation">Hydrogen Inhalation &middot; Equipment</option>
-                  <option value="bemer">BEMER &middot; Equipment</option>
-                  <option value="rife">Rife &middot; Equipment</option>
-                  <option value="energetics">Energetics &middot; Equipment</option>
+                <optgroup label="Or open one column by name">
+                  <option value="drdrannikov">Only Dr. Drannikov</option>
+                  <option value="mira">Only Mira</option>
+                  <option value="drbakman">Only Dr. Bakman</option>
+                  <option value="leighann">Only Leigh Ann</option>
+                  <option value="maofficevisit">Only MA Office Visit &middot; Charlene</option>
+                  <option value="mediciv">Only Medic IV &middot; Bea</option>
+                  <option value="nurseiv1">Only Nurse IV 1 &middot; Nick</option>
+                  <option value="nurseiv2">Only Nurse IV 2 &middot; Juan</option>
+                  <option value="labdraw">Only Lab Draw &middot; Wesley</option>
+                  <option value="diagnostictesting">Only Diagnostic Testing &middot; Equipment</option>
+                  <option value="inbody">Only InBody &middot; Equipment</option>
+                  <option value="redlight">Only Red Light &middot; Equipment</option>
+                  <option value="erchonialaser">Only Erchonia Laser &middot; Equipment</option>
+                  <option value="erchoniahandheld">Only Erchonia Handheld &middot; Equipment</option>
+                  <option value="adananotubroom">Only ADA Nano Tub Room &middot; Room</option>
+                  <option value="nanotubroom">Only Nano Tub Room &middot; Room</option>
+                  <option value="eboochair1">Only Eboo Chair 1 &middot; Equipment</option>
+                  <option value="eboochair2">Only Eboo Chair 2 &middot; Equipment</option>
+                  <option value="saltroomchair1">Only Salt Room - Chair 1 &middot; Seat</option>
+                  <option value="saltroomchair2">Only Salt Room - Chair 2 &middot; Seat</option>
+                  <option value="saltroomchair3">Only Salt Room - Chair 3 &middot; Seat</option>
+                  <option value="saltroomchair4">Only Salt Room - Chair 4 &middot; Seat</option>
+                  <option value="biochargerchair1">Only BioCharger - Chair 1 &middot; Seat</option>
+                  <option value="biochargerchair2">Only BioCharger - Chair 2 &middot; Seat</option>
+                  <option value="biochargerchair3">Only BioCharger - Chair 3 &middot; Seat</option>
+                  <option value="biochargerchair4">Only BioCharger - Chair 4 &middot; Seat</option>
+                  <option value="biochargerchair5">Only BioCharger - Chair 5 &middot; Seat</option>
+                  <option value="biochargerchair6">Only BioCharger - Chair 6 &middot; Seat</option>
+                  <option value="nanovi1">Only NanoVi 1 &middot; Equipment</option>
+                  <option value="nanovi2">Only NanoVi 2 &middot; Equipment</option>
+                  <option value="hydrogeninhalation">Only Hydrogen Inhalation &middot; Equipment</option>
+                  <option value="bemer">Only BEMER &middot; Equipment</option>
+                  <option value="rife">Only Rife &middot; Equipment</option>
+                  <option value="energetics">Only Energetics &middot; Equipment</option>
                 </optgroup>
               </select>
               <input class="field-input l-colfind" id="l-colfind" type="search"
@@ -1930,25 +1930,57 @@
           </div>
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select l-show" id="l-view-w" onchange="lSync(this)" aria-label="Resources shown">
-                <option value="all">Everyone &mdash; all resources</option>
-                <optgroup label="Providers">
-                  <option value="providers">All providers</option>
-                  <option value="dr">Dr. Drannikov</option>
-                  <option value="bak">Dr. Bakman</option>
-                  <option value="bro">Brooke &middot; Physician Associate</option>
+              <select class="field-select l-select l-show" id="l-view-w" onchange="lSync(this)" aria-label="Which columns to show">
+                <option value="all">Everything &mdash; all 34 columns</option>
+                <optgroup label="Narrow by organizing type &mdash; what is being booked">
+                  <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 of 34 columns</option>
+                  <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 of 34 columns</option>
+                  <option value="org:Office Visit">Office Visit &mdash; 1 of 34 columns</option>
+                  <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 of 34 columns</option>
+                  <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 of 34 columns</option>
+                  <option value="org:Infusion">Infusion &mdash; 4 of 34 columns</option>
+                  <option value="org:Lab">Lab &mdash; 1 of 34 columns</option>
+                  <option value="org:Diagnostics">Diagnostics &mdash; 2 of 34 columns</option>
+                  <option value="org:Treatment">Treatment &mdash; 17 of 34 columns</option>
+                  <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 of 34 columns</option>
+                  <option value="org:Energetics">Energetics &mdash; 1 of 34 columns</option>
+                  <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 of 34 columns</option>
                 </optgroup>
-                <optgroup label="Resources &middot; IV">
-                  <option value="infusion">All IV resources</option>
-                  <option value="c1">IV 1 &middot; Nick &middot; Nurse</option>
-                  <option value="c2">IV 2 &middot; Bea &middot; Medic</option>
-                  <option value="c3">IV 3 &middot; Juan &middot; Medic</option>
-                  <option value="c4">IV 4 &middot; Nate &middot; Medic</option>
-                </optgroup>
-                <optgroup label="Rooms">
-                  <option value="rooms">All rooms</option>
-                  <option value="room1">Room 1 &middot; exam</option>
-                  <option value="room2">Room 2 &middot; procedures</option>
+                <optgroup label="Or open one column by name">
+                  <option value="drdrannikov">Only Dr. Drannikov</option>
+                  <option value="mira">Only Mira</option>
+                  <option value="drbakman">Only Dr. Bakman</option>
+                  <option value="leighann">Only Leigh Ann</option>
+                  <option value="maofficevisit">Only MA Office Visit &middot; Charlene</option>
+                  <option value="mediciv">Only Medic IV &middot; Bea</option>
+                  <option value="nurseiv1">Only Nurse IV 1 &middot; Nick</option>
+                  <option value="nurseiv2">Only Nurse IV 2 &middot; Juan</option>
+                  <option value="labdraw">Only Lab Draw &middot; Wesley</option>
+                  <option value="diagnostictesting">Only Diagnostic Testing &middot; Equipment</option>
+                  <option value="inbody">Only InBody &middot; Equipment</option>
+                  <option value="redlight">Only Red Light &middot; Equipment</option>
+                  <option value="erchonialaser">Only Erchonia Laser &middot; Equipment</option>
+                  <option value="erchoniahandheld">Only Erchonia Handheld &middot; Equipment</option>
+                  <option value="adananotubroom">Only ADA Nano Tub Room &middot; Room</option>
+                  <option value="nanotubroom">Only Nano Tub Room &middot; Room</option>
+                  <option value="eboochair1">Only Eboo Chair 1 &middot; Equipment</option>
+                  <option value="eboochair2">Only Eboo Chair 2 &middot; Equipment</option>
+                  <option value="saltroomchair1">Only Salt Room - Chair 1 &middot; Seat</option>
+                  <option value="saltroomchair2">Only Salt Room - Chair 2 &middot; Seat</option>
+                  <option value="saltroomchair3">Only Salt Room - Chair 3 &middot; Seat</option>
+                  <option value="saltroomchair4">Only Salt Room - Chair 4 &middot; Seat</option>
+                  <option value="biochargerchair1">Only BioCharger - Chair 1 &middot; Seat</option>
+                  <option value="biochargerchair2">Only BioCharger - Chair 2 &middot; Seat</option>
+                  <option value="biochargerchair3">Only BioCharger - Chair 3 &middot; Seat</option>
+                  <option value="biochargerchair4">Only BioCharger - Chair 4 &middot; Seat</option>
+                  <option value="biochargerchair5">Only BioCharger - Chair 5 &middot; Seat</option>
+                  <option value="biochargerchair6">Only BioCharger - Chair 6 &middot; Seat</option>
+                  <option value="nanovi1">Only NanoVi 1 &middot; Equipment</option>
+                  <option value="nanovi2">Only NanoVi 2 &middot; Equipment</option>
+                  <option value="hydrogeninhalation">Only Hydrogen Inhalation &middot; Equipment</option>
+                  <option value="bemer">Only BEMER &middot; Equipment</option>
+                  <option value="rife">Only Rife &middot; Equipment</option>
+                  <option value="energetics">Only Energetics &middot; Equipment</option>
                 </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
@@ -2705,25 +2737,57 @@
           </div>
           <div class="l-filters">
             <label class="l-fl"><span class="filter-group-lbl">Show</span>
-              <select class="field-select l-select l-show" id="l-view-m" onchange="lSync(this)" aria-label="Resources shown">
-                <option value="all">Everyone &mdash; all resources</option>
-                <optgroup label="Providers">
-                  <option value="providers">All providers</option>
-                  <option value="dr">Dr. Drannikov</option>
-                  <option value="bak">Dr. Bakman</option>
-                  <option value="bro">Brooke &middot; Physician Associate</option>
+              <select class="field-select l-select l-show" id="l-view-m" onchange="lSync(this)" aria-label="Which columns to show">
+                <option value="all">Everything &mdash; all 34 columns</option>
+                <optgroup label="Narrow by organizing type &mdash; what is being booked">
+                  <option value="org:Office Visit - 30 min">Office Visit - 30 min &mdash; 3 of 34 columns</option>
+                  <option value="org:Office Visit - 60 min">Office Visit - 60 min &mdash; 3 of 34 columns</option>
+                  <option value="org:Office Visit">Office Visit &mdash; 1 of 34 columns</option>
+                  <option value="org:Procedure - 30 min">Procedure - 30 min &mdash; 1 of 34 columns</option>
+                  <option value="org:Procedure - 60 min">Procedure - 60 min &mdash; 1 of 34 columns</option>
+                  <option value="org:Infusion">Infusion &mdash; 4 of 34 columns</option>
+                  <option value="org:Lab">Lab &mdash; 1 of 34 columns</option>
+                  <option value="org:Diagnostics">Diagnostics &mdash; 2 of 34 columns</option>
+                  <option value="org:Treatment">Treatment &mdash; 17 of 34 columns</option>
+                  <option value="org:Treatment Infusion Suite">Treatment Infusion Suite &mdash; 5 of 34 columns</option>
+                  <option value="org:Energetics">Energetics &mdash; 1 of 34 columns</option>
+                  <option value="org:Energetics/Diagnostic">Energetics/Diagnostic &mdash; 1 of 34 columns</option>
                 </optgroup>
-                <optgroup label="Resources &middot; IV">
-                  <option value="infusion">All IV resources</option>
-                  <option value="c1">IV 1 &middot; Nick &middot; Nurse</option>
-                  <option value="c2">IV 2 &middot; Bea &middot; Medic</option>
-                  <option value="c3">IV 3 &middot; Juan &middot; Medic</option>
-                  <option value="c4">IV 4 &middot; Nate &middot; Medic</option>
-                </optgroup>
-                <optgroup label="Rooms">
-                  <option value="rooms">All rooms</option>
-                  <option value="room1">Room 1 &middot; exam</option>
-                  <option value="room2">Room 2 &middot; procedures</option>
+                <optgroup label="Or open one column by name">
+                  <option value="drdrannikov">Only Dr. Drannikov</option>
+                  <option value="mira">Only Mira</option>
+                  <option value="drbakman">Only Dr. Bakman</option>
+                  <option value="leighann">Only Leigh Ann</option>
+                  <option value="maofficevisit">Only MA Office Visit &middot; Charlene</option>
+                  <option value="mediciv">Only Medic IV &middot; Bea</option>
+                  <option value="nurseiv1">Only Nurse IV 1 &middot; Nick</option>
+                  <option value="nurseiv2">Only Nurse IV 2 &middot; Juan</option>
+                  <option value="labdraw">Only Lab Draw &middot; Wesley</option>
+                  <option value="diagnostictesting">Only Diagnostic Testing &middot; Equipment</option>
+                  <option value="inbody">Only InBody &middot; Equipment</option>
+                  <option value="redlight">Only Red Light &middot; Equipment</option>
+                  <option value="erchonialaser">Only Erchonia Laser &middot; Equipment</option>
+                  <option value="erchoniahandheld">Only Erchonia Handheld &middot; Equipment</option>
+                  <option value="adananotubroom">Only ADA Nano Tub Room &middot; Room</option>
+                  <option value="nanotubroom">Only Nano Tub Room &middot; Room</option>
+                  <option value="eboochair1">Only Eboo Chair 1 &middot; Equipment</option>
+                  <option value="eboochair2">Only Eboo Chair 2 &middot; Equipment</option>
+                  <option value="saltroomchair1">Only Salt Room - Chair 1 &middot; Seat</option>
+                  <option value="saltroomchair2">Only Salt Room - Chair 2 &middot; Seat</option>
+                  <option value="saltroomchair3">Only Salt Room - Chair 3 &middot; Seat</option>
+                  <option value="saltroomchair4">Only Salt Room - Chair 4 &middot; Seat</option>
+                  <option value="biochargerchair1">Only BioCharger - Chair 1 &middot; Seat</option>
+                  <option value="biochargerchair2">Only BioCharger - Chair 2 &middot; Seat</option>
+                  <option value="biochargerchair3">Only BioCharger - Chair 3 &middot; Seat</option>
+                  <option value="biochargerchair4">Only BioCharger - Chair 4 &middot; Seat</option>
+                  <option value="biochargerchair5">Only BioCharger - Chair 5 &middot; Seat</option>
+                  <option value="biochargerchair6">Only BioCharger - Chair 6 &middot; Seat</option>
+                  <option value="nanovi1">Only NanoVi 1 &middot; Equipment</option>
+                  <option value="nanovi2">Only NanoVi 2 &middot; Equipment</option>
+                  <option value="hydrogeninhalation">Only Hydrogen Inhalation &middot; Equipment</option>
+                  <option value="bemer">Only BEMER &middot; Equipment</option>
+                  <option value="rife">Only Rife &middot; Equipment</option>
+                  <option value="energetics">Only Energetics &middot; Equipment</option>
                 </optgroup>
               </select></label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
@@ -6941,7 +7005,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=111"></script>
+<script src="assets/hcos.js?v=112"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
