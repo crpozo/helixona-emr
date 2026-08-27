@@ -140,10 +140,39 @@ for sid in ('l-view', 'l-view-w', 'l-view-m'):
     if len(opts) != len(H.org_types()):
         bad.append('%s ofrece %d organizing types, hierarchy.py dice %d'
                    % (sid, len(opts), len(H.org_types())))
-    cols = re.findall(r'<option value="([a-z0-9]+)">Only ', blk)
-    if len(cols) != len(H.board_columns()):
-        bad.append('%s ofrece %d columnas por nombre, el tablero tiene %d'
-                   % (sid, len(cols), len(H.board_columns())))
+    # el filtro es SOLO organizing types (Carlos, 2026-08-27). Para abrir una
+    # columna suelta esta el buscador de al lado, que no obliga a recorrer 34
+    # entradas en un desplegable.
+    extra = re.findall(r'<option value="(?!all|org:)([^"]+)"', blk)
+    if extra:
+        bad.append('%s ofrece opciones que no son organizing types: %s'
+                   % (sid, ', '.join(extra[:5])))
+
+# los dos menus del filtro salen de la hoja: tipos = columnas, subtipos = tipos
+# de cita. Se cuentan en la PRIMERA copia de la barra; las otras son clones.
+i = sched.index('data-msel="ty"')
+ty_opts = re.findall(r'<label class="msel-opt" data-ty="([^"]+)"', sched[i:sched.index('msel-foot', i)])
+want_cols = [c['id'] for c in H.board_columns()]
+if set(ty_opts) != set(want_cols) or len(ty_opts) != len(want_cols):
+    bad.append('el filtro de appointment types ofrece %d columnas, el tablero tiene %d'
+               % (len(ty_opts), len(want_cols)))
+i = sched.index('data-msel="sub"')
+sub_opts = re.findall(r'<label class="msel-opt" data-sub="([^"]+)"', sched[i:sched.index('msel-foot', i)])
+want_tx = []
+for _o, _c, _k, _ts, _p, _m, _r in H.COLUMNS:
+    for _t in _ts:
+        if _t not in want_tx: want_tx.append(_t)
+# se compara el CONJUNTO, no la secuencia: el menu los agrupa por organizing
+# type y la hoja los lista por fila, asi que el orden difiere a proposito
+if set(sub_opts) != set(want_tx):
+    falta = [t for t in want_tx if t not in sub_opts]
+    sobra = [t for t in sub_opts if t not in want_tx]
+    if falta: bad.append('al filtro de subtypes le faltan: %s' % ', '.join(falta[:5]))
+    if sobra: bad.append('el filtro de subtypes inventa: %s' % ', '.join(sobra[:5]))
+if len(sub_opts) != len(set(sub_opts)):
+    from collections import Counter
+    bad.append('el filtro de subtypes repite: %s'
+               % ', '.join(x for x, v in Counter(sub_opts).items() if v > 1))
 
 # ninguna columna puede salir dos veces en el tablero
 heads_ids = re.findall(r'<div class="daycal-col-head" data-col="([^"]+)"', sched)

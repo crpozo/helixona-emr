@@ -194,13 +194,13 @@ def render():
             tpl = ('              <div class="cal-appt %s %s %s" style="top:%dpx;height:%dpx"'
                    ' data-appt="A-9%04d" data-open-drawer="#l-appt-drawer" data-st="%s"'
                    ' data-sub="%s" data-days="2" data-pt="%s" data-when="%s" data-tx="%s"'
-                   ' data-org="%s"' + pattr + '>\n'
+                   ' data-org="%s" data-col="%s"' + pattr + '>\n'
                    '                <span class="cal-appt-sub">%s</span>\n'
                    '                <div class="cal-appt-name">%s</div>\n'
                    '                <div class="cal-appt-time">%s</div>\n'
                    '              </div>')
             inner.append(tpl % (st, sub, ty, top(t), height(dur), random.randint(1000, 9999),
-                                st.replace('st-', '').title(), sub, pt, fmt(t), what, worg,
+                                st.replace('st-', '').title(), sub, pt, fmt(t), what, worg, c['id'],
                                 what, pt, fmt(t)))
         grid.append('            <div class="daycal-col" data-col="%s" data-area="%s" data-orgs="%s" data-res="%s">\n%s\n            </div>'
                     % (c['id'], c['area'], '|'.join(c['orgs']), c['res'], '\n'.join(inner)))
