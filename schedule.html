@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=114">
+<link rel="stylesheet" href="assets/hcos.css?v=115">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -4166,23 +4166,23 @@
                 makes a new queue for the whole clinic.</div>
             </div>
             <div class="field"><label class="field-lbl" for="l-fe-sev">Severity</label>
-              <select class="field-select" id="l-fe-sev">
-                <option selected>High &mdash; rings the block on the calendar</option>
-                <option>Medium &mdash; icon only</option>
-                <option>Low &mdash; icon only, blue</option>
+              <select class="field-select" id="l-fe-sev" onchange="lFeSev()">
+                <option value="high" selected>High &mdash; rings the block on the calendar</option>
+                <option value="med">Medium &mdash; icon only</option>
+                <option value="low">Low &mdash; icon only, blue</option>
               </select>
             </div>
             <div class="field"><label class="field-lbl" for="l-fe-icon">Icon</label>
-              <div class="chip-row">
+              <div class="chip-row" id="l-fe-icons">
                 <button class="filter-chip active" type="button" title="Food allergy"><span class="fl sev-high fi-allergyfood"></span></button>
                 <button class="filter-chip" type="button" title="Drug allergy"><span class="fl sev-high fi-allergydrug"></span></button>
                 <button class="filter-chip" type="button" title="Pregnant"><span class="fl sev-high fi-pregnant"></span></button>
                 <button class="filter-chip" type="button" title="Urgent medical alert"><span class="fl sev-high fi-urgent"></span></button>
-                <button class="filter-chip" type="button" title="Deficiency"><span class="fl sev-med fi-deficiency"></span></button>
+                <button class="filter-chip" type="button" title="Deficiency"><span class="fl sev-high fi-deficiency"></span></button>
                 <button class="filter-chip" type="button" title="Prior auth expiring"><span class="fl sev-high fi-authexpiry"></span></button>
-                <button class="filter-chip" type="button" title="Outstanding balance"><span class="fl sev-med fi-balance"></span></button>
-                <button class="filter-chip" type="button" title="Interpreter needed"><span class="fl sev-low fi-interpreter"></span></button>
-                <button class="filter-chip" type="button" title="Intake forms missing"><span class="fl sev-low fi-forms"></span></button>
+                <button class="filter-chip" type="button" title="Outstanding balance"><span class="fl sev-high fi-balance"></span></button>
+                <button class="filter-chip" type="button" title="Interpreter needed"><span class="fl sev-high fi-interpreter"></span></button>
+                <button class="filter-chip" type="button" title="Intake forms missing"><span class="fl sev-high fi-forms"></span></button>
               </div>
               <input type="hidden" id="l-fe-icon" value="triangle">
             </div>
@@ -6915,7 +6915,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=114"></script>
+<script src="assets/hcos.js?v=115"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -9677,6 +9677,14 @@
       var n = document.getElementById(id);
       if (n) n.className = 'fl sev-' + sev + ' fi-' + FN_ICON;
     });
+    /* LA PALETA SE TIÑE CON LA SEVERIDAD (Carlos, 2026-08-27). El desplegable
+       decia "Low — icon only, blue" y los treinta simbolos seguian en ambar, asi
+       que la frase prometia un color que no se veia por ningun lado. Ahora se
+       elige el simbolo VIENDO como va a salir, que es la unica razon de que la
+       paleta este dibujada y no sea una lista de nombres. */
+    document.querySelectorAll('#fn-icons .fl').forEach(function (n) {
+      n.className = n.className.replace(/\bsev-(high|med|low)\b/, 'sev-' + sev);
+    });
     var line = document.getElementById('fn-line');
     if (line) line.textContent = text || name || 'Your wording appears here';
     var cc = document.getElementById('fn-cat-chip'); if (cc) cc.textContent = cat === 'new' ? 'New category' : cat;
@@ -9689,6 +9697,19 @@
     var dt = document.getElementById('fn-drawer-t');
     if (dt) dt.textContent = sev === 'high' ? 'Alerts on this patient' : 'Flags on this patient';
   }
+
+  /* La pantalla de editar tenia el mismo desplegable y ninguna conexion: decia
+     "Low — icon only, blue" con los simbolos en rojo. Y su paleta arrancaba con
+     tres severidades mezcladas, que se lee como si cada simbolo tuviera un color
+     propio — no lo tiene, el color es la severidad de la bandera. */
+  function lFeSev() {
+    var sev = (document.getElementById('l-fe-sev') || {}).value || 'high';
+    document.querySelectorAll('#l-fe-icons .fl').forEach(function (n) {
+      n.className = n.className.replace(/\bsev-(high|med|low)\b/, 'sev-' + sev);
+    });
+  }
+  window.lFeSev = lFeSev;
+
   function lFlagNew() {
     var name = (document.getElementById('fn-name') || {}).value.trim();
     var text = (document.getElementById('fn-text') || {}).value.trim();
