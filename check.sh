@@ -148,6 +148,28 @@ for sid in ('l-view', 'l-view-w', 'l-view-m'):
         bad.append('%s ofrece opciones que no son organizing types: %s'
                    % (sid, ', '.join(extra[:5])))
 
+# COLISIONES DE CASCADA. Dos reglas con el MISMO selector declarando la MISMA
+# propiedad: la segunda gana en silencio. Asi se rompio .week-appt — una regla
+# reservaba padding-left:14px para la barra lateral y otra, mas abajo, ponia
+# padding:2px 6px y metia el nombre debajo de la barra ("Nadia" -> "ladia").
+css = open('assets/hcos.css').read()
+WATCH = ['.week-appt', '.cal-appt', '.daysum-row', '.l-slot', '.msel-opt']
+for sel in WATCH:
+    seen, clash = {}, []
+    for m in re.finditer(r'(?:^|\n)' + re.escape(sel) + r'\s*\{([^}]*)\}', css):
+        for d in m.group(1).split(';'):
+            if ':' not in d: continue
+            prop = d.split(':')[0].strip()
+            if not prop or prop.startswith('--') or prop.startswith('/*'): continue
+            # position se declara a proposito dos veces en .week-appt: relative
+            # para el ::before y absolute para colocarlo en la rejilla
+            if sel == '.week-appt' and prop == 'position': continue
+            seen[prop] = seen.get(prop, 0) + 1
+    clash = [k for k, v in seen.items() if v > 1]
+    if clash:
+        bad.append('%s se declara en dos reglas con las mismas propiedades: %s'
+                   % (sel, ', '.join(sorted(clash))))
+
 # los dos menus del filtro salen de la hoja: tipos = columnas, subtipos = tipos
 # de cita. Se cuentan en la PRIMERA copia de la barra; las otras son clones.
 i = sched.index('data-msel="ty"')

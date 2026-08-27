@@ -1991,18 +1991,29 @@ a.lead-chip:hover { border-color: var(--ink); }
   font-family: ui-monospace, monospace;
   background: #FBFBFB;
 }
+/* SOLO LA COLOCACION VA AQUI. El color, el borde y el hueco para la barra
+   lateral los pone la regla .week-appt de arriba, que es la que comparte con el
+   tablero del dia. Esta regla venia declarando padding, border-left y background
+   otra vez, y por venir despues ganaba: mataba el padding-left:14px y el nombre
+   quedaba DEBAJO de la barra de 10px — "Nadia" se leia "ladia". Dos reglas para
+   una cosa, y la segunda no sabia lo que hacia la primera. */
 .week-appt {
   position: absolute; left: 3px; right: 3px;
   border-radius: 4px;
-  padding: 2px 6px;
-  border: 1px solid var(--line-soft);
-  border-left: 3px solid var(--st-scheduled);
-  background: var(--st-scheduled-bg);
+  padding-top: 3px; padding-right: 6px; padding-bottom: 3px;
   cursor: pointer; overflow: hidden;
-  font-size: 9.5px; line-height: 1.3; z-index: 1;
+  display: flex; align-items: center;
+  line-height: 1.25; z-index: 1;
 }
 .week-appt:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.18); z-index: 5; }
-.week-appt .n { font-size: 10px; font-weight: 600; color: var(--hx-navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.week-appt .n {
+  font-size: 11px; font-weight: 600; color: var(--hx-navy);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: block; width: 100%;
+}
+/* un bloque de media hora no da para dos lineas: el nombre se centra en el alto
+   que tenga, en vez de asomar por arriba */
+.week-appt.is-short .n { font-size: 10px; }
 
 /* Month view — the month at a glance, one cell per clinic day */
 .monthcal { border-top: 1px solid var(--line-soft); }
@@ -3497,12 +3508,16 @@ tr[data-state="suggested"] .ins-undo { opacity: .38; }
 .daysum { display: grid; gap: 0; }
 .daysum-row {
   display: grid;
-  grid-template-columns: 74px 12px minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  grid-template-columns: 74px 30px minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 1fr) auto;
   gap: 12px; align-items: center;
   padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 13px;
 }
 .daysum-row:last-child { border-bottom: none; }
-.daysum-row.is-count { grid-template-columns: 12px minmax(0, 1fr) auto; }
+.daysum-row.is-count { grid-template-columns: 34px minmax(0, 1fr) auto; }
+/* la columna de la muestra tiene que medir lo que mide la muestra: .ty-sw son
+   34px y .rail-sw 30. Reservar doce dejaba la muestra encima del nombre, que es
+   el mismo fallo de la semana en otro sitio. */
+.daysum .rail-sw, .daysum .ty-sw { width: 100%; }
 .daysum-when { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 12px; }
 .daysum-pt { font-weight: 600; min-width: 0; }
 .daysum-tx { color: var(--ink); min-width: 0; }
