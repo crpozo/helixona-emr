@@ -101,7 +101,7 @@ i = tr.find('t-08-hierarchy')
 if i > -1:
     seg = tr[i:i+3000]
     m = re.search(r'A column on the day board\.\s*([A-Za-z-]+)\.', seg)
-    WORDS = {35: 'Thirty-five', 40: 'Forty', 41: 'Forty-one', 39: 'Thirty-nine'}
+    WORDS = {33: 'Thirty-three', 34: 'Thirty-four', 35: 'Thirty-five', 36: 'Thirty-six', 40: 'Forty'}
     if m and m.group(1) != WORDS.get(want, ''):
         bad.append('treatments.html dice "%s" columnas, hierarchy.py dice %d' % (m.group(1), want))
 
@@ -122,6 +122,21 @@ for m in re.finditer(r'<div class="cal-appt (?!is-elsewhere)[^"]*"[^>]*>', sched
     cat = 'erchonia' if proto in ERCH else 'biocharger'
     if proto not in plan[cat]:
         bad.append('%s esta en el board con "%s", que su plan no aprueba' % (who, proto))
+
+# el filtro de organizing type no puede repetir una entrada (Carlos: "no hagas
+# que se repita"), y tiene que ofrecer los doce
+opts = re.findall(r'<option value="org:([^"]+)"', sched)
+if len(opts) != len(set(opts)):
+    from collections import Counter
+    dup = [k for k, v in Counter(opts).items() if v > 1]
+    bad.append('el filtro repite organizing types: %s' % ', '.join(dup))
+if len(opts) != len(H.org_types()):
+    bad.append('el filtro ofrece %d organizing types, hierarchy.py dice %d' % (len(opts), len(H.org_types())))
+
+# ninguna columna puede salir dos veces en el tablero
+heads_ids = re.findall(r'<div class="daycal-col-head" data-col="([^"]+)"', sched)
+if len(heads_ids) != len(set(heads_ids)):
+    bad.append('el tablero repite columnas: %d cabeceras, %d distintas' % (len(heads_ids), len(set(heads_ids))))
 
 # y al reves: una cita cuyo tipo EXIGE protocolo no puede estar sin el. El
 # comprobante anterior solo validaba los protocolos presentes, que es como

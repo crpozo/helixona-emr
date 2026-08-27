@@ -50,6 +50,10 @@ COLUMNS = [
  # ---- lab ----
  ('Lab', 'Lab Draw', 'Room', ['Quest Lab Draw', 'MDL', 'G6PD'], 'Lab orders from POC', 30,
   ['with-iv-start']),
+ # la misma linea, filtrada tambien como Infusion: la extraccion entra con el
+ # arranque de la IV y el escritorio la busca ahi (Carlos, 2026-08-26)
+ ('Infusion', 'Lab Draw', 'Room', ['Quest Lab Draw', 'MDL', 'G6PD'], 'Lab orders from POC', 30,
+  ['with-iv-start']),
 
  # ---- diagnostics ----
  ('Diagnostics', 'Diagnostic Testing', 'Equipment', ['Diagnostic Testing'],
@@ -73,12 +77,12 @@ COLUMNS = [
  ('Treatment', 'Salt Room - Chair 2', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
  ('Treatment', 'Salt Room - Chair 3', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
  ('Treatment', 'Salt Room - Chair 4', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
- ('Treatment', 'BioCharger - Chair 1', 'Seat', ['BioCharger'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 2', 'Seat', ['BioCharger'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 3', 'Seat', ['BioCharger'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 4', 'Seat', ['BioCharger'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 5', 'Seat', ['BioCharger'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 6', 'Seat', ['BioCharger'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Treatment', 'BioCharger - Chair 1', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Treatment', 'BioCharger - Chair 2', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Treatment', 'BioCharger - Chair 3', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Treatment', 'BioCharger - Chair 4', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Treatment', 'BioCharger - Chair 5', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Treatment', 'BioCharger - Chair 6', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
 
  # ---- treatment inside the infusion suite ----
  ('Treatment Infusion Suite', 'NanoVi 1', 'Equipment', ['NanoVi 30 min'],
@@ -204,27 +208,96 @@ RESOURCE_WHO = {
  'iv-n1': 'Nick · Nurse', 'iv-n2': 'Juan · Nurse', 'lab': 'Wesley · MA',
 }
 
+# ---------------------------------------------------------------------------
+# EL ORGANIZING TYPE ES UN FILTRO, NO UNA BANDA (Carlos, 2026-08-26).
+#
+#   "estas son las columnas en el schedule (no repitas, por ejemplo pon solo 1
+#    Dr. Drannikov)" ... "Necesitamos que el filtro org type tenga solo esto ...
+#    no hagas que se repita"
+#
+# Antes una columna era la pareja (organizing type, nombre), y por eso el Dr.
+# Drannikov salia CUATRO veces en el tablero: una por cada organizing type que
+# atiende. Eso no es lo que la clinica ve. El es un hombre y una linea.
+#
+# La columna es el NOMBRE. El organizing type describe el TIPO DE CITA que entra
+# en ella, no la columna: el Dr. Drannikov atiende Office Visit de 30 y de 60 y
+# Procedure de 30 y de 60 en la misma linea de su dia. Asi que el organizing
+# type vive en el filtro — doce, sin repetir — y el tablero dibuja treinta y
+# cinco columnas.
+#
+# La banda de encima ya no puede ser el organizing type (una columna pertenece a
+# varios). Es el AREA: donde esta la linea fisicamente, que si es una sola cosa.
+# ---------------------------------------------------------------------------
 ORG_ORDER = ['Office Visit - 30 min', 'Office Visit - 60 min', 'Office Visit',
              'Procedure - 30 min', 'Procedure - 60 min', 'Infusion', 'Lab',
              'Diagnostics', 'Treatment', 'Treatment Infusion Suite',
              'Energetics', 'Energetics/Diagnostic']
 
+AREA_ORDER = ['Providers & staff', 'Infusion', 'Lab', 'Diagnostics',
+              'Treatment', 'Treatment Infusion Suite', 'Energetics']
+
+AREA_OF = {
+ 'Dr. Drannikov': 'Providers & staff', 'Mira': 'Providers & staff',
+ 'Dr. Bakman - FPE': 'Providers & staff', 'Dr. Bakman - Other': 'Providers & staff',
+ 'Leigh Ann': 'Providers & staff', 'MA Office Visit': 'Providers & staff',
+ 'Medic IV': 'Infusion', 'Nurse IV 1': 'Infusion', 'Nurse IV 2': 'Infusion',
+ 'Lab Draw': 'Lab',
+ 'Diagnostic Testing': 'Diagnostics', 'InBody': 'Diagnostics',
+ 'Red Light': 'Treatment', 'Erchonia Laser': 'Treatment', 'Erchonia Handheld': 'Treatment',
+ 'ADA Nano Tub Room': 'Treatment', 'Nano Tub Room': 'Treatment',
+ 'Eboo Chair 1': 'Treatment', 'Eboo Chair 2': 'Treatment',
+ 'NanoVi 1': 'Treatment Infusion Suite', 'NanoVi 2': 'Treatment Infusion Suite',
+ 'Hydrogen Inhalation': 'Treatment Infusion Suite', 'BEMER': 'Treatment Infusion Suite',
+ 'Rife': 'Treatment Infusion Suite',
+ 'Energetics': 'Energetics',
+}
+for _i in range(1, 5): AREA_OF['Salt Room - Chair %d' % _i] = 'Treatment'
+for _i in range(1, 7): AREA_OF['BioCharger - Chair %d' % _i] = 'Treatment'
+
 
 def board_columns():
-    """One board column per (organizing type, column name), in the clinic's order."""
-    seen, out = set(), []
+    """Una columna por NOMBRE. Treinta y cinco lineas reservables.
+
+    Cada una lleva TODOS los organizing types que atiende y todos sus tipos de
+    cita, porque el filtro pregunta por el tipo de cita y la columna responde.
+    """
+    seen, out = {}, []
     for org, col, kind, types, poc, mins, rules in COLUMNS:
-        k = (org, col)
-        if k in seen: continue
-        seen.add(k)
-        out.append({'org': org, 'name': col, 'kind': kind,
-                    'res': RESOURCE_OF.get(col, col.lower().replace(' ', '-')),
-                    'who': RESOURCE_WHO.get(RESOURCE_OF.get(col, ''), ''),
-                    'mins': mins, 'rules': rules,
-                    'id': (org + '-' + col).lower().replace(' ', '').replace('-', '')
-                           .replace('/', '').replace('.', '')})
-    out.sort(key=lambda c: (ORG_ORDER.index(c['org']), c['name']))
+        if col in seen:
+            c = seen[col]
+            if org not in c['orgs']: c['orgs'].append(org)
+            for t in types:
+                if t not in c['types']: c['types'].append(t)
+            if poc and poc not in c['poc']: c['poc'].append(poc)
+            c['mins'][org] = mins
+            for r in rules:
+                if r not in c['rules']: c['rules'].append(r)
+            continue
+        c = {'name': col, 'kind': kind,
+             'area': AREA_OF.get(col, 'Treatment'),
+             'orgs': [org], 'types': list(types),
+             'poc': [poc] if poc else [],
+             'mins': {org: mins}, 'rules': list(rules),
+             'res': RESOURCE_OF.get(col, col.lower().replace(' ', '-')),
+             'who': RESOURCE_WHO.get(RESOURCE_OF.get(col, ''), ''),
+             'id': col.lower().replace(' ', '').replace('-', '').replace('/', '').replace('.', '')}
+        seen[col] = c
+        out.append(c)
+    for i, c in enumerate(out): c['_seq'] = i
+    out.sort(key=lambda c: (AREA_ORDER.index(c['area']), c['_seq']))
     return out
+
+
+def org_types():
+    """Los doce organizing types del filtro, en el orden de la clinica, sin repetir."""
+    used = {org for org, *_ in COLUMNS}
+    return [o for o in ORG_ORDER if o in used]
+
+
+def columns_for_org(org):
+    """Que columnas atienden un organizing type — para que el filtro sepa que ocultar."""
+    return [c for c in board_columns() if org in c['orgs']]
+
 
 
 # ---------------------------------------------------------------------------
@@ -253,6 +326,15 @@ TAKES_PROTOCOL = {
  'Erchonia Handheld': {'label': 'Protocol', 'catalogue': 'erchonia', 'required': True,
                        'max': 1,
                        'help': 'Add-on only, and it still needs its own ordered protocol.'},
+ # la clinica partio el tipo en dos: 30 min para recetas sueltas y 60 para un
+ # stack, que corre solo. El eje del protocolo es el mismo en ambos.
+ 'BioCharger 30 min': {'label': 'Recipe', 'catalogue': 'biocharger', 'required': True,
+                       'max': 3,
+                       'help': 'Up to three single recipes, run in sequence inside the 30 minutes. '
+                               'A stack does not go here — it has its own 60-minute type.'},
+ 'BioCharger Stack 60 min': {'label': 'Recipe', 'catalogue': 'biocharger', 'required': True,
+                       'max': 1,
+                       'help': 'One stack, one patient, one day. It runs on its own.'},
  'BioCharger':        {'label': 'Recipe', 'catalogue': 'biocharger', 'required': True,
                        'max': 3,
                        'help': 'A STACK is one per patient per day. Single recipes: up to three, '

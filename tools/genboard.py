@@ -44,16 +44,21 @@ SUB_OF_TYPE = {
  'InBody':'t-nmt','Red Light Bed':'t-micro','Erchonia Laser':'t-erchlas',
  'Erchonia Handheld':'t-erchlas','Hydrogen':'t-scenar','Oxygen':'t-scenar',
  'EBOO':'t-ebootx','EBOO SAFE':'t-eboosafe','Halo Salt Therapy':'t-scenar',
- 'BioCharger':'t-biochg','NanoVi 30 min':'t-minilym','Hydrogen 15 min':'t-scenar',
+ 'BioCharger':'t-biochg','BioCharger 30 min':'t-biochg','BioCharger Stack 60 min':'t-biochg','NanoVi 30 min':'t-minilym','Hydrogen 15 min':'t-scenar',
  'Hydrogen 30 min':'t-scenar','Hydrogen 45 min':'t-scenar','BEMER':'t-biomodr','Rife':'t-nmt',
  'BioMod Pro':'t-biomodp','BioMod Recharge':'t-biomodr','Lymph Star':'t-lymph',
  'Mini-Lymph Star':'t-minilym','Neuro Muscular Therapy (NMT)':'t-nmt','SCENAR':'t-scenar',
  'MEAD Initial':'t-mead','MEAD Reassess':'t-meadre','IV':'t-ff10'}
 
-def types_for(org, col):
+def types_for(col):
+    """Todo lo que entra en esa columna, con su duracion y su organizing type.
+
+    Antes se preguntaba por (banda, columna) porque una columna era esa pareja.
+    Ahora la columna es el nombre y atiende varias bandas: el Dr. Drannikov hace
+    Office Visit de 30 y Procedure de 60 en la misma linea de su dia."""
     out = []
     for o, c, kind, types, poc, mins, rules in h.COLUMNS:
-        if o == org and c == col: out += [(t, mins) for t in types]
+        if c == col: out += [(t, mins, o) for t in types]
     return out
 
 
@@ -87,11 +92,11 @@ def build():
                 continue
             # pick a column of this resource, and something it can actually take
             c = random.choice(mine)
-            opts = types_for(c['org'], c['name'])
+            opts = types_for(c['name'])
             if not opts:
                 t += 30
                 continue
-            what, dur = random.choice(opts)
+            what, dur, worg = random.choice(opts)
             dur = dur or 30
             # Si el tipo de cita pide un protocolo, el paciente NO puede ser
             # cualquiera: tiene que ser alguien a quien un proveedor se lo haya
@@ -113,7 +118,7 @@ def build():
                 t += 30
                 continue
             taken.append((t, t + dur))
-            blocks[c['id']].append((t, dur, who, what, random.choice(ST), proto, proto_label))
+            blocks[c['id']].append((t, dur, who, what, random.choice(ST), proto, proto_label, worg))
             # the SAME minutes are unavailable in this resource's other columns.
             # The held block has to say WHERE they are, and the column name only
             # says that when the columns are named differently. Dr. Drannikov is
@@ -130,7 +135,7 @@ def build():
                     where = c['name']
                     if where == other['name']: where = elsewhere_label(c['org'])
                     if where == other['name']: where = what
-                    blocks[other['id']].append((t, dur, where, 'elsewhere', 'busy', None, None))
+                    blocks[other['id']].append((t, dur, where, 'elsewhere', 'busy', None, None, worg))
             t += dur + random.choice([0, 0, 30, 60])
     return cols, blocks
 
@@ -163,19 +168,19 @@ def render():
     heads, bands, grid = [], [], []
     # the band row: one per organizing type, spanning its columns
     i = 1
-    for org in h.ORG_ORDER:
-        n = len([c for c in cols if c['org'] == org])
+    for area in h.AREA_ORDER:
+        n = len([c for c in cols if c['area'] == area])
         if not n: continue
-        bands.append('            <div class="daycal-band" data-org="%s" style="grid-column:%d / span %d">%s</div>'
-                     % (org, i + 1, n, org))
+        bands.append('            <div class="daycal-band" data-area="%s" style="grid-column:%d / span %d">%s</div>'
+                     % (area, i + 1, n, area))
         i += n
     for c in cols:
-        heads.append('            <div class="daycal-col-head" data-col="%s" data-org="%s" data-res="%s">%s<span class="sub">%s</span></div>'
-                     % (c['id'], c['org'], c['res'], c['name'], c['who'] or c['kind']))
+        heads.append('            <div class="daycal-col-head" data-col="%s" data-area="%s" data-orgs="%s" data-res="%s">%s<span class="sub">%s</span></div>'
+                     % (c['id'], c['area'], '|'.join(c['orgs']), c['res'], c['name'], c['who'] or c['kind']))
     for c in cols:
         inner = []
-        for t, dur, pt, what, st, proto, proto_label in sorted(blocks[c['id']], key=lambda b: b[:5]):
-            ty = TY_OF_ORG[c['org']]
+        for t, dur, pt, what, st, proto, proto_label, worg in sorted(blocks[c['id']], key=lambda b: b[:5]):
+            ty = TY_OF_ORG.get(worg, 'ty-chiro')
             if st == 'busy':
                 # `pt` here carries the COLUMN they are in, not a patient. Naming
                 # the patient made these read as appointments in this column,
@@ -195,10 +200,10 @@ def render():
                    '                <div class="cal-appt-time">%s</div>\n'
                    '              </div>')
             inner.append(tpl % (st, sub, ty, top(t), height(dur), random.randint(1000, 9999),
-                                st.replace('st-', '').title(), sub, pt, fmt(t), what, c['org'],
+                                st.replace('st-', '').title(), sub, pt, fmt(t), what, worg,
                                 what, pt, fmt(t)))
-        grid.append('            <div class="daycal-col" data-col="%s" data-org="%s" data-res="%s">\n%s\n            </div>'
-                    % (c['id'], c['org'], c['res'], '\n'.join(inner)))
+        grid.append('            <div class="daycal-col" data-col="%s" data-area="%s" data-orgs="%s" data-res="%s">\n%s\n            </div>'
+                    % (c['id'], c['area'], '|'.join(c['orgs']), c['res'], '\n'.join(inner)))
 
     hours = []
     for hh in range(OPEN, CLOSE + 1):
