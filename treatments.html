@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=117">
+<link rel="stylesheet" href="assets/hcos.css?v=118">
 <style>
   .t-code { display: block; font-family: ui-monospace, monospace; font-size: 10px; color: var(--muted); margin-top: 1px; }
   .t-num { text-align: right; white-space: nowrap; }
@@ -1365,9 +1365,11 @@
         </div>
 
         <div class="callout">
-          <strong>A column is one bookable line of the day. The organizing type filters what goes into it.</strong>
+          <strong>Department on top, then the column, then what goes into it.</strong>
           <div class="hier">
-            <div class="hier-step is-key"><b>Column name</b><span>One bookable line of the day. Thirty-four of them.</span></div>
+            <div class="hier-step"><b>Department</b><span>Clinic &middot; Infusion &middot; Treatment &middot; Treatment Infusion Suite &middot; Energetics. The first filter.</span></div>
+            <div class="hier-arrow" aria-hidden="true">&rarr;</div>
+            <div class="hier-step is-key"><b>Column name</b><span>One bookable line of the day. Twenty-five of them.</span></div>
             <div class="hier-arrow" aria-hidden="true">&rarr;</div>
             <div class="hier-step"><b>Appointment type</b><span>What can be booked into that column.</span></div>
             <div class="hier-arrow" aria-hidden="true">+</div>
@@ -1380,161 +1382,143 @@
           Dr. Drannikov appears <em>once</em>: he does 30-minute office visits, 60-minute ones and
           both lengths of procedure, but he has one day and one line. So does Dr. Bakman: his FPE
           and everything else book by different rules, and that difference lives in the plan-of-care
-          note on each row, not in two columns of the board. The BioCharger is still six, because
-          six people can sit in it at once &mdash; that is a room, not a person.</p>
+          note on each row, not in two columns of the board. And the <strong>Salt Room and the
+          BioCharger are one column each</strong> now &mdash; their chairs are the appointment types
+          under them, which is how a room with six seats stops being drawn as six machines.</p>
           <p style="margin-top:10px">Splitting a column per organizing type is what put him on the
           board four times over, which is not what the clinic sees when it walks in. With that
-          undone, every column is now its own resource &mdash; <strong>thirty-four columns,
-          thirty-four resources</strong> &mdash; and no line has to tell another that its owner
+          undone, every column is now its own resource &mdash; <strong>twenty-five columns,
+          twenty-five resources</strong> &mdash; and no line has to tell another that its owner
           is somewhere else.</p>
         </div>
 
         <div class="tbl-wrap" style="margin-top:14px">
           <table class="tbl">
             <thead><tr>
-              <th scope="col">Column on the board</th>
+              <th scope="col">Column &middot; appointment type</th>
               <th scope="col">What it is</th>
-              <th scope="col">Appointment types</th>
+              <th scope="col">Sub types</th>
               <th scope="col">From the plan of care</th>
               <th scope="col">Length</th>
               <th scope="col">Booking rules</th>
             </tr></thead>
             <tbody>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 30 min</th></tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Clinic</th></tr>
               <tr>
-                <td><strong>Dr. Drannikov</strong></td>
+                <td><strong>Dr. Drannikov</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 30 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>Follow-Up, Transfer of Care, Telemedicine</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 60 min</th></tr>
               <tr>
-                <td><strong>Dr. Drannikov</strong></td>
+                <td><strong>Dr. Drannikov</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 60 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>New Patient, New Patient F/U</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Procedure - 30 min</th></tr>
               <tr>
-                <td><strong>Dr. Drannikov</strong></td>
+                <td><strong>Dr. Drannikov</strong> <span class="field-help" style="display:inline">&middot; Procedure - 30 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>Trigger Point, Prolozone, PRP, Female Pellet, Male Pellet</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Procedure - 60 min</th></tr>
               <tr>
-                <td><strong>Dr. Drannikov</strong></td>
+                <td><strong>Dr. Drannikov</strong> <span class="field-help" style="display:inline">&middot; Procedure - 60 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>Acupuncture, Microcurrent</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 30 min</th></tr>
               <tr>
-                <td><strong>Mira</strong></td>
+                <td><strong>Mira</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 30 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>Follow-Up, Telemedicine, Transfer of Care</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 60 min</th></tr>
               <tr>
-                <td><strong>Mira</strong></td>
+                <td><strong>Mira</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 60 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>New Patient, New Patient F/U</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 30 min</th></tr>
               <tr>
-                <td><strong>Dr. Bakman</strong></td>
+                <td><strong>Dr. Bakman</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 30 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
-                <td>FPE, Medicare FPE, FPE FU</td>
-                <td class="field-help" style="margin:0">Program determines timing of booking this</td>
+                <td>FPE, Medicare FPE, FPE FU, Laser Eval, POC Review</td>
+                <td class="field-help" style="margin:0">Program determines timing of booking this; POC determines if this can book</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Dr. Bakman</strong></td>
+                <td><strong>Dr. Bakman</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 15 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
-                <td>Chiropractic Visit, Laser Eval, POC Review</td>
-                <td class="field-help" style="margin:0">POC determines if this can book</td>
-                <td>30 min</td>
+                <td>Chiropractic Visit</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>15 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit - 60 min</th></tr>
               <tr>
-                <td><strong>Leigh Ann</strong></td>
+                <td><strong>Leigh Ann</strong> <span class="field-help" style="display:inline">&middot; Office Visit - 60 min</span></td>
                 <td><span class="res-kind">Provider</span></td>
                 <td>Depth Psychology</td>
                 <td class="field-help" style="margin:0">Books through her own app today</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">Books through her own app today — HCOS shows it but does not own it.</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Office Visit</th></tr>
               <tr>
-                <td><strong>MA Office Visit</strong></td>
-                <td><span class="res-kind">Staff</span></td>
-                <td>GLP Injection, Vitals, Nasal Swabs, EKG</td>
+                <td><strong>Eboo Chair 1</strong> <span class="field-help" style="display:inline">&middot; EBOO</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>EBOO, EBOO SAFE, Isolation Appointment</td>
+                <td class="field-help" style="margin:0">POC determines which</td>
+                <td>120 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
-                <td>15 min</td>
+              </tr>
+              <tr>
+                <td><strong>Eboo Chair 2</strong> <span class="field-help" style="display:inline">&middot; EBOO</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>EBOO, EBOO SAFE, Isolation Appointment</td>
+                <td class="field-help" style="margin:0">POC determines which</td>
+                <td>120 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Infusion</th></tr>
               <tr>
-                <td><strong>Medic IV</strong></td>
+                <td><strong>Medic IV</strong> <span class="field-help" style="display:inline">&middot; Infusion</span></td>
                 <td><span class="res-kind">IV chair</span></td>
-                <td>IV</td>
+                <td>Foundational Flow 5, Foundational Flow 10, Foundational Flow 15, Foundational Flow 20, Foundational Flow 25, Foundational Flow 50, Cellular Boost, Mast Cell, Mast Cell - Benadryl Only, Cognitive Support, Core Iron Blend, Core Restore, Detox Prime, Essential Amino, Mega C 100, Mega C 15, Mega C 25, Mega C 50, Mega C 75, Mini Cust, Mini MB, Mito Boost, EBOO Boost IV</td>
                 <td class="field-help" style="margin:0">IV bag determined by POC — only prescribed bags</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Nurse IV 1</strong></td>
+                <td><strong>Nurse IV 1</strong> <span class="field-help" style="display:inline">&middot; Infusion</span></td>
                 <td><span class="res-kind">IV chair</span></td>
-                <td>IV</td>
+                <td>Foundational Flow 5, Foundational Flow 10, Foundational Flow 15, Foundational Flow 20, Foundational Flow 25, Foundational Flow 50, Cellular Boost, Mast Cell, Mast Cell - Benadryl Only, Cognitive Support, Core Iron Blend, Core Restore, Detox Prime, Essential Amino, Mega C 100, Mega C 15, Mega C 25, Mega C 50, Mega C 75, Mini Cust, Mini MB, Mito Boost, EBOO Boost IV</td>
                 <td class="field-help" style="margin:0">IV bag determined by POC — only prescribed bags</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Nurse IV 2</strong></td>
+                <td><strong>Nurse IV 2</strong> <span class="field-help" style="display:inline">&middot; Infusion</span></td>
                 <td><span class="res-kind">IV chair</span></td>
-                <td>IV</td>
+                <td>Foundational Flow 5, Foundational Flow 10, Foundational Flow 15, Foundational Flow 20, Foundational Flow 25, Foundational Flow 50, Cellular Boost, Mast Cell, Mast Cell - Benadryl Only, Cognitive Support, Core Iron Blend, Core Restore, Detox Prime, Essential Amino, Mega C 100, Mega C 15, Mega C 25, Mega C 50, Mega C 75, Mini Cust, Mini MB, Mito Boost, EBOO Boost IV</td>
                 <td class="field-help" style="margin:0">IV bag determined by POC — only prescribed bags</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Lab</th></tr>
               <tr>
-                <td><strong>Lab Draw</strong></td>
-                <td><span class="res-kind">Room</span></td>
-                <td>Quest Lab Draw, MDL, G6PD</td>
-                <td class="field-help" style="margin:0">Lab orders from POC</td>
-                <td>30 min</td>
-                <td class="field-help" style="margin:0">Booked along with the IV start.</td>
-              </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Infusion</th></tr>
-              <tr>
-                <td><strong>Lab Draw</strong></td>
-                <td><span class="res-kind">Room</span></td>
-                <td>Quest Lab Draw, MDL, G6PD</td>
-                <td class="field-help" style="margin:0">Lab orders from POC</td>
-                <td>30 min</td>
-                <td class="field-help" style="margin:0">Booked along with the IV start.</td>
-              </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Diagnostics</th></tr>
-              <tr>
-                <td><strong>Diagnostic Testing</strong></td>
+                <td><strong>Diagnostic Testing</strong> <span class="field-help" style="display:inline">&middot; Diagnostics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Diagnostic Testing</td>
                 <td class="field-help" style="margin:0">Functional neuro testing</td>
@@ -1542,16 +1526,15 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>InBody</strong></td>
-                <td><span class="res-kind">Equipment</span></td>
+                <td><strong>MA Office Visit</strong> <span class="field-help" style="display:inline">&middot; Diagnostics</span></td>
+                <td><span class="res-kind">Staff</span></td>
                 <td>InBody</td>
                 <td class="field-help" style="margin:0">InBody scan only</td>
                 <td>15 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Treatment</th></tr>
               <tr>
-                <td><strong>Red Light</strong></td>
+                <td><strong>Red Light</strong> <span class="field-help" style="display:inline">&middot; Treatment</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Red Light Bed</td>
                 <td class="field-help" style="margin:0">POC determines duration — possible titrate</td>
@@ -1559,23 +1542,48 @@
                 <td class="field-help" style="margin:0">A survey goes out during the titrate, asking about reactions.</td>
               </tr>
               <tr>
-                <td><strong>Erchonia Laser</strong></td>
+                <td><strong>MA Office Visit</strong> <span class="field-help" style="display:inline">&middot; MA Office Visit</span></td>
+                <td><span class="res-kind">Staff</span></td>
+                <td>GLP Injection, Vitals, Nasal Swabs, EKG</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>15 min</td>
+                <td class="field-help" style="margin:0">&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Lab Draw</strong> <span class="field-help" style="display:inline">&middot; Lab Draw</span></td>
+                <td><span class="res-kind">Room</span></td>
+                <td>Quest Lab Draw, MDL, G6PD</td>
+                <td class="field-help" style="margin:0">Lab orders from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Booked along with the IV start.</td>
+              </tr>
+              <tr>
+                <td><strong>Lab Draw</strong> <span class="field-help" style="display:inline">&middot; Infusion</span></td>
+                <td><span class="res-kind">Room</span></td>
+                <td>Quest Lab Draw, MDL, G6PD</td>
+                <td class="field-help" style="margin:0">Lab orders from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Booked along with the IV start.</td>
+              </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Treatment</th></tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>Erchonia Laser</td>
-                <td class="field-help" style="margin:0">Protocol from POC — list all POC-approved protocols</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
+                <td class="field-help" style="margin:0">Protocol from POC — the 36 below are the list</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
               </tr>
               <tr>
-                <td><strong>Erchonia Handheld</strong></td>
+                <td><strong>Erchonia Handheld</strong> <span class="field-help" style="display:inline">&middot; Treatment</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Erchonia Handheld</td>
-                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td class="field-help" style="margin:0">Add on Only — Protocol from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">Add-on only — it cannot be the reason for the visit. Can be booked alongside the Erchonia Laser, or an IV.</td>
               </tr>
               <tr>
-                <td><strong>ADA Nano Tub Room</strong></td>
+                <td><strong>ADA Nano Tub Room</strong> <span class="field-help" style="display:inline">&middot; ADA Nano Tub Room</span></td>
                 <td><span class="res-kind">Room</span></td>
                 <td>Hydrogen, Oxygen</td>
                 <td class="field-help" style="margin:0">POC determines hydrogen or oxygen</td>
@@ -1583,7 +1591,7 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Nano Tub Room</strong></td>
+                <td><strong>Nano Tub Room</strong> <span class="field-help" style="display:inline">&middot; Nano Tub Room</span></td>
                 <td><span class="res-kind">Room</span></td>
                 <td>Hydrogen, Oxygen</td>
                 <td class="field-help" style="margin:0">POC determines hydrogen or oxygen</td>
@@ -1591,104 +1599,88 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Eboo Chair 1</strong></td>
-                <td><span class="res-kind">Equipment</span></td>
-                <td>EBOO, EBOO SAFE</td>
-                <td class="field-help" style="margin:0">POC determines which</td>
-                <td>120 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Eboo Chair 2</strong></td>
-                <td><span class="res-kind">Equipment</span></td>
-                <td>EBOO, EBOO SAFE</td>
-                <td class="field-help" style="margin:0">POC determines which</td>
-                <td>120 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Salt Room - Chair 1</strong></td>
+                <td><strong>Salt Room</strong> <span class="field-help" style="display:inline">&middot; Salt Room - Chair 1</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>Halo Salt Therapy</td>
+                <td>Guided Meditation, Guided Breathing Exercises, Guided Relaxation</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Salt Room - Chair 2</strong></td>
+                <td><strong>Salt Room</strong> <span class="field-help" style="display:inline">&middot; Salt Room - Chair 2</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>Halo Salt Therapy</td>
+                <td>Guided Meditation, Guided Breathing Exercises, Guided Relaxation</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Salt Room - Chair 3</strong></td>
+                <td><strong>Salt Room</strong> <span class="field-help" style="display:inline">&middot; Salt Room - Chair 3</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>Halo Salt Therapy</td>
+                <td>Guided Meditation, Guided Breathing Exercises, Guided Relaxation</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Salt Room - Chair 4</strong></td>
+                <td><strong>Salt Room</strong> <span class="field-help" style="display:inline">&middot; Salt Room - Chair 4</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>Halo Salt Therapy</td>
+                <td>Guided Meditation, Guided Breathing Exercises, Guided Relaxation</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>BioCharger - Chair 1</strong></td>
+                <td><strong>BioCharger</strong> <span class="field-help" style="display:inline">&middot; BioCharger - Chair 1</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>BioCharger - Chair 2</strong></td>
+                <td><strong>BioCharger</strong> <span class="field-help" style="display:inline">&middot; BioCharger - Chair 2</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>BioCharger - Chair 3</strong></td>
+                <td><strong>BioCharger</strong> <span class="field-help" style="display:inline">&middot; BioCharger - Chair 3</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>BioCharger - Chair 4</strong></td>
+                <td><strong>BioCharger</strong> <span class="field-help" style="display:inline">&middot; BioCharger - Chair 4</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>BioCharger - Chair 5</strong></td>
+                <td><strong>BioCharger</strong> <span class="field-help" style="display:inline">&middot; BioCharger - Chair 5</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>BioCharger - Chair 6</strong></td>
+                <td><strong>BioCharger</strong> <span class="field-help" style="display:inline">&middot; BioCharger - Chair 6</span></td>
                 <td><span class="res-kind">Seat</span></td>
-                <td>BioCharger 30 min, BioCharger Stack 60 min</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
                 <td class="field-help" style="margin:0">Allowed recipes from POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Treatment Infusion Suite</th></tr>
               <tr>
-                <td><strong>NanoVi 1</strong></td>
+                <td><strong>NanoVi 1</strong> <span class="field-help" style="display:inline">&middot; NanoVi 1</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>NanoVi 30 min</td>
                 <td class="field-help" style="margin:0">POC determines if recommended, and the duration</td>
@@ -1696,7 +1688,7 @@
                 <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
               </tr>
               <tr>
-                <td><strong>NanoVi 2</strong></td>
+                <td><strong>NanoVi 2</strong> <span class="field-help" style="display:inline">&middot; NanoVi 2</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>NanoVi 30 min</td>
                 <td class="field-help" style="margin:0">POC determines if recommended, and the duration</td>
@@ -1704,7 +1696,7 @@
                 <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
               </tr>
               <tr>
-                <td><strong>Hydrogen Inhalation</strong></td>
+                <td><strong>Hydrogen Inhalation</strong> <span class="field-help" style="display:inline">&middot; Hydrogen Inhalation</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Hydrogen 15 min, Hydrogen 30 min, Hydrogen 45 min</td>
                 <td class="field-help" style="margin:0">POC determines duration and concentration</td>
@@ -1712,7 +1704,7 @@
                 <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
               </tr>
               <tr>
-                <td><strong>BEMER</strong></td>
+                <td><strong>BEMER</strong> <span class="field-help" style="display:inline">&middot; BEMER</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>BEMER</td>
                 <td class="field-help" style="margin:0">POC determines the level of treatment</td>
@@ -1720,24 +1712,24 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Rife</strong></td>
+                <td><strong>Rife</strong> <span class="field-help" style="display:inline">&middot; Treatment Infusion Suite</span></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>Rife</td>
-                <td class="field-help" style="margin:0">Recipes from POC</td>
+                <td><span class="field-help" style="margin:0">from the plan of care</span></td>
+                <td class="field-help" style="margin:0">Recipe in POC</td>
                 <td>30 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Energetics</th></tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>BioMod Pro</td>
+                <td>BioMod Pro, Lymph Star</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>BioMod Recharge</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
@@ -1745,7 +1737,7 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Lymph Star</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
@@ -1753,7 +1745,7 @@
                 <td class="field-help" style="margin:0">Not the same day as EBOO, and not for 3 days after. One day BEFORE is what is recommended.</td>
               </tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Mini-Lymph Star</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
@@ -1761,7 +1753,7 @@
                 <td class="field-help" style="margin:0">Not the same day as EBOO, and not for 3 days after. One day BEFORE is what is recommended.</td>
               </tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>Neuro Muscular Therapy (NMT)</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
@@ -1769,29 +1761,309 @@
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics</span></td>
                 <td><span class="res-kind">Equipment</span></td>
                 <td>SCENAR</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
-              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Energetics/Diagnostic</th></tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Energetics</strong> <span class="field-help" style="display:inline">&middot; Energetics/Diagnostic</span></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>MEAD Initial</td>
+                <td>MEAD</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
                 <td>60 min</td>
                 <td class="field-help" style="margin:0">&mdash;</td>
               </tr>
+              <tr><th colspan="6" style="text-align:left;background:var(--hx-band)">Treatment</th></tr>
               <tr>
-                <td><strong>Energetics</strong></td>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
                 <td><span class="res-kind">Equipment</span></td>
-                <td>MEAD Reassess</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
+                <td>Head &amp; Cerebellum</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
                 <td>30 min</td>
-                <td class="field-help" style="margin:0">&mdash;</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Shoulder</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Wrist/hand</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Knee</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Heel</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Neck</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Elbow</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Low Back</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Ankle/Foot</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Acute Pain</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Level 1 Brain</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Level 2 Brain</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Emotional Stress</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Sympathetic Calm</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Parasympathetic Facilitation</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Level 1 Gut</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Level 2 Gut</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Inflammation</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Parasites 1</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Parasites 2</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Lyme</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>EBV</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Infection</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Digestion</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Indigestion</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Allergy</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Immune Enhance</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Hormone Balance</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Plantar Fasciitis</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Chronic Pain</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Lymphatic</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Weight Loss Trial</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Large Intestines</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Small Intestines</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>General Musculoskeletal</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
+              </tr>
+              <tr>
+                <td><strong>Erchonia Laser</strong> <span class="field-help" style="display:inline">&middot; Erchonia Laser</span></td>
+                <td><span class="res-kind">Equipment</span></td>
+                <td>Neuro Inflammation</td>
+                <td class="field-help" style="margin:0">Protocol from POC</td>
+                <td>30 min</td>
+                <td class="field-help" style="margin:0">Can be booked with an IV, after the IV has started.</td>
               </tr>
             </tbody>
           </table>
@@ -2052,7 +2324,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=117"></script>
+<script src="assets/hcos.js?v=118"></script>
 <script>
 /* Kind chips narrow the catalogue and report what is on screen. */
 (function () {

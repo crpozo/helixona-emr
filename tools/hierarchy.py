@@ -18,9 +18,46 @@ The subtype list is NOT static. It comes from the patient's POC, so the booking
 screen offers what that patient is actually prescribed, not the whole catalogue.
 """
 
-# organizing type, column name, kind, appointment types, from the POC, minutes, rules
+# ---------------------------------------------------------------------------
+# THE SHEET, WITH A DEPARTMENT ON TOP (Carlos, 2026-09-02: "we need this
+# structure, as you can see we add department").
+#
+#   DEPARTMENT              Clinic / Infusion / Treatment / Treatment Infusion
+#                           Suite / Energetics — the FIRST filter, multi-select
+#     COLUMN NAME/RESOURCE  one line on the board, one per name
+#       APPOINTMENT TYPE    the sheet's third column: for a provider it is the
+#                           organizing type ("Office Visit - 30 min"), for a
+#                           machine it is the resource type ("NanoVi 1"). The
+#                           sheet titles it "Resource Type (for filters)". This
+#                           is ONE thing, and it ends the "Type vs Appointment
+#                           types" collision: there is no separate organizing type
+#                           any more, this is it.
+#         SUB TYPE          what is actually booked; for Erchonia the 36
+#                           protocols are listed here one per row, which is why
+#                           the subtype filter can offer them.
+#
+# Two things the sheet changed that are not just labels:
+#   · SALT ROOM and BIOCHARGER are now ONE column each, and the chairs are the
+#     appointment types under them. 34 columns become 25. This is the seat-group
+#     model the clinic asked for on 2026-08-26 and could not express before.
+#   · Dr. Bakman gets a 15-minute row for Chiropractic Visit.
+#
+# Four rows are encoded as the sheet has them but look like fill-down slips, and
+# are flagged in the commit for Carlos to confirm rather than silently "fixed":
+#   · Diagnostic Testing / Red Light / MA Office Visit / Lab Draw carry
+#     Department = Infusion. Kept as written.
+#   · One row reads "Diagnostic Testing | Office Visit - 60 min | Depth
+#     Psychology". That is Leigh Ann's row with the wrong column name; Leigh Ann
+#     is kept as her own column, because deleting a person over a typo is worse
+#     than asking.
+#   · "MA Office Visit | Diagnostics | InBody" moves the InBody scan under the
+#     MA's column. Followed: the MA runs it. The InBody column is gone.
+# ---------------------------------------------------------------------------
+# The tuple keeps the shape genboard reads: (appointment type, column, kind,
+# subtypes, POC note, minutes, rules). Department sits beside it in
+# DEPARTMENT_OF so nothing downstream had to be rewritten to gain a level.
 COLUMNS = [
- # ---- providers ----
+ # ---- Clinic ----
  ('Office Visit - 30 min', 'Dr. Drannikov', 'Provider',
   ['Follow-Up', 'Transfer of Care', 'Telemedicine'], '', 30, []),
  ('Office Visit - 60 min', 'Dr. Drannikov', 'Provider',
@@ -33,83 +70,105 @@ COLUMNS = [
   ['Follow-Up', 'Telemedicine', 'Transfer of Care'], '', 30, []),
  ('Office Visit - 60 min', 'Mira', 'Provider',
   ['New Patient', 'New Patient F/U'], '', 60, []),
- # Dr. Bakman es UNA linea (Carlos, 2026-08-27: "Dr. Bakman no se repite").
- # Su FPE y el resto se reservan por reglas distintas, y esa diferencia vive en
- # la nota de POC de cada fila — no en dos columnas del tablero. El era el ultimo
- # caso de una persona partida en varias lineas; ya no queda ninguno.
  ('Office Visit - 30 min', 'Dr. Bakman', 'Provider',
-  ['FPE', 'Medicare FPE', 'FPE FU'], 'Program determines timing of booking this', 30, []),
- ('Office Visit - 30 min', 'Dr. Bakman', 'Provider',
-  ['Chiropractic Visit', 'Laser Eval', 'POC Review'], 'POC determines if this can book', 30, []),
+  ['FPE', 'Medicare FPE', 'FPE FU', 'Laser Eval', 'POC Review'],
+  'Program determines timing of booking this; POC determines if this can book', 30, []),
+ ('Office Visit - 15 min', 'Dr. Bakman', 'Provider',
+  ['Chiropractic Visit'], '', 15, []),
  ('Office Visit - 60 min', 'Leigh Ann', 'Provider',
   ['Depth Psychology'], 'Books through her own app today', 60, ['external']),
- ('Office Visit', 'MA Office Visit', 'Staff',
+ ('EBOO', 'Eboo Chair 1', 'Equipment', ['EBOO', 'EBOO SAFE', 'Isolation Appointment'],
+  'POC determines which', 120, []),
+ ('EBOO', 'Eboo Chair 2', 'Equipment', ['EBOO', 'EBOO SAFE', 'Isolation Appointment'],
+  'POC determines which', 120, []),
+
+ # ---- Infusion ----
+ ('Infusion', 'Medic IV', 'IV chair', ['Foundational Flow 5', 'Foundational Flow 10', 'Foundational Flow 15', 'Foundational Flow 20', 'Foundational Flow 25', 'Foundational Flow 50', 'Cellular Boost', 'Mast Cell', 'Mast Cell - Benadryl Only', 'Cognitive Support', 'Core Iron Blend', 'Core Restore', 'Detox Prime', 'Essential Amino', 'Mega C 100', 'Mega C 15', 'Mega C 25', 'Mega C 50', 'Mega C 75', 'Mini Cust', 'Mini MB', 'Mito Boost', 'EBOO Boost IV'],
+  'IV bag determined by POC — only prescribed bags', 30, []),
+ ('Infusion', 'Nurse IV 1', 'IV chair', ['Foundational Flow 5', 'Foundational Flow 10', 'Foundational Flow 15', 'Foundational Flow 20', 'Foundational Flow 25', 'Foundational Flow 50', 'Cellular Boost', 'Mast Cell', 'Mast Cell - Benadryl Only', 'Cognitive Support', 'Core Iron Blend', 'Core Restore', 'Detox Prime', 'Essential Amino', 'Mega C 100', 'Mega C 15', 'Mega C 25', 'Mega C 50', 'Mega C 75', 'Mini Cust', 'Mini MB', 'Mito Boost', 'EBOO Boost IV'],
+  'IV bag determined by POC — only prescribed bags', 30, []),
+ ('Infusion', 'Nurse IV 2', 'IV chair', ['Foundational Flow 5', 'Foundational Flow 10', 'Foundational Flow 15', 'Foundational Flow 20', 'Foundational Flow 25', 'Foundational Flow 50', 'Cellular Boost', 'Mast Cell', 'Mast Cell - Benadryl Only', 'Cognitive Support', 'Core Iron Blend', 'Core Restore', 'Detox Prime', 'Essential Amino', 'Mega C 100', 'Mega C 15', 'Mega C 25', 'Mega C 50', 'Mega C 75', 'Mini Cust', 'Mini MB', 'Mito Boost', 'EBOO Boost IV'],
+  'IV bag determined by POC — only prescribed bags', 30, []),
+ ('Diagnostics', 'Diagnostic Testing', 'Equipment', ['Diagnostic Testing'],
+  'Functional neuro testing', 60, []),
+ ('Diagnostics', 'MA Office Visit', 'Staff', ['InBody'], 'InBody scan only', 15, []),
+ ('Treatment', 'Red Light', 'Equipment', ['Red Light Bed'],
+  'POC determines duration — possible titrate', 60, ['survey-titrate']),
+ ('MA Office Visit', 'MA Office Visit', 'Staff',
   ['GLP Injection', 'Vitals', 'Nasal Swabs', 'EKG'], '', 15, []),
-
- # ---- infusion ----
- ('Infusion', 'Medic IV', 'IV chair', ['IV'], 'IV bag determined by POC — only prescribed bags', 30, []),
- ('Infusion', 'Nurse IV 1', 'IV chair', ['IV'], 'IV bag determined by POC — only prescribed bags', 30, []),
- ('Infusion', 'Nurse IV 2', 'IV chair', ['IV'], 'IV bag determined by POC — only prescribed bags', 30, []),
-
- # ---- lab ----
- ('Lab', 'Lab Draw', 'Room', ['Quest Lab Draw', 'MDL', 'G6PD'], 'Lab orders from POC', 30,
+ ('Lab Draw', 'Lab Draw', 'Room', ['Quest Lab Draw', 'MDL', 'G6PD'], 'Lab orders from POC', 30,
   ['with-iv-start']),
- # la misma linea, filtrada tambien como Infusion: la extraccion entra con el
- # arranque de la IV y el escritorio la busca ahi (Carlos, 2026-08-26)
  ('Infusion', 'Lab Draw', 'Room', ['Quest Lab Draw', 'MDL', 'G6PD'], 'Lab orders from POC', 30,
   ['with-iv-start']),
 
- # ---- diagnostics ----
- ('Diagnostics', 'Diagnostic Testing', 'Equipment', ['Diagnostic Testing'],
-  'Functional neuro testing', 60, []),
- ('Diagnostics', 'InBody', 'Equipment', ['InBody'], 'InBody scan only', 15, []),
-
- # ---- treatment ----
- ('Treatment', 'Red Light', 'Equipment', ['Red Light Bed'],
-  'POC determines duration — possible titrate', 60, ['survey-titrate']),
- ('Treatment', 'Erchonia Laser', 'Equipment', ['Erchonia Laser'],
-  'Protocol from POC — list all POC-approved protocols', 30, ['with-iv-after-start']),
+ # ---- Treatment ----
+ ('Erchonia Laser', 'Erchonia Laser', 'Equipment', [],
+  'Protocol from POC — the 36 below are the list', 30, ['with-iv-after-start']),
  ('Treatment', 'Erchonia Handheld', 'Equipment', ['Erchonia Handheld'],
-  'Protocol from POC', 30, ['add-on-only', 'with-erchonia-or-iv']),
- ('Treatment', 'ADA Nano Tub Room', 'Room', ['Hydrogen', 'Oxygen'],
+  'Add on Only — Protocol from POC', 30, ['add-on-only', 'with-erchonia-or-iv']),
+ ('ADA Nano Tub Room', 'ADA Nano Tub Room', 'Room', ['Hydrogen', 'Oxygen'],
   'POC determines hydrogen or oxygen', 60, []),
- ('Treatment', 'Nano Tub Room', 'Room', ['Hydrogen', 'Oxygen'],
+ ('Nano Tub Room', 'Nano Tub Room', 'Room', ['Hydrogen', 'Oxygen'],
   'POC determines hydrogen or oxygen', 60, []),
- ('Treatment', 'Eboo Chair 1', 'Equipment', ['EBOO', 'EBOO SAFE'], 'POC determines which', 120, []),
- ('Treatment', 'Eboo Chair 2', 'Equipment', ['EBOO', 'EBOO SAFE'], 'POC determines which', 120, []),
- ('Treatment', 'Salt Room - Chair 1', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
- ('Treatment', 'Salt Room - Chair 2', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
- ('Treatment', 'Salt Room - Chair 3', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
- ('Treatment', 'Salt Room - Chair 4', 'Seat', ['Halo Salt Therapy'], '', 60, ['group:salt']),
- ('Treatment', 'BioCharger - Chair 1', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 2', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 3', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 4', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 5', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
- ('Treatment', 'BioCharger - Chair 6', 'Seat', ['BioCharger 30 min', 'BioCharger Stack 60 min'], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('Salt Room - Chair 1', 'Salt Room', 'Seat',
+  ['Guided Meditation', 'Guided Breathing Exercises', 'Guided Relaxation'], '', 60, ['group:salt']),
+ ('Salt Room - Chair 2', 'Salt Room', 'Seat',
+  ['Guided Meditation', 'Guided Breathing Exercises', 'Guided Relaxation'], '', 60, ['group:salt']),
+ ('Salt Room - Chair 3', 'Salt Room', 'Seat',
+  ['Guided Meditation', 'Guided Breathing Exercises', 'Guided Relaxation'], '', 60, ['group:salt']),
+ ('Salt Room - Chair 4', 'Salt Room', 'Seat',
+  ['Guided Meditation', 'Guided Breathing Exercises', 'Guided Relaxation'], '', 60, ['group:salt']),
+ ('BioCharger - Chair 1', 'BioCharger', 'Seat', [], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('BioCharger - Chair 2', 'BioCharger', 'Seat', [], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('BioCharger - Chair 3', 'BioCharger', 'Seat', [], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('BioCharger - Chair 4', 'BioCharger', 'Seat', [], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('BioCharger - Chair 5', 'BioCharger', 'Seat', [], 'Allowed recipes from POC', 30, ['group:biocharger']),
+ ('BioCharger - Chair 6', 'BioCharger', 'Seat', [], 'Allowed recipes from POC', 30, ['group:biocharger']),
 
- # ---- treatment inside the infusion suite ----
- ('Treatment Infusion Suite', 'NanoVi 1', 'Equipment', ['NanoVi 30 min'],
+ # ---- Treatment Infusion Suite ----
+ ('NanoVi 1', 'NanoVi 1', 'Equipment', ['NanoVi 30 min'],
   'POC determines if recommended, and the duration', 30, ['with-iv-after-start']),
- ('Treatment Infusion Suite', 'NanoVi 2', 'Equipment', ['NanoVi 30 min'],
+ ('NanoVi 2', 'NanoVi 2', 'Equipment', ['NanoVi 30 min'],
   'POC determines if recommended, and the duration', 30, ['with-iv-after-start']),
- ('Treatment Infusion Suite', 'Hydrogen Inhalation', 'Equipment',
+ ('Hydrogen Inhalation', 'Hydrogen Inhalation', 'Equipment',
   ['Hydrogen 15 min', 'Hydrogen 30 min', 'Hydrogen 45 min'],
   'POC determines duration and concentration', 30, ['with-iv-after-start']),
- ('Treatment Infusion Suite', 'BEMER', 'Equipment', ['BEMER'],
-  'POC determines the level of treatment', 30, []),
- ('Treatment Infusion Suite', 'Rife', 'Equipment', ['Rife'], 'Recipes from POC', 30, []),
+ ('BEMER', 'BEMER', 'Equipment', ['BEMER'], 'POC determines the level of treatment', 30, []),
+ ('Treatment Infusion Suite', 'Rife', 'Equipment', [], 'Recipe in POC', 30, []),
 
- # ---- energetics: ONE column, many appointment types ----
- ('Energetics', 'Energetics', 'Equipment', ['BioMod Pro'], '', 60, []),
+ # ---- Energetics: ONE column, many appointment types ----
+ ('Energetics', 'Energetics', 'Equipment', ['BioMod Pro', 'Lymph Star'], '', 60, []),
  ('Energetics', 'Energetics', 'Equipment', ['BioMod Recharge'], '', 30, []),
  ('Energetics', 'Energetics', 'Equipment', ['Lymph Star'], '', 60, ['eboo-spacing']),
  ('Energetics', 'Energetics', 'Equipment', ['Mini-Lymph Star'], '', 30, ['eboo-spacing']),
  ('Energetics', 'Energetics', 'Equipment', ['Neuro Muscular Therapy (NMT)'], '', 60, []),
  ('Energetics', 'Energetics', 'Equipment', ['SCENAR'], '', 60, []),
- ('Energetics/Diagnostic', 'Energetics', 'Equipment', ['MEAD Initial'], '', 60, []),
- ('Energetics/Diagnostic', 'Energetics', 'Equipment', ['MEAD Reassess'], '', 30, []),
+ ('Energetics/Diagnostic', 'Energetics', 'Equipment', ['MEAD'], '', 60, []),
 ]
+
+# the 36 Erchonia protocols are subtypes of the Erchonia Laser appointment type,
+# one per row in the sheet. They come from the catalogue below so the two can
+# never disagree.
+def _erchonia_rows():
+    return [('Erchonia Laser', 'Erchonia Laser', 'Equipment', [n], 'Protocol from POC', 30,
+             ['with-iv-after-start']) for n, _m in ERCHONIA]
+
+# department of every column name — the sheet's first column
+DEPARTMENT_OF = {
+ 'Dr. Drannikov': 'Clinic', 'Mira': 'Clinic', 'Dr. Bakman': 'Clinic', 'Leigh Ann': 'Clinic',
+ 'Eboo Chair 1': 'Clinic', 'Eboo Chair 2': 'Clinic',
+ 'Medic IV': 'Infusion', 'Nurse IV 1': 'Infusion', 'Nurse IV 2': 'Infusion',
+ 'Diagnostic Testing': 'Infusion', 'MA Office Visit': 'Infusion', 'Red Light': 'Infusion',
+ 'Lab Draw': 'Infusion',
+ 'Erchonia Laser': 'Treatment', 'Erchonia Handheld': 'Treatment',
+ 'ADA Nano Tub Room': 'Treatment', 'Nano Tub Room': 'Treatment',
+ 'Salt Room': 'Treatment', 'BioCharger': 'Treatment',
+ 'NanoVi 1': 'Treatment Infusion Suite', 'NanoVi 2': 'Treatment Infusion Suite',
+ 'Hydrogen Inhalation': 'Treatment Infusion Suite', 'BEMER': 'Treatment Infusion Suite',
+ 'Rife': 'Treatment Infusion Suite',
+ 'Energetics': 'Energetics',
+}
+DEPARTMENT_ORDER = ['Clinic', 'Infusion', 'Treatment', 'Treatment Infusion Suite', 'Energetics']
 
 # the booking rules, written once and read by the booking screen
 RULES = {
@@ -193,7 +252,7 @@ RESOURCE_OF = {
  'Dr. Bakman': 'bakman',
  'Leigh Ann': 'leighann', 'MA Office Visit': 'ma',
  'Medic IV': 'iv-medic', 'Nurse IV 1': 'iv-n1', 'Nurse IV 2': 'iv-n2',
- 'Lab Draw': 'lab', 'Diagnostic Testing': 'diag', 'InBody': 'inbody',
+ 'Lab Draw': 'lab', 'Diagnostic Testing': 'diag',
  'Red Light': 'redlight', 'Erchonia Laser': 'erch', 'Erchonia Handheld': 'erch-hand',
  'ADA Nano Tub Room': 'ada-tub', 'Nano Tub Room': 'nano-tub',
  'Eboo Chair 1': 'eboo1', 'Eboo Chair 2': 'eboo2',
@@ -201,8 +260,8 @@ RESOURCE_OF = {
  'Hydrogen Inhalation': 'h2', 'BEMER': 'bemer', 'Rife': 'rife',
  'Energetics': 'energetics',
 }
-for _i in range(1, 5): RESOURCE_OF['Salt Room - Chair %d' % _i] = 'salt%d' % _i
-for _i in range(1, 7): RESOURCE_OF['BioCharger - Chair %d' % _i] = 'bio%d' % _i
+RESOURCE_OF['Salt Room'] = 'salt'
+RESOURCE_OF['BioCharger'] = 'biocharger'
 
 # who is behind a resource, for the column head
 RESOURCE_WHO = {
@@ -232,9 +291,14 @@ RESOURCE_WHO = {
 # La banda de encima ya no puede ser el organizing type (una columna pertenece a
 # varios). Es el AREA: donde esta la linea fisicamente, que si es una sola cosa.
 # ---------------------------------------------------------------------------
-ORG_ORDER = ['Office Visit - 30 min', 'Office Visit - 60 min', 'Office Visit',
-             'Procedure - 30 min', 'Procedure - 60 min', 'Infusion', 'Lab',
-             'Diagnostics', 'Treatment', 'Treatment Infusion Suite',
+ORG_ORDER = ['Office Visit - 15 min', 'Office Visit - 30 min', 'Office Visit - 60 min',
+             'Procedure - 30 min', 'Procedure - 60 min', 'EBOO',
+             'Infusion', 'Diagnostics', 'MA Office Visit', 'Lab Draw', 'Treatment',
+             'Erchonia Laser', 'ADA Nano Tub Room', 'Nano Tub Room',
+             'Salt Room - Chair 1', 'Salt Room - Chair 2', 'Salt Room - Chair 3', 'Salt Room - Chair 4',
+             'BioCharger - Chair 1', 'BioCharger - Chair 2', 'BioCharger - Chair 3',
+             'BioCharger - Chair 4', 'BioCharger - Chair 5', 'BioCharger - Chair 6',
+             'NanoVi 1', 'NanoVi 2', 'Hydrogen Inhalation', 'BEMER', 'Treatment Infusion Suite',
              'Energetics', 'Energetics/Diagnostic']
 
 AREA_ORDER = ['Providers & staff', 'Infusion', 'Lab', 'Diagnostics',
@@ -246,7 +310,7 @@ AREA_OF = {
  'Leigh Ann': 'Providers & staff', 'MA Office Visit': 'Providers & staff',
  'Medic IV': 'Infusion', 'Nurse IV 1': 'Infusion', 'Nurse IV 2': 'Infusion',
  'Lab Draw': 'Lab',
- 'Diagnostic Testing': 'Diagnostics', 'InBody': 'Diagnostics',
+ 'Diagnostic Testing': 'Diagnostics',
  'Red Light': 'Treatment', 'Erchonia Laser': 'Treatment', 'Erchonia Handheld': 'Treatment',
  'ADA Nano Tub Room': 'Treatment', 'Nano Tub Room': 'Treatment',
  'Eboo Chair 1': 'Treatment', 'Eboo Chair 2': 'Treatment',
@@ -255,8 +319,8 @@ AREA_OF = {
  'Rife': 'Treatment Infusion Suite',
  'Energetics': 'Energetics',
 }
-for _i in range(1, 5): AREA_OF['Salt Room - Chair %d' % _i] = 'Treatment'
-for _i in range(1, 7): AREA_OF['BioCharger - Chair %d' % _i] = 'Treatment'
+AREA_OF['Salt Room'] = 'Treatment'
+AREA_OF['BioCharger'] = 'Treatment'
 
 
 def board_columns():
@@ -266,7 +330,7 @@ def board_columns():
     cita, porque el filtro pregunta por el tipo de cita y la columna responde.
     """
     seen, out = {}, []
-    for org, col, kind, types, poc, mins, rules in COLUMNS:
+    for org, col, kind, types, poc, mins, rules in COLUMNS + _erchonia_rows():
         if col in seen:
             c = seen[col]
             if org not in c['orgs']: c['orgs'].append(org)
@@ -279,6 +343,7 @@ def board_columns():
             continue
         c = {'name': col, 'kind': kind,
              'area': AREA_OF.get(col, 'Treatment'),
+             'dept': DEPARTMENT_OF.get(col, 'Treatment'),
              'orgs': [org], 'types': list(types),
              'poc': [poc] if poc else [],
              'mins': {org: mins}, 'rules': list(rules),
@@ -293,9 +358,30 @@ def board_columns():
 
 
 def org_types():
-    """Los doce organizing types del filtro, en el orden de la clinica, sin repetir."""
-    used = {org for org, *_ in COLUMNS}
-    return [o for o in ORG_ORDER if o in used]
+    """Los appointment types (columna 3 de la hoja), en el orden de la clinica, sin repetir."""
+    used = {org for org, *_ in COLUMNS + _erchonia_rows()}
+    return [o for o in ORG_ORDER if o in used] + sorted(o for o in used if o not in ORG_ORDER)
+
+appt_types = org_types
+
+
+def departments():
+    """Los cinco departamentos, en orden, solo los que tienen alguna columna."""
+    used = {c['dept'] for c in board_columns()}
+    return [d for d in DEPARTMENT_ORDER if d in used]
+
+
+def columns_for_dept(dept):
+    return [c for c in board_columns() if c['dept'] == dept]
+
+
+def subtypes():
+    """Todo lo reservable (columna 4), sin repetir, en orden de aparicion."""
+    out = []
+    for org, col, kind, types, poc, mins, rules in COLUMNS + _erchonia_rows():
+        for t in types:
+            if t not in out: out.append(t)
+    return out
 
 
 def columns_for_org(org):

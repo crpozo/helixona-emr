@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff admin &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=118">
+<style>
+  .wt-grid { display: grid; grid-template-columns: 90px repeat(3, 1fr); gap: 6px 10px; align-items: center; font-size: 12.5px; }
+  .wt-grid .d { font-weight: 600; }
+  .wt-grid select { font-size: 12.5px; }
+  .slot-ex { display: flex; gap: 2px; margin-top: 6px; }
+  .slot-ex i { flex: 1; height: 14px; background: #E3ECFB; border: 1px solid #2E6DB4; border-radius: 2px; }
+</style>
+</head>
+<body data-page="staff" data-page-title="Staff · Admin" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-ad-people" data-title="People &amp; working time">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/admin</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Staff admin</div>
+            <div class="field-help" style="margin:2px 0 0">Admin only. Creates people, sets their working time, and decides how fine the booking grid is. Everything the capacity page counts starts here.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="st-ad-slots">Slot timing</button>
+            <button class="btn btn-primary" data-open-modal="#ad-new-modal">Add a person</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Working time is what makes someone a resource.</strong> A person without a working-time
+          template is on the payroll and off the board: no shifts, no capacity, nothing bookable
+          against them. Set the template once; the calendar copies it week to week and the
+          office manager only touches exceptions.
+        </div>
+
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Person</th><th>Role</th><th>Department</th><th>Working time</th><th>Certified for</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><strong>Dr. Drannikov</strong></td><td>Physician</td><td>Clinic</td><td>Mon&ndash;Thu 8&ndash;5 &middot; Fri 8&ndash;1</td><td>1 column</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Dr. Bakman</strong></td><td>Physician</td><td>Clinic</td><td>Tue, Thu, Fri 8&ndash;5</td><td>1 column</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Mira</strong></td><td>Provider</td><td>Clinic</td><td>Mon&ndash;Fri 8&ndash;5</td><td>1 column</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Leigh Ann</strong></td><td>Depth Psychology</td><td>Clinic</td><td class="field-help" style="margin:0">Books through her own app</td><td>1 column</td><td>External</td><td><button class="btn btn-sm" disabled>Working time</button></td></tr>
+            <tr><td><strong>Charlene</strong></td><td>Medical Assistant</td><td>Clinic</td><td>Mon&ndash;Fri 8&ndash;5</td><td>2 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Wesley</strong></td><td>Medical Assistant</td><td>Infusion</td><td>Mon&ndash;Fri 8&ndash;4</td><td>2 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Bea</strong></td><td>Medic</td><td>Infusion</td><td>Mon&ndash;Fri 7:30&ndash;4</td><td>4 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Nick</strong></td><td>Nurse</td><td>Infusion</td><td>Mon&ndash;Fri 8&ndash;5</td><td>5 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Juan</strong></td><td>Nurse</td><td>Infusion</td><td>Mon&ndash;Fri 9&ndash;6 &middot; away Jul 23&ndash;24</td><td>4 columns <span class="field-help" style="display:inline">(1 expired)</span></td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Sarah</strong></td><td>Treatment tech</td><td>Treatment</td><td>Mon&ndash;Fri 8&ndash;5</td><td>7 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Emily</strong></td><td>Energetics tech</td><td>Energetics</td><td>Mon, Tue, Thu, Fri 9&ndash;6</td><td>4 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>John</strong></td><td>Suite tech</td><td>Treatment Infusion Suite</td><td>Mon&ndash;Thu 8&ndash;4</td><td>5 columns</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Working time</button></td></tr>
+            <tr><td><strong>Priya</strong></td><td>Front desk</td><td>&mdash;</td><td class="field-help" style="margin:0">No working time set &mdash; not a bookable resource</td><td>&mdash;</td><td>Active</td><td><button class="btn btn-sm" data-activate="st-ad-time">Set working time</button></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-ad-time" data-title="Working time">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/admin/nick/working-time</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Working time &mdash; Nick</div><div class="field-help" style="margin:2px 0 0">The template every week starts from. Exceptions are edited on the calendar.</div></div>
+          <div class="app-user"><button class="btn" data-activate="st-ad-people">Back</button></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Weekly template</div>
+          <div class="wt-grid">
+            <div></div><div class="field-help" style="margin:0">Start</div><div class="field-help" style="margin:0">End</div><div class="field-help" style="margin:0">Break</div>
+            <div class="d">Monday</div><select class="field-select"><option selected>8:00 AM</option><option>9:00 AM</option></select><select class="field-select"><option selected>5:00 PM</option><option>6:00 PM</option></select><select class="field-select"><option selected>12:00–12:30</option><option>None</option></select>
+            <div class="d">Tuesday</div><select class="field-select"><option selected>8:00 AM</option><option>9:00 AM</option></select><select class="field-select"><option selected>5:00 PM</option><option>6:00 PM</option></select><select class="field-select"><option selected>12:00–12:30</option><option>None</option></select>
+            <div class="d">Wednesday</div><select class="field-select"><option selected>8:00 AM</option><option>9:00 AM</option></select><select class="field-select"><option selected>5:00 PM</option><option>6:00 PM</option></select><select class="field-select"><option selected>12:00–12:30</option><option>None</option></select>
+            <div class="d">Thursday</div><select class="field-select"><option selected>8:00 AM</option><option>9:00 AM</option></select><select class="field-select"><option selected>5:00 PM</option><option>6:00 PM</option></select><select class="field-select"><option selected>12:00–12:30</option><option>None</option></select>
+            <div class="d">Friday</div><select class="field-select"><option selected>8:00 AM</option><option>9:00 AM</option></select><select class="field-select"><option selected>5:00 PM</option><option>6:00 PM</option></select><select class="field-select"><option selected>12:00–12:30</option><option>None</option></select>
+            <div class="d">Saturday</div><select class="field-select"><option selected>Off</option><option>8:00 AM</option></select><select class="field-select"><option selected>&mdash;</option></select><select class="field-select"><option selected>&mdash;</option></select>
+            <div class="d">Sunday</div><select class="field-select"><option selected>Off</option><option>8:00 AM</option></select><select class="field-select"><option selected>&mdash;</option></select><select class="field-select"><option selected>&mdash;</option></select>
+          </div>
+          <div class="field-help" style="margin-top:10px"><strong>42.5 hours a week</strong> on the board. Booking will not offer Nick outside these hours, and the capacity page counts exactly these.</div>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+            <button class="btn" data-activate="st-ad-people">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Template saved. Applies from next Monday; this week keeps its edits.', 'ok')">Save template</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-ad-slots" data-title="Slot timing">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/admin/slots</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Slot timing</div><div class="field-help" style="margin:2px 0 0">How fine the booking grid is, per column. Admin only, and it only changes future days.</div></div>
+          <div class="app-user"><button class="btn" data-activate="st-ad-people">Back</button></div>
+        </div>
+        <div class="callout">
+          <strong>The grid is not the appointment length.</strong> A 15-minute grid on Dr. Bakman lets a
+          chiropractic visit start at 8:15; it does not make a 30-minute visit shorter. Finer grids
+          mean more starts to offer and more gaps to leave &mdash; which is why the clinic's day
+          columns are on 30 and the MA's on 15.
+        </div>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Column</th><th>Department</th><th>Grid</th><th>Day runs</th><th>What it looks like</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Dr. Drannikov</strong></td><td>Clinic</td><td><select class="field-select" style="width:110px"><option>15 min</option><option selected>30 min</option><option>60 min</option></select></td><td>8 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>Dr. Bakman</strong></td><td>Clinic</td><td><select class="field-select" style="width:110px"><option selected>15 min</option><option>30 min</option><option>60 min</option></select></td><td>8 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>MA Office Visit</strong></td><td>Infusion</td><td><select class="field-select" style="width:110px"><option selected>15 min</option><option>30 min</option></select></td><td>8 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>Medic IV / Nurse IV 1 / Nurse IV 2</strong></td><td>Infusion</td><td><select class="field-select" style="width:110px"><option>15 min</option><option selected>30 min</option></select></td><td>7:30 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>Eboo Chair 1 / 2</strong></td><td>Clinic</td><td><select class="field-select" style="width:110px"><option>30 min</option><option selected>60 min</option><option>120 min</option></select></td><td>8 AM &ndash; 5 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>Salt Room</strong></td><td>Treatment</td><td><select class="field-select" style="width:110px"><option>30 min</option><option selected>60 min</option></select></td><td>8 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>BioCharger</strong></td><td>Treatment</td><td><select class="field-select" style="width:110px"><option>15 min</option><option selected>30 min</option><option>60 min</option></select></td><td>8 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></td></tr>
+            <tr><td><strong>Everything else</strong></td><td>&mdash;</td><td><select class="field-select" style="width:110px"><option>15 min</option><option selected>30 min</option><option>60 min</option></select></td><td>8 AM &ndash; 6 PM</td><td><div class="slot-ex"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></td></tr>
+          </tbody>
+        </table></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+          <button class="btn btn-primary" onclick="HCOS.toast('Slot timing saved. Future days regrid; today and anything already booked do not move.', 'ok')">Save</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="ad-new-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Add a person</div><div class="modal-sub">They become a resource only once working time is set</div></div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label class="field-lbl">Name</label><input class="field-input" placeholder="First name is enough"></div>
+        <div class="field"><label class="field-lbl">Role</label><select class="field-select"><option>Nurse</option><option>Medic</option><option>Medical Assistant</option><option>Treatment tech</option><option>Provider</option><option>Physician</option><option>Front desk</option></select></div>
+        <div class="field"><label class="field-lbl">Department</label><select class="field-select"><option>Clinic</option><option>Infusion</option><option>Treatment</option><option>Treatment Infusion Suite</option><option>Energetics</option></select></div>
+        <div class="field"><label class="field-lbl">Reports to</label><select class="field-select"><option>Office manager</option><option>Dr. Drannikov</option></select></div>
+      </div>
+      <label class="cx-toggle"><input type="checkbox" checked> Set working time next &mdash; otherwise they are not bookable</label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal data-activate="st-ad-time">Add and set working time</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=118"></script>
+</body>
+</html>

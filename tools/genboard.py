@@ -29,10 +29,14 @@ ST = ['st-done','st-done','st-inchair','st-arrived','st-confirmed','st-confirmed
 
 # how the clinic's appointment types map onto the colour code we already have
 TY_OF_ORG = {
- 'Office Visit - 30 min':'ty-visit','Office Visit - 60 min':'ty-visit','Office Visit':'ty-visit',
- 'Procedure - 30 min':'ty-proc','Procedure - 60 min':'ty-proc','Infusion':'ty-iv','Lab':'ty-lab',
- 'Diagnostics':'ty-diag','Treatment':'ty-chiro','Treatment Infusion Suite':'ty-chiro',
- 'Energetics':'ty-energ','Energetics/Diagnostic':'ty-energ'}
+ 'Office Visit - 15 min':'ty-visit','Office Visit - 30 min':'ty-visit','Office Visit - 60 min':'ty-visit',
+ 'MA Office Visit':'ty-visit','Procedure - 30 min':'ty-proc','Procedure - 60 min':'ty-proc',
+ 'Infusion':'ty-iv','Lab Draw':'ty-lab','Diagnostics':'ty-diag','EBOO':'ty-eboo',
+ 'Treatment':'ty-chiro','Erchonia Laser':'ty-laser','ADA Nano Tub Room':'ty-chiro','Nano Tub Room':'ty-chiro',
+ 'NanoVi 1':'ty-chiro','NanoVi 2':'ty-chiro','Hydrogen Inhalation':'ty-chiro','BEMER':'ty-chiro',
+ 'Treatment Infusion Suite':'ty-chiro','Energetics':'ty-energ','Energetics/Diagnostic':'ty-energ'}
+for _i in range(1, 5): TY_OF_ORG['Salt Room - Chair %d' % _i] = 'ty-chiro'
+for _i in range(1, 7): TY_OF_ORG['BioCharger - Chair %d' % _i] = 'ty-energ'
 SUB_OF_TYPE = {
  'Follow-Up':'t-fu','Transfer of Care':'t-nptoc','Telemedicine':'t-npfu','New Patient':'t-newpt',
  'New Patient F/U':'t-npfu','Trigger Point':'t-tpi','Prolozone':'t-proloz','PRP':'t-prp',
@@ -44,11 +48,14 @@ SUB_OF_TYPE = {
  'InBody':'t-nmt','Red Light Bed':'t-micro','Erchonia Laser':'t-erchlas',
  'Erchonia Handheld':'t-erchlas','Hydrogen':'t-scenar','Oxygen':'t-scenar',
  'EBOO':'t-ebootx','EBOO SAFE':'t-eboosafe','Halo Salt Therapy':'t-scenar',
- 'BioCharger':'t-biochg','BioCharger 30 min':'t-biochg','BioCharger Stack 60 min':'t-biochg','NanoVi 30 min':'t-minilym','Hydrogen 15 min':'t-scenar',
+ 'BioCharger':'t-biochg','BioCharger 30 min':'t-biochg','BioCharger Stack 60 min':'t-biochg','Isolation Appointment':'t-eboosafe','Guided Meditation':'t-scenar','Guided Breathing Exercises':'t-scenar','Guided Relaxation':'t-scenar','MEAD':'t-mead','NanoVi 30 min':'t-minilym','Hydrogen 15 min':'t-scenar',
  'Hydrogen 30 min':'t-scenar','Hydrogen 45 min':'t-scenar','BEMER':'t-biomodr','Rife':'t-nmt',
  'BioMod Pro':'t-biomodp','BioMod Recharge':'t-biomodr','Lymph Star':'t-lymph',
  'Mini-Lymph Star':'t-minilym','Neuro Muscular Therapy (NMT)':'t-nmt','SCENAR':'t-scenar',
  'MEAD Initial':'t-mead','MEAD Reassess':'t-meadre','IV':'t-ff10'}
+
+for _n, _m in h.ERCHONIA: SUB_OF_TYPE.setdefault(_n, 't-erchlas')
+
 
 def types_for(col):
     """Todo lo que entra en esa columna, con su duracion y su organizing type.
@@ -57,7 +64,7 @@ def types_for(col):
     Ahora la columna es el nombre y atiende varias bandas: el Dr. Drannikov hace
     Office Visit de 30 y Procedure de 60 en la misma linea de su dia."""
     out = []
-    for o, c, kind, types, poc, mins, rules in h.COLUMNS:
+    for o, c, kind, types, poc, mins, rules in h.COLUMNS + h._erchonia_rows():
         if c == col: out += [(t, mins, o) for t in types]
     return out
 

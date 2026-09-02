@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff skills &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=118">
+<style>
+  .sk-tbl th, .sk-tbl td { text-align: center; }
+  .sk-tbl th:first-child, .sk-tbl td:first-child { text-align: left; }
+  .sk-tbl th.res { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; font-size: 10.5px; padding: 8px 4px; height: 118px; vertical-align: bottom; }
+  .sk-yes { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #B7CDB0; border: 1px solid #5A7A52; color: #2E4A28; font-size: 12px; line-height: 17px; }
+  .sk-exp { background: #F5D08C; border-color: #B8860B; color: #5A3E00; }
+  .sk-dead { background: #F1B6AE; border-color: #C0392B; color: #8E2118; }
+  .sk-none { display: inline-block; width: 18px; height: 18px; color: #DDD; }
+  .cert-due { font-variant-numeric: tabular-nums; }
+  .cert-soon td { background: #FFF8E6; }
+  .cert-late td { background: #FBE3E0; }
+  .tag { display: inline-block; font-size: 10.5px; padding: 2px 8px; border-radius: 10px; background: #EEF1F7; border: 1px solid #D5DBE8; margin: 2px 3px 2px 0; }
+</style>
+</head>
+<body data-page="staff" data-page-title="Staff · Skills &amp; certifications" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-sk-matrix" data-title="Skill matrix">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/skills</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Who can run what</div>
+            <div class="field-help" style="margin:2px 0 0">A tick is a current certification. Amber expires within 30 days; red has expired and the person is <em>not</em> offered for that resource until it is renewed.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-activate="st-sk-certs">Certifications</button>
+            <button class="btn btn-primary" data-activate="st-sk-profile">Open a profile</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>This matrix is what booking checks.</strong> It is not a list of preferences and it is
+          not editable from the shift screen. A tick appears when a certification is recorded with a
+          date, and disappears the day it lapses &mdash; the office manager is warned thirty days out,
+          and the column closes on the day, not a week after somebody notices.
+        </div>
+
+        <div class="tbl-scroll"><table class="tbl sk-tbl" id="sk-matrix"></table></div>
+        <div class="field-help" style="margin-top:8px">
+          <span class="sk-yes">&#10003;</span> certified &nbsp;
+          <span class="sk-yes sk-exp">!</span> expires within 30 days &nbsp;
+          <span class="sk-yes sk-dead">&times;</span> expired &mdash; not bookable &nbsp;
+          <span class="sk-none">&middot;</span> not certified
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-sk-certs" data-title="Certifications &amp; expiry">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/certifications</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Certifications &amp; expiry</div>
+            <div class="field-help" style="margin:2px 0 0">Monitored by the office manager. Anything inside thirty days is already a task on her board.</div>
+          </div>
+          <div class="app-user">
+            <select class="field-select l-select" aria-label="Show" onchange="skCertFilter(this.value)">
+              <option value="">Everything</option><option value="soon">Expiring within 30 days</option><option value="late">Expired</option>
+            </select>
+            <button class="btn btn-primary" data-open-modal="#sk-add-modal">Record a certification</button>
+          </div>
+        </div>
+        <div class="tbl-scroll"><table class="tbl">
+          <thead><tr><th>Person</th><th>Certification</th><th>Unlocks</th><th>Issued</th><th>Due</th><th>Status</th><th></th></tr></thead>
+          <tbody id="sk-certs"></tbody>
+        </table></div>
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Rules</div>
+          <dl class="rules">
+            <div class="rule"><dt>30 days out</dt><dd>A task opens for the office manager: renew, retrain, or accept that the column will close. It does not close yet.</dd></div>
+            <div class="rule"><dt>On the day</dt><dd>The tick goes. The person is no longer offered for that resource; existing bookings stay and raise a task each to reassign or confirm.</dd></div>
+            <div class="rule"><dt>Internal training</dt><dd>Counts the same as an external certificate once signed off by the person named on the training record. It has a due date too.</dd></div>
+            <div class="rule"><dt>Who can edit</dt><dd>Office manager and admin. A provider can see their own record and request a change, not make one.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-sk-profile" data-title="Employee profile">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/sarah</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Sarah &middot; Treatment tech</div>
+            <div class="field-help" style="margin:2px 0 0">Treatment &middot; on shift Mon&ndash;Fri 8&ndash;5 &middot; the only person certified for Erchonia</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="st-sk-matrix">Back to matrix</button></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:16px">
+          <div>
+            <div class="card">
+              <div class="card-title">Expertise</div>
+              <span class="tag">Erchonia laser</span><span class="tag">Erchonia handheld</span><span class="tag">Red light</span>
+              <span class="tag">Salt room</span><span class="tag">BioCharger</span><span class="tag">Nano tub</span><span class="tag">Patient education</span>
+              <div class="field-help" style="margin-top:8px">Tags describe what she is good at. They do not unlock a resource &mdash; only a certification below does.</div>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">Certifications</div>
+              <div class="tbl-scroll"><table class="tbl">
+                <thead><tr><th>Certification</th><th>Unlocks</th><th>Due</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr><td>Erchonia FX-635 operator</td><td>Erchonia Laser, Erchonia Handheld</td><td class="cert-due">2026-11-30</td><td>Current</td></tr>
+                  <tr class="cert-soon"><td>BioCharger NG operator</td><td>BioCharger</td><td class="cert-due">2026-09-28</td><td>Expires in 26 days &mdash; task open</td></tr>
+                  <tr><td>Halotherapy room safety (internal)</td><td>Salt Room</td><td class="cert-due">2027-03-01</td><td>Current &middot; signed off by Nick</td></tr>
+                  <tr><td>Red light bed (internal)</td><td>Red Light</td><td class="cert-due">2027-01-15</td><td>Current</td></tr>
+                  <tr><td>BLS / CPR</td><td>&mdash; required for all clinical staff</td><td class="cert-due">2027-05-10</td><td>Current</td></tr>
+                </tbody>
+              </table></div>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-title">Training log</div>
+              <div class="tbl-scroll"><table class="tbl">
+                <thead><tr><th>Date</th><th>What</th><th>By</th></tr></thead>
+                <tbody>
+                  <tr><td>2026-07-02</td><td>Nano tub — hydrogen vs oxygen protocol refresher</td><td>John</td></tr>
+                  <tr><td>2026-05-14</td><td>BioCharger stacks — one per patient per day</td><td>Emily</td></tr>
+                  <tr><td>2026-03-01</td><td>Halotherapy room safety (internal certification)</td><td>Nick</td></tr>
+                </tbody>
+              </table></div>
+            </div>
+            <div class="card" style="margin-top:14px">
+              <div class="card-title">What depends on her</div>
+              <p style="font-size:13px;margin:0 0 8px">Erchonia Laser has <strong>no other certified operator</strong>. When Sarah is off, the column closes for the day.</p>
+              <p class="field-help" style="margin:0">Cross-training Nick on the Erchonia is the cheapest way to stop this being a single point of failure &mdash; a suggested task, not an automatic one.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="sk-add-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Record a certification</div><div class="modal-sub">External certificate or internal training</div></div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-lbl">Person</label><select class="field-select"><option>Nick</option><option>Sarah</option><option>Emily</option><option>John</option><option>Bea</option><option>Juan</option><option>Wesley</option><option>Charlene</option></select></div>
+      <div class="field"><label class="field-lbl">Certification</label><input class="field-input" placeholder="e.g. Erchonia FX-635 operator"></div>
+      <div class="field"><label class="field-lbl">Unlocks</label>
+        <div class="chip-row">
+          <button class="filter-chip" type="button">Erchonia Laser</button><button class="filter-chip" type="button">Erchonia Handheld</button>
+          <button class="filter-chip" type="button">BioCharger</button><button class="filter-chip" type="button">Salt Room</button>
+          <button class="filter-chip" type="button">NanoVi 1</button><button class="filter-chip" type="button">NanoVi 2</button>
+          <button class="filter-chip" type="button">Rife</button><button class="filter-chip" type="button">Energetics</button>
+        </div>
+        <div class="field-help">Which board columns this lets the person run. This is the line booking reads.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="field"><label class="field-lbl">Issued</label><input class="field-input" type="date" value="2026-09-02"></div>
+        <div class="field"><label class="field-lbl">Due</label><input class="field-input" type="date" value="2027-09-02"></div>
+      </div>
+      <label class="cx-toggle"><input type="checkbox"> Internal training &mdash; signed off by <input class="field-input" style="width:120px;display:inline-block;margin-left:6px" placeholder="who"></label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Recorded. The skill matrix and the booking screen updated together.', 'ok')">Record</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=118"></script>
+<script>
+  var RES = ['Dr. Drannikov','Dr. Bakman','Mira','MA Office Visit','Medic IV','Nurse IV 1','Nurse IV 2','Lab Draw','Diagnostic Testing','Red Light',
+             'Erchonia Laser','Erchonia Handheld','ADA Nano Tub Room','Nano Tub Room','Eboo Chair 1','Eboo Chair 2','Salt Room','BioCharger',
+             'NanoVi 1','NanoVi 2','Hydrogen Inhalation','BEMER','Rife','Energetics'];
+  /* value: '' none, 'y' current, 's' expiring soon, 'x' expired */
+  var SK = [
+    ['Dr. Drannikov', { 'Dr. Drannikov': 'y' }],
+    ['Dr. Bakman',    { 'Dr. Bakman': 'y' }],
+    ['Mira',          { 'Mira': 'y' }],
+    ['Charlene',      { 'MA Office Visit': 'y', 'Diagnostic Testing': 'y' }],
+    ['Wesley',        { 'Lab Draw': 'y', 'Red Light': 'y' }],
+    ['Bea',           { 'Medic IV': 'y', 'Eboo Chair 1': 'y', 'Eboo Chair 2': 'y', 'Lab Draw': 'y' }],
+    ['Nick',          { 'Nurse IV 1': 'y', 'Nurse IV 2': 'y', 'Lab Draw': 'y', 'Salt Room': 'y', 'BioCharger': 'y' }],
+    ['Juan',          { 'Nurse IV 1': 'y', 'Nurse IV 2': 'y', 'NanoVi 1': 'y', 'NanoVi 2': 'y', 'Hydrogen Inhalation': 'x' }],
+    ['Sarah',         { 'Erchonia Laser': 'y', 'Erchonia Handheld': 'y', 'Red Light': 'y', 'Salt Room': 'y', 'BioCharger': 's', 'ADA Nano Tub Room': 'y', 'Nano Tub Room': 'y' }],
+    ['Emily',         { 'Energetics': 'y', 'BEMER': 'y', 'Rife': 'y', 'BioCharger': 'y' }],
+    ['John',          { 'NanoVi 1': 'y', 'NanoVi 2': 'y', 'Hydrogen Inhalation': 'y', 'ADA Nano Tub Room': 'y', 'Nano Tub Room': 'y' }]
+  ];
+  var t = document.getElementById('sk-matrix');
+  t.innerHTML = '<thead><tr><th>Person</th>' + RES.map(function (r) { return '<th class="res">' + r + '</th>'; }).join('') + '</tr></thead>'
+    + '<tbody>' + SK.map(function (p) {
+      return '<tr><td><strong>' + p[0] + '</strong></td>' + RES.map(function (r) {
+        var v = p[1][r];
+        return '<td>' + (v === 'y' ? '<span class="sk-yes" title="Certified">&#10003;</span>'
+                        : v === 's' ? '<span class="sk-yes sk-exp" title="Expires within 30 days">!</span>'
+                        : v === 'x' ? '<span class="sk-yes sk-dead" title="Expired — not bookable">&times;</span>'
+                        : '<span class="sk-none">&middot;</span>') + '</td>';
+      }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+
+  var CERTS = [
+    ['Juan',  'Hydrogen inhalation device (internal)', 'Hydrogen Inhalation', '2025-08-20', '2026-08-20', 'late'],
+    ['Sarah', 'BioCharger NG operator', 'BioCharger', '2025-09-28', '2026-09-28', 'soon'],
+    ['Nick',  'BLS / CPR', '— all clinical staff', '2024-10-01', '2026-10-01', 'soon'],
+    ['Emily', 'Rife operator (internal)', 'Rife', '2026-02-11', '2027-02-11', ''],
+    ['Bea',   'EBOO circuit — vendor certification', 'Eboo Chair 1, Eboo Chair 2', '2026-01-05', '2028-01-05', ''],
+    ['Sarah', 'Erchonia FX-635 operator', 'Erchonia Laser, Erchonia Handheld', '2025-11-30', '2026-11-30', ''],
+    ['John',  'NanoVi operator (internal)', 'NanoVi 1, NanoVi 2', '2026-04-02', '2027-04-02', ''],
+    ['Charlene', 'InBody scan (internal)', 'MA Office Visit — InBody', '2026-06-15', '2027-06-15', '']
+  ];
+  function skCertFilter(v) {
+    var tb = document.getElementById('sk-certs'); tb.innerHTML = '';
+    CERTS.forEach(function (c) {
+      if (v && c[5] !== v) return;
+      var st = c[5] === 'late' ? 'Expired — tick removed, column not offered' : c[5] === 'soon' ? 'Expires soon — task open for the office manager' : 'Current';
+      tb.innerHTML += '<tr class="' + (c[5] ? 'cert-' + c[5] : '') + '"><td><strong>' + c[0] + '</strong></td><td>' + c[1] + '</td><td>' + c[2] + '</td>'
+        + '<td class="cert-due">' + c[3] + '</td><td class="cert-due">' + c[4] + '</td><td>' + st + '</td>'
+        + '<td><button class="btn btn-sm" onclick="HCOS.toast(\'Renewal recorded for ' + c[0] + '. Due date moved a year on.\', \'ok\')">Renew</button></td></tr>';
+    });
+  }
+  window.skCertFilter = skCertFilter; skCertFilter('');
+</script>
+</body>
+</html>

@@ -101,7 +101,7 @@ i = tr.find('t-08-hierarchy')
 if i > -1:
     seg = tr[i:i+3000]
     m = re.search(r'A column on the day board\.\s*([A-Za-z-]+)\.', seg)
-    WORDS = {32: 'Thirty-two', 33: 'Thirty-three', 34: 'Thirty-four', 35: 'Thirty-five', 36: 'Thirty-six'}
+    WORDS = {24: 'Twenty-four', 25: 'Twenty-five', 26: 'Twenty-six', 34: 'Thirty-four'}
     if m and m.group(1) != WORDS.get(want, ''):
         bad.append('treatments.html dice "%s" columnas, hierarchy.py dice %d' % (m.group(1), want))
 
@@ -123,30 +123,35 @@ for m in re.finditer(r'<div class="cal-appt (?!is-elsewhere)[^"]*"[^>]*>', sched
     if proto not in plan[cat]:
         bad.append('%s esta en el board con "%s", que su plan no aprueba' % (who, proto))
 
-# el filtro de organizing type no puede repetir una entrada (Carlos: "no hagas
-# que se repita"), y tiene que ofrecer los doce
-# se cuenta POR SELECT: dia, semana y mes llevan el mismo filtro, y contar sobre
-# el archivo entero daba doce por tres y parecia una repeticion que no lo era
-for sid in ('l-view', 'l-view-w', 'l-view-m'):
-    k = sched.find('id="%s"' % sid)
-    if k < 0:
-        bad.append('falta el filtro %s' % sid); continue
-    blk = sched[k:sched.index('</select>', k)]
-    opts = re.findall(r'<option value="org:([^"]+)"', blk)
-    if len(opts) != len(set(opts)):
-        from collections import Counter
-        dup = [x for x, v in Counter(opts).items() if v > 1]
-        bad.append('%s repite organizing types: %s' % (sid, ', '.join(dup)))
-    if len(opts) != len(H.org_types()):
-        bad.append('%s ofrece %d organizing types, hierarchy.py dice %d'
-                   % (sid, len(opts), len(H.org_types())))
-    # el filtro es SOLO organizing types (Carlos, 2026-08-27). Para abrir una
-    # columna suelta esta el buscador de al lado, que no obliga a recorrer 34
-    # entradas en un desplegable.
-    extra = re.findall(r'<option value="(?!all|org:)([^"]+)"', blk)
-    if extra:
-        bad.append('%s ofrece opciones que no son organizing types: %s'
-                   % (sid, ', '.join(extra[:5])))
+# LOS CUATRO FILTROS SALEN DE LA HOJA (Carlos, 2026-09-02): departamento,
+# columna, appointment type, subtipo. Se cuentan en la unica barra del fuente
+# (semana y mes son clones en runtime).
+if 'l-select l-show' in sched:
+    bad.append('sigue existiendo el select "Everything" — los filtros son multi-select ahora')
+def _opts(key, attr):
+    i = sched.index('<div class="msel" data-msel="%s">' % key)
+    j = sched.index('<div class="msel-foot">', i)
+    return re.findall(r'<label class="msel-opt" [^>]*%s="([^"]+)"' % attr, sched[i:j])
+def _unesc(xs): return [x.replace('&amp;', '&').replace('&#x27;', "'").replace('&quot;', '"') for x in xs]
+got = _unesc(_opts('dept', 'data-dept'))
+if got != H.departments():
+    bad.append('filtro Departments: %s ≠ hierarchy %s' % (got, H.departments()))
+got = _opts('col', 'data-colid'); want = [c['id'] for c in H.board_columns()]
+if sorted(got) != sorted(want) or len(got) != len(want):
+    bad.append('filtro Column Name/Resource ofrece %d columnas, el tablero tiene %d' % (len(got), len(want)))
+got = _unesc(_opts('ty', 'data-ty')); want = H.appt_types()
+if set(got) != set(want) or len(got) != len(set(got)):
+    bad.append('filtro Appointment types: faltan %s · sobran %s' % ([x for x in want if x not in got][:4], [x for x in got if x not in want][:4]))
+got = _unesc(_opts('sub', 'data-sub')); want = H.subtypes()
+if set(got) != set(want) or len(got) != len(set(got)):
+    bad.append('filtro Appointment subtypes: faltan %s · sobran %s' % ([x for x in want if x not in got][:4], [x for x in got if x not in want][:4]))
+# ninguna columna puede salir dos veces en el tablero
+heads_ids = re.findall(r'<div class="daycal-col-head" data-col="([^"]+)"', sched)
+if len(heads_ids) != len(set(heads_ids)):
+    bad.append('el tablero repite columnas: %d cabeceras, %d distintas' % (len(heads_ids), len(set(heads_ids))))
+# y cada cabecera dice su departamento
+if len(re.findall(r'<div class="daycal-col-head" data-col="[^"]+" data-dept="', sched)) != len(heads_ids):
+    bad.append('hay cabeceras de columna sin data-dept')
 
 # COLISIONES DE CASCADA. Dos reglas con el MISMO selector declarando la MISMA
 # propiedad: la segunda gana en silencio. Asi se rompio .week-appt — una regla
@@ -169,37 +174,6 @@ for sel in WATCH:
     if clash:
         bad.append('%s se declara en dos reglas con las mismas propiedades: %s'
                    % (sel, ', '.join(sorted(clash))))
-
-# los dos menus del filtro salen de la hoja: tipos = columnas, subtipos = tipos
-# de cita. Se cuentan en la PRIMERA copia de la barra; las otras son clones.
-i = sched.index('data-msel="ty"')
-ty_opts = re.findall(r'<label class="msel-opt" data-ty="([^"]+)"', sched[i:sched.index('msel-foot', i)])
-want_cols = [c['id'] for c in H.board_columns()]
-if set(ty_opts) != set(want_cols) or len(ty_opts) != len(want_cols):
-    bad.append('el filtro de appointment types ofrece %d columnas, el tablero tiene %d'
-               % (len(ty_opts), len(want_cols)))
-i = sched.index('data-msel="sub"')
-sub_opts = re.findall(r'<label class="msel-opt" data-sub="([^"]+)"', sched[i:sched.index('msel-foot', i)])
-want_tx = []
-for _o, _c, _k, _ts, _p, _m, _r in H.COLUMNS:
-    for _t in _ts:
-        if _t not in want_tx: want_tx.append(_t)
-# se compara el CONJUNTO, no la secuencia: el menu los agrupa por organizing
-# type y la hoja los lista por fila, asi que el orden difiere a proposito
-if set(sub_opts) != set(want_tx):
-    falta = [t for t in want_tx if t not in sub_opts]
-    sobra = [t for t in sub_opts if t not in want_tx]
-    if falta: bad.append('al filtro de subtypes le faltan: %s' % ', '.join(falta[:5]))
-    if sobra: bad.append('el filtro de subtypes inventa: %s' % ', '.join(sobra[:5]))
-if len(sub_opts) != len(set(sub_opts)):
-    from collections import Counter
-    bad.append('el filtro de subtypes repite: %s'
-               % ', '.join(x for x, v in Counter(sub_opts).items() if v > 1))
-
-# ninguna columna puede salir dos veces en el tablero
-heads_ids = re.findall(r'<div class="daycal-col-head" data-col="([^"]+)"', sched)
-if len(heads_ids) != len(set(heads_ids)):
-    bad.append('el tablero repite columnas: %d cabeceras, %d distintas' % (len(heads_ids), len(set(heads_ids))))
 
 # y al reves: una cita cuyo tipo EXIGE protocolo no puede estar sin el. El
 # comprobante anterior solo validaba los protocolos presentes, que es como

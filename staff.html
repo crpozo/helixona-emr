@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=118">
+<style>
+  /* the staff calendar is the only place a shift grid exists, so it lives here */
+  .sh-grid { display: grid; grid-template-columns: 200px repeat(5, 1fr); border: 1px solid var(--line-soft); border-radius: 8px; overflow: hidden; }
+  .sh-grid > div { padding: 8px 10px; border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); font-size: 12.5px; min-height: 52px; }
+  .sh-grid > div:nth-child(6n) { border-right: none; }
+  .sh-head { background: #F7F7F7; font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); font-weight: 600; min-height: 0 !important; }
+  .sh-who { display: flex; flex-direction: column; gap: 2px; }
+  .sh-who b { font-size: 13px; }
+  .sh-who span { color: var(--muted); font-size: 11.5px; }
+  .sh-shift { display: inline-block; padding: 3px 8px; border-radius: 4px; background: #E3ECFB; border: 1px solid #2E6DB4; color: #1B4A80; font-variant-numeric: tabular-nums; font-size: 11.5px; cursor: pointer; }
+  .sh-shift.is-off { background: transparent; border: 1px dashed var(--line); color: var(--muted); }
+  .sh-shift.is-ext { background: #F3F3F3; border-color: #BDBDBD; color: #555; }
+  .sh-cell { display: flex; flex-direction: column; gap: 4px; }
+  .sh-runs { font-size: 10.5px; color: var(--muted); }
+  .sh-warn { font-size: 10.5px; color: #8E2118; }
+  .sh-tools { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+</style>
+</head>
+<body data-page="staff" data-page-title="Staff" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-01-calendar" data-title="Staff calendar">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Staff calendar</div>
+            <div class="field-help" style="margin:2px 0 0">Who is on shift, and what each of them can run. The humans, independent of the equipment.</div>
+          </div>
+          <div class="app-user">
+            <button class="btn" data-open-modal="#st-copy-modal">Copy last week</button>
+            <button class="btn btn-primary" data-activate="st-02-shift">Edit a shift</button>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>A machine with nobody qualified on shift is not bookable.</strong> The booking screen
+          reads this calendar and the skill matrix together: an Erchonia at 4 PM needs the Erchonia
+          column free <em>and</em> someone certified for it still on the floor. When that is not true
+          the slot is closed and the desk is told why &mdash; not offered a time the clinic cannot keep.
+          <a href="staff-skills.html">Who can run what &rsaquo;</a>
+        </div>
+
+        <div class="sh-tools">
+          <button class="btn btn-sm">&lsaquo;</button>
+          <button class="btn btn-sm">This week</button>
+          <button class="btn btn-sm">&rsaquo;</button>
+          <span class="cal-date" style="margin-left:6px">Mon Jul 20 &ndash; Fri Jul 24</span>
+          <span class="l-sep" aria-hidden="true"></span>
+          <select class="field-select l-select" aria-label="Department" onchange="stDept(this.value)">
+            <option value="">Every department</option>
+            <option>Clinic</option><option>Infusion</option><option>Treatment</option>
+            <option>Treatment Infusion Suite</option><option>Energetics</option>
+          </select>
+          <label class="cx-toggle"><input type="checkbox" onchange="stGaps(this.checked)"> Show only days with a gap</label>
+        </div>
+
+        <div class="sh-grid" id="st-grid">
+          <div class="sh-head">Staff</div>
+          <div class="sh-head">Mon 20</div><div class="sh-head">Tue 21</div><div class="sh-head">Wed 22</div><div class="sh-head">Thu 23</div><div class="sh-head">Fri 24</div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Gaps this week &mdash; a resource with no one to run it</div>
+          <div class="tbl-scroll"><table class="tbl">
+            <thead><tr><th>Day</th><th>Window</th><th>Resource</th><th>Needs</th><th>On shift</th><th>What happens</th></tr></thead>
+            <tbody id="st-gaps"></tbody>
+          </table></div>
+          <div class="field-help" style="margin-top:8px">A gap closes the column for that window on the day board and in booking. It does not cancel anything already booked &mdash; it raises a task for the office manager instead.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="st-02-shift" data-title="Edit a shift">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/shift</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Edit a shift</div></div>
+          <div class="app-user"><button class="btn" data-activate="st-01-calendar">Back to calendar</button></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Nick &middot; Nurse &middot; Tue Jul 21</div>
+          <div class="field-row" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+            <div class="field"><label class="field-lbl">Start</label>
+              <select class="field-select"><option>7:30 AM</option><option selected>8:00 AM</option><option>8:30 AM</option><option>9:00 AM</option></select></div>
+            <div class="field"><label class="field-lbl">End</label>
+              <select class="field-select"><option>4:00 PM</option><option>4:30 PM</option><option selected>5:00 PM</option><option>6:00 PM</option></select></div>
+            <div class="field"><label class="field-lbl">Break</label>
+              <select class="field-select"><option>None</option><option selected>12:00 &ndash; 12:30</option><option>1:00 &ndash; 1:30</option></select></div>
+          </div>
+          <div class="field"><label class="field-lbl">Available for</label>
+            <div class="chip-row">
+              <button class="filter-chip active" type="button">Nurse IV 1</button>
+              <button class="filter-chip active" type="button">Nurse IV 2</button>
+              <button class="filter-chip active" type="button">Lab Draw</button>
+              <button class="filter-chip active" type="button">Salt Room</button>
+              <button class="filter-chip active" type="button">BioCharger</button>
+              <button class="filter-chip" type="button" disabled title="Not certified — see Skills">Erchonia Laser</button>
+            </div>
+            <div class="field-help">Only what Nick is certified to run can be ticked. A greyed chip is a certification, not a preference &mdash; it changes on the <a href="staff-skills.html">Skills</a> page, not here.</div>
+          </div>
+          <div class="field"><label class="field-lbl">Repeat</label>
+            <select class="field-select"><option>This day only</option><option selected>Every Tuesday</option><option>Every weekday</option></select></div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn" data-activate="st-01-calendar">Cancel</button>
+            <button class="btn btn-primary" onclick="HCOS.toast('Shift saved. Two IV bookings after 5 PM on Tuesday now have no nurse — a task went to the office manager.', 'warn')">Save shift</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="modal-overlay" id="st-copy-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="modal-title">Copy last week</div><div class="modal-sub">Jul 13 &ndash; 17 &rarr; Jul 20 &ndash; 24</div></div>
+      <button class="modal-close" data-close-modal>&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>Every shift from last week is copied onto this one. Shifts already set this week are kept &mdash; copying never overwrites something a manager typed.</p>
+      <label class="cx-toggle"><input type="checkbox" checked> Skip anyone marked away this week (Juan, Thu&ndash;Fri)</label>
+      <label class="cx-toggle"><input type="checkbox"> Also copy into the following three weeks</label>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close-modal>Cancel</button>
+      <button class="btn btn-primary" data-close-modal onclick="HCOS.toast('Copied 41 shifts. 3 were already set and were left alone.', 'ok')">Copy 41 shifts</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/hcos.js?v=118"></script>
+<script>
+  /* The roster is synthetic. First names are the clinic's own, which is fine;
+     nothing here is a patient. */
+  var ST_ROSTER = [
+    { n: 'Dr. Drannikov', r: 'Physician', d: 'Clinic',  runs: ['Dr. Drannikov'], sh: ['8–5','8–5','8–5','8–5','8–1'] },
+    { n: 'Dr. Bakman',    r: 'Physician', d: 'Clinic',  runs: ['Dr. Bakman'],    sh: ['off','8–5','off','8–5','8–5'] },
+    { n: 'Mira',          r: 'Provider',  d: 'Clinic',  runs: ['Mira'],          sh: ['8–5','8–5','8–5','8–5','8–5'] },
+    { n: 'Leigh Ann',     r: 'Depth Psychology', d: 'Clinic', runs: ['Leigh Ann'], sh: ['ext','ext','ext','ext','ext'] },
+    { n: 'Charlene',      r: 'Medical Assistant', d: 'Clinic', runs: ['MA Office Visit','Diagnostic Testing'], sh: ['8–5','8–5','8–5','8–5','8–5'] },
+    { n: 'Wesley',        r: 'Medical Assistant', d: 'Infusion', runs: ['Lab Draw','Red Light'], sh: ['8–4','8–4','8–4','8–4','8–4'] },
+    { n: 'Bea',           r: 'Medic',     d: 'Infusion', runs: ['Medic IV','Eboo Chair 1','Eboo Chair 2'], sh: ['7:30–4','7:30–4','7:30–4','7:30–4','7:30–4'] },
+    { n: 'Nick',          r: 'Nurse',     d: 'Infusion', runs: ['Nurse IV 1','Nurse IV 2','Lab Draw','Salt Room','BioCharger'], sh: ['8–5','8–5','8–5','8–5','8–5'] },
+    { n: 'Juan',          r: 'Nurse',     d: 'Infusion', runs: ['Nurse IV 1','Nurse IV 2','NanoVi 1','NanoVi 2','Hydrogen Inhalation'], sh: ['9–6','9–6','9–6','away','away'] },
+    { n: 'Sarah',         r: 'Treatment tech', d: 'Treatment', runs: ['Erchonia Laser','Erchonia Handheld','Red Light','Salt Room','BioCharger','ADA Nano Tub Room','Nano Tub Room'], sh: ['8–5','8–5','8–5','8–5','8–5'] },
+    { n: 'Emily',         r: 'Energetics tech', d: 'Energetics', runs: ['Energetics','BEMER','Rife','BioCharger'], sh: ['9–6','9–6','off','9–6','9–6'] },
+    { n: 'John',          r: 'Suite tech', d: 'Treatment Infusion Suite', runs: ['NanoVi 1','NanoVi 2','Hydrogen Inhalation','ADA Nano Tub Room','Nano Tub Room'], sh: ['8–4','8–4','8–4','8–4','off'] }
+  ];
+  /* every resource that needs a person, and how late the board runs it */
+  var ST_NEEDS = { 'Erchonia Laser': '8–6', 'Salt Room': '8–6', 'BioCharger': '8–6', 'Energetics': '8–6',
+                   'Nurse IV 2': '8–6', 'NanoVi 1': '8–6', 'Nano Tub Room': '8–6', 'Rife': '8–6' };
+  var ST_DAYS = ['Mon','Tue','Wed','Thu','Fri'];
+  var stFilter = { dept: '', gaps: false };
+
+  function stEnd(sh) { var m = /–(\d+)/.exec(sh); return m ? (+m[1] < 8 ? +m[1] + 12 : +m[1]) : 0; }
+
+  function stGapsFor(day) {
+    var out = [];
+    Object.keys(ST_NEEDS).forEach(function (res) {
+      var covers = ST_ROSTER.filter(function (p) {
+        return p.runs.indexOf(res) !== -1 && !/off|away|ext/.test(p.sh[day]);
+      });
+      var latest = covers.reduce(function (a, p) { return Math.max(a, stEnd(p.sh[day])); }, 0);
+      if (!covers.length) out.push({ res: res, win: 'all day', who: 'nobody' });
+      else if (latest < 18) out.push({ res: res, win: (latest > 12 ? latest - 12 : latest) + ' PM – 6 PM',
+                                       who: covers.map(function (p) { return p.n; }).join(', ') + ' until ' + (latest - 12) + ' PM' });
+    });
+    return out;
+  }
+
+  function stRender() {
+    var g = document.getElementById('st-grid');
+    [].slice.call(g.querySelectorAll(':not(.sh-head)')).forEach(function (n) { n.remove(); });
+    var gapsByDay = ST_DAYS.map(function (_, i) { return stGapsFor(i); });
+    ST_ROSTER.forEach(function (p) {
+      if (stFilter.dept && p.d !== stFilter.dept) return;
+      var who = document.createElement('div'); who.className = 'sh-who';
+      who.innerHTML = '<b>' + p.n + '</b><span>' + p.r + ' · ' + p.d + '</span>';
+      g.appendChild(who);
+      p.sh.forEach(function (sh, i) {
+        var c = document.createElement('div'); c.className = 'sh-cell';
+        var covering = p.runs.filter(function (r) { return ST_NEEDS[r]; });
+        var dayHasGap = gapsByDay[i].some(function (x) { return p.runs.indexOf(x.res) !== -1; });
+        if (stFilter.gaps && !dayHasGap) { c.innerHTML = ''; g.appendChild(c); return; }
+        var cls = sh === 'off' || sh === 'away' ? ' is-off' : sh === 'ext' ? ' is-ext' : '';
+        var label = sh === 'ext' ? 'own app' : sh === 'away' ? 'away' : sh;
+        c.innerHTML = '<span class="sh-shift' + cls + '" data-activate="st-02-shift" role="button" tabindex="0">' + label + '</span>'
+          + (cls ? '' : '<span class="sh-runs">' + p.runs.slice(0, 3).join(' · ') + (p.runs.length > 3 ? ' +' + (p.runs.length - 3) : '') + '</span>')
+          + (dayHasGap && !cls && stEnd(sh) < 18 ? '<span class="sh-warn">Leaves before the last slot</span>' : '');
+        g.appendChild(c);
+      });
+    });
+    var tb = document.getElementById('st-gaps'); tb.innerHTML = '';
+    gapsByDay.forEach(function (gaps, i) {
+      gaps.forEach(function (x) {
+        tb.innerHTML += '<tr><td>' + ST_DAYS[i] + '</td><td>' + x.win + '</td><td><strong>' + x.res + '</strong></td>'
+          + '<td>someone certified for it</td><td>' + x.who + '</td>'
+          + '<td>' + (x.who === 'nobody' ? 'Column closed all day. Booking refuses it.' : 'Slots after that close. Booking refuses them.') + '</td></tr>';
+      });
+    });
+    if (!tb.innerHTML) tb.innerHTML = '<tr><td colspan="6" class="field-help">No gaps this week — every resource has someone certified on shift for its whole day.</td></tr>';
+  }
+  function stDept(v) { stFilter.dept = v; stRender(); }
+  function stGaps(on) { stFilter.gaps = on; stRender(); }
+  window.stDept = stDept; window.stGaps = stGaps;
+  stRender();
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff capacity &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=118">
+<style>
+  .cp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .cp-dept { border: 1px solid var(--line-soft); border-radius: 10px; padding: 14px 16px; background: #fff; }
+  .cp-dept h4 { margin: 0 0 4px; font-size: 14px; }
+  .cp-nums { display: flex; gap: 14px; font-variant-numeric: tabular-nums; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+  .cp-nums b { color: var(--ink); font-size: 15px; }
+  .cp-bar { position: relative; height: 14px; background: #EEE; border-radius: 7px; overflow: hidden; }
+  .cp-bar > i { position: absolute; left: 0; top: 0; bottom: 0; }
+  .cp-bar .booked { background: #2E6DB4; }
+  .cp-bar .staffed { background: #B7CDB0; }
+  .cp-legend { display: flex; gap: 14px; font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .cp-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: -1px; margin-right: 4px; }
+  .cp-warn { color: #8E2118; font-size: 12px; margin-top: 8px; }
+  .cp-hours { display: grid; grid-template-columns: 120px repeat(10, 1fr); gap: 2px; align-items: center; font-size: 11px; }
+  .cp-hours .h { text-align: center; color: var(--muted); }
+  .cp-hours .row-l { font-weight: 600; font-size: 12px; }
+  .cp-hours .cell { height: 22px; border-radius: 3px; background: #EEE; }
+  .cp-hours .cell.ok { background: #B7CDB0; }
+  .cp-hours .cell.tight { background: #F5D08C; }
+  .cp-hours .cell.none { background: #F1B6AE; }
+</style>
+</head>
+<body data-page="staff" data-page-title="Staff · Capacity" data-shell="app">
+
+<div class="screens">
+  <section class="screen" id="st-cap" data-title="Staff capacity">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/capacity</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Capacity &mdash; Tuesday, July 21</div>
+            <div class="field-help" style="margin:2px 0 0">Hours the clinic can sell today, by department: people on shift against what is already booked.</div>
+          </div>
+          <div class="app-user">
+            <select class="field-select l-select" aria-label="Day"><option>Today</option><option>Tomorrow</option><option>This week</option></select>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Capacity is people, not chairs.</strong> The Salt Room has four seats and the BioCharger six,
+          but if one person is certified for both and on shift 8&ndash;5, the clinic can sell nine hours of
+          those rooms today, not twenty. The bars below count <em>staffed</em> hours &mdash; a resource with
+          nobody qualified on the floor contributes nothing, however free the room looks on the board.
+        </div>
+
+        <div class="cp-grid" id="cp-depts"></div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="card-title">Coverage through the day &mdash; is someone certified on the floor for each resource?</div>
+          <div class="cp-hours" id="cp-hours"></div>
+          <div class="cp-legend" style="margin-top:8px">
+            <span><i style="background:#B7CDB0"></i>covered</span>
+            <span><i style="background:#F5D08C"></i>one person, and they are booked</span>
+            <span><i style="background:#F1B6AE"></i>nobody certified on shift &mdash; column closed</span>
+          </div>
+          <div class="field-help" style="margin-top:8px">Red cells are what the <a href="staff.html">Staff calendar</a> reports as gaps. The booking screen refuses those hours; the office manager gets a task to cover them or accept them.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="assets/hcos.js?v=118"></script>
+<script>
+  /* staffed hours = sum of on-shift hours of people certified for a resource
+     in that department; booked = what the day board has, in hours. Synthetic. */
+  var CP = [
+    { d: 'Clinic',   staffed: 34, booked: 27.5, people: 5, note: 'Dr. Bakman off Monday and Wednesday.' },
+    { d: 'Infusion', staffed: 26, booked: 22,   people: 3, note: 'Juan away Thu–Fri: Nurse IV 2 has no cover those afternoons.' },
+    { d: 'Treatment', staffed: 9, booked: 12.5, people: 1, note: 'Only Sarah is certified for Erchonia, Salt and BioCharger — the board is selling more than one person can run.' },
+    { d: 'Treatment Infusion Suite', staffed: 17, booked: 9, people: 2, note: '' },
+    { d: 'Energetics', staffed: 9, booked: 6, people: 1, note: 'Emily off Wednesday: Energetics closed that day.' }
+  ];
+  var g = document.getElementById('cp-depts');
+  CP.forEach(function (x) {
+    var pct = Math.min(100, Math.round(x.booked / Math.max(x.staffed, 1) * 100));
+    var over = x.booked > x.staffed;
+    g.innerHTML += '<div class="cp-dept"><h4>' + x.d + '</h4>'
+      + '<div class="cp-nums"><span><b>' + x.staffed + '</b> h staffed</span><span><b>' + x.booked + '</b> h booked</span><span><b>' + x.people + '</b> on shift</span></div>'
+      + '<div class="cp-bar"><i class="staffed" style="width:100%"></i><i class="booked" style="width:' + pct + '%"></i></div>'
+      + '<div class="cp-legend"><span><i style="background:#B7CDB0"></i>staffed</span><span><i style="background:#2E6DB4"></i>booked · ' + pct + '%</span></div>'
+      + (over ? '<div class="cp-warn"><strong>Over capacity by ' + (x.booked - x.staffed) + ' h.</strong> ' + x.note + '</div>'
+              : x.note ? '<div class="field-help" style="margin-top:8px">' + x.note + '</div>' : '')
+      + '</div>';
+  });
+
+  var HOURS = ['8','9','10','11','12','1','2','3','4','5'];
+  var COV = [
+    ['Erchonia Laser',  'ok ok ok tight tight ok ok ok ok none'],
+    ['Salt Room',       'ok ok ok ok ok ok ok ok ok none'],
+    ['BioCharger',      'ok ok tight tight ok ok ok ok ok none'],
+    ['Nurse IV 2',      'ok ok ok ok ok ok ok ok ok ok'],
+    ['NanoVi 1',        'ok ok ok ok ok ok ok ok none none'],
+    ['Nano Tub Room',   'ok ok ok ok ok ok ok ok none none'],
+    ['Energetics',      'none ok ok ok ok ok ok ok ok ok'],
+    ['Rife',            'none ok ok ok ok ok ok ok ok ok']
+  ];
+  var h = document.getElementById('cp-hours');
+  h.innerHTML = '<div></div>' + HOURS.map(function (x) { return '<div class="h">' + x + '</div>'; }).join('');
+  COV.forEach(function (r) {
+    h.innerHTML += '<div class="row-l">' + r[0] + '</div>' + r[1].split(' ').map(function (c) { return '<div class="cell ' + c + '" title="' + r[0] + '"></div>'; }).join('');
+  });
+</script>
+</body>
+</html>

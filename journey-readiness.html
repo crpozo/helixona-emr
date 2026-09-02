@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily readiness &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=118">
+<style>
+  /* the check-in is a phone ritual; it is drawn narrow on purpose */
+  .rd-phone { max-width: 420px; margin: 0 auto; }
+  .rd-q { padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+  .rd-q:last-child { border-bottom: none; }
+  .rd-q .ask { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .rd-q .src { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .rd-scale { display: flex; gap: 6px; }
+  .rd-scale button { flex: 1; padding: 10px 0; border: 1px solid var(--line); background: #fff; border-radius: 8px; font-size: 13px; cursor: pointer; }
+  .rd-scale button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .rd-mode { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .rd-mode button { padding: 12px 8px; border: 1px solid var(--line); background: #fff; border-radius: 8px; text-align: left; cursor: pointer; }
+  .rd-mode button b { display: block; font-size: 13px; }
+  .rd-mode button span { font-size: 11px; color: var(--muted); }
+  .rd-mode button.on { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .rd-follow { background: #F7F7F7; border-radius: 8px; padding: 10px 12px; margin-top: 8px; font-size: 13px; }
+  .rd-note { font-size: 13px; color: var(--muted); background: #F3F6FB; border-left: 3px solid #2E6DB4; padding: 10px 12px; border-radius: 0 8px 8px 0; margin: 12px 0; }
+  .rd-state { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600; border: 1px solid; }
+  .rd-state.ready { background: #E3F0DE; border-color: #5A7A52; color: #2E4A28; }
+  .rd-state.steady { background: #E3ECFB; border-color: #2E6DB4; color: #1B4A80; }
+  .rd-state.recovery { background: #FBEFD7; border-color: #C98A1E; color: #7A5510; }
+  .rd-state.flare { background: #FBE3E0; border-color: #C0392B; color: #8E2118; }
+  .rd-state.review { background: #EEE; border-color: #555; color: #222; }
+  .rd-arc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .rd-arc > div { border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 12px; font-size: 12.5px; }
+  .rd-arc b { display: block; font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .rd-spark { display: flex; align-items: flex-end; gap: 3px; height: 40px; margin-top: 6px; }
+  .rd-spark i { flex: 1; background: #B7CDB0; border-radius: 2px 2px 0 0; }
+  .rd-spark i.lo { background: #F1B6AE; }
+  .rd-pattern { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 13px; }
+  .rd-pattern:last-child { border-bottom: none; }
+  .rd-pattern .conf { font-size: 11px; color: var(--muted); }
+  .rd-coach { border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; background: #F7F7F7; font-size: 13.5px; }
+  .rd-coach b { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .rd-route th, .rd-route td { vertical-align: top; }
+</style>
+</head>
+<body data-page="journey" data-page-title="Patient journey · Daily readiness" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-01-morning" data-title="Morning check-in">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/readiness/morning</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Good morning &mdash; how is your body doing today?</div>
+            <div class="field-help" style="margin:2px 0 0">About one minute. The push notification opens straight here; no menu in between.</div>
+          </div>
+          <div class="app-user"><span class="field-help" style="margin:0">Priya &middot; Tue Jul 21 &middot; 7:12 AM</span></div>
+        </div>
+
+        <div class="callout">
+          <strong>This is a check-in, not a grade.</strong> Seven taps, then the day. Follow-up questions appear
+          only when an answer needs them. Nothing Helixona already knows is asked again &mdash; yesterday's
+          IV and today's booked Erchonia are already on the timeline.
+        </div>
+
+        <div class="rd-phone card">
+          <div class="rd-q"><div class="ask">How long did you sleep?</div>
+            <div style="display:flex;gap:8px;align-items:center"><input class="field-input" value="7" style="width:64px" aria-label="Hours"> h <input class="field-input" value="20" style="width:64px" aria-label="Minutes"> min</div>
+            <div class="src">Prefilled from your watch &middot; <a href="#">not right?</a></div></div>
+          <div class="rd-q"><div class="ask">Did you wake naturally?</div>
+            <div class="rd-scale"><button class="on" type="button">Yes</button><button type="button">No</button><button type="button">Not sure</button></div></div>
+          <div class="rd-q"><div class="ask">How restorative was your sleep?</div>
+            <div class="rd-scale"><button type="button">1</button><button type="button">2</button><button class="on" type="button">3</button><button type="button">4</button><button type="button">5</button></div>
+            <div class="src">1 = not restorative &middot; 5 = fully restored</div></div>
+          <div class="rd-q"><div class="ask">How is your energy right now?</div>
+            <div class="rd-scale"><button type="button">1</button><button type="button">2</button><button type="button">3</button><button class="on" type="button">4</button><button type="button">5</button></div></div>
+          <div class="rd-q"><div class="ask">What mode does your body feel like it is in today?</div>
+            <div class="rd-mode">
+              <button type="button" class="on" onclick="rdMode(this,'ready')"><b>Ready</b><span>Clear, energy to spare</span></button>
+              <button type="button" onclick="rdMode(this,'steady')"><b>Steady</b><span>Near my usual</span></button>
+              <button type="button" onclick="rdMode(this,'recovery')"><b>Recovery</b><span>Asking for rest</span></button>
+              <button type="button" onclick="rdMode(this,'flare')"><b>Flare / Crash</b><span>Much less than usual</span></button>
+            </div>
+            <div class="rd-follow" id="rd-follow" style="display:none">What are you noticing? <span class="chip-row" style="margin-top:6px">
+              <button class="filter-chip" type="button">Sleepiness</button><button class="filter-chip" type="button">Pain</button><button class="filter-chip" type="button">Brain fog</button><button class="filter-chip" type="button">Weakness</button><button class="filter-chip" type="button">Dizziness</button><button class="filter-chip" type="button">Sensitivity</button><button class="filter-chip" type="button">Stomach</button><button class="filter-chip" type="button">Mood</button><button class="filter-chip" type="button">Other</button></span></div></div>
+          <div class="rd-q"><div class="ask">How demanding was yesterday on your body?</div>
+            <div class="rd-scale"><button type="button">Low</button><button class="on" type="button">Moderate</button><button type="button" onclick="rdDemand(true)">High</button><button type="button" onclick="rdDemand(true)">Extreme</button></div>
+            <div class="rd-follow" id="rd-demand" style="display:none">Where did it come from? <span class="chip-row" style="margin-top:6px">
+              <button class="filter-chip" type="button">Exertion</button><button class="filter-chip" type="button">Stress</button><button class="filter-chip" type="button">Travel</button><button class="filter-chip active" type="button">Treatment</button><button class="filter-chip" type="button">Poor sleep</button><button class="filter-chip" type="button">Illness</button><button class="filter-chip" type="button">Heat</button><button class="filter-chip" type="button">Exposure</button></span></div></div>
+          <div class="rd-q"><div class="ask">Would you like someone from your care team to check in with you?</div>
+            <div class="rd-scale"><button class="on" type="button">I'm okay</button><button type="button">When convenient</button><button type="button" onclick="HCOS.toast('Request received. Your care guide will reach you today before 2 PM.', 'ok')">Today</button></div>
+            <div class="src">A note or a voice message can go with it. Emergency symptoms &mdash; chest pain, trouble breathing, new weakness on one side &mdash; call 911, not this.</div></div>
+          <div style="padding:14px 0 4px"><button class="btn btn-primary" style="width:100%" data-activate="rd-04-mode">Done for this morning</button></div>
+        </div>
+
+        <div class="rd-note rd-phone">Already on today's timeline from Helixona, not asked: <strong>IV &middot; Foundational Flow 10</strong> yesterday 2:00 PM &middot; <strong>Erchonia Laser &middot; Low Back</strong> booked today 10:30 AM.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-02-evening" data-title="Evening check-in">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/readiness/evening</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Time to wind down. Tell me how your day went.</div>
+            <div class="field-help" style="margin:2px 0 0">Closes the loop on this morning. Events already entered are summarised, not re-asked.</div></div>
+          <div class="app-user"><span class="field-help" style="margin:0">Priya &middot; 9:05 PM</span></div>
+        </div>
+        <div class="rd-phone card">
+          <div class="rd-note" style="margin-top:0">Today so far: morning <span class="rd-state ready">Ready</span> &middot; Erchonia Laser 10:30 &middot; you logged <strong>a headache at 3:40 PM</strong>. Anything important missed?</div>
+          <div class="rd-q"><div class="ask">Compared with this morning, do you feel&hellip;</div>
+            <div class="rd-scale"><button type="button">Better</button><button class="on" type="button">The same</button><button type="button">Worse</button></div></div>
+          <div class="rd-q"><div class="ask">Energy through the day</div>
+            <div class="rd-scale"><button class="on" type="button">Stayed steady</button><button type="button">Faded slowly</button><button type="button">Crashed</button></div></div>
+          <div class="rd-q"><div class="ask">Could you do your normal activities?</div>
+            <div class="rd-scale"><button class="on" type="button">Yes</button><button type="button">Partly</button><button type="button">No</button></div></div>
+          <div class="rd-q"><div class="ask">Anything to add?</div>
+            <div class="chip-row"><button class="filter-chip" type="button">Pain</button><button class="filter-chip" type="button">Flushing</button><button class="filter-chip" type="button">Brain fog</button><button class="filter-chip" type="button">Dizziness</button><button class="filter-chip" type="button">Stomach</button><button class="filter-chip" type="button">Mood</button><button class="filter-chip active" type="button">Headache (already logged)</button></div></div>
+          <div class="rd-q"><div class="ask">Need support?</div>
+            <div class="rd-scale"><button class="on" type="button">I'm okay</button><button type="button">When convenient</button><button type="button">Today</button></div></div>
+          <div style="padding:14px 0 4px"><button class="btn btn-primary" style="width:100%" onclick="HCOS.toast('Saved. Morning and evening are paired as one Daily Readiness Record.', 'ok')">Good night</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-03-event" data-title="Log an event">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/readiness/event</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Something happened</div><div class="field-help" style="margin:2px 0 0">Any time, without a full survey. Date and time are captured for you.</div></div>
+        </div>
+        <div class="rd-phone card">
+          <div class="rd-q"><div class="ask">What?</div>
+            <div class="chip-row"><button class="filter-chip" type="button">Flare</button><button class="filter-chip" type="button">Crash</button><button class="filter-chip" type="button">Flushing</button><button class="filter-chip" type="button">Pain up</button><button class="filter-chip active" type="button">Headache / migraine</button><button class="filter-chip" type="button">Dizziness</button><button class="filter-chip" type="button">Stomach</button><button class="filter-chip" type="button">Mood shift</button><button class="filter-chip" type="button">Exposure</button><button class="filter-chip" type="button">Medication / supplement issue</button><button class="filter-chip" type="button">Treatment outside Helixona</button><button class="filter-chip" type="button">Other</button></div></div>
+          <div class="rd-q"><div class="ask">How bad?</div><div class="rd-scale"><button type="button">Mild</button><button class="on" type="button">Moderate</button><button type="button">Severe</button></div></div>
+          <div class="rd-q"><div class="ask">Suspected trigger <span class="field-help" style="display:inline">(optional)</span></div><input class="field-input" placeholder="e.g. skipped lunch, hot afternoon"></div>
+          <div class="rd-q"><div class="ask">Note, photo or voice <span class="field-help" style="display:inline">(optional)</span></div>
+            <div style="display:flex;gap:8px"><input class="field-input" placeholder="A few words" style="flex:1"><button class="btn" type="button">&#127908;</button><button class="btn" type="button">&#128247;</button></div></div>
+          <div class="rd-q"><div class="ask">Need support?</div><div class="rd-scale"><button class="on" type="button">No</button><button type="button">When convenient</button><button type="button">Today</button></div></div>
+          <div style="padding:14px 0 4px"><button class="btn btn-primary" style="width:100%" onclick="HCOS.toast('Logged at 3:40 PM. It will be on tonight\'s summary and your clinician\'s timeline.', 'ok')">Log it</button></div>
+        </div>
+        <div class="rd-note rd-phone"><strong>Severe</strong> plus a new symptom does not get coaching &mdash; it routes for clinical review and says so. Emergency symptoms get emergency instructions, not a form.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-04-mode" data-title="Today's mode &amp; readiness">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/readiness/today</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Today &mdash; <span class="rd-state ready">Ready</span> &middot; treatment readiness <span class="rd-state steady">Standard</span></div>
+            <div class="field-help" style="margin:2px 0 0">Mode is how you feel. Readiness is what your body can take. They are not the same thing, on purpose.</div></div>
+        </div>
+        <div class="rd-coach"><b>Today</b>You are feeling strong today. That is wonderful. Your recent pattern shows that doing too much on high-energy days can lead to a Recovery Day afterward &mdash; consider using about 70% of your available energy today.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="card"><div class="card-title">Patient modes</div>
+            <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Mode</th><th>Means</th><th>HCOS does</th></tr></thead><tbody>
+              <tr><td><span class="rd-state ready">Ready</span></td><td>High clarity and energy, reserve in hand</td><td>Normal plan; guards against overextension if the pattern is boom-and-bust</td></tr>
+              <tr><td><span class="rd-state steady">Steady</span></td><td>Stable, near personal baseline</td><td>Usual plan and supports</td></tr>
+              <tr><td><span class="rd-state recovery">Recovery</span></td><td>Body asking for rest or less demand</td><td>Sleep, hydration, nourishment, gentle movement, lower treatment burden</td></tr>
+              <tr><td><span class="rd-state flare">Flare / Crash</span></td><td>Major drop in function or symptoms up sharply</td><td>Flare plan on; recent triggers reviewed; routed to the care team by severity</td></tr>
+              <tr><td><span class="rd-state review">Physician review</span></td><td>New, severe, or out-of-pattern</td><td>No automated coaching. Escalated for clinical review.</td></tr>
+            </tbody></table></div></div>
+          <div class="card"><div class="card-title">Treatment readiness states</div>
+            <div class="tbl-scroll"><table class="tbl"><thead><tr><th>State</th><th>Typical inputs</th><th>Response</th></tr></thead><tbody>
+              <tr><td><strong>Gentle</strong></td><td>Reduced reserve, recent flare, more sleep needed, poor tolerance of the last intervention</td><td>Lower intensity, wider spacing, stabilise</td></tr>
+              <tr><td><strong>Standard</strong></td><td>Near baseline, stable, recovered from the last treatment, no red flags</td><td>Proceed with the planned protocol</td></tr>
+              <tr><td><strong>Advanced</strong></td><td>Sustained stability, documented tolerance of Standard, labs and clinical clearance</td><td>Only within physician-approved parameters</td></tr>
+              <tr><td><strong>Flare recovery</strong></td><td>Active flare or crash pattern</td><td>Pause or modify; activate the flare plan</td></tr>
+              <tr><td><strong>Physician review</strong></td><td>New severe symptom, big deviation from baseline, a physician-set threshold crossed</td><td>Hold recommendations; route to the clinical team</td></tr>
+            </tbody></table></div>
+            <div class="field-help" style="margin-top:8px">Readiness combines the morning check-in with symptom trends, the last treatment's response, care-plan adherence, relevant labs and physician exclusions. It supports clinical judgement; it never replaces it. The physician can approve, override or lock the rule.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-05-profile" data-title="Capacity profile">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/readiness/profile</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Priya's capacity profile</div><div class="field-help" style="margin:2px 0 0">Built from 34 daily records. Observations and probabilities, not causes.</div></div>
+        </div>
+        <div class="callout"><strong>"I feel energetic" is not "I have high treatment capacity."</strong> Some patients feel excellent, overextend, and crash two days later. So the profile keeps six things apart, and learns Priya's own baseline before it calls a day unusual &mdash; a ten-hour sleep is normal for one person and a warning for another.</div>
+        <div class="rd-arc" style="grid-template-columns:repeat(3,1fr)">
+          <div><b>Current energy</b>4 / 5 today<div class="rd-spark"><i style="height:60%"></i><i style="height:70%"></i><i style="height:40%" class="lo"></i><i style="height:55%"></i><i style="height:80%"></i><i style="height:75%"></i><i style="height:85%"></i></div></div>
+          <div><b>Recovery reserve</b>Good &mdash; 3 steady days since the last dip<div class="rd-spark"><i style="height:30%" class="lo"></i><i style="height:45%"></i><i style="height:60%"></i><i style="height:70%"></i><i style="height:75%"></i><i style="height:80%"></i><i style="height:80%"></i></div></div>
+          <div><b>Treatment tolerance</b>Last Erchonia: no next-day cost<div class="rd-spark"><i style="height:70%"></i><i style="height:65%"></i><i style="height:70%"></i><i style="height:75%"></i><i style="height:70%"></i><i style="height:80%"></i><i style="height:78%"></i></div></div>
+          <div><b>Sustainable capacity</b>~5 h of demand a day without a next-day cost</div>
+          <div><b>Volatility</b>Moderate &mdash; swings after travel, steady otherwise</div>
+          <div><b>Recovery time</b><strong>2 days</strong>, down from 4 in June</div>
+        </div>
+        <div class="card" style="margin-top:16px"><div class="card-title">Patterns &mdash; with the observations behind each</div>
+          <div class="rd-pattern">Recovery Mode is more likely one to two days after travel. <div class="conf">Observed after 6 of the last 8 travel days &middot; confidence rising</div></div>
+          <div class="rd-pattern">Sleep under 6 h is followed by a higher symptom burden for 48 hours. <div class="conf">7 of 9 short-sleep nights &middot; confidence high</div></div>
+          <div class="rd-pattern">Two intensive treatments inside 48 hours are followed by prolonged fatigue. <div class="conf">3 of 3 occurrences &middot; few observations &mdash; treat as a hint</div></div>
+          <div class="rd-pattern">High-energy days are often followed by overactivity and a Recovery Day. <div class="conf">5 of 8 &middot; the reason for today's 70% suggestion</div></div>
+          <div class="rd-pattern">Average recovery after an intervention has shortened from four days to two. <div class="conf">Last 6 treatments vs the 6 before &middot; improving</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-06-caregiver" data-title="Caregiver view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/caregiver/readiness</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">How Priya is today</div><div class="field-help" style="margin:2px 0 0">Shared with Priya's permission. Enough to reassure, not the clinical detail.</div></div></div>
+        <div class="rd-phone">
+          <div class="rd-coach" style="background:#E3F0DE"><b>Familiar pattern</b>Priya is in Recovery Mode today. This is consistent with her established pattern after travel, and her reported symptoms remain within her usual range.</div>
+          <div class="rd-coach" style="background:#FBE3E0"><b>Outside the familiar pattern &mdash; example</b>Today's symptoms differ from Priya's normal Recovery Mode pattern. The care team has been notified.</div>
+          <div class="rd-note"><strong>This never replaces emergency instructions.</strong> New severe chest pain, breathing difficulty, neurological symptoms, loss of consciousness, or any physician-defined red flag: follow emergency protocols. Priya controls who sees this and can turn it off.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-07-routing" data-title="Support &amp; alert routing">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks?queue=readiness</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">Support requests &amp; alerts</div><div class="field-help" style="margin:2px 0 0">Every check-in is a low-friction doorway. The patient never has to know whom to contact &mdash; the HCOS assesses urgency inside approved rules and puts it in the right queue.</div></div>
+          <div class="app-user"><a class="btn" href="tasks.html">Open in Tasks</a></div></div>
+        <div class="tbl-scroll"><table class="tbl rd-route"><thead><tr><th>Level</th><th>Typical trigger</th><th>Goes to</th><th>Expected action</th></tr></thead><tbody>
+          <tr><td><strong>Routine support</strong></td><td>Patient asks for a check-in; nothing concerning in the answers</td><td>Assigned care guide</td><td>Review context, contact the patient, document, escalate if needed</td></tr>
+          <tr><td><strong>Clinical review</strong></td><td>Meaningful decline, prolonged Recovery Mode, poor treatment response, repeated alerts</td><td>Care guide + designated mid-level / MA / nurse queue</td><td>Same day, or within the configured service standard</td></tr>
+          <tr><td><strong>Urgent clinical review</strong></td><td>Concerning non-emergency pattern or rapid change from baseline</td><td>Nurse, physician extender, or covering clinician</td><td>Prompt assessment; escalation to physician under protocol</td></tr>
+          <tr><td><strong>Emergency direction</strong></td><td>Emergency red-flag answer</td><td>Patient gets emergency instructions; clinical team notified</td><td>Do not wait for a portal response &mdash; 911 or emergency care per approved language</td></tr>
+        </tbody></table></div>
+        <div class="card" style="margin-top:16px"><div class="card-title">Open now</div>
+          <div class="tbl-scroll"><table class="tbl"><thead><tr><th>When</th><th>Patient</th><th>Type</th><th>Level</th><th>Owner</th><th>Due</th><th>Status</th><th>Why</th></tr></thead><tbody>
+            <tr><td>7:12 AM</td><td>Priya N.</td><td>Patient request</td><td>Routine</td><td>Care guide (Wesley)</td><td>2:00 PM</td><td>Received</td><td>"When convenient" ticked</td></tr>
+            <tr><td>6:48 AM</td><td>Walter H.</td><td>Automated</td><td>Clinical review</td><td>Nurse queue (Nick)</td><td>Today</td><td>Under review</td><td>Recovery Mode 4 days running; energy 2/5 three mornings</td></tr>
+            <tr><td>Yesterday 3:40 PM</td><td>Priya N.</td><td>Event</td><td>Routine</td><td>Care guide</td><td>Done</td><td>Care team responded</td><td>Moderate headache after Erchonia; resolved by evening</td></tr>
+            <tr><td>6:02 AM</td><td>Ben O.</td><td>Automated</td><td>Urgent clinical review</td><td>Covering clinician (Mira)</td><td>10:00 AM</td><td>Escalated</td><td>New severe symptom + "Flare"; unacknowledged 2 h &rarr; auto-escalated</td></tr>
+          </tbody></table></div>
+          <div class="field-help" style="margin-top:8px">Every row has an owner, status, priority, timestamp, due time and escalation path. Unacknowledged items escalate after the configured window. The patient sees only <em>Received &middot; Under review &middot; Care team responded</em>.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="rd-08-clinician" data-title="Clinician dashboard">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients/P-004377/readiness</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">Priya Natarajan &mdash; readiness</div><div class="field-help" style="margin:2px 0 0">Trends and exceptions, not a diary. Every insight shows its observations.</div></div>
+          <div class="app-user"><button class="btn">Override readiness</button><button class="btn btn-primary">Lock rule</button></div></div>
+        <div class="rd-arc">
+          <div><b>Today</b><span class="rd-state ready">Ready</span> &middot; <span class="rd-state steady">Standard</span></div>
+          <div><b>7-day sleep</b>7.1 h avg &middot; 1 short night<div class="rd-spark"><i style="height:70%"></i><i style="height:75%"></i><i style="height:40%" class="lo"></i><i style="height:72%"></i><i style="height:78%"></i><i style="height:74%"></i><i style="height:76%"></i></div></div>
+          <div><b>7-day energy</b>3.7 / 5 &middot; up from 3.1<div class="rd-spark"><i style="height:60%"></i><i style="height:60%"></i><i style="height:40%" class="lo"></i><i style="height:60%"></i><i style="height:80%"></i><i style="height:80%"></i><i style="height:80%"></i></div></div>
+          <div><b>Resting HR / HRV</b>62 / 48 ms &middot; watch, opt-in<div class="rd-spark"><i style="height:50%"></i><i style="height:52%"></i><i style="height:65%" class="lo"></i><i style="height:55%"></i><i style="height:50%"></i><i style="height:48%"></i><i style="height:47%"></i></div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:16px">
+          <div class="card"><div class="card-title">Morning &rarr; evening, this week</div>
+            <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Day</th><th>Morning</th><th>Helixona</th><th>Events</th><th>Evening</th><th>Next day</th></tr></thead><tbody>
+              <tr><td>Mon 20</td><td><span class="rd-state steady">Steady</span> 3/5</td><td>IV &middot; FF10</td><td>&mdash;</td><td>Steady &middot; same</td><td>Ready</td></tr>
+              <tr><td>Tue 21</td><td><span class="rd-state ready">Ready</span> 4/5</td><td>Erchonia &middot; Low Back</td><td>Headache 3:40 PM (moderate)</td><td>Same &middot; steady</td><td>&mdash;</td></tr>
+              <tr><td>Sun 19</td><td><span class="rd-state recovery">Recovery</span> 2/5</td><td>&mdash;</td><td>Travel Sat</td><td>Better</td><td>Steady</td></tr>
+            </tbody></table></div>
+            <div class="field-help" style="margin-top:8px">Sources are labelled: patient-reported, device-derived, clinician-entered, or calculated. Treatments come from the scheduling and treatment records, never from patient recall.</div></div>
+          <div>
+            <div class="card"><div class="card-title">Flags</div>
+              <div class="rd-pattern"><span class="fl sev-med fi-urgent" style="margin-right:6px"></span>Post-treatment day-1 survey due &mdash; Erchonia (same day, days 1&ndash;3, day 7)</div>
+              <div class="rd-pattern"><span class="fl sev-low fi-forms" style="margin-right:6px"></span>Missed evening check-in Sat 18</div>
+              <div class="rd-pattern"><span class="fl sev-low fi-star" style="margin-right:6px"></span>Recovery time improved 4 &rarr; 2 days</div></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Rule &mdash; physician-set</div>
+              <p style="font-size:13px;margin:0">If energy &le; 2/5 for 3 mornings <em>or</em> any new severe symptom &rarr; <strong>Physician review</strong>, no automated coaching. Set by Dr. Drannikov 2026-06-30.</p></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px"><div class="card-title">How the surveys fit together</div>
+          <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Layer</th><th>Purpose</th><th>Examples</th></tr></thead><tbody>
+            <tr><td><strong>Universal baseline</strong></td><td>The one-minute check-in every enrolled patient gets</td><td>Sleep, restoration, energy, mode, stress, symptoms, support</td></tr>
+            <tr><td><strong>Event-activated sequences</strong></td><td>Triggered by a verified treatment record, not recall</td><td>Same day &middot; days 1&ndash;3 &middot; day 7 &middot; later if clinically useful</td></tr>
+            <tr><td><strong>Pathway packs</strong></td><td>By program or care pathway</td><td>Complex Chronic Care, Vitality, Recovery, condition-specific</td></tr>
+            <tr><td><strong>Periodic assessments</strong></td><td>Longer instruments that must not burden the ritual</td><td>Weekly, monthly, quarterly, intake, outcome, validated scales</td></tr>
+          </tbody></table></div>
+          <div class="field-help" style="margin-top:8px">One "Today" experience for the patient: urgent safety first, then the morning check-in, then anything treatment-triggered, then events, then the evening. Duplicate questions are suppressed; <strong>zero duplicate data entry</strong> is a hard rule.</div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=118"></script>
+<script>
+  function rdMode(btn, m) {
+    btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('on'); });
+    btn.classList.add('on');
+    document.getElementById('rd-follow').style.display = (m === 'recovery' || m === 'flare') ? '' : 'none';
+  }
+  function rdDemand(on) { document.getElementById('rd-demand').style.display = on ? '' : 'none'; }
+  window.rdMode = rdMode; window.rdDemand = rdDemand;
+</script>
+</body>
+</html>

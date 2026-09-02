@@ -43,6 +43,12 @@
     { name: 'Patient journey', href: 'journey.html', page: 'journey' },
     { name: 'Caregiver access', href: 'caregiver.html', page: 'caregiver' },
     { group: 'Practice' },
+    /* Staff is its own module (Carlos, 2026-09-02): the humans exist
+       independently of the equipment. A calendar of who is on shift, what each
+       person is certified to run, and when that certification expires — and the
+       booking screen reads it, because a machine with nobody qualified on shift
+       is not bookable. */
+    { name: 'Staff', href: 'staff.html', page: 'staff' },
     { name: 'Pricing & memberships', href: 'pricing.html', page: 'pricing' },
     { name: 'Dashboards', href: 'reporting.html', page: 'reporting' },
     { name: 'Security & audit', href: 'security.html', page: 'security' }
@@ -57,6 +63,12 @@
     schedule: [
       ['Calendar', 'schedule.html'],
       ['Booking rules', 'schedule-rules.html']
+    ],
+    staff: [
+      ['Calendar', 'staff.html'],
+      ['Capacity', 'staff-capacity.html'],
+      ['Skills & certifications', 'staff-skills.html'],
+      ['Admin', 'staff-admin.html']
     ],
     pricing: [
       ['Price list', 'pricing.html'],
@@ -99,6 +111,7 @@
       ['Today', 'journey.html'],
       ['Plan & orders', 'journey-plan.html'],
       ['Check-in', 'journey-checkin.html'],
+      ['Daily readiness', 'journey-readiness.html'],
       ['Schedule', 'journey-schedule.html'],
       ['Progress', 'journey-progress.html'],
       ['Rewards', 'journey-rewards.html'],
