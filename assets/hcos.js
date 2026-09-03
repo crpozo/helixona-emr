@@ -109,6 +109,10 @@
     ],
     journey: [
       ['Today', 'journey.html'],
+      /* The Work of Healing (product concept, 2026-09-02): the patient home that
+         makes the work visible and prompts the team to recognise it. It is a
+         view of the canonical plan of care, not a separate checklist. */
+      ['The Work of Healing', 'journey-work.html'],
       ['Plan & orders', 'journey-plan.html'],
       ['Check-in', 'journey-checkin.html'],
       ['Daily readiness', 'journey-readiness.html'],

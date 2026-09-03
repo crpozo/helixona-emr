@@ -1096,3 +1096,28 @@ through the type's colour class or the entry's key, never by re-adding a categor
 **A top-level `lBook()` at load is what broke this**: the cascade fills the selects last, so
 anything reading them earlier finds `''`; the cascade boots at the end of the script and
 `lBook()` returns when nothing is chosen.
+
+## The Work of Healing (product concept, 2026-09-02) — journey-work.html
+
+The patient home for Complex Chronic Care / Comprehensive Care: makes the work visible,
+celebrates progress against the patient's OWN baseline, and prompts the care team when a human
+call or note would matter. Nine screens: Patient home (encouraging arc, numbers behind a tap),
+My Week (assigned vs optional; clinician holds are not missed work), Activity response (one tap:
+Completed · Working on it · Really hard today · Don't feel good · Question · Contact me — the
+last four are SUPPORT SIGNALS routed per the plan), My Progress (work completed · capacity built
+· clinical change · care stage Stabilization → Eliminate → Nourish → Repair → Rebuild Capacity →
+Graduate/Maintain; cumulative, never a resetting streak), Care-guide queue (Connected / Check in /
+Clinical attention — a routing tool, never a patient grade; signals consolidated per patient),
+Staff patient view, Recognition composer (AI drafts from source events, a person sends; routine
+low-risk celebrations automate, emotional or clinical ones never do), Plan item rules (the §6
+structured fields; only a physician/extender changes stage, pace, plan, thresholds), and Voice,
+guardrails & scope (care paths × management models, AI may/may not, Helixona voice samples).
+
+- **It is a view of the canonical plan of care, not a separate gamification checklist.**
+- **No leaderboards, prizes, purchased achievements, patient comparisons or resetting streaks.**
+  `journey-rewards.html` (points, tier ladder, catalogue) is therefore SUPERSEDED and carries a
+  callout saying so; it stays only until the team decides what survives. Do not extend it.
+- Palette: the brief asks for gold, sand and earth tones; the wireframe stays grayscale by rule
+  (done = ink). Recorded as a decision for the real app, not applied here.
+- Open decisions (§15): pace-level names, the MVP progress formula, the message library and
+  automation boundaries, Medical-Director-approved rule templates, first wearables.

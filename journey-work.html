@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Work of Healing &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=122">
+<style>
+  /* patient-facing screens are a phone; staff screens are the desk. The brief
+     asks for gold, sand and earth tones — the wireframe stays grayscale by rule
+     (done = ink, never gold), and the palette is a decision for the real app. */
+  .wk-phone { max-width: 420px; margin: 0 auto; }
+  .wk-arc { display: flex; align-items: center; gap: 18px; padding: 6px 0 14px; }
+  .wk-arc svg { width: 132px; height: 132px; flex-shrink: 0; }
+  .wk-arc .lead { font-size: 17px; font-weight: 600; line-height: 1.3; }
+  .wk-arc .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .wk-detail { display: none; margin-top: 10px; border-top: 1px solid var(--line-soft); padding-top: 10px; font-size: 13px; }
+  .wk-detail.open { display: block; }
+  .wk-detail .row { display: flex; justify-content: space-between; padding: 5px 0; font-variant-numeric: tabular-nums; }
+  .wk-detail .row b { font-weight: 600; }
+  .wk-item { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  .wk-item:last-child { border-bottom: none; }
+  .wk-item .what { font-size: 14px; font-weight: 600; }
+  .wk-item .why { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .wk-item .st { font-size: 11.5px; padding: 3px 9px; border-radius: 10px; border: 1px solid var(--line); white-space: nowrap; }
+  .wk-item .st.done { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .wk-item .st.hold { border-style: dashed; color: var(--muted); }
+  .wk-item .st.optional { color: var(--muted); }
+  .wk-resp { display: grid; gap: 6px; margin-top: 8px; }
+  .wk-resp button { text-align: left; padding: 10px 12px; border: 1px solid var(--line); background: #fff; border-radius: 8px; font-size: 13.5px; cursor: pointer; }
+  .wk-resp button.on { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .wk-resp button small { display: block; color: var(--muted); font-size: 11.5px; }
+  .wk-recog { border-radius: 10px; padding: 12px 14px; background: #F7F7F7; font-size: 13.5px; margin-bottom: 8px; }
+  .wk-recog b { display: block; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .wk-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 10px 0; }
+  .wk-week div { text-align: center; font-size: 11px; color: var(--muted); }
+  .wk-week i { display: block; height: 28px; border-radius: 6px; background: #EEE; margin-bottom: 4px; }
+  .wk-week i.done { background: var(--ink); }
+  .wk-week i.part { background: #9A9A9A; }
+  .wk-week i.hold { background: repeating-linear-gradient(135deg,#EDEDED 0 4px,#F7F7F7 4px 8px); border: 1px dashed #BBB; }
+  .wk-stage { display: flex; gap: 4px; margin: 8px 0 4px; }
+  .wk-stage span { flex: 1; text-align: center; font-size: 10.5px; padding: 6px 2px; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); }
+  .wk-stage span.done { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .wk-stage span.now { border-color: var(--ink); color: var(--ink); font-weight: 600; box-shadow: inset 0 0 0 1px var(--ink); }
+  .wk-att { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600; border: 1px solid; }
+  .wk-att.ok { background: #E3F0DE; border-color: #5A7A52; color: #2E4A28; }
+  .wk-att.check { background: #FBEFD7; border-color: #C98A1E; color: #7A5510; }
+  .wk-att.clin { background: #FBE3E0; border-color: #C0392B; color: #8E2118; }
+  .wk-q { padding: 12px 0; border-bottom: 1px solid var(--line-soft); display: grid; grid-template-columns: 110px 1fr auto; gap: 12px; align-items: start; font-size: 13px; }
+  .wk-q:last-child { border-bottom: none; }
+  .wk-q .why { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .wk-q .acts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .wk-msg { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 13.5px; background: #fff; }
+  .wk-msg textarea { width: 100%; min-height: 96px; font: inherit; border: none; resize: vertical; outline: none; }
+  .wk-src { font-size: 12px; color: var(--muted); }
+  .wk-src li { margin: 2px 0; }
+  .wk-two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; }
+  @media (max-width: 860px) { .wk-two { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="journey" data-page-title="Patient journey · The Work of Healing" data-shell="app">
+
+<div class="screens">
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-01-home" data-title="Patient home">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">The Work of Healing</div>
+            <div class="field-help" style="margin:2px 0 0">Priya &middot; Complex Chronic Care &middot; Comprehensive Care &middot; week 9 of the plan</div>
+          </div>
+          <div class="app-user"><button class="btn" data-activate="wk-03-respond">Ask my care guide to contact me</button></div>
+        </div>
+
+        <div class="callout">
+          <strong>Four questions, no grade.</strong> What am I working on today? What have I already done?
+          How is my progress changing? How do I reach my team? The indicator is encouraging by default
+          and exact on request &mdash; a tap opens the percentages for the people who find numbers
+          motivating. It compares Priya with <em>her own</em> baseline, never with anyone else.
+        </div>
+
+        <div class="wk-phone">
+          <div class="card">
+            <div class="wk-arc">
+              <svg viewBox="0 0 120 120" role="img" aria-label="Progress this week: most of the plan done">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#EEE" stroke-width="12"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#1A1A1A" stroke-width="12" stroke-linecap="round"
+                        stroke-dasharray="314" stroke-dashoffset="72" transform="rotate(-90 60 60)"/>
+                <text x="60" y="66" text-anchor="middle" font-size="22" font-weight="700" fill="#1A1A1A">&#10003;</text>
+              </svg>
+              <div>
+                <div class="lead">You have done most of this week&rsquo;s work already.</div>
+                <div class="sub">Two IVs, three check-ins and your walks. One thing is on hold by Dr. Drannikov &mdash; that is not missed work.</div>
+                <button class="btn btn-sm" style="margin-top:8px" onclick="document.getElementById('wk-detail').classList.toggle('open')">Show the numbers</button>
+              </div>
+            </div>
+            <div class="wk-detail" id="wk-detail">
+              <div class="row"><span>Countable plan items due this week</span><b>9</b></div>
+              <div class="row"><span>Completed</span><b>7 &middot; 78%</b></div>
+              <div class="row"><span>On hold by your clinician (excluded)</span><b>1</b></div>
+              <div class="row"><span>Optional home activities you recorded</span><b>4 &middot; not counted</b></div>
+              <div class="row"><span>Same week, one month ago</span><b>62%</b></div>
+              <div class="field-help" style="margin-top:6px">Only items your clinician marked as countable and due this week are in the percentage. Holds, cancellations by the clinic and plan changes never count against you. Tap any line to see which activities are in it.</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <div class="card-title">Today</div>
+            <div class="wk-item"><div><div class="what">Morning check-in</div><div class="why">Done at 7:12 &mdash; you said Ready</div></div><span class="st done">Done</span></div>
+            <div class="wk-item"><div><div class="what">Erchonia Laser &middot; Low Back</div><div class="why">10:30 AM &middot; already on your schedule, nothing to record</div></div><span class="st">Booked</span></div>
+            <div class="wk-item"><div><div class="what">Breathing practice &middot; 10 min</div><div class="why">Optional &mdash; record it if it helps you to</div></div><button class="st optional" type="button" data-activate="wk-03-respond">Record</button></div>
+            <div class="wk-item"><div><div class="what">Sauna</div><div class="why">On hold until Thursday &mdash; Dr. Drannikov, after the flare</div></div><span class="st hold">On hold</span></div>
+            <div class="wk-item"><div><div class="what">Evening check-in</div><div class="why">Around 9 PM &middot; two minutes</div></div><span class="st">Later</span></div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <div class="card-title">From your team</div>
+            <div class="wk-recog"><b>Wesley &middot; care guide &middot; yesterday</b>I was looking at the work you have been doing and wanted you to know that we see it. You have continued to show up through a difficult period, and that work matters. We are proud of you.</div>
+            <div class="wk-recog"><b>Helixona &middot; Monday</b>You have completed your morning and evening check-ins for ten days. The information you are sharing is helping your team understand your body more clearly.</div>
+            <div class="field-help">Routine notes like the second one are sent automatically from an approved library. The first is a person, and it says so.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-02-week" data-title="My Week">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/week</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">My Week</div><div class="field-help" style="margin:2px 0 0">Mon Jul 20 &ndash; Sun Jul 26 &middot; plan version 4, signed by Dr. Drannikov on Jul 3</div></div></div>
+        <div class="wk-phone">
+          <div class="card">
+            <div class="wk-week">
+              <div><i class="done"></i>Mon</div><div><i class="done"></i>Tue</div><div><i class="part"></i>Wed</div><div><i class="hold"></i>Thu</div><div><i></i>Fri</div><div><i></i>Sat</div><div><i></i>Sun</div>
+            </div>
+            <div class="field-help">Ink = done, grey = partly, hatched = a clinician hold that day. Nothing here is a score.</div>
+          </div>
+          <div class="card" style="margin-top:12px">
+            <div class="card-title">Assigned by your clinician</div>
+            <div class="wk-item"><div><div class="what">IV &middot; Foundational Flow 10</div><div class="why">Mon &middot; done &middot; recorded by the clinic, not by you</div></div><span class="st done">Done</span></div>
+            <div class="wk-item"><div><div class="what">Erchonia Laser &middot; Low Back</div><div class="why">Tue 10:30 &middot; booked</div></div><span class="st">Booked</span></div>
+            <div class="wk-item"><div><div class="what">Morning and evening check-ins</div><div class="why">Daily &middot; 5 of 6 so far this week</div></div><span class="st done">5 of 6</span></div>
+            <div class="wk-item"><div><div class="what">Magnesium glycinate &middot; evening</div><div class="why">Daily &middot; countable</div></div><button class="st" type="button" data-activate="wk-03-respond">Record</button></div>
+            <div class="wk-item"><div><div class="what">Light walking &middot; 15 min</div><div class="why">3× this week &middot; countable &middot; 2 recorded</div></div><button class="st" type="button" data-activate="wk-03-respond">Record</button></div>
+            <div class="wk-item"><div><div class="what">Sauna &middot; 15 min</div><div class="why">On hold Mon&ndash;Thu &mdash; Dr. Drannikov, after last week&rsquo;s flare. Back on Friday.</div></div><span class="st hold">On hold</span></div>
+          </div>
+          <div class="card" style="margin-top:12px">
+            <div class="card-title">Optional &mdash; record if it helps you</div>
+            <div class="wk-item"><div><div class="what">Breathing practice</div><div class="why">Not counted. Skipping it is not missed work.</div></div><button class="st optional" type="button" data-activate="wk-03-respond">Record</button></div>
+            <div class="wk-item"><div><div class="what">Hydration</div><div class="why">Not counted</div></div><button class="st optional" type="button" data-activate="wk-03-respond">Record</button></div>
+            <div class="wk-item"><div><div class="what">Sleep practice</div><div class="why">Not counted</div></div><button class="st optional" type="button" data-activate="wk-03-respond">Record</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-03-respond" data-title="Activity response">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/week/walking</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">Light walking &middot; 15 min</div><div class="field-help" style="margin:2px 0 0">One tap. A short note only if you want to.</div></div></div>
+        <div class="wk-phone card">
+          <div class="wk-resp" id="wk-resp">
+            <button type="button" onclick="wkPick(this,'done')">Completed</button>
+            <button type="button" onclick="wkPick(this,'working')">I am working on this</button>
+            <button type="button" onclick="wkPick(this,'hard')">This is really hard for me today<small>Tells your care guide, gently</small></button>
+            <button type="button" onclick="wkPick(this,'unwell')">I do not feel good when I do this<small>Goes to your nurse to look at</small></button>
+            <button type="button" onclick="wkPick(this,'question')">I have a question</button>
+            <button type="button" onclick="wkPick(this,'contact')">Please ask my care guide to contact me</button>
+          </div>
+          <div class="field" style="margin-top:12px"><input class="field-input" placeholder="A few words, if you like"></div>
+          <div id="wk-resp-note" class="field-help" style="min-height:18px">Anything that says you are struggling, feel unwell, have a question or want a call becomes a <strong>support signal</strong>, routed the way your plan says &mdash; you never have to know whom to contact.</div>
+          <button class="btn btn-primary" style="width:100%;margin-top:10px" onclick="HCOS.toast('Saved. Thank you for telling us.', 'ok')">Save</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-04-progress" data-title="My Progress">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/progress</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">My Progress</div><div class="field-help" style="margin:2px 0 0">The work you did, kept apart from what your body did &mdash; so effort counts before symptoms move.</div></div></div>
+        <div class="callout"><strong>Cumulative, never a streak that resets.</strong> Coming back after a hard week is recognised as a step, not shown as a broken chain. No points, no ranks, no comparisons with other patients.</div>
+        <div class="wk-phone">
+          <div class="card"><div class="card-title">Work completed &middot; last 30 days</div>
+            <div class="wk-item"><div><div class="what">Appointments attended</div><div class="why">11 of 11 booked</div></div><span class="st done">11</span></div>
+            <div class="wk-item"><div><div class="what">Check-ins completed</div><div class="why">52 of 60 &middot; every one you missed was in flare week</div></div><span class="st done">52</span></div>
+            <div class="wk-item"><div><div class="what">Home activities recorded</div><div class="why">Walking 9 &middot; magnesium 26 &middot; breathing 14 (optional)</div></div><span class="st done">49</span></div>
+            <div class="wk-item"><div><div class="what">Told your team something useful</div><div class="why">The headache after Erchonia &mdash; it changed your next protocol</div></div><span class="st done">3</span></div>
+          </div>
+          <div class="card" style="margin-top:12px"><div class="card-title">Capacity built</div>
+            <div class="wk-item"><div><div class="what">Recovery after a treatment</div><div class="why">Now about 2 days, was 4 in June</div></div><span class="st done">Better</span></div>
+            <div class="wk-item"><div><div class="what">Treatment tolerance</div><div class="why">Last three Erchonia sessions: no next-day cost</div></div><span class="st done">Steady</span></div>
+            <div class="wk-item"><div><div class="what">Came back after the flare</div><div class="why">Jul 12 &ndash; 15, and you reconnected on the 16th</div></div><span class="st done">Yes</span></div>
+          </div>
+          <div class="card" style="margin-top:12px"><div class="card-title">What your body is showing</div>
+            <div class="wk-item"><div><div class="what">Morning energy</div><div class="why">3.7 of 5 this week &middot; 3.1 last month</div></div><span class="st">Up</span></div>
+            <div class="wk-item"><div><div class="what">Your goal: a full morning at work</div><div class="why">3 of 5 mornings this week</div></div><span class="st">3 / 5</span></div>
+            <div class="wk-item"><div><div class="what">Labs</div><div class="why">Ferritin rising &mdash; Dr. Drannikov will go through it on Aug 4</div></div><span class="st">Reviewed</span></div>
+          </div>
+          <div class="card" style="margin-top:12px"><div class="card-title">Care stage</div>
+            <div class="wk-stage"><span class="done">Stabilization</span><span class="now">Eliminate</span><span>Nourish</span><span>Repair</span><span>Rebuild</span><span>Graduate</span></div>
+            <div class="field-help">As written in your signed plan of care. Only your clinician moves this.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-05-queue" data-title="Care-guide queue">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/tasks?queue=care-guide</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Care-guide queue &middot; Wesley</div><div class="field-help" style="margin:2px 0 0">What changed, why it is here, and what the plan directs next. Related signals for one patient are one item, not four.</div></div>
+          <div class="app-user"><a class="btn" href="tasks.html">Open in Tasks</a></div>
+        </div>
+        <div class="callout"><strong>The status is a routing tool, not a patient grade.</strong> <span class="wk-att ok">Connected</span> look for moments worth celebrating &middot; <span class="wk-att check">Check in</span> a pattern changed or the patient asked &mdash; warm outreach &middot; <span class="wk-att clin">Clinical attention</span> a clinician-defined rule was met &mdash; route now. Patients never see these colours.</div>
+        <div class="card">
+          <div class="wk-q"><span class="wk-att ok">Connected</span><div><strong>Maya Reyes</strong> &mdash; a moment worth recognising<div class="why">Completed morning and evening check-ins 14 days running while reporting rising fatigue. Rule: consistency over a clinically meaningful period. Prompt: <em>this may be a meaningful time to recognise how steadily she has stayed connected with her plan.</em></div></div><div class="acts"><button class="btn btn-sm btn-primary" data-activate="wk-07-compose">Recognise</button><button class="btn btn-sm">Later</button></div></div>
+          <div class="wk-q"><span class="wk-att check">Check in</span><div><strong>Walter Hsu</strong> &mdash; surveys stopped<div class="why">No check-in for 4 days after 31 consecutive. Rule: sudden pause &rarr; care guide. Last note said &ldquo;this is really hard for me today&rdquo; on the walking item.</div></div><div class="acts"><button class="btn btn-sm btn-primary" onclick="HCOS.toast('Outreach opened. Draft: “Hi Walter, we’ve missed hearing from you and wanted to check in…”', 'ok')">Reach out</button><button class="btn btn-sm">Assign</button><button class="btn btn-sm">Route to nurse</button></div></div>
+          <div class="wk-q"><span class="wk-att check">Check in</span><div><strong>Priya Natarajan</strong> &mdash; asked to be contacted<div class="why">&ldquo;Please ask my care guide to contact me&rdquo; on the magnesium item, 8:40 AM. When convenient. Consolidated with her note about the headache.</div></div><div class="acts"><button class="btn btn-sm btn-primary">Call today</button><button class="btn btn-sm">Follow-up date</button></div></div>
+          <div class="wk-q"><span class="wk-att clin">Clinical attention</span><div><strong>Ben Okonkwo</strong> &mdash; &ldquo;I do not feel good when I do this&rdquo; &times; 3<div class="why">Three symptom-associated responses on the sauna item in 5 days. Rule set by Dr. Drannikov: symptoms on a heat activity &rarr; nurse review same day. Not the care guide&rsquo;s call.</div></div><div class="acts"><button class="btn btn-sm btn-primary">Routed to Nick</button><button class="btn btn-sm">Acknowledge</button></div></div>
+          <div class="wk-q"><span class="wk-att ok">Connected</span><div><strong>Priya Natarajan</strong> &mdash; milestone<div class="why">Completed the Stabilization stage per plan v4. Rule: care-stage completion &rarr; human recognition prompt.</div></div><div class="acts"><button class="btn btn-sm btn-primary" data-activate="wk-07-compose">Recognise</button><button class="btn btn-sm">Resolve</button></div></div>
+        </div>
+        <div class="field-help" style="margin-top:8px">Every item: acknowledge, assign, document outreach, route, set a follow-up date, resolve. Every prompt shows its rule and the events behind it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-06-staff" data-title="Staff patient view">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients/P-004377/work</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div><div class="page-title">Priya Natarajan &mdash; the work of healing</div><div class="field-help" style="margin:2px 0 0">Complex Chronic Care &middot; Comprehensive Care &middot; plan v4 &middot; stage Eliminate &middot; pace Standard &middot; <span class="wk-att ok">Connected</span></div></div>
+          <div class="app-user"><a class="btn" href="journey-careplan.html">Plan of care</a><button class="btn btn-primary" data-activate="wk-07-compose">Recognise</button></div>
+        </div>
+        <div class="wk-two">
+          <div>
+            <div class="card"><div class="card-title">Participation &middot; countable items, by plan version in force</div>
+              <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Period</th><th>Due</th><th>Done</th><th>Held</th><th>%</th><th>Note</th></tr></thead><tbody>
+                <tr><td>This week</td><td>9</td><td>7</td><td>1</td><td>78%</td><td>sauna held after flare</td></tr>
+                <tr><td>Last week</td><td>10</td><td>4</td><td>3</td><td>57%</td><td>flare Jul 12&ndash;15; 3 items held</td></tr>
+                <tr><td>Jun 22&ndash;28</td><td>10</td><td>9</td><td>0</td><td>90%</td><td>&mdash;</td></tr>
+                <tr><td>Baseline (May)</td><td>8</td><td>5</td><td>0</td><td>62%</td><td>plan v2</td></tr>
+              </tbody></table></div>
+              <div class="field-help" style="margin-top:6px">Every percentage is transparent: click a row for the exact events. Holds and clinic cancellations are excluded, never counted as missed.</div></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Support signals &amp; communications</div>
+              <div class="tbl-scroll"><table class="tbl"><thead><tr><th>When</th><th>What</th><th>Rule</th><th>To</th><th>Outcome</th></tr></thead><tbody>
+                <tr><td>Jul 21 8:40</td><td>Asked for contact (magnesium)</td><td>Contact request &rarr; care guide</td><td>Wesley</td><td>Open &middot; call today</td></tr>
+                <tr><td>Jul 20</td><td>Headache after Erchonia (event)</td><td>Symptom after treatment &rarr; nurse</td><td>Nick</td><td>Resolved &middot; protocol changed</td></tr>
+                <tr><td>Jul 16</td><td>Returned after flare</td><td>Return &rarr; recognition prompt</td><td>Wesley</td><td>Called &middot; &ldquo;we see it&rdquo;</td></tr>
+                <tr><td>Jul 13</td><td>Missed 3 check-ins</td><td>Pause &rarr; check in</td><td>Wesley</td><td>Reached &middot; in flare, holds set</td></tr>
+              </tbody></table></div></div>
+          </div>
+          <div>
+            <div class="card"><div class="card-title">Recognition history</div>
+              <div class="wk-recog"><b>Jul 20 &middot; Wesley &middot; call</b>Recognised showing up through the flare week. Human, drafted by HCOS, edited by Wesley.</div>
+              <div class="wk-recog"><b>Jul 18 &middot; automatic &middot; app</b>Ten days of check-ins. Library message #14, routine tier.</div>
+              <div class="wk-recog"><b>Jul 3 &middot; automatic &middot; app</b>Began plan v4 &mdash; first steps done.</div></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Capacity, from Daily Readiness</div>
+              <p style="font-size:13px;margin:0 0 6px">Recovery time <strong>4 &rarr; 2 days</strong> &middot; treatment tolerance steady &middot; morning energy 3.1 &rarr; 3.7.</p>
+              <a class="btn btn-sm" href="journey-readiness.html#/rd-05-profile">Open the capacity profile</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-07-compose" data-title="Recognition composer">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/patients/P-004391/recognise</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">Recognise Maya Reyes</div><div class="field-help" style="margin:2px 0 0">HCOS drafted it from her own events. Wesley sends it, in his words, or not at all.</div></div>
+          <div class="app-user"><button class="btn" data-activate="wk-05-queue">Back to queue</button></div></div>
+        <div class="wk-two">
+          <div>
+            <div class="card"><div class="card-title">What this is about &mdash; the source events</div>
+              <ul class="wk-src">
+                <li>14 consecutive days of morning and evening check-ins (Jul 8 &ndash; 21)</li>
+                <li>Fatigue reported rising from 2/5 to 4/5 over the same period</li>
+                <li>Rule: consistency over a clinically meaningful period &rarr; human recognition prompt</li>
+                <li>Generated Jul 21 07:40 &middot; rule set v3 &middot; drafted by HCOS &middot; awaiting Wesley</li>
+              </ul></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Suggested message &mdash; edit freely</div>
+              <div class="wk-msg"><textarea>Hi Maya, I was looking at your check-ins and wanted you to know that we see it. Fourteen days in a row, and you kept sharing even as the fatigue climbed — that is real work, and it is helping us understand what your body is telling us. How are you doing today? If it would help to talk it through, I can call this afternoon.</textarea></div>
+              <div class="field-help" style="margin-top:6px">Names the specific work. Asks how she is. Offers an easy way to connect. Proportionate. Nothing childish, nothing exaggerated.</div></div>
+          </div>
+          <div>
+            <div class="card"><div class="card-title">Send</div>
+              <div class="field"><label class="field-lbl">Channel</label><select class="field-select"><option>App message</option><option selected>Text message</option><option>Voice note</option><option>Say it at Thursday&rsquo;s visit</option></select></div>
+              <div class="field"><label class="field-lbl">From</label><select class="field-select"><option selected>Wesley &middot; care guide</option><option>Nick &middot; nurse</option></select></div>
+              <label class="cx-toggle"><input type="checkbox" checked> Record on her communication log</label>
+              <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+                <button class="btn" onclick="HCOS.toast('Dismissed. The prompt and your reason are kept on the audit trail.', 'ok')">Not now</button>
+                <button class="btn btn-primary" onclick="HCOS.toast('Sent as Wesley. Source events, draft, edits and delivery are on the audit trail.', 'ok')">Send as Wesley</button>
+              </div></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Automation boundary</div>
+              <p style="font-size:13px;margin:0">Routine, low-risk celebrations go out automatically from the approved library. <strong>This one did not</strong>: fatigue is rising, so it is emotionally significant and a person sends it. Clinical concerns never use this composer at all &mdash; they follow the safety workflow.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-08-builder" data-title="Plan item rules">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/careplan/P-004377/item/walking</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">Plan item &mdash; Light walking &middot; 15 min</div><div class="field-help" style="margin:2px 0 0">Every countable or monitored item carries these fields. The clinician sets them; HCOS executes and documents them. AI cannot change any of it.</div></div>
+          <div class="app-user"><a class="btn" href="journey-careplan.html">Plan of care</a></div></div>
+        <div class="callout"><strong>Clinical authority.</strong> The clinician decides what the patient is asked to do, how often, at what pace, under what safety limits, and when a change is routed. A physician or authorised extender changes stage, pace or plan; everyone else suggests.</div>
+        <div class="wk-two">
+          <div class="card">
+            <div class="field"><label class="field-lbl">Clinical purpose and care stage</label><select class="field-select"><option>Stabilization</option><option selected>Eliminate</option><option>Nourish</option><option>Repair</option><option>Rebuild Capacity</option><option>Graduate / Maintain</option></select><div class="field-help">Gentle movement to support lymphatic flow during elimination.</div></div>
+            <div class="field"><label class="field-lbl">Instructions and cadence</label><input class="field-input" value="15 minutes, flat ground, 3× a week, mornings preferred · Jul 3 – Sep 30"></div>
+            <div class="field"><label class="field-lbl">Care pace / intensity</label><select class="field-select"><option>Gentle</option><option selected>Standard</option><option>More intensive</option></select><div class="field-help">Final names for these levels are still to be standardised (§15).</div></div>
+            <div class="field"><label class="field-lbl">Completion source</label><select class="field-select"><option selected>Patient entry</option><option>System event (appointment, treatment, survey)</option><option>Care-team verification</option><option>Connected device (future)</option></select></div>
+            <div class="field"><label class="field-lbl">Progress behaviour</label><select class="field-select"><option selected>Countable — in the participation percentage</option><option>Informational — shown, not counted</option><option>Optional self-tracking — never counted, never missed</option></select></div>
+          </div>
+          <div class="card">
+            <div class="field"><label class="field-lbl">Support signal rules</label><input class="field-input" value="“Really hard” ×2 in 7 days, or “ask my care guide” → care guide, when convenient"></div>
+            <div class="field"><label class="field-lbl">Clinical escalation rules</label><input class="field-input" value="“I do not feel good” ×2 in 7 days → nurse review same day (Dr. Drannikov, Jul 3)"></div>
+            <div class="field"><label class="field-lbl">Hold and exception logic</label><input class="field-input" value="Held automatically during a Flare/Crash readiness state, hospitalisation or travel; held days excluded from the denominator"></div>
+            <div class="field"><label class="field-lbl">Authority and version</label><div class="field-help" style="margin:0">Approved by Dr. Drannikov &middot; active from Jul 3, 2026 &middot; plan version 4 &middot; suggested by Wesley (care guide) on Jul 1</div></div>
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><button class="btn">Suggest a change</button><button class="btn btn-primary" onclick="HCOS.toast('Saved as plan version 5, active from tomorrow. Version 4 governs everything already recorded.', 'ok')">Approve &amp; version</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="screen" id="wk-09-rules" data-title="Voice, guardrails &amp; scope">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/journey/work/rules</span></div>
+      <div class="frame-body">
+        <div class="app-header"><div><div class="page-title">The Work of Healing &mdash; how it is governed</div><div class="field-help" style="margin:2px 0 0">From the product concept, initial release. Reviewer context, not product UI.</div></div></div>
+        <div class="wk-two">
+          <div>
+            <div class="card"><div class="card-title">Who gets it, and when</div>
+              <div class="tbl-scroll"><table class="tbl"><thead><tr><th>Care path</th><th>Management model</th><th>Release</th></tr></thead><tbody>
+                <tr><td><strong>Complex Chronic Care</strong></td><td>Comprehensive Care (always)</td><td>MVP &mdash; the design population</td></tr>
+                <tr><td>Chronic Care</td><td>Comprehensive or Collaborative</td><td>Expansion 1</td></tr>
+                <tr><td>Collaborative specialty care</td><td>Collaborative &mdash; e.g. oncology support, high-dose vitamin C under a referring physician</td><td>Expansion 1</td></tr>
+                <tr><td>Lifetime Health &amp; Wellness</td><td>Defined by the program</td><td>Expansion 2 &mdash; habits, function, wearables</td></tr>
+              </tbody></table></div>
+              <div class="field-help" style="margin-top:6px">The care path says why the patient is here; the management model says who directs the care. Referral source never decides eligibility. These are the two axes the architecture review said never to mix.</div></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">The Helixona voice &mdash; samples the library starts from</div>
+              <div class="wk-recog"><b>Routine progress &middot; automatic</b>You completed several important parts of your plan this week. Every one of those steps represents time and effort you invested in your healing.</div>
+              <div class="wk-recog"><b>Return after a difficult period &middot; automatic</b>It is wonderful to see you reconnecting with your plan. Returning is an important step, and your care team is here beside you as you build your rhythm again.</div>
+              <div class="wk-recog"><b>Care-guide outreach &middot; a person</b>Hi Priya, we&rsquo;ve missed hearing from you and wanted to check in. How are you doing? Is there anything we can do to support you right now? Can we jump on a call and see what might be helpful? We&rsquo;re here for you.</div>
+              <div class="field-help">One consistent voice; patients are not asked to pick a motivational personality. Name the work, ask how they are, offer a way to connect, keep it proportionate. Every patient-facing line passes a voice review before release.</div></div>
+          </div>
+          <div>
+            <div class="card"><div class="card-title">AI may &middot; AI may not</div>
+              <div class="tbl-scroll"><table class="tbl"><thead><tr><th>May</th><th>May not</th></tr></thead><tbody>
+                <tr><td>Identify progress against the patient&rsquo;s own baseline</td><td>Create or change a plan, pace, threshold, hold or escalation rule</td></tr>
+                <tr><td>Draft a specific, warm recognition from approved data</td><td>Present an inference as clinical fact, or claim a treatment caused improvement</td></tr>
+                <tr><td>Detect changes meeting clinician-defined rules and show the events</td><td>Decide on its own that engagement is adequate or inadequate</td></tr>
+                <tr><td>Summarise barriers and route them per the approved workflow</td><td>Send sensitive clinical or emotional messages outside the automation boundary</td></tr>
+                <tr><td>Prompt the care guide when human recognition may be meaningful</td><td>Compare or rank patients, or use purchasing as a measure of progress</td></tr>
+              </tbody></table></div>
+              <div class="field-help" style="margin-top:6px">Every AI observation keeps its source events, time, rule or model version, review status and human edits. Staff can always see why a prompt appeared.</div></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Not in this product, on purpose</div>
+              <p style="font-size:13px;margin:0">No leaderboards. No comparisons between patients. No tangible prizes, purchased achievements or rewards for consuming more services. No streak that resets to zero. <strong>The Rewards tab (points, tier ladder, catalogue) is superseded by this</strong> and is kept only until the team decides what, if anything, survives from it.</p></div>
+            <div class="card" style="margin-top:14px"><div class="card-title">Decisions still to make (§15)</div>
+              <ul style="font-size:13px;margin:0;padding-left:18px"><li>Final names for the care pace levels</li><li>The exact MVP progress formula and the categories in the percentage detail</li><li>The initial recognition-message library and automation boundaries</li><li>Plan-rule templates approved by the Medical Director</li><li>The first wearable integrations after the MVP</li><li>The palette: the brief asks for gold, sand and earth; this wireframe is grayscale by rule</li></ul></div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top:16px"><strong>North-star test at every review:</strong> does this help the patient see the work they are doing, recognise meaningful progress, and feel more connected to the people caring for them?</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=122"></script>
+<script>
+  var WK_NOTES = {
+    done: 'Recorded. It counts toward this week.',
+    working: 'Recorded as in progress — no pressure, it stays on the list.',
+    hard: 'Your care guide will see this, gently, and may check in. You do not have to explain.',
+    unwell: 'This goes to your nurse to look at, the way your plan says. If it is severe, use emergency care — not this.',
+    question: 'Your care guide will answer. Write it below if you like.',
+    contact: 'Your care guide will contact you. Choose "when convenient" or "today" below if it matters.'
+  };
+  function wkPick(btn, k) {
+    btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('on'); });
+    btn.classList.add('on');
+    document.getElementById('wk-resp-note').innerHTML = WK_NOTES[k] + (k === 'done' || k === 'working' ? '' : ' <strong>This is a support signal.</strong>');
+  }
+  window.wkPick = wkPick;
+</script>
+</body>
+</html>
