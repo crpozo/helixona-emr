@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=118">
+<link rel="stylesheet" href="assets/hcos.css?v=119">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -106,14 +106,14 @@
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search columns&hellip;" aria-label="Search columns&hellip;">
                     <div class="msel-opts">
-                      <div class="msel-group" data-dept-of="Clinic">Clinic</div>
+                      <div class="msel-group" data-dept-of="Clinic"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Clinic"><span class="msel-group-lbl">Clinic</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-colid="drdrannikov" data-dept-of="Clinic"><input type="checkbox" aria-label="Dr. Drannikov">Dr. Drannikov</label>
                       <label class="msel-opt" data-colid="mira" data-dept-of="Clinic"><input type="checkbox" aria-label="Mira">Mira</label>
                       <label class="msel-opt" data-colid="drbakman" data-dept-of="Clinic"><input type="checkbox" aria-label="Dr. Bakman">Dr. Bakman</label>
                       <label class="msel-opt" data-colid="leighann" data-dept-of="Clinic"><input type="checkbox" aria-label="Leigh Ann">Leigh Ann</label>
                       <label class="msel-opt" data-colid="eboochair1" data-dept-of="Clinic"><input type="checkbox" aria-label="Eboo Chair 1">Eboo Chair 1</label>
                       <label class="msel-opt" data-colid="eboochair2" data-dept-of="Clinic"><input type="checkbox" aria-label="Eboo Chair 2">Eboo Chair 2</label>
-                      <div class="msel-group" data-dept-of="Infusion">Infusion</div>
+                      <div class="msel-group" data-dept-of="Infusion"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Infusion"><span class="msel-group-lbl">Infusion</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-colid="maofficevisit" data-dept-of="Infusion"><input type="checkbox" aria-label="MA Office Visit">MA Office Visit</label>
                       <label class="msel-opt" data-colid="mediciv" data-dept-of="Infusion"><input type="checkbox" aria-label="Medic IV">Medic IV</label>
                       <label class="msel-opt" data-colid="nurseiv1" data-dept-of="Infusion"><input type="checkbox" aria-label="Nurse IV 1">Nurse IV 1</label>
@@ -121,20 +121,20 @@
                       <label class="msel-opt" data-colid="labdraw" data-dept-of="Infusion"><input type="checkbox" aria-label="Lab Draw">Lab Draw</label>
                       <label class="msel-opt" data-colid="diagnostictesting" data-dept-of="Infusion"><input type="checkbox" aria-label="Diagnostic Testing">Diagnostic Testing</label>
                       <label class="msel-opt" data-colid="redlight" data-dept-of="Infusion"><input type="checkbox" aria-label="Red Light">Red Light</label>
-                      <div class="msel-group" data-dept-of="Treatment">Treatment</div>
+                      <div class="msel-group" data-dept-of="Treatment"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment"><span class="msel-group-lbl">Treatment</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-colid="erchonialaser" data-dept-of="Treatment"><input type="checkbox" aria-label="Erchonia Laser">Erchonia Laser</label>
                       <label class="msel-opt" data-colid="erchoniahandheld" data-dept-of="Treatment"><input type="checkbox" aria-label="Erchonia Handheld">Erchonia Handheld</label>
                       <label class="msel-opt" data-colid="adananotubroom" data-dept-of="Treatment"><input type="checkbox" aria-label="ADA Nano Tub Room">ADA Nano Tub Room</label>
                       <label class="msel-opt" data-colid="nanotubroom" data-dept-of="Treatment"><input type="checkbox" aria-label="Nano Tub Room">Nano Tub Room</label>
                       <label class="msel-opt" data-colid="saltroom" data-dept-of="Treatment"><input type="checkbox" aria-label="Salt Room">Salt Room</label>
                       <label class="msel-opt" data-colid="biocharger" data-dept-of="Treatment"><input type="checkbox" aria-label="BioCharger">BioCharger</label>
-                      <div class="msel-group" data-dept-of="Treatment Infusion Suite">Treatment Infusion Suite</div>
+                      <div class="msel-group" data-dept-of="Treatment Infusion Suite"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment Infusion Suite"><span class="msel-group-lbl">Treatment Infusion Suite</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-colid="nanovi1" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="NanoVi 1">NanoVi 1</label>
                       <label class="msel-opt" data-colid="nanovi2" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="NanoVi 2">NanoVi 2</label>
                       <label class="msel-opt" data-colid="hydrogeninhalation" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="Hydrogen Inhalation">Hydrogen Inhalation</label>
                       <label class="msel-opt" data-colid="bemer" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="BEMER">BEMER</label>
                       <label class="msel-opt" data-colid="rife" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="Rife">Rife</label>
-                      <div class="msel-group" data-dept-of="Energetics">Energetics</div>
+                      <div class="msel-group" data-dept-of="Energetics"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics"><span class="msel-group-lbl">Energetics</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-colid="energetics" data-dept-of="Energetics"><input type="checkbox" aria-label="Energetics">Energetics</label>
                     </div>
                     <div class="msel-foot">
@@ -151,20 +151,20 @@
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search types&hellip;" aria-label="Search types&hellip;">
                     <div class="msel-opts">
-                      <div class="msel-group" data-dept-of="Clinic">Clinic</div>
+                      <div class="msel-group" data-dept-of="Clinic"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Clinic"><span class="msel-group-lbl">Clinic</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-ty="Office Visit - 30 min" data-cols="drdrannikov|mira|drbakman" data-dept-of="Clinic"><input type="checkbox" aria-label="Office Visit - 30 min"><i class="ty-sw ty-visit"></i>Office Visit - 30 min</label>
                       <label class="msel-opt" data-ty="Office Visit - 60 min" data-cols="drdrannikov|mira|leighann" data-dept-of="Clinic"><input type="checkbox" aria-label="Office Visit - 60 min"><i class="ty-sw ty-visit"></i>Office Visit - 60 min</label>
                       <label class="msel-opt" data-ty="Procedure - 30 min" data-cols="drdrannikov" data-dept-of="Clinic"><input type="checkbox" aria-label="Procedure - 30 min"><i class="ty-sw ty-proc"></i>Procedure - 30 min</label>
                       <label class="msel-opt" data-ty="Procedure - 60 min" data-cols="drdrannikov" data-dept-of="Clinic"><input type="checkbox" aria-label="Procedure - 60 min"><i class="ty-sw ty-proc"></i>Procedure - 60 min</label>
                       <label class="msel-opt" data-ty="Office Visit - 15 min" data-cols="drbakman" data-dept-of="Clinic"><input type="checkbox" aria-label="Office Visit - 15 min"><i class="ty-sw ty-visit"></i>Office Visit - 15 min</label>
                       <label class="msel-opt" data-ty="EBOO" data-cols="eboochair1|eboochair2" data-dept-of="Clinic"><input type="checkbox" aria-label="EBOO"><i class="ty-sw ty-eboo"></i>EBOO</label>
-                      <div class="msel-group" data-dept-of="Infusion">Infusion</div>
+                      <div class="msel-group" data-dept-of="Infusion"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Infusion"><span class="msel-group-lbl">Infusion</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-ty="Diagnostics" data-cols="maofficevisit|diagnostictesting" data-dept-of="Infusion"><input type="checkbox" aria-label="Diagnostics"><i class="ty-sw ty-diag"></i>Diagnostics</label>
                       <label class="msel-opt" data-ty="MA Office Visit" data-cols="maofficevisit" data-dept-of="Infusion"><input type="checkbox" aria-label="MA Office Visit"><i class="ty-sw ty-visit"></i>MA Office Visit</label>
                       <label class="msel-opt" data-ty="Infusion" data-cols="mediciv|nurseiv1|nurseiv2|labdraw" data-dept-of="Infusion"><input type="checkbox" aria-label="Infusion"><i class="ty-sw ty-iv"></i>Infusion</label>
                       <label class="msel-opt" data-ty="Lab Draw" data-cols="labdraw" data-dept-of="Infusion"><input type="checkbox" aria-label="Lab Draw"><i class="ty-sw ty-lab"></i>Lab Draw</label>
                       <label class="msel-opt" data-ty="Treatment" data-cols="redlight|erchoniahandheld" data-dept-of="Infusion|Treatment"><input type="checkbox" aria-label="Treatment"><i class="ty-sw ty-chiro"></i>Treatment</label>
-                      <div class="msel-group" data-dept-of="Treatment">Treatment</div>
+                      <div class="msel-group" data-dept-of="Treatment"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment"><span class="msel-group-lbl">Treatment</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-ty="Erchonia Laser" data-cols="erchonialaser" data-dept-of="Treatment"><input type="checkbox" aria-label="Erchonia Laser"><i class="ty-sw ty-laser"></i>Erchonia Laser</label>
                       <label class="msel-opt" data-ty="ADA Nano Tub Room" data-cols="adananotubroom" data-dept-of="Treatment"><input type="checkbox" aria-label="ADA Nano Tub Room"><i class="ty-sw ty-chiro"></i>ADA Nano Tub Room</label>
                       <label class="msel-opt" data-ty="Nano Tub Room" data-cols="nanotubroom" data-dept-of="Treatment"><input type="checkbox" aria-label="Nano Tub Room"><i class="ty-sw ty-chiro"></i>Nano Tub Room</label>
@@ -178,13 +178,13 @@
                       <label class="msel-opt" data-ty="BioCharger - Chair 4" data-cols="biocharger" data-dept-of="Treatment"><input type="checkbox" aria-label="BioCharger - Chair 4"><i class="ty-sw ty-energ"></i>BioCharger - Chair 4</label>
                       <label class="msel-opt" data-ty="BioCharger - Chair 5" data-cols="biocharger" data-dept-of="Treatment"><input type="checkbox" aria-label="BioCharger - Chair 5"><i class="ty-sw ty-energ"></i>BioCharger - Chair 5</label>
                       <label class="msel-opt" data-ty="BioCharger - Chair 6" data-cols="biocharger" data-dept-of="Treatment"><input type="checkbox" aria-label="BioCharger - Chair 6"><i class="ty-sw ty-energ"></i>BioCharger - Chair 6</label>
-                      <div class="msel-group" data-dept-of="Treatment Infusion Suite">Treatment Infusion Suite</div>
+                      <div class="msel-group" data-dept-of="Treatment Infusion Suite"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment Infusion Suite"><span class="msel-group-lbl">Treatment Infusion Suite</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-ty="NanoVi 1" data-cols="nanovi1" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="NanoVi 1"><i class="ty-sw ty-chiro"></i>NanoVi 1</label>
                       <label class="msel-opt" data-ty="NanoVi 2" data-cols="nanovi2" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="NanoVi 2"><i class="ty-sw ty-chiro"></i>NanoVi 2</label>
                       <label class="msel-opt" data-ty="Hydrogen Inhalation" data-cols="hydrogeninhalation" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="Hydrogen Inhalation"><i class="ty-sw ty-chiro"></i>Hydrogen Inhalation</label>
                       <label class="msel-opt" data-ty="BEMER" data-cols="bemer" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="BEMER"><i class="ty-sw ty-chiro"></i>BEMER</label>
                       <label class="msel-opt" data-ty="Treatment Infusion Suite" data-cols="rife" data-dept-of="Treatment Infusion Suite"><input type="checkbox" aria-label="Treatment Infusion Suite"><i class="ty-sw ty-chiro"></i>Treatment Infusion Suite</label>
-                      <div class="msel-group" data-dept-of="Energetics">Energetics</div>
+                      <div class="msel-group" data-dept-of="Energetics"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics"><span class="msel-group-lbl">Energetics</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-ty="Energetics" data-cols="energetics" data-dept-of="Energetics"><input type="checkbox" aria-label="Energetics"><i class="ty-sw ty-energ"></i>Energetics</label>
                       <label class="msel-opt" data-ty="Energetics/Diagnostic" data-cols="energetics" data-dept-of="Energetics"><input type="checkbox" aria-label="Energetics/Diagnostic"><i class="ty-sw ty-energ"></i>Energetics/Diagnostic</label>
                     </div>
@@ -202,9 +202,9 @@
                   <div class="msel-panel">
                     <input class="msel-search" placeholder="Search subtypes&hellip;" aria-label="Search subtypes&hellip;">
                     <div class="msel-opts">
-                      <div class="msel-group" data-ty-of="Office Visit - 15 min">Office Visit - 15 min</div>
+                      <div class="msel-group" data-ty-of="Office Visit - 15 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit - 15 min"><span class="msel-group-lbl">Office Visit - 15 min</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Chiropractic Visit" data-ty-of="Office Visit - 15 min"><input type="checkbox" aria-label="Chiropractic Visit"><i class="rail-sw t-dctx"></i>Chiropractic Visit</label>
-                      <div class="msel-group" data-ty-of="Office Visit - 30 min">Office Visit - 30 min</div>
+                      <div class="msel-group" data-ty-of="Office Visit - 30 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit - 30 min"><span class="msel-group-lbl">Office Visit - 30 min</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Follow-Up" data-ty-of="Office Visit - 30 min"><input type="checkbox" aria-label="Follow-Up"><i class="rail-sw t-fu"></i>Follow-Up</label>
                       <label class="msel-opt" data-sub="Transfer of Care" data-ty-of="Office Visit - 30 min"><input type="checkbox" aria-label="Transfer of Care"><i class="rail-sw t-nptoc"></i>Transfer of Care</label>
                       <label class="msel-opt" data-sub="Telemedicine" data-ty-of="Office Visit - 30 min"><input type="checkbox" aria-label="Telemedicine"><i class="rail-sw t-npfu"></i>Telemedicine</label>
@@ -213,24 +213,24 @@
                       <label class="msel-opt" data-sub="FPE FU" data-ty-of="Office Visit - 30 min"><input type="checkbox" aria-label="FPE FU"><i class="rail-sw t-fpefu"></i>FPE FU</label>
                       <label class="msel-opt" data-sub="Laser Eval" data-ty-of="Office Visit - 30 min"><input type="checkbox" aria-label="Laser Eval"><i class="rail-sw t-lasereval"></i>Laser Eval</label>
                       <label class="msel-opt" data-sub="POC Review" data-ty-of="Office Visit - 30 min"><input type="checkbox" aria-label="POC Review"><i class="rail-sw t-pocrev"></i>POC Review</label>
-                      <div class="msel-group" data-ty-of="Office Visit - 60 min">Office Visit - 60 min</div>
+                      <div class="msel-group" data-ty-of="Office Visit - 60 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit - 60 min"><span class="msel-group-lbl">Office Visit - 60 min</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="New Patient" data-ty-of="Office Visit - 60 min"><input type="checkbox" aria-label="New Patient"><i class="rail-sw t-newpt"></i>New Patient</label>
                       <label class="msel-opt" data-sub="New Patient F/U" data-ty-of="Office Visit - 60 min"><input type="checkbox" aria-label="New Patient F/U"><i class="rail-sw t-npfu"></i>New Patient F/U</label>
                       <label class="msel-opt" data-sub="Depth Psychology" data-ty-of="Office Visit - 60 min"><input type="checkbox" aria-label="Depth Psychology"><i class="rail-sw t-fu"></i>Depth Psychology</label>
-                      <div class="msel-group" data-ty-of="Procedure - 30 min">Procedure - 30 min</div>
+                      <div class="msel-group" data-ty-of="Procedure - 30 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Procedure - 30 min"><span class="msel-group-lbl">Procedure - 30 min</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Trigger Point" data-ty-of="Procedure - 30 min"><input type="checkbox" aria-label="Trigger Point"><i class="rail-sw t-tpi"></i>Trigger Point</label>
                       <label class="msel-opt" data-sub="Prolozone" data-ty-of="Procedure - 30 min"><input type="checkbox" aria-label="Prolozone"><i class="rail-sw t-proloz"></i>Prolozone</label>
                       <label class="msel-opt" data-sub="PRP" data-ty-of="Procedure - 30 min"><input type="checkbox" aria-label="PRP"><i class="rail-sw t-prp"></i>PRP</label>
                       <label class="msel-opt" data-sub="Female Pellet" data-ty-of="Procedure - 30 min"><input type="checkbox" aria-label="Female Pellet"><i class="rail-sw t-pelf"></i>Female Pellet</label>
                       <label class="msel-opt" data-sub="Male Pellet" data-ty-of="Procedure - 30 min"><input type="checkbox" aria-label="Male Pellet"><i class="rail-sw t-pelm"></i>Male Pellet</label>
-                      <div class="msel-group" data-ty-of="Procedure - 60 min">Procedure - 60 min</div>
+                      <div class="msel-group" data-ty-of="Procedure - 60 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Procedure - 60 min"><span class="msel-group-lbl">Procedure - 60 min</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Acupuncture" data-ty-of="Procedure - 60 min"><input type="checkbox" aria-label="Acupuncture"><i class="rail-sw t-micro"></i>Acupuncture</label>
                       <label class="msel-opt" data-sub="Microcurrent" data-ty-of="Procedure - 60 min"><input type="checkbox" aria-label="Microcurrent"><i class="rail-sw t-micro"></i>Microcurrent</label>
-                      <div class="msel-group" data-ty-of="EBOO">EBOO</div>
+                      <div class="msel-group" data-ty-of="EBOO"><input type="checkbox" class="msel-group-cb" aria-label="Select all in EBOO"><span class="msel-group-lbl">EBOO</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="EBOO" data-ty-of="EBOO"><input type="checkbox" aria-label="EBOO"><i class="rail-sw t-ebootx"></i>EBOO</label>
                       <label class="msel-opt" data-sub="EBOO SAFE" data-ty-of="EBOO"><input type="checkbox" aria-label="EBOO SAFE"><i class="rail-sw t-eboosafe"></i>EBOO SAFE</label>
                       <label class="msel-opt" data-sub="Isolation Appointment" data-ty-of="EBOO"><input type="checkbox" aria-label="Isolation Appointment"><i class="rail-sw t-eboosafe"></i>Isolation Appointment</label>
-                      <div class="msel-group" data-ty-of="Infusion">Infusion</div>
+                      <div class="msel-group" data-ty-of="Infusion"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Infusion"><span class="msel-group-lbl">Infusion</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Foundational Flow 5" data-ty-of="Infusion"><input type="checkbox" aria-label="Foundational Flow 5"><i class="rail-sw t-fu"></i>Foundational Flow 5</label>
                       <label class="msel-opt" data-sub="Foundational Flow 10" data-ty-of="Infusion"><input type="checkbox" aria-label="Foundational Flow 10"><i class="rail-sw t-fu"></i>Foundational Flow 10</label>
                       <label class="msel-opt" data-sub="Foundational Flow 15" data-ty-of="Infusion"><input type="checkbox" aria-label="Foundational Flow 15"><i class="rail-sw t-fu"></i>Foundational Flow 15</label>
@@ -257,18 +257,18 @@
                       <label class="msel-opt" data-sub="Quest Lab Draw" data-ty-of="Lab Draw|Infusion"><input type="checkbox" aria-label="Quest Lab Draw"><i class="rail-sw t-quest"></i>Quest Lab Draw</label>
                       <label class="msel-opt" data-sub="MDL" data-ty-of="Lab Draw|Infusion"><input type="checkbox" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
                       <label class="msel-opt" data-sub="G6PD" data-ty-of="Lab Draw|Infusion"><input type="checkbox" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
-                      <div class="msel-group" data-ty-of="Diagnostics">Diagnostics</div>
+                      <div class="msel-group" data-ty-of="Diagnostics"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Diagnostics"><span class="msel-group-lbl">Diagnostics</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Diagnostic Testing" data-ty-of="Diagnostics"><input type="checkbox" aria-label="Diagnostic Testing"><i class="rail-sw t-nmt"></i>Diagnostic Testing</label>
                       <label class="msel-opt" data-sub="InBody" data-ty-of="Diagnostics"><input type="checkbox" aria-label="InBody"><i class="rail-sw t-nmt"></i>InBody</label>
-                      <div class="msel-group" data-ty-of="MA Office Visit">MA Office Visit</div>
+                      <div class="msel-group" data-ty-of="MA Office Visit"><input type="checkbox" class="msel-group-cb" aria-label="Select all in MA Office Visit"><span class="msel-group-lbl">MA Office Visit</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="GLP Injection" data-ty-of="MA Office Visit"><input type="checkbox" aria-label="GLP Injection"><i class="rail-sw t-fu"></i>GLP Injection</label>
                       <label class="msel-opt" data-sub="Vitals" data-ty-of="MA Office Visit"><input type="checkbox" aria-label="Vitals"><i class="rail-sw t-fu"></i>Vitals</label>
                       <label class="msel-opt" data-sub="Nasal Swabs" data-ty-of="MA Office Visit"><input type="checkbox" aria-label="Nasal Swabs"><i class="rail-sw t-fu"></i>Nasal Swabs</label>
                       <label class="msel-opt" data-sub="EKG" data-ty-of="MA Office Visit"><input type="checkbox" aria-label="EKG"><i class="rail-sw t-fu"></i>EKG</label>
-                      <div class="msel-group" data-ty-of="Treatment">Treatment</div>
+                      <div class="msel-group" data-ty-of="Treatment"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment"><span class="msel-group-lbl">Treatment</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Red Light Bed" data-ty-of="Treatment"><input type="checkbox" aria-label="Red Light Bed"><i class="rail-sw t-micro"></i>Red Light Bed</label>
                       <label class="msel-opt" data-sub="Erchonia Handheld" data-ty-of="Treatment"><input type="checkbox" aria-label="Erchonia Handheld"><i class="rail-sw t-erchlas"></i>Erchonia Handheld</label>
-                      <div class="msel-group" data-ty-of="Erchonia Laser">Erchonia Laser</div>
+                      <div class="msel-group" data-ty-of="Erchonia Laser"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Erchonia Laser"><span class="msel-group-lbl">Erchonia Laser</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Head &amp; Cerebellum" data-ty-of="Erchonia Laser"><input type="checkbox" aria-label="Head &amp; Cerebellum"><i class="rail-sw t-erchlas"></i>Head &amp; Cerebellum</label>
                       <label class="msel-opt" data-sub="Shoulder" data-ty-of="Erchonia Laser"><input type="checkbox" aria-label="Shoulder"><i class="rail-sw t-erchlas"></i>Shoulder</label>
                       <label class="msel-opt" data-sub="Wrist/hand" data-ty-of="Erchonia Laser"><input type="checkbox" aria-label="Wrist/hand"><i class="rail-sw t-erchlas"></i>Wrist/hand</label>
@@ -305,29 +305,29 @@
                       <label class="msel-opt" data-sub="Small Intestines" data-ty-of="Erchonia Laser"><input type="checkbox" aria-label="Small Intestines"><i class="rail-sw t-erchlas"></i>Small Intestines</label>
                       <label class="msel-opt" data-sub="General Musculoskeletal" data-ty-of="Erchonia Laser"><input type="checkbox" aria-label="General Musculoskeletal"><i class="rail-sw t-erchlas"></i>General Musculoskeletal</label>
                       <label class="msel-opt" data-sub="Neuro Inflammation" data-ty-of="Erchonia Laser"><input type="checkbox" aria-label="Neuro Inflammation"><i class="rail-sw t-erchlas"></i>Neuro Inflammation</label>
-                      <div class="msel-group" data-ty-of="ADA Nano Tub Room">ADA Nano Tub Room</div>
+                      <div class="msel-group" data-ty-of="ADA Nano Tub Room"><input type="checkbox" class="msel-group-cb" aria-label="Select all in ADA Nano Tub Room"><span class="msel-group-lbl">ADA Nano Tub Room</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Hydrogen" data-ty-of="ADA Nano Tub Room|Nano Tub Room"><input type="checkbox" aria-label="Hydrogen"><i class="rail-sw t-scenar"></i>Hydrogen</label>
                       <label class="msel-opt" data-sub="Oxygen" data-ty-of="ADA Nano Tub Room|Nano Tub Room"><input type="checkbox" aria-label="Oxygen"><i class="rail-sw t-scenar"></i>Oxygen</label>
-                      <div class="msel-group" data-ty-of="Salt Room - Chair 1">Salt Room - Chair 1</div>
+                      <div class="msel-group" data-ty-of="Salt Room - Chair 1"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Salt Room - Chair 1"><span class="msel-group-lbl">Salt Room - Chair 1</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Guided Meditation" data-ty-of="Salt Room - Chair 1|Salt Room - Chair 2|Salt Room - Chair 3|Salt Room - Chair 4"><input type="checkbox" aria-label="Guided Meditation"><i class="rail-sw t-scenar"></i>Guided Meditation</label>
                       <label class="msel-opt" data-sub="Guided Breathing Exercises" data-ty-of="Salt Room - Chair 1|Salt Room - Chair 2|Salt Room - Chair 3|Salt Room - Chair 4"><input type="checkbox" aria-label="Guided Breathing Exercises"><i class="rail-sw t-scenar"></i>Guided Breathing Exercises</label>
                       <label class="msel-opt" data-sub="Guided Relaxation" data-ty-of="Salt Room - Chair 1|Salt Room - Chair 2|Salt Room - Chair 3|Salt Room - Chair 4"><input type="checkbox" aria-label="Guided Relaxation"><i class="rail-sw t-scenar"></i>Guided Relaxation</label>
-                      <div class="msel-group" data-ty-of="NanoVi 1">NanoVi 1</div>
+                      <div class="msel-group" data-ty-of="NanoVi 1"><input type="checkbox" class="msel-group-cb" aria-label="Select all in NanoVi 1"><span class="msel-group-lbl">NanoVi 1</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="NanoVi 30 min" data-ty-of="NanoVi 1|NanoVi 2"><input type="checkbox" aria-label="NanoVi 30 min"><i class="rail-sw t-minilym"></i>NanoVi 30 min</label>
-                      <div class="msel-group" data-ty-of="Hydrogen Inhalation">Hydrogen Inhalation</div>
+                      <div class="msel-group" data-ty-of="Hydrogen Inhalation"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Hydrogen Inhalation"><span class="msel-group-lbl">Hydrogen Inhalation</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="Hydrogen 15 min" data-ty-of="Hydrogen Inhalation"><input type="checkbox" aria-label="Hydrogen 15 min"><i class="rail-sw t-scenar"></i>Hydrogen 15 min</label>
                       <label class="msel-opt" data-sub="Hydrogen 30 min" data-ty-of="Hydrogen Inhalation"><input type="checkbox" aria-label="Hydrogen 30 min"><i class="rail-sw t-scenar"></i>Hydrogen 30 min</label>
                       <label class="msel-opt" data-sub="Hydrogen 45 min" data-ty-of="Hydrogen Inhalation"><input type="checkbox" aria-label="Hydrogen 45 min"><i class="rail-sw t-scenar"></i>Hydrogen 45 min</label>
-                      <div class="msel-group" data-ty-of="BEMER">BEMER</div>
+                      <div class="msel-group" data-ty-of="BEMER"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BEMER"><span class="msel-group-lbl">BEMER</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="BEMER" data-ty-of="BEMER"><input type="checkbox" aria-label="BEMER"><i class="rail-sw t-biomodr"></i>BEMER</label>
-                      <div class="msel-group" data-ty-of="Energetics">Energetics</div>
+                      <div class="msel-group" data-ty-of="Energetics"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics"><span class="msel-group-lbl">Energetics</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="BioMod Pro" data-ty-of="Energetics"><input type="checkbox" aria-label="BioMod Pro"><i class="rail-sw t-biomodp"></i>BioMod Pro</label>
                       <label class="msel-opt" data-sub="Lymph Star" data-ty-of="Energetics"><input type="checkbox" aria-label="Lymph Star"><i class="rail-sw t-lymph"></i>Lymph Star</label>
                       <label class="msel-opt" data-sub="BioMod Recharge" data-ty-of="Energetics"><input type="checkbox" aria-label="BioMod Recharge"><i class="rail-sw t-biomodr"></i>BioMod Recharge</label>
                       <label class="msel-opt" data-sub="Mini-Lymph Star" data-ty-of="Energetics"><input type="checkbox" aria-label="Mini-Lymph Star"><i class="rail-sw t-minilym"></i>Mini-Lymph Star</label>
                       <label class="msel-opt" data-sub="Neuro Muscular Therapy (NMT)" data-ty-of="Energetics"><input type="checkbox" aria-label="Neuro Muscular Therapy (NMT)"><i class="rail-sw t-nmt"></i>Neuro Muscular Therapy (NMT)</label>
                       <label class="msel-opt" data-sub="SCENAR" data-ty-of="Energetics"><input type="checkbox" aria-label="SCENAR"><i class="rail-sw t-scenar"></i>SCENAR</label>
-                      <div class="msel-group" data-ty-of="Energetics/Diagnostic">Energetics/Diagnostic</div>
+                      <div class="msel-group" data-ty-of="Energetics/Diagnostic"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics/Diagnostic"><span class="msel-group-lbl">Energetics/Diagnostic</span><em class="msel-group-n"></em></div>
                       <label class="msel-opt" data-sub="MEAD" data-ty-of="Energetics/Diagnostic"><input type="checkbox" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
                     </div>
                     <div class="msel-foot">
@@ -6507,19 +6507,19 @@
               <span class="field-help" id="l-bm-picked" style="margin:0">Nothing picked &mdash; it would refuse everything</span>
             </div>
             <div class="msel-inline-opts">
-                <div class="msel-group" data-ty-of="ty-visit">Office Visit</div>
+                <div class="msel-group" data-ty-of="ty-visit"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit"><span class="msel-group-lbl">Office Visit</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient"><i class="rail-sw t-newpt"></i>New patient</label>
                 <label class="msel-opt bm-sub" data-sub="t-npfu" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient FU"><i class="rail-sw t-npfu"></i>New patient FU</label>
                 <label class="msel-opt bm-sub" data-sub="t-nptoc" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient TOC"><i class="rail-sw t-nptoc"></i>New patient TOC</label>
                 <label class="msel-opt bm-sub" data-sub="t-fu" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="Follow Up"><i class="rail-sw t-fu"></i>Follow Up</label>
-                <div class="msel-group" data-ty-of="ty-proc">Procedure</div>
+                <div class="msel-group" data-ty-of="ty-proc"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Procedure"><span class="msel-group-lbl">Procedure</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-prp" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="PRP"><i class="rail-sw t-prp"></i>PRP</label>
                 <label class="msel-opt bm-sub" data-sub="t-tpi" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="TPI"><i class="rail-sw t-tpi"></i>TPI</label>
                 <label class="msel-opt bm-sub" data-sub="t-pelm" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Pellet Males"><i class="rail-sw t-pelm"></i>Pellet Males</label>
                 <label class="msel-opt bm-sub" data-sub="t-pelf" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Pellet Females"><i class="rail-sw t-pelf"></i>Pellet Females</label>
                 <label class="msel-opt bm-sub" data-sub="t-proloz" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Prolozone"><i class="rail-sw t-proloz"></i>Prolozone</label>
                 <label class="msel-opt bm-sub" data-sub="t-micro" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Microcurrent"><i class="rail-sw t-micro"></i>Microcurrent</label>
-                <div class="msel-group" data-ty-of="ty-energ">Energetics</div>
+                <div class="msel-group" data-ty-of="ty-energ"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics"><span class="msel-group-lbl">Energetics</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger"><i class="rail-sw t-biochg"></i>BioCharger</label>
                 <label class="msel-opt bm-sub" data-sub="t-lymph" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="LymphStar"><i class="rail-sw t-lymph"></i>LymphStar</label>
                 <label class="msel-opt bm-sub" data-sub="t-scenar" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="SCENAR"><i class="rail-sw t-scenar"></i>SCENAR</label>
@@ -6529,32 +6529,32 @@
                 <label class="msel-opt bm-sub" data-sub="t-nmt" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="NMT"><i class="rail-sw t-nmt"></i>NMT</label>
                 <label class="msel-opt bm-sub" data-sub="t-mead" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
                 <label class="msel-opt bm-sub" data-sub="t-meadre" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD ReAssessment"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</label>
-                <div class="msel-group" data-ty-of="ty-lab">Labs</div>
+                <div class="msel-group" data-ty-of="ty-lab"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Labs"><span class="msel-group-lbl">Labs</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-mdl" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
                 <label class="msel-opt bm-sub" data-sub="t-quest" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="Quest"><i class="rail-sw t-quest"></i>Quest</label>
                 <label class="msel-opt bm-sub" data-sub="t-g6pd" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
                 <label class="msel-opt bm-sub" data-sub="t-igenex" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="iGenex"><i class="rail-sw t-igenex"></i>iGenex</label>
-                <div class="msel-group" data-ty-of="ty-diag">Diagnostics</div>
+                <div class="msel-group" data-ty-of="ty-diag"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Diagnostics"><span class="msel-group-lbl">Diagnostics</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-diag" data-ty-of="ty-diag"><input type="checkbox" onchange="lBmCount()" aria-label="Diagnostics"><i class="rail-sw t-diag"></i>Diagnostics</label>
-                <div class="msel-group" data-ty-of="ty-fpe">FPE</div>
+                <div class="msel-group" data-ty-of="ty-fpe"><input type="checkbox" class="msel-group-cb" aria-label="Select all in FPE"><span class="msel-group-lbl">FPE</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-fpeie" data-ty-of="ty-fpe"><input type="checkbox" onchange="lBmCount()" aria-label="FPE - IE"><i class="rail-sw t-fpeie"></i>FPE - IE</label>
                 <label class="msel-opt bm-sub" data-sub="t-fpefu" data-ty-of="ty-fpe"><input type="checkbox" onchange="lBmCount()" aria-label="FPE F/U"><i class="rail-sw t-fpefu"></i>FPE F/U</label>
-                <div class="msel-group" data-ty-of="ty-chiro">Chiro</div>
+                <div class="msel-group" data-ty-of="ty-chiro"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Chiro"><span class="msel-group-lbl">Chiro</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-dcintx" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="DC IN - TX"><i class="rail-sw t-dcintx"></i>DC IN - TX</label>
                 <label class="msel-opt bm-sub" data-sub="t-dctx" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="DC - TX"><i class="rail-sw t-dctx"></i>DC - TX</label>
                 <label class="msel-opt bm-sub" data-sub="t-lasereval" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="Laser Eval"><i class="rail-sw t-lasereval"></i>Laser Eval</label>
                 <label class="msel-opt bm-sub" data-sub="t-medifne" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="MediFNE"><i class="rail-sw t-medifne"></i>MediFNE</label>
                 <label class="msel-opt bm-sub" data-sub="t-pocrev" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="POC Review"><i class="rail-sw t-pocrev"></i>POC Review</label>
-                <div class="msel-group" data-ty-of="ty-eboo">EBOO</div>
+                <div class="msel-group" data-ty-of="ty-eboo"><input type="checkbox" class="msel-group-cb" aria-label="Select all in EBOO"><span class="msel-group-lbl">EBOO</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-eboosafe" data-ty-of="ty-eboo"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO Safe"><i class="rail-sw t-eboosafe"></i>EBOO Safe</label>
                 <label class="msel-opt bm-sub" data-sub="t-ebootx" data-ty-of="ty-eboo"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO"><i class="rail-sw t-ebootx"></i>EBOO</label>
-                <div class="msel-group" data-ty-of="ty-laser">Laser</div>
+                <div class="msel-group" data-ty-of="ty-laser"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Laser"><span class="msel-group-lbl">Laser</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="Erchonia Laser"><i class="rail-sw t-erchlas"></i>Erchonia Laser</label>
                 <label class="msel-opt bm-sub" data-sub="t-erccemp" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompEmp"><i class="rail-sw t-erccemp"></i>ErcCompEmp</label>
                 <label class="msel-opt bm-sub" data-sub="t-erccpt" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompPt"><i class="rail-sw t-erccpt"></i>ErcCompPt</label>
                 <label class="msel-opt bm-sub" data-sub="t-erccvip" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompVIP"><i class="rail-sw t-erccvip"></i>ErcCompVIP</label>
                 <label class="msel-opt bm-sub" data-sub="t-erccref" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompRef"><i class="rail-sw t-erccref"></i>ErcCompRef</label>
-                <div class="msel-group" data-ty-of="ty-iv">IV</div>
+                <div class="msel-group" data-ty-of="ty-iv"><input type="checkbox" class="msel-group-cb" aria-label="Select all in IV"><span class="msel-group-lbl">IV</span><em class="msel-group-n"></em></div>
                 <label class="msel-opt bm-sub" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Cellular Boost"><i class="rail-sw t-cell"></i>Cellular Boost</label>
                 <label class="msel-opt bm-sub" data-sub="t-chel" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Chelation"><i class="rail-sw t-chel"></i>Chelation</label>
                 <label class="msel-opt bm-sub" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Cognitive Support"><i class="rail-sw t-cog"></i>Cognitive Support</label>
@@ -6636,7 +6636,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=118"></script>
+<script src="assets/hcos.js?v=119"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -10630,14 +10630,28 @@
         o.style.display = lTyInCols(o) ? '' : 'none';
         o.querySelector('input').checked = lSel.types.indexOf(o.getAttribute('data-ty')) !== -1;
       });
-      /* a group with nothing left under it goes with its options */
+      /* a group with nothing left under it goes with its options; a group with
+         everything chosen shows checked, with some chosen shows the dash */
+      var ATTR2 = { dept: 'data-dept', col: 'data-colid', ty: 'data-ty', sub: 'data-sub', st: 'data-st' };
+      var LIST2 = { dept: 'depts', col: 'cols', ty: 'types', sub: 'subs', st: 'sts' };
       document.querySelectorAll('.msel-opts').forEach(function (box) {
-        var g = null, any = false;
+        var m = box.closest('.msel'), w = m ? m.getAttribute('data-msel') : '';
+        var attr = ATTR2[w], list = LIST2[w] ? lSel[LIST2[w]] : [];
+        var g = null, vis = [], chosen = 0;
+        function close() {
+          if (!g) return;
+          g.style.display = vis.length ? '' : 'none';
+          var cb = g.querySelector('.msel-group-cb'), cnt = g.querySelector('.msel-group-n');
+          if (cb) { cb.checked = vis.length > 0 && chosen === vis.length; cb.indeterminate = chosen > 0 && chosen < vis.length; }
+          if (cnt) cnt.textContent = chosen ? chosen + ' of ' + vis.length : vis.length + '';
+        }
         [].forEach.call(box.children, function (ch) {
-          if (ch.classList.contains('msel-group')) { if (g) g.style.display = any ? '' : 'none'; g = ch; any = false; }
-          else if (ch.style.display !== 'none') any = true;
+          if (ch.classList.contains('msel-group')) { close(); g = ch; vis = []; chosen = 0; }
+          else if (ch.classList.contains('msel-opt') && ch.style.display !== 'none' && !ch.classList.contains('hidden')) {
+            vis.push(ch); if (attr && list.indexOf(ch.getAttribute(attr)) !== -1) chosen++;
+          }
         });
-        if (g) g.style.display = any ? '' : 'none';
+        close();
       });
       document.querySelectorAll('.msel-opt[data-sub], .msel-group[data-ty-of]').forEach(function (o) {
         o.style.display = lSubInTypes(o) ? '' : 'none';
@@ -10757,6 +10771,9 @@
        or lets it all go if it was already taken. */
     var ATTR = { dept: 'data-dept', col: 'data-colid', ty: 'data-ty', sub: 'data-sub', st: 'data-st' };
     var LIST = { dept: 'depts', col: 'cols', ty: 'types', sub: 'subs', st: 'sts' };
+    /* the group's own checkbox and the whole row do the same thing; the
+       checkbox is there so the row LOOKS like something you can select, which
+       a bare heading did not ("esta confuso"). summarize() owns its state. */
     document.addEventListener('click', function (ev) {
       var g = ev.target.closest ? ev.target.closest('.msel-group') : null;
       if (!g) return;
@@ -10772,7 +10789,8 @@
       lSel[list] = all ? lSel[list].filter(function (k) { return keys.indexOf(k) === -1; })
                        : lSel[list].concat(keys.filter(function (k) { return lSel[list].indexOf(k) === -1; }));
       summarize(); lApply();
-      HCOS.toast((all ? 'Cleared ' : 'Selected ') + g.textContent.trim() + ' — ' + keys.length + ' item' + (keys.length === 1 ? '' : 's') + '.', 'ok');
+      var gl = g.querySelector('.msel-group-lbl');
+      HCOS.toast((all ? 'Cleared ' : 'Selected ') + (gl ? gl.textContent : g.textContent).trim() + ' — ' + keys.length + ' item' + (keys.length === 1 ? '' : 's') + '.', 'ok');
     });
 
     document.addEventListener('input', function (ev) {

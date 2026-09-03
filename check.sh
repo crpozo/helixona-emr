@@ -158,7 +158,7 @@ if len(re.findall(r'<div class="daycal-col-head" data-col="[^"]+" data-dept="', 
 # reservaba padding-left:14px para la barra lateral y otra, mas abajo, ponia
 # padding:2px 6px y metia el nombre debajo de la barra ("Nadia" -> "ladia").
 css = open('assets/hcos.css').read()
-WATCH = ['.week-appt', '.cal-appt', '.daysum-row', '.l-slot', '.msel-opt']
+WATCH = ['.week-appt', '.cal-appt', '.daysum-row', '.l-slot', '.msel-opt', '.msel-group']
 for sel in WATCH:
     seen, clash = {}, []
     for m in re.finditer(r'(?:^|\n)' + re.escape(sel) + r'\s*\{([^}]*)\}', css):
