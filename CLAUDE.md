@@ -1079,3 +1079,20 @@ duplicate data entry** — what Helixona already knows is on the timeline, never
 
 Repo moved 2026-09-02 to `~/Desktop/MindfulTech/helixona-emr`. Local preview: `python3 -m
 http.server 8725` from the repo root.
+
+### The booking vocabulary is generated (tools/genbook.py, 2026-09-02)
+
+The booking screen, the waitlist, request-an-order, the insights / waitlist / blocked-time
+filters, the week and month treatment selects and the bulk-move list all read **`L_BOOK`**, one
+JavaScript block emitted by `tools/genbook.py` from hierarchy.py: departments, columns,
+appointment types, and every sub type with the **engine key** it maps to. The engine (`L_TX`,
+read by ten functions) keeps its palette entries and gains one entry per sheet sub type NAME —
+the sub type select's value is the sheet name, and `L_TX[name]` carries duration, order link and
+protocol. 98 of 116 sub types match a palette entry (36 Erchonia protocols inherit the laser's);
+18 are generated from the row's minutes. A type with no sub types on the sheet (BioCharger
+chairs, Rife) gets one pseudo sub type — "recipe from the plan of care" — so the cascade always
+holds. Readers still filed by the palette's ten categories (`L_BK_AI`, `L_COV`) are bridged
+through the type's colour class or the entry's key, never by re-adding a category select.
+**A top-level `lBook()` at load is what broke this**: the cascade fills the selects last, so
+anything reading them earlier finds `''`; the cascade boots at the end of the script and
+`lBook()` returns when nothing is chosen.

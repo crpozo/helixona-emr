@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=120">
+<link rel="stylesheet" href="assets/hcos.css?v=121">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -1665,21 +1665,48 @@
               </label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select l-treat" id="l-treat-w" onchange="lSync(this)" aria-label="Treatment">
-                <optgroup label="Type">
-                  <option value="all">Appointment types</option>
-                  <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
-                  <option value="ty:ty-proc">Procedure &mdash; all subtypes</option>
-                  <option value="ty:ty-iv">IV &mdash; all subtypes</option>
-                  <option value="ty:ty-energ">Energetics &mdash; all subtypes</option>
+                <option value="all">Every appointment type</option>
+                <optgroup label="Clinic">
+                  <option value="ty:Office Visit - 15 min">Office Visit - 15 min</option>
+                  <option value="ty:Office Visit - 30 min">Office Visit - 30 min</option>
+                  <option value="ty:Office Visit - 60 min">Office Visit - 60 min</option>
+                  <option value="ty:Procedure - 30 min">Procedure - 30 min</option>
+                  <option value="ty:Procedure - 60 min">Procedure - 60 min</option>
+                  <option value="ty:EBOO">EBOO</option>
                 </optgroup>
-                <optgroup label="Subtype">
-                  <option value="t-mc100">IV &middot; Mega C 100g</option>
-                  <option value="t-mc50">IV &middot; Mega C 50g</option>
-                  <option value="t-ff10">IV &middot; Foundational Flow 10</option>
-                  <option value="t-newpt">Office visit &middot; New patient</option>
-                  <option value="t-npfu">Office visit &middot; New patient FU</option>
-                  <option value="t-ebootx">EBOO &middot; EBOO</option>
-                  <option value="t-mdl">Labs &middot; MDL</option>
+                <optgroup label="Infusion">
+                  <option value="ty:Infusion">Infusion</option>
+                  <option value="ty:Diagnostics">Diagnostics</option>
+                  <option value="ty:MA Office Visit">MA Office Visit</option>
+                  <option value="ty:Lab Draw">Lab Draw</option>
+                  <option value="ty:Treatment">Treatment</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="ty:Treatment">Treatment</option>
+                  <option value="ty:Erchonia Laser">Erchonia Laser</option>
+                  <option value="ty:ADA Nano Tub Room">ADA Nano Tub Room</option>
+                  <option value="ty:Nano Tub Room">Nano Tub Room</option>
+                  <option value="ty:Salt Room - Chair 1">Salt Room - Chair 1</option>
+                  <option value="ty:Salt Room - Chair 2">Salt Room - Chair 2</option>
+                  <option value="ty:Salt Room - Chair 3">Salt Room - Chair 3</option>
+                  <option value="ty:Salt Room - Chair 4">Salt Room - Chair 4</option>
+                  <option value="ty:BioCharger - Chair 1">BioCharger - Chair 1</option>
+                  <option value="ty:BioCharger - Chair 2">BioCharger - Chair 2</option>
+                  <option value="ty:BioCharger - Chair 3">BioCharger - Chair 3</option>
+                  <option value="ty:BioCharger - Chair 4">BioCharger - Chair 4</option>
+                  <option value="ty:BioCharger - Chair 5">BioCharger - Chair 5</option>
+                  <option value="ty:BioCharger - Chair 6">BioCharger - Chair 6</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="ty:NanoVi 1">NanoVi 1</option>
+                  <option value="ty:NanoVi 2">NanoVi 2</option>
+                  <option value="ty:Hydrogen Inhalation">Hydrogen Inhalation</option>
+                  <option value="ty:BEMER">BEMER</option>
+                  <option value="ty:Treatment Infusion Suite">Treatment Infusion Suite</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="ty:Energetics">Energetics</option>
+                  <option value="ty:Energetics/Diagnostic">Energetics/Diagnostic</option>
                 </optgroup>
               </select></label>
             <span class="l-count" id="l-count-w">Showing everything</span>
@@ -2413,21 +2440,48 @@
               </label>
             <label class="l-fl"><span class="filter-group-lbl">Treatment</span>
               <select class="field-select l-select l-treat" id="l-treat-m" onchange="lSync(this)" aria-label="Treatment">
-                <optgroup label="Type">
-                  <option value="all">Appointment types</option>
-                  <option value="ty:ty-visit">Office visit &mdash; all subtypes</option>
-                  <option value="ty:ty-proc">Procedure &mdash; all subtypes</option>
-                  <option value="ty:ty-iv">IV &mdash; all subtypes</option>
-                  <option value="ty:ty-energ">Energetics &mdash; all subtypes</option>
+                <option value="all">Every appointment type</option>
+                <optgroup label="Clinic">
+                  <option value="ty:Office Visit - 15 min">Office Visit - 15 min</option>
+                  <option value="ty:Office Visit - 30 min">Office Visit - 30 min</option>
+                  <option value="ty:Office Visit - 60 min">Office Visit - 60 min</option>
+                  <option value="ty:Procedure - 30 min">Procedure - 30 min</option>
+                  <option value="ty:Procedure - 60 min">Procedure - 60 min</option>
+                  <option value="ty:EBOO">EBOO</option>
                 </optgroup>
-                <optgroup label="Subtype">
-                  <option value="t-mc100">IV &middot; Mega C 100g</option>
-                  <option value="t-mc50">IV &middot; Mega C 50g</option>
-                  <option value="t-ff10">IV &middot; Foundational Flow 10</option>
-                  <option value="t-newpt">Office visit &middot; New patient</option>
-                  <option value="t-npfu">Office visit &middot; New patient FU</option>
-                  <option value="t-ebootx">EBOO &middot; EBOO</option>
-                  <option value="t-mdl">Labs &middot; MDL</option>
+                <optgroup label="Infusion">
+                  <option value="ty:Infusion">Infusion</option>
+                  <option value="ty:Diagnostics">Diagnostics</option>
+                  <option value="ty:MA Office Visit">MA Office Visit</option>
+                  <option value="ty:Lab Draw">Lab Draw</option>
+                  <option value="ty:Treatment">Treatment</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="ty:Treatment">Treatment</option>
+                  <option value="ty:Erchonia Laser">Erchonia Laser</option>
+                  <option value="ty:ADA Nano Tub Room">ADA Nano Tub Room</option>
+                  <option value="ty:Nano Tub Room">Nano Tub Room</option>
+                  <option value="ty:Salt Room - Chair 1">Salt Room - Chair 1</option>
+                  <option value="ty:Salt Room - Chair 2">Salt Room - Chair 2</option>
+                  <option value="ty:Salt Room - Chair 3">Salt Room - Chair 3</option>
+                  <option value="ty:Salt Room - Chair 4">Salt Room - Chair 4</option>
+                  <option value="ty:BioCharger - Chair 1">BioCharger - Chair 1</option>
+                  <option value="ty:BioCharger - Chair 2">BioCharger - Chair 2</option>
+                  <option value="ty:BioCharger - Chair 3">BioCharger - Chair 3</option>
+                  <option value="ty:BioCharger - Chair 4">BioCharger - Chair 4</option>
+                  <option value="ty:BioCharger - Chair 5">BioCharger - Chair 5</option>
+                  <option value="ty:BioCharger - Chair 6">BioCharger - Chair 6</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="ty:NanoVi 1">NanoVi 1</option>
+                  <option value="ty:NanoVi 2">NanoVi 2</option>
+                  <option value="ty:Hydrogen Inhalation">Hydrogen Inhalation</option>
+                  <option value="ty:BEMER">BEMER</option>
+                  <option value="ty:Treatment Infusion Suite">Treatment Infusion Suite</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="ty:Energetics">Energetics</option>
+                  <option value="ty:Energetics/Diagnostic">Energetics/Diagnostic</option>
                 </optgroup>
               </select></label>
             <span class="l-count" id="l-count-m">Showing everything</span>
@@ -4005,69 +4059,173 @@
               </select>
               <select class="field-select l-select ins-f" id="ins-f-sub" onchange="lInsFilter()"
                       aria-label="Appointment subtype" style="min-width:180px">
-                <option value="">Every appointment subtype</option>
-                <option value="t-newpt">New patient</option>
-                <option value="t-npfu">New patient FU</option>
-                <option value="t-nptoc">New patient TOC</option>
-                <option value="t-fu">Follow Up</option>
-                <option value="t-prp">PRP</option>
-                <option value="t-tpi">TPI</option>
-                <option value="t-pelm">Pellet Males</option>
-                <option value="t-pelf">Pellet Females</option>
-                <option value="t-proloz">Prolozone</option>
-                <option value="t-micro">Microcurrent</option>
-                <option value="t-biochg">BioCharger</option>
-                <option value="t-lymph">LymphStar</option>
-                <option value="t-scenar">SCENAR</option>
-                <option value="t-minilym">Mini-LymphStar</option>
-                <option value="t-biomodp">BioMod Pro</option>
-                <option value="t-biomodr">BioMod Recharge</option>
-                <option value="t-nmt">NMT</option>
-                <option value="t-mead">MEAD</option>
-                <option value="t-meadre">MEAD ReAssessment</option>
-                <option value="t-mdl">MDL</option>
-                <option value="t-quest">Quest</option>
-                <option value="t-g6pd">G6PD</option>
-                <option value="t-igenex">iGenex</option>
-                <option value="t-diag">Diagnostics</option>
-                <option value="t-fpeie">FPE - IE</option>
-                <option value="t-fpefu">FPE F/U</option>
-                <option value="t-dcintx">DC IN - TX</option>
-                <option value="t-dctx">DC - TX</option>
-                <option value="t-lasereval">Laser Eval</option>
-                <option value="t-medifne">MediFNE</option>
-                <option value="t-pocrev">POC Review</option>
-                <option value="t-eboosafe">EBOO Safe</option>
-                <option value="t-ebootx">EBOO</option>
-                <option value="t-erchlas">Erchonia Laser</option>
-                <option value="t-erccemp">ErcCompEmp</option>
-                <option value="t-erccpt">ErcCompPt</option>
-                <option value="t-erccvip">ErcCompVIP</option>
-                <option value="t-erccref">ErcCompRef</option>
-                <option value="t-cell">Cellular Boost</option>
-                <option value="t-chel">Chelation</option>
-                <option value="t-cog">Cognitive Support</option>
-                <option value="t-iron">Core Iron Blend</option>
-                <option value="t-rest">Core Restore</option>
-                <option value="t-detox">Detox Prime</option>
-                <option value="t-ebooiv">Eboo Boost</option>
-                <option value="t-amino">Essential Aminos</option>
-                <option value="t-ff5">Foundational Flow 5</option>
-                <option value="t-ff10">Foundational Flow 10</option>
-                <option value="t-ff15">Foundational Flow 15</option>
-                <option value="t-ff20">Foundational Flow 20</option>
-                <option value="t-ff25">Foundational Flow 25</option>
-                <option value="t-ff50">Foundational Flow 50</option>
-                <option value="t-mast">Mast Cell</option>
-                <option value="t-mc15">Mega C 15g</option>
-                <option value="t-mc25">Mega C 25g</option>
-                <option value="t-mc50">Mega C 50g</option>
-                <option value="t-mc75">Mega C 75g</option>
-                <option value="t-mc100">Mega C 100g</option>
-                <option value="t-migraine">Migraine</option>
-                <option value="t-mito">Mito Boost</option>
-                <option value="t-minimb">Mini Mito Boost</option>
-                <option value="t-minimbc">Mini Mito Boost - Custom</option>
+                <option value="">Every subtype</option>
+                <optgroup label="Office Visit - 15 min">
+                  <option value="t-dctx">Chiropractic Visit</option>
+                </optgroup>
+                <optgroup label="Office Visit - 30 min">
+                  <option value="t-fu">Follow-Up</option>
+                  <option value="t-nptoc">Transfer of Care</option>
+                  <option value="t-npfu">Telemedicine</option>
+                  <option value="t-fpeie">FPE</option>
+                  <option value="t-medifne">Medicare FPE</option>
+                  <option value="t-fpefu">FPE FU</option>
+                  <option value="t-lasereval">Laser Eval</option>
+                  <option value="t-pocrev">POC Review</option>
+                </optgroup>
+                <optgroup label="Office Visit - 60 min">
+                  <option value="t-newpt">New Patient</option>
+                  <option value="t-npfu">New Patient F/U</option>
+                  <option value="gen:depthpsychology">Depth Psychology</option>
+                </optgroup>
+                <optgroup label="Procedure - 30 min">
+                  <option value="t-tpi">Trigger Point</option>
+                  <option value="t-proloz">Prolozone</option>
+                  <option value="t-prp">PRP</option>
+                  <option value="t-pelf">Female Pellet</option>
+                  <option value="t-pelm">Male Pellet</option>
+                </optgroup>
+                <optgroup label="Procedure - 60 min">
+                  <option value="t-micro">Acupuncture</option>
+                  <option value="t-micro">Microcurrent</option>
+                </optgroup>
+                <optgroup label="EBOO">
+                  <option value="t-ebootx">EBOO</option>
+                  <option value="t-eboosafe">EBOO SAFE</option>
+                  <option value="t-eboosafe">Isolation Appointment</option>
+                </optgroup>
+                <optgroup label="Infusion">
+                  <option value="t-ff5">Foundational Flow 5</option>
+                  <option value="t-ff10">Foundational Flow 10</option>
+                  <option value="t-ff15">Foundational Flow 15</option>
+                  <option value="t-ff20">Foundational Flow 20</option>
+                  <option value="t-ff25">Foundational Flow 25</option>
+                  <option value="t-ff50">Foundational Flow 50</option>
+                  <option value="t-cell">Cellular Boost</option>
+                  <option value="t-mast">Mast Cell</option>
+                  <option value="t-mast">Mast Cell - Benadryl Only</option>
+                  <option value="t-cog">Cognitive Support</option>
+                  <option value="t-iron">Core Iron Blend</option>
+                  <option value="t-rest">Core Restore</option>
+                  <option value="t-detox">Detox Prime</option>
+                  <option value="t-amino">Essential Amino</option>
+                  <option value="t-mc100">Mega C 100</option>
+                  <option value="t-mc15">Mega C 15</option>
+                  <option value="t-mc25">Mega C 25</option>
+                  <option value="t-mc50">Mega C 50</option>
+                  <option value="t-mc75">Mega C 75</option>
+                  <option value="t-minimbc">Mini Cust</option>
+                  <option value="t-minimb">Mini MB</option>
+                  <option value="t-mito">Mito Boost</option>
+                  <option value="t-ebooiv">EBOO Boost IV</option>
+                  <option value="t-quest">Quest Lab Draw</option>
+                  <option value="t-mdl">MDL</option>
+                  <option value="t-g6pd">G6PD</option>
+                </optgroup>
+                <optgroup label="Diagnostics">
+                  <option value="t-diag">Diagnostic Testing</option>
+                  <option value="t-diag">InBody</option>
+                </optgroup>
+                <optgroup label="MA Office Visit">
+                  <option value="gen:glpinjection">GLP Injection</option>
+                  <option value="gen:vitals">Vitals</option>
+                  <option value="gen:nasalswabs">Nasal Swabs</option>
+                  <option value="gen:ekg">EKG</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="gen:redlightbed">Red Light Bed</option>
+                  <option value="t-erchlas">Erchonia Handheld</option>
+                </optgroup>
+                <optgroup label="Erchonia Laser">
+                  <option value="t-erchlas">Head &amp; Cerebellum</option>
+                  <option value="t-erchlas">Shoulder</option>
+                  <option value="t-erchlas">Wrist/hand</option>
+                  <option value="t-erchlas">Knee</option>
+                  <option value="t-erchlas">Heel</option>
+                  <option value="t-erchlas">Neck</option>
+                  <option value="t-erchlas">Elbow</option>
+                  <option value="t-erchlas">Low Back</option>
+                  <option value="t-erchlas">Ankle/Foot</option>
+                  <option value="t-erchlas">Acute Pain</option>
+                  <option value="t-erchlas">Level 1 Brain</option>
+                  <option value="t-erchlas">Level 2 Brain</option>
+                  <option value="t-erchlas">Emotional Stress</option>
+                  <option value="t-erchlas">Sympathetic Calm</option>
+                  <option value="t-erchlas">Parasympathetic Facilitation</option>
+                  <option value="t-erchlas">Level 1 Gut</option>
+                  <option value="t-erchlas">Level 2 Gut</option>
+                  <option value="t-erchlas">Inflammation</option>
+                  <option value="t-erchlas">Parasites 1</option>
+                  <option value="t-erchlas">Parasites 2</option>
+                  <option value="t-erchlas">Lyme</option>
+                  <option value="t-erchlas">EBV</option>
+                  <option value="t-erchlas">Infection</option>
+                  <option value="t-erchlas">Digestion</option>
+                  <option value="t-erchlas">Indigestion</option>
+                  <option value="t-erchlas">Allergy</option>
+                  <option value="t-erchlas">Immune Enhance</option>
+                  <option value="t-erchlas">Hormone Balance</option>
+                  <option value="t-erchlas">Plantar Fasciitis</option>
+                  <option value="t-erchlas">Chronic Pain</option>
+                  <option value="t-erchlas">Lymphatic</option>
+                  <option value="t-erchlas">Weight Loss Trial</option>
+                  <option value="t-erchlas">Large Intestines</option>
+                  <option value="t-erchlas">Small Intestines</option>
+                  <option value="t-erchlas">General Musculoskeletal</option>
+                  <option value="t-erchlas">Neuro Inflammation</option>
+                </optgroup>
+                <optgroup label="ADA Nano Tub Room">
+                  <option value="gen:hydrogen">Hydrogen</option>
+                  <option value="gen:oxygen">Oxygen</option>
+                </optgroup>
+                <optgroup label="Salt Room - Chair 1">
+                  <option value="gen:guidedmeditation">Guided Meditation</option>
+                  <option value="gen:guidedbreathingexercises">Guided Breathing Exercises</option>
+                  <option value="gen:guidedrelaxation">Guided Relaxation</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 1">
+                  <option value="t-biochg">BioCharger - Chair 1</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 2">
+                  <option value="t-biochg">BioCharger - Chair 2</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 3">
+                  <option value="t-biochg">BioCharger - Chair 3</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 4">
+                  <option value="t-biochg">BioCharger - Chair 4</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 5">
+                  <option value="t-biochg">BioCharger - Chair 5</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 6">
+                  <option value="t-biochg">BioCharger - Chair 6</option>
+                </optgroup>
+                <optgroup label="NanoVi 1">
+                  <option value="gen:nanovi30min">NanoVi 30 min</option>
+                </optgroup>
+                <optgroup label="Hydrogen Inhalation">
+                  <option value="gen:hydrogen15min">Hydrogen 15 min</option>
+                  <option value="gen:hydrogen30min">Hydrogen 30 min</option>
+                  <option value="gen:hydrogen45min">Hydrogen 45 min</option>
+                </optgroup>
+                <optgroup label="BEMER">
+                  <option value="gen:bemer">BEMER</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="gen:treatmentinfusionsuite">Treatment Infusion Suite</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="t-biomodp">BioMod Pro</option>
+                  <option value="t-lymph">Lymph Star</option>
+                  <option value="t-biomodr">BioMod Recharge</option>
+                  <option value="t-minilym">Mini-Lymph Star</option>
+                  <option value="t-nmt">Neuro Muscular Therapy (NMT)</option>
+                  <option value="t-scenar">SCENAR</option>
+                </optgroup>
+                <optgroup label="Energetics/Diagnostic">
+                  <option value="gen:mead">MEAD</option>
+                </optgroup>
               </select>
             </div>
             <span class="l-sep" aria-hidden="true"></span>
@@ -4404,69 +4562,173 @@
               </select>
               <select class="field-select l-select wl-f" onchange="lWlFilter()" id="wl-f-sub"
                       aria-label="Subtype" style="min-width:170px">
-                <option value="">Every appointment subtype</option>
-                <option value="t-newpt">New patient</option>
-                <option value="t-npfu">New patient FU</option>
-                <option value="t-nptoc">New patient TOC</option>
-                <option value="t-fu">Follow Up</option>
-                <option value="t-prp">PRP</option>
-                <option value="t-tpi">TPI</option>
-                <option value="t-pelm">Pellet Males</option>
-                <option value="t-pelf">Pellet Females</option>
-                <option value="t-proloz">Prolozone</option>
-                <option value="t-micro">Microcurrent</option>
-                <option value="t-biochg">BioCharger</option>
-                <option value="t-lymph">LymphStar</option>
-                <option value="t-scenar">SCENAR</option>
-                <option value="t-minilym">Mini-LymphStar</option>
-                <option value="t-biomodp">BioMod Pro</option>
-                <option value="t-biomodr">BioMod Recharge</option>
-                <option value="t-nmt">NMT</option>
-                <option value="t-mead">MEAD</option>
-                <option value="t-meadre">MEAD ReAssessment</option>
-                <option value="t-mdl">MDL</option>
-                <option value="t-quest">Quest</option>
-                <option value="t-g6pd">G6PD</option>
-                <option value="t-igenex">iGenex</option>
-                <option value="t-diag">Diagnostics</option>
-                <option value="t-fpeie">FPE - IE</option>
-                <option value="t-fpefu">FPE F/U</option>
-                <option value="t-dcintx">DC IN - TX</option>
-                <option value="t-dctx">DC - TX</option>
-                <option value="t-lasereval">Laser Eval</option>
-                <option value="t-medifne">MediFNE</option>
-                <option value="t-pocrev">POC Review</option>
-                <option value="t-eboosafe">EBOO Safe</option>
-                <option value="t-ebootx">EBOO</option>
-                <option value="t-erchlas">Erchonia Laser</option>
-                <option value="t-erccemp">ErcCompEmp</option>
-                <option value="t-erccpt">ErcCompPt</option>
-                <option value="t-erccvip">ErcCompVIP</option>
-                <option value="t-erccref">ErcCompRef</option>
-                <option value="t-cell">Cellular Boost</option>
-                <option value="t-chel">Chelation</option>
-                <option value="t-cog">Cognitive Support</option>
-                <option value="t-iron">Core Iron Blend</option>
-                <option value="t-rest">Core Restore</option>
-                <option value="t-detox">Detox Prime</option>
-                <option value="t-ebooiv">Eboo Boost</option>
-                <option value="t-amino">Essential Aminos</option>
-                <option value="t-ff5">Foundational Flow 5</option>
-                <option value="t-ff10">Foundational Flow 10</option>
-                <option value="t-ff15">Foundational Flow 15</option>
-                <option value="t-ff20">Foundational Flow 20</option>
-                <option value="t-ff25">Foundational Flow 25</option>
-                <option value="t-ff50">Foundational Flow 50</option>
-                <option value="t-mast">Mast Cell</option>
-                <option value="t-mc15">Mega C 15g</option>
-                <option value="t-mc25">Mega C 25g</option>
-                <option value="t-mc50">Mega C 50g</option>
-                <option value="t-mc75">Mega C 75g</option>
-                <option value="t-mc100">Mega C 100g</option>
-                <option value="t-migraine">Migraine</option>
-                <option value="t-mito">Mito Boost</option>
-                <option value="t-minimb">Mini Mito Boost</option>
-                <option value="t-minimbc">Mini Mito Boost - Custom</option>
+                <option value="">Every subtype</option>
+                <optgroup label="Office Visit - 15 min">
+                  <option value="t-dctx">Chiropractic Visit</option>
+                </optgroup>
+                <optgroup label="Office Visit - 30 min">
+                  <option value="t-fu">Follow-Up</option>
+                  <option value="t-nptoc">Transfer of Care</option>
+                  <option value="t-npfu">Telemedicine</option>
+                  <option value="t-fpeie">FPE</option>
+                  <option value="t-medifne">Medicare FPE</option>
+                  <option value="t-fpefu">FPE FU</option>
+                  <option value="t-lasereval">Laser Eval</option>
+                  <option value="t-pocrev">POC Review</option>
+                </optgroup>
+                <optgroup label="Office Visit - 60 min">
+                  <option value="t-newpt">New Patient</option>
+                  <option value="t-npfu">New Patient F/U</option>
+                  <option value="gen:depthpsychology">Depth Psychology</option>
+                </optgroup>
+                <optgroup label="Procedure - 30 min">
+                  <option value="t-tpi">Trigger Point</option>
+                  <option value="t-proloz">Prolozone</option>
+                  <option value="t-prp">PRP</option>
+                  <option value="t-pelf">Female Pellet</option>
+                  <option value="t-pelm">Male Pellet</option>
+                </optgroup>
+                <optgroup label="Procedure - 60 min">
+                  <option value="t-micro">Acupuncture</option>
+                  <option value="t-micro">Microcurrent</option>
+                </optgroup>
+                <optgroup label="EBOO">
+                  <option value="t-ebootx">EBOO</option>
+                  <option value="t-eboosafe">EBOO SAFE</option>
+                  <option value="t-eboosafe">Isolation Appointment</option>
+                </optgroup>
+                <optgroup label="Infusion">
+                  <option value="t-ff5">Foundational Flow 5</option>
+                  <option value="t-ff10">Foundational Flow 10</option>
+                  <option value="t-ff15">Foundational Flow 15</option>
+                  <option value="t-ff20">Foundational Flow 20</option>
+                  <option value="t-ff25">Foundational Flow 25</option>
+                  <option value="t-ff50">Foundational Flow 50</option>
+                  <option value="t-cell">Cellular Boost</option>
+                  <option value="t-mast">Mast Cell</option>
+                  <option value="t-mast">Mast Cell - Benadryl Only</option>
+                  <option value="t-cog">Cognitive Support</option>
+                  <option value="t-iron">Core Iron Blend</option>
+                  <option value="t-rest">Core Restore</option>
+                  <option value="t-detox">Detox Prime</option>
+                  <option value="t-amino">Essential Amino</option>
+                  <option value="t-mc100">Mega C 100</option>
+                  <option value="t-mc15">Mega C 15</option>
+                  <option value="t-mc25">Mega C 25</option>
+                  <option value="t-mc50">Mega C 50</option>
+                  <option value="t-mc75">Mega C 75</option>
+                  <option value="t-minimbc">Mini Cust</option>
+                  <option value="t-minimb">Mini MB</option>
+                  <option value="t-mito">Mito Boost</option>
+                  <option value="t-ebooiv">EBOO Boost IV</option>
+                  <option value="t-quest">Quest Lab Draw</option>
+                  <option value="t-mdl">MDL</option>
+                  <option value="t-g6pd">G6PD</option>
+                </optgroup>
+                <optgroup label="Diagnostics">
+                  <option value="t-diag">Diagnostic Testing</option>
+                  <option value="t-diag">InBody</option>
+                </optgroup>
+                <optgroup label="MA Office Visit">
+                  <option value="gen:glpinjection">GLP Injection</option>
+                  <option value="gen:vitals">Vitals</option>
+                  <option value="gen:nasalswabs">Nasal Swabs</option>
+                  <option value="gen:ekg">EKG</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="gen:redlightbed">Red Light Bed</option>
+                  <option value="t-erchlas">Erchonia Handheld</option>
+                </optgroup>
+                <optgroup label="Erchonia Laser">
+                  <option value="t-erchlas">Head &amp; Cerebellum</option>
+                  <option value="t-erchlas">Shoulder</option>
+                  <option value="t-erchlas">Wrist/hand</option>
+                  <option value="t-erchlas">Knee</option>
+                  <option value="t-erchlas">Heel</option>
+                  <option value="t-erchlas">Neck</option>
+                  <option value="t-erchlas">Elbow</option>
+                  <option value="t-erchlas">Low Back</option>
+                  <option value="t-erchlas">Ankle/Foot</option>
+                  <option value="t-erchlas">Acute Pain</option>
+                  <option value="t-erchlas">Level 1 Brain</option>
+                  <option value="t-erchlas">Level 2 Brain</option>
+                  <option value="t-erchlas">Emotional Stress</option>
+                  <option value="t-erchlas">Sympathetic Calm</option>
+                  <option value="t-erchlas">Parasympathetic Facilitation</option>
+                  <option value="t-erchlas">Level 1 Gut</option>
+                  <option value="t-erchlas">Level 2 Gut</option>
+                  <option value="t-erchlas">Inflammation</option>
+                  <option value="t-erchlas">Parasites 1</option>
+                  <option value="t-erchlas">Parasites 2</option>
+                  <option value="t-erchlas">Lyme</option>
+                  <option value="t-erchlas">EBV</option>
+                  <option value="t-erchlas">Infection</option>
+                  <option value="t-erchlas">Digestion</option>
+                  <option value="t-erchlas">Indigestion</option>
+                  <option value="t-erchlas">Allergy</option>
+                  <option value="t-erchlas">Immune Enhance</option>
+                  <option value="t-erchlas">Hormone Balance</option>
+                  <option value="t-erchlas">Plantar Fasciitis</option>
+                  <option value="t-erchlas">Chronic Pain</option>
+                  <option value="t-erchlas">Lymphatic</option>
+                  <option value="t-erchlas">Weight Loss Trial</option>
+                  <option value="t-erchlas">Large Intestines</option>
+                  <option value="t-erchlas">Small Intestines</option>
+                  <option value="t-erchlas">General Musculoskeletal</option>
+                  <option value="t-erchlas">Neuro Inflammation</option>
+                </optgroup>
+                <optgroup label="ADA Nano Tub Room">
+                  <option value="gen:hydrogen">Hydrogen</option>
+                  <option value="gen:oxygen">Oxygen</option>
+                </optgroup>
+                <optgroup label="Salt Room - Chair 1">
+                  <option value="gen:guidedmeditation">Guided Meditation</option>
+                  <option value="gen:guidedbreathingexercises">Guided Breathing Exercises</option>
+                  <option value="gen:guidedrelaxation">Guided Relaxation</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 1">
+                  <option value="t-biochg">BioCharger - Chair 1</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 2">
+                  <option value="t-biochg">BioCharger - Chair 2</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 3">
+                  <option value="t-biochg">BioCharger - Chair 3</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 4">
+                  <option value="t-biochg">BioCharger - Chair 4</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 5">
+                  <option value="t-biochg">BioCharger - Chair 5</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 6">
+                  <option value="t-biochg">BioCharger - Chair 6</option>
+                </optgroup>
+                <optgroup label="NanoVi 1">
+                  <option value="gen:nanovi30min">NanoVi 30 min</option>
+                </optgroup>
+                <optgroup label="Hydrogen Inhalation">
+                  <option value="gen:hydrogen15min">Hydrogen 15 min</option>
+                  <option value="gen:hydrogen30min">Hydrogen 30 min</option>
+                  <option value="gen:hydrogen45min">Hydrogen 45 min</option>
+                </optgroup>
+                <optgroup label="BEMER">
+                  <option value="gen:bemer">BEMER</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="gen:treatmentinfusionsuite">Treatment Infusion Suite</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="t-biomodp">BioMod Pro</option>
+                  <option value="t-lymph">Lymph Star</option>
+                  <option value="t-biomodr">BioMod Recharge</option>
+                  <option value="t-minilym">Mini-Lymph Star</option>
+                  <option value="t-nmt">Neuro Muscular Therapy (NMT)</option>
+                  <option value="t-scenar">SCENAR</option>
+                </optgroup>
+                <optgroup label="Energetics/Diagnostic">
+                  <option value="gen:mead">MEAD</option>
+                </optgroup>
               </select>
             </div>
             <span class="l-sep" aria-hidden="true"></span>
@@ -4855,13 +5117,42 @@
             <div class="l-fl">
               <select class="field-select l-select blk-f" id="blk-f-res" onchange="lBlkFilter()"
                       aria-label="Resource" style="min-width:180px">
-                <option value="">Every resource</option>
-                <option value="prov">Providers</option>
-                <option value="dr">Dr. Drannikov</option>
-                <option value="bak">Dr. Bakman</option>
-                <option value="bro">Brooke</option>
-                <option value="iv">IV 1&ndash;4</option>
-                <option value="room">Rooms</option>
+                <option value="">Every column</option>
+                <optgroup label="Clinic">
+                  <option value="drdrannikov">Dr. Drannikov</option>
+                  <option value="mira">Mira</option>
+                  <option value="drbakman">Dr. Bakman</option>
+                  <option value="leighann">Leigh Ann</option>
+                  <option value="eboochair1">Eboo Chair 1</option>
+                  <option value="eboochair2">Eboo Chair 2</option>
+                </optgroup>
+                <optgroup label="Infusion">
+                  <option value="maofficevisit">MA Office Visit</option>
+                  <option value="mediciv">Medic IV</option>
+                  <option value="nurseiv1">Nurse IV 1</option>
+                  <option value="nurseiv2">Nurse IV 2</option>
+                  <option value="labdraw">Lab Draw</option>
+                  <option value="diagnostictesting">Diagnostic Testing</option>
+                  <option value="redlight">Red Light</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="erchonialaser">Erchonia Laser</option>
+                  <option value="erchoniahandheld">Erchonia Handheld</option>
+                  <option value="adananotubroom">ADA Nano Tub Room</option>
+                  <option value="nanotubroom">Nano Tub Room</option>
+                  <option value="saltroom">Salt Room</option>
+                  <option value="biocharger">BioCharger</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="nanovi1">NanoVi 1</option>
+                  <option value="nanovi2">NanoVi 2</option>
+                  <option value="hydrogeninhalation">Hydrogen Inhalation</option>
+                  <option value="bemer">BEMER</option>
+                  <option value="rife">Rife</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="energetics">Energetics</option>
+                </optgroup>
               </select>
             </div>
             <span class="l-sep" aria-hidden="true"></span>
@@ -4882,69 +5173,173 @@
               </select>
               <select class="field-select l-select blk-f" id="blk-f-sub" onchange="lBlkFilter()"
                       aria-label="Subtype" style="min-width:170px">
-                <option value="">Every appointment subtype</option>
-                <option value="t-newpt">New patient</option>
-                <option value="t-npfu">New patient FU</option>
-                <option value="t-nptoc">New patient TOC</option>
-                <option value="t-fu">Follow Up</option>
-                <option value="t-prp">PRP</option>
-                <option value="t-tpi">TPI</option>
-                <option value="t-pelm">Pellet Males</option>
-                <option value="t-pelf">Pellet Females</option>
-                <option value="t-proloz">Prolozone</option>
-                <option value="t-micro">Microcurrent</option>
-                <option value="t-biochg">BioCharger</option>
-                <option value="t-lymph">LymphStar</option>
-                <option value="t-scenar">SCENAR</option>
-                <option value="t-minilym">Mini-LymphStar</option>
-                <option value="t-biomodp">BioMod Pro</option>
-                <option value="t-biomodr">BioMod Recharge</option>
-                <option value="t-nmt">NMT</option>
-                <option value="t-mead">MEAD</option>
-                <option value="t-meadre">MEAD ReAssessment</option>
-                <option value="t-mdl">MDL</option>
-                <option value="t-quest">Quest</option>
-                <option value="t-g6pd">G6PD</option>
-                <option value="t-igenex">iGenex</option>
-                <option value="t-diag">Diagnostics</option>
-                <option value="t-fpeie">FPE - IE</option>
-                <option value="t-fpefu">FPE F/U</option>
-                <option value="t-dcintx">DC IN - TX</option>
-                <option value="t-dctx">DC - TX</option>
-                <option value="t-lasereval">Laser Eval</option>
-                <option value="t-medifne">MediFNE</option>
-                <option value="t-pocrev">POC Review</option>
-                <option value="t-eboosafe">EBOO Safe</option>
-                <option value="t-ebootx">EBOO</option>
-                <option value="t-erchlas">Erchonia Laser</option>
-                <option value="t-erccemp">ErcCompEmp</option>
-                <option value="t-erccpt">ErcCompPt</option>
-                <option value="t-erccvip">ErcCompVIP</option>
-                <option value="t-erccref">ErcCompRef</option>
-                <option value="t-cell">Cellular Boost</option>
-                <option value="t-chel">Chelation</option>
-                <option value="t-cog">Cognitive Support</option>
-                <option value="t-iron">Core Iron Blend</option>
-                <option value="t-rest">Core Restore</option>
-                <option value="t-detox">Detox Prime</option>
-                <option value="t-ebooiv">Eboo Boost</option>
-                <option value="t-amino">Essential Aminos</option>
-                <option value="t-ff5">Foundational Flow 5</option>
-                <option value="t-ff10">Foundational Flow 10</option>
-                <option value="t-ff15">Foundational Flow 15</option>
-                <option value="t-ff20">Foundational Flow 20</option>
-                <option value="t-ff25">Foundational Flow 25</option>
-                <option value="t-ff50">Foundational Flow 50</option>
-                <option value="t-mast">Mast Cell</option>
-                <option value="t-mc15">Mega C 15g</option>
-                <option value="t-mc25">Mega C 25g</option>
-                <option value="t-mc50">Mega C 50g</option>
-                <option value="t-mc75">Mega C 75g</option>
-                <option value="t-mc100">Mega C 100g</option>
-                <option value="t-migraine">Migraine</option>
-                <option value="t-mito">Mito Boost</option>
-                <option value="t-minimb">Mini Mito Boost</option>
-                <option value="t-minimbc">Mini Mito Boost - Custom</option>
+                <option value="">Every subtype</option>
+                <optgroup label="Office Visit - 15 min">
+                  <option value="t-dctx">Chiropractic Visit</option>
+                </optgroup>
+                <optgroup label="Office Visit - 30 min">
+                  <option value="t-fu">Follow-Up</option>
+                  <option value="t-nptoc">Transfer of Care</option>
+                  <option value="t-npfu">Telemedicine</option>
+                  <option value="t-fpeie">FPE</option>
+                  <option value="t-medifne">Medicare FPE</option>
+                  <option value="t-fpefu">FPE FU</option>
+                  <option value="t-lasereval">Laser Eval</option>
+                  <option value="t-pocrev">POC Review</option>
+                </optgroup>
+                <optgroup label="Office Visit - 60 min">
+                  <option value="t-newpt">New Patient</option>
+                  <option value="t-npfu">New Patient F/U</option>
+                  <option value="gen:depthpsychology">Depth Psychology</option>
+                </optgroup>
+                <optgroup label="Procedure - 30 min">
+                  <option value="t-tpi">Trigger Point</option>
+                  <option value="t-proloz">Prolozone</option>
+                  <option value="t-prp">PRP</option>
+                  <option value="t-pelf">Female Pellet</option>
+                  <option value="t-pelm">Male Pellet</option>
+                </optgroup>
+                <optgroup label="Procedure - 60 min">
+                  <option value="t-micro">Acupuncture</option>
+                  <option value="t-micro">Microcurrent</option>
+                </optgroup>
+                <optgroup label="EBOO">
+                  <option value="t-ebootx">EBOO</option>
+                  <option value="t-eboosafe">EBOO SAFE</option>
+                  <option value="t-eboosafe">Isolation Appointment</option>
+                </optgroup>
+                <optgroup label="Infusion">
+                  <option value="t-ff5">Foundational Flow 5</option>
+                  <option value="t-ff10">Foundational Flow 10</option>
+                  <option value="t-ff15">Foundational Flow 15</option>
+                  <option value="t-ff20">Foundational Flow 20</option>
+                  <option value="t-ff25">Foundational Flow 25</option>
+                  <option value="t-ff50">Foundational Flow 50</option>
+                  <option value="t-cell">Cellular Boost</option>
+                  <option value="t-mast">Mast Cell</option>
+                  <option value="t-mast">Mast Cell - Benadryl Only</option>
+                  <option value="t-cog">Cognitive Support</option>
+                  <option value="t-iron">Core Iron Blend</option>
+                  <option value="t-rest">Core Restore</option>
+                  <option value="t-detox">Detox Prime</option>
+                  <option value="t-amino">Essential Amino</option>
+                  <option value="t-mc100">Mega C 100</option>
+                  <option value="t-mc15">Mega C 15</option>
+                  <option value="t-mc25">Mega C 25</option>
+                  <option value="t-mc50">Mega C 50</option>
+                  <option value="t-mc75">Mega C 75</option>
+                  <option value="t-minimbc">Mini Cust</option>
+                  <option value="t-minimb">Mini MB</option>
+                  <option value="t-mito">Mito Boost</option>
+                  <option value="t-ebooiv">EBOO Boost IV</option>
+                  <option value="t-quest">Quest Lab Draw</option>
+                  <option value="t-mdl">MDL</option>
+                  <option value="t-g6pd">G6PD</option>
+                </optgroup>
+                <optgroup label="Diagnostics">
+                  <option value="t-diag">Diagnostic Testing</option>
+                  <option value="t-diag">InBody</option>
+                </optgroup>
+                <optgroup label="MA Office Visit">
+                  <option value="gen:glpinjection">GLP Injection</option>
+                  <option value="gen:vitals">Vitals</option>
+                  <option value="gen:nasalswabs">Nasal Swabs</option>
+                  <option value="gen:ekg">EKG</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="gen:redlightbed">Red Light Bed</option>
+                  <option value="t-erchlas">Erchonia Handheld</option>
+                </optgroup>
+                <optgroup label="Erchonia Laser">
+                  <option value="t-erchlas">Head &amp; Cerebellum</option>
+                  <option value="t-erchlas">Shoulder</option>
+                  <option value="t-erchlas">Wrist/hand</option>
+                  <option value="t-erchlas">Knee</option>
+                  <option value="t-erchlas">Heel</option>
+                  <option value="t-erchlas">Neck</option>
+                  <option value="t-erchlas">Elbow</option>
+                  <option value="t-erchlas">Low Back</option>
+                  <option value="t-erchlas">Ankle/Foot</option>
+                  <option value="t-erchlas">Acute Pain</option>
+                  <option value="t-erchlas">Level 1 Brain</option>
+                  <option value="t-erchlas">Level 2 Brain</option>
+                  <option value="t-erchlas">Emotional Stress</option>
+                  <option value="t-erchlas">Sympathetic Calm</option>
+                  <option value="t-erchlas">Parasympathetic Facilitation</option>
+                  <option value="t-erchlas">Level 1 Gut</option>
+                  <option value="t-erchlas">Level 2 Gut</option>
+                  <option value="t-erchlas">Inflammation</option>
+                  <option value="t-erchlas">Parasites 1</option>
+                  <option value="t-erchlas">Parasites 2</option>
+                  <option value="t-erchlas">Lyme</option>
+                  <option value="t-erchlas">EBV</option>
+                  <option value="t-erchlas">Infection</option>
+                  <option value="t-erchlas">Digestion</option>
+                  <option value="t-erchlas">Indigestion</option>
+                  <option value="t-erchlas">Allergy</option>
+                  <option value="t-erchlas">Immune Enhance</option>
+                  <option value="t-erchlas">Hormone Balance</option>
+                  <option value="t-erchlas">Plantar Fasciitis</option>
+                  <option value="t-erchlas">Chronic Pain</option>
+                  <option value="t-erchlas">Lymphatic</option>
+                  <option value="t-erchlas">Weight Loss Trial</option>
+                  <option value="t-erchlas">Large Intestines</option>
+                  <option value="t-erchlas">Small Intestines</option>
+                  <option value="t-erchlas">General Musculoskeletal</option>
+                  <option value="t-erchlas">Neuro Inflammation</option>
+                </optgroup>
+                <optgroup label="ADA Nano Tub Room">
+                  <option value="gen:hydrogen">Hydrogen</option>
+                  <option value="gen:oxygen">Oxygen</option>
+                </optgroup>
+                <optgroup label="Salt Room - Chair 1">
+                  <option value="gen:guidedmeditation">Guided Meditation</option>
+                  <option value="gen:guidedbreathingexercises">Guided Breathing Exercises</option>
+                  <option value="gen:guidedrelaxation">Guided Relaxation</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 1">
+                  <option value="t-biochg">BioCharger - Chair 1</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 2">
+                  <option value="t-biochg">BioCharger - Chair 2</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 3">
+                  <option value="t-biochg">BioCharger - Chair 3</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 4">
+                  <option value="t-biochg">BioCharger - Chair 4</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 5">
+                  <option value="t-biochg">BioCharger - Chair 5</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 6">
+                  <option value="t-biochg">BioCharger - Chair 6</option>
+                </optgroup>
+                <optgroup label="NanoVi 1">
+                  <option value="gen:nanovi30min">NanoVi 30 min</option>
+                </optgroup>
+                <optgroup label="Hydrogen Inhalation">
+                  <option value="gen:hydrogen15min">Hydrogen 15 min</option>
+                  <option value="gen:hydrogen30min">Hydrogen 30 min</option>
+                  <option value="gen:hydrogen45min">Hydrogen 45 min</option>
+                </optgroup>
+                <optgroup label="BEMER">
+                  <option value="gen:bemer">BEMER</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="gen:treatmentinfusionsuite">Treatment Infusion Suite</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="t-biomodp">BioMod Pro</option>
+                  <option value="t-lymph">Lymph Star</option>
+                  <option value="t-biomodr">BioMod Recharge</option>
+                  <option value="t-minilym">Mini-Lymph Star</option>
+                  <option value="t-nmt">Neuro Muscular Therapy (NMT)</option>
+                  <option value="t-scenar">SCENAR</option>
+                </optgroup>
+                <optgroup label="Energetics/Diagnostic">
+                  <option value="gen:mead">MEAD</option>
+                </optgroup>
               </select>
             </div>
             <span class="l-sep" aria-hidden="true"></span>
@@ -5236,48 +5631,23 @@
               style="float:right;font-weight:400;font-size:11px">Set up types &amp; subtypes &rsaquo;</a></div>
             <div class="grid-2">
               <div class="field">
-                <label class="field-label">Type</label>
-                <select class="field-select" id="l-bk-ty" onchange="lBkTy()" aria-label="Type">
-                  <option value="visit">Office Visit</option>
-                  <option value="proc">Procedure</option>
-                  <option value="energ">Energetics</option>
-                  <option value="lab">Labs</option>
-                  <option value="diag">Diagnostics</option>
-                  <option value="fpe">FPE</option>
-                  <option value="chiro">Chiro</option>
-                  <option value="eboo">EBOO</option>
-                  <option value="laser">Laser</option>
-                  <option value="iv" selected>IV</option>
+                <label class="field-label" for="l-bk-dept">Department</label>
+                <select class="field-select" id="l-bk-dept" onchange="lBkDept()" aria-label="Department">
+                  <option value="">Any department</option>
+                  <option value="Clinic">Clinic</option>
+                  <option value="Infusion">Infusion</option>
+                  <option value="Treatment">Treatment</option>
+                  <option value="Treatment Infusion Suite">Treatment Infusion Suite</option>
+                  <option value="Energetics">Energetics</option>
                 </select>
               </div>
               <div class="field">
-                <label class="field-label" for="l-bk-type">Subtype &mdash; follows the type</label>
-                <select class="field-select" id="l-bk-type" onchange="lTypeChange()" aria-label="Subtype &mdash; follows the type">
-                  <option value="cell" selected>Cellular Boost</option>
-                  <option value="chel">Chelation</option>
-                  <option value="cog">Cognitive Support</option>
-                  <option value="iron">Core Iron Blend</option>
-                  <option value="rest">Core Restore</option>
-                  <option value="detox">Detox Prime</option>
-                  <option value="ebooiv">Eboo Boost</option>
-                  <option value="amino">Essential Aminos</option>
-                  <option value="ff5">Foundational Flow 5</option>
-                  <option value="ff10">Foundational Flow 10 &middot; 1 h</option>
-                  <option value="ff15">Foundational Flow 15</option>
-                  <option value="ff20">Foundational Flow 20</option>
-                  <option value="ff25">Foundational Flow 25</option>
-                  <option value="ff50">Foundational Flow 50</option>
-                  <option value="mast">Mast Cell</option>
-                  <option value="mc15">Mega C 15g</option>
-                  <option value="mc25">Mega C 25g &middot; 2.5 h</option>
-                  <option value="mc50">Mega C 50g &middot; 2 h</option>
-                  <option value="mc75">Mega C 75g</option>
-                  <option value="mc100">Mega C 100g &middot; 3 h</option>
-                  <option value="migraine">Migraine</option>
-                  <option value="mito">Mito Boost</option>
-                  <option value="minimb">Mini Mito Boost &middot; 30 min</option>
-                  <option value="minimbc">Mini Mito Boost - Custom</option>
-                </select>
+                <label class="field-label" for="l-bk-ty">Appointment type</label>
+                <select class="field-select" id="l-bk-ty" onchange="lBkTy()" aria-label="Appointment type"></select>
+              </div>
+              <div class="field">
+                <label class="field-label" for="l-bk-type">Sub type &mdash; follows the appointment type</label>
+                <select class="field-select" id="l-bk-type" onchange="lTypeChange()" aria-label="Sub type — follows the appointment type"></select>
               </div>
             </div>
             <div class="prov" id="l-bk-order"><span>&nbsp;</span></div>
@@ -5478,7 +5848,7 @@
           <div class="card">
             <div class="card-title">Resource and time</div>
             <div class="field">
-              <label class="field-label">Resource</label>
+              <label class="field-label">Column Name/Resource</label>
               <select class="field-select" id="l-bk-res" onchange="lBook()" aria-label="Resource">
                 <optgroup label="Clinic">
                   <option value="drdrannikov" data-kind="Provider" data-dept="Clinic" data-orgs="Office Visit - 30 min|Office Visit - 60 min|Procedure - 30 min|Procedure - 60 min" data-takes="Office Visit - 30 min|Office Visit - 60 min|Procedure - 30 min|Procedure - 60 min|Follow-Up|Transfer of Care|Telemedicine|New Patient|New Patient F/U|Trigger Point|Prolozone|PRP|Female Pellet|Male Pellet|Acupuncture|Microcurrent">Dr. Drannikov</option>
@@ -5649,89 +6019,173 @@
             <div class="grid-2">
               <div class="field"><label class="field-lbl" for="l-ro-sub">Treatment</label>
                 <select class="field-select" id="l-ro-sub" aria-label="Treatment">
-                    <optgroup label="Office Visit">
-                      <option value="newpt">New patient</option>
-                      <option value="npfu">New patient FU</option>
-                      <option value="nptoc">New patient TOC</option>
-                      <option value="fu">Follow Up</option>
-                    </optgroup>
-                    <optgroup label="Procedure">
-                      <option value="prp">PRP</option>
-                      <option value="tpi">TPI</option>
-                      <option value="pelm">Pellet Males</option>
-                      <option value="pelf">Pellet Females</option>
-                      <option value="proloz">Prolozone</option>
-                      <option value="micro">Microcurrent</option>
-                    </optgroup>
-                    <optgroup label="Energetics">
-                      <option value="biochg">BioCharger</option>
-                      <option value="lymph">LymphStar</option>
-                      <option value="scenar">SCENAR</option>
-                      <option value="minilym">Mini-LymphStar</option>
-                      <option value="biomodp">BioMod Pro</option>
-                      <option value="biomodr">BioMod Recharge</option>
-                      <option value="nmt">NMT</option>
-                      <option value="mead">MEAD</option>
-                      <option value="meadre">MEAD ReAssessment</option>
-                    </optgroup>
-                    <optgroup label="Labs">
-                      <option value="mdl">MDL</option>
-                      <option value="quest">Quest</option>
-                      <option value="g6pd">G6PD</option>
-                      <option value="igenex">iGenex</option>
-                    </optgroup>
-                    <optgroup label="Diagnostics">
-                      <option value="diag">Diagnostics</option>
-                    </optgroup>
-                    <optgroup label="FPE">
-                      <option value="fpeie">FPE - IE</option>
-                      <option value="fpefu">FPE F/U</option>
-                    </optgroup>
-                    <optgroup label="Chiro">
-                      <option value="dcintx">DC IN - TX</option>
-                      <option value="dctx">DC - TX</option>
-                      <option value="lasereval">Laser Eval</option>
-                      <option value="medifne">MediFNE</option>
-                      <option value="pocrev">POC Review</option>
-                    </optgroup>
-                    <optgroup label="EBOO">
-                      <option value="eboosafe">EBOO Safe</option>
-                      <option value="ebootx">EBOO</option>
-                    </optgroup>
-                    <optgroup label="Laser">
-                      <option value="erchlas">Erchonia Laser</option>
-                      <option value="erccemp">ErcCompEmp</option>
-                      <option value="erccpt">ErcCompPt</option>
-                      <option value="erccvip">ErcCompVIP</option>
-                      <option value="erccref">ErcCompRef</option>
-                    </optgroup>
-                    <optgroup label="IV">
-                      <option value="cell">Cellular Boost</option>
-                      <option value="chel">Chelation</option>
-                      <option value="cog">Cognitive Support</option>
-                      <option value="iron">Core Iron Blend</option>
-                      <option value="rest">Core Restore</option>
-                      <option value="detox">Detox Prime</option>
-                      <option value="ebooiv">Eboo Boost</option>
-                      <option value="amino">Essential Aminos</option>
-                      <option value="ff5">Foundational Flow 5</option>
-                      <option value="ff10">Foundational Flow 10</option>
-                      <option value="ff15">Foundational Flow 15</option>
-                      <option value="ff20">Foundational Flow 20</option>
-                      <option value="ff25">Foundational Flow 25</option>
-                      <option value="ff50">Foundational Flow 50</option>
-                      <option value="mast">Mast Cell</option>
-                      <option value="mc15">Mega C 15g</option>
-                      <option value="mc25">Mega C 25g</option>
-                      <option value="mc50">Mega C 50g</option>
-                      <option value="mc75">Mega C 75g</option>
-                      <option value="mc100">Mega C 100g</option>
-                      <option value="migraine">Migraine</option>
-                      <option value="mito">Mito Boost</option>
-                      <option value="minimb">Mini Mito Boost</option>
-                      <option value="minimbc">Mini Mito Boost - Custom</option>
-                    </optgroup>
-                </select></div>
+                <optgroup label="Office Visit - 15 min">
+                  <option value="dctx">Chiropractic Visit</option>
+                </optgroup>
+                <optgroup label="Office Visit - 30 min">
+                  <option value="fu">Follow-Up</option>
+                  <option value="nptoc">Transfer of Care</option>
+                  <option value="npfu">Telemedicine</option>
+                  <option value="fpeie">FPE</option>
+                  <option value="medifne">Medicare FPE</option>
+                  <option value="fpefu">FPE FU</option>
+                  <option value="lasereval">Laser Eval</option>
+                  <option value="pocrev">POC Review</option>
+                </optgroup>
+                <optgroup label="Office Visit - 60 min">
+                  <option value="newpt">New Patient</option>
+                  <option value="npfu">New Patient F/U</option>
+                  <option value="gen:depthpsychology">Depth Psychology</option>
+                </optgroup>
+                <optgroup label="Procedure - 30 min">
+                  <option value="tpi">Trigger Point</option>
+                  <option value="proloz">Prolozone</option>
+                  <option value="prp">PRP</option>
+                  <option value="pelf">Female Pellet</option>
+                  <option value="pelm">Male Pellet</option>
+                </optgroup>
+                <optgroup label="Procedure - 60 min">
+                  <option value="micro">Acupuncture</option>
+                  <option value="micro">Microcurrent</option>
+                </optgroup>
+                <optgroup label="EBOO">
+                  <option value="ebootx">EBOO</option>
+                  <option value="eboosafe">EBOO SAFE</option>
+                  <option value="eboosafe">Isolation Appointment</option>
+                </optgroup>
+                <optgroup label="Infusion">
+                  <option value="ff5">Foundational Flow 5</option>
+                  <option value="ff10">Foundational Flow 10</option>
+                  <option value="ff15">Foundational Flow 15</option>
+                  <option value="ff20">Foundational Flow 20</option>
+                  <option value="ff25">Foundational Flow 25</option>
+                  <option value="ff50">Foundational Flow 50</option>
+                  <option value="cell">Cellular Boost</option>
+                  <option value="mast">Mast Cell</option>
+                  <option value="mast">Mast Cell - Benadryl Only</option>
+                  <option value="cog">Cognitive Support</option>
+                  <option value="iron">Core Iron Blend</option>
+                  <option value="rest">Core Restore</option>
+                  <option value="detox">Detox Prime</option>
+                  <option value="amino">Essential Amino</option>
+                  <option value="mc100">Mega C 100</option>
+                  <option value="mc15">Mega C 15</option>
+                  <option value="mc25">Mega C 25</option>
+                  <option value="mc50">Mega C 50</option>
+                  <option value="mc75">Mega C 75</option>
+                  <option value="minimbc">Mini Cust</option>
+                  <option value="minimb">Mini MB</option>
+                  <option value="mito">Mito Boost</option>
+                  <option value="ebooiv">EBOO Boost IV</option>
+                  <option value="quest">Quest Lab Draw</option>
+                  <option value="mdl">MDL</option>
+                  <option value="g6pd">G6PD</option>
+                </optgroup>
+                <optgroup label="Diagnostics">
+                  <option value="diag">Diagnostic Testing</option>
+                  <option value="diag">InBody</option>
+                </optgroup>
+                <optgroup label="MA Office Visit">
+                  <option value="gen:glpinjection">GLP Injection</option>
+                  <option value="gen:vitals">Vitals</option>
+                  <option value="gen:nasalswabs">Nasal Swabs</option>
+                  <option value="gen:ekg">EKG</option>
+                </optgroup>
+                <optgroup label="Treatment">
+                  <option value="gen:redlightbed">Red Light Bed</option>
+                  <option value="erchlas">Erchonia Handheld</option>
+                </optgroup>
+                <optgroup label="Erchonia Laser">
+                  <option value="erchlas">Head &amp; Cerebellum</option>
+                  <option value="erchlas">Shoulder</option>
+                  <option value="erchlas">Wrist/hand</option>
+                  <option value="erchlas">Knee</option>
+                  <option value="erchlas">Heel</option>
+                  <option value="erchlas">Neck</option>
+                  <option value="erchlas">Elbow</option>
+                  <option value="erchlas">Low Back</option>
+                  <option value="erchlas">Ankle/Foot</option>
+                  <option value="erchlas">Acute Pain</option>
+                  <option value="erchlas">Level 1 Brain</option>
+                  <option value="erchlas">Level 2 Brain</option>
+                  <option value="erchlas">Emotional Stress</option>
+                  <option value="erchlas">Sympathetic Calm</option>
+                  <option value="erchlas">Parasympathetic Facilitation</option>
+                  <option value="erchlas">Level 1 Gut</option>
+                  <option value="erchlas">Level 2 Gut</option>
+                  <option value="erchlas">Inflammation</option>
+                  <option value="erchlas">Parasites 1</option>
+                  <option value="erchlas">Parasites 2</option>
+                  <option value="erchlas">Lyme</option>
+                  <option value="erchlas">EBV</option>
+                  <option value="erchlas">Infection</option>
+                  <option value="erchlas">Digestion</option>
+                  <option value="erchlas">Indigestion</option>
+                  <option value="erchlas">Allergy</option>
+                  <option value="erchlas">Immune Enhance</option>
+                  <option value="erchlas">Hormone Balance</option>
+                  <option value="erchlas">Plantar Fasciitis</option>
+                  <option value="erchlas">Chronic Pain</option>
+                  <option value="erchlas">Lymphatic</option>
+                  <option value="erchlas">Weight Loss Trial</option>
+                  <option value="erchlas">Large Intestines</option>
+                  <option value="erchlas">Small Intestines</option>
+                  <option value="erchlas">General Musculoskeletal</option>
+                  <option value="erchlas">Neuro Inflammation</option>
+                </optgroup>
+                <optgroup label="ADA Nano Tub Room">
+                  <option value="gen:hydrogen">Hydrogen</option>
+                  <option value="gen:oxygen">Oxygen</option>
+                </optgroup>
+                <optgroup label="Salt Room - Chair 1">
+                  <option value="gen:guidedmeditation">Guided Meditation</option>
+                  <option value="gen:guidedbreathingexercises">Guided Breathing Exercises</option>
+                  <option value="gen:guidedrelaxation">Guided Relaxation</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 1">
+                  <option value="biochg">BioCharger - Chair 1</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 2">
+                  <option value="biochg">BioCharger - Chair 2</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 3">
+                  <option value="biochg">BioCharger - Chair 3</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 4">
+                  <option value="biochg">BioCharger - Chair 4</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 5">
+                  <option value="biochg">BioCharger - Chair 5</option>
+                </optgroup>
+                <optgroup label="BioCharger - Chair 6">
+                  <option value="biochg">BioCharger - Chair 6</option>
+                </optgroup>
+                <optgroup label="NanoVi 1">
+                  <option value="gen:nanovi30min">NanoVi 30 min</option>
+                </optgroup>
+                <optgroup label="Hydrogen Inhalation">
+                  <option value="gen:hydrogen15min">Hydrogen 15 min</option>
+                  <option value="gen:hydrogen30min">Hydrogen 30 min</option>
+                  <option value="gen:hydrogen45min">Hydrogen 45 min</option>
+                </optgroup>
+                <optgroup label="BEMER">
+                  <option value="gen:bemer">BEMER</option>
+                </optgroup>
+                <optgroup label="Treatment Infusion Suite">
+                  <option value="gen:treatmentinfusionsuite">Treatment Infusion Suite</option>
+                </optgroup>
+                <optgroup label="Energetics">
+                  <option value="biomodp">BioMod Pro</option>
+                  <option value="lymph">Lymph Star</option>
+                  <option value="biomodr">BioMod Recharge</option>
+                  <option value="minilym">Mini-Lymph Star</option>
+                  <option value="nmt">Neuro Muscular Therapy (NMT)</option>
+                  <option value="scenar">SCENAR</option>
+                </optgroup>
+                <optgroup label="Energetics/Diagnostic">
+                  <option value="gen:mead">MEAD</option>
+                </optgroup>
+              </select></div>
               <div class="field"><label class="field-lbl" for="l-ro-who">Ask</label>
                 <select class="field-select" id="l-ro-who" aria-label="Ask">
                   <option>Dr. Drannikov &mdash; her usual provider</option>
@@ -6414,20 +6868,18 @@
 
       <div class="step-lbl"><span>2</span> What they need</div>
       <div class="grid-3">
-        <div class="field"><label class="field-lbl" for="l-wl-ty">Appointment type</label>
-          <select class="field-select" id="l-wl-ty" onchange="lWlTy()">
-            <option value="visit">Office Visit</option>
-            <option value="proc">Procedure</option>
-            <option value="energ">Energetics</option>
-            <option value="lab">Labs</option>
-            <option value="diag">Diagnostics</option>
-            <option value="fpe">FPE</option>
-            <option value="chiro">Chiro</option>
-            <option value="eboo">EBOO</option>
-            <option value="laser">Laser</option>
-            <option value="iv" selected>IV</option>
+        <div class="field"><label class="field-lbl" for="l-wl-dept">Department</label>
+          <select class="field-select" id="l-wl-dept" onchange="lWlDept()">
+            <option value="">Any department</option>
+            <option value="Clinic">Clinic</option>
+            <option value="Infusion">Infusion</option>
+            <option value="Treatment">Treatment</option>
+            <option value="Treatment Infusion Suite">Treatment Infusion Suite</option>
+            <option value="Energetics">Energetics</option>
           </select></div>
-        <div class="field"><label class="field-lbl" for="l-wl-sub">Appointment subtype</label>
+        <div class="field"><label class="field-lbl" for="l-wl-ty">Appointment type</label>
+          <select class="field-select" id="l-wl-ty" onchange="lWlTy()"></select></div>
+        <div class="field"><label class="field-lbl" for="l-wl-sub">Sub type</label>
           <select class="field-select" id="l-wl-sub" onchange="lWlProto()"></select></div>
         <div class="field"><label class="field-lbl" for="l-wl-res">Resource</label>
           <select class="field-select" id="l-wl-res"></select>
@@ -6507,79 +6959,148 @@
               <span class="field-help" id="l-bm-picked" style="margin:0">Nothing picked &mdash; it would refuse everything</span>
             </div>
             <div class="msel-inline-opts">
-                <div class="msel-group" data-ty-of="ty-visit"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit"><span class="msel-group-lbl">Office Visit</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-newpt" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient"><i class="rail-sw t-newpt"></i>New patient</label>
-                <label class="msel-opt bm-sub" data-sub="t-npfu" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient FU"><i class="rail-sw t-npfu"></i>New patient FU</label>
-                <label class="msel-opt bm-sub" data-sub="t-nptoc" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="New patient TOC"><i class="rail-sw t-nptoc"></i>New patient TOC</label>
-                <label class="msel-opt bm-sub" data-sub="t-fu" data-ty-of="ty-visit"><input type="checkbox" onchange="lBmCount()" aria-label="Follow Up"><i class="rail-sw t-fu"></i>Follow Up</label>
-                <div class="msel-group" data-ty-of="ty-proc"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Procedure"><span class="msel-group-lbl">Procedure</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-prp" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="PRP"><i class="rail-sw t-prp"></i>PRP</label>
-                <label class="msel-opt bm-sub" data-sub="t-tpi" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="TPI"><i class="rail-sw t-tpi"></i>TPI</label>
-                <label class="msel-opt bm-sub" data-sub="t-pelm" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Pellet Males"><i class="rail-sw t-pelm"></i>Pellet Males</label>
-                <label class="msel-opt bm-sub" data-sub="t-pelf" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Pellet Females"><i class="rail-sw t-pelf"></i>Pellet Females</label>
-                <label class="msel-opt bm-sub" data-sub="t-proloz" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Prolozone"><i class="rail-sw t-proloz"></i>Prolozone</label>
-                <label class="msel-opt bm-sub" data-sub="t-micro" data-ty-of="ty-proc"><input type="checkbox" onchange="lBmCount()" aria-label="Microcurrent"><i class="rail-sw t-micro"></i>Microcurrent</label>
-                <div class="msel-group" data-ty-of="ty-energ"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics"><span class="msel-group-lbl">Energetics</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger"><i class="rail-sw t-biochg"></i>BioCharger</label>
-                <label class="msel-opt bm-sub" data-sub="t-lymph" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="LymphStar"><i class="rail-sw t-lymph"></i>LymphStar</label>
-                <label class="msel-opt bm-sub" data-sub="t-scenar" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="SCENAR"><i class="rail-sw t-scenar"></i>SCENAR</label>
-                <label class="msel-opt bm-sub" data-sub="t-minilym" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="Mini-LymphStar"><i class="rail-sw t-minilym"></i>Mini-LymphStar</label>
-                <label class="msel-opt bm-sub" data-sub="t-biomodp" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioMod Pro"><i class="rail-sw t-biomodp"></i>BioMod Pro</label>
-                <label class="msel-opt bm-sub" data-sub="t-biomodr" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="BioMod Recharge"><i class="rail-sw t-biomodr"></i>BioMod Recharge</label>
-                <label class="msel-opt bm-sub" data-sub="t-nmt" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="NMT"><i class="rail-sw t-nmt"></i>NMT</label>
-                <label class="msel-opt bm-sub" data-sub="t-mead" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
-                <label class="msel-opt bm-sub" data-sub="t-meadre" data-ty-of="ty-energ"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD ReAssessment"><i class="rail-sw t-meadre"></i>MEAD ReAssessment</label>
-                <div class="msel-group" data-ty-of="ty-lab"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Labs"><span class="msel-group-lbl">Labs</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-mdl" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
-                <label class="msel-opt bm-sub" data-sub="t-quest" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="Quest"><i class="rail-sw t-quest"></i>Quest</label>
-                <label class="msel-opt bm-sub" data-sub="t-g6pd" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
-                <label class="msel-opt bm-sub" data-sub="t-igenex" data-ty-of="ty-lab"><input type="checkbox" onchange="lBmCount()" aria-label="iGenex"><i class="rail-sw t-igenex"></i>iGenex</label>
-                <div class="msel-group" data-ty-of="ty-diag"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Diagnostics"><span class="msel-group-lbl">Diagnostics</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-diag" data-ty-of="ty-diag"><input type="checkbox" onchange="lBmCount()" aria-label="Diagnostics"><i class="rail-sw t-diag"></i>Diagnostics</label>
-                <div class="msel-group" data-ty-of="ty-fpe"><input type="checkbox" class="msel-group-cb" aria-label="Select all in FPE"><span class="msel-group-lbl">FPE</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-fpeie" data-ty-of="ty-fpe"><input type="checkbox" onchange="lBmCount()" aria-label="FPE - IE"><i class="rail-sw t-fpeie"></i>FPE - IE</label>
-                <label class="msel-opt bm-sub" data-sub="t-fpefu" data-ty-of="ty-fpe"><input type="checkbox" onchange="lBmCount()" aria-label="FPE F/U"><i class="rail-sw t-fpefu"></i>FPE F/U</label>
-                <div class="msel-group" data-ty-of="ty-chiro"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Chiro"><span class="msel-group-lbl">Chiro</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-dcintx" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="DC IN - TX"><i class="rail-sw t-dcintx"></i>DC IN - TX</label>
-                <label class="msel-opt bm-sub" data-sub="t-dctx" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="DC - TX"><i class="rail-sw t-dctx"></i>DC - TX</label>
-                <label class="msel-opt bm-sub" data-sub="t-lasereval" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="Laser Eval"><i class="rail-sw t-lasereval"></i>Laser Eval</label>
-                <label class="msel-opt bm-sub" data-sub="t-medifne" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="MediFNE"><i class="rail-sw t-medifne"></i>MediFNE</label>
-                <label class="msel-opt bm-sub" data-sub="t-pocrev" data-ty-of="ty-chiro"><input type="checkbox" onchange="lBmCount()" aria-label="POC Review"><i class="rail-sw t-pocrev"></i>POC Review</label>
-                <div class="msel-group" data-ty-of="ty-eboo"><input type="checkbox" class="msel-group-cb" aria-label="Select all in EBOO"><span class="msel-group-lbl">EBOO</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-eboosafe" data-ty-of="ty-eboo"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO Safe"><i class="rail-sw t-eboosafe"></i>EBOO Safe</label>
-                <label class="msel-opt bm-sub" data-sub="t-ebootx" data-ty-of="ty-eboo"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO"><i class="rail-sw t-ebootx"></i>EBOO</label>
-                <div class="msel-group" data-ty-of="ty-laser"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Laser"><span class="msel-group-lbl">Laser</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="Erchonia Laser"><i class="rail-sw t-erchlas"></i>Erchonia Laser</label>
-                <label class="msel-opt bm-sub" data-sub="t-erccemp" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompEmp"><i class="rail-sw t-erccemp"></i>ErcCompEmp</label>
-                <label class="msel-opt bm-sub" data-sub="t-erccpt" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompPt"><i class="rail-sw t-erccpt"></i>ErcCompPt</label>
-                <label class="msel-opt bm-sub" data-sub="t-erccvip" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompVIP"><i class="rail-sw t-erccvip"></i>ErcCompVIP</label>
-                <label class="msel-opt bm-sub" data-sub="t-erccref" data-ty-of="ty-laser"><input type="checkbox" onchange="lBmCount()" aria-label="ErcCompRef"><i class="rail-sw t-erccref"></i>ErcCompRef</label>
-                <div class="msel-group" data-ty-of="ty-iv"><input type="checkbox" class="msel-group-cb" aria-label="Select all in IV"><span class="msel-group-lbl">IV</span><em class="msel-group-n"></em></div>
-                <label class="msel-opt bm-sub" data-sub="t-cell" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Cellular Boost"><i class="rail-sw t-cell"></i>Cellular Boost</label>
-                <label class="msel-opt bm-sub" data-sub="t-chel" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Chelation"><i class="rail-sw t-chel"></i>Chelation</label>
-                <label class="msel-opt bm-sub" data-sub="t-cog" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Cognitive Support"><i class="rail-sw t-cog"></i>Cognitive Support</label>
-                <label class="msel-opt bm-sub" data-sub="t-iron" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Core Iron Blend"><i class="rail-sw t-iron"></i>Core Iron Blend</label>
-                <label class="msel-opt bm-sub" data-sub="t-rest" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Core Restore"><i class="rail-sw t-rest"></i>Core Restore</label>
-                <label class="msel-opt bm-sub" data-sub="t-detox" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Detox Prime"><i class="rail-sw t-detox"></i>Detox Prime</label>
-                <label class="msel-opt bm-sub" data-sub="t-ebooiv" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Eboo Boost"><i class="rail-sw t-ebooiv"></i>Eboo Boost</label>
-                <label class="msel-opt bm-sub" data-sub="t-amino" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Essential Aminos"><i class="rail-sw t-amino"></i>Essential Aminos</label>
-                <label class="msel-opt bm-sub" data-sub="t-ff5" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 5"><i class="rail-sw t-ff5"></i>Foundational Flow 5</label>
-                <label class="msel-opt bm-sub" data-sub="t-ff10" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 10"><i class="rail-sw t-ff10"></i>Foundational Flow 10</label>
-                <label class="msel-opt bm-sub" data-sub="t-ff15" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 15"><i class="rail-sw t-ff15"></i>Foundational Flow 15</label>
-                <label class="msel-opt bm-sub" data-sub="t-ff20" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 20"><i class="rail-sw t-ff20"></i>Foundational Flow 20</label>
-                <label class="msel-opt bm-sub" data-sub="t-ff25" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 25"><i class="rail-sw t-ff25"></i>Foundational Flow 25</label>
-                <label class="msel-opt bm-sub" data-sub="t-ff50" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 50"><i class="rail-sw t-ff50"></i>Foundational Flow 50</label>
-                <label class="msel-opt bm-sub" data-sub="t-mast" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mast Cell"><i class="rail-sw t-mast"></i>Mast Cell</label>
-                <label class="msel-opt bm-sub" data-sub="t-mc15" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 15g"><i class="rail-sw t-mc15"></i>Mega C 15g</label>
-                <label class="msel-opt bm-sub" data-sub="t-mc25" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 25g"><i class="rail-sw t-mc25"></i>Mega C 25g</label>
-                <label class="msel-opt bm-sub" data-sub="t-mc50" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 50g"><i class="rail-sw t-mc50"></i>Mega C 50g</label>
-                <label class="msel-opt bm-sub" data-sub="t-mc75" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 75g"><i class="rail-sw t-mc75"></i>Mega C 75g</label>
-                <label class="msel-opt bm-sub" data-sub="t-mc100" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 100g"><i class="rail-sw t-mc100"></i>Mega C 100g</label>
-                <label class="msel-opt bm-sub" data-sub="t-migraine" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Migraine"><i class="rail-sw t-migraine"></i>Migraine</label>
-                <label class="msel-opt bm-sub" data-sub="t-mito" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mito Boost"><i class="rail-sw t-mito"></i>Mito Boost</label>
-                <label class="msel-opt bm-sub" data-sub="t-minimb" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mini Mito Boost"><i class="rail-sw t-minimb"></i>Mini Mito Boost</label>
-                <label class="msel-opt bm-sub" data-sub="t-minimbc" data-ty-of="ty-iv"><input type="checkbox" onchange="lBmCount()" aria-label="Mini Mito Boost - Custom"><i class="rail-sw t-minimbc"></i>Mini Mito Boost - Custom</label>
-            </div>
+                <div class="msel-group" data-ty-of="Office Visit - 15 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit - 15 min"><span class="msel-group-lbl">Office Visit - 15 min</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-dctx" data-ty-of="Office Visit - 15 min"><input type="checkbox" onchange="lBmCount()" aria-label="Chiropractic Visit"><i class="rail-sw t-dctx"></i>Chiropractic Visit</label>
+                <div class="msel-group" data-ty-of="Office Visit - 30 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit - 30 min"><span class="msel-group-lbl">Office Visit - 30 min</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-fu" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Follow-Up"><i class="rail-sw t-fu"></i>Follow-Up</label>
+                <label class="msel-opt bm-sub" data-sub="t-nptoc" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Transfer of Care"><i class="rail-sw t-nptoc"></i>Transfer of Care</label>
+                <label class="msel-opt bm-sub" data-sub="t-npfu" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Telemedicine"><i class="rail-sw t-npfu"></i>Telemedicine</label>
+                <label class="msel-opt bm-sub" data-sub="t-fpeie" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="FPE"><i class="rail-sw t-fpeie"></i>FPE</label>
+                <label class="msel-opt bm-sub" data-sub="t-medifne" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Medicare FPE"><i class="rail-sw t-fpeie"></i>Medicare FPE</label>
+                <label class="msel-opt bm-sub" data-sub="t-fpefu" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="FPE FU"><i class="rail-sw t-fpefu"></i>FPE FU</label>
+                <label class="msel-opt bm-sub" data-sub="t-lasereval" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Laser Eval"><i class="rail-sw t-lasereval"></i>Laser Eval</label>
+                <label class="msel-opt bm-sub" data-sub="t-pocrev" data-ty-of="Office Visit - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="POC Review"><i class="rail-sw t-pocrev"></i>POC Review</label>
+                <div class="msel-group" data-ty-of="Office Visit - 60 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Office Visit - 60 min"><span class="msel-group-lbl">Office Visit - 60 min</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-newpt" data-ty-of="Office Visit - 60 min"><input type="checkbox" onchange="lBmCount()" aria-label="New Patient"><i class="rail-sw t-newpt"></i>New Patient</label>
+                <label class="msel-opt bm-sub" data-sub="t-npfu" data-ty-of="Office Visit - 60 min"><input type="checkbox" onchange="lBmCount()" aria-label="New Patient F/U"><i class="rail-sw t-npfu"></i>New Patient F/U</label>
+                <label class="msel-opt bm-sub" data-sub="gen:depthpsychology" data-ty-of="Office Visit - 60 min"><input type="checkbox" onchange="lBmCount()" aria-label="Depth Psychology"><i class="rail-sw t-fu"></i>Depth Psychology</label>
+                <div class="msel-group" data-ty-of="Procedure - 30 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Procedure - 30 min"><span class="msel-group-lbl">Procedure - 30 min</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-tpi" data-ty-of="Procedure - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Trigger Point"><i class="rail-sw t-tpi"></i>Trigger Point</label>
+                <label class="msel-opt bm-sub" data-sub="t-proloz" data-ty-of="Procedure - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Prolozone"><i class="rail-sw t-proloz"></i>Prolozone</label>
+                <label class="msel-opt bm-sub" data-sub="t-prp" data-ty-of="Procedure - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="PRP"><i class="rail-sw t-prp"></i>PRP</label>
+                <label class="msel-opt bm-sub" data-sub="t-pelf" data-ty-of="Procedure - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Female Pellet"><i class="rail-sw t-pelf"></i>Female Pellet</label>
+                <label class="msel-opt bm-sub" data-sub="t-pelm" data-ty-of="Procedure - 30 min"><input type="checkbox" onchange="lBmCount()" aria-label="Male Pellet"><i class="rail-sw t-pelm"></i>Male Pellet</label>
+                <div class="msel-group" data-ty-of="Procedure - 60 min"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Procedure - 60 min"><span class="msel-group-lbl">Procedure - 60 min</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-micro" data-ty-of="Procedure - 60 min"><input type="checkbox" onchange="lBmCount()" aria-label="Acupuncture"><i class="rail-sw t-micro"></i>Acupuncture</label>
+                <label class="msel-opt bm-sub" data-sub="t-micro" data-ty-of="Procedure - 60 min"><input type="checkbox" onchange="lBmCount()" aria-label="Microcurrent"><i class="rail-sw t-micro"></i>Microcurrent</label>
+                <div class="msel-group" data-ty-of="EBOO"><input type="checkbox" class="msel-group-cb" aria-label="Select all in EBOO"><span class="msel-group-lbl">EBOO</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-ebootx" data-ty-of="EBOO"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO"><i class="rail-sw t-ebootx"></i>EBOO</label>
+                <label class="msel-opt bm-sub" data-sub="t-eboosafe" data-ty-of="EBOO"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO SAFE"><i class="rail-sw t-eboosafe"></i>EBOO SAFE</label>
+                <label class="msel-opt bm-sub" data-sub="t-eboosafe" data-ty-of="EBOO"><input type="checkbox" onchange="lBmCount()" aria-label="Isolation Appointment"><i class="rail-sw t-eboosafe"></i>Isolation Appointment</label>
+                <div class="msel-group" data-ty-of="Infusion"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Infusion"><span class="msel-group-lbl">Infusion</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-ff5" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 5"><i class="rail-sw t-fu"></i>Foundational Flow 5</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff10" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 10"><i class="rail-sw t-fu"></i>Foundational Flow 10</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff15" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 15"><i class="rail-sw t-fu"></i>Foundational Flow 15</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff20" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 20"><i class="rail-sw t-fu"></i>Foundational Flow 20</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff25" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 25"><i class="rail-sw t-fu"></i>Foundational Flow 25</label>
+                <label class="msel-opt bm-sub" data-sub="t-ff50" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Foundational Flow 50"><i class="rail-sw t-fu"></i>Foundational Flow 50</label>
+                <label class="msel-opt bm-sub" data-sub="t-cell" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Cellular Boost"><i class="rail-sw t-fu"></i>Cellular Boost</label>
+                <label class="msel-opt bm-sub" data-sub="t-mast" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mast Cell"><i class="rail-sw t-fu"></i>Mast Cell</label>
+                <label class="msel-opt bm-sub" data-sub="t-mast" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mast Cell - Benadryl Only"><i class="rail-sw t-fu"></i>Mast Cell - Benadryl Only</label>
+                <label class="msel-opt bm-sub" data-sub="t-cog" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Cognitive Support"><i class="rail-sw t-fu"></i>Cognitive Support</label>
+                <label class="msel-opt bm-sub" data-sub="t-iron" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Core Iron Blend"><i class="rail-sw t-fu"></i>Core Iron Blend</label>
+                <label class="msel-opt bm-sub" data-sub="t-rest" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Core Restore"><i class="rail-sw t-fu"></i>Core Restore</label>
+                <label class="msel-opt bm-sub" data-sub="t-detox" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Detox Prime"><i class="rail-sw t-fu"></i>Detox Prime</label>
+                <label class="msel-opt bm-sub" data-sub="t-amino" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Essential Amino"><i class="rail-sw t-fu"></i>Essential Amino</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc100" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 100"><i class="rail-sw t-fu"></i>Mega C 100</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc15" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 15"><i class="rail-sw t-fu"></i>Mega C 15</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc25" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 25"><i class="rail-sw t-fu"></i>Mega C 25</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc50" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 50"><i class="rail-sw t-fu"></i>Mega C 50</label>
+                <label class="msel-opt bm-sub" data-sub="t-mc75" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mega C 75"><i class="rail-sw t-fu"></i>Mega C 75</label>
+                <label class="msel-opt bm-sub" data-sub="t-minimbc" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mini Cust"><i class="rail-sw t-fu"></i>Mini Cust</label>
+                <label class="msel-opt bm-sub" data-sub="t-minimb" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mini MB"><i class="rail-sw t-fu"></i>Mini MB</label>
+                <label class="msel-opt bm-sub" data-sub="t-mito" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Mito Boost"><i class="rail-sw t-fu"></i>Mito Boost</label>
+                <label class="msel-opt bm-sub" data-sub="t-ebooiv" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="EBOO Boost IV"><i class="rail-sw t-fu"></i>EBOO Boost IV</label>
+                <label class="msel-opt bm-sub" data-sub="t-quest" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="Quest Lab Draw"><i class="rail-sw t-quest"></i>Quest Lab Draw</label>
+                <label class="msel-opt bm-sub" data-sub="t-mdl" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="MDL"><i class="rail-sw t-mdl"></i>MDL</label>
+                <label class="msel-opt bm-sub" data-sub="t-g6pd" data-ty-of="Infusion"><input type="checkbox" onchange="lBmCount()" aria-label="G6PD"><i class="rail-sw t-g6pd"></i>G6PD</label>
+                <div class="msel-group" data-ty-of="Diagnostics"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Diagnostics"><span class="msel-group-lbl">Diagnostics</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-diag" data-ty-of="Diagnostics"><input type="checkbox" onchange="lBmCount()" aria-label="Diagnostic Testing"><i class="rail-sw t-nmt"></i>Diagnostic Testing</label>
+                <label class="msel-opt bm-sub" data-sub="t-diag" data-ty-of="Diagnostics"><input type="checkbox" onchange="lBmCount()" aria-label="InBody"><i class="rail-sw t-nmt"></i>InBody</label>
+                <div class="msel-group" data-ty-of="MA Office Visit"><input type="checkbox" class="msel-group-cb" aria-label="Select all in MA Office Visit"><span class="msel-group-lbl">MA Office Visit</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:glpinjection" data-ty-of="MA Office Visit"><input type="checkbox" onchange="lBmCount()" aria-label="GLP Injection"><i class="rail-sw t-fu"></i>GLP Injection</label>
+                <label class="msel-opt bm-sub" data-sub="gen:vitals" data-ty-of="MA Office Visit"><input type="checkbox" onchange="lBmCount()" aria-label="Vitals"><i class="rail-sw t-fu"></i>Vitals</label>
+                <label class="msel-opt bm-sub" data-sub="gen:nasalswabs" data-ty-of="MA Office Visit"><input type="checkbox" onchange="lBmCount()" aria-label="Nasal Swabs"><i class="rail-sw t-fu"></i>Nasal Swabs</label>
+                <label class="msel-opt bm-sub" data-sub="gen:ekg" data-ty-of="MA Office Visit"><input type="checkbox" onchange="lBmCount()" aria-label="EKG"><i class="rail-sw t-fu"></i>EKG</label>
+                <div class="msel-group" data-ty-of="Treatment"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment"><span class="msel-group-lbl">Treatment</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:redlightbed" data-ty-of="Treatment"><input type="checkbox" onchange="lBmCount()" aria-label="Red Light Bed"><i class="rail-sw t-micro"></i>Red Light Bed</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Treatment"><input type="checkbox" onchange="lBmCount()" aria-label="Erchonia Handheld"><i class="rail-sw t-erchlas"></i>Erchonia Handheld</label>
+                <div class="msel-group" data-ty-of="Erchonia Laser"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Erchonia Laser"><span class="msel-group-lbl">Erchonia Laser</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Head &amp; Cerebellum"><i class="rail-sw t-erchlas"></i>Head &amp; Cerebellum</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Shoulder"><i class="rail-sw t-erchlas"></i>Shoulder</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Wrist/hand"><i class="rail-sw t-erchlas"></i>Wrist/hand</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Knee"><i class="rail-sw t-erchlas"></i>Knee</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Heel"><i class="rail-sw t-erchlas"></i>Heel</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Neck"><i class="rail-sw t-erchlas"></i>Neck</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Elbow"><i class="rail-sw t-erchlas"></i>Elbow</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Low Back"><i class="rail-sw t-erchlas"></i>Low Back</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Ankle/Foot"><i class="rail-sw t-erchlas"></i>Ankle/Foot</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Acute Pain"><i class="rail-sw t-erchlas"></i>Acute Pain</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Level 1 Brain"><i class="rail-sw t-erchlas"></i>Level 1 Brain</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Level 2 Brain"><i class="rail-sw t-erchlas"></i>Level 2 Brain</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Emotional Stress"><i class="rail-sw t-erchlas"></i>Emotional Stress</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Sympathetic Calm"><i class="rail-sw t-erchlas"></i>Sympathetic Calm</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Parasympathetic Facilitation"><i class="rail-sw t-erchlas"></i>Parasympathetic Facilitation</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Level 1 Gut"><i class="rail-sw t-erchlas"></i>Level 1 Gut</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Level 2 Gut"><i class="rail-sw t-erchlas"></i>Level 2 Gut</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Inflammation"><i class="rail-sw t-erchlas"></i>Inflammation</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Parasites 1"><i class="rail-sw t-erchlas"></i>Parasites 1</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Parasites 2"><i class="rail-sw t-erchlas"></i>Parasites 2</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Lyme"><i class="rail-sw t-erchlas"></i>Lyme</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="EBV"><i class="rail-sw t-erchlas"></i>EBV</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Infection"><i class="rail-sw t-erchlas"></i>Infection</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Digestion"><i class="rail-sw t-erchlas"></i>Digestion</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Indigestion"><i class="rail-sw t-erchlas"></i>Indigestion</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Allergy"><i class="rail-sw t-erchlas"></i>Allergy</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Immune Enhance"><i class="rail-sw t-erchlas"></i>Immune Enhance</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Hormone Balance"><i class="rail-sw t-erchlas"></i>Hormone Balance</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Plantar Fasciitis"><i class="rail-sw t-erchlas"></i>Plantar Fasciitis</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Chronic Pain"><i class="rail-sw t-erchlas"></i>Chronic Pain</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Lymphatic"><i class="rail-sw t-erchlas"></i>Lymphatic</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Weight Loss Trial"><i class="rail-sw t-erchlas"></i>Weight Loss Trial</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Large Intestines"><i class="rail-sw t-erchlas"></i>Large Intestines</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Small Intestines"><i class="rail-sw t-erchlas"></i>Small Intestines</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="General Musculoskeletal"><i class="rail-sw t-erchlas"></i>General Musculoskeletal</label>
+                <label class="msel-opt bm-sub" data-sub="t-erchlas" data-ty-of="Erchonia Laser"><input type="checkbox" onchange="lBmCount()" aria-label="Neuro Inflammation"><i class="rail-sw t-erchlas"></i>Neuro Inflammation</label>
+                <div class="msel-group" data-ty-of="ADA Nano Tub Room"><input type="checkbox" class="msel-group-cb" aria-label="Select all in ADA Nano Tub Room"><span class="msel-group-lbl">ADA Nano Tub Room</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:hydrogen" data-ty-of="ADA Nano Tub Room"><input type="checkbox" onchange="lBmCount()" aria-label="Hydrogen"><i class="rail-sw t-scenar"></i>Hydrogen</label>
+                <label class="msel-opt bm-sub" data-sub="gen:oxygen" data-ty-of="ADA Nano Tub Room"><input type="checkbox" onchange="lBmCount()" aria-label="Oxygen"><i class="rail-sw t-scenar"></i>Oxygen</label>
+                <div class="msel-group" data-ty-of="Salt Room - Chair 1"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Salt Room - Chair 1"><span class="msel-group-lbl">Salt Room - Chair 1</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:guidedmeditation" data-ty-of="Salt Room - Chair 1"><input type="checkbox" onchange="lBmCount()" aria-label="Guided Meditation"><i class="rail-sw t-scenar"></i>Guided Meditation</label>
+                <label class="msel-opt bm-sub" data-sub="gen:guidedbreathingexercises" data-ty-of="Salt Room - Chair 1"><input type="checkbox" onchange="lBmCount()" aria-label="Guided Breathing Exercises"><i class="rail-sw t-scenar"></i>Guided Breathing Exercises</label>
+                <label class="msel-opt bm-sub" data-sub="gen:guidedrelaxation" data-ty-of="Salt Room - Chair 1"><input type="checkbox" onchange="lBmCount()" aria-label="Guided Relaxation"><i class="rail-sw t-scenar"></i>Guided Relaxation</label>
+                <div class="msel-group" data-ty-of="BioCharger - Chair 1"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BioCharger - Chair 1"><span class="msel-group-lbl">BioCharger - Chair 1</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="BioCharger - Chair 1"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger - Chair 1"><i class="rail-sw t-biochg"></i>BioCharger - Chair 1</label>
+                <div class="msel-group" data-ty-of="BioCharger - Chair 2"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BioCharger - Chair 2"><span class="msel-group-lbl">BioCharger - Chair 2</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="BioCharger - Chair 2"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger - Chair 2"><i class="rail-sw t-biochg"></i>BioCharger - Chair 2</label>
+                <div class="msel-group" data-ty-of="BioCharger - Chair 3"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BioCharger - Chair 3"><span class="msel-group-lbl">BioCharger - Chair 3</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="BioCharger - Chair 3"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger - Chair 3"><i class="rail-sw t-biochg"></i>BioCharger - Chair 3</label>
+                <div class="msel-group" data-ty-of="BioCharger - Chair 4"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BioCharger - Chair 4"><span class="msel-group-lbl">BioCharger - Chair 4</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="BioCharger - Chair 4"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger - Chair 4"><i class="rail-sw t-biochg"></i>BioCharger - Chair 4</label>
+                <div class="msel-group" data-ty-of="BioCharger - Chair 5"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BioCharger - Chair 5"><span class="msel-group-lbl">BioCharger - Chair 5</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="BioCharger - Chair 5"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger - Chair 5"><i class="rail-sw t-biochg"></i>BioCharger - Chair 5</label>
+                <div class="msel-group" data-ty-of="BioCharger - Chair 6"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BioCharger - Chair 6"><span class="msel-group-lbl">BioCharger - Chair 6</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biochg" data-ty-of="BioCharger - Chair 6"><input type="checkbox" onchange="lBmCount()" aria-label="BioCharger - Chair 6"><i class="rail-sw t-biochg"></i>BioCharger - Chair 6</label>
+                <div class="msel-group" data-ty-of="NanoVi 1"><input type="checkbox" class="msel-group-cb" aria-label="Select all in NanoVi 1"><span class="msel-group-lbl">NanoVi 1</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:nanovi30min" data-ty-of="NanoVi 1"><input type="checkbox" onchange="lBmCount()" aria-label="NanoVi 30 min"><i class="rail-sw t-minilym"></i>NanoVi 30 min</label>
+                <div class="msel-group" data-ty-of="Hydrogen Inhalation"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Hydrogen Inhalation"><span class="msel-group-lbl">Hydrogen Inhalation</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:hydrogen15min" data-ty-of="Hydrogen Inhalation"><input type="checkbox" onchange="lBmCount()" aria-label="Hydrogen 15 min"><i class="rail-sw t-scenar"></i>Hydrogen 15 min</label>
+                <label class="msel-opt bm-sub" data-sub="gen:hydrogen30min" data-ty-of="Hydrogen Inhalation"><input type="checkbox" onchange="lBmCount()" aria-label="Hydrogen 30 min"><i class="rail-sw t-scenar"></i>Hydrogen 30 min</label>
+                <label class="msel-opt bm-sub" data-sub="gen:hydrogen45min" data-ty-of="Hydrogen Inhalation"><input type="checkbox" onchange="lBmCount()" aria-label="Hydrogen 45 min"><i class="rail-sw t-scenar"></i>Hydrogen 45 min</label>
+                <div class="msel-group" data-ty-of="BEMER"><input type="checkbox" class="msel-group-cb" aria-label="Select all in BEMER"><span class="msel-group-lbl">BEMER</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:bemer" data-ty-of="BEMER"><input type="checkbox" onchange="lBmCount()" aria-label="BEMER"><i class="rail-sw t-biomodr"></i>BEMER</label>
+                <div class="msel-group" data-ty-of="Treatment Infusion Suite"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Treatment Infusion Suite"><span class="msel-group-lbl">Treatment Infusion Suite</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:treatmentinfusionsuite" data-ty-of="Treatment Infusion Suite"><input type="checkbox" onchange="lBmCount()" aria-label="Treatment Infusion Suite"><i class="rail-sw t-fu"></i>Treatment Infusion Suite</label>
+                <div class="msel-group" data-ty-of="Energetics"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics"><span class="msel-group-lbl">Energetics</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="t-biomodp" data-ty-of="Energetics"><input type="checkbox" onchange="lBmCount()" aria-label="BioMod Pro"><i class="rail-sw t-biomodp"></i>BioMod Pro</label>
+                <label class="msel-opt bm-sub" data-sub="t-lymph" data-ty-of="Energetics"><input type="checkbox" onchange="lBmCount()" aria-label="Lymph Star"><i class="rail-sw t-lymph"></i>Lymph Star</label>
+                <label class="msel-opt bm-sub" data-sub="t-biomodr" data-ty-of="Energetics"><input type="checkbox" onchange="lBmCount()" aria-label="BioMod Recharge"><i class="rail-sw t-biomodr"></i>BioMod Recharge</label>
+                <label class="msel-opt bm-sub" data-sub="t-minilym" data-ty-of="Energetics"><input type="checkbox" onchange="lBmCount()" aria-label="Mini-Lymph Star"><i class="rail-sw t-minilym"></i>Mini-Lymph Star</label>
+                <label class="msel-opt bm-sub" data-sub="t-nmt" data-ty-of="Energetics"><input type="checkbox" onchange="lBmCount()" aria-label="Neuro Muscular Therapy (NMT)"><i class="rail-sw t-nmt"></i>Neuro Muscular Therapy (NMT)</label>
+                <label class="msel-opt bm-sub" data-sub="t-scenar" data-ty-of="Energetics"><input type="checkbox" onchange="lBmCount()" aria-label="SCENAR"><i class="rail-sw t-scenar"></i>SCENAR</label>
+                <div class="msel-group" data-ty-of="Energetics/Diagnostic"><input type="checkbox" class="msel-group-cb" aria-label="Select all in Energetics/Diagnostic"><span class="msel-group-lbl">Energetics/Diagnostic</span><em class="msel-group-n"></em></div>
+                <label class="msel-opt bm-sub" data-sub="gen:mead" data-ty-of="Energetics/Diagnostic"><input type="checkbox" onchange="lBmCount()" aria-label="MEAD"><i class="rail-sw t-mead"></i>MEAD</label>
+              </div>
           </div>
           <div class="field-help">Only these can be booked into the space. Everything else is
             refused, so the space is still there when you need it.</div>
@@ -6636,7 +7157,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=120"></script>
+<script src="assets/hcos.js?v=121"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -7841,6 +8362,18 @@
      the clinic's sheet. It used to hold sixteen entries keyed to the retired
      taxonomy (flow, nad, ivc, gsh), so the moment the subtype select spoke
      real keys every lookup came back undefined (Carlos, 2026-08-12). */
+  /* THE BOOKING VOCABULARY — generated by tools/genbook.py from hierarchy.py.
+     Department -> column -> appointment type -> sub type. `key` is the L_TX
+     entry the engine already knows; `gen` marks a sheet subtype the palette
+     never had, whose duration is the row's own minutes. Do not edit by hand. */
+  var L_BOOK = {"depts": ["Clinic", "Infusion", "Treatment", "Treatment Infusion Suite", "Energetics"], "cols": [{"id": "drdrannikov", "name": "Dr. Drannikov", "dept": "Clinic", "kind": "Provider", "orgs": ["Office Visit - 30 min", "Office Visit - 60 min", "Procedure - 30 min", "Procedure - 60 min"], "types": ["Follow-Up", "Transfer of Care", "Telemedicine", "New Patient", "New Patient F/U", "Trigger Point", "Prolozone", "PRP", "Female Pellet", "Male Pellet", "Acupuncture", "Microcurrent"], "mins": {"Office Visit - 30 min": 30, "Office Visit - 60 min": 60, "Procedure - 30 min": 30, "Procedure - 60 min": 60}, "res": "drannikov"}, {"id": "mira", "name": "Mira", "dept": "Clinic", "kind": "Provider", "orgs": ["Office Visit - 30 min", "Office Visit - 60 min"], "types": ["Follow-Up", "Telemedicine", "Transfer of Care", "New Patient", "New Patient F/U"], "mins": {"Office Visit - 30 min": 30, "Office Visit - 60 min": 60}, "res": "mira"}, {"id": "drbakman", "name": "Dr. Bakman", "dept": "Clinic", "kind": "Provider", "orgs": ["Office Visit - 30 min", "Office Visit - 15 min"], "types": ["FPE", "Medicare FPE", "FPE FU", "Laser Eval", "POC Review", "Chiropractic Visit"], "mins": {"Office Visit - 30 min": 30, "Office Visit - 15 min": 15}, "res": "bakman"}, {"id": "leighann", "name": "Leigh Ann", "dept": "Clinic", "kind": "Provider", "orgs": ["Office Visit - 60 min"], "types": ["Depth Psychology"], "mins": {"Office Visit - 60 min": 60}, "res": "leighann"}, {"id": "maofficevisit", "name": "MA Office Visit", "dept": "Infusion", "kind": "Staff", "orgs": ["Diagnostics", "MA Office Visit"], "types": ["InBody", "GLP Injection", "Vitals", "Nasal Swabs", "EKG"], "mins": {"Diagnostics": 15, "MA Office Visit": 15}, "res": "ma"}, {"id": "mediciv", "name": "Medic IV", "dept": "Infusion", "kind": "IV chair", "orgs": ["Infusion"], "types": ["Foundational Flow 5", "Foundational Flow 10", "Foundational Flow 15", "Foundational Flow 20", "Foundational Flow 25", "Foundational Flow 50", "Cellular Boost", "Mast Cell", "Mast Cell - Benadryl Only", "Cognitive Support", "Core Iron Blend", "Core Restore", "Detox Prime", "Essential Amino", "Mega C 100", "Mega C 15", "Mega C 25", "Mega C 50", "Mega C 75", "Mini Cust", "Mini MB", "Mito Boost", "EBOO Boost IV"], "mins": {"Infusion": 30}, "res": "iv-medic"}, {"id": "nurseiv1", "name": "Nurse IV 1", "dept": "Infusion", "kind": "IV chair", "orgs": ["Infusion"], "types": ["Foundational Flow 5", "Foundational Flow 10", "Foundational Flow 15", "Foundational Flow 20", "Foundational Flow 25", "Foundational Flow 50", "Cellular Boost", "Mast Cell", "Mast Cell - Benadryl Only", "Cognitive Support", "Core Iron Blend", "Core Restore", "Detox Prime", "Essential Amino", "Mega C 100", "Mega C 15", "Mega C 25", "Mega C 50", "Mega C 75", "Mini Cust", "Mini MB", "Mito Boost", "EBOO Boost IV"], "mins": {"Infusion": 30}, "res": "iv-n1"}, {"id": "nurseiv2", "name": "Nurse IV 2", "dept": "Infusion", "kind": "IV chair", "orgs": ["Infusion"], "types": ["Foundational Flow 5", "Foundational Flow 10", "Foundational Flow 15", "Foundational Flow 20", "Foundational Flow 25", "Foundational Flow 50", "Cellular Boost", "Mast Cell", "Mast Cell - Benadryl Only", "Cognitive Support", "Core Iron Blend", "Core Restore", "Detox Prime", "Essential Amino", "Mega C 100", "Mega C 15", "Mega C 25", "Mega C 50", "Mega C 75", "Mini Cust", "Mini MB", "Mito Boost", "EBOO Boost IV"], "mins": {"Infusion": 30}, "res": "iv-n2"}, {"id": "labdraw", "name": "Lab Draw", "dept": "Infusion", "kind": "Room", "orgs": ["Lab Draw", "Infusion"], "types": ["Quest Lab Draw", "MDL", "G6PD"], "mins": {"Lab Draw": 30, "Infusion": 30}, "res": "lab"}, {"id": "diagnostictesting", "name": "Diagnostic Testing", "dept": "Infusion", "kind": "Equipment", "orgs": ["Diagnostics"], "types": ["Diagnostic Testing"], "mins": {"Diagnostics": 60}, "res": "diag"}, {"id": "eboochair1", "name": "Eboo Chair 1", "dept": "Clinic", "kind": "Equipment", "orgs": ["EBOO"], "types": ["EBOO", "EBOO SAFE", "Isolation Appointment"], "mins": {"EBOO": 120}, "res": "eboo1"}, {"id": "eboochair2", "name": "Eboo Chair 2", "dept": "Clinic", "kind": "Equipment", "orgs": ["EBOO"], "types": ["EBOO", "EBOO SAFE", "Isolation Appointment"], "mins": {"EBOO": 120}, "res": "eboo2"}, {"id": "redlight", "name": "Red Light", "dept": "Infusion", "kind": "Equipment", "orgs": ["Treatment"], "types": ["Red Light Bed"], "mins": {"Treatment": 60}, "res": "redlight"}, {"id": "erchonialaser", "name": "Erchonia Laser", "dept": "Treatment", "kind": "Equipment", "orgs": ["Erchonia Laser"], "types": ["Head & Cerebellum", "Shoulder", "Wrist/hand", "Knee", "Heel", "Neck", "Elbow", "Low Back", "Ankle/Foot", "Acute Pain", "Level 1 Brain", "Level 2 Brain", "Emotional Stress", "Sympathetic Calm", "Parasympathetic Facilitation", "Level 1 Gut", "Level 2 Gut", "Inflammation", "Parasites 1", "Parasites 2", "Lyme", "EBV", "Infection", "Digestion", "Indigestion", "Allergy", "Immune Enhance", "Hormone Balance", "Plantar Fasciitis", "Chronic Pain", "Lymphatic", "Weight Loss Trial", "Large Intestines", "Small Intestines", "General Musculoskeletal", "Neuro Inflammation"], "mins": {"Erchonia Laser": 30}, "res": "erch"}, {"id": "erchoniahandheld", "name": "Erchonia Handheld", "dept": "Treatment", "kind": "Equipment", "orgs": ["Treatment"], "types": ["Erchonia Handheld"], "mins": {"Treatment": 30}, "res": "erch-hand"}, {"id": "adananotubroom", "name": "ADA Nano Tub Room", "dept": "Treatment", "kind": "Room", "orgs": ["ADA Nano Tub Room"], "types": ["Hydrogen", "Oxygen"], "mins": {"ADA Nano Tub Room": 60}, "res": "ada-tub"}, {"id": "nanotubroom", "name": "Nano Tub Room", "dept": "Treatment", "kind": "Room", "orgs": ["Nano Tub Room"], "types": ["Hydrogen", "Oxygen"], "mins": {"Nano Tub Room": 60}, "res": "nano-tub"}, {"id": "saltroom", "name": "Salt Room", "dept": "Treatment", "kind": "Seat", "orgs": ["Salt Room - Chair 1", "Salt Room - Chair 2", "Salt Room - Chair 3", "Salt Room - Chair 4"], "types": ["Guided Meditation", "Guided Breathing Exercises", "Guided Relaxation"], "mins": {"Salt Room - Chair 1": 60, "Salt Room - Chair 2": 60, "Salt Room - Chair 3": 60, "Salt Room - Chair 4": 60}, "res": "salt"}, {"id": "biocharger", "name": "BioCharger", "dept": "Treatment", "kind": "Seat", "orgs": ["BioCharger - Chair 1", "BioCharger - Chair 2", "BioCharger - Chair 3", "BioCharger - Chair 4", "BioCharger - Chair 5", "BioCharger - Chair 6"], "types": [], "mins": {"BioCharger - Chair 1": 30, "BioCharger - Chair 2": 30, "BioCharger - Chair 3": 30, "BioCharger - Chair 4": 30, "BioCharger - Chair 5": 30, "BioCharger - Chair 6": 30}, "res": "biocharger"}, {"id": "nanovi1", "name": "NanoVi 1", "dept": "Treatment Infusion Suite", "kind": "Equipment", "orgs": ["NanoVi 1"], "types": ["NanoVi 30 min"], "mins": {"NanoVi 1": 30}, "res": "nanovi1"}, {"id": "nanovi2", "name": "NanoVi 2", "dept": "Treatment Infusion Suite", "kind": "Equipment", "orgs": ["NanoVi 2"], "types": ["NanoVi 30 min"], "mins": {"NanoVi 2": 30}, "res": "nanovi2"}, {"id": "hydrogeninhalation", "name": "Hydrogen Inhalation", "dept": "Treatment Infusion Suite", "kind": "Equipment", "orgs": ["Hydrogen Inhalation"], "types": ["Hydrogen 15 min", "Hydrogen 30 min", "Hydrogen 45 min"], "mins": {"Hydrogen Inhalation": 30}, "res": "h2"}, {"id": "bemer", "name": "BEMER", "dept": "Treatment Infusion Suite", "kind": "Equipment", "orgs": ["BEMER"], "types": ["BEMER"], "mins": {"BEMER": 30}, "res": "bemer"}, {"id": "rife", "name": "Rife", "dept": "Treatment Infusion Suite", "kind": "Equipment", "orgs": ["Treatment Infusion Suite"], "types": [], "mins": {"Treatment Infusion Suite": 30}, "res": "rife"}, {"id": "energetics", "name": "Energetics", "dept": "Energetics", "kind": "Equipment", "orgs": ["Energetics", "Energetics/Diagnostic"], "types": ["BioMod Pro", "Lymph Star", "BioMod Recharge", "Mini-Lymph Star", "Neuro Muscular Therapy (NMT)", "SCENAR", "MEAD"], "mins": {"Energetics": 60, "Energetics/Diagnostic": 60}, "res": "energetics"}], "types": [{"name": "Office Visit - 15 min", "cols": ["drbakman"], "depts": ["Clinic"], "mins": 15, "ty": "ty-visit"}, {"name": "Office Visit - 30 min", "cols": ["drdrannikov", "mira", "drbakman"], "depts": ["Clinic"], "mins": 30, "ty": "ty-visit"}, {"name": "Office Visit - 60 min", "cols": ["drdrannikov", "mira", "leighann"], "depts": ["Clinic"], "mins": 60, "ty": "ty-visit"}, {"name": "Procedure - 30 min", "cols": ["drdrannikov"], "depts": ["Clinic"], "mins": 30, "ty": "ty-proc"}, {"name": "Procedure - 60 min", "cols": ["drdrannikov"], "depts": ["Clinic"], "mins": 60, "ty": "ty-proc"}, {"name": "EBOO", "cols": ["eboochair1", "eboochair2"], "depts": ["Clinic"], "mins": 120, "ty": "ty-eboo"}, {"name": "Infusion", "cols": ["mediciv", "nurseiv1", "nurseiv2", "labdraw"], "depts": ["Infusion"], "mins": 30, "ty": "ty-iv"}, {"name": "Diagnostics", "cols": ["maofficevisit", "diagnostictesting"], "depts": ["Infusion"], "mins": 15, "ty": "ty-diag"}, {"name": "MA Office Visit", "cols": ["maofficevisit"], "depts": ["Infusion"], "mins": 15, "ty": "ty-visit"}, {"name": "Lab Draw", "cols": ["labdraw"], "depts": ["Infusion"], "mins": 30, "ty": "ty-lab"}, {"name": "Treatment", "cols": ["redlight", "erchoniahandheld"], "depts": ["Infusion", "Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "Erchonia Laser", "cols": ["erchonialaser"], "depts": ["Treatment"], "mins": 30, "ty": "ty-laser"}, {"name": "ADA Nano Tub Room", "cols": ["adananotubroom"], "depts": ["Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "Nano Tub Room", "cols": ["nanotubroom"], "depts": ["Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "Salt Room - Chair 1", "cols": ["saltroom"], "depts": ["Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "Salt Room - Chair 2", "cols": ["saltroom"], "depts": ["Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "Salt Room - Chair 3", "cols": ["saltroom"], "depts": ["Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "Salt Room - Chair 4", "cols": ["saltroom"], "depts": ["Treatment"], "mins": 60, "ty": "ty-chiro"}, {"name": "BioCharger - Chair 1", "cols": ["biocharger"], "depts": ["Treatment"], "mins": 30, "ty": "ty-energ"}, {"name": "BioCharger - Chair 2", "cols": ["biocharger"], "depts": ["Treatment"], "mins": 30, "ty": "ty-energ"}, {"name": "BioCharger - Chair 3", "cols": ["biocharger"], "depts": ["Treatment"], "mins": 30, "ty": "ty-energ"}, {"name": "BioCharger - Chair 4", "cols": ["biocharger"], "depts": ["Treatment"], "mins": 30, "ty": "ty-energ"}, {"name": "BioCharger - Chair 5", "cols": ["biocharger"], "depts": ["Treatment"], "mins": 30, "ty": "ty-energ"}, {"name": "BioCharger - Chair 6", "cols": ["biocharger"], "depts": ["Treatment"], "mins": 30, "ty": "ty-energ"}, {"name": "NanoVi 1", "cols": ["nanovi1"], "depts": ["Treatment Infusion Suite"], "mins": 30, "ty": "ty-chiro"}, {"name": "NanoVi 2", "cols": ["nanovi2"], "depts": ["Treatment Infusion Suite"], "mins": 30, "ty": "ty-chiro"}, {"name": "Hydrogen Inhalation", "cols": ["hydrogeninhalation"], "depts": ["Treatment Infusion Suite"], "mins": 30, "ty": "ty-chiro"}, {"name": "BEMER", "cols": ["bemer"], "depts": ["Treatment Infusion Suite"], "mins": 30, "ty": "ty-chiro"}, {"name": "Treatment Infusion Suite", "cols": ["rife"], "depts": ["Treatment Infusion Suite"], "mins": 30, "ty": "ty-chiro"}, {"name": "Energetics", "cols": ["energetics"], "depts": ["Energetics"], "mins": 60, "ty": "ty-energ"}, {"name": "Energetics/Diagnostic", "cols": ["energetics"], "depts": ["Energetics"], "mins": 60, "ty": "ty-energ"}], "subs": [{"name": "Follow-Up", "key": "fu", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drdrannikov", "mira"], "mins": 30, "iv": false, "proto": null, "sb": "t-fu"}, {"name": "Transfer of Care", "key": "nptoc", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drdrannikov", "mira"], "mins": 30, "iv": false, "proto": null, "sb": "t-nptoc"}, {"name": "Telemedicine", "key": "npfu", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drdrannikov", "mira"], "mins": 30, "iv": false, "proto": null, "sb": "t-npfu"}, {"name": "New Patient", "key": "newpt", "gen": false, "inh": false, "types": ["Office Visit - 60 min"], "cols": ["drdrannikov", "mira"], "mins": 60, "iv": false, "proto": null, "sb": "t-newpt"}, {"name": "New Patient F/U", "key": "npfu", "gen": false, "inh": false, "types": ["Office Visit - 60 min"], "cols": ["drdrannikov", "mira"], "mins": 60, "iv": false, "proto": null, "sb": "t-npfu"}, {"name": "Trigger Point", "key": "tpi", "gen": false, "inh": false, "types": ["Procedure - 30 min"], "cols": ["drdrannikov"], "mins": 30, "iv": false, "proto": null, "sb": "t-tpi"}, {"name": "Prolozone", "key": "proloz", "gen": false, "inh": false, "types": ["Procedure - 30 min"], "cols": ["drdrannikov"], "mins": 30, "iv": false, "proto": null, "sb": "t-proloz"}, {"name": "PRP", "key": "prp", "gen": false, "inh": false, "types": ["Procedure - 30 min"], "cols": ["drdrannikov"], "mins": 30, "iv": false, "proto": null, "sb": "t-prp"}, {"name": "Female Pellet", "key": "pelf", "gen": false, "inh": false, "types": ["Procedure - 30 min"], "cols": ["drdrannikov"], "mins": 30, "iv": false, "proto": null, "sb": "t-pelf"}, {"name": "Male Pellet", "key": "pelm", "gen": false, "inh": false, "types": ["Procedure - 30 min"], "cols": ["drdrannikov"], "mins": 30, "iv": false, "proto": null, "sb": "t-pelm"}, {"name": "Acupuncture", "key": "micro", "gen": false, "inh": false, "types": ["Procedure - 60 min"], "cols": ["drdrannikov"], "mins": 60, "iv": false, "proto": null, "sb": "t-micro"}, {"name": "Microcurrent", "key": "micro", "gen": false, "inh": false, "types": ["Procedure - 60 min"], "cols": ["drdrannikov"], "mins": 60, "iv": false, "proto": null, "sb": "t-micro"}, {"name": "FPE", "key": "fpeie", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drbakman"], "mins": 30, "iv": false, "proto": null, "sb": "t-fpeie"}, {"name": "Medicare FPE", "key": "medifne", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drbakman"], "mins": 30, "iv": false, "proto": null, "sb": "t-fpeie"}, {"name": "FPE FU", "key": "fpefu", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drbakman"], "mins": 30, "iv": false, "proto": null, "sb": "t-fpefu"}, {"name": "Laser Eval", "key": "lasereval", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drbakman"], "mins": 30, "iv": false, "proto": null, "sb": "t-lasereval"}, {"name": "POC Review", "key": "pocrev", "gen": false, "inh": false, "types": ["Office Visit - 30 min"], "cols": ["drbakman"], "mins": 30, "iv": false, "proto": null, "sb": "t-pocrev"}, {"name": "Chiropractic Visit", "key": "dctx", "gen": false, "inh": false, "types": ["Office Visit - 15 min"], "cols": ["drbakman"], "mins": 15, "iv": false, "proto": null, "sb": "t-dctx"}, {"name": "Depth Psychology", "key": "gen_depthpsychology", "gen": true, "inh": false, "types": ["Office Visit - 60 min"], "cols": ["leighann"], "mins": 60, "iv": false, "proto": null, "sb": "t-fu"}, {"name": "EBOO", "key": "ebootx", "gen": false, "inh": false, "types": ["EBOO"], "cols": ["eboochair1", "eboochair2"], "mins": 120, "iv": false, "proto": null, "sb": "t-ebootx"}, {"name": "EBOO SAFE", "key": "eboosafe", "gen": false, "inh": false, "types": ["EBOO"], "cols": ["eboochair1", "eboochair2"], "mins": 120, "iv": false, "proto": null, "sb": "t-eboosafe"}, {"name": "Isolation Appointment", "key": "eboosafe", "gen": false, "inh": false, "types": ["EBOO"], "cols": ["eboochair1", "eboochair2"], "mins": 120, "iv": false, "proto": null, "sb": "t-eboosafe"}, {"name": "Foundational Flow 5", "key": "ff5", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Foundational Flow 10", "key": "ff10", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Foundational Flow 15", "key": "ff15", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Foundational Flow 20", "key": "ff20", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Foundational Flow 25", "key": "ff25", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Foundational Flow 50", "key": "ff50", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Cellular Boost", "key": "cell", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mast Cell", "key": "mast", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mast Cell - Benadryl Only", "key": "mast", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Cognitive Support", "key": "cog", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Core Iron Blend", "key": "iron", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Core Restore", "key": "rest", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Detox Prime", "key": "detox", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Essential Amino", "key": "amino", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mega C 100", "key": "mc100", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mega C 15", "key": "mc15", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mega C 25", "key": "mc25", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mega C 50", "key": "mc50", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mega C 75", "key": "mc75", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mini Cust", "key": "minimbc", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mini MB", "key": "minimb", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Mito Boost", "key": "mito", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "EBOO Boost IV", "key": "ebooiv", "gen": false, "inh": false, "types": ["Infusion"], "cols": ["mediciv", "nurseiv1", "nurseiv2"], "mins": 30, "iv": true, "proto": null, "sb": "t-fu"}, {"name": "Diagnostic Testing", "key": "diag", "gen": false, "inh": false, "types": ["Diagnostics"], "cols": ["diagnostictesting"], "mins": 60, "iv": false, "proto": null, "sb": "t-nmt"}, {"name": "InBody", "key": "diag", "gen": false, "inh": false, "types": ["Diagnostics"], "cols": ["maofficevisit"], "mins": 15, "iv": false, "proto": null, "sb": "t-nmt"}, {"name": "Red Light Bed", "key": "gen_redlightbed", "gen": true, "inh": false, "types": ["Treatment"], "cols": ["redlight"], "mins": 60, "iv": false, "proto": null, "sb": "t-micro"}, {"name": "GLP Injection", "key": "gen_glpinjection", "gen": true, "inh": false, "types": ["MA Office Visit"], "cols": ["maofficevisit"], "mins": 15, "iv": false, "proto": null, "sb": "t-fu"}, {"name": "Vitals", "key": "gen_vitals", "gen": true, "inh": false, "types": ["MA Office Visit"], "cols": ["maofficevisit"], "mins": 15, "iv": false, "proto": null, "sb": "t-fu"}, {"name": "Nasal Swabs", "key": "gen_nasalswabs", "gen": true, "inh": false, "types": ["MA Office Visit"], "cols": ["maofficevisit"], "mins": 15, "iv": false, "proto": null, "sb": "t-fu"}, {"name": "EKG", "key": "gen_ekg", "gen": true, "inh": false, "types": ["MA Office Visit"], "cols": ["maofficevisit"], "mins": 15, "iv": false, "proto": null, "sb": "t-fu"}, {"name": "Quest Lab Draw", "key": "quest", "gen": false, "inh": false, "types": ["Infusion", "Lab Draw"], "cols": ["labdraw"], "mins": 30, "iv": false, "proto": null, "sb": "t-quest"}, {"name": "MDL", "key": "mdl", "gen": false, "inh": false, "types": ["Infusion", "Lab Draw"], "cols": ["labdraw"], "mins": 30, "iv": false, "proto": null, "sb": "t-mdl"}, {"name": "G6PD", "key": "g6pd", "gen": false, "inh": false, "types": ["Infusion", "Lab Draw"], "cols": ["labdraw"], "mins": 30, "iv": false, "proto": null, "sb": "t-g6pd"}, {"name": "Erchonia Handheld", "key": "erchlas", "gen": false, "inh": false, "types": ["Treatment"], "cols": ["erchoniahandheld"], "mins": 30, "iv": false, "proto": null, "sb": "t-erchlas"}, {"name": "Hydrogen", "key": "gen_hydrogen", "gen": true, "inh": false, "types": ["ADA Nano Tub Room", "Nano Tub Room"], "cols": ["adananotubroom", "nanotubroom"], "mins": 60, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "Oxygen", "key": "gen_oxygen", "gen": true, "inh": false, "types": ["ADA Nano Tub Room", "Nano Tub Room"], "cols": ["adananotubroom", "nanotubroom"], "mins": 60, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "Guided Meditation", "key": "gen_guidedmeditation", "gen": true, "inh": false, "types": ["Salt Room - Chair 1", "Salt Room - Chair 2", "Salt Room - Chair 3", "Salt Room - Chair 4"], "cols": ["saltroom"], "mins": 60, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "Guided Breathing Exercises", "key": "gen_guidedbreathingexercises", "gen": true, "inh": false, "types": ["Salt Room - Chair 1", "Salt Room - Chair 2", "Salt Room - Chair 3", "Salt Room - Chair 4"], "cols": ["saltroom"], "mins": 60, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "Guided Relaxation", "key": "gen_guidedrelaxation", "gen": true, "inh": false, "types": ["Salt Room - Chair 1", "Salt Room - Chair 2", "Salt Room - Chair 3", "Salt Room - Chair 4"], "cols": ["saltroom"], "mins": 60, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "NanoVi 30 min", "key": "gen_nanovi30min", "gen": true, "inh": false, "types": ["NanoVi 1", "NanoVi 2"], "cols": ["nanovi1", "nanovi2"], "mins": 30, "iv": false, "proto": null, "sb": "t-minilym"}, {"name": "Hydrogen 15 min", "key": "gen_hydrogen15min", "gen": true, "inh": false, "types": ["Hydrogen Inhalation"], "cols": ["hydrogeninhalation"], "mins": 30, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "Hydrogen 30 min", "key": "gen_hydrogen30min", "gen": true, "inh": false, "types": ["Hydrogen Inhalation"], "cols": ["hydrogeninhalation"], "mins": 30, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "Hydrogen 45 min", "key": "gen_hydrogen45min", "gen": true, "inh": false, "types": ["Hydrogen Inhalation"], "cols": ["hydrogeninhalation"], "mins": 30, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "BEMER", "key": "gen_bemer", "gen": true, "inh": false, "types": ["BEMER"], "cols": ["bemer"], "mins": 30, "iv": false, "proto": null, "sb": "t-biomodr"}, {"name": "BioMod Pro", "key": "biomodp", "gen": false, "inh": false, "types": ["Energetics"], "cols": ["energetics"], "mins": 60, "iv": false, "proto": null, "sb": "t-biomodp"}, {"name": "Lymph Star", "key": "lymph", "gen": false, "inh": false, "types": ["Energetics"], "cols": ["energetics"], "mins": 60, "iv": false, "proto": null, "sb": "t-lymph"}, {"name": "BioMod Recharge", "key": "biomodr", "gen": false, "inh": false, "types": ["Energetics"], "cols": ["energetics"], "mins": 30, "iv": false, "proto": null, "sb": "t-biomodr"}, {"name": "Mini-Lymph Star", "key": "minilym", "gen": false, "inh": false, "types": ["Energetics"], "cols": ["energetics"], "mins": 30, "iv": false, "proto": null, "sb": "t-minilym"}, {"name": "Neuro Muscular Therapy (NMT)", "key": "nmt", "gen": false, "inh": false, "types": ["Energetics"], "cols": ["energetics"], "mins": 60, "iv": false, "proto": null, "sb": "t-nmt"}, {"name": "SCENAR", "key": "scenar", "gen": false, "inh": false, "types": ["Energetics"], "cols": ["energetics"], "mins": 60, "iv": false, "proto": null, "sb": "t-scenar"}, {"name": "MEAD", "key": "gen_mead", "gen": true, "inh": false, "types": ["Energetics/Diagnostic"], "cols": ["energetics"], "mins": 60, "iv": false, "proto": null, "sb": "t-mead"}, {"name": "Head & Cerebellum", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Shoulder", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Wrist/hand", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Knee", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Heel", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Neck", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Elbow", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Low Back", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Ankle/Foot", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Acute Pain", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Level 1 Brain", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Level 2 Brain", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Emotional Stress", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Sympathetic Calm", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Parasympathetic Facilitation", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Level 1 Gut", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Level 2 Gut", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Inflammation", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Parasites 1", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Parasites 2", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Lyme", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "EBV", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Infection", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Digestion", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Indigestion", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Allergy", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Immune Enhance", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Hormone Balance", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Plantar Fasciitis", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Chronic Pain", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Lymphatic", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Weight Loss Trial", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Large Intestines", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Small Intestines", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "General Musculoskeletal", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "Neuro Inflammation", "key": "erchlas", "gen": false, "inh": true, "types": ["Erchonia Laser"], "cols": ["erchonialaser"], "mins": 30, "iv": false, "proto": "Erchonia Laser", "sb": "t-erchlas"}, {"name": "BioCharger - Chair 1", "key": "biochg", "gen": false, "inh": true, "types": ["BioCharger - Chair 1"], "cols": ["biocharger"], "mins": 30, "iv": false, "proto": "BioCharger", "sb": "t-biochg", "pseudo": true}, {"name": "BioCharger - Chair 2", "key": "biochg", "gen": false, "inh": true, "types": ["BioCharger - Chair 2"], "cols": ["biocharger"], "mins": 30, "iv": false, "proto": "BioCharger", "sb": "t-biochg", "pseudo": true}, {"name": "BioCharger - Chair 3", "key": "biochg", "gen": false, "inh": true, "types": ["BioCharger - Chair 3"], "cols": ["biocharger"], "mins": 30, "iv": false, "proto": "BioCharger", "sb": "t-biochg", "pseudo": true}, {"name": "BioCharger - Chair 4", "key": "biochg", "gen": false, "inh": true, "types": ["BioCharger - Chair 4"], "cols": ["biocharger"], "mins": 30, "iv": false, "proto": "BioCharger", "sb": "t-biochg", "pseudo": true}, {"name": "BioCharger - Chair 5", "key": "biochg", "gen": false, "inh": true, "types": ["BioCharger - Chair 5"], "cols": ["biocharger"], "mins": 30, "iv": false, "proto": "BioCharger", "sb": "t-biochg", "pseudo": true}, {"name": "BioCharger - Chair 6", "key": "biochg", "gen": false, "inh": true, "types": ["BioCharger - Chair 6"], "cols": ["biocharger"], "mins": 30, "iv": false, "proto": "BioCharger", "sb": "t-biochg", "pseudo": true}, {"name": "Treatment Infusion Suite", "key": "gen_treatmentinfusionsuite", "gen": true, "inh": false, "types": ["Treatment Infusion Suite"], "cols": ["rife"], "mins": 30, "iv": false, "proto": null, "sb": "t-fu", "pseudo": true}]};
+
+  /* THE ENGINE READS THE SHEET (Carlos, 2026-09-02). Every booking read — hold
+     length, order check, coverage gate, protocol gate, slot search — goes
+     through L_TX[<sub type select value>]. That value is now the sub type's NAME
+     from the sheet, and each name gets an entry: the palette's, where the
+     matcher found one (duration, order, version carry over), or the sheet row's
+     own minutes where the palette never had it. Two taxonomies, one lookup. */
   var L_TX = {
     newpt:  { name: 'New patient', low: 'new patient', art: 'a', mins: 90, iv: false, order: null },
     npfu:   { name: 'New patient FU', low: 'new patient fu', art: 'a', mins: 45, iv: false, order: null },
@@ -7908,6 +8441,19 @@
     minimb: { name: 'Mini Mito Boost', low: 'mini mito boost', art: 'a', mins: 30, iv: true , order: null },
     minimbc: { name: 'Mini Mito Boost - Custom', low: 'mini mito boost - custom', art: 'a', mins: 30, iv: true , order: null }
   };
+
+  window.L_BOOK_BY_NAME = {};
+  (function () {
+    L_BOOK.subs.forEach(function (x) {
+      window.L_BOOK_BY_NAME[x.name] = x;
+      var base = L_TX[x.key] || {};
+      var e = {}; for (var k in base) e[k] = base[k];
+      e.name = x.name; e.key = x.key; e.mins = x.gen ? x.mins : (base.mins || x.mins);
+      e.iv = !!x.iv || !!base.iv; e.proto = x.proto; e.gen = !!x.gen; e.pseudo = !!x.pseudo;
+      L_TX[x.name] = e;
+      if (typeof L_COV !== 'undefined' && L_COV[x.key] && !L_COV[x.name]) L_COV[x.name] = L_COV[x.key];
+    });
+  })();
 
   // "a Foundational Flow 10" / "an IV vitamin C 25 g" — the treatment keeps its own name in a sentence.
   function lName(tx, cap) { return (cap ? (tx.art === 'an' ? 'An' : 'A') : tx.art) + ' ' + tx.low; }
@@ -8177,6 +8723,9 @@
   window.lProtoFocus = lProtoFocus;
 
   function lBook() {
+    /* nothing chosen yet (the cascade has not filled the selects) — draw nothing
+       rather than throw on L_TX[''] */
+    if (!L_TX[lV('l-bk-type')]) return;
     var box = document.getElementById('l-bk-checks');
     if (!box) return;
 
@@ -8377,7 +8926,11 @@
     HCOS.toast('Booked as appointment A-88264 — one identifier, on the day view and the chair board.', 'ok');
   }
 
-  lBook();
+  /* the eager lBook() that stood here rendered the booking screen at load —
+     before the department/type/subtype cascade had filled its selects, so it
+     looked up L_TX[''] and threw, and an uncaught error at top level stops the
+     rest of the script: L_SLOTDAYS, L_BK_AI and the boot never ran. The cascade
+     boots last and calls lBook() itself. */
 
   /* ==========================================================================
      THE FLAG DICTIONARY — one definition, read by the block, the hover card,
@@ -8555,6 +9108,7 @@
   /* Subtype follows type, from the clinic's own sheet. It used to be five
      invented types and four hard-coded IV recipes that never changed when
      the type did, though the label promised they would (Carlos, 2026-08-12). */
+
   var L_SUBS = {
     visit:   [['newpt', 'New patient · 90 min', 1], ['npfu', 'New patient FU · 45 min', 0],
               ['nptoc', 'New patient TOC · 90 min', 0], ['fu', 'Follow Up · 30 min', 0]],
@@ -8581,15 +9135,39 @@
               ['mc100', 'Mega C 100g · 3 h', 0], ['migraine', 'Migraine', 0], ['mito', 'Mito Boost', 0],
               ['minimb', 'Mini Mito Boost · 30 min', 0], ['minimbc', 'Mini Mito Boost - Custom', 0]]
   };
-  function lBkTy() {
-    var ty = document.getElementById('l-bk-ty').value;
-    var sel = document.getElementById('l-bk-type');
-    sel.innerHTML = '';
-    L_SUBS[ty].forEach(function (o) {
-      var opt = document.createElement('option');
-      opt.value = o[0]; opt.textContent = o[1]; if (o[2]) opt.selected = true;
-      sel.appendChild(opt);
+  function lBkOpts(dept, col) {
+    /* the appointment types that fit the department and — if one is chosen —
+       the column. Both narrow; neither is required. */
+    return L_BOOK.types.filter(function (t) {
+      if (dept && t.depts.indexOf(dept) === -1) return false;
+      if (col && t.cols.indexOf(col) === -1) return false;
+      return true;
     });
+  }
+  function lFill(sel, items, keep) {
+    var cur = keep && sel.value; sel.innerHTML = '';
+    items.forEach(function (it) {
+      var o = document.createElement('option'); o.value = it[0]; o.textContent = it[1]; sel.appendChild(o);
+    });
+    if (cur && [].some.call(sel.options, function (o) { return o.value === cur; })) sel.value = cur;
+  }
+  function lBkDept() {
+    var dept = lV('l-bk-dept'), col = '';
+    lFill(document.getElementById('l-bk-ty'), lBkOpts(dept, col).map(function (t) { return [t.name, t.name]; }), true);
+    lBkTy();
+  }
+  function lColPick() {
+    /* picking a column narrows the types to what that column runs; the column
+       stays chosen unless the type it cannot run is kept */
+    var col = lV('l-bk-res'), dept = lV('l-bk-dept');
+    lFill(document.getElementById('l-bk-ty'), lBkOpts(dept, col).map(function (t) { return [t.name, t.name]; }), true);
+    lBkTy(true);
+  }
+  function lBkTy(fromCol) {
+    var ty = lV('l-bk-ty');
+    var sel = document.getElementById('l-bk-type');
+    var subs = L_BOOK.subs.filter(function (x) { return x.types.indexOf(ty) !== -1; });
+    lFill(sel, subs.map(function (x) { return [x.name, x.pseudo ? x.name + ' — recipe from the plan of care' : x.name]; }), true);
     /* order matters: the type decides the protocol gate and the columns, the
        columns decide the open slots. Running these the other way round offers
        slots in chairs the treatment cannot use. */
@@ -8597,10 +9175,12 @@
     if (typeof lBkAi === 'function') { L_BK_AI_ALL = false; lBkAi(); }
     if (typeof lCovGate === 'function') lCovGate();
     if (typeof lProtoGate === 'function') lProtoGate();
-    if (typeof lResFollow === 'function') lResFollow();
+    if (!fromCol && typeof lResFollow === 'function') lResFollow();
     if (typeof lSlots === 'function') lSlots();
     if (typeof window.lFocusOrder === 'function') window.lFocusOrder();
   }
+  window.lBkDept = lBkDept; window.lColPick = lColPick;
+
   window.lBkTy = lBkTy;
 
   /* ---------- finding a patient ----------
@@ -8684,6 +9264,9 @@
       : [];
     if (!pool.length) pool = [['', 'any open column']];
     var n = 0;
+    /* the cascade can run before this list is declared — a slot finder with
+       no data yet says "nothing yet", it does not throw */
+    if (typeof L_SLOTDAYS === 'undefined' || !L_SLOTDAYS) return [];
     return L_SLOTDAYS.map(function (d) {
       var times = d[1].slice(0, Math.max(pool.length, 1) * 2);
       var slots = times.map(function (t) { return [t, pool[(n++) % pool.length][1]]; });
@@ -8767,7 +9350,10 @@
   function lBkAi() {
     var box = document.getElementById('l-bk-ai');
     if (!box) return;
-    var ty = lV('l-bk-ty') || 'iv';
+    /* the AI patterns are filed by the palette's ten categories; the type
+       select now holds the sheet's appointment type, so it is bridged through
+       the type's colour class ("Office Visit - 60 min" -> ty-visit -> visit) */
+    var ty = ((L_TY_OF_ORG[lV('l-bk-ty')] || 'ty-visit').replace('ty-', '')) || 'iv';
     var list = L_BK_AI[ty] || [['low', 'Nothing yet',
       'Not enough history for this treatment to say anything useful. It will learn.']];
     var show = L_BK_AI_ALL ? list : list.filter(function (x) { return x[0] === 'high'; });
@@ -8812,7 +9398,9 @@
     var box = document.getElementById('l-bk-cov');
     if (!box) return;
     var sub = lV('l-bk-type');
-    var rule = L_COV[sub];
+    /* the coverage rules are filed by the palette key (tpi); the select holds
+       the sheet name (Trigger Point). Resolve through the entry's own key. */
+    var rule = L_COV[sub] || L_COV[(L_TX[sub] || {}).key];
     box.style.display = rule ? '' : 'none';
     if (!rule) return;
     document.getElementById('l-cov-t').textContent = rule.name + '  ·  CPT ' + rule.cpt;
@@ -8954,14 +9542,12 @@
   var L_PROTO_PICK = [];
 
   function lProtoFor() {
-    var sel = document.getElementById('l-bk-type');
-    if (!sel) return null;
-    var label = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].textContent : '';
-    for (var k in L_PROTO) {
-      if (label.indexOf(k) === 0 || label === k) return { key: k, rule: L_PROTO[k] };
-    }
+    var tx = L_TX[lV('l-bk-type')];
+    if (!tx || !tx.proto) return null;
+    for (var k in L_PROTO) if (tx.proto === k || tx.proto.indexOf(k + ' ') === 0) return { rule: L_PROTO[k], key: k };
     return null;
   }
+
   function lProtoGate() {
     var box = document.getElementById('l-bk-proto');
     if (!box) return;
@@ -9137,14 +9723,25 @@
 
   /* the waitlist needs it for the same reason booking does: a freed Erchonia
      slot only matches somebody if it can run THEIR ordered protocol */
+  function lWlDept() {
+    var dept = lV('l-wl-dept');
+    lFill(document.getElementById('l-wl-ty'), lBkOpts(dept, '').map(function (t) { return [t.name, t.name]; }), true);
+    lWlTy();
+  }
+  function lWlTy() {
+    var ty = lV('l-wl-ty');
+    var subs = L_BOOK.subs.filter(function (x) { return x.types.indexOf(ty) !== -1; });
+    lFill(document.getElementById('l-wl-sub'), subs.map(function (x) { return [x.name, x.pseudo ? x.name + ' — recipe from the plan of care' : x.name]; }), true);
+    lWlProto();
+  }
+  window.lWlDept = lWlDept; window.lWlTy = lWlTy;
   function lWlProto() {
     var sel = document.getElementById('l-wl-sub');
     var wrap = document.getElementById('l-wl-protowrap');
     var out = document.getElementById('l-wl-proto');
     if (!sel || !wrap || !out) return;
-    var lbl = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].textContent : '';
-    var rule = null;
-    for (var k in L_PROTO) if (lbl.indexOf(k) === 0) rule = L_PROTO[k];
+    var tx = L_TX[sel.value]; var rule = null;
+    if (tx && tx.proto) for (var k in L_PROTO) if (tx.proto === k || tx.proto.indexOf(k + ' ') === 0) rule = L_PROTO[k];
     if (!rule) { wrap.style.display = 'none'; return; }
     wrap.style.display = '';
     var who = ((document.getElementById('l-wl-pt') || {}).value || '').trim();
@@ -9153,6 +9750,7 @@
       ? poc.map(function (p) { return '<option>' + p[0] + '</option>'; }).join('')
       : '<option value="">Nothing approved on their plan of care</option>';
   }
+
   window.lWlProto = lWlProto;
 
 
@@ -9183,16 +9781,7 @@
   /* The waitlist asked for a type and a subtype from two frozen lists that knew
      nothing about each other, so you could sit somebody on the list for an IV
      called "Pellet Males". Same cascade as the booking screen, same source. */
-  function lWlTy() {
-    setTimeout(function () { if (typeof lWlProto === 'function') lWlProto(); }, 0);
-    var ty = (document.getElementById('l-wl-ty') || {}).value;
-    var sel = document.getElementById('l-wl-sub');
-    if (!sel || !L_SUBS[ty]) return;
-    sel.innerHTML = L_SUBS[ty].map(function (o, i) {
-      return '<option' + (i === 0 ? ' selected' : '') + '>' +
-             o[1].split(' \u00b7 ')[0] + '</option>';
-    }).join('');
-  }
+  
   window.lWlTy = lWlTy;
 
 
@@ -10886,6 +11475,12 @@
     if (r) r.innerHTML = HCOS.resourceOptions({ allLabel: 'Every resource' });
     if (typeof lInsFilter === 'function') lInsFilter();
   })();
+
+  /* the booking and waitlist cascades fill from L_BOOK once every declaration
+     above has run — placed last on purpose, after a boot call placed earlier
+     found L_SLOTDAYS still undefined */
+  if (typeof lBkDept === 'function') lBkDept();
+  if (typeof lWlDept === 'function') lWlDept();
 </script>
 </body>
 </html>

@@ -153,6 +153,39 @@ if len(heads_ids) != len(set(heads_ids)):
 if len(re.findall(r'<div class="daycal-col-head" data-col="[^"]+" data-dept="', sched)) != len(heads_ids):
     bad.append('hay cabeceras de columna sin data-dept')
 
+# EL VOCABULARIO DE RESERVA SALE DE LA HOJA (tools/genbook.py). Los selects de
+# departamento son fijos en el fuente; tipo y subtipo se llenan por JS desde
+# L_BOOK, asi que lo que se guarda es que L_BOOK esta y coincide con la hoja.
+import genbook as GB
+gb = GB.build(sched)
+for sid in ('l-bk-dept', 'l-wl-dept'):
+    k = sched.find('id="%s"' % sid)
+    if k < 0: bad.append('falta el select %s' % sid); continue
+    opts = [o for o in re.findall(r'<option value="([^"]*)"', sched[k:sched.index('</select>', k)]) if o]
+    if opts != H.departments():
+        bad.append('%s ofrece %s, hierarchy dice %s' % (sid, opts, H.departments()))
+m = re.search(r'var L_BOOK = (\{.*?\});\n', sched)
+if not m: bad.append('falta L_BOOK en schedule.html (tools/genbook.py)')
+else:
+    import json
+    lb = json.loads(m.group(1))
+    if len(lb['cols']) != len(H.board_columns()) or len(lb['types']) != len(H.appt_types()) or len(lb['subs']) != len(gb['subs']):
+        bad.append('L_BOOK desfasado: cols %d/%d · tipos %d/%d · subtipos %d/%d — regenerar con tools/genbook.py'
+                   % (len(lb['cols']), len(H.board_columns()), len(lb['types']), len(H.appt_types()), len(lb['subs']), len(gb['subs'])))
+k = sched.index('id="blk-f-res"'); opts = [o for o in re.findall(r'<option value="([^"]*)"', sched[k:sched.index('</select>', k)]) if o]
+if sorted(opts) != sorted(c['id'] for c in H.board_columns()):
+    bad.append('blk-f-res no ofrece las %d columnas del tablero' % len(H.board_columns()))
+for sid in ('l-treat-w', 'l-treat-m'):
+    k = sched.index('id="%s"' % sid); opts = [o[3:] for o in re.findall(r'<option value="(ty:[^"]*)"', sched[k:sched.index('</select>', k)])]
+    if set(o.replace('&amp;', '&') for o in opts) != set(H.appt_types()):
+        bad.append('%s no ofrece los %d appointment types' % (sid, len(H.appt_types())))
+# un select que ofrezca CINCO o mas de las diez categorias de la paleta es la
+# taxonomia vieja; una sola ("visit" = hasta la proxima visita, en fn-life) no
+for m in re.finditer(r'<select[^>]*id="([^"]+)"[^>]*>(.*?)</select>', sched, re.S):
+    hits = set(re.findall(r'<option value="(visit|proc|energ|lab|diag|fpe|chiro|eboo|laser|iv)"', m.group(2)))
+    if len(hits) >= 5:
+        bad.append('%s sigue con las diez categorias de la paleta' % m.group(1))
+
 # COLISIONES DE CASCADA. Dos reglas con el MISMO selector declarando la MISMA
 # propiedad: la segunda gana en silencio. Asi se rompio .week-appt — una regla
 # reservaba padding-left:14px para la barra lateral y otra, mas abajo, ponia
