@@ -1021,3 +1021,61 @@ organizing type, verlas separadas"*.
   and the other columns render the hour as **"in another of their columns"** rather than leaving it
   blank. A blank hour reads as available, and that is exactly how somebody gets double-booked with
   themselves.
+
+## DEPARTMENT ON TOP; "ORGANIZING TYPE" RETIRED (the clinic's sheet, 2026-09-02)
+
+The section above is history. Carlos's new sheet is **Department → Column Name/Resource →
+Appointment Type → Sub Type**, and it supersedes the 40/35/34-column boards described earlier.
+
+    DEPARTMENT            Clinic · Infusion · Treatment · Treatment Infusion Suite · Energetics
+                          — the FIRST filter, multi-select (5)
+      COLUMN NAME         one bookable line, one per name — 25 of them. A person is ONE column
+                          ("Dr. Bakman no se repite"). Salt Room and BioCharger are one column
+                          each; their chairs are the appointment types under them.
+        APPOINTMENT TYPE  the sheet's third column: an organizing type for a person
+                          ("Office Visit - 30 min"), the resource type for a machine ("NanoVi 1").
+                          ONE thing, 31 of them. There is no separate "organizing type" any more.
+          SUB TYPE        what is booked — 109, including the 36 Erchonia protocols one per row.
+
+- `tools/hierarchy.py`: `COLUMNS` keeps the 7-tuple genboard reads (appointment type, column,
+  kind, subtypes, POC note, minutes, rules); `DEPARTMENT_OF` sits beside it; `_erchonia_rows()`
+  supplies the 36 protocol rows from the catalogue so the two cannot disagree; `departments()`,
+  `appt_types()`, `subtypes()`, `columns_for_dept()`.
+- **The filter bar asks the sheet, in the sheet's order:** weekday → Find a column → Departments
+  → Column Name/Resource → Appointment types → Appointment subtypes → statuses. "Everything" is
+  gone. Every level narrows the next; **every group heading carries its own checkbox and count**
+  (checked = all, dash = some) and clicking it takes the group.
+- **Filters show real data:** the type filter tests the appointment's own `data-org`, so
+  "Office Visit - 60 min" shows the 60-minute visits, not everything in a column that also does
+  them. Subtypes test `data-tx`. Columns test `data-col` and `data-dept` on the head.
+- **Four sheet rows encoded as written and flagged for Carlos, not "fixed":** Diagnostic Testing,
+  Red Light, MA Office Visit and Lab Draw carry Department = Infusion; the row "Diagnostic Testing
+  | Office Visit - 60 min | Depth Psychology" is Leigh Ann's with the wrong name (she is kept);
+  InBody moved under the MA's column. InBody is no longer a column.
+- `check.sh` guards all four filters against hierarchy.py, every column head for `data-dept`, and
+  cascade collisions on `.msel-group` too.
+
+## Staff is a module (Carlos, 2026-09-02) — Practice group
+
+`staff.html` (calendar: shifts, what each person can run, copy last week, and the GAPS),
+`staff-capacity.html` (hours staffed vs booked by department — capacity is people, not chairs),
+`staff-skills.html` (the matrix booking reads; certifications with expiry — amber 30 days out,
+red = tick removed on the day; internal training counts once signed off; a profile),
+`staff-admin.html` (create people, working-time templates — no template = not a resource — and
+the slot grid per column). **A machine with nobody certified on shift is not bookable**: a gap
+closes the column for that window and booking refuses it; nothing already booked is cancelled,
+it raises a task. The gaps table is **one row per resource**, not per day — twenty-two identical
+"slots after that close" lines were true and useless ("what is this?").
+
+## Daily Readiness extends the Patient Journey (brief v1.2, 2026-09-02)
+
+`journey-readiness.html`, tab "Daily readiness": one-minute morning check-in with conditional
+follow-ups; evening loop-closer; any-time event log; modes Ready / Steady / Recovery / Flare /
+Physician review kept apart from readiness states Gentle / Standard / Advanced / Flare recovery /
+Physician review; a capacity profile with six measures kept apart and patterns carrying their
+observation counts; coaching that never blames; caregiver view with the emergency caveat;
+four-level alert routing into Tasks; clinician dashboard of trends and exceptions. **Zero
+duplicate data entry** — what Helixona already knows is on the timeline, never re-asked.
+
+Repo moved 2026-09-02 to `~/Desktop/MindfulTech/helixona-emr`. Local preview: `python3 -m
+http.server 8725` from the repo root.

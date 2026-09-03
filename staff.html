@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Staff &middot; HCOS Wireframe</title>
-<link rel="stylesheet" href="assets/hcos.css?v=119">
+<link rel="stylesheet" href="assets/hcos.css?v=120">
 <style>
   /* the staff calendar is the only place a shift grid exists, so it lives here */
   .sh-grid { display: grid; grid-template-columns: 200px repeat(5, 1fr); border: 1px solid var(--line-soft); border-radius: 8px; overflow: hidden; }
@@ -20,6 +20,8 @@
   .sh-cell { display: flex; flex-direction: column; gap: 4px; }
   .sh-runs { font-size: 10.5px; color: var(--muted); }
   .sh-warn { font-size: 10.5px; color: #8E2118; }
+  .cert-late td { background: #FBE3E0; }
+  .rd-note { font-size: 13px; color: var(--muted); background: #F3F6FB; border-left: 3px solid #2E6DB4; padding: 10px 12px; border-radius: 0 8px 8px 0; }
   .sh-tools { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
 </style>
 </head>
@@ -72,12 +74,13 @@
         </div>
 
         <div class="card" style="margin-top:16px">
-          <div class="card-title">Gaps this week &mdash; a resource with no one to run it</div>
+          <div class="card-title">Gaps this week &mdash; a resource with nobody certified to run it</div>
+          <div id="st-gap-lead" class="rd-note" style="margin:0 0 10px"></div>
           <div class="tbl-scroll"><table class="tbl">
-            <thead><tr><th>Day</th><th>Window</th><th>Resource</th><th>Needs</th><th>On shift</th><th>What happens</th></tr></thead>
+            <thead><tr><th>Resource</th><th>Certified</th><th>Nobody at all</th><th>Short at the end of the day</th><th>Cheapest fix</th></tr></thead>
             <tbody id="st-gaps"></tbody>
           </table></div>
-          <div class="field-help" style="margin-top:8px">A gap closes the column for that window on the day board and in booking. It does not cancel anything already booked &mdash; it raises a task for the office manager instead.</div>
+          <div class="field-help" style="margin-top:8px">A gap closes the column for that window on the day board and in booking. Nothing already booked is cancelled &mdash; each affected booking raises a task for the office manager instead.</div>
         </div>
       </div>
     </div>
@@ -145,7 +148,7 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=119"></script>
+<script src="assets/hcos.js?v=120"></script>
 <script>
   /* The roster is synthetic. First names are the clinic's own, which is fine;
      nothing here is a patient. */
@@ -207,15 +210,40 @@
         g.appendChild(c);
       });
     });
-    var tb = document.getElementById('st-gaps'); tb.innerHTML = '';
-    gapsByDay.forEach(function (gaps, i) {
-      gaps.forEach(function (x) {
-        tb.innerHTML += '<tr><td>' + ST_DAYS[i] + '</td><td>' + x.win + '</td><td><strong>' + x.res + '</strong></td>'
-          + '<td>someone certified for it</td><td>' + x.who + '</td>'
-          + '<td>' + (x.who === 'nobody' ? 'Column closed all day. Booking refuses it.' : 'Slots after that close. Booking refuses them.') + '</td></tr>';
+    /* ONE ROW PER RESOURCE, not per day. The first version listed every
+       day × resource and printed twenty-two near-identical lines of "slots
+       after that close" — true, and useless ("what is this?"). Grouped, the
+       week says one thing clearly: most resources are short between 5 and 6
+       because shifts end at 5 and the board runs to 6. That is a decision about
+       the day's end, not twenty-two separate problems. */
+    var byRes = {};
+    Object.keys(ST_NEEDS).forEach(function (res) {
+      var certified = ST_ROSTER.filter(function (p) { return p.runs.indexOf(res) !== -1; });
+      var none = [], short = [];
+      gapsByDay.forEach(function (gaps, i) {
+        gaps.forEach(function (x) { if (x.res !== res) return; (x.who === 'nobody' ? none : short).push(ST_DAYS[i] + (x.who === 'nobody' ? '' : ' (' + x.win.split(' – ')[0] + ')')); });
       });
+      byRes[res] = { certified: certified, none: none, short: short };
     });
-    if (!tb.innerHTML) tb.innerHTML = '<tr><td colspan="6" class="field-help">No gaps this week — every resource has someone certified on shift for its whole day.</td></tr>';
+    var tb = document.getElementById('st-gaps'); tb.innerHTML = '';
+    var totalNone = 0, totalShort = 0, single = [];
+    Object.keys(byRes).forEach(function (res) {
+      var r = byRes[res]; totalNone += r.none.length; totalShort += r.short.length;
+      if (r.certified.length === 1) single.push(res + ' (only ' + r.certified[0].n + ')');
+      var fix = r.certified.length === 1
+        ? 'Cross-train a second person — ' + r.certified[0].n + ' is a single point of failure'
+        : r.none.length ? 'Move a shift, or accept the closure' : r.short.length ? 'Keep one certified person until 6, or end the board at 5' : '—';
+      tb.innerHTML += '<tr' + (r.none.length ? ' class="cert-late"' : '') + '><td><strong>' + res + '</strong></td>'
+        + '<td>' + r.certified.map(function (p) { return p.n; }).join(', ') + '</td>'
+        + '<td>' + (r.none.length ? '<strong>' + r.none.join(', ') + '</strong>' : '—') + '</td>'
+        + '<td>' + (r.short.length ? r.short.join(', ') : '—') + '</td>'
+        + '<td class="field-help" style="margin:0">' + fix + '</td></tr>';
+    });
+    var lead = document.getElementById('st-gap-lead');
+    if (lead) lead.innerHTML = (totalShort ? '<strong>' + totalShort + ' of these gaps are the same gap:</strong> the board sells slots until 6 PM and most shifts end at 5. Either the day ends at 5 for those columns, or one certified person stays until 6. ' : '')
+      + (totalNone ? '<strong>' + totalNone + ' day' + (totalNone === 1 ? '' : 's') + ' with nobody at all</strong> — those columns are closed the whole day. ' : '')
+      + (single.length ? '<span class="field-help" style="display:inline">Single points of failure: ' + single.join('; ') + '.</span>' : '');
+    if (!tb.innerHTML) tb.innerHTML = '<tr><td colspan="5" class="field-help">No gaps this week — every resource has someone certified on shift for its whole day.</td></tr>';
   }
   function stDept(v) { stFilter.dept = v; stRender(); }
   function stGaps(on) { stFilter.gaps = on; stRender(); }
