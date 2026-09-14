@@ -1057,15 +1057,11 @@ Appointment Type → Sub Type**, and it supersedes the 40/35/34-column boards de
 
 ## Staff is a module (Carlos, 2026-09-02) — Practice group
 
-`staff.html` (calendar: shifts, what each person can run, copy last week, and the GAPS),
-`staff-capacity.html` (hours staffed vs booked by department — capacity is people, not chairs),
-`staff-skills.html` (the matrix booking reads; certifications with expiry — amber 30 days out,
-red = tick removed on the day; internal training counts once signed off; a profile),
-`staff-admin.html` (create people, working-time templates — no template = not a resource — and
-the slot grid per column). **A machine with nobody certified on shift is not bookable**: a gap
-closes the column for that window and booking refuses it; nothing already booked is cancelled,
-it raises a task. The gaps table is **one row per resource**, not per day — twenty-two identical
-"slots after that close" lines were true and useless ("what is this?").
+**Rebuilt from scratch on 2026-09-14 from the clinic's sheet and nothing else** ("we don't need
+what you built before"). Three pages = the sheet's three blocks, in its words: `staff.html`
+Dynamic Scheduling, `staff-certified.html` Certified Yes/No, `staff-setup.html` Set Up Page by
+Modality. The earlier calendar/capacity/skills/admin pages are deleted, not hidden. One model in
+`assets/staff.js` (`STAFF`) feeds all three; the pages carry no script of their own.
 
 ## Daily Readiness extends the Patient Journey (brief v1.2, 2026-09-02)
 
@@ -1131,29 +1127,23 @@ Daily readiness and The Work of Healing under Patient journey. The active tab no
 filename in `location.pathname`, which is the one thing that differs between sub-pages, on
 `file://` and hosted alike. An audit confirms every page with a subnav is itself a tab of its group.
 
-## The staff board runs on PHASES (Cassandra's sheet, 2026-09-14) — staff.html rebuilt
+## The staff board runs on PHASES (Cassandra's sheet, 2026-09-14)
 
 A treatment needs a person's hands at the START and the END; in between the machine runs alone
-and that person is FREE. `staff.html` now draws exactly that, on a 15-minute grid, one column per
-modality (the sheet's ten: RedLight, Erchonia Laser, Nano Bath 1/2, Halo Therapy, Bio Charger,
-Bemer, Hydrogen Inhalation, Nano Vie, RIFE):
+and that person is FREE. Dynamic Scheduling draws exactly that, on a 15-minute grid, one column
+per modality (the sheet's ten: RedLight, Erchonia Laser, Nano Bath 1/2, Halo Therapy, Bio
+Charger, Bemer, Hydrogen Inhalation, Nano Vie, RIFE):
 
-    red    hands on — the person is busy
-    blue   machine running — the person who started it is free for another start
-    black  nobody certified AND on shift AND free could start here (recomputed per cell)
+    red    hands on — the tech is busy
+    blue   machine running — the tech who started it is free for another start
+    black  nobody certified AND working today AND free could start here (per cell)
     white  a start is possible
 
-- **"Working today" toggles** per person recompute the whole board — Cassandra's "2 techs
-  certified and working today" example reproduces: Hydrogen and NanoVi black all day because
-  neither Nick nor Juan holds them; every other black cell is a moment both are hands-on.
-- **Set up by modality** (`st-04-setup`): hands-on start / runs alone / hands-on end per machine.
-  RedLight 5/50/5 and Erchonia 10/15/5 are from the sheet; the rest are placeholders marked
-  "to confirm". Editing a number redraws the board.
-- **By person** below the board: the same morning as a timeline per tech with the FREE MINUTES
-  counted on the right — the capacity the old shift calendar could not see.
-- **Certifications** (`st-03-certs`): the Yes/No matrix at a glance (4 × 10 is readable; the
-  25-column one was not), with a holders count whose 1 marks a single point of failure.
-- Staffing is pooled and greedy: an appointment's red minutes go to the first certified tech
-  free at every one of them (blue counts as free); the same person opens and closes it.
-  Unstaffed treatments are counted and named in the summary.
-- Working copy for this and everything else: `~/helixona-emr` (not iCloud).
+- "Working today" toggles recompute the board; the sheet's "2 techs certified and working
+  today" (Nick + Juan) reproduces: Hydrogen Inhalation and Nano Vie black all day.
+- Set Up by Modality = Active Time Beginning / Dormant Time / Active Time End. RedLight 5/50/5
+  and Erchonia 10/15/5 are the sheet's; the other eight are blank there → placeholders "to confirm".
+- Certified Yes/No is editable by clicking; the count row marks a single holder in red.
+- Staffing is pooled and greedy: red minutes go to the first certified tech free at every one
+  of them (blue counts as free); the same person opens and closes. Unstaffed = counted and named.
+- Working copy: `~/helixona-emr` (not iCloud).

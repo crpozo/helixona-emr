@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=126">
+<link rel="stylesheet" href="assets/staff.css?v=126">
+</head>
+<body data-page="staff" data-page-title="Staff" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="st-03-setup" data-title="Set Up Page by Modality">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/setup</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Set Up Page by Modality</div>
+            <div class="page-sub">Active Time Beginning, Dormant Time and Active Time End per modality, in minutes.</div>
+          </div>
+          <div class="app-user"><button class="btn btn-primary" onclick="HCOS.toast('Saved. Future days use the new times; today already booked does not move.', 'ok')">Save</button></div>
+        </div>
+        <div class="tbl-scroll"><table class="tbl setup-tbl" id="setup-tbl">
+          <thead><tr><th>Modality</th><th>Active Time Beginning</th><th>Dormant Time</th><th>Active Time End</th><th>Total</th><th>Tech minutes</th><th>Shape</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+        <div class="callout"><strong>Only the active minutes cost a person.</strong> RedLight is sixty minutes of bed and ten minutes of technician. RedLight and Erchonia Laser are from the clinic&rsquo;s sheet; the other eight are blank on the sheet and carry placeholders marked <em>to confirm</em>. Change a number and the Dynamic Scheduling board redraws.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=126"></script>
+<script src="assets/staff.js?v=126"></script>
+</body>
+</html>

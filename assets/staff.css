@@ -1,0 +1,56 @@
+/* Staff module — the clinic's sheet, three blocks. Colours are the sheet's:
+   red = hands on it, blue = machine running and the person is free, black = nobody can start. */
+.dy-tools { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+.dy-who { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dy-who label { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 12.5px; cursor: pointer; background: #fff; }
+.dy-who label.on { border-color: var(--hx-navy); background: var(--hx-navy); color: #fff; }
+.dy-who input { display: none; }
+.dy-n { font-size: 12.5px; font-weight: 600; }
+.dy-legend { display: flex; gap: 14px; font-size: 11.5px; color: var(--muted); flex-wrap: wrap; margin-left: auto; }
+.dy-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px; margin-right: 5px; border: 1px solid rgba(0,0,0,.15); }
+.dy-sum { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.dy-sum > div { border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 12px; background: #fff; }
+.dy-sum b { display: block; font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.dy-sum span { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+.dy-wrap { overflow-x: auto; border: 1px solid var(--line-soft); border-radius: 8px; margin-bottom: 18px; }
+.dy-grid { display: grid; grid-template-rows: 36px; grid-auto-rows: 22px; min-width: 980px; }
+.dy-grid > div { border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); font-size: 11px; min-width: 0; position: relative; }
+.dy-grid .h { background: #F7F7F7; font-weight: 600; font-size: 11px; padding: 4px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: sticky; top: 0; z-index: 2; }
+.dy-grid .h small { display: block; font-weight: 400; color: var(--muted); font-size: 10px; }
+.dy-grid .t { color: var(--muted); font-variant-numeric: tabular-nums; padding: 3px 6px; text-align: right; background: #FAFAFA; position: sticky; left: 0; z-index: 1; }
+.dy-grid .t.hour { color: var(--ink); font-weight: 600; }
+.dy-grid .c { cursor: pointer; }
+.dy-grid .c.red  { background: #E06666; }
+.dy-grid .c.blue { background: #6D9EEB; }
+.dy-grid .c.black { background: #1A1A1A; cursor: not-allowed; }
+.dy-grid .c.start { box-shadow: inset 0 2px 0 #1A1A1A; }
+.dy-grid .c .n { position: absolute; left: 4px; top: 3px; right: 4px; font-size: 10.5px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dy-grid .c .w { position: absolute; right: 4px; bottom: 2px; font-size: 9.5px; color: #fff; opacity: .9; }
+.dy-grid .c:hover:not(.black) { outline: 2px solid var(--hx-navy); outline-offset: -2px; z-index: 1; }
+.st-grid { display: grid; grid-auto-rows: 26px; min-width: 980px; }
+.st-grid > div { border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); font-size: 11px; min-width: 0; }
+.st-grid .who { background: #FAFAFA; padding: 4px 8px; font-weight: 600; font-size: 12px; position: sticky; left: 0; white-space: nowrap; z-index: 1; }
+.st-grid .who small { font-weight: 400; color: var(--muted); margin-left: 6px; }
+.st-grid .who .free { float: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.st-grid .who.tick { font-weight: 400; color: var(--muted); font-size: 10px; padding: 6px 2px; position: static; }
+.st-grid .k { position: relative; }
+.st-grid .k.red { background: #E06666; }
+.st-grid .k.blue { background: #6D9EEB; }
+.st-grid .k.off { background: repeating-linear-gradient(45deg, #F3F3F3 0 4px, #fff 4px 8px); }
+.st-grid .k .n { position: absolute; left: 3px; top: 5px; font-size: 9.5px; color: #fff; white-space: nowrap; overflow: hidden; max-width: 100%; }
+.st-sub { font-size: 12px; font-weight: 600; margin: 0 0 8px; }
+.cert-tbl td, .cert-tbl th { text-align: center; }
+.cert-tbl td:first-child, .cert-tbl th:first-child { text-align: left; font-weight: 600; }
+.cert-tbl .yn { min-width: 52px; padding: 5px 0; border-radius: 4px; border: 1px solid transparent; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+.cert-tbl .yn.yes { background: #B6D7A8; color: #1f3d17; }
+.cert-tbl .yn.no  { background: #F4CCCC; color: #6b1a1a; }
+.cert-tbl .sum td { background: #FAFAFA; color: var(--muted); font-size: 11.5px; }
+.cert-tbl .sum td.one { color: #B0281E; font-weight: 600; }
+.setup-tbl .field-input { width: 64px; display: inline-block; text-align: right; margin-right: 4px; }
+.setup-tbl .num { font-variant-numeric: tabular-nums; }
+.setup-tbl .hands { font-weight: 600; }
+.setup-tbl .tc { font-size: 10.5px; color: var(--muted); font-weight: 400; margin-left: 6px; }
+.setup-tbl .shape { display: flex; height: 12px; width: 160px; border-radius: 3px; overflow: hidden; background: #eee; }
+.setup-tbl .shape i { display: block; height: 100%; }
+.setup-tbl .shape .a { background: #E06666; }
+.setup-tbl .shape .d { background: #6D9EEB; }

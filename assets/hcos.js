@@ -65,10 +65,9 @@
       ['Booking rules', 'schedule-rules.html']
     ],
     staff: [
-      ['Calendar', 'staff.html'],
-      ['Capacity', 'staff-capacity.html'],
-      ['Skills & certifications', 'staff-skills.html'],
-      ['Admin', 'staff-admin.html']
+      ['Dynamic Scheduling', 'staff.html'],
+      ['Certified Yes/No', 'staff-certified.html'],
+      ['Set Up by Modality', 'staff-setup.html']
     ],
     pricing: [
       ['Price list', 'pricing.html'],

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certified &middot; HCOS Wireframe</title>
+<link rel="stylesheet" href="assets/hcos.css?v=126">
+<link rel="stylesheet" href="assets/staff.css?v=126">
+</head>
+<body data-page="staff" data-page-title="Staff" data-shell="app">
+
+<div class="screens">
+
+  <section class="screen" id="st-02-certified" data-title="Certified Yes/No">
+    <div class="frame">
+      <div class="frame-titlebar"><span class="frame-dot"></span><span class="frame-dot"></span><span class="frame-dot"></span>
+        <span class="frame-url">hcos.helixona.com/staff/certified</span></div>
+      <div class="frame-body">
+        <div class="app-header">
+          <div>
+            <div class="page-title">Certified Yes/No</div>
+            <div class="page-sub">Resource (Human) by modality. Exactly the clinic&rsquo;s sheet.</div>
+          </div>
+          <div class="app-user"><button class="btn btn-primary" onclick="HCOS.toast('Saved. The board uses the new certifications from now on.', 'ok')">Save</button></div>
+        </div>
+        <div class="tbl-scroll"><table class="tbl cert-tbl" id="cert-tbl"></table></div>
+        <div class="callout"><strong>Click a cell to flip it.</strong> Yes / No is the whole record. The board reads this table: a modality with no Yes among the techs working today is black all day, and a column where only one person says Yes is flagged red in the count row because that person is a single point of failure.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/hcos.js?v=126"></script>
+<script src="assets/staff.js?v=126"></script>
+</body>
+</html>
