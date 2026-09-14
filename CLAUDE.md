@@ -1077,8 +1077,9 @@ observation counts; coaching that never blames; caregiver view with the emergenc
 four-level alert routing into Tasks; clinician dashboard of trends and exceptions. **Zero
 duplicate data entry** — what Helixona already knows is on the timeline, never re-asked.
 
-Repo moved 2026-09-02 to `~/Desktop/MindfulTech/helixona-emr`. Local preview: `python3 -m
-http.server 8725` from the repo root.
+**Working copy: `~/helixona-emr` (2026-09-14).** The copy under `~/Desktop/MindfulTech/` is iCloud,
+and iCloud stalls anything that touches sixty files at once — check.sh and a glob over *.html hung
+for minutes there. Do not work from it. Local preview: `python3 -m http.server 8725` from the repo root.
 
 ### The booking vocabulary is generated (tools/genbook.py, 2026-09-02)
 
@@ -1121,3 +1122,11 @@ guardrails & scope (care paths × management models, AI may/may not, Helixona vo
   (done = ink). Recorded as a decision for the real app, not applied here.
 - Open decisions (§15): pace-level names, the MVP progress formula, the message library and
   automation boundaries, Medical-Director-approved rule templates, first wearables.
+
+## The active subnav tab is the FILE you are on (2026-09-14)
+
+Every Staff page declares `data-page="staff"` — that is what picks the sidebar entry and the subnav
+group — so a tab test of `PAGE + '.html'` lit Calendar and nothing else, and the same held for
+Daily readiness and The Work of Healing under Patient journey. The active tab now matches the
+filename in `location.pathname`, which is the one thing that differs between sub-pages, on
+`file://` and hosted alike. An audit confirms every page with a subnav is itself a tab of its group.

@@ -231,9 +231,18 @@
       main.appendChild(buildTopbar());
       var subnav = SUBNAV[PAGE.split('-')[0]];
       if (subnav) {
+        /* THE ACTIVE TAB IS THE FILE YOU ARE ON, not the module you are in
+           (Carlos, 2026-09-14: "Calendar, capacity, skills & admin is not
+           highlighting when changing page"). Every Staff page declares
+           data-page="staff" — that is what picks the sidebar entry and the
+           subnav group — so testing PAGE + '.html' matched Calendar and
+           nothing else. The same held for Daily readiness and The Work of
+           Healing under Patient journey. The filename in the URL is the one
+           thing that differs between sub-pages, on file:// and hosted alike. */
+        var here = (location.pathname.split('/').pop() || '').split('?')[0] || (PAGE + '.html');
         var tabs = el('nav', 'subnav');
         subnav.forEach(function (t) {
-          var a = el('a', 'subnav-tab' + (t[1] === PAGE + '.html' ? ' active' : ''), esc(t[0]));
+          var a = el('a', 'subnav-tab' + (t[1] === here ? ' active' : ''), esc(t[0]));
           a.href = t[1];
           tabs.appendChild(a);
         });
