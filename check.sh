@@ -239,4 +239,25 @@ if bad:
 PYHIER
 [ $? -ne 0 ] && fail=1
 
+# EL TABLERO DE STAFF LEE EL MISMO DIA QUE EL SCHEDULE (tools/genstaff.py). Si el
+# board se regenera y staff-data.js no, el staff muestra citas que ya no existen.
+python3 - <<'PYS' || exit 1
+import sys, pathlib, json, re
+sys.path.insert(0, 'tools'); import genstaff as G
+want = G.parse()
+have = json.loads(re.search(r'window.STAFF_DATA = (\{.*\});', pathlib.Path('assets/staff-data.js').read_text(), re.S).group(1))
+n_have = len(have['appts']) + sum(len(v) for v in have['work'].values())
+seen=set(); n_want=0
+for a in want:
+    k=(a['col'],a['at'])
+    if k in seen: continue
+    seen.add(k); n_want+=1
+if n_want != n_have:
+    print('staff-data.js desactualizado: schedule tiene %d citas en maquinas/tecnicos, staff-data %d — corre python3 tools/genstaff.py' % (n_want, n_have)); sys.exit(1)
+for f in ['staff.html','staff-certified.html','staff-setup.html','schedule.html']:
+    if 'assets/staff-data.js' not in pathlib.Path(f).read_text() or 'assets/staff.js' not in pathlib.Path(f).read_text():
+        print(f + ' no carga staff-data.js + staff.js'); sys.exit(1)
+print('staff-data.js al dia con schedule.html · gate de staff cargado en las 4 paginas')
+PYS
+
 exit $fail

@@ -1146,4 +1146,17 @@ Charger, Bemer, Hydrogen Inhalation, Nano Vie, RIFE):
 - Certified Yes/No is editable by clicking; the count row marks a single holder in red.
 - Staffing is pooled and greedy: red minutes go to the first certified tech free at every one
   of them (blue counts as free); the same person opens and closes. Unstaffed = counted and named.
+- **The board is the schedule's day (2026-09-14, "this wireframe has to be as real as possible"):**
+  `tools/genstaff.py` parses schedule.html's day board and writes `assets/staff-data.js`
+  (64 treatments on the sheet's machines + the techs' own IV/lab work). Run it after genboard;
+  check.sh fails when it is stale. Columns = the platform's machines (Nano Tub Room = Nano Bath 1,
+  ADA = Nano Bath 2, Salt Room = Halo Therapy, NanoVi 1/2 = Nano Vie). The techs ARE the
+  platform's Nick (Nurse IV 1), Juan (Nurse IV 2), Bea (Medic IV), Wes (Lab); their infusions
+  (hook-up 10 / drip / take-down 5) spend their hands first.
+- **Hands are counted per 15-minute cell, not per minute:** a tech has 15 minutes of hands in
+  each cell; a 5-min Red Light set-up and a 10-min IV hook-up at 10:00 share one cell. The
+  minute-exact version left 31 of 64 treatments unstaffed because everything starts on :00/:30.
+- **New booking runs the same check** (`STAFF.forCol(res, start, mins)` inside `lEval`): ok →
+  "Bea is certified … free to set up at … and finish at …"; block → the reason and a "Use 10:45"
+  button from `STAFF.nextOk`; other dates → a wait line. schedule.html loads staff-data.js + staff.js.
 - Working copy: `~/helixona-emr` (not iCloud).

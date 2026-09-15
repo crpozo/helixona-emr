@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Staff &middot; HCOS Wireframe</title>
-<link rel="stylesheet" href="assets/hcos.css?v=126">
-<link rel="stylesheet" href="assets/staff.css?v=126">
+<link rel="stylesheet" href="assets/hcos.css?v=127">
+<link rel="stylesheet" href="assets/staff.css?v=127">
 </head>
 <body data-page="staff" data-page-title="Staff" data-shell="app">
 
@@ -19,7 +19,7 @@
         <div class="app-header">
           <div>
             <div class="page-title">Dynamic Scheduling &mdash; Tuesday, July 21</div>
-            <div class="page-sub">Fifteen-minute board per modality, 8:00 to 12:00. Who is certified and working today decides what is bookable.</div>
+            <div class="page-sub">The same Tuesday the schedule shows, fifteen minutes at a time, one column per machine. Who is certified and working today decides what is bookable.</div>
           </div>
           <div class="app-user"><button class="btn" onclick="HCOS.toast('Tomorrow uses the same working list unless you change it.', 'ok')">Copy to tomorrow</button></div>
         </div>
@@ -30,16 +30,17 @@
         </div>
         <div class="dy-sum" id="dy-sum"></div>
         <div class="dy-wrap"><div class="dy-grid" id="dy-grid"></div></div>
-        <div class="st-sub">Each technician, same morning &mdash; the blue minutes are where a second treatment can start</div>
+        <div class="st-sub">Each technician, same day &mdash; dark red is their own infusion or lab work, blue is a drip or machine running, white is free</div>
         <div class="dy-wrap"><div class="st-grid" id="st-grid"></div></div>
-        <div class="callout"><strong>How the board is built.</strong> Tick who is working today. For every booked treatment the first certified tech who is free at its start and its end gets it, and only those minutes go red. A modality with nobody certified working today is black all day. Turn Bea or Wes on and Hydrogen Inhalation and Nano Vie open up.</div>
+        <div class="callout"><strong>How the board is built.</strong> Every block is an appointment from today&rsquo;s schedule board, same patient, same time, same identifier. The techs are the platform&rsquo;s own Nick (Nurse IV 1), Juan (Nurse IV 2), Bea (Medic IV) and Wes (Lab); their infusions and draws occupy their hands too. For every treatment the first certified tech free at its start and its end gets it, and only those minutes go red. A machine with nobody certified working today is black all day. New booking runs the same check and refuses a start nobody can open and close.</div>
       </div>
     </div>
   </section>
 
 </div>
 
-<script src="assets/hcos.js?v=126"></script>
-<script src="assets/staff.js?v=126"></script>
+<script src="assets/hcos.js?v=127"></script>
+<script src="assets/staff-data.js?v=127"></script>
+<script src="assets/staff.js?v=127"></script>
 </body>
 </html>

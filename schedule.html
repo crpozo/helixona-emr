@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/hcos.css?v=126">
+<link rel="stylesheet" href="assets/hcos.css?v=127">
 <style>
   .l-hint-visible { border-color: var(--line); color: var(--muted); background: var(--st-scheduled-bg); z-index: 1; }
   .l-hint-visible:hover { border-color: var(--ink); color: var(--ink); }
@@ -7157,7 +7157,9 @@
   </div>
 </div>
 
-<script src="assets/hcos.js?v=126"></script>
+<script src="assets/hcos.js?v=127"></script>
+<script src="assets/staff-data.js?v=127"></script>
+<script src="assets/staff.js?v=127"></script>
 <script>
   // The two filters actually filter: "Show" picks the columns, "Treatment" picks
   // the appointments, and the count says what survived.
@@ -8450,6 +8452,8 @@
       var e = {}; for (var k in base) e[k] = base[k];
       e.name = x.name; e.key = x.key; e.mins = x.gen ? x.mins : (base.mins || x.mins);
       e.iv = !!x.iv || !!base.iv; e.proto = x.proto; e.gen = !!x.gen; e.pseudo = !!x.pseudo;
+      /* generated entries had no article or lowercase name → "a undefined undefined" in every check */
+      if (!e.low) e.low = x.name; if (!e.art) e.art = /^[aeiou]/i.test(x.name) ? 'an' : 'a';
       L_TX[x.name] = e;
       if (typeof L_COV !== 'undefined' && L_COV[x.key] && !L_COV[x.name]) L_COV[x.name] = L_COV[x.key];
     });
@@ -8593,6 +8597,23 @@
         blocks++;
       } else {
         checks.push(['ok', lResName(res) + ' is free ' + lClock(start) + ' – ' + lClock(end) + '.', '']);
+      }
+    }
+
+    // Staff — a machine on the sheet needs a certified tech free at the start and at
+    // the end (the staff board's red minutes). Same model, same day: STAFF.forCol.
+    if (window.STAFF && STAFF.forCol) {
+      var sc = STAFF.forCol(res, start, dur);
+      if (sc && date !== 'jul21') {
+        checks.push(['wait', 'Staff for ' + sc.mod + ' is checked against that day&rsquo;s board when it is built. Today, ' + (sc.certified.join(', ') || 'nobody') + ' hold the certification.', '<a href="staff-certified.html">certified</a>']);
+      } else if (sc && sc.ok) {
+        checks.push(['ok', sc.who + ' is certified on ' + sc.mod + ' and free to set up at ' + lClock(sc.begin.s) + ' and finish at ' + lClock(sc.end.s) + '. The machine runs alone in between.', '<a href="staff.html">staff board</a>']);
+      } else if (sc) {
+        var nx = STAFF.nextOk(res, dur, start + 15);
+        checks.push(['block', sc.why, nx !== null
+          ? '<button class="btn btn-sm" onclick="lUseStart(' + nx + ')">Use ' + lClock(nx) + '</button>'
+          : '<a href="staff.html">staff board</a>']);
+        blocks++;
       }
     }
 
